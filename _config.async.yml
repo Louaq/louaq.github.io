@@ -1,0 +1,64 @@
+theme:  
+    switch: true # 主题切换按钮
+    default: style-light
+    
+assets:
+  internal_provider: unpkg # local | unpkg | jsdelivr
+  third_party_provider: unpkg # unpkg | jsdelivr
+  
+  
+favicon:
+  logo: ./img/favicon.ico
+  visibilitychange: true
+  show_text: (/≧▽≦/)咦！又好了！
+  hide_text: (●—●)喔哟，崩溃啦！ 
+
+user:
+  name: louaq
+  email: yangyang_scuec@qq.com
+  domain: https://hulzt.top
+  avatar: ./img/b.jpg
+  describe: 网站简介。
+  rule_text: 暂不接受个人博客以外的友链申请，确保您的网站内容积极向上，文章至少30篇，原创70%以上，部署HTTPS
+  
+top_bars:
+  - title:  主页
+    url: /
+    children:
+      - title: archives2
+        url: /archives2/
+  - title: 归档
+    url: /archives/
+    noswup: true
+  - title: 社交
+  
+  
+sidebar:
+  social: # 社交地址
+    - name: github
+      icon: fab fa-github
+      url: https://github.com
+    - name: gitee
+      icon: iconfont cg-gitee
+      url: https://gitee.com 
+  
+  
+footer:
+  powered:
+    enable: true
+  beian:
+    enable: false
+    icp:
+  copyright_year:
+  live_time:
+    enable: false
+    prefix: footer.tips
+    start_time: 08/21/2024 17:00:00
+  custom_text:
+  
+  
+  
+  
+  
+  
+  
