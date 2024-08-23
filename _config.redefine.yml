@@ -23,11 +23,11 @@ info:
 # Docs: https://redefine-docs.ohevan.com/basic/defaults
 defaults:
   # Favicon
-  favicon: /images/favicon.ico
+  favicon: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/favicon.ico
   # Site logo
   logo: 
   # Site avatar
-  avatar: /images/b.jpg
+  avatar: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b.jpg
 # IMAGE CONFIGURATION <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
@@ -50,7 +50,7 @@ global:
   fonts:
     # Chinese fonts
     chinese: 
-      enable: false # Whether to enable custom chinese fonts
+      enable: true # Whether to enable custom chinese fonts
       family:  # Font family
       url:  # Font URL to CSS file
     # English fonts
@@ -65,10 +65,10 @@ global:
   # Effects on mouse hover
   hover:
     shadow: true # shadow effect
-    scale: false # scale effect
+    scale: true # scale effect
   # Scroll progress
   scroll_progress:
-    bar: false # progress bar
+    bar: true # progress bar
     percentage: true # percentage
   # Website counter
   website_counter:
@@ -119,9 +119,9 @@ home_banner:
   title: Theme Redefine
   # Home banner subtitle
   subtitle:
-    text: [] # subtitle text, array
+    text: ['Loading...'] # subtitle text, array
     hitokoto:  # 一言配置
-      enable: false # Whether to enable hitokoto
+      enable: true # Whether to enable hitokoto
       api: https://v1.hitokoto.cn # API URL, can add types, see https://developer.hitokoto.cn/sentence/#%E5%8F%A5%E5%AD%90%E7%B1%BB%E5%9E%8B-%E5%8F%82%E6%95%B0
     typing_speed: 100 # Typing speed (ms)
     backing_speed: 80 # Backing speed (ms)
@@ -152,12 +152,12 @@ home_banner:
   # Home banner social links
   social_links:
     # Whether to enable
-    enable: false
+    enable: true
     # Social links style
     style: default # default, reverse, center
     # Social links
     links:
-      github:  # your GitHub URL
+      github: https://github.com/Louaq # your GitHub URL
       instagram: # your Instagram URL
       zhihu:  # your ZhiHu URL
       twitter:  # your twitter URL
@@ -174,7 +174,7 @@ home_banner:
 # Docs: https://redefine-docs.ohevan.com/home/navbar
 navbar:
   # Auto hide navbar
-  auto_hide: false
+  auto_hide: true
   # Navbar background color
   color:
     left: "#f78736" #left side 
@@ -192,22 +192,18 @@ navbar:
     Archives: 
        path: /archives 
        icon: fa-regular fa-archive # can be empty
-    # Status: 
-    #   path: https://status.ohevan.com/
-    #   icon: fa-regular fa-chart-bar
-    # About: 
-    #   icon: fa-regular fa-user
-    #   submenus:
-    #     Me: /about
-    #     Github: https://github.com/EvanNotFound/hexo-theme-redefine
-    #     Blog: https://ohevan.com
-    #     Friends: /friends
-    # Links: 
-    #   icon: fa-regular fa-link
-    #   submenus:
-    #     Link1: /link1
-    #     Link2: /link2
-    #     Link3: /link3
+    Status: 
+       path: https://status.ohevan.com/
+       icon: fa-regular fa-chart-bar
+    About: 
+       icon: fa-regular fa-user
+       submenus:
+        Me: /about
+        Github: https://github.com/louaq
+        Blog: https://hulzt.top
+        Friends: /friends
+
+
     # ...... # you can add more
   # Navbar search (local search). Requires hexo-generator-searchdb (npm i hexo-generator-searchdb). See https://github.com/theme-next/hexo-generator-searchdb
   search:
@@ -225,7 +221,7 @@ home:
   sidebar:
     enable: true # Whether to enable sidebar
     position: left # Sidebar position. left, right
-    first_item: menu # First item in sidebar. menu, info
+    first_item: info # First item in sidebar. menu, info
     announcement: # Announcement text
     show_on_mobile: true # Whether to show sidebar navigation on mobile sheet menu
     links:
@@ -279,8 +275,8 @@ articles:
   # Author label
   author_label: 
     enable: true # Whether to enable
-    auto: false # Whether to automatically add author label, e.g. Lv1, Lv2, Lv3...
-    list: []
+    auto: true # Whether to automatically add author label, e.g. Lv1, Lv2, Lv3...
+    list: ["Lv1", "Lv2", "Lv3"]
   # Code block settings
   code_block:
     copy: true # Whether to enable code block copy button
@@ -293,7 +289,7 @@ articles:
   toc:
     enable: true # Whether to enable TOC
     max_depth: 3 # TOC depth
-    number: false # Whether to add number to TOC automatically
+    number: true # Whether to add number to TOC automatically
     expand: true # Whether to expand TOC
     init_open: true # Open toc by default
   # Whether to enable copyright notice
@@ -325,7 +321,7 @@ comment:
   # Whether to enable comment
   enable: true
   # Comment system
-  system: waline # waline, gitalk, twikoo, giscus
+  system: giscus # waline, gitalk, twikoo, giscus
   # System configuration
   config:
     # Waline comment system. See https://waline.js.org/
@@ -350,15 +346,15 @@ comment:
       region: # Twikoo region. can be empty
     # Giscus comment system. See https://giscus.app/
     giscus:
-      repo: # Github repository name e.g. EvanNotFound/hexo-theme-redefine
-      repo_id: # Github repository id
-      category: # Github discussion category
-      category_id: # Github discussion category id
+      repo: Louaq/louaq.github.io # Github repository name e.g. EvanNotFound/hexo-theme-redefine
+      repo_id: R_kgDOMmY6eQ # Github repository id
+      category: Announcements # Github discussion category
+      category_id: DIC_kwDOMmY6ec4Ch4AA # Github discussion category id
       mapping: pathname # Which value to use as the unique identifier for the page. e.g. pathname, url, title, og:title. DO NOT USE og:title WITH PJAX ENABLED since pjax will not update og:title when the page changes
       strict: 0 # Whether to enable strict mode. e.g. 0, 1
       reactions_enabled: 1 # Whether to enable reactions. e.g. 0, 1
       emit_metadata: 0 # Whether to emit metadata. e.g. 0, 1
-      lang: en # Giscus language. e.g. en, zh-CN, zh-TW
+      lang: zh-CN # Giscus language. e.g. en, zh-CN, zh-TW
       input_position: bottom # Place the comment box above/below the comments. e.g. top, bottom
       loading: lazy # Load the comments lazily
 # COMMENT <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
@@ -372,11 +368,11 @@ footer:
   # Icon in footer, write fontawesome icon code here
   icon: '<i class="fa-solid fa-heart fa-beat" style="--fa-animation-duration: 0.5s; color: #f54545"></i>'
   # The start time of the website, format: YYYY/MM/DD HH:mm:ss
-  start: 2022/8/17 11:45:14
+  start: 2024/8/22 11:45:14
   # Site statistics
   statistics: true # show site statistics or not (total articles, total words)
   # Footer message
-  customize:
+  customize: 你说的对，但是《原神》是由米哈游自主研发的一款全新开放世界冒险游戏。
   # ICP record number. See https://beian.miit.gov.cn/
   icp:
     enable: false # Whether to enable
@@ -444,9 +440,9 @@ page_templates:
 # Docs: https://redefine-docs.ohevan.com/cdn
 cdn:
   # Whether to enable CDN
-  enable: false
+  enable: true
   # CDN Provider
-  provider: npmmirror # npmmirror, zstatic, sustech, staticfile, bootcdn, cdnjs, jsdelivr, unpkg, custom
+  provider: aliyun # npmmirror, zstatic, sustech, staticfile, bootcdn, cdnjs, jsdelivr, unpkg, custom
   # Custom CDN URL
   # format example: https://cdn.custom.com/hexo-theme-redefine/${version}/source/${path}
   # The ${path} must leads to the root of the "source" folder of the theme
