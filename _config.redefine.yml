@@ -161,7 +161,7 @@ home_banner:
       instagram: # your Instagram URL
       zhihu:  # your ZhiHu URL
       twitter:  # your twitter URL
-      email:  # your email
+      email: yangyang_scuec@qq.com # your email
       # ...... # you can add more
     # Social links with QRcode drawers
     qrs:
@@ -191,17 +191,24 @@ navbar:
       icon: fa-regular fa-house # can be empty
     Archives: 
        path: /archives 
-       icon: fa-regular fa-archive # can be empty
-    Status: 
-       path: https://status.ohevan.com/
-       icon: fa-regular fa-chart-bar
+       icon: fa-regular fa-archive # can be empty       
+    Tags: 
+       icon: fa-solid fa-tags #图标
+       path: /tags #链接
+    Categories: 
+       path: /categories 
+       icon: fa-regular fa-folder # can be empty
+    相册: #取名随意
+      icon: fa-solid fa-image #图标
+      path: /masonry/
+    #Status: 
+    #   path: https://status.ohevan.com/
+    #   icon: fa-regular fa-chart-bar
     About: 
        icon: fa-regular fa-user
        submenus:
-        Me: /about
         Github: https://github.com/louaq
         Blog: https://hulzt.top
-        Friends: /friends
 
 
     # ...... # you can add more
@@ -211,6 +218,7 @@ navbar:
     enable: true
     # Preload search data when the page loads
     preload: true
+    
 # NAVIGATION BAR <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< end
 
 
