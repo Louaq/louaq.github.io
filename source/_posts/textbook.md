@@ -5,7 +5,11 @@ expires: 2024-09-30 23:59:59
 mathjax: true
 excerpt: "这是编写的教材的一些资料"
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/44_Stella_4k.jpg"
+
 ---
+
+
+
 | 章节名称                             | 资料                                                         |
 | :----------------------------------- | ------------------------------------------------------------ |
 | Python的多边形扫描转换算法（公选版） | https://blog.csdn.net/nohairless/article/details/105374028   |
