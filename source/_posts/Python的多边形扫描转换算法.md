@@ -1,5 +1,5 @@
 ---
-title: 多边形的扫描转化算法
+title: Scanning conversion algorithm for polygons
 date: 2024-09-21 11:19:00
 expires: 2024-09-30 23:59:59
 mathjax: true
