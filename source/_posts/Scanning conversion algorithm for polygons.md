@@ -1,9 +1,9 @@
 ---
-title: Scanning conversion algorithm for polygons
+title: Python多边形的扫描转化算法
 date: 2024-09-21 11:19:00
 expires: 2024-09-30 23:59:59
 mathjax: true
-excerpt: "多边形的扫描转化算法"
+excerpt: ""
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/44_Stella_4k.jpg"
 
 
