@@ -3,7 +3,7 @@ title: YOLOv8目录结构
 date: 2024-08-19 12:00:00
 expires: 2024-08-21 23:59:59
 mathjax: true
-excerpt: "这是文章摘要 This is the excerpt of the post"
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
 ---
 

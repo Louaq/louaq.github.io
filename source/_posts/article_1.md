@@ -1,10 +1,17 @@
 ---
 title: YOLOv8的训练自己的数据集
 date: 2024-09-25 12:00:00
-expires: 2024-09-30 23:59:59
+expires: 2024-10-30 23:59:59
 mathjax: true
-excerpt: "这是文章摘要 This is the excerpt of the post"
+excerpt: "春水碧于天，画船听雨眠。
+
+—— 菩萨蛮·人人尽说江南好"
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_11_4k_a329c.jpg"
+tags: 
+    - "python"
+    - "Deep Learning"
+categories:
+    - "深度学习"
 ---
 
 一、YOLOv8的简介

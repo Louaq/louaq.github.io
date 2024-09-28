@@ -3,7 +3,9 @@ title: 恒源云
 date: 2024-09-25 12:00:00
 expires: 2024-09-30 23:59:59
 mathjax: true
-excerpt: "这是文章摘要 This is the excerpt of the post"
+excerpt: "只身千里客，孤枕一灯秋。
+
+—— 陆游"
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_6_4k_7e58d.jpg"
 ---
 
