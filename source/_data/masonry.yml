@@ -38,7 +38,7 @@
 - image: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/10TheHumanWorld1_4k_6fbc7.jpg
   title: TheHumanWorld
   description: ella_TheHumanWorld
-<<<<<<< HEAD
+
 
 - image: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ComfyUI_01102_.png
   title: TheHu
@@ -52,7 +52,7 @@
 - image: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ComfyUI_01097_.png
   title: Jijia_2
   description: ComfyUI_2
-=======
+
   
 - image: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ComfyUI_01102_.png
   title: TheHumanWorld
@@ -76,4 +76,4 @@
 - image: https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/10213.png
   title: TheHumanWorld
   description: ella_TheHumanWorld
->>>>>>> 59ab326aef7a9b44e5630f0549126b0cd1f31d1a
+
