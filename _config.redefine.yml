@@ -11,7 +11,7 @@
 # Docs: https://redefine-docs.ohevan.com/basic/info
 info:
   # Site title
-  title: Loop
+  title: Louaq
   # Author name
   author: Louaq
   # Site URL
@@ -159,7 +159,7 @@ home_banner:
     links:
       github: https://github.com/Louaq # your GitHub URL
       instagram: # your Instagram URL
-      zhihu:  # your ZhiHu URL
+      zhihu: https://www.zhihu.com/people/an-ye-jing-ling-64-3  # your ZhiHu URL
       twitter:  # your twitter URL
       email: yangyang_scuec@qq.com # your email
       # ...... # you can add more
@@ -208,7 +208,6 @@ navbar:
        icon: fa-regular fa-user
        submenus:
         Github: https://github.com/louaq
-        Blog: https://hulzt.top
 
 
     # ...... # you can add more
