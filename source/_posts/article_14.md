@@ -6,6 +6,7 @@ thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/30_Abyss_4k_e
 tags: 
     - "论文"
     - "python"
+    - "Ultralytics"
 categories:
     - "YOLO"
 

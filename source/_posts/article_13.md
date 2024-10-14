@@ -5,6 +5,7 @@ expires: 2024-08-21 13:00:00
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6TianNan3_4k_6e30c.jpg"
 tags: 
     - "人工智能"
+    - "Ultralytics"
 categories:
     - "YOLO"
 

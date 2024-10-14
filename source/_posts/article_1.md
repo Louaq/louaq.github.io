@@ -10,6 +10,7 @@ thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_11_4
 tags: 
     - "python"
     - "Deep Learning"
+    - "Computer Vision"
 categories:
     - "深度学习"
 ---

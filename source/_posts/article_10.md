@@ -5,6 +5,7 @@ expires: 2024-08-06 13:00:00
 thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/24Burst1_4k_1b397.jpg"
 tags: 
     - "python"
+    - "热力图"
 categories:
     - "YOLO"
 
