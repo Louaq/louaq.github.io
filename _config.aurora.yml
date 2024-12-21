@@ -61,30 +61,20 @@ authors:
 menu:
   Home:
     i18n:
-       en: Home
        cn: 首页
-  About:
-    i18n:
-       en: About
-       cn: 关于
-  Tags:
-    i18n:
-       en: Tages
-       cn: 标签
   Archives:
     i18n:
-       en: Archives
        cn: 归档
+  Tags:
+    i18n:
+       cn: 标签
   Links: 
     i18n:
-       en: Friends
        cn: 友链
-  message-board:
-    name: 'MessageBoard'
+  About:
     i18n:
-      cn: '留言板'
-      en: 'Message Board'
-    path: '/page/message-board'
+       cn: 关于
+
 
 #! ---------------------------------------------------------------
 #! Theme Config
