@@ -2,7 +2,7 @@
 title: 评估
 date: 2024-08-11 12:00:00
 expires: 2024-08-26 13:00:00
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/11TheHumanWorld2_4k_b3be0.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/11TheHumanWorld2_4k_b3be0.jpg"
 tags: 
     - "python"
 categories:

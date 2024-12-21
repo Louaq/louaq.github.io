@@ -8,7 +8,7 @@ tags:
 excerpt: "只身千里客，孤枕一灯秋。
 
 —— 陆游"
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_6_4k_7e58d.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_6_4k_7e58d.jpg"
 ---
 
  # 恒源云

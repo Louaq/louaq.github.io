@@ -6,7 +6,7 @@ mathjax: true
 excerpt: "测试"
 tags:
     - "Ultralytics"
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_9_4k_b0d62.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_9_4k_b0d62.jpg"
 ---
 
 # 测试

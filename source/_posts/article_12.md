@@ -2,7 +2,7 @@
 title: 绘图
 date: 2024-08-9 12:00:00
 expires: 2024-08-11 13:00:00
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/4TianNan1_4k_fb78c.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/4TianNan1_4k_fb78c.jpg"
 tags: 
     - "人工智能"
     - "论文"

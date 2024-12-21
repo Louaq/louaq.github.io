@@ -2,7 +2,7 @@
 title: 数据集
 date: 2024-08-19 12:00:00
 expires: 2024-08-21 13:00:00
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6TianNan3_4k_6e30c.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6TianNan3_4k_6e30c.jpg"
 tags: 
     - "人工智能"
     - "Ultralytics"

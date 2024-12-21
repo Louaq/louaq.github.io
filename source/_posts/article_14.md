@@ -2,7 +2,7 @@
 title: 报错
 date: 2024-08-1 12:00:00
 expires: 2024-08-21 13:00:00
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/30_Abyss_4k_e2e25.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/30_Abyss_4k_e2e25.jpg"
 tags: 
     - "论文"
     - "python"

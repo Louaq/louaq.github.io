@@ -6,7 +6,7 @@ mathjax: true
 excerpt: "春水碧于天，画船听雨眠。
 
 —— 菩萨蛮·人人尽说江南好"
-thumbnail: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_11_4k_a329c.jpg"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_11_4k_a329c.jpg"
 tags: 
     - "python"
     - "Deep Learning"
