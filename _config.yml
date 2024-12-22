@@ -14,17 +14,15 @@ timezone: ''
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
 url: https://lovely-dolphin-d6dfd9.netlify.app
-root: /
 permalink: /post/:title.html
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
-
 algolia:
-  appId: 7NC4KB1RXJ
-  apiKey: b540386ea8c9de1fceba58a4d632cf23
-  adminApiKey: 30d0433ade7c9b8f91d092f77c8f79ad
+  appId: 7EJVL8BNWL
+  apiKey: 6b6081814c364e05be7f60040cba90bb
+  adminApiKey: d3c158ff3df4b528c9151bfdf8aa3cee
   chunkSize: 5000
   indexName: "shoka"
   fields:
