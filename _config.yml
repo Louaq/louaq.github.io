@@ -13,13 +13,28 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: http://example.com
+url: https://lovely-dolphin-d6dfd9.netlify.app
+root: /
 permalink: /post/:title.html
 permalink_defaults:
 pretty_urls:
   trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
   trailing_html: true # Set to false to remove trailing '.html' from permalinks
 
+algolia:
+  appId: 7NC4KB1RXJ
+  apiKey: b540386ea8c9de1fceba58a4d632cf23
+  adminApiKey: 30d0433ade7c9b8f91d092f77c8f79ad
+  chunkSize: 5000
+  indexName: "shoka"
+  fields:
+    - path #必须配置
+    - title #必须配置
+    - categories #推荐配置
+    - content:strip:truncate,0,2000
+    - gallery
+    - photos
+    - tags
 # Directory
 source_dir: source
 public_dir: public
@@ -98,7 +113,7 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: aurora
+theme: shoka
 
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
@@ -112,3 +127,6 @@ mathjax:
   normal_width: 0.6        # relative normal (monospace) width
   append_css: true         # add CSS to every page
   every_page: false        # if true, every page will be rendered by mathjax regardless the `mathjax` setting in Front-matter of each article
+
+
+
