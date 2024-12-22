@@ -15,7 +15,7 @@ images: images
 
 # themes/shoka/source/images/***
 favicon:
-  apple_touch_icon: /apple-touch-icon.png
+  apple_touch_icon: /favicon.svg
   #safari_pinned_tab: /logo.svg
   #android_manifest: /manifest.json
   #ms_browserconfig: /browserconfig.xml
@@ -97,7 +97,7 @@ menu:
      categories: /categories/ || th
      tags: /tags/ || tags
   friends: /friends/ || heart
-  links: /links/ || magic
+  links: /webstack/ || magic
 
 # Social Links
 # Usage: `Key: permalink || icon || color`
@@ -107,24 +107,24 @@ menu:
 social:
   github: https://github.com/Louaq || github || "#191717"
   #twitter: https://twitter.com/yourname || twitter || "#00aff0"
-  zhihu: https://www.zhihu.com/people/yourname || zhihu || "#1e88e5"
-  music: https://music.163.com/#/user/home?id=yourid || cloud-music || "#e60026"
-  weibo: https://weibo.com/yourname || weibo || "#ea716e"
+  zhihu: https://www.zhihu.com/people/an-ye-jing-ling-64-3 || zhihu || "#1e88e5"
+  music: https://music.163.com/?from=infinity#/user/home?id=1525018658 || cloud-music || "#e60026"
+  weibo: https://www.weibo.com/u/5769723850 || weibo || "#ea716e"
   about: https://about.me/yourname || address-card || "#3b5998"
-  email: mailto:yourname@mail.com || envelope || "#55acd5"
+  email: mailto:yangyang@mail.scuec.edu.cn || envelope || "#55acd5"
   #facebook: https://www.facebook.com/yourname || facebook
   #stackoverflow: https://stackoverflow.com/yourname || stack-overflow
   #youtube: https://youtube.com/yourname || youtube
   #instagram: https://instagram.com/yourname || instagram
   #skype: skype:yourname?call|chat || skype
-  douban: https://www.douban.com/people/yourname/ || douban
+  douban: https://www.douban.com/people/253156361 || douban
 
 sidebar:
   # Sidebar Position.
   position: right
   # position: right
   # Replace the default avatar image and set the url here.
-  avatar: avatar.jpg
+  avatar: avatar.png
 
 widgets:
   # if true, will show random posts
@@ -150,7 +150,7 @@ post:
 # Reward (Donate)
 reward:
   # If true, reward will be displayed in every article by default.
-  enable: true
+  enable: false
   account:
     wechatpay: /wechatpay.png
     alipay: /alipay.png
@@ -299,7 +299,7 @@ audio:
   #    - https://music.163.com/#/playlist?id=2031842656
 
 # random image api
-image_server: #"https://acg.xydwz.cn/api/api.php"
+image_server: https://www.dmoe.cc/random.php
 
 # Algolia Search
 # For more information: https://www.algolia.com

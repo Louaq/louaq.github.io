@@ -5,6 +5,8 @@ expires: 2024-08-21 23:59:59
 mathjax: true
 excerpt: "仙路尽头谁为峰 一见无始道成空"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_9_4k_b0d62.jpg"
+categories:
+    - "写作"
 ---
 
 # 文件分析

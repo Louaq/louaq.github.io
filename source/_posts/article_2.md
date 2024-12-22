@@ -9,6 +9,8 @@ excerpt: "只身千里客，孤枕一灯秋。
 
 —— 陆游"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_6_4k_7e58d.jpg"
+categories:
+    - "深度学习"
 ---
 
  # 恒源云

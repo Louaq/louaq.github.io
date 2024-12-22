@@ -70,6 +70,10 @@ prismjs:
   line_number: true
   tab_replace: ''
 
+category_map: # edit for Theme.shoka
+  YOLO: YOLO
+  写作: writing
+  深度学习: DeepLearning
 # Home page setting
 # path: Root path for your blogs index page. (default = '')
 # per_page: Posts displayed per page. (0 = disable pagination)
@@ -81,7 +85,6 @@ index_generator:
 
 # Category & Tag
 default_category: uncategorized
-category_map:
 tag_map:
 
 # Metadata elements
