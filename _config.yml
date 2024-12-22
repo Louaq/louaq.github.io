@@ -13,12 +13,11 @@ timezone: ''
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://lovely-dolphin-d6dfd9.netlify.app
-permalink: /post/:title.html
+#url: 
+url: http://yoursite.com
+root: /
+permalink: :title/ # edit for Theme.shoka
 permalink_defaults:
-pretty_urls:
-  trailing_index: true # Set to false to remove trailing 'index.html' from permalinks
-  trailing_html: true # Set to false to remove trailing '.html' from permalinks
 algolia:
   appId: 7EJVL8BNWL
   apiKey: 6b6081814c364e05be7f60040cba90bb
@@ -33,6 +32,7 @@ algolia:
     - gallery
     - photos
     - tags
+    - permalink
 # Directory
 source_dir: source
 public_dir: public
