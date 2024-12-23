@@ -34,15 +34,6 @@ loader:
   start: false # When entering the page
   switch: false # When switching to another page
 
-# click with Firework
-#fireworks:
-#  enable: true
-#  color:
-#    - "rgba(255,182,185,.9)"
-#    - "rgba(250,227,217,.9)"
-#    - "rgba(187,222,214,.9)"
-#    - "rgba(138,198,209,.9)"
-
 font:
   enable: true
   # Font options:
@@ -141,7 +132,7 @@ footer:
     color: "#ffc0cb"
   # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
   count: true
-  powered: true
+  powered: false
 
 post:
   # Dependencies: https://github.com/theme-next/hexo-symbols-count-time
