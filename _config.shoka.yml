@@ -33,7 +33,14 @@ auto_scroll: true
 loader:
   start: false # When entering the page
   switch: false # When switching to another page
-
+  
+fireworks:
+  enable: false
+  color:
+    # - "rgba(255,182,185,.9)"
+    # - "rgba(250,227,217,.9)"
+    # - "rgba(187,222,214,.9)"
+    # - "rgba(138,198,209,.9)"
 font:
   enable: true
   # Font options:
