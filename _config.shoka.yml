@@ -94,8 +94,9 @@ menu:
      archives: /archives/ || list-alt
      categories: /categories/ || th
      tags: /tags/ || tags
-  friends: /friends/ || heart
-  links: /webstack/ || magic
+  朋友: /friends/ || heart
+  友链: /webstack/ || magic
+  状态: https://site-status-obwnywzdz-mstf.vercel.app || th
 
 # Social Links
 # Usage: `Key: permalink || icon || color`
