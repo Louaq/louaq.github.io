@@ -1,3 +1,20 @@
+---
+title: vscode配置latex环境
+date: 2024-12-29 13:24:01
+expires: 2024-12-31 23:59:59
+mathjax: true
+excerpt: "介绍vscode如何配置latex环境"
+tags: 
+    - "vscode"
+    - "latex"
+categories:
+    - "YOLO"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1.%E7%B4%AB%E7%81%B5%20%E5%87%A1%E4%BA%BA%E4%BF%AE%E4%BB%99%E4%BC%A0.jpeg"
+---
+
+
+
+
 前言
 --
 
