@@ -298,7 +298,7 @@ audio:
   #    - https://music.163.com/#/playlist?id=2031842656
 
 # random image api
-image_server: https://www.dmoe.cc/random.php
+image_server: https://t.mwm.moe/fj
 
 # Algolia Search
 # For more information: https://www.algolia.com
