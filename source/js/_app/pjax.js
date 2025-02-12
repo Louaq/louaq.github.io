@@ -119,7 +119,7 @@ const siteInit = function () {
   CONFIG.quicklink.ignores = LOCAL.ignores
   quicklink.listen(CONFIG.quicklink)
 
-//  visibilityListener()
+  visibilityListener()
   themeColorListener()
 
   algoliaSearch(pjax)
