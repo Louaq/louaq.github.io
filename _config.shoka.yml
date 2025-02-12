@@ -266,6 +266,13 @@ autoprefixer:
     - '*.min.css'
 
 
+highlight:
+  enable:false
+
+
+prismjs:
+  enable:false
+
 keywords: #站点关键词，用 “,” 分隔
 
 feed:
