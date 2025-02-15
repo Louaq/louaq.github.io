@@ -23,6 +23,8 @@ algolia:
   apiKey: 6b6081814c364e05be7f60040cba90bb
   adminApiKey: d3c158ff3df4b528c9151bfdf8aa3cee
   chunkSize: 5000
+  clearIndex: true  # 强制清空旧索引
+  atomic: true      # 原子化更新（防止中间状态）
   indexName: "shoka"
   fields:
     - path #必须配置

@@ -32,5 +32,3 @@ copyright: false
 ```
 ~~~
 
-# 小伙伴们
-{% linksfile friends/_data.yml %}
