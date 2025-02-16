@@ -1,0 +1,25 @@
+name: Algolia Upload Records
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  algolia:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive  # 确保正确拉取主题子模块
+      
+      - name: Install dependencies
+        run: npm install  # 优先安装package.json中的所有依赖
+      
+      - name: Generate and Upload to Algolia
+        env:
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+        run: |
+          npx hexo algolia
