@@ -235,12 +235,12 @@ comment:
   # See: https://github.com/gitalk/gitalk
   #      https://gitalk.github.io
   gitalk:
-    github_id:        # GitHub repo owner
-    github_admins:    # GitHub Admins (in Array type), optional
-    repository:       # Repository name to store issues
-    client_id:        # GitHub Application Client ID
-    client_secret:    # GitHub Application Client Secret
-    proxy:            # GitHub oauth request reverse proxy for CORS
+    github_id: Louaq                # GitHub repo owner
+    github_admins:                 # GitHub Admins (in Array type), optional
+    repository: keep_comment        # Repository name to store issues
+    client_id: Ov23li7GyQf529XGzzZe       # GitHub Application Client ID
+    client_secret: 18f4d13889000b90fa46833b003031810d5888b4    # GitHub Application Client Secret
+    proxy:                 # GitHub oauth request reverse proxy for CORS
 
   # Twikoo
   # See: https://github.com/imaegoo/twikoo
