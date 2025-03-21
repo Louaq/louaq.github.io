@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Louaq">
+    
+    <title>
+        
+            说明文档 |
+        
+        Louaq lab
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"louaq.github.io","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#c0392b","title":"Louaq lab","author":"Louaq","avatar":"/images/b.jpg","logo":"/images/b.jpg","favicon":"/images/logo.png","mode":"light"},"menu":{"首页":"/  || fa-solid fa-home","归档":"/archives  || fa-solid fa-box-archive","标签":"/tags    || fa-solid fa-tags","种类":"/categories   || fa-solid fa-layer-group","链接":"/links        || fa-solid fa-link","照片":"/photos       || fa-solid fa-image","工具":"/tools        || fa-solid fa-tools","关于":"/about        || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/home.png","background_img_dark":"/images/home.png","description":null,"hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/Louaq","weixin":null,"qq":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":"你好，欢迎来到我的博客！","category":true,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY 年 MM 月 DD 日 HH:mm","copyright_info":true,"share":true,"created_datetime_icon":"fa-solid fa-star","updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"netlify","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{"links":[{"title":"朋友们 1"},{"name":"XPoet","link":"https://xpoet.cn","description":"懒惰是程序员第一生产力","avatar":"https://xpoet.cn/images/avatar.png"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"}],"photos":[{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png","name":"XPoet"},{"url":"https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7l3rs32fxqjoDIYPAqF0DqJ1DGxwDIiw.png","name":"img1"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0n000d6xujp03olsly1lyclDIYPAqF0DqJ1DGxwDIiw.png","name":"img2"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png","name":"XPoet"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxe9zhglhvdaDIYPAqF0DqJ1DGxwDIiw.png","name":"img1"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytx8syk0n4qDIYPAqF0DqJ1DGxwDIiw.png","name":"img2"}],"tools":[{"category":"聊天 AI","anchorId":"JUU4JTgxJThBJUU1JUE0JUE5JTIwQUk0"},{"name":"ChatGPT","link":"https://chat.openai.com/","description":"OpenAI 旗下 AI 聊天对话工具","image":"/images/tools/chatgpt.svg"},{"name":"Gemini","link":"https://gemini.google.com/app","description":"Google 旗下 AI 聊天对话工具","image":"/images/tools/gemini.svg"}]},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Keep" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/b.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Louaq lab
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                种类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                链接
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                照片
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tools">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tools"></i>
+                                
+                                工具
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            种类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            链接
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            照片
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tools">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tools"></i>
+                                </span>
+                            
+                            工具
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+                <div class="post-content-top border-box"
+                     style="height: 13.8rem"
+                >
+                    <div class="cover-post-title">
+                        说明文档
+                    </div>
+                    <img class="post-cover" src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/%E6%8A%A5%E7%BA%B8%E5%A2%99%E5%8F%AF%E7%88%B1%E5%A5%B3%E5%AD%A9%E8%90%A8%E5%8B%92%E8%8A%AC%E5%A6%AE4K%E5%A3%81%E7%BA%B83840_2400_%E5%BD%BC%E5%B2%B8%E5%9B%BE%E7%BD%91.jpg"
+                         onerror="this.style.display='none'"
+                    >
+                </div>
+            
+
+            <div class="post-content-bottom border-box has-cover">
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/b.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Louaq</span>
+                                
+                                    <span class="author-badge">筑基</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-star"></i>&nbsp;
+                <span class="datetime">2024 年 08 月 19 日 04:00</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Mar 20 2025 12:21:37 GMT+0000">2025 年 03 月 20 日 12:21</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/YOLO/">YOLO</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/python/">python</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E8%AE%BA%E6%96%87/">论文</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>2.2k Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+                        <div class="post-aging-tips"
+                             data-update-date="Thu Mar 20 2025 12:21:37 GMT+0000"
+                             data-aging-days="30"
+                        >
+                            <i class="fa-solid fa-circle-exclamation"></i>It has been <span class="days">0</span> days since the last update of this post. Some contents may be outdated. Please pay attention to screening.
+                        </div>
+                    
+
+                    
+                         <blockquote>
+<p>这篇文档主要介绍《基于YOLOv8的农田病虫害检测与分析》的代码实现部分，整篇论文的目的主要是改进YOLOv8的网络结构，使其在检测病虫害的精度和实时性上有所提升。接下来，我将介绍如何从零开始搭建起本项目。</p>
+</blockquote>
+<h1 id="安装Python"><a href="#安装Python" class="headerlink" title="安装Python"></a>安装Python</h1><p>到python的官方网站：<a class="link"   target="_blank" rel="noopener" href="https://www.python.org/" >https://www.python.org/<i class="fas fa-external-link-alt"></i></a>下载，安装</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-10-42.png"
+                       
+                 ></p>
+<p>安装完成后，在命令行窗口运行：python，查看安装的结果，如下图：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-14-22.png"
+                       
+                 ></p>
+<p>至此，Python安装完成，接下来还需要安装anaconda，这是一个python虚拟环境，特别适合管理python的环境。</p>
+<h1 id="安装anaconda"><a href="#安装anaconda" class="headerlink" title="安装anaconda"></a>安装anaconda</h1><p>到anaconda的官方网站：<a class="link"   target="_blank" rel="noopener" href="https://www.anaconda.com/download/success" >https://www.anaconda.com/download/success<i class="fas fa-external-link-alt"></i></a>下载，并安装：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-17-10.png"
+                       
+                 ></p>
+<p>安装成功后，会在开始菜单出现如下图所示：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-19-17.png"
+                       
+                 ></p>
+<p>anaconda安装完成，接下来安装pycharm，主要用来编写代码。</p>
+<h1 id="安装Pycharm"><a href="#安装Pycharm" class="headerlink" title="安装Pycharm"></a>安装Pycharm</h1><p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-23-47.png"
+                       
+                 ></p>
+<p>学生可以申请教育版</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-24-59.png"
+                       
+                 ></p>
+<p>支持，所有的软件安装完成。</p>
+<h1 id="YOLOv8目录结构介绍"><a href="#YOLOv8目录结构介绍" class="headerlink" title="YOLOv8目录结构介绍"></a>YOLOv8目录结构介绍</h1><p>首先介绍整个项目的目录：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-27-47.png"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-28-07.png"
+                       
+                 ></p>
+<p>和原来的YOLOv8相比，根目录新增一些训练的脚本和测试的脚本，比如train.py和Detect.py，当然也可以直接通过命令行的方式来实现，两者效果都是一样的。</p>
+<blockquote>
+<p><strong>重点是ultralytics&#x2F;nn目录，所有的改进模块都是在这里进行，在这里我新建了一个Addmodules的目录，里面是改进的各种模块，包括主干网络，颈部网络和检测头的改进。</strong></p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-36-15.png"
+                       
+                 ></p>
+<p>需要修改的部分我都已经作了修改，不用再做其他的改动</p>
+<blockquote>
+<p><strong>还有一个重要的目录：ultralytics&#x2F;cfg&#x2F;models&#x2F;Add，这里面放的都是yaml文件，其中改进的yaml文件都已经写好，不需要改动。</strong></p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-38-32.png"
+                       
+                 ></p>
+<p>以下是一个yaml文件的示例，其它的都是类似的结构，只是参数不同：</p>
+<h1 id="安装项目的环境（非常重要）"><a href="#安装项目的环境（非常重要）" class="headerlink" title="安装项目的环境（非常重要）"></a>安装项目的环境（非常重要）</h1><blockquote>
+<p>环境配置非常重要，我当时配环境换了一周左右的时间，中间经历了各种报错，软件包不兼容的问题和显卡驱动匹配的问题，总之就是不好搞。为了方面复现工作，我已经把anaconda的环境导出为environment.yml，位于项目的根目录里面，创建虚拟环境的时候直接使用就可以</p>
+</blockquote>
+<h2 id="anaconda虚拟环境"><a href="#anaconda虚拟环境" class="headerlink" title="anaconda虚拟环境"></a>anaconda虚拟环境</h2><p>再anaconda prompt终端输入conda env create -f environment.yml，就可以根据environment.yml文件创建虚拟环境，创建好后，通过conda env list查看环境是否存在，如下图所示就表明创建成功：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_16-35-14.png"
+                       
+                 ></p>
+<p>如果安装的时候出现torch相关的错误，大概率是你的显卡驱动和这里面的torch包版本不匹配，这个问题需要自行修改即可，网上关于这方面的资料很多。</p>
+<h2 id="使用虚拟环境"><a href="#使用虚拟环境" class="headerlink" title="使用虚拟环境"></a>使用虚拟环境</h2><p>虚拟环境创建完成之后，就可以在pycharm中使用，点击右下角，切换conda环境，选择刚才创建的虚拟环境。如果到了这一步还没有报错的话，恭喜你，已经完成了80%的工作。</p>
+<p>运行Detect.py脚本，测试检测效果，如果没有报错，接下来就是训练模型。</p>
+<h1 id="训练脚本train-py"><a href="#训练脚本train-py" class="headerlink" title="训练脚本train.py"></a>训练脚本train.py</h1><p>找到根目录的train.py文件，注释已经写的很清楚，如下图：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    model = YOLO(<span class="string">&#x27;yolov8-HSFPN.yaml&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># model.load(&#x27;yolov8n.pt&#x27;) # 是否加载预训练权重,科研不建议大家加载否则很难提升精度</span></span><br><span class="line"></span><br><span class="line">    model.train(data=<span class="string">r&#x27;D:/Downloads/YOLOv8/datasets/data.yaml&#x27;</span>,</span><br><span class="line">                <span class="comment"># 如果大家任务是其它的&#x27;ultralytics/cfg/default.yaml&#x27;找到这里修改task可以改成detect, segment, classify, pose</span></span><br><span class="line">                cache=<span class="literal">False</span>,</span><br><span class="line">                imgsz=<span class="number">640</span>,</span><br><span class="line">                epochs=<span class="number">150</span>,</span><br><span class="line">                single_cls=<span class="literal">False</span>,  <span class="comment"># 是否是单类别检测</span></span><br><span class="line">                batch=<span class="number">4</span>,</span><br><span class="line">                close_mosaic=<span class="number">10</span>,</span><br><span class="line">                workers=<span class="number">0</span>,</span><br><span class="line">                device=<span class="string">&#x27;0&#x27;</span>,</span><br><span class="line">                optimizer=<span class="string">&#x27;SGD&#x27;</span>, <span class="comment"># using SGD</span></span><br><span class="line">                <span class="comment"># resume=&#x27;runs/train/exp21/weights/last.pt&#x27;, # 如过想续训就设置last.pt的地址</span></span><br><span class="line">                amp=<span class="literal">True</span>,  <span class="comment"># 如果出现训练损失为Nan可以关闭amp</span></span><br><span class="line">                project=<span class="string">&#x27;runs/train&#x27;</span>,</span><br><span class="line">                name=<span class="string">&#x27;exp&#x27;</span>,</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+
+
+
+<p>model &#x3D; YOLO(‘yolov8-HSFPN.yaml’)，把里面的yaml文件换成自己的yaml文件，我这里用的是yolov8-HSFPN.yaml，data&#x3D;r’D:&#x2F;Downloads&#x2F;YOLOv8&#x2F;datasets&#x2F;data.yaml，同理，换成自己数据集的yaml文件，我这里的数据集是yolo格式。其它的参数可以按照自己的任务自行调整。</p>
+<p>还有一个检测的脚本，Detect.py:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    model = YOLO(<span class="string">&#x27;D:/Downloads/YOLOv8/result/result_8_HSFPN/train/exp/weights/best.pt&#x27;</span>) <span class="comment"># select your model.pt path</span></span><br><span class="line">    model.predict(source=<span class="string">&#x27;D:/Downloads/YOLOv8/ultralytics/assets&#x27;</span>,</span><br><span class="line">                  imgsz=<span class="number">640</span>,</span><br><span class="line">                  project=<span class="string">&#x27;runs/detect&#x27;</span>,</span><br><span class="line">                  name=<span class="string">&#x27;exp&#x27;</span>,</span><br><span class="line">                  save=<span class="literal">True</span>,</span><br><span class="line">                )</span><br></pre></td></tr></table></figure>
+
+<p>同理，把best.pt换成你自己训练好的模型，source里面输入检测图片的路径，运行该脚本就可以开始检测，结果保存在runs&#x2F;detect目录。</p>
+<h1 id="开始训练"><a href="#开始训练" class="headerlink" title="开始训练"></a>开始训练</h1><p>准备好数据集，最好是yolo格式的，我的数据集项目里自带了，不需要重新下载：</p>
+<img    
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-55-44.png"
+                         style="zoom:67%;" 
+                 >
+
+<p>datasets目录里面就是我的数据集：有train，test，valid三个目录，分别存放训练集，测试集和验证集的图像和标签：</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-58-01.png"
+                       
+                 ></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_15-58-32.png"
+                       
+                 ></p>
+<p>准备这些之后，运行train.py文件，开始训练。如果报错的话，请自行上网查找，无非就是找不到数据集，某个包的版本不对，或者是GPU用不了，只能用CPU。</p>
+<h1 id="训练结果"><a href="#训练结果" class="headerlink" title="训练结果"></a>训练结果</h1><blockquote>
+<p>训练结果会保存在runs&#x2F;train目录下，exp1,exp2,exp3的顺序，表示每一次的训练结果。</p>
+</blockquote>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_16-04-37.png"
+                       
+                 ></p>
+<p>上图就是训练完成后目录的结构，weights目录里面就是我们需要的模型：best.pts是效果最好的，最后也是需要这个，last.pt是最后一次的训练结果。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/Snipaste_2024-05-23_16-05-47.png"
+                       
+                 ></p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p><strong>整个项目的改进工作我已经做好，复现的话只需装好对应的环境，修改train.py的参数，运行train.py就可以开始训练；修改Detect.py的参数，就可以检测。目前项目只针对检测任务，对于分割和分类没有做改进。</strong></p>
+<h1 id="经验之谈"><a href="#经验之谈" class="headerlink" title="经验之谈"></a>经验之谈</h1><p><strong>（1）以下为两个重要库的版本，必须对应下载，否则会报错</strong></p>
+<blockquote>
+<p>python &#x3D;&#x3D; 3.9.7<br>pytorch &#x3D;&#x3D; 1.12.1<br>timm &#x3D;&#x3D; 0.9.12  # 此安装包必须要<br>mmcv-full &#x3D;&#x3D; 1.6.2  # 不安装此包部分关于dyhead的代码运行不了以及Gold-YOLO</p>
+</blockquote>
+<p><strong>（2）mmcv-full会安装失败是因为自身系统的编译工具有问题，也有可能是环境之间安装的有冲突</strong></p>
+<pre><code>推荐大家离线安装的形式,下面的地址中大家可以找找自己的版本,下载到本地进行安装。
+https://download.openmmlab.com/mmcv/dist/cu111/torch1.8.0/index.html
+https://download.openmmlab.com/mmcv/dist/index.html
+</code></pre>
+<p><strong>（3）basicsr安装失败原因,通过pip install basicsr 下载如果失败,大家可以去百度搜一下如何换下载镜像源就可以修复</strong></p>
+<h2 id="针对一些报错的解决办法在这里说一下"><a href="#针对一些报错的解决办法在这里说一下" class="headerlink" title="针对一些报错的解决办法在这里说一下"></a>针对一些报错的解决办法在这里说一下</h2><p><strong>(1)训练过程中loss出现Nan值.</strong><br>   可以尝试关闭AMP混合精度训练.</p>
+<p><strong>(2)多卡训练问题,修改模型以后不能支持多卡训练可以尝试下面的两行命令行操作，两个是不同的操作，是代表不同的版本现尝试第一个不行用第二个</strong></p>
+<pre><code>python -m torch.distributed.run --nproc_per_node 2 train.py
+python -m torch.distributed.launch --nproc_per_node 2 train.py
+</code></pre>
+<p><strong>(3) 针对运行过程中的一些报错解决</strong><br>    1.如果训练的过程中验证报错了(主要是一些形状不匹配的错误这是因为验证集的一些特殊图片导致)<br>    找到ultralytics&#x2F;models&#x2F;yolo&#x2F;detect&#x2F;train.py的DetectionTrainer class中的build_dataset函数中的rect&#x3D;mode &#x3D;&#x3D; ‘val’改为rect&#x3D;False</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2.</span>推理的时候运行detect.py文件报了形状不匹配的错误</span><br><span class="line">找到ultralytics/engine/predictor.py找到函数<span class="keyword">def</span> <span class="title function_">pre_transform</span>(<span class="params">self, im</span>),在LetterBox中的auto改为<span class="literal">False</span></span><br><span class="line"></span><br><span class="line"><span class="number">3.</span>训练的过程中报错类型不匹配的问题</span><br><span class="line">找到<span class="string">&#x27;ultralytics/engine/validator.py&#x27;</span>文件找到 <span class="string">&#x27;class BaseValidator:&#x27;</span> 然后在其<span class="string">&#x27;__call__&#x27;</span>中</span><br><span class="line"><span class="variable language_">self</span>.args.half = <span class="variable language_">self</span>.device.<span class="built_in">type</span> != <span class="string">&#x27;cpu&#x27;</span>  <span class="comment"># force FP16 val during training的一行代码下面加上self.args.half = False</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>(4) 针对yaml文件中的nc修改</strong><br>    不用修改，模型会自动根据你数据集的配置文件获取。<br>    这也是模型打印两次的区别，第一次打印出来的就是你选择模型的yaml文件结构，第二次打印的就是替换了你数据集的yaml文件，模型使用的是第二种。</p>
+<p><strong>(5) 针对环境的问题</strong><br>    环境的问题每个人遇见的都不一样，可自行上网查找。</p>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                说明文档
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2024/08/19/说明文档/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    Author
+                </div>
+                <div class="content">Louaq</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    Published
+                </div>
+                <div class="content">2024-08-19 04:00</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    License
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="Copy copyright info" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/python/">python</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/">人工智能</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E8%AE%BA%E6%96%87/">论文</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/08/19/article_4/"
+                                   title="YOLOv8文件分析"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">YOLOv8文件分析</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                            <div class="next-post">
+                                <a class="next"
+                                   rel="next"
+                                   href="/2024/08/11/article_11/"
+                                   title="评估"
+                                >
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">评估</span>
+                                        <span class="post-nav-item">Next posts</span>
+                                    </span>
+                                    <span class="right arrow-icon flex-center">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;Comments
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">Comment plugin failed to load</span>
+    <button class="reload keep-button">Click to reload</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">Loading comment plugin</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="configuration-items-error-tip border-box">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    Please fill in the required configuration items for Valine comment plugin
+</div>
+
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Python"><span class="nav-number">1.</span> <span class="nav-text">安装Python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85anaconda"><span class="nav-number">2.</span> <span class="nav-text">安装anaconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Pycharm"><span class="nav-number">3.</span> <span class="nav-text">安装Pycharm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YOLOv8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">YOLOv8目录结构介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%8E%AF%E5%A2%83%EF%BC%88%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">安装项目的环境（非常重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#anaconda%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.1.</span> <span class="nav-text">anaconda虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.2.</span> <span class="nav-text">使用虚拟环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%84%9A%E6%9C%ACtrain-py"><span class="nav-number">6.</span> <span class="nav-text">训练脚本train.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">7.</span> <span class="nav-text">开始训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C"><span class="nav-number">8.</span> <span class="nav-text">训练结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E4%B9%8B%E8%B0%88"><span class="nav-number">10.</span> <span class="nav-text">经验之谈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%B8%80%E4%BA%9B%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%E5%9C%A8%E8%BF%99%E9%87%8C%E8%AF%B4%E4%B8%80%E4%B8%8B"><span class="nav-number">10.1.</span> <span class="nav-text">针对一些报错的解决办法在这里说一下</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Louaq</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="Netlify"><img src="/images/brands/netlify.png"></span>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">Total words</span>
+                    <span class="item-value border-box word">35.8k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Python"><span class="nav-number">1.</span> <span class="nav-text">安装Python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85anaconda"><span class="nav-number">2.</span> <span class="nav-text">安装anaconda</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Pycharm"><span class="nav-number">3.</span> <span class="nav-text">安装Pycharm</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#YOLOv8%E7%9B%AE%E5%BD%95%E7%BB%93%E6%9E%84%E4%BB%8B%E7%BB%8D"><span class="nav-number">4.</span> <span class="nav-text">YOLOv8目录结构介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E9%A1%B9%E7%9B%AE%E7%9A%84%E7%8E%AF%E5%A2%83%EF%BC%88%E9%9D%9E%E5%B8%B8%E9%87%8D%E8%A6%81%EF%BC%89"><span class="nav-number">5.</span> <span class="nav-text">安装项目的环境（非常重要）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#anaconda%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.1.</span> <span class="nav-text">anaconda虚拟环境</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83"><span class="nav-number">5.2.</span> <span class="nav-text">使用虚拟环境</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E8%84%9A%E6%9C%ACtrain-py"><span class="nav-number">6.</span> <span class="nav-text">训练脚本train.py</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%80%E5%A7%8B%E8%AE%AD%E7%BB%83"><span class="nav-number">7.</span> <span class="nav-text">开始训练</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%AE%AD%E7%BB%83%E7%BB%93%E6%9E%9C"><span class="nav-number">8.</span> <span class="nav-text">训练结果</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%BB%8F%E9%AA%8C%E4%B9%8B%E8%B0%88"><span class="nav-number">10.</span> <span class="nav-text">经验之谈</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E4%B8%80%E4%BA%9B%E6%8A%A5%E9%94%99%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%E5%9C%A8%E8%BF%99%E9%87%8C%E8%AF%B4%E4%B8%80%E4%B8%8B"><span class="nav-number">10.1.</span> <span class="nav-text">针对一些报错的解决办法在这里说一下</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>

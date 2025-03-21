@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Louaq">
+    
+    <title>
+        
+            可视化热力图 |
+        
+        Louaq lab
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+        <link rel="shortcut icon" href="/images/logo.png">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/fontawesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/regular.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/solid.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/font/css/brands.min.css">
+    
+    <script class="keep-theme-configurations">
+    const KEEP = window.KEEP || {}
+    KEEP.hexo_config = {"hostname":"louaq.github.io","root":"/","language":"en","path":"search.xml"}
+    KEEP.theme_config = {"base_info":{"primary_color":"#c0392b","title":"Louaq lab","author":"Louaq","avatar":"/images/b.jpg","logo":"/images/b.jpg","favicon":"/images/logo.png","mode":"light"},"menu":{"首页":"/  || fa-solid fa-home","归档":"/archives  || fa-solid fa-box-archive","标签":"/tags    || fa-solid fa-tags","种类":"/categories   || fa-solid fa-layer-group","链接":"/links        || fa-solid fa-link","照片":"/photos       || fa-solid fa-image","工具":"/tools        || fa-solid fa-tools","关于":"/about        || fa-solid fa-user-graduate"},"first_screen":{"enable":true,"background_img":"/images/home.png","background_img_dark":"/images/home.png","description":null,"hitokoto":true},"social_contact":{"enable":true,"links":{"github":"https://github.com/Louaq","weixin":null,"qq":null,"email":null}},"scroll":{"progress_bar":true,"percent":true,"hide_header":true},"home":{"announcement":"你好，欢迎来到我的博客！","category":true,"tag":true,"post_datetime":"updated","post_datetime_format":"YYYY-MM-DD HH:mm:ss"},"post":{"author_badge":{"enable":true,"level_badge":false,"custom_badge":["炼气","筑基","结丹","元婴","化神"]},"word_count":{"wordcount":true,"min2read":true},"datetime_format":"YYYY 年 MM 月 DD 日 HH:mm","copyright_info":true,"share":true,"created_datetime_icon":"fa-solid fa-star","updated_datetime_icon":"fa-solid fa-arrows-rotate","reward":{"enable":false,"img_link":null,"text":null}},"code_block":{"tools":{"enable":true,"style":"mac"},"highlight_theme":"default"},"toc":{"enable":true,"number":true,"expand_all":true,"init_open":true,"layout":"right"},"website_count":{"busuanzi_count":{"enable":true,"site_uv":true,"site_pv":true,"page_pv":true}},"local_search":{"enable":true,"preload":true},"comment":{"enable":true,"use":"valine","valine":{"appid":null,"appkey":null,"server_urls":null,"placeholder":null},"gitalk":{"github_id":null,"github_admins":null,"repository":null,"client_id":null,"client_secret":null,"proxy":null},"twikoo":{"env_id":null,"region":null,"version":"1.6.36"},"waline":{"server_url":null,"reaction":false,"version":"3.2.1"},"giscus":{"repo":null,"repo_id":null,"category":"Announcements","category_id":null,"reactions_enabled":false},"artalk":{"server":null},"disqus":{"shortname":null}},"rss":{"enable":true},"lazyload":{"enable":true},"cdn":{"enable":true,"provider":"cdnjs"},"pjax":{"enable":true},"footer":{"since":2024,"word_count":true,"site_deploy":{"enable":true,"provider":"netlify","url":null},"record":{"enable":false,"list":[{"code":null,"link":null}]}},"inject":{"enable":false,"css":[null],"js":[null]},"root":"","source_data":{"links":[{"title":"朋友们 1"},{"name":"XPoet","link":"https://xpoet.cn","description":"懒惰是程序员第一生产力","avatar":"https://xpoet.cn/images/avatar.png"},{"name":"不知名艺术家","link":"https://jinzhanqi.com/","description":"love artist, love code.","avatar":"https://s3.ax1x.com/2020/11/17/DVvkB4.jpg"}],"photos":[{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png","name":"XPoet"},{"url":"https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7l3rs32fxqjoDIYPAqF0DqJ1DGxwDIiw.png","name":"img1"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0n000d6xujp03olsly1lyclDIYPAqF0DqJ1DGxwDIiw.png","name":"img2"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png","name":"XPoet"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxe9zhglhvdaDIYPAqF0DqJ1DGxwDIiw.png","name":"img1"},{"url":"https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytx8syk0n4qDIYPAqF0DqJ1DGxwDIiw.png","name":"img2"}],"tools":[{"category":"聊天 AI","anchorId":"JUU4JTgxJThBJUU1JUE0JUE5JTIwQUk0"},{"name":"ChatGPT","link":"https://chat.openai.com/","description":"OpenAI 旗下 AI 聊天对话工具","image":"/images/tools/chatgpt.svg"},{"name":"Gemini","link":"https://gemini.google.com/app","description":"Google 旗下 AI 聊天对话工具","image":"/images/tools/gemini.svg"}]},"version":"4.2.5"}
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"}
+    KEEP.language_code_block = {"copy":"Copy code","copied":"Copied","fold":"Fold code block","folded":"Folded"}
+    KEEP.language_copy_copyright = {"copy":"Copy copyright info","copied":"Copied","title":"Original post title","author":"Original post author","link":"Original post link"}
+  </script>
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Keep" type="application/atom+xml">
+</head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+        <span class="scroll-progress-bar"></span>
+    
+
+    
+        <span class="pjax-progress-bar"></span>
+        <i class="pjax-progress-icon fas fa-circle-notch fa-spin"></i>
+    
+</div>
+
+
+
+<main class="page-container border-box">
+    <!-- home first screen  -->
+    
+
+    <!-- page content -->
+    <div class="page-main-content border-box">
+        <div class="page-main-content-top">
+            
+<header class="header-wrapper">
+
+    <div class="border-box header-content">
+        <div class="left flex-start border-box">
+            
+                <a class="logo-image border-box" href="/">
+                    <img src="/images/b.jpg">
+                </a>
+            
+            <a class="site-name border-box" href="/">
+               Louaq lab
+            </a>
+        </div>
+
+        <div class="right border-box">
+            <div class="pc border-box">
+                <ul class="menu-list border-box">
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-home"></i>
+                                
+                                首页
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/archives">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                
+                                归档
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tags">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tags"></i>
+                                
+                                标签
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/categories">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                
+                                种类
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/links">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-link"></i>
+                                
+                                链接
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/photos">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-image"></i>
+                                
+                                照片
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/tools">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-tools"></i>
+                                
+                                工具
+                                
+                            </a>
+                            
+                        </li>
+                    
+                        
+                        <li class="menu-item flex-start border-box">
+                            <a class="menu-text-color border-box" href="/about">
+                                
+                                    <i class="menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                
+                                关于
+                                
+                            </a>
+                            
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="menu-text-color fas search fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile border-box flex-start">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list border-box">
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-home"></i>
+                                </span>
+                            
+                            首页
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/archives">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-box-archive"></i>
+                                </span>
+                            
+                            归档
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tags">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tags"></i>
+                                </span>
+                            
+                            标签
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/categories">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-layer-group"></i>
+                                </span>
+                            
+                            种类
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/links">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-link"></i>
+                                </span>
+                            
+                            链接
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/photos">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-image"></i>
+                                </span>
+                            
+                            照片
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/tools">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-tools"></i>
+                                </span>
+                            
+                            工具
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+                
+                <li class="drawer-menu-item border-box not-sub-menu">
+                    <label class="drawer-menu-label border-box">
+                        <a class="drawer-menu-text-color left-side flex-start border-box" href="/about">
+                            
+                                <span class="menu-icon-wrap border-box flex-center">
+                                    <i class="drawer-menu-text-color menu-icon fa-solid fa-user-graduate"></i>
+                                </span>
+                            
+                            关于
+                        </a>
+                        
+                    </label>
+                    
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle border-box">
+
+            <div class="main-content border-box">
+                
+
+                    
+<div class="fade-in-down-animation">
+    <div class="post-page-container border-box">
+        <div class="post-content-container border-box">
+            
+                <div class="post-content-top border-box"
+                     style="height: 13.8rem"
+                >
+                    <div class="cover-post-title">
+                        可视化热力图
+                    </div>
+                    <img class="post-cover" src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/24Burst1_4k_1b397.jpg"
+                         onerror="this.style.display='none'"
+                    >
+                </div>
+            
+
+            <div class="post-content-bottom border-box has-cover">
+                
+
+                
+                    <div class="post-header border-box">
+                        
+                            <div class="avatar-box border-box">
+                                <img src="/images/b.jpg">
+                            </div>
+                        
+                        <div class="info-box">
+                            <div class="author border-box">
+                                <span class="name">Louaq</span>
+                                
+                                    <span class="author-badge">筑基</span>
+                                
+                            </div>
+                            <div class="meta-info border-box">
+                                
+
+<div class="post-meta-info-container border-box post">
+    <div class="post-meta-info border-box">
+        
+
+        
+            <span class="meta-info-item post-create-date">
+                <i class="icon fa-solid fa-star"></i>&nbsp;
+                <span class="datetime">2024 年 07 月 28 日 04:00</span>
+            </span>
+
+            
+                <span class="meta-info-item post-update-date">
+                    <i class="icon fa-solid fa-arrows-rotate"></i>&nbsp;
+                    <span class="datetime" data-updated="Thu Mar 20 2025 12:24:23 GMT+0000">2025 年 03 月 20 日 12:24</span>
+                </span>
+            
+        
+
+        
+            <span class="meta-info-item post-category border-box"><i class="icon fas fa-folder"></i>&nbsp;
+                <ul class="post-category-ul">
+                    
+                            <li class="category-item"><a href="/categories/YOLO/">YOLO</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+            <span class="post-tag meta-info-item border-box">
+                <ul class="post-tag-ul">
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/python/">python</a></li>
+                        
+                    
+                            <li class="tag-item"><span class="tag-separator"><i class="icon fas fa-hashtag"></i></span><a href="/tags/%E7%83%AD%E5%8A%9B%E5%9B%BE/">热力图</a></li>
+                        
+                    
+                </ul>
+            </span>
+        
+
+        
+        
+            <span class="meta-info-item post-wordcount">
+                <i class="icon fas fa-file-word"></i>&nbsp;<span>1.8k Words</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-min2read">
+                <i class="icon fas fa-clock"></i>&nbsp;<span>8 Mins</span>
+            </span>
+        
+        
+            <span class="meta-info-item post-pv">
+                <i class="icon fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+            </span>
+        
+    </div>
+
+    
+</div>
+
+                            </div>
+                        </div>
+                    </div>
+                
+
+                <div class="post-content keep-markdown-body ">
+                    
+                        <div class="post-aging-tips"
+                             data-update-date="Thu Mar 20 2025 12:24:23 GMT+0000"
+                             data-aging-days="30"
+                        >
+                            <i class="fa-solid fa-circle-exclamation"></i>It has been <span class="days">0</span> days since the last update of this post. Some contents may be outdated. Please pay attention to screening.
+                        </div>
+                    
+
+                    
+                         <h2 id="一、本文介绍"><a href="#一、本文介绍" class="headerlink" title="一、本文介绍"></a>一、本文介绍</h2><p>本文给大家带来的机制是的<strong>可视化热力图功能</strong>，热力图)作为我们论文当中的必备一环，可以展示出我们呈现机制的有效性，本文的内容支持YOLOv8最新版本，同时支持视频讲解，本文的内容是根据检测头的输出内容，然后来绘图，<strong>产生6300张预测图片，从中选取出有效的热力图来绘图。</strong></p>
+<p>在开始之前给大家推荐一下我的专栏，本专栏每周更新3-10篇最新前沿机制 | 包括二次创新全网无重复，以及融合改进(大家拿到之后添加另外一个改进机制在你的数据集上实现涨点即可撰写论文)，还有各种前沿顶会改进机制 |，更有包含我所有附赠的文件（文件内集成我所有的改进机制全部注册完毕可以直接运行）和交流群和视频讲解提供给大家。  </p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/0a203fd9e3cd4f89b95e419e4fc22f1f.png"
+                       
+                 ></p>
+<hr>
+<h2 id="二、项目完整代码"><a href="#二、项目完整代码" class="headerlink" title="二、项目完整代码 "></a>二、项目完整代码 </h2><p><strong>我们将这个代码，复制粘贴到我们YOLOv8的仓库里然后创建一个py文件存放进去即可。</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> warnings</span><br><span class="line">warnings.filterwarnings(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line">warnings.simplefilter(<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line"><span class="keyword">import</span> torch, yaml, cv2, os, shutil</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">np.random.seed(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> tqdm <span class="keyword">import</span> trange</span><br><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">from</span> ultralytics.nn.tasks <span class="keyword">import</span> DetectionModel <span class="keyword">as</span> Model</span><br><span class="line"><span class="keyword">from</span> ultralytics.utils.torch_utils <span class="keyword">import</span> intersect_dicts</span><br><span class="line"><span class="keyword">from</span> ultralytics.utils.ops <span class="keyword">import</span> xywh2xyxy</span><br><span class="line"><span class="keyword">from</span> pytorch_grad_cam <span class="keyword">import</span> GradCAMPlusPlus, GradCAM, XGradCAM</span><br><span class="line"><span class="keyword">from</span> pytorch_grad_cam.utils.image <span class="keyword">import</span> show_cam_on_image</span><br><span class="line"><span class="keyword">from</span> pytorch_grad_cam.activations_and_gradients <span class="keyword">import</span> ActivationsAndGradients</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">letterbox</span>(<span class="params">im, new_shape=(<span class="params"><span class="number">640</span>, <span class="number">640</span></span>), color=(<span class="params"><span class="number">114</span>, <span class="number">114</span>, <span class="number">114</span></span>), auto=<span class="literal">True</span>, scaleFill=<span class="literal">False</span>, scaleup=<span class="literal">True</span>, stride=<span class="number">32</span></span>):</span><br><span class="line">    <span class="comment"># Resize and pad image while meeting stride-multiple constraints</span></span><br><span class="line">    shape = im.shape[:<span class="number">2</span>]  <span class="comment"># current shape [height, width]</span></span><br><span class="line">    <span class="keyword">if</span> <span class="built_in">isinstance</span>(new_shape, <span class="built_in">int</span>):</span><br><span class="line">        new_shape = (new_shape, new_shape)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Scale ratio (new / old)</span></span><br><span class="line">    r = <span class="built_in">min</span>(new_shape[<span class="number">0</span>] / shape[<span class="number">0</span>], new_shape[<span class="number">1</span>] / shape[<span class="number">1</span>])</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> scaleup:  <span class="comment"># only scale down, do not scale up (for better val mAP)</span></span><br><span class="line">        r = <span class="built_in">min</span>(r, <span class="number">1.0</span>)</span><br><span class="line"> </span><br><span class="line">    <span class="comment"># Compute padding</span></span><br><span class="line">    ratio = r, r  <span class="comment"># width, height ratios</span></span><br><span class="line">    new_unpad = <span class="built_in">int</span>(<span class="built_in">round</span>(shape[<span class="number">1</span>] * r)), <span class="built_in">int</span>(<span class="built_in">round</span>(shape[<span class="number">0</span>] * r))</span><br><span class="line">    dw, dh = new_shape[<span class="number">1</span>] - new_unpad[<span class="number">0</span>], new_shape[<span class="number">0</span>] - new_unpad[<span class="number">1</span>]  <span class="comment"># wh padding</span></span><br><span class="line">    <span class="keyword">if</span> auto:  <span class="comment"># minimum rectangle</span></span><br><span class="line">        dw, dh = np.mod(dw, stride), np.mod(dh, stride)  <span class="comment"># wh padding</span></span><br><span class="line">    <span class="keyword">elif</span> scaleFill:  <span class="comment"># stretch</span></span><br><span class="line">        dw, dh = <span class="number">0.0</span>, <span class="number">0.0</span></span><br><span class="line">        new_unpad = (new_shape[<span class="number">1</span>], new_shape[<span class="number">0</span>])</span><br><span class="line">        ratio = new_shape[<span class="number">1</span>] / shape[<span class="number">1</span>], new_shape[<span class="number">0</span>] / shape[<span class="number">0</span>]  <span class="comment"># width, height ratios</span></span><br><span class="line"> </span><br><span class="line">    dw /= <span class="number">2</span>  <span class="comment"># divide padding into 2 sides</span></span><br><span class="line">    dh /= <span class="number">2</span></span><br><span class="line"> </span><br><span class="line">    <span class="keyword">if</span> shape[::-<span class="number">1</span>] != new_unpad:  <span class="comment"># resize</span></span><br><span class="line">        im = cv2.resize(im, new_unpad, interpolation=cv2.INTER_LINEAR)</span><br><span class="line">    top, bottom = <span class="built_in">int</span>(<span class="built_in">round</span>(dh - <span class="number">0.1</span>)), <span class="built_in">int</span>(<span class="built_in">round</span>(dh + <span class="number">0.1</span>))</span><br><span class="line">    left, right = <span class="built_in">int</span>(<span class="built_in">round</span>(dw - <span class="number">0.1</span>)), <span class="built_in">int</span>(<span class="built_in">round</span>(dw + <span class="number">0.1</span>))</span><br><span class="line">    im = cv2.copyMakeBorder(im, top, bottom, left, right, cv2.BORDER_CONSTANT, value=color)  <span class="comment"># add border</span></span><br><span class="line">    <span class="keyword">return</span> im, ratio, (dw, dh)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">class</span> <span class="title class_">yolov8_heatmap</span>:</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, weight, cfg, device, method, layer, backward_type, conf_threshold, ratio</span>):</span><br><span class="line">        device = torch.device(device)</span><br><span class="line">        ckpt = torch.load(weight)</span><br><span class="line">        model_names = ckpt[<span class="string">&#x27;model&#x27;</span>].names</span><br><span class="line">        csd = ckpt[<span class="string">&#x27;model&#x27;</span>].<span class="built_in">float</span>().state_dict()  <span class="comment"># checkpoint state_dict as FP32</span></span><br><span class="line">        model = Model(cfg, ch=<span class="number">3</span>, nc=<span class="built_in">len</span>(model_names)).to(device)</span><br><span class="line">        csd = intersect_dicts(csd, model.state_dict(), exclude=[<span class="string">&#x27;anchor&#x27;</span>])  <span class="comment"># intersect</span></span><br><span class="line">        model.load_state_dict(csd, strict=<span class="literal">False</span>)  <span class="comment"># load</span></span><br><span class="line">        model.<span class="built_in">eval</span>()</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">f&#x27;Transferred <span class="subst">&#123;<span class="built_in">len</span>(csd)&#125;</span>/<span class="subst">&#123;<span class="built_in">len</span>(model.state_dict())&#125;</span> items&#x27;</span>)</span><br><span class="line">        </span><br><span class="line">        target_layers = [<span class="built_in">eval</span>(layer)]</span><br><span class="line">        method = <span class="built_in">eval</span>(method)</span><br><span class="line"> </span><br><span class="line">        colors = np.random.uniform(<span class="number">0</span>, <span class="number">255</span>, size=(<span class="built_in">len</span>(model_names), <span class="number">3</span>)).astype(np.int32)</span><br><span class="line">        <span class="variable language_">self</span>.__dict__.update(<span class="built_in">locals</span>())</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">post_process</span>(<span class="params">self, result</span>):</span><br><span class="line">        logits_ = result[:, <span class="number">4</span>:]</span><br><span class="line">        boxes_ = result[:, :<span class="number">4</span>]</span><br><span class="line">        <span class="built_in">sorted</span>, indices = torch.sort(logits_.<span class="built_in">max</span>(<span class="number">1</span>)[<span class="number">0</span>], descending=<span class="literal">True</span>)</span><br><span class="line">        <span class="keyword">return</span> torch.transpose(logits_[<span class="number">0</span>], dim0=<span class="number">0</span>, dim1=<span class="number">1</span>)[indices[<span class="number">0</span>]], torch.transpose(boxes_[<span class="number">0</span>], dim0=<span class="number">0</span>, dim1=<span class="number">1</span>)[indices[<span class="number">0</span>]], xywh2xyxy(torch.transpose(boxes_[<span class="number">0</span>], dim0=<span class="number">0</span>, dim1=<span class="number">1</span>)[indices[<span class="number">0</span>]]).cpu().detach().numpy()</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">draw_detections</span>(<span class="params">self, box, color, name, img</span>):</span><br><span class="line">        xmin, ymin, xmax, ymax = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">int</span>, <span class="built_in">list</span>(box)))</span><br><span class="line">        cv2.rectangle(img, (xmin, ymin), (xmax, ymax), <span class="built_in">tuple</span>(<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> color), <span class="number">2</span>)</span><br><span class="line">        cv2.putText(img, <span class="built_in">str</span>(name), (xmin, ymin - <span class="number">5</span>), cv2.FONT_HERSHEY_SIMPLEX, <span class="number">0.8</span>, <span class="built_in">tuple</span>(<span class="built_in">int</span>(x) <span class="keyword">for</span> x <span class="keyword">in</span> color), <span class="number">2</span>, lineType=cv2.LINE_AA)</span><br><span class="line">        <span class="keyword">return</span> img</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__call__</span>(<span class="params">self, img_path, save_path</span>):</span><br><span class="line">        <span class="comment"># remove dir if exist</span></span><br><span class="line">        <span class="keyword">if</span> os.path.exists(save_path):</span><br><span class="line">            shutil.rmtree(save_path)</span><br><span class="line">        <span class="comment"># make dir if not exist</span></span><br><span class="line">        os.makedirs(save_path, exist_ok=<span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># img process</span></span><br><span class="line">        img = cv2.imread(img_path)</span><br><span class="line">        img = letterbox(img)[<span class="number">0</span>]</span><br><span class="line">        img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)</span><br><span class="line">        img = np.float32(img) / <span class="number">255.0</span></span><br><span class="line">        tensor = torch.from_numpy(np.transpose(img, axes=[<span class="number">2</span>, <span class="number">0</span>, <span class="number">1</span>])).unsqueeze(<span class="number">0</span>).to(<span class="variable language_">self</span>.device)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># init ActivationsAndGradients</span></span><br><span class="line">        grads = ActivationsAndGradients(<span class="variable language_">self</span>.model, <span class="variable language_">self</span>.target_layers, reshape_transform=<span class="literal">None</span>)</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># get ActivationsAndResult</span></span><br><span class="line">        result = grads(tensor)</span><br><span class="line">        activations = grads.activations[<span class="number">0</span>].cpu().detach().numpy()</span><br><span class="line"> </span><br><span class="line">        <span class="comment"># postprocess to yolo output</span></span><br><span class="line">        post_result, pre_post_boxes, post_boxes = <span class="variable language_">self</span>.post_process(result[<span class="number">0</span>])</span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> trange(<span class="built_in">int</span>(post_result.size(<span class="number">0</span>) * <span class="variable language_">self</span>.ratio)):</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">float</span>(post_result[i].<span class="built_in">max</span>()) &lt; <span class="variable language_">self</span>.conf_threshold:</span><br><span class="line">                <span class="keyword">break</span></span><br><span class="line"> </span><br><span class="line">            <span class="variable language_">self</span>.model.zero_grad()</span><br><span class="line">            <span class="comment"># get max probability for this prediction</span></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.backward_type == <span class="string">&#x27;class&#x27;</span> <span class="keyword">or</span> <span class="variable language_">self</span>.backward_type == <span class="string">&#x27;all&#x27;</span>:</span><br><span class="line">                score = post_result[i].<span class="built_in">max</span>()</span><br><span class="line">                score.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.backward_type == <span class="string">&#x27;box&#x27;</span> <span class="keyword">or</span> <span class="variable language_">self</span>.backward_type == <span class="string">&#x27;all&#x27;</span>:</span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">4</span>):</span><br><span class="line">                    score = pre_post_boxes[i, j]</span><br><span class="line">                    score.backward(retain_graph=<span class="literal">True</span>)</span><br><span class="line"> </span><br><span class="line">            <span class="comment"># process heatmap</span></span><br><span class="line">            <span class="keyword">if</span> <span class="variable language_">self</span>.backward_type == <span class="string">&#x27;class&#x27;</span>:</span><br><span class="line">                gradients = grads.gradients[<span class="number">0</span>]</span><br><span class="line">            <span class="keyword">elif</span> <span class="variable language_">self</span>.backward_type == <span class="string">&#x27;box&#x27;</span>:</span><br><span class="line">                gradients = grads.gradients[<span class="number">0</span>] + grads.gradients[<span class="number">1</span>] + grads.gradients[<span class="number">2</span>] + grads.gradients[<span class="number">3</span>]</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                gradients = grads.gradients[<span class="number">0</span>] + grads.gradients[<span class="number">1</span>] + grads.gradients[<span class="number">2</span>] + grads.gradients[<span class="number">3</span>] + grads.gradients[<span class="number">4</span>]</span><br><span class="line">            b, k, u, v = gradients.size()</span><br><span class="line">            weights = <span class="variable language_">self</span>.method.get_cam_weights(<span class="variable language_">self</span>.method, <span class="literal">None</span>, <span class="literal">None</span>, <span class="literal">None</span>, activations, gradients.detach().numpy())</span><br><span class="line">            weights = weights.reshape((b, k, <span class="number">1</span>, <span class="number">1</span>))</span><br><span class="line">            saliency_map = np.<span class="built_in">sum</span>(weights * activations, axis=<span class="number">1</span>)</span><br><span class="line">            saliency_map = np.squeeze(np.maximum(saliency_map, <span class="number">0</span>))</span><br><span class="line">            saliency_map = cv2.resize(saliency_map, (tensor.size(<span class="number">3</span>), tensor.size(<span class="number">2</span>)))</span><br><span class="line">            saliency_map_min, saliency_map_max = saliency_map.<span class="built_in">min</span>(), saliency_map.<span class="built_in">max</span>()</span><br><span class="line">            <span class="keyword">if</span> (saliency_map_max - saliency_map_min) == <span class="number">0</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            saliency_map = (saliency_map - saliency_map_min) / (saliency_map_max - saliency_map_min)</span><br><span class="line"> </span><br><span class="line">            <span class="comment"># add heatmap and box to image</span></span><br><span class="line">            cam_image = show_cam_on_image(img.copy(), saliency_map, use_rgb=<span class="literal">True</span>)</span><br><span class="line">            <span class="string">&quot;不想在图片中绘画出边界框和置信度，注释下面的一行代码即可&quot;</span></span><br><span class="line">            cam_image = <span class="variable language_">self</span>.draw_detections(post_boxes[i], <span class="variable language_">self</span>.colors[<span class="built_in">int</span>(post_result[i, :].argmax())], <span class="string">f&#x27;<span class="subst">&#123;self.model_names[<span class="built_in">int</span>(post_result[i, :].argmax())]&#125;</span> <span class="subst">&#123;<span class="built_in">float</span>(post_result[i].<span class="built_in">max</span>()):<span class="number">.2</span>f&#125;</span>&#x27;</span>, cam_image)</span><br><span class="line">            cam_image = Image.fromarray(cam_image)</span><br><span class="line">            cam_image.save(<span class="string">f&#x27;<span class="subst">&#123;save_path&#125;</span>/<span class="subst">&#123;i&#125;</span>.png&#x27;</span>)</span><br><span class="line"> </span><br><span class="line"><span class="keyword">def</span> <span class="title function_">get_params</span>():</span><br><span class="line">    params = &#123;</span><br><span class="line">        <span class="string">&#x27;weight&#x27;</span>: <span class="string">&#x27;yolov8n.pt&#x27;</span>,   <span class="comment"># 训练出来的权重文件</span></span><br><span class="line">        <span class="string">&#x27;cfg&#x27;</span>: <span class="string">&#x27;ultralytics/cfg/models/v8/yolov8n.yaml&#x27;</span>,  <span class="comment"># 训练权重对应的yaml配置文件</span></span><br><span class="line">        <span class="string">&#x27;device&#x27;</span>: <span class="string">&#x27;cuda:0&#x27;</span>,</span><br><span class="line">        <span class="string">&#x27;method&#x27;</span>: <span class="string">&#x27;GradCAM&#x27;</span>, <span class="comment"># GradCAMPlusPlus, GradCAM, XGradCAM , 使用的热力图库文件不同的效果不一样可以多尝试</span></span><br><span class="line">        <span class="string">&#x27;layer&#x27;</span>: <span class="string">&#x27;model.model[9]&#x27;</span>,  <span class="comment"># 想要检测的对应层</span></span><br><span class="line">        <span class="string">&#x27;backward_type&#x27;</span>: <span class="string">&#x27;all&#x27;</span>, <span class="comment"># class, box, all</span></span><br><span class="line">        <span class="string">&#x27;conf_threshold&#x27;</span>: <span class="number">0.01</span>, <span class="comment"># 0.6  # 置信度阈值，有的时候你的进度条到一半就停止了就是因为没有高于此值的了</span></span><br><span class="line">        <span class="string">&#x27;ratio&#x27;</span>: <span class="number">0.02</span> <span class="comment"># 0.02-0.1</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> params</span><br><span class="line"> </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    model = yolov8_heatmap(**get_params())</span><br><span class="line">    model(<span class="string">r&#x27;ultralytics/assets/bus.jpg&#x27;</span>, <span class="string">&#x27;result&#x27;</span>)  <span class="comment"># 第一个是检测的文件, 第二个是保存的路径</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="三、参数解析"><a href="#三、参数解析" class="headerlink" title=" 三、参数解析 "></a> 三、参数解析 </h2><p><strong>下面上面项目核心代码的参数解析，共有7个，能够起到作用的参数并不多。</strong> </p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/6fcc9bb6ec814ab1961efb0c7db5f1a1.png"
+                       
+                 ></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>参数名</th>
+<th>参数类型</th>
+<th>参数讲解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>weights</td>
+<td>str</td>
+<td>用于检测视频的权重文件地址（可以是你训练好的，也可以是官方提供的）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>cfg</td>
+<td>str</td>
+<td>你选择的权重对应的yaml配置文件，请注意一定要对应否则会报错和不显示图片</td>
+</tr>
+<tr>
+<td>2</td>
+<td>device</td>
+<td>str</td>
+<td>设备的选择可以用GPU也可以用CPU</td>
+</tr>
+<tr>
+<td>3</td>
+<td>method</td>
+<td>str</td>
+<td>使用的热力图第三方库的版本，不同的版本效果也不一样。</td>
+</tr>
+<tr>
+<td>4</td>
+<td>layer</td>
+<td>str</td>
+<td>想要检测的对应层，比如这里设置的是9那么检测的就是第九层</td>
+</tr>
+<tr>
+<td>4</td>
+<td>backward_type</td>
+<td>str</td>
+<td>检测的类别</td>
+</tr>
+<tr>
+<td>5</td>
+<td>conf_threshold</td>
+<td>str</td>
+<td>置信度阈值，有的时候你的进度条没有满就是因为没有大于这个阈值的图片了</td>
+</tr>
+<tr>
+<td>6</td>
+<td>ratio</td>
+<td>int</td>
+<td>YOLOv8一次产生6300张预测框，选择多少比例的图片绘画热力图。</td>
+</tr>
+</tbody></table>
+<h2 id="四、项目的使用教程"><a href="#四、项目的使用教程" class="headerlink" title="四、项目的使用教程"></a>四、项目的使用教程</h2><h3 id="4-1-步骤一"><a href="#4-1-步骤一" class="headerlink" title="4.1 步骤一"></a>4.1 步骤一</h3><p>我们在Yolo仓库的目录下创建一个py文件将代码存放进去，如下图所示。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/6c4bed4cef9a488d8cda62492efa80c7.png"
+                       
+                 ></p>
+<hr>
+<h3 id="4-2-步骤二"><a href="#4-2-步骤二" class="headerlink" title="4.2 步骤二"></a>4.2 步骤二</h3><p><strong>我们按照参数解析部分的介绍填好大家的参数，主要配置的有两个一个就是权重文件地址另一个就是图片的地址。</strong></p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/2bd70b825206498bb8688b90cfa3e12c.png"
+                       
+                 ></p>
+<hr>
+<h3 id="4-3-步骤三"><a href="#4-3-步骤三" class="headerlink" title="4.3 步骤三"></a>4.3 步骤三</h3><p>我们挺好之后运行文件即可，图片就会保存在同级目录下的新的文件夹result内。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/0a203fd9e3cd4f89b95e419e4fc22f1f.png"
+                       
+                 ></p>
+<hr>
+<h3 id="4-4-置信度和检测框"><a href="#4-4-置信度和检测框" class="headerlink" title="4.4 置信度和检测框"></a>4.4 置信度和检测框</h3><p>看下下面的说明就行。</p>
+<p><img  
+                       lazyload
+                       alt="image"
+                       data-src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/26206bf8e8cb4da4b2f230ac932cd577.png"
+                       
+                 ></p>
+<hr>
+
+                    
+                </div>
+
+                
+                        
+<div class="post-copyright-info-container border-box">
+    <div class="copyright-info-content border-box">
+        <div class="copyright-info-top border-box">
+            <div class="copyright-post-title border-box text-ellipsis">
+                可视化热力图
+            </div>
+
+            <div class="copyright-post-link border-box text-ellipsis">
+                2024/07/28/article_10/
+            </div>
+        </div>
+
+        <div class="copyright-info-bottom border-box">
+            <div class="copyright-post-author bottom-item">
+                <div class="type">
+                    Author
+                </div>
+                <div class="content">Louaq</div>
+            </div>
+
+            <div class="post-time bottom-item">
+                <div class="type">
+                    Published
+                </div>
+                <div class="content">2024-07-28 04:00</div>
+            </div>
+
+
+            <div class="post-license bottom-item">
+                <div class="type">
+                    License
+                </div>
+                <div class="content tooltip" data-tooltip-content="CC BY-NC-SA 4.0">
+                    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed" target="_blank">
+                        
+                            <i class="fa-brands fa-creative-commons"></i>
+                            <i class="fa-brands fa-creative-commons-by"></i>
+                            <i class="fa-brands fa-creative-commons-nc"></i>
+                            <i class="fa-brands fa-creative-commons-sa"></i>
+                        
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <i class="copyright-bg fa-solid fa-copyright"></i>
+    </div>
+    <div class="copy-copyright-info flex-center tooltip" data-tooltip-content="Copy copyright info" data-tooltip-offset-y="-2px">
+        <i class="fa-solid fa-copy"></i>
+    </div>
+</div>
+
+                
+
+                <div class="post-bottom-tags-and-share border-box">
+                    <div>
+                        
+                            <ul class="post-tags-box border-box">
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/python/">python</a>
+                                    </li>
+                                
+                                    <li class="tag-item border-box">
+                                        <i class="icon fas fa-hashtag"></i>&nbsp;<a href="/tags/%E7%83%AD%E5%8A%9B%E5%9B%BE/">热力图</a>
+                                    </li>
+                                
+                            </ul>
+                        
+                    </div>
+                    <div>
+                        
+                            <div class="post-share-container border-box">
+    <ul class="share-list-wrap border-box">
+        <li class="qq share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to QQ"
+        >
+            <i class="fa-brands fa-qq"></i>
+        </li>
+        <li class="wechat share-item border-box flex-center tooltip tooltip-img"
+            data-tooltip-content="Share to WeChat"
+            data-tooltip-img-tip="Scan by WeChat"
+            data-tooltip-img-style="background-color: #fff; top: -10px; padding: 0.6rem 0.6rem 0.1rem 0.6rem;"
+        >
+            <i class="fa-brands fa-weixin"></i>
+        </li>
+        <li class="weibo share-item border-box flex-center tooltip"
+            data-tooltip-content="Share to WeiBo"
+        >
+            <i class="fa-brands fa-weibo"></i>
+        </li>
+    </ul>
+</div>
+
+                        
+                    </div>
+                </div>
+
+                
+
+                
+                    <div class="post-nav border-box">
+                        
+                            <div class="prev-post">
+                                <a class="prev"
+                                   rel="prev"
+                                   href="/2024/08/01/article_14/"
+                                   title="报错"
+                                >
+                                    <span class="left arrow-icon flex-center">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </span>
+                                    <span class="title flex-center">
+                                        <span class="post-nav-title-item text-ellipsis">报错</span>
+                                        <span class="post-nav-item">Prev posts</span>
+                                    </span>
+                                </a>
+                            </div>
+                        
+                        
+                    </div>
+                
+
+                
+                    
+
+
+    <div class="comments-container border-box">
+        <div id="comments-anchor" class="comment-area-title border-box">
+            <i class="fas fa-comments"></i>&nbsp;Comments
+        </div>
+        <div class="comment-plugin-fail border-box">
+    <span class="fail-tip">Comment plugin failed to load</span>
+    <button class="reload keep-button">Click to reload</button>
+</div>
+<div class="comment-plugin-loading flex-center border-box">
+    <i class="loading-icon fa-solid fa-spinner fa-spin"></i>
+    <span class="load-tip">Loading comment plugin</span>
+</div>
+<script data-pjax>
+  window.KeepCommentPlugin = {}
+  window.KeepCommentPlugin.hideLoading = () => {
+    const cplDom = document.querySelector('.comments-container .comment-plugin-loading')
+    cplDom.style.display = 'none'
+  }
+  window.KeepCommentPlugin.loadFailHandle = () => {
+    window.KeepCommentPlugin.hideLoading()
+    const cpfDom = document.querySelector('.comments-container .comment-plugin-fail')
+    cpfDom.style.display = 'flex'
+    cpfDom.querySelector('.reload').addEventListener('click', () => {
+      window.location.reload()
+    })
+  }
+</script>
+
+        
+            
+
+    <div class="configuration-items-error-tip border-box">
+    <i class="fa-solid fa-circle-exclamation"></i>
+    Please fill in the required configuration items for Valine comment plugin
+</div>
+
+
+
+        
+    </div>
+
+
+
+
+
+                
+            </div>
+        </div>
+
+        
+            <div class="pc-post-toc right-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E6%96%87%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、本文介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">二、项目完整代码 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text"> 三、参数解析 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">四、项目的使用教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%AD%A5%E9%AA%A4%E4%B8%80"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 步骤一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%AD%A5%E9%AA%A4%E4%BA%8C"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 步骤二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%AD%A5%E9%AA%A4%E4%B8%89"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 步骤三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E7%BD%AE%E4%BF%A1%E5%BA%A6%E5%92%8C%E6%A3%80%E6%B5%8B%E6%A1%86"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 置信度和检测框</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        
+    </div>
+</div>
+
+
+                
+            </div>
+        </div>
+
+        <div class="page-main-content-bottom border-box">
+            
+<footer class="footer border-box">
+    <div class="copyright-info info-item">
+    &copy;&nbsp;<span>2024</span>&nbsp;-&nbsp;2025
+    
+            &nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;&nbsp;<a href="/">Louaq</a>
+        
+    </div>
+
+    <div class="theme-info info-item">
+        Powered by&nbsp;<a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;&&nbsp;Theme&nbsp;<a class="keep-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep</a>
+    </div>
+
+    
+        
+        <div class="deploy-info info-item">
+            
+            This site is deployed on <span class="tooltip" data-tooltip-content="Netlify"><img src="/images/brands/netlify.png"></span>
+            
+        </div>
+    
+
+    
+        <div class="count-info info-item">
+            
+                <span class="count-item border-box word">
+                    <span class="item-type border-box">Total words</span>
+                    <span class="item-value border-box word">35.8k</span>
+                </span>
+            
+
+            
+                <span class="count-item border-box uv">
+                    <span class="item-type border-box">Unique Visitor</span>
+                    <span class="item-value border-box uv" id="busuanzi_value_site_uv"></span>
+                </span>
+            
+
+            
+                <span class="count-item border-box pv">
+                    <span class="item-type border-box">Page View</span>
+                    <span class="item-value border-box pv" id="busuanzi_value_site_pv"></span>
+                </span>
+            
+        </div>
+    
+
+    
+</footer>
+
+        </div>
+    </div>
+
+    <!-- post tools -->
+    
+        <div class="post-tools right-toc">
+            <div class="post-tools-container border-box">
+    <ul class="post-tools-list border-box">
+        <!-- PC encrypt again -->
+        
+
+        <!-- PC TOC show toggle -->
+        
+            <li class="tools-item flex-center toggle-show-toc">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        <!-- PC go comment -->
+        
+            <li class="tools-item flex-center go-to-comments">
+                <i class="fas fa-comment"></i>
+                <span class="post-comments-count"></span>
+            </li>
+        
+
+        <!-- PC full screen -->
+        <li class="tools-item flex-center full-screen">
+            <i class="fa-solid fa-expand"></i>
+        </li>
+    </ul>
+</div>
+
+        </div>
+    
+
+    <!-- side tools -->
+    <div class="side-tools">
+        <div class="side-tools-container border-box ">
+    <ul class="side-tools-list side-tools-show-handle border-box">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <!-- toggle mode -->
+        
+
+        <!-- rss -->
+        
+            <li class="tools-item rss flex-center">
+                <a class="flex-center"
+                   href="/atom.xml"
+                   target="_blank"
+                >
+                    <i class="fas fa-rss"></i>
+                </a>
+            </li>
+        
+
+        <!-- to bottom -->
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list border-box">
+        
+            <li class="tools-item toggle-show-toc-tablet flex-center">
+                <i class="fas fa-list"></i>
+            </li>
+        
+
+        
+            <li class="tools-item go-to-comments-tablet flex-center">
+                <i class="fas fa-comment"></i>
+            </li>
+        
+
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+
+        <li class="tools-item tool-scroll-to-top flex-center show-arrow">
+            <i class="arrow fas fa-arrow-up"></i>
+            <span class="percent"></span>
+        </li>
+    </ul>
+</div>
+
+    </div>
+
+    <!-- image mask -->
+    <div class="zoom-in-image-mask">
+    <img class="zoom-in-image">
+</div>
+
+
+    <!-- local search -->
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="close-popup-btn">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+    <!-- tablet toc -->
+    
+        <div class="tablet-post-toc-mask">
+            <div class="tablet-post-toc">
+                <div class="post-toc-wrap border-box">
+    <div class="post-toc border-box">
+        <ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%AC%E6%96%87%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">一、本文介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E9%A1%B9%E7%9B%AE%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"><span class="nav-number">2.</span> <span class="nav-text">二、项目完整代码 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E5%8F%82%E6%95%B0%E8%A7%A3%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text"> 三、参数解析 </span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9B%9B%E3%80%81%E9%A1%B9%E7%9B%AE%E7%9A%84%E4%BD%BF%E7%94%A8%E6%95%99%E7%A8%8B"><span class="nav-number">4.</span> <span class="nav-text">四、项目的使用教程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#4-1-%E6%AD%A5%E9%AA%A4%E4%B8%80"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 步骤一</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-2-%E6%AD%A5%E9%AA%A4%E4%BA%8C"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 步骤二</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-3-%E6%AD%A5%E9%AA%A4%E4%B8%89"><span class="nav-number">4.3.</span> <span class="nav-text">4.3 步骤三</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-4-%E7%BD%AE%E4%BF%A1%E5%BA%A6%E5%92%8C%E6%A3%80%E6%B5%8B%E6%A1%86"><span class="nav-number">4.4.</span> <span class="nav-text">4.4 置信度和检测框</span></a></li></ol></li></ol>
+    </div>
+</div>
+
+            </div>
+        </div>
+    
+</main>
+
+
+
+
+
+<!-- common js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/utils.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/header-shrink.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/back2top.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/toggle-theme.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/code-block.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/main.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/libs/anime.min.js"></script>
+
+<!-- local search -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/local-search.min.js"></script>
+
+
+<!-- lazyload -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/lazyload.min.js"></script>
+
+
+<div class="pjax">
+    <!-- home page -->
+    
+
+    <!-- post page -->
+    
+        <!-- post-helper -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/post-helper.min.js"></script>
+
+        <!-- toc -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/toc.min.js"></script>
+        
+
+        <!-- copyright-info -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/copyright-info.min.js"></script>
+        
+
+        <!-- share -->
+        
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/post/share.min.js"></script>
+        
+    
+
+    <!-- categories page -->
+    
+
+    <!-- links page -->
+    
+
+    <!-- photos page -->
+    
+
+    <!-- tools page -->
+    
+</div>
+
+<!-- mermaid -->
+
+
+<!-- pjax -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-theme-keep/4.2.5/js/libs/pjax.min.js"></script>
+<script>
+    window.addEventListener('DOMContentLoaded', () => {
+        window.pjax = new Pjax({
+            selectors: [
+                'head title',
+                '.page-container',
+                '.pjax'
+            ],
+            history: true,
+            debug: false,
+            cacheBust: false,
+            timeout: 0,
+            analytics: false,
+            currentUrlFullReload: false,
+            scrollRestoration: false,
+        });
+
+        document.addEventListener('pjax:send', () => {
+            KEEP.utils.pjaxProgressBarStart()
+        });
+
+        document.addEventListener('pjax:complete', () => {
+            KEEP.utils.pjaxProgressBarEnd()
+            window.pjax.executeScripts(document.querySelectorAll('script[data-pjax], .pjax script'))
+            KEEP.initExecute()
+        });
+    });
+</script>
+
+
+
+
+</body>
+</html>
