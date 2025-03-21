@@ -1,0 +1,113 @@
+# ====================================================================
+# 中文繁體
+# ====================================================================
+
+category: 分類
+categories: 分類
+tag: 標籤
+tags: 標籤
+tagcloud: 標籤雲
+home: 首頁
+archive: 歸檔
+archives: 歸檔
+about: 關於
+links: 友鏈
+link: 友鏈
+photos: 相簿
+photo: 照片
+tool: 工具
+tools: 工具
+me: 我的
+search: 搜尋...
+prev: 上一頁
+next: 下一頁
+prev_posts: 上一篇
+next_posts: 下一篇
+page: 第 %d 頁
+recent_posts: 之前的文章
+share: 分享
+theme: 主題
+rss_feed: RSS 訂閱
+top: 頂端
+read_more: 繼續閱讀...
+wordcount: 字數
+min2read: 分鐘
+changelog: 日誌
+social_contact: 社交
+github: GitHub
+google: 谷歌
+apple: 蘋果
+microsoft: 微軟
+weixin: 微信
+qq: QQ
+alipay: 支付寶
+weibo: 微博
+zhihu: 知乎
+twitter: Twitter
+x: X
+facebook: Facebook
+email: Email
+code_block:
+  copy: 複製代碼
+  copied: 已複製
+  fold: 折疊代碼塊
+  folded: 已折疊
+copy_copyright:
+  copy: 複製版權資訊
+  copied: 已複製
+  title: 原文標題
+  author: 原文作者
+  link: 原文連結
+copyright:
+  author: 作者
+  title: 標題
+  link: 連結
+  create_time: 撰寫時間
+  published: 發布於
+  license: 版權
+  license_title: 版權宣告
+  license_content: "這個網站所有文章均使用 %s 授權"
+ago:
+  second: "%s 秒前"
+  minute: "%s 分鐘前"
+  hour: "%s 小時前"
+  day: "%s 天前"
+  week: "%s 周前"
+  month: "%s 個月前"
+  year: "%s 年前"
+footer:
+  powered_by: "%s&nbsp;框架"
+  site_uv: 讀者
+  site_pv: 閱覽
+  deploy: "本站由 %s 提供部署服務"
+  deploy_provider:
+    github: GitHub Pages
+    vercel: Vercel
+    netlify: Netlify
+    cloudflare: Cloudflare
+    gitee: Gitee Pages
+    aliyun: 阿里雲
+    tencent_cloud: 騰訊雲
+    upyun: 又拍雲
+  total_words: 總字數
+post:
+  aging: "本文距離上次更新已過去 %s 天，部分內容可能已經過時，請註意甄別。"
+  share:
+    qq: "分享到 QQ"
+    wechat: "分享到微信"
+    weibo: "分享到微博"
+    wechat_scan: "微信掃一掃"
+  reward: 給作者打賞
+comment:
+  comments: 留言
+  fail_tip: 留言插件加載失敗
+  reload: 點擊重新加載
+  loading: 正在載入留言插件
+  config_error: "請完整填寫 %s 留言插件的必填設定項"
+404:
+  page_not_found: 頁面缺失
+  go_home: 前往首頁
+encryption:
+  excerpt: 🔒 文章已加密，輸入密碼後才能查看。
+  input_password: 請輸入密碼...
+  re_encryption: 重新加密

@@ -1,0 +1,11 @@
+- category: 聊天 AI
+
+- name: ChatGPT
+  link: https://chat.openai.com/
+  description: OpenAI 旗下 AI 聊天对话工具
+  image: /images/tools/chatgpt.svg
+
+- name: Gemini
+  link: https://gemini.google.com/app
+  description: Google 旗下 AI 聊天对话工具
+  image: /images/tools/gemini.svg

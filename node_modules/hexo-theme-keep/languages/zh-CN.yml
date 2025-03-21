@@ -1,0 +1,113 @@
+# ====================================================================
+# 中文简体
+# ====================================================================
+
+category: 分类
+categories: 分类
+tag: 标签
+tags: 标签
+tagcloud: 标签云
+home: 首页
+archive: 归档
+archives: 归档
+about: 关于
+links: 友链
+link: 友链
+photos: 相册
+photo: 照片
+tool: 工具
+tools: 工具
+me: 我的
+search: 搜索...
+prev: 上一页
+next: 下一页
+prev_posts: 上一篇
+next_posts: 下一篇
+page: 第 %d 页
+recent_posts: 最新文章
+share: 分享
+theme: 主题
+rss_feed: RSS Feed
+top: 置顶
+read_more: 阅读全文
+wordcount: 字
+min2read: 分钟
+changelog: 更新日志
+social_contact: 社交
+github: GitHub
+google: 谷歌
+apple: 苹果
+microsoft: 微软
+weixin: 微信
+qq: QQ
+alipay: 支付宝
+weibo: 微博
+zhihu: 知乎
+twitter: 推特
+x: X
+facebook: Facebook
+email: Email
+code_block:
+  copy: 复制代码
+  copied: 已复制
+  fold: 折叠代码块
+  folded: 已折叠
+copy_copyright:
+  copy: 复制版权信息
+  copied: 已复制
+  title: 原文标题
+  author: 原文作者
+  link: 原文链接
+copyright:
+  title: 标题
+  author: 作者
+  link: 链接
+  create_time: 创建时间
+  published: 发布于
+  license: 许可
+  license_title: 版权声明
+  license_content: "本博客所有文章除特别声明外，均采用 %s 许可协议。转载请注明出处！"
+ago:
+  second: "%s 秒前"
+  minute: "%s 分钟前"
+  hour: "%s 小时前"
+  day: "%s 天前"
+  week: "%s 周前"
+  month: "%s 个月前"
+  year: "%s 年前"
+footer:
+  powered_by: "由&nbsp;%s&nbsp;驱动"
+  site_uv: 访客数
+  site_pv: 访问量
+  deploy: "本站由 %s 提供部署服务"
+  deploy_provider:
+    github: GitHub Pages
+    vercel: Vercel
+    netlify: Netlify
+    cloudflare: Cloudflare
+    gitee: Gitee Pages
+    aliyun: 阿里云
+    tencent_cloud: 腾讯云
+    upyun: 又拍云
+  total_words: 总字数
+post:
+  aging: "本文距离上次更新已过去 %s 天，部分内容可能已经过时，请注意甄别。"
+  share:
+    qq: "分享到 QQ"
+    wechat: "分享到微信"
+    weibo: "分享到微博"
+    wechat_scan: "微信扫一扫"
+  reward: 打赏作者
+comment:
+  comments: 评论
+  fail_tip: 评论插件加载失败
+  reload: 点击重新加载
+  loading: 正在加载评论插件
+  config_error: "请完整填写 %s 评论插件必需的配置项"
+404:
+  page_not_found: 页面找不到
+  go_home: 前往首页
+encryption:
+  excerpt: 🔒 文章已加密，输入密码后才能查看。
+  input_password: 请输入密码...
+  re_encryption: 重新加密
