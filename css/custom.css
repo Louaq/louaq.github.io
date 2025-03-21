@@ -1,0 +1,25 @@
+/* your-hexo/source/css/custom.css */
+
+:root {
+    --box-border-radius: 10px;
+}
+/* your-hexo/source/css/custom.css */
+
+:root {
+    --header-title-font-family: 'Times New Roman';
+}
+/* your-hexo/source/css/custom.css */
+
+:root {
+    --first-screen-font-color-light: #006666;
+}
+/* your-hexo/source/css/custom.css */
+
+:root {
+    --first-screen-font-color-dark: #0099CC;
+}
+/* your-hexo/source/css/custom.css */
+
+:root {
+    --home-post-hover-scale: 1;
+}
