@@ -78,14 +78,14 @@ social_contact:
     # at the same time change your link to the image link.
     # e.g. `weixin: img | ./images/qrcode.png`
     github: https://github.com/Louaq         # GitHub
-    weixin:          # WeChat
-    qq:              # QQ
+    #weixin:          # WeChat
+    #qq:              # QQ
     #weibo:           # WeiBo
     #zhihu:           # ZhiHu
     #twitter:         # Twitter
     #x:               # X
     #facebook:        # Facebook
-    email:           # Email
+    email: beautbawj9@gmail.com          # Email
 
 
 # ---------------------------------------------------------------------------------------
@@ -321,7 +321,7 @@ footer:
 
   site_deploy:
     enable: true        # Option values: true | false
-    provider: netlify     # Option values: github | vercel | netlify | cloudflare | gitee | aliyun | tencent_cloud | upyun
+    provider: github     # Option values: github | vercel | netlify | cloudflare | gitee | aliyun | tencent_cloud | upyun
     url:                 # Your deployment provider url, Can be null
 
   record:

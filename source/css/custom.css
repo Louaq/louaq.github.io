@@ -11,7 +11,7 @@
 /* your-hexo/source/css/custom.css */
 
 :root {
-    --first-screen-font-color-light: #006666;
+    --first-screen-font-color-light: #ffffff;
 }
 /* your-hexo/source/css/custom.css */
 
@@ -20,6 +20,9 @@
 }
 /* your-hexo/source/css/custom.css */
 
+:root {
+    --first-screen-icon-color-light: #CC33FF;
+}
 :root {
     --home-post-hover-scale: 1;
 }
