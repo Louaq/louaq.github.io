@@ -180,7 +180,7 @@ toc:
   enable: true      # Option values: true | false
 
   # Automatically add list number to toc
-  number: true      # Option values: true | false
+  number: false      # Option values: true | false
 
   # If true, all level of TOC in a post will be displayed, rather than the activated part of it.
   expand_all: true  # Option values: true | false
