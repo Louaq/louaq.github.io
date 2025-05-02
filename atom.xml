@@ -6,7 +6,7 @@
   <link href="https://bamb.netlify.app/atom.xml" rel="self"/>
   
   <link href="https://bamb.netlify.app/"/>
-  <updated>2025-05-02T14:49:45.613Z</updated>
+  <updated>2025-05-02T14:59:15.072Z</updated>
   <id>https://bamb.netlify.app/</id>
   
   <author>
@@ -17,164 +17,23 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>深度学习环境配置2——windows下的torch=1.2.0环境配置</title>
-    <link href="https://bamb.netlify.app/2025/02/06/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/"/>
-    <id>https://bamb.netlify.app/2025/02/06/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</id>
-    <published>2025-02-06T16:27:00.000Z</published>
-    <updated>2025-05-02T14:49:45.613Z</updated>
-    
-    
-    <summary type="html">CUDA环境安装</summary>
-    
-    
-    
-    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="python" scheme="https://bamb.netlify.app/tags/python/"/>
-    
-    <category term="Deep Learning" scheme="https://bamb.netlify.app/tags/Deep-Learning/"/>
-    
-    <category term="CUDA" scheme="https://bamb.netlify.app/tags/CUDA/"/>
-    
-    <category term="cudnn" scheme="https://bamb.netlify.app/tags/cudnn/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>vscode配置latex环境</title>
-    <link href="https://bamb.netlify.app/2024/12/29/visual-studio-code/"/>
-    <id>https://bamb.netlify.app/2024/12/29/visual-studio-code/</id>
-    <published>2024-12-29T13:24:01.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
-    
-    
-    <summary type="html">介绍vscode如何配置latex环境</summary>
-    
-    
-    
-    <category term="YOLO" scheme="https://bamb.netlify.app/categories/YOLO/"/>
-    
-    
-    <category term="vscode" scheme="https://bamb.netlify.app/tags/vscode/"/>
-    
-    <category term="latex" scheme="https://bamb.netlify.app/tags/latex/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>YOLOv8的训练自己的数据集</title>
-    <link href="https://bamb.netlify.app/2024/09/25/article-1/"/>
-    <id>https://bamb.netlify.app/2024/09/25/article-1/</id>
-    <published>2024-09-25T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
-    
-    
-    <summary type="html">春水碧于天，画船听雨眠。 swiper: true —— 菩萨蛮·人人尽说江南好</summary>
-    
-    
-    
-    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="python" scheme="https://bamb.netlify.app/tags/python/"/>
-    
-    <category term="Deep Learning" scheme="https://bamb.netlify.app/tags/Deep-Learning/"/>
-    
-    <category term="Computer Vision" scheme="https://bamb.netlify.app/tags/Computer-Vision/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>恒源云</title>
-    <link href="https://bamb.netlify.app/2024/09/25/article-2/"/>
-    <id>https://bamb.netlify.app/2024/09/25/article-2/</id>
-    <published>2024-09-25T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.613Z</updated>
-    
-    
-    <summary type="html">只身千里客，孤枕一灯秋。 swiper:true —— 陆游</summary>
-    
-    
-    
-    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="恒源云" scheme="https://bamb.netlify.app/tags/%E6%81%92%E6%BA%90%E4%BA%91/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据集</title>
-    <link href="https://bamb.netlify.app/2024/08/19/article-13/"/>
-    <id>https://bamb.netlify.app/2024/08/19/article-13/</id>
-    <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/mo-ban/"/>
+    <id>https://bamb.netlify.app/2025/05/02/mo-ban/</id>
+    <published>2025-05-02T14:59:15.072Z</published>
+    <updated>2025-05-02T14:59:15.072Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;p&gt;YoloV8。YoloV8是一种高效的目标检测算法，它的训练需要高质量的数据集。然而，获取高质量的数据集是一项耗时且费力的任务。&lt;/p&gt;
-&lt;p&gt;&lt;img</summary>
+    <summary type="html">&lt;h1 id=&quot;标题&quot;&gt;&lt;a href=&quot;#标题&quot; class=&quot;headerlink&quot; title=&quot;标题&quot;&gt;&lt;/a&gt;标题&lt;/h1&gt;&lt;ArticleMetadata/&gt;
+
+&lt;p&gt;作者单位&lt;/p&gt;
+&lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot;</summary>
         
       
-    
-    
-    
-    <category term="YOLO" scheme="https://bamb.netlify.app/categories/YOLO/"/>
-    
-    
-    <category term="人工智能" scheme="https://bamb.netlify.app/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="Ultralytics" scheme="https://bamb.netlify.app/tags/Ultralytics/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>YOLOv8目录结构</title>
-    <link href="https://bamb.netlify.app/2024/08/19/article-3/"/>
-    <id>https://bamb.netlify.app/2024/08/19/article-3/</id>
-    <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.613Z</updated>
-    
-    
-    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
-    
-    
-    
-    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>YOLOv8文件分析</title>
-    <link href="https://bamb.netlify.app/2024/08/19/article-4/"/>
-    <id>https://bamb.netlify.app/2024/08/19/article-4/</id>
-    <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.613Z</updated>
-    
-    
-    <summary type="html">仙路尽头谁为峰 一见无始道成空</summary>
-    
-    
-    
-    <category term="写作" scheme="https://bamb.netlify.app/categories/%E5%86%99%E4%BD%9C/"/>
-    
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://bamb.netlify.app/2024/08/19/hello-world/"/>
-    <id>https://bamb.netlify.app/2024/08/19/hello-world/</id>
-    <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.613Z</updated>
-    
-    
-    <summary type="html">这是文章摘要 This is the excerpt of the post</summary>
     
     
     
@@ -182,144 +41,401 @@
   </entry>
   
   <entry>
-    <title>说明文档</title>
-    <link href="https://bamb.netlify.app/2024/08/19/shuo-ming-wen-dang/"/>
-    <id>https://bamb.netlify.app/2024/08/19/shuo-ming-wen-dang/</id>
-    <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.613Z</updated>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/jing-du-mo-ban/"/>
+    <id>https://bamb.netlify.app/2025/05/02/jing-du-mo-ban/</id>
+    <published>2025-05-02T14:59:15.072Z</published>
+    <updated>2025-05-02T14:59:15.072Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;blockquote&gt;
-&lt;p&gt;这篇文档主要介绍《基于YOLOv8的农田病虫害检测与分析》的代码实现部分，整篇论文的目的主要是改进YOLOv8的网络结构，使其在检测病虫害的精度和实时性上有所提升。接下来，我将介绍如何从零开始搭建起本项目。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h</summary>
+    <summary type="html">&lt;h1 id=&quot;精读模板&quot;&gt;&lt;a href=&quot;#精读模板&quot; class=&quot;headerlink&quot;</summary>
         
       
     
     
     
-    <category term="YOLO" scheme="https://bamb.netlify.app/categories/YOLO/"/>
-    
-    
-    <category term="python" scheme="https://bamb.netlify.app/tags/python/"/>
-    
-    <category term="人工智能" scheme="https://bamb.netlify.app/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="论文" scheme="https://bamb.netlify.app/tags/%E8%AE%BA%E6%96%87/"/>
     
   </entry>
   
   <entry>
-    <title>评估</title>
-    <link href="https://bamb.netlify.app/2024/08/11/article-11/"/>
-    <id>https://bamb.netlify.app/2024/08/11/article-11/</id>
-    <published>2024-08-11T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/weakclip-adapting-clip-for-weakly-supervised-semantic/"/>
+    <id>https://bamb.netlify.app/2025/05/02/weakclip-adapting-clip-for-weakly-supervised-semantic/</id>
+    <published>2025-05-02T14:59:15.071Z</published>
+    <updated>2025-05-02T14:59:15.071Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;WeakCLIP-Adapting-CLIP-for-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
         
       
     
     
     
-    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="评估" scheme="https://bamb.netlify.app/tags/%E8%AF%84%E4%BC%B0/"/>
     
   </entry>
   
   <entry>
-    <title>绘图</title>
-    <link href="https://bamb.netlify.app/2024/08/09/article-12/"/>
-    <id>https://bamb.netlify.app/2024/08/09/article-12/</id>
-    <published>2024-08-09T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/stronger-fewer-superior-harnessing-vision-foundation-models/"/>
+    <id>https://bamb.netlify.app/2025/05/02/stronger-fewer-superior-harnessing-vision-foundation-models/</id>
+    <published>2025-05-02T14:59:15.070Z</published>
+    <updated>2025-05-02T14:59:15.070Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;一、本文介绍&quot;&gt;&lt;a href=&quot;#一、本文介绍&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;Stronger-Fewer-Superior-Harnessing-Vision-Foundation-Models-for-Domain-Generalized-Semantic-Segmentation（DGSS）&quot;&gt;&lt;a</summary>
         
       
     
     
     
-    <category term="写作" scheme="https://bamb.netlify.app/categories/%E5%86%99%E4%BD%9C/"/>
-    
-    
-    <category term="python" scheme="https://bamb.netlify.app/tags/python/"/>
-    
-    <category term="人工智能" scheme="https://bamb.netlify.app/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
-    
-    <category term="论文" scheme="https://bamb.netlify.app/tags/%E8%AE%BA%E6%96%87/"/>
     
   </entry>
   
   <entry>
-    <title>报错</title>
-    <link href="https://bamb.netlify.app/2024/08/01/article-14/"/>
-    <id>https://bamb.netlify.app/2024/08/01/article-14/</id>
-    <published>2024-08-01T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</id>
+    <published>2025-05-02T14:59:15.070Z</published>
+    <updated>2025-05-02T14:59:15.070Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;一、本文介绍&quot;&gt;&lt;a href=&quot;#一、本文介绍&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;USE-Universal-Segment-Embeddings-for-Open-Vocabulary-Image-Segmentation&quot;&gt;&lt;a</summary>
         
       
     
     
     
-    <category term="YOLO" scheme="https://bamb.netlify.app/categories/YOLO/"/>
-    
-    
-    <category term="python" scheme="https://bamb.netlify.app/tags/python/"/>
-    
-    <category term="论文" scheme="https://bamb.netlify.app/tags/%E8%AE%BA%E6%96%87/"/>
-    
-    <category term="Ultralytics" scheme="https://bamb.netlify.app/tags/Ultralytics/"/>
     
   </entry>
   
   <entry>
-    <title>可视化热力图</title>
-    <link href="https://bamb.netlify.app/2024/07/28/article-10/"/>
-    <id>https://bamb.netlify.app/2024/07/28/article-10/</id>
-    <published>2024-07-28T12:00:00.000Z</published>
-    <updated>2025-05-02T14:49:45.612Z</updated>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/"/>
+    <id>https://bamb.netlify.app/2025/05/02/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h2 id=&quot;一、本文介绍&quot;&gt;&lt;a href=&quot;#一、本文介绍&quot; class=&quot;headerlink&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;Learning-Generalized-Medical-Image-Segmentation-from-Decoupled-Feature-Queries&quot;&gt;&lt;a</summary>
         
       
     
     
     
-    <category term="YOLO" scheme="https://bamb.netlify.app/categories/YOLO/"/>
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
     
     
-    <category term="python" scheme="https://bamb.netlify.app/tags/python/"/>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Pixel-Wise-Reclassification-with-Prototypes-for-Enhancing-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
     
-    <category term="热力图" scheme="https://bamb.netlify.app/tags/%E7%83%AD%E5%8A%9B%E5%9B%BE/"/>
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Progressive-Feature-Self-Reinforcement-for-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Prompt-and-Transfer：Dynamic-Class-Aware-Enhancement-for-Few-Shot-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/prompting-multi-modal-image-segmentation-with-semantic-grouping/"/>
+    <id>https://bamb.netlify.app/2025/05/02/prompting-multi-modal-image-segmentation-with-semantic-grouping/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Prompting-Multi-Modal-Image-Segmentation-with-Semantic-Grouping&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Relevant-Intrinsic-Feature-Enhancement-Network-for-Few-Shot-Semantic-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Rolling-Unet-Revitalizing-MLP’s-Ability-to-Efficiently-Extract-Long-Distance-Dependencies-for-Medical-Image-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SED-A-Simple-Encoder-Decoder-for-Open-Vocabulary-Semantic-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;SFC-Shared-Feature-Calibration-in-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/scaling-upmulti-domain-semantic-segmentation-with-sentence/"/>
+    <id>https://bamb.netlify.app/2025/05/02/scaling-upmulti-domain-semantic-segmentation-with-sentence/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Scaling-Up-Multi-domain-Semantic-Segmentation-with-Sentence-Embeddings&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/"/>
+    <id>https://bamb.netlify.app/2025/05/02/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Scribble-Hides-Class-Promoting-Scribble-Based-Weakly-Supervised-Semantic-Segmentation-with-Its-Class-Label&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Scribble-Supervised-Semantic-Segmentation-with-Prototype-based-Feature-Augmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/segament-anything/"/>
+    <id>https://bamb.netlify.app/2025/05/02/segament-anything/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Segment-Anything&quot;&gt;&lt;a href=&quot;#Segment-Anything&quot; class=&quot;headerlink&quot; title=&quot;Segment Anything&quot;&gt;&lt;/a&gt;Segment Anything&lt;/h1&gt;&lt;h2</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/self-supervised-vision-transformers-for-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/05/02/self-supervised-vision-transformers-for-semantic-segmentation/</id>
+    <published>2025-05-02T14:59:15.069Z</published>
+    <updated>2025-05-02T14:59:15.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;Self-supervised-vision-transformers-for-semantic-segmentation&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title></title>
+    <link href="https://bamb.netlify.app/2025/05/02/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/"/>
+    <id>https://bamb.netlify.app/2025/05/02/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/</id>
+    <published>2025-05-02T14:59:15.068Z</published>
+    <updated>2025-05-02T14:59:15.068Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;C-CAM-Causal-CAM-for-Weakly-Supervised-Semantic-Segmentation-on-Medical-Image&quot;&gt;&lt;a</summary>
+        
+      
+    
+    
+    
     
   </entry>
   
