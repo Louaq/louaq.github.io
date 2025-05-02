@@ -6,7 +6,7 @@
   <link href="https://bamb.netlify.app/atom.xml" rel="self"/>
   
   <link href="https://bamb.netlify.app/"/>
-  <updated>2025-05-02T14:47:48.763Z</updated>
+  <updated>2025-05-02T14:49:45.613Z</updated>
   <id>https://bamb.netlify.app/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://bamb.netlify.app/2025/02/06/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/"/>
     <id>https://bamb.netlify.app/2025/02/06/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</id>
     <published>2025-02-06T16:27:00.000Z</published>
-    <updated>2025-05-02T14:47:48.763Z</updated>
+    <updated>2025-05-02T14:49:45.613Z</updated>
     
     
     <summary type="html">CUDA环境安装</summary>
@@ -46,7 +46,7 @@
     <link href="https://bamb.netlify.app/2024/12/29/visual-studio-code/"/>
     <id>https://bamb.netlify.app/2024/12/29/visual-studio-code/</id>
     <published>2024-12-29T13:24:01.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
     <summary type="html">介绍vscode如何配置latex环境</summary>
@@ -67,7 +67,7 @@
     <link href="https://bamb.netlify.app/2024/09/25/article-1/"/>
     <id>https://bamb.netlify.app/2024/09/25/article-1/</id>
     <published>2024-09-25T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
     <summary type="html">春水碧于天，画船听雨眠。 swiper: true —— 菩萨蛮·人人尽说江南好</summary>
@@ -90,7 +90,7 @@
     <link href="https://bamb.netlify.app/2024/09/25/article-2/"/>
     <id>https://bamb.netlify.app/2024/09/25/article-2/</id>
     <published>2024-09-25T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.763Z</updated>
+    <updated>2025-05-02T14:49:45.613Z</updated>
     
     
     <summary type="html">只身千里客，孤枕一灯秋。 swiper:true —— 陆游</summary>
@@ -109,7 +109,7 @@
     <link href="https://bamb.netlify.app/2024/08/19/article-13/"/>
     <id>https://bamb.netlify.app/2024/08/19/article-13/</id>
     <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
       
@@ -137,7 +137,7 @@
     <link href="https://bamb.netlify.app/2024/08/19/article-3/"/>
     <id>https://bamb.netlify.app/2024/08/19/article-3/</id>
     <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.763Z</updated>
+    <updated>2025-05-02T14:49:45.613Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -150,26 +150,11 @@
   </entry>
   
   <entry>
-    <title>Hello World</title>
-    <link href="https://bamb.netlify.app/2024/08/19/hello-world/"/>
-    <id>https://bamb.netlify.app/2024/08/19/hello-world/</id>
-    <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.763Z</updated>
-    
-    
-    <summary type="html">这是文章摘要 This is the excerpt of the post</summary>
-    
-    
-    
-    
-  </entry>
-  
-  <entry>
     <title>YOLOv8文件分析</title>
     <link href="https://bamb.netlify.app/2024/08/19/article-4/"/>
     <id>https://bamb.netlify.app/2024/08/19/article-4/</id>
     <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.763Z</updated>
+    <updated>2025-05-02T14:49:45.613Z</updated>
     
     
     <summary type="html">仙路尽头谁为峰 一见无始道成空</summary>
@@ -182,11 +167,26 @@
   </entry>
   
   <entry>
+    <title>Hello World</title>
+    <link href="https://bamb.netlify.app/2024/08/19/hello-world/"/>
+    <id>https://bamb.netlify.app/2024/08/19/hello-world/</id>
+    <published>2024-08-19T12:00:00.000Z</published>
+    <updated>2025-05-02T14:49:45.613Z</updated>
+    
+    
+    <summary type="html">这是文章摘要 This is the excerpt of the post</summary>
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
     <title>说明文档</title>
     <link href="https://bamb.netlify.app/2024/08/19/shuo-ming-wen-dang/"/>
     <id>https://bamb.netlify.app/2024/08/19/shuo-ming-wen-dang/</id>
     <published>2024-08-19T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.763Z</updated>
+    <updated>2025-05-02T14:49:45.613Z</updated>
     
     
       
@@ -218,7 +218,7 @@
     <link href="https://bamb.netlify.app/2024/08/11/article-11/"/>
     <id>https://bamb.netlify.app/2024/08/11/article-11/</id>
     <published>2024-08-11T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
       
@@ -243,7 +243,7 @@
     <link href="https://bamb.netlify.app/2024/08/09/article-12/"/>
     <id>https://bamb.netlify.app/2024/08/09/article-12/</id>
     <published>2024-08-09T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
       
@@ -272,7 +272,7 @@
     <link href="https://bamb.netlify.app/2024/08/01/article-14/"/>
     <id>https://bamb.netlify.app/2024/08/01/article-14/</id>
     <published>2024-08-01T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
       
@@ -301,7 +301,7 @@
     <link href="https://bamb.netlify.app/2024/07/28/article-10/"/>
     <id>https://bamb.netlify.app/2024/07/28/article-10/</id>
     <published>2024-07-28T12:00:00.000Z</published>
-    <updated>2025-05-02T14:47:48.762Z</updated>
+    <updated>2025-05-02T14:49:45.612Z</updated>
     
     
       
