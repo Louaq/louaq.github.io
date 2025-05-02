@@ -6,7 +6,7 @@
   <link href="https://bamb.netlify.app/atom.xml" rel="self"/>
   
   <link href="https://bamb.netlify.app/"/>
-  <updated>2025-05-02T14:59:15.072Z</updated>
+  <updated>2025-05-02T15:28:37.211Z</updated>
   <id>https://bamb.netlify.app/</id>
   
   <author>
@@ -17,424 +17,341 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/mo-ban/"/>
-    <id>https://bamb.netlify.app/2025/05/02/mo-ban/</id>
-    <published>2025-05-02T14:59:15.072Z</published>
-    <updated>2025-05-02T14:59:15.072Z</updated>
+    <title>Dual Attention Encoder with Joint Preservation for Medical Image Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/04/22/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/04/22/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</id>
+    <published>2025-04-22T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;标题&quot;&gt;&lt;a href=&quot;#标题&quot; class=&quot;headerlink&quot; title=&quot;标题&quot;&gt;&lt;/a&gt;标题&lt;/h1&gt;&lt;ArticleMetadata/&gt;
-
-&lt;p&gt;作者单位&lt;/p&gt;
-&lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot;</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/jing-du-mo-ban/"/>
-    <id>https://bamb.netlify.app/2025/05/02/jing-du-mo-ban/</id>
-    <published>2025-05-02T14:59:15.072Z</published>
-    <updated>2025-05-02T14:59:15.072Z</updated>
+    <title>Pixel-Wise Reclassification with Prototypes for Enhancing Weakly Supervised Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/04/13/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/04/13/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-13T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;精读模板&quot;&gt;&lt;a href=&quot;#精读模板&quot; class=&quot;headerlink&quot;</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/weakclip-adapting-clip-for-weakly-supervised-semantic/"/>
-    <id>https://bamb.netlify.app/2025/05/02/weakclip-adapting-clip-for-weakly-supervised-semantic/</id>
-    <published>2025-05-02T14:59:15.071Z</published>
-    <updated>2025-05-02T14:59:15.071Z</updated>
+    <title>弱监督语义分割</title>
+    <link href="https://bamb.netlify.app/2025/04/12/20250412-ruo-jian-du-yu-yi-fen-ge/"/>
+    <id>https://bamb.netlify.app/2025/04/12/20250412-ruo-jian-du-yu-yi-fen-ge/</id>
+    <published>2025-04-12T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;WeakCLIP-Adapting-CLIP-for-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/stronger-fewer-superior-harnessing-vision-foundation-models/"/>
-    <id>https://bamb.netlify.app/2025/05/02/stronger-fewer-superior-harnessing-vision-foundation-models/</id>
-    <published>2025-05-02T14:59:15.070Z</published>
-    <updated>2025-05-02T14:59:15.070Z</updated>
+    <title>Knowledge Transfer with Simulated Inter-Image Erasing for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/04/11/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/04/11/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-11T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Stronger-Fewer-Superior-Harnessing-Vision-Foundation-Models-for-Domain-Generalized-Semantic-Segmentation（DGSS）&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</id>
-    <published>2025-05-02T14:59:15.070Z</published>
-    <updated>2025-05-02T14:59:15.070Z</updated>
+    <title>All-pairs Consistency Learning for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/04/07/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/04/07/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-07T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;USE-Universal-Segment-Embeddings-for-Open-Vocabulary-Image-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/"/>
-    <id>https://bamb.netlify.app/2025/05/02/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Self-supervised vision transformers for semantic segmentation</title>
+    <link href="https://bamb.netlify.app/2025/04/03/self-supervised-vision-transformers-for-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/04/03/self-supervised-vision-transformers-for-semantic-segmentation/</id>
+    <published>2025-04-03T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.213Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Learning-Generalized-Medical-Image-Segmentation-from-Decoupled-Feature-Queries&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>A Transformer-based Adaptive Prototype Matching Network for Few-Shot Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/04/02/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/04/02/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</id>
+    <published>2025-04-02T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Pixel-Wise-Reclassification-with-Prototypes-for-Enhancing-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Kill Two Birds with One Stone Domain Generalization for Semantic Segmentation via Network Pruning</title>
+    <link href="https://bamb.netlify.app/2025/04/02/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/"/>
+    <id>https://bamb.netlify.app/2025/04/02/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/</id>
+    <published>2025-04-02T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Progressive-Feature-Self-Reinforcement-for-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Stronger, Fewer, &amp; Superior Harnessing Vision Foundation Models for Domain Generalized Semantic Segmentation（DGSS）</title>
+    <link href="https://bamb.netlify.app/2025/04/01/stronger-fewer-superior-harnessing-vision-foundation-models/"/>
+    <id>https://bamb.netlify.app/2025/04/01/stronger-fewer-superior-harnessing-vision-foundation-models/</id>
+    <published>2025-04-01T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.213Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Prompt-and-Transfer：Dynamic-Class-Aware-Enhancement-for-Few-Shot-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/prompting-multi-modal-image-segmentation-with-semantic-grouping/"/>
-    <id>https://bamb.netlify.app/2025/05/02/prompting-multi-modal-image-segmentation-with-semantic-grouping/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Class Tokens Infusion for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/29/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/03/29/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-03-29T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Prompting-Multi-Modal-Image-Segmentation-with-Semantic-Grouping&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>USE Universal Segment Embeddings for Open-Vocabulary Image Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/26/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/03/26/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</id>
+    <published>2025-03-26T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.213Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Relevant-Intrinsic-Feature-Enhancement-Network-for-Few-Shot-Semantic-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>LLMFormer Large LanguageModel for Open-Vocabulary Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/24/llmformer-large-languagemodel-for-open-vocabulary-semantic/"/>
+    <id>https://bamb.netlify.app/2025/03/24/llmformer-large-languagemodel-for-open-vocabulary-semantic/</id>
+    <published>2025-03-24T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Rolling-Unet-Revitalizing-MLP’s-Ability-to-Efficiently-Extract-Long-Distance-Dependencies-for-Medical-Image-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>CC4S Encouraging Certainty and Consistency in Scribble-Supervised Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/20/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/03/20/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</id>
+    <published>2025-03-20T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;SED-A-Simple-Encoder-Decoder-for-Open-Vocabulary-Semantic-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Scaling Up Multi-domain Semantic Segmentation with Sentence Embeddings</title>
+    <link href="https://bamb.netlify.app/2025/03/18/scaling-upmulti-domain-semantic-segmentation-with-sentence/"/>
+    <id>https://bamb.netlify.app/2025/03/18/scaling-upmulti-domain-semantic-segmentation-with-sentence/</id>
+    <published>2025-03-18T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.213Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;SFC-Shared-Feature-Calibration-in-Weakly-Supervised-Semantic-Segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/scaling-upmulti-domain-semantic-segmentation-with-sentence/"/>
-    <id>https://bamb.netlify.app/2025/05/02/scaling-upmulti-domain-semantic-segmentation-with-sentence/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Learning Generalized Medical Image Segmentation from Decoupled Feature Queries</title>
+    <link href="https://bamb.netlify.app/2025/03/17/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/"/>
+    <id>https://bamb.netlify.app/2025/03/17/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/</id>
+    <published>2025-03-17T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Scaling-Up-Multi-domain-Semantic-Segmentation-with-Sentence-Embeddings&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/"/>
-    <id>https://bamb.netlify.app/2025/05/02/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/13/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/03/13/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-03-13T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Scribble-Hides-Class-Promoting-Scribble-Based-Weakly-Supervised-Semantic-Segmentation-with-Its-Class-Label&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Pytorch教程</title>
+    <link href="https://bamb.netlify.app/2025/03/12/20250312-pytorch-jiao-cheng/"/>
+    <id>https://bamb.netlify.app/2025/03/12/20250312-pytorch-jiao-cheng/</id>
+    <published>2025-03-12T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Scribble-Supervised-Semantic-Segmentation-with-Prototype-based-Feature-Augmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/segament-anything/"/>
-    <id>https://bamb.netlify.app/2025/05/02/segament-anything/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Relevant Intrinsic Feature Enhancement Network for Few-Shot Semantic Segmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/11/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/"/>
+    <id>https://bamb.netlify.app/2025/03/11/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</id>
+    <published>2025-03-11T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.212Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Segment-Anything&quot;&gt;&lt;a href=&quot;#Segment-Anything&quot; class=&quot;headerlink&quot; title=&quot;Segment Anything&quot;&gt;&lt;/a&gt;Segment Anything&lt;/h1&gt;&lt;h2</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/self-supervised-vision-transformers-for-semantic-segmentation/"/>
-    <id>https://bamb.netlify.app/2025/05/02/self-supervised-vision-transformers-for-semantic-segmentation/</id>
-    <published>2025-05-02T14:59:15.069Z</published>
-    <updated>2025-05-02T14:59:15.069Z</updated>
+    <title>Scribble-Supervised Semantic Segmentation with Prototype-based Feature Augmentation</title>
+    <link href="https://bamb.netlify.app/2025/03/11/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/"/>
+    <id>https://bamb.netlify.app/2025/03/11/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</id>
+    <published>2025-03-11T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.213Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;Self-supervised-vision-transformers-for-semantic-segmentation&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
   
   <entry>
-    <title></title>
-    <link href="https://bamb.netlify.app/2025/05/02/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/"/>
-    <id>https://bamb.netlify.app/2025/05/02/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/</id>
-    <published>2025-05-02T14:59:15.068Z</published>
-    <updated>2025-05-02T14:59:15.068Z</updated>
+    <title>Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation :1st_place_medal</title>
+    <link href="https://bamb.netlify.app/2025/03/10/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/"/>
+    <id>https://bamb.netlify.app/2025/03/10/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/</id>
+    <published>2025-03-10T12:00:00.000Z</published>
+    <updated>2025-05-02T15:28:37.211Z</updated>
     
     
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;C-CAM-Causal-CAM-for-Weakly-Supervised-Semantic-Segmentation-on-Medical-Image&quot;&gt;&lt;a</summary>
-        
-      
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
     
     
+    
+    <category term="深度学习" scheme="https://bamb.netlify.app/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
     
     
   </entry>
