@@ -1,5 +1,5 @@
 ---
-title: SFC: Shared Feature Calibration in Weakly Supervised Semantic Segmentation
+title: SFC Shared Feature Calibration in Weakly Supervised Semantic Segmentation
 date: 2025-04-10 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

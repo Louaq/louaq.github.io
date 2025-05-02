@@ -1,5 +1,5 @@
 ---
-title: SED:A Simple Encoder-Decoder for Open-Vocabulary Semantic Segmentation
+title: SED A Simple Encoder-Decoder for Open-Vocabulary Semantic Segmentation
 date: 2025-03-04 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

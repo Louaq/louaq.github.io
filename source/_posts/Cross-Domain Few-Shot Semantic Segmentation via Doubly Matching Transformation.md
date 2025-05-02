@@ -1,5 +1,5 @@
 ---
-title: Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation :1st_place_medal
+title: Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation
 date: 2025-03-10 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

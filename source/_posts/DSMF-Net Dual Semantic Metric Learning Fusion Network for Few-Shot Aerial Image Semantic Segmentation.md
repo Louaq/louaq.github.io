@@ -1,5 +1,5 @@
 ---
-title: DSMF-Net: Dual Semantic Metric Learning Fusion Network for Few-Shot Aerial Image Semantic Segmentation
+title: DSMF-Net Dual Semantic Metric Learning Fusion Network for Few-Shot Aerial Image Semantic Segmentation
 date: 2025-04-02 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

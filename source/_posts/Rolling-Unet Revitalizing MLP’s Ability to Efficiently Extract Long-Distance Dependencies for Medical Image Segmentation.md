@@ -1,5 +1,5 @@
 ---
-title: Rolling-Unet: Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation
+title: Rolling-Unet Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation
 date: 2025-04-22 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

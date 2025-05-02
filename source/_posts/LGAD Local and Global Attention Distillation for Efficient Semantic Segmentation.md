@@ -1,5 +1,5 @@
 ---
-title: LGAD: Local and Global Attention Distillation for Efficient Semantic Segmentation
+title: LGAD Local and Global Attention Distillation for Efficient Semantic Segmentation
 date: 2025-03-31 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

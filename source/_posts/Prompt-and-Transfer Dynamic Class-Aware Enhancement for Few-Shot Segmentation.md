@@ -1,5 +1,5 @@
 ---
-title: Prompt-and-Transfer：Dynamic Class-Aware Enhancement for Few-Shot Segmentation
+title: Prompt-and-Transfer Dynamic Class-Aware Enhancement for Few-Shot Segmentation
 date: 2025-03-08 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

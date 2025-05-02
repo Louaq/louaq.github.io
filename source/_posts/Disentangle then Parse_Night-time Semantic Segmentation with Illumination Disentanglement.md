@@ -1,5 +1,5 @@
 ---
-title: Disentangle then Parse: Night-time Semantic Segmentation with Illumination Disentanglement
+title: Disentangle then Parse Night-time Semantic Segmentation with Illumination Disentanglement
 date: 2025-03-04 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true

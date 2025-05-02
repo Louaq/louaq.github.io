@@ -1,5 +1,5 @@
 ---
-title: CorrMatch: Label Propagation via Correlation Matching for Semi-Supervised Semantic Segmentation
+title: CorrMatch Label Propagation via Correlation Matching for Semi-Supervised Semantic Segmentation
 date: 2025-03-22 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
