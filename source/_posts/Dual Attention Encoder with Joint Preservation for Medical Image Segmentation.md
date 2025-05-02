@@ -6,6 +6,8 @@ mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
 categories: 深度学习
+swiper: true
+top: true
 ---
 
 

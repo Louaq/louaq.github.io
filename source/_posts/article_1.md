@@ -4,12 +4,10 @@ date: 2024-09-25 12:00:00
 expires: 2024-10-30 23:59:59
 mathjax: true
 excerpt: "春水碧于天，画船听雨眠。
-swiper: true
 —— 菩萨蛮·人人尽说江南好"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_11_4k_a329c.jpg"
 tags: [python, Deep Learning, Computer Vision]
 categories: 深度学习
-top: true
 ---
 
 一、YOLOv8的简介

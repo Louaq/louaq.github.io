@@ -8,6 +8,7 @@ excerpt: "CUDA环境安装"
 cover: "https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxe9zhglhvdaDIYPAqF0DqJ1DGxwDIiw.png"
 tags: [python, Deep Learning, CUDA, cudnn]
 categories: 深度学习
+top: true
 ---
 
 ### 一、Anaconda安装

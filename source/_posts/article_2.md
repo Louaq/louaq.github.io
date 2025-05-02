@@ -5,7 +5,6 @@ expires: 2024-09-30 23:59:59
 mathjax: true
 tags: [恒源云]
 excerpt: "只身千里客，孤枕一灯秋。
-swiper:true
 —— 陆游"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_6_4k_7e58d.jpg"
 categories: 深度学习
