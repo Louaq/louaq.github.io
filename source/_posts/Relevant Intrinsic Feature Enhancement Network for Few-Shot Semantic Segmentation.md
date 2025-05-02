@@ -1,4 +1,14 @@
-# Relevant Intrinsic Feature Enhancement Network for Few-Shot Semantic Segmentation
+---
+title: Relevant Intrinsic Feature Enhancement Network for Few-Shot Semantic Segmentation
+date: 2025-03-11 12:00:00
+expires: 2025-08-21 23:59:59
+mathjax: true
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+categories: 深度学习
+---
+
+
 
 University of Chinese Academy of Sciences、Chinese Academy of Sciences、Alibaba group
 

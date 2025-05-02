@@ -1,4 +1,13 @@
-# Prompting Multi-Modal Image Segmentation with Semantic Grouping
+---
+title: Prompting Multi-Modal Image Segmentation with Semantic Grouping
+date: 2025-03-06 12:00:00
+expires: 2025-08-21 23:59:59
+mathjax: true
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+categories: 深度学习
+---
+
 
 ## University of Chinese Academy of Sciences
 

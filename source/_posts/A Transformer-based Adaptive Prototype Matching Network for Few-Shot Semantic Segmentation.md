@@ -1,9 +1,14 @@
-# A Transformer-based Adaptive Prototype Matching Network for Few-Shot Semantic Segmentation
+---
+title: A Transformer-based Adaptive Prototype Matching Network for Few-Shot Semantic Segmentation
+date: 2025-04-02 12:00:00
+expires: 2025-08-21 23:59:59
+mathjax: true
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+categories: 深度学习
+---
 
 ## 南京信息工程大学、青海师范大学、澳门大学、中国科学院  :100:
-
-
-
 
 
 ## **摘要：**

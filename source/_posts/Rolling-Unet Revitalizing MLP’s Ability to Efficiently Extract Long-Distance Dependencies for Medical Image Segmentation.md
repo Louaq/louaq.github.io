@@ -1,14 +1,12 @@
-# Rolling-Unet: Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation
-
-<ArticleMetadata/>
-
-北京化工大学
-
-::: tip
-
-会议论文写作模板，复现论文代码
-
-:::
+---
+title: Rolling-Unet: Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation
+date: 2025-04-22 12:00:00
+expires: 2025-08-21 23:59:59
+mathjax: true
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+categories: 深度学习
+---
 
 ## 摘要
 

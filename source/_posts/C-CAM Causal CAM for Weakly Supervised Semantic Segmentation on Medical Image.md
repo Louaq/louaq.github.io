@@ -1,12 +1,12 @@
-# C-CAM: Causal CAM for Weakly Supervised Semantic Segmentation on Medical Image
-
-<ArticleMetadata/>
-
-::: tip
-
-西安交通大学
-
-:::
+---
+title: C-CAM: Causal CAM for Weakly Supervised Semantic Segmentation on Medical Image
+date: 2025-04-16 12:00:00
+expires: 2025-08-21 23:59:59
+mathjax: true
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+categories: 深度学习
+---
 
 ## 摘要
 

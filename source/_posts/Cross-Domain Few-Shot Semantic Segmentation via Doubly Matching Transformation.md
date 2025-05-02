@@ -1,4 +1,12 @@
-# Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation :1st_place_medal:
+---
+title: Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation :1st_place_medal
+date: 2025-03-10 12:00:00
+expires: 2025-08-21 23:59:59
+mathjax: true
+excerpt: "云想衣裳花想容，春风拂槛露华浓"
+cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+categories: 深度学习
+---
 
 Nanjing University of Aeronautics and Astronautics 、State Key Laboratory of Integrated Services Networks, Xidian University
 

@@ -11,6 +11,9 @@ importers:
       hexo:
         specifier: ^7.3.0
         version: 7.3.0(chokidar@3.6.0)
+      hexo-cli:
+        specifier: ^4.3.2
+        version: 4.3.2
       hexo-fs:
         specifier: ^5.0.0
         version: 5.0.0
