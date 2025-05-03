@@ -17,6 +17,9 @@ menu:
    医学图像分割:
      url: /medical
      icon: fas fa-bookmark
+   组会资料:
+     url: /pdf
+     icon: fas fa-bookmark
    留言板:
       url: /messageBoard
       icon: fas fa-comment-dots
