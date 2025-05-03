@@ -629,7 +629,7 @@ color_scheme:
     # 如果背景只想要一个图片：可以使用 ['http://xxxxxx'] 或者 'http://xxxxxxx'，这样的写法, 图片地址也可以是本地路径('/img/xxx.png' or '/medias/xxx.png')
     # 也可以是颜色字符串（例如'#C7EDCC', 或者rgba(0 ,0 ,0, 0.8) 那么会使用该颜色作为背景）
     # 空字符串则背景颜色为透明
-    bgImg: ''
+    bgImg: 'https://pic1.zhimg.com/80/v2-6d0cbd4380b4959542d3f5da31c7f20c_1440w.jpg'
     # 背景图幻灯片模式--延迟时间
     # 如果bgImg设置为数组，数组里面是多个图片地址,则 bgImgDelay表示背景图幻灯片的 延迟间隔时间
     bgImgDelay: 180000 # 默认三分钟，切换一张图片
@@ -743,13 +743,13 @@ highlight:
 
 # wordcount字数统计, 需要 npm i hexo-wordcount 安装
 wordcount:
-  on: false
+  on: true
 
 # 自己嵌入css或者script
 import:
   link:
     # - <link href="xxx.css"  rel="stylesheet">
-    - 
+    - <link href="/custom/index.css" rel="stylesheet">
     - 
   script: 
     # - <script src="xxx.js"></script>
