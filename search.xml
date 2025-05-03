@@ -13,10 +13,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 医学图像分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Medical Image Segmentation </tag>
+            
+            <tag> Dual Attention Encoder </tag>
+            
+        </tags>
       
     </entry>
     
@@ -32,10 +40,18 @@
       
       <categories>
           
-          <category> medical image segmentation </category>
+          <category> 医学图像分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Medical Image Segmentation </tag>
+            
+            <tag> MLP </tag>
+            
+        </tags>
       
     </entry>
     
@@ -51,10 +67,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 医学图像分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Weakly Supervised Semantic Segmentation </tag>
+            
+            <tag> C-CAM </tag>
+            
+        </tags>
       
     </entry>
     
@@ -70,10 +94,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 弱监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Pixel-Wise Reclassification </tag>
+            
+        </tags>
       
     </entry>
     
@@ -89,7 +119,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
@@ -108,10 +138,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 弱监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 模拟图像间擦除 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -127,10 +163,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 弱监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> SFC </tag>
+            
+            <tag> semantic segmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -151,6 +195,14 @@
       </categories>
       
       
+        <tags>
+            
+            <tag> CLIP </tag>
+            
+            <tag> Weakly-Supervised Semantic Segmentation </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -165,10 +217,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 弱监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Weakly Supervised Semantic Segmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -184,10 +242,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 自监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> semantic segmentation </tag>
+            
+            <tag> ViT </tag>
+            
+        </tags>
       
     </entry>
     
@@ -203,10 +269,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 少样本语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Transformer </tag>
+            
+            <tag> Few-Shot Semantic Segmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -222,10 +296,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 少样本语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> DSMF-Net </tag>
+            
+            <tag> Semantic Segmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -241,10 +323,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 领域泛化语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Domain Generalization </tag>
+            
+        </tags>
       
     </entry>
     
@@ -260,10 +348,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 领域泛化语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Vision Foundation Models </tag>
+            
+        </tags>
       
     </entry>
     
@@ -279,10 +373,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> 注意力蒸馏 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -298,10 +398,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 弱监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Scribble-Supervised Semantic Segmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -317,10 +423,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 开放词汇图像分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Universal Segment Embeddings </tag>
+            
+        </tags>
       
     </entry>
     
@@ -336,10 +448,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 开放词汇语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> LLMFormer </tag>
+            
+        </tags>
       
     </entry>
     
@@ -355,10 +473,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 半监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Semi-Supervised Semantic Segmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -374,10 +498,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 涂鸦监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Scribble-Supervised Semantic Segmentation </tag>
+            
+            <tag> CC4S </tag>
+            
+        </tags>
       
     </entry>
     
@@ -393,10 +525,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 多模态语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Sentence Embeddings </tag>
+            
+        </tags>
       
     </entry>
     
@@ -412,10 +550,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 涂鸦监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Scribble </tag>
+            
+        </tags>
       
     </entry>
     
@@ -431,10 +575,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 医学图像分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Medical Image Segmentation </tag>
+            
+            <tag> Decoupled Feature Queries </tag>
+            
+        </tags>
       
     </entry>
     
@@ -450,10 +602,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 弱监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Weakly Supervised Semantic Segmentation </tag>
+            
+            <tag> Feature Self-Reinforcement </tag>
+            
+        </tags>
       
     </entry>
     
@@ -469,7 +629,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> Pytorch </category>
           
       </categories>
       
@@ -488,10 +648,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 少样本语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Feature Enhancement Network </tag>
+            
+        </tags>
       
     </entry>
     
@@ -507,10 +673,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 涂鸦监督语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Semantic Segmentation </tag>
+            
+            <tag> Feature Augmentation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -526,10 +700,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 少样本语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Few-Shot Semantic Segmentation </tag>
+            
+            <tag> Transformation </tag>
+            
+        </tags>
       
     </entry>
     
@@ -545,10 +727,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 少样本语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Prompt-and-Transfer </tag>
+            
+        </tags>
       
     </entry>
     
@@ -564,10 +752,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 多模态图像分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Semantic Grouping </tag>
+            
+        </tags>
       
     </entry>
     
@@ -583,10 +777,18 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 夜间语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Semantic Segmentation </tag>
+            
+            <tag> Illumination Disentanglement </tag>
+            
+        </tags>
       
     </entry>
     
@@ -602,10 +804,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 开放词汇语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> SED </tag>
+            
+        </tags>
       
     </entry>
     
@@ -621,10 +829,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 超高分辨率图像语义分割 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> Ultra High-resolution Images </tag>
+            
+        </tags>
       
     </entry>
     
@@ -640,10 +854,16 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> mata分割一切 </category>
           
       </categories>
       
+      
+        <tags>
+            
+            <tag> SAM </tag>
+            
+        </tags>
       
     </entry>
     
@@ -659,7 +879,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
@@ -678,7 +898,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
@@ -697,7 +917,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
@@ -716,7 +936,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
@@ -735,7 +955,7 @@
       
       <categories>
           
-          <category> 深度学习 </category>
+          <category> 语义分割 </category>
           
       </categories>
       
@@ -1061,9 +1281,9 @@
             
             <tag> python </tag>
             
-            <tag> 论文 </tag>
-            
             <tag> Ultralytics </tag>
+            
+            <tag> 论文 </tag>
             
         </tags>
       
