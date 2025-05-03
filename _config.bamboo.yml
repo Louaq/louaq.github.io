@@ -64,7 +64,7 @@ sidebar:
       shape: circle # circle, rectangle
       url: /about/
       title: Louaq
-      subtitle: a man who code
+      subtitle: keep coding
       jinrishici: true # Poetry Today. You can set a string, and it will be displayed when loading fails.
       fontFammily: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif
       background: '#fff'
@@ -349,14 +349,14 @@ baiduPush: true
 music:
   on: true
   autoHide: true    # hide automaticaly
-  server: tencent   # require music platform: netease, tencent, kugou, xiami, baidu
+  server: netease   # require music platform: netease, tencent, kugou, xiami, baidu
   type: playlist    # require song, playlist, album, search, artist
-  id: 8062553743    # require song id / playlist id / album id / search keyword
+  id: 2321957752    # require song id / playlist id / album id / search keyword
   fixed: true       # 开启吸底模式，建议开启
   autoplay: false   # 是否自动播放, 有些浏览器会禁用自动播放，目前edge可以自动播放
   theme: '#42b983'
   loop: 'all'       # 音频循环播放, 可选值: 'all', 'one', 'none'
-  order: 'random'   # 音频循环顺序, 可选值: 'list', 'random'
+  order: 'list'   # 音频循环顺序, 可选值: 'list', 'random'
   preload: 'auto'   # 预加载，可选值: 'none', 'metadata', 'auto'
   volume: 0.5       # 默认音量，请注意播放器会记忆用户设置，用户手动设置音量后默认音量即失效
   listFolded: true  # 列表默认折叠
@@ -369,7 +369,7 @@ copyright:
 # 首页座右铭
 motto:
   on: true
-  title: '座右铭'
+  title: '格言'
   content: '最是人间留不住，朱颜辞镜花辞树'
   background: 'url("https://img10.360buyimg.com/ddimg/jfs/t1/166587/8/21344/72069/6088c24fEda5fdeb6/f9730ab637b7ca47.png")' # url("xxx") or red or #000 or rgba() ..
 
@@ -425,7 +425,7 @@ typed:
 
 # 文章详情页图片上的气泡效果
 bubble:
-  on: true
+  on: false
 
 ### ---------- 评论开始----------- start ###
 # 评论只能有一个为on: true; 评论优先级为 utterance > beaudar > twikoo > valine > gitalk > giscus > waline > livere > gitment > changyan
@@ -550,7 +550,7 @@ archive:
   title: 'archive'
   img: 'https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png'
   desc: '愿你如风，被人温柔以待'
-  full: true # 设置为true，则图片全屏显示
+  full: false # 设置为true，则图片全屏显示
   video: '' # 如果有值，则在屏幕大于920px的时候，全屏显示视频，为空则显示图片(img)
   background: '' # red or rgba(255,255,255,0.8) or other color or url("http:xxx.png")
   yearColor: '' # 年份字体颜色
