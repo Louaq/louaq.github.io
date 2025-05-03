@@ -5,7 +5,8 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
-categories: 深度学习
+categories: 超高分辨率图像语义分割
+tags: [Ultra High-resolution Images]
 ---
 # 香港中文大学  Adobe 等 
 

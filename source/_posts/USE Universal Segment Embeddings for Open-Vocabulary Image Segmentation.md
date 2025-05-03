@@ -5,7 +5,8 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
-categories: 深度学习
+categories: 开放词汇图像分割
+tags: [Universal Segment Embeddings]
 ---
 
 Bosch Research North America、Bosch Center for Artificial Intelligence (BCAI)

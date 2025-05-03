@@ -5,7 +5,8 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
 cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
-categories: 深度学习
+categories: 涂鸦监督语义分割
+tags: [Scribble-Supervised Semantic Segmentation, CC4S]
 ---
 
 ## Peking University、Shandong Universit
