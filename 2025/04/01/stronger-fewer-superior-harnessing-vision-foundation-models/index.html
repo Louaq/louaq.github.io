@@ -13,11 +13,26 @@
 
   <title>Stronger, Fewer, &amp; Superior Harnessing Vision Foundation Models for Domain Generalized Semantic Segmentation（DGSS） | Louaq</title>
 
-  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
   <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
   
+  
+    <script>
+        var themeModelId = '';
+        if (themeModelId) {
+            localStorage.setItem('modelId', themeModelId);
+        }
+    </script>
+    
+    <script async src="https://cdn.jsdelivr.net/gh/yuang01/live2d-widget@latest/autoload.js"></script>
+    <script>
+        var live2dOpen = eval('true') || false;
+        if (!live2dOpen) {
+            localStorage.setItem('waifu-display', 1609323474481);
+        }
+    </script>
   
   
   
@@ -246,6 +261,17 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
+                <a href="/medical" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">医学图像分割</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
                 <a href="/messageBoard" class="drawer-menu-item-link">
                   
                     <i class="fas fa-comment-dots" aria-hidden="true"></i>
@@ -257,16 +283,16 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
-                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(5)">
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
                   <span>
                     
                       <i class="fas fa-link"></i>
                     
                     <span class="name">友情链接</span>
                   </span>
-                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(5)}" aria-hidden="true"></i>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
                 </a>
-                <ul class="drawer-sub-menu" v-if="isOpen(5)">
+                <ul class="drawer-sub-menu" v-if="isOpen(6)">
                   
                   <li>
                     <a href="/gallery">
@@ -283,6 +309,13 @@
                       <i class="fas fa-film" style="margin-top: -20px;"></i>
                       
                       <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <span>👪简单说一说</span>
                     </a>
                   </li>
                   
@@ -417,6 +450,17 @@
           
             <li class="menu-item" style="position: relative;">
               
+                <a href="/medical" class="menu-item-link" title="医学图像分割">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">医学图像分割</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
                 <a href="/messageBoard" class="menu-item-link" title="留言板">
                   
                     <i class="fas fa-comment-dots" aria-hidden="true"></i>
@@ -452,6 +496,13 @@
                       <i class="fas fa-film" style="margin-top: -20px;"></i>
                       
                       <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <span>👪简单说一说</span>
                     </a>
                   </li>
                   
@@ -1622,8 +1673,6 @@
 
     
     <!-- 背景彩带 -->
-    
-      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
     
 
     <script src="/js/utils/index.js"></script>

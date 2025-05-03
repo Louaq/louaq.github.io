@@ -13,11 +13,26 @@
 
   <title>留言板 | Louaq</title>
 
-  <link rel="icon" type="image/x-icon, image/vnd.microsoft.icon" href="/img/favicon.ico">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
   <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
   <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
   
+  
+    <script>
+        var themeModelId = '';
+        if (themeModelId) {
+            localStorage.setItem('modelId', themeModelId);
+        }
+    </script>
+    
+    <script async src="https://cdn.jsdelivr.net/gh/yuang01/live2d-widget@latest/autoload.js"></script>
+    <script>
+        var live2dOpen = eval('true') || false;
+        if (!live2dOpen) {
+            localStorage.setItem('waifu-display', 1609323474481);
+        }
+    </script>
   
   
   
@@ -246,6 +261,17 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
+                <a href="/medical" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">医学图像分割</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
                 <a href="/messageBoard" class="drawer-menu-item-link">
                   
                     <i class="fas fa-comment-dots" aria-hidden="true"></i>
@@ -257,16 +283,16 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
-                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(5)">
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
                   <span>
                     
                       <i class="fas fa-link"></i>
                     
                     <span class="name">友情链接</span>
                   </span>
-                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(5)}" aria-hidden="true"></i>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
                 </a>
-                <ul class="drawer-sub-menu" v-if="isOpen(5)">
+                <ul class="drawer-sub-menu" v-if="isOpen(6)">
                   
                   <li>
                     <a href="/gallery">
@@ -283,6 +309,13 @@
                       <i class="fas fa-film" style="margin-top: -20px;"></i>
                       
                       <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <span>👪简单说一说</span>
                     </a>
                   </li>
                   
@@ -417,6 +450,17 @@
           
             <li class="menu-item" style="position: relative;">
               
+                <a href="/medical" class="menu-item-link" title="医学图像分割">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">医学图像分割</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
                 <a href="/messageBoard" class="menu-item-link" title="留言板">
                   
                     <i class="fas fa-comment-dots" aria-hidden="true"></i>
@@ -452,6 +496,13 @@
                       <i class="fas fa-film" style="margin-top: -20px;"></i>
                       
                       <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <span>👪简单说一说</span>
                     </a>
                   </li>
                   
@@ -656,7 +707,7 @@
       <div class="china-lines-main_content" style="text-align:center">
         三月七日，沙湖道中遇雨。雨具先去，同行皆狼狈，余独不觉，已而遂晴，故作此词。
         莫听穿林打叶声，何妨吟啸且徐行。竹杖芒鞋轻胜马，谁怕？一蓑烟雨任平生。
-        料峭春风吹酒醒，微冷，山头斜照却相迎⑽。回首向来萧瑟处⑾，归去，也无风雨也无晴。 --苏轼
+        料峭春风吹酒醒，微冷，山头斜照却相迎。回首向来萧瑟处，归去，也无风雨也无晴。 --苏轼
       </div>
     </div>
     <div style="width: 100%;margin-top: 1em;font-size: 0px;box-sizing: border-box;">
@@ -1110,8 +1161,8 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri May 02 2025 15:59:04 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-05-02 日</div>
+            <div id="last-update" style="display: none;">Sat May 03 2025 01:25:36 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2025-05-03 日</div>
           
         </div>
         
@@ -1161,7 +1212,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-05-02 日';
+            document.getElementById('last-update-show').innerHTML = '2025-05-03 日';
           }
         </script>
         
@@ -1698,8 +1749,6 @@
 
     
     <!-- 背景彩带 -->
-    
-      <script async type="text/javascript" size="100" alpha='0.4' zIndex="-1" src="/js/ribbon.min.js"></script>
     
 
     <script src="/js/utils/index.js"></script>
