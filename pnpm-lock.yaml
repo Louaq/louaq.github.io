@@ -59,6 +59,9 @@ importers:
       hexo-util:
         specifier: ^3.3.0
         version: 3.3.0
+      hexo-wordcount:
+        specifier: ^6.0.1
+        version: 6.0.1
 
 packages:
 
@@ -560,6 +563,9 @@ packages:
   hexo-util@3.3.0:
     resolution: {integrity: sha512-YvGngXijE2muEh5L/VI4Fmjqb+/yAkmY+VuyhWVoRwQu1X7bmWodsfYRXX7CUYhi5LqsvH8FAe/yBW1+f6ZX4Q==}
     engines: {node: '>=14'}
+
+  hexo-wordcount@6.0.1:
+    resolution: {integrity: sha512-tbo2P9xRWEKQmRf7+XuPjx9It1MnaE26nA+EEb2DN39gK1x+26W7Nm4Iyp4AugQjBWYYDx7OLn4gp1WFxQpQew==}
 
   hexo@7.3.0:
     resolution: {integrity: sha512-dOe8mzBKrvjubW5oBmyhcnQDpC+M2xmAMLae5K+o+SkHxyvAhShkS2VQZoTsOLIJKY6xilv7dzCjCvE7ol/NHQ==}
@@ -1748,6 +1754,8 @@ snapshots:
       htmlparser2: 9.1.0
       prismjs: 1.30.0
       strip-indent: 3.0.0
+
+  hexo-wordcount@6.0.1: {}
 
   hexo@7.3.0(chokidar@3.6.0):
     dependencies:
