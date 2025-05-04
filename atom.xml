@@ -1,0 +1,1107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Louaq</title>
+  
+  
+  <link href="https://louaq.github.io/atom.xml" rel="self"/>
+  
+  <link href="https://louaq.github.io/"/>
+  <updated>2025-05-04T07:49:11.628Z</updated>
+  <id>https://louaq.github.io/</id>
+  
+  <author>
+    <name>Louaq</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Dual Attention Encoder with Joint Preservation for Medical Image Segmentation</title>
+    <link href="https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/"/>
+    <id>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</id>
+    <published>2025-04-22T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="医学图像分割" scheme="https://louaq.github.io/categories/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Medical Image Segmentation" scheme="https://louaq.github.io/tags/Medical-Image-Segmentation/"/>
+    
+    <category term="Dual Attention Encoder" scheme="https://louaq.github.io/tags/Dual-Attention-Encoder/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Rolling-Unet Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation</title>
+    <link href="https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/"/>
+    <id>https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</id>
+    <published>2025-04-22T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="医学图像分割" scheme="https://louaq.github.io/categories/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Medical Image Segmentation" scheme="https://louaq.github.io/tags/Medical-Image-Segmentation/"/>
+    
+    <category term="MLP" scheme="https://louaq.github.io/tags/MLP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>C-CAM Causal CAM for Weakly Supervised Semantic Segmentation on Medical Image</title>
+    <link href="https://louaq.github.io/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/"/>
+    <id>https://louaq.github.io/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/</id>
+    <published>2025-04-16T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="医学图像分割" scheme="https://louaq.github.io/categories/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Weakly Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Weakly-Supervised-Semantic-Segmentation/"/>
+    
+    <category term="C-CAM" scheme="https://louaq.github.io/tags/C-CAM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pixel-Wise Reclassification with Prototypes for Enhancing Weakly Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-13T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Pixel-Wise Reclassification" scheme="https://louaq.github.io/tags/Pixel-Wise-Reclassification/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>弱监督语义分割</title>
+    <link href="https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/"/>
+    <id>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</id>
+    <published>2025-04-12T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Knowledge Transfer with Simulated Inter-Image Erasing for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-11T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="模拟图像间擦除" scheme="https://louaq.github.io/tags/%E6%A8%A1%E6%8B%9F%E5%9B%BE%E5%83%8F%E9%97%B4%E6%93%A6%E9%99%A4/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SFC Shared Feature Calibration in Weakly Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-10T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="SFC" scheme="https://louaq.github.io/tags/SFC/"/>
+    
+    <category term="semantic segmentation" scheme="https://louaq.github.io/tags/semantic-segmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>WeakCLIP Adapting CLIP for Weakly-Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/"/>
+    <id>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</id>
+    <published>2025-04-09T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Weakly Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Weakly-Supervised-Semantic-Segmentation/"/>
+    
+    <category term="CLIP" scheme="https://louaq.github.io/tags/CLIP/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>All-pairs Consistency Learning for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-04-07T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Weakly Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Weakly-Supervised-Semantic-Segmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Self-supervised vision transformers for semantic segmentation</title>
+    <link href="https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/</id>
+    <published>2025-04-03T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="自监督语义分割" scheme="https://louaq.github.io/categories/%E8%87%AA%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="semantic segmentation" scheme="https://louaq.github.io/tags/semantic-segmentation/"/>
+    
+    <category term="ViT" scheme="https://louaq.github.io/tags/ViT/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>A Transformer-based Adaptive Prototype Matching Network for Few-Shot Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</id>
+    <published>2025-04-02T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="少样本语义分割" scheme="https://louaq.github.io/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Transformer" scheme="https://louaq.github.io/tags/Transformer/"/>
+    
+    <category term="Few-Shot Semantic Segmentation" scheme="https://louaq.github.io/tags/Few-Shot-Semantic-Segmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>DSMF-Net Dual Semantic Metric Learning Fusion Network for Few-Shot Aerial Image Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/</id>
+    <published>2025-04-02T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="少样本语义分割" scheme="https://louaq.github.io/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="DSMF-Net" scheme="https://louaq.github.io/tags/DSMF-Net/"/>
+    
+    <category term="Semantic Segmentation" scheme="https://louaq.github.io/tags/Semantic-Segmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Kill Two Birds with One Stone Domain Generalization for Semantic Segmentation via Network Pruning</title>
+    <link href="https://louaq.github.io/post/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/"/>
+    <id>https://louaq.github.io/post/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/</id>
+    <published>2025-04-02T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="领域泛化语义分割" scheme="https://louaq.github.io/categories/%E9%A2%86%E5%9F%9F%E6%B3%9B%E5%8C%96%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Domain Generalization" scheme="https://louaq.github.io/tags/Domain-Generalization/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Stronger, Fewer, &amp; Superior Harnessing Vision Foundation Models for Domain Generalized Semantic Segmentation（DGSS）</title>
+    <link href="https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/"/>
+    <id>https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/</id>
+    <published>2025-04-01T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="领域泛化语义分割" scheme="https://louaq.github.io/categories/%E9%A2%86%E5%9F%9F%E6%B3%9B%E5%8C%96%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Vision Foundation Models" scheme="https://louaq.github.io/tags/Vision-Foundation-Models/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LGAD Local and Global Attention Distillation for Efficient Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/</id>
+    <published>2025-03-31T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="注意力蒸馏" scheme="https://louaq.github.io/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%92%B8%E9%A6%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Class Tokens Infusion for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-03-29T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Scribble-Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Scribble-Supervised-Semantic-Segmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>USE Universal Segment Embeddings for Open-Vocabulary Image Segmentation</title>
+    <link href="https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/"/>
+    <id>https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</id>
+    <published>2025-03-26T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="开放词汇图像分割" scheme="https://louaq.github.io/categories/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Universal Segment Embeddings" scheme="https://louaq.github.io/tags/Universal-Segment-Embeddings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>LLMFormer Large LanguageModel for Open-Vocabulary Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/llmformer-large-languagemodel-for-open-vocabulary-semantic/"/>
+    <id>https://louaq.github.io/post/llmformer-large-languagemodel-for-open-vocabulary-semantic/</id>
+    <published>2025-03-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="开放词汇语义分割" scheme="https://louaq.github.io/categories/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="LLMFormer" scheme="https://louaq.github.io/tags/LLMFormer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CorrMatch Label Propagation via Correlation Matching for Semi-Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/corrmatch-label-propagation-via-correlation-matching-for-semi-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/corrmatch-label-propagation-via-correlation-matching-for-semi-supervised-semantic-segmentation/</id>
+    <published>2025-03-22T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="半监督语义分割" scheme="https://louaq.github.io/categories/%E5%8D%8A%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Semi-Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Semi-Supervised-Semantic-Segmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>CC4S Encouraging Certainty and Consistency in Scribble-Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</id>
+    <published>2025-03-20T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="涂鸦监督语义分割" scheme="https://louaq.github.io/categories/%E6%B6%82%E9%B8%A6%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Scribble-Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Scribble-Supervised-Semantic-Segmentation/"/>
+    
+    <category term="CC4S" scheme="https://louaq.github.io/tags/CC4S/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scaling Up Multi-domain Semantic Segmentation with Sentence Embeddings</title>
+    <link href="https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/"/>
+    <id>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</id>
+    <published>2025-03-18T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="多模态语义分割" scheme="https://louaq.github.io/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Sentence Embeddings" scheme="https://louaq.github.io/tags/Sentence-Embeddings/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scribble Hides Class Promoting Scribble-Based Weakly-Supervised Semantic Segmentation with Its Class Label</title>
+    <link href="https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/"/>
+    <id>https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</id>
+    <published>2025-03-18T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="涂鸦监督语义分割" scheme="https://louaq.github.io/categories/%E6%B6%82%E9%B8%A6%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Scribble" scheme="https://louaq.github.io/tags/Scribble/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Learning Generalized Medical Image Segmentation from Decoupled Feature Queries</title>
+    <link href="https://louaq.github.io/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/"/>
+    <id>https://louaq.github.io/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/</id>
+    <published>2025-03-17T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="医学图像分割" scheme="https://louaq.github.io/categories/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Medical Image Segmentation" scheme="https://louaq.github.io/tags/Medical-Image-Segmentation/"/>
+    
+    <category term="Decoupled Feature Queries" scheme="https://louaq.github.io/tags/Decoupled-Feature-Queries/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</id>
+    <published>2025-03-13T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="弱监督语义分割" scheme="https://louaq.github.io/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Weakly Supervised Semantic Segmentation" scheme="https://louaq.github.io/tags/Weakly-Supervised-Semantic-Segmentation/"/>
+    
+    <category term="Feature Self-Reinforcement" scheme="https://louaq.github.io/tags/Feature-Self-Reinforcement/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Pytorch教程</title>
+    <link href="https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/"/>
+    <id>https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/</id>
+    <published>2025-03-12T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="Pytorch" scheme="https://louaq.github.io/categories/Pytorch/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Relevant Intrinsic Feature Enhancement Network for Few-Shot Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</id>
+    <published>2025-03-11T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="少样本语义分割" scheme="https://louaq.github.io/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Feature Enhancement Network" scheme="https://louaq.github.io/tags/Feature-Enhancement-Network/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scribble-Supervised Semantic Segmentation with Prototype-based Feature Augmentation</title>
+    <link href="https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/"/>
+    <id>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</id>
+    <published>2025-03-11T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="涂鸦监督语义分割" scheme="https://louaq.github.io/categories/%E6%B6%82%E9%B8%A6%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Semantic Segmentation" scheme="https://louaq.github.io/tags/Semantic-Segmentation/"/>
+    
+    <category term="Feature Augmentation" scheme="https://louaq.github.io/tags/Feature-Augmentation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation</title>
+    <link href="https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/"/>
+    <id>https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/</id>
+    <published>2025-03-10T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="少样本语义分割" scheme="https://louaq.github.io/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Few-Shot Semantic Segmentation" scheme="https://louaq.github.io/tags/Few-Shot-Semantic-Segmentation/"/>
+    
+    <category term="Transformation" scheme="https://louaq.github.io/tags/Transformation/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Prompt-and-Transfer Dynamic Class-Aware Enhancement for Few-Shot Segmentation</title>
+    <link href="https://louaq.github.io/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/"/>
+    <id>https://louaq.github.io/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/</id>
+    <published>2025-03-08T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="少样本语义分割" scheme="https://louaq.github.io/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Prompt-and-Transfer" scheme="https://louaq.github.io/tags/Prompt-and-Transfer/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Prompting Multi-Modal Image Segmentation with Semantic Grouping</title>
+    <link href="https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/"/>
+    <id>https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/</id>
+    <published>2025-03-06T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="多模态图像分割" scheme="https://louaq.github.io/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Semantic Grouping" scheme="https://louaq.github.io/tags/Semantic-Grouping/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Disentangle then Parse Night-time Semantic Segmentation with Illumination Disentanglement</title>
+    <link href="https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/"/>
+    <id>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</id>
+    <published>2025-03-04T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="夜间语义分割" scheme="https://louaq.github.io/categories/%E5%A4%9C%E9%97%B4%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Semantic Segmentation" scheme="https://louaq.github.io/tags/Semantic-Segmentation/"/>
+    
+    <category term="Illumination Disentanglement" scheme="https://louaq.github.io/tags/Illumination-Disentanglement/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>SED A Simple Encoder-Decoder for Open-Vocabulary Semantic Segmentation</title>
+    <link href="https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/"/>
+    <id>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</id>
+    <published>2025-03-04T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="开放词汇语义分割" scheme="https://louaq.github.io/categories/%E5%BC%80%E6%94%BE%E8%AF%8D%E6%B1%87%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="SED" scheme="https://louaq.github.io/tags/SED/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>High Quality Segmentation for Ultra High-resolution Images</title>
+    <link href="https://louaq.github.io/post/high-quality-segmentation-for-ultra-high-resolution-images/"/>
+    <id>https://louaq.github.io/post/high-quality-segmentation-for-ultra-high-resolution-images/</id>
+    <published>2025-03-02T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="超高分辨率图像语义分割" scheme="https://louaq.github.io/categories/%E8%B6%85%E9%AB%98%E5%88%86%E8%BE%A8%E7%8E%87%E5%9B%BE%E5%83%8F%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+    <category term="Ultra High-resolution Images" scheme="https://louaq.github.io/tags/Ultra-High-resolution-Images/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Segment Anything</title>
+    <link href="https://louaq.github.io/post/segament-anything/"/>
+    <id>https://louaq.github.io/post/segament-anything/</id>
+    <published>2025-02-27T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="mata" scheme="https://louaq.github.io/categories/mata/"/>
+    
+    
+    <category term="SAM" scheme="https://louaq.github.io/tags/SAM/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>模板</title>
+    <link href="https://louaq.github.io/post/mo-ban/"/>
+    <id>https://louaq.github.io/post/mo-ban/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;作者单位&lt;/p&gt;
+&lt;h2 id=&quot;摘要&quot;&gt;&lt;a href=&quot;#摘要&quot; class=&quot;headerlink&quot; title=&quot;摘要&quot;&gt;&lt;/a&gt;摘要&lt;/h2&gt;&lt;h2 id=&quot;翻译&quot;&gt;&lt;a href=&quot;#翻译&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>精读模板</title>
+    <link href="https://louaq.github.io/post/jing-du-mo-ban/"/>
+    <id>https://louaq.github.io/post/jing-du-mo-ban/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>FCN</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-fcn/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-fcn/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>FCN模型讲解</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>语义分割基础</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>语义分割上采样</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.628Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>语义分割概述</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</id>
+    <published>2025-02-24T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.629Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="语义分割" scheme="https://louaq.github.io/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>深度学习环境配置2——windows下的torch=1.2.0环境配置</title>
+    <link href="https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/"/>
+    <id>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</id>
+    <published>2025-02-06T16:27:00.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">CUDA环境安装</summary>
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://louaq.github.io/tags/python/"/>
+    
+    <category term="Deep Learning" scheme="https://louaq.github.io/tags/Deep-Learning/"/>
+    
+    <category term="CUDA" scheme="https://louaq.github.io/tags/CUDA/"/>
+    
+    <category term="cudnn" scheme="https://louaq.github.io/tags/cudnn/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>vscode配置latex环境</title>
+    <link href="https://louaq.github.io/post/latex/visual-studio-code/"/>
+    <id>https://louaq.github.io/post/latex/visual-studio-code/</id>
+    <published>2024-12-29T13:24:01.000Z</published>
+    <updated>2025-05-04T07:49:11.630Z</updated>
+    
+    
+    <summary type="html">介绍vscode如何配置latex环境</summary>
+    
+    
+    
+    <category term="latex" scheme="https://louaq.github.io/categories/latex/"/>
+    
+    
+    <category term="vscode" scheme="https://louaq.github.io/tags/vscode/"/>
+    
+    <category term="latex" scheme="https://louaq.github.io/tags/latex/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>YOLOv8的训练自己的数据集</title>
+    <link href="https://louaq.github.io/post/yolo/article-1/"/>
+    <id>https://louaq.github.io/post/yolo/article-1/</id>
+    <published>2024-09-25T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+    <summary type="html">春水碧于天，画船听雨眠。 —— 菩萨蛮·人人尽说江南好</summary>
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="python" scheme="https://louaq.github.io/tags/python/"/>
+    
+    <category term="Deep Learning" scheme="https://louaq.github.io/tags/Deep-Learning/"/>
+    
+    <category term="Computer Vision" scheme="https://louaq.github.io/tags/Computer-Vision/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>恒源云</title>
+    <link href="https://louaq.github.io/post/yolo/article-2/"/>
+    <id>https://louaq.github.io/post/yolo/article-2/</id>
+    <published>2024-09-25T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+    <summary type="html">只身千里客，孤枕一灯秋。 —— 陆游</summary>
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="恒源云" scheme="https://louaq.github.io/tags/%E6%81%92%E6%BA%90%E4%BA%91/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>数据集</title>
+    <link href="https://louaq.github.io/post/yolo/article-13/"/>
+    <id>https://louaq.github.io/post/yolo/article-13/</id>
+    <published>2024-08-19T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;p&gt;YoloV8。YoloV8是一种高效的目标检测算法，它的训练需要高质量的数据集。然而，获取高质量的数据集是一项耗时且费力的任务。&lt;/p&gt;
+&lt;p&gt;&lt;img</summary>
+        
+      
+    
+    
+    
+    <category term="YOLO" scheme="https://louaq.github.io/categories/YOLO/"/>
+    
+    
+    <category term="人工智能" scheme="https://louaq.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="Ultralytics" scheme="https://louaq.github.io/tags/Ultralytics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>YOLOv8目录结构</title>
+    <link href="https://louaq.github.io/post/yolo/article-3/"/>
+    <id>https://louaq.github.io/post/yolo/article-3/</id>
+    <published>2024-08-19T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+    <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>YOLOv8文件分析</title>
+    <link href="https://louaq.github.io/post/yolo/article-4/"/>
+    <id>https://louaq.github.io/post/yolo/article-4/</id>
+    <published>2024-08-19T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+    <summary type="html">仙路尽头谁为峰 一见无始道成空</summary>
+    
+    
+    
+    <category term="写作" scheme="https://louaq.github.io/categories/%E5%86%99%E4%BD%9C/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>说明文档</title>
+    <link href="https://louaq.github.io/post/yolo/shuo-ming-wen-dang/"/>
+    <id>https://louaq.github.io/post/yolo/shuo-ming-wen-dang/</id>
+    <published>2024-08-19T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;blockquote&gt;
+&lt;p&gt;这篇文档主要介绍《基于YOLOv8的农田病虫害检测与分析》的代码实现部分，整篇论文的目的主要是改进YOLOv8的网络结构，使其在检测病虫害的精度和实时性上有所提升。接下来，我将介绍如何从零开始搭建起本项目。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h</summary>
+        
+      
+    
+    
+    
+    <category term="YOLO" scheme="https://louaq.github.io/categories/YOLO/"/>
+    
+    
+    <category term="python" scheme="https://louaq.github.io/tags/python/"/>
+    
+    <category term="人工智能" scheme="https://louaq.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="论文" scheme="https://louaq.github.io/tags/%E8%AE%BA%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>评估</title>
+    <link href="https://louaq.github.io/post/yolo/article-11/"/>
+    <id>https://louaq.github.io/post/yolo/article-11/</id>
+    <published>2024-08-11T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、简介&quot;&gt;&lt;a href=&quot;#一、简介&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="深度学习" scheme="https://louaq.github.io/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="评估" scheme="https://louaq.github.io/tags/%E8%AF%84%E4%BC%B0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>绘图</title>
+    <link href="https://louaq.github.io/post/yolo/article-12/"/>
+    <id>https://louaq.github.io/post/yolo/article-12/</id>
+    <published>2024-08-09T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、本文介绍&quot;&gt;&lt;a href=&quot;#一、本文介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="写作" scheme="https://louaq.github.io/categories/%E5%86%99%E4%BD%9C/"/>
+    
+    
+    <category term="python" scheme="https://louaq.github.io/tags/python/"/>
+    
+    <category term="人工智能" scheme="https://louaq.github.io/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="论文" scheme="https://louaq.github.io/tags/%E8%AE%BA%E6%96%87/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>报错</title>
+    <link href="https://louaq.github.io/post/yolo/article-14/"/>
+    <id>https://louaq.github.io/post/yolo/article-14/</id>
+    <published>2024-08-01T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、本文介绍&quot;&gt;&lt;a href=&quot;#一、本文介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="YOLO" scheme="https://louaq.github.io/categories/YOLO/"/>
+    
+    
+    <category term="python" scheme="https://louaq.github.io/tags/python/"/>
+    
+    <category term="论文" scheme="https://louaq.github.io/tags/%E8%AE%BA%E6%96%87/"/>
+    
+    <category term="Ultralytics" scheme="https://louaq.github.io/tags/Ultralytics/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>可视化热力图</title>
+    <link href="https://louaq.github.io/post/yolo/article-10/"/>
+    <id>https://louaq.github.io/post/yolo/article-10/</id>
+    <published>2024-07-28T12:00:00.000Z</published>
+    <updated>2025-05-04T07:49:11.631Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;一、本文介绍&quot;&gt;&lt;a href=&quot;#一、本文介绍&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="YOLO" scheme="https://louaq.github.io/categories/YOLO/"/>
+    
+    
+    <category term="python" scheme="https://louaq.github.io/tags/python/"/>
+    
+    <category term="热力图" scheme="https://louaq.github.io/tags/%E7%83%AD%E5%8A%9B%E5%9B%BE/"/>
+    
+  </entry>
+  
+</feed>

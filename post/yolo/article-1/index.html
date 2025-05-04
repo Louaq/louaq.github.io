@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html>
+  <!-- meta/link... -->
+  
+
+
+
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+  <title>YOLOv8的训练自己的数据集 | Louaq</title>
+
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
+  <link href="https://unpkg.com/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+  <link href="/js/swiper/swiper@5.4.1.min.css" rel="stylesheet">
+  
+  
+    <script>
+        var themeModelId = '';
+        if (themeModelId) {
+            localStorage.setItem('modelId', themeModelId);
+        }
+    </script>
+    
+    <script async src="https://cdn.jsdelivr.net/gh/yuang01/live2d-widget@latest/autoload.js"></script>
+    <script>
+        var live2dOpen = eval('true') || false;
+        if (!live2dOpen) {
+            localStorage.setItem('waifu-display', 1609323474481);
+        }
+    </script>
+  
+  
+  
+<link rel="stylesheet" href="/css/animate.min.css">
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  
+    <link href="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.css" rel="stylesheet">
+  
+  
+    
+<link rel="stylesheet" href="/js/shareJs/share.min.css">
+
+  
+  <style>
+        @media (max-width: 992px) {
+            #waifu {
+                display: none;
+            }
+        }
+    </style>
+    <script defer src="//cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="//cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+
+    
+    
+    <!-- 依赖于jquery和vue -->
+    <script src="https://unpkg.com/jquery@3.5.1/dist/jquery.min.js"></script>
+    <script src="https://unpkg.com/vue@2.6.11/dist/vue.min.js"></script>
+
+    <!-- import link -->
+    
+        
+            
+        
+            
+        
+            <link href="/custom/index.css" rel="stylesheet">
+        
+    
+    <!-- import script -->
+    
+        
+            
+        
+            
+        
+    
+
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+</head>
+
+  
+  <!-- 预加载动画 -->
+  
+  
+  <div class="preloader_6" id="loader">
+  <div class="loader"></div>
+</div>
+  <script>
+    var endLoading = function () {
+      document.body.style.overflow = 'auto';
+      document.getElementById('loader').classList.add("loaded");
+    }
+    window.addEventListener('DOMContentLoaded', endLoading);
+  </script>
+
+
+  <body>
+    <!-- 判断是否为暗黑风格 -->
+    <!-- 判断是否为黑夜模式 -->
+<script defer>
+  let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+
+  if (isDark) {
+    $(document.body).addClass('darkModel');
+  }
+</script>
+
+    <!-- 需要在上面加载的js -->
+    <script>
+  function loadScript(src, cb) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var HEAD = document.getElementsByTagName("head")[0] || document.documentElement;
+        var script = document.createElement("script");
+        script.setAttribute("type", "text/javascript");
+        if (cb) {
+          if (JSON.stringify(cb)) {
+            for (let p in cb) {
+              if (p == "onload") {
+                script[p] = () => {
+                  cb[p]()
+                  resolve()
+                }
+              } else {
+                script[p] = cb[p]
+                script.onload = resolve
+              }
+            }
+          } else {
+            script.onload = () => {
+              cb()
+              resolve()
+            };
+          }
+        } else {
+          script.onload = resolve
+        }
+        script.setAttribute("src", src);
+        HEAD.appendChild(script);
+      });
+    });
+  }
+
+  //https://github.com/filamentgroup/loadCSS
+  var loadCSS = function (src) {
+    return new Promise(resolve => {
+      setTimeout(function () {
+        var link = document.createElement('link');
+        link.rel = "stylesheet";
+        link.href = src;
+        link.onload = resolve;
+        document.getElementsByTagName("head")[0].appendChild(link);
+      });
+    });
+  };
+
+</script> 
+
+<!-- 轮播图所需要的js -->
+<script src="/js/swiper/swiper.min.js"></script>
+<script src="/js/swiper/vue-awesome-swiper.js"></script>
+<script src="/js/swiper/swiper.animate1.0.3.min.js"></script>
+
+<script type="text/javascript">
+  Vue.use(window.VueAwesomeSwiper)
+</script>
+
+
+  <script src="/js/vue-typed-js/index.js"></script>
+
+
+<!-- 首页的公告滚动插件的js需要重新加载 -->
+<script src="/js/vue-seamless-scroll/index.js"></script>
+
+<!-- 打字机效果js -->
+<script src="https://unpkg.com/typed.js@2.0.11"></script>
+
+
+    <div id="safearea">
+      <main class="main" id="pjax-container">
+        <!-- 头部导航 -->
+        
+<header class="header  " 
+  id="navHeader"
+  style="position: fixed;
+  left: 0; top: 0; z-index: 10;width: 100%;"
+>
+  <div class="header-content">
+    <div class="bars">
+      <div id="appDrawer" class="sidebar-image">
+  <div class="drawer-box-icon">
+    <i class="fas fa-bars" aria-hidden="true" @click="showDialogDrawer"></i>
+  </div>
+  
+  <transition name="fade">
+    <div class="drawer-box_mask" v-cloak style="display: none;" v-show="visible" @click.self="cancelDialogDrawer">
+    </div>
+  </transition>
+  <div class="drawer-box" :class="{'active': visible}">
+    <div class="drawer-box-head bg-color">
+      <img class="drawer-box-head_logo lazyload placeholder" src="/img/b.jpg" class="lazyload placeholder" data-srcset="/img/b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+      <h3 class="drawer-box-head_title">Louaq</h3>
+      <h5 class="drawer-box-head_desc"></h5>
+    </div>
+    
+    <div class="drawer-box-content">
+      <ul class="drawer-box-content_menu">
+        
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                  
+                  <span class="name">首页</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/archives" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-archive" aria-hidden="true"></i>
+                  
+                  <span class="name">归档</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/tags" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-tags" aria-hidden="true"></i>
+                  
+                  <span class="name">标签</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/categories" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">分类</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/medical" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">医学图像分割</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/pdf" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">组会资料</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="/messageBoard" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                  
+                  <span class="name">留言板</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(7)">
+                  <span>
+                    
+                      <i class="fas fa-link"></i>
+                    
+                    <span class="name">友情链接</span>
+                  </span>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(7)}" aria-hidden="true"></i>
+                </a>
+                <ul class="drawer-sub-menu" v-if="isOpen(7)">
+                  
+                  <li>
+                    <a href="/gallery">
+                      
+                      <i class="fas fa-music" style="margin-top: -20px;"></i>
+                      
+                      <span>图库</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/huoban">
+                      
+                      <i class="fas fa-film" style="margin-top: -20px;"></i>
+                      
+                      <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <span>👪简单说一说</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/me">
+                      
+                      <i class="fas fa-film" style="margin-top: -20px;"></i>
+                      
+                      <span>关于我</span>
+                    </a>
+                  </li>
+                  
+                </ul>
+              
+            </li>
+          
+        
+        
+          <li class="drawer-box-content_item">
+            <a target="_blank" rel="noopener" href="https://github.com/Louaq">
+              <i class="fas fa-github" aria-hidden="true"></i>
+              <span>Github</span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appDrawer',
+    data: {
+      visible: false,
+      top: 0,
+      openArr: [],
+    },
+    computed: {
+    },
+    mounted() {
+    },
+    methods: {
+      isOpen(index) {
+        if (this.openArr.includes(index)) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      openOrCloseMenu(curIndex) {
+        const index = this.openArr.indexOf(curIndex);
+        if (index !== -1) {
+          this.openArr.splice(index, 1);
+        } else {
+          this.openArr.push(curIndex);
+        }
+      },
+      showDialogDrawer() {
+        this.visible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'width: 100%; height: 100%;overflow: hidden;';
+      },
+      cancelDialogDrawer() {
+        this.visible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      }
+    },
+    created() {}
+  })
+</script>
+
+    </div>
+    <div class="blog-title" id="author-avatar">
+      
+        <div class="avatar">
+          <img src="/img/b.jpg" class="lazyload placeholder" data-srcset="/img/b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="logo">
+        </div>
+      
+      <a href="/" class="logo">Louaq</a>
+    </div>
+    <nav class="navbar">
+      <ul class="menu">
+        
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/" class="menu-item-link" title="首页">
+                  
+                    <i class="fas fa-home" aria-hidden="true"></i>
+                  
+                  <span class="name">首页</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/archives" class="menu-item-link" title="归档">
+                  
+                    <i class="fas fa-archive" aria-hidden="true"></i>
+                  
+                  <span class="name">归档</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/tags" class="menu-item-link" title="标签">
+                  
+                    <i class="fas fa-tags" aria-hidden="true"></i>
+                  
+                  <span class="name">标签</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/categories" class="menu-item-link" title="分类">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">分类</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/medical" class="menu-item-link" title="医学图像分割">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">医学图像分割</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/pdf" class="menu-item-link" title="组会资料">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">组会资料</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="/messageBoard" class="menu-item-link" title="留言板">
+                  
+                    <i class="fas fa-comment-dots" aria-hidden="true"></i>
+                  
+                  <span class="name">留言板</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="javascript:;" class="menu-item-link" title="友情链接">
+                  
+                    <i class="fas fa-link"></i>
+                  
+                  <span class="name">友情链接</span>
+                  <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
+                </a>
+                <ul class="sub-menu">
+                  
+                  <li>
+                    <a href="/gallery">
+                      
+                      <i class="fas fa-music" style="margin-top: -20px;"></i>
+                      
+                      <span>图库</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/huoban">
+                      
+                      <i class="fas fa-film" style="margin-top: -20px;"></i>
+                      
+                      <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <span>👪简单说一说</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/me">
+                      
+                      <i class="fas fa-film" style="margin-top: -20px;"></i>
+                      
+                      <span>关于我</span>
+                    </a>
+                  </li>
+                  
+                </ul>
+              
+            </li>
+          
+        
+      </ul>
+      
+      
+        <div id="appSearch">
+  <div class="search"  @click="showDialog()"><i class="fas fa-search" aria-hidden="true"></i></div>
+  <transition name="fade">
+    <div class="message-box_wrapper" style="display: none;" v-cloak v-show="dialogVisible" @click.self="cancelDialogVisible()">
+      <div class="message-box animated bounceInDown">
+        <h2>
+          <span>
+            <i class="fas fa-search" aria-hidden="true"></i>
+            <span class="title">本地搜索</span>
+          </span>
+          <i class="fas fa-times close" pointer style="float:right;" aria-hidden="true" @click.self="cancelDialogVisible()"></i>
+        </h2>
+        <form class="site-search-form">
+          <input type="text"
+            placeholder="请输入关键字"
+            id="local-search-input" 
+            @click="getSearchFile()"
+            class="st-search-input"
+            v-model="searchInput"
+          />
+        </form>
+        <div class="result-wrapper">
+          <div id="local-search-result" class="local-search-result-cls"></div>
+        </div>
+      </div>
+    </div>
+  </transition>
+</div>
+<script src="/js/local_search.js"></script>
+<script>
+  var body = document.body || document.documentElement || window;
+  var vm = new Vue({
+    el: '#appSearch',
+    data: {
+      dialogVisible: false,
+      searchInput: '',
+      top: 0,
+    },
+    computed: {
+    },
+    mounted() {
+      window.addEventListener('pjax:complete', () => {
+        this.cancelDialogVisible();
+      })
+    },
+    methods: {
+      showDialog() {
+        this.dialogVisible = true;
+        // 防止页面滚动，只能让弹框滚动
+        this.top = $(document).scrollTop()
+        body.style.cssText = 'overflow: hidden;';
+      },
+      getSearchFile() {
+        if (!this.searchInput) {
+          getSearchFile("/search.xml");
+        }
+      },
+      cancelDialogVisible() {
+        this.dialogVisible = false;
+        body.removeAttribute('style');
+        $(document).scrollTop(this.top)
+      },
+    },
+    created() {}
+  })
+</script>
+<!-- 解决刷新页面闪烁问题，可以在元素上添加display: none, 或者用vue.extend方法，详情：https://blog.csdn.net/qq_31393401/article/details/81017912 -->
+<!-- 下面是搜索基本写法 -->
+<!-- <script type="text/javascript" id="local.search.active">
+  var inputArea = document.querySelector("#local-search-input");
+  inputArea.onclick   = function(){ getSearchFile(); this.onclick = null }
+  inputArea.onkeydown = function(){ if(event.keyCode == 13) return false }
+</script> -->
+
+      
+
+    </nav>
+  </div>
+  
+    <a target="_blank" rel="noopener" href="https://github.com/Louaq" class="github-corner color-primary" aria-label="View source on GitHub"><svg width="60" height="60" viewBox="0 0 250 250" style="fill:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+  
+  
+    <div id="he-plugin-simple"></div>
+    <script defer>
+      WIDGET = {
+        CONFIG: {
+          "modules": "012",
+          "background": 5,
+          "tmpColor": "4A4A4A",
+          "tmpSize": 16,
+          "cityColor": "4A4A4A",
+          "citySize": 16,
+          "aqiSize": 16,
+          "weatherIconSize": 24,
+          "alertIconSize": 18,
+          "padding": "10px 10px 10px 10px",
+          "shadow": "1",
+          "language": "auto",
+          "borderRadius": 5,
+          "fixed": "false",
+          "vertical": "middle",
+          "horizontal": "center",
+          "key": "2784dd3fcb1e4f0f9a9b579bf69641f2"
+        }
+      }
+    </script>
+    <script defer src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script> 
+    
+</header>
+        <!-- 内容区域 -->
+        
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        YOLOv8的训练自己的数据集
+      </span>
+    </div>
+    
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2024-09-25 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-detail-header_category">
+              深度学习
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> 字数统计: 6.6k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> 阅读时长: 24分钟 |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
+  </div>
+  
+  
+</div>
+
+
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h2 id="一、YOLOv8的简介"><a href="#一、YOLOv8的简介" class="headerlink" title="一、YOLOv8的简介"></a>一、YOLOv8的简介</h2><p>YOLO（You Only Look Once）系列算法因其高效、准确等特点而备受瞩目。由2023年Ultralytics公司发布了YOLO的<strong>最新版本YOLOv8是结合前几代YOLO的基础上的一个融合改进版</strong>。</p>
+<p>本文YOLOv8网络结构&#x2F;环境搭建&#x2F;数据集获取&#x2F;训练&#x2F;推理&#x2F;验证&#x2F;导出&#x2F;部署，从网络结构的讲解从模型的网络结构讲解到模型的部署都有详细介绍，同时在本专栏中还包括YOLOv8模型系列的改进包<strong>括个人提出的创新点，传统卷积、注意力机制、损失函数的修改教程，能够帮助你的论文获得创新点。</strong></p>
+<h2 id="二、YOLOv8相对于Yolov5的核心改动"><a href="#二、YOLOv8相对于Yolov5的核心改动" class="headerlink" title="二、YOLOv8相对于Yolov5的核心改动"></a>二、YOLOv8相对于Yolov5的核心改动</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/39fa749365bc4a6e87a8e63563bca5cc.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/39fa749365bc4a6e87a8e63563bca5cc.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="39fa749365bc4a6e87a8e63563bca5cc.png"></p>
+<hr>
+<p>从YOLOv8的网络结构可以看出,其延用了YOLOv5的网络结构思想，<strong>包括基于CSP（紧凑和分离）的骨干网络(backbone)和Neck部分的设计，以及对于不同尺度模型的考虑。</strong></p>
+<p><strong>改进总结：</strong></p>
+<blockquote>
+<ol>
+<li><p>Backbone的改进：使用C2f模块代替C3模块，进一步轻量化，同时保持了CSP的思想，同时采用了SPPF模块。</p>
+</li>
+<li><p>PAN-FPN的改进：保留了PAN的思想，但删除了上采样阶段中的卷积结构，同时将C3模块替换为C2f模块。</p>
+</li>
+<li><p>Decoupled-Head的引入：采用了Decoupled-Head的思想，使得网络的训练和推理更加高效。</p>
+</li>
+<li><p>Anchor-Free的思想：抛弃了Anchor-Base，采用了Anchor-Free的思想。</p>
+</li>
+<li><p>损失函数的改进：采用VFL Loss作为分类损失，同时使用DFL Loss和CIOU Loss作为回归损失。</p>
+</li>
+<li><p>样本匹配方式的改进：采用了Task-Aligned Assigner匹配方式。</p>
+</li>
+</ol>
+</blockquote>
+<p>这些改进使得YOLOv8在目标检测方面具有更高的精度和更快的速度，同时保持了轻量化的特点。</p>
+<p><strong>具体来说</strong>，YOLOv8的Backbone部分使用了C2f模块来替代了YOLOv5中的C3模块，实现了进一步的轻量化。同时，它也保留了YOLOv5等架构中使用的SPPF（空间金字塔池化）模块。</p>
+<p>在PAN-FPN（路径聚合网络-特征金字塔网络）部分，虽然YOLOv8依旧采用了PAN的思想，但是在结构上，它删除了YOLOv5中PAN-FPN上采样阶段中的卷积结构，并将C3模块替换为了C2f模块。</p>
+<p>这些改进使得YOLOv8在保持了YOLOv5网络结构的优点的同时，进行了更加精细的调整和优化，提高了模型在不同场景下的性能。</p>
+<h2 id="三、YOLOv8的网络结构"><a href="#三、YOLOv8的网络结构" class="headerlink" title="三、YOLOv8的网络结构"></a><strong>三、YOLOv8的网络结构</strong></h2><p>YOLOv8的网络结构主要由以下三个大部分组成：</p>
+<blockquote>
+<ol>
+<li><p>Backbone：它采用了一系列卷积和反卷积层来提取特征，同时也使用了残差连接和瓶颈结构来减小网络的大小和提高性能。该部分采用了C2f模块作为基本构成单元，与YOLOv5的C3模块相比，C2f模块具有更少的参数量和更优秀的特征提取能力。</p>
+</li>
+<li><p>Neck：它采用了多尺度特征融合技术，将来自Backbone的不同阶段的特征图进行融合，以增强特征表示能力。具体来说，YOLOv8的Neck部分包括一个SPPF模块、一个PAA模块和两个PAN模块。</p>
+</li>
+<li><p>Head：它负责最终的目标检测和分类任务，包括一个检测头和一个分类头。检测头包含一系列卷积层和反卷积层，用于生成检测结果；分类头则采用全局平均池化来对每个特征图进行分类。</p>
+</li>
+</ol>
+</blockquote>
+<p>下面我们来针对于YOLOv8的三个组成部分进行详细讲解。</p>
+<h4 id="3-1-Backbone"><a href="#3-1-Backbone" class="headerlink" title="3.1 Backbone"></a>3.1 Backbone</h4><p>由最上面的YOLOv8网络结构图我们可以看出在其中的Backbone部分，由5个卷积模块和4个C2f模块和一个SPPF模块组成，</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/a744491cd5a14bcf9b33015b18c6c6c8.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/a744491cd5a14bcf9b33015b18c6c6c8.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="a744491cd5a14bcf9b33015b18c6c6c8.png"></p>
+<p>(其中浅蓝色为卷积模块,黄色为C2f模块深蓝色为SPPF模块 )</p>
+<p>如果上图看的不够直观,我们来看一下YOLOv8的文件中的yaml文件,看一下它backbone部分的结构组成部分，会更加直观。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">backbone:</span><br><span class="line">  <span class="comment"># [from, repeats, module, args]</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">64</span>, <span class="number">3</span>, <span class="number">2</span>]]  <span class="comment"># 0-P1/2</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">128</span>, <span class="number">3</span>, <span class="number">2</span>]]  <span class="comment"># 1-P2/4</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">3</span>, C2f, [<span class="number">128</span>, <span class="literal">True</span>]]</span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">256</span>, <span class="number">3</span>, <span class="number">2</span>]]  <span class="comment"># 3-P3/8</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">6</span>, C2f, [<span class="number">256</span>, <span class="literal">True</span>]]</span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">512</span>, <span class="number">3</span>, <span class="number">2</span>]]  <span class="comment"># 5-P4/16</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">6</span>, C2f, [<span class="number">512</span>, <span class="literal">True</span>]]</span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">1024</span>, <span class="number">3</span>, <span class="number">2</span>]]  <span class="comment"># 7-P5/32</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">3</span>, C2f, [<span class="number">1024</span>, <span class="literal">True</span>]]</span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, SPPF, [<span class="number">1024</span>, <span class="number">5</span>]]  <span class="comment"># 9</span></span><br></pre></td></tr></table></figure>
+
+<p>上面的部分就是YOLOv8的yaml文件的Backbone部分，可以看到其由5个Conv模块，四个C2f模块以及一个SPPF模块组成，<strong>下面我们来根据每个模块的组成来进行讲解。</strong></p>
+<h5 id="3-1-1-卷积模块-Conv"><a href="#3-1-1-卷积模块-Conv" class="headerlink" title="3.1.1 卷积模块(Conv)"></a>3.1.1 卷积模块(Conv)</h5><p>在其中卷积模块的结构主要为下图</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/56694f12be0d4664905561c9438e2850.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/56694f12be0d4664905561c9438e2850.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="56694f12be0d4664905561c9438e2850.png"></p>
+<p>在其中主要结构为一个2D的卷积一个BatchNorm2d和一个SiLU激活函数，整个<strong>卷积模块</strong>的作用为：</p>
+<ol>
+<li><strong>降采样：每个卷积模块中的卷积层都采用步长为2的卷积核进行降采样操作，以减小特征图的尺寸并增加通道数。</strong></li>
+<li><strong>非线性表示：每个卷积层之后都添加了Batch Normalization（批标准化）层和ReLU激活函数，以增强模型的非线性表示能力。</strong></li>
+</ol>
+<blockquote>
+<p>在其中Batch Normalization（批标准化）是深度学习中常用的一种技术，用于加速神经网络的训练。Batch Normalization通过对每个小批量数据进行标准化，使得神经网络在训练过程中更加稳定，可以使用更高的学习率，并且减少了对初始化权重的依赖。Batch Normalization的基本思想是：对每个小批量数据进行标准化，使得每个特征的均值为0，方差为1，然后再通过一个可学习的缩放因子和平移因子来调整数据的分布，从而使得神经网络更容易训练。</p>
+</blockquote>
+<h5 id="3-1-2-C2f模块"><a href="#3-1-2-C2f模块" class="headerlink" title="3.1.2 C2f模块"></a><strong>3.1.2 C2f模块</strong></h5><p>在YOLOv8的网络结构中C2f模块算是YOLOv8的一个较大的改变，与YOLOv5的C3模块相比，C2f模块具有更少的参数量和更优秀的特征提取能力。<strong>下图为C2f的内部网络结构图。</strong></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/3fa4855f3d38447b93e5faf40cd59169.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/3fa4855f3d38447b93e5faf40cd59169.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="3fa4855f3d38447b93e5faf40cd59169.png"></p>
+<p>在C2f模块中我们可以看到输入首先经过<strong>一个k&#x3D;1，s&#x3D;1，p&#x3D;0，c&#x3D;c_out</strong>的卷积模块进行了处理，然后经过一个split处理**(在这里split和后面的concat的组成其实就是所谓的残差模块处理)**经过数量为n的DarknetBottleneck模块处理以后将残差模块和主干模块的结果进行Concat拼接在经过一个卷积模块处理进行输出。 </p>
+<blockquote>
+<p>在其中提到的残差连接（residual connections）是一种用于构建深层神经网络的技术。它的核心思想是通过跳过层级连接来传递残差或误差。</p>
+<p>在传统的神经网络中，信息流通过一层层的网络层，每一层都通过非线性激活函数进行转换和提取特征。然而，随着神经网络的加深，可能会出现”梯度消失”或”梯度爆炸”的问题，导致网络收敛困难或性能下降。</p>
+<p>残差连接通过引入跨层级的连接，将输入的原始信息直接传递到后续层级，以解决梯度消失和爆炸问题。具体而言，它将网络的输入与中间层的输出相加，形成了一个”捷径”或”跳跃连接”，从而允许梯度更容易地传播。</p>
+<p>数学上，假设我们有一个输入x，通过多个网络层进行处理后得到预测值H(x)。那么残差连接的表达式为：</p>
+<p>F(x) &#x3D; H(x) + x</p>
+<p>其中，F(x)为残差块的输出，H(x)为经过一系列网络层处理后得到的特征表示，x为输入直接连接到残差块中的跳跃连接。</p>
+<p>通过残差连接，网络可以更容易地学习残差或误差，从而使网络更深层次的特征表达更准确。这对于训练深层神经网络非常有用，可以提高网络的性能和收敛速度。</p>
+</blockquote>
+<blockquote>
+<p> 在C2f模块中用到的DarknetBottleneck模块其中使用多个3x3卷积核进行卷积操作，提取特征信息。同时其具有add是否进行残差链接的选项。</p>
+</blockquote>
+<p> <strong>其实整个C2f模块就是一个改良版本的Darknet</strong></p>
+<ol>
+<li><p>首先，使用1x1卷积核将输入通道数减少到原来的1&#x2F;2，以减少计算量和内存消耗。</p>
+</li>
+<li><p>然后，使用多个3x3卷积核进行卷积操作，提取特征信息。</p>
+</li>
+<li><p>接着，使用残差链接，将输入直接加到输出中，从而形成了一条跨层连接。</p>
+</li>
+<li><p>接着，再次使用1x1卷积核恢复特征图的通道数。</p>
+</li>
+</ol>
+<p>SPPF模块 </p>
+<p>YOLOv8的SPPF模块相对于YOLOv5的SPPF模块并没有任何的改变。</p>
+<h4 id="3-2-Neck"><a href="#3-2-Neck" class="headerlink" title="3.2 Neck"></a>3.2 Neck</h4><p>YOLOv8的Neck部分是该模型中的一个关键组件，<strong>它在特征提取和融合方面起着重要作用</strong>。Neck的详细描述如下：</p>
+<p>Neck部分主要起到一个特征融合的操作, YOLOv8的Neck部分依然采用PAN-FPN的思想，下图的a，b，c为一个Neck部分的流程示意图。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/a3aeff6d8f0542a79efbd5e95c0b10b9.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/a3aeff6d8f0542a79efbd5e95c0b10b9.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="a3aeff6d8f0542a79efbd5e95c0b10b9.png"></p>
+<blockquote>
+<p>整个Neck部分的步骤如下：：将特征提取网络(Backbone)的输出P3，P4，P5输入进PAN-FPN网络结构，使得多个尺度的特征图进行融合；将P5经过上采样与P4进行融合得到F1，将F1经过C2f层和一次上采样与P3进行融合得到T1，将T1经过一次卷积层与F1经过融合得到F2，将F2经过一次C2f层得到T2，将T2经过一次卷积层与P5融合得到F3，将F3经过一次C2f层得到T3，最终得到T1、T2、T3就是整个Neck的产物； </p>
+</blockquote>
+<p>上述过程可以描述为下图，我在图片上做了一些标准方便理解。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/4b480765acd947879588f6d132704eb8.jpeg" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/4b480765acd947879588f6d132704eb8.jpeg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="4b480765acd947879588f6d132704eb8.jpeg"></p>
+<p>上述的过程可以在代码部分看到,我们同样看YOLOv8的yaml文件，能够更直观的看到这个步骤,大家可以看代码同时对应图片来进行分析:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">head:</span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, nn.Upsample, [<span class="literal">None</span>, <span class="number">2</span>, <span class="string">&#x27;nearest&#x27;</span>]]</span><br><span class="line">  - [[-<span class="number">1</span>, <span class="number">6</span>], <span class="number">1</span>, Concat, [<span class="number">1</span>]]  <span class="comment"># cat backbone P4</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">3</span>, C2f, [<span class="number">512</span>]]  <span class="comment"># 12</span></span><br><span class="line"> </span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, nn.Upsample, [<span class="literal">None</span>, <span class="number">2</span>, <span class="string">&#x27;nearest&#x27;</span>]]</span><br><span class="line">  - [[-<span class="number">1</span>, <span class="number">4</span>], <span class="number">1</span>, Concat, [<span class="number">1</span>]]  <span class="comment"># cat backbone P3</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">3</span>, C2f, [<span class="number">256</span>]]  <span class="comment"># 15 (P3/8-small)</span></span><br><span class="line"> </span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">256</span>, <span class="number">3</span>, <span class="number">2</span>]]</span><br><span class="line">  - [[-<span class="number">1</span>, <span class="number">12</span>], <span class="number">1</span>, Concat, [<span class="number">1</span>]]  <span class="comment"># cat head P4</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">3</span>, C2f, [<span class="number">512</span>]]  <span class="comment"># 18 (P4/16-medium)</span></span><br><span class="line"> </span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">1</span>, Conv, [<span class="number">512</span>, <span class="number">3</span>, <span class="number">2</span>]]</span><br><span class="line">  - [[-<span class="number">1</span>, <span class="number">9</span>], <span class="number">1</span>, Concat, [<span class="number">1</span>]]  <span class="comment"># cat head P5</span></span><br><span class="line">  - [-<span class="number">1</span>, <span class="number">3</span>, C2f, [<span class="number">1024</span>]]  <span class="comment"># 21 (P5/32-large)</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Neck部分的整体功能的详细分析如下:</strong></p>
+<p>1. Neck的作用：<br>Neck部分在YOLOv8模型中<strong>负责对来自Backbone的特征进行进一步处理和融合</strong>，以提高目标检测的准确性和鲁棒性。它通过引入不同的结构和技术，将多尺度的特征图进行融合，以便更好地捕捉不同尺度目标的信息。</p>
+<p>2. 特征金字塔网络（Feature Pyramid Network, FPN）：<br>YOLOv8的Neck部分通常采用特征金字塔网络结构，用于处理来自Backbone的多尺度特征图。<strong>FPN通过在不同层级上建立特征金字塔</strong>，使得模型能够在不同尺度上进行目标检测。它通过上采样和下采样操作，将低层级的细节特征与高层级的语义特征进行融合，以获取更全面和丰富的特征表示。</p>
+<p>3. 特征融合（Feature Fusion）：<br>Neck部分还包括特征融合的操作，<strong>用于将来自不同层级的特征进行融合</strong>。这种特征融合有助于提高模型对目标的检测准确性，尤其是对于不同尺度的目标。</p>
+<p>4. 上采样和下采样：<br>Neck部分通常会使用上采样和下采样操作，以调整特征图的尺度和分辨率。上采样操作可以将低分辨率的特征图放大到与高分辨率特征图相同的尺寸，<strong>以保留更多的细节信息</strong>。而下采样操作则可以将高分辨率的特征图降低尺寸，<strong>以减少计算量和内存消耗</strong>。</p>
+<p>YOLOv8的Neck部分通过特征金字塔网络和特征融合等操作，<strong>有效地提取和融合多尺度的特征</strong>，从而提高了目标检测的性能和鲁棒性。这使得模型能够更好地适应不同尺度和大小的目标，并在复杂场景下取得更准确的检测结果。</p>
+<blockquote>
+<p>PAN-FPN（具有特征金字塔网络的路径聚合网络）是一种用于计算机视觉中对象检测的神经网络架构。它将特征金字塔网络（FPN）与路径聚合网络（PAN）相结合，以提高目标检测的准确性和效率。</p>
+<p>FPN 用于从不同比例的图像中提取特征，而 PAN 用于跨网络的不同层聚合这些特征。这允许网络检测不同大小和分辨率的对象，并处理具有多个对象的复杂场景。</p>
+</blockquote>
+<h4 id="3-3-Head"><a href="#3-3-Head" class="headerlink" title="3.3 Head"></a>3.3 Head</h4><p>如果Backbone和Neck部分可以理解为准备工作，那么Head部分就是收获的部分，经过前面的准备工作我们得到了Neck部分的输出T1、T2、T3分别代表不同层级的特征图，<strong>Head部分就是对这三个特征图进行处理以产生模型的的输出结果的一个过程。</strong></p>
+<p>YOLOv8的Head部分我们先来看一下它的网络结构。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/bc05b2293026433985d4152e8a116634.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/bc05b2293026433985d4152e8a116634.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bc05b2293026433985d4152e8a116634.png"></p>
+<p>可以看到在YOLOv8的Head部分，体现了最核心的改动——&gt;解耦头(Decoupled-Head)，顾名思义就是将原先的一个检测头分解成两个部分。</p>
+<p>在Head部分的三个解耦头分别对应着Neck部分的特征图输出T1、T2、T3。、</p>
+<p><strong>解耦头的工作流程是：</strong></p>
+<blockquote>
+<p>将网络得到的特征图T1，T2，T3分别输入解耦头头进行预测，检测头的结构如下图所示其中包含4个3×3卷积与2个1×1卷积，同时在检测头的回归分支中添加WIOU损失函数如图4所示，回归头部需要计算预测框与真实框之间的位置偏移量，然后将偏移量送入回归头部进行损失计算，然后输出一个四维向量，分别表示目标框的左上角坐标x、y和右下角坐标x、y。分类头部针对于每个Anchor Free提取的候选框对其进行RoI Pooling和卷积操作得到一个分类器输出张量每个位置上的值表示该候选框属于每个类别的概率，在最后通过极大值抑制方式筛选出最终的检测结果 </p>
+</blockquote>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/ddf8b2f464a348868513ba3488ece02b.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/ddf8b2f464a348868513ba3488ece02b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="ddf8b2f464a348868513ba3488ece02b.png"></p>
+<p>我们再从YOLOv8的yaml文件来看Head部分的作用</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/16099ed50b934e5ba7100ab8a381c1cd.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/16099ed50b934e5ba7100ab8a381c1cd.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="16099ed50b934e5ba7100ab8a381c1cd.png"></p>
+<p><strong>可以看到检测头部分的输出为15,18，21分别对应着Neck部分的三个输出特征图。</strong> </p>
+<p>到此YOLOv8的网络结构部分讲解就已经完成，下面我们来看如何利用YOLOv8进行训练操作。  </p>
+<hr>
+<h2 id="四、环境搭建"><a href="#四、环境搭建" class="headerlink" title="四、环境搭建"></a>四、环境搭建</h2><p>在我们配置好环境之后，在之后模型获取完成之后，我们可以进行配置的安装我们可以在命令行下输入如下命令进行环境的配置。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install -r requirements.txt</span><br></pre></td></tr></table></figure>
+
+<p>输入如上命令之后我们就可以看到命令行在安装模型所需的库了。 </p>
+<h2 id="五、数据集获取"><a href="#五、数据集获取" class="headerlink" title="五、数据集获取"></a>五、数据集获取</h2><p>我在上面随便下载了一个 数据集用它导出yolov8的数据集，以及自动给转换成txt的格式yaml文件也已经配置好了，我们直接用就可以。 </p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/8673527d34eb42348770158c69de678f.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/8673527d34eb42348770158c69de678f.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="8673527d34eb42348770158c69de678f.png"></p>
+<hr>
+<h2 id="六、模型获取"><a href="#六、模型获取" class="headerlink" title="六、模型获取"></a>六、模型获取</h2><p>到这里假设你已经搭建好了环境和有了数据集，那么我们就可以进行模型的下载，因为yolov8目前还存在BUG并不稳定随时都有可能进行更新，所以不推荐大家通过其它的途径下载，最好通过下面的方式进行下载。</p>
+<p>我们可以直接在终端命令下</p>
+<p><strong>(PS：这里需要注意的是我们需要在你总项目文件目录下输入这个命令，因为他会下载到当前目录下)</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install ultralytics</span><br></pre></td></tr></table></figure>
+
+<p> 如果大家去github上直接下载zip文件到本地可能会遇到报错如下，识别不了yolo命令，所以推荐大家用这种方式下载，</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/c89d06161cd149c0ac0488e90188bcfc.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/c89d06161cd149c0ac0488e90188bcfc.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="c89d06161cd149c0ac0488e90188bcfc.png"></p>
+<hr>
+<h2 id="七、模型训练"><a href="#七、模型训练" class="headerlink" title="七、模型训练"></a>七、模型训练</h2><p>我们来看一下主要的ultralytics目录结构，</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/a900c1d0d16f45e2b8c3829aec6c2499.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/a900c1d0d16f45e2b8c3829aec6c2499.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="a900c1d0d16f45e2b8c3829aec6c2499.png"></p>
+<p> 我门打开cfg目录下的default.yaml文件可以配置模型的参数，</p>
+<p>在其中和模型训练有关的参数及其解释如下:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>参数名</th>
+<th>输入类型</th>
+<th>参数解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>task</td>
+<td>str</td>
+<td>YOLO模型的任务选择，选择你是要进行检测、分类等操作</td>
+</tr>
+<tr>
+<td>1</td>
+<td>mode</td>
+<td>str</td>
+<td>YOLO模式的选择，选择要进行训练、推理、输出、验证等操作</td>
+</tr>
+<tr>
+<td>2</td>
+<td>model</td>
+<td>str&#x2F;optional</td>
+<td>模型的文件，可以是官方的预训练模型，也可以是训练自己模型的yaml文件</td>
+</tr>
+<tr>
+<td>3</td>
+<td>data</td>
+<td>str&#x2F;optional</td>
+<td>模型的地址，可以是文件的地址，也可以是配置好地址的yaml文件</td>
+</tr>
+<tr>
+<td>4</td>
+<td>epochs</td>
+<td>int</td>
+<td>训练的轮次，将你的数据输入到模型里进行训练的次数</td>
+</tr>
+<tr>
+<td>5</td>
+<td>patience</td>
+<td>int</td>
+<td>早停机制，当你的模型精度没有改进了就提前停止训练</td>
+</tr>
+<tr>
+<td>6</td>
+<td>batch</td>
+<td>int</td>
+<td>我们输入的数据集会分解为多个子集，一次向模型里输入多少个子集</td>
+</tr>
+<tr>
+<td>7</td>
+<td>imgsz</td>
+<td>int&#x2F;list</td>
+<td>输入的图片的大小，可以是整数就代表图片尺寸为int*int，或者list分别代表宽和高[w，h]</td>
+</tr>
+<tr>
+<td>8</td>
+<td>save</td>
+<td>bool</td>
+<td>是否保存模型以及预测结果</td>
+</tr>
+<tr>
+<td>9</td>
+<td>save_period</td>
+<td>int</td>
+<td>在训练过程中多少次保存一次模型文件,就是生成的pt文件</td>
+</tr>
+<tr>
+<td>10</td>
+<td>cache</td>
+<td>bool</td>
+<td>参数cache用于控制是否启用缓存机制。</td>
+</tr>
+<tr>
+<td>11</td>
+<td>device</td>
+<td>int&#x2F;str&#x2F;list&#x2F;optional</td>
+<td>GPU设备的选择：cuda device&#x3D;0 or device&#x3D;0,1,2,3 or device&#x3D;cpu</td>
+</tr>
+<tr>
+<td>12</td>
+<td>workers</td>
+<td>int</td>
+<td>工作的线程，Windows系统一定要设置为0否则很可能会引起线程报错</td>
+</tr>
+<tr>
+<td>13</td>
+<td>name</td>
+<td>str&#x2F;optional</td>
+<td>模型保存的名字，结果会保存到’project&#x2F;name’ 目录下</td>
+</tr>
+<tr>
+<td>14</td>
+<td>exist_ok</td>
+<td>bool</td>
+<td>如果模型存在的时候是否进行覆盖操作</td>
+</tr>
+<tr>
+<td>15</td>
+<td>prepetrained</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<h3 id="7-1-训练的三种方式"><a href="#7-1-训练的三种方式" class="headerlink" title="7.1 训练的三种方式"></a>7.1 训练的三种方式</h3><h4 id="7-1-1-方式一"><a href="#7-1-1-方式一" class="headerlink" title="7.1.1 方式一"></a>7.1.1 方式一</h4><p>我们可以通过命令直接进行训练在其中指定参数，但是这样的方式，我们每个参数都要在其中打出来。命令如下:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo task=detect mode=train model=yolov8n.pt data=data.yaml batch=<span class="number">16</span> epochs=<span class="number">100</span> imgsz=<span class="number">640</span> workers=<span class="number">0</span> device=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p>需要注意的是如果你是Windows系统的电脑其中的Workers最好设置成0否则容易报线程的错误。</p>
+<h4 id="7-1-2-方式二（推荐）"><a href="#7-1-2-方式二（推荐）" class="headerlink" title="7.1.2 方式二（推荐）"></a><strong>7.1.2 方式二（推荐）</strong></h4><p>通过指定cfg直接进行训练，我们配置好ultralytics&#x2F;cfg&#x2F;default.yaml这个文件之后，可以直接执行这个文件进行训练，这样就不用在命令行输入其它的参数了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo cfg=ultralytics/cfg/default.yaml</span><br></pre></td></tr></table></figure>
+
+<h4 id="7-1-3-方式三"><a href="#7-1-3-方式三" class="headerlink" title="7.1.3 方式三"></a><strong>7.1.3 方式三</strong></h4><p> 我们可以通过创建py文件来进行训练，这样的好处就是不用在终端上打命令，这也能省去一些工作量，我们在根目录下创建一个名字为run.py的文件，在其中输入代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> ultralytics <span class="keyword">import</span> YOLO model = YOLO(<span class="string">&quot;权重的地址&quot;</span>) data = <span class="string">&quot;文件的地址&quot;</span> model.train(data=data, epochs=<span class="number">100</span>, batch=<span class="number">16</span>)</span><br></pre></td></tr></table></figure>
+
+<p> 无论通过上述的哪一种方式在控制台输出如下图片的内容就代表着开始训练成功了！</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/4f1fbc25c60f44bd980ee215b5866d12.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/typoraImages/4f1fbc25c60f44bd980ee215b5866d12.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="4f1fbc25c60f44bd980ee215b5866d12.png"></p>
+<hr>
+<h2 id="八、模型验证-测试"><a href="#八、模型验证-测试" class="headerlink" title="八、模型验证&#x2F;测试 "></a>八、模型验证&#x2F;测试 </h2><table>
+<thead>
+<tr>
+<th></th>
+<th>参数名</th>
+<th>类型</th>
+<th>参数讲解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1</td>
+<td>val</td>
+<td>bool</td>
+<td>用于控制是否在训练过程中进行验证&#x2F;测试。</td>
+</tr>
+<tr>
+<td>2</td>
+<td>split</td>
+<td>str</td>
+<td>用于指定用于验证&#x2F;测试的数据集划分。可以选择 ‘val’、’test’ 或 ‘train’ 中的一个作为验证&#x2F;测试数据集</td>
+</tr>
+<tr>
+<td>3</td>
+<td>save_json</td>
+<td>bool</td>
+<td>用于控制是否将结果保存为 JSON 文件</td>
+</tr>
+<tr>
+<td>4</td>
+<td>save_hybird</td>
+<td>bool</td>
+<td>用于控制是否保存标签和附加预测结果的混合版本</td>
+</tr>
+<tr>
+<td>5</td>
+<td>conf</td>
+<td>float&#x2F;optional</td>
+<td>用于设置检测时的目标置信度阈值</td>
+</tr>
+<tr>
+<td>6</td>
+<td>iou</td>
+<td>float</td>
+<td>用于设置非极大值抑制（NMS）的交并比（IoU）阈值。</td>
+</tr>
+<tr>
+<td>7</td>
+<td>max_det</td>
+<td>int</td>
+<td>用于设置每张图像的最大检测数。</td>
+</tr>
+<tr>
+<td>8</td>
+<td>half</td>
+<td>bool</td>
+<td>用于控制是否使用半精度（FP16）进行推断。</td>
+</tr>
+<tr>
+<td>9</td>
+<td>dnn</td>
+<td>bool</td>
+<td>，用于控制是否使用 OpenCV DNN 进行 ONNX 推断。</td>
+</tr>
+<tr>
+<td>10</td>
+<td>plots</td>
+<td>bool</td>
+<td>用于控制在训练&#x2F;验证过程中是否保存绘图结果。</td>
+</tr>
+</tbody></table>
+<p> 验证我们划分的验证集&#x2F;测试集的情况，也就是评估我们训练出来的best.pt模型好与坏</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo task=detect mode=val model=best.pt data=data.yaml device=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、模型推理"><a href="#九、模型推理" class="headerlink" title="九、模型推理"></a>九、模型推理</h2><p>我们训练好自己的模型之后，都会生成一个模型文件,保存在你设置的目录下,当我们再次想要实验该模型的效果之后就可以调用该模型进行推理了，我们也可以用官方的预训练权重来进行推理。</p>
+<p>推理的方式和训练一样我们这里就选一种来进行举例其它的两种方式都是一样的操作只是需要改一下其中的一些参数即可:</p>
+<p><strong>参数讲解</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>参数名</th>
+<th>类型</th>
+<th>参数讲解</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>source</td>
+<td>str&#x2F;optinal</td>
+<td>用于指定图像或视频的目录</td>
+</tr>
+<tr>
+<td>1</td>
+<td>show</td>
+<td>bool</td>
+<td>用于控制是否在可能的情况下显示结果</td>
+</tr>
+<tr>
+<td>2</td>
+<td>save_txt</td>
+<td>bool</td>
+<td>用于控制是否将结果保存为 <code>.txt</code> 文件</td>
+</tr>
+<tr>
+<td>3</td>
+<td>save_conf</td>
+<td>bool</td>
+<td>用于控制是否在保存结果时包含置信度分数</td>
+</tr>
+<tr>
+<td>4</td>
+<td>save_crop</td>
+<td>bool</td>
+<td>用于控制是否将带有结果的裁剪图像保存下来</td>
+</tr>
+<tr>
+<td>5</td>
+<td>show_labels</td>
+<td>bool</td>
+<td>用于控制在绘图结果中是否显示目标标签</td>
+</tr>
+<tr>
+<td>6</td>
+<td>show_conf</td>
+<td>bool</td>
+<td>用于控制在绘图结果中是否显示目标置信度分数</td>
+</tr>
+<tr>
+<td>7</td>
+<td>vid_stride</td>
+<td>int&#x2F;optional</td>
+<td>用于设置视频的帧率步长</td>
+</tr>
+<tr>
+<td>8</td>
+<td>stream_buffer</td>
+<td>bool</td>
+<td>用于控制是否缓冲所有流式帧（True）或返回最新的帧（False）</td>
+</tr>
+<tr>
+<td>9</td>
+<td>line_width</td>
+<td>int&#x2F;list[int]&#x2F;optional</td>
+<td>用于设置边界框的线宽度，如果缺失则自动设置</td>
+</tr>
+<tr>
+<td>10</td>
+<td>visualize</td>
+<td>bool</td>
+<td>用于控制是否可视化模型的特征</td>
+</tr>
+<tr>
+<td>11</td>
+<td>augment</td>
+<td>bool</td>
+<td>用于控制是否对预测源应用图像增强</td>
+</tr>
+<tr>
+<td>12</td>
+<td>agnostic_nms</td>
+<td>bool</td>
+<td>用于控制是否使用无关类别的非极大值抑制（NMS）</td>
+</tr>
+<tr>
+<td>13</td>
+<td>classes</td>
+<td>int&#x2F;list[int]&#x2F;optional</td>
+<td>用于按类别筛选结果</td>
+</tr>
+<tr>
+<td>14</td>
+<td>retina_masks</td>
+<td>bool</td>
+<td>用于控制是否使用高分辨率分割掩码</td>
+</tr>
+<tr>
+<td>15</td>
+<td>boxes</td>
+<td>bool</td>
+<td>用于控制是否在分割预测中显示边界框。</td>
+</tr>
+</tbody></table>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo task=detect mode=predict model=best.pt source=images device=<span class="number">0</span></span><br></pre></td></tr></table></figure>
+
+<p> 这里需要需要注意的是我们用模型进行推理的时候可以选择照片也可以选择一个视频的格式都可以。支持的视频格式有 </p>
+<blockquote>
+<ul>
+<li><p>MP4（.mp4）：这是一种常见的视频文件格式，通常具有较高的压缩率和良好的视频质量</p>
+</li>
+<li><p>AVI（.avi）：这是一种较旧但仍广泛使用的视频文件格式。它通常具有较大的文件大小</p>
+</li>
+<li><p>MOV（.mov）：这是一种常见的视频文件格式，通常与苹果设备和QuickTime播放器相关</p>
+</li>
+<li><p>MKV（.mkv）：这是一种开放的多媒体容器格式，可以容纳多个视频、音频和字幕轨道</p>
+</li>
+<li><p>FLV（.flv）：这是一种用于在线视频传输的流式视频文件格式</p>
+</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="十、模型输出"><a href="#十、模型输出" class="headerlink" title="十、模型输出"></a>十、模型输出</h2><p>当我们进行部署的时候可以进行文件导出，然后在进行部署。</p>
+<p>YOLOv8支持的输出格式有如下</p>
+<blockquote>
+<p>1. ONNX（Open Neural Network Exchange）：ONNX 是一个开放的深度学习模型表示和转换的标准。它允许在不同的深度学习框架之间共享模型，并支持跨平台部署。导出为 ONNX 格式的模型可以在支持 ONNX 的推理引擎中进行部署和推理。</p>
+<p>2. TensorFlow SavedModel：TensorFlow SavedModel 是 TensorFlow 框架的标准模型保存格式。它包含了模型的网络结构和参数，可以方便地在 TensorFlow 的推理环境中加载和使用。</p>
+<p>3. PyTorch JIT（Just-In-Time）：PyTorch JIT 是 PyTorch 的即时编译器，可以将 PyTorch 模型导出为优化的 Torch 脚本或 Torch 脚本模型。这种格式可以在没有 PyTorch 环境的情况下进行推理，并且具有更高的性能。</p>
+<p>4. Caffe Model：Caffe 是一个流行的深度学习框架，它使用自己的模型表示格式。导出为 Caffe 模型的文件可以在 Caffe 框架中进行部署和推理。</p>
+<p>5. TFLite（TensorFlow Lite）：TFLite 是 TensorFlow 的移动和嵌入式设备推理框架，支持在资源受限的设备上进行高效推理。模型可以导出为 TFLite 格式，以便在移动设备或嵌入式系统中进行部署。</p>
+<p>6. Core ML（Core Machine Learning）：Core ML 是苹果的机器学习框架，用于在 iOS 和 macOS 上进行推理。模型可以导出为 Core ML 格式，以便在苹果设备上进行部署。</p>
+<p>这些格式都提供了不同的优势和适用场景。选择合适的导出格式应该考虑到目标平台和部署环境的要求，以及所使用的深度学习框架的支持情况。</p>
+</blockquote>
+<p>模型输出的参数有如下</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>参数名</th>
+<th>类型</th>
+<th>参数解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>format</td>
+<td>str</td>
+<td>导出模型的格式</td>
+</tr>
+<tr>
+<td>1</td>
+<td>keras</td>
+<td>bool</td>
+<td>表示是否使用Keras</td>
+</tr>
+<tr>
+<td>2</td>
+<td>optimize</td>
+<td>bool</td>
+<td>用于在导出TorchScript模型时进行优化，以便在移动设备上获得更好的性能</td>
+</tr>
+<tr>
+<td>3</td>
+<td>int8</td>
+<td>bool</td>
+<td>用于在导出CoreML或TensorFlow模型时进行INT8量化</td>
+</tr>
+<tr>
+<td>4</td>
+<td>dynamic</td>
+<td>bool</td>
+<td>用于在导出CoreML或TensorFlow模型时进行INT8量化</td>
+</tr>
+<tr>
+<td>5</td>
+<td>simplify</td>
+<td>bool</td>
+<td>用于在导出ONNX模型时进行模型简化</td>
+</tr>
+<tr>
+<td>6</td>
+<td>opset</td>
+<td>int&#x2F;optional</td>
+<td>用于指定导出ONNX模型时的opset版本</td>
+</tr>
+<tr>
+<td>7</td>
+<td>workspace</td>
+<td>int</td>
+<td>用于指定TensorRT模型的工作空间大小，以GB为单位</td>
+</tr>
+<tr>
+<td>8</td>
+<td>nms</td>
+<td>bool</td>
+<td>用于在导出CoreML模型时添加非极大值抑制（NMS）</td>
+</tr>
+</tbody></table>
+<p>命令行命令如下: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yolo task=detect mode=export model=best.pt <span class="built_in">format</span>=onnx  </span><br></pre></td></tr></table></figure>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/python/" class="">
+              python
+            </a>
+          
+            <a href="/tags/Deep-Learning/" class="">
+              Deep Learning
+            </a>
+          
+            <a href="/tags/Computer-Vision/" class="">
+              Computer Vision
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Louaq</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/post/yolo/article-1/" target="_blank" title="YOLOv8的训练自己的数据集">https://louaq.github.io/post/yolo/article-1/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+  
+  <div class="post-nav-prev post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+    </div>
+    <a href="/post/latex/visual-studio-code/" class="post-nav-link">
+      <div class="title">
+        <i class="fas fa-angle-left"></i> 上一篇:
+        <div class="title-text">vscode配置latex环境</div>
+      </div>
+      
+      <!-- <div class="content">
+        前言LaTeX 作为一种强大的排版系统，对于理工科，特别是公式比较多的数学专业（秃头专业），其重要性自不必多说，不在本文
+      </div> -->
+    </a>
+  </div>
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/post/yolo/article-2/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">恒源云</div>
+      </div>
+      <!-- <div class="content">
+        恒源云为当涉及到深度学习的训练任务时，GPU的计算能力是不可或缺的。相对于传统的中央处理器（CPU），图形处理器（GPU
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
+
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
+
+
+    
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
+    
+      <section id="waline-box">
+  <div id="waline-comment"></div>
+</section>
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
+  
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box circle' href='/about/'>
+          <img src='/img/b.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>Louaq</h2>
+        
+        
+          <p>keep coding</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">Louaq</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="/yang_syy@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Louaq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=2969742951"
+              class="social fab fa-qq flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+    
+      <div class="widget moyu" id="moyu" style="order: 0;background: #e9e5d1">
+        <header>
+          
+            <a style="color: #d63130" target="_blank" rel="noopener" href='http://baidu.com'><i class="fa-solid fa-fish fa-fw" aria-hidden="true"></i><span class='name'>开始摸鱼</span></a>
+          
+        </header>
+        <div class="content">
+          <img class="no-lazy" src="https://api.vvhan.com/api/moyu" style="width:100%">
+        </div>
+    </div>
+    
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81YOLOv8%E7%9A%84%E7%AE%80%E4%BB%8B"><span class="toc-text">一、YOLOv8的简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81YOLOv8%E7%9B%B8%E5%AF%B9%E4%BA%8EYolov5%E7%9A%84%E6%A0%B8%E5%BF%83%E6%94%B9%E5%8A%A8"><span class="toc-text">二、YOLOv8相对于Yolov5的核心改动</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81YOLOv8%E7%9A%84%E7%BD%91%E7%BB%9C%E7%BB%93%E6%9E%84"><span class="toc-text">三、YOLOv8的网络结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-Backbone"><span class="toc-text">3.1 Backbone</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-1-%E5%8D%B7%E7%A7%AF%E6%A8%A1%E5%9D%97-Conv"><span class="toc-text">3.1.1 卷积模块(Conv)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#3-1-2-C2f%E6%A8%A1%E5%9D%97"><span class="toc-text">3.1.2 C2f模块</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-Neck"><span class="toc-text">3.2 Neck</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-Head"><span class="toc-text">3.3 Head</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-text">四、环境搭建</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E8%8E%B7%E5%8F%96"><span class="toc-text">五、数据集获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%A8%A1%E5%9E%8B%E8%8E%B7%E5%8F%96"><span class="toc-text">六、模型获取</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">七、模型训练</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E8%AE%AD%E7%BB%83%E7%9A%84%E4%B8%89%E7%A7%8D%E6%96%B9%E5%BC%8F"><span class="toc-text">7.1 训练的三种方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-1-%E6%96%B9%E5%BC%8F%E4%B8%80"><span class="toc-text">7.1.1 方式一</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-2-%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-text">7.1.2 方式二（推荐）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#7-1-3-%E6%96%B9%E5%BC%8F%E4%B8%89"><span class="toc-text">7.1.3 方式三</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%A8%A1%E5%9E%8B%E9%AA%8C%E8%AF%81-%E6%B5%8B%E8%AF%95"><span class="toc-text">八、模型验证&#x2F;测试 </span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B9%9D%E3%80%81%E6%A8%A1%E5%9E%8B%E6%8E%A8%E7%90%86"><span class="toc-text">九、模型推理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%81%E3%80%81%E6%A8%A1%E5%9E%8B%E8%BE%93%E5%87%BA"><span class="toc-text">十、模型输出</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nearxw9s1l5DIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nearxw9s1l5DIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-22</span>
+                
+              </div>
+              <a class="post-title" href="/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/">Dual Attention Encoder with Joint Preservation for Medical Image Segmentation</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7l3rs32fxqjoDIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7l3rs32fxqjoDIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-22</span>
+                
+              </div>
+              <a class="post-title" href="/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/">Rolling-Unet Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-16</span>
+                
+              </div>
+              <a class="post-title" href="/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/">C-CAM Causal CAM for Weakly Supervised Semantic Segmentation on Medical Image</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-13</span>
+                
+              </div>
+              <a class="post-title" href="/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/">Pixel-Wise Reclassification with Prototypes for Enhancing Weakly Supervised Semantic Segmentation</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">04-12</span>
+                
+              </div>
+              <a class="post-title" href="/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/">弱监督语义分割</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || 'https://pic1.zhimg.com/80/v2-6d0cbd4380b4959542d3f5da31c7f20c_1440w.jpg';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
+
+      </main>
+    </div>
+
+    <!-- 页脚 -->
+    
+  
+  
+    <!-- 底部鱼儿跳动效果，依赖于jquery-->
+<div id="j-fish-skip" style=" position: relative;height: 153px;width: auto;"></div>
+<script defer>
+  var RENDERER = {
+    POINT_INTERVAL: 5,
+    FISH_COUNT: 3,
+    MAX_INTERVAL_COUNT: 50,
+    INIT_HEIGHT_RATE: .5,
+    THRESHOLD: 50,
+    FISH_COLOR: '',
+    init: function () {
+      this.setFishColor(); this.setParameters(), this.reconstructMethods(), this.setup(), this.bindEvent(), this.render()
+    },
+    setFishColor: function () {
+      let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+      if (isDark) {
+        this.FISH_COLOR = '#222'; // 暗黑色，有时间把这整成一个变量
+      } else {
+        this.FISH_COLOR = '' || 'rgba(66, 185, 133, 0.8)';
+      }
+    },
+    setParameters: function () {
+      this.$window = $(window), this.$container = $("#j-fish-skip"), this.$canvas = $("<canvas />"), this.context = this.$canvas.appendTo(this.$container).get(0).getContext("2d"), this.points = [], this.fishes = [], this.watchIds = []
+    },
+    createSurfacePoints: function () {
+      var t = Math.round(this.width / this.POINT_INTERVAL);
+      this.pointInterval = this.width / (t - 1), this.points.push(new SURFACE_POINT(this, 0));
+      for (var i = 1; i < t; i++) {
+        var e = new SURFACE_POINT(this, i * this.pointInterval),
+          h = this.points[i - 1];
+        e.setPreviousPoint(h), h.setNextPoint(e), this.points.push(e)
+      }
+    },
+    reconstructMethods: function () {
+      this.watchWindowSize = this.watchWindowSize.bind(this), this.jdugeToStopResize = this.jdugeToStopResize.bind(this), this.startEpicenter = this.startEpicenter.bind(this), this.moveEpicenter = this.moveEpicenter.bind(this), this.reverseVertical = this.reverseVertical.bind(this), this.render = this.render.bind(this)
+    },
+    setup: function () {
+      this.points.length = 0, this.fishes.length = 0, this.watchIds.length = 0, this.intervalCount = this.MAX_INTERVAL_COUNT, this.width = this.$container.width(), this.height = this.$container.height(), this.fishCount = this.FISH_COUNT * this.width / 500 * this.height / 500, this.$canvas.attr({
+        width: this.width,
+        height: this.height
+      }), this.reverse = !1, this.fishes.push(new FISH(this)), this.createSurfacePoints()
+    },
+    watchWindowSize: function () {
+      this.clearTimer(), this.tmpWidth = this.$window.width(), this.tmpHeight = this.$window.height(), this.watchIds.push(setTimeout(this.jdugeToStopResize, this.WATCH_INTERVAL))
+    },
+    clearTimer: function () {
+      for (; this.watchIds.length > 0;) clearTimeout(this.watchIds.pop())
+    },
+    jdugeToStopResize: function () {
+      var t = this.$window.width(),
+        i = this.$window.height(),
+        e = t == this.tmpWidth && i == this.tmpHeight;
+      this.tmpWidth = t, this.tmpHeight = i, e && this.setup()
+    },
+    bindEvent: function () {
+      this.$window.on("resize", this.watchWindowSize), this.$container.on("mouseenter", this.startEpicenter), this.$container.on("mousemove", this.moveEpicenter)
+    },
+    getAxis: function (t) {
+      var i = this.$container.offset();
+      return {
+        x: t.clientX - i.left + this.$window.scrollLeft(),
+        y: t.clientY - i.top + this.$window.scrollTop()
+      }
+    },
+    startEpicenter: function (t) {
+      this.axis = this.getAxis(t)
+    },
+    moveEpicenter: function (t) {
+      var i = this.getAxis(t);
+      this.axis || (this.axis = i), this.generateEpicenter(i.x, i.y, i.y - this.axis.y), this.axis = i
+    },
+    generateEpicenter: function (t, i, e) {
+      if (!(i < this.height / 2 - this.THRESHOLD || i > this.height / 2 + this.THRESHOLD)) {
+        var h = Math.round(t / this.pointInterval);
+        h < 0 || h >= this.points.length || this.points[h].interfere(i, e)
+      }
+    },
+    reverseVertical: function () {
+      this.reverse = !this.reverse;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].reverseVertical()
+    },
+    controlStatus: function () {
+      for (var t = 0, i = this.points.length; t < i; t++) this.points[t].updateSelf();
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].updateNeighbors();
+      this.fishes.length < this.fishCount && 0 == --this.intervalCount && (this.intervalCount = this.MAX_INTERVAL_COUNT, this.fishes.push(new FISH(this)))
+    },
+    render: function () {
+      requestAnimationFrame(this.render), this.controlStatus(), this.context.clearRect(0, 0, this.width, this.height), this.context.fillStyle = this.FISH_COLOR;
+      for (var t = 0, i = this.fishes.length; t < i; t++) this.fishes[t].render(this.context);
+      this.context.save(), this.context.globalCompositeOperation = "xor", this.context.beginPath(), this.context.moveTo(0, this.reverse ? 0 : this.height);
+      for (t = 0, i = this.points.length; t < i; t++) this.points[t].render(this.context);
+      this.context.lineTo(this.width, this.reverse ? 0 : this.height), this.context.closePath(), this.context.fill(), this.context.restore()
+    }
+  },
+  SURFACE_POINT = function (t, i) {
+    this.renderer = t, this.x = i, this.init()
+  };
+  SURFACE_POINT.prototype = {
+    SPRING_CONSTANT: .03,
+    SPRING_FRICTION: .9,
+    WAVE_SPREAD: .3,
+    ACCELARATION_RATE: .01,
+    init: function () {
+      this.initHeight = this.renderer.height * this.renderer.INIT_HEIGHT_RATE, this.height = this.initHeight, this.fy = 0, this.force = {
+        previous: 0,
+        next: 0
+      }
+    },
+    setPreviousPoint: function (t) {
+      this.previous = t
+    },
+    setNextPoint: function (t) {
+      this.next = t
+    },
+    interfere: function (t, i) {
+      this.fy = this.renderer.height * this.ACCELARATION_RATE * (this.renderer.height - this.height - t >= 0 ? -1 : 1) * Math.abs(i)
+    },
+    updateSelf: function () {
+      this.fy += this.SPRING_CONSTANT * (this.initHeight - this.height), this.fy *= this.SPRING_FRICTION, this.height += this.fy
+    },
+    updateNeighbors: function () {
+      this.previous && (this.force.previous = this.WAVE_SPREAD * (this.height - this.previous.height)), this.next && (this.force.next = this.WAVE_SPREAD * (this.height - this.next.height))
+    },
+    render: function (t) {
+      this.previous && (this.previous.height += this.force.previous, this.previous.fy += this.force.previous), this.next && (this.next.height += this.force.next, this.next.fy += this.force.next), t.lineTo(this.x, this.renderer.height - this.height)
+    }
+  };
+  var FISH = function (t) {
+    this.renderer = t, this.init()
+  };
+  FISH.prototype = {
+    GRAVITY: .4,
+    init: function () {
+      this.direction = Math.random() < .5, this.x = this.direction ? this.renderer.width + this.renderer.THRESHOLD : -this.renderer.THRESHOLD, this.previousY = this.y, this.vx = this.getRandomValue(4, 10) * (this.direction ? -1 : 1), this.renderer.reverse ? (this.y = this.getRandomValue(1 * this.renderer.height / 10, 4 * this.renderer.height / 10), this.vy = this.getRandomValue(2, 5), this.ay = this.getRandomValue(.05, .2)) : (this.y = this.getRandomValue(6 * this.renderer.height / 10, 9 * this.renderer.height / 10), this.vy = this.getRandomValue(-5, -2), this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1, this.theta = 0, this.phi = 0
+    },
+    getRandomValue: function (t, i) {
+      return t + (i - t) * Math.random()
+    },
+    reverseVertical: function () {
+      this.isOut = !this.isOut, this.ay *= -1
+    },
+    controlStatus: function (t) {
+      this.previousY = this.y, this.x += this.vx, this.y += this.vy, this.vy += this.ay, this.renderer.reverse ? this.y > this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy -= this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(.05, .2)), this.isOut = !1) : this.y < this.renderer.height * this.renderer.INIT_HEIGHT_RATE ? (this.vy += this.GRAVITY, this.isOut = !0) : (this.isOut && (this.ay = this.getRandomValue(-.2, -.05)), this.isOut = !1), this.isOut || (this.theta += Math.PI / 20, this.theta %= 2 * Math.PI, this.phi += Math.PI / 30, this.phi %= 2 * Math.PI), this.renderer.generateEpicenter(this.x + (this.direction ? -1 : 1) * this.renderer.THRESHOLD, this.y, this.y - this.previousY), (this.vx > 0 && this.x > this.renderer.width + this.renderer.THRESHOLD || this.vx < 0 && this.x < -this.renderer.THRESHOLD) && this.init()
+    },
+    render: function (t) {
+      t.save(), t.translate(this.x, this.y), t.rotate(Math.PI + Math.atan2(this.vy, this.vx)), t.scale(1, this.direction ? 1 : -1), t.beginPath(), t.moveTo(-30, 0), t.bezierCurveTo(-20, 15, 15, 10, 40, 0), t.bezierCurveTo(15, -10, -20, -15, -30, 0), t.fill(), t.save(), t.translate(40, 0), t.scale(.9 + .2 * Math.sin(this.theta), 1), t.beginPath(), t.moveTo(0, 0), t.quadraticCurveTo(5, 10, 20, 8), t.quadraticCurveTo(12, 5, 10, 0), t.quadraticCurveTo(12, -5, 20, -8), t.quadraticCurveTo(5, -10, 0, 0), t.fill(), t.restore(), t.save(), t.translate(-3, 0), t.rotate((Math.PI / 3 + Math.PI / 10 * Math.sin(this.phi)) * (this.renderer.reverse ? -1 : 1)), t.beginPath(), this.renderer.reverse ? (t.moveTo(5, 0), t.bezierCurveTo(10, 10, 10, 30, 0, 40), t.bezierCurveTo(-12, 25, -8, 10, 0, 0)) : (t.moveTo(-5, 0), t.bezierCurveTo(-10, -10, -10, -30, 0, -40), t.bezierCurveTo(12, -25, 8, -10, 0, 0)), t.closePath(), t.fill(), t.restore(), t.restore(), this.controlStatus(t)
+    }
+  }, $(function () {
+    RENDERER.init()
+    $('.dark').click(function () {
+      setTimeout(() => {
+        RENDERER.setFishColor();
+        RENDERER.context.fill();
+      });
+    })
+  });
+</script>
+  
+  <div class="footer bg-color">
+    <div class="footer-main">
+      
+        
+          <div class="link">
+            
+              
+                <a href="/atom.xml" class="social">
+                  
+                    <i class="fas fa-rss" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a href="mailto:yang_syy@qq.com" class="social">
+                  
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a target="_blank" rel="noopener" href="https://github.com/Louaq" class="social">
+                  
+                    <i class="fab fa-github" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+              
+                <a href="tencent://AddContact/?fromId=50&amp;fromSubId=1&amp;subcmd=all&amp;uin=2969742951" class="social">
+                  
+                    <i class="fab fa-qq" aria-hidden="true"></i>
+                  
+                </a>
+              
+            
+          </div>
+        
+      
+        
+          <div class="footer-copyright">
+            <p>Copyright © 2024 - 2025 <a target="_blank" rel="noopener" href="https://github.com/Louaq">louaq</a></p>
+
+          </div>
+        
+      
+        
+          <div class="footer-custom">
+            
+          </div>
+        
+      
+        
+          
+            <!-- 不蒜子统计 -->
+            <!-- 不蒜子统计 -->
+<span id="busuanzi_container_site_pv">
+      <i class="fas fa-eye" aria-hidden="true"></i>本站总访问量：<span id="busuanzi_value_site_pv"></span> 次
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv" style='display:none'>
+      <i class="fas fa-users" aria-hidden="true"></i>本站访客数：<span id="busuanzi_value_site_uv"></span> 人
+</span>
+
+          
+        
+      
+    </div>
+  </div>
+
+
+
+    <!-- 渲染暗黑按钮 -->
+    
+      <div class="dark" onclick="toggleDarkMode()">
+  <div class="dark-content">
+    <i class="fas" id="darkIcon" aria-hidden="true"></i>
+  </div>
+</div>
+
+<script defer>
+  $(function() {
+    // 初始化暗黑模式状态
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    updateDarkModeIcon(isDark);
+  });
+
+  function toggleDarkMode() {
+    const isDark = $(document.body).hasClass('darkModel');
+    $(document.body).toggleClass('darkModel');
+    localStorage.setItem('dark', !isDark);
+    updateDarkModeIcon(!isDark);
+  }
+
+  function updateDarkModeIcon(isDark) {
+    const iconElement = document.getElementById('darkIcon');
+    if (isDark) {
+      iconElement.classList.remove('fa-moon');
+      iconElement.classList.add('fa-lightbulb');
+    } else {
+      iconElement.classList.remove('fa-lightbulb');
+      iconElement.classList.add('fa-moon');
+    }
+  }
+</script>
+
+    
+    <!-- 渲染回到顶部按钮 -->
+    
+      <div class="goTop top-btn-color" pointer>
+  <i class="fas fa-arrow-up" aria-hidden="true"></i>
+</div>
+<script defer src="/js/goTop.js"></script>
+
+    
+    <!-- 渲染左下角音乐播放器 -->
+    
+      <link rel="stylesheet" href="/js/aplayer/APlayer@1.10.1.min.css">
+<style>
+.aplayer .aplayer-lrc p {
+  
+  display: none;
+  
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px !important;
+}
+
+.aplayer .aplayer-lrc p.aplayer-lrc-current {
+  
+  display: none;
+  
+  font-size: 15px;
+  color: #42b983;
+}
+
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body {
+  left: -66px !important;
+}
+
+.aplayer.aplayer-fixed.aplayer-narrow .aplayer-body:hover {
+  left: 0px !important;
+}
+
+
+</style>
+<meting-js  
+  class=""
+  server="netease"
+  type="playlist"
+  id="2321957752"
+  fixed='true'
+  autoplay='false'
+  theme='#42b983'
+  loop='all'
+  order='list'
+  preload='auto'
+  volume='0.5'
+  list-folded='true'
+>
+</meting-js>
+
+<!-- <style>
+  #aplayer {
+    position: fixed;
+    left: 0;
+    bottom: 300px;
+  }
+</style> -->
+<script defer src="https://unpkg.com/aplayer@1.10.1/dist/APlayer.min.js"></script>
+<script defer src="https://unpkg.com/meting@2/dist/Meting.min.js"></script>
+    
+
+    <!-- 图片放大 -->
+    
+      <script src="https://unpkg.com/@fancyapps/ui@5.0/dist/fancybox/fancybox.umd.js"></script>
+    
+
+    <!-- 百度解析 -->
+    <!-- Baidu Analytics -->
+
+    <!-- Baidu Push -->
+
+<script async>
+    (function () {
+        var bp = document.createElement('script');
+        var curProtocol = window.location.protocol.split(':')[0];
+        if (curProtocol === 'https') {
+            bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+        } else {
+            bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+        }
+        var s = document.getElementsByTagName("script")[0];
+        s.parentNode.insertBefore(bp, s);
+    })();
+</script>
+
+    
+    <!-- 背景彩带 -->
+    
+
+    <script src="/js/utils/index.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- 文章目录所需js -->
+<!-- <link href="/js/tocbot/tocbot.css" rel="stylesheet">
+<script src="/js/tocbot/tocbot.min.js"></script> -->
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.18.2/tocbot.css">
+
+<script>
+  var headerEl = 'h2, h3, h4',  //headers 
+    content = '.post-detail',//文章容器
+    idArr = {};  //标题数组以确定是否增加索引id
+  //add #id
+  var option = {
+    // Where to render the table of contents.
+    tocSelector: '.toc',
+    // Where to grab the headings to build the table of contents.
+    contentSelector: content,
+    // Which headings to grab inside of the contentSelector element.
+    headingSelector: headerEl,
+    scrollSmooth: true,
+    scrollSmoothOffset: -70,
+    // headingsOffset: -($(window).height() * 0.4 - 45),
+    headingsOffset: -($(window).height() * 0.4 - 70),
+    // positionFixedSelector: '.toc-main',
+    // positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto',
+    activeLinkClass: 'is-active-link',
+    orderedList: true,
+    collapseDepth: 20,
+    // onClick: function (e) {},
+  }
+  if ($('.toc').length > 0) {
+
+    $(content).children(headerEl).each(function () {
+      //去除空格以及多余标点
+      var headerId = $(this).text().replace(/[\s|\~|`|\!|\@|\#|\$|\%|\^|\&|\*|\(|\)|\_|\+|\=|\||\|\[|\]|\{|\}|\;|\:|\"|\'|\,|\<|\.|\>|\/|\?|\：|\，|\。]/g, '');
+
+      headerId = headerId.toLowerCase();
+      if (idArr[headerId]) {
+        //id已经存在
+        $(this).attr('id', headerId + '-' + idArr[headerId]);
+        idArr[headerId]++;
+      }
+      else {
+        //id未存在
+        idArr[headerId] = 1;
+        $(this).attr('id', headerId);
+      }
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+      tocbot.init(option);
+      mobileTocClick();
+    });
+
+  }
+
+  window.tocScrollFn = function () {
+    return bamboo.throttle(function () {
+      findHeadPosition();
+    }, 100)()
+  }
+  window.addEventListener('scroll', tocScrollFn);
+
+  const findHeadPosition = function (top) {
+    if ($('.toc-list').length <= 0) {
+      return false;
+    }
+    setTimeout(() => {  // or DOMContentLoaded 
+      autoScrollToc();
+    }, 0);
+  }
+
+  const autoScrollToc = function () {
+    const $activeItem = document.querySelector('.is-active-link');
+    const $cardToc = document.querySelector('.toc-content');
+    const activePosition = $activeItem.getBoundingClientRect().top
+    const sidebarScrollTop = $cardToc.scrollTop
+    if (activePosition > (document.documentElement.clientHeight - 100)) {
+      $cardToc.scrollTop = sidebarScrollTop + 150
+    }
+    if (activePosition < 150) {
+      $cardToc.scrollTop = sidebarScrollTop - 150
+    }
+  }
+
+  document.addEventListener('pjax:send', function () {
+    if ($('.toc').length) {
+      tocbot.destroy();
+    }
+  });
+
+  document.addEventListener('pjax:complete', function () {
+    if ($('.toc').length) {
+      tocbot.init(option);
+      mobileTocClick();
+    }
+  });
+  
+  // 手机端toc按钮点击出现目录
+  const mobileTocClick = function () {
+    const $cardTocLayout = document.getElementsByClassName('side_toc')[0];
+    const $cardToc = $cardTocLayout.getElementsByClassName('toc-content')[0];
+    let right = '45px';
+    if (window.innerWidth >= 551 && window.innerWidth <= 992) {
+      right = '100px'
+    }
+    const mobileToc = {
+      open: () => {
+        $cardTocLayout.style.cssText = 'animation: toc-open .3s; opacity: 1; right: ' + right
+      },
+
+      close: () => {
+        $cardTocLayout.style.animation = 'toc-close .2s'
+        setTimeout(() => {
+          $cardTocLayout.style.cssText = "opacity:''; animation: ''; right: ''"
+        }, 100)
+      }
+    }
+    document.getElementById('toc-mobile-btn').addEventListener('click', () => {
+      if (window.getComputedStyle($cardTocLayout).getPropertyValue('opacity') === '0') mobileToc.open()
+      else mobileToc.close()
+    })
+
+    $cardToc.addEventListener('click', (e) => {
+      if (window.innerWidth < 992) { // 小于992px的时候
+        mobileToc.close()
+      }
+    })
+  }
+</script>
+
+<style>
+  /* .is-position-fixed {
+    position: sticky !important;
+    top: 74px;
+  }
+
+  .toc-main ul {
+    counter-reset: show-list;
+  }
+
+  .toc-main ul li::before {
+    content: counter(item)".";
+    display: block;
+    position: absolute;
+    left: 12px;
+    top: 0;
+  } */
+</style>
+ 
+
+<!-- 设置导航背景 -->
+<script>
+  let setHeaderClass = () => {
+    const nav = $('#navHeader');
+    const navTop = nav.outerHeight();
+    const winTop = $(window).scrollTop();
+    if(winTop > navTop) {
+      nav.addClass('header-bg-color');
+    }
+    else {
+      nav.removeClass('header-bg-color');
+    }
+  };
+
+  let scrollCollect = () => {
+    return bamboo.throttle(function (e) {
+      setHeaderClass();
+    }, 200)()
+  }
+
+  let initHeaderBg = () => {
+    setHeaderClass();
+  }
+
+  setHeaderClass();
+  window.addEventListener('scroll', scrollCollect);
+
+  document.addEventListener('pjax:send', function () {
+    window.removeEventListener('scroll', scrollCollect)
+  })
+  document.addEventListener('pjax:complete', function () {
+    window.addEventListener('scroll', scrollCollect);
+    setHeaderClass();
+  })
+</script> 
+
+<!-- 渲染issues标签里的内容 -->
+<script>
+  function loadIssuesJS() {
+    if ($(".post-detail").find(".issues-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/issues/index.js');
+  };
+  $(function () {
+    loadIssuesJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof IssuesAPI == "undefined") {
+      loadIssuesJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的图片标签(getPhotoOnline)里的内容 -->
+<script>
+  function loadPhotoOnlineJS() {
+    if ($(".post-detail").find(".getJsonPhoto-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getPhotoOnline/index.js');
+  };
+  $(function () {
+    loadPhotoOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getPhotoJson == "undefined") {
+      loadPhotoOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的talk标签(getTalkOnline)里的内容 -->
+<script>
+  function loadTalkOnlineJS() {
+    if ($(".post-detail").find(".getJsonTalk-api").length == 0) {
+      return;
+    } 
+    loadScript('https://cdnjs.cloudflare.com/ajax/libs/waterfall.js/1.0.2/waterfall.min.js'); // 瀑布流插件，https://raphamorim.io/waterfall.js/
+    loadScript('/js/getTalkOnline/index.js');
+  };
+  $(function () {
+    loadTalkOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getTalkJson == "undefined") {
+      loadTalkOnlineJS();
+    }
+  })
+</script>
+
+<!-- 渲染远程json加载的site-card标签(getSiteOnline)里的内容 -->
+<script>
+  function loadSiteOnlineJS() {
+    if ($(".post-detail").find(".getJsonSite-api").length == 0) {
+      return;
+    } 
+    loadScript('/js/getSiteOnline/index.js');
+  };
+  $(function () {
+    loadSiteOnlineJS();
+  });
+  document.addEventListener('pjax:complete', function () {
+    if (typeof getSiteJson == "undefined") {
+      loadSiteOnlineJS();
+    }
+  })
+</script>
+
+<!-- 输入框打字特效 -->
+<!-- 输入框打字特效 -->
+
+  <script src="/js/activate-power-mode.js"></script>
+  <script>
+    POWERMODE.colorful = true;  // 打开随机颜色特效
+    POWERMODE.shake = false;    // 关闭输入框抖动
+    document.body.addEventListener('input', POWERMODE);//监听打字事件
+  </script>
+
+
+<!-- markdown代码一键复制功能 -->
+
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
+
+<!-- 图片懒加载 -->
+<script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
+<script>
+  // https://www.npmjs.com/package/vanilla-lazyload
+  // Set the options globally
+  // to make LazyLoad self-initialize
+  window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 0
+  };
+  // Listen to the initialization event
+  // and get the instance of LazyLoad
+  window.addEventListener(
+    "LazyLoad::Initialized",
+    function (event) {
+      window.lazyLoadInstance = event.detail.instance;
+    },
+    false
+  );
+  document.addEventListener('DOMContentLoaded', function () {
+    lazyLoadInstance.update();
+  });
+  document.addEventListener('pjax:complete', function () {
+    lazyLoadInstance.update();
+  });
+</script>
+
+
+<!-- 卡片滚动动画 -->
+   
+
+<!-- 评论所需js -->
+
+  
+        <script src="/js/waline/waline.min.js"></script>
+<script type="text/javascript">
+  comment_el = '#waline-comment';
+  var waline;
+  loadWaline = function () {
+    if (!$(comment_el).length) {
+      return;
+    }
+    var walineEmoji = 'https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo';
+    walineEmoji = walineEmoji.split(',')
+
+    waline = Waline({
+      el: comment_el,
+      serverURL: 'https://waline-comments-inky.vercel.app/',
+      lang: 'zh-CN',
+      vistor: '',
+      emoji: walineEmoji,
+      login: 'enable',
+      pageSize: '10',
+      copyright: true
+    });
+  }
+  $(document).ready(loadWaline);
+  document.addEventListener('pjax:complete', function () {
+    loadWaline();
+  });
+</script>
+      
+
+
+<!-- 鼠标点击特效 -->
+<!-- 爱心点击 -->
+
+  
+    <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 999; pointer-events: none;" ></canvas>
+    <script async src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script>
+    <script async src="/js/cursor/explosion.min.js"></script>
+  
+
+
+
+
+  <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" data-pjax></script>
+
+
+<!-- 轮播图标签 -->
+<script>
+  var bambooSwiperTag = {};
+  function load_swiper() {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    loadCSS("https://unpkg.com/swiper@6/swiper-bundle.min.css")
+    loadScript("https://unpkg.com/swiper@6/swiper-bundle.min.js").then(() => {
+      pjax_swiper();
+    });
+  }
+
+  load_swiper();
+
+  function pjax_swiper() {
+    bambooSwiperTag.swiper = new Swiper('.post-swiper-container', {
+      slidesPerView: 'auto',
+      spaceBetween: 8,
+      centeredSlides: true,
+      loop: true,
+      autoplay: true ? {
+        delay: 3000,
+        stopOnLastSlide: false,
+        disableOnInteraction: false,
+      } : false,
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      on:{
+        init: function(){
+          swiperAnimateCache(this); //隐藏动画元素 
+          swiperAnimate(this); //初始化完成开始动画
+        }, 
+        slideChangeTransitionEnd: function(){ 
+          swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          //this.slides.eq(this.activeIndex).find('.ani').removeClass('ani'); 动画只展现一次，去除ani类名
+        } 
+      }
+    });
+  }
+
+  document.addEventListener('pjax:complete', function () {
+    if (!document.querySelectorAll(".post-swiper-container")[0]) return;
+    if (typeof bambooSwiperTag.swiper === "undefined") {
+      load_swiper();
+    } else {
+      pjax_swiper();
+    }
+  });
+</script>
+    <!-- pjax -->
+    
+
+<!-- pjax -->
+
+
+  <script src="/js/pjax@0.2.8/index.js"></script>
+  
+    <div class="pjax-animate">
+  
+    <script src="https://unpkg.com/nprogress@0.2.0/nprogress.js"></script>
+    <div id="loading-bar-wrapper"><script>NProgress.configure({parent:"#loading-bar-wrapper",trickleSpeed: 100})</script></div>
+    <script>
+      window.ShowLoading = function() {
+        NProgress.start();
+      };
+      window.HideLoading = function() {
+        NProgress.done();
+      }
+    </script>
+  
+	<script>
+    document.addEventListener('pjax:complete', function () {
+      window.HideLoading();
+    })
+    document.addEventListener('pjax:send', function () {
+      window.ShowLoading();
+    })
+    document.addEventListener('pjax:error', function () {
+      window.HideLoading();
+    })
+	</script>
+</div>
+
+  
+
+  <script>
+    var pjax = new Pjax({
+      elements: 'a[href]:not([href^="#"]):not([href="javascript:void(0)"]):not([no-pjax])',   // 拦截正常带链接的 a 标签
+      selectors: ["#pjax-container","title"],                                   // 根据实际需要确认重载区域
+      cacheBust: false,   // url 地址追加时间戳，用以避免浏览器缓存
+      timeout: 5000
+    });
+
+    document.addEventListener('pjax:send', function (e) {
+
+      try {
+        var currentUrl = window.location.pathname;
+        var targetUrl = e.triggerElement.href;
+        var banUrl = [""];
+        if (banUrl[0] != "") {
+          banUrl.forEach(item => {
+            if(currentUrl.indexOf(item) != -1 || targetUrl.indexOf(item) != -1) {
+              window.location.href = targetUrl;
+            }
+          });
+        }
+      } catch (error) {}
+
+      $(window).unbind('resize');
+      $(window).unbind('scroll');
+      $(document).unbind('scroll');
+      $(document).unbind('click');
+      $('body').unbind('click');
+
+    })
+    
+    document.addEventListener('pjax:complete', function () {
+      $('script[data-pjax], .pjax-reload script').each(function () {
+        $(this).parent().append($(this).remove());
+      });
+    });
+
+    document.addEventListener('pjax:error', function (e) {
+      window.location.href = e.triggerElement.href;
+    })
+    
+    // 刷新不从顶部开始
+    document.addEventListener("DOMContentLoaded", function () {
+      history.scrollRestoration = 'auto';
+    })
+  </script>
+
+
+
+  </body>
+</html>
