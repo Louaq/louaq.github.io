@@ -4,11 +4,11 @@ date: 2025-04-22 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
 categories: 医学图像分割
 tags: [Medical Image Segmentation, Dual Attention Encoder]
-swiper: true
 top: true
+swiper: true
+swiperImg: https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocyxuegif80y9DIYPAqF0DqJ1DGxwDIiw.png
 ---
 
 

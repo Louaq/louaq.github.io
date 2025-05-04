@@ -2,11 +2,11 @@
 title: Rolling-Unet Revitalizing MLP’s Ability to Efficiently Extract Long-Distance Dependencies for Medical Image Segmentation
 date: 2025-04-22 12:00:00
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-bgImg: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
 categories: 医学图像分割
 tags: [Medical Image Segmentation, MLP]
 top: true
 swiper: true
+swiperImg: https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7l3rs32fxqjoDIYPAqF0DqJ1DGxwDIiw.png
 ---
 
 ## 摘要
