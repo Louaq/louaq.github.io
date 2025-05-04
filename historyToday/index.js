@@ -30,94 +30,56 @@ new Vue({
       startAutoPlay() {
         this.swiperOption.autoplay && this.swiper.autoplay.start();
       },
-      // 获取百度日历API的历史上的今天数据
+      // 请求开源api, 获取历史上的今天数据
       getHistoryList() {
         const today = new Date();
         const month = today.getMonth() + 1;
         const day = today.getDate();
         
-        fetch(`https://baike.baidu.com/api/calendar/get?resource_id=6018&date=${month}-${day}`, {
-          method: "GET", 
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-          }
+        fetch(`https://api.oick.cn/lishi/api.php?m=${month}&d=${day}`, {
+          method: "GET",
         })
           .then((res) => {
             return res.json();
           })
           .then((data) => {
-            if (data && data.data && data.data.length > 0) {
-              // 处理百度日历API的数据
-              let historyEvents = [];
+            if (data && data.result && Array.isArray(data.result)) {
+              this.content = data.result.map(item => ({
+                title: item.title || "历史事件",
+                desc: item.event || "",
+                year: item.date || ""
+              }));
               
-              // 从almanac中提取历史事件数据
-              if (data.data[0].festival && data.data[0].festival.almanac) {
-                historyEvents = data.data[0].festival.almanac;
-              }
-              
-              // 如果almanac没有数据，尝试从other中获取
-              if (historyEvents.length === 0 && data.data[0].festival && data.data[0].festival.other) {
-                historyEvents = data.data[0].festival.other;
-              }
-              
-              // 如果上述都没有数据，尝试使用百科数据
-              if (historyEvents.length === 0 && data.data[0].history) {
-                historyEvents = data.data[0].history.map(item => {
-                  return {
-                    year: item.year,
-                    title: item.title,
-                    desc: item.desc
-                  };
-                });
-              }
-              
-              // 如果还是没有数据，使用一些默认数据
-              if (historyEvents.length === 0) {
-                historyEvents = [
-                  { year: "1949", title: "中华人民共和国成立" },
-                  { year: "1969", title: "阿波罗11号成功登月" },
-                  { year: "1978", title: "中国改革开放政策开始实施" },
-                  { year: "1997", title: "香港回归中国" },
-                  { year: "2008", title: "北京奥运会开幕" }
+              if (this.content.length === 0) {
+                this.content = [
+                  { title: "暂无历史数据", desc: "今天暂无历史数据", year: "" }
                 ];
               }
-              
-              this.content = historyEvents;
             } else {
-              // 如果API无法获取数据，使用默认数据
               this.content = [
-                { year: "1949", title: "中华人民共和国成立" },
-                { year: "1969", title: "阿波罗11号成功登月" },
-                { year: "1978", title: "中国改革开放政策开始实施" },
-                { year: "1997", title: "香港回归中国" },
-                { year: "2008", title: "北京奥运会开幕" }
+                { title: "获取数据失败", desc: "无法获取历史上的今天数据", year: "" }
               ];
             }
           })
           .catch((err) => {
             console.log("err", err);
-            // 请求出错，使用默认数据
             this.content = [
-              { year: "1949", title: "中华人民共和国成立" },
-              { year: "1969", title: "阿波罗11号成功登月" },
-              { year: "1978", title: "中国改革开放政策开始实施" },
-              { year: "1997", title: "香港回归中国" },
-              { year: "2008", title: "北京奥运会开幕" }
+              { title: "获取数据失败", desc: "请求历史数据时发生错误", year: "" }
             ];
           });
       },
     },
     template: `
-      <div class="swiper-container" 
-           @mouseenter="stopAutoPlay" 
-           @mouseleave="startAutoPlay">
-        <swiper ref="myhistoryswiper" :options="swiperOption">
+      <div class="history-today-container">
+        <swiper 
+          ref="myhistoryswiper" 
+          :options="swiperOption" 
+          @mouseenter.native="stopAutoPlay" 
+          @mouseleave.native="startAutoPlay">
           <swiper-slide v-for="(item, index) in content" :key="index">
             <div class="history-item">
-              <h3>{{ item.year }}年</h3>
-              <p>{{ item.title }}</p>
-              <p v-if="item.desc">{{ item.desc }}</p>
+              <h3 class="history-title">{{ item.year }} {{ item.title }}</h3>
+              <p class="history-desc">{{ item.desc }}</p>
             </div>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
