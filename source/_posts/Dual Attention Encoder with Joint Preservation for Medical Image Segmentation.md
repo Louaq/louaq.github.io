@@ -8,7 +8,7 @@ categories: 医学图像分割
 tags: [Medical Image Segmentation, Dual Attention Encoder]
 top: true
 swiper: true
-swiperImg: https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocyxuegif80y9DIYPAqF0DqJ1DGxwDIiw.png
+swiperImg: https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nearxw9s1l5DIYPAqF0DqJ1DGxwDIiw.png
 ---
 
 
