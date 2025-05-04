@@ -87,7 +87,7 @@ sidebar:
         icon: fas fa-list
         icon_color: # 标题字体颜色
         title: 本文目录
-      before: number # number为序号，可以是自定义表情字符
+      before:   # number为序号，可以是自定义表情字符
       heading: h2, h3, h4 # h2,3,4标题会在目录显示，可以加上 ,h5则h5标题也会显示在目录里
       collapseDepth: 20 # 折叠深度, 0则会折叠，0-6即可, 20相当于不折叠
     # ---------------------------------------
@@ -219,7 +219,7 @@ swiper:
   defaultDescTypedBackSpeed: 50 # defaultDesc 打字返回速度 typed backSpeed
   defaultDescTypedLoop: true # defaultDesc文字的打字特效是否循环  typed loop
   # defaultAddToSwiper表示：当有文章设置了swiper: true的时候，将上面的 默认内容 放在轮播图的第一页
-  defaultAddToSwiper: true # 开启这个，则loop默认为false
+  defaultAddToSwiper: false # 开启这个，则loop默认为false
   bothSideBlur: '300000px' # 轮播图两边模糊程度，px越大越模糊，针对下面的imgwidthFull、full为false的时候
   ## 轮播图样式更改
   # 轮播图的文字和按钮居中显示 (针对 imgwidthFull和 full都是false的时候)

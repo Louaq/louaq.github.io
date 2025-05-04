@@ -6,9 +6,8 @@ mathjax: true
 swiper: true
 excerpt: "介绍vscode如何配置latex环境"
 tags: [vscode, latex]
-categories: YOLO
+categories: latex
 top: true
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1.%E7%B4%AB%E7%81%B5%20%E5%87%A1%E4%BA%BA%E4%BF%AE%E4%BB%99%E4%BC%A0.jpeg"
 ---
 
 
