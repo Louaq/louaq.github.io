@@ -74,6 +74,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/categories/index.html</loc>
+    
+    <lastmod>2025-05-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/friends/index.html</loc>
     
     <lastmod>2025-05-25</lastmod>
@@ -120,6 +129,15 @@
   
   <url>
     <loc>https://louaq.github.io/huoban/index.html</loc>
+    
+    <lastmod>2025-05-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</loc>
     
     <lastmod>2025-05-25</lastmod>
     
@@ -227,15 +245,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/categories/index.html</loc>
-    
-    <lastmod>2025-05-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-05-25</lastmod>
@@ -326,7 +335,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-05-25</lastmod>
     
@@ -335,7 +344,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
     
     <lastmod>2025-05-25</lastmod>
     
@@ -354,15 +363,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</loc>
-    
-    <lastmod>2025-05-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</loc>
     
     <lastmod>2025-05-25</lastmod>
     
@@ -416,7 +416,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</loc>
+    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
     
     <lastmod>2025-05-25</lastmod>
     
@@ -425,7 +425,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</loc>
     
     <lastmod>2025-05-25</lastmod>
     
@@ -630,13 +630,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Illumination-Disentanglement/</loc>
-    <lastmod>2025-05-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/tags/Medical-Image-Segmentation/</loc>
     <lastmod>2025-05-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -645,6 +638,13 @@
   
   <url>
     <loc>https://louaq.github.io/tags/Dual-Attention-Encoder/</loc>
+    <lastmod>2025-05-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/tags/Illumination-Disentanglement/</loc>
     <lastmod>2025-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -735,13 +735,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/SED/</loc>
-    <lastmod>2025-05-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/tags/SFC/</loc>
     <lastmod>2025-05-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -750,6 +743,13 @@
   
   <url>
     <loc>https://louaq.github.io/tags/semantic-segmentation/</loc>
+    <lastmod>2025-05-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/tags/SED/</loc>
     <lastmod>2025-05-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
