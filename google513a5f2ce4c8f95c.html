@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Prompt-and-Transfer Dynamic Class-Aware Enhancement for Few-Shot Segmentation | Louaq</title>
+  <title>Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -683,52 +683,17 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Prompt-and-Transfer Dynamic Class-Aware Enhancement for Few-Shot Segmentation
+        
       </span>
     </div>
     
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-03-08 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              少样本语义分割
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.6k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
     
   </div>
   
@@ -744,76 +709,9 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="中科院"><a href="#中科院" class="headerlink" title="中科院"></a>中科院</h2><h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a><strong>摘要：</strong></h2><blockquote>
-<p>For more efficient generalization to unseen domains(classes), most Few-shot Segmentation (FSS) would directly exploit pretrained encoders and only fine-tune the decoder, especially in the current era of large models. However, such fixed feature<br>encoders tend to be class-agnostic, inevitably activating objects that are irrelevant to the target class. In contrast, humans can<br>effortlessly focus on specific objects in the line of sight. This paper mimics the visual perception pattern ofhumanbeings and proposes a novel and powerful prompt-driven scheme, called “Prompt and Transfer” (PAT), which constructs a dynamic class-aware prompting paradigm to tune the encoder for focusing on the interested object (target class) in the current task. Three key points are elaborated to enhance the prompting: 1) Cross-modal linguistic information is introduced to initialize prompts for each task. 2) Semantic Prompt Transfer (SPT) that precisely transfers the class-specific semantics within the images to prompts. 3) Part Mask Generator(PMG)thatworks in conjunction withSPT to adaptively generate different but complementary part prompts for different individuals. Surprisingly, PAT achieves competitive performance on 4 different tasks including standard FSS, Cross-domain FSS (e.g., CV, medical, and remote sensing domains), Weak-label FSS, and Zero-shot Segmentation, setting new state-of-the-arts on 11 benchmarks.</p>
-</blockquote>
-<h2 id="翻译："><a href="#翻译：" class="headerlink" title="翻译："></a><strong>翻译：</strong></h2><blockquote>
-<p>为了更高效地在未知领域（类别）中进行泛化，大多数少样本分割（FSS）方法通常会直接使用预训练的编码器，并仅微调解码器，尤其是在当前大模型时代。然而，这种固定的编码器通常是类别无关的，往往会错误地激活与目标类别无关的物体。与此不同，人类可以轻松聚焦于视线中的特定物体。本文模仿人类的视觉感知方式，提出了一种新颖且高效的基于提示的方案——“提示与迁移”（PAT）。该方案构建了一种动态的类别感知提示机制，能够调整编码器专注于当前任务中的目标类别（感兴趣的物体）。为了增强提示效果，本文重点介绍了三项关键技术：1）引入跨模态的语言信息来初始化每个任务的提示。2）语义提示迁移（SPT），通过精确地将图像中的类别特定语义迁移到提示中，提升模型的识别能力。3）部分掩码生成器（PMG），与SPT协同工作，为不同个体生成不同但互补的部分提示。令人惊讶的是，PAT在四个任务中表现优异，包括标准FSS、跨域FSS（如计算机视觉、医学、遥感领域）、弱标签FSS和零-shot分割，并在11个基准测试中设立了新的技术标准。</p>
-</blockquote>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a><strong>研究背景</strong></h2><blockquote>
-<p>本文聚焦于**少样本分割（Few-shot Segmentation，FSS）**领域，其研究背景主要源于当前FSS方法存在的局限性以及人类视觉感知模式带来的启示： </p>
-<ol>
-<li><strong>数据驱动方法的局限</strong>：深度学习在计算机视觉任务中取得显著进展，但这些数据驱动的技术在标注数据不足时表现不佳，半监督学习也难以很好地泛化到未见类别。因此，少样本学习（FSL）应运而生，旨在利用少量标注样本快速泛化到未见领域。 </li>
-<li><strong>现有FSS方法的问题</strong>：为了更有效地泛化到未见类别，大多数FSS方法直接使用预训练编码器，仅微调解码器。然而，这种固定参数的特征编码器往往对类别不敏感，会激活与目标类别无关的对象，增加后续解码器分割新类别的负担，且这一问题未得到实质性解决。 </li>
-<li><strong>人类视觉感知的启示</strong>：人类能够以独特的视觉感知模式选择性地关注视线中的关键对象。受此启发，作者认为理想的FSS特征编码器应具有类别感知能力，能够针对不同任务激活相应的类别对象。因此，本文提出了一种基于提示学习的“Prompt and Transfer”（PAT）方法，以动态驱动编码器关注特定对象，实现类别感知增强。</li>
-</ol>
-</blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-30-17.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-30-17.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-05_19-30-17"></p>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a><strong>研究现状</strong></h2><ul>
-<li><strong>少样本学习（FSL）</strong>：多数方法遵循元学习范式，可分为优化和度量两类，部分方法引入文本信息用于分类。</li>
-<li><strong>少样本分割（FSS）</strong>：主要有原型匹配、特征融合和像素匹配三种方法，多数采用预训练编码器并微调解码器。部分研究开始探索适用于FSS的特征编码器。</li>
-<li><strong>提示学习</strong>：源于自然语言处理，计算机视觉领域尝试引入可学习参数激活语义知识，部分工作探索了与少样本学习的结合</li>
-</ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a><strong>提出的模型</strong></h2><ol>
-<li>提出“Prompt and Transfer”（PAT）动态类别感知提示范式，模仿人类视觉感知模式，动态驱动编码器关注特定对象，解决固定编码器类别无关问题。 </li>
-<li>构建三个关键增强点：引入跨模态语言信息初始化提示；设计语义提示转移（SPT）精确转移语义；构建部分掩码生成器（PMG）挖掘细粒度语义提示。 </li>
-<li>在多个任务和基准上取得新的最优性能，且可扩展到跨领域、弱标签和零样本分割等场景。</li>
-</ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-34-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-34-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-05_19-34-33"></p>
-<h2 id="实验（compared-with-the-state-of-the-art-models-and-ablation-experiments）"><a href="#实验（compared-with-the-state-of-the-art-models-and-ablation-experiments）" class="headerlink" title="实验（compared with the state-of-the-art models and ablation experiments）"></a><strong>实验（compared with the state-of-the-art models and ablation experiments）</strong></h2><ol>
-<li><strong>Comparison with the State-of-the-Arts</strong></li>
-</ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-36-14.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-36-14.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-05_19-36-14"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-36-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-36-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-05_19-36-33"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-36-50.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-36-50.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-05_19-36-50"></p>
-<ol start="2">
-<li><h2 id="ablation-experiments"><a href="#ablation-experiments" class="headerlink" title="ablation experiments"></a><strong>ablation experiments</strong></h2></li>
-</ol>
-<blockquote>
-<ol>
-<li><strong>组件分析</strong>：</li>
-</ol>
-<p>   ​         <strong>引入前景提示（FG）</strong>：与基线相比，在PASCAL - 5i和COCO - 20i数据集上分别实现了0.96%和1.61%的平均交并比（mIoU）提升，证明了动态类别感知提示范式对少样本分割（FSS）的有效性。    </p>
-<p>   ​            <strong>结合语义提示转移（SPT）</strong>：在PASCAL - 5i和COCO - 20i数据集上分别实现了2.27%和3.44%的mIoU提升，表明从支持和查询图像中提取特定类别的线索能显著增强类别感知能力，使编码器更精准地聚焦于目标对象。    </p>
-<p>   ​          <strong>结合部分掩码生成器（PMG）</strong>：在PASCAL - 5i和COCO - 20i数据集上分别实现了3.38%和4.78%的mIoU提升，说明挖掘细粒度的部分语义能进一步发挥提示的作用，实现更精确的分割。    </p>
-<p>   ​        <strong>引入背景提示（BG）并结合SPT</strong>：在PASCAL - 5i和COCO - 20i数据集上分别实现了4.36%和5.91%的mIoU提升，体现了背景语义对分割的重要性。 </p>
-<ol start="2">
-<li><p><strong>提示初始化消融实验</strong>：    - <strong>随机初始化提示</strong>：在没有SPT和PMG持续增强其类别感知能力的情况下，使用随机初始化的提示来调整编码器不会带来性能提升。    - <strong>引入额外类别语义</strong>：将额外的类别语义作为初始提示可以调整编码器，使其初步定位目标，提高分割精度。    - <strong>语言信息的优势</strong>：语言信息比支持平均令牌更具类别代表性，使用CLIP提取的语言信息作为初始提示具有最优的分割结果。 </p>
-</li>
-<li><p><strong>提示增强消融实验</strong>：    - <strong>部分掩码生成器（PMG）</strong>：        - <strong>定性评估</strong>：可视化结果显示，PMG可以将目标对象清晰地划分为不同的互补部分区域，证明其能够自适应地生成不同的部分掩码。        - <strong>部分掩码数量影响</strong>：当部分掩码数量（Np）从1增加到8时，mIoU精度随之增加；继续增加数量，mIoU精度反而下降，过多的部分掩码可能导致目标对象无法清晰划分，产生冗余和噪声。    - <strong>语义提示转移（SPT）</strong>：        - <strong>支持和查询语义的重要性</strong>：仅将支持图像或查询图像的目标语义转移到提示中会导致不同程度的性能下降，说明两者对于查询图像的分割都至关重要。        - <strong>高斯抑制的作用</strong>：SPT中的高斯抑制通过调整注意力分布，使特定区域的全局语义更好地聚合到提示中，从而提高分割精度。    - <strong>提示增强次数</strong>：在变压器编码器的最后L个块中进行提示增强，更多的语义迁移次数通常能带来更高的分割精度，但综合效率和性能考虑，选择3次（L &#x3D; 3）较为合适。</p>
-</li>
-<li><p><strong>骨干网络设置消融实验</strong>：    - <strong>不同骨干网络的性能</strong>：使用DeiT - B&#x2F;16骨干网络在所有设置下具有最佳的分割精度，DeiT - S&#x2F;16次之，较小的ViT - S&#x2F;16或DeiT - T&#x2F;16虽然分割性能较差，但推理速度具有竞争力。    - <strong>块数量的影响</strong>：不同骨干网络中，块的数量并非越多越好，例如两种ViT变体在10个块时效果最佳，三种DeiT变体在11个块时效果最佳。 </p>
-</li>
-<li><p><strong>使用一致编码器的比较</strong>：在使用一致的特征编码器设置下，PAT取得了最佳的分割性能；盲目使用变压器提取特征可能无法带来预期的性能提升；引入额外的语言信息有助于生成更强大的提示，以生成类别感知特征。</p>
-</li>
-<li><p><strong>PAT与其他FSS方法的结合</strong>：使用更复杂的解码器不一定能优于简单的相似度计算；配备PAT提出的动态类别感知编码器后，其他FSS方法的性能有显著提升，表明该编码器能灵活地为不同的新类别生成类别感知特征，并且与基于解码器的方法具有良好的兼容性。</p>
-</li>
-</ol>
-</blockquote>
-<h2 id="研究结论"><a href="#研究结论" class="headerlink" title="研究结论"></a><strong>研究结论</strong></h2><blockquote>
-<p>作者在摒弃以往冻结编码器以泛化到未见类别的小样本分割（FSS）做法后，提出了一种新颖的动态类别感知提示范式（PAT）。该范式模仿人类视觉感知模式，用于调整编码器以聚焦不同FSS任务中的特定对象。实验结果表明，PAT在三个流行的FSS基准测试中创造了新的最优性能。令人惊喜的是，当将其扩展到<strong>跨领域、弱标签甚至零样本</strong>等更现实的场景时，也取得了令人满意的结果。作者希望这项工作能为小样本场景下的编码器设计提供新视角，并激发未来相关研究聚焦于此。 </p>
-</blockquote>
-
+        google-site-verification: google513a5f2ce4c8f95c.html
       </div>
       <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/Prompt-and-Transfer/" class="">
-              Prompt-and-Transfer
-            </a>
-          
-        </div>
         
       </div>
       
@@ -824,7 +722,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/" target="_blank" title="Prompt-and-Transfer Dynamic Class-Aware Enhancement for Few-Shot Segmentation">https://louaq.github.io/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/</a>
+    <a href="/google513a5f2ce4c8f95c.html" target="_blank" title="">https://louaq.github.io/google513a5f2ce4c8f95c.html</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -842,42 +740,7 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation</div>
-      </div>
-      
-      <!-- <div class="content">
-        Nanjing University of Aeronautics and Astronautics 、State Ke
-      </div> -->
-    </a>
-  </div>
 
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Prompting Multi-Modal Image Segmentation with Semantic Grouping</div>
-      </div>
-      <!-- <div class="content">
-        University of Chinese Academy of Sciences摘要：Multi-modal imag
-      </div> -->
-    </a>
-  </div>
 
 </div>
 
@@ -1008,29 +871,7 @@
   <div class="layout_sticky">    
     
       
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E7%A7%91%E9%99%A2"><span class="toc-text">中科院</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%EF%BC%9A"><span class="toc-text">摘要：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91%EF%BC%9A"><span class="toc-text">翻译：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88compared-with-the-state-of-the-art-models-and-ablation-experiments%EF%BC%89"><span class="toc-text">实验（compared with the state-of-the-art models and ablation experiments）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#ablation-experiments"><span class="toc-text">ablation experiments</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%BB%93%E8%AE%BA"><span class="toc-text">研究结论</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
-</div>
-
+      
       
   <section class="widget side_recent_post">
     
@@ -1155,6 +996,147 @@
       </div>
     </div>
   </section>
+
+      
+  <section class="widget side_archives">
+    
+    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><span class="card-archive-list-count">14</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/03/"><span class="card-archive-list-date">三月 2025</span><span class="card-archive-list-count">19</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><span class="card-archive-list-count">1</span></a></li></ul></div>
+  </section>
+
+      <section class="widget side_webinfo">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: ">站点信息</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="webinfo">
+      
+        <div class="webinfo-item">
+          <div>文章数目：</div>
+          <div>44 篇</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>已运行时间：</div>
+          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
+        </div>
+        <script>
+          var BirthDay = new Date(new Date('2025/03/23'));
+          var today = new Date();
+          var timeold = (today.getTime() - BirthDay.getTime());
+          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
+          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
+        </script>
+      
+
+
+      
+        <div class="webinfo-item">
+          <div>本站总字数：</div>
+          <div>80.2k 字</div>
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站访客数：</div>
+          
+          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>本站总访问量：</div>
+          
+          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
+          
+        </div>
+      
+
+      
+        <div class="webinfo-item">
+          <div>最后活动时间：</div>
+          
+            <div id="last-update" style="display: none;">Sun May 25 2025 06:56:38 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2025-05-25 日</div>
+          
+        </div>
+        
+        <script>
+          function timeago(dateTimeStamp) {
+              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
+              var hour = minute * 60;
+              var day = hour * 24;
+              var week = day * 7;
+              var month = day * 30;
+              var now = new Date().getTime(); //获取当前时间毫秒
+              var diffValue = now - dateTimeStamp; //时间差
+              if (diffValue < 0) {
+                  return;
+              }
+              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
+              var hourC = diffValue / hour;
+              var dayC = diffValue / day;
+              var weekC = diffValue / week;
+              var monthC = diffValue / month;
+              if (monthC >= 1 && monthC <= 3) {
+                  result = " " + parseInt(monthC) + " 月前"
+              } else if (weekC >= 1 && weekC <= 3) {
+                  result = " " + parseInt(weekC) + " 周前"
+              } else if (dayC >= 1 && dayC <= 6) {
+                  result = " " + parseInt(dayC) + " 天前"
+              } else if (hourC >= 1 && hourC <= 23) {
+                  result = " " + parseInt(hourC) + " 小时前"
+              } else if (minC >= 1 && minC <= 59) {
+                  result = " " + parseInt(minC) + " 分钟前"
+              } else if (diffValue >= 0 && diffValue <= minute) {
+                  result = "刚刚"
+              } else {
+                  var datetime = new Date();
+                  datetime.setTime(dateTimeStamp);
+                  var Nyear = datetime.getFullYear();
+                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+                  result = Nyear + "-" + Nmonth + "-" + Ndate
+              }
+              return result;
+          }
+          var lastUpDate = document.getElementById('last-update').innerHTML;
+          try {
+            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
+          } catch (error) {
+            document.getElementById('last-update-show').innerHTML = '2025-05-25 日';
+          }
+        </script>
+        
+      
+    </div>
+  </div>
+</section>
+      
+  
+    <div class="widget historyToday" id="historyToday" style="order: -1;background: #fff">
+      <header>
+        
+          <a style="color: #d63130" href='https://louaq.github.io/'><i class="fas fa-calendar-week fa-fw" aria-hidden="true"></i><span class='name'>历史上的今天</span></a>
+        
+      </header>
+      <div class="content">
+         <div id="myHistorySwiper" @mouseenter="stopAutoPlay()" @mouseleave="startAutoPlay()"> <swiper class="myhistoryswiper" ref="myhistoryswiper" style="height:80px;" :options="swiperOption"> <swiper-slide v-for="(item, index) in content" :key="index"> {{item}} </swiper-slide> </swiper> </div> <script defer src="/historyToday/index.js"></script> 
+      </div>
+  </div>
+  
 
     
   </div>
@@ -1283,59 +1265,6 @@
 		height: 100%;
 	}
 </style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
 
 
 
