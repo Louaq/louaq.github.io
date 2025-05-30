@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://louaq.github.io/tags/index.html</loc>
+    <loc>https://louaq.github.io/talk/index.html</loc>
     
     <lastmod>2025-05-30</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/talk/index.html</loc>
+    <loc>https://louaq.github.io/tags/index.html</loc>
     
     <lastmod>2025-05-30</lastmod>
     
@@ -245,7 +245,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/</loc>
     
     <lastmod>2025-05-30</lastmod>
     
@@ -254,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-05-30</lastmod>
     
@@ -363,6 +363,15 @@
   
   <url>
     <loc>https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</loc>
+    
+    <lastmod>2025-05-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-05-30</lastmod>
     
@@ -542,15 +551,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-05-30</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/404.html</loc>
     
     <lastmod>2025-05-30</lastmod>
@@ -688,14 +688,14 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/%E6%A8%A1%E6%8B%9F%E5%9B%BE%E5%83%8F%E9%97%B4%E6%93%A6%E9%99%A4/</loc>
+    <loc>https://louaq.github.io/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%92%B8%E9%A6%8F/</loc>
     <lastmod>2025-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%92%B8%E9%A6%8F/</loc>
+    <loc>https://louaq.github.io/tags/%E6%A8%A1%E6%8B%9F%E5%9B%BE%E5%83%8F%E9%97%B4%E6%93%A6%E9%99%A4/</loc>
     <lastmod>2025-05-30</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
