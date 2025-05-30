@@ -307,16 +307,27 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
-                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(7)">
+                <a href="/talk" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">说一说</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(8)">
                   <span>
                     
                       <i class="fas fa-link"></i>
                     
                     <span class="name">友情链接</span>
                   </span>
-                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(7)}" aria-hidden="true"></i>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(8)}" aria-hidden="true"></i>
                 </a>
-                <ul class="drawer-sub-menu" v-if="isOpen(7)">
+                <ul class="drawer-sub-menu" v-if="isOpen(8)">
                   
                   <li>
                     <a href="/gallery">
@@ -333,13 +344,6 @@
                       <i class="fas fa-film" style="margin-top: -20px;"></i>
                       
                       <span>伙伴</span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="/talk">
-                      
-                      <span>👪简单说一说</span>
                     </a>
                   </li>
                   
@@ -507,6 +511,17 @@
           
             <li class="menu-item" style="position: relative;">
               
+                <a href="/talk" class="menu-item-link" title="说一说">
+                  
+                    <i class="fas fa-bookmark" aria-hidden="true"></i>
+                  
+                  <span class="name">说一说</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
                 <a href="javascript:;" class="menu-item-link" title="友情链接">
                   
                     <i class="fas fa-link"></i>
@@ -531,13 +546,6 @@
                       <i class="fas fa-film" style="margin-top: -20px;"></i>
                       
                       <span>伙伴</span>
-                    </a>
-                  </li>
-                  
-                  <li>
-                    <a href="/talk">
-                      
-                      <span>👪简单说一说</span>
                     </a>
                   </li>
                   
@@ -709,8 +717,7 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍"></a>个人介绍</h1><p>博主: louaq | 性别: 男 | 邮箱: <a href="mailto:&#121;&#x61;&#110;&#x67;&#95;&#115;&#121;&#121;&#64;&#113;&#x71;&#x2e;&#x63;&#111;&#109;">yang_syy@qq.com</a></p>
-
+        <h1 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍"></a>个人介绍</h1>
       </div>
       <div class="post-tags-categories">
         
@@ -1066,8 +1073,8 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed May 28 2025 08:10:27 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-05-28 日</div>
+            <div id="last-update" style="display: none;">Fri May 30 2025 03:14:14 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2025-05-30 日</div>
           
         </div>
         
@@ -1117,7 +1124,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-05-28 日';
+            document.getElementById('last-update-show').innerHTML = '2025-05-30 日';
           }
         </script>
         
