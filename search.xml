@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation</title>
+      <link href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/"/>
+      <url>/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</url>
+      
+        <content type="html"><![CDATA[<p>作者单位</p><h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> 医学图像分割 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> U-Net </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>A Simple and Robust Framework for Cross-Modality Medical Image Segmentation applied to Vision Transformers</title>
       <link href="/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/"/>
       <url>/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</url>
@@ -941,25 +966,6 @@
     
     
     <entry>
-      <title>精读模板</title>
-      <link href="/post/jing-du-mo-ban/"/>
-      <url>/post/jing-du-mo-ban/</url>
-      
-        <content type="html"><![CDATA[<p>作者单位</p><table><thead><tr><th>标题</th><th>XXXXXXXXXXXXXXXXXXXXX</th></tr></thead><tbody><tr><td>翻译</td><td>XXXXXXXXXXXXXXXXXXXXXXX</td></tr><tr><td>主题</td><td>XXXXXXXX</td></tr><tr><td>方法</td><td>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td></tr></tbody></table><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><blockquote><p>第一句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第二句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第三句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第四句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第五句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第六句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第七句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第八句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第九句：</p></blockquote><blockquote><p>翻译：</p></blockquote><h1 id="overview"><a href="#overview" class="headerlink" title="overview"></a>overview</h1><p><strong>研究背景</strong></p><blockquote><p>第一句：随着数字媒体产业的快速发展，由各种资源捕捉到的海量视频数据集正以爆炸式的速度增长。  </p><p>第二句：大多数监控视频只包含有限的重要事件。</p></blockquote><p><strong>提出视频摘要的概念</strong></p><blockquote><p>第三句：用户将视频中的重要事件浓缩转发  </p><p>第四句：提出了视频摘要的概念</p></blockquote>]]></content>
-      
-      
-      <categories>
-          
-          <category> 深度学习 </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>FCN</title>
       <link href="/post/fcn/20250224-fcn/"/>
       <url>/post/fcn/20250224-fcn/</url>
@@ -970,6 +976,25 @@
       <categories>
           
           <category> 语义分割 </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>精读模板</title>
+      <link href="/post/jing-du-mo-ban/"/>
+      <url>/post/jing-du-mo-ban/</url>
+      
+        <content type="html"><![CDATA[<p>作者单位</p><table><thead><tr><th>标题</th><th>XXXXXXXXXXXXXXXXXXXXX</th></tr></thead><tbody><tr><td>翻译</td><td>XXXXXXXXXXXXXXXXXXXXXXX</td></tr><tr><td>主题</td><td>XXXXXXXX</td></tr><tr><td>方法</td><td>XXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</td></tr></tbody></table><h1 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h1><blockquote><p>第一句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第二句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第三句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第四句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第五句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第六句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第七句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第八句：</p></blockquote><blockquote><p>翻译：</p></blockquote><blockquote><p>第九句：</p></blockquote><blockquote><p>翻译：</p></blockquote><h1 id="overview"><a href="#overview" class="headerlink" title="overview"></a>overview</h1><p><strong>研究背景</strong></p><blockquote><p>第一句：随着数字媒体产业的快速发展，由各种资源捕捉到的海量视频数据集正以爆炸式的速度增长。  </p><p>第二句：大多数监控视频只包含有限的重要事件。</p></blockquote><p><strong>提出视频摘要的概念</strong></p><blockquote><p>第三句：用户将视频中的重要事件浓缩转发  </p><p>第四句：提出了视频摘要的概念</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 深度学习 </category>
           
       </categories>
       
