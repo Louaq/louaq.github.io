@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation | Louaq</title>
+  <title>FRP配合Nginx实现域名访问Windows远程桌面的配置方案 | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -691,21 +691,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation
+        FRP配合Nginx实现域名访问Windows远程桌面的配置方案
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-03-10 |
+          <i class="fas fa-calendar"></i> 发表于：2025-06-08 |
         </span>
       
 
@@ -713,8 +713,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E5%B0%91%E6%A0%B7%E6%9C%AC%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              少样本语义分割
+            <a href="/categories/frp/" class="post-detail-header_category">
+              frp
             </a>
           
         </span>
@@ -723,11 +723,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.1k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 829 |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 8分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 3分钟 |
           </span>
   
           
@@ -752,65 +752,61 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>Nanjing University of Aeronautics and Astronautics 、State Key Laboratory of Integrated Services Networks, Xidian University</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><strong>摘要</strong></h2><blockquote>
-<p>Cross-Domain Few-shot Semantic Segmentation (CD-FSS) aims to train generalized models that can segment classes from different domains with a few labeled images. Previous works have proven the effectiveness of feature transformation in ad-<br>dressing CD-FSS. However, they completely rely on support images for feature transformation, and repeatedly utilizing a few support images for each class may easily lead to overfitting and overlooking intra-class appearance differences. In this paper,<br>we propose a Doubly Matching Transformation-based Network (DMTNet) to solve the above issue. Instead of completely relying on support images, we propose Self-Matching Transformation (SMT) to construct query-specific transformation matri-<br>ces based on query images themselves to transform domain-specific query features into domain-agnostic ones. Calculating query-specific transformation matrices can prevent overfitting, especially for the meta-testing stage where only one or several images are used as support images to segment hundreds or thousands of images. After obtaining domain-agnostic features, we exploit a Dual Hypercorrelation Construction (DHC) module to explore the hypercorrelations between the query im-<br>age with the foreground and background of the support image, based on which foreground and background prediction maps are generated and supervised, respectively, to enhance the segmentation result. In addition, we propose a Test-time Self-Finetuning (TSF) strategy to more accurately self-tune the query prediction in unseen domains. Extensive experiments on four popular datasets show that DMTNet achieves superior performance over state-of-the-art approaches. Code is available at<br><a target="_blank" rel="noopener" href="https://github.com/ChenJiayi68/DMTNet">https://github.com/ChenJiayi68/DMTNet</a>.</p>
-</blockquote>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a><strong>翻译</strong></h2><blockquote>
-<p>**跨域少样本语义分割（CD-FSS）**旨在训练能够以少量标注图像对不同领域进行分割的通用模型。以往的研究已经证明了特征转换在解决CD-FSS问题中的有效性。然而，这些方法完全依赖于支持图像进行特征转换，而重复利用少量支持图像来处理每个类别，容易导致过拟合，并忽视类内外观的差异。为了解决上述问题，本文提出了一种基于双重匹配转换的网络（DMTNet）。我们并不完全依赖支持图像，而是提出了自匹配转换（SMT），通过查询图像自身构建特定的转换矩阵，将领域特定的查询特征转换为领域无关的特征。计算查询特定的转换矩阵有助于防止过拟合，特别是在元测试阶段，此时仅使用一张或几张图像作为支持图像来对数百或数千张图像进行分割。在获得领域无关特征后，我们利用双重超相关构建（DHC）模块，探索查询图像与支持图像前景和背景之间的超相关性，基于此生成前景和背景的预测图并进行监督，从而增强分割结果。此外，我们还提出了一种测试时自我微调（TSF）策略，以更准确地在未知领域自我调整查询预测。在四个流行数据集上的大量实验表明，DMTNet在性能上优于现有的最先进方法。相关代码可在 <a target="_blank" rel="noopener" href="https://github.com/ChenJiayi68/DMTNet">https://github.com/ChenJiayi68/DMTNet</a> 获取。</p>
-</blockquote>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a><strong>研究背景</strong></h2><blockquote>
-<p><strong>语义分割</strong>近年来依赖大规模标注数据集取得快速发展，但实际场景中收集大量训练数据耗时且成本高。少样本语义分割（FSS）应运而生，旨在用少量标注支持图像实现查询图像的准确分割，常采用元学习，但在实际应用中，源数据集和目标数据集存在较大领域差距，导致FSS模型对未见领域的泛化能力较差。 为解决FSS模型在跨领域场景下性能显著下降的问题，跨领域少样本语义分割（CD - FSS）被提出。现有主要的CD - FSS方法PATNet通过将特定领域特征转换为领域无关特征来消除领域差距，但在元测试阶段仅基于少量支持图像的转换矩阵为大量查询图像生成领域无关特征，易导致过拟合。此外，多数现有CD - FSS方法在分割过程中只关注前景目标区域，忽略背景区域。 基于上述问题，本文提出一种基于<strong>双重匹配变换的网络（DMTNet）</strong>，以解决特征变换过度依赖支持图像、类内外观差异以及信息利用不充分等关键问题。 </p>
-</blockquote>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a><strong>研究现状</strong></h2><ul>
-<li><strong>少样本语义分割（FSS）</strong>：现有方法分为基于度量和基于关系两类。前者将支持图像表示为类原型，通过非参数测量工具分割查询图像；后者构建支持 - 查询对的密集对应关系。但在源域和目标域差距大时，性能会下降。</li>
-<li><strong>跨域语义分割</strong>：分为域<strong>自适应语义分割（DASS）<strong>和</strong>域泛化语义分割（DGSS）</strong>。DASS通过联合使用源域和目标域数据训练模型；DGSS通过归一化和白化（NW）、域随机化（DR）等方法缩小域差距。</li>
-<li><strong>跨域少样本语义分割（CD - FSS）</strong>：近期提出了一些方法，如PixDA、RTD、PATNet等，旨在解决少样本和域差距问题。</li>
-</ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a><strong>提出的模型</strong></h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-05-44.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-05-44.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-05-44"></p>
-<p><strong>本文提出了一种基于双重匹配变换的网络（Doubly Matching Transformation-based Network，DMTNet）用于跨域少样本语义分割（Cross-Domain Few-shot Semantic Segmentation，CD-FSS）</strong></p>
-<ol>
-<li><p><strong>自匹配变换模块（Self-Matching Transformation，SMT）</strong></p>
+        <p>根据您提供的frps.toml和frpc.toml配置，我将详细说明如何通过Nginx反向代理，实现使用域名xx.xx访问Windows远程桌面的完整配置流程。</p>
+<h2 id="现有FRP配置分析"><a href="#现有FRP配置分析" class="headerlink" title="现有FRP配置分析"></a>现有FRP配置分析</h2><p>您提供的FRP配置显示：</p>
 <ul>
-<li><p><strong>相似性自匹配</strong>：通过查询特征与支持图像的前景和背景原型之间的基于相似性的自匹配，为查询图像生成粗略的分割掩码。将支持特征划分为多个局部特征，通过测量支持局部原型与查询全局特征之间的相似性，生成更细粒度的预测查询掩码，并使用二元交叉熵（BCE）损失函数进行监督。</p>
-</li>
-<li><p><strong>自适应特征变换</strong>：为支持和查询特征分别构建专门的变换矩阵，确保在自适应变换过程中前景对象的不变性。通过求解线性方程得到变换矩阵，同时提出整合支持图像的广义逆来优化查询图像的广义逆。</p>
-</li>
+<li>FRP服务端(frps)运行在公网服务器(x.x.x.x)的7000端口</li>
+<li>HTTP服务设置在7002端口</li>
+<li>FRP管理面板在7500端口</li>
+<li>远程桌面连接被映射到服务端的7001端口</li>
+<li>客户端本地RDP服务在3389端口</li>
+<li>已启用数据加密和压缩传输</li>
 </ul>
-</li>
-<li><p><strong>双超相关构建模块（Dual Hypercorrelation Construction，DHC）</strong>：探索查询特征与支持图像的前景和背景特征在无域特征空间中的密集相关性。分别基于支持前景特征和背景特征与查询特征构建4D相关张量，将得到的密集相关图输入到4D卷积金字塔编码器和2D卷积金字塔解码器中，生成预测的查询前景掩码和背景掩码，并使用BCE损失函数进行训练监督。</p>
-</li>
-<li><p><strong>测试时自微调策略（Test-time Self-Finetuning，TSF）</strong>：在元测试阶段，通过尝试预测支持图像的真实掩码来微调网络，使模型学习目标域的风格信息，从而为查询图像生成更准确的掩码。只微调编码器的少数参数，避免对支持图像过拟合。</p>
-</li>
+<h2 id="Nginx配置步骤"><a href="#Nginx配置步骤" class="headerlink" title="Nginx配置步骤"></a>Nginx配置步骤</h2><h3 id="1-在公网服务器上安装Nginx"><a href="#1-在公网服务器上安装Nginx" class="headerlink" title="1. 在公网服务器上安装Nginx"></a>1. 在公网服务器上安装Nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br><span class="line">apt install nginx -y  <span class="comment"># Debian/Ubuntu系统</span></span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">yum install nginx -y  <span class="comment"># CentOS系统</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建Nginx配置文件"><a href="#2-创建Nginx配置文件" class="headerlink" title="2. 创建Nginx配置文件"></a>2. 创建Nginx配置文件</h3><p>创建文件 <code>/etc/nginx/conf.d/rdp.conf</code> 并添加以下内容：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># HTTP重定向到HTTPS配置</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">80</span>;</span><br><span class="line">    <span class="attribute">server_name</span> xxxx.com www.xxxx.com;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 将HTTP请求重定向到HTTPS</span></span><br><span class="line">    <span class="attribute">return</span> <span class="number">301</span> https://<span class="variable">$host</span><span class="variable">$request_uri</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># RDP Guacamole Web访问配置（如果使用）</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="attribute">listen</span> <span class="number">443</span> ssl;</span><br><span class="line">    <span class="attribute">server_name</span> xxxx.com www.xxxx.com;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># SSL证书配置</span></span><br><span class="line">    <span class="attribute">ssl_certificate</span> /etc/nginx/ssl/xxxx.crt;</span><br><span class="line">    <span class="attribute">ssl_certificate_key</span> /etc/nginx/ssl/xxxx.key;</span><br><span class="line">    <span class="attribute">ssl_protocols</span> TLSv1.<span class="number">2</span> TLSv1.<span class="number">3</span>;</span><br><span class="line">    <span class="attribute">ssl_prefer_server_ciphers</span> <span class="literal">on</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># RDP Web访问（如使用Apache Guacamole等工具）</span></span><br><span class="line">    <span class="section">location</span> /rdp/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:8080/guacamole/;</span><br><span class="line">        <span class="attribute">proxy_buffering</span> <span class="literal">off</span>;</span><br><span class="line">        <span class="attribute">proxy_http_version</span> <span class="number">1</span>.<span class="number">1</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Upgrade <span class="variable">$http_upgrade</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Connection <span class="variable">$http_connection</span>;</span><br><span class="line">        <span class="attribute">proxy_cookie_path</span> /guacamole/ /rdp/;</span><br><span class="line">        <span class="attribute">access_log</span> <span class="literal">off</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># FRP管理面板访问</span></span><br><span class="line">    <span class="section">location</span> /frp/ &#123;</span><br><span class="line">        <span class="attribute">proxy_pass</span> http://localhost:7500/;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> Host <span class="variable">$host</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Real-IP <span class="variable">$remote_addr</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</span><br><span class="line">        <span class="attribute">proxy_set_header</span> REMOTE-HOST <span class="variable">$remote_addr</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-配置TCP流量转发"><a href="#3-配置TCP流量转发" class="headerlink" title="3. 配置TCP流量转发"></a>3. 配置TCP流量转发</h3><p>编辑Nginx主配置文件 <code>/etc/nginx/nginx.conf</code>，在http部分外添加stream模块配置：</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在http &#123;...&#125;之外添加</span></span><br><span class="line"><span class="section">stream</span> &#123;</span><br><span class="line">    <span class="comment"># RDP流量转发</span></span><br><span class="line">    <span class="section">server</span> &#123;</span><br><span class="line">        <span class="attribute">listen</span> <span class="number">3389</span>;  <span class="comment"># 标准RDP端口</span></span><br><span class="line">        <span class="attribute">proxy_pass</span> <span class="number">127.0.0.1:7001</span>;  <span class="comment"># 转发到FRP映射的端口</span></span><br><span class="line">        <span class="attribute">proxy_connect_timeout</span> <span class="number">10s</span>;</span><br><span class="line">        <span class="attribute">proxy_timeout</span> <span class="number">30s</span>;  <span class="comment"># RDP连接通常需要更长时间</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-申请并配置SSL证书"><a href="#4-申请并配置SSL证书" class="headerlink" title="4. 申请并配置SSL证书"></a>4. 申请并配置SSL证书</h3><p>可以使用Let’s Encrypt免费证书：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">apt install certbot python3-certbot-nginx -y</span><br><span class="line">certbot --nginx -d xxxx.xx -d xxxx.xx</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-配置域名DNS解析"><a href="#5-配置域名DNS解析" class="headerlink" title="5. 配置域名DNS解析"></a>5. 配置域名DNS解析</h3><p>在域名管理面板中，为xxxx.xx和<a target="_blank" rel="noopener" href="http://www.xxxx.com添加a记录,指向您的服务器ip(x.x.x.x)./">www.xxxx.com添加A记录，指向您的服务器IP（x.x.x.x）。</a></p>
+<h3 id="6-测试并重启Nginx"><a href="#6-测试并重启Nginx" class="headerlink" title="6. 测试并重启Nginx"></a>6. 测试并重启Nginx</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nginx -t  <span class="comment"># 检查配置语法</span></span><br><span class="line">systemctl restart nginx  <span class="comment"># 重启Nginx服务</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="7-防火墙配置"><a href="#7-防火墙配置" class="headerlink" title="7. 防火墙配置"></a>7. 防火墙配置</h3><p>确保服务器防火墙开放必要端口：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># UFW (Ubuntu)</span></span><br><span class="line">ufw allow 80/tcp</span><br><span class="line">ufw allow 443/tcp</span><br><span class="line">ufw allow 3389/tcp</span><br><span class="line">ufw allow 7000/tcp</span><br><span class="line">ufw allow 7001/tcp</span><br><span class="line">ufw allow 7002/tcp</span><br><span class="line"></span><br><span class="line"><span class="comment"># Firewalld (CentOS)</span></span><br><span class="line">firewall-cmd --permanent --add-port=80/tcp</span><br><span class="line">firewall-cmd --permanent --add-port=443/tcp</span><br><span class="line">firewall-cmd --permanent --add-port=3389/tcp</span><br><span class="line">firewall-cmd --permanent --add-port=7000-7002/tcp</span><br><span class="line">firewall-cmd --reload</span><br></pre></td></tr></table></figure>
+
+<h2 id="远程桌面连接方式"><a href="#远程桌面连接方式" class="headerlink" title="远程桌面连接方式"></a>远程桌面连接方式</h2><h3 id="方法一：直接使用RDP客户端"><a href="#方法一：直接使用RDP客户端" class="headerlink" title="方法一：直接使用RDP客户端"></a>方法一：直接使用RDP客户端</h3><p>在远程桌面客户端中，可以直接使用域名连接：</p>
+<ul>
+<li>地址：xxxx.xx</li>
+<li>端口：3389（默认，可省略）</li>
+<li>用户名、密码：Windows账户凭据</li>
+</ul>
+<h3 id="方法二：使用Web接口（如配置了Guacamole）"><a href="#方法二：使用Web接口（如配置了Guacamole）" class="headerlink" title="方法二：使用Web接口（如配置了Guacamole）"></a>方法二：使用Web接口（如配置了Guacamole）</h3><ol>
+<li>访问 <a target="_blank" rel="noopener" href="https://xxxx.xx/rdp/">https://xxxx.xx/rdp/</a></li>
+<li>输入Windows的用户名和密码</li>
+<li>通过Web浏览器访问远程桌面</li>
 </ol>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a><strong>实验（Compared with SOTA）</strong></h2><blockquote>
-<p>数据集：PASCAL VOC 2012、ISIC2018、Chest X-ray、 Deepglobe、 and FSS-1000</p>
-</blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-10-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-10-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-10-33"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-14-22.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-14-22.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-14-22"></p>
-<p>与迁移学习、少样本语义分割和跨域少样本语义分割的几种先进方法进行比较，<strong>DMTNet在四个数据集的平均结果上表现优异</strong>，在1 - shot设置下达到**59.74%<strong>的平均IoU，在5 - shot设置下达到</strong>66.01%**的平均IoU。与最先进的PATNet相比，在1 - shot和5 - shot设置下分别提高了3.68%和4.02%。</p>
-<h2 id="实验（Ablation-Study）"><a href="#实验（Ablation-Study）" class="headerlink" title="实验（Ablation Study）"></a><strong>实验（Ablation Study）</strong></h2><p>验证了SMT、DHC和TSF三个关键模块的有效性，使用所有三个模块时模型性能最佳，移除任何一个模块都会导致平均性能下降。同时，通过实验确定了TSF策略中微调编码器层能取得最佳性能。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-18.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-18.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-12-18"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-35.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-35.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-12-35"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h2><p><strong>作者提出用于跨域少样本语义分割的DMTNet，并得出以下结论：</strong></p>
-<ol>
-<li><strong>DMTNet利用SMT模块基于自身原型为支持和查询图像计算变换矩阵，将特定领域特征自适应转换为通用特征，避免过度依赖支持图像导致过拟合。</strong> </li>
-<li><strong>DHC模块在通用特征空间中探索查询图像与支持图像前景和背景的双重超相关性，生成并监督前景和背景预测掩码，提升分割效果。</strong> </li>
-<li><strong>在元测试阶段，TSF策略微调少量参数，使模型学习目标域风格信息，进一步提高分割性能。</strong></li>
-<li><strong>大量实验表明，DMTNet在四个具有不同领域差距的数据集上有效，达到了当前最优性能。</strong></li>
+<h2 id="安全建议"><a href="#安全建议" class="headerlink" title="安全建议"></a>安全建议</h2><ol>
+<li><strong>限制远程桌面访问IP</strong>：通过Nginx配置添加IP白名单</li>
+<li><strong>启用Windows网络级别身份验证</strong></li>
+<li><strong>定期更新远程桌面服务补丁</strong></li>
+<li><strong>配置失败登录尝试限制</strong></li>
+<li><strong>使用复杂密码</strong></li>
+<li><strong>考虑使用VPN作为额外安全层</strong></li>
 </ol>
+<p>这套配置实现了通过加密隧道将Windows远程桌面安全地暴露到互联网，并通过域名xxxx.xx提供访问，同时利用SSL加密保护数据传输安全。</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/Few-Shot-Semantic-Segmentation/" class="">
-              Few-Shot Semantic Segmentation
-            </a>
-          
-            <a href="/tags/Transformation/" class="">
-              Transformation
+            <a href="/tags/frp/" class="">
+              frp
             </a>
           
         </div>
@@ -824,7 +820,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/" target="_blank" title="Cross-Domain Few-Shot Semantic Segmentation via Doubly Matching Transformation">https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/</a>
+    <a href="/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/" target="_blank" title="FRP配合Nginx实现域名访问Windows远程桌面的配置方案">https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -846,17 +842,16 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/" class="post-nav-link">
+    <a href="/post/frp/shi-yong-fail2ban-bao-hu-fu-wu-qi-mian-shou-ke-yi-ip-gong-ji/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Scribble-Supervised Semantic Segmentation with Prototype-based Feature Augmentation</div>
+        <div class="title-text">使用Fail2ban保护服务器免受可疑IP攻击</div>
       </div>
       
       <!-- <div class="content">
-        Hohai University, Nanjing, China
-RMIT University, Melbourne,
+        Fail2ban是一个强大的安全工具，能够监控服务器日志文件，检测可疑活动，并自动配置防火墙规则来阻止发起这些活动的IP
       </div> -->
     </a>
   </div>
@@ -867,16 +862,16 @@ RMIT University, Melbourne,
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/" class="post-nav-link">
+    <a href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Prompt-and-Transfer Dynamic Class-Aware Enhancement for Few-Shot Segmentation</div>
+        <div class="title-text">Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation</div>
       </div>
       <!-- <div class="content">
-        中科院摘要：
-For more efficient generalization to unseen domains(c
+        作者单位
+摘要翻译研究背景研究现状提出的模型实验（Compared with SOTA）实验（Ablation Expe
       </div> -->
     </a>
   </div>
@@ -1022,7 +1017,7 @@ For more efficient generalization to unseen domains(c
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Study%EF%BC%89"><span class="toc-text">实验（Ablation Study）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%B0%E6%9C%89FRP%E9%85%8D%E7%BD%AE%E5%88%86%E6%9E%90"><span class="toc-text">现有FRP配置分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">Nginx配置步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9C%A8%E5%85%AC%E7%BD%91%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8A%E5%AE%89%E8%A3%85Nginx"><span class="toc-text">1. 在公网服务器上安装Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BANginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">2. 创建Nginx配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%85%8D%E7%BD%AETCP%E6%B5%81%E9%87%8F%E8%BD%AC%E5%8F%91"><span class="toc-text">3. 配置TCP流量转发</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E7%94%B3%E8%AF%B7%E5%B9%B6%E9%85%8D%E7%BD%AESSL%E8%AF%81%E4%B9%A6"><span class="toc-text">4. 申请并配置SSL证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E9%85%8D%E7%BD%AE%E5%9F%9F%E5%90%8DDNS%E8%A7%A3%E6%9E%90"><span class="toc-text">5. 配置域名DNS解析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-%E6%B5%8B%E8%AF%95%E5%B9%B6%E9%87%8D%E5%90%AFNginx"><span class="toc-text">6. 测试并重启Nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-%E9%98%B2%E7%81%AB%E5%A2%99%E9%85%8D%E7%BD%AE"><span class="toc-text">7. 防火墙配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8B%E6%A1%8C%E9%9D%A2%E8%BF%9E%E6%8E%A5%E6%96%B9%E5%BC%8F"><span class="toc-text">远程桌面连接方式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%B8%80%EF%BC%9A%E7%9B%B4%E6%8E%A5%E4%BD%BF%E7%94%A8RDP%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-text">方法一：直接使用RDP客户端</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%96%B9%E6%B3%95%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8Web%E6%8E%A5%E5%8F%A3%EF%BC%88%E5%A6%82%E9%85%8D%E7%BD%AE%E4%BA%86Guacamole%EF%BC%89"><span class="toc-text">方法二：使用Web接口（如配置了Guacamole）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E5%85%A8%E5%BB%BA%E8%AE%AE"><span class="toc-text">安全建议</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
