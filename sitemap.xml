@@ -20,7 +20,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/myjson/talk.json</loc>
+    <loc>https://louaq.github.io/pdf/index.html</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -29,7 +29,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/pdf/index.html</loc>
+    <loc>https://louaq.github.io/myjson/talk.json</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -57,6 +57,15 @@
   
   <url>
     <loc>https://louaq.github.io/messageBoard/index.html</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/huoban/index.html</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -173,7 +182,25 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/huoban/index.html</loc>
+    <loc>https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -183,6 +210,15 @@
   
   <url>
     <loc>https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -201,15 +237,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -371,7 +398,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -380,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -389,7 +416,16 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -417,6 +453,24 @@
   
   <url>
     <loc>https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
+    
+    <lastmod>2025-06-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -525,60 +579,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
-    
-    <lastmod>2025-06-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</loc>
     
     <lastmod>2025-06-08</lastmod>
     
@@ -801,6 +801,13 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/tags/SED/</loc>
+    <lastmod>2025-06-08</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/tags/SFC/</loc>
     <lastmod>2025-06-08</lastmod>
     <changefreq>weekly</changefreq>
@@ -816,13 +823,6 @@
   
   <url>
     <loc>https://louaq.github.io/tags/Sentence-Embeddings/</loc>
-    <lastmod>2025-06-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/tags/SED/</loc>
     <lastmod>2025-06-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
