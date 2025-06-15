@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://louaq.github.io/talk/index.html</loc>
+    <loc>https://louaq.github.io/tags/index.html</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -11,7 +11,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/index.html</loc>
+    <loc>https://louaq.github.io/talk/index.html</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -74,7 +74,43 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/gallery/gudian.html</loc>
+    
+    <lastmod>2025-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/gallery/index.html</loc>
+    
+    <lastmod>2025-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/huoban/index.html</loc>
+    
+    <lastmod>2025-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/</loc>
+    
+    <lastmod>2025-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/transunet-de-gai-jin/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -92,7 +128,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</loc>
+    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -101,7 +137,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
+    <loc>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -164,15 +200,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/gallery/fengjing.html</loc>
-    
-    <lastmod>2025-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/gallery/bizhi.html</loc>
     
     <lastmod>2025-06-15</lastmod>
@@ -182,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/gallery/gudian.html</loc>
+    <loc>https://louaq.github.io/gallery/fengjing.html</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -191,7 +218,16 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/gallery/index.html</loc>
+    <loc>https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</loc>
+    
+    <lastmod>2025-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -218,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -227,7 +263,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -308,16 +344,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/</loc>
-    
-    <lastmod>2025-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/transunet-de-gai-jin/</loc>
+    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -380,7 +407,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-fcn/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -389,16 +416,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -416,6 +434,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</loc>
+    
+    <lastmod>2025-06-15</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</loc>
     
     <lastmod>2025-06-15</lastmod>
@@ -425,7 +452,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -434,7 +461,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -542,24 +569,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</loc>
-    
-    <lastmod>2025-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
-    
-    <lastmod>2025-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/</loc>
     
     <lastmod>2025-06-15</lastmod>
@@ -569,16 +578,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-fcn/</loc>
-    
-    <lastmod>2025-06-15</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</loc>
+    <loc>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</loc>
     
     <lastmod>2025-06-15</lastmod>
     
@@ -675,7 +675,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Illumination-Disentanglement/</loc>
+    <loc>https://louaq.github.io/tags/DSMF-Net/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -683,6 +683,13 @@
   
   <url>
     <loc>https://louaq.github.io/tags/Semantic-Segmentation/</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/tags/Illumination-Disentanglement/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -697,13 +704,6 @@
   
   <url>
     <loc>https://louaq.github.io/tags/Dual-Attention-Encoder/</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/tags/DSMF-Net/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -780,14 +780,14 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Feature-Enhancement-Network/</loc>
+    <loc>https://louaq.github.io/tags/U-Net/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/U-Net/</loc>
+    <loc>https://louaq.github.io/tags/Feature-Enhancement-Network/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -878,6 +878,13 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/tags/CLIP/</loc>
+    <lastmod>2025-06-15</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/tags/python/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
@@ -900,13 +907,6 @@
   
   <url>
     <loc>https://louaq.github.io/tags/cudnn/</loc>
-    <lastmod>2025-06-15</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/tags/CLIP/</loc>
     <lastmod>2025-06-15</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
