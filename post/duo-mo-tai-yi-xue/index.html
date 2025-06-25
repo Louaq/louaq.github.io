@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>深度学习环境配置2——windows下的torch=1.2.0环境配置 | Louaq</title>
+  <title>多模态医学图像分割综述 | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -676,21 +676,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        深度学习环境配置2——windows下的torch=1.2.0环境配置
+        多模态医学图像分割综述
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-02-06 |
+          <i class="fas fa-calendar"></i> 发表于：2025-06-25 |
         </span>
       
 
@@ -698,8 +698,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="post-detail-header_category">
-              深度学习
+            <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              多模态医学图像分割
             </a>
           
         </span>
@@ -708,11 +708,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.4k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 5分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 3分钟 |
           </span>
   
           
@@ -737,66 +737,71 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h3 id="一、Anaconda安装"><a href="#一、Anaconda安装" class="headerlink" title="一、Anaconda安装"></a>一、Anaconda安装</h3><p><strong>Anaconda的安装主要是为了方便环境管理，可以同时在一个电脑上安装多种环境，不同环境放置不同框架：pytorch、tensorflow、keras可以在不同的环境下安装，只需要使用conda create –n创建新环境即可。</strong></p>
-<h4 id="1、Anaconda的下载"><a href="#1、Anaconda的下载" class="headerlink" title="1、Anaconda的下载"></a>1、Anaconda的下载</h4><p>同学们可以选择安装新版Anaconda和旧版的Anaconda，安装步骤没有什么区别。</p>
-<p><strong>旧版本anaconda的下载：</strong><br><strong>新版本的Anaconda没有VSCODE，如果大家为了安装VSCODE方便可以直接安装旧版的Anaconda，百度网盘连接如下。也可以装新版然后分开装VSCODE。</strong><br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/12tW0Oad_Tqn7jNs8RNkvFA">https://pan.baidu.com/s/12tW0Oad_Tqn7jNs8RNkvFA</a> 提取码: i83n</p>
-<p><strong>新版本anaconda的下载：</strong><br>如果想要安装最新的Anaconda，首先登录Anaconda的官网：<a target="_blank" rel="noopener" href="https://www.anaconda.com/distribution/">https://www.anaconda.com/distribution/</a>。直接下载对应安装包就可以。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ccda457f3e2c14fa490e5dee510e15ff.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ccda457f3e2c14fa490e5dee510e15ff.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/79729ea1f6363089a7b848e2bbb41119.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/79729ea1f6363089a7b848e2bbb41119.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>一般是下载64位的，下载完成后打开。</p>
-<h4 id="2、Anaconda的安装"><a href="#2、Anaconda的安装" class="headerlink" title="2、Anaconda的安装"></a>2、Anaconda的安装</h4><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b04e1b9b3c820f4212c77e872f721ff0.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b04e1b9b3c820f4212c77e872f721ff0.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>选择安装的位置，可以不安装在C盘。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/cf41baaf1550d7d707c56da7997bf467.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/cf41baaf1550d7d707c56da7997bf467.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>我选择了Add Anaconda to my PATH environment variable，这样会自动将anaconda装到系统的环境变量中，配置会更加方便一些。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/34a7c27d1eb9256186f88e6e610ffbd5.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/34a7c27d1eb9256186f88e6e610ffbd5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>等待安装完之后，Anaconda的安装就结束了。</p>
-<h3 id="二、Cudnn和CUDA的下载和安装"><a href="#二、Cudnn和CUDA的下载和安装" class="headerlink" title="二、Cudnn和CUDA的下载和安装"></a>二、Cudnn和CUDA的下载和安装</h3><p><strong>我这里使用的是torch&#x3D;1.2.0，官方推荐的Cuda版本是10.0，因此会用到cuda10.0，与cuda10.0对应的cudnn是7.4.1。</strong></p>
-<h4 id="1、Cudnn和CUDA的下载"><a href="#1、Cudnn和CUDA的下载" class="headerlink" title="1、Cudnn和CUDA的下载"></a>1、Cudnn和CUDA的下载</h4><p><strong>网盘下载：</strong><br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1znYSRDtLNFLufAuItOeoyQ">https://pan.baidu.com/s/1znYSRDtLNFLufAuItOeoyQ</a><br>提取码: 8ggr</p>
-<p><strong>官网下载：</strong><br>cuda10.0官网的地址是：<br><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cuda-10.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exelocal">cuda10.0官网地址</a><br>cudnn官网的地址是：需要大家进去后寻找7.4.1.5。<br><a target="_blank" rel="noopener" href="https://developer.nvidia.com/cudnn">cudnn官网地址</a></p>
-<p>下载完之后得到这两个文件。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/829e732c6e6228e02d96c3b7bd115d9b.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/829e732c6e6228e02d96c3b7bd115d9b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/8d273ca827020e1e079a78743bd000c5.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/8d273ca827020e1e079a78743bd000c5.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
-<h4 id="2、Cudnn和CUDA的安装"><a href="#2、Cudnn和CUDA的安装" class="headerlink" title="2、Cudnn和CUDA的安装"></a>2、Cudnn和CUDA的安装</h4><p>下载好之后可以打开exe文件进行安装。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/c1fa30103f2316fc350436a8815d54e0.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/c1fa30103f2316fc350436a8815d54e0.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>这里选择自定义。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1bf16ce7629339969e0830a1630bd182.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1bf16ce7629339969e0830a1630bd182.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="不"><br>然后直接点下一步就行了。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d833eb6e1fa90ca9f621eb1072fe25aa.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d833eb6e1fa90ca9f621eb1072fe25aa.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>安装完后在C盘这个位置可以找到根目录。<br>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.0<br>然后大家把Cudnn的内容进行解压。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/0ae6fdd762c2435ef118a642b341d4ba.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/0ae6fdd762c2435ef118a642b341d4ba.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>把这里面的内容直接复制到C盘的根目录下就可以了。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/a88d013177374fcfecfec1e3865e3c5e.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/a88d013177374fcfecfec1e3865e3c5e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
-<h3 id="三、配置torch环境"><a href="#三、配置torch环境" class="headerlink" title="三、配置torch环境"></a>三、配置torch环境</h3><h4 id="1、pytorch环境的创建与激活"><a href="#1、pytorch环境的创建与激活" class="headerlink" title="1、pytorch环境的创建与激活"></a>1、pytorch环境的创建与激活</h4><p>Win+R启动cmd，在命令提示符内输入以下命令：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">conda create –n pytorch python=3.6</span><br></pre></td></tr></table></figure>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate pytorch</span><br></pre></td></tr></table></figure>
-
-<p>这里一共存在两条指令：<br>前面一条指令用于创建一个名为pytorch的环境，该环境的python版本为3.6。<br>后面一条指令用于激活一个名为pytorch的环境。</p>
-<h4 id="2、pytorch库的安装"><a href="#2、pytorch库的安装" class="headerlink" title="2、pytorch库的安装"></a>2、pytorch库的安装</h4><p>由于我们所有的操作都要在对应环境中进行，所以在进行库的安装前需要先激活环境。</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">activate pytorch </span><br></pre></td></tr></table></figure>
-
-<p>此时cmd窗口的样子为：<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/e67dbf5cfc4f4125fedbffcb3bd85b77.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/e67dbf5cfc4f4125fedbffcb3bd85b77.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
-<h5 id="a、官方推荐安装方法（推荐）"><a href="#a、官方推荐安装方法（推荐）" class="headerlink" title="a、官方推荐安装方法（推荐）"></a>a、官方推荐安装方法（推荐）</h5><p>打开pytorch的官方安装方法：<br><a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/">https://pytorch.org/get-started/previous-versions/</a><br>官网推荐的安装代码如下，我使用的是Cuda10的版本，不太懂为什么要写3个&#x3D;才能正确定位，两个&#x3D;会定位到cuda92的whl：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CUDA 10.0</span><br><span class="line">pip install torch===1.2.0 torchvision===0.4.0 -f https://download.pytorch.org/whl/torch_stable.html</span><br></pre></td></tr></table></figure>
-
-<p>这是pytorch官方提供的指令，用于安装torch和torchvision。</p>
-<h5 id="b、先下载whl后安装"><a href="#b、先下载whl后安装" class="headerlink" title="b、先下载whl后安装"></a>b、先下载whl后安装</h5><p>需要注意的是，直接这样安装似乎特别慢，因此我们可以进入如下网址:<br><a target="_blank" rel="noopener" href="https://download.pytorch.org/whl/torch_stable.html">https://download.pytorch.org/whl/torch_stable.html</a><br>找到自己需要的轮子下载。下载的时候使用迅雷下载就行了，速度还是比较快的！<br><img src="https://i-blog.csdnimg.cn/blog_migrate/08b8a756b9d7d214ce81f10bb5b73758.png#pic_center" class="lazyload placeholder" data-srcset="https://i-blog.csdnimg.cn/blog_migrate/08b8a756b9d7d214ce81f10bb5b73758.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"  /><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/737ffc86979d1e7ceda0d98b5ddcef41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/737ffc86979d1e7ceda0d98b5ddcef41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>下载完成后找到安装路径：<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1eae8e7fae0ea98cc5559e6287059451.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1eae8e7fae0ea98cc5559e6287059451.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>在cmd定位过来后利用文件全名进行安装就行了！<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/32c32f513e9be037243f885cd6f4ef11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/32c32f513e9be037243f885cd6f4ef11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>这里我也传一个百度网盘的版本。<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14-QVk7Kb_CVwaVZxVPIgtw">https://pan.baidu.com/s/14-QVk7Kb_CVwaVZxVPIgtw</a><br>提取码: rg2e<br><strong>全部安装完成之后重启电脑。</strong></p>
-<h4 id="3、其它依赖库的安装"><a href="#3、其它依赖库的安装" class="headerlink" title="3、其它依赖库的安装"></a>3、其它依赖库的安装</h4><p>但如果想要跑深度学习模型，还有一些其它的依赖库需要安装。具体如下：</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scipy==1.2.1</span><br><span class="line">numpy==1.17.0</span><br><span class="line">matplotlib==3.1.2</span><br><span class="line">opencv_python==4.1.2.30</span><br><span class="line">torch==1.2.0</span><br><span class="line">torchvision==0.4.0</span><br><span class="line">tqdm==4.60.0</span><br><span class="line">Pillow==8.2.0</span><br><span class="line">h5py==2.10.0</span><br></pre></td></tr></table></figure>
-
-<p>如果想要更便捷的安装可以在桌面或者其它地方创建一个requirements.txt文件，复制上述内容到txt文件中。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7f76e6ad79f6bed1e2f4676b627354d3.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7f76e6ad79f6bed1e2f4676b627354d3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>使用如下指令安装即可。<strong>下述指令中，requirements.txt前方的路径是我将文件放在桌面的路径，各位同学根据自己的电脑修改。</strong></p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pip install -r C:\Users\33232\Desktop\requirements.txt</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-<h4 id="4、安装较慢请注意换源"><a href="#4、安装较慢请注意换源" class="headerlink" title="4、安装较慢请注意换源"></a>4、安装较慢请注意换源</h4><p>需要注意的是，如果在pip中下载安装比较慢可以换个源，可以到用户文件夹下，创建一个pip文件夹，然后在pip文件夹里创建一个txt文件。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/28006284902c6a57318e718daccee1a8.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/28006284902c6a57318e718daccee1a8.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>修改txt文件的内容，并且把后缀改成ini</p>
-<figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[global]</span><br><span class="line">index-url = http://pypi.mirrors.ustc.edu.cn/simple</span><br><span class="line">[install]</span><br><span class="line">use-mirrors =true</span><br><span class="line">mirrors =http://pypi.mirrors.ustc.edu.cn/simple/</span><br><span class="line">trusted-host =pypi.mirrors.ustc.edu.cn</span><br></pre></td></tr></table></figure>
-
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/783a72953baad1fd9de83303701cbaf8.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/783a72953baad1fd9de83303701cbaf8.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/8bd41332dee625e1c6e182608acb9a29.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/8bd41332dee625e1c6e182608acb9a29.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><strong>全部安装完成之后重启电脑。</strong></p>
-<h3 id="四、安装VSCODE"><a href="#四、安装VSCODE" class="headerlink" title="四、安装VSCODE"></a>四、安装<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=VSCODE&spm=1001.2101.3001.7020">VSCODE</a></h3><p><strong>我个人喜欢VSCODE，所以就安装它啦。其它的编辑软件也可以，个人喜好罢了。</strong></p>
-<h4 id="1、下载安装包安装（推荐）"><a href="#1、下载安装包安装（推荐）" class="headerlink" title="1、下载安装包安装（推荐）"></a>1、下载安装包安装（推荐）</h4><p><strong>最新版本的Anaconda没有VSCODE因此可以直接百度VSCODE进行安装。</strong></p>
-<h5 id="a、VSCODE的下载"><a href="#a、VSCODE的下载" class="headerlink" title="a、VSCODE的下载"></a>a、VSCODE的下载</h5><p>直接加载VSCODE的官网<a target="_blank" rel="noopener" href="https://code.visualstudio.com/">https://code.visualstudio.com/</a>，点击Download for Windows即可下载。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/f69abbceb271a9dc5d12142e76df4ebc.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/f69abbceb271a9dc5d12142e76df4ebc.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
-<h5 id="b、VSCODE的安装"><a href="#b、VSCODE的安装" class="headerlink" title="b、VSCODE的安装"></a>b、VSCODE的安装</h5><p>首先同意协议，点一下步。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/a80d57bcc63ffc394fb5b59aed099347.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/a80d57bcc63ffc394fb5b59aed099347.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>其他里面的几个勾要打起来，因为这样就可以右键文件夹用VSCODE打开，非常方便。下一步。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/4156c82700455d0ab65ea5bb8f68eeb3.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/4156c82700455d0ab65ea5bb8f68eeb3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>继续下一步安装即可。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6523e522b685fc8512cacaedfb1934d8.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6523e522b685fc8512cacaedfb1934d8.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
-<p><strong>安装完成后在左下角更改自己的环境就行了。</strong><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/4a6e8c3ce2dec68836338fdcc57a0dc1.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/4a6e8c3ce2dec68836338fdcc57a0dc1.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
-<h4 id="2、anaconda上安装"><a href="#2、anaconda上安装" class="headerlink" title="2、anaconda上安装"></a>2、anaconda上安装</h4><p>打开anaconda，切换环境。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/361dd496e006335bd418e8b03e91354e.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/361dd496e006335bd418e8b03e91354e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>安装VSCODE，安装完就可以launch一下了，之后就可以把VScode固定到任务栏上，方便打开。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/f781c276062dded3ab0d4c9f37aef3bf.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/f781c276062dded3ab0d4c9f37aef3bf.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>多模态医学图像分割</strong>：多模态医学图像分割指<strong>融合多模态图像的信息</strong>以提高分割性能。常见的医学图像主<br>要有计算机断层扫描（Computed Tomography， <strong>CT</strong>）、磁共振成像（Magnetic Resonance Imaging， <strong>MRI</strong>）和正电子发射断层扫描（Positron Emission computed Tomography， <strong>PET</strong>）等。</p>
+<ul>
+<li>CT图像是肌肉及骨骼疾病，如骨肿瘤、骨折等疾病的常用诊断成像</li>
+<li>MRI图像能提供较好的软组织对比度</li>
+<li>功能性影像（例如PET）缺乏解剖特征，但能提供疾病的定量代谢和功能信息</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_19-44-11"></p>
+<blockquote>
+<p> T1w: T1 加权成像             T2w: T2加权成像</p>
+</blockquote>
+<blockquote>
+<p>融合多模态医学图像进行分割已经成了研究热点</p>
+</blockquote>
+<h2 id="多模态医学图像分割数据集"><a href="#多模态医学图像分割数据集" class="headerlink" title="多模态医学图像分割数据集"></a>多模态医学图像分割数据集</h2><ul>
+<li><p>脑肿瘤分割（Brain Tumor Segmentation， BraTS）数据集</p>
+</li>
+<li><p>缺血性中风病变分割（Ischemic Stroke LEsion Segmentation， ISLES）数据集</p>
+</li>
+<li><p>MR 脑图像分割（MR Brain image Segmentation，MRBrainS）数 据 集</p>
+</li>
+<li><p>新生儿脑分割（Neonatal Brain Segmentation， NeoBrainS）数据集</p>
+</li>
+<li><p>组合（CT-MR）腹部器官分 割 （Combined CT-MR Healthy Abdominal Organ Segmentation， CHAOS）数据集</p>
+</li>
+<li><p>婴儿脑 MRI 分割（6-month Infant brain MRI segmentation， Iseg）数据集</p>
+</li>
+<li><p>多模态MR图像自动椎间盘定位分割（automatic InterVertebral Disc localization and segmentation from 3D MR images， IVDM3Seg）数据集</p>
+</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-03-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-03-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-03-33"></p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>数据预处理对后续分割任务有重要影响；尤其对多模态医学图像进行分割时，由于图像具有强度不一、对比度各异、噪声较大等特点，为使图像像素值分布更统一、网络训练更平滑，需要将图像经过预处理操作后再送入分割网络。如图所示，典型的预处理技术主要有<strong>图像配准、偏置场校正、图像重采样、强度值归一化</strong>等。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-04-42.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-04-42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-04-42"></p>
+<p>数据增强通过对训练数据集中的图像进行变换（旋转、平移、缩放、翻转、扭曲以及加入某些噪声如高斯噪声等），增加了可用的训练数据。数据增强技术在医学图像的分割任务中有着广泛的应用。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-05-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-05-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-05-25"></p>
+<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><blockquote>
+<p>交叉熵损失（Cross-Entropy loss， CE）函数：交叉熵损失是最常用的损失函数之一，对每个像素的类别预测进行单独评估，然后对所有像素点进行平均。</p>
+</blockquote>
+<p>$$<br>Loss_{\mathrm{CE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p>
+<blockquote>
+<p>加权交叉熵损失（Weighted Cross-Entropy loss， WCE）函数：在医学图像分割任务中由于大部分像素点属于背景类，因此在计算损失时对不同类别的像素点赋予不同的权重是合理的，并可以缓解类别不平衡问题</p>
+</blockquote>
+<p>$$<br>Loss_{\mathrm{WCE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}w_{l}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p>
+<blockquote>
+<p>骰子损失（DICE loss）：骰子损失同样是医学图像分割中常用的损失函数之一。它可以衡量预测结果和真实结果之间重合度</p>
+</blockquote>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-56-51.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-56-51.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="DICE loss"></p>
+<p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-57-31.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-57-31.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Focal loss"></p>
+<blockquote>
+<p>其中：y ∈ { - 1，+ 1}代表像素点的真实类别；pt衡量了模型预测结果与真实值之间的差异，值越大表示越接近；γ为可调节因子，可以平滑地调整简单样本的权重降低的速度。当γ &gt; 0时，可以减小简单样本的相对损失，把重点放在困难样本上；当γ &#x3D; 0时，焦点损失变为交叉熵损失。</p>
+</blockquote>
+<p>三种融合方法：<strong>输入级融合、中间层融合以及决策级融合</strong></p>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 窦猛,陈哲彬,王辛,周继陶,姚宇.基于深度学习的多模态医学图像分割综述[J].计算机应用,2023,43(11):3385-3395</p>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/python/" class="">
-              python
+            <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" class="">
+              多模态
             </a>
           
-            <a href="/tags/Deep-Learning/" class="">
-              Deep Learning
-            </a>
-          
-            <a href="/tags/CUDA/" class="">
-              CUDA
-            </a>
-          
-            <a href="/tags/cudnn/" class="">
-              cudnn
+            <a href="/tags/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="">
+              医学图像分割
             </a>
           
         </div>
@@ -810,7 +815,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/" target="_blank" title="深度学习环境配置2——windows下的torch=1.2.0环境配置">https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</a>
+    <a href="/post/duo-mo-tai-yi-xue/" target="_blank" title="多模态医学图像分割综述">https://louaq.github.io/post/duo-mo-tai-yi-xue/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -828,43 +833,21 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/fcn/20250224-yu-yi-fen-ge-gai-shu/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">语义分割概述</div>
-      </div>
-      
-      <!-- <div class="content">
-        1.什么是语义分割
-所谓的分割，就是从像素层面上对图像进行描述，即某一个像素属于哪一类物体
-
-
-分类：图片级，比如区分一
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/latex/visual-studio-code/" class="post-nav-link">
+    <a href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">vscode配置latex环境</div>
+        <div class="title-text">Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation</div>
       </div>
       <!-- <div class="content">
-        前言LaTeX 作为一种强大的排版系统，对于理工科，特别是公式比较多的数学专业（秃头专业），其重要性自不必多说，不在本文
+        摘要U-Net is a widely used model for medical image segmentatio
       </div> -->
     </a>
   </div>
@@ -999,7 +982,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81Anaconda%E5%AE%89%E8%A3%85"><span class="toc-text">一、Anaconda安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Anaconda%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="toc-text">1、Anaconda的下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Anaconda%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">2、Anaconda的安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Cudnn%E5%92%8CCUDA%E7%9A%84%E4%B8%8B%E8%BD%BD%E5%92%8C%E5%AE%89%E8%A3%85"><span class="toc-text">二、Cudnn和CUDA的下载和安装</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81Cudnn%E5%92%8CCUDA%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="toc-text">1、Cudnn和CUDA的下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81Cudnn%E5%92%8CCUDA%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">2、Cudnn和CUDA的安装</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AEtorch%E7%8E%AF%E5%A2%83"><span class="toc-text">三、配置torch环境</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81pytorch%E7%8E%AF%E5%A2%83%E7%9A%84%E5%88%9B%E5%BB%BA%E4%B8%8E%E6%BF%80%E6%B4%BB"><span class="toc-text">1、pytorch环境的创建与激活</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81pytorch%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">2、pytorch库的安装</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a%E3%80%81%E5%AE%98%E6%96%B9%E6%8E%A8%E8%8D%90%E5%AE%89%E8%A3%85%E6%96%B9%E6%B3%95%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-text">a、官方推荐安装方法（推荐）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b%E3%80%81%E5%85%88%E4%B8%8B%E8%BD%BDwhl%E5%90%8E%E5%AE%89%E8%A3%85"><span class="toc-text">b、先下载whl后安装</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3%E3%80%81%E5%85%B6%E5%AE%83%E4%BE%9D%E8%B5%96%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">3、其它依赖库的安装</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4%E3%80%81%E5%AE%89%E8%A3%85%E8%BE%83%E6%85%A2%E8%AF%B7%E6%B3%A8%E6%84%8F%E6%8D%A2%E6%BA%90"><span class="toc-text">4、安装较慢请注意换源</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%AE%89%E8%A3%85VSCODE"><span class="toc-text">四、安装VSCODE</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1%E3%80%81%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85%E5%8C%85%E5%AE%89%E8%A3%85%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-text">1、下载安装包安装（推荐）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#a%E3%80%81VSCODE%E7%9A%84%E4%B8%8B%E8%BD%BD"><span class="toc-text">a、VSCODE的下载</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#b%E3%80%81VSCODE%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">b、VSCODE的安装</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2%E3%80%81anaconda%E4%B8%8A%E5%AE%89%E8%A3%85"><span class="toc-text">2、anaconda上安装</span></a></li></ol></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">多模态医学图像分割数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%EF%BC%9A"><span class="toc-text">参考文献：</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>

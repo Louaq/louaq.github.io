@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>多模态医学图像分割综述</title>
+      <link href="/post/duo-mo-tai-yi-xue/"/>
+      <url>/post/duo-mo-tai-yi-xue/</url>
+      
+        <content type="html"><![CDATA[<h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>多模态医学图像分割</strong>：多模态医学图像分割指<strong>融合多模态图像的信息</strong>以提高分割性能。常见的医学图像主<br>要有计算机断层扫描（Computed Tomography， <strong>CT</strong>）、磁共振成像（Magnetic Resonance Imaging， <strong>MRI</strong>）和正电子发射断层扫描（Positron Emission computed Tomography， <strong>PET</strong>）等。</p><ul><li>CT图像是肌肉及骨骼疾病，如骨肿瘤、骨折等疾病的常用诊断成像</li><li>MRI图像能提供较好的软组织对比度</li><li>功能性影像（例如PET）缺乏解剖特征，但能提供疾病的定量代谢和功能信息</li></ul><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_19-44-11"></p><blockquote><p> T1w: T1 加权成像             T2w: T2加权成像</p></blockquote><blockquote><p>融合多模态医学图像进行分割已经成了研究热点</p></blockquote><h2 id="多模态医学图像分割数据集"><a href="#多模态医学图像分割数据集" class="headerlink" title="多模态医学图像分割数据集"></a>多模态医学图像分割数据集</h2><ul><li><p>脑肿瘤分割（Brain Tumor Segmentation， BraTS）数据集</p></li><li><p>缺血性中风病变分割（Ischemic Stroke LEsion Segmentation， ISLES）数据集</p></li><li><p>MR 脑图像分割（MR Brain image Segmentation，MRBrainS）数 据 集</p></li><li><p>新生儿脑分割（Neonatal Brain Segmentation， NeoBrainS）数据集</p></li><li><p>组合（CT-MR）腹部器官分 割 （Combined CT-MR Healthy Abdominal Organ Segmentation， CHAOS）数据集</p></li><li><p>婴儿脑 MRI 分割（6-month Infant brain MRI segmentation， Iseg）数据集</p></li><li><p>多模态MR图像自动椎间盘定位分割（automatic InterVertebral Disc localization and segmentation from 3D MR images， IVDM3Seg）数据集</p></li></ul><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-03-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-03-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-03-33"></p><h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>数据预处理对后续分割任务有重要影响；尤其对多模态医学图像进行分割时，由于图像具有强度不一、对比度各异、噪声较大等特点，为使图像像素值分布更统一、网络训练更平滑，需要将图像经过预处理操作后再送入分割网络。如图所示，典型的预处理技术主要有<strong>图像配准、偏置场校正、图像重采样、强度值归一化</strong>等。</p><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-04-42.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-04-42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-04-42"></p><p>数据增强通过对训练数据集中的图像进行变换（旋转、平移、缩放、翻转、扭曲以及加入某些噪声如高斯噪声等），增加了可用的训练数据。数据增强技术在医学图像的分割任务中有着广泛的应用。</p><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-05-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-05-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-05-25"></p><h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><blockquote><p>交叉熵损失（Cross-Entropy loss， CE）函数：交叉熵损失是最常用的损失函数之一，对每个像素的类别预测进行单独评估，然后对所有像素点进行平均。</p></blockquote><p>$$<br>Loss_{\mathrm{CE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p><blockquote><p>加权交叉熵损失（Weighted Cross-Entropy loss， WCE）函数：在医学图像分割任务中由于大部分像素点属于背景类，因此在计算损失时对不同类别的像素点赋予不同的权重是合理的，并可以缓解类别不平衡问题</p></blockquote><p>$$<br>Loss_{\mathrm{WCE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}w_{l}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p><blockquote><p>骰子损失（DICE loss）：骰子损失同样是医学图像分割中常用的损失函数之一。它可以衡量预测结果和真实结果之间重合度</p></blockquote><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-56-51.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-56-51.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="DICE loss"></p><p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上</p><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-57-31.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-57-31.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Focal loss"></p><blockquote><p>其中：y ∈ { - 1，+ 1}代表像素点的真实类别；pt衡量了模型预测结果与真实值之间的差异，值越大表示越接近；γ为可调节因子，可以平滑地调整简单样本的权重降低的速度。当γ &gt; 0时，可以减小简单样本的相对损失，把重点放在困难样本上；当γ &#x3D; 0时，焦点损失变为交叉熵损失。</p></blockquote><p>三种融合方法：<strong>输入级融合、中间层融合以及决策级融合</strong></p><h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 窦猛,陈哲彬,王辛,周继陶,姚宇.基于深度学习的多模态医学图像分割综述[J].计算机应用,2023,43(11):3385-3395</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 多模态医学图像分割 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 多模态 </tag>
+            
+            <tag> 医学图像分割 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation</title>
       <link href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/"/>
       <url>/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</url>
@@ -455,9 +482,9 @@
       
         <tags>
             
-            <tag> Semantic Segmentation </tag>
-            
             <tag> DSMF-Net </tag>
+            
+            <tag> Semantic Segmentation </tag>
             
         </tags>
       
@@ -936,9 +963,9 @@
       
         <tags>
             
-            <tag> Illumination Disentanglement </tag>
-            
             <tag> Semantic Segmentation </tag>
+            
+            <tag> Illumination Disentanglement </tag>
             
         </tags>
       
