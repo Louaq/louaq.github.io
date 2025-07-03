@@ -690,11 +690,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.1k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 3分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
           </span>
   
           
@@ -727,7 +727,10 @@
 </ul>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_19-44-11"></p>
 <blockquote>
-<p> T1w: T1 加权成像             T2w: T2加权成像</p>
+<p> T1w: T1 加权成像 </p>
+<p> T1ce: 对比增强 T1 加权成像          </p>
+<p>  T2w: T2加权成像</p>
+<p> FLAIR:  流体衰减反转恢复</p>
 </blockquote>
 <blockquote>
 <p>融合多模态医学图像进行分割已经成了研究热点</p>
@@ -764,14 +767,14 @@
 <blockquote>
 <p>骰子损失（DICE loss）：骰子损失同样是医学图像分割中常用的损失函数之一。它可以衡量预测结果和真实结果之间重合度</p>
 </blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-56-51.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-56-51.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="DICE loss"></p>
-<p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-57-31.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-57-31.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Focal loss"></p>
+<p>$$<br>Loss_{\mathrm{Dice}}&#x3D;1-2\frac{\sum_{l\in L}\sum_{i\in N}y_{i}^{l}\hat{y}<em>{i}^{l}+\varepsilon}{\sum</em>{l\in L}\sum_{i\in N}\left(y_{i}^{l}+\hat{y}_{i}^{l}\right)+\varepsilon}<br>$$</p>
+<p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上<br>$$<br>p_t&#x3D;\begin{cases}p_t,&amp;y&#x3D;1\1-p_t,&amp;\text{其他}\end{cases}<br>$$</p>
+<p>$$<br>Loss_{\mathrm{FL}}(p_{t})&#x3D;-\alpha_{t}(1-p_{t})^{\gamma}\log(p_{t})<br>$$</p>
 <blockquote>
 <p>其中：y ∈ { - 1，+ 1}代表像素点的真实类别；pt衡量了模型预测结果与真实值之间的差异，值越大表示越接近；γ为可调节因子，可以平滑地调整简单样本的权重降低的速度。当γ &gt; 0时，可以减小简单样本的相对损失，把重点放在困难样本上；当γ &#x3D; 0时，焦点损失变为交叉熵损失。</p>
 </blockquote>
 <p>三种融合方法：<strong>输入级融合、中间层融合以及决策级融合</strong></p>
-<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 窦猛,陈哲彬,王辛,周继陶,姚宇.基于深度学习的多模态医学图像分割综述[J].计算机应用,2023,43(11):3385-3395</p>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 杨鸿杰,徐巧枝,于磊. 基于深度学习的多模态医学影像分割研究综述[J]. 计算机应用研究,2022,39(5):1297-1306. DOI:10.19734&#x2F;j.issn.1001-3695.2021.10.0424.</p>
 
       </div>
       <div class="post-tags-categories">
@@ -1019,6 +1022,27 @@
             
 
             <div class="post-img-box">
+              <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-03</span>
+                
+              </div>
+              <a class="post-title" href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
               <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
                 <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
@@ -1094,27 +1118,6 @@
                 
               </div>
               <a class="post-title" href="/post/duo-mo-tai-yi-xue/">多模态医学图像分割综述</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntztu7v2sv4lzDIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-23</span>
-                
-              </div>
-              <a class="post-title" href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/">Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation</a>
             </div>
           </div>
         
