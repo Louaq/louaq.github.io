@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation | Louaq</title>
+  <title>标签: Asymmetric encoding | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -644,690 +644,109 @@
 </header>
         <!-- 内容区域 -->
         
-<!-- prismjs 代码高亮 -->
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-03-13 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              弱监督语义分割
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.1k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 8分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+<div class="tag-header" style="background-image: url('https://vip.123pan.cn/1816472581/ymjew503t0m000d6xujzns6nfwgh6p6vDIYPAqF0DqJ1DGxwDIiw.jpg');">
+  <div class="tag-header-title">
+    tag
   </div>
+  <div class="tag-header-desc">
   
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <p><strong>Zhejiang Lab、Xidian University、Zhejiang University、University of Manchester</strong></p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Compared to conventional semantic segmentation with pixel-level supervision, <strong>weakly supervised semantic segmentation(WSSS)</strong> with image-level labels poses the challenge that it commonly focuses on the most discriminative regions, resulting in a disparity between weakly and fully supervision scenarios. A typical manifestation is the diminished precision on object boundaries, leading to deteriorated accuracy of WSSS. To alleviate this issue, we propose to adaptively partition the image content into certain regions (e.g., confident<br>foreground and background) and uncertain regions (e.g., object boundaries and misclassified categories) for separate processing. For uncertain cues, we propose an adaptive masking strategy and seek to recover the local information with self-distilled knowledge.We further assume that confident regions should be robust enough to preserve the global semantics, and introduce a complementary self-distillation method that constrains semantic consistency between confident regions and an augmented view with the same class labels. Extensive experiments conducted on PASCAL VOC 2012 and MS COCO 2014 demonstrate that our proposed single-stage approach for WSSS not only outperforms state-of-the-art counterparts but also surpasses multi-stage methods that trade complexity foraccuracy.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>相较于需要像素级标注的传统语义分割方法，仅使用图像级标签的<strong>弱监督语义分割 (Weakly Supervised Semantic Segmentation, WSSS)</strong> 面临一个关键挑战：这类方法通常会过度关注最具区分度的区域，导致弱监督与全监督方法间存在显著性能差异。这种现象的典型表现是物体边界区域的识别精度下降，从而影响 WSSS 的整体准确性。为解决这一问题，我们提出将图像内容自适应划分为确定区域（如高置信度的前景和背景）与不确定区域（如物体边界和易混淆类别）进行差异化处理。针对不确定区域，我们设计了一种自适应掩码策略，通过<strong>自蒸馏知识 (self-distilled knowledge)</strong> 来恢复局部特征信息。同时我们提出，确定区域应当具备足够的鲁棒性以保持全局语义特征，为此开发了互补式自蒸馏方法，通过约束高置信区域与经过数据增强的同类别图像视图之间的语义一致性来强化模型。在 PASCAL VOC 2012 和 MS COCO 2014 数据集上的大量实验表明，我们提出的单阶段 WSSS 方法不仅超越了当前最先进的同类方案，其性能表现甚至优于那些通过增加模型复杂度来提升准确率的多阶段方法。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于弱监督语义分割（WSSS）领域，旨在解决现有方法存在的问题，提升分割性能。研究背景如下：</p>
-<ul>
-<li><strong>WSSS的优势与挑战</strong>：与传统的像素级监督语义分割相比，WSSS使用如边界框、涂鸦、点和图像级标签等“弱”标签，可降低标注成本。其中，图像级标签最为经济，但难以利用。 -</li>
-<li><strong>现有方法的局限性</strong>：基于图像级标签的WSSS常用方法是先训练图像分类网络，生成类激活图（CAMs）作为种子区域，再将其细化为伪分割标签来监督分割网络。然而，CAMs本质上存在缺陷，它主要关注对象最具判别性的区域，导致前景对象与背景的边界区域以及多语义不同对象内的误分类区域存在高度不确定性，影响分割精度。 </li>
-<li><strong>本文的研究目标</strong>：为解决上述问题，本文提出一种渐进式特征自我强化方法，通过自适应划分图像内容为确定区域和不确定区域并分别处理，以明确不确定区域的视觉语义，提高WSSS性能。</li>
-</ul>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
-<li><strong>弱监督语义分割方法</strong>：多阶段方法先通过分类模型生成类激活图（CAMs）作为伪标签，再训练分割模型评估性能，部分采用视觉变换器提升长程建模能力；单阶段方法将分类、伪标签细化和分割联合训练，但性能常不如多阶段方法。</li>
-<li><strong>自蒸馏方法</strong>：将自监督学习与知识蒸馏结合，动态构建教师网络，简化训练过程并取得不错效果。</li>
-</ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-23-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-23-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-13_10-23-43"></p>
-<p>采用<strong>编码器 - 解码器</strong>架构实现图像级监督的语义分割。</p>
-<ul>
-<li><strong>编码器</strong>：使用在 ImageNet 上预训练的 ViT - B 视觉变压器，由图像级类标签监督。采用补丁令牌对比（PTC）进行亲和性学习，以约束最后一层补丁令牌之间的亲和性，防止过度平滑。</li>
-<li><strong>解码器</strong>：借鉴 DeepLab 中的轻量级卷积解码器，由类激活映射（CAMs）生成的伪分割标签监督。</li>
-<li><strong>聚合模块</strong>：将patch token汇总为一个类token。</li>
-<li><strong>投影器</strong>：由 3 层感知器和权重归一化的全连接层组成，将所有令牌转换到合适的特征空间进行特征学习。</li>
-<li><strong>自蒸馏机制</strong>：通过学生和教师管道实现自蒸馏，以改进模型训练。</li>
-</ul>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
-<p>数据集：PASCAL VOC 2012、MS COCO 2014</p>
-</blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-30.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-30.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-13_10-26-30"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-13_10-26-43"></p>
-<ul>
-<li><strong>PASCAL VOC 2012</strong>：提出的特征自强化（FSR）方法在验证集和测试集上的mIoU分别达到75.7%和75.0%，显著优于其他单阶段方法，甚至超过了一些复杂的多阶段方法，如比BECO分别高2.0%和1.5%。与使用图像级标签和现成显著性图的多阶段方法相比，也取得了更优的性能。</li>
-<li><strong>MS COCO 2014</strong>：在验证集上mIoU达到45.5%，优于之前的单阶段解决方案，略高于多阶段的MCTformer + 0.2%，进一步证明了该方法的优越性。</li>
-</ul>
-<h2 id="实验（Alabtion-Experiments）"><a href="#实验（Alabtion-Experiments）" class="headerlink" title="实验（Alabtion Experiments）"></a>实验（Alabtion Experiments）</h2><ul>
-<li><p><strong>不确定特征选择分析</strong>：比较了基于边缘和基于CAM的两种严格选择不确定特征的方法，基于CAM的选择略优于基于边缘的选择，且当基于CAM的选择不那么严格时，性能进一步提升，经验上掩码比率r &#x3D; 0.4效果最佳。不确定特征掩码在大多数情况下比随机特征掩码性能更高，表明强化不确定特征对语义澄清很重要。</p>
-</li>
-<li><p><strong>特征自强化分析</strong></p>
-<p>展示了FSR在不确定区域（unc.FSR）和确定区域（cer.FSR）的消融结果。unc.FSR在伪标签和预测标签上都有显著提升，证明了强化不确定特征的有效性。结合unc.FSR和cer.FSR可以进一步提高伪标签和预测标签的质量，表明强化确定特征与unc.FSR互补，增强了全局理解。</p>
-<ul>
-<li><strong>unc.FSR分析</strong>：通过分析注意力机制，计算每个注意力头在Transformer层上的平均注意力熵。应用unc.FSR时，深层（如第7 - 11层）的熵更高且更集中，表明unc.FSR通过提高深层的上下文程度有利于语义分割。</li>
-<li><strong>cer.FSR分析</strong>：将确定特征的注意力聚合（MCA）与全局平均池化（GAP）和全局最大池化（GMP）两种传统方法进行比较。GAP性能优于GMP，MCA大幅优于GAP，表明注意力加权机制优于平均加权。可视化的类到补丁注意力图显示类令牌可以自适应地学习关注目标区域。</li>
-</ul>
-</li>
-<li><p><strong>数据增强</strong>：与其他数据增强方法的比较结果表明，数据增强对性能的影响有限。例如，加入高斯模糊或日光化处理时，性能在预期范围内波动；使用强大的AutoAugment时，结果略有下降，因为强增强可能会干扰分割目标。</p>
-</li>
-</ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了一种<strong>基于语义不确定性引导的弱监督语义分割方法</strong>，并将其集成到单阶段框架中，在PASCAL VOC 2012和MS COCO 2014基准上验证了有效性。具体结论如下： 1. <strong>方法设计有效</strong>：设计了基于激活的掩码策略，利用自蒸馏知识恢复局部信息，并引入自蒸馏方法增强语义一致性，能有效估计边界。 2. <strong>性能表现优异</strong>：在两个基准测试中，所提方法显著优于其他单阶段方法，甚至超过了一些复杂的多阶段方法，证明了基于Transformer的单阶段训练的有效性。 3. <strong>消融实验验证</strong>：消融实验表明，增强不确定特征和确定特征对语义分割都很重要，两者结合可进一步提高伪标签和预测标签的质量。 </p>
-<blockquote>
-<p>启发：弱监督语义分割、自蒸馏</p>
-</blockquote>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/Weakly-Supervised-Semantic-Segmentation/" class="">
-              Weakly Supervised Semantic Segmentation
-            </a>
-          
-            <a href="/tags/Feature-Self-Reinforcement/" class="">
-              Feature Self-Reinforcement
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Louaq</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/" target="_blank" title="Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation">https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Learning Generalized Medical Image Segmentation from Decoupled Feature Queries</div>
-      </div>
-      
-      <!-- <div class="content">
-        Jarvis Research Center、Wuhan University、Guangxi Medical Univ
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/post/fcn/20250312-pytorch-jiao-cheng/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Pytorch教程</div>
-      </div>
-      <!-- <div class="content">
-        
-
-
-
-
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script defer src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+    <span class="title" id="tag-header-desc"></span>
+    <script>
+  function typedFn() {
+    const el = '#tag-header-desc';
+    const type = 'tagDetail';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <section id="waline-box">
-  <div id="waline-comment"></div>
-</section>
+  typedFn();
+</script>
     
   </div>
+  <div class="mask-box"></div>
+</div>
 
 
-<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
-
+<div class="tag">
+  <div class="tag-name">
+    <div class="name" style="background-color: #85C1E9;">Asymmetric encoding 分类</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  <aside id='l_side'>
+<section class="posts">
   
     
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/about/'>
-          <img src='/img/b.jpg'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2025-07-04</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Asymmetric-encoding/" rel="tag">Asymmetric encoding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adaptive-heterogeneous-graph-fusion/" rel="tag">adaptive heterogeneous graph fusion</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Louaq</h2>
-        
-        
-          <p>keep coding</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">Louaq</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:yang_syy@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Louaq"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-    
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Alabtion-Experiments%EF%BC%89"><span class="toc-text">实验（Alabtion Experiments）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-04</span>
-                
-              </div>
-              <a class="post-title" href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-03</span>
-                
-              </div>
-              <a class="post-title" href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-02</span>
-                
-              </div>
-              <a class="post-title" href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/">A nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-30</span>
-                
-              </div>
-              <a class="post-title" href="/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/">Mirror U-Net Marrying Multimodal Fission with Multi-task Learning for Semantic Segmentation in Medical Imaging</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-26</span>
-                
-              </div>
-              <a class="post-title" href="/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/">BSAFusion A Bidirectional Stepwise Feature Alignment Network for Unaligned Medical Image Fusion</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script defer src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || 'https://pic1.zhimg.com/80/v2-6d0cbd4380b4959542d3f5da31c7f20c_1440w.jpg';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>

@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation | Louaq</title>
+  <title>Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -658,21 +658,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation
+        Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-03-13 |
+          <i class="fas fa-calendar"></i> 发表于：2025-07-04 |
         </span>
       
 
@@ -680,8 +680,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              弱监督语义分割
+            <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              多模态医学图像分割
             </a>
           
         </span>
@@ -690,11 +690,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.1k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.5k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 8分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 12分钟 |
           </span>
   
           
@@ -719,53 +719,82 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p><strong>Zhejiang Lab、Xidian University、Zhejiang University、University of Manchester</strong></p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Compared to conventional semantic segmentation with pixel-level supervision, <strong>weakly supervised semantic segmentation(WSSS)</strong> with image-level labels poses the challenge that it commonly focuses on the most discriminative regions, resulting in a disparity between weakly and fully supervision scenarios. A typical manifestation is the diminished precision on object boundaries, leading to deteriorated accuracy of WSSS. To alleviate this issue, we propose to adaptively partition the image content into certain regions (e.g., confident<br>foreground and background) and uncertain regions (e.g., object boundaries and misclassified categories) for separate processing. For uncertain cues, we propose an adaptive masking strategy and seek to recover the local information with self-distilled knowledge.We further assume that confident regions should be robust enough to preserve the global semantics, and introduce a complementary self-distillation method that constrains semantic consistency between confident regions and an augmented view with the same class labels. Extensive experiments conducted on PASCAL VOC 2012 and MS COCO 2014 demonstrate that our proposed single-stage approach for WSSS not only outperforms state-of-the-art counterparts but also surpasses multi-stage methods that trade complexity foraccuracy.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>相较于需要像素级标注的传统语义分割方法，仅使用图像级标签的<strong>弱监督语义分割 (Weakly Supervised Semantic Segmentation, WSSS)</strong> 面临一个关键挑战：这类方法通常会过度关注最具区分度的区域，导致弱监督与全监督方法间存在显著性能差异。这种现象的典型表现是物体边界区域的识别精度下降，从而影响 WSSS 的整体准确性。为解决这一问题，我们提出将图像内容自适应划分为确定区域（如高置信度的前景和背景）与不确定区域（如物体边界和易混淆类别）进行差异化处理。针对不确定区域，我们设计了一种自适应掩码策略，通过<strong>自蒸馏知识 (self-distilled knowledge)</strong> 来恢复局部特征信息。同时我们提出，确定区域应当具备足够的鲁棒性以保持全局语义特征，为此开发了互补式自蒸馏方法，通过约束高置信区域与经过数据增强的同类别图像视图之间的语义一致性来强化模型。在 PASCAL VOC 2012 和 MS COCO 2014 数据集上的大量实验表明，我们提出的单阶段 WSSS 方法不仅超越了当前最先进的同类方案，其性能表现甚至优于那些通过增加模型复杂度来提升准确率的多阶段方法。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于弱监督语义分割（WSSS）领域，旨在解决现有方法存在的问题，提升分割性能。研究背景如下：</p>
-<ul>
-<li><strong>WSSS的优势与挑战</strong>：与传统的像素级监督语义分割相比，WSSS使用如边界框、涂鸦、点和图像级标签等“弱”标签，可降低标注成本。其中，图像级标签最为经济，但难以利用。 -</li>
-<li><strong>现有方法的局限性</strong>：基于图像级标签的WSSS常用方法是先训练图像分类网络，生成类激活图（CAMs）作为种子区域，再将其细化为伪分割标签来监督分割网络。然而，CAMs本质上存在缺陷，它主要关注对象最具判别性的区域，导致前景对象与背景的边界区域以及多语义不同对象内的误分类区域存在高度不确定性，影响分割精度。 </li>
-<li><strong>本文的研究目标</strong>：为解决上述问题，本文提出一种渐进式特征自我强化方法，通过自适应划分图像内容为确定区域和不确定区域并分别处理，以明确不确定区域的视觉语义，提高WSSS性能。</li>
-</ul>
+        <p>重庆邮电大学、第三军医大学、重庆医科大学第二附属医院</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Existing studies of <strong>multi-modality medical image segmentation</strong> tend to aggregate all modalities without discrimination and employ multiple symmetric encoders or decoders for feature extraction and fusion. They often over-look the different contributions to visual representation and intelligent decisions among multi-modality images. Motivated by this discovery, this paper proposes an asymmetric adaptive heterogeneous network for multi-modality image feature extraction with modality discrimination and adaptive fusion. For feature extraction, it uses a heterogeneous two-stream asymmetric feature-bridging network to extract complementary features from auxiliary multi-modality and leading single-modality images, respectively. For feature adaptive fusion, the proposed Transformer-CNN Feature Alignment and Fusion (T-CFAF) module enhances the leading single-modality information, and the Cross-Modality Heterogeneous Graph Fusion (CMHGF) module further fuses multi-modality features at a high-level semantic layer adaptively. Comparative evaluation with ten segmentation models on six datasets demonstrates significant efficiency gains as well as highly competitive segmentation accuracy. ((Our code is publicly available at <a target="_blank" rel="noopener" href="https://github.com/joker-527/AAHN">https://github.com/joker-527/AAHN</a>)</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时，忽视了多模态图像在视觉表示和智能决策中的不同贡献。受此发现的启发，本文提出了一种用于多模态图像特征提取的<strong>非对称自适应异构网络</strong>，该网络具有模态区分和自适应融合功能。在特征提取方面，使用异构双流非对称特征桥接网络分别从辅助多模态和主要单模态图像中提取互补特征。对于特征自适应融合，提出的Transformer-CNN特征对齐与融合（T-CFAF）模块增强了主要单模态信息，而跨模态异构图融合（CMHGF）模块进一步在高级语义层自适应地融合多模态特征。与六个数据集上的十个分割模型进行比较评估，结果显示显著的效率提升以及极具竞争力的分割准确性。（我们的代码在<a target="_blank" rel="noopener" href="https://github.com/joker-527/AAHN%E5%85%AC%E5%BC%80%E6%8F%90%E4%BE%9B%EF%BC%89">https://github.com/joker-527/AAHN公开提供）</a></p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-28-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-28-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-05_16-28-08"></p>
+<p>多模态医学图像能从多个角度提供互补信息，整合不同成像模态可提升成像数据的敏感性、特异性和空间分辨率。然而，现有多模态医学图像分割研究存在两个关键问题：</p>
+<ol>
+<li><strong>特征提取问题</strong>：现有方法倾向于无差别聚合所有模态，采用对称编码器或解码器进行特征提取，忽略了不同模态图像对视觉表示和智能决策的不同贡献，难以有效提取多模态图像中独特且互补的特征。 </li>
+<li><strong>特征融合问题</strong>：常见的特征融合方法是在通道维度上进行初始拼接或求和，然后输入特定融合模块，这种方式可能导致性能瓶颈，无法实现多模态特征的自适应融合，还可能造成独特特征的丢失。</li>
+</ol>
+<p>为解决这些问题，本文提出了一种用于多模态医学图像特征提取的非对称自适应异构网络，旨在实现模态区分和自适应融合，以有效管理多模态特征的异质性，显著提高分割结果。 </p>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
-<li><strong>弱监督语义分割方法</strong>：多阶段方法先通过分类模型生成类激活图（CAMs）作为伪标签，再训练分割模型评估性能，部分采用视觉变换器提升长程建模能力；单阶段方法将分类、伪标签细化和分割联合训练，但性能常不如多阶段方法。</li>
-<li><strong>自蒸馏方法</strong>：将自监督学习与知识蒸馏结合，动态构建教师网络，简化训练过程并取得不错效果。</li>
+<li><strong>多模态特征提取</strong>：常见方法有集中提取（如3D AGSE - VNet、MBANet、Swin UNETR）和单独提取（如ME - Net、MAML、NestedFormer、A2FSeg），但大多基于对称特征提取，未考虑模态关系。</li>
+<li><strong>特征融合</strong>：现有方法常采用初始拼接或求和，再通过特定融合模块处理，如IVD - Net、Wang等人和Zhou等人的方法，但可能导致性能瓶颈，且简单使用CNN或Transformer会损失独特特征。</li>
+<li><strong>CNN和Transformer结合</strong>：多种方法将两者结合用于医学图像处理，但常忽略不同模态图像特征的异质性。</li>
+<li><strong>图神经网络应用</strong>：用于分割的图结构模型主要关注单模态，难以处理多模态图像的异质性。</li>
 </ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-23-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-23-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-13_10-23-43"></p>
-<p>采用<strong>编码器 - 解码器</strong>架构实现图像级监督的语义分割。</p>
-<ul>
-<li><strong>编码器</strong>：使用在 ImageNet 上预训练的 ViT - B 视觉变压器，由图像级类标签监督。采用补丁令牌对比（PTC）进行亲和性学习，以约束最后一层补丁令牌之间的亲和性，防止过度平滑。</li>
-<li><strong>解码器</strong>：借鉴 DeepLab 中的轻量级卷积解码器，由类激活映射（CAMs）生成的伪分割标签监督。</li>
-<li><strong>聚合模块</strong>：将patch token汇总为一个类token。</li>
-<li><strong>投影器</strong>：由 3 层感知器和权重归一化的全连接层组成，将所有令牌转换到合适的特征空间进行特征学习。</li>
-<li><strong>自蒸馏机制</strong>：通过学生和教师管道实现自蒸馏，以改进模型训练。</li>
-</ul>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
-<p>数据集：PASCAL VOC 2012、MS COCO 2014</p>
-</blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-30.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-30.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-13_10-26-30"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-26-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-13_10-26-43"></p>
-<ul>
-<li><strong>PASCAL VOC 2012</strong>：提出的特征自强化（FSR）方法在验证集和测试集上的mIoU分别达到75.7%和75.0%，显著优于其他单阶段方法，甚至超过了一些复杂的多阶段方法，如比BECO分别高2.0%和1.5%。与使用图像级标签和现成显著性图的多阶段方法相比，也取得了更优的性能。</li>
-<li><strong>MS COCO 2014</strong>：在验证集上mIoU达到45.5%，优于之前的单阶段解决方案，略高于多阶段的MCTformer + 0.2%，进一步证明了该方法的优越性。</li>
-</ul>
-<h2 id="实验（Alabtion-Experiments）"><a href="#实验（Alabtion-Experiments）" class="headerlink" title="实验（Alabtion Experiments）"></a>实验（Alabtion Experiments）</h2><ul>
-<li><p><strong>不确定特征选择分析</strong>：比较了基于边缘和基于CAM的两种严格选择不确定特征的方法，基于CAM的选择略优于基于边缘的选择，且当基于CAM的选择不那么严格时，性能进一步提升，经验上掩码比率r &#x3D; 0.4效果最佳。不确定特征掩码在大多数情况下比随机特征掩码性能更高，表明强化不确定特征对语义澄清很重要。</p>
-</li>
-<li><p><strong>特征自强化分析</strong></p>
-<p>展示了FSR在不确定区域（unc.FSR）和确定区域（cer.FSR）的消融结果。unc.FSR在伪标签和预测标签上都有显著提升，证明了强化不确定特征的有效性。结合unc.FSR和cer.FSR可以进一步提高伪标签和预测标签的质量，表明强化确定特征与unc.FSR互补，增强了全局理解。</p>
-<ul>
-<li><strong>unc.FSR分析</strong>：通过分析注意力机制，计算每个注意力头在Transformer层上的平均注意力熵。应用unc.FSR时，深层（如第7 - 11层）的熵更高且更集中，表明unc.FSR通过提高深层的上下文程度有利于语义分割。</li>
-<li><strong>cer.FSR分析</strong>：将确定特征的注意力聚合（MCA）与全局平均池化（GAP）和全局最大池化（GMP）两种传统方法进行比较。GAP性能优于GMP，MCA大幅优于GAP，表明注意力加权机制优于平均加权。可视化的类到补丁注意力图显示类令牌可以自适应地学习关注目标区域。</li>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-31-41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-31-41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-05_16-31-41"></p>
+<h3 id="整体架构"><a href="#整体架构" class="headerlink" title="整体架构"></a>整体架构</h3><p>模型的整体架构包括一个非对称双分支特征桥接编码器、Transformer - CNN 特征对齐与融合（T - CFAF）模块、跨模态异质图融合（CMHGF）模块和解码器，主要流程为：</p>
+<ol>
+<li><strong>特征提取</strong>：使用非对称双分支特征桥接编码器从辅助多模态和主导单模态图像中分别提取互补特征。</li>
+<li><strong>特征融合</strong>：T - CFAF 模块增强主导单模态信息，CMHGF 模块在高层语义层自适应地融合多模态特征。</li>
+<li><strong>图像分割</strong>：解码器通过跳跃连接逐步对齐来自 CNN 分支的低层次和高层次特征，实现最终的分割。</li>
+</ol>
+<h3 id="主要组件"><a href="#主要组件" class="headerlink" title="主要组件"></a>主要组件</h3><ul>
+<li>非对称双分支特征桥接编码器：<ul>
+<li><strong>多模态 Transformer 分支</strong>：具有强大的全局上下文信息建模能力，能够更好地捕捉辅助多模态特征。该分支包括嵌入层和骨干结构。嵌入层采用传统卷积结构，可保留位置信息并提取详细特征；骨干结构是 CNN 和 ViT 的混合组合，结合了两者的优势，能够保留 CNN 的准确位置信息和 Transformers 的全局上下文建模能力。</li>
+<li><strong>单模态 CNN 分支</strong>：利用 CNN 保留局部细节的能力处理主导单模态图像。主要由多个残差块（RES）和 T - CFAF 模块组成，通过平均池化形成特征金字塔结构，用于提取多尺度特征。</li>
 </ul>
 </li>
-<li><p><strong>数据增强</strong>：与其他数据增强方法的比较结果表明，数据增强对性能的影响有限。例如，加入高斯模糊或日光化处理时，性能在预期范围内波动；使用强大的AutoAugment时，结果略有下降，因为强增强可能会干扰分割目标。</p>
+<li><strong>Transformer - CNN 特征对齐与融合（T-CFAF）模块</strong>：为了增强 CNN 分支上主导单模态信息，该模块将多模态特征图和单模态特征图在通道维度上拼接，通过计算通道注意力和跨模态注意力，调整通道权重，补充多模态信息，增强主导 CNN 特征。</li>
+<li><strong>跨模态异构图融合（CMHGF）模块</strong>：用于缓解不同模态之间的特征异质性，实现跨模态特征的自适应融合。该模块将特征图空间投影到图空间，通过图卷积操作更新节点特征，构建异质图，计算节点间的相似度，更新节点特征向量，最终实现多模态特征的融合。</li>
+</ul>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><ul>
+<li>数据集：在六个数据集上进行实验，涵盖不同医学场景，为模型性能评估提供多样数据支持。<ul>
+<li><strong>Hecktor21</strong>：来自2021年Aicrowd在MICCAI发布的HECKTOR挑战，包含325名患者的18F - FDG PET和CT扫描，其中224例有标注。</li>
+<li><strong>Prostate158</strong>：包含158个前列腺MRI，专家标注，有T2加权和扩散加权图像及表观扩散系数图，目标区域为前列腺周围区（PZ）和过渡区（TZ）。</li>
+<li><strong>BraTS2019和BraTS2023</strong>：来自2019年和2023年脑肿瘤分割挑战，分别有335和1251个标注的MRI图像，每个病例有四种模态，标注区域包括肿瘤的三个子区域。</li>
+<li><strong>CHAOS</strong>：来自联合（CT - MR）健康腹部器官分割挑战的任务5，旨在从20个不同序列的MRI数据集中分割腹部器官。</li>
+<li><strong>BraTS2024</strong>：专注于治疗后神经胶质瘤的自动多区域脑肿瘤分割，使用治疗后的MRI，评估子区域包括非增强肿瘤核心等。</li>
+</ul>
+</li>
+<li><strong>实现细节</strong>：使用Pytorch - 1.7.1实现，在单张24GB NVIDIA GeForce RTX 3090 GPU上从零开始训练300个epoch，批量大小为16，输入图像调整为128×128。采用SGD优化器，初始学习率0.001并使用动态学习率策略，结合交叉熵损失和Dice损失训练网络。根据器官和病变可见性直观选择单模态分支作为CNN分支的输入。</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-35-31.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-35-31.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-05_16-35-31"></p>
+<ul>
+<li><strong>头颈部肿瘤分割（Hecktor21数据集）</strong>：该方法在HD95指标上取得最低分2.0793，Dice系数达到最高0.8242。箱线图显示其在Dice和HD95得分上表现更优且稳定，可视化结果表明该方法分割结果接近真实情况，对小目标体积也有良好处理能力。</li>
+<li><strong>前列腺分割（Prostate158数据集）</strong>：在PZ和TZ区域的Dice得分表现更好，PZ区域Dice得分为0.7833，TZ区域为0.8921，相比其他方法有显著提升。在HD95指标上虽未都达到最佳，但与最佳方法差距小，整体表现最优，且具有稳定性。可视化结果显示该方法在PZ区域过分割和欠分割问题较少，3D视角结果更接近真实情况。</li>
+<li><strong>脑肿瘤分割（BraTS2019数据集）</strong>：在WT和TC区域Dice得分最高，分别为0.9280和0.8764，ET区域Dice得分仅次于MAML模型。HD95指标上，ET区域得分最低，WT和TC区域与最佳方法差距不显著，整体平均HD95得分最低。箱线图显示Dice和HD95得分分布更集中，异常值少。可视化结果表明该方法在脑肿瘤和水肿区域分割更准确。</li>
+<li><strong>腹部器官分割（CHAOS数据集）</strong>：在所有评估器官上均优于其他方法，肝脏、右肾、左肾和脾脏的Dice系数分别为0.9206、0.9350、0.9077和0.9208，HD95也表现良好。箱线图显示该方法在两个指标下箱体高度最短，变异性最低，异常值最少，稳定性高。可视化结果表明该方法在不同形状和大小的腹部器官分割上表现更好。</li>
+<li><strong>脑肿瘤分割（BraTS2023数据集）</strong>：在WT、TC和ET区域的Dice和HD95指标上均表现优异，Dice得分分别为0.9371、0.9054和0.8629，HD95值分别为2.7786mm、3.3692mm和2.3758mm。箱线图显示WT区域Dice得分和三个区域HD95得分分布更集中，TC和ET区域Dice得分异常值少。可视化结果表明该方法在脑肿瘤和水肿区域分割更准确，具有良好的泛化能力。</li>
+<li><strong>脑肿瘤分割（BraTS2024数据集）</strong>：除NETC区域的HD95外，在所有评估肿瘤区域表现显著提升，在TC、WT、SNFH和RC区域Dice得分最高，HD95得分较低。可视化结果表明该方法在不同子区域分割更准确。</li>
+<li><strong>在线评估结果（BraTS2023验证集）</strong>：与竞争方法相比，该方法在TC区域取得有竞争力的结果，Dice为0.860，HD95为15.110。该方法属于研究导向方法，注重探索不同模态的异构表示和融合，虽一些竞争方法计算能力和后处理技术强，但该方法在整体分割性能和泛化能力上表现出色。</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-36-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-36-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-05_16-36-26"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
+<li><p><strong>各模块有效性</strong></p>
+<ul>
+<li><strong>T - CFAF模块</strong>：移除该模块会导致Dice得分和HD95距离显著下降，添加CA和CMA可提高平均Dice得分，降低HD95距离。可视化结果表明添加T - CFAF后模型分割更接近真实情况。该模块有效补充多模态信息，促进特征提取，提高整体分割性能。</li>
+<li><strong>CMHGF模块</strong>：用通道连接结构替代该模块会使平均Dice得分下降，HD95距离增加。在BraTS2019数据集上的详细实验表明，CMHGF模块比CMA模块更能有效整合跨模态特征，增强分割准确性，跳跃连接和GNN结构对模型性能提升起关键作用。</li>
+</ul>
+</li>
+<li><p><strong>不同单模态分支比较</strong>：不同主要模态输入会导致不同结果，但该模型在大多数情况下与无模态区分的方法相比，能产生最高分割准确率。不同模态贡献不同，如头颈部肿瘤分割中高分辨率CT图像局部信息可提高准确性，脑肿瘤分割中T2图像因能清晰描绘病变而表现更好，前列腺和腹部器官分割中不同主要模态结果无明显规律。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-37-31.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-37-31.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-05_16-37-31"></p>
 </li>
 </ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了一种<strong>基于语义不确定性引导的弱监督语义分割方法</strong>，并将其集成到单阶段框架中，在PASCAL VOC 2012和MS COCO 2014基准上验证了有效性。具体结论如下： 1. <strong>方法设计有效</strong>：设计了基于激活的掩码策略，利用自蒸馏知识恢复局部信息，并引入自蒸馏方法增强语义一致性，能有效估计边界。 2. <strong>性能表现优异</strong>：在两个基准测试中，所提方法显著优于其他单阶段方法，甚至超过了一些复杂的多阶段方法，证明了基于Transformer的单阶段训练的有效性。 3. <strong>消融实验验证</strong>：消融实验表明，增强不确定特征和确定特征对语义分割都很重要，两者结合可进一步提高伪标签和预测标签的质量。 </p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-38-07.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-38-07.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-05_16-38-07"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了一种用于多模态医学图像分割的非对称异构网络，得出以下结论：</p>
+<ol>
+<li>创新性模块有效：特征桥接的Transformer - CNN非对称双编码器分支可高效提取辅助多模态和主导单模态的互补特征；T - CFAF模块促进多模态信息集成到单模态分支；CMHGF模块利用图结构自适应融合双编码器的跨模态特征。</li>
+<li>性能优越：实验结果表明，该方法显著优于现有的多模态分割方法，在多个数据集上的各项指标表现出色。</li>
+<li>具有通用性：该模型可作为通用的多模态研究框架，单模态编码分支易于替换，未来可进一步研究基于文本-图像的多模态模型。</li>
+</ol>
 <blockquote>
-<p>启发：弱监督语义分割、自蒸馏</p>
+<p>不足：</p>
+<p><strong>(1) 参数数量和模型复杂度</strong>：该方法的参数数量和计算量较大，每批次大小为1时，有4.1137亿个参数和941.001 GFLOPs，相比其他方法规模更大。这一问题导致受限于GPU内存，只能使用二维网络。尽管采用的非对称特征编码结构以及T - CFAF和CMHGF特征对齐融合模块能有效学习多模态信息并取得优于现有先进技术的结果，但大量的参数限制了模型在处理能力或内存受限的实际场景中的应用。 </p>
+<p><strong>(2) 处理不完整模态数据能力</strong>：该方法主要聚焦于对齐的多模态医学图像分割。然而在实际临床环境中，由于设备限制或患者状况等原因，可能会出现模态缺失的情况。未来研究需要解决在模态数据不完整的情况下进行有效分割的问题，即开发出能够适应模态缺失情况，并在关键模态信息缺失时仍能保持高分割精度的鲁棒算法。 </p>
 </blockquote>
 
       </div>
@@ -773,12 +802,12 @@
         
         <div class="tags">
           
-            <a href="/tags/Weakly-Supervised-Semantic-Segmentation/" class="">
-              Weakly Supervised Semantic Segmentation
+            <a href="/tags/Asymmetric-encoding/" class="">
+              Asymmetric encoding
             </a>
           
-            <a href="/tags/Feature-Self-Reinforcement/" class="">
-              Feature Self-Reinforcement
+            <a href="/tags/adaptive-heterogeneous-graph-fusion/" class="">
+              adaptive heterogeneous graph fusion
             </a>
           
         </div>
@@ -792,7 +821,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/" target="_blank" title="Progressive Feature Self-Reinforcement for Weakly Supervised Semantic Segmentation">https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</a>
+    <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" target="_blank" title="Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation">https://louaq.github.io/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -810,43 +839,24 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Learning Generalized Medical Image Segmentation from Decoupled Feature Queries</div>
-      </div>
-      
-      <!-- <div class="content">
-        Jarvis Research Center、Wuhan University、Guangxi Medical Univ
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/fcn/20250312-pytorch-jiao-cheng/" class="post-nav-link">
+    <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Pytorch教程</div>
+        <div class="title-text">MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion</div>
       </div>
       <!-- <div class="content">
         
+大连大学、北京科技大学、大连理工大学、阿尔斯特大学
 
-
-
-
+摘要Multi-modality image fusion (M
       </div> -->
     </a>
   </div>
@@ -981,7 +991,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Alabtion-Experiments%EF%BC%89"><span class="toc-text">实验（Alabtion Experiments）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="toc-text">整体架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E7%BB%84%E4%BB%B6"><span class="toc-text">主要组件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
