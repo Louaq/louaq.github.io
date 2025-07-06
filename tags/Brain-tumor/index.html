@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Self-supervised vision transformers for semantic segmentation | Louaq</title>
+  <title>标签: Brain tumor | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -644,688 +644,109 @@
 </header>
         <!-- 内容区域 -->
         
-<!-- prismjs 代码高亮 -->
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Self-supervised vision transformers for semantic segmentation
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-04-03 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E8%87%AA%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              自监督语义分割
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.3k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 8分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+<div class="tag-header" style="background-image: url('https://vip.123pan.cn/1816472581/ymjew503t0m000d6xujzns6nfwgh6p6vDIYPAqF0DqJ1DGxwDIiw.jpg');">
+  <div class="tag-header-title">
+    tag
   </div>
+  <div class="tag-header-desc">
   
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Semantic segmentation is a fundamental task in computer vision and it is a building block of many other vision applications. Nevertheless, semantic segmentation annotations are extremely expensive to collect, so using pre-training to alleviate the need for a large number of labeled samples is appealing. Recently, <strong>self-supervised</strong> <strong>learning (SSL)</strong> has shown effectiveness in extracting strong representations and has been widely applied to a variety of downstream tasks. However, most works perform sub-optimally in semantic segmentation because they ignore the specific properties of segmentation: (i) the need of pixel level fine-grained understanding; (ii) with the assistance of global context understanding; (iii) both of the above achieve with the dense self-supervisory signal. Based on these key factors, we introduce a systematic self-supervised pre-training framework for semantic segmentation, which consists of a hierarchical encoder–decoder architecture MEVT for generating high-resolution features with global contextual information propagation and a self-supervised training strategy for learning fine-grained semantic features. In our study, our framework shows competitive performance compared with other main self-supervised pre-training methods for semantic segmentation on <strong>COCO-Stuff, ADE20K, PASCAL VOC, and Cityscapes</strong> datasets. e.g., MEVT achieves the advantage in linear probing by +1.3 mIoU on PASCAL VOC.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>语义分割是计算机视觉的基础任务，也是众多视觉应用的基础模块。但由于语义分割标注的获取成本极高，通过预训练减少对大量标注样本的依赖显得尤为重要。近年来，自监督学习（SSL）在特征提取方面展现出显著成效，已被广泛应用于各类下游任务。然而，现有方法在语义分割任务中效果欠佳，主要原因在于忽视了该任务的三个核心特性：(i) 需要像素级的细粒度理解；(ii) 需要结合全局上下文信息；(iii) 必须通过密集的自监督信号同时实现上述两个目标。基于这些关键要素，我们开发了系统的自监督预训练框架，包含以下创新：采用 MEVT 分层编码器-解码器架构生成具有全局上下文传播能力的高分辨率特征，以及专门设计的自监督训练策略用于学习细粒度语义特征。实验表明，在 COCO-Stuff、ADE20K、PASCAL VOC 和 Cityscapes 等数据集上，我们的框架相比其他主流自监督预训练方法展现出竞争优势。典型例证如：MEVT 在 PASCAL VOC 的线性探测任务中实现了 1.3 mIoU 的性能提升。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>语义分割是计算机视觉的基础任务，在自动驾驶、机器人操作等领域应用广泛，但标注成本高昂，多数语义分割数据集规模远小于分类数据集。因此，利用大规模无标签数据进行预训练以减少对大量标注样本的依赖成为潜在解决方案。 </p>
-<p>近年来，<strong>自监督学习（SSL）及其在视觉Transformer</strong>上的应用在计算机视觉领域取得显著进展，能帮助网络学习通用视觉表示，降低对大规模标注数据的需求。然而，多数自监督学习方法在语义分割任务中表现欠佳，原因在于它们忽略了语义分割的特定属性：需要像素级的细粒度理解、借助全局上下文理解，且要通过密集的自监督信号实现上述两点。 基于这些问题，本文作者探索一种适用于语义分割的自监督预训练方法，提出了一个系统的自监督预训练框架，旨在生成具有全局上下文信息传播的高分辨率特征，并学习细粒度的语义特征，以提升语义分割任务的性能。 </p>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
-<li><strong>自监督学习</strong>：提出多种预训练任务，如色彩化、图像修复等，对比学习在下游视觉任务表现良好，基于掩码图像建模的方法取得了不错的成果，部分研究还改进了训练目标和架构。</li>
-<li><strong>密集预测预训练</strong>：利用自监督学习进行密集预测预训练，一些方法聚焦实例级&#x2F;原型对应，部分引入像素&#x2F;区域级自监督预训练方法。</li>
-<li><strong>视觉Transformer</strong>：ViT将Transformer应用于图像识别，Swin Transformer引入卷积风格窗口计算，部分工作构建多分辨率特征图用于密集输出。</li>
-</ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-00-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-00-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-14_21-00-59"></p>
-<p>本文提出了一种用于<strong>语义分割的自监督预训练框架</strong>，该框架在网络架构和自监督目标方面都有创新，核心模型是多尺度编码器 - 解码器视觉变压器（Multi-scale Encoder–Decoder Vision Transformer, MEVT），以下是详细介绍： </p>
-<ol>
-<li><strong>模型架构</strong>    <ul>
-<li><strong>多尺度解码器</strong>：为了获得高分辨率的细粒度特征，MEVT在预训练架构中引入了多尺度解码器，并对编码器和解码器进行联合预训练。解码器由全局注意力阶段（Stage 5）和局部注意力阶段（Stage 6）组成，通过“Patch Unmerging”层对特征图进行上采样，同时引入跳跃连接（skip-connections），促进训练过程中浅层的梯度传播。    </li>
-<li><strong>混合注意力机制</strong>：为了融合全局和局部上下文信息，MEVT采用了一种简单而有效的混合注意力策略。在浅层（Stage 1、2和6）使用Swin Transformer的窗口注意力块来处理局部信息，在深层（Stage 3、4和5）使用全局自注意力（ViT块）来增强全局上下文信息的传播。</li>
-</ul>
-</li>
-<li><strong>自监督预训练策略</strong>：MEVT使用图像级自蒸馏损失（来自DINO）对全局平均池化（GAP）特征进行预训练。将图像的两个增强视图分别输入到教师网络和学生网络中，通过最小化交叉熵损失将知识从教师网络蒸馏到学生网络。教师网络通过指数移动平均（EMA）更新。在Stage 4和Stage 6的输出处分别应用自蒸馏损失，并对两个损失项进行等权重加权，以确保编码器和解码器网络得到充分的预训练。</li>
-<li><strong>模型优势</strong></li>
-</ol>
-<ul>
-<li><strong>性能表现</strong>：在多个语义分割数据集（COCO - Stuff、ADE20K、PASCAL VOC和Cityscapes）上的实验结果表明，MEVT在各种设置（线性探测、微调、低样本学习）下均优于大多数现有方法。例如，在PASCAL VOC上，MEVT在线性探测中比其他方法提高了+1.3 mIoU。   </li>
-<li><strong>特征学习</strong>：通过实验和消融研究，证明了MEVT能够学习到具有细粒度和全局上下文感知能力的视觉表示，适用于具有挑战性的语义分割任务。例如，在定性结果中，MEVT在复杂环境中识别小物体的能力优于其他基线方法。</li>
-</ul>
-<h2 id="实验（Compared-with-SOTA）-1st-place-medal"><a href="#实验（Compared-with-SOTA）-1st-place-medal" class="headerlink" title="实验（Compared with SOTA）:1st_place_medal:"></a>实验（Compared with SOTA）:1st_place_medal:</h2><p><strong>数据集</strong>：在ImageNet上进行300个epoch的预训练。</p>
-<ul>
-<li><strong>线性探测结果</strong>：在COCO - Stuff、ADE20K、Cityscapes和PASCAL等数据集上，MEVT在大多数数据集上优于所有基线方法。例如，在具有挑战性的Cityscapes数据集上，MEVT比基于Transformer的DINO方法高出8.4 mIoU，比采用Swin - T的MOBY方法高出2.6 mIoU。</li>
-<li><strong>端到端微调结果</strong>：在ADE20K数据集上，使用线性头时，MEVT比之前最好的方法iBOT高出2.4 mIoU。</li>
-<li><strong>低样本微调结果</strong>：在不同比例标记的ADE20K图像上，MEVT在各种监督水平下均优于现有方法，表明其在实际场景中能实现更高效的语义分割。</li>
-</ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-04-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-04-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-14_21-04-37"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-04-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-04-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-14_21-04-43"></p>
-<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><ul>
-<li><strong>预训练解码器</strong>：将解码器纳入预训练框架显著提高了线性探测mIoU（+4.9）和微调mIoU（+2.2）。</li>
-<li><strong>解码器深度</strong>：默认使用两个块的解码器，从一个块增加到两个块可提高线性探测和微调性能，增加到三个块时性能下降。</li>
-<li><strong>多尺度融合</strong>：MEVT在低分辨率阶段使用全局自注意力进行多尺度信息融合，比仅依赖窗口注意力的Swin - T + W.A.Dec.在线性探测和微调上分别高出2.9 mIoU和2.8 mIoU。</li>
-<li><strong>跳跃连接</strong>：添加两个跳跃连接时性能最佳，线性探测mIoU从67.8提高到71.5。</li>
-<li><strong>位置编码</strong>：成对相对位置偏差的效果优于其他位置偏差，线性探测mIoU提高了4.3。</li>
-</ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了一种<strong>自监督预训练方法</strong>，用于促进下游<strong>语义分割任务</strong>，得出以下结论：</p>
-<ol>
-<li><strong>方法创新</strong>：该方法在神经网络架构和自监督目标方面均有创新，构建了包含多尺度编码器-解码器架构MEVT和自监督训练策略的框架。</li>
-<li><strong>性能优越</strong>：此框架简单且强大，在<strong>COCO-Stuff、ADE20K、PASCAL VOC和Cityscapes</strong>四个常用数据集的多种语义分割和低样本评估指标上达到了最优性能。 </li>
-<li><strong>应用前景</strong>：<strong>作者希望该简单框架能推动无标签或少量标签语义分割的广泛应用，减少对大量高质量标注数据的依赖。</strong></li>
-</ol>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/semantic-segmentation/" class="">
-              semantic segmentation
-            </a>
-          
-            <a href="/tags/ViT/" class="">
-              ViT
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Louaq</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/post/self-supervised-vision-transformers-for-semantic-segmentation/" target="_blank" title="Self-supervised vision transformers for semantic segmentation">https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">All-pairs Consistency Learning for Weakly Supervised Semantic Segmentation</div>
-      </div>
-      
-      <!-- <div class="content">
-        澳大利亚国立大学、OpenNLPLab、上海人工智能实验室、厦门大学、OPPO研究院
-::: tip
-启发
-:::
-摘要
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">A Transformer-based Adaptive Prototype Matching Network for Few-Shot Semantic Segmentation</div>
-      </div>
-      <!-- <div class="content">
-        南京信息工程大学、青海师范大学、澳门大学、中国科学院  :100:摘要：
-Few-shot semantic segme
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script defer src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+    <span class="title" id="tag-header-desc"></span>
+    <script>
+  function typedFn() {
+    const el = '#tag-header-desc';
+    const type = 'tagDetail';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <section id="waline-box">
-  <div id="waline-comment"></div>
-</section>
+  typedFn();
+</script>
     
   </div>
+  <div class="mask-box"></div>
+</div>
 
 
-<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
-
+<div class="tag">
+  <div class="tag-name">
+    <div class="name" style="background-color: #D7BDE2;">Brain tumor 分类</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  <aside id='l_side'>
+<section class="posts">
   
     
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/about/'>
-          <img src='/img/b.jpg'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2025-07-06</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">BTSegDiff Brain tumor segmentation based on multimodal MRI Dynamically guided diffusion probability model</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Brain-tumor/" rel="tag">Brain tumor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Diffusion-Probability-Model-DPM/" rel="tag">Diffusion Probability Model (DPM)</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            在脑肿瘤的治疗中，准确的诊断和治疗严重依赖于可靠的脑肿瘤分割，而多模态磁共振成像（MRI）通过提供有价值的补充信息发挥关键作用
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Louaq</h2>
-        
-        
-          <p>keep coding</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">Louaq</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:yang_syy@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Louaq"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-    
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Compared with SOTA）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-06</span>
-                
-              </div>
-              <a class="post-title" href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">BTSegDiff Brain tumor segmentation based on multimodal MRI Dynamically guided diffusion probability model</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-05</span>
-                
-              </div>
-              <a class="post-title" href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-03</span>
-                
-              </div>
-              <a class="post-title" href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">07-02</span>
-                
-              </div>
-              <a class="post-title" href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/">A nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">06-30</span>
-                
-              </div>
-              <a class="post-title" href="/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/">Mirror U-Net Marrying Multimodal Fission with Multi-task Learning for Semantic Segmentation in Medical Imaging</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script defer src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || 'https://pic1.zhimg.com/80/v2-6d0cbd4380b4959542d3f5da31c7f20c_1440w.jpg';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>
