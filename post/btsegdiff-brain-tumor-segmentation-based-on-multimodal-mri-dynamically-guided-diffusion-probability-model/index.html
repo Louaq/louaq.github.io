@@ -721,18 +721,18 @@
       <div class="post-content">
         <p>云南大学、锡根大学</p>
 <blockquote>
-<p>论文内有多处表述错误！！！</p>
+<p>针对论文，有以下疑问：</p>
 </blockquote>
 <ol>
-<li>Introduction第4段中第6句和第7句，表述重复，仅有method和approach两个单词不同</li>
+<li>Introduction第4段中第6句和第7句，有表述重复的情况，仅有method和approach两个单词不同</li>
 </ol>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-50-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-50-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-06_20-50-26"></p>
 <ol start="2">
-<li>在 <strong>2.1. MRI brain tumor segmentation</strong> 第2段中，出现MR images的表述，推测应该为MRI images（核磁共振图像）,少写大写字母I</li>
+<li>在 <strong>2.1. MRI brain tumor segmentation</strong> 第2段中，出现MR images的表述，但是全文中只出现过MRI images（核磁共振图像）</li>
 </ol>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-54-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-54-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-06_20-54-08"></p>
 <ol start="3">
-<li>在 <strong>4.4. Uncertainty measure based sampling</strong>  第6段中，出现语义不详的表述：<strong>sUncertainty measure</strong></li>
+<li>在 <strong>4.4. Uncertainty measure based sampling</strong>  第6段中，表述：<strong>sUncertainty measure</strong> 不理解</li>
 </ol>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-57-19.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-57-19.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-06_20-57-19"></p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>In the treatment of brain tumors, accurate diagnosis and treatment heavily rely on reliable <strong>brain tumor segmentation</strong>, where multimodal <strong>Magnetic Resonance Imaging</strong> (MRI) plays a pivotal role by providing valuable<br>complementary information. This integration significantly enhances the performance of brain tumor segmen­<br>tation. However, due to the uneven grayscale distribution, irregular shapes, and significant size variations in<br>brain tumor images, this task remains highly challenging. In order to overcome these obstacles, we have introduced a novel framework for automated segmentation of brain tumors that leverages the diverse infor­<br>mation from multi-modal MRI scans. Our proposed method is named BTSegDiff and it is based on a Diffusion<br>Probability Model (DPM). First, we designed a dynamic conditional guidance module consisting of an encoder.<br>This encoder is used to extract information from multimodal MRI images and guide the DPM in generating accurate and realistic segmentation masks. During the guidance process, we need to fuse the diffused generated features with the extracted multimodal features. However, diffusion process itself introduces a significant amount of Gaussian noise, which can affect the fusion results. Therefore, we designed a Fourier domain feature fusion module to transfer this fusion process to Euclidean space and reduce the impact of high-frequency noise on fusion. Lastly, we have taken into account that the DPM, as a generative model, produces non-unique results with each sampling. In the meticulous field of medicine, this is highly detrimental. Therefore, we have designed a Stepwise Uncertainty Sampling module based on Monte Carlo uncertainty calculation to generate unique out­ comes and enhance segmentation accuracy simultaneously. To validate the effectiveness of our approach, we perform a validation on the popular BraTs2020 and BraTS2021 benchmarks. The experimental results show that our method outperforms many existing brain tumor segmentation methods. Our code is available at <a target="_blank" rel="noopener" href="https://github.com/jaceqin/BTSegDiff">https://github.com/jaceqin/BTSegDiff</a>.</p>
