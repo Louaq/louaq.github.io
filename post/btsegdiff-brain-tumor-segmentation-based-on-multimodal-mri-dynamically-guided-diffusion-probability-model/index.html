@@ -694,7 +694,7 @@
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 12分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 11分钟 |
           </span>
   
           
@@ -720,21 +720,6 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>云南大学、锡根大学</p>
-<blockquote>
-<p>针对论文，有以下疑问：</p>
-</blockquote>
-<ol>
-<li>Introduction第4段中第6句和第7句，有表述重复的情况，仅有method和approach两个单词不同</li>
-</ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-50-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-50-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-06_20-50-26"></p>
-<ol start="2">
-<li>在 <strong>2.1. MRI brain tumor segmentation</strong> 第2段中，出现MR images的表述，但是全文中只出现过MRI images（核磁共振图像）</li>
-</ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-54-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-54-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-06_20-54-08"></p>
-<ol start="3">
-<li>在 <strong>4.4. Uncertainty measure based sampling</strong>  第6段中，表述：<strong>sUncertainty measure</strong> 不理解</li>
-</ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-57-19.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-06_20-57-19.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-06_20-57-19"></p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>In the treatment of brain tumors, accurate diagnosis and treatment heavily rely on reliable <strong>brain tumor segmentation</strong>, where multimodal <strong>Magnetic Resonance Imaging</strong> (MRI) plays a pivotal role by providing valuable complementary information. This integration significantly enhances the performance of brain tumor segmen­tation. However, due to the uneven grayscale distribution, irregular shapes, and significant size variations in brain tumor images, this task remains highly challenging. In order to overcome these obstacles, we have introduced a novel framework for automated segmentation of brain tumors that leverages the diverse infor­mation from multi-modal MRI scans. Our proposed method is named BTSegDiff and it is based on a Diffusion Probability Model (DPM). First, we designed a dynamic conditional guidance module consisting of an encoder. This encoder is used to extract information from multimodal MRI images and guide the DPM in generating accurate and realistic segmentation masks. During the guidance process, we need to fuse the diffused generated features with the extracted multimodal features. However, diffusion process itself introduces a significant amount of Gaussian noise, which can affect the fusion results. Therefore, we designed a Fourier domain feature fusion module to transfer this fusion process to Euclidean space and reduce the impact of high-frequency noise on fusion. Lastly, we have taken into account that the DPM, as a generative model, produces non-unique results with each sampling. In the meticulous field of medicine, this is highly detrimental. Therefore, we have designed a Stepwise Uncertainty Sampling module based on Monte Carlo uncertainty calculation to generate unique out­ comes and enhance segmentation accuracy simultaneously. To validate the effectiveness of our approach, we perform a validation on the popular BraTs2020 and BraTS2021 benchmarks. The experimental results show that our method outperforms many existing brain tumor segmentation methods. Our code is available at <a target="_blank" rel="noopener" href="https://github.com/jaceqin/BTSegDiff">https://github.com/jaceqin/BTSegDiff</a>.</p>
 <h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>在脑肿瘤的治疗中，准确的诊断和治疗严重依赖于可靠的脑肿瘤分割，而多模态磁共振成像（MRI）通过提供有价值的补充信息发挥关键作用。这种整合显著提高了脑肿瘤分割的性能。然而，由于脑肿瘤图像中灰度分布不均、形状不规则以及大小差异显著，这项任务仍然极具挑战性。为了克服这些障碍，我们引入了一种利用多模态MRI扫描的多样信息进行脑肿瘤自动分割的新框架。我们提出的方法名为BTSegDiff，基于扩散概率模型（DPM）。首先，我们设计了一个动态条件指导模块，该模块由编码器组成。编码器用于从多模态MRI图像中提取信息，并指导DPM生成准确和逼真的分割掩码。在指导过程中，我们需要将扩散生成的特征与提取的多模态特征进行融合。然而，扩散过程本身引入了大量的高斯噪声，这可能影响融合结果。因此，我们设计了一个傅里叶域特征融合模块，将该融合过程转移到欧几里得空间，并减少高频噪声对融合的影响。最后，我们考虑到DPM作为生成模型，每次采样产生的结果都不唯一。在医学这个细致的领域中，这非常不利。因此，我们设计了一个基于蒙特卡洛不确定性计算的逐步不确定性采样模块，以生成独特结果并同时提高分割精度。为了验证我们方法的有效性，我们在流行的BraTs2020和BraTS2021基准上进行了验证。实验结果表明，我们的方法优于许多现有的脑肿瘤分割方法。我们的代码可在<a target="_blank" rel="noopener" href="https://github.com/jaceqin/BTSegDiff%E3%80%82">https://github.com/jaceqin/BTSegDiff。</a></p>
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于<strong>脑肿瘤分割研究</strong>，其背景源于脑肿瘤发病率上升，准确分割对诊断治疗至关重要。传统手动分割耗人力且依赖医生经验，计算机辅助自动分割方法具有重要临床价值，但面临诸多挑战。 早期基于区域生成、边缘检测和阈值分割的自动分割方法虽有进步，但需手动调参，难以处理多模态图像。深度学习发展使基于其的医学图像分割方法展现出强大特征学习能力，U - Net 提升了脑肿瘤分割性能，Transform 能更好学习全局信息。然而，这些方法仍存在不足，如 CNN 难以学习全局特征，Transform 需为不同数据集设计合适架构。 扩散概率模型（DPM）在生成任务和医学成像领域有一定成效，但现有基于 DPM 的脑肿瘤分割方法忽视了多模态信息提取和模型不确定性定量分析。为解决这些问题，作者提出基于 DPM 的脑肿瘤分割框架 BTSegDiff，旨在利用多模态 MRI 信息引导 DPM 生成高质量分割结果，减少噪声影响，解决 DPM 结果不唯一问题，提升分割准确性和稳定性。 </p>
@@ -839,9 +824,7 @@
         
 南华大学
 
-针对本文，有以下疑问
-
-在 III. METHODOLOGY 中 1) Feature Extractio
+摘要Multimodal medical image fusion aims to integrate c
       </div> -->
     </a>
   </div>
