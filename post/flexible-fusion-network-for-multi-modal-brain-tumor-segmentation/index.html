@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>分类: 多模态医学图像分割 | Louaq</title>
+  <title>Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -644,377 +644,688 @@
 </header>
         <!-- 内容区域 -->
         
+<!-- prismjs 代码高亮 -->
 
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-<div class="bg-light-floor-categoryDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-<div class="category-header"  style="background-image:url('https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdsj6gkwlqjDIYPAqF0DqJ1DGxwDIiw.jpg')">
-  <div class="category-header-title">
-    category
-  </div>
-  <div class="category-header-desc">
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
+  
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation
+      </span>
+    </div>
     
-      <span class="title" id="category-header-desc"></span>
-      <script>
-  function typedFn() {
-    const el = '#category-header-desc';
-    const type = 'categoryDetail';
-    let desc = '愿你如风，被人温柔以待'
-    var typed = new Typed(el, {
-      strings: [desc],
-      startDelay: 100,
-      typeSpeed: 100,
-      loop: true,
-      backSpeed: 50,
-      showCursor: true
-    });
-  }
-  typedFn();
-</script>
+    
       
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2025-07-08 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              多模态医学图像分割
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.1k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> 阅读时长: 11分钟 |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
   </div>
-  <div class="mask-box"></div>
+  
+  
 </div>
 
 
-<div class="category">
-  <div class="category-name">
-    <div class="name" style="background-color: #F8C471;">多模态医学图像分割 分类</div>
+
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <blockquote>
+<p>南京理工大学、东南大学</p>
+</blockquote>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Automated brain tumor segmentation is crucial for aiding brain disease diagnosis and evaluating disease progress. Currently, <strong>magnetic resonance imaging</strong> (MRI) is a routinely adopted approach in the field of brain tumor segmentation that can provide different modality images. It is critical to leverage multi-modal images to boost brain tumor segmentation performance. Existing works commonly concentrate on generating a shared representation by fusing multi-modal data, while few methods take into account modality-specific characteristics. Besides, how to efficiently fuse arbitrary numbers of modalities is still a difficult task. In this study, we present a flexible fusion network (termed F2Net) for multi-modal brain tumor segmentation, which can flexibly fuse arbitrary numbers of multi-modal information to explore complementary information while maintaining the specific characteristics of each modality. Our F2Net is based on the encoder-decoder structure, which utilizes two Transformer-based feature learning streams and a cross-modal shared learning network to extract individual and shared feature representations. To effectively integrate the knowledge from the multi-modality data, we propose a cross-modal feature enhanced module (CFM) and a multi-modal collaboration module (MCM), which aims at fusing the multi-modal features into the shared learning network and incorporating the features from encoders into the shared decoder, respectively. Extensive experimental results on multiple benchmark datasets demonstrate the effectiveness of our F2Net over other state-of-the-art segmentation methods.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>自动化脑肿瘤分割对于辅助脑疾病诊断和评估疾病进展至关重要。目前，磁共振成像（MRI）是脑肿瘤分割领域常用的方法，可以提供不同的模态图像。利用多模态图像提升脑肿瘤分割性能是关键。现有研究通常关注通过融合多模态数据生成共享表示，而很少有方法考虑模态特异性特征。此外，如何有效地融合任意数量的模态仍是一个困难的任务。在本研究中，我们提出了一种灵活的融合网络（称为F2Net）用于多模态脑肿瘤分割，该网络可以灵活地融合任意数量的多模态信息，以探索互补信息，同时保持每种模态的特异性特征。我们的F2Net基于编码器-解码器结构，利用两个基于Transformer的特征学习流和一个跨模态共享学习网络来提取个体和共享特征表示。为了有效整合多模态数据的知识，我们提出了一个跨模态特征增强模块（CFM）和一个多模态协作模块（MCM），分别旨在将多模态特征融合到共享学习网络中，并将编码器中的特征整合到共享解码器中。多个基准数据集上的广泛实验结果证明了我们的F2Net在其他最新分割方法上的有效性。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦多模态脑肿瘤分割，旨在提升分割性能，其研究背景如下：</p>
+<ul>
+<li><p><strong>临床需求</strong>：脑肿瘤是全球致命疾病之一，及时检测对临床评估和治疗策略至关重要。磁共振成像（MRI）是分析脑肿瘤的常用工具，包含<strong>T1、T2、T1CE和FLAIR四种成像模态</strong>，各模态能提供大脑结构的独特信息和肿瘤不同子区域的互补信息。但自动脑肿瘤分割面临肿瘤大小、形状和位置多样性大等挑战。</p>
+</li>
+<li><p><strong>现有方法局限</strong>：卷积神经网络（CNNs）在医学分割任务中取得显著成功，如U - Net及其变体，但现有多模态脑肿瘤分割方法存在不足。早期融合策略不能有效保留各模态特征和探索模态间联系；晚期融合模型虽提取独立特征，但未充分利用模态特征提升分割性能；部分方法学习融合信息时忽略了模态编码器特征的重要性。因此，如何有效融合多模态数据，同时挖掘共享信息和捕捉模态特定特征以获得良好的分割结果仍是挑战。</p>
+</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_09-56-38.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_09-56-38.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_09-56-38"></p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
+<li><strong>医学图像分割</strong>：CNN 算法广泛应用，U - Net 及其变体表现出色，且已拓展到 3D 分割；Transformer 用于计算机视觉任务，部分结合 Transformer 的模型在医学图像分割中取得进展。</li>
+<li><strong>脑肿瘤分割</strong>：从生成概率模型转向神经网络模型，包括 2D 和 3D CNN 模型，部分模型结合 Transformer 提升性能。</li>
+<li><strong>多模态学习</strong>：多模态数据融合受关注，有多种融合算法，如独立深度学习流、模态感知模块、共享特征提取等方法。</li>
+</ul>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_09-58-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_09-58-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_09-58-59"></p>
+<p>F2Net主要包含两部分：两个<strong>基于Transformer的特定学习网络</strong>和一个<strong>跨模态共享学习网络</strong>。多模态数据首先输入到两个基于Transformer的特定学习网络中学习多级特征，然后通过提出的跨模态特征增强模块（CFM）对多级特征表示进行融合，融合后的特征以逐层策略通过共享学习网络。同时，使用跳跃连接将编码器路径的原始多级特征表示合并到相应的解码器中。此外，还提出了多模态协作模块（MCM），有选择地将特定编码器和共享编码器的特征集成到共享解码器中，以提供更丰富的信息，提高特征表示能力。</p>
+<ol>
+<li>基于Transformer的特定学习网络<ul>
+<li>以基于Transformer的结构作为骨干网络，如PVTv2，它能捕捉长距离依赖关系。输入图像被划分为不重叠的块，将块特征投影到C维空间，并添加位置嵌入后输入到具有空间缩减注意力（SA）层的基于Transformer的编码器中。</li>
+<li>采用渐进收缩策略生成多尺度特征，得到两组多尺度的四个特征F1和F2。</li>
+<li>解码器路径使用跳跃连接将编码器的特征合并到解码器中，通过简单的级联块（“Cas. Block”）组合分层特征。每个解码器都有监督信号，有助于最终分割结果。</li>
+</ul>
+</li>
+<li>跨模态共享学习网络<ul>
+<li><strong>跨模态特征增强模块（CFM）</strong>：为有效利用不同模态的独特特征而提出。首先将两个模态特定编码器的特征进行拼接，经过3×3卷积层和Sigmoid激活函数生成归一化图wi，作为特征级注意力权重。然后将两个特征与wi相乘，得到增强的特征表示。接着对增强的特征图进行求和、平滑处理，并与原始特征拼接，最后结合上一层的上下文信息。CFM能够有效捕捉多模态之间的互补信息，减少背景噪声。</li>
+<li><strong>多模态协作模块（MCM）</strong>：在跨模态共享学习网络的解码器中使用。将模态特定编码器的特征与共享编码器的特征相乘，再与共享编码器的特征拼接，经过一系列操作得到增强的特征表示。还将模态特定编码器的特征协作相乘，与前面的增强特征拼接，最终得到协作特征。MCM能够利用多模态数据的互补信息，提高脑肿瘤分割结果。</li>
+<li><strong>解码器路径</strong>：利用融合后的特征fMCM1、fMCM2、fMCM3进行解码，通过跳跃连接将编码器的分层特征合并到共享解码器中，最终输出作为最终分割结果。</li>
+</ul>
+</li>
+<li><strong>损失函数</strong>：采用混合损失评估预测结果与真实标签之间的差异，混合损失包括加权Dice损失和交叉熵（CE）损失。F2Net的总损失函数由共享学习网络的损失、两个模态特定解码器的损失组成。</li>
+</ol>
+<h3 id="模型优势"><a href="#模型优势" class="headerlink" title="模型优势"></a>模型优势</h3><ul>
+<li><strong>灵活性</strong>：能够灵活融合任意数量的多模态信息，探索互补信息的同时保留每个模态的特定特征。</li>
+<li><strong>有效性</strong>：在多个基准数据集上的实验结果表明，F2Net优于其他最先进的分割方法。</li>
+<li><strong>创新性</strong>：提出的CFM和MCM模块有效提高了特征表示能力和分割性能。</li>
+</ul>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
+<p><strong>数据集</strong>：在三个数据集上评估F2Net，分别是<strong>BraTS 2019、BraTS 2020和ISLES 2015 SISS</strong>。其中，BraTS 2019有335个多模态磁共振扫描，BraTS 2020有369个多模态磁共振扫描，每个受试者都有T1、T1CE、T2和FLAIR四种模态及对应的分割掩码；ISLES 2015 SISS有28个训练病例，包含T1、T1CE、T2和扩散加权成像（DWI）四种模态。实验采用体积轴向平面的2D切片，对输入图像进行归一化和边界裁剪，并将每个2D切片裁剪为224×224大小。同时，将每个数据集中的所有受试者随机分为80%的训练数据和20%的测试数据。</p>
+</blockquote>
+<blockquote>
+<p><strong>实现细节</strong>：使用在ImageNet - 1K上预训练的PVTv2作为F2Net的骨干网络，在一块NVIDIA RTX 2080Ti GPU上训练。采用SGD优化器，初始学习率为0.01，并按照“Poly”策略降低学习率，批大小设置为12，训练100个epoch。从BraTS 2019和BraTS 2020数据集中采用四种模态训练网络，从ISLES 2015数据集中选择三种模态训练分割方法。代码使用<strong>PyTorch和MindSpore</strong>实现，对于比较方法，除TranSiam外，均使用发布的源代码进行训练，TranSiam则按照原论文设置进行复现。</p>
+</blockquote>
+<blockquote>
+<p><strong>评估指标</strong>：使用四个指标评估所有分割方法的有效性，分别是骰子分数（Dice）、交并比（IoU）、95%豪斯多夫距离（HD95）和敏感度。</p>
+</blockquote>
+<ol>
+<li><strong>定量结果</strong>：选择七种最先进的方法进行比较实验，包括单模态和多模态分割方法。结果表明，F2Net在这些数据集上的分割性能均高于其他比较方法，其关键优势在于能有效利用多模态数据间的相关性和互补信息，提升多模态脑肿瘤分割性能。</li>
+<li><strong>定性比较</strong>：可视化结果显示，F2Net取得了良好进展，与其他方法相比，漏分割组织更少。单模态方法往往无法分割不同类型的脑肿瘤，因为它们未考虑各模态的特征和模态间的关系；与其他多模态分割方法相比，由于提出的CFM和MCM，F2Net能取得更准确的结果和更清晰的边缘。</li>
+</ol>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-03-44.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-03-44.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_10-03-44"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-03-50.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-03-50.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_10-03-50"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-04-31.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-04-31.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_10-04-31"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ol>
+<li><strong>CFM的有效性</strong>：通过两个基线实验研究CFM的重要性，结果表明CFM能提高多模态融合的表征能力，提升分割性能，引入MCM时也能观察到性能提升。</li>
+<li><strong>MCM的有效性</strong>：基于一个基线实验研究MCM的益处，结果显示引入MCM组件能有效利用各模态特定编码器提取的特征，准确定位和分割真实肿瘤区域，在四个评估指标上均有更好表现。</li>
+<li><strong>灵活融合策略的有效性</strong>：在BraTS 2020数据集上设计多个消融实验，结果表明使用共享学习网络能获得更好性能，引入CFM和MCM时融合策略能挖掘丰富模式并产生高性能；使用四个完整模态时，分割精度相对更好，说明该融合策略能有效融合多模态数据，探索共享信息和模态特定特征。</li>
+</ol>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-05-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-05-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_10-05-33"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-05-42.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-09_10-05-42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-09_10-05-42"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>文章提出了用于<strong>多模态脑肿瘤分割</strong>的灵活融合网络F2Net，并得出以下结论： </p>
+<ol>
+<li><strong>性能优越</strong>：F2Net能灵活融合任意数量的多模态信息，在三个数据集上的实验表明，相比其他先进的分割方法，它能有效利用多模态数据的相关性和互补信息，取得更高的分割性能。 </li>
+<li><strong>模块有效</strong>：交叉模态特征增强模块（CFM）和多模态协作模块（MCM）可有效捕捉多模态之间的互补信息，抑制背景噪声，提升特征表示能力，从而提高分割性能。</li>
+<li><strong>策略可行</strong>：灵活融合策略能高效融合多模态数据，挖掘丰富模式，明确探索共享信息和模态特定特征，使用更多模态时分割结果更好。不过，该模型在边界模糊和大病变情况下效果欠佳，后续需研究更轻量级骨干网络和自适应多模态融合方法。</li>
+</ol>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Medical-Image-Segmentation/" class="">
+              Medical Image Segmentation
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Louaq</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/" target="_blank" title="Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation">https://louaq.github.io/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">MACTFusion Lightweight Cross Transformer for Adaptive Multimodal Medical Image Fusion</div>
+      </div>
+      <!-- <div class="content">
+        
+南华大学
+
+摘要Multimodal medical image fusion aims to integrate c
+      </div> -->
+    </a>
   </div>
-  <!-- 每一篇文章卡片 -->
-  <!-- hash算法 -->
 
-<section class="posts">
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-07-08</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/">Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Medical-Image-Segmentation/" rel="tag">Medical Image Segmentation</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
 </div>
 
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            自动化脑肿瘤分割对于辅助脑疾病诊断和评估疾病进展至关重要
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
     
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-07-06</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">BTSegDiff Brain tumor segmentation based on multimodal MRI Dynamically guided diffusion probability model</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Brain-tumor/" rel="tag">Brain tumor</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Diffusion-Probability-Model-DPM/" rel="tag">Diffusion Probability Model (DPM)</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            在脑肿瘤的治疗中，准确的诊断和治疗严重依赖于可靠的脑肿瘤分割，而多模态磁共振成像（MRI）通过提供有价值的补充信息发挥关键作用
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
     
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-07-05</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Asymmetric-encoding/" rel="tag">Asymmetric encoding</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/adaptive-heterogeneous-graph-fusion/" rel="tag">adaptive heterogeneous graph fusion</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+    <!-- 打赏 -->
     
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-07-03</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Multi-Modality-Image-Fusion/" rel="tag">Multi-Modality Image Fusion</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            多模态图像融合(MMIF)需要合成具有详细纹理和突出目标的图像
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+    <!-- 分享 -->
     
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-07-02</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/">A nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Dual-Attention-Encoder/" rel="tag">Dual Attention Encoder</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Medical-Image-Segmentation/" rel="tag">Medical Image Segmentation</a></li></ul>
+<script defer src="/js/shareJs/social-share.min.js"></script>
+</script>
 
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
-</div>
+<style>
+  .social-share {
+    margin: 20px 0;
+  }
+</style>
 
 
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
     
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-06-25</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/duo-mo-tai-yi-xue/">多模态医学图像分割综述</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
+    
+    <!-- 评论 -->
+    <!-- 评论 -->
 
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" rel="tag">医学图像分割</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" rel="tag">多模态</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/">多模态医学图像分割</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/duo-mo-tai-yi-xue/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            基本概念多模态医学图像分割：多模态医学图像分割指融合多模态图像的信息以提高分割性能。常见的医学图像主要有计算机断层扫描（Computed Tomography， CT）、磁共振成像（Magnetic Resonance Imaging， M
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/duo-mo-tai-yi-xue/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/duo-mo-tai-yi-xue/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+  <div id="myComment">
+    
+      <section id="waline-box">
+  <div id="waline-comment"></div>
 </section>
-</div>
-<div class="w-70">
+    
+  </div>
+
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
+  </div>
+
+  <!-- 目录 -->
+  <aside id='l_side'>
   
+    
+      <section class="widget side_blogger">
+  <div class='content'>
+    
+      
+        <a class='avatar flat-box circle' href='/about/'>
+          <img src='/img/b.jpg'/>
+        </a>
+      
+    
+    
+      <div class='text'>
+        
+          <h2>Louaq</h2>
+        
+        
+          <p>keep coding</p>
+
+        
+        
+          <p><span id="jinrishici-sentence">Louaq</span></p>
+          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
+        
+      </div>
+    
+    
+      <div class="social-wrapper">
+        
+          
+            <a href="/atom.xml"
+              class="social fas fa-rss flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="mailto:yang_syy@qq.com"
+              class="social fas fa-envelope flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+            <a href="https://github.com/Louaq"
+              class="social fab fa-github flat-btn"
+              target="_blank"
+              rel="external nofollow noopener noreferrer">
+              
+            </a>
+          
+        
+          
+        
+      </div>
+    
+  </div>
+</section>
+
+    
+  
+  
+  
+    
+  
+
+  <div class="layout_sticky">    
+    
+      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E4%BC%98%E5%8A%BF"><span class="toc-text">模型优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
+
+      
+  <section class="widget side_recent_post">
+    
+  <header>
+    
+      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
+    
+  </header>
+
+
+    <div class='content'>
+      
+      <!-- hash算法 -->
+      
+      <div class="aside-list">
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-08</span>
+                
+              </div>
+              <a class="post-title" href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/">Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-07</span>
+                
+              </div>
+              <a class="post-title" href="/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/">MACTFusion Lightweight Cross Transformer for Adaptive Multimodal Medical Image Fusion</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-06</span>
+                
+              </div>
+              <a class="post-title" href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">BTSegDiff Brain tumor segmentation based on multimodal MRI Dynamically guided diffusion probability model</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-05</span>
+                
+              </div>
+              <a class="post-title" href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation</a>
+            </div>
+          </div>
+        
+          <div class="aside-list-item">
+            
+            
+            
+
+            <div class="post-img-box">
+              <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" class="post-img " style="background-size: cover; 
+                background-position: center center;">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+              </a>
+            </div>
+            <div class="post-date-title">
+              <div>
+                
+                  <span class="post-date">07-03</span>
+                
+              </div>
+              <a class="post-title" href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion</a>
+            </div>
+          </div>
+        
+      </div>
+    </div>
+  </section>
+
+    
+  </div>
+</aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
+</div>
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || 'https://pic1.zhimg.com/80/v2-6d0cbd4380b4959542d3f5da31c7f20c_1440w.jpg';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+
+
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
+
 
       </main>
     </div>
