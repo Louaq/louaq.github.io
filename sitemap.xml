@@ -128,6 +128,42 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/transunet-de-gai-jin/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</loc>
     
     <lastmod>2025-07-09</lastmod>
@@ -183,105 +219,6 @@
   
   <url>
     <loc>https://louaq.github.io/categories/index.html</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/segament-anything/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/transunet-de-gai-jin/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/</loc>
     
     <lastmod>2025-07-09</lastmod>
     
@@ -354,6 +291,60 @@
   
   <url>
     <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/segament-anything/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/</loc>
     
     <lastmod>2025-07-09</lastmod>
     
@@ -443,6 +434,24 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/frp/shi-yong-fail2ban-bao-hu-fu-wu-qi-mian-shou-ke-yi-ip-gong-ji/</loc>
     
     <lastmod>2025-07-09</lastmod>
@@ -453,6 +462,51 @@
   
   <url>
     <loc>https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/corrmatch-label-propagation-via-correlation-matching-for-semi-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-07-09</lastmod>
     
@@ -560,7 +614,16 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</loc>
+    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
+    
+    <lastmod>2025-07-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</loc>
     
     <lastmod>2025-07-09</lastmod>
     
@@ -597,69 +660,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/corrmatch-label-propagation-via-correlation-matching-for-semi-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
-    
-    <lastmod>2025-07-09</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</loc>
     
     <lastmod>2025-07-09</lastmod>
     
@@ -770,6 +770,13 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/tags/C-CAM/</loc>
+    <lastmod>2025-07-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/tags/Scribble-Supervised-Semantic-Segmentation/</loc>
     <lastmod>2025-07-09</lastmod>
     <changefreq>weekly</changefreq>
@@ -778,13 +785,6 @@
   
   <url>
     <loc>https://louaq.github.io/tags/CC4S/</loc>
-    <lastmod>2025-07-09</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/tags/C-CAM/</loc>
     <lastmod>2025-07-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
