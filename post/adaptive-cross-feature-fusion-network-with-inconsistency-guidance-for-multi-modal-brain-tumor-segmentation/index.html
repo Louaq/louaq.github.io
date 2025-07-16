@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>WeakCLIP Adapting CLIP for Weakly-Supervised Semantic Segmentation | Louaq</title>
+  <title>Adaptive Cross-Feature Fusion Network With Inconsistency Guidance for Multi-Modal Brain Tumor Segmentation | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -658,21 +658,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        WeakCLIP Adapting CLIP for Weakly-Supervised Semantic Segmentation
+        Adaptive Cross-Feature Fusion Network With Inconsistency Guidance for Multi-Modal Brain Tumor Segmentation
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-04-09 |
+          <i class="fas fa-calendar"></i> 发表于：2025-07-16 |
         </span>
       
 
@@ -680,8 +680,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E5%BC%B1%E7%9B%91%E7%9D%A3%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              弱监督语义分割
+            <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              多模态医学图像分割
             </a>
           
         </span>
@@ -690,11 +690,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.8k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 3k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 10分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 11分钟 |
           </span>
   
           
@@ -719,73 +719,71 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>华中科技大学、西北工业大学</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Contrastive language and image pre-training (CLIP) achieves great success in various computer vision tasks and also presents<br>an opportune avenue for enhancing weakly-supervised image understanding with its large-scale pre-trained knowledge. As<br>an effective way to reduce the reliance on pixel-level human-annotated labels, weakly-supervised semantic segmentation<br>(WSSS) aims to refine the class activation map (CAM) and produce high-quality pseudo masks. Weakly-supervised semantic<br>segmentation (WSSS)aims to refine the class activationmap(CAM)as pseudo masks, but heavily relies on inductive biases like<br>hand-crafted priors and digital image processing methods. For the vision-language pre-trained model, i.e. CLIP, we propose a<br>novel text-to-pixel matching paradigm forWSSS.However, directly applying CLIP toWSSS is challenging due to three critical<br>problems: (1) the task gap between contrastive pre-training and WSSS CAM refinement, (2) lacking text-to-pixel modeling to<br>fully utilize the pre-trained knowledge, and (3) the insufficient details owning to the 1&#x2F;16 down-sampling resolution ofViT. Thus,<br>we proposeWeakCLIP to address the problems and leverage the pre-trained knowledge from CLIP toWSSS. Specifically, we<br>first address the task gap by proposing a pyramid adapter and learnable prompts to extract WSSS-specific representation. We<br>then design a co-attention matching module to model text-to-pixel relationships. Finally, the pyramid adapter and text-guided<br>decoder are introduced to gather multi-level information and integrate it with text guidance hierarchically.WeakCLIP provides<br>an effective and parameter-efficient way to transfer CLIP knowledge to refine CAM. Extensive experiments demonstrate that<br>WeakCLIP achieves the state-of-the-art WSSS performance on standard benchmarks, i.e., 74.0% mIoU on the val set of<br>PASCAL VOC 2012 and 46.1% mIoU on the val set of COCO 2014. The source code and model checkpoints are released<br>at <a target="_blank" rel="noopener" href="https://github.com/hustvl/WeakCLIP">https://github.com/hustvl/WeakCLIP</a>.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>对比语言和图像预训练(CLIP)在各种计算机视觉任务中取得了巨大的成功，并且利用其大规模的预训练知识为增强弱监督图像理解提供了一个很好的途径。弱监督语义分割(WSSS)是一种减少对像素级人工标注标签依赖的有效方法，其目的是细化类激活图(CAM)并生成高质量的伪掩膜。弱监督语义分割(WSSS)旨在将类激活图(CAM)细化为伪掩膜，但严重依赖于手工制作先验和数字图像处理方法等归纳偏差。对于视觉语言预训练模型，即CLIP，我们提出了一种新的文本到像素的wsss匹配范式。然而，直接应用CLIP toWSSS是具有挑战性的，因为存在三个关键问题:(1)对比预训练与WSSSCAM细化之间的任务差距;(2)缺乏文本到像素的建模以充分利用预训练的知识;(3)由于vit的下采样分辨率为1 16，细节不足。因此，我们提出了weakclip来解决问题，并利用CLIP toWSSS的预训练知识。具体来说，我们首先通过提出金字塔适配器和可学习的提示词符来提取特定于wss的表示来解决任务差距。然后，我们设计了一个共同关注匹配模块来模拟文本到像素的关系。最后，引入金字塔适配器和文本引导解码器，实现多级信息采集，并与文本引导分层集成。WeakCLIP提供了一种有效的、参数高效的方法来传递CLIP知识以改进CAM。大量的实验表明，WeakCLIP在标准基准测试上达到了最先进的WSSS性能，即在PASCAL VOC 2012的val集上达到了74.0%的mIoU，在COCO 2014的val集上达到了46.1%的mIoU。源代码和模型检查点在<a target="_blank" rel="noopener" href="https://github.com/hustvl/WeakCLIP%E4%B8%8A%E5%8F%91%E5%B8%83%E3%80%82">https://github.com/hustvl/WeakCLIP上发布。</a></p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于弱监督语义分割（WSSS）任务，旨在解决当前方法在处理类激活图（CAM）种子时面临的问题，具体研究背景如下： </p>
-<ul>
-<li><strong>WSSS的重要性与挑战</strong>：语义分割中像素级标注耗时费力，限制了实际应用。WSSS利用弱监督信息生成伪像素级分割，可减轻标注负担，但仅使用图像级标签的WSSS是该领域最具挑战性的方向。</li>
-<li><strong>现有CAM细化方法的局限性</strong>：现有方法多依赖手工先验和改进的数字图像处理算法来细化CAM，这些方法存在归纳偏差，限制了性能和鲁棒性。 </li>
-<li><strong>CLIP的潜力与应用挑战</strong>：CLIP在计算机视觉任务中取得了巨大成功，为WSSS带来了新的机遇。然而，直接将CLIP应用于WSSS存在任务差距、缺乏文本到像素建模以及细节不足等问题。 基于以上背景，作者提出了WeakCLIP方法，旨在利用CLIP的预训练知识，通过文本到像素匹配范式解决WSSS中的关键问题，提高伪掩码的质量，从而推动WSSS的发展。</li>
-</ul>
+        <p>深圳大学</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>In the context of contemporary artificial intelligence, increasing deep learning (DL) based segmentation methods have been recently proposed for <strong>brain tumor segmentation (BraTS)</strong> via analysis of multi-modal MRI. However, known DL-based works usually directly fuse the information of different modalities at multiple stages without considering the gap between modalities, leaving much room for performance improvement. In this paper, we introduce a novel deep neural network, termed ACFNet, for accurately segmenting brain tumor in multi-modal MRI. Specifically, ACFNet has a parallel structure with three encoder-decoder streams. The upper and lower streams generate coarse predictions from individual modality, while the middle stream integrates the complementary knowledge of different modalities and bridges the gap between them to yield fine prediction. To effectively integrate the complementary information, we propose an adaptive cross-feature fusion (ACF) module at the encoder that first explores the correlation information between the feature representations from upper and lower streams and then refines the fused correlation information. To bridge the gap between the information frommulti-modal data, we propose a prediction inconsistency guidance (PIG) module at the decoder that helps the network focus more on error-prone regions through a guidance strategy when incorporating the features from the encoder. The guidance is obtained by calculating the prediction inconsistency between upper and lower streams and highlights the gap between multi-modal data. Extensive experiments on the BraTS 2020 dataset show that ACFNet is competent for the BraTS task with promising results and outperforms six mainstream competing methods.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>在当代人工智能背景下，近年来提出了越来越多基于深度学习（DL）的分割方法，用于通过分析多模态MRI进行脑肿瘤分割（BraTS）。然而，已知的DL方法通常在多个阶段直接融合不同模态的信息，而没有考虑模态之间的差距，留下了很大的性能提升空间。本文中，我们介绍了一种新颖的深度神经网络，称为ACFNet，用于准确分割多模态MRI中的脑肿瘤。具体来说，ACFNet具有三条编码器-解码器流的并行结构。上下流从单个模态产生粗略预测，而中间流整合不同模态的互补知识并弥合它们之间的差距，以产生精细预测。为了有效整合互补信息，我们在编码器中提出了一种自适应交叉特征融合（ACF）模块，该模块首先探索来自上下流的特征表示之间的相关信息，然后优化融合的相关信息。为弥合多模态数据的信息差距，我们在解码器中提出了一种预测不一致性指导（PIG）模块，通过引导策略帮助网络在整合来自编码器的特征时更加关注易错区域。该指导通过计算上下流之间的预测不一致性获得，并突出多模态数据之间的差距。对BraTS 2020数据集的大量实验表明，ACFNet在BraTS任务中表现出色，取得了令人满意的结果，并超过了六种主流竞争方法。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>脑肿瘤严重威胁患者生命，其智能监测与诊断水平有待提高。磁共振成像（MRI）是脑肿瘤监测与诊断的常用手段，准确的脑肿瘤分割有助于疾病诊断和治疗方案制定，但人工标注主观、繁琐且负担重，因此设计自动化分割方法十分必要。 </p>
+<p>近年来，深度学习助力医学图像分析取得显著进展，为脑肿瘤分割提供了大量灵感。然而，脑肿瘤MRI包含多种模态，如FLAIR、T2、T1和T1ce，如何有效挖掘这些模态的信息是设计多模态脑肿瘤分割方法的关键。现有方法通常采用编码器 - 解码器结构，但大多直接融合不同模态信息，忽略了模态间的差异，即“模态差距”，这会导致各模态细节孤立，影响模型性能，也阻碍了准确描绘肿瘤边界的能力。 </p>
+<p>为解决这些问题，本文提出了自适应交叉特征融合网络（ACFNet），旨在自适应地整合和细化不同模态的特征，解决模态差距问题，实现更准确的多模态脑肿瘤分割。 </p>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
-<li><strong>弱监督语义分割（WSSS）</strong>：为减轻像素级标注负担，出现多种基于不同弱监督信息（如<strong>边界框、涂鸦、点、图像级标签</strong>）的算法。其中，基于<strong>图像级标签</strong>的WSSS最具挑战性，常使用类激活图（CAM）定位目标，但原始CAM噪声大、易出错，已有多种方法对其进行优化。</li>
-<li><strong>大规模预训练模型</strong>：大规模预训练模型在各领域广泛应用，如CLIP通过对比学习在大量图像-文本对上预训练，展现出强大的知识迁移能力。已有研究尝试将CLIP应用于WSSS，如CLIMS引入辅助损失，CLIP - ES利用文本提示和GradCAM提升CAM质量。</li>
+<li><strong>多模态学习</strong>：多模态数据能提供互补信息，简单拼接多模态图像输入DNN效果不佳，近期更多研究关注基于DNN或病变特征融合多模态数据。</li>
+<li><strong>医学图像分割</strong>：CNN 方法在医学图像分割中占重要地位，U-Net及其变体应用广泛，Vision Transformers也展现出良好性能，部分方法结合二者优势。</li>
+<li><strong>脑肿瘤分割</strong>：早期采用生成概率模型融合多模态信息，目前主要是2D和3D CNN方法。多模态脑肿瘤分割方法分为早期融合、晚期融合和多层融合三类，多层融合效果更好。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-09_08-44-06.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-09_08-44-06.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-09_08-44-06"></p>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种名为<strong>WeakCLIP的弱监督语义分割（WSSS）方法</strong>，旨在利用预训练的CLIP模型知识来改进WSSS网络的类激活图（CAM）细化过程。以下是WeakCLIP模型的详细介绍： </p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-13-41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-13-41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-13-41"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-16-56.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-16-56.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-16-56"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-17-07.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-17-07.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-17-07"></p>
+<p>本文提出了一种名为自适应跨特征融合网络（Adaptive Cross-feature Fusion Network，ACFNet）的新型深度神经网络，用于多模态脑肿瘤分割</p>
 <ol>
-<li><p><strong>文本到像素匹配范式</strong>：与以往基于CLIP的WSSS方法不同，WeakCLIP提出了<strong>文本到像素匹配</strong>范式，以在像素级别查询相似度。具体而言，输入图像通过CLIP预训练的ViT - B网络提取多层特征图，经过投影层后，定义文本到像素匹配操作，得到文本到像素匹配的嵌入。 </p>
-</li>
-<li><p><strong>WeakCLIP框架</strong> </p>
+<li><strong>整体架构</strong>：ACFNet具有三个并行的编码器 - 解码器流结构，类似于U - Net。将T1和T1ce、T2和FLAIR这两对相关的成像模态分别作为上、下两个流的输入，以更好地学习跨模态特征表示。中间流用于整合不同模态的互补知识。</li>
+<li><strong>自适应跨特征融合模块（ACF模块）</strong></li>
+</ol>
 <ul>
-<li><strong>可学习提示（Learnable Prompt）</strong>：受CoOp和CLIP - Adapter启发，提出可学习嵌入作为自适应提示。将类文本标记并嵌入为类文本嵌入，与随机初始化的可学习嵌入拼接，作为文本编码器的输入，最终投影得到文本嵌入。  </li>
-<li><strong>金字塔适配器（Pyramid Adapter）</strong>：为解决CLIP视觉编码器专注于整体图像内容以及低分辨率问题，提出金字塔适配器。它独立于CLIP图像编码器，对不同分辨率的特征图进行处理，通过上采样和下采样操作，生成不同分辨率的特征，有效融合低级细节和高级表示。   </li>
-<li><strong>协同注意力匹配模块（Co - attention Matching）</strong>：为充分利用CLIP预训练知识，提出协同注意力匹配模块，用于建模双向文本到像素匹配。该模块使用两个交叉注意力模块分别建模文本到像素和像素到文本的关系，并通过残差连接更新文本和图像嵌入，最后进行文本到图像匹配得到协同注意力匹配的嵌入。  </li>
-<li><strong>文本引导解码器（Text - Guided Decoder）</strong>：为解决CLIP ViT - B的分辨率限制问题，引入文本引导解码器。将协同注意力匹配的嵌入插值到与适配器输出特征对应的大小，与适配器输出特征拼接后进行解码，得到分割预测。    </li>
-<li><strong>WSSS损失（WSSS Losses）</strong>：采用DSRG中使用的WSSS损失，包括平衡种子损失和边界损失。平衡种子损失计算分割预测与CAM种子之间的加权交叉熵损失；边界损失先使用条件随机场（CRF）处理分割预测以细化对象边界，然后计算CRF细化结果与分割预测之间的Kullback - Leibler散度损失。</li>
+<li><strong>相关特征探索单元（CFE单元）</strong>：该单元有两个并行分支，通过交叉引导策略探索不同模态特征表示之间的相关性。以一个分支为例，先计算两个模态特征的差值，经全局平均池化（GAP）得到通道统计信息，再通过两个全连接层挖掘通道依赖关系，最终得到包含通道权重的特征，用于突出不同模态之间的差异。另一个分支则交换输入特征的角色，以从不同角度突出差异。    </li>
+<li><strong>跨特征细化单元（CFR单元）</strong>：将CFE单元两个分支的输出沿通道方向拼接，通过空间注意力（SA）块获得空间域的像素权重，对拼接特征进行加权，再经过拼接、卷积操作得到细化后的特征。同时，将该特征与相邻低层CFR单元的输出整合，得到最终输出。</li>
 </ul>
-</li>
-<li><p><strong>伪掩码生成和再训练</strong>：使用训练好的WeakCLIP网络生成高质量的伪掩码。当推理结果中的类别不在图像级标签中时，将其标记为未知标签。最后，使用生成的伪掩码进行全监督分割，采用DeepLabv1网络架构，并尝试使用更先进的基于ViT的分割方法进行再训练。 实验结果表明，WeakCLIP在PASCAL VOC 2012和COCO 2014数据集上取得了优于以往WSSS方法的结果，证明了该方法的有效性和高效性。</p>
-</li>
+<ol start="3">
+<li><strong>预测不一致引导模块（PIG模块）</strong>：利用上、下两个流预测结果的不一致性来引导网络关注易出错区域。在解码阶段，将中间流对应ACF模块的输出与预测不一致信息沿通道方向拼接，经过卷积等操作，使网络聚焦于易出错区域，减少不确定分割，最终生成准确的预测结果。</li>
+<li><strong>损失函数</strong>：ACFNet的总损失由三个流的损失组成，每个流的基本损失Lb是经典的Dice损失和交叉熵损失的线性组合。总损失公式为Lt &#x3D; Lb(P1, G) + Lb(P2, G) + Lb(Po, G)，其中G是每个场景的真实标签集，包含整个肿瘤、增强肿瘤和肿瘤核心的标签。 实验结果表明，ACFNet在多模态脑肿瘤分割任务中表现出色，优于六种主流的医学图像分割方法。消融实验也验证了ACF模块和PIG模块对整体性能提升的重要贡献。</li>
 </ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-09_08-49-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-09_08-49-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-09_08-49-54"></p>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p>数据集：<strong>PASCAL VOC 2012、COCO 2014</strong></p>
-<ul>
-<li><strong>ASCAL VOC 2012</strong>：在CAM监督方面，WeakCLIP与MCTformer相同，但低于ViT - PCM；在伪掩码质量上，比基线MCTformer提高了8.1%，比AMN提高了5.0%。使用精炼后的伪掩码训练DeepLabV1网络，WeakCLIP在验证集和测试集上的mIoU分别达到74.0%和73.8%，优于其他仅使用图像级监督的方法，以及部分使用额外显著图监督或边界框监督的方法。使用基于ViT的再训练基准（Segmenter和SegFormer）可进一步提升分割结果，混合ViT再训练的WeakCLIP表现最佳。</li>
-<li><strong>COCO 2014</strong>：WeakCLIP在验证集上的mIoU达到46.1%，比基线MCTformer提高了4.1%，优于其他仅使用图像级监督的方法。使用SegFormer和MiT - B2骨干进行再训练，WeakCLIP在COCO 2014验证集上取得最佳性能。</li>
-</ul>
-<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><ol>
-<li><ul>
-<li><strong>组件改进</strong>：协同注意力匹配模块将验证集mIoU提高到67.4%；可学习提示将其提高到68.9%；金字塔适配器将性能提升到70.3%；文本引导解码器将验证集mIoU进一步提升到72.6%。</li>
-<li><strong>可学习嵌入数量</strong>：可学习嵌入数量为8时性能最佳。</li>
-<li><strong>可学习温度初始值</strong>：协同注意力匹配中可学习温度初始值为1e - 1时性能最佳。</li>
-</ul>
-</li>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
+<ol>
+<li><strong>数据集</strong>：选用BraTS 2020数据集评估ACFNet。因该数据集测试部分不可用，仅使用训练部分，包含369个不同对象的多模态MR扫描，每个扫描有T1、T1ce、T2和FLAIR四种模态。从每个体积的轴向平面提取2D切片重建数据集，裁剪为224×224并归一化到[0, 1]，按切片原始对象ID划分为80%训练集和20%测试集。</li>
+<li><strong>评估指标</strong>：采用四个广泛用于医学图像分割的评估指标，即Dice相似度系数、交并比（IoU）、灵敏度和第95百分位豪斯多夫距离（HD95）。</li>
+<li><strong>实现细节</strong>：在PyTorch框架上实现实验，在配备NVIDIA 3090 GPU和Intel 4210R CPU的Ubuntu服务器上训练和测试模型。使用SGD优化器，动量设为0.9，权重衰减设为1e - 4，初始学习率0.01并采用多项式衰减策略，批量大小12，训练100个epoch。</li>
 </ol>
-<h2 id="其他实验（Other-Experiments）-1st-place-medal"><a href="#其他实验（Other-Experiments）-1st-place-medal" class="headerlink" title="其他实验（Other Experiments）:1st_place_medal:"></a>其他实验（Other Experiments）:1st_place_medal:</h2><ol>
-<li><strong>逐类语义分割结果</strong>：在PASCAL VOC 2012的验证集和测试集以及COCO 2014的验证集上，将WeakCLIP与基线MCTformer进行逐类分割结果比较，WeakCLIP在大多数类别中表现更优。</li>
-<li><strong>可视化分析</strong><ul>
-<li>比较MCTformer和WeakCLIP生成的伪掩码，WeakCLIP生成的语义信息更准确、精确，能识别出MCTformer遗漏或识别不准确的对象位置。</li>
-<li>在PASCAL VOC 2012验证集上再训练后的分割结果可视化显示，WeakCLIP对室内和室外场景都能实现准确分割。</li>
-</ul>
-</li>
-<li><strong>参数效率分析</strong>：与MCTformer相比，WeakCLIP仅训练12.4%的参数，训练帧率（FPS）快4.3倍，节省68.4%的GPU内存。</li>
-<li><strong>不同CLIP骨干实验</strong>：使用不同CLIP骨干进行实验，结果表明WeakCLIP - ResNet101性能优于WeakCLIP - ResNet50，WeakCLIP - ViT - B表现最佳。</li>
+</blockquote>
+<ol>
+<li><strong>定量结果</strong>：将ACFNet与U - Net、U - Net++等六种主流医学图像分割方法比较。结果显示，ACFNet在多数评估指标上优于竞争对手。例如，在分割全肿瘤（WT）、增强肿瘤（ET）和肿瘤核心（TC）时，Dice值、IoU值和灵敏度值均有提升。单模态方法通常不如多模态方法，可能是直接级联所有模态会忽略其内在相关性，而在网络中间层融合多模态特征有助于发现和利用这些相关性以提高分割性能。此外，ACFNet计算效率方面的浮点运算（FLOPs）和推理时间高于多数竞争方法，但平行结构及ACF和PIG模块对捕捉模态差异、提高分割精度很关键。</li>
+<li><strong>定性结果</strong>：通过可视化结果直观比较分割性能。单模态方法处理背景噪声能力有限，难以准确定位不同大小和形状的脑肿瘤，处理小病灶时易出现漏检。多模态方法因在多模态融合上的努力产生更准确结果，ACFNet在定位小病灶、区分病灶区域与周围环境方面比IVD - Net更准确，且在不同大小和形状的病灶上表现稳定，这得益于其有效的多模态特征融合和减少模态差距的策略。</li>
 </ol>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了名为<strong>WeakCLIP</strong>的新方案，旨在利用预训练CLIP模型的知识来增强弱监督语义分割（WSSS）网络的**类激活图（CAM）**细化过程。该框架采用了新的文本到像素匹配范式，有效解决了将CLIP集成到WSSS中存在的三个关键问题。在广泛使用的PASCAL VOC 2012和COCO 2014数据集上的实验结果表明，与以往的WSSS方法相比，WeakCLIP取得了显著改进。引入利用大规模视觉语言预训练的WeakCLIP范式，有望推动WSSS问题的解决。未来，作者计划探索更先进的大规模CLIP，以提升WSSS的像素级理解能力。 </p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-19-40.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-19-40.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-19-40"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-19-48.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-19-48.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-19-48"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><p>对ACFNet的两个关键模块ACF和PIG进行消融实验，每次仅移除考虑的模块，保持网络其余部分不变学习新模型。结果表明，ACF模块的CFE和CFR单元以及PIG模块对整体性能提升有积极贡献，可视化结果也显示这两个模块有助于获得准确的分割结果。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-20-36.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-20-36.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-20-36"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-20-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-20-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-20-54"></p>
+<h2 id="失败案例"><a href="#失败案例" class="headerlink" title="失败案例"></a>失败案例</h2><p>ACFNet在一些具有挑战性的场景中无法准确分割脑肿瘤，如无法准确定位大肿瘤的精细细节，在肿瘤边界模糊时分割性能不佳。可能原因是ACFNet在这些场景中对复杂肿瘤的表示能力有限，特别是肿瘤与非肿瘤区域相似度高以及肿瘤区域内部差异大时。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-21-48.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-16_15-21-48.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-16_15-21-48"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>近年来，多模态数据中的自动脑肿瘤分割受到了越来越多的关注。本文介绍了一种名为ACFNet的新型深度神经网络，用于在磁共振成像（MRI）中实现准确的脑肿瘤分割，其动机主要体现在两个方面：</p>
+<ol>
+<li>直接整合来自不同模态的中间特征可能会导致信息掩蔽，高效融合多模态数据有助于获得更具判别性的特征表示并提高分割性能。</li>
+<li>正确发现多模态数据中的差异并利用这些差异来引导网络，有助于减少可能的假阴性或假阳性结果。 为了有效融合多模态数据，ACFNet使用了自适应交叉特征融合（ACF）模块来探索中间层的内在互补性；为了获得准确的分割性能，ACFNet利用了预测不一致性引导（PIG）模块，该模块能根据不同模态预测结果之间的不一致性，引导网络关注容易出错的区域。</li>
+</ol>
+<p>实验结果表明，ACFNet可以有效解决<strong>多模态脑肿瘤分割问题</strong>，取得了令人满意的结果。此外，消融实验结果也验证了ACF模块和PIG模块的有效性。 基于本文的研究，未来的研究方向主要有两个：</p>
+<blockquote>
+<ol>
+<li>探索ACFNet在除MRI之外的其他多模态图像分割任务中的性能。 </li>
+<li>开发降低ACFNet计算需求的方法，使其更有可能在临床环境中部署。</li>
+</ol>
+</blockquote>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/Weakly-Supervised-Semantic-Segmentation/" class="">
-              Weakly Supervised Semantic Segmentation
-            </a>
-          
-            <a href="/tags/CLIP/" class="">
-              CLIP
+            <a href="/tags/ACFNet/" class="">
+              ACFNet
             </a>
           
         </div>
@@ -799,7 +797,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/weakclip-adapting-clip-for-weakly-supervised-semantic/" target="_blank" title="WeakCLIP Adapting CLIP for Weakly-Supervised Semantic Segmentation">https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</a>
+    <a href="/post/adaptive-cross-feature-fusion-network-with-inconsistency-guidance-for-multi-modal-brain-tumor-segmentation/" target="_blank" title="Adaptive Cross-Feature Fusion Network With Inconsistency Guidance for Multi-Modal Brain Tumor Segmentation">https://louaq.github.io/post/adaptive-cross-feature-fusion-network-with-inconsistency-guidance-for-multi-modal-brain-tumor-segmentation/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -817,24 +815,6 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-85c31120acff76826ab53ea8934ef4bb_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">SFC Shared Feature Calibration in Weakly Supervised Semantic Segmentation</div>
-      </div>
-      
-      <!-- <div class="content">
-        摘要Image-level weakly supervised semantic segmentation has re
-      </div> -->
-    </a>
-  </div>
-
 
 
   
@@ -843,17 +823,14 @@
       background-position: center center;">
       <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/" class="post-nav-link">
+    <a href="/post/msgfusion-medical-semantic-guided-two-branch-network-for-multimodal-brain-image-fusion/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">All-pairs Consistency Learning for Weakly Supervised Semantic Segmentation</div>
+        <div class="title-text">MsgFusion Medical Semantic Guided Two-Branch Network for Multimodal Brain Image Fusion</div>
       </div>
       <!-- <div class="content">
-        澳大利亚国立大学、OpenNLPLab、上海人工智能实验室、厦门大学、OPPO研究院
-::: tip
-启发
-:::
-摘要
+        作者单位
+摘要Multimodal image fusion plays an essential role in me
       </div> -->
     </a>
   </div>
@@ -988,7 +965,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%B6%E4%BB%96%E5%AE%9E%E9%AA%8C%EF%BC%88Other-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">其他实验（Other Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%B1%E8%B4%A5%E6%A1%88%E4%BE%8B"><span class="toc-text">失败案例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
