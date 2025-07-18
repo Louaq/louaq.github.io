@@ -719,26 +719,27 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="中国科学技术大学，上海人工智能实验室"><a href="#中国科学技术大学，上海人工智能实验室" class="headerlink" title="中国科学技术大学，上海人工智能实验室"></a><strong>中国科学技术大学，上海人工智能实验室</strong></h2><p><a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git">https://github.com/w1oves/Rein.git</a></p>
+        <h2 id="中国科学技术大学上海人工智能实验室"><a class="markdownIt-Anchor" href="#中国科学技术大学上海人工智能实验室"></a> <strong>中国科学技术大学，上海人工智能实验室</strong></h2>
+<p><a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git">https://github.com/w1oves/Rein.git</a></p>
 <blockquote>
 <p>摘要：In this paper, we first assess and harness various Vision Foundation Models (VFMs) in the context of Domain Generalized Semantic Segmentation (DGSS). Driven by the motivation that Leveraging Stronger pre-trained models and Fewer trainable parameters for Superior generaliz- ability, we introduce a robust fine-tuning approach, namely “Rein”, to parameter-efficiently harness VFMs for DGSS. Built upon a set of trainable tokens, each linked to distinct instances, Rein precisely refines and forwards the feature maps from each layer to the next layer within the backbone. This process produces diverse refinements for different categories within a single image. With fewer trainable parameters, Rein efficiently fine-tunes VFMs for DGSS tasks, surprisingly surpassing full parameter fine-tuning. Extensive experiments across various settings demonstrate that Rein significantly outperforms state-of-the-art methods. Remarkably, with just an extra 1% of trainable parameters within the frozen backbone, Rein achieves a mIoU of78.4% on the Cityscapes, without accessing any real urban-scene datasets. Code is available at <a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git">https://github.com/w1oves/Rein.git</a>.</p>
 </blockquote>
 <blockquote>
 <p>翻译：在本文中，我们首先在领域泛化语义分割（DGSS）任务中，评估并应用了多种视觉基础模型（VFM）。我们提出的动机是：“通过利用更强大的预训练模型和更少的可训练参数，获得更好的泛化能力”。基于此，我们提出了一种高效的微调方法——“Rein”，该方法能够以参数高效的方式利用VFM来解决DGSS任务。Rein方法依赖于一组可训练的标记，每个标记与特定实例对应，能够精确地细化并将特征图从每一层传递到骨干网络的下一层。这样，Rein能够在单张图像中为不同的类别生成多样化的细化结果。通过减少可训练的参数，Rein在微调VFM时，效果出乎意料地优于完全参数微调。通过广泛的实验验证，Rein显著超越了现有的最先进方法。值得一提的是，仅在冻结的骨干网络中增加1%的可训练参数，Rein便在Cityscapes数据集上达到了78.4%的mIoU，而且无需使用任何真实的城市场景数据集。代码已发布，您可以通过<a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git%E8%AE%BF%E9%97%AE%E3%80%82">https://github.com/w1oves/Rein.git访问。</a></p>
 </blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-26_21-13-37"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-26_21-13-59"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-26_21-13-37" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-26_21-13-59" /></p>
 <p>​                                                                                <strong>模型结构图</strong></p>
-<p><strong>本文的研究背景：</strong> </p>
+<p><strong>本文的研究背景：</strong></p>
 <ul>
-<li><strong>传统DGSS方法的局限</strong>：以往DGSS方法着重提升模型在多未见领域的预测准确性，但多采用VGGNet、MobileNetV2和ResNet等经典骨干网络，且依赖复杂数据增强和领域不变特征提取策略，对更强的VFMs在DGSS中的效能探索不足。 </li>
+<li><strong>传统DGSS方法的局限</strong>：以往DGSS方法着重提升模型在多未见领域的预测准确性，但多采用VGGNet、MobileNetV2和ResNet等经典骨干网络，且依赖复杂数据增强和领域不变特征提取策略，对更强的VFMs在DGSS中的效能探索不足。</li>
 <li><strong>VFMs的潜力与挑战</strong>：近年来，CLIP、MAE、SAM等大规模VFMs显著提升了计算机视觉任务的性能，其在不同未知场景下展现出强大泛化能力。然而，将VFMs用于DGSS任务存在挑战，常用数据集规模远小于ImageNet，对VFMs大量可训练参数进行微调会导致泛化能力受限，且现有的参数高效微调策略大多不适用于DGSS。-</li>
 <li><strong>研究动机</strong>：基于利用更强预训练模型和更少可训练参数实现更优泛化能力的动机，作者评估并利用VFMs进行DGSS研究，提出“Rein”微调方法，以高效利用VFMs解决DGSS问题。</li>
 </ul>
 <p><strong>研究现状：</strong></p>
 <ul>
-<li><strong>领域广义语义分割（DGSS）</strong>：传统方法聚焦提升模型跨多未见领域的预测准确性，采用复杂数据增强和领域不变特征提取策略，多使用VGGNet、MobileNetV2等旧骨干网络。 </li>
-<li><strong>视觉基础模型（VFMs）</strong>：如CLIP、MAE、SAM等在计算机视觉挑战中表现出色，具有显著的跨场景泛化能力，但在DGSS任务中的表现缺乏专门研究。 </li>
+<li><strong>领域广义语义分割（DGSS）</strong>：传统方法聚焦提升模型跨多未见领域的预测准确性，采用复杂数据增强和领域不变特征提取策略，多使用VGGNet、MobileNetV2等旧骨干网络。</li>
+<li><strong>视觉基础模型（VFMs）</strong>：如CLIP、MAE、SAM等在计算机视觉挑战中表现出色，具有显著的跨场景泛化能力，但在DGSS任务中的表现缺乏专门研究。</li>
 <li><strong>参数高效微调（PEFT）</strong>：在自然语言处理领域取得成功，部分方法开始应用于计算机视觉，但大多不是为DGSS设计，难以对单张图像中不同实例的特征进行细化。</li>
 </ul>
 <p><strong>研究思路：</strong></p>
@@ -750,9 +751,9 @@
 <li><strong>分析数据</strong>：在多个数据集和三种泛化设置下进行实验，对比Rein与现有DGSS和参数高效微调（PEFT）方法的性能。通过消融实验分析Rein各组件的有效性、令牌长度和秩对模型性能的影响，以及训练速度、GPU内存使用和模型存储要求。</li>
 <li><strong>得出结论</strong>：实验表明，冻结的VFMs性能优于先前DGSS方法，Rein以更少可训练参数显著增强VFMs的泛化能力，大幅超越现有方法。证明了VFMs在DGSS领域的巨大潜力以及Rein方法的有效性。</li>
 </ol>
-<p><strong>本文的创新点：</strong> </p>
+<p><strong>本文的创新点：</strong></p>
 <ol>
-<li><strong>评估并利用视觉基础模型（VFMs）</strong>：首次在**领域泛化语义分割（DGSS）**中评估多种VFMs，证实其强大泛化能力，为该领域建立重要基准。 </li>
+<li><strong>评估并利用视觉基础模型（VFMs）</strong>：首次在**领域泛化语义分割（DGSS）**中评估多种VFMs，证实其强大泛化能力，为该领域建立重要基准。</li>
 <li><strong>提出“Rein”微调方法</strong>：通过可学习令牌对特征图进行实例级细化，以较少可训练参数有效利用VFMs，显著提升泛化性，超越现有方法。</li>
 <li><strong>设计优化策略</strong>：采用层共享MLP权重和低秩token序列，减少参数冗余，提高训练效率。</li>
 </ol>
@@ -817,7 +818,8 @@
 ::: tip
 启发
 :::
-摘要Deep models are notoriously kn
+ 摘要
+Deep models are notoriously 
       </div> -->
     </a>
   </div>
@@ -837,7 +839,8 @@
       </div>
       <!-- <div class="content">
         Shaoxing University、Central South University
-摘要Efficient sem
+ 摘要
+Efficient s
       </div> -->
     </a>
   </div>
@@ -972,7 +975,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%A4%A7%E5%AD%A6%EF%BC%8C%E4%B8%8A%E6%B5%B7%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AE%9E%E9%AA%8C%E5%AE%A4"><span class="toc-text">中国科学技术大学，上海人工智能实验室</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%A4%A7%E5%AD%A6%E4%B8%8A%E6%B5%B7%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AE%9E%E9%AA%8C%E5%AE%A4"><span class="toc-text"> 中国科学技术大学，上海人工智能实验室</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1530,7 +1533,7 @@
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
 </div>
             
           </div>

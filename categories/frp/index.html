@@ -724,7 +724,9 @@
           </div>
           <div class="post-content">
             为了增强Windows远程桌面通过FRP和Nginx配置的安全性，限制失败登录尝试是非常重要的一环。我将介绍多个层面上的失败登录限制配置方法。
-1. Nginx层面的失败登录限制使用Nginx限流模块在Nginx配置中添加限流规则，可以有效
+ 1. Nginx层面的失败登录限制
+ 使用Nginx限流模块
+在Nginx配置中添加限流规则，
           </div>
         </div>
         <div class="post-more">
@@ -779,8 +781,9 @@
           </div>
           <div class="post-content">
             Fail2ban是一个强大的安全工具，能够监控服务器日志文件，检测可疑活动，并自动配置防火墙规则来阻止发起这些活动的IP地址。下面是详细的配置和使用方法：
-安装Fail2ban在Debian&#x2F;Ubuntu系统上：
-12sudo a
+ 安装Fail2ban
+在Debian/Ubuntu系统上：
+12sudo apt 
           </div>
         </div>
         <div class="post-more">
@@ -835,9 +838,10 @@
           </div>
           <div class="post-content">
             根据您提供的frps.toml和frpc.toml配置，我将详细说明如何通过Nginx反向代理，实现使用域名xx.xx访问Windows远程桌面的完整配置流程。
-现有FRP配置分析您提供的FRP配置显示：
+ 现有FRP配置分析
+您提供的FRP配置显示：
 
-FRP服务端(frps)运行在公
+FRP服务端(frps)运行
           </div>
         </div>
         <div class="post-more">
@@ -1070,7 +1074,7 @@ FRP服务端(frps)运行在公
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
 </div>
             
           </div>

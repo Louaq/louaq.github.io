@@ -690,7 +690,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.9k |
           </span>
   
           <span class="min2read">
@@ -720,43 +720,60 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>Peking University, Beijing, China</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>Scribble-based weakly-supervised semantic segmentation</strong> using sparse scribble supervision is gaining traction as it reduces annotation costs when compared to fully annotated alternatives. Existing methods primarily generate pseudo-labels by diffusing labeled pixels to unlabeled ones with local cues for supervision. However, this diffusion process fails to exploit global semantics and class-specific cues, which are important for semantic segmentation. In this study, we pro-pose a class-driven scribble promotion network, which uti-<br>lizes both scribble annotations and pseudo-labels informed by image-level classes and global semantics for supervision. Directly adopting pseudo-labels might misguide the segmentation model, thus we design a localization rectification module to correct foreground representations in the feature space. To further combine the advantages of both supervisions, we also introduce a distance entropy loss for uncertainty reduction,which adapts per-pixel confidence weights according to the reliable region determined by the scribble and pseudo-label’s boundary. Experiments on the ScribbleSup dataset with different qualities of scribble annotations outperform all the previous methods, demonstrating the superiority and robustness<br>of our method. The code is available at <a target="_blank" rel="noopener" href="https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network">https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network</a>.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p> **基于涂鸦的弱监督语义分割（Weakly-supervised Semantic Segmentation, WSSS）**通过使用稀疏涂鸦监督正逐渐受到关注，相较于需要完整标注的替代方案，这种方法能显著降低标注成本。现有方法主要通过基于局部特征线索的像素扩散机制，将已标注像素的特征传播至未标注区域来生成伪标签。然而，这种扩散过程未能有效利用全局语义信息和类别特异性特征线索，而这些要素对实现高质量的语义分割至关重要。本研究提出了一种类驱动的涂鸦增强网络，该网络通过协同利用涂鸦标注和基于图像级类别及全局语义引导的伪标签实现监督。考虑到直接使用伪标签可能误导分割模型，我们特别设计了定位校正模块，用于在特征空间中修正前景目标表示。为了深度融合两种监督方式的优势，我们还开发了距离熵损失函数，通过涂鸦标注与伪标签边界的可靠区域确定机制，动态调整各像素点的置信权重以降低不确定性。在ScribbleSup数据集上采用不同质量涂鸦标注的实验表明，我们的方法在性能表现和鲁棒性方面均优于现有所有方法。相关代码已开源：<a target="_blank" rel="noopener" href="https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network%E3%80%82">https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network。</a></p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>语义分割领域已经取得很大的进步，但是也面临着一些挑战：手动的处理大量的数据集费时费力，且不能在现实世界中进行语义分割。基于涂鸦的WSSS的内在挑战在于稀疏标签提供的部分监督，现存的方法有三种：正则化损失、一致性学习和标签扩散。基于正则化损失的方法设计了特定的损失函数来提高模型的稳定性，基于一致性学习的方法旨在捕获不变特征，从而通过一致性损失来提高细粒度分割性能。基于标签扩散的方法通过将标记的像素扩散到未标记的像素来生成像素级伪标签，但以上的方法都存在不足，利用涂鸦标签的方法也存在不足。</p>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
+<p><strong>Scribble-based weakly-supervised semantic segmentation</strong> using sparse scribble supervision is gaining traction as it reduces annotation costs when compared to fully annotated alternatives. Existing methods primarily generate pseudo-labels by diffusing labeled pixels to unlabeled ones with local cues for supervision. However, this diffusion process fails to exploit global semantics and class-specific cues, which are important for semantic segmentation. In this study, we pro-pose a class-driven scribble promotion network, which uti-<br />
+lizes both scribble annotations and pseudo-labels informed by image-level classes and global semantics for supervision. Directly adopting pseudo-labels might misguide the segmentation model, thus we design a localization rectification module to correct foreground representations in the feature space. To further combine the advantages of both supervisions, we also introduce a distance entropy loss for uncertainty reduction,which adapts per-pixel confidence weights according to the reliable region determined by the scribble and pseudo-label’s boundary. Experiments on the ScribbleSup dataset with different qualities of scribble annotations outperform all the previous methods, demonstrating the superiority and robustness<br />
+of our method. The code is available at <a target="_blank" rel="noopener" href="https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network">https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network</a>.</p>
+<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
+<p>**基于涂鸦的弱监督语义分割（Weakly-supervised Semantic Segmentation, WSSS）**通过使用稀疏涂鸦监督正逐渐受到关注，相较于需要完整标注的替代方案，这种方法能显著降低标注成本。现有方法主要通过基于局部特征线索的像素扩散机制，将已标注像素的特征传播至未标注区域来生成伪标签。然而，这种扩散过程未能有效利用全局语义信息和类别特异性特征线索，而这些要素对实现高质量的语义分割至关重要。本研究提出了一种类驱动的涂鸦增强网络，该网络通过协同利用涂鸦标注和基于图像级类别及全局语义引导的伪标签实现监督。考虑到直接使用伪标签可能误导分割模型，我们特别设计了定位校正模块，用于在特征空间中修正前景目标表示。为了深度融合两种监督方式的优势，我们还开发了距离熵损失函数，通过涂鸦标注与伪标签边界的可靠区域确定机制，动态调整各像素点的置信权重以降低不确定性。在ScribbleSup数据集上采用不同质量涂鸦标注的实验表明，我们的方法在性能表现和鲁棒性方面均优于现有所有方法。相关代码已开源：<a target="_blank" rel="noopener" href="https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network%E3%80%82">https://github.com/Zxl19990529/Class-driven-Scribble-Promotion-Network。</a></p>
+<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
+<p>语义分割领域已经取得很大的进步，但是也面临着一些挑战：手动的处理大量的数据集费时费力，且不能在现实世界中进行语义分割。基于涂鸦的WSSS的内在挑战在于稀疏标签提供的部分监督，现存的方法有三种：正则化损失、一致性学习和标签扩散。基于正则化损失的方法设计了特定的损失函数来提高模型的稳定性，基于一致性学习的方法旨在捕获不变特征，从而通过一致性损失来提高细粒度分割性能。基于标签扩散的方法通过将标记的像素扩散到未标记的像素来生成像素级伪标签，但以上的方法都存在不足，利用涂鸦标签的方法也存在不足。</p>
+<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
+<ul>
 <li><strong>图像级弱监督语义分割</strong>：早期深度学习图像分类成果推动特征可视化工作，如引入类激活图（CAM）技术，后续有多种方法基于此生成语义伪标签以训练分割网络，还出现利用像素相关性、自注意力机制等的方法。</li>
 <li><strong>涂鸦级弱监督语义分割</strong>：早期采用传统交互式分割方法，近年分为正则化损失、一致性学习和标签扩散三类方法。部分新方法尝试自适应生成伪标签。</li>
 <li><strong>其他弱监督语义分割</strong>：点级和边界框级标注也是常见方式，但在训练监督和人工成本间难以平衡。</li>
 </ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_14-48-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_14-48-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_14-48-25"></p>
+<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_14-48-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_14-48-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_14-48-25" /></p>
 <p>利用从<strong>稀疏涂鸦</strong>中提取的图像级类别标签为图像监督分割提供全局线索，生成全局考虑的伪标签，同时引入定位校正模块（Localization Rectification Module，LoRM）和距离熵损失（Distance Entropy Loss，DEL）来结合两种监督的优势。</p>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
+<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
+<blockquote>
 <p>数据集：PASCAL VOC2012 and SBD</p>
 </blockquote>
-<h3 id="1-ScribbleSup数据集上的比较"><a href="#1-ScribbleSup数据集上的比较" class="headerlink" title="1. ScribbleSup数据集上的比较"></a>1. ScribbleSup数据集上的比较</h3><ul>
-<li><strong>模型配置</strong>：部署resnet101作为骨干网络，deeplabV3+作为分割器，超参数设置为(λs &#x3D; e2, λc &#x3D; e7)以生成最佳结果。</li>
+<h3 id="1-scribblesup数据集上的比较"><a class="markdownIt-Anchor" href="#1-scribblesup数据集上的比较"></a> 1. ScribbleSup数据集上的比较</h3>
+<ul>
+<li><strong>模型配置</strong>：部署resnet101作为骨干网络，deeplabV3+作为分割器，超参数设置为(λs = e2, λc = e7)以生成最佳结果。</li>
 <li><strong>公平性处理</strong>：对于先前工作RAWKS和NCL采用的CRF后处理，因其耗时较长，在比较中进行了考虑。对于近期工作TEL和AGMM，为确保公平性，使用标准涂鸦重新实现它们。</li>
 <li><strong>实验结果</strong>：该方法优于所有先前方法，比TEL高0.6%，比AGMM高1.6%。测试结果从PASCAL VOC2012网站获取。可视化比较显示，近期方法未能捕捉到正确的全局语义。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-01-53.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-01-53.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-01-53"></p>
-<h3 id="2-涂鸦收缩和丢弃实验"><a href="#2-涂鸦收缩和丢弃实验" class="headerlink" title="2. 涂鸦收缩和丢弃实验"></a>2. 涂鸦收缩和丢弃实验</h3><p>由于基于涂鸦的注释具有灵活性，用户注释的涂鸦长度可能不同，有时会丢弃一些对象。因此，评估模型在不同收缩或丢弃比率下的鲁棒性很重要。实验结果表明，随着丢弃或收缩比率的增加，模型性能下降。当涂鸦收缩到点（收缩比率 &#x3D; 1）时，AGMM和TEL的性能下降约10%，而该方法的性能仅下降不到1%，显示出其鲁棒性。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-32.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-32.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-02-32"></p>
-<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><h3 id="3-组件消融实验"><a href="#3-组件消融实验" class="headerlink" title="3. 组件消融实验"></a>3. 组件消融实验</h3><ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-01-53.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-01-53.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-01-53" /></p>
+<h3 id="2-涂鸦收缩和丢弃实验"><a class="markdownIt-Anchor" href="#2-涂鸦收缩和丢弃实验"></a> 2. 涂鸦收缩和丢弃实验</h3>
+<p>由于基于涂鸦的注释具有灵活性，用户注释的涂鸦长度可能不同，有时会丢弃一些对象。因此，评估模型在不同收缩或丢弃比率下的鲁棒性很重要。实验结果表明，随着丢弃或收缩比率的增加，模型性能下降。当涂鸦收缩到点（收缩比率 = 1）时，AGMM和TEL的性能下降约10%，而该方法的性能仅下降不到1%，显示出其鲁棒性。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-32.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-32.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-02-32" /></p>
+<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）🥇</h2>
+<h3 id="3-组件消融实验"><a class="markdownIt-Anchor" href="#3-组件消融实验"></a> 3. 组件消融实验</h3>
+<ul>
 <li><strong>模型配置</strong>：采用resnet50作为骨干网络，deeplabV2作为分割器，使用ScribbleSup数据集进行训练和验证。</li>
-<li><strong>超参数调整</strong>：通过网格搜索找到距离熵损失所有组件的最佳超参数组合，即λs &#x3D; 1, λc &#x3D; 6。</li>
+<li><strong>超参数调整</strong>：通过网格搜索找到距离熵损失所有组件的最佳超参数组合，即λs = 1, λc = 6。</li>
 <li><strong>实验结果</strong>：单独使用涂鸦或伪标签作为基本监督产生的结果不理想（约67%），而同时使用两者产生了更好的结果（72.13%），表明涂鸦和伪标签提供了互补的监督。仅添加Ldc会使模型性能下降到与仅使用Lsegc几乎相同的水平，这是由于模型对伪标签中的噪声标签过拟合，而LoRM可以解决这个问题，将模型性能从67.33%提高到73.64%。与基线相比，所有组件都能提高性能，同时使用所有组件可获得最佳性能。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-52.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-52.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-02-52"></p>
-<h3 id="4-伪标签消融实验"><a href="#4-伪标签消融实验" class="headerlink" title="4. 伪标签消融实验"></a>4. 伪标签消融实验</h3><p>使用deeplabV3+作为分割器，对不同伪标签进行实验，以评估其影响。结果表明，随着伪标签基础准确率的提高，该方法的性能也随之提高，这表明该方法直接受益于图像级弱监督语义分割方法，是一个有前途的发展方向。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-03-15.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-03-15.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-03-15"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了用于**基于涂鸦的弱监督语义分割（scribble-based WSSS）**问题的类驱动涂鸦提升网络（<strong>CDSP</strong>），并得出以下结论： </p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-52.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-02-52.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-02-52" /></p>
+<h3 id="4-伪标签消融实验"><a class="markdownIt-Anchor" href="#4-伪标签消融实验"></a> 4. 伪标签消融实验</h3>
+<p>使用deeplabV3+作为分割器，对不同伪标签进行实验，以评估其影响。结果表明，随着伪标签基础准确率的提高，该方法的性能也随之提高，这表明该方法直接受益于图像级弱监督语义分割方法，是一个有前途的发展方向。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-03-15.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_15-03-15.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-18_15-03-15" /></p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>作者提出了用于**基于涂鸦的弱监督语义分割（scribble-based WSSS）**问题的类驱动涂鸦提升网络（<strong>CDSP</strong>），并得出以下结论：</p>
 <blockquote>
 <ol>
-<li><p>引入定位校正模块（LoRM）解决模型对噪声标签过拟合问题，通过参考其他前景位置的特征表示，校正被误导的前景特征。 </p>
+<li>
+<p>引入定位校正模块（LoRM）解决模型对噪声标签过拟合问题，通过参考其他前景位置的特征表示，校正被误导的前景特征。</p>
 </li>
-<li><p>采用距离熵损失（DEL）增强网络鲁棒性，根据涂鸦和伪标签边界确定可靠区域，为预测分配不同置信度。 </p>
+<li>
+<p>采用距离熵损失（DEL）增强网络鲁棒性，根据涂鸦和伪标签边界确定可靠区域，为预测分配不同置信度。</p>
 </li>
-<li><p>实验结果表明，该方法优于现有方法，在不同质量涂鸦的实验中表现出卓越的鲁棒性，达到了当前最优性能，证明了利用图像级类别信息生成全局伪标签用于基于涂鸦的弱监督语义分割的有效性。</p>
+<li>
+<p>实验结果表明，该方法优于现有方法，在不同质量涂鸦的实验中表现出卓越的鲁棒性，达到了当前最优性能，证明了利用图像级类别信息生成全局伪标签用于基于涂鸦的弱监督语义分割的有效性。</p>
 </li>
 </ol>
 </blockquote>
@@ -812,7 +829,8 @@
       </div>
       
       <!-- <div class="content">
-        摘要The state-of-the-art semantic segmentation methods have ac
+         摘要
+The state-of-the-art semantic segmentation methods have 
       </div> -->
     </a>
   </div>
@@ -966,7 +984,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-ScribbleSup%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text">1. ScribbleSup数据集上的比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B6%82%E9%B8%A6%E6%94%B6%E7%BC%A9%E5%92%8C%E4%B8%A2%E5%BC%83%E5%AE%9E%E9%AA%8C"><span class="toc-text">2. 涂鸦收缩和丢弃实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BB%84%E4%BB%B6%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="toc-text">3. 组件消融实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%AA%E6%A0%87%E7%AD%BE%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="toc-text">4. 伪标签消融实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-scribblesup%E6%95%B0%E6%8D%AE%E9%9B%86%E4%B8%8A%E7%9A%84%E6%AF%94%E8%BE%83"><span class="toc-text"> 1. ScribbleSup数据集上的比较</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%B6%82%E9%B8%A6%E6%94%B6%E7%BC%A9%E5%92%8C%E4%B8%A2%E5%BC%83%E5%AE%9E%E9%AA%8C"><span class="toc-text"> 2. 涂鸦收缩和丢弃实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）🥇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%BB%84%E4%BB%B6%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="toc-text"> 3. 组件消融实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E4%BC%AA%E6%A0%87%E7%AD%BE%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="toc-text"> 4. 伪标签消融实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1524,7 +1542,7 @@
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
 </div>
             
           </div>

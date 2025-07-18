@@ -721,7 +721,8 @@
       <div class="post-content">
         <p>​University of Science and Technology of China               Shanghai AI Laboratory</p>
 <p><strong>摘要：</strong></p>
-<p>Most prior semantic segmentation methods have been developed for day-time scenes, while typically underperforming in night-time scenes due to insufficient and complicated lighting conditions. In this work, we tackle this challenge by proposing a novel night-time semantic segmentation paradigm, i.e., disentangle then parse (DTP). DTP explicitly disentangles night-time images into light-invariant reflectance and light-specific illumination components and then recognizes semantics based on their adaptive fusion. Concretely, the proposed DTP comprises two key components: 1) Instead of processing lighting-entangled features as in prior works, our Semantic-Oriented Disentanglement (SOD) framework enables the extraction of re-<br>flectance component without being impeded by lighting, allowing the network to consistently recognize the semantics under cover of varying and complicated lighting conditions. 2) Based on the observation that the illumination component can serve as a cue for some semantically confused regions, we further introduce an Illumination-Aware Parser (IAParser) to explicitly learn the correlation between semantics and lighting, and aggregate the illumination features to yield more precise predictions. Extensive experiments on the night-time segmentation task with various settings demonstrate that DTP significantly outperforms state-of-the-art methods. Furthermore, with negligible additional parameters, DTP can be directly used to benefit existing day-time methods for night-time segmentation. Code and dataset are available at <a target="_blank" rel="noopener" href="https://github.com/w1oves/DTP.git">https://github.com/w1oves/DTP.git</a>.</p>
+<p>Most prior semantic segmentation methods have been developed for day-time scenes, while typically underperforming in night-time scenes due to insufficient and complicated lighting conditions. In this work, we tackle this challenge by proposing a novel night-time semantic segmentation paradigm, i.e., disentangle then parse (DTP). DTP explicitly disentangles night-time images into light-invariant reflectance and light-specific illumination components and then recognizes semantics based on their adaptive fusion. Concretely, the proposed DTP comprises two key components: 1) Instead of processing lighting-entangled features as in prior works, our Semantic-Oriented Disentanglement (SOD) framework enables the extraction of re-<br />
+flectance component without being impeded by lighting, allowing the network to consistently recognize the semantics under cover of varying and complicated lighting conditions. 2) Based on the observation that the illumination component can serve as a cue for some semantically confused regions, we further introduce an Illumination-Aware Parser (IAParser) to explicitly learn the correlation between semantics and lighting, and aggregate the illumination features to yield more precise predictions. Extensive experiments on the night-time segmentation task with various settings demonstrate that DTP significantly outperforms state-of-the-art methods. Furthermore, with negligible additional parameters, DTP can be directly used to benefit existing day-time methods for night-time segmentation. Code and dataset are available at <a target="_blank" rel="noopener" href="https://github.com/w1oves/DTP.git">https://github.com/w1oves/DTP.git</a>.</p>
 <p><strong>翻译：</strong></p>
 <p>大多数现有的语义分割方法都是为白天场景设计的，因此在夜间场景中往往表现不佳，主要是因为夜间的光照条件复杂且不足。为了解决这个问题，本文提出了一种全新的夜间语义分割方法——“先解耦再解析”（DTP）。DTP方法首先将夜间图像分解为不受光照影响的<strong>反射成分</strong>和与光照相关的<strong>光照成分</strong>，然后通过自适应融合这两部分信息来进行语义识别。具体来说，DTP包含两个关键技术：1）与以往方法将光照信息与特征混合的做法不同，我们提出的“语义导向解耦”（SOD）框架能够在不受光照影响的情况下提取反射成分，这样可以帮助网络在复杂多变的光照条件下持续准确地识别语义。2）通过观察到光照成分可以作为一些语义模糊区域的线索，我们引入了“光照感知解析器”（IAParser），该模块能够学习语义与光照之间的关系，并聚合光照特征，从而提高预测的精度。在各种夜间分割任务的实验中，DTP显著超越了现有的先进方法。而且，DTP几乎不增加额外的参数，能够直接用于现有的白天分割方法，提升其在夜间的分割效果。相关代码和数据集可以在<a target="_blank" rel="noopener" href="https://github.com/w1oves/DTP.git%E4%B8%8B%E8%BD%BD%E3%80%82">https://github.com/w1oves/DTP.git下载。</a></p>
 <p><strong>研究背景：</strong></p>
@@ -740,23 +741,27 @@
 <p><strong>创新点：</strong></p>
 <ol>
 <li>提出“先分离再解析”（DTP）的夜间语义分割范式，可提升现有日间方法在夜间的性能。</li>
-<li>设计语义导向解纠缠框架（SOD），借助语义约束分离图像，使网络在不同光照下提取一致特征。 </li>
-<li>引入光照感知解析器（IAParser），利用光照组件作为线索，实现更精准预测。 </li>
+<li>设计语义导向解纠缠框架（SOD），借助语义约束分离图像，使网络在不同光照下提取一致特征。</li>
+<li>引入光照感知解析器（IAParser），利用光照组件作为线索，实现更精准预测。</li>
 <li>细化NightCity数据集，提出NightCity-fine，为夜间分割提供更可靠基准。</li>
 </ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-03_15-54-06.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-03_15-54-06.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-03_15-54-06"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-03_15-54-06.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-03_15-54-06.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-03_15-54-06" /></p>
 <p>实验：</p>
 <ol>
 <li><strong>数据集</strong></li>
 </ol>
 <ul>
-<li><p><strong>NightCity - fine</strong>：原始的NightCity是最大的夜间语义分割数据集，但存在标注错误。作者提出了NightCity - fine，对训练集和验证集中不合理的标注进行了仔细修改，共修正了2554个标签图。    </p>
+<li>
+<p><strong>NightCity - fine</strong>：原始的NightCity是最大的夜间语义分割数据集，但存在标注错误。作者提出了NightCity - fine，对训练集和验证集中不合理的标注进行了仔细修改，共修正了2554个标签图。</p>
 </li>
-<li><p><strong>Cityscapes</strong>：这是一个自动驾驶数据集，在白天场景下从50个不同城市采集，包含2975张训练图像和500张验证图像，具有19个语义类别，图像分辨率为2048x1024。</p>
+<li>
+<p><strong>Cityscapes</strong>：这是一个自动驾驶数据集，在白天场景下从50个不同城市采集，包含2975张训练图像和500张验证图像，具有19个语义类别，图像分辨率为2048x1024。</p>
 </li>
-<li><p><strong>BDD100K</strong>：使用其子集BDD100K - night进行补充实验，该子集包含314张夜间训练图像和31张验证图像，其互补数据集为BDD100K - day。 </p>
+<li>
+<p><strong>BDD100K</strong>：使用其子集BDD100K - night进行补充实验，该子集包含314张夜间训练图像和31张验证图像，其互补数据集为BDD100K - day。</p>
 </li>
-<li><p><strong>与SOTA方法的对比实验</strong></p>
+<li>
+<p><strong>与SOTA方法的对比实验</strong></p>
 </li>
 </ul>
 <p>使用的数据集：<strong>NightCity, NightCity-fine,  and BDD100K-night</strong></p>
@@ -764,7 +769,7 @@
 <li><strong>消融实验</strong></li>
 </ul>
 <p><strong>结论：</strong></p>
-<p>作者提出了一种新颖的夜间语义分割范式——Disentangle then Parse（DTP），并得出以下结论： </p>
+<p>作者提出了一种新颖的夜间语义分割范式——Disentangle then Parse（DTP），并得出以下结论：</p>
 <ol>
 <li><strong>方法优势</strong>：提出语义导向的解纠缠（SOD）框架，使分割不受复杂光照干扰；引入光照感知解析器（IAParser），利用光照中的语义线索实现更精确预测。DTP可作为即插即用范式，以极少额外参数助力现有方法提升性能。</li>
 <li><strong>数据集贡献</strong>：对最大的夜间分割数据集NightCity进行细化，提出NightCity - fine，用于更有效的训练和验证评估。</li>
@@ -826,7 +831,9 @@
       </div>
       
       <!-- <div class="content">
-        University of Chinese Academy of Sciences摘要：Multi-modal imag
+         University of Chinese Academy of Sciences
+ 摘要：
+Multi-modal 
       </div> -->
     </a>
   </div>
@@ -845,8 +852,9 @@
         <div class="title-text">SED A Simple Encoder-Decoder for Open-Vocabulary Semantic Segmentation</div>
       </div>
       <!-- <div class="content">
-        天津大学，重庆大学等
-摘要：Open-vocabulary semantic segmentation strives 
+         天津大学，重庆大学等
+
+摘要：Open-vocabulary semantic segmentation strive
       </div> -->
     </a>
   </div>
@@ -1539,7 +1547,7 @@
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
 </div>
             
           </div>

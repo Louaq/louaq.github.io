@@ -723,52 +723,71 @@
 <p>::: tip</p>
 <p>启发</p>
 <p>:::</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>In this work, we propose a new <strong>transformer-based regularization</strong> to better localize objects for <strong>Weakly supervised semantic segmentation (WSSS)</strong>. In image-level WSSS, Class Activation Map (CAM) is adopted to generate object localization as pseudo segmentation labels. To address the partial activation issue of the CAMs, consistency regularization is employed to maintain activation intensity invariance across various image augmentations. However, such methods ignore pair-wise relations among regions within each CAM, which capture context and should also be invariant across image views. To this end, we propose a new<br>all-pairs consistency regularization (ACR). Given a pair of augmented views, our approach regularizes the activation intensities between a pair of augmented views, while also ensuring that the affinity across regions within each view remains consistent. We adopt vision transformers as the self-attention mechanism naturally embeds pair-wise affinity. This enables us to simply regularize the distance between the attention matrices of augmented image pairs. Additionally, we introduce a novel class-wise localization<br>method that leverages the gradients ofthe class token. Our method can be seamlessly integrated into existing WSSS methods using transformers without modifying the architectures. We evaluate our method on PASCAL VOC and MS COCO datasets. Our method produces noticeably better class localization maps (67.3% mIoU on PASCAL VOC train), resulting in superior WSSS performances.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>在这项工作中，我们提出了一种新的<strong>基于变换的正则化方法</strong>来更好地定位弱监督语义分割(WSSS)的对象。在图像级WSSS中，采用类激活图(Class Activation Map, CAM)生成目标定位作为伪分割标签。为了解决cam的部分激活问题，采用一致性正则化方法在不同的图像增强中保持激活强度的不变性。然而，这些方法忽略了每个CAM内区域之间的成对关系，这种关系捕获上下文，并且应该在图像视图之间保持不变。为此，我们提出了一种新的全对一致性正则化(ACR)。给定一对增强视图，我们的方法规范了一对增强视图之间的激活强度，同时还确保每个视图中跨区域的亲和性保持一致。我们采用视觉Transformer作为自注意力机制机制，自然嵌入成对的亲和力。这使我们能够简单地正则化增广图像对的注意矩阵之间的距离。此外，我们引入了一种新的类智能定位方法，利用类标记的梯度。我们的方法可以使用Transformer无缝集成到现有的WSSS方法中，而无需修改体系结构。我们在PASCAL VOC和MS COCO数据集上评估了我们的方法。我们的方法产生了明显更好的类定位图(在PASCAL VOC训练上有67.3%的mIoU)，从而获得了卓越的WSSS性能。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于弱监督语义分割（WSSS）领域，旨在解决现有方法的局限性，具体研究背景如下：</p>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
+<p>In this work, we propose a new <strong>transformer-based regularization</strong> to better localize objects for <strong>Weakly supervised semantic segmentation (WSSS)</strong>. In image-level WSSS, Class Activation Map (CAM) is adopted to generate object localization as pseudo segmentation labels. To address the partial activation issue of the CAMs, consistency regularization is employed to maintain activation intensity invariance across various image augmentations. However, such methods ignore pair-wise relations among regions within each CAM, which capture context and should also be invariant across image views. To this end, we propose a new<br />
+all-pairs consistency regularization (ACR). Given a pair of augmented views, our approach regularizes the activation intensities between a pair of augmented views, while also ensuring that the affinity across regions within each view remains consistent. We adopt vision transformers as the self-attention mechanism naturally embeds pair-wise affinity. This enables us to simply regularize the distance between the attention matrices of augmented image pairs. Additionally, we introduce a novel class-wise localization<br />
+method that leverages the gradients ofthe class token. Our method can be seamlessly integrated into existing WSSS methods using transformers without modifying the architectures. We evaluate our method on PASCAL VOC and MS COCO datasets. Our method produces noticeably better class localization maps (67.3% mIoU on PASCAL VOC train), resulting in superior WSSS performances.</p>
+<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
+<p>在这项工作中，我们提出了一种新的<strong>基于变换的正则化方法</strong>来更好地定位弱监督语义分割(WSSS)的对象。在图像级WSSS中，采用类激活图(Class Activation Map, CAM)生成目标定位作为伪分割标签。为了解决cam的部分激活问题，采用一致性正则化方法在不同的图像增强中保持激活强度的不变性。然而，这些方法忽略了每个CAM内区域之间的成对关系，这种关系捕获上下文，并且应该在图像视图之间保持不变。为此，我们提出了一种新的全对一致性正则化(ACR)。给定一对增强视图，我们的方法规范了一对增强视图之间的激活强度，同时还确保每个视图中跨区域的亲和性保持一致。我们采用视觉Transformer作为自注意力机制机制，自然嵌入成对的亲和力。这使我们能够简单地正则化增广图像对的注意矩阵之间的距离。此外，我们引入了一种新的类智能定位方法，利用类标记的梯度。我们的方法可以使用Transformer无缝集成到现有的WSSS方法中，而无需修改体系结构。我们在PASCAL VOC和MS COCO数据集上评估了我们的方法。我们的方法产生了明显更好的类定位图(在PASCAL VOC训练上有67.3%的mIoU)，从而获得了卓越的WSSS性能。</p>
+<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
+<p>本文聚焦于弱监督语义分割（WSSS）领域，旨在解决现有方法的局限性，具体研究背景如下：</p>
 <ul>
-<li><strong>WSSS的意义与挑战</strong>：WSSS旨在利用图像级标签、点、涂鸦和边界框等弱标签，缓解像素级标注的繁琐和高成本问题。其中，图像级WSSS仅使用类别标签监督像素级预测，尤为具有挑战性。 </li>
+<li><strong>WSSS的意义与挑战</strong>：WSSS旨在利用图像级标签、点、涂鸦和边界框等弱标签，缓解像素级标注的繁琐和高成本问题。其中，图像级WSSS仅使用类别标签监督像素级预测，尤为具有挑战性。</li>
 <li><strong>现有方法的不足</strong>：现有图像级WSSS方法通常依赖基于卷积神经网络的类激活图（CAM）生成伪分割标签，但CAM存在激活不完整和不准确的问题，这是由于图像标签和像素级分割监督之间的差距导致的。</li>
 <li><strong>一致性正则化的局限</strong>：现有工作使用增强不变一致性来改进CAM，考虑了区域激活一致性，但忽略了跨视图的成对一致性，即区域亲和性一致性。激活一致性只能发现新视图中的激活，无法解决未激活区域和背景噪声问题。</li>
 <li><strong>本文的研究动机</strong>：鉴于亲和性是上下文编码的一种方式，且上下文对像素级预测至关重要，本文提出全对一致性正则化（ACR）方法，同时强制区域激活一致性和区域亲和性一致性，以提高WSSS的性能。</li>
 </ul>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
-<li><p><strong>弱监督语义分割方法多样</strong>：采用图像级标签、涂鸦、点和边界框等弱标签，避免像素级标注的繁琐。图像级弱监督语义分割常依赖类激活图（CAM）生成伪分割标签，且有多种方法对其进行优化。</p>
+<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
+<ul>
+<li>
+<p><strong>弱监督语义分割方法多样</strong>：采用图像级标签、涂鸦、点和边界框等弱标签，避免像素级标注的繁琐。图像级弱监督语义分割常依赖类激活图（CAM）生成伪分割标签，且有多种方法对其进行优化。</p>
 </li>
-<li><p><strong>一致性正则化受关注</strong>：不同类型的一致性被提出用于优化初始种子，如CAM一致性、特征一致性等。</p>
+<li>
+<p><strong>一致性正则化受关注</strong>：不同类型的一致性被提出用于优化初始种子，如CAM一致性、特征一致性等。</p>
 </li>
-<li><p><strong>亲和性学习细化</strong>：成对亲和性常被用于优化初始种子，在CNN和Transformer时代都有相关研究。</p>
+<li>
+<p><strong>亲和性学习细化</strong>：成对亲和性常被用于优化初始种子，在CNN和Transformer时代都有相关研究。</p>
 </li>
 </ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-44-09.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-44-09.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-44-09"></p>
+<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-44-09.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-44-09.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-44-09" /></p>
 <p>本文提出了一种名为<strong>全对一致性正则化</strong>（<strong>All-pairs Consistency Regularization，ACR</strong>）的模型，用于弱监督语义分割（Weakly Supervised Semantic Segmentation，WSSS）任务。</p>
-<h3 id="核心思想"><a href="#核心思想" class="headerlink" title="核心思想"></a>核心思想</h3><p>在图像级弱监督语义分割中，<strong>类激活图</strong>（<strong>Class Activation Map，CAM</strong>）常被用于生成目标定位作为伪分割标签，但存在部分激活问题。现有方法采用一致性正则化来保持不同图像增强下的激活强度不变性，但忽略了每个CAM内区域之间的成对关系。因此，ACR模型旨在同时确保区域激活一致性和区域亲和性一致性，以更好地定位目标。</p>
-<h3 id="模型设计"><a href="#模型设计" class="headerlink" title="模型设计"></a>模型设计</h3><ul>
+<h3 id="核心思想"><a class="markdownIt-Anchor" href="#核心思想"></a> 核心思想</h3>
+<p>在图像级弱监督语义分割中，<strong>类激活图</strong>（<strong>Class Activation Map，CAM</strong>）常被用于生成目标定位作为伪分割标签，但存在部分激活问题。现有方法采用一致性正则化来保持不同图像增强下的激活强度不变性，但忽略了每个CAM内区域之间的成对关系。因此，ACR模型旨在同时确保区域激活一致性和区域亲和性一致性，以更好地定位目标。</p>
+<h3 id="模型设计"><a class="markdownIt-Anchor" href="#模型设计"></a> 模型设计</h3>
+<ul>
 <li><strong>基于视觉Transformer</strong>：选择视觉Transformer作为基础模型，因为其自注意力机制可以自然地编码区域之间的依赖关系，适合建模两种一致性，且无需引入额外模块。</li>
-<li>注意力一致性正则化<ul>
+<li>注意力一致性正则化
+<ul>
 <li><strong>区域激活一致性</strong>：通过比较原始图像和增强图像的类到块注意力（class-to-patch attention），计算两者之间的ℓ1损失，以鼓励网络生成对变换不变的目标定位。</li>
 <li><strong>区域亲和性一致性</strong>：比较原始图像和增强图像的块到块注意力（patch-to-patch attention），计算两者之间的ℓ1损失，以鼓励图像区域之间的成对关系对变换不变。</li>
 <li><strong>变换逆操作</strong>：为了解决图像增强后注意力矩阵空间顺序不一致的问题，引入变换逆操作，恢复注意力矩阵的原始空间顺序，以便直接计算两个注意力矩阵之间的距离。</li>
 </ul>
 </li>
-<li>基于梯度的Transformer类定位图生成<ul>
+<li>基于梯度的Transformer类定位图生成
+<ul>
 <li><strong>梯度计算</strong>：通过反向传播分类分数，计算类到块注意力的类特定梯度，去除负值并重塑为h×w的图，得到类定位图。</li>
 <li><strong>亲和性细化</strong>：利用学习到的块间亲和性对激活图进行细化，结合区域激活一致性和区域亲和性一致性，生成最终的类定位图。</li>
 </ul>
 </li>
 </ul>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p>数据集：<strong>PASCAL VOC、MS COCO</strong></p>
-<h4 id="MS-COCO"><a href="#MS-COCO" class="headerlink" title="MS COCO"></a>MS COCO</h4><p>表1展示了在MS COCO上的分割结果。本文方法实现了45%的分割平均交并比（mIoU），明显优于现有方法。值得注意的是，该结果不依赖任何额外的显著性信息，但超过了所有先前的WSSS方法，包括使用显著性信息的方法。MS COCO是一个更大的数据集，有更多语义类别和包含多个对象的复杂图像。这一结果表明，显著性信息可能会阻碍WSSS方法在复杂场景中的扩展性，因此本文方法未纳入显著性信息。该结果证明了全对一致性正则化（ACR）能够在具有挑战性的场景中生成可靠的类别定位图。MS COCO的每类结果报告在补充材料中。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-50-42.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-50-42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-50-42"></p>
-<h4 id="PASCAL-VOC"><a href="#PASCAL-VOC" class="headerlink" title="PASCAL VOC"></a>PASCAL VOC</h4><ul>
+<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
+<p>数据集：<strong>PASCAL VOC、MS COCO</strong></p>
+<h4 id="ms-coco"><a class="markdownIt-Anchor" href="#ms-coco"></a> MS COCO</h4>
+<p>表1展示了在MS COCO上的分割结果。本文方法实现了45%的分割平均交并比（mIoU），明显优于现有方法。值得注意的是，该结果不依赖任何额外的显著性信息，但超过了所有先前的WSSS方法，包括使用显著性信息的方法。MS COCO是一个更大的数据集，有更多语义类别和包含多个对象的复杂图像。这一结果表明，显著性信息可能会阻碍WSSS方法在复杂场景中的扩展性，因此本文方法未纳入显著性信息。该结果证明了全对一致性正则化（ACR）能够在具有挑战性的场景中生成可靠的类别定位图。MS COCO的每类结果报告在补充材料中。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-50-42.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-50-42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-50-42" /></p>
+<h4 id="pascal-voc"><a class="markdownIt-Anchor" href="#pascal-voc"></a> PASCAL VOC</h4>
+<ul>
 <li><strong>种子性能</strong>：表2报告了类别定位图的mIoU，包括有无亲和性细化的性能。结果显示，即使没有亲和性细化，ACR*仍优于大多数现有的非显著性方法（mIoU为59.4%）。本文的ACR显著改善了初始种子，证明了所提出的ACR的有效性。在没有显著性信息辅助的情况下，先前最佳方法[66]也采用变压器亲和性来细化种子，而ACR比其高出5.2%。图5展示了定性结果。此外，图6展示了在包含多个对象的复杂场景中的种子，ACR学习到精确的亲和性，有助于形成具有精确边界的完整对象形状。</li>
 <li><strong>伪标签性能</strong>：表2的最后一列显示了伪分割标签的性能。遵循常见做法，采用PSA [2]将激活图（种子）处理为像素级伪分割标签。实验发现PSA容易受到误报样本（即过度激活）的影响。为避免过度激活，使用ACR*训练PSA网络，然后训练好的PSA网络将细化ACR种子（67.3%）为伪标签。结果表明，本文方法显著改善了伪标签。</li>
 <li><strong>语义分割性能</strong>：表3展示了在PASCAL VOC上的语义分割结果。ACR在验证集和测试集上分别取得了71.2%和70.9%的有竞争力的结果，优于先前的非显著性方法。图7显示，使用本文伪标签训练的分割模型可以产生准确和完整的预测。PASCAL VOC的每类结果报告在补充材料中。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-51-40.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-51-40.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-51-40"></p>
-<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><p>本文提出在分类训练期间同时正则化区域激活和区域亲和性。表4对这两个正则化项进行了消融实验。首先观察到，即使在基线模型中，区域亲和性也能显著提高种子质量，这验证了视觉变压器的上下文编码能力。通过引入这两个正则化项，发现它们分别对性能有显著提升。同时使用两个正则化项取得了最优结果，与普通变压器基线（51.1%）相比，整体mIoU提高了15.8%，证明了ACR的有效性。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-53-12.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-53-12.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-53-12"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了一种名为<strong>全对一致性正则化（ACR）的训练框架</strong>，用于从变压器生成更好的类定位图。研究结果表明，ACR在分类训练中利用区域激活一致性和区域亲和一致性，通过变压器的自注意力机制同时规范这两种一致性。仅使用一个类令牌，ACR就能学习精确的对象定位和准确的成对亲和性，以提取对象范围。其类定位图显著优于先前方法，在PASCAL VOC和MS COCO数据集上取得了最先进的性能。此外，ACR可以无缝集成到视觉变压器网络中，无需额外修改，这有助于其他基于变压器的任务。因此，作者认为ACR是一种简单而有效的方法，能够为弱监督语义分割提供更好的初始种子。 </p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-51-40.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-51-40.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-51-40" /></p>
+<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）🥇</h2>
+<p>本文提出在分类训练期间同时正则化区域激活和区域亲和性。表4对这两个正则化项进行了消融实验。首先观察到，即使在基线模型中，区域亲和性也能显著提高种子质量，这验证了视觉变压器的上下文编码能力。通过引入这两个正则化项，发现它们分别对性能有显著提升。同时使用两个正则化项取得了最优结果，与普通变压器基线（51.1%）相比，整体mIoU提高了15.8%，证明了ACR的有效性。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-53-12.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-53-12.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-07_13-53-12" /></p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<p>作者提出了一种名为<strong>全对一致性正则化（ACR）的训练框架</strong>，用于从变压器生成更好的类定位图。研究结果表明，ACR在分类训练中利用区域激活一致性和区域亲和一致性，通过变压器的自注意力机制同时规范这两种一致性。仅使用一个类令牌，ACR就能学习精确的对象定位和准确的成对亲和性，以提取对象范围。其类定位图显著优于先前方法，在PASCAL VOC和MS COCO数据集上取得了最先进的性能。此外，ACR可以无缝集成到视觉变压器网络中，无需额外修改，这有助于其他基于变压器的任务。因此，作者认为ACR是一种简单而有效的方法，能够为弱监督语义分割提供更好的初始种子。</p>
 
       </div>
       <div class="post-tags-categories">
@@ -822,7 +841,8 @@
       
       <!-- <div class="content">
         华中科技大学、西北工业大学
-摘要Contrastive language and image pre-training 
+ 摘要
+Contrastive language and image pre-trainin
       </div> -->
     </a>
   </div>
@@ -841,7 +861,8 @@
         <div class="title-text">Self-supervised vision transformers for semantic segmentation</div>
       </div>
       <!-- <div class="content">
-        摘要Semantic segmentation is a fundamental task in computer vi
+         摘要
+Semantic segmentation is a fundamental task in computer 
       </div> -->
     </a>
   </div>
@@ -976,7 +997,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-text">核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="toc-text">模型设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MS-COCO"><span class="toc-text">MS COCO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PASCAL-VOC"><span class="toc-text">PASCAL VOC</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-text"> 核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E8%AE%BE%E8%AE%A1"><span class="toc-text"> 模型设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#ms-coco"><span class="toc-text"> MS COCO</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#pascal-voc"><span class="toc-text"> PASCAL VOC</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）🥇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1534,7 +1555,7 @@
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
 </div>
             
           </div>

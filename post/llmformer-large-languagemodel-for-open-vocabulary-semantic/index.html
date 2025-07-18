@@ -720,18 +720,28 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>Hunan University、Monash University</p>
-<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>Open-vocabulary (OV) semantic segmentation</strong> has attracted increasing attention in recent years, which aims to recognize<br>objects in an open class set for real-world applications. While prior OV semantic segmentation approaches have relied on<br>additional semantic knowledge derived from vision-language (VL) pre-training, such as the popular CLIP model, this paper<br>introduces a novel paradigm by harnessing the unprecedented capabilities of large language models (LLMs). Inspired by<br>recent breakthroughs in LLMs that provide a richer knowledge base compared to traditional vision-language pre-training, our proposed methodology capitalizes on the vast knowledge embedded within LLMs for OV semantic segmentation. Particularly, we partition LLM knowledge into object, attribute, and relation priors, and propose three novel attention modules-semantic, scaled visual, and relation attentions, to utilize the LLM priors. Extensive experiments are conducted on common benchmarks including ADE20K (847 classes) and Pascal Context (459 classes). The results show that our model outperforms previous state-of-the-art (SoTA) methods by up to 7.2% absolute. Moreover, unlike previous VL-pre-training-based works, our method can even predict OV segmentation results without target candidate classes.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>开放词汇语义分割近年来受到越来越多的关注，其目的是为了在现实应用中识别开放类集中的对象。虽然之前的开放词汇语义分割方法依赖于来自视觉语言(VL)预训练的额外语义知识，例如流行的CLIP模型，但本文通过利用大型语言模型(大语言模型)前所未有的能力引入了一种新的范式。与传统的视觉语言预训练相比，大语言模型提供了更丰富的知识库，受其最新突破的启发，我们提出的方法利用大语言模型中嵌入的大量知识进行开放词汇语义分割。特别地，我们将大语言模型知识划分为对象先验、属性先验和关系先验，并提出了语义关注、尺度视觉关注和关系关注三个新的关注模块来利用大语言模型先验。在包括ADE20K(847个类)和Pascal Context(459个类)在内的常见基准测试上进行了广泛的实验。结果表明，我们的模型比以前的最先进的(SoTA)方法高出7.2%。此外，与之前基于vl预训练的工作不同，我们的方法甚至可以在没有目标候选类的情况下预测开放词汇分割结果。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>基于先验的语义分割方法可以识别固定集的目标种类，但不能够很好的处理真实世界中各种新的目标，由此引出开放词汇语义分割。开放词汇语义分割分为两种：一阶段和两阶段，尽管取得了不错的效果，但是大多数还是利用预训练的视觉语言模型提取embeding，这种方式仅提供有限的语义信息。随着大语言模型的发展，由于其提供了对场景的综合理解能力，本文作者尝试采用LLM的知识解决开放词汇语义分割中的挑战，即利用大语言模型描述中的目标名字、目标属性和目标关系。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_15-58-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_15-58-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_15-58-54"></p>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
+<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
+<p><strong>Open-vocabulary (OV) semantic segmentation</strong> has attracted increasing attention in recent years, which aims to recognize<br />
+objects in an open class set for real-world applications. While prior OV semantic segmentation approaches have relied on<br />
+additional semantic knowledge derived from vision-language (VL) pre-training, such as the popular CLIP model, this paper<br />
+introduces a novel paradigm by harnessing the unprecedented capabilities of large language models (LLMs). Inspired by<br />
+recent breakthroughs in LLMs that provide a richer knowledge base compared to traditional vision-language pre-training, our proposed methodology capitalizes on the vast knowledge embedded within LLMs for OV semantic segmentation. Particularly, we partition LLM knowledge into object, attribute, and relation priors, and propose three novel attention modules-semantic, scaled visual, and relation attentions, to utilize the LLM priors. Extensive experiments are conducted on common benchmarks including ADE20K (847 classes) and Pascal Context (459 classes). The results show that our model outperforms previous state-of-the-art (SoTA) methods by up to 7.2% absolute. Moreover, unlike previous VL-pre-training-based works, our method can even predict OV segmentation results without target candidate classes.</p>
+<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
+<p>开放词汇语义分割近年来受到越来越多的关注，其目的是为了在现实应用中识别开放类集中的对象。虽然之前的开放词汇语义分割方法依赖于来自视觉语言(VL)预训练的额外语义知识，例如流行的CLIP模型，但本文通过利用大型语言模型(大语言模型)前所未有的能力引入了一种新的范式。与传统的视觉语言预训练相比，大语言模型提供了更丰富的知识库，受其最新突破的启发，我们提出的方法利用大语言模型中嵌入的大量知识进行开放词汇语义分割。特别地，我们将大语言模型知识划分为对象先验、属性先验和关系先验，并提出了语义关注、尺度视觉关注和关系关注三个新的关注模块来利用大语言模型先验。在包括ADE20K(847个类)和Pascal Context(459个类)在内的常见基准测试上进行了广泛的实验。结果表明，我们的模型比以前的最先进的(SoTA)方法高出7.2%。此外，与之前基于vl预训练的工作不同，我们的方法甚至可以在没有目标候选类的情况下预测开放词汇分割结果。</p>
+<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
+<p>基于先验的语义分割方法可以识别固定集的目标种类，但不能够很好的处理真实世界中各种新的目标，由此引出开放词汇语义分割。开放词汇语义分割分为两种：一阶段和两阶段，尽管取得了不错的效果，但是大多数还是利用预训练的视觉语言模型提取embeding，这种方式仅提供有限的语义信息。随着大语言模型的发展，由于其提供了对场景的综合理解能力，本文作者尝试采用LLM的知识解决开放词汇语义分割中的挑战，即利用大语言模型描述中的目标名字、目标属性和目标关系。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_15-58-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_15-58-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_15-58-54" /></p>
+<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
+<ul>
 <li><strong>固定集语义分割</strong>：早期采用CNN架构，后引入多尺度组合、全局上下文建模和transformer等方法，但难以利用大预训练模型知识，且只能识别固定集对象。</li>
 <li><strong>开放词汇语义分割</strong>：分为单阶段和两阶段方法。两阶段方法依赖训练良好的掩码生成器，计算成本高；单阶段方法虽有改进，但大多仅从视觉 - 语言预训练模型提取知识，语义信息有限。</li>
 <li><strong>大语言模型</strong>：在许多领域取得成功，具备综合复杂推理能力，部分模型可理解视觉内容，但主要用于通用表示和预测</li>
 </ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-00-15.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-00-15.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-00-15"></p>
+<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-00-15.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-00-15.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-00-15" /></p>
 <ol>
-<li><p>整体架构</p>
+<li>
+<p>整体架构</p>
 <p>LLMFormer由三个主要部分组成：</p>
 <ul>
 <li><strong>图像特征提取（Image Feature Extraction）</strong>：使用多模态大语言模型（MLLM）中的视觉编码器、适配器（ViT Adapter）和多尺度可变形注意力（MSDA）模块，以捕获多尺度的图像特征。</li>
@@ -739,7 +749,8 @@
 <li><strong>LLM先验引导的分割（LLM-Prior-Guided Segmentation）</strong>：引入了三种新型注意力模块，分别是语义注意力（Semantic Attention）、缩放视觉注意力（Scaled Visual Attention）和关系注意力（Relation Attention），以利用LLM的先验知识进行开放词汇语义分割。</li>
 </ul>
 </li>
-<li><p>关键组件</p>
+<li>
+<p>关键组件</p>
 </li>
 </ol>
 <ul>
@@ -750,7 +761,8 @@
 <p>::: tip</p>
 <p>重要</p>
 <p>:::</p>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
+<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
+<blockquote>
 <p>数据集：训练：COCO-Stuff，测试：ADE20K、Pascal Context、Pascal VOC</p>
 </blockquote>
 <ul>
@@ -758,10 +770,11 @@
 <li><strong>ADE20K数据集</strong>：在A - 847和A - 150上均达到了最先进的性能，超过FC - CLIP分别为1.7%和4.4%，超过使用VIT - L骨干的SAN分别为2.8%和5.2%。</li>
 <li><strong>Pascal VOC 2012数据集</strong>：取得了最佳的mIoU，显著超过之前的SOTA方法FC - CLIP 1.4%。在Open IoU指标下也有显著提升，证明了模型的开放词汇能力。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-04-53.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-04-53.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-04-53"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-00.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-00.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-05-00"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-17.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-17.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-05-17"></p>
-<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-04-53.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-04-53.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-04-53" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-00.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-00.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-05-00" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-17.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_16-05-17.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-24_16-05-17" /></p>
+<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）🥇</h2>
+<ul>
 <li><strong>主要组件的影响</strong>：语义注意力模块能显著提升性能，基于大语言模型（LLM）属性的尺度选择和关系注意力可进一步提高性能，完整模型在A - 847和A - 150上取得最佳性能。</li>
 <li><strong>语义注意力</strong>：使用对象先验能持续提高开放词汇分割性能，属性先验可进一步增强结果，交叉注意力在整合先验的方法中表现最优。</li>
 <li><strong>缩放视觉注意力</strong>：多尺度方法优于单尺度方法，基于属性先验的尺度选择方法优于其他非选择方法。</li>
@@ -770,11 +783,12 @@
 <li><strong>成本比较</strong>：与Zegformer和OV - Seg相比，模型的可训练参数更少，同时精度更高。使用LLAVA - Phi2 - 2.7B可进一步降低计算开销，性能仅有轻微下降。</li>
 <li><strong>不同提示</strong>：详细提示（描述所有对象、属性和关系）能进一步提高分割性能，但实验中主要使用简单提示。</li>
 </ul>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><blockquote>
-<p>作者提出了LLMFormer这一利用大语言模型（LLM）知识进行开放词汇语义分割（OV）的新方法，并得出以下结论： </p>
+<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
+<blockquote>
+<p>作者提出了LLMFormer这一利用大语言模型（LLM）知识进行开放词汇语义分割（OV）的新方法，并得出以下结论：</p>
 </blockquote>
 <ol>
-<li><strong>方法有效性</strong>：提出语义、缩放视觉和关系三种注意力模块，利用LLM的对象、属性和关系先验知识进行分割，大量实验证明LLMFormer及各注意力模块有效。 </li>
+<li><strong>方法有效性</strong>：提出语义、缩放视觉和关系三种注意力模块，利用LLM的对象、属性和关系先验知识进行分割，大量实验证明LLMFormer及各注意力模块有效。</li>
 <li><strong>性能优势</strong>：在ADE20K、Pascal Context和Pascal VOC等数据集上显著优于现有方法，绝对提升最高达7.2%，还能在无预定义候选类别的情况下预测OV分割结果，更适用于实际应用。</li>
 <li><strong>未来方向</strong>：当前工作虽提升了OV识别能力，但LLM参数多致速度慢，且存在细粒度分类和边界分割问题，未来将研究效率、细粒度分类和分割问题。</li>
 </ol>
@@ -853,7 +867,8 @@
       </div>
       <!-- <div class="content">
         Nankai University、NKIARI, Shenzhen Futian、SICE, UESTC
-摘要This
+ 摘要
+Th
       </div> -->
     </a>
   </div>
@@ -988,7 +1003,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）🥇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1546,7 +1561,7 @@
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
 </div>
             
           </div>
