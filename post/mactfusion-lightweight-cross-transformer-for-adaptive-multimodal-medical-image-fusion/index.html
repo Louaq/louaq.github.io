@@ -751,16 +751,15 @@
 </li>
 <li><strong>图像重建</strong>：通过图像重建模块从融合特征中重建融合图像。</li>
 </ol>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>综合考虑多个方面定义了联合损失函数，包括结构相似性指数损失（SSIM）、梯度损失（纹理损失）和强度损失，以保证融合图像的视觉保真度和强度信息。公式为：$L &#x3D; \delta_1L_{ssim} + \delta_2L_{grad} + \delta_3L_{int}$，其中$\delta_1$、$\delta_2$和$\delta_3$是控制各损失项权重的参数。</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>综合考虑多个方面定义了联合损失函数，包括结构相似性指数损失（SSIM）、梯度损失（纹理损失）和强度损失，以保证融合图像的视觉保真度和强度信息。公式为：$L = \delta<em>1L</em>{ssim} + \delta<em>2L</em>{grad} + \delta<em>3L</em>{int}$，其中$\delta_1$、$\delta_2$和$\delta_3$是控制各损失项权重的参数。</p>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-53-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-53-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-53-54"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-16.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-16.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-16"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-26"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-48.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-48.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-48"></p>
 <ol>
-<li><p>对比实验与评估指标：</p>
-<ul>
+<li>对比实验与评估指标：<ul>
 <li><strong>对比方法</strong>：与CSMCA、EMFusion、FusionGAN、IFCNN、U2Fusion、IFT和SwinFusion等先进方法进行对比。</li>
-<li><strong>评估指标</strong>：选用了包括相关差异之和（SCD）、多尺度结构相似性指数（MS - SSIM）、边缘信息测量（QAB&#x2F;F）、标准差（SD）、加权融合质量指标（Qw）和视觉信息保真度（VIF）在内的六个常见定量指标进行评估。</li>
+<li><strong>评估指标</strong>：选用了包括相关差异之和（SCD）、多尺度结构相似性指数（MS - SSIM）、边缘信息测量（QAB/F）、标准差（SD）、加权融合质量指标（Qw）和视觉信息保真度（VIF）在内的六个常见定量指标进行评估。</li>
 </ul>
 </li>
 <li><p>不同模态医学图像融合实验：</p>
@@ -772,10 +771,8 @@
 </li>
 <li><p><strong>临床多模态脑肿瘤图像融合实验</strong>：与临床医生合作，对脑胶质瘤、转移性肿瘤和脑膜瘤的MR - T1和MR - T2图像进行融合。融合结果清晰度更高、纹理信息更丰富，有助于医生评估肿瘤异质性和了解肿瘤对周围脑组织的浸润情况。</p>
 </li>
-<li><p><strong>GFP和PC图像融合实验</strong>：验证了MACTFusion的<strong>泛化能力</strong>，该模型与SwinFusion一样，能有效保留纹理和颜色信息。</p>
-</li>
-<li><p><strong>医学图像分割应用实验</strong>：将融合结果应用于医学图像<strong>分割任务</strong>，MACTFusion的分割结果比单模态图像和SwinFusion的结果更准</p>
-</li>
+<li><strong>GFP和PC图像融合实验</strong>：验证了MACTFusion的<strong>泛化能力</strong>，该模型与SwinFusion一样，能有效保留纹理和颜色信息。</li>
+<li><strong>医学图像分割应用实验</strong>：将融合结果应用于医学图像<strong>分割任务</strong>，MACTFusion的分割结果比单模态图像和SwinFusion的结果更准</li>
 </ol>
 <h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
 <li><strong>网络架构分析</strong>：对浅特征提取模块（SFE）、空间自适应融合模块（SAFM）和跨模态融合Transformer（CMFT）进行消融实验。结果表明，缺少这些模块会导致相应指标下降，影响模型提取细节、映射特征分布和整合补充信息的能力。</li>

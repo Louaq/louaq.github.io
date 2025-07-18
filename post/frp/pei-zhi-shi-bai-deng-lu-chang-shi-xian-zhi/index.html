@@ -722,28 +722,21 @@
         <p>为了增强Windows远程桌面通过FRP和Nginx配置的安全性，限制失败登录尝试是非常重要的一环。我将介绍多个层面上的失败登录限制配置方法。</p>
 <h2 id="1-Nginx层面的失败登录限制"><a href="#1-Nginx层面的失败登录限制" class="headerlink" title="1. Nginx层面的失败登录限制"></a>1. Nginx层面的失败登录限制</h2><h3 id="使用Nginx限流模块"><a href="#使用Nginx限流模块" class="headerlink" title="使用Nginx限流模块"></a>使用Nginx限流模块</h3><p>在Nginx配置中添加限流规则，可以有效防止暴力破解尝试：</p>
 <figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在nginx.conf的http部分添加</span></span><br><span class="line"><span class="section">http</span> &#123;</span><br><span class="line">    <span class="comment"># 定义限制区域</span></span><br><span class="line">    <span class="attribute">limit_req_zone</span> <span class="variable">$binary_remote_addr</span> zone=rdp_login:<span class="number">10m</span> rate=5r/m;</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 其他配置...</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在rdp.conf的server部分添加</span></span><br><span class="line"><span class="section">server</span> &#123;</span><br><span class="line">    <span class="comment"># ...其他配置</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 对RDP登录页面应用限流</span></span><br><span class="line">    <span class="section">location</span> /rdp/ &#123;</span><br><span class="line">        <span class="attribute">limit_req</span> zone=rdp_login burst=<span class="number">10</span> nodelay;</span><br><span class="line">        <span class="comment"># 其他proxy_pass配置...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <h3 id="使用fail2ban监控Nginx日志"><a href="#使用fail2ban监控Nginx日志" class="headerlink" title="使用fail2ban监控Nginx日志"></a>使用fail2ban监控Nginx日志</h3><p>安装并配置fail2ban来监控Nginx日志并自动封禁可疑IP：</p>
 <ol>
-<li>安装fail2ban：</li>
-</ol>
+<li><p>安装fail2ban：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install fail2ban -y</span><br></pre></td></tr></table></figure>
-
-<ol start="2">
-<li>创建自定义过滤器，例如 <code>/etc/fail2ban/filter.d/nginx-rdp.conf</code>：</li>
-</ol>
+</li>
+<li><p>创建自定义过滤器，例如 <code>/etc/fail2ban/filter.d/nginx-rdp.conf</code>：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[Definition]</span></span><br><span class="line"><span class="attr">failregex</span> = ^&lt;HOST&gt; - .* <span class="string">&quot;POST /rdp/api/tokens HTTP/1\.1&quot;</span> <span class="number">401</span></span><br><span class="line">ignoreregex =</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>在fail2ban配置中添加监控规则，修改 <code>/etc/fail2ban/jail.local</code>：</li>
-</ol>
+</li>
+<li><p>在fail2ban配置中添加监控规则，修改 <code>/etc/fail2ban/jail.local</code>：</p>
 <figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="section">[nginx-rdp]</span></span><br><span class="line"><span class="attr">enabled</span> = <span class="literal">true</span></span><br><span class="line"><span class="attr">port</span> = http,https</span><br><span class="line"><span class="attr">filter</span> = nginx-rdp</span><br><span class="line"><span class="attr">logpath</span> = /var/log/nginx/access.log</span><br><span class="line"><span class="attr">maxretry</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">bantime</span> = <span class="number">3600</span>  <span class="comment"># 封禁1小时</span></span><br><span class="line"><span class="attr">findtime</span> = <span class="number">300</span>  <span class="comment"># 5分钟内</span></span><br></pre></td></tr></table></figure>
-
-<ol start="4">
-<li>重启fail2ban：</li>
-</ol>
+</li>
+<li><p>重启fail2ban：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart fail2ban</span><br></pre></td></tr></table></figure>
-
+</li>
+</ol>
 <h2 id="2-Windows-RDP层面的失败登录限制"><a href="#2-Windows-RDP层面的失败登录限制" class="headerlink" title="2. Windows RDP层面的失败登录限制"></a>2. Windows RDP层面的失败登录限制</h2><h3 id="账户锁定策略"><a href="#账户锁定策略" class="headerlink" title="账户锁定策略"></a>账户锁定策略</h3><p>在Windows系统上配置账户锁定策略：</p>
 <ol>
 <li>打开本地安全策略（secpol.msc）</li>
@@ -756,7 +749,6 @@
 </li>
 </ol>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 或者通过PowerShell设置（管理员权限）</span></span><br><span class="line">net accounts /lockoutthreshold:<span class="number">5</span></span><br><span class="line">net accounts /lockoutduration:<span class="number">30</span></span><br><span class="line">net accounts /lockoutwindow:<span class="number">30</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="使用Windows高级防火墙"><a href="#使用Windows高级防火墙" class="headerlink" title="使用Windows高级防火墙"></a>使用Windows高级防火墙</h3><p>配置Windows高级防火墙来限制连接尝试：</p>
 <ol>
 <li>打开Windows高级防火墙（wf.msc）</li>
@@ -774,12 +766,9 @@
 <li>通过编辑<code>rdpwrap.ini</code>文件添加IP过滤规则</li>
 </ol>
 <h2 id="4-服务器层面的安全措施"><a href="#4-服务器层面的安全措施" class="headerlink" title="4. 服务器层面的安全措施"></a>4. 服务器层面的安全措施</h2><h3 id="安装和配置DenyHosts或Fail2ban"><a href="#安装和配置DenyHosts或Fail2ban" class="headerlink" title="安装和配置DenyHosts或Fail2ban"></a>安装和配置DenyHosts或Fail2ban</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 安装Fail2ban（如果还没安装）</span></span><br><span class="line">apt install fail2ban -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置RDP保护，编辑/etc/fail2ban/jail.local</span></span><br><span class="line">[rdp]</span><br><span class="line">enabled = <span class="literal">true</span></span><br><span class="line">port = 3389</span><br><span class="line">filter = rdp</span><br><span class="line">logpath = /var/log/auth.log</span><br><span class="line">maxretry = 3</span><br><span class="line">bantime = 86400  <span class="comment"># 24小时</span></span><br></pre></td></tr></table></figure>
-
 <h3 id="使用iptables设置连接限制"><a href="#使用iptables设置连接限制" class="headerlink" title="使用iptables设置连接限制"></a>使用iptables设置连接限制</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 限制每分钟最多接受5个新连接</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 3389 -m state --state NEW -m <span class="built_in">limit</span> --<span class="built_in">limit</span> 5/minute --limit-burst 5 -j ACCEPT</span><br><span class="line">iptables -A INPUT -p tcp --dport 3389 -m state --state NEW -j DROP</span><br><span class="line"></span><br><span class="line"><span class="comment"># 限制每个IP最大同时连接数</span></span><br><span class="line">iptables -A INPUT -p tcp --dport 3389 -m connlimit --connlimit-above 3 -j REJECT</span><br></pre></td></tr></table></figure>
-
 <h2 id="5-FRP层面的限制"><a href="#5-FRP层面的限制" class="headerlink" title="5. FRP层面的限制"></a>5. FRP层面的限制</h2><p>修改frps.toml配置来添加连接限制：</p>
 <figure class="highlight toml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加到frps.toml</span></span><br><span class="line"><span class="attr">maxPortsPerClient</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">authentication.method</span> = <span class="string">&quot;token&quot;</span></span><br><span class="line"><span class="attr">webServer.authMethod</span> = <span class="string">&quot;password&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加黑白名单 </span></span><br><span class="line"><span class="attr">allowPorts</span> = [<span class="number">3389</span>, <span class="number">7001</span>, <span class="number">7002</span>, <span class="number">7500</span>, <span class="number">80</span>, <span class="number">443</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 限制连接</span></span><br><span class="line"><span class="attr">transport.maxPoolCount</span> = <span class="number">5</span></span><br><span class="line"><span class="attr">transport.maxPoolSize</span> = <span class="number">100</span></span><br></pre></td></tr></table></figure>
-
 <h2 id="6-实施多因素认证（MFA）"><a href="#6-实施多因素认证（MFA）" class="headerlink" title="6. 实施多因素认证（MFA）"></a>6. 实施多因素认证（MFA）</h2><h3 id="配置Windows-Hello或智能卡认证"><a href="#配置Windows-Hello或智能卡认证" class="headerlink" title="配置Windows Hello或智能卡认证"></a>配置Windows Hello或智能卡认证</h3><ol>
 <li>通过组策略启用智能卡认证需求</li>
 <li>配置本地安全策略，要求网络级别身份验证</li>
@@ -791,10 +780,8 @@
 <li>WiKID强认证系统</li>
 </ol>
 <h2 id="7-监控和审计"><a href="#7-监控和审计" class="headerlink" title="7. 监控和审计"></a>7. 监控和审计</h2><h3 id="配置Windows事件日志监控"><a href="#配置Windows事件日志监控" class="headerlink" title="配置Windows事件日志监控"></a>配置Windows事件日志监控</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 启用详细的RDP登录日志</span></span><br><span class="line">wevtutil <span class="built_in">sl</span> <span class="string">&quot;Microsoft-Windows-RemoteDesktopServices-RdpCoreTS/Operational&quot;</span> /e:true</span><br><span class="line"></span><br><span class="line"><span class="comment"># 配置事件转发以集中日志</span></span><br><span class="line">wecutil qc /q</span><br></pre></td></tr></table></figure>
-
 <h3 id="设置登录通知"><a href="#设置登录通知" class="headerlink" title="设置登录通知"></a>设置登录通知</h3><p>创建登录通知脚本，在检测到失败登录尝试时发送电子邮件或其他通知：</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建监控脚本</span></span><br><span class="line"><span class="variable">$query</span> = <span class="string">&#x27;*[System[(EventID=4625)]]&#x27;</span>  <span class="comment"># 失败登录事件ID</span></span><br><span class="line"><span class="variable">$subscription</span> = <span class="built_in">Register-WmiEvent</span> <span class="literal">-Query</span> <span class="variable">$query</span> <span class="literal">-SourceIdentifier</span> <span class="string">&quot;LoginFailureAlert&quot;</span> <span class="literal">-Action</span> &#123;</span><br><span class="line">    <span class="comment"># 发送电子邮件或其他通知</span></span><br><span class="line">    <span class="built_in">Send-MailMessage</span> <span class="literal">-From</span> <span class="string">&quot;alert@yourdomain.com&quot;</span> <span class="literal">-To</span> <span class="string">&quot;admin@yourdomain.com&quot;</span> <span class="literal">-Subject</span> <span class="string">&quot;RDP Login Failure&quot;</span> <span class="literal">-Body</span> <span class="string">&quot;Failed login attempt detected&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
 <p>通过以上多层防护措施的组合实施，可以有效限制失败登录尝试并大大提高远程桌面环境的安全性。这种深度防御策略能够在不同层面拦截和记录可疑活动，保护您的Windows远程桌面免受未授权访问的风险。</p>
 
       </div>

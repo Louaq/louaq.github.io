@@ -721,11 +721,11 @@
       <div class="post-content">
         <p>Jarvis Research Center、Wuhan University、Guangxi Medical University</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Domain generalized medical image segmentation requires models to learn from multiple source domains and generalize well to arbitrary unseen target domain. Such a task is both technically challenging and clinically practical, due to the domain shift problem (i.e., images are collected from different hospitals and scanners). Existing methods focused on either learning shape-invariant representation or reaching consensus among the source domains. An ideal generalized representation is supposed to show similar pattern responses within the same channel for cross-domain images. However, to deal with the significant distribution discrepancy, the network tends to capture similar patterns by mul-tiple channels, while different cross-domain patterns are also allowed to rest in the same channel. To address this issue, we propose to leverage channel-wise decoupled deep features as queries. With the aid of cross-attention mechanism, the long-range dependency between deep and shallow features can be fully mined via self-attention and then guides the learning of<br>generalized representation. Besides, a relaxed deep whitening transformation is proposed to learn channel-wise decoupled features in a feasible way. The proposed decoupled feature query (DFQ) scheme can be seamlessly integrate into the Transformer segmentation model in an end-to-end manner. Extensive experiments show its state-of-the-art performance, notably outperforming the runner-up by 1.31% and 1.98% with DSC metric on generalized fundus and prostate benchmarks, respectively. Source code is available at <a target="_blank" rel="noopener" href="https://github.com/BiQiWHU/DFQ">https://github.com/BiQiWHU/DFQ</a>.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p><strong>域泛化医学图像分割</strong>任务要求模型能够从多个源域学习，并有效泛化到任意未知目标域。这种任务不仅在技术上具有挑战性，同时也具有重要的临床应用价值，其核心难点在于域偏移问题 (即医学图像采集自不同医院和扫描设备) 。现有方法主要聚焦于学习形状不变性表征或实现源域间的特征共识。理想的泛化表征应确保跨域图像在相同特征通道上呈现相似的模式响应。然而，面对显著的分布差异，网络往往通过多个通道捕捉相似模式，而不同跨域模式又可能共存于同一通道。针对这一矛盾，我们提出基于通道解耦深度特征的查询机制。通过交叉注意力机制，深度特征与浅层特征间的长程依赖关系可经由自注意力充分挖掘，从而指导泛化表征的学习。此外，我们开发了一种自适应深度白化变换，以更灵活的方式实现通道解耦特征学习。所提出的解耦特征查询 (DFQ) 框架能够以端到端方式无缝集成于Transformer分割模型。大量实验验证了该方案的先进性，在眼底和前列腺的泛化性基准测试中，其Dice相似系数 (DSC) 指标分别以1.31%和1.98%的优势显著超越次优方法。项目代码已开源：<a target="_blank" rel="noopener" href="https://github.com/BiQiWHU/DFQ%E3%80%82">https://github.com/BiQiWHU/DFQ。</a></p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p><strong>域泛化医学图像分割</strong>任务要求模型能够从多个源域学习，并有效泛化到任意未知目标域。这种任务不仅在技术上具有挑战性，同时也具有重要的临床应用价值，其核心难点在于域偏移问题 (即医学图像采集自不同医院和扫描设备) 。现有方法主要聚焦于学习形状不变性表征或实现源域间的特征共识。理想的泛化表征应确保跨域图像在相同特征通道上呈现相似的模式响应。然而，面对显著的分布差异，网络往往通过多个通道捕捉相似模式，而不同跨域模式又可能共存于同一通道。针对这一矛盾，我们提出基于通道解耦深度特征的查询机制。通过交叉注意力机制，深度特征与浅层特征间的长程依赖关系可经由自注意力充分挖掘，从而指导泛化表征的学习。此外，我们开发了一种自适应深度白化变换，以更灵活的方式实现通道解耦特征学习。所提出的解耦特征查询 (DFQ) 框架能够以端到端方式无缝集成于Transformer分割模型。大量实验验证了该方案的先进性，在眼底和前列腺的泛化性基准测试中，其Dice相似系数 (DSC) 指标分别以1.31%和1.98%的优势显著超越次优方法。项目代码已开源：<a target="_blank" rel="noopener" href="https://github.com/BiQiWHU/DFQ。">https://github.com/BiQiWHU/DFQ。</a></p>
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><ol>
 <li><strong>数据分布差异</strong>：多数现有医学图像分割方法假定训练和测试样本遵循相同统计分布，但实际中，医学图像来自不同医院、由不同水平的标注者标注，存在显著的领域偏移问题，导致模型泛化能力要求高。 </li>
 <li><strong>现有方法不足</strong>：过去医学图像分割的领域适应研究需目标域样本参与训练，只能泛化到训练中见过的目标域。现有领域泛化医学图像分割方法主要分为学习形状不变特征和明确学习多源域间的域间偏移两类，但难以应对不同成像条件下任意未见领域的特征分布变化。 </li>
-<li><strong>特征问题</strong>：领域偏移使深度学习模型同一通道中不同领域的医学图像激活模式差异大，浅层特征的特征不对齐问题明显，网络为捕捉各领域模式会在多通道学习相似模式，导致特征冗余，影响模型对未见领域的泛化能力。</li>
+<li><strong>特征问题</strong>：领域偏移使深度学习模型同一通道中不同领域的医学图像激活模式差异大，浅层特征的特征不对齐问题明显，网络为捕捉各领域模式会在多通道学习相似模式，导致特征冗余，影响模型对未见领域的泛化能力。 </li>
 </ol>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>医学图像分割技术发展</strong>：深度学习技术推动医学图像分割发展，早期U - Net及其变体占主导，后DeepLab及改进模型成为趋势，近期Vision Transformer因强大特征表示能力受关注，且弱监督、半监督和多标注场景下的分割研究也有开展。</li>
@@ -745,7 +745,7 @@
 </li>
 <li>解码泛化表示<ul>
 <li><strong>方法</strong>：通过一个由权重$W_1$和偏置$b_1$参数化的线性层对学习到的泛化表示进行特征融合，然后将结果输入到语义分割头进行最终预测。</li>
-<li><strong>损失函数</strong>：总损失函数$L$是标准的二元交叉熵损失和Dice损失（记为$L_{seg}$）与每个特征的$L_{i_{RDWT}}$的组合，即$L &#x3D; L_{seg} + λ · \sum_{i&#x3D;1}^{4}L_{i_{RDWT}}$，其中$λ$设置为$1 × 10^{-4}$。</li>
+<li><strong>损失函数</strong>：总损失函数$L$是标准的二元交叉熵损失和Dice损失（记为$L<em>{seg}$）与每个特征的$L</em>{i<em>{RDWT}}$的组合，即$L = L</em>{seg} + λ · \sum<em>{i=1}^{4}L</em>{i_{RDWT}}$，其中$λ$设置为$1 × 10^{-4}$。</li>
 </ul>
 </li>
 </ol>
@@ -770,10 +770,10 @@
 <li><strong>各尺度实验</strong>：研究了解耦查询和风格不变的键与值的影响。结果显示，使用风格解耦的键和值（F1）以及风格解耦的查询（F2、F3、F4）都对分割结果有积极贡献，其中风格解耦查询的贡献更大。</li>
 </ul>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ol>
-<li><p><strong>方法创新</strong>：为解决跨领域医学图像的特征不对齐问题，提出了放松的深度白化变换（RDWT），增强了通道表示能力并减少通道冗余；创新性地使用解耦的深度特征作为查询，引导整个框架学习不同领域相似的通道特征模式。</p>
-</li>
-<li><p><strong>性能表现</strong>：大量实验表明，该方法在前列腺和眼底图像分割基准测试中显著优于现有最先进的方法，在多个指标上取得了最佳性能，如在眼底和前列腺基准测试中，DSC指标分别至少高出1.31%和1.98%，展现出了卓越的领域泛化能力。</p>
-</li>
+<li><strong>方法创新</strong>：为解决跨领域医学图像的特征不对齐问题，提出了放松的深度白化变换（RDWT），增强了通道表示能力并减少通道冗余；创新性地使用解耦的深度特征作为查询，引导整个框架学习不同领域相似的通道特征模式。</li>
+</ol>
+<ol>
+<li><strong>性能表现</strong>：大量实验表明，该方法在前列腺和眼底图像分割基准测试中显著优于现有最先进的方法，在多个指标上取得了最佳性能，如在眼底和前列腺基准测试中，DSC指标分别至少高出1.31%和1.98%，展现出了卓越的领域泛化能力。 </li>
 </ol>
 
       </div>

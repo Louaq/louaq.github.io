@@ -690,7 +690,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 906 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 902 |
           </span>
   
           <span class="min2read">
@@ -748,21 +748,23 @@
 <h2 id="5-评价指标"><a href="#5-评价指标" class="headerlink" title="5.评价指标"></a>5.评价指标</h2><p>一般来说，分割的指标主要有两个：像素分类精度（<code>accuracy</code>）和区域的交并比（<code>IoU</code>），下面给出具体的计算公式。</p>
 <p>说明：</p>
 <ul>
-<li><p>$n_{ij}$表示像素点属于分类$i$被预测为分类$j$的像素点数量，</p>
-</li>
-<li><p>$t_i&#x3D;\sum_{j}n_{ij}$表示标签中所有分类为$i$的像素点数量</p>
-</li>
-<li><p>总共有$n_{cl}$个不同的分类。</p>
-</li>
-<li><p>像素分类准确率 (<code>pixel accurarcy</code>)</p>
-</li>
+<li>$n_{ij}$表示像素点属于分类$i$被预测为分类$j$的像素点数量，</li>
+<li>$t<em>i=\sum</em>{j}n_{ij}$表示标签中所有分类为$i$的像素点数量</li>
+<li>总共有$n_{cl}$个不同的分类。</li>
 </ul>
-<p>$$<br>pacc&#x3D;\frac{\sum_{i}n_{ii}}{\sum_{i}t_{i}}<br>$$</p>
-<p>该指标表示所有像素中分类正确的比例</p>
 <ul>
-<li><p>平均准确率 (<code>mean accuracy</code>)：<br>$$<br>macc&#x3D;\frac1{n_{c1}}\sum_{i}\frac{n_{ii}}{t_{i}}<br>$$<br>计算每一类分类正确的像素点数和该类的所有像素点数的比例然后求平均</p>
+<li>像素分类准确率 (<code>pixel accurarcy</code>)</li>
+</ul>
+<script type="math/tex; mode=display">
+pacc=\frac{\sum_{i}n_{ii}}{\sum_{i}t_{i}}</script><p>该指标表示所有像素中分类正确的比例</p>
+<ul>
+<li><p>平均准确率 (<code>mean accuracy</code>)：</p>
+<script type="math/tex; mode=display">
+macc=\frac1{n_{c1}}\sum_{i}\frac{n_{ii}}{t_{i}}</script><p>计算每一类分类正确的像素点数和该类的所有像素点数的比例然后求平均</p>
 </li>
-<li><p>平均交并比 (<code>mean IoU</code>)：<br>$$<br>mIoU&#x3D;\frac{1}{n_{cl}}\sum_{i}\frac{n_{ii}}{(t_{i}+\sum_{j}n_{ji}-n_{ii})}<br>$$<br>其中 IoU 的概念与目标检测中的 IoU 概念一致，表示两个区域的交并比，只不过相比较目标检测的矩形框，在分割任务中，区域为不规则的物体边界。</p>
+<li><p>平均交并比 (<code>mean IoU</code>)：</p>
+<script type="math/tex; mode=display">
+mIoU=\frac{1}{n_{cl}}\sum_{i}\frac{n_{ii}}{(t_{i}+\sum_{j}n_{ji}-n_{ii})}</script><p>其中 IoU 的概念与目标检测中的 IoU 概念一致，表示两个区域的交并比，只不过相比较目标检测的矩形框，在分割任务中，区域为不规则的物体边界。</p>
 </li>
 </ul>
 

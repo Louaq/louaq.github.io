@@ -724,31 +724,31 @@
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>这篇文章聚焦于3D医学图像跨模态分割模型的无监督域适应方法研究，其研究背景主要源于以下两方面问题： </p>
 <ol>
 <li><strong>跨模态性能差异大</strong>：医学图像存在多种模态，不同模态间有显著的域差距，如前庭神经鞘瘤分割中的增强T1（ceT1）和高分辨率T2（hrT2）磁共振成像。用一种模态训练的模型在其他模态图像上表现差，且为每种模态手动标注医学图像耗时费力，直接应用训练模型或分别训练新模型都不现实。 </li>
-<li><strong>现有方法局限性</strong>：早期域适应方法需在源域和目标域进行标注，无监督域适应（UDA）虽有潜力，但现有UDA方法多基于图像或特征对齐与对抗训练正则化，主要针对2D医学图像分割，在3D医学图像分割上性能有限。此外，伪标签在UDA中的应用研究较少，因其受源域和目标域间显著域偏移影响，难以生成可靠伪标签，且直接使用含大量噪声的伪标签会误导目标域分割模型训练。</li>
+<li><strong>现有方法局限性</strong>：早期域适应方法需在源域和目标域进行标注，无监督域适应（UDA）虽有潜力，但现有UDA方法多基于图像或特征对齐与对抗训练正则化，主要针对2D医学图像分割，在3D医学图像分割上性能有限。此外，伪标签在UDA中的应用研究较少，因其受源域和目标域间显著域偏移影响，难以生成可靠伪标签，且直接使用含大量噪声的伪标签会误导目标域分割模型训练。 </li>
 </ol>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>深度学习在医学图像分割取得进展</strong>：如脑胶质瘤和前庭神经鞘瘤分割算法性能接近手动分割，但不同模态医学图像间存在显著领域差距，模型跨模态表现不佳。</li>
 <li><strong>领域适应方法涌现</strong>：早期领域适应方法需源域和一定程度的目标域标注，半监督DA利用少量标注和大量未标注图像进行适应。无监督领域适应（UDA）成为热门，现有方法主要基于图像或特征对齐，结合对抗训练进行正则化。</li>
 <li><strong>伪标签学习受关注</strong>：伪标签广泛用于训练标注不足或弱标注的分割模型，但在UDA中的应用研究较少。</li>
 </ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种基于<strong>增强过滤伪标签</strong>（FPL+）的**无监督域自适应（UDA）**方法用于3D医学图像分割，以下是该模型的主要构成和关键步骤：</p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种基于<strong>增强过滤伪标签</strong>（FPL+）的<strong>无监督域自适应（UDA）</strong>方法用于3D医学图像分割，以下是该模型的主要构成和关键步骤：</p>
 <h3 id="1-跨域数据增强（Cross-Domain-Data-Augmentation-CDDA）"><a href="#1-跨域数据增强（Cross-Domain-Data-Augmentation-CDDA）" class="headerlink" title="1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）"></a>1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）</h3><ul>
 <li><p><strong>目的</strong>：为了缓解源域和目标域之间的域差距，生成更多可用于训练的样本。</p>
 </li>
-<li><p><strong>具体操作</strong>：利用图像风格转换器$T_t$和辅助目标风格转换器$T_{at}$将标记的源域图像$X_{s_i}$转换为两个伪目标域图像$X_{s\rightarrow t_i}$和$X_{s\rightarrow at_i}$，再将它们分别通过$T_s$转换回两个伪源域图像 $X_{s’_i}$和$X_{s’’_i}$。这样每个标记的源域图像可以得到四个增强图像，且它们共享相同的分割标签$Y_{s_i}$。增强后的源域训练集$D_{ss}&#x3D;{X_{s_i}, X_{s’_i}, X_{s’’_i}}$ 和伪目标域训练集$D_{st} &#x3D; {X_{s\rightarrow t_i}, X_{s\rightarrow at_i}}$用于训练伪标签生成器。</p>
+<li><p><strong>具体操作</strong>：利用图像风格转换器$T<em>t$和辅助目标风格转换器$T</em>{at}$将标记的源域图像$X<em>{s_i}$转换为两个伪目标域图像$X</em>{s\rightarrow t<em>i}$和$X</em>{s\rightarrow at<em>i}$，再将它们分别通过$T_s$转换回两个伪源域图像 $X</em>{s’_i}$和$X<em>{s’’_i}$。这样每个标记的源域图像可以得到四个增强图像，且它们共享相同的分割标签$Y</em>{s_i}$。增强后的源域训练集$D<em>{ss}={X</em>{s_i}, X<em>{s’_i}, X</em>{s’’_i}}$ 和伪目标域训练集$D<em>{st} = {X</em>{s\rightarrow t_i}, X_{s\rightarrow at_i}}$用于训练伪标签生成器。</p>
 </li>
-<li><p><strong>训练损失</strong>：图像转换器$T_s$和$T_t$基于CycleGAN实现，训练涉及两个对抗损失$L_{t_{gan}}$、$L_{s_{gan}}$和一个循环一致性损失$L_{cyc}$。</p>
+<li><p><strong>训练损失</strong>：图像转换器$T<em>s$和$T_t$基于CycleGAN实现，训练涉及两个对抗损失$L</em>{t<em>{gan}}$、$L</em>{s<em>{gan}}$和一个循环一致性损失$L</em>{cyc}$。</p>
 </li>
 </ul>
 <h3 id="2-双域伪标签生成器（Dual-Domain-pseudo-label-Generator-DDG）"><a href="#2-双域伪标签生成器（Dual-Domain-pseudo-label-Generator-DDG）" class="headerlink" title="2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）"></a>2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）</h3><ul>
 <li><strong>目的</strong>：学习增强后的双域图像，为目标域训练集提供高质量的伪标签。</li>
 <li><strong>具体操作</strong>：使用双域批量归一化（Dual - BN）层处理域偏移，同时学习域不变的结构特征。在某一层中，从源域提取的特征由源域BN层归一化，从目标域提取的特征由目标域BN层归一化。</li>
-<li><strong>损失函数</strong>：使用Dice损失$L_{dice}$在$D_{ss}$和$D_{st}$上训练$DDG$。</li>
+<li><strong>损失函数</strong>：使用Dice损失$L<em>{dice}$在$D</em>{ss}$和$D_{st}$上训练$DDG$。</li>
 </ul>
 <h3 id="3-伪标签过滤（Pseudo-Label-Filtering）"><a href="#3-伪标签过滤（Pseudo-Label-Filtering）" class="headerlink" title="3. 伪标签过滤（Pseudo Label Filtering）"></a>3. 伪标签过滤（Pseudo Label Filtering）</h3><ul>
 <li>目的：抑制不可靠的伪标签，提高最终分割器的训练效果。<ul>
 <li><strong>基于尺寸感知不确定性估计的图像级加权</strong>：使用蒙特卡罗（MC）Dropout进行不确定性估计，计算每个目标域图像的方差图$V_j$，并根据估计的不确定区域大小$\eta_j$对图像级不确定性$v_j$进行归一化，得到图像级不确定性$u_j$，进而计算图像级权重$w_j$。</li>
-<li><strong>基于双域一致性的像素级加权</strong>：将目标域图像$X_{t_j}$通过$T_s$转换为伪源域图像$X_{t\rightarrow s_j}$，并使用$DDG$得到另一个伪标签$\hat{Y}<em>{t\rightarrow s_j}$。<br>通过比较 $\hat{Y}</em>{t\rightarrow s_j}$和$\hat{Y}<em>{t_j}$，将一致和不一致的区域分别视为可靠和不可靠的预测，定义像素级权重图$M_j$。<br>最后将图像级权重$w_j$和像素级权重图$M_j$组合成单一权重图$A_j &#x3D; M_j \cdot w_j$，并使用加权Dice损失$L</em>{w-dice}$进行训练。</li>
+<li><strong>基于双域一致性的像素级加权</strong>：将目标域图像$X<em>{t_j}$通过$T_s$转换为伪源域图像$X</em>{t\rightarrow s_j}$，并使用$DDG$得到另一个伪标签$\hat{Y}<em>{t\rightarrow s_j}$。<br>通过比较 $\hat{Y}</em>{t\rightarrow s<em>j}$和$\hat{Y}</em>{t<em>j}$，将一致和不一致的区域分别视为可靠和不可靠的预测，定义像素级权重图$M_j$。<br>最后将图像级权重$w_j$和像素级权重图$M_j$组合成单一权重图$A_j = M_j \cdot w_j$，并使用加权Dice损失$L</em>{w-dice}$进行训练。</li>
 </ul>
 </li>
 </ul>
@@ -759,21 +759,15 @@
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-50-38.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-50-38.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-50-38"></p>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
 <p><strong>前庭神经鞘瘤分割数据集（Vestibular Schwannoma Segmentation Dataset）</strong>：使用公开的包含242名患者的3D MRI图像数据集，有对比增强T1加权（ceT1）和高分辨率T2加权（hrT2）两种模态。将其随机分为200个训练样本、14个验证样本和28个测试样本，进行双向适应实验。实验前对图像进行裁剪和归一化预处理。</p>
-</blockquote>
-<blockquote>
 <p><strong>脑肿瘤分割数据集（BraTS Dataset）</strong>：采用2020年多模态脑肿瘤分割挑战赛数据集，使用T2和FLAIR图像进行双向适应，目标是分割整个肿瘤。从官方训练集中选取样本，部分用于验证和测试。对图像进行强度归一化和去除无肿瘤切片的预处理。</p>
-</blockquote>
-<blockquote>
 <p><strong>心脏分割数据集（MMWHS Dataset）</strong>：该数据集包含20个3D CT扫描和20个3D MRI扫描，分割目标包括升主动脉（AA）、左心房血腔（LAC）、左心室血腔（LVC）和左心室心肌（MYO）。指定MRI为源域，CT为目标域，划分训练、验证和测试集，并对图像进行裁剪和归一化。</p>
-</blockquote>
-<blockquote>
 <p><strong>实现细节</strong>：伪标签生成器G和最终分割器S基于改进的2.5D网络实现，添加额外的BN层用于双域批量归一化。使用Adam优化器训练，G训练200个周期，S初始化后训练100个周期。设置不同的补丁大小和批量大小，按照CycleGAN实现训练图像翻译器Ts和Tt。蒙特卡罗dropout的超参数K设为5，熵阈值e设为0.2。使用PyTorch 1.8.1在NVIDIA GeForce RTX 2080Ti GPU上实现实验，通过Dice分数和平均对称表面距离（ASSD）定量评估分割性能。</p>
 </blockquote>
-<p><strong>将FPL+与十种最先进的无监督域适应（UDA）方法进行比较，同时还与“w&#x2F;o DA”（直接应用源域训练的模型到目标域）、“labeled target”（使用目标域全注释图像训练）和“strong upbound”（使用源域和目标域的标注图像训练双域分割网络）进行对比。</strong></p>
+<p><strong>将FPL+与十种最先进的无监督域适应（UDA）方法进行比较，同时还与“w/o DA”（直接应用源域训练的模型到目标域）、“labeled target”（使用目标域全注释图像训练）和“strong upbound”（使用源域和目标域的标注图像训练双域分割网络）进行对比。</strong></p>
 <ol>
-<li><strong>前庭神经鞘瘤分割结果</strong>：“w&#x2F;o DA”方法在两个方向上的平均Dice分数极低，表明两种模态间存在显著的域差距。所有UDA方法均有改进，FPL+在两个方向上的平均Dice分数分别达到82.92%和91.98%，显著高于其他方法，甚至在某些情况下优于“labeled target”。</li>
+<li><strong>前庭神经鞘瘤分割结果</strong>：“w/o DA”方法在两个方向上的平均Dice分数极低，表明两种模态间存在显著的域差距。所有UDA方法均有改进，FPL+在两个方向上的平均Dice分数分别达到82.92%和91.98%，显著高于其他方法，甚至在某些情况下优于“labeled target”。</li>
 <li><strong>脑胶质瘤分割结果</strong>：在“FLAIR到T2”和“T2到FLAIR”两个方向上，FPL+的平均Dice分数和ASSD均优于其他现有UDA方法，在“T2到FLAIR”方向上超过“labeled target”，略低于“strong upper bound”。</li>
-<li><strong>心脏分割结果</strong>：“w&#x2F;o DA”的Dice分数远低于“labeled target”，表明MR和CT模态间存在明显的域差距。FPL+的平均Dice分数和ASSD分别为73.70%和2.61mm，显著优于现有UDA方法，能更准确地分割心脏子结构。</li>
+<li><strong>心脏分割结果</strong>：“w/o DA”的Dice分数远低于“labeled target”，表明MR和CT模态间存在明显的域差距。FPL+的平均Dice分数和ASSD分别为73.70%和2.61mm，显著优于现有UDA方法，能更准确地分割心脏子结构。</li>
 </ol>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-40.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-40.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-53-40"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-57.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-57.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-53-57"></p>
@@ -847,9 +841,7 @@
         重庆邮电大学
 
 fluid-attenuated inversion recovery (FLAIR)
-
-
-T1-wei
+T1-weigh
       </div> -->
     </a>
   </div>

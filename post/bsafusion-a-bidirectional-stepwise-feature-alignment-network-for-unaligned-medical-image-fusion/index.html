@@ -756,12 +756,12 @@
 <p>数据集：CT-MRI, PET-MRI, SPECT-MRI datasets</p>
 </blockquote>
 <ul>
-<li><strong>评估指标</strong>：选择了五个常用的图像质量指标来客观评估融合方法的性能，分别是基于梯度的融合性能（Gradient - based Fusion Performance，$Q_{AB&#x2F;F}$）、Chen - Varshney度量（Chen - Varshney Metric，$Q_{CV}$）、视觉信息保真度（Visual Information Fidelity，$Q_{VIF}$）、基于结构的度量（Structure - based Metric，$Q_{S}$）和结构相似性指数度量（Structural Similarity Index Measure，$Q_{SSIM}$）。其中，$Q_{CV}$值越低表示融合图像质量越好，其他指标值越高表示融合质量越好。</li>
+<li><strong>评估指标</strong>：选择了五个常用的图像质量指标来客观评估融合方法的性能，分别是基于梯度的融合性能（Gradient - based Fusion Performance，$Q<em>{AB/F}$）、Chen - Varshney度量（Chen - Varshney Metric，$Q</em>{CV}$）、视觉信息保真度（Visual Information Fidelity，$Q<em>{VIF}$）、基于结构的度量（Structure - based Metric，$Q</em>{S}$）和结构相似性指数度量（Structural Similarity Index Measure，$Q<em>{SSIM}$）。其中，$Q</em>{CV}$值越低表示融合图像质量越好，其他指标值越高表示融合质量越好。</li>
 </ul>
 <p>常见的解决未对齐多源图像融合问题的方法有“Registration + Fusion”（先对要融合的图像进行配准，然后再融合）和“Joint Registration and Fusion”（将配准和融合结合为一个过程的两阶段方法）。为验证所提方法的优越性，将其与这两种方法进行比较，重点对比“Joint Registration and Fusion”方法，与“Registration + Fusion”方法的比较结果包含在补充材料中。具体对比了所提方法与五种联合配准和融合方法（UMF - CMGR、SuperFusion、MURF、IMF和PAMRFuse）的性能。实验结果表明，所提方法在特征对齐、对比度保留和细节保留方面具有显著优势，与现有的两阶段联合处理框架相比，性能更强。此外，通过箱线图展示客观评估结果，所提方法在所有指标上均取得了最佳平均性能，双向对齐策略比IMF的单向对齐策略产生了更好的融合效果。</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-28_20-02-38.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-28_20-02-38.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-28_20-02-38"></p>
 <h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
-<li><strong>MDF - FR的有效性</strong>：设计了设置A（不进行MFRH交换且不使用$L_{ce2}$）和设置B（不进行MFRH交换但使用$L_{ce2}$）来验证MDF - FR的有效性。实验结果表明，包含MDF - FR时，所提方法能实现更好的对齐和融合性能。</li>
+<li><strong>MDF - FR的有效性</strong>：设计了设置A（不进行MFRH交换且不使用$L<em>{ce2}$）和设置B（不进行MFRH交换但使用$L</em>{ce2}$）来验证MDF - FR的有效性。实验结果表明，包含MDF - FR时，所提方法能实现更好的对齐和融合性能。</li>
 <li><strong>BSFA的有效性</strong>：通过三个实验验证BSFA的有效性。一是完全移除BSFA，评估其对整体对齐性能和融合结果的影响；二是移除BSFA中的正向配准层（FRL），仅保留反向配准层（RRL）；三是仅保留FRL，移除RRL。对齐结果显示，只有完全实施BSFA时，所提方法才能实现出色的对齐效果</li>
 </ul>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种<strong>单阶段的多模态医学图像配准与融合框架</strong>。与传统的两阶段方法不同，该框架通过共享特征编码器降低了模型的复杂度。通过引入模态差异无关特征表示（MDF - FR）方法，该框架解决了跨模态特征对齐中的模态差异问题。为每个输入图像添加的模态特征表示头（MFRH）可以整合全局图像特征，保留不同模态间的互补信息。 此外，基于向量位移原理提出的双向逐步对齐策略用于预测变形场。该方法保留了融合信息的完整性和多样性，在需要精确高效配准与融合的临床应用中展现出了潜力。 </p>

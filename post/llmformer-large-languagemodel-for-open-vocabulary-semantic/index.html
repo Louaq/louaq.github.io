@@ -739,8 +739,9 @@
 <li><strong>LLM先验引导的分割（LLM-Prior-Guided Segmentation）</strong>：引入了三种新型注意力模块，分别是语义注意力（Semantic Attention）、缩放视觉注意力（Scaled Visual Attention）和关系注意力（Relation Attention），以利用LLM的先验知识进行开放词汇语义分割。</li>
 </ul>
 </li>
-<li><p>关键组件</p>
-</li>
+</ol>
+<ol>
+<li>关键组件</li>
 </ol>
 <ul>
 <li><strong>语义注意力（Semantic Attention）</strong>：将对象和属性先验知识嵌入到掩码嵌入中，以增强开放词汇对象的发现、掩码预测和分类能力。该模块通过多头交叉注意力机制，捕捉对象先验与掩码之间的对应关系。</li>
@@ -776,7 +777,7 @@
 <ol>
 <li><strong>方法有效性</strong>：提出语义、缩放视觉和关系三种注意力模块，利用LLM的对象、属性和关系先验知识进行分割，大量实验证明LLMFormer及各注意力模块有效。 </li>
 <li><strong>性能优势</strong>：在ADE20K、Pascal Context和Pascal VOC等数据集上显著优于现有方法，绝对提升最高达7.2%，还能在无预定义候选类别的情况下预测OV分割结果，更适用于实际应用。</li>
-<li><strong>未来方向</strong>：当前工作虽提升了OV识别能力，但LLM参数多致速度慢，且存在细粒度分类和边界分割问题，未来将研究效率、细粒度分类和分割问题。</li>
+<li><strong>未来方向</strong>：当前工作虽提升了OV识别能力，但LLM参数多致速度慢，且存在细粒度分类和边界分割问题，未来将研究效率、细粒度分类和分割问题。 </li>
 </ol>
 <blockquote>
 <p>不足及展望：使用LLM带来了巨大的参数量，导致速度减小；本文当前的工作关注于提升开放词汇的分类能力，其他的细粒度分类和边界框分割问题没有涉及，这也是未来工作的研究方法。</p>

@@ -690,7 +690,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 481 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 470 |
           </span>
   
           <span class="min2read">
@@ -730,20 +730,18 @@
 <p>转置卷积，也叫反卷积，它并不是正向卷积的完全逆过程，用一句话来解释：</p>
 <blockquote>
 <p>反卷积是一种特殊的正向卷积，先按照一定的比例通过补 0 来扩大输入图像的尺寸，再进行普通的卷积。</p>
-</blockquote>
-<blockquote>
 <p>卷积核大小：kernelsize</p>
 <p>卷积步长：stride</p>
 <p>特征图填充宽度：padding</p>
 </blockquote>
-<p>对于普通的 kernelsize&#x3D;(3,3),strides&#x3D;(2,2) 的卷积，其过程如下图所示</p>
+<p>对于普通的 kernelsize=(3,3),strides=(2,2) 的卷积，其过程如下图所示</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/padding_strides.gif" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/padding_strides.gif" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="padding_strides"></p>
-<p>kernelsize&#x3D;(3,3),strides&#x3D;(1,1) 情况下的反卷积则体现为：</p>
+<p>kernelsize=(3,3),strides=(1,1) 情况下的反卷积则体现为：</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/padding_strides_transposed.gif" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/padding_strides_transposed.gif" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="padding_strides_transposed"></p>
 <p>我们可以发现，对于反卷积而言，补 0 主要是通过输入边缘的 padding 和输入内部插 0 实现。</p>
 <p>具体的说，padding 的层数为 $kernelsize−stride$，而对于输入的内部插 0，其插入的 0 的数量为$stride−1$。</p>
 <p><strong>接口与参数说明</strong></p>
-<p><strong>torch.nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride&#x3D;1, padding&#x3D;0, output_padding&#x3D;0, groups&#x3D;1, bias&#x3D;True, dilation&#x3D;1)</strong></p>
+<p><strong>torch.nn.ConvTranspose2d(in_channels, out_channels, kernel_size, stride=1, padding=0, output_padding=0, groups=1, bias=True, dilation=1)</strong></p>
 <ol>
 <li><strong>in_channels</strong>(int) – 输入信号的通道数</li>
 <li><strong>out_channels</strong> (int) – 卷积产生的通道数</li>
@@ -752,11 +750,12 @@
 <li><strong>padding</strong> (int or tuple, optional) - 输入的每一条边补充0的层数，高宽都增加2*padding</li>
 <li><strong>output_padding</strong> (int or tuple, optional) - 输出边补充0的层数，高宽都增加padding</li>
 <li><strong>groups</strong> (int, optional) – 从输入通道到输出通道的阻塞连接数</li>
-<li><strong>bias</strong> (bool, optional) - 如果bias&#x3D;True，添加偏置</li>
+<li><strong>bias</strong> (bool, optional) - 如果bias=True，添加偏置</li>
 <li><strong>dilation</strong> (int or tuple, optional) – 卷积核元素之间的间距</li>
 </ol>
-<p>输出尺寸的计算公式为:<br>$$<br>H_{out}&#x3D;(H_{in}-1)<em>stride[0]-2</em>padding[0]+kernelsize[0]+outputpadding[0]\W_{out}&#x3D;(W_{in}-1)<em>stride[1]-2</em>padding[1]+kernelsize[1]+outputpadding[1]<br>$$</p>
-
+<p>输出尺寸的计算公式为:</p>
+<script type="math/tex; mode=display">
+H_{out}=(H_{in}-1)*stride[0]-2*padding[0]+kernelsize[0]+outputpadding[0]\\W_{out}=(W_{in}-1)*stride[1]-2*padding[1]+kernelsize[1]+outputpadding[1]</script>
       </div>
       <div class="post-tags-categories">
         
@@ -791,21 +790,35 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/" class="post-nav-link">
+    <a href="/post/fcn/20250224-fcn/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">语义分割基础</div>
+        <div class="title-text">FCN</div>
       </div>
       
       <!-- <div class="content">
-        1. 基本概念1.1 什么是图像分割预测目标的轮廓
+        FCN
 
 
-1.2 图像分割的应用场景
-医学图像分割：医学影像，CT照片等
+FCN基本原理
 
+
+FCN细节
+
+
+
+
+
+FCN结果
+SegNetSegNet的基本原理
+
+
+
+
+
+UNet
       </div> -->
     </a>
   </div>
