@@ -74,78 +74,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/huoban/index.html</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/duo-mo-tai-yi-xue/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/mo-ban/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/jing-du-mo-ban/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/latex/visual-studio-code/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/about/index.html</loc>
     
     <lastmod>2025-07-18</lastmod>
@@ -209,34 +137,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
+    <loc>https://louaq.github.io/huoban/index.html</loc>
     
     <lastmod>2025-07-18</lastmod>
     
@@ -299,7 +200,61 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/</loc>
+    <loc>https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/duo-mo-tai-yi-xue/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/mo-ban/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/jing-du-mo-ban/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/latex/visual-studio-code/</loc>
     
     <lastmod>2025-07-18</lastmod>
     
@@ -389,6 +344,42 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/</loc>
     
     <lastmod>2025-07-18</lastmod>
@@ -461,6 +452,33 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/frp/shi-yong-fail2ban-bao-hu-fu-wu-qi-mian-shou-ke-yi-ip-gong-ji/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/</loc>
     
     <lastmod>2025-07-18</lastmod>
@@ -506,6 +524,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/fcn/20250224-fcn/</loc>
+    
+    <lastmod>2025-07-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</loc>
     
     <lastmod>2025-07-18</lastmod>
@@ -516,15 +543,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-fcn/</loc>
     
     <lastmod>2025-07-18</lastmod>
     
@@ -561,24 +579,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</loc>
-    
-    <lastmod>2025-07-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/frp/shi-yong-fail2ban-bao-hu-fu-wu-qi-mian-shou-ke-yi-ip-gong-ji/</loc>
     
     <lastmod>2025-07-18</lastmod>
     
