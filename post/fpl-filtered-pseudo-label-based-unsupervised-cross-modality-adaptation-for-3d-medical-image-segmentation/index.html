@@ -733,9 +733,12 @@
 </ul>
 <h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种基于<strong>增强过滤伪标签</strong>（FPL+）的**无监督域自适应（UDA）**方法用于3D医学图像分割，以下是该模型的主要构成和关键步骤：</p>
 <h3 id="1-跨域数据增强（Cross-Domain-Data-Augmentation-CDDA）"><a href="#1-跨域数据增强（Cross-Domain-Data-Augmentation-CDDA）" class="headerlink" title="1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）"></a>1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）</h3><ul>
-<li><strong>目的</strong>：为了缓解源域和目标域之间的域差距，生成更多可用于训练的样本。</li>
-<li><strong>具体操作</strong>：利用图像风格转换器$T_t$和辅助目标风格转换器$T_{at}$将标记的源域图像$X_{s_i}$转换为两个伪目标域图像$X_{s\rightarrow t_i}$和$X_{s\rightarrow at_i}$，再将它们分别通过$T_s$转换回两个伪源域图像$X_{s’<em>i}$和$X</em>{s’’<em>i}$。这样每个标记的源域图像可以得到四个增强图像，且它们共享相同的分割标签$Y</em>{s_i}$。增强后的源域训练集$D_{ss} &#x3D; {X_{s_i}, X_{s’<em>i}, X</em>{s’’<em>i}}$和伪目标域训练集$D</em>{st} &#x3D; {X_{s\rightarrow t_i}, X_{s\rightarrow at_i}}$用于训练伪标签生成器。</li>
-<li><strong>训练损失</strong>：图像转换器$T_s$和$T_t$基于CycleGAN实现，训练涉及两个对抗损失$L_{t_{gan}}$、$L_{s_{gan}}$和一个循环一致性损失$L_{cyc}$。</li>
+<li><p><strong>目的</strong>：为了缓解源域和目标域之间的域差距，生成更多可用于训练的样本。</p>
+</li>
+<li><p><strong>具体操作</strong>：利用图像风格转换器$T_t$和辅助目标风格转换器$T_{at}$将标记的源域图像$X_{s_i}$转换为两个伪目标域图像$X_{s\rightarrow t_i}$和$X_{s\rightarrow at_i}$，再将它们分别通过$T_s$转换回两个伪源域图像 $X_{s’_i}$和$X_{s’’_i}$。这样每个标记的源域图像可以得到四个增强图像，且它们共享相同的分割标签$Y_{s_i}$。增强后的源域训练集$D_{ss}&#x3D;{X_{s_i}, X_{s’_i}, X_{s’’_i}}$ 和伪目标域训练集$D_{st} &#x3D; {X_{s\rightarrow t_i}, X_{s\rightarrow at_i}}$用于训练伪标签生成器。</p>
+</li>
+<li><p><strong>训练损失</strong>：图像转换器$T_s$和$T_t$基于CycleGAN实现，训练涉及两个对抗损失$L_{t_{gan}}$、$L_{s_{gan}}$和一个循环一致性损失$L_{cyc}$。</p>
+</li>
 </ul>
 <h3 id="2-双域伪标签生成器（Dual-Domain-pseudo-label-Generator-DDG）"><a href="#2-双域伪标签生成器（Dual-Domain-pseudo-label-Generator-DDG）" class="headerlink" title="2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）"></a>2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）</h3><ul>
 <li><strong>目的</strong>：学习增强后的双域图像，为目标域训练集提供高质量的伪标签。</li>
@@ -745,7 +748,7 @@
 <h3 id="3-伪标签过滤（Pseudo-Label-Filtering）"><a href="#3-伪标签过滤（Pseudo-Label-Filtering）" class="headerlink" title="3. 伪标签过滤（Pseudo Label Filtering）"></a>3. 伪标签过滤（Pseudo Label Filtering）</h3><ul>
 <li>目的：抑制不可靠的伪标签，提高最终分割器的训练效果。<ul>
 <li><strong>基于尺寸感知不确定性估计的图像级加权</strong>：使用蒙特卡罗（MC）Dropout进行不确定性估计，计算每个目标域图像的方差图$V_j$，并根据估计的不确定区域大小$\eta_j$对图像级不确定性$v_j$进行归一化，得到图像级不确定性$u_j$，进而计算图像级权重$w_j$。</li>
-<li><strong>基于双域一致性的像素级加权</strong>：将目标域图像$X_{t_j}$通过$T_s$转换为伪源域图像$X_{t\rightarrow s_j}$，并使用$DDG$得到另一个伪标签$\hat{Y}<em>{t\rightarrow s_j}$。通过比较$\hat{Y}</em>{t\rightarrow s_j}$和$\hat{Y}<em>{t_j}$，将一致和不一致的区域分别视为可靠和不可靠的预测，定义像素级权重图$M_j$。最后将图像级权重$w_j$和像素级权重图$M_j$组合成单一权重图$A_j &#x3D; M_j \cdot w_j$，并使用加权Dice损失$L</em>{w - dice}$进行训练。</li>
+<li><strong>基于双域一致性的像素级加权</strong>：将目标域图像$X_{t_j}$通过$T_s$转换为伪源域图像$X_{t\rightarrow s_j}$，并使用$DDG$得到另一个伪标签$\hat{Y}<em>{t\rightarrow s_j}$。<br>通过比较 $\hat{Y}</em>{t\rightarrow s_j}$和$\hat{Y}<em>{t_j}$，将一致和不一致的区域分别视为可靠和不可靠的预测，定义像素级权重图$M_j$。<br>最后将图像级权重$w_j$和像素级权重图$M_j$组合成单一权重图$A_j &#x3D; M_j \cdot w_j$，并使用加权Dice损失$L</em>{w-dice}$进行训练。</li>
 </ul>
 </li>
 </ul>
