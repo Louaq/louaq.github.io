@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -690,7 +802,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 566 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 552 |
           </span>
   
           <span class="min2read">
@@ -720,7 +832,7 @@
     <article class="post post-detail">
       <div class="post-content">
         <figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"><span class="keyword">import</span> torch.nn.functional <span class="keyword">as</span> F</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br></pre></td></tr></table></figure>
-<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">class FCN_VGG16(nn.Module):</span><br><span class="line">    <span class="string">&#x27;&#x27;</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">    FCN 的 backbone，由 VGG16 修改而来，舍弃最后的全连接层</span></span><br><span class="line"><span class="string">    以池化层为区分，一个池化层到上一个池化层之间的部分认为一个卷积块。</span></span><br><span class="line"><span class="string">    &#x27;</span><span class="string">&#x27;&#x27;</span></span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(FCN_VGG16, self).__init__()</span><br><span class="line">        self.features = nn.Sequential(</span><br><span class="line">            # 第一个卷积块: 输入通道数：3，输出通道数：64，卷积核大小：3<span class="number">*3</span>，步长：1，填充：1</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=3, <span class="attribute">out_channels</span>=64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=64, <span class="attribute">out_channels</span>=64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第二个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=64, <span class="attribute">out_channels</span>=128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=128, <span class="attribute">out_channels</span>=128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第三个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=128, <span class="attribute">out_channels</span>=256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=256, <span class="attribute">out_channels</span>=256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=256, <span class="attribute">out_channels</span>=256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第四个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=256, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512,out_channels=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第五个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        # 每一层在 features 中的范围，&#123;0，1，2，3，4&#125; 为第一个卷积块，&#123;5，6，7，8，9&#125; 为第二个卷积块<span class="built_in">..</span>.</span><br><span class="line">        self.range = ((0, 5), (5, 10), (10, 17), (17, 24), (24, 31))</span><br><span class="line"></span><br><span class="line">    def forward(self, input):</span><br><span class="line">        output = &#123;&#125;</span><br><span class="line">        # 每一块的输出</span><br><span class="line">        <span class="keyword">for</span> idx, (start, end) <span class="keyword">in</span> enumerate(self.range):</span><br><span class="line">            <span class="keyword">for</span> layer <span class="keyword">in</span> range(start, end):</span><br><span class="line">                input = self.features[layer](input)</span><br><span class="line">            output[<span class="string">&quot;x%d&quot;</span> % (idx + 1)] = input</span><br><span class="line">        return output</span><br></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line">class FCN_VGG16(nn.Module):</span><br><span class="line">    <span class="string">''</span><span class="string">'</span></span><br><span class="line"><span class="string">    FCN 的 backbone，由 VGG16 修改而来，舍弃最后的全连接层</span></span><br><span class="line"><span class="string">    以池化层为区分，一个池化层到上一个池化层之间的部分认为一个卷积块。</span></span><br><span class="line"><span class="string">    '</span><span class="string">''</span></span><br><span class="line">    def __init__(self):</span><br><span class="line">        super(FCN_VGG16, self).__init__()</span><br><span class="line">        self.features = nn.Sequential(</span><br><span class="line">            # 第一个卷积块: 输入通道数：3，输出通道数：64，卷积核大小：3<span class="number">*3</span>，步长：1，填充：1</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=3, <span class="attribute">out_channels</span>=64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=64, <span class="attribute">out_channels</span>=64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第二个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=64, <span class="attribute">out_channels</span>=128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=128, <span class="attribute">out_channels</span>=128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第三个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=128, <span class="attribute">out_channels</span>=256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=256, <span class="attribute">out_channels</span>=256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=256, <span class="attribute">out_channels</span>=256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第四个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=256, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512,out_channels=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">            # 第五个卷积块</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.Conv2d(<span class="attribute">in_channels</span>=512, <span class="attribute">out_channels</span>=512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)),</span><br><span class="line">            nn.ReLU(<span class="attribute">inplace</span>=<span class="literal">True</span>),</span><br><span class="line">            nn.MaxPool2d(<span class="attribute">kernel_size</span>=2, <span class="attribute">stride</span>=2, <span class="attribute">padding</span>=0, <span class="attribute">dilation</span>=1, <span class="attribute">ceil_mode</span>=<span class="literal">False</span>),</span><br><span class="line">        )</span><br><span class="line"></span><br><span class="line">        # 每一层在 features 中的范围，{0，1，2，3，4} 为第一个卷积块，{5，6，7，8，9} 为第二个卷积块<span class="built_in">..</span>.</span><br><span class="line">        self.range = ((0, 5), (5, 10), (10, 17), (17, 24), (24, 31))</span><br><span class="line"></span><br><span class="line">    def forward(self, input):</span><br><span class="line">        output = {}</span><br><span class="line">        # 每一块的输出</span><br><span class="line">        <span class="keyword">for</span> idx, (start, end) <span class="keyword">in</span> enumerate(self.range):</span><br><span class="line">            <span class="keyword">for</span> layer <span class="keyword">in</span> range(start, end):</span><br><span class="line">                input = self.features[layer](input)</span><br><span class="line">            output[<span class="string">"x%d"</span> % (idx + 1)] = input</span><br><span class="line">        return output</span><br></pre></td></tr></table></figure>
 <figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">def <span class="built_in">test_vgg</span>():</span><br><span class="line">    # Backbone 的测试函数</span><br><span class="line">    input_x = torch.<span class="built_in">randn</span>((<span class="number">1</span>,<span class="number">3</span>,<span class="number">512</span>,<span class="number">512</span>))</span><br><span class="line">    vgg = <span class="built_in">FCN_VGG16</span>()</span><br><span class="line">    output_y = <span class="built_in">vgg</span>(input_x)</span><br><span class="line"></span><br><span class="line">    for key in output_y:</span><br><span class="line">        <span class="built_in">print</span>(output_y[key].<span class="built_in">size</span>())</span><br><span class="line"></span><br><span class="line"><span class="built_in">test_vgg</span>()</span><br></pre></td></tr></table></figure>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-25_10-19-29.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-25_10-19-29.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-25_10-19-29"></p>
 

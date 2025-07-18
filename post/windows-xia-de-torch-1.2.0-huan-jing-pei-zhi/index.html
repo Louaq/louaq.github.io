@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -739,7 +851,7 @@
 <h5 id="a、官方推荐安装方法（推荐）"><a href="#a、官方推荐安装方法（推荐）" class="headerlink" title="a、官方推荐安装方法（推荐）"></a>a、官方推荐安装方法（推荐）</h5><p>打开pytorch的官方安装方法：<br><a target="_blank" rel="noopener" href="https://pytorch.org/get-started/previous-versions/">https://pytorch.org/get-started/previous-versions/</a><br>官网推荐的安装代码如下，我使用的是Cuda10的版本，不太懂为什么要写3个=才能正确定位，两个=会定位到cuda92的whl：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># CUDA 10.0</span><br><span class="line">pip install torch===1.2.0 torchvision===0.4.0 -f https://download.pytorch.org/whl/torch_stable.html</span><br></pre></td></tr></table></figure>
 <p>这是pytorch官方提供的指令，用于安装torch和torchvision。</p>
-<h5 id="b、先下载whl后安装"><a href="#b、先下载whl后安装" class="headerlink" title="b、先下载whl后安装"></a>b、先下载whl后安装</h5><p>需要注意的是，直接这样安装似乎特别慢，因此我们可以进入如下网址:<br><a target="_blank" rel="noopener" href="https://download.pytorch.org/whl/torch_stable.html">https://download.pytorch.org/whl/torch_stable.html</a><br>找到自己需要的轮子下载。下载的时候使用迅雷下载就行了，速度还是比较快的！<br><img src="https://i-blog.csdnimg.cn/blog_migrate/08b8a756b9d7d214ce81f10bb5b73758.png#pic_center" class="lazyload placeholder" data-srcset="https://i-blog.csdnimg.cn/blog_migrate/08b8a756b9d7d214ce81f10bb5b73758.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"  /><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/737ffc86979d1e7ceda0d98b5ddcef41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/737ffc86979d1e7ceda0d98b5ddcef41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>下载完成后找到安装路径：<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1eae8e7fae0ea98cc5559e6287059451.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1eae8e7fae0ea98cc5559e6287059451.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>在cmd定位过来后利用文件全名进行安装就行了！<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/32c32f513e9be037243f885cd6f4ef11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/32c32f513e9be037243f885cd6f4ef11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>这里我也传一个百度网盘的版本。<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14-QVk7Kb_CVwaVZxVPIgtw">https://pan.baidu.com/s/14-QVk7Kb_CVwaVZxVPIgtw</a><br>提取码: rg2e<br><strong>全部安装完成之后重启电脑。</strong></p>
+<h5 id="b、先下载whl后安装"><a href="#b、先下载whl后安装" class="headerlink" title="b、先下载whl后安装"></a>b、先下载whl后安装</h5><p>需要注意的是，直接这样安装似乎特别慢，因此我们可以进入如下网址:<br><a target="_blank" rel="noopener" href="https://download.pytorch.org/whl/torch_stable.html">https://download.pytorch.org/whl/torch_stable.html</a><br>找到自己需要的轮子下载。下载的时候使用迅雷下载就行了，速度还是比较快的！<br><img src="https://i-blog.csdnimg.cn/blog_migrate/08b8a756b9d7d214ce81f10bb5b73758.png#pic_center" class="lazyload placeholder" data-srcset="https://i-blog.csdnimg.cn/blog_migrate/08b8a756b9d7d214ce81f10bb5b73758.png#pic_center" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/737ffc86979d1e7ceda0d98b5ddcef41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/737ffc86979d1e7ceda0d98b5ddcef41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>下载完成后找到安装路径：<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1eae8e7fae0ea98cc5559e6287059451.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/1eae8e7fae0ea98cc5559e6287059451.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>在cmd定位过来后利用文件全名进行安装就行了！<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/32c32f513e9be037243f885cd6f4ef11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/32c32f513e9be037243f885cd6f4ef11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>这里我也传一个百度网盘的版本。<br>链接: <a target="_blank" rel="noopener" href="https://pan.baidu.com/s/14-QVk7Kb_CVwaVZxVPIgtw">https://pan.baidu.com/s/14-QVk7Kb_CVwaVZxVPIgtw</a><br>提取码: rg2e<br><strong>全部安装完成之后重启电脑。</strong></p>
 <h4 id="3、其它依赖库的安装"><a href="#3、其它依赖库的安装" class="headerlink" title="3、其它依赖库的安装"></a>3、其它依赖库的安装</h4><p>但如果想要跑深度学习模型，还有一些其它的依赖库需要安装。具体如下：</p>
 <figure class="highlight txt"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">scipy==1.2.1</span><br><span class="line">numpy==1.17.0</span><br><span class="line">matplotlib==3.1.2</span><br><span class="line">opencv_python==4.1.2.30</span><br><span class="line">torch==1.2.0</span><br><span class="line">torchvision==0.4.0</span><br><span class="line">tqdm==4.60.0</span><br><span class="line">Pillow==8.2.0</span><br><span class="line">h5py==2.10.0</span><br></pre></td></tr></table></figure>
 <p>如果想要更便捷的安装可以在桌面或者其它地方创建一个requirements.txt文件，复制上述内容到txt文件中。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7f76e6ad79f6bed1e2f4676b627354d3.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7f76e6ad79f6bed1e2f4676b627354d3.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>使用如下指令安装即可。<strong>下述指令中，requirements.txt前方的路径是我将文件放在桌面的路径，各位同学根据自己的电脑修改。</strong></p>
