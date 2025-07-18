@@ -733,7 +733,7 @@
 <ul>
 <li><p><strong>特征聚合</strong>：输入图像经过多层编码器处理，生成不同层次的特征。将前四层特征调整为相同大小后，沿通道维度拼接形成统一的特征表示，并进行特征维度缩减。</p>
 </li>
-<li><p><strong>路由阶段</strong>：路由银行中的每个路由器为定制合适的专家组合，为不同阶段的跳跃连接选择路由方案。专家采用独立的卷积子网络，对输入特征进行专门的非线性变换。使用TopK（K = 2）操作进行稀疏选择，确保只有部分专家被激活，降低计算开销。最后，通过对接器模块对跳跃连接进行整形和处理，将其传输到相应的解码器。</p>
+<li><p><strong>路由阶段</strong>：路由银行中的每个路由器为定制合适的专家组合，为不同阶段的跳跃连接选择路由方案。专家采用独立的卷积子网络，对输入特征进行专门的非线性变换。使用TopK（K &#x3D; 2）操作进行稀疏选择，确保只有部分专家被激活，降低计算开销。最后，通过对接器模块对跳跃连接进行整形和处理，将其传输到相应的解码器。</p>
 </li>
 <li><p><strong>平衡专家利用</strong>：该模块包含专家方差（Expert Variance，EV）损失和未使用专家处理两个关键机制。</p>
 <ul>
@@ -757,7 +757,7 @@
 <p>训练策略</p>
 </blockquote>
 <p>训练过程分为两个阶段。第一阶段，<strong>使用原始跳跃连接训练编码器和解码器</strong>，使其熟悉数据集并掌握基本的编码和解码能力。之后，<strong>冻结编码器和解码器，专注训练提出的TC - MoSC模块</strong>，使每个专家充分学习其专长的特征，路由器根据各解码阶段的语义需求有效分配任务。冻结编码器和解码器是为防止其参数在整个训练过程中变化，降低训练难度，便于收敛。</p>
-<p><strong>定量比较</strong>：在GlaS、MoNuSeg和ISIC16数据集上，使用Dice系数和交并比（IoU）作为性能指标；在多标签分割的Synapse数据集上，使用95% Hausdorff距离指标。采用5折交叉验证评估模型性能，使用独立Student’s t - 检验（α = 0.05）评估统计显著性。结果表明，模型在GlaS和MoNuSeg上显著优于基线模型，实验结果的小标准差显示出模型的高稳定性和鲁棒性，在不同数据集上兼容性良好。<br><strong>定性比较</strong>：如图5所示，红色框突出显示了UTANet在四个数据集上优于其他模型的区域。在MoNuseg数据集上，UTANet能更有效地捕捉细节信息，这得益于TA - MoSC模块中对细节敏感的专家模块。</p>
+<p><strong>定量比较</strong>：在GlaS、MoNuSeg和ISIC16数据集上，使用Dice系数和交并比（IoU）作为性能指标；在多标签分割的Synapse数据集上，使用95% Hausdorff距离指标。采用5折交叉验证评估模型性能，使用独立Student’s t - 检验（α &#x3D; 0.05）评估统计显著性。结果表明，模型在GlaS和MoNuSeg上显著优于基线模型，实验结果的小标准差显示出模型的高稳定性和鲁棒性，在不同数据集上兼容性良好。<br><strong>定性比较</strong>：如图5所示，红色框突出显示了UTANet在四个数据集上优于其他模型的区域。在MoNuseg数据集上，UTANet能更有效地捕捉细节信息，这得益于TA - MoSC模块中对细节敏感的专家模块。</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-23_10-48-36.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-23_10-48-36.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-23_10-48-36"></p>
 <h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
 <li><strong>提出模块的消融研究</strong>：结果显示，Baseline + TA - MoSC + BEU始终优于其他基线，表明纳入TA - MoSC模块显著提高了模型的分割性能，应用BEU优化进一步增强了性能。不同数据集在解码阶段需要不同程度的补充信息，为解码器提供适当的补充信息可大幅提高模型的分割性能。</li>

@@ -724,14 +724,14 @@
 <p>Cross-Domain Few-shot Semantic Segmentation (CD-FSS) aims to train generalized models that can segment classes from different domains with a few labeled images. Previous works have proven the effectiveness of feature transformation in ad-<br>dressing CD-FSS. However, they completely rely on support images for feature transformation, and repeatedly utilizing a few support images for each class may easily lead to overfitting and overlooking intra-class appearance differences. In this paper,<br>we propose a Doubly Matching Transformation-based Network (DMTNet) to solve the above issue. Instead of completely relying on support images, we propose Self-Matching Transformation (SMT) to construct query-specific transformation matri-<br>ces based on query images themselves to transform domain-specific query features into domain-agnostic ones. Calculating query-specific transformation matrices can prevent overfitting, especially for the meta-testing stage where only one or several images are used as support images to segment hundreds or thousands of images. After obtaining domain-agnostic features, we exploit a Dual Hypercorrelation Construction (DHC) module to explore the hypercorrelations between the query im-<br>age with the foreground and background of the support image, based on which foreground and background prediction maps are generated and supervised, respectively, to enhance the segmentation result. In addition, we propose a Test-time Self-Finetuning (TSF) strategy to more accurately self-tune the query prediction in unseen domains. Extensive experiments on four popular datasets show that DMTNet achieves superior performance over state-of-the-art approaches. Code is available at<br><a target="_blank" rel="noopener" href="https://github.com/ChenJiayi68/DMTNet">https://github.com/ChenJiayi68/DMTNet</a>.</p>
 </blockquote>
 <h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a><strong>翻译</strong></h2><blockquote>
-<p><strong>跨域少样本语义分割（CD-FSS）</strong>旨在训练能够以少量标注图像对不同领域进行分割的通用模型。以往的研究已经证明了特征转换在解决CD-FSS问题中的有效性。然而，这些方法完全依赖于支持图像进行特征转换，而重复利用少量支持图像来处理每个类别，容易导致过拟合，并忽视类内外观的差异。为了解决上述问题，本文提出了一种基于双重匹配转换的网络（DMTNet）。我们并不完全依赖支持图像，而是提出了自匹配转换（SMT），通过查询图像自身构建特定的转换矩阵，将领域特定的查询特征转换为领域无关的特征。计算查询特定的转换矩阵有助于防止过拟合，特别是在元测试阶段，此时仅使用一张或几张图像作为支持图像来对数百或数千张图像进行分割。在获得领域无关特征后，我们利用双重超相关构建（DHC）模块，探索查询图像与支持图像前景和背景之间的超相关性，基于此生成前景和背景的预测图并进行监督，从而增强分割结果。此外，我们还提出了一种测试时自我微调（TSF）策略，以更准确地在未知领域自我调整查询预测。在四个流行数据集上的大量实验表明，DMTNet在性能上优于现有的最先进方法。相关代码可在 <a target="_blank" rel="noopener" href="https://github.com/ChenJiayi68/DMTNet">https://github.com/ChenJiayi68/DMTNet</a> 获取。</p>
+<p>**跨域少样本语义分割（CD-FSS）**旨在训练能够以少量标注图像对不同领域进行分割的通用模型。以往的研究已经证明了特征转换在解决CD-FSS问题中的有效性。然而，这些方法完全依赖于支持图像进行特征转换，而重复利用少量支持图像来处理每个类别，容易导致过拟合，并忽视类内外观的差异。为了解决上述问题，本文提出了一种基于双重匹配转换的网络（DMTNet）。我们并不完全依赖支持图像，而是提出了自匹配转换（SMT），通过查询图像自身构建特定的转换矩阵，将领域特定的查询特征转换为领域无关的特征。计算查询特定的转换矩阵有助于防止过拟合，特别是在元测试阶段，此时仅使用一张或几张图像作为支持图像来对数百或数千张图像进行分割。在获得领域无关特征后，我们利用双重超相关构建（DHC）模块，探索查询图像与支持图像前景和背景之间的超相关性，基于此生成前景和背景的预测图并进行监督，从而增强分割结果。此外，我们还提出了一种测试时自我微调（TSF）策略，以更准确地在未知领域自我调整查询预测。在四个流行数据集上的大量实验表明，DMTNet在性能上优于现有的最先进方法。相关代码可在 <a target="_blank" rel="noopener" href="https://github.com/ChenJiayi68/DMTNet">https://github.com/ChenJiayi68/DMTNet</a> 获取。</p>
 </blockquote>
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a><strong>研究背景</strong></h2><blockquote>
 <p><strong>语义分割</strong>近年来依赖大规模标注数据集取得快速发展，但实际场景中收集大量训练数据耗时且成本高。少样本语义分割（FSS）应运而生，旨在用少量标注支持图像实现查询图像的准确分割，常采用元学习，但在实际应用中，源数据集和目标数据集存在较大领域差距，导致FSS模型对未见领域的泛化能力较差。 为解决FSS模型在跨领域场景下性能显著下降的问题，跨领域少样本语义分割（CD - FSS）被提出。现有主要的CD - FSS方法PATNet通过将特定领域特征转换为领域无关特征来消除领域差距，但在元测试阶段仅基于少量支持图像的转换矩阵为大量查询图像生成领域无关特征，易导致过拟合。此外，多数现有CD - FSS方法在分割过程中只关注前景目标区域，忽略背景区域。 基于上述问题，本文提出一种基于<strong>双重匹配变换的网络（DMTNet）</strong>，以解决特征变换过度依赖支持图像、类内外观差异以及信息利用不充分等关键问题。 </p>
 </blockquote>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a><strong>研究现状</strong></h2><ul>
 <li><strong>少样本语义分割（FSS）</strong>：现有方法分为基于度量和基于关系两类。前者将支持图像表示为类原型，通过非参数测量工具分割查询图像；后者构建支持 - 查询对的密集对应关系。但在源域和目标域差距大时，性能会下降。</li>
-<li><strong>跨域语义分割</strong>：分为域<strong>自适应语义分割（DASS）</strong>和<strong>域泛化语义分割（DGSS）</strong>。DASS通过联合使用源域和目标域数据训练模型；DGSS通过归一化和白化（NW）、域随机化（DR）等方法缩小域差距。</li>
+<li><strong>跨域语义分割</strong>：分为域<strong>自适应语义分割（DASS）<strong>和</strong>域泛化语义分割（DGSS）</strong>。DASS通过联合使用源域和目标域数据训练模型；DGSS通过归一化和白化（NW）、域随机化（DR）等方法缩小域差距。</li>
 <li><strong>跨域少样本语义分割（CD - FSS）</strong>：近期提出了一些方法，如PixDA、RTD、PATNet等，旨在解决少样本和域差距问题。</li>
 </ul>
 <h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a><strong>提出的模型</strong></h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-05-44.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-05-44.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-05-44"></p>
@@ -745,19 +745,17 @@
 </li>
 </ul>
 </li>
-</ol>
-<ol>
-<li><strong>双超相关构建模块（Dual Hypercorrelation Construction，DHC）</strong>：探索查询特征与支持图像的前景和背景特征在无域特征空间中的密集相关性。分别基于支持前景特征和背景特征与查询特征构建4D相关张量，将得到的密集相关图输入到4D卷积金字塔编码器和2D卷积金字塔解码器中，生成预测的查询前景掩码和背景掩码，并使用BCE损失函数进行训练监督。</li>
-</ol>
-<ol>
-<li><strong>测试时自微调策略（Test-time Self-Finetuning，TSF）</strong>：在元测试阶段，通过尝试预测支持图像的真实掩码来微调网络，使模型学习目标域的风格信息，从而为查询图像生成更准确的掩码。只微调编码器的少数参数，避免对支持图像过拟合。</li>
+<li><p><strong>双超相关构建模块（Dual Hypercorrelation Construction，DHC）</strong>：探索查询特征与支持图像的前景和背景特征在无域特征空间中的密集相关性。分别基于支持前景特征和背景特征与查询特征构建4D相关张量，将得到的密集相关图输入到4D卷积金字塔编码器和2D卷积金字塔解码器中，生成预测的查询前景掩码和背景掩码，并使用BCE损失函数进行训练监督。</p>
+</li>
+<li><p><strong>测试时自微调策略（Test-time Self-Finetuning，TSF）</strong>：在元测试阶段，通过尝试预测支持图像的真实掩码来微调网络，使模型学习目标域的风格信息，从而为查询图像生成更准确的掩码。只微调编码器的少数参数，避免对支持图像过拟合。</p>
+</li>
 </ol>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a><strong>实验（Compared with SOTA）</strong></h2><blockquote>
 <p>数据集：PASCAL VOC 2012、ISIC2018、Chest X-ray、 Deepglobe、 and FSS-1000</p>
 </blockquote>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-10-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-10-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-10-33"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-14-22.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-14-22.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-14-22"></p>
-<p>与迁移学习、少样本语义分割和跨域少样本语义分割的几种先进方法进行比较，<strong>DMTNet在四个数据集的平均结果上表现优异</strong>，在1 - shot设置下达到<strong>59.74%</strong>的平均IoU，在5 - shot设置下达到<strong>66.01%</strong>的平均IoU。与最先进的PATNet相比，在1 - shot和5 - shot设置下分别提高了3.68%和4.02%。</p>
+<p>与迁移学习、少样本语义分割和跨域少样本语义分割的几种先进方法进行比较，<strong>DMTNet在四个数据集的平均结果上表现优异</strong>，在1 - shot设置下达到**59.74%<strong>的平均IoU，在5 - shot设置下达到</strong>66.01%**的平均IoU。与最先进的PATNet相比，在1 - shot和5 - shot设置下分别提高了3.68%和4.02%。</p>
 <h2 id="实验（Ablation-Study）"><a href="#实验（Ablation-Study）" class="headerlink" title="实验（Ablation Study）"></a><strong>实验（Ablation Study）</strong></h2><p>验证了SMT、DHC和TSF三个关键模块的有效性，使用所有三个模块时模型性能最佳，移除任何一个模块都会导致平均性能下降。同时，通过实验确定了TSF策略中微调编码器层能取得最佳性能。</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-18.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-18.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-12-18"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-35.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-12-35.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-10_10-12-35"></p>
@@ -766,7 +764,7 @@
 <li><strong>DMTNet利用SMT模块基于自身原型为支持和查询图像计算变换矩阵，将特定领域特征自适应转换为通用特征，避免过度依赖支持图像导致过拟合。</strong> </li>
 <li><strong>DHC模块在通用特征空间中探索查询图像与支持图像前景和背景的双重超相关性，生成并监督前景和背景预测掩码，提升分割效果。</strong> </li>
 <li><strong>在元测试阶段，TSF策略微调少量参数，使模型学习目标域风格信息，进一步提高分割性能。</strong></li>
-<li><strong>大量实验表明，DMTNet在四个具有不同领域差距的数据集上有效，达到了当前最优性能。</strong> </li>
+<li><strong>大量实验表明，DMTNet在四个具有不同领域差距的数据集上有效，达到了当前最优性能。</strong></li>
 </ol>
 
       </div>

@@ -690,7 +690,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 957 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 959 |
           </span>
   
           <span class="min2read">
@@ -723,16 +723,15 @@
 <h3 id="1-层次化Transformer编码器改进"><a href="#1-层次化Transformer编码器改进" class="headerlink" title="1. 层次化Transformer编码器改进"></a><strong>1. 层次化Transformer编码器改进</strong></h3><ul>
 <li><p><strong>多尺度特征融合机制</strong>：</p>
 <ul>
-<li>将编码器分为3个阶段（浅层/中层/深层），每阶段插入轻量级Transformer模块：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪代码示例：多尺度特征提取</span></span><br><span class="line">shallow_feat = CNN_Block1(x)  <span class="comment"># 高分辨率底层特征（边缘/纹理）</span></span><br><span class="line">medium_feat = Transformer_Block1(shallow_feat)  <span class="comment"># 局部-全局特征交互</span></span><br><span class="line">deep_feat = Transformer_Block2(medium_feat)  <span class="comment"># 全局语义建模</span></span><br></pre></td></tr></table></figure></li>
+<li>将编码器分为3个阶段（浅层&#x2F;中层&#x2F;深层），每阶段插入轻量级Transformer模块：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 伪代码示例：多尺度特征提取</span></span><br><span class="line">shallow_feat = CNN_Block1(x)  <span class="comment"># 高分辨率底层特征（边缘/纹理）</span></span><br><span class="line">medium_feat = Transformer_Block1(shallow_feat)  <span class="comment"># 局部-全局特征交互</span></span><br><span class="line">deep_feat = Transformer_Block2(medium_feat)  <span class="comment"># 全局语义建模</span></span><br></pre></td></tr></table></figure></li>
 <li>采用<strong>轴向注意力</strong>（Axial Attention）替代标准Transformer，降低计算复杂度（减少50%+ FLOPs）。</li>
 </ul>
 </li>
 <li><p><strong>血管形态学先验注入</strong>：</p>
 <ul>
-<li>在Transformer前插入<strong>方向可变形卷积</strong>（Oriented Deformable Conv）：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DeformConvBlock</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_ch</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.offset = nn.Conv2d(in_ch, <span class="number">18</span>, <span class="number">3</span>, padding=<span class="number">1</span>)  <span class="comment"># 9个偏移量(x,y)</span></span><br><span class="line">        <span class="variable language_">self</span>.conv = DeformConv2d(in_ch, out_ch, kernel_size=<span class="number">3</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        offset = <span class="variable language_">self</span>.offset(x)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.conv(x, offset)  <span class="comment"># 自适应血管走向</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>在Transformer前插入<strong>方向可变形卷积</strong>（Oriented Deformable Conv）：</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DeformConvBlock</span>(nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, in_ch</span>):</span><br><span class="line">        <span class="built_in">super</span>().__init__()</span><br><span class="line">        <span class="variable language_">self</span>.offset = nn.Conv2d(in_ch, <span class="number">18</span>, <span class="number">3</span>, padding=<span class="number">1</span>)  <span class="comment"># 9个偏移量(x,y)</span></span><br><span class="line">        <span class="variable language_">self</span>.conv = DeformConv2d(in_ch, out_ch, kernel_size=<span class="number">3</span>)</span><br><span class="line">        </span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x</span>):</span><br><span class="line">        offset = <span class="variable language_">self</span>.offset(x)</span><br><span class="line">        <span class="keyword">return</span> <span class="variable language_">self</span>.conv(x, offset)  <span class="comment"># 自适应血管走向</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <h3 id="2-解码器优化与边缘细化"><a href="#2-解码器优化与边缘细化" class="headerlink" title="2. 解码器优化与边缘细化"></a><strong>2. 解码器优化与边缘细化</strong></h3><ul>
@@ -741,38 +740,38 @@
 <li>在跳跃连接中引入<strong>双路径注意力门控</strong>：</li>
 </ul>
 <ol>
-<li><strong>空间注意力路径</strong>：聚焦血管分支关键区域<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spatial_att = CNN_Spatial_Att(encoder_feat + decoder_feat)</span><br></pre></td></tr></table></figure></li>
-<li><strong>通道注意力路径</strong>：强化薄血管相关特征通道<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel_att = SENet_Block(encoder_feat)</span><br></pre></td></tr></table></figure>
-</li>
+<li><strong>空间注意力路径</strong>：聚焦血管分支关键区域</li>
 </ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">spatial_att = CNN_Spatial_Att(encoder_feat + decoder_feat)</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li><strong>通道注意力路径</strong>：强化薄血管相关特征通道</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">channel_att = SENet_Block(encoder_feat)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>基于BIFPN的渐进式上采样</strong>：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 双向特征金字塔结构（BIFPN改进版）</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">bifpn_fusion</span>(<span class="params">f1, f2</span>):</span><br><span class="line">    f1 = UpSample(f1)</span><br><span class="line">    <span class="keyword">return</span> Conv(Add([f1, f2]))  <span class="comment"># 特征加权融合</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>边缘修正模块</strong>(Edge Refinement Module):</p>
 <ul>
-<li>在最终输出前添加<strong>多向梯度检测分支</strong>：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">edge_mask = Sobel_Conv(pred)  <span class="comment"># 提取预测结果的边缘</span></span><br><span class="line">refined_pred = pred + edge_mask * (gt_edge - pred_edge)  <span class="comment"># 对抗训练模式</span></span><br></pre></td></tr></table></figure>
-</li>
+<li>在最终输出前添加<strong>多向梯度检测分支</strong>：</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">edge_mask = Sobel_Conv(pred)  <span class="comment"># 提取预测结果的边缘</span></span><br><span class="line">refined_pred = pred + edge_mask * (gt_edge - pred_edge)  <span class="comment"># 对抗训练模式</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <h3 id="3-面向细血管的损失函数设计"><a href="#3-面向细血管的损失函数设计" class="headerlink" title="3. 面向细血管的损失函数设计"></a><strong>3. 面向细血管的损失函数设计</strong></h3><ul>
-<li><p><strong>形态学感知混合损失</strong>：</p>
-<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Total</span> <span class="variable">Loss</span> <span class="operator">=</span> α<span class="operator">*</span><span class="variable">Dice</span> <span class="variable">Loss</span> <span class="operator">+</span> β<span class="operator">*</span><span class="variable">Focal</span> <span class="variable">Loss</span> <span class="operator">+</span> γ<span class="operator">*</span><span class="variable">Vessel</span> <span class="built_in">Thickness</span> <span class="variable">Loss</span></span><br></pre></td></tr></table></figure>
+<li><strong>形态学感知混合损失</strong>：<figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Total</span> <span class="variable">Loss</span> <span class="operator">=</span> α<span class="operator">*</span><span class="variable">Dice</span> <span class="variable">Loss</span> <span class="operator">+</span> β<span class="operator">*</span><span class="variable">Focal</span> <span class="variable">Loss</span> <span class="operator">+</span> γ<span class="operator">*</span><span class="variable">Vessel</span> <span class="built_in">Thickness</span> <span class="variable">Loss</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li><p><strong>血管直径敏感损失</strong>（VD Loss）:</p>
 <ul>
-<li>利用距离变换生成厚度权重图：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distance_map = cv2.distanceTransform(gt_mask, cv2.DIST_L2, <span class="number">3</span>)</span><br><span class="line">weight_map = <span class="number">1</span> + <span class="number">10</span> * (<span class="number">1</span> - distance_map / max_dist)  <span class="comment"># 细血管区域权重更高</span></span><br><span class="line">VD_loss = BCEWithLogitsLoss(pred, gt, weight=weight_map)</span><br></pre></td></tr></table></figure>
-</li>
+<li>利用距离变换生成厚度权重图：</li>
 </ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">distance_map = cv2.distanceTransform(gt_mask, cv2.DIST_L2, <span class="number">3</span>)</span><br><span class="line">weight_map = <span class="number">1</span> + <span class="number">10</span> * (<span class="number">1</span> - distance_map / max_dist)  <span class="comment"># 细血管区域权重更高</span></span><br><span class="line">VD_loss = BCEWithLogitsLoss(pred, gt, weight=weight_map)</span><br></pre></td></tr></table></figure>
 </li>
 <li><p><strong>拓扑连续性损失</strong>（基于Persistent Homology）：</p>
 <ul>
-<li>使用拓扑数据分析工具（如GUDHI库）计算预测与GT的拓扑差异：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">topo_loss = calculate_persistent_homology_loss(pred, gt)</span><br></pre></td></tr></table></figure>
-</li>
+<li>使用拓扑数据分析工具（如GUDHI库）计算预测与GT的拓扑差异：</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">topo_loss = calculate_persistent_homology_loss(pred, gt)</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
@@ -792,10 +791,9 @@
 </li>
 <li><p><strong>物理成像过程模拟</strong>：</p>
 <ul>
-<li>添加<strong>光照不均匀性噪声</strong>（符合眼底相机成像特性）：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_illumination_variation</span>(<span class="params">img</span>):</span><br><span class="line">    x = np.random.uniform(<span class="number">0.8</span>, <span class="number">1.2</span>, size=(<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">    illumination = cv2.resize(x, (img.shape[<span class="number">1</span>], img.shape[<span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">return</span> img * illumination</span><br></pre></td></tr></table></figure>
-</li>
+<li>添加<strong>光照不均匀性噪声</strong>（符合眼底相机成像特性）：</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">def</span> <span class="title function_">add_illumination_variation</span>(<span class="params">img</span>):</span><br><span class="line">    x = np.random.uniform(<span class="number">0.8</span>, <span class="number">1.2</span>, size=(<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">    illumination = cv2.resize(x, (img.shape[<span class="number">1</span>], img.shape[<span class="number">0</span>]))</span><br><span class="line">    <span class="keyword">return</span> img * illumination</span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <h3 id="5-实验结果验证建议"><a href="#5-实验结果验证建议" class="headerlink" title="5. 实验结果验证建议"></a><strong>5. 实验结果验证建议</strong></h3><ul>
@@ -804,15 +802,16 @@
 </li>
 <li><p><strong>可视化分析</strong>：</p>
 <ul>
-<li><strong>错分病例热力图</strong>（Grad-CAM++）：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.module.encoder[-<span class="number">1</span>].register_forward_hook(get_activations)</span><br><span class="line">heatmap = generate_gradcam(input_img, pred)</span><br></pre></td></tr></table></figure></li>
-<li><strong>血管连通性分析</strong>（使用SKimage测量分支数量）：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pred_skeleton = skeletonize(pred_mask)</span><br><span class="line">num_branches = count_bifurcations(pred_skeleton)</span><br></pre></td></tr></table></figure>
-</li>
+<li><strong>错分病例热力图</strong>（Grad-CAM++）：</li>
 </ul>
-</li>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">model.module.encoder[-<span class="number">1</span>].register_forward_hook(get_activations)</span><br><span class="line">heatmap = generate_gradcam(input_img, pred)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>血管连通性分析</strong>（使用SKimage测量分支数量）：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pred_skeleton = skeletonize(pred_mask)</span><br><span class="line">num_branches = count_bifurcations(pred_skeleton)</span><br></pre></td></tr></table></figure></li>
 </ul>
 <hr>
 <h3 id="6-可能的性能提升对比"><a href="#6-可能的性能提升对比" class="headerlink" title="6. 可能的性能提升对比"></a><strong>6. 可能的性能提升对比</strong></h3><p>在DRIVE数据集上的改进效果预估：</p>
-<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -822,8 +821,7 @@
 <th>参数量（M）↓</th>
 </tr>
 </thead>
-<tbody>
-<tr>
+<tbody><tr>
 <td>Original TransUnet</td>
 <td>78.2</td>
 <td>63.5</td>
@@ -847,9 +845,7 @@
 <td><strong>69.8</strong></td>
 <td>91.7</td>
 </tr>
-</tbody>
-</table>
-</div>
+</tbody></table>
 <hr>
 <h3 id="关键参考文献"><a href="#关键参考文献" class="headerlink" title="关键参考文献"></a><strong>关键参考文献</strong></h3><ol>
 <li><strong>《OCTA-500: Physiological Structure Mining Model》</strong> (CVPR 2023) - 血管分叉点增强方法</li>

@@ -736,28 +736,30 @@
 <li><strong>多级原型生成模块</strong>：从支持特征中提取全局原型，从查询分支中提取局部原型，为更好的类间区分提供多粒度证据。    </li>
 <li><strong>多级原型交互模块</strong>：构建不同粒度原型之间的交互，增强特征挖掘能力，以进行准确的识别。   </li>
 <li><ul>
-<li><strong>特征激活模块</strong>：使用n层Transformer编码器进行特征激活，激活包含目标类对象的像素并停用其他像素，提供最终的分割结果。 </li>
+<li><strong>特征激活模块</strong>：使用n层Transformer编码器进行特征激活，激活包含目标类对象的像素并停用其他像素，提供最终的分割结果。</li>
 </ul>
 </li>
 </ul>
 </li>
 <li><strong>无标签数据特征增强</strong>：引入辅助无标签分支作为有效的数据利用方法，通过对训练样本的子集进行重采样作为无标签数据，并应用相同的分割损失，教导模型避免学习有标签输入的特定样本偏差。无标签分支与查询分支共享参数，使用相互生成的伪标签进行训练。 </li>
-<li><strong>多级原型处理</strong>    <ul>
+<li><strong>多级原型处理</strong></li>
+</ol>
+<ul>
 <li><strong>全局支持原型生成</strong>：通过对全局特征进行掩码平均池化，从支持特征中提取全局原型，以捕获高维类别级别的类别信息。    </li>
 <li><strong>局部查询原型生成</strong>：从查询分支中额外提取局部原型，为二进制分类提供细粒度信息。使用先验掩码和局部平均池化，并通过1×1卷积和通道注意力机制进行细化。</li>
-<li>-<strong>多级原型交互</strong>：将生成的全局和局部原型扩展到特征图的大小，然后与查询特征和先验掩码连接，经过1×1卷积和激活操作，得到增强的查询特征。 </li>
+<li>-<strong>多级原型交互</strong>：将生成的全局和局部原型扩展到特征图的大小，然后与查询特征和先验掩码连接，经过1×1卷积和激活操作，得到增强的查询特征。</li>
 </ul>
-</li>
+<ol start="4">
 <li><strong>特征激活</strong>：使用Transformer编码器对增强的查询特征进行自注意力和交叉注意力处理，输出经过调整大小后传递给分类头，得到最终的逐像素分割结果。</li>
 <li><strong>损失函数</strong>：RiFeNet的损失函数是主损失和自监督损失的加权和。主损失使用DICE损失计算查询输入的预测结果与真实标签之间的差异，自监督损失用于无标签分支的训练，权重β经验性地设置为0.5。 实验结果表明，RiFeNet在PASCAL - 5i和COCO数据集上的表现优于现有方法，证明了其在少样本语义分割任务中的有效性。</li>
 </ol>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a><strong>实验（Compared with SOTA）</strong></h2><p>数据集：PASCAL-5${^i}$ 、COCO</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_09-38-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_09-38-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-11_09-38-26"></p>
 <ul>
-<li><strong>PASCAL - 5i数据集</strong>：RiFeNet在大多数实验场景下优于最佳方法。在单样本设置下比CyCTR高约3.5%，五样本设置下高约2%。与现有最先进的DCAMA相比，使用ResNet50骨干时，单样本设置下高出2.5%；使用ResNet101时，高出2.7%。单样本设置下增益更大，原因是随着有标签图像增加，无标签数据与有标签图像的比例从2降至0.4，无标签分支的积极影响减小。</li>
-</ul>
-<ul>
-<li><strong>COCO数据集</strong>：在该数据集的复杂场景下，RiFeNet在单样本设置的几乎所有分割中仍比当前最佳的DCAMA高出0.8%。定性结果也证明了RiFeNet的有效性，在支持集和查询集中前景对象姿态、外观和拍摄角度差异较大的情况下，RiFeNet在保持前景语义一致性方面有显著改进，在处理前景与背景相似性问题上表现更好。</li>
+<li><p><strong>PASCAL - 5i数据集</strong>：RiFeNet在大多数实验场景下优于最佳方法。在单样本设置下比CyCTR高约3.5%，五样本设置下高约2%。与现有最先进的DCAMA相比，使用ResNet50骨干时，单样本设置下高出2.5%；使用ResNet101时，高出2.7%。单样本设置下增益更大，原因是随着有标签图像增加，无标签数据与有标签图像的比例从2降至0.4，无标签分支的积极影响减小。</p>
+</li>
+<li><p><strong>COCO数据集</strong>：在该数据集的复杂场景下，RiFeNet在单样本设置的几乎所有分割中仍比当前最佳的DCAMA高出0.8%。定性结果也证明了RiFeNet的有效性，在支持集和查询集中前景对象姿态、外观和拍摄角度差异较大的情况下，RiFeNet在保持前景语义一致性方面有显著改进，在处理前景与背景相似性问题上表现更好。</p>
+</li>
 </ul>
 <h2 id="实验（Ablation-Experiments）"><a href="#实验（Ablation-Experiments）" class="headerlink" title="实验（Ablation Experiments）"></a><strong>实验（Ablation Experiments）</strong></h2><ul>
 <li><strong>关键组件有效性</strong>：在单样本设置下，使用无标签分支或多级别原型交互均可使性能提升约2%，两者结合时，RiFeNet在基线基础上提高3.1%。</li>

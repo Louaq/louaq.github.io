@@ -748,10 +748,10 @@
 <li>训练目标包括任务损失和稀疏正则化项，通过修改稀疏正则化函数F(γ)来重新加权香草L1正则化，以抑制对域敏感的滤波器或注意力头。</li>
 </ul>
 </li>
-<li>滤波器/头敏感性度量：<ul>
-<li><strong>一元滤波器/头敏感性（Unary Filter/Head Sensitivity）</strong>：测量第i个滤波器/头在域转移下的激活方差，通过对共享相同内容但不同风格的小批量图像进行前向传播，计算激活图的方差并归一化得到wU i。</li>
-<li><strong>二元滤波器/头敏感性（Binary Filter/Head Sensitivity）</strong>：考虑域转移下滤波器之间的二元关系，通过计算协方差矩阵并对其行求和得到wB i，以识别与同一层中其他滤波器高度相关的滤波器。</li>
-<li>最终的滤波器敏感性w由一元和二元滤波器敏感性加权求和得到，即w = λwU + (1 - λ)wB，其中λ是控制两者相对重要性的超参数。</li>
+<li>滤波器&#x2F;头敏感性度量：<ul>
+<li><strong>一元滤波器&#x2F;头敏感性（Unary Filter&#x2F;Head Sensitivity）</strong>：测量第i个滤波器&#x2F;头在域转移下的激活方差，通过对共享相同内容但不同风格的小批量图像进行前向传播，计算激活图的方差并归一化得到wU i。</li>
+<li><strong>二元滤波器&#x2F;头敏感性（Binary Filter&#x2F;Head Sensitivity）</strong>：考虑域转移下滤波器之间的二元关系，通过计算协方差矩阵并对其行求和得到wB i，以识别与同一层中其他滤波器高度相关的滤波器。</li>
+<li>最终的滤波器敏感性w由一元和二元滤波器敏感性加权求和得到，即w &#x3D; λwU + (1 - λ)wB，其中λ是控制两者相对重要性的超参数。</li>
 </ul>
 </li>
 </ol>
@@ -777,15 +777,15 @@
 <h2 id="实验（Ablation-Experiments）🥇"><a href="#实验（Ablation-Experiments）🥇" class="headerlink" title="实验（Ablation Experiments）🥇"></a>实验（Ablation Experiments）🥇</h2><p>‍对NPDG的核心组件（DSP模块、一元和二元滤波器敏感性）进行消融研究。所有组件都有助于提高基线模型的泛化性能，DSP生成的新变体域比随机采样策略效果更好。结合一元和二元滤波器敏感性可使mIoU达到最高，表明两者具有互补作用。</p>
 <p>‍<img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-02_14-37-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-02_14-37-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-02_14-37-26"></p>
 <h1 id="‍超参数研究"><a href="#‍超参数研究" class="headerlink" title="‍超参数研究"></a>‍超参数研究</h1><ul>
-<li><strong>一元和二元权重的比例λ</strong>：通过网格搜索确定λ值，ResNet101和MiT - B5模型在λ = 0.4时性能最优，表明一元和二元敏感性剪枝都有贡献，二元剪枝效果略更明显。</li>
+<li><strong>一元和二元权重的比例λ</strong>：通过网格搜索确定λ值，ResNet101和MiT - B5模型在λ &#x3D; 0.4时性能最优，表明一元和二元敏感性剪枝都有贡献，二元剪枝效果略更明显。</li>
 <li><strong>剪枝率r</strong>：剪枝率是灵活参数，在分割任务中，过高的剪枝率会导致边缘模糊，影响分割性能。实验表明，最优剪枝率在20% - 40%之间，约30%时泛化效果最佳。可使用验证集找到剪枝率和mIoU的精确权衡，实际应用中，若没有验证集，使用约30%的剪枝率通常可行。</li>
-<li><strong>剪枝阈值t</strong>：剪枝阈值不是非常敏感的超参数，在一定范围内取值均可。只要稀疏训练迭代次数足够，就能识别出满足要求的滤波器。一般设置t = 0.1。</li>
+<li><strong>剪枝阈值t</strong>：剪枝阈值不是非常敏感的超参数，在一定范围内取值均可。只要稀疏训练迭代次数足够，就能识别出满足要求的滤波器。一般设置t &#x3D; 0.1。</li>
 </ul>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了一种基于<strong>网络剪枝</strong>的<strong>领域泛化</strong>方法NPDG，得出以下结论：</p>
 <ol>
 <li><strong>创新性</strong>：NPDG通过定制的剪枝策略，从一元和二元分析辨别滤波器对领域偏移的敏感性，同时引入可微风格扰动方案动态模拟领域变化，助力识别敏感滤波器，是利用网络剪枝解决领域泛化问题的先驱。 </li>
 <li><strong>有效性</strong>：在CNN和Transformer架构上的大量实验表明，NPDG能以更轻量级的模型实现语义分割泛化的最优性能。 </li>
-<li><strong>局限性与展望</strong>：当前NPDG主要考虑风格差异导致的领域偏移，难以识别所有因素，未来将全面解决领域偏移问题。此外，目前依赖经验值选择超参数，未来需开发测试时训练的方法确定超参数。 </li>
+<li><strong>局限性与展望</strong>：当前NPDG主要考虑风格差异导致的领域偏移，难以识别所有因素，未来将全面解决领域偏移问题。此外，目前依赖经验值选择超参数，未来需开发测试时训练的方法确定超参数。</li>
 </ol>
 
       </div>

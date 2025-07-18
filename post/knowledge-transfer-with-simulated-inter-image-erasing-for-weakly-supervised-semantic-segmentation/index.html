@@ -721,7 +721,7 @@
       <div class="post-content">
         <p>南京理工大学、地平线机器人</p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Though <strong>adversarial erasing</strong> has prevailed in <strong>weakly supervised semantic segmentation</strong> to help activate integral object regions, existing approaches still suffer from the dilemma of under-activation and over-expansion due to the difficulty in determining when to stop erasing. In this paper, we propose a Knowledge Transfer with Simulated Inter-Image Erasing (KTSE) approach for weakly supervised semantic segmentation to alleviate the above problem. In contrast to existing erasing-based methods that remove the discriminative part for more object discovery, we propose a simulated inter-image erasing scenario to weaken the original activation by introducing extra object information. Then, object knowledge is transferred from the anchor image to the consequent less activated localization map to strengthen network localization ability. Considering the adopted bidirectional alignment will also weaken the anchor image activation if appropriate constraints are missing, we propose a self-supervised regularization module to maintain the reliable activation in discriminative regions and improve the inter-class object boundary recognition for complex images with multiple categories of objects. In addition, we resort to intra-image erasing and propose a multi-granularity alignment module to gently enlarge the object activation to boost the object knowledge transfer. Extensive experiments and ablation studies on PASCAL VOC 2012 and COCO datasets demonstrate the superiority of our proposed approach. Source codes and models are available at <a target="_blank" rel="noopener" href="https://github.com/NUST-Machine-Intelligence-Laboratory/KTSE">https://github.com/NUST-Machine-Intelligence-Laboratory/KTSE</a>.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>尽管<strong>对抗擦除</strong>在弱监督语义分割中很流行，以帮助激活完整的目标区域，但由于难以确定何时停止擦除，现有的方法仍然存在<strong>激活不足和过度扩展</strong>的困境。在本文中，我们提出了一种基于模拟图像间擦除(KTSE)的弱监督语义分割方法来缓解上述问题。与现有的基于擦除的方法不同，我们提出了一种模拟图像间擦除场景，通过引入额外的目标信息来削弱原始激活。然后，将目标知识从锚点图像转移到随后激活程度较低的定位图中，以增强网络定位能力。考虑到如果缺少适当的约束条件，所采用的双向对齐也会削弱锚点图像的激活，我们提出了一种自监督正则化模块，以保持在判别区域的可靠激活，并改善具有多类别物体的复杂图像的类间物体边界识别。此外，我们采用图像内擦除的方法，并提出了一种多粒度对齐模块来温和地放大目标激活，以促进目标知识的转移。在PASCAL VOC 2012和COCO数据集上进行的大量实验和烧蚀研究证明了我们提出的方法的优越性。源代码和模型可在<a target="_blank" rel="noopener" href="https://github.com/NUST-Machine-Intelligence-Laboratory/KTSE上获得。">https://github.com/NUST-Machine-Intelligence-Laboratory/KTSE上获得。</a></p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>尽管<strong>对抗擦除</strong>在弱监督语义分割中很流行，以帮助激活完整的目标区域，但由于难以确定何时停止擦除，现有的方法仍然存在<strong>激活不足和过度扩展</strong>的困境。在本文中，我们提出了一种基于模拟图像间擦除(KTSE)的弱监督语义分割方法来缓解上述问题。与现有的基于擦除的方法不同，我们提出了一种模拟图像间擦除场景，通过引入额外的目标信息来削弱原始激活。然后，将目标知识从锚点图像转移到随后激活程度较低的定位图中，以增强网络定位能力。考虑到如果缺少适当的约束条件，所采用的双向对齐也会削弱锚点图像的激活，我们提出了一种自监督正则化模块，以保持在判别区域的可靠激活，并改善具有多类别物体的复杂图像的类间物体边界识别。此外，我们采用图像内擦除的方法，并提出了一种多粒度对齐模块来温和地放大目标激活，以促进目标知识的转移。在PASCAL VOC 2012和COCO数据集上进行的大量实验和烧蚀研究证明了我们提出的方法的优越性。源代码和模型可在<a target="_blank" rel="noopener" href="https://github.com/NUST-Machine-Intelligence-Laboratory/KTSE%E4%B8%8A%E8%8E%B7%E5%BE%97%E3%80%82">https://github.com/NUST-Machine-Intelligence-Laboratory/KTSE上获得。</a></p>
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>语义分割在深度学习时代取得了巨大进展，广泛应用于<strong>自动驾驶和图像编辑等领域</strong>。但深度学习模型训练依赖大量标注图像，收集精确的像素级标注耗时耗力。因此，弱监督学习作为减轻标注负担的方向，受到众多研究者关注。 本文聚焦于图像级标签监督下的弱监督语义分割（WSSS）。当前WSSS通常遵循将图像标签转换为像素级粗标签、细化伪标签、用细化标签训练最终分割模型的三步流程。在分割标签生成方面，类激活图（CAM）技术是目标定位的主流范式，但朴素CAM只能突出对象最具判别性的区域，激活小且稀疏，导致对象挖掘不完整。 为解决这一问题，许多工作致力于扩展CAM激活以生成高质量伪标签，其中对抗擦除是主流方法之一。然而，现有的基于对抗擦除的方法难以确定何时停止擦除，过度擦除会导致过度扩展，擦除不足则会导致激活不足。因此，本文提出了一种基于模拟图像间擦除的知识转移（KTSE）方法，以缓解上述问题。 </p>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>弱监督语义分割（WSSS）</strong>：以图像级标签作为弱监督进行语义分割是热门方向，通常采用<strong>类激活图（CAM）技术定位目标对象</strong>，将图像级标签转化为像素级标注。为扩大CAM激活区域，研究者采用了多种方法，如扩张卷积、对比学习、自监督学习、利用跨图像信息等。</li>
@@ -733,28 +733,29 @@
 <h3 id="具体模块"><a href="#具体模块" class="headerlink" title="具体模块"></a>具体模块</h3><ol>
 <li><strong>类激活图（CAM）生成</strong>    <ul>
 <li><strong>网络架构调整</strong>：参考ACoL移除最终全连接层，将骨干网络输出通道设置为C + 1（C为前景类别数，1为背景），直接从类感知CAM特征F生成对象定位图。    </li>
-<li><strong>CAM计算</strong>：对于每个前景类c，将注意力图Fc输入ReLU层，然后归一化到0到1的范围，即$A ^{c} =\frac {ReLU\left ( F^{c} \right )}{\max \left ( F^{c} \right )}$。   </li>
-<li><strong>池化头与损失函数</strong>：采用门控金字塔池化（GPP）层作为最终池化头，使用多标签软边缘损失训练分类网络，损失函数为$\mathcal {L} <em>{cls}=-\frac {1}{C} \sum </em>{ c=1}^{C} y^{c} \log \sigma \left (q^{c}\right )+\left (1-y^{c}\right ) \log \left [1-\sigma \left (q^{c}\right )\right ]$，其中$\sigma (·)$是sigmoid函数，$y^{c}$是第c类的图像级标签。 </li>
+<li><strong>CAM计算</strong>：对于每个前景类c，将注意力图Fc输入ReLU层，然后归一化到0到1的范围，即$A ^{c} &#x3D;\frac {ReLU\left ( F^{c} \right )}{\max \left ( F^{c} \right )}$。   </li>
+<li><strong>池化头与损失函数</strong>：采用门控金字塔池化（GPP）层作为最终池化头，使用多标签软边缘损失训练分类网络，损失函数为$\mathcal {L} _{cls}&#x3D;-\frac {1}{C} \sum _{ c&#x3D;1}^{C} y^{c} \log \sigma \left (q^{c}\right )+\left (1-y^{c}\right ) \log \left [1-\sigma \left (q^{c}\right )\right ]$，其中$\sigma (·)$是sigmoid函数，$y^{c}$是第c类的图像级标签。</li>
 </ul>
 </li>
 <li><strong>模拟图像间擦除（SIE）</strong>    <ul>
 <li><strong>场景设计</strong>：与现有擦除方法不同，通过拼接锚图像和配对图像创建更大的合成图像，将锚图像视为被擦除的图像。引入额外对象信息使锚图像中突出的对象区域减少，然后将锚图像的对象知识转移到激活较低的合成图像锚部分，以增强网络的对象定位能力。   </li>
-<li><strong>知识转移损失</strong>：损失函数为$\mathcal {L} <em>{kt} = ReLU \left ( \hat {F </em>{a} } - \hat {F <em>{s} } \right )$，其中$\hat {F </em>{a} } =CFE\left ( F <em>{a}, y \right )$，$\hat {F </em>{s} } =CFE\left ( F <em>{s}, y \right )$，$F </em>{a}$和$F _{s}$分别表示锚分支和模拟分支的CAM特征，CFE表示类特征提取。</li>
+<li><strong>知识转移损失</strong>：损失函数为$\mathcal {L} _{kt} &#x3D; ReLU \left ( \hat {F _{a} } - \hat {F _{s} } \right )$，其中$\hat {F _{a} } &#x3D;CFE\left ( F _{a}, y \right )$，$\hat {F _{s} } &#x3D;CFE\left ( F _{s}, y \right )$，$F _{a}$和$F _{s}$分别表示锚分支和模拟分支的CAM特征，CFE表示类特征提取。</li>
 </ul>
 </li>
 <li><strong>自监督正则化（SSR）</strong>    <ul>
 <li><strong>问题提出</strong>：由于知识转移是双向的，学习模拟分支的稀疏激活会削弱锚分支的对象挖掘。为保持锚分支在判别区域的可靠激活，提出自监督正则化模块。   </li>
-<li><strong>伪标签生成</strong>：使用两个阈值$\beta<em>{h} = 0.3$和$\beta</em>{l} = 0.15$定位置信前景和背景，生成伪标签$\hat {Y} _{i,j}$。   </li>
-<li><strong>损失函数</strong>：使用交叉熵损失$\mathcal {L} <em>{ce}$直接监督CAM特征的学习，同时设计类间损失$\mathcal {L} </em>{inter}$鼓励复杂图像中多个前景类的激活一致性，以提高类间对象边界的识别能力。</li>
+<li><strong>伪标签生成</strong>：使用两个阈值$\beta_{h} &#x3D; 0.3$和$\beta_{l} &#x3D; 0.15$定位置信前景和背景，生成伪标签$\hat {Y} _{i,j}$。   </li>
+<li><strong>损失函数</strong>：使用交叉熵损失$\mathcal {L} _{ce}$直接监督CAM特征的学习，同时设计类间损失$\mathcal {L} _{inter}$鼓励复杂图像中多个前景类的激活一致性，以提高类间对象边界的识别能力。</li>
 </ul>
 </li>
 <li><strong>多粒度对齐（MGA）</strong>   <ul>
 <li><strong>问题提出</strong>：自监督正则化模块虽能促进知识转移，但网络对象定位能力的提升受锚CAM质量限制，因此采用传统的图像内擦除并提出多粒度对齐模块。  </li>
-<li><strong>全局对齐</strong>：将锚特征$F<em>{a}$和掩码特征$F</em>{m}$输入类特征提取模块，采用全局平均池化（GAP）操作获得每个分支的最终类置信度，设计图像级全局对齐损失$\mathcal {L} _{global}$。   </li>
-<li><strong>局部对齐</strong>：利用像素级局部激活对齐将擦除图像中新发现的对象信息转移到锚分支，损失函数为$\mathcal {L} <em>{local}= ReLU\left ( \hat {F </em>{m}} - \hat {F _{a}} \right )$。 <h3 id="训练目标"><a href="#训练目标" class="headerlink" title="训练目标"></a>训练目标</h3>整体训练损失为$\mathcal {L}=\mathcal {L} <em>{cls} + \mathcal {L} </em>{kt} + \mathcal {L} <em>{global} + \mathcal {L} </em>{local} + \mathcal {L} <em>{ce} + \lambda </em>{inter}\mathcal {L} <em>{inter}$，其中$\lambda </em>{inter} = 0.005$是控制类间损失权重的超参数。 </li>
+<li><strong>全局对齐</strong>：将锚特征$F_{a}$和掩码特征$F_{m}$输入类特征提取模块，采用全局平均池化（GAP）操作获得每个分支的最终类置信度，设计图像级全局对齐损失$\mathcal {L} _{global}$。   </li>
+<li><strong>局部对齐</strong>：利用像素级局部激活对齐将擦除图像中新发现的对象信息转移到锚分支，损失函数为$\mathcal {L} _{local}&#x3D; ReLU\left ( \hat {F _{m}} - \hat {F _{a}} \right )$。</li>
 </ul>
 </li>
 </ol>
+<h3 id="训练目标"><a href="#训练目标" class="headerlink" title="训练目标"></a>训练目标</h3><p>整体训练损失为$\mathcal {L}&#x3D;\mathcal {L} _{cls} + \mathcal {L} _{kt} + \mathcal {L} _{global} + \mathcal {L} _{local} + \mathcal {L} _{ce} + \lambda _{inter}\mathcal {L} _{inter}$，其中$\lambda _{inter} &#x3D; 0.005$是控制类间损失权重的超参数。 </p>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
 <p>数据集：<strong>PASCAL VOC 2012 (20+1)、COCO 2014 (80+1)</strong></p>
 </blockquote>
@@ -775,7 +776,7 @@
 <li>与现有对抗擦除方法不同，KTSE模拟图像间擦除场景，添加额外对象信息，增强网络目标定位能力，缓解过扩展问题。 </li>
 <li>提出自监督正则化模块，维持判别区域可靠激活，提升复杂图像类间目标边界识别能力。 </li>
 <li>提出多粒度对齐模块，通过图像级全局对齐和像素级局部对齐扩大目标激活，促进知识转移。</li>
-<li>在PASCAL VOC 2012和COCO数据集上的大量实验和消融研究表明，KTSE方法优于现有方法，能有效缓解过扩展和激活不足问题。 </li>
+<li>在PASCAL VOC 2012和COCO数据集上的大量实验和消融研究表明，KTSE方法优于现有方法，能有效缓解过扩展和激活不足问题。</li>
 </ol>
 
       </div>

@@ -724,11 +724,11 @@
 </blockquote>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>The successful fusion of <strong>3-D multi-modal medical images</strong> depends on both specific characteristics unique to each imaging mode as well as consistent spatial semantic features among all modes. However, the inherent variability in the appearance of these images poses a significant challenge to reliable learning of semantic information. To address this issue, this paper proposes a nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion. The proposed approach utilizes contrastive learning to effectively extract specified multi-scale features from each mode using U-Net (CU-Net). Subsequently, it employs geometric spatial consistency learning through a fusion convolutional decoder (FCD) and a geometric matching network (GMN) to ensure consistent acquisition of semantic representation within the same 3-D regions across multiple modalities. Additionally, a hybrid multi-level loss is introduced to facilitate the learning process of fused images. Ultimately, we leverage optimally specified multi-modal features for fusion and brain tumor lesion segmentation. The proposed approach enables cooperative learning between 3-D fusion and segmentation tasks by employing an innovative nested self-supervised strategy, thereby successfully striking a harmonious balance between semantic consistency and visual specificity during the extraction of multi-modal features. The fusion results demonstrated a mean classification SSIM, PSNR, NMI,and SFR of 0.9310, 27.8861, 1.5403, and 1.0896 respectively. The segmentation results revealed a mean classification Dice, sensitivity (Sen), specificity (Spe), and accuracy (Acc) of 0.8643, 0.8736, 0.9915, and 0.9911 correspondingly. The experimental findings demonstrate that our approach outperforms 11 other state-of-the-art fusion methods and 5 classical U-Net-based segmentation methods in terms of 4 objective metrics and qualitative evaluation. The code of the proposed method is available at <a target="_blank" rel="noopener" href="https://github.com/ImZhangyYing/NLSF">https://github.com/ImZhangyYing/NLSF</a>.</p>
 <h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征。然而，这些图像外观的固有变化对语义信息的可靠学习构成了重大挑战。为了解决这一问题，本文提出了一种用于3D语义分割驱动的多模态医学图像融合的嵌套自监督学习框架。所提出的方法利用对比学习通过U-Net (CU-Net)有效地从每种模式中提取指定的多尺度特征。随后，它通过融合卷积解码器（FCD）和几何匹配网络（GMN）进行几何空间一致性学习，以确保在多个模态的相同3D区域内一致地获取语义表示。此外，引入了一种混合多层次损失来促进融合图像的学习过程。最终，我们利用最佳指定的多模态特征进行融合和脑肿瘤病灶分割。所提出的方法通过使用创新的嵌套自监督策略，实现了3D融合和分割任务之间的协同学习，从而在多模态特征提取过程中成功地在语义一致性和视觉特异性之间达到了和谐的平衡。融合结果显示，平均分类SSIM、PSNR、NMI和SFR分别为0.9310、27.8861、1.5403和1.0896。分割结果揭示了平均分类Dice、灵敏度（Sen）、特异性（Spe）和准确性（Acc）分别为0.8643、0.8736、0.9915和0.9911。实验结果表明，我们的方法在4个客观指标和定性评估方面优于其他11种先进的融合方法和5种经典U-Net分割方法。所提出方法的代码可在<a target="_blank" rel="noopener" href="https://github.com/ImZhangyYing/NLSF">https://github.com/ImZhangyYing/NLSF</a></p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文的研究背景主要围绕多<strong>模态医学图像融合（MMIF）和分割（MMIS）</strong>展开，现有方法存在诸多不足，具体如下：</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文的研究背景主要围绕多**模态医学图像融合（MMIF）和分割（MMIS）**展开，现有方法存在诸多不足，具体如下：</p>
 <ol>
 <li><strong>医学影像需求</strong>：在医学成像领域，不同模态影像能提供<strong>互补信息</strong>，综合各模态信息对准确诊断至关重要。3D医学影像相比2D影像，能提供更丰富的空间信息，在手术规划和复杂病例诊断中更具优势。 </li>
 <li><strong>现有MMIF方法局限</strong>：大部分现有方法针对<strong>2D多模态医学图像</strong>，难以保留人体解剖结构的3D空间信息；多聚焦于多模态的视觉特异性，忽视了多模态图像间的空间语义一致性；缺乏对融合和下游任务的统一建模，现有分割方法未将MMIF任务作为有效先验来提升MMIS任务性能。 </li>
-<li><strong>对比学习与语义一致性问题</strong>：现有自监督学习在对比学习中虽能区分各模态特征，但忽视了3D医学图像中<strong>空间语义特征的一致性</strong>，无法准确捕捉图像间的语义信息。 为解决上述问题，本文提出了一种用于3D语义分割驱动的多模态医学图像融合的嵌套自监督学习框架（NSLF）。 </li>
+<li><strong>对比学习与语义一致性问题</strong>：现有自监督学习在对比学习中虽能区分各模态特征，但忽视了3D医学图像中<strong>空间语义特征的一致性</strong>，无法准确捕捉图像间的语义信息。 为解决上述问题，本文提出了一种用于3D语义分割驱动的多模态医学图像融合的嵌套自监督学习框架（NSLF）。</li>
 </ol>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>融合方法</strong>：分为传统方法（如基于稀疏表示、多尺度变换）和深度学习方法（如基于CNN、AE）。现有方法在多模态医学图像融合（MMIF）和多模态医学图像分割（MMIS）中取得一定成果，但多针对2D图像，且难以有效捕捉全局依赖。</li>
@@ -756,12 +756,12 @@
 </ul>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><ul>
 <li><strong>数据集</strong>：使用了BraTS 2021挑战赛的开源多模态MRI数据集，包括训练集、验证集和测试集。</li>
-<li><strong>对比实验</strong>：在3D/2D多模态医学图像融合和分割任务中，将NSLF与11种最先进的融合方法和5种经典的基于U-Net的分割方法进行了对比。</li>
+<li><strong>对比实验</strong>：在3D&#x2F;2D多模态医学图像融合和分割任务中，将NSLF与11种最先进的融合方法和5种经典的基于U-Net的分割方法进行了对比。</li>
 <li><strong>评估指标</strong>：采用结构相似性指数（SSIM）、峰值信噪比（PSNR）、归一化互信息（NMI）、空间频率响应（SFR）、Dice系数、灵敏度（Sen）、特异性（Spe）和准确率（Acc）等指标对模型性能进行评估。</li>
 </ul>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-54-14.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-54-14.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-02_14-54-14"><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-53-38.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-53-38.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-02_14-53-38"></p>
 <ol>
-<li>二维/三维多模态医学图像融合（2-D/3-D MMIF）</li>
+<li>二维&#x2F;三维多模态医学图像融合（2-D&#x2F;3-D MMIF）</li>
 </ol>
 <ul>
 <li><strong>训练细节</strong>：使用PyTorch在4090 GPU上训练模型，对CU - Net和FCD应用Adam优化器，采用余弦退火策略调整学习率，权重衰减设为5e - 4，初始学习率1e - 4，最小学习率1e - 5。设置早停机制，耐心值为10。批大小为1，最大训练轮数为30。将所有输入图像中心裁剪为80<em>80</em>64后输入网络。</li>
@@ -773,7 +773,7 @@
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-55-15.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-55-15.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-02_14-55-15"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-55-45.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-55-45.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-02_14-55-45"></p>
 <ol>
-<li>二维/三维多模态医学图像分割（2-D/3-D MMIS）<ul>
+<li>二维&#x2F;三维多模态医学图像分割（2-D&#x2F;3-D MMIS）<ul>
 <li><strong>训练细节</strong>：同样使用PyTorch在4090 GPU上训练，训练设置与图像融合类似。输入图像中心裁剪为160<em>160</em>64后输入网络，在验证和测试阶段，根据增强肿瘤（ET）、肿瘤核心（TC）和整个肿瘤（WT）三个肿瘤区域的表现进行评估。</li>
 <li><strong>对比方法</strong>：与5种基于U - Net的先进方法（U - Net、VoxResNet、V - Net、Attention U - Net、U - Net++）进行比较，实验在相同条件下进行以确保公平性。</li>
 <li><strong>评估指标</strong>：使用骰子系数（Dice）、敏感性（Sen）、特异性（Spe）和准确性（Acc）四个指标评估脑肿瘤病变的三维分割性能。</li>
@@ -789,7 +789,7 @@
 </ul>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-56-18.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-56-18.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-02_14-56-18"></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-56-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-56-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-02_14-56-24"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种用于<strong>多模态医学图像融合（MMIF）和多模态医学图像分割（MMIS）</strong>任务的嵌套自监督学习框架（NSLF），主要结论如下：</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文提出了一种用于**多模态医学图像融合（MMIF）和多模态医学图像分割（MMIS）**任务的嵌套自监督学习框架（NSLF），主要结论如下：</p>
 <ol>
 <li><strong>方法概述</strong>：NSLF由特征提取器（CU - Net）、融合解码器（FCD）、几何匹配网络（GMN）和分割解码器（FSD）组成。通过对比学习从CU - Net获取源图像的特定多尺度特征，并将其输入到FCD、GMN和FSD中，以支持融合和分割任务。GMN对特征提取和融合网络施加几何一致性约束，确保框架提取的多模态特征具有一致的语义信息。</li>
 <li><strong>实验结果</strong>：综合实验结果验证了该方法在视觉效果和定量分析方面的优越性。在3 - D多模态脑MRI融合任务中，该方法在SSIM、PSNR、NMI和SFR等指标上优于11种先进的融合方法；在多模态脑MRI的多病灶3 - D分割任务中，该方法在Dice、Sen、Spe和Acc等指标上优于5种基于U - Net的经典分割方法。</li>
