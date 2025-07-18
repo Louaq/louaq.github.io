@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -719,51 +831,39 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="university-of-chinese-academy-of-sciences"><a class="markdownIt-Anchor" href="#university-of-chinese-academy-of-sciences"></a> University of Chinese Academy of Sciences</h2>
-<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> <strong>摘要：</strong></h2>
-<p>Multi-modal image segmentation is one of the core issues in computer vision. The main challenge lies in integrating common information between modalities while retaining specific patterns for each modality. Existing methods typically perform full fine-tuning on RGB-based pre-trained parameters to inherit the powerful representation of the foundation model. Although effective, such paradigm is not optimal due to weak transferability and scarce downstream data. Inspired by the recent success of prompt learning in language models, we propose the Grouping Prompt Tuning Framework(GoPT), which introduces explicit semantic grouping to learn modal-related prompts, adapting the frozen pre-trained foundation model to various downstream multi-modal segmentation tasks. Specifically, a class-aware uni-modal prompter is designed to balance intra- and inter-modal semantic propaga-<br />
-tion by grouping modality-specific class tokens, thereby improving the adaptability of spatial information. Furthermore,<br />
-an alignment-induced cross-modal prompter is introduced to aggregate class-aware representations and share prompt parameters among different modalities to assist in modeling common statistics. Extensive experiments show the superiority of our GoPT, which achieves SOTA performance on various downstream multi-modal image segmentation tasks by training only &lt; 1% model parameters.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> <strong>翻译：</strong></h2>
-<p>多模态图像分割技术是计算机视觉领域的关键挑战。这项技术的核心难点在于如何有效融合不同模态（如图像、红外等）的共性特征，同时保留各模态独有的特征模式。当前主流方法主要通过对基于可见光（RGB）预训练模型进行全局微调，以继承基础模型的强大特征提取能力。但这种方法存在明显局限：一方面模型可迁移性较弱，另一方面下游任务标注数据往往匮乏。受大语言模型中提示学习方法取得突破的启发，我们研发了分组提示调优框架（GoPT），通过语义分组机制学习模态专属提示，使冻结的预训练模型能灵活适配多种多模态分割任务。该框架包含两大创新模块：首先是<strong>类感知单模态提示器</strong>，通过聚类同类模态特征，在保留模态内独特空间信息的同时，促进跨模态语义对齐；其次是<strong>对齐引导的跨模态提示器</strong>，通过共享提示参数聚合不同模态的类特征表示，有效捕捉多模态数据的共有统计规律。实验数据显示，GoPT 仅需微调模型不足 1% 的参数，就在多个多模态图像分割基准任务中刷新了最高性能记录，展现出显著优势。</p>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> <strong>研究背景：</strong></h2>
-<ol>
-<li><strong>多模态融合的重要性</strong>：语义分割旨在为场景中每个像素分配语义类别，随着传感器技术发展，多模态融合用于分割成为图像解释核心问题。深度学习推动下，深度多模态融合展现出比单模态分割更显著的优势。</li>
-<li><strong>现存方法的挑战</strong>：现有多模态分割方法主要分为基于对齐和基于聚合的融合，但面临诸多挑战。一方面，不同成像机制的模态存在异质差距，基于对齐的融合因信息交换弱，常提供无效的跨模态融合；另一方面，不同模态有效信息不同，基于聚合的融合易忽略模态内传播，导致模态间知识共享和模态内信息处理失衡。</li>
-<li><strong>全微调方法的局限</strong>：多模态方法常采用基于RGB的预训练分割器，全微调虽有效，但效率低、参数存储负担大，且因样本标注有限，无法充分利用预训练模型知识获得通用表示。</li>
+        <h2 id="University-of-Chinese-Academy-of-Sciences"><a href="#University-of-Chinese-Academy-of-Sciences" class="headerlink" title="University of Chinese Academy of Sciences"></a>University of Chinese Academy of Sciences</h2><h2 id="摘要："><a href="#摘要：" class="headerlink" title="摘要："></a><strong>摘要：</strong></h2><p>Multi-modal image segmentation is one of the core issues in computer vision. The main challenge lies in integrating common information between modalities while retaining specific patterns for each modality. Existing methods typically perform full fine-tuning on RGB-based pre-trained parameters to inherit the powerful representation of the foundation model. Although effective, such paradigm is not optimal due to weak transferability and scarce downstream data. Inspired by the recent success of prompt learning in language models, we propose the Grouping Prompt Tuning Framework(GoPT), which introduces explicit semantic grouping to learn modal-related prompts, adapting the frozen pre-trained foundation model to various downstream multi-modal segmentation tasks. Specifically, a class-aware uni-modal prompter is designed to balance intra- and inter-modal semantic propaga-<br>tion by grouping modality-specific class tokens, thereby improving the adaptability of spatial information. Furthermore,<br>an alignment-induced cross-modal prompter is introduced to aggregate class-aware representations and share prompt parameters among different modalities to assist in modeling common statistics. Extensive experiments show the superiority of our GoPT, which achieves SOTA performance on various downstream multi-modal image segmentation tasks by training only &lt; 1% model parameters.</p>
+<h2 id="翻译："><a href="#翻译：" class="headerlink" title="翻译："></a><strong>翻译：</strong></h2><p>多模态图像分割技术是计算机视觉领域的关键挑战。这项技术的核心难点在于如何有效融合不同模态（如图像、红外等）的共性特征，同时保留各模态独有的特征模式。当前主流方法主要通过对基于可见光（RGB）预训练模型进行全局微调，以继承基础模型的强大特征提取能力。但这种方法存在明显局限：一方面模型可迁移性较弱，另一方面下游任务标注数据往往匮乏。受大语言模型中提示学习方法取得突破的启发，我们研发了分组提示调优框架（GoPT），通过语义分组机制学习模态专属提示，使冻结的预训练模型能灵活适配多种多模态分割任务。该框架包含两大创新模块：首先是<strong>类感知单模态提示器</strong>，通过聚类同类模态特征，在保留模态内独特空间信息的同时，促进跨模态语义对齐；其次是<strong>对齐引导的跨模态提示器</strong>，通过共享提示参数聚合不同模态的类特征表示，有效捕捉多模态数据的共有统计规律。实验数据显示，GoPT 仅需微调模型不足 1% 的参数，就在多个多模态图像分割基准任务中刷新了最高性能记录，展现出显著优势。</p>
+<h2 id="研究背景："><a href="#研究背景：" class="headerlink" title="研究背景："></a><strong>研究背景：</strong></h2><ol>
+<li><strong>多模态融合的重要性</strong>：语义分割旨在为场景中每个像素分配语义类别，随着传感器技术发展，多模态融合用于分割成为图像解释核心问题。深度学习推动下，深度多模态融合展现出比单模态分割更显著的优势。 </li>
+<li><strong>现存方法的挑战</strong>：现有多模态分割方法主要分为基于对齐和基于聚合的融合，但面临诸多挑战。一方面，不同成像机制的模态存在异质差距，基于对齐的融合因信息交换弱，常提供无效的跨模态融合；另一方面，不同模态有效信息不同，基于聚合的融合易忽略模态内传播，导致模态间知识共享和模态内信息处理失衡。 </li>
+<li><strong>全微调方法的局限</strong>：多模态方法常采用基于RGB的预训练分割器，全微调虽有效，但效率低、参数存储负担大，且因样本标注有限，无法充分利用预训练模型知识获得通用表示。 </li>
 </ol>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> <strong>研究现状：</strong></h2>
-<ul>
+<h2 id="研究现状："><a href="#研究现状：" class="headerlink" title="研究现状："></a><strong>研究现状：</strong></h2><ul>
 <li><strong>多模态图像分割主流方法</strong>：以深度多模态融合为主，旨在利用多数据源增强细粒度细节和像素级语义，主要分为基于对齐和基于聚合的融合方法。前者通过条件损失对齐子网络嵌入，后者运用特定算子组合多模态子网络。</li>
 <li><strong>模型训练方式</strong>：因缺乏大规模多模态训练集，现有方法通常先加载基于RGB的预训练模型参数，再在特定下游任务数据集上微调。</li>
 <li><strong>视觉提示学习应用</strong>：提示调优作为新范式，在自然语言处理中表现出色，近期也开始应用于视觉任务。</li>
 </ul>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> <strong>提出的模型：</strong></h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_14-56-04.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_14-56-04.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_14-56-04" /></p>
+<h2 id="提出的模型："><a href="#提出的模型：" class="headerlink" title="提出的模型："></a><strong>提出的模型：</strong></h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_14-56-04.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_14-56-04.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_14-56-04"></p>
 <p>本文提出了<strong>分组提示调优框架（Grouping Prompt Tuning Framework，GoPT）</strong>，用于<strong>多模态图像分割</strong>任务，以下是该模型的详细介绍：</p>
 <ol>
-<li><strong>核心思想</strong>：引入显式语义分组机制到提示学习中，通过冻结预训练的基础模型，仅微调少量视觉提示参数，使模型适应各种下游多模态分割任务，以解决现有方法在整合模态间信息和保留各模态特定模式方面的挑战。</li>
-<li><strong>整体架构</strong>
-<ul>
-<li><strong>输入处理</strong>：将RGB图像和辅助模态图像输入到补丁嵌入层，生成对应的RGB标记和辅助模态标记。</li>
-<li><strong>提示生成</strong>：把标记送入分组提示器，生成特定于模态的提示。</li>
-<li><strong>特征融合</strong>：将学习到的提示作为残差添加到原始RGB流中，再输入到基础模型的下一层。</li>
+<li><strong>核心思想</strong>：引入显式语义分组机制到提示学习中，通过冻结预训练的基础模型，仅微调少量视觉提示参数，使模型适应各种下游多模态分割任务，以解决现有方法在整合模态间信息和保留各模态特定模式方面的挑战。 </li>
+<li><strong>整体架构</strong>    <ul>
+<li><strong>输入处理</strong>：将RGB图像和辅助模态图像输入到补丁嵌入层，生成对应的RGB标记和辅助模态标记。    </li>
+<li><strong>提示生成</strong>：把标记送入分组提示器，生成特定于模态的提示。    </li>
+<li><strong>特征融合</strong>：将学习到的提示作为残差添加到原始RGB流中，再输入到基础模型的下一层。 </li>
 </ul>
 </li>
-<li><strong>主要组件</strong>
-<ul>
-<li><strong>类感知单模态提示器（Class-Aware Uni-Modal Prompter，CUP）</strong>：通过引入特定于模态的类标记，对辅助模态的视觉概念进行分层渐进分组，平衡模态内和模态间的语义传播，提高空间信息的适应性。</li>
-<li><strong>对齐诱导跨模态提示器（Alignment-Induced Cross-Modal Prompter，ACP）</strong>：根据显式分组的语义相似性，聚合辅助模态的类感知表示，将其他数据源的关键模式整合到RGB流中，生成新的跨模态对齐诱导提示，辅助建模模态公共统计信息。</li>
+<li><strong>主要组件</strong>    <ul>
+<li><strong>类感知单模态提示器（Class-Aware Uni-Modal Prompter，CUP）</strong>：通过引入特定于模态的类标记，对辅助模态的视觉概念进行分层渐进分组，平衡模态内和模态间的语义传播，提高空间信息的适应性。    </li>
+<li><strong>对齐诱导跨模态提示器（Alignment-Induced Cross-Modal Prompter，ACP）</strong>：根据显式分组的语义相似性，聚合辅助模态的类感知表示，将其他数据源的关键模式整合到RGB流中，生成新的跨模态对齐诱导提示，辅助建模模态公共统计信息。 </li>
 </ul>
 </li>
-<li><strong>优化策略</strong>：使用基于RGB的预训练基础模型的参数初始化多模态分割模型，在提示调优过程中，仅更新分组提示器和分割头的梯度值，以少量提示参数促进模型快速收敛，并有效继承预训练基础模型的先验知识。</li>
-<li><strong>实验验证</strong>：在多个下游多模态图像分割任务（RGB - D、RGB - T、RGB - SAR分割）上进行了广泛实验，结果表明GoPT仅训练不到1%的模型参数，就能在各项指标上取得优于现有方法的性能，展现出高效性和优越性。</li>
+<li><strong>优化策略</strong>：使用基于RGB的预训练基础模型的参数初始化多模态分割模型，在提示调优过程中，仅更新分组提示器和分割头的梯度值，以少量提示参数促进模型快速收敛，并有效继承预训练基础模型的先验知识。 </li>
+<li><strong>实验验证</strong>：在多个下游多模态图像分割任务（RGB - D、RGB - T、RGB - SAR分割）上进行了广泛实验，结果表明GoPT仅训练不到1%的模型参数，就能在各项指标上取得优于现有方法的性能，展现出高效性和优越性。 </li>
 </ol>
-<h2 id="实验过程与sota方法的对比"><a class="markdownIt-Anchor" href="#实验过程与sota方法的对比"></a> <strong>实验过程（与SOTA方法的对比）：</strong></h2>
-<p>数据集：NYUDv2、SUN RGB-D、MFNet、PST900、WHU-OS</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-02-29.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-02-29.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_15-02-29" /></p>
-<h2 id="实验过程消融实验"><a class="markdownIt-Anchor" href="#实验过程消融实验"></a> <strong>实验过程（消融实验）：</strong></h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-05-05.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-05-05.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_15-05-05" /></p>
+<h2 id="实验过程（与SOTA方法的对比）："><a href="#实验过程（与SOTA方法的对比）：" class="headerlink" title="实验过程（与SOTA方法的对比）："></a><strong>实验过程（与SOTA方法的对比）：</strong></h2><p>数据集：NYUDv2、SUN RGB-D、MFNet、PST900、WHU-OS</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-02-29.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-02-29.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_15-02-29"></p>
+<h2 id="实验过程（消融实验）："><a href="#实验过程（消融实验）：" class="headerlink" title="实验过程（消融实验）："></a><strong>实验过程（消融实验）：</strong></h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-05-05.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-05-05.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_15-05-05"></p>
 <p>通过消融实验，证明了GoPT已经达到了SOTA的标准</p>
 <ul>
 <li>Effectiveness of Prompter Structure  （<strong>table 4，row 7 and row 8</strong>）</li>
@@ -772,7 +872,7 @@ an alignment-induced cross-modal prompter is introduced to aggregate class-aware
 <li>Hard vs. Soft Assignment                <strong>（Figure 7）</strong></li>
 </ul>
 <p><strong>结论：</strong></p>
-<p>作者提出了用于<strong>多模态图像分割</strong>的参数高效视觉调优框架GoPT，通过在提示学习中引入显式语义分组，使冻结的预训练基础模型适应各种下游多模态分割任务。具体而言，设计了类感知单模态提示器（CUP），通过对特定模态的类令牌进行分组，平衡了模态内和模态间的语义传播；引入了对齐诱导的跨模态提示器（ACP），聚合类感知表示并辅助建模公共统计信息。大量下游任务实验表明，GoPT在准确性和效率上达到了最佳平衡，仅训练不到1%的模型参数，就在多个下游多模态图像分割任务中取得了SOTA性能，证明了该框架的优越性和泛化性。</p>
+<p>作者提出了用于<strong>多模态图像分割</strong>的参数高效视觉调优框架GoPT，通过在提示学习中引入显式语义分组，使冻结的预训练基础模型适应各种下游多模态分割任务。具体而言，设计了类感知单模态提示器（CUP），通过对特定模态的类令牌进行分组，平衡了模态内和模态间的语义传播；引入了对齐诱导的跨模态提示器（ACP），聚合类感知表示并辅助建模公共统计信息。大量下游任务实验表明，GoPT在准确性和效率上达到了最佳平衡，仅训练不到1%的模型参数，就在多个下游多模态图像分割任务中取得了SOTA性能，证明了该框架的优越性和泛化性。 </p>
 
       </div>
       <div class="post-tags-categories">
@@ -825,10 +925,8 @@ an alignment-induced cross-modal prompter is introduced to aggregate class-aware
       </div>
       
       <!-- <div class="content">
-         中科院
- 摘要：
-
-For more efficient generalization to unseen domai
+        中科院摘要：
+For more efficient generalization to unseen domains(c
       </div> -->
     </a>
   </div>
@@ -982,7 +1080,7 @@ For more efficient generalization to unseen domai
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#university-of-chinese-academy-of-sciences"><span class="toc-text"> University of Chinese Academy of Sciences</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E4%B8%8Esota%E6%96%B9%E6%B3%95%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text"> 实验过程（与SOTA方法的对比）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="toc-text"> 实验过程（消融实验）：</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#University-of-Chinese-Academy-of-Sciences"><span class="toc-text">University of Chinese Academy of Sciences</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81%EF%BC%9A"><span class="toc-text">摘要：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91%EF%BC%9A"><span class="toc-text">翻译：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF%EF%BC%9A"><span class="toc-text">研究背景：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6%EF%BC%9A"><span class="toc-text">研究现状：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="toc-text">提出的模型：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E4%B8%8ESOTA%E6%96%B9%E6%B3%95%E7%9A%84%E5%AF%B9%E6%AF%94%EF%BC%89%EF%BC%9A"><span class="toc-text">实验过程（与SOTA方法的对比）：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%EF%BC%88%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C%EF%BC%89%EF%BC%9A"><span class="toc-text">实验过程（消融实验）：</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1540,7 +1638,7 @@ For more efficient generalization to unseen domai
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2188,5 +2286,20 @@ For more efficient generalization to unseen domai
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

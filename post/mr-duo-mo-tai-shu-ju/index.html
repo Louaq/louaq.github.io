@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -723,10 +835,8 @@
 <p>.nii数据的预处理，参考F2Net</p>
 </blockquote>
 <p>转换后的.npy文件数量与原始.nii文件数量的关系如下：</p>
-<h3 id="数量关系说明"><a class="markdownIt-Anchor" href="#数量关系说明"></a> 数量关系说明</h3>
-<ol>
-<li>
-<p><strong>输入.nii文件</strong>：每个病例包含5个.nii文件</p>
+<h3 id="数量关系说明"><a href="#数量关系说明" class="headerlink" title="数量关系说明"></a>数量关系说明</h3><ol>
+<li><p><strong>输入.nii文件</strong>：每个病例包含5个.nii文件</p>
 <ul>
 <li>FLAIR模态 (flair.nii)</li>
 <li>T1模态 (t1.nii)</li>
@@ -735,18 +845,14 @@
 <li>分割掩码 (seg.nii)</li>
 </ul>
 </li>
-<li>
-<p><strong>输出.npy文件</strong>：每个.nii文件中包含多个切片(通常约155个轴向切片)，但代码只处理<strong>包含肿瘤区域</strong>的切片</p>
+<li><p><strong>输出.npy文件</strong>：每个.nii文件中包含多个切片(通常约155个轴向切片)，但代码只处理<strong>包含肿瘤区域</strong>的切片</p>
 </li>
-<li>
-<p><strong>转换关系公式</strong>：</p>
+<li><p><strong>转换关系公式</strong>：</p>
 <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.npy文件总数 <span class="operator">=</span> <span class="number">2</span> × 所有病例中包含肿瘤的切片总数</span><br></pre></td></tr></table></figure>
 </li>
-<li>
-<p><strong>具体说明</strong>：</p>
+<li><p><strong>具体说明</strong>：</p>
 <ul>
-<li>每个包含肿瘤的切片会生成2个.npy文件：
-<ul>
+<li>每个包含肿瘤的切片会生成2个.npy文件：<ul>
 <li>一个在trainImage文件夹(四模态图像数据)</li>
 <li>一个在trainGt文件夹(对应分割掩码)</li>
 </ul>
@@ -755,13 +861,11 @@
 </ul>
 </li>
 </ol>
-<h3 id="举例说明"><a class="markdownIt-Anchor" href="#举例说明"></a> 举例说明</h3>
-<p>假设您有100个病例，每个病例的MRI体积包含155个切片，而每个病例平均有40个切片包含肿瘤区域：</p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>假设您有100个病例，每个病例的MRI体积包含155个切片，而每个病例平均有40个切片包含肿瘤区域：</p>
 <ul>
 <li>原始.nii文件总数 = 100个病例 × 5个模态文件 = 500个文件</li>
 <li>包含肿瘤的切片总数 = 100个病例 × 40个包含肿瘤的切片 = 4,000个切片</li>
-<li>生成的.npy文件总数 = 4,000个切片 × 2个文件/切片 = 8,000个文件
-<ul>
+<li>生成的.npy文件总数 = 4,000个切片 × 2个文件/切片 = 8,000个文件<ul>
 <li>trainImage文件夹: 4,000个文件</li>
 <li>trainGt文件夹: 4,000个文件</li>
 </ul>
@@ -821,8 +925,7 @@
       
       <!-- <div class="content">
         作者单位
- 摘要
-The precise segmentation of different brain regions
+摘要The precise segmentation of different brain regions a
       </div> -->
     </a>
   </div>
@@ -844,8 +947,7 @@ The precise segmentation of different brain regions
         
 南京理工大学、东南大学
 
- 摘要
-Automated brain tumor segmentation is cruc
+摘要Automated brain tumor segmentation is crucia
       </div> -->
     </a>
   </div>
@@ -980,7 +1082,7 @@ Automated brain tumor segmentation is cruc
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%AF%B4%E6%98%8E"><span class="toc-text"> 数量关系说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text"> 举例说明</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%AF%B4%E6%98%8E"><span class="toc-text">数量关系说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">举例说明</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1538,7 +1640,7 @@ Automated brain tumor segmentation is cruc
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2186,5 +2288,20 @@ Automated brain tumor segmentation is cruc
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

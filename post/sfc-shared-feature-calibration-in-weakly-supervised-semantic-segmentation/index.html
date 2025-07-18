@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -694,7 +806,7 @@
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 8分钟 |
           </span>
   
           
@@ -719,58 +831,48 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
-<p>Image-level weakly supervised semantic segmentation has received increasing attention due to its low annotation cost.<br />
-Existing methods mainly rely on <strong>Class Activation Mapping (CAM)</strong> to obtain pseudo-labels for training semantic segmentation models. In this work, we are the first to demonstrate that long-tailed distribution in training data can cause the CAM calculated through classifier weights over-activated for head classes and under-activated for tail classes due to the shared features among head- and tail- classes. This degrades pseudo-label quality and further influences final semantic segmentation performance. To address this issue, we propose a Shared Feature Calibration (SFC) method for CAM generation. Specifically, we leverage the class prototypes that carry positive shared features and propose a Multi-Scaled Distribution-Weighted (MSDW) consistency loss for narrowing the gap between the CAMs generated through classifier weights and class prototypes during training. The MSDW loss counterbalances over-activation and under-activation by calibrating the shared features in head-/tail-class classifier weights. Experimental results show that our SFC significantly improves CAM boundaries and achieves new state-of-the-art performances. The project is available at <a target="_blank" rel="noopener" href="https://github.com/Barrett-python/SFC">https://github.com/Barrett-python/SFC</a>.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
-<p>图像级弱监督语义分割因其标注成本低而受到越来越多的关注。现有方法主要依靠类激活映射(Class Activation Mapping, CAM)获取伪标签，用于训练语义分割模型。在这项工作中，我们首次证明了训练数据中的长尾分布会导致通过分类器权重计算的CAM由于头类和尾类之间的共享特征而对头类过度激活而对尾类激活不足。这降低了伪标签的质量，并进一步影响最终的语义分割性能。为了解决这一问题，我们提出了一种用于CAM生成的共享特征校准(SFC)方法。具体来说，我们利用带有正共享特征的类原型，并提出了多尺度分布加权(MSDW)一致性损失，以缩小训练期间通过分类器权重和类原型生成的cam之间的差距。MSDW损失通过校准头/尾类分类器权重中的共享特征来平衡过度激活和欠激活。实验结果表明，我们的SFC显著改善了CAM边界，实现了新的最先进的性能。该项目可在<a target="_blank" rel="noopener" href="https://github.com/Barrett-python/SFC%E4%B8%8A%E8%8E%B7%E5%BE%97%E3%80%82">https://github.com/Barrett-python/SFC上获得。</a></p>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
-<p><strong>图像级弱监督语义分割（WSSS）<strong>因标注成本低而备受关注，现有方法多依赖</strong>类激活映射</strong>（CAM）生成伪标签来训练语义分割模型。然而，研究发现WSSS的训练数据呈长尾分布，这使得头类和尾类之间的共享特征成分在头类分类器权重中倾向于为正，在尾类分类器权重中倾向于为负。 具体而言，头类权重接收的正梯度多于负梯度，尾类权重则相反。这导致包含共享特征的像素被头类分类器权重激活，而包含尾类特征的像素未被尾类权重激活，使得通过分类器权重计算的CAM对头部类过度激活，对尾部类激活不足，进而降低了伪标签的质量，影响了最终的WSSS性能。 目前，尚未有工作针对长尾分布训练数据导致的过激活和欠激活问题进行研究。因此，本文旨在分析该问题产生的原因，并提出共享特征校准（SFC）方法来解决这一问题，以提高CAM质量和WSSS性能。</p>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
-<ul>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Image-level weakly supervised semantic segmentation has received increasing attention due to its low annotation cost.<br>Existing methods mainly rely on <strong>Class Activation Mapping (CAM)</strong> to obtain pseudo-labels for training semantic segmentation models. In this work, we are the first to demonstrate that long-tailed distribution in training data can cause the CAM calculated through classifier weights over-activated for head classes and under-activated for tail classes due to the shared features among head- and tail- classes. This degrades pseudo-label quality and further influences final semantic segmentation performance. To address this issue, we propose a Shared Feature Calibration (SFC) method for CAM generation. Specifically, we leverage the class prototypes that carry positive shared features and propose a Multi-Scaled Distribution-Weighted (MSDW) consistency loss for narrowing the gap between the CAMs generated through classifier weights and class prototypes during training. The MSDW loss counterbalances over-activation and under-activation by calibrating the shared features in head-/tail-class classifier weights. Experimental results show that our SFC significantly improves CAM boundaries and achieves new state-of-the-art performances. The project is available at <a target="_blank" rel="noopener" href="https://github.com/Barrett-python/SFC">https://github.com/Barrett-python/SFC</a>.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>图像级弱监督语义分割因其标注成本低而受到越来越多的关注。现有方法主要依靠类激活映射(Class Activation Mapping, CAM)获取伪标签，用于训练语义分割模型。在这项工作中，我们首次证明了训练数据中的长尾分布会导致通过分类器权重计算的CAM由于头类和尾类之间的共享特征而对头类过度激活而对尾类激活不足。这降低了伪标签的质量，并进一步影响最终的语义分割性能。为了解决这一问题，我们提出了一种用于CAM生成的共享特征校准(SFC)方法。具体来说，我们利用带有正共享特征的类原型，并提出了多尺度分布加权(MSDW)一致性损失，以缩小训练期间通过分类器权重和类原型生成的cam之间的差距。MSDW损失通过校准头/尾类分类器权重中的共享特征来平衡过度激活和欠激活。实验结果表明，我们的SFC显著改善了CAM边界，实现了新的最先进的性能。该项目可在<a target="_blank" rel="noopener" href="https://github.com/Barrett-python/SFC上获得。">https://github.com/Barrett-python/SFC上获得。</a></p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p><strong>图像级弱监督语义分割（WSSS）</strong>因标注成本低而备受关注，现有方法多依赖<strong>类激活映射</strong>（CAM）生成伪标签来训练语义分割模型。然而，研究发现WSSS的训练数据呈长尾分布，这使得头类和尾类之间的共享特征成分在头类分类器权重中倾向于为正，在尾类分类器权重中倾向于为负。 具体而言，头类权重接收的正梯度多于负梯度，尾类权重则相反。这导致包含共享特征的像素被头类分类器权重激活，而包含尾类特征的像素未被尾类权重激活，使得通过分类器权重计算的CAM对头部类过度激活，对尾部类激活不足，进而降低了伪标签的质量，影响了最终的WSSS性能。 目前，尚未有工作针对长尾分布训练数据导致的过激活和欠激活问题进行研究。因此，本文旨在分析该问题产生的原因，并提出共享特征校准（SFC）方法来解决这一问题，以提高CAM质量和WSSS性能。</p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>弱监督语义分割（WSSS）</strong>：伪标签生成基于注意力映射，关键在于生成高质量的<strong>类激活映射</strong>（CAM）。已有方法采用启发式策略、自监督学习、对比学习等生成CAM，还使用<strong>CRF、IRN等方法对初始映射进行细化</strong>。此外，视觉-语言预训练成为解决下游视觉 - 语言任务（包括WSSS）的流行方法。</li>
 <li><strong>分类中的共享特征</strong>：分类是语义分割的上游任务，现有方法多提取判别性部分特征进行分类，避免共享特征影响分类性能。而WSSS不能仅依赖判别性特征构建完整CAM，部分方法冻结预训练编码器的若干层以避免遗忘非判别性特征。</li>
 </ul>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_13-57-44.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_13-57-44.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_13-57-44" /></p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_13-57-44.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_13-57-44.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_13-57-44"></p>
 <p>本文提出了一种名为<strong>共享特征校准</strong>（<strong>Shared Feature Calibration，SFC</strong>）的方法，用于解决弱监督语义分割（Weakly Supervised Semantic Segmentation，WSSS）中因训练数据<strong>长尾分布</strong>导致的类激活映射（Class Activation Mapping，CAM）过激活和欠激活问题。以下是该模型的详细介绍：</p>
 <ol>
-<li><strong>模型背景</strong>：图像级弱监督语义分割因标注成本低而受到广泛关注。现有方法主要依赖CAM获取伪标签来训练语义分割模型，但训练数据的长尾分布会使头类别的CAM过激活，尾类别的CAM欠激活，从而降低伪标签质量，影响最终分割性能。</li>
-<li><strong>模型结构</strong>    - <strong>图像库重采样（Image Bank Re-sampling，IBR）</strong>：维护一个图像库，存储每个前景类别的最新图像。在训练时，从图像库中均匀采样图像并与原始训练批次拼接，以增加尾类别样本的采样频率，有效校准尾类别分类器权重中的共享特征。
-<ul>
-<li><strong>多尺度分布加权一致性损失（Multi-Scaled Distribution-Weighted，MSDW）</strong>：提出两个分布加权一致性损失<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><msub><mi>P</mi><mrow><mi>D</mi><mi>W</mi></mrow></msub></msub></mrow><annotation encoding="application/x-tex">L_{P_{DW}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.933635em;vertical-align:-0.250305em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3567071428571427em;margin-left:-0.13889em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.14329285714285717em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.250305em;"><span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>L</mi><msub><mi>W</mi><mrow><mi>D</mi><mi>W</mi></mrow></msub></msub></mrow><annotation encoding="application/x-tex">L_{W_{DW}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.933635em;vertical-align:-0.250305em;"></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3448em;"><span style="top:-2.3567071428571427em;margin-left:-0.13889em;margin-right:0.07142857142857144em;"><span class="pstrut" style="height:2.5em;"></span><span class="sizing reset-size3 size1 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.02778em;">D</span><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.14329285714285717em;"><span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.250305em;"><span></span></span></span></span></span></span></span></span></span>，分别用于缩小原型CAM和分类器权重CAM之间的差距，以及缩小原始图像和下采样图像的分类器权重CAM之间的差距。通过计算缩放分布系数<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>D</mi><msub><mi>C</mi><mi>c</mi></msub></mrow><annotation encoding="application/x-tex">DC_c</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.83333em;vertical-align:-0.15em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:-0.07153em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">c</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>对一致性损失进行重新加权，使总需求较高的类别分配更高的一致性损失。</li>
+<li><strong>模型背景</strong>：图像级弱监督语义分割因标注成本低而受到广泛关注。现有方法主要依赖CAM获取伪标签来训练语义分割模型，但训练数据的长尾分布会使头类别的CAM过激活，尾类别的CAM欠激活，从而降低伪标签质量，影响最终分割性能。 </li>
+<li><strong>模型结构</strong>    - <strong>图像库重采样（Image Bank Re-sampling，IBR）</strong>：维护一个图像库，存储每个前景类别的最新图像。在训练时，从图像库中均匀采样图像并与原始训练批次拼接，以增加尾类别样本的采样频率，有效校准尾类别分类器权重中的共享特征。   <ul>
+<li><strong>多尺度分布加权一致性损失（Multi-Scaled Distribution-Weighted，MSDW）</strong>：提出两个分布加权一致性损失$L<em>{P</em>{DW}}<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.452ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="2.149ex" role="img" focusable="false" viewBox="0 -750 1000 950"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">和</text></g></g></g></svg></mjx-container>L<em>{W</em>{DW}}<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.452ex;" xmlns="http://www.w3.org/2000/svg" width="146.342ex" height="2.149ex" role="img" focusable="false" viewBox="0 -750 64683 950"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><text data-variant="italic" transform="scale(1,-1)" font-size="884px" font-family="serif" font-style="italic">，</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">分</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">别</text></g><g data-mml-node="mi" transform="translate(3000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">用</text></g><g data-mml-node="mi" transform="translate(4000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">于</text></g><g data-mml-node="mi" transform="translate(5000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">缩</text></g><g data-mml-node="mi" transform="translate(6000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">小</text></g><g data-mml-node="mi" transform="translate(7000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">原</text></g><g data-mml-node="mi" transform="translate(8000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">型</text></g><g data-mml-node="mi" transform="translate(9000,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(9760,0)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(10510,0)"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="mi" transform="translate(11561,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">和</text></g><g data-mml-node="mi" transform="translate(12561,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">分</text></g><g data-mml-node="mi" transform="translate(13561,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">类</text></g><g data-mml-node="mi" transform="translate(14561,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">器</text></g><g data-mml-node="mi" transform="translate(15561,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">权</text></g><g data-mml-node="mi" transform="translate(16561,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">重</text></g><g data-mml-node="mi" transform="translate(17561,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(18321,0)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(19071,0)"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="mi" transform="translate(20122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">之</text></g><g data-mml-node="mi" transform="translate(21122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g><g data-mml-node="mi" transform="translate(22122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">的</text></g><g data-mml-node="mi" transform="translate(23122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">差</text></g><g data-mml-node="mi" transform="translate(24122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">距</text></g><g data-mml-node="mi" transform="translate(25122,0)"><text data-variant="italic" transform="scale(1,-1)" font-size="884px" font-family="serif" font-style="italic">，</text></g><g data-mml-node="mi" transform="translate(26122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">以</text></g><g data-mml-node="mi" transform="translate(27122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">及</text></g><g data-mml-node="mi" transform="translate(28122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">缩</text></g><g data-mml-node="mi" transform="translate(29122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">小</text></g><g data-mml-node="mi" transform="translate(30122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">原</text></g><g data-mml-node="mi" transform="translate(31122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">始</text></g><g data-mml-node="mi" transform="translate(32122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">图</text></g><g data-mml-node="mi" transform="translate(33122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">像</text></g><g data-mml-node="mi" transform="translate(34122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">和</text></g><g data-mml-node="mi" transform="translate(35122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">下</text></g><g data-mml-node="mi" transform="translate(36122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">采</text></g><g data-mml-node="mi" transform="translate(37122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">样</text></g><g data-mml-node="mi" transform="translate(38122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">图</text></g><g data-mml-node="mi" transform="translate(39122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">像</text></g><g data-mml-node="mi" transform="translate(40122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">的</text></g><g data-mml-node="mi" transform="translate(41122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">分</text></g><g data-mml-node="mi" transform="translate(42122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">类</text></g><g data-mml-node="mi" transform="translate(43122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">器</text></g><g data-mml-node="mi" transform="translate(44122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">权</text></g><g data-mml-node="mi" transform="translate(45122,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">重</text></g><g data-mml-node="mi" transform="translate(46122,0)"><path data-c="1D436" d="M50 252Q50 367 117 473T286 641T490 704Q580 704 633 653Q642 643 648 636T656 626L657 623Q660 623 684 649Q691 655 699 663T715 679T725 690L740 705H746Q760 705 760 698Q760 694 728 561Q692 422 692 421Q690 416 687 415T669 413H653Q647 419 647 422Q647 423 648 429T650 449T651 481Q651 552 619 605T510 659Q484 659 454 652T382 628T299 572T226 479Q194 422 175 346T156 222Q156 108 232 58Q280 24 350 24Q441 24 512 92T606 240Q610 253 612 255T628 257Q648 257 648 248Q648 243 647 239Q618 132 523 55T319 -22Q206 -22 128 53T50 252Z"></path></g><g data-mml-node="mi" transform="translate(46882,0)"><path data-c="1D434" d="M208 74Q208 50 254 46Q272 46 272 35Q272 34 270 22Q267 8 264 4T251 0Q249 0 239 0T205 1T141 2Q70 2 50 0H42Q35 7 35 11Q37 38 48 46H62Q132 49 164 96Q170 102 345 401T523 704Q530 716 547 716H555H572Q578 707 578 706L606 383Q634 60 636 57Q641 46 701 46Q726 46 726 36Q726 34 723 22Q720 7 718 4T704 0Q701 0 690 0T651 1T578 2Q484 2 455 0H443Q437 6 437 9T439 27Q443 40 445 43L449 46H469Q523 49 533 63L521 213H283L249 155Q208 86 208 74ZM516 260Q516 271 504 416T490 562L463 519Q447 492 400 412L310 260L413 259Q516 259 516 260Z"></path></g><g data-mml-node="mi" transform="translate(47632,0)"><path data-c="1D440" d="M289 629Q289 635 232 637Q208 637 201 638T194 648Q194 649 196 659Q197 662 198 666T199 671T201 676T203 679T207 681T212 683T220 683T232 684Q238 684 262 684T307 683Q386 683 398 683T414 678Q415 674 451 396L487 117L510 154Q534 190 574 254T662 394Q837 673 839 675Q840 676 842 678T846 681L852 683H948Q965 683 988 683T1017 684Q1051 684 1051 673Q1051 668 1048 656T1045 643Q1041 637 1008 637Q968 636 957 634T939 623Q936 618 867 340T797 59Q797 55 798 54T805 50T822 48T855 46H886Q892 37 892 35Q892 19 885 5Q880 0 869 0Q864 0 828 1T736 2Q675 2 644 2T609 1Q592 1 592 11Q592 13 594 25Q598 41 602 43T625 46Q652 46 685 49Q699 52 704 61Q706 65 742 207T813 490T848 631L654 322Q458 10 453 5Q451 4 449 3Q444 0 433 0Q418 0 415 7Q413 11 374 317L335 624L267 354Q200 88 200 79Q206 46 272 46H282Q288 41 289 37T286 19Q282 3 278 1Q274 0 267 0Q265 0 255 0T221 1T157 2Q127 2 95 1T58 0Q43 0 39 2T35 11Q35 13 38 25T43 40Q45 46 65 46Q135 46 154 86Q158 92 223 354T289 629Z"></path></g><g data-mml-node="mi" transform="translate(48683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">之</text></g><g data-mml-node="mi" transform="translate(49683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">间</text></g><g data-mml-node="mi" transform="translate(50683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">的</text></g><g data-mml-node="mi" transform="translate(51683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">差</text></g><g data-mml-node="mi" transform="translate(52683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">距</text></g><g data-mml-node="TeXAtom" data-mjx-texclass="ORD" transform="translate(53683,0)"><g data-mml-node="mo"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">。</text></g></g><g data-mml-node="mi" transform="translate(54683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">通</text></g><g data-mml-node="mi" transform="translate(55683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">过</text></g><g data-mml-node="mi" transform="translate(56683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">计</text></g><g data-mml-node="mi" transform="translate(57683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">算</text></g><g data-mml-node="mi" transform="translate(58683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">缩</text></g><g data-mml-node="mi" transform="translate(59683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">放</text></g><g data-mml-node="mi" transform="translate(60683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">分</text></g><g data-mml-node="mi" transform="translate(61683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">布</text></g><g data-mml-node="mi" transform="translate(62683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">系</text></g><g data-mml-node="mi" transform="translate(63683,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">数</text></g></g></g></svg></mjx-container>DC_c$对一致性损失进行重新加权，使总需求较高的类别分配更高的一致性损失。</li>
 </ul>
 </li>
-<li><strong>模型推理</strong>：最终的CAM通过将分类器权重CAM和原型CAM相加得到，即<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><msub><mi>M</mi><mrow><mi>f</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi>l</mi></mrow></msub><msub><mo stretchy="false">)</mo><mover accent="true"><mi>c</mi><mo>~</mo></mover></msub><mo>=</mo><mo stretchy="false">(</mo><msub><mi>M</mi><mi>W</mi></msub><mo stretchy="false">(</mo><mi>F</mi><mo separator="true">,</mo><mi>W</mi><mo separator="true">,</mo><mi>I</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">)</mo><mover accent="true"><mi>c</mi><mo>~</mo></mover></msub><mo>+</mo><mo stretchy="false">(</mo><msub><mi>M</mi><mi>P</mi></msub><mo stretchy="false">(</mo><mi>F</mi><mo separator="true">,</mo><mi>P</mi><mo stretchy="false">)</mo><msub><mo stretchy="false">)</mo><mover accent="true"><mi>c</mi><mo>~</mo></mover></msub></mrow><annotation encoding="application/x-tex">(M_{final})_{\tilde{c}} = (M_{W}(F, W, I))_{\tilde{c}} + (M_{P}(F, P))_{\tilde{c}}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.10764em;">f</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight" style="margin-right:0.01968em;">l</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31750199999999995em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord accent mtight"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6678599999999999em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">c</span></span></span><span style="top:-3.0500000000000003em;"><span class="pstrut" style="height:2.7em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord mtight">~</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">W</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">W</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mclose">)</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31750199999999995em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord accent mtight"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6678599999999999em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">c</span></span></span><span style="top:-3.0500000000000003em;"><span class="pstrut" style="height:2.7em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord mtight">~</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10903em;">M</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.32833099999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.10903em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.13889em;">P</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mclose">)</span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31750199999999995em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord accent mtight"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6678599999999999em;"><span style="top:-2.7em;"><span class="pstrut" style="height:2.7em;"></span><span class="mord mtight"><span class="mord mathnormal mtight">c</span></span></span><span style="top:-3.0500000000000003em;"><span class="pstrut" style="height:2.7em;"></span><span class="accent-body" style="left:-0.19444em;"><span class="mord mtight">~</span></span></span></span></span></span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，共同解决过激活和欠激活问题。</li>
-<li><strong>实验结果</strong>：在PASCAL VOC 2012和MS COCO 2014两个基准数据集上进行实验，结果表明SFC方法显著提高了CAM的边界质量，在弱监督语义分割任务中取得了新的最先进性能。 综上所述，SFC方法通过图像库重采样和多尺度分布加权一致性损失，有效解决了长尾分布下共享特征导致的CAM过激活和欠激活问题，提高了弱监督语义分割的性能。</li>
+<li><strong>模型推理</strong>：最终的CAM通过将分类器权重CAM和原型CAM相加得到，即$(M<em>{final})</em>{\tilde{c}} = (M<em>{W}(F, W, I))</em>{\tilde{c}} + (M<em>{P}(F, P))</em>{\tilde{c}}$，共同解决过激活和欠激活问题。 </li>
+<li><strong>实验结果</strong>：在PASCAL VOC 2012和MS COCO 2014两个基准数据集上进行实验，结果表明SFC方法显著提高了CAM的边界质量，在弱监督语义分割任务中取得了新的最先进性能。 综上所述，SFC方法通过图像库重采样和多尺度分布加权一致性损失，有效解决了长尾分布下共享特征导致的CAM过激活和欠激活问题，提高了弱监督语义分割的性能。 </li>
 </ol>
-<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
-<blockquote>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
 <p>数据集：PASCAL VOC 2021、MS COCO 2014</p>
 </blockquote>
 <ul>
 <li><strong>伪标签质量比较</strong>：评估伪标签生成过程中中间和最终结果的质量。比较分类模型生成的初始CAM、经过CRF和IRN后处理的CAM。实验结果表明，SFC生成的CAM明显优于以往方法，在PASCAL VOC数据集上，SFC的CAM比现有方法高2.6%；经过CRF处理后mIoU达到69.4%，再经过IRN处理后mIoU提高到73.7%，比AMN方法高1.5%。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-01-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-01-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-01-54" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-01-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-01-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-01-54"></p>
 <ul>
 <li><strong>弱监督语义分割性能比较</strong>：将经过CRF和IRN后处理的伪掩码作为真实标签，以全监督方式训练语义分割模型。在PASCAL VOC 2012的验证集和测试集上，使用ImageNet预训练骨干网络，SFC方法的mIoU分别达到71.2%和72.5%，优于仅使用图像级标签或同时使用图像级标签和显著性图的其他弱监督语义分割方法。在MS COCO 2014验证集上，使用ResNet101骨干网络，SFC方法的mIoU达到46.8%，比AMN方法高2.1%。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-02-00.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-02-00.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-02-00" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-03-21.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-03-21.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-03-21" /></p>
-<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）🥇</h2>
-<ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-02-00.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-02-00.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-02-00"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-03-21.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-03-21.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-03-21"></p>
+<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><ul>
 <li><strong>SFC组件有效性验证</strong>：验证图像库重采样（IBR）和多尺度分布加权（MSDW）一致性损失（包括LP DW和LW DW）的有效性。结果表明，IBR可提高分类器权重CAM的mIoU，增加尾部类别的采样频率能提升LMSDW的有效性；LW DW可增强LP DW带来的性能提升，但单独使用LW DW无法校准下采样特征空间中的共享特征，性能会显著下降。</li>
 <li><strong>DC系数有效性研究</strong>：研究式（6）中DC系数的有效性。结果显示，DC系数能有效调整每个类别的一致性损失权重，带来显著的性能提升。</li>
 <li><strong>CAM组合性能比较</strong>：比较推理时单独使用MW、MP和组合使用Mfinal的性能。结果表明，组合使用Mfinal的性能最高，说明在SFC中用MP补充MW效果更好。</li>
 <li><strong>不同类别集性能增益分析</strong>：分析有无DC系数时不同类别集的平均性能增益。结果显示，使用DC系数时，头部和尾部类别能获得更多的mIoU增益。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-04-01.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-04-01.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-04-01" /></p>
-<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
-<p>作者得出以下结论：</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-04-01.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-10_14-04-01.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-04-10_14-04-01"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者得出以下结论：</p>
 <ol>
 <li>首次指出在长尾场景下，<strong>头类和尾类的共享特征</strong>会使头类的分类器权重生成的类激活映射（CAM）扩大，尾类的CAM缩小，导致伪标签质量下降，影响弱监督语义分割（WSSS）最终性能。</li>
 <li>提出共享特征校准（SFC）方法，通过图像库重采样（IBR）和多尺度分布加权（MSDW）一致性损失，平衡不同分类器权重中的共享特征比例，避免共享特征导致的<strong>过激活和欠激活</strong>问题。</li>
-<li>实验表明，SFC显著改善了CAM边界，在<strong>Pascal VOC 2012</strong>和<strong>MS COCO 2014</strong>数据集上仅使用图像级标签就取得了新的最优WSSS性能，为提高图像级弱监督语义分割中CAM的准确性提供了新视角，未来将探索其他可能的解决方案。</li>
+<li>实验表明，SFC显著改善了CAM边界，在<strong>Pascal VOC 2012</strong>和<strong>MS COCO 2014</strong>数据集上仅使用图像级标签就取得了新的最优WSSS性能，为提高图像级弱监督语义分割中CAM的准确性提供了新视角，未来将探索其他可能的解决方案。 </li>
 </ol>
 
       </div>
@@ -829,8 +931,7 @@ Existing methods mainly rely on <strong>Class Activation Mapping (CAM)</strong> 
       
       <!-- <div class="content">
         南京理工大学、地平线机器人
- 摘要
-Though adversarial erasing has prevailed i
+摘要Though adversarial erasing has prevailed in 
       </div> -->
     </a>
   </div>
@@ -850,8 +951,7 @@ Though adversarial erasing has prevailed i
       </div>
       <!-- <div class="content">
         华中科技大学、西北工业大学
- 摘要
-Contrastive language and image pre-trainin
+摘要Contrastive language and image pre-training 
       </div> -->
     </a>
   </div>
@@ -986,7 +1086,7 @@ Contrastive language and image pre-trainin
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）🥇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1544,7 +1644,7 @@ Contrastive language and image pre-trainin
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2192,5 +2292,20 @@ Contrastive language and image pre-trainin
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

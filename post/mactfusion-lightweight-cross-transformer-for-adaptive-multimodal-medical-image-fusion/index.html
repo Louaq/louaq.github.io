@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -690,7 +802,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.9k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 2.8k |
           </span>
   
           <span class="min2read">
@@ -722,87 +834,67 @@
         <blockquote>
 <p>南华大学</p>
 </blockquote>
-<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
-<p><strong>Multimodal medical image fusion</strong> aims to integrate complementary information from different modalities of medical images. Deep learning methods, especially recent vision Transformers, have effectively improved image fusion performance. However, there are limitations for Transformers in image fusion, such as lacks of local feature extraction and cross-modal feature interaction, resulting in insufficient multimodal feature extraction and integration. In addition, the computational cost of Transformers is higher. To address these challenges, in this work, we develop an adaptive cross-modal fusion strategy for unsupervised multimodal medical image fusion. Specifically, we propose a novel lightweight cross Transformer based on cross multi-axis attention mechanism. It includes cross-window attention and cross-grid attention to mine and integrate both local and global interactions of multimodal features. The cross Transformer is further guided by a spatial adaptation fusion module, which allows the model to focus on the most relevant information. Moreover, we design a special feature extraction module that combines multiple gradient residual dense convolutional and Transformer layers to obtain local features from coarse to fine and capture global features. The proposed strategy significantly boosts the fusion performance while minimizing computational costs. Extensive experiments, including clinical brain tumor image fusion, have shown that our model can achieve clearer texture details and better visual quality than other state-of-the-art fusion methods.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
-<p><strong>多模态医学图像融合</strong>旨在整合来自不同医学图像模态的互补信息。深度学习方法，尤其是近期的视觉Transformer，有效提升了图像融合性能。然而，Transformer在图像融合中存在局限性，例如缺乏局部特征提取和跨模态特征交互，导致多模态特征提取和整合不够充分。此外，Transformer的计算成本较高。为了解决这些挑战，本研究开发了一种用于无监督<strong>多模态医学图像融合的自适应跨模态融合策略</strong>。具体而言，我们提出了一种基于跨多轴注意机制的新型轻量级跨Transformer。它包括跨窗口注意和跨网格注意，以挖掘和整合多模态特征的局部和全局交互。跨Transformer进一步由空间适应融合模块引导，使模型能够聚焦于最相关的信息。此外，我们设计了一个特殊的特征提取模块，该模块结合了多个梯度残差密集卷积层和Transformer层，以从粗到细获取局部特征并捕获全局特征。所提出的策略在显著提升融合性能的同时，最小化了计算成本。大量实验，包括临床脑肿瘤图像融合，表明我们的模型能够比其他先进融合方法实现更清晰的纹理细节和更好的视觉质量。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>Multimodal medical image fusion</strong> aims to integrate complementary information from different modalities of medical images. Deep learning methods, especially recent vision Transformers, have effectively improved image fusion performance. However, there are limitations for Transformers in image fusion, such as lacks of local feature extraction and cross-modal feature interaction, resulting in insufficient multimodal feature extraction and integration. In addition, the computational cost of Transformers is higher. To address these challenges, in this work, we develop an adaptive cross-modal fusion strategy for unsupervised multimodal medical image fusion. Specifically, we propose a novel lightweight cross Transformer based on cross multi-axis attention mechanism. It includes cross-window attention and cross-grid attention to mine and integrate both local and global interactions of multimodal features. The cross Transformer is further guided by a spatial adaptation fusion module, which allows the model to focus on the most relevant information. Moreover, we design a special feature extraction module that combines multiple gradient residual dense convolutional and Transformer layers to obtain local features from coarse to fine and capture global features. The proposed strategy significantly boosts the fusion performance while minimizing computational costs. Extensive experiments, including clinical brain tumor image fusion, have shown that our model can achieve clearer texture details and better visual quality than other state-of-the-art fusion methods.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p><strong>多模态医学图像融合</strong>旨在整合来自不同医学图像模态的互补信息。深度学习方法，尤其是近期的视觉Transformer，有效提升了图像融合性能。然而，Transformer在图像融合中存在局限性，例如缺乏局部特征提取和跨模态特征交互，导致多模态特征提取和整合不够充分。此外，Transformer的计算成本较高。为了解决这些挑战，本研究开发了一种用于无监督<strong>多模态医学图像融合的自适应跨模态融合策略</strong>。具体而言，我们提出了一种基于跨多轴注意机制的新型轻量级跨Transformer。它包括跨窗口注意和跨网格注意，以挖掘和整合多模态特征的局部和全局交互。跨Transformer进一步由空间适应融合模块引导，使模型能够聚焦于最相关的信息。此外，我们设计了一个特殊的特征提取模块，该模块结合了多个梯度残差密集卷积层和Transformer层，以从粗到细获取局部特征并捕获全局特征。所提出的策略在显著提升融合性能的同时，最小化了计算成本。大量实验，包括临床脑肿瘤图像融合，表明我们的模型能够比其他先进融合方法实现更清晰的纹理细节和更好的视觉质量。</p>
 <blockquote>
 <p>code: <a target="_blank" rel="noopener" href="https://github.com/millieXie/MACTFusion">https://github.com/millieXie/MACTFusion</a></p>
 </blockquote>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
-<p>多模态医学影像在疾病诊断中至关重要，但不同模态影像各有优劣。结构影像（如CT、MRI）空间分辨率高，能展现器官解剖结构，但CT缺乏结构组织细节信息，MRI缺乏高对比度信息；功能影像（如PET、SPECT）可反映生物分子血流和代谢活动，但空间分辨率低。多模态影像融合旨在整合不同影像的互补信息，增强视觉感知。</p>
-<p>现有的医学影像融合方法分为经典方法和深度学习方法。经典方法存在不可逆数据丢失、细节失真、融合规则设计复杂等问题；深度学习方法虽有优势，但CNN框架会忽略长程交互，导致全局上下文特征丢失，而Transformer方法存在局部特征提取和跨模态特征交互不足、计算成本高等问题。</p>
-<p>受 <strong>Vision Transformer</strong>成功应用的启发，本文提出一种自适应跨模态融合策略，开发了轻量级的MACTFusion跨Transformer架构，旨在以较低计算成本挖掘和整合多模态特征的局部和全局交互，提高融合性能，为后续疾病诊断、治疗规划和手术导航等提供更有价值的影像信息。</p>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
-<ul>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>多模态医学影像在疾病诊断中至关重要，但不同模态影像各有优劣。结构影像（如CT、MRI）空间分辨率高，能展现器官解剖结构，但CT缺乏结构组织细节信息，MRI缺乏高对比度信息；功能影像（如PET、SPECT）可反映生物分子血流和代谢活动，但空间分辨率低。多模态影像融合旨在整合不同影像的互补信息，增强视觉感知。 </p>
+<p>现有的医学影像融合方法分为经典方法和深度学习方法。经典方法存在不可逆数据丢失、细节失真、融合规则设计复杂等问题；深度学习方法虽有优势，但CNN框架会忽略长程交互，导致全局上下文特征丢失，而Transformer方法存在局部特征提取和跨模态特征交互不足、计算成本高等问题。 </p>
+<p>受 <strong>Vision Transformer</strong>成功应用的启发，本文提出一种自适应跨模态融合策略，开发了轻量级的MACTFusion跨Transformer架构，旨在以较低计算成本挖掘和整合多模态特征的局部和全局交互，提高融合性能，为后续疾病诊断、治疗规划和手术导航等提供更有价值的影像信息。 </p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>多模态医学成像重要性</strong>：多模态医学成像在疾病诊断中发挥关键作用，医学图像分为结构和功能信息图像两类，不同成像方式各有优劣，图像融合可整合互补信息。</li>
 <li><strong>融合方法分类</strong>：现有医学图像融合方法分为经典方法和深度学习方法。经典方法包括多尺度变换、脉冲耦合神经网络和稀疏表示等，但存在不可逆数据损失和细节失真等问题。深度学习方法主要有卷积神经网络（CNNs）、生成对抗网络（GANs）和Transformers等，在融合性能上有提升，但仍有局限。</li>
 <li><strong>Transformer应用</strong>：Transformer在医学图像融合中得到应用，如SwinFusion等，但多数网络融合策略简单，无法充分挖掘和整合跨模态信息，且计算成本高。</li>
 </ul>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-47-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-47-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-47-08" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-49-14.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-49-14.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-49-14" /></p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-47-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-47-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-47-08"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-49-14.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-49-14.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-49-14"></p>
 <p>模型主要聚焦于MRI与其他医学图像（如CT、PET和SPECT图像）的融合，包含特征提取、自适应跨模态融合和图像重建三个部分：</p>
 <ol>
-<li>特征提取
-<ul>
+<li>特征提取<ul>
 <li><strong>浅层特征提取</strong>：由密集特征提取器和梯度密集块（GRDB）组成。密集特征提取器通过1×1卷积降低通道维度，再用三个级联的3×3卷积层提取局部特征并拼接输出。GRDB则通过梯度操作增强对细粒度细节的学习。</li>
 <li><strong>深层特征提取</strong>：由简单深度可分离卷积（SD - Conv）块和多轴注意力块构成。SD - Conv块可作为位置编码生成器，使模型无需显式的位置编码层。多轴注意力块由窗口注意力和网格注意力组成，可降低计算复杂度，同时获取局部和全局交互信息。</li>
 </ul>
 </li>
-<li>自适应跨模态融合策略
-<ul>
+<li>自适应跨模态融合策略<ul>
 <li><strong>空间自适应融合模块（SAFM）</strong>：基于空间自适应归一化思想，可自适应地重新映射特征分布，使模型学习到丰富的纹理和合适的强度信息。</li>
 <li><strong>跨模态融合Transformer</strong>：包括跨窗口注意力和跨网格注意力，用于挖掘和整合多模态特征的局部和全局交互。输入特征先经过SD - Conv块处理，再通过跨窗口注意力进行局部交互，接着通过跨网格注意力进行全局交互，最后将两个对称分支的输出特征拼接得到最终的融合特征。</li>
 </ul>
 </li>
 <li><strong>图像重建</strong>：通过图像重建模块从融合特征中重建融合图像。</li>
 </ol>
-<h3 id="损失函数"><a class="markdownIt-Anchor" href="#损失函数"></a> 损失函数</h3>
-<p>综合考虑多个方面定义了联合损失函数，包括结构相似性指数损失（SSIM）、梯度损失（纹理损失）和强度损失，以保证融合图像的视觉保真度和强度信息。公式为：<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>L</mi><mo>=</mo><msub><mi>δ</mi><mn>1</mn></msub><msub><mi>L</mi><mrow><mi>s</mi><mi>s</mi><mi>i</mi><mi>m</mi></mrow></msub><mo>+</mo><msub><mi>δ</mi><mn>2</mn></msub><msub><mi>L</mi><mrow><mi>g</mi><mi>r</mi><mi>a</mi><mi>d</mi></mrow></msub><mo>+</mo><msub><mi>δ</mi><mn>3</mn></msub><msub><mi>L</mi><mrow><mi>i</mi><mi>n</mi><mi>t</mi></mrow></msub></mrow><annotation encoding="application/x-tex">L = \delta_1L_{ssim} + \delta_2L_{grad} + \delta_3L_{int}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathnormal">L</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">s</span><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">m</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.980548em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3361079999999999em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight" style="margin-right:0.03588em;">g</span><span class="mord mathnormal mtight" style="margin-right:0.02778em;">r</span><span class="mord mathnormal mtight">a</span><span class="mord mathnormal mtight">d</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathnormal">L</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathnormal mtight">i</span><span class="mord mathnormal mtight">n</span><span class="mord mathnormal mtight">t</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>，其中<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">\delta_1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>、<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">\delta_2</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>和<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>δ</mi><mn>3</mn></msub></mrow><annotation encoding="application/x-tex">\delta_3</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.03785em;">δ</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:-0.03785em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">3</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span></span></span></span>是控制各损失项权重的参数。</p>
-<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-53-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-53-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-53-54" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-16.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-16.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-16" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-26" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-48.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-48.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-48" /></p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>综合考虑多个方面定义了联合损失函数，包括结构相似性指数损失（SSIM）、梯度损失（纹理损失）和强度损失，以保证融合图像的视觉保真度和强度信息。公式为：$L = \delta<em>1L</em>{ssim} + \delta<em>2L</em>{grad} + \delta<em>3L</em>{int}<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.452ex;" xmlns="http://www.w3.org/2000/svg" width="6.787ex" height="2.149ex" role="img" focusable="false" viewBox="0 -750 3000 950"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><text data-variant="italic" transform="scale(1,-1)" font-size="884px" font-family="serif" font-style="italic">，</text></g><g data-mml-node="mi" transform="translate(1000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">其</text></g><g data-mml-node="mi" transform="translate(2000,0)"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">中</text></g></g></g></svg></mjx-container>\delta_1<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.452ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="2.149ex" role="img" focusable="false" viewBox="0 -750 1000 950"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="TeXAtom" data-mjx-texclass="ORD"><g data-mml-node="mo"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">、</text></g></g></g></g></svg></mjx-container>\delta_2<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.452ex;" xmlns="http://www.w3.org/2000/svg" width="2.262ex" height="2.149ex" role="img" focusable="false" viewBox="0 -750 1000 950"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><text data-variant="normal" transform="scale(1,-1)" font-size="884px" font-family="serif">和</text></g></g></g></svg></mjx-container>\delta_3$是控制各损失项权重的参数。</p>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-53-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-53-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-53-54"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-16.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-16.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-16"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-26"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-48.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-54-48.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-54-48"></p>
 <ol>
-<li>
-<p>对比实验与评估指标：</p>
-<ul>
+<li>对比实验与评估指标：<ul>
 <li><strong>对比方法</strong>：与CSMCA、EMFusion、FusionGAN、IFCNN、U2Fusion、IFT和SwinFusion等先进方法进行对比。</li>
 <li><strong>评估指标</strong>：选用了包括相关差异之和（SCD）、多尺度结构相似性指数（MS - SSIM）、边缘信息测量（QAB/F）、标准差（SD）、加权融合质量指标（Qw）和视觉信息保真度（VIF）在内的六个常见定量指标进行评估。</li>
 </ul>
 </li>
-<li>
-<p>不同模态医学图像融合实验：</p>
+<li><p>不同模态医学图像融合实验：</p>
 <ul>
 <li><strong>CT - MRI融合</strong>：使用哈佛医学数据集，MACTFusion在保留CT的密集信息和MRI的纹理细节方面表现出色，在各项定量指标上取得最优结果。</li>
 <li><strong>PET - MRI融合</strong>：该模型能较好地保留PET的功能信息和MRI的纹理细节，颜色分布更接近PET图像，在多个定量指标上表现优异。</li>
 <li><strong>SPECT - MRI融合</strong>：MACTFusion获取了更多细节并保留了SPECT图像的适当颜色信息，在多数指标上取得最优结果。</li>
 </ul>
 </li>
-<li>
-<p><strong>临床多模态脑肿瘤图像融合实验</strong>：与临床医生合作，对脑胶质瘤、转移性肿瘤和脑膜瘤的MR - T1和MR - T2图像进行融合。融合结果清晰度更高、纹理信息更丰富，有助于医生评估肿瘤异质性和了解肿瘤对周围脑组织的浸润情况。</p>
+<li><p><strong>临床多模态脑肿瘤图像融合实验</strong>：与临床医生合作，对脑胶质瘤、转移性肿瘤和脑膜瘤的MR - T1和MR - T2图像进行融合。融合结果清晰度更高、纹理信息更丰富，有助于医生评估肿瘤异质性和了解肿瘤对周围脑组织的浸润情况。</p>
 </li>
-<li>
-<p><strong>GFP和PC图像融合实验</strong>：验证了MACTFusion的<strong>泛化能力</strong>，该模型与SwinFusion一样，能有效保留纹理和颜色信息。</p>
-</li>
-<li>
-<p><strong>医学图像分割应用实验</strong>：将融合结果应用于医学图像<strong>分割任务</strong>，MACTFusion的分割结果比单模态图像和SwinFusion的结果更准</p>
-</li>
+<li><strong>GFP和PC图像融合实验</strong>：验证了MACTFusion的<strong>泛化能力</strong>，该模型与SwinFusion一样，能有效保留纹理和颜色信息。</li>
+<li><strong>医学图像分割应用实验</strong>：将融合结果应用于医学图像<strong>分割任务</strong>，MACTFusion的分割结果比单模态图像和SwinFusion的结果更准</li>
 </ol>
-<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）​​</h2>
-<ul>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
 <li><strong>网络架构分析</strong>：对浅特征提取模块（SFE）、空间自适应融合模块（SAFM）和跨模态融合Transformer（CMFT）进行消融实验。结果表明，缺少这些模块会导致相应指标下降，影响模型提取细节、映射特征分布和整合补充信息的能力。</li>
 <li><strong>损失函数分析</strong>：对联合损失函数中的结构相似性损失Lssim、梯度损失Lgrad和强度损失Lint进行消融实验。结果显示，缺少任何一个子损失都会影响融合性能，而联合损失函数使MACTFusion在所有评估指标上取得最优结果。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-46.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-46.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-56-46" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-55.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-55.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-56-55" /></p>
-<h2 id="计算复杂度分析"><a class="markdownIt-Anchor" href="#计算复杂度分析"></a> 计算复杂度分析</h2>
-<p>通过训练参数数量和FLOPs评估实现效率，MACTFusion的FLOPs最小，训练参数数量少于IFT和SwinFusion，训练运行时间约为SwinFusion的四分之一，同时VIF表现最佳，证明该方法高效有效。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-58-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-58-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-58-37" /></p>
-<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
-<p>在这项工作中，我们提出了一种新的<strong>轻量级自适应交叉Transformer架构</strong>，命名为<strong>MACTFusion</strong>，用于多模态医学图像融合。设计的交叉多轴注意机制包括交叉窗口注意以整合局部特征，以及交叉网格注意以整合来自不同模态的全局特征。具体来说，我们引入了空间自适应融合模块来引导交叉Transformer，使模型聚焦于最相关的信息。此外，我们设计了一个特殊的特征提取模块，该模块结合了多个梯度残差密集卷积和Transformer层，以从粗到细获取局部特征，并有效捕获全局特征。值得注意的是，所提出的模型在保持卓越融合性能的同时，尽量减少了计算成本。大量实验结果表明，我们的模型优于其他先进的融合技术。因此，它在后续诊断、治疗计划和手术导航中具有重要的应用价值。未来，我们将尝试将提出的MACTFusion应用于临床医学图像融合。此外，我们还将扩展其应用至3D图像融合。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-46.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-46.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-56-46"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-55.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-56-55.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-56-55"></p>
+<h2 id="计算复杂度分析"><a href="#计算复杂度分析" class="headerlink" title="计算复杂度分析"></a>计算复杂度分析</h2><p>通过训练参数数量和FLOPs评估实现效率，MACTFusion的FLOPs最小，训练参数数量少于IFT和SwinFusion，训练运行时间约为SwinFusion的四分之一，同时VIF表现最佳，证明该方法高效有效。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-58-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-58-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-07_19-58-37"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在这项工作中，我们提出了一种新的<strong>轻量级自适应交叉Transformer架构</strong>，命名为<strong>MACTFusion</strong>，用于多模态医学图像融合。设计的交叉多轴注意机制包括交叉窗口注意以整合局部特征，以及交叉网格注意以整合来自不同模态的全局特征。具体来说，我们引入了空间自适应融合模块来引导交叉Transformer，使模型聚焦于最相关的信息。此外，我们设计了一个特殊的特征提取模块，该模块结合了多个梯度残差密集卷积和Transformer层，以从粗到细获取局部特征，并有效捕获全局特征。值得注意的是，所提出的模型在保持卓越融合性能的同时，尽量减少了计算成本。大量实验结果表明，我们的模型优于其他先进的融合技术。因此，它在后续诊断、治疗计划和手术导航中具有重要的应用价值。未来，我们将尝试将提出的MACTFusion应用于临床医学图像融合。此外，我们还将扩展其应用至3D图像融合。</p>
 <blockquote>
 <ol>
 <li><strong>方法优势</strong>：设计的交叉多轴注意力机制能整合不同模态的局部和全局特征，空间适应融合模块引导交叉 Transformer 聚焦关键信息，特殊特征提取模块可有效获取局部和全局特征。该模型在降低计算成本的同时，保持了出色的融合性能。</li>
@@ -865,8 +957,7 @@
         
 南京理工大学、东南大学
 
- 摘要
-Automated brain tumor segmentation is cruc
+摘要Automated brain tumor segmentation is crucia
       </div> -->
     </a>
   </div>
@@ -886,8 +977,7 @@ Automated brain tumor segmentation is cruc
       </div>
       <!-- <div class="content">
         云南大学、锡根大学
- 摘要
-In the treatment of brain tumors, accurate dia
+摘要In the treatment of brain tumors, accurate diagn
       </div> -->
     </a>
   </div>
@@ -1022,7 +1112,7 @@ In the treatment of brain tumors, accurate dia
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text"> 损失函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-text"> 计算复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90"><span class="toc-text">计算复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1580,7 +1670,7 @@ In the treatment of brain tumors, accurate dia
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2228,5 +2318,20 @@ In the treatment of brain tumors, accurate dia
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

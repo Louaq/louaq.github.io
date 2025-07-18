@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -720,19 +832,13 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>Bosch Research North America、Bosch Center for Artificial Intelligence (BCAI)</p>
-<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
-<p>The <strong>open-vocabulary image segmentation</strong> task involves partitioning images into semantically meaningful segments and classifying them with flexible text-defined categories. The recent vision-based foundation models such as the Segment Anything Model (SAM) have shown superior performance in generating class-agnostic image segments. The main challenge in open-vocabulary image segmentation now lies in accurately classifying these segments into text-defined categories. In this paper, we introduce the Universal Segment Embedding (USE) framework to address this challenge. This framework is comprised of two key components: 1) a <strong>data pipeline</strong> designed to efficiently curate a large amount of segment-text pairs at various granularities, and 2) a <strong>universal segment embedding model</strong> that enables precise segment classification into a vast range oftext defined categories. The USE model can not only help open-vocabulary image segmentation but also facilitate otherdownstream tasks (e.g., querying and ranking). Through comprehensive experimental studies on semantic segmen-<br />
-tation and part segmentation benchmarks, we demonstrate that the USE framework outperforms state-of-the-art open-<br />
-vocabulary segmentation methods.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
-<p>开放词汇图像分割任务包括将图像划分为语义上有意义的片段，并使用灵活的文本定义类别对其进行分类。近年来，基于视觉的基础模型(如SAM)在生成与类别无关的图像片段方面表现出了优异的性能。目前，开放词汇表图像分割的主要挑战在于将这些片段准确地分类到文本定义的类别中。在本文中，我们引入了通用段嵌入(USE)框架来解决这一挑战。该框架由两个关键组件组成:1)一个数据解决方案，旨在有效地管理各种粒度的大量片段-文本对;2)一个通用的片段嵌入模型，能够将精确的片段分类到大量文本定义的类别中。USE模型不仅可以帮助开放词汇表图像分割，还可以促进其他下游任务(例如查询和排序)。通过对语义切分和零件切分基准的综合实验研究，我们证明了USE框架优于最先进的开放词汇切分方法。</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>The <strong>open-vocabulary image segmentation</strong> task involves partitioning images into semantically meaningful segments and classifying them with flexible text-defined categories. The recent vision-based foundation models such as the Segment Anything Model (SAM) have shown superior performance in generating class-agnostic image segments. The main challenge in open-vocabulary image segmentation now lies in accurately classifying these segments into text-defined categories. In this paper, we introduce the Universal Segment Embedding (USE) framework to address this challenge. This framework is comprised of two key components: 1) a <strong>data pipeline</strong> designed to efficiently curate a large amount of segment-text pairs at various granularities, and 2) a <strong>universal segment embedding model</strong> that enables precise segment classification into a vast range oftext defined categories. The USE model can not only help open-vocabulary image segmentation but also facilitate otherdownstream tasks (e.g., querying and ranking). Through comprehensive experimental studies on semantic segmen-<br>tation and part segmentation benchmarks, we demonstrate that the USE framework outperforms state-of-the-art open-<br>vocabulary segmentation methods.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>开放词汇图像分割任务包括将图像划分为语义上有意义的片段，并使用灵活的文本定义类别对其进行分类。近年来，基于视觉的基础模型(如SAM)在生成与类别无关的图像片段方面表现出了优异的性能。目前，开放词汇表图像分割的主要挑战在于将这些片段准确地分类到文本定义的类别中。在本文中，我们引入了通用段嵌入(USE)框架来解决这一挑战。该框架由两个关键组件组成:1)一个数据解决方案，旨在有效地管理各种粒度的大量片段-文本对;2)一个通用的片段嵌入模型，能够将精确的片段分类到大量文本定义的类别中。USE模型不仅可以帮助开放词汇表图像分割，还可以促进其他下游任务(例如查询和排序)。通过对语义切分和零件切分基准的综合实验研究，我们证明了USE框架优于最先进的开放词汇切分方法。</p>
 <p>::: tip</p>
 <p>启发</p>
 <p>:::</p>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
-<p>开放词汇图像分割的目的是将图像分割成语义上有意义的片段，并用文本定义的任意类对其进行分类。最近的基础模型在将图像的像素分为有意义的片段上效果显著，例如SAM，然而，现有的开放词汇图像分割方法面临着挑战：<strong>端到端的方法</strong>不能将基础模型生成的图像段作为输入或提示来分配类标签；<strong>两阶段的方法</strong>由于人类标签的限制，它们在分类不同粒度的片段方面仍然受到限制。基于上述的存在的问题，本文的作者提出了<strong>通用片段嵌入框架（Universal Segment Embedding，USE）</strong>，该框架由两个关键的组件：数据方案和通用片段嵌入模型。</p>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
-<ul>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>开放词汇图像分割的目的是将图像分割成语义上有意义的片段，并用文本定义的任意类对其进行分类。最近的基础模型在将图像的像素分为有意义的片段上效果显著，例如SAM，然而，现有的开放词汇图像分割方法面临着挑战：<strong>端到端的方法</strong>不能将基础模型生成的图像段作为输入或提示来分配类标签；<strong>两阶段的方法</strong>由于人类标签的限制，它们在分类不同粒度的片段方面仍然受到限制。基于上述的存在的问题，本文的作者提出了<strong>通用片段嵌入框架（Universal Segment Embedding，USE）</strong>，该框架由两个关键的组件：数据方案和通用片段嵌入模型。</p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li>多模态表示学习：</li>
 </ul>
 <p>从大规模图像-文本数据中学习(例如CLIP)在将视觉概念与文本描述联系起来方面显示出了很好的结果，然而，对于文本数据的多模态表示学习，目前的研究还很少。</p>
@@ -744,8 +850,7 @@ vocabulary segmentation methods.</p>
 <li>改进图像-文本数据集：</li>
 </ul>
 <p>现有的工作可以分为两类:数据过滤和数据改进。数据过滤旨在通过过滤噪声的图像-文本对来提高模型训练的效率和鲁棒性，而数据改进则侧重于改善图像和文本数据的对齐。</p>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
-<p><strong>USE Data Pipeline：</strong></p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><strong>USE Data Pipeline：</strong></p>
 <ol>
 <li><strong>多粒度图像字幕生成</strong>：利用多模态大语言模型（MLLM），通过特定提示生成图像中对象及其属性的详细描述，以获取更丰富的语义信息。</li>
 <li><strong>从字幕中进行指代表达定位</strong>：从字幕中提取名词短语并扩展为指代表达，使用开放词汇定位模型（如Grounding DINO）获取与这些表达对应的边界框，生成框 - 文本对。</li>
@@ -757,27 +862,24 @@ vocabulary segmentation methods.</p>
 <li><strong>段嵌入头</strong>：根据输入段从图像块嵌入中提取段嵌入，并将其映射到视觉 - 语言联合空间。通过计算段在每个图像块内的面积并归一化，得到段在每个块内的权重，进而计算加权平均嵌入，最后通过线性层映射为段嵌入。</li>
 <li><strong>训练与损失</strong>：使用段 - 文本对比损失来训练模型，在训练时，每个段随机采样一个文本描述来计算文本嵌入。</li>
 </ol>
-<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
-<p>训练集：COCO、Visual Genome (VG)       测试集：ADE20K、Pascal Context</p>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p>训练集：COCO、Visual Genome (VG)       测试集：ADE20K、Pascal Context</p>
 <blockquote>
 <p>评估方法：使用类无关掩码，通过提示SAM生成掩码，经过滤和合并后，用模型获取掩码嵌入，计算与目标类文本嵌入的相似度，转换为概率，聚合像素上所有片段的概率进行类别预测。</p>
 <p>对比结果：与最先进的开放词汇语义分割方法在<strong>ADE20K和Pascal Context数据集</strong>上对比，以平均交并比（mIoU）评估性能。结果表明，USE方法在所有数据集上大幅优于最先进的两阶段方法，与端到端方法相比平均性能最佳，在COCO和VG图像上训练时性能进一步提升。</p>
 </blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-31-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-31-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-26_14-31-25" /></p>
-<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）🥇</h2>
-<ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-31-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-31-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-26_14-31-25"></p>
+<h2 id="实验（Ablation-Experiments）-1st-place-medal"><a href="#实验（Ablation-Experiments）-1st-place-medal" class="headerlink" title="实验（Ablation Experiments）:1st_place_medal:"></a>实验（Ablation Experiments）:1st_place_medal:</h2><ul>
 <li><strong>预训练骨干网络选择</strong>：在ADE20K数据集和开放词汇语义分割任务上研究，结果表明结合CLIP和DINOv2可获得性能提升。</li>
 <li><strong>图像编码器架构设计</strong>：研究cls令牌对性能的影响，结果显示包含cls令牌可提高mIoU。</li>
 <li><strong>定性比较</strong>：对比从真实标注和MLLM增强标注中提取的对象，MLLM增强标注能捕获更细粒度的对象和部件。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-33-30.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-33-30.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-26_14-33-30" /></p>
-<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
-<p>作者提出用于<strong>开放词汇图像分割的USE框架</strong>，通过实验研究得出以下结论：</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-33-30.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-33-30.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-26_14-33-30"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出用于<strong>开放词汇图像分割的USE框架</strong>，通过实验研究得出以下结论：</p>
 <blockquote>
 <ol>
-<li><strong>方法有效性</strong>：该框架结合精心设计的数据管道和轻量级嵌入模型，能在无人工标注下以零样本方式有效对图像片段进行分类。</li>
-<li><strong>性能优越性</strong>：在语义分割和部件分割任务的实验中，USE框架在<strong>ADE20K、Pascal Context</strong>和<strong>PartImageNet</strong>等数据集上，大幅超越现有最先进的两阶段方法，平均性能也优于端到端方法。</li>
-<li><strong>研究意义</strong>：此工作为构建开放词汇图像分割的基础模型和基于片段的表征学习提供了参考，有望推动相关领域的研究发展。</li>
+<li><strong>方法有效性</strong>：该框架结合精心设计的数据管道和轻量级嵌入模型，能在无人工标注下以零样本方式有效对图像片段进行分类。 </li>
+<li><strong>性能优越性</strong>：在语义分割和部件分割任务的实验中，USE框架在<strong>ADE20K、Pascal Context</strong>和<strong>PartImageNet</strong>等数据集上，大幅超越现有最先进的两阶段方法，平均性能也优于端到端方法。 </li>
+<li><strong>研究意义</strong>：此工作为构建开放词汇图像分割的基础模型和基于片段的表征学习提供了参考，有望推动相关领域的研究发展。 </li>
 </ol>
 </blockquote>
 
@@ -832,8 +934,7 @@ vocabulary segmentation methods.</p>
       </div>
       
       <!-- <div class="content">
-         摘要
-Weakly Supervised Semantic Segmentation (WSSS) relies on
+        摘要Weakly Supervised Semantic Segmentation (WSSS) relies on C
       </div> -->
     </a>
   </div>
@@ -853,8 +954,7 @@ Weakly Supervised Semantic Segmentation (WSSS) relies on
       </div>
       <!-- <div class="content">
         Hunan University、Monash University
- 摘要
-Open-vocabulary (OV) 
+摘要Open-vocabulary (OV) se
       </div> -->
     </a>
   </div>
@@ -989,7 +1089,7 @@ Open-vocabulary (OV)
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）🥇</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89-1st-place-medal"><span class="toc-text">实验（Ablation Experiments）:1st_place_medal:</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1547,7 +1647,7 @@ Open-vocabulary (OV)
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2195,5 +2295,20 @@ Open-vocabulary (OV)
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

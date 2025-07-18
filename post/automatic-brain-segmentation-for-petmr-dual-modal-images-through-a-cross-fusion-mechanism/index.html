@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -720,67 +832,54 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>作者单位</p>
-<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
-<p>The precise segmentation of different <strong>brain regions and tissues</strong> is usually a prerequisite for the detection and diagnosis of various neurological disorders in neuroscience. Considering the abundance of functional and structural dual-modality information for <strong>positron emission tomography/magnetic resonance</strong> (PET/MR) images, we propose a novel 3D whole-brain segmentation network with a cross-fusion mechanism introduced to obtain 45 brain regions. Specifically, the network processes PET and MR images simultaneously, employing UX-Net and a cross-fusion block for feature extraction and fusion in the encoder. We test our method by comparing it with other deep learning-based methods, including 3DUXNET, Swin-UNETR, UNETR, nnFormer, UNet3D, NestedUNet, ResUNet, and VNet. The experimental results demonstrate that the proposed method achieves better segmentation performance in terms of both visual and quantitative evaluation metrics and achieves more precise segmentation in three views while preserving fine details. In particular, the proposed method achieves superior quantitative results, with a Dice coefficient of 85.73% ± 0.01%, a Jaccard index of 76.68% ± 0.02%, a sensitivity of 85.00% ± 0.01%, a precision of 83.26% ± 0.03% and a Hausdorff distance (HD) of 4.4885 ± 14.85%. Moreover, the distribution and correlation of the SUV in the volume of interest (VOI) are also evaluated (PCC &gt; 0.9), indicating consistency with the ground truth and the superiority of the proposed method. In future work, we will utilize our whole-brain segmentation method in clinical practice to assist doctors in accurately diagnosing and treating brain diseases.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
-<p>不同脑区和组织的精确分割通常是神经科学中检测和诊断各种神经系统疾病的前提。考虑到正电子发射断层扫描/磁共振（PET/MR）图像的功能和结构双模态信息的丰富性，我们提出了一种新颖的三维全脑分割网络，通过引入交叉融合机制来获得45个脑区。具体而言，该网络同时处理PET和MR图像，在编码器中采用UX-Net和交叉融合块进行特征提取和融合。我们通过与其他基于深度学习的方法进行比较来测试我们的方法，包括3DUXNET、Swin-UNETR、UNETR、nnFormer、UNet3D、NestedUNet、ResUNet和VNet。实验结果表明，所提出的方法在视觉和定量评估指标方面实现了更好的分割性能，并在三个视图中实现了更精确的分割，同时保留了细节。特别是，所提出的方法在量化结果方面表现优异，Dice系数为85.73% ± 0.01%，Jaccard指数为76.68% ± 0.02%，敏感性为85.00% ± 0.01%，精确度为83.26% ± 0.03%，Hausdorff距离（HD）为4.4885 ± 14.85%。此外，还评估了感兴趣区域（VOI）中SUV的分布和相关性（PCC &gt; 0.9），表明与真实值的一致性以及所提出方法的优越性。在未来的工作中，我们将利用我们的全脑分割方法在临床实践中帮助医生准确诊断和治疗脑疾病。</p>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
-<p>本文聚焦于脑区分割研究，旨在解决现有方法的局限，其研究背景如下：</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>The precise segmentation of different <strong>brain regions and tissues</strong> is usually a prerequisite for the detection and diagnosis of various neurological disorders in neuroscience. Considering the abundance of functional and structural dual-modality information for <strong>positron emission tomography/magnetic resonance</strong> (PET/MR) images, we propose a novel 3D whole-brain segmentation network with a cross-fusion mechanism introduced to obtain 45 brain regions. Specifically, the network processes PET and MR images simultaneously, employing UX-Net and a cross-fusion block for feature extraction and fusion in the encoder. We test our method by comparing it with other deep learning-based methods, including 3DUXNET, Swin-UNETR, UNETR, nnFormer, UNet3D, NestedUNet, ResUNet, and VNet. The experimental results demonstrate that the proposed method achieves better segmentation performance in terms of both visual and quantitative evaluation metrics and achieves more precise segmentation in three views while preserving fine details. In particular, the proposed method achieves superior quantitative results, with a Dice coefficient of 85.73% ± 0.01%, a Jaccard index of 76.68% ± 0.02%, a sensitivity of 85.00% ± 0.01%, a precision of 83.26% ± 0.03% and a Hausdorff distance (HD) of 4.4885 ± 14.85%. Moreover, the distribution and correlation of the SUV in the volume of interest (VOI) are also evaluated (PCC &gt; 0.9), indicating consistency with the ground truth and the superiority of the proposed method. In future work, we will utilize our whole-brain segmentation method in clinical practice to assist doctors in accurately diagnosing and treating brain diseases.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>不同脑区和组织的精确分割通常是神经科学中检测和诊断各种神经系统疾病的前提。考虑到正电子发射断层扫描/磁共振（PET/MR）图像的功能和结构双模态信息的丰富性，我们提出了一种新颖的三维全脑分割网络，通过引入交叉融合机制来获得45个脑区。具体而言，该网络同时处理PET和MR图像，在编码器中采用UX-Net和交叉融合块进行特征提取和融合。我们通过与其他基于深度学习的方法进行比较来测试我们的方法，包括3DUXNET、Swin-UNETR、UNETR、nnFormer、UNet3D、NestedUNet、ResUNet和VNet。实验结果表明，所提出的方法在视觉和定量评估指标方面实现了更好的分割性能，并在三个视图中实现了更精确的分割，同时保留了细节。特别是，所提出的方法在量化结果方面表现优异，Dice系数为85.73% ± 0.01%，Jaccard指数为76.68% ± 0.02%，敏感性为85.00% ± 0.01%，精确度为83.26% ± 0.03%，Hausdorff距离（HD）为4.4885 ± 14.85%。此外，还评估了感兴趣区域（VOI）中SUV的分布和相关性（PCC &gt; 0.9），表明与真实值的一致性以及所提出方法的优越性。在未来的工作中，我们将利用我们的全脑分割方法在临床实践中帮助医生准确诊断和治疗脑疾病。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于脑区分割研究，旨在解决现有方法的局限，其研究背景如下：</p>
 <ol>
 <li><strong>脑区分割的重要性</strong>：精准的脑区分割对神经科学研究和临床诊断意义重大，不同脑区的体积、表面积和形态与帕金森病、阿尔茨海默病等多种神经系统疾病相关。</li>
-<li><strong>PET/MR成像系统的优势</strong>：正电子发射断层扫描/磁共振（PET/MR）集成成像系统结合了PET代谢成像和MR高分辨率成像的优点，是诊断脑部疾病的有效工具。</li>
-<li><strong>现有脑区分割方法的不足</strong>：手动分割脑医学图像耗时费力，且结果易受个体差异和主观因素影响；传统自动分割方法依赖手动特征工程，对图像质量和噪声敏感，对解剖变异的鲁棒性差；现有的深度学习方法多基于单模态医学图像分割，部分融合双模态的方法分割的脑区较少，融合方式简单，缺乏深度和全面的整合。 因此，本文提出一种基于交叉融合机制的自动脑分割方法，充分利用PET和MR医学图像，结合两者的功能和结构信息，以实现更精确、全面的脑区自动分割。</li>
+<li><strong>PET/MR成像系统的优势</strong>：正电子发射断层扫描/磁共振（PET/MR）集成成像系统结合了PET代谢成像和MR高分辨率成像的优点，是诊断脑部疾病的有效工具。 </li>
+<li><strong>现有脑区分割方法的不足</strong>：手动分割脑医学图像耗时费力，且结果易受个体差异和主观因素影响；传统自动分割方法依赖手动特征工程，对图像质量和噪声敏感，对解剖变异的鲁棒性差；现有的深度学习方法多基于单模态医学图像分割，部分融合双模态的方法分割的脑区较少，融合方式简单，缺乏深度和全面的整合。 因此，本文提出一种基于交叉融合机制的自动脑分割方法，充分利用PET和MR医学图像，结合两者的功能和结构信息，以实现更精确、全面的脑区自动分割。 </li>
 </ol>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
-<ul>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>传统方法</strong>：可分为<strong>阈值和统计方法</strong>、<strong>图像处理和数学模型方法</strong>、<strong>基于图谱的方法</strong>，但依赖手动特征工程，对图像质量和噪声敏感，对解剖变异鲁棒性差。</li>
 <li><strong>深度学习方法</strong>：基于高分辨率MR图像或代谢成像与低分辨率PET的单模态分割方法较多，部分方法开始融合PET和MR双模态信息，但存在分割脑区少、融合方法简单的问题。</li>
 </ul>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-30.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-30.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-51-30" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-36.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-36.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-51-36" /></p>
-<h3 id="网络整体结构"><a class="markdownIt-Anchor" href="#网络整体结构"></a> 网络整体结构</h3>
-<p>模型采用经典的U形分割结构，由编码器（encoder）和解码器（decoder）组成。PET和MR图像同时作为输入，通过编码器中的特征提取模块（UX - Net block）和融合模块（cross - fusion block）进行特征提取与融合，最后由解码器完成脑分割任务。</p>
-<h3 id="编码器部分"><a class="markdownIt-Anchor" href="#编码器部分"></a> 编码器部分</h3>
-<ul>
-<li>UX-Net Block：作为特征提取器，是网络的骨干部分。该模块采用分层变压器（hierarchical transformer）的思想，使用大规模深度卷积（large-scale depthwise convolution）在不增加计算成本的情况下获取局部信息，适合分层变压器结构并保留了卷积神经网络（CNN）的归纳偏置等优点。
-<ul>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-30.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-30.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-51-30"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-36.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-36.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-51-36"></p>
+<h3 id="网络整体结构"><a href="#网络整体结构" class="headerlink" title="网络整体结构"></a>网络整体结构</h3><p>模型采用经典的U形分割结构，由编码器（encoder）和解码器（decoder）组成。PET和MR图像同时作为输入，通过编码器中的特征提取模块（UX - Net block）和融合模块（cross - fusion block）进行特征提取与融合，最后由解码器完成脑分割任务。</p>
+<h3 id="编码器部分"><a href="#编码器部分" class="headerlink" title="编码器部分"></a>编码器部分</h3><ul>
+<li>UX-Net Block：作为特征提取器，是网络的骨干部分。该模块采用分层变压器（hierarchical transformer）的思想，使用大规模深度卷积（large-scale depthwise convolution）在不增加计算成本的情况下获取局部信息，适合分层变压器结构并保留了卷积神经网络（CNN）的归纳偏置等优点。<ul>
 <li>首先通过大卷积核的投影层提取图像块特征。</li>
 <li>分四个阶段提取不同层次的特征，每个阶段包含两个7×7×7的大规模深度卷积和两个1×1×1的逐点卷积，以丰富特征表示并减少通道冗余。</li>
 <li>每个阶段使用2×2×2的标准卷积模块将特征分辨率降低1/2，并应用层归一化（layer normalization）和高斯误差线性单元（GELU）作为激活函数。</li>
 <li>最后通过包含两个批量归一化的3×3×3卷积层的残差块稳定提取的特征。</li>
 </ul>
 </li>
-<li>Cross - Fusion Block：主要用于融合经过残差块处理后的PET和MR图像在四个阶段提取的特征，由两个交叉注意力块（cross - attention blocks）组成。
-<ul>
+<li>Cross - Fusion Block：主要用于融合经过残差块处理后的PET和MR图像在四个阶段提取的特征，由两个交叉注意力块（cross - attention blocks）组成。<ul>
 <li>利用多通道交叉注意力机制（multichannel cross - attention mechanism）在两个不同来源的特征之间建立复杂关联，实现全面的特征交叉融合。</li>
 <li>具体过程是先计算查询（query）、键（key）和值（value），得到两个特征的注意力分布，实现全局关联，再通过卷积层进一步处理输出特征。</li>
 <li>通过两次交叉注意力计算（CA1和CA2）并拼接结果，最后通过残差连接得到最终的交叉融合结果。</li>
 </ul>
 </li>
 </ul>
-<h3 id="解码器部分"><a class="markdownIt-Anchor" href="#解码器部分"></a> 解码器部分</h3>
-<p>编码器各阶段生成的多尺度输出通过跳跃连接（skip connections）连接到解码器，形成U形网络用于下游分割任务。</p>
+<h3 id="解码器部分"><a href="#解码器部分" class="headerlink" title="解码器部分"></a>解码器部分</h3><p>编码器各阶段生成的多尺度输出通过跳跃连接（skip connections）连接到解码器，形成U形网络用于下游分割任务。</p>
 <ul>
 <li>解码器将各阶段特征上采样并与前一阶段的特征拼接，经过残差块处理。</li>
 <li>网络的原始输入和编码器的输出按从上到下顺序设置为[e0, e1, e2, e3, e4]，解码器的输出按从上到下顺序设置为[d1, d2, d3, d4]。</li>
 <li>以第3个解码器层为例，先对第4个解码器层的输出进行上采样，然后与编码器第2层的输出拼接，经过残差块得到该层输出。</li>
 <li>最后将解码器的输出输入到包含1×1×1卷积层和softmax激活函数的残差块中，预测分割概率。</li>
 </ul>
-<h3 id="损失函数"><a class="markdownIt-Anchor" href="#损失函数"></a> 损失函数</h3>
-<p>结合了Dice系数损失（Dice coefﬁcient loss）和交叉熵损失（cross - entropy loss）构建混合损失函数，以充分利用两种损失函数的优点，增强模型在图像分割任务中的性能。</p>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>结合了Dice系数损失（Dice coefﬁcient loss）和交叉熵损失（cross - entropy loss）构建混合损失函数，以充分利用两种损失函数的优点，增强模型在图像分割任务中的性能。</p>
 <ul>
 <li>Dice系数损失用于衡量两个样本之间的相似度，常用于图像分割任务。</li>
 <li>交叉熵损失是图像分割中广泛使用的损失函数。</li>
-<li>总损失L是Dice系数损失Ldice和交叉熵损失Lce的加权和，权重为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi></mrow><annotation encoding="application/x-tex">ω</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathnormal" style="margin-right:0.03588em;">ω</span></span></span></span>。</li>
+<li>总损失L是Dice系数损失Ldice和交叉熵损失Lce的加权和，权重为<mjx-container class="MathJax" jax="SVG"><svg style="vertical-align: -0.025ex;" xmlns="http://www.w3.org/2000/svg" width="1.407ex" height="1.027ex" role="img" focusable="false" viewBox="0 -443 622 454"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="scale(1,-1)"><g data-mml-node="math"><g data-mml-node="mi"><path data-c="1D714" d="M495 384Q495 406 514 424T555 443Q574 443 589 425T604 364Q604 334 592 278T555 155T483 38T377 -11Q297 -11 267 66Q266 68 260 61Q201 -11 125 -11Q15 -11 15 139Q15 230 56 325T123 434Q135 441 147 436Q160 429 160 418Q160 406 140 379T94 306T62 208Q61 202 61 187Q61 124 85 100T143 76Q201 76 245 129L253 137V156Q258 297 317 297Q348 297 348 261Q348 243 338 213T318 158L308 135Q309 133 310 129T318 115T334 97T358 83T393 76Q456 76 501 148T546 274Q546 305 533 325T508 357T495 384Z"></path></g></g></g></svg></mjx-container>。</li>
 </ul>
-<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
-<blockquote>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
 <p><strong>数据集</strong>：使用了110名受试者的18F - FDG PET/MR脑图像，所有数据在3.0T的PET/MRI集成扫描仪上采集。利用FreeSurfer工具获取45个脑区作为真实标签（GT），并对PET和MR图像进行配准和独热编码处理。</p>
 </blockquote>
 <ol>
-<li>训练实现
-<ul>
+<li>训练实现<ul>
 <li><strong>数据预处理</strong>：对输入图像的像素值进行最小 - 最大归一化，并裁剪前景以消除背景。同时，引入正负样本的随机裁剪，获取96×96×96的图像块。</li>
 <li><strong>数据增强</strong>：采用随机缩放、随机翻转和随机强度调整等技术增加数据多样性，缓解过拟合问题。</li>
 <li><strong>训练设置</strong>：在PyTorch框架、Windows 10系统和NVIDIA GeForce RTX 3090 24GB GPU上进行训练。训练250个轮次，批次大小设为1，学习率为1e - 4，使用AdamW动态调整训练损失，每次训练迭代输入2个96×96×96的图像块，损失权重ω设为1。</li>
@@ -789,33 +888,29 @@
 </li>
 <li><strong>评估指标</strong>：采用五种评估指标，包括Dice相似度、Jaccard系数、精确率、灵敏度和Hausdorff距离（HD），全面评估分割性能</li>
 </ol>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-55-55.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-55-55.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-55-55" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-01.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-01.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-56-01" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-56-24" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-55-55.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-55-55.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-55-55"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-01.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-01.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-56-01"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-56-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-56-24"></p>
 <ul>
 <li><strong>整体定量评估</strong>：可视化全脑分割结果，提出的方法在三个视图上的分割结果更接近GT，能完整分割45个脑区并保留细节。定量结果显示，该方法在各项指标上表现优越，相比最佳对比方法有显著提升。</li>
 <li><strong>特定脑区评估</strong>：分析特定脑区（如壳核、海马体、尾状核和右 inferior - 侧脑室）的分割结果，提出的方法能更好地保留边缘细节，与GT的一致性更高。</li>
 <li><strong>一致性和相关性分析</strong>：分析PET图像分割结果在不同感兴趣体积（VOI）区域的标准摄取值（SUV）分布和相关性，提出的方法的SUV分布与GT最一致，相关系数PCC较高。</li>
 <li><strong>临床定量质量评估</strong>：计算肿瘤与背景比和临床容忍率，提出的方法临床容忍率最低，分割性能显著优于其他方法。</li>
-<li>额外数据评估和验证
-<ul>
+<li>额外数据评估和验证<ul>
 <li><strong>额外数据测试</strong>：引入40例PET和MR数据进行测试，提出的方法在额外数据集上仍保持优越性能，证明了模型的鲁棒性和通用性。</li>
 <li><strong>噪声数据测试</strong>：向测试集的PET图像中添加不同水平的噪声，提出的方法在噪声环境下仍能准确分割脑区，表现出较强的鲁棒性，而NestedUNet受噪声影响最大。</li>
 </ul>
 </li>
 </ul>
-<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）​​</h2>
-<ul>
-<li>消融研究和融合模块分析
-<ul>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
+<li>消融研究和融合模块分析<ul>
 <li><strong>消融分析</strong>：验证了UX - Net块和交叉融合块在模型分割效果中的关键作用，替换这两个模块会导致定量指标下降。</li>
 <li><strong>交叉融合块有效性分析</strong>：交叉融合机制在Dice分数、Jaccard系数和精确率方面取得最佳定量结果，分割性能出色。</li>
 </ul>
 </li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-57-20.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-57-20.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-57-20" /></p>
-<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
-<p>作者提出一种基于<strong>交叉融合机制</strong>的自动脑分割方法，将<strong>PET和MR多模态信息</strong>融合用于精确脑分割。实验在PET/MR数据集上开展，并与8种深度学习方法对比，从视觉、定量和临床三方面评估分割结果，证明该方法的优越性。具体而言，此方法取得了优异的定量结果，Dice得分85.73% ± 0.01%，Jaccard指数76.68% ± 0.02%等，SUV相关性评估也显示其优于其他方法，临床误差容忍率不超5%。该方法实现了精确的全脑分割，对脑部疾病的临床诊断和分析有益。未来，作者将探索该方法在其他模态图像处理任务中的应用。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-57-20.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-57-20.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-10_20-57-20"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出一种基于<strong>交叉融合机制</strong>的自动脑分割方法，将<strong>PET和MR多模态信息</strong>融合用于精确脑分割。实验在PET/MR数据集上开展，并与8种深度学习方法对比，从视觉、定量和临床三方面评估分割结果，证明该方法的优越性。具体而言，此方法取得了优异的定量结果，Dice得分85.73% ± 0.01%，Jaccard指数76.68% ± 0.02%等，SUV相关性评估也显示其优于其他方法，临床误差容忍率不超5%。该方法实现了精确的全脑分割，对脑部疾病的临床诊断和分析有益。未来，作者将探索该方法在其他模态图像处理任务中的应用。</p>
 
       </div>
       <div class="post-tags-categories">
@@ -869,8 +964,7 @@
       
       <!-- <div class="content">
         作者单位
- 摘要
-Multimodal image fusion plays an essential role in 
+摘要Multimodal image fusion plays an essential role in me
       </div> -->
     </a>
   </div>
@@ -893,9 +987,8 @@ Multimodal image fusion plays an essential role in
 .nii数据的预处理，参考F2Net
 
 转换后的.npy文件数量与原始.nii文件数量的关系如下：
- 数量关系说明
-
-
+数量关系说明
+输入
       </div> -->
     </a>
   </div>
@@ -1030,7 +1123,7 @@ Multimodal image fusion plays an essential role in
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-text"> 网络整体结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E9%83%A8%E5%88%86"><span class="toc-text"> 编码器部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E7%A0%81%E5%99%A8%E9%83%A8%E5%88%86"><span class="toc-text"> 解码器部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text"> 损失函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-text">网络整体结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BC%96%E7%A0%81%E5%99%A8%E9%83%A8%E5%88%86"><span class="toc-text">编码器部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A7%A3%E7%A0%81%E5%99%A8%E9%83%A8%E5%88%86"><span class="toc-text">解码器部分</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1588,7 +1681,7 @@ Multimodal image fusion plays an essential role in
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2236,5 +2329,20 @@ Multimodal image fusion plays an essential role in
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

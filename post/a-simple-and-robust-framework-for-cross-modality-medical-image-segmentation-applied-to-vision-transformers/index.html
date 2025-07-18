@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -720,57 +832,45 @@
     <article class="post post-detail">
       <div class="post-content">
         <p>Centre des Mat´eriaux、Centre de Mise en Forme des Mat´eriaux、Centre de Morphologie Math´ematique</p>
-<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> 摘要</h2>
-<p>When it comes to clinical images, automatic segmentation has a wide variety of applications and a considerable<br />
-diversity of input domains, such as different types of Magnetic Resonance Images and Computerized Tomography scans. This heterogeneity is a challenge for cross-modality algorithms that should equally perform independently of the input image type fed to them. Often, segmentation models are trained using a single modality, preventing generalization to other types of input data without resorting to transfer learning techniques. Furthermore, the multi-modal or cross-modality architectures proposed in the literature frequently require registered images, which are not easy to collect in clinical environments, or need additional process-<br />
-ing steps, such as synthetic image generation. In this work, we propose a simple framework to achieve fair image segmentation ofmultiple modalities using a single conditional model that adapts its normalization layers based on the input type, trained with non-registered interleaved mixed data. We show that our framework outperforms other cross-modality segmentation methods, when applied to the same 3D UNet baseline model, on the Multi-Modality Whole Heart Segmentation Challenge. Furthermore, we define the Conditional Vision Transformer encoder, based on the proposed cross-modality framework, and we show that it brings significant improvements to the resulting segmentation, up to 6.87% ofDice accuracy, with respect to its baseline ref-<br />
-erence. The code to reproduce our experiments and the trained model weights are publicly available at <a target="_blank" rel="noopener" href="https://github.com/matteo-bastico/MI-Seg">https://github.com/matteo-bastico/MI-Seg</a>.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> 翻译</h2>
-<p>对于临床图像，<strong>自动分割</strong>具有广泛的应用和多样的输入域，例如不同类型的磁共振图像和计算机断层扫描。这种异质性对跨模态算法提出了挑战，因为它们应该在不考虑输入图像类型的情况下同样有效地运行。通常，分割模型使用单一模态进行训练，无法在不借助迁移学习技术的情况下泛化到其他类型的输入数据。此外，文献中提出的多模态或跨模态架构通常需要已配准的图像，而这些图像在临床环境中难以收集，或者需要额外的处理步骤，如合成图像生成。在这项工作中，我们提出了一个简单的框架，通过一个单一的条件模型实现多模态图像的公平分割，该模型根据输入类型调整其归一化层，并使用未配准的交错混合数据进行训练。我们展示了在相同的3D UNet基线模型上，我们的框架在多模态全心脏分割挑战中优于其他跨模态分割方法。此外，我们基于所提出的跨模态框架定义了条件视觉Transformer编码器，并展示了它对最终分割带来了显著的改进，与基线参考相比，Dice准确率提高了最多6.87%。复现我们实验的代码和训练好的模型权重已公开在<a target="_blank" rel="noopener" href="https://github.com/matteo-bastico/MI-Seg">https://github.com/matteo-bastico/MI-Seg</a></p>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> 研究背景</h2>
-<p>医学图像分割是<strong>深度学习和人工智能</strong>领域的研究热点，但当前的算法存在一些问题，这构成了本文的研究背景：</p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>When it comes to clinical images, automatic segmentation has a wide variety of applications and a considerable<br>diversity of input domains, such as different types of Magnetic Resonance Images and Computerized Tomography scans. This heterogeneity is a challenge for cross-modality algorithms that should equally perform independently of the input image type fed to them. Often, segmentation models are trained using a single modality, preventing generalization to other types of input data without resorting to transfer learning techniques. Furthermore, the multi-modal or cross-modality architectures proposed in the literature frequently require registered images, which are not easy to collect in clinical environments, or need additional process-<br>ing steps, such as synthetic image generation. In this work, we propose a simple framework to achieve fair image segmentation ofmultiple modalities using a single conditional model that adapts its normalization layers based on the input type, trained with non-registered interleaved mixed data. We show that our framework outperforms other cross-modality segmentation methods, when applied to the same 3D UNet baseline model, on the Multi-Modality Whole Heart Segmentation Challenge. Furthermore, we define the Conditional Vision Transformer encoder, based on the proposed cross-modality framework, and we show that it brings significant improvements to the resulting segmentation, up to 6.87% ofDice accuracy, with respect to its baseline ref-<br>erence. The code to reproduce our experiments and the trained model weights are publicly available at <a target="_blank" rel="noopener" href="https://github.com/matteo-bastico/MI-Seg">https://github.com/matteo-bastico/MI-Seg</a>.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>对于临床图像，<strong>自动分割</strong>具有广泛的应用和多样的输入域，例如不同类型的磁共振图像和计算机断层扫描。这种异质性对跨模态算法提出了挑战，因为它们应该在不考虑输入图像类型的情况下同样有效地运行。通常，分割模型使用单一模态进行训练，无法在不借助迁移学习技术的情况下泛化到其他类型的输入数据。此外，文献中提出的多模态或跨模态架构通常需要已配准的图像，而这些图像在临床环境中难以收集，或者需要额外的处理步骤，如合成图像生成。在这项工作中，我们提出了一个简单的框架，通过一个单一的条件模型实现多模态图像的公平分割，该模型根据输入类型调整其归一化层，并使用未配准的交错混合数据进行训练。我们展示了在相同的3D UNet基线模型上，我们的框架在多模态全心脏分割挑战中优于其他跨模态分割方法。此外，我们基于所提出的跨模态框架定义了条件视觉Transformer编码器，并展示了它对最终分割带来了显著的改进，与基线参考相比，Dice准确率提高了最多6.87%。复现我们实验的代码和训练好的模型权重已公开在<a target="_blank" rel="noopener" href="https://github.com/matteo-bastico/MI-Seg">https://github.com/matteo-bastico/MI-Seg</a></p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>医学图像分割是<strong>深度学习和人工智能</strong>领域的研究热点，但当前的算法存在一些问题，这构成了本文的研究背景：</p>
 <ol>
-<li><strong>单模态训练局限性</strong>：现有算法通常在单一医学成像模态上训练，如T1 - 或T2加权磁共振成像（MRI）或计算机断层扫描（CT），在测试不同训练图像时易受数据可变性影响。数据可变性源于成像方法、扫描仪、采集设置和患者个体差异等。</li>
-<li><strong>多模态和跨模态方法的不足</strong>
-<ul>
-<li><strong>多模态方法</strong>：需堆叠不同类型图像生成组合输入，或利用多模态生成合成图像，但都需要配准的医学图像，而采集同一患者的多张图像受资源和时间限制。</li>
-<li><strong>跨模态方法</strong>：如使用辅助模态改进目标模态分割，采用微调或迁移学习，但未充分利用跨模态信息。联合训练在域转移显著时难直接学习共同特征，基于合成图像生成的技术增加了计算复杂性，不利于实时应用。 因此，本文旨在提出一种通用框架，实现高质量跨模态分割，同时避免模型开销和训练时对配准临床图像的需求。</li>
+<li><strong>单模态训练局限性</strong>：现有算法通常在单一医学成像模态上训练，如T1 - 或T2加权磁共振成像（MRI）或计算机断层扫描（CT），在测试不同训练图像时易受数据可变性影响。数据可变性源于成像方法、扫描仪、采集设置和患者个体差异等。 </li>
+<li><strong>多模态和跨模态方法的不足</strong>   <ul>
+<li><strong>多模态方法</strong>：需堆叠不同类型图像生成组合输入，或利用多模态生成合成图像，但都需要配准的医学图像，而采集同一患者的多张图像受资源和时间限制。    </li>
+<li><strong>跨模态方法</strong>：如使用辅助模态改进目标模态分割，采用微调或迁移学习，但未充分利用跨模态信息。联合训练在域转移显著时难直接学习共同特征，基于合成图像生成的技术增加了计算复杂性，不利于实时应用。 因此，本文旨在提出一种通用框架，实现高质量跨模态分割，同时避免模型开销和训练时对配准临床图像的需求。 </li>
 </ul>
 </li>
 </ol>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> 研究现状</h2>
-<p><strong>模型架构</strong>：近年来，多种深度学习架构被提出用于医学图像分割，如 UNet 及其变体，以及基于 Vision Transformers（ViT）的模型，如 TransUNET、UNETR 和 Swin - UNETR 等，性能表现优异。</p>
-<p><strong>多模态学习</strong>：多模态学习在医学影像领域有应用，包括基于<strong>生成对抗网络</strong>（<strong>GAN</strong>）的合成图像生成和多模态图像分割，部分研究将二者结合。</p>
-<p><strong>跨模态分割</strong>：提出了一些跨模态医学图像分割技术，如使用辅助模态提升目标模态分割性能、联合训练、基于特征提取器的方法等。</p>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> 提出的模型</h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_15-58-11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_15-58-11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_15-58-11" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-00-23.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-00-23.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-00-23" /></p>
-<p>论文提出了一个简单的框架和基于该框架的条件Vision Transformers（C - ViT）编码器，用于跨模态医学图像分割，具体如下：</p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><p><strong>模型架构</strong>：近年来，多种深度学习架构被提出用于医学图像分割，如 UNet 及其变体，以及基于 Vision Transformers（ViT）的模型，如 TransUNET、UNETR 和 Swin - UNETR 等，性能表现优异。 </p>
+<p><strong>多模态学习</strong>：多模态学习在医学影像领域有应用，包括基于<strong>生成对抗网络</strong>（<strong>GAN</strong>）的合成图像生成和多模态图像分割，部分研究将二者结合。 </p>
+<p><strong>跨模态分割</strong>：提出了一些跨模态医学图像分割技术，如使用辅助模态提升目标模态分割性能、联合训练、基于特征提取器的方法等。 </p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_15-58-11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_15-58-11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_15-58-11"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-00-23.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-00-23.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-00-23"></p>
+<p>论文提出了一个简单的框架和基于该框架的条件Vision Transformers（C - ViT）编码器，用于跨模态医学图像分割，具体如下： </p>
 <ol>
-<li><strong>跨模态分割框架</strong>：该框架适用于任何编码器 - 解码器架构，旨在实现高质量的跨模态分割，且无需在分割模型上增加额外开销，也不需要注册临床图像进行训练。具体做法是将不同领域的医学图像直接输入到一个单一的模态条件模型中，该模型通过自适应其编码器归一化层来生成所需的分割结果。自适应基于条件实例归一化（CIN），模型可以端到端地进行训练。通过随机混合多种模态的不同数据（即交错混合训练方式），避免了先前的合成图像风格迁移。</li>
-<li><strong>条件视觉变换器（C - ViT）编码器</strong>：基于上述提出的框架，正式定义了C - ViT编码器架构，用于构建与模态无关的基于ViT的图像分割或分类模型。C - ViT编码器有两个子层，即多头自注意力机制（MSA）和多层感知机（MLP），在每个子层之前都使用CIN替换了传统的层归一化（LN）。C - ViT编码器可以推广到Swin - 变压器模型中。 实验结果表明，该框架和C - ViT编码器在多模态全心脏分割（MM - WHS）2017挑战赛数据集上，相较于其他方法，显著提高了分割准确性，同时降低了训练和推理的复杂性。</li>
+<li><strong>跨模态分割框架</strong>：该框架适用于任何编码器 - 解码器架构，旨在实现高质量的跨模态分割，且无需在分割模型上增加额外开销，也不需要注册临床图像进行训练。具体做法是将不同领域的医学图像直接输入到一个单一的模态条件模型中，该模型通过自适应其编码器归一化层来生成所需的分割结果。自适应基于条件实例归一化（CIN），模型可以端到端地进行训练。通过随机混合多种模态的不同数据（即交错混合训练方式），避免了先前的合成图像风格迁移。 </li>
+<li><strong>条件视觉变换器（C - ViT）编码器</strong>：基于上述提出的框架，正式定义了C - ViT编码器架构，用于构建与模态无关的基于ViT的图像分割或分类模型。C - ViT编码器有两个子层，即多头自注意力机制（MSA）和多层感知机（MLP），在每个子层之前都使用CIN替换了传统的层归一化（LN）。C - ViT编码器可以推广到Swin - 变压器模型中。 实验结果表明，该框架和C - ViT编码器在多模态全心脏分割（MM - WHS）2017挑战赛数据集上，相较于其他方法，显著提高了分割准确性，同时降低了训练和推理的复杂性。 </li>
 </ol>
-<h2 id="实验compared-with-sota"><a class="markdownIt-Anchor" href="#实验compared-with-sota"></a> 实验（Compared with SOTA）</h2>
-<p>数据集：<strong>Multi-modality Whole Heart Segmentation Challenge 2017 (MM-WHS 2017) dataset</strong></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-16.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-16.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-03-16" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-23.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-23.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-03-23" /></p>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p>数据集：<strong>Multi-modality Whole Heart Segmentation Challenge 2017 (MM-WHS 2017) dataset</strong></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-16.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-16.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-03-16"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-23.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-23.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-03-23"></p>
 <ul>
 <li><strong>数据和方法</strong>：在心脏子结构分割的定量比较中，对比了微调、联合训练、X形架构、Zhang等人基于合成图像生成的在线训练方法以及Li等人的知识蒸馏跨模态分割技术。微调是先使用辅助模态训练模型，再将知识迁移到目标模态；联合训练是在不同批次中交替使用两种模态同时训练基线模型。</li>
 <li><strong>结果分析</strong>：微调、联合训练和X形架构对分割精度的提升有限，因为它们没有充分利用跨模态信息。基于GAN的在线合成方法（有无相互知识蒸馏）能显著提高目标模态分割的平均精度，最高达3.06%，但会给模型带来显著开销，限制实时应用。本文方法在降低训练和推理复杂度的同时，显著提高了分割精度，平均Dice系数提升了0.65%，单个心脏子结构（如右心室）最高提升2.71%，不过升主动脉和肺动脉的性能略有下降，可能是手动分割范围与测试工具裁剪不一致导致。</li>
 </ul>
-<h2 id="实验ablation-experiments"><a class="markdownIt-Anchor" href="#实验ablation-experiments"></a> 实验（Ablation Experiments）​​</h2>
-<ul>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
 <li><strong>定量结果</strong>：与基线模型、微调及联合训练的结果相比，本文框架将心脏子结构的平均Dice系数提高了4%，全心分割（WHS）的准确率提高了6.87%。基于ViT的条件模型在验证集上表现优于基于UNet的模型，但在测试集上性能略差，可能是因为Transformer通常需要更多数据进行更精细的泛化。</li>
 <li><strong>定性结果</strong>：使用C - ViT时，与其他方法相比有明显改进，如在某些切片的分割结果中能对真实标注（GT）进行细化，3D分割中C - ViT的结果没有真实标注区域外的误报。且该框架在交叉验证中表现稳健。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-04-21.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-04-21.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-04-21" /></p>
-<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> 结论</h2>
-<p>作者提出一种简单框架，用单跨模态条件模型和交错混合数据训练，以减少模型开销和对配准数据的需求，实现不同医学图像的分割。结论如下：</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-04-21.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-04-21.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-04-21"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出一种简单框架，用单跨模态条件模型和交错混合数据训练，以减少模型开销和对配准数据的需求，实现不同医学图像的分割。结论如下：</p>
 <ol>
 <li>基于条件实例归一化（CIN）定义通用条件模型，可应用于所有先进医学图像分割架构。</li>
-<li>开发新的条件视觉变压器（C - ViT）编码器，用于创建基于ViT的条件模型。</li>
-<li>该框架在心脏子结构分割的多模态公共数据集上达到了跨模态医学图像分割的新水平，不仅利用辅助模态帮助目标模态分割，也能对辅助模态高质量分割。</li>
-<li>未来可在更多模态数据集测试，以无监督域适应方式扩展框架，实现单标注模态训练并适应无标注域。</li>
+<li>开发新的条件视觉变压器（C - ViT）编码器，用于创建基于ViT的条件模型。 </li>
+<li>该框架在心脏子结构分割的多模态公共数据集上达到了跨模态医学图像分割的新水平，不仅利用辅助模态帮助目标模态分割，也能对辅助模态高质量分割。 </li>
+<li>未来可在更多模态数据集测试，以无监督域适应方式扩展框架，实现单标注模态训练并适应无标注域。 </li>
 </ol>
 
       </div>
@@ -850,8 +950,7 @@ erence. The code to reproduce our experiments and the trained model weights are 
         
 四川大学、中国科学院大学
 
- 摘要
-Transformers have recently gained conside
+摘要Transformers have recently gained considera
       </div> -->
     </a>
   </div>
@@ -986,7 +1085,7 @@ Transformers have recently gained conside
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Ccompared-with-sota"><span class="toc-text"> 实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8Cablation-experiments"><span class="toc-text"> 实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1544,7 +1643,7 @@ Transformers have recently gained conside
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2192,5 +2291,20 @@ Transformers have recently gained conside
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

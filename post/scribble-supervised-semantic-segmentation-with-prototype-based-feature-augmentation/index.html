@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -721,29 +833,20 @@
       <div class="post-content">
         <p><strong>Hohai University, Nanjing, China</strong></p>
 <p><strong>RMIT University, Melbourne, Australia</strong></p>
-<h2 id="摘要"><a class="markdownIt-Anchor" href="#摘要"></a> <strong>摘要</strong></h2>
-<p><strong>Scribble-supervised semantic segmentation</strong> presents a cost-effective training method that utilizes annotations generated through scribbling. It is valued in attaining high performance while minimizing annotation costs, which has made it highly regarded among researchers. Scribble supervision propagates information from labeled pixels to the surrounding unlabeled pixels, enabling semantic segmentation for the entire image. However, existing methods often ignore the features of classified pixels during feature<br />
-propagation. To address these limitations, this paper proposes a prototype-based feature augmentation method that leverages feature prototypes to augment scribble supervision. Experimental results demonstrate that our approach achieves state-of-the-art performance on the PASCAL VOC 2012 dataset in scribble-supervised semantic segmentation tasks. The code is available at<br />
-<a target="_blank" rel="noopener" href="https://github.com/TranquilChan/PFA">https://github.com/TranquilChan/PFA</a>.</p>
-<h2 id="翻译"><a class="markdownIt-Anchor" href="#翻译"></a> <strong>翻译</strong></h2>
-<p>**涂鸦监督语义分割（Scribble-supervised semantic segmentation）**提出了一种经济高效的训练方法，通过使用涂鸦生成的标注进行模型训练。该方法因能在显著降低标注成本的同时实现高性能表现，因此备受研究人员推崇。其核心原理是通过将已标注像素的信息传递至相邻未标注区域，从而完成整幅图像的语义分割。然而，我们发现现有方法在特征传递过程中普遍忽视已分类像素的特征特性。针对这一局限性，本文提出基于原型（prototype）的特征增强方法，通过挖掘特征原型（feature prototypes）的统计特性来强化涂鸦监督效果。实验表明，我们的方法在 PASCAL VOC 2012 数据集的涂鸦监督语义分割任务中达到了当前最佳水平，相关代码已开源：<a target="_blank" rel="noopener" href="https://github.com/TranbilChan/PFA%E3%80%82">https://github.com/TranbilChan/PFA。</a></p>
-<h2 id="研究背景"><a class="markdownIt-Anchor" href="#研究背景"></a> <strong>研究背景</strong></h2>
-<p><strong>标注成本问题</strong>：深度学习技术推动了深度神经网络在图像分割的发展，但是，对于标注像素级别的样本需要大量的人力和财力，并且其标注过程也非常繁琐。因此，研究者越来越关注利用涂鸦标签进行监督学习的方法。<strong>涂鸦标签属于弱监督学习</strong>，相比像素级标注，能显著减少标注工作量、提高效率，且比点、边界框和图像级标签提供更多关键语义信息。</p>
-<p><strong>现有方法的局限性</strong>：现有涂鸦监督语义分割方法主要依赖<strong>正则化损失、一致性损失、伪建议、辅助任务和标签扩散</strong>等，但这些方法存在一定缺陷。例如，正则化方法常忽略利用高层语义信息，一致性损失未在类别层面提供直接监督，伪标签方法耗时，辅助任务会引入额外数据和预测误差，标签扩散主要依赖局部信息，且许多方法忽略了正确分类像素特征在指导边界区域像素分类中的作用。 基于以上背景，作者提出基于原型的特征增强方法，以解决现有方法的不足，提高涂鸦监督语义分割的性能。</p>
-<h2 id="研究现状"><a class="markdownIt-Anchor" href="#研究现状"></a> <strong>研究现状</strong></h2>
-<ul>
-<li>
-<p><strong>标注方式</strong>：图像语义分割任务训练通常需大量高质量标注样本，像素级标注耗时耗力，因此弱监督学习方法受关注，如使用涂鸦、点、边界框和图像级标签等。其中，涂鸦监督能提供更多关键语义信息，表现更优。</p>
-</li>
-<li>
-<p><strong>现有方法</strong>：现有涂鸦监督语义分割方法主要依赖正则化损失、一致性损失、伪建议、辅助任务和标签扩散等，但这些方法存在一定局限性。</p>
-</li>
-<li>
-<p><strong>原型方法</strong>：特征原型在计算机视觉任务中用于增强模型识别能力，部分方法在弱监督语义分割中探索了原型的使用，但未充分发挥其特征增强和引导作用。</p>
-</li>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><strong>摘要</strong></h2><p><strong>Scribble-supervised semantic segmentation</strong> presents a cost-effective training method that utilizes annotations generated through scribbling. It is valued in attaining high performance while minimizing annotation costs, which has made it highly regarded among researchers. Scribble supervision propagates information from labeled pixels to the surrounding unlabeled pixels, enabling semantic segmentation for the entire image. However, existing methods often ignore the features of classified pixels during feature<br>propagation. To address these limitations, this paper proposes a prototype-based feature augmentation method that leverages feature prototypes to augment scribble supervision. Experimental results demonstrate that our approach achieves state-of-the-art performance on the PASCAL VOC 2012 dataset in scribble-supervised semantic segmentation tasks. The code is available at<br><a target="_blank" rel="noopener" href="https://github.com/TranquilChan/PFA">https://github.com/TranquilChan/PFA</a>.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a><strong>翻译</strong></h2><p><strong>涂鸦监督语义分割（Scribble-supervised semantic segmentation）</strong>提出了一种经济高效的训练方法，通过使用涂鸦生成的标注进行模型训练。该方法因能在显著降低标注成本的同时实现高性能表现，因此备受研究人员推崇。其核心原理是通过将已标注像素的信息传递至相邻未标注区域，从而完成整幅图像的语义分割。然而，我们发现现有方法在特征传递过程中普遍忽视已分类像素的特征特性。针对这一局限性，本文提出基于原型（prototype）的特征增强方法，通过挖掘特征原型（feature prototypes）的统计特性来强化涂鸦监督效果。实验表明，我们的方法在 PASCAL VOC 2012 数据集的涂鸦监督语义分割任务中达到了当前最佳水平，相关代码已开源：<a target="_blank" rel="noopener" href="https://github.com/TranbilChan/PFA。">https://github.com/TranbilChan/PFA。</a></p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a><strong>研究背景</strong></h2><p><strong>标注成本问题</strong>：深度学习技术推动了深度神经网络在图像分割的发展，但是，对于标注像素级别的样本需要大量的人力和财力，并且其标注过程也非常繁琐。因此，研究者越来越关注利用涂鸦标签进行监督学习的方法。<strong>涂鸦标签属于弱监督学习</strong>，相比像素级标注，能显著减少标注工作量、提高效率，且比点、边界框和图像级标签提供更多关键语义信息。</p>
+<p><strong>现有方法的局限性</strong>：现有涂鸦监督语义分割方法主要依赖<strong>正则化损失、一致性损失、伪建议、辅助任务和标签扩散</strong>等，但这些方法存在一定缺陷。例如，正则化方法常忽略利用高层语义信息，一致性损失未在类别层面提供直接监督，伪标签方法耗时，辅助任务会引入额外数据和预测误差，标签扩散主要依赖局部信息，且许多方法忽略了正确分类像素特征在指导边界区域像素分类中的作用。 基于以上背景，作者提出基于原型的特征增强方法，以解决现有方法的不足，提高涂鸦监督语义分割的性能。 </p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a><strong>研究现状</strong></h2><ul>
+<li><strong>标注方式</strong>：图像语义分割任务训练通常需大量高质量标注样本，像素级标注耗时耗力，因此弱监督学习方法受关注，如使用涂鸦、点、边界框和图像级标签等。其中，涂鸦监督能提供更多关键语义信息，表现更优。</li>
 </ul>
-<h2 id="提出的模型"><a class="markdownIt-Anchor" href="#提出的模型"></a> <strong>提出的模型</strong></h2>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-11_19-29-04" /></p>
+<ul>
+<li><strong>现有方法</strong>：现有涂鸦监督语义分割方法主要依赖正则化损失、一致性损失、伪建议、辅助任务和标签扩散等，但这些方法存在一定局限性。</li>
+</ul>
+<ul>
+<li><strong>原型方法</strong>：特征原型在计算机视觉任务中用于增强模型识别能力，部分方法在弱监督语义分割中探索了原型的使用，但未充分发挥其特征增强和引导作用。</li>
+</ul>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a><strong>提出的模型</strong></h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-11_19-29-04"></p>
 <ul>
 <li><strong>特征提取</strong>：使用基于Mix Transformer的编码器（Segformer中的MiT-B1）提取初始特征图。</li>
 <li><strong>初始预测</strong>：将特征图输入解码器生成语义分割预测图，通过部分交叉熵损失（partial cross-entropy loss），利用涂鸦标签进行监督，细化预测结果。</li>
@@ -751,31 +854,26 @@ propagation. To address these limitations, this paper proposes a prototype-based
 <li><strong>特征增强</strong>：使用局部和全局原型通过原型特征增强器对初始特征进行增强。</li>
 <li><strong>一致性监督</strong>：将增强后的特征图再次通过解码器生成增强预测图，使用一致性损失（consistency loss）对初始预测图和增强预测图进行约束。</li>
 </ul>
-<h2 id="实验过程compared-with-sota"><a class="markdownIt-Anchor" href="#实验过程compared-with-sota"></a> <strong>实验过程（Compared with SOTA）</strong></h2>
-<p>数据集：<strong>PASCAL-Scribble</strong></p>
+<h2 id="实验过程（Compared-with-SOTA）"><a href="#实验过程（Compared-with-SOTA）" class="headerlink" title="实验过程（Compared with SOTA）"></a><strong>实验过程（Compared with SOTA）</strong></h2><p>数据集：<strong>PASCAL-Scribble</strong></p>
 <ul>
 <li>选择<strong>MiT-B1</strong>作为骨干网络，与现有方法在<strong>PASCAL VOC 2012</strong>验证集上进行比较。</li>
 <li>与当前最先进的方法TEL相比，尽管MiT-B1骨干网络在全监督数据集上的性能稍弱，但该方法的mIoU仍提高了0.6%。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-33-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-33-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-11_19-33-24" /></p>
-<h2 id="实验过程ablation-experiments"><a class="markdownIt-Anchor" href="#实验过程ablation-experiments"></a> <strong>实验过程（Ablation Experiments）</strong></h2>
-<ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-33-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-33-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-11_19-33-24"></p>
+<h2 id="实验过程（Ablation-Experiments）"><a href="#实验过程（Ablation-Experiments）" class="headerlink" title="实验过程（Ablation Experiments）"></a><strong>实验过程（Ablation Experiments）</strong></h2><ul>
 <li><strong>各组件有效性</strong>：以仅使用部分交叉熵损失作为基线，对<strong>局部原型增强</strong>和<strong>全局原型增强</strong>方法进行消融实验。结果表明，同时使用两种原型增强时性能最佳，mIoU比基线提高了10.4%。</li>
 <li><strong>原型设置</strong>：实验发现，当每个类别的全局原型数量增加到约5时，mIoU的增加趋于饱和；在原型提取时，k百分比为8%时方法性能较好。</li>
 <li><strong>骨干网络影响</strong>：研究了不同骨干网络对方法的影响，发现基于Transformer的骨干网络在效率和性能上限方面表现更优。使用MiT - B5时，mIoU达到81.5%，显著超过现有方法。</li>
 </ul>
-<h2 id="结论"><a class="markdownIt-Anchor" href="#结论"></a> <strong>结论</strong></h2>
-<p>作者提出了一种基于原型的特征增强方法用于涂鸦监督语义分割，得出以下结论：</p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h2><p>作者提出了一种基于原型的特征增强方法用于涂鸦监督语义分割，得出以下结论：</p>
 <ul>
-<li>
-<p>从<strong>涂鸦监督</strong>初始结果的置信部分提取原型，利用这些原型增强初始特征，并根据涂鸦监督的具体情况采用不同原型策略，能以正确分类像素的原型引导错误分类像素的分类，提升预测性能。</p>
-</li>
-<li>
-<p>实验结果表明，该方法在PASCAL VOC 2012数据集上达到了最先进的性能，相比当前最优方法TEL，使用稍弱的骨干网络MiT-B1仍使mIoU提高了0.6%。</p>
-</li>
-<li>
-<p><strong>未来计划将此方法应用于其他任务，以挖掘其巨大潜力和应用价值 （下一个创新点）</strong></p>
-</li>
+<li>从<strong>涂鸦监督</strong>初始结果的置信部分提取原型，利用这些原型增强初始特征，并根据涂鸦监督的具体情况采用不同原型策略，能以正确分类像素的原型引导错误分类像素的分类，提升预测性能。</li>
+</ul>
+<ul>
+<li>实验结果表明，该方法在PASCAL VOC 2012数据集上达到了最先进的性能，相比当前最优方法TEL，使用稍弱的骨干网络MiT-B1仍使mIoU提高了0.6%。</li>
+</ul>
+<ul>
+<li><strong>未来计划将此方法应用于其他任务，以挖掘其巨大潜力和应用价值 （下一个创新点）</strong></li>
 </ul>
 
       </div>
@@ -987,7 +1085,7 @@ propagation. To address these limitations, this paper proposes a prototype-based
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text"> 摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text"> 翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text"> 研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text"> 研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text"> 提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8Bcompared-with-sota"><span class="toc-text"> 实验过程（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8Bablation-experiments"><span class="toc-text"> 实验过程（Ablation Experiments）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text"> 结论</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验过程（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%BF%87%E7%A8%8B%EF%BC%88Ablation-Experiments%EF%BC%89"><span class="toc-text">实验过程（Ablation Experiments）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1545,7 +1643,7 @@ propagation. To address these limitations, this paper proposes a prototype-based
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2193,5 +2291,20 @@ propagation. To address these limitations, this paper proposes a prototype-based
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>

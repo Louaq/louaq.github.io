@@ -81,7 +81,119 @@
         
     
 
-<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -719,21 +831,9 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="天津大学重庆大学等"><a class="markdownIt-Anchor" href="#天津大学重庆大学等"></a> <strong>天津大学，重庆大学等</strong></h2>
-<blockquote>
-<p>摘要：Open-vocabulary semantic segmentation strives to distinguish pixels into different semantic groups from an open<br />
-set of categories. Most existing methods explore utilizing pre-trained vision-language models, in which the key is to<br />
-adapt the image-level model for pixel-level segmentation task. In this paper, we propose a simple encoder-decoder,<br />
-named SED, for open-vocabulary semantic segmentation, which comprises a hierarchical encoder-based cost map generation and a gradual fusion decoder with category early rejection. The hierarchical encoder-based cost map generation employs hierarchical backbone, instead ofplain transformer, to predict pixel-level image-text cost map.<br />
-Compared to plain transformer, hierarchical backbone better captures local spatial information and has linear computational complexity with respect to input size. Our gradual fusion decoder employs a top-down structure to com-<br />
-bine cost map and the feature maps of different backbone levels for segmentation. To accelerate inference speed, we<br />
-introduce a category early rejection scheme in the decoder that rejects many no-existing categories at the early layer<br />
-ofdecoder, resulting in at most 4.7 times acceleration without accuracy degradation. Experiments are performed on<br />
-multiple open-vocabulary semantic segmentation datasets, which demonstrates the efficacy ofour SED method. When<br />
-using ConvNeXt-B, our SED method achieves mIoU score of 31.6% on ADE20K with 150 categories at 82 millisecond (ms) per image on a single A6000. Our source code is available at <a target="_blank" rel="noopener" href="https://github.com/xb534/SED">https://github.com/xb534/SED</a></p>
-</blockquote>
-<blockquote>
-<p>翻译：开放词汇语义分割旨在将像素划分到一个开放类别集中的不同语义组。大多数现有的方法尝试使用预训练的视觉-语言模型，关键是将图像级的模型适应为像素级的分割任务。本文提出了一种简单的编码器-解码器架构，称为SED，用于开放词汇语义分割。SED包含两部分：基于层次编码器的成本图生成和逐渐融合的解码器，并且具有类别早期拒绝的功能。基于层次编码器的成本图生成使用层次化的骨干网络，而不是传统的Transformer，来预测像素级的图像-文本成本图。与普通的Transformer相比，层次化骨干网络能够更好地捕捉局部空间信息，并且计算复杂度与输入的大小成线性关系。我们的逐渐融合解码器采用自上而下的结构，将成本图与不同层级骨干网络的特征图进行融合，完成分割任务。为了提高推理速度，我们在解码器中引入了类别早期拒绝方案，通过在解码器的早期层次中剔除不存在的类别，从而在不牺牲精度的情况下，实现最多4.7倍的加速。我们在多个开放词汇语义分割数据集上进行了实验，验证了SED方法的有效性。当使用ConvNeXt-B时，SED方法在ADE20K数据集上，针对150个类别的mIoU得分为31.6%，每张图像的推理时间为82毫秒（ms），运行于单个A6000显卡。我们的源代码可以通过<a target="_blank" rel="noopener" href="https://github.com/xb534/SED%E4%B8%8B%E8%BD%BD%E3%80%82">https://github.com/xb534/SED下载。</a></p>
+        <h2 id="天津大学，重庆大学等"><a href="#天津大学，重庆大学等" class="headerlink" title="天津大学，重庆大学等"></a><strong>天津大学，重庆大学等</strong></h2><blockquote>
+<p>摘要：Open-vocabulary semantic segmentation strives to distinguish pixels into different semantic groups from an open<br>set of categories. Most existing methods explore utilizing pre-trained vision-language models, in which the key is to<br>adapt the image-level model for pixel-level segmentation task. In this paper, we propose a simple encoder-decoder,<br>named SED, for open-vocabulary semantic segmentation, which comprises a hierarchical encoder-based cost map generation and a gradual fusion decoder with category early rejection. The hierarchical encoder-based cost map generation employs hierarchical backbone, instead ofplain transformer, to predict pixel-level image-text cost map.<br>Compared to plain transformer, hierarchical backbone better captures local spatial information and has linear computational complexity with respect to input size. Our gradual fusion decoder employs a top-down structure to com-<br>bine cost map and the feature maps of different backbone levels for segmentation. To accelerate inference speed, we<br>introduce a category early rejection scheme in the decoder that rejects many no-existing categories at the early layer<br>ofdecoder, resulting in at most 4.7 times acceleration without accuracy degradation. Experiments are performed on<br>multiple open-vocabulary semantic segmentation datasets, which demonstrates the efficacy ofour SED method. When<br>using ConvNeXt-B, our SED method achieves mIoU score of 31.6% on ADE20K with 150 categories at 82 millisecond (ms) per image on a single A6000. Our source code is available at <a target="_blank" rel="noopener" href="https://github.com/xb534/SED">https://github.com/xb534/SED</a></p>
+<p>翻译：开放词汇语义分割旨在将像素划分到一个开放类别集中的不同语义组。大多数现有的方法尝试使用预训练的视觉-语言模型，关键是将图像级的模型适应为像素级的分割任务。本文提出了一种简单的编码器-解码器架构，称为SED，用于开放词汇语义分割。SED包含两部分：基于层次编码器的成本图生成和逐渐融合的解码器，并且具有类别早期拒绝的功能。基于层次编码器的成本图生成使用层次化的骨干网络，而不是传统的Transformer，来预测像素级的图像-文本成本图。与普通的Transformer相比，层次化骨干网络能够更好地捕捉局部空间信息，并且计算复杂度与输入的大小成线性关系。我们的逐渐融合解码器采用自上而下的结构，将成本图与不同层级骨干网络的特征图进行融合，完成分割任务。为了提高推理速度，我们在解码器中引入了类别早期拒绝方案，通过在解码器的早期层次中剔除不存在的类别，从而在不牺牲精度的情况下，实现最多4.7倍的加速。我们在多个开放词汇语义分割数据集上进行了实验，验证了SED方法的有效性。当使用ConvNeXt-B时，SED方法在ADE20K数据集上，针对150个类别的mIoU得分为31.6%，每张图像的推理时间为82毫秒（ms），运行于单个A6000显卡。我们的源代码可以通过<a target="_blank" rel="noopener" href="https://github.com/xb534/SED下载。">https://github.com/xb534/SED下载。</a></p>
 </blockquote>
 <p><strong>研究背景：</strong> <strong>传统的方法只能分割训练集的种类，不能识别出来在训练集中没有的未知场景</strong>，同时两阶段和单阶段的方法都存在不足。两阶段的框架存在不足：计算效率低，没有充分利用上下文信息；单阶段的框架存在不足：对于低分辨率的输入，主干网络对空间信息变得不敏感，即使加入额外的网络来提供空间信息，也会增加计算资源，分割种类的增加也会增加计算资源。</p>
 <p><strong>研究现状：</strong></p>
@@ -744,41 +844,25 @@ using ConvNeXt-B, our SED method achieves mIoU score of 31.6% on ADE20K with 150
 </ul>
 <p><strong>研究方法：</strong></p>
 <ul>
-<li>
-<p><strong>Hierarchical Encoder-based Cost Map（基于分层编码器的代价图）</strong></p>
-</li>
-<li>
-<p><strong>Gradual Fusion Decoder（渐进式融合编码器）</strong></p>
-</li>
-<li>
-<p><strong>Category Early Rejection（类别早期拒接）</strong></p>
-</li>
+<li><strong>Hierarchical Encoder-based Cost Map（基于分层编码器的代价图）</strong></li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-53-28.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-53-28.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_08-53-28" /></p>
+<ul>
+<li><strong>Gradual Fusion Decoder（渐进式融合编码器）</strong></li>
+</ul>
+<ul>
+<li><strong>Category Early Rejection（类别早期拒接）</strong></li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-53-28.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-53-28.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_08-53-28"></p>
 <p><strong>实验设定（对比实验+消融实验）</strong></p>
 <blockquote>
-<p>训练集：COCO-Stuff 的训练集，包含大约 118k 密集标注的 171 类目标。<br />
-测试集：跨数据集测试。<br />
-ADE20K，包含 20K training 和 2K validation =&gt; A-150 和 A-847。<br />
-PASCAL VOC，包含 1.5k training 和 1.5k validation =&gt; PAS-20。<br />
-PASCAL-Context 来自原始的 PASCAL VOC 数据集 =&gt; PC-59 和 PC-459。</p>
+<p>训练集：COCO-Stuff 的训练集，包含大约 118k 密集标注的 171 类目标。<br>测试集：跨数据集测试。<br>ADE20K，包含 20K training 和 2K validation =&gt; A-150 和 A-847。<br>PASCAL VOC，包含 1.5k training 和 1.5k validation =&gt; PAS-20。<br>PASCAL-Context 来自原始的 PASCAL VOC 数据集 =&gt; PC-59 和 PC-459。</p>
+<p>模型设定：<br>基于 ConvNeXt-B/L 视觉编码器形式的预训练 CLIP。<br>类别模板数量 P PP 同 CAT-Seg 一致，均为 80。<br>文本编码器冻结，只训练图像编码器和解码器。</p>
+<p>GPU: 4xA6000<br>图像编码器学习率多乘以一个 0.01 倍的因子。<br>共 80k 次迭代。<br>训练时剪裁图像 768 × 768 大小，测试时直接放缩图像到 768 × 768大小。</p>
 </blockquote>
-<blockquote>
-<p>模型设定：<br />
-基于 ConvNeXt-B/L 视觉编码器形式的预训练 CLIP。<br />
-类别模板数量 P PP 同 CAT-Seg 一致，均为 80。<br />
-文本编码器冻结，只训练图像编码器和解码器。</p>
-</blockquote>
-<blockquote>
-<p>GPU: 4xA6000<br />
-图像编码器学习率多乘以一个 0.01 倍的因子。<br />
-共 80k 次迭代。<br />
-训练时剪裁图像 768 × 768 大小，测试时直接放缩图像到 768 × 768大小。</p>
-</blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_08-59-08" /></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_08-59-43" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-08.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-08.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_08-59-08"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-59-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_08-59-43"></p>
 <p><strong>实验结果：本文的SED方法都表现出较好的效果，缩短了推理时间</strong></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_09-00-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_09-00-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_09-00-24" /></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_09-00-24.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_09-00-24.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-28_09-00-24"></p>
 <p><strong>结论与不足</strong></p>
 <p>作者提出了用于<strong>开放词汇语义分割</strong>的SED方法，得出以下结论：</p>
 <ol>
@@ -859,8 +943,7 @@ PASCAL-Context 来自原始的 PASCAL VOC 数据集 =&gt; PC-59 和 PC-459。</p
         <div class="title-text">High Quality Segmentation for Ultra High-resolution Images</div>
       </div>
       <!-- <div class="content">
-         香港中文大学  Adobe 等
-**摘要：**To segment 4K or 6K ultra high-resol
+        香港中文大学  Adobe 等摘要：To segment 4K or 6K ultra high-resolution 
       </div> -->
     </a>
   </div>
@@ -995,7 +1078,7 @@ PASCAL-Context 来自原始的 PASCAL VOC 数据集 =&gt; PC-59 和 PC-459。</p
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%E9%87%8D%E5%BA%86%E5%A4%A7%E5%AD%A6%E7%AD%89"><span class="toc-text"> 天津大学，重庆大学等</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%A9%E6%B4%A5%E5%A4%A7%E5%AD%A6%EF%BC%8C%E9%87%8D%E5%BA%86%E5%A4%A7%E5%AD%A6%E7%AD%89"><span class="toc-text">天津大学，重庆大学等</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
@@ -1553,7 +1636,7 @@ PASCAL-Context 来自原始的 PASCAL VOC 数据集 =&gt; PC-59 和 PC-459。</p
         
           <div class="footer-custom">
             
-              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo" /></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right" /></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo" /></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github" /></a></p>
+              <div><p><a target="_blank" rel="noopener" href="https://hexo.io/"><img src="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7kzw7cqrg3qiDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="hexo"></a> <a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d7w33g6ud96m6t5jdcDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Copy right"></a> <a target="_blank" rel="noopener" href="https://github.com/yuang01/hexo-theme-bamboo/"><img src="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0n000d7w33gzrjfv9mfiy5sDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="bamboo"></a> <a target="_blank" rel="noopener" href="https://github.com/Louaq/louaq.github.io"><img src="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xp4cyad6dvuzvDIYPAqF0DqJ1DGxwDIiw.svg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="github"></a></p>
 </div>
             
           </div>
@@ -2201,5 +2284,20 @@ PASCAL-Context 来自原始的 PASCAL VOC 数据集 =&gt; PC-59 和 PC-459。</p
 
 
 
-  </body>
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</body>
 </html>
