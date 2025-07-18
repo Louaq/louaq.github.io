@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>.nii数据的预处理 | Louaq</title>
+  <title>FPL+ Filtered Pseudo Label-Based Unsupervised Cross-Modality Adaptation for 3D Medical Image Segmentation | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -658,21 +658,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        .nii数据的预处理
+        FPL+ Filtered Pseudo Label-Based Unsupervised Cross-Modality Adaptation for 3D Medical Image Segmentation
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-07-09 |
+          <i class="fas fa-calendar"></i> 发表于：2025-07-18 |
         </span>
       
 
@@ -680,8 +680,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E6%95%B0%E6%8D%AE%E9%9B%86/" class="post-detail-header_category">
-              数据集
+            <a href="/categories/%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              多模态医学图像分割
             </a>
           
         </span>
@@ -690,11 +690,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 444 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 3.5k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 1分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 13分钟 |
           </span>
   
           
@@ -719,55 +719,83 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <blockquote>
-<p>.nii数据的预处理，参考F2Net</p>
-</blockquote>
-<p>转换后的.npy文件数量与原始.nii文件数量的关系如下：</p>
-<h3 id="数量关系说明"><a href="#数量关系说明" class="headerlink" title="数量关系说明"></a>数量关系说明</h3><ol>
-<li><p><strong>输入.nii文件</strong>：每个病例包含5个.nii文件</p>
-<ul>
-<li>FLAIR模态 (flair.nii)</li>
-<li>T1模态 (t1.nii)</li>
-<li>T1CE模态 (t1ce.nii)</li>
-<li>T2模态 (t2.nii)</li>
-<li>分割掩码 (seg.nii)</li>
-</ul>
-</li>
-<li><p><strong>输出.npy文件</strong>：每个.nii文件中包含多个切片(通常约155个轴向切片)，但代码只处理<strong>包含肿瘤区域</strong>的切片</p>
-</li>
-<li><p><strong>转换关系公式</strong>：</p>
-<figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">.npy文件总数 <span class="operator">=</span> <span class="number">2</span> × 所有病例中包含肿瘤的切片总数</span><br></pre></td></tr></table></figure>
-</li>
-<li><p><strong>具体说明</strong>：</p>
-<ul>
-<li>每个包含肿瘤的切片会生成2个.npy文件：<ul>
-<li>一个在trainImage文件夹(四模态图像数据)</li>
-<li>一个在trainGt文件夹(对应分割掩码)</li>
-</ul>
-</li>
-<li>不包含肿瘤的切片会被跳过，不会生成.npy文件</li>
-</ul>
-</li>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Adapting a medical image segmentation model to a new domain is important for improving its cross-domain transferability, and due to the expensive annotation process, Unsupervised Domain Adaptation (UDA) is appealing where only unlabeled images are needed for the adaptation. Existing UDA methods are mainly based on image or feature alignment with adversarial training for regularization, and they are limited by insufficient supervision in the target domain. In this paper, we propose an enhanced Filtered Pseudo Label (FPL+)-based UDA method for 3D medical image segmentation. It first uses cross-domain data augmentation to translate labeled images in the source domain to a dual-domain training set consisting of a pseudo source-domain set andapseudo target-domain set. To leverage the dual-domain augmented images to train a pseudo label generator, domain-specific batch normalization layers are used to deal with the domain shift while learning the domain-invariant structure features, generating high-quality pseudo labels for target-domain images. We then combine labeled source-domain images and target-domain images with pseudo labels to train a final segmentor, where image-level weighting based on uncertainty estimation and pixel-level weighting based on dual-domain consensus are proposed to mitigate the adverse effect of noisy pseudo labels. Experiments on three public multi-modal datasets for Vestibular Schwannoma, brain tumor and whole heart segmentation show that our method surpassed ten state-of-the-art UDA methods, and it even achieved better results than fully supervised learning in the target domain in some cases.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p><strong>将医学图像分割模型适应到新的领域对于提高其跨领域的可迁移性至关重要</strong>，由于标注过程昂贵，无监督领域适应（UDA）显得极具吸引力，因为只需要未标注的图像进行适应。现有的UDA方法主要基于图像或特征对齐，通过对抗训练进行正则化，但在目标领域中由于监督不足而受到限制。本文提出了一种增强的基于过滤伪标签（FPL+）的UDA方法，用于3D医学图像分割。首先，使用跨领域数据增强将源领域的标注图像转换为由伪源领域集和伪目标领域集组成的双域训练集。为了利用双域增强图像训练伪标签生成器，使用特定领域的批归一化层来处理领域偏移，同时学习领域不变的结构特征，为目标领域图像生成高质量的伪标签。随后，我们结合带有伪标签的源领域标注图像和目标领域图像训练最终分割器，其中基于不确定性估计的图像级加权和基于双域一致性的像素级加权被提出以减轻噪声伪标签的不利影响。在三个公共多模态数据集上的实验，涉及前庭神经鞘瘤、脑肿瘤和全心分割，显示我们的方法超越了十种最先进的UDA方法，甚至在某些情况下在目标领域中取得了比完全监督学习更好的结果。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>这篇文章聚焦于3D医学图像跨模态分割模型的无监督域适应方法研究，其研究背景主要源于以下两方面问题： </p>
+<ol>
+<li><strong>跨模态性能差异大</strong>：医学图像存在多种模态，不同模态间有显著的域差距，如前庭神经鞘瘤分割中的增强T1（ceT1）和高分辨率T2（hrT2）磁共振成像。用一种模态训练的模型在其他模态图像上表现差，且为每种模态手动标注医学图像耗时费力，直接应用训练模型或分别训练新模型都不现实。 </li>
+<li><strong>现有方法局限性</strong>：早期域适应方法需在源域和目标域进行标注，无监督域适应（UDA）虽有潜力，但现有UDA方法多基于图像或特征对齐与对抗训练正则化，主要针对2D医学图像分割，在3D医学图像分割上性能有限。此外，伪标签在UDA中的应用研究较少，因其受源域和目标域间显著域偏移影响，难以生成可靠伪标签，且直接使用含大量噪声的伪标签会误导目标域分割模型训练。</li>
 </ol>
-<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p>假设您有100个病例，每个病例的MRI体积包含155个切片，而每个病例平均有40个切片包含肿瘤区域：</p>
-<ul>
-<li>原始.nii文件总数 &#x3D; 100个病例 × 5个模态文件 &#x3D; 500个文件</li>
-<li>包含肿瘤的切片总数 &#x3D; 100个病例 × 40个包含肿瘤的切片 &#x3D; 4,000个切片</li>
-<li>生成的.npy文件总数 &#x3D; 4,000个切片 × 2个文件&#x2F;切片 &#x3D; 8,000个文件<ul>
-<li>trainImage文件夹: 4,000个文件</li>
-<li>trainGt文件夹: 4,000个文件</li>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
+<li><strong>深度学习在医学图像分割取得进展</strong>：如脑胶质瘤和前庭神经鞘瘤分割算法性能接近手动分割，但不同模态医学图像间存在显著领域差距，模型跨模态表现不佳。</li>
+<li><strong>领域适应方法涌现</strong>：早期领域适应方法需源域和一定程度的目标域标注，半监督DA利用少量标注和大量未标注图像进行适应。无监督领域适应（UDA）成为热门，现有方法主要基于图像或特征对齐，结合对抗训练进行正则化。</li>
+<li><strong>伪标签学习受关注</strong>：伪标签广泛用于训练标注不足或弱标注的分割模型，但在UDA中的应用研究较少。</li>
+</ul>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种基于<strong>增强过滤伪标签</strong>（FPL+）的**无监督域自适应（UDA）**方法用于3D医学图像分割，以下是该模型的主要构成和关键步骤：</p>
+<h3 id="1-跨域数据增强（Cross-Domain-Data-Augmentation-CDDA）"><a href="#1-跨域数据增强（Cross-Domain-Data-Augmentation-CDDA）" class="headerlink" title="1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）"></a>1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）</h3><ul>
+<li><strong>目的</strong>：为了缓解源域和目标域之间的域差距，生成更多可用于训练的样本。</li>
+<li><strong>具体操作</strong>：利用图像风格转换器$T_t$和辅助目标风格转换器$T_{at}$将标记的源域图像$X_{s_i}$转换为两个伪目标域图像$X_{s\rightarrow t_i}$和$X_{s\rightarrow at_i}$，再将它们分别通过$T_s$转换回两个伪源域图像$X_{s’<em>i}$和$X</em>{s’’<em>i}$。这样每个标记的源域图像可以得到四个增强图像，且它们共享相同的分割标签$Y</em>{s_i}$。增强后的源域训练集$D_{ss} &#x3D; {X_{s_i}, X_{s’<em>i}, X</em>{s’’<em>i}}$和伪目标域训练集$D</em>{st} &#x3D; {X_{s\rightarrow t_i}, X_{s\rightarrow at_i}}$用于训练伪标签生成器。</li>
+<li><strong>训练损失</strong>：图像转换器$T_s$和$T_t$基于CycleGAN实现，训练涉及两个对抗损失$L_{t_{gan}}$、$L_{s_{gan}}$和一个循环一致性损失$L_{cyc}$。</li>
+</ul>
+<h3 id="2-双域伪标签生成器（Dual-Domain-pseudo-label-Generator-DDG）"><a href="#2-双域伪标签生成器（Dual-Domain-pseudo-label-Generator-DDG）" class="headerlink" title="2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）"></a>2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）</h3><ul>
+<li><strong>目的</strong>：学习增强后的双域图像，为目标域训练集提供高质量的伪标签。</li>
+<li><strong>具体操作</strong>：使用双域批量归一化（Dual - BN）层处理域偏移，同时学习域不变的结构特征。在某一层中，从源域提取的特征由源域BN层归一化，从目标域提取的特征由目标域BN层归一化。</li>
+<li><strong>损失函数</strong>：使用Dice损失$L_{dice}$在$D_{ss}$和$D_{st}$上训练$DDG$。</li>
+</ul>
+<h3 id="3-伪标签过滤（Pseudo-Label-Filtering）"><a href="#3-伪标签过滤（Pseudo-Label-Filtering）" class="headerlink" title="3. 伪标签过滤（Pseudo Label Filtering）"></a>3. 伪标签过滤（Pseudo Label Filtering）</h3><ul>
+<li>目的：抑制不可靠的伪标签，提高最终分割器的训练效果。<ul>
+<li><strong>基于尺寸感知不确定性估计的图像级加权</strong>：使用蒙特卡罗（MC）Dropout进行不确定性估计，计算每个目标域图像的方差图$V_j$，并根据估计的不确定区域大小$\eta_j$对图像级不确定性$v_j$进行归一化，得到图像级不确定性$u_j$，进而计算图像级权重$w_j$。</li>
+<li><strong>基于双域一致性的像素级加权</strong>：将目标域图像$X_{t_j}$通过$T_s$转换为伪源域图像$X_{t\rightarrow s_j}$，并使用$DDG$得到另一个伪标签$\hat{Y}<em>{t\rightarrow s_j}$。通过比较$\hat{Y}</em>{t\rightarrow s_j}$和$\hat{Y}<em>{t_j}$，将一致和不一致的区域分别视为可靠和不可靠的预测，定义像素级权重图$M_j$。最后将图像级权重$w_j$和像素级权重图$M_j$组合成单一权重图$A_j &#x3D; M_j \cdot w_j$，并使用加权Dice损失$L</em>{w - dice}$进行训练。</li>
 </ul>
 </li>
 </ul>
-<p>因此，转换后的.npy文件数量通常会远多于原始.nii文件的数量，但具体倍数取决于每个病例中包含肿瘤的切片数量。这种转换将3D体积数据转换为适合2D CNN训练的单独切片，只保留了对训练有价值的含肿瘤区域的切片。</p>
+<h3 id="4-最终分割器学习（Final-Segmentor-Learning）"><a href="#4-最终分割器学习（Final-Segmentor-Learning）" class="headerlink" title="4. 最终分割器学习（Final Segmentor Learning）"></a>4. 最终分割器学习（Final Segmentor Learning）</h3><ul>
+<li><strong>目的</strong>：结合源域标记图像和带有伪标签的目标域图像进行联合训练，学习域不变特征，提高在目标域的分割性能。</li>
+<li><strong>具体操作</strong>：最终分割器$S$采用与伪标签生成器$G$相同的架构，基于双域批量归一化层设计。其训练损失结合了源域的Dice损失和目标域的加权Dice损失。为了加速训练，最终分割器$S$使用伪标签生成器$G$的权重进行初始化。在测试阶段，直接使用训练好的最终分割器$S$进行推理。</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-50-38.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-50-38.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-50-38"></p>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
+<p><strong>前庭神经鞘瘤分割数据集（Vestibular Schwannoma Segmentation Dataset）</strong>：使用公开的包含242名患者的3D MRI图像数据集，有对比增强T1加权（ceT1）和高分辨率T2加权（hrT2）两种模态。将其随机分为200个训练样本、14个验证样本和28个测试样本，进行双向适应实验。实验前对图像进行裁剪和归一化预处理。</p>
+</blockquote>
+<blockquote>
+<p><strong>脑肿瘤分割数据集（BraTS Dataset）</strong>：采用2020年多模态脑肿瘤分割挑战赛数据集，使用T2和FLAIR图像进行双向适应，目标是分割整个肿瘤。从官方训练集中选取样本，部分用于验证和测试。对图像进行强度归一化和去除无肿瘤切片的预处理。</p>
+</blockquote>
+<blockquote>
+<p><strong>心脏分割数据集（MMWHS Dataset）</strong>：该数据集包含20个3D CT扫描和20个3D MRI扫描，分割目标包括升主动脉（AA）、左心房血腔（LAC）、左心室血腔（LVC）和左心室心肌（MYO）。指定MRI为源域，CT为目标域，划分训练、验证和测试集，并对图像进行裁剪和归一化。</p>
+</blockquote>
+<blockquote>
+<p><strong>实现细节</strong>：伪标签生成器G和最终分割器S基于改进的2.5D网络实现，添加额外的BN层用于双域批量归一化。使用Adam优化器训练，G训练200个周期，S初始化后训练100个周期。设置不同的补丁大小和批量大小，按照CycleGAN实现训练图像翻译器Ts和Tt。蒙特卡罗dropout的超参数K设为5，熵阈值e设为0.2。使用PyTorch 1.8.1在NVIDIA GeForce RTX 2080Ti GPU上实现实验，通过Dice分数和平均对称表面距离（ASSD）定量评估分割性能。</p>
+</blockquote>
+<p><strong>将FPL+与十种最先进的无监督域适应（UDA）方法进行比较，同时还与“w&#x2F;o DA”（直接应用源域训练的模型到目标域）、“labeled target”（使用目标域全注释图像训练）和“strong upbound”（使用源域和目标域的标注图像训练双域分割网络）进行对比。</strong></p>
+<ol>
+<li><strong>前庭神经鞘瘤分割结果</strong>：“w&#x2F;o DA”方法在两个方向上的平均Dice分数极低，表明两种模态间存在显著的域差距。所有UDA方法均有改进，FPL+在两个方向上的平均Dice分数分别达到82.92%和91.98%，显著高于其他方法，甚至在某些情况下优于“labeled target”。</li>
+<li><strong>脑胶质瘤分割结果</strong>：在“FLAIR到T2”和“T2到FLAIR”两个方向上，FPL+的平均Dice分数和ASSD均优于其他现有UDA方法，在“T2到FLAIR”方向上超过“labeled target”，略低于“strong upper bound”。</li>
+<li><strong>心脏分割结果</strong>：“w&#x2F;o DA”的Dice分数远低于“labeled target”，表明MR和CT模态间存在明显的域差距。FPL+的平均Dice分数和ASSD分别为73.70%和2.61mm，显著优于现有UDA方法，能更准确地分割心脏子结构。</li>
+</ol>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-40.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-40.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-53-40"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-57.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-53-57.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-53-57"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><p>在VS数据集上对双域伪标签生成器（DDG）和最终分割器S进行全面的消融实验，验证FPL+各组件的有效性，并将伪标签过滤方法与几种现有的抗噪声学习方法进行比较。</p>
+<ol>
+<li><strong>CDDA和Dual - BN对DDG的有效性</strong>：以仅使用Ds→t训练伪标签生成器为基线，实验表明结合Ds→t和Ds训练且不使用Dual - BN时性能有所提升，引入Dual - BN进一步提高性能，使用CDDA生成的双域增强图像结合Dual - BN能获得最高的平均Dice分数。</li>
+<li><strong>最终分割器训练的消融实验</strong>：以标准监督学习使用DDG生成的目标域伪标签为基线，逐步引入添加源域标注图像、使用Dual - BN、从G初始化S、图像级加权和像素级加权等组件。结果显示每个组件都能有效提高分割性能，结合图像级和像素级加权训练最终分割器能获得最佳效果。</li>
+<li><strong>与其他伪标签学习方法的比较</strong>：将FPL+训练S的策略与Co - teaching、GCE Loss和TriNet三种最先进的从噪声标签学习的方法进行比较，结果表明FPL+的性能优于这些方法。</li>
+<li><strong>超参数的有效性</strong>：研究了图像级加权的熵图阈值e和辅助翻译器训练周期数对性能的影响。结果显示e设置为0.2时性能最佳，辅助翻译器训练到200个周期时，伪标签生成器的性能达到峰值。</li>
+</ol>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-54-32.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-54-32.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-54-32"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-54-52.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-18_16-54-52.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-18_16-54-52"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了基于<strong>增强过滤伪标签（FPL+）的无监督跨模态适应方法</strong>用于3D医学图像分割，并得出以下结论：</p>
+<ol>
+<li><strong>方法有效性</strong>：通过跨域数据增强和图像、像素级加权等策略，有效对齐源域和目标域图像，筛选可靠伪标签，提升了模型跨域转移能力。在三个公共多模态数据集上的实验表明，该方法超越了十种最先进的无监督域适应（UDA）方法，在某些情况下甚至优于目标域的全监督学习。</li>
+<li><strong>方法局限性</strong>：方法涉及训练伪标签生成器和最终分割器两个步骤，增加了一定复杂性；因GPU内存和图像翻译伪影问题，难以实现3D图像的端到端生成和分割；要求源域和目标域的分割目标可见且拓扑相似。未来，该方法有望应用于其他分割任务。</li>
+</ol>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/Dataset/" class="">
-              Dataset
+            <a href="/tags/Unsupervised-Domain-Adaptation/" class="">
+              Unsupervised Domain Adaptation
             </a>
           
         </div>
@@ -781,7 +809,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/mr-duo-mo-tai-shu-ju/" target="_blank" title=".nii数据的预处理">https://louaq.github.io/post/mr-duo-mo-tai-shu-ju/</a>
+    <a href="/post/fpl-filtered-pseudo-label-based-unsupervised-cross-modality-adaptation-for-3d-medical-image-segmentation/" target="_blank" title="FPL+ Filtered Pseudo Label-Based Unsupervised Cross-Modality Adaptation for 3D Medical Image Segmentation">https://louaq.github.io/post/fpl-filtered-pseudo-label-based-unsupervised-cross-modality-adaptation-for-3d-medical-image-segmentation/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -799,25 +827,6 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/automatic-brain-segmentation-for-petmr-dual-modal-images-through-a-cross-fusion-mechanism/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Automatic Brain Segmentation for PET/MR Dual-Modal Images Through a Cross-Fusion Mechanism</div>
-      </div>
-      
-      <!-- <div class="content">
-        作者单位
-摘要The precise segmentation of different brain regions a
-      </div> -->
-    </a>
-  </div>
-
 
 
   
@@ -826,16 +835,18 @@
       background-position: center center;">
       <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/" class="post-nav-link">
+    <a href="/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation</div>
+        <div class="title-text">Brain tumor segmentation in MRI with multi-modality spatial information enhancement and boundary shape correction</div>
       </div>
       <!-- <div class="content">
-        
-南京理工大学、东南大学
+        重庆邮电大学
 
-摘要Automated brain tumor segmentation is crucia
+fluid-attenuated inversion recovery (FLAIR)
+
+
+T1-wei
       </div> -->
     </a>
   </div>
@@ -970,7 +981,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E9%87%8F%E5%85%B3%E7%B3%BB%E8%AF%B4%E6%98%8E"><span class="toc-text">数量关系说明</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%BE%8B%E8%AF%B4%E6%98%8E"><span class="toc-text">举例说明</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E8%B7%A8%E5%9F%9F%E6%95%B0%E6%8D%AE%E5%A2%9E%E5%BC%BA%EF%BC%88Cross-Domain-Data-Augmentation-CDDA%EF%BC%89"><span class="toc-text">1. 跨域数据增强（Cross - Domain Data Augmentation, CDDA）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%8F%8C%E5%9F%9F%E4%BC%AA%E6%A0%87%E7%AD%BE%E7%94%9F%E6%88%90%E5%99%A8%EF%BC%88Dual-Domain-pseudo-label-Generator-DDG%EF%BC%89"><span class="toc-text">2. 双域伪标签生成器（Dual - Domain pseudo label Generator, DDG）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BC%AA%E6%A0%87%E7%AD%BE%E8%BF%87%E6%BB%A4%EF%BC%88Pseudo-Label-Filtering%EF%BC%89"><span class="toc-text">3. 伪标签过滤（Pseudo Label Filtering）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9C%80%E7%BB%88%E5%88%86%E5%89%B2%E5%99%A8%E5%AD%A6%E4%B9%A0%EF%BC%88Final-Segmentor-Learning%EF%BC%89"><span class="toc-text">4. 最终分割器学习（Final Segmentor Learning）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
