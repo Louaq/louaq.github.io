@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -834,7 +720,7 @@ mjx-container[display="true"] + br {
     <article class="post post-detail">
       <div class="post-content">
         <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>The <strong>state-of-the-art semantic segmentation methods</strong> have achieved impressive performance on predefined close-set individual datasets, but their generalization to zero-shot domains and unseen categories is limited. Labeling a large-scale dataset is challenging and expensive, Training a robust semantic segmentation model on multi-domains has drawn much attention. However, inconsistent taxonomies hinder the naive merging of current publicly available annotations. <strong>To address this, we propose a simple solution to scale up the multi-domain semantic segmentation dataset with less human effort</strong>. We replace each class label with a sentence embedding, which is a vector-valued embedding of a sentence describing the class. This approach enables the merging of multiple datasets from different domains, each with varying class labels and semantics. We merged publicly available noisy and weak annotations with the most finely annotated data, over 2 million images, which enables training a model that achieves performance equal to that of state-of-the-art supervised methods on 7 benchmark datasets, despite not using any images therefrom. Instead of manually tuning a consistent label space, we utilized a vector-valued embedding of short paragraphs to describe the classes. By fine-tuning the model on standard semantic segmentation datasets, we also achieve a significant improvement over the state-of-the-art supervised segmentation on NYUD-V2 (Silberman et al., in: European conference on computer vision, Springer, pp 746–760, 2012) and PASCAL-context (Everingham et al. in Int J Comput Visi 111(1):98–136, 2015) at 60% and 65% mIoU, respectively. Our method can segment unseen labels based on the closeness of language embeddings, showing strong generalization to unseen image domains and labels. Additionally, it enables impressive performance improvements in some adaptation applications, such as depth estimation and instance segmentation. Code is available at <a target="_blank" rel="noopener" href="https://github.com/YvanYin/SSIW">https://github.com/YvanYin/SSIW</a>.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>当前最先进的语义分割方法在预设的封闭数据集上表现出色，但其在零样本（zero-shot）领域和未见过类别上的泛化能力仍然有限。由于大规模数据标注既困难又昂贵，开发跨领域通用的鲁棒语义分割模型成为研究热点。然而，现有公开数据集的不同分类标准阻碍了它们的直接融合。为此，我们提出了一种高效扩展多领域语义分割数据集的方法：用文本嵌入（text embedding）替代传统类别标签，这种向量化的语义表示可以融合不同领域、不同标签体系的数据。通过整合包含 200 万张图像的精细标注数据与公开的带噪声弱标注数据，我们训练的模型在 7 个主流测试集上达到了监督学习的顶尖水平，尽管完全没有使用这些测试集的训练图像。与人工统一标签体系不同，我们通过语言模型生成短文本描述来表征类别语义。在标准数据集微调后，模型在 NYUD-V2 (Silberman et al., 2012) 和 PASCAL-context (Everingham et al., 2015) 上分别取得 60% 和 65% 的平均交并比（mIoU），显著超越现有监督方法。该方法通过计算语义相似度实现未见过标签的分割，展现出优异的跨领域泛化能力，<strong>同时在深度估计、实例分割等下游任务中带来显著性能提升。</strong>代码已开源：<a target="_blank" rel="noopener" href="https://github.com/YvanYin/SSIW">https://github.com/YvanYin/SSIW</a></p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>当前最先进的语义分割方法在预设的封闭数据集上表现出色，但其在零样本（zero-shot）领域和未见过类别上的泛化能力仍然有限。由于大规模数据标注既困难又昂贵，开发跨领域通用的鲁棒语义分割模型成为研究热点。然而，现有公开数据集的不同分类标准阻碍了它们的直接融合。为此，我们提出了一种高效扩展多领域语义分割数据集的方法：用文本嵌入（text embedding）替代传统类别标签，这种向量化的语义表示可以融合不同领域、不同标签体系的数据。通过整合包含 200 万张图像的精细标注数据与公开的带噪声弱标注数据，我们训练的模型在 7 个主流测试集上达到了监督学习的顶尖水平，尽管完全没有使用这些测试集的训练图像。与人工统一标签体系不同，我们通过语言模型生成短文本描述来表征类别语义。在标准数据集微调后，模型在 NYUD-V2 (Silberman et al., 2012) 和 PASCAL-context (Everingham et al., 2015) 上分别取得 60% 和 65% 的平均交并比（mIoU），显著超越现有监督方法。该方法通过计算语义相似度实现未见过标签的分割，展现出优异的跨领域泛化能力，**同时在深度估计、实例分割等下游任务中带来显著性能提升。**代码已开源：<a target="_blank" rel="noopener" href="https://github.com/YvanYin/SSIW">https://github.com/YvanYin/SSIW</a></p>
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>语义分割是计算机视觉的基础任务，在自动驾驶、农业机器人和医学等领域应用广泛。当前语义分割方法虽在预定义封闭集数据集上表现出色，但存在明显局限：</p>
 <ol>
 <li><strong>泛化能力不足</strong>：这些方法假设测试集中的所有类别都在训练时出现，然而现实场景并非如此，且模型受限于训练数据集的图像领域，难以泛化到新领域和标签。</li>
@@ -878,7 +764,7 @@ mjx-container[display="true"] + br {
 </ul>
 </li>
 <li><strong>多尺度评估</strong>：在评估语义分割性能时，将测试图像调整为多个尺度（0.5 - 1.75，步长为0.25）输入模型，然后平均得分作为最终预测结果。</li>
-<li><strong>实现细节</strong>：使用HRNet - W48和Segformer两种网络架构进行实验。训练时，采用不同的优化器和学习率衰减策略，并对图像进行数据增强处理。推理时，将图像短边调整为三种分辨率（480/720/1080），并根据需要采用多尺度或单尺度测试。</li>
+<li><strong>实现细节</strong>：使用HRNet - W48和Segformer两种网络架构进行实验。训练时，采用不同的优化器和学习率衰减策略，并对图像进行数据增强处理。推理时，将图像短边调整为三种分辨率（480&#x2F;720&#x2F;1080），并根据需要采用多尺度或单尺度测试。</li>
 </ul>
 <h3 id="2-实验内容"><a href="#2-实验内容" class="headerlink" title="2. 实验内容"></a>2. 实验内容</h3><ul>
 <li><p><strong>语义分割评估</strong></p>
@@ -906,7 +792,7 @@ mjx-container[display="true"] + br {
 <li><strong>数据融合</strong>：从维基百科收集标签简短描述，编码为向量嵌入替代标签，可轻松合并多数据集，得到强大鲁棒的分割模型。</li>
 <li><strong>损失函数</strong>：提出异质损失，利用噪声和弱标注数据集。 </li>
 <li><strong>性能表现</strong>：在7个跨域数据集上，性能优于或与当前最先进方法相当，模型能分割零样本标签。</li>
-<li><strong>下游应用</strong>：该模型显著提升单目深度估计和实例分割等下游应用的性能。不过，模型性能可能受语言模型表示限制，对训练语言空间外的类别泛化能力不足，但增加数据类别和改进语言模型有望解决。 </li>
+<li><strong>下游应用</strong>：该模型显著提升单目深度估计和实例分割等下游应用的性能。不过，模型性能可能受语言模型表示限制，对训练语言空间外的类别泛化能力不足，但增加数据类别和改进语言模型有望解决。</li>
 </ol>
 
       </div>

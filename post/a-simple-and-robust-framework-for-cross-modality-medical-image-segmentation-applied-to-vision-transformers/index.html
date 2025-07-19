@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -841,7 +727,7 @@ mjx-container[display="true"] + br {
 <li><strong>单模态训练局限性</strong>：现有算法通常在单一医学成像模态上训练，如T1 - 或T2加权磁共振成像（MRI）或计算机断层扫描（CT），在测试不同训练图像时易受数据可变性影响。数据可变性源于成像方法、扫描仪、采集设置和患者个体差异等。 </li>
 <li><strong>多模态和跨模态方法的不足</strong>   <ul>
 <li><strong>多模态方法</strong>：需堆叠不同类型图像生成组合输入，或利用多模态生成合成图像，但都需要配准的医学图像，而采集同一患者的多张图像受资源和时间限制。    </li>
-<li><strong>跨模态方法</strong>：如使用辅助模态改进目标模态分割，采用微调或迁移学习，但未充分利用跨模态信息。联合训练在域转移显著时难直接学习共同特征，基于合成图像生成的技术增加了计算复杂性，不利于实时应用。 因此，本文旨在提出一种通用框架，实现高质量跨模态分割，同时避免模型开销和训练时对配准临床图像的需求。 </li>
+<li><strong>跨模态方法</strong>：如使用辅助模态改进目标模态分割，采用微调或迁移学习，但未充分利用跨模态信息。联合训练在域转移显著时难直接学习共同特征，基于合成图像生成的技术增加了计算复杂性，不利于实时应用。 因此，本文旨在提出一种通用框架，实现高质量跨模态分割，同时避免模型开销和训练时对配准临床图像的需求。</li>
 </ul>
 </li>
 </ol>
@@ -853,7 +739,7 @@ mjx-container[display="true"] + br {
 <p>论文提出了一个简单的框架和基于该框架的条件Vision Transformers（C - ViT）编码器，用于跨模态医学图像分割，具体如下： </p>
 <ol>
 <li><strong>跨模态分割框架</strong>：该框架适用于任何编码器 - 解码器架构，旨在实现高质量的跨模态分割，且无需在分割模型上增加额外开销，也不需要注册临床图像进行训练。具体做法是将不同领域的医学图像直接输入到一个单一的模态条件模型中，该模型通过自适应其编码器归一化层来生成所需的分割结果。自适应基于条件实例归一化（CIN），模型可以端到端地进行训练。通过随机混合多种模态的不同数据（即交错混合训练方式），避免了先前的合成图像风格迁移。 </li>
-<li><strong>条件视觉变换器（C - ViT）编码器</strong>：基于上述提出的框架，正式定义了C - ViT编码器架构，用于构建与模态无关的基于ViT的图像分割或分类模型。C - ViT编码器有两个子层，即多头自注意力机制（MSA）和多层感知机（MLP），在每个子层之前都使用CIN替换了传统的层归一化（LN）。C - ViT编码器可以推广到Swin - 变压器模型中。 实验结果表明，该框架和C - ViT编码器在多模态全心脏分割（MM - WHS）2017挑战赛数据集上，相较于其他方法，显著提高了分割准确性，同时降低了训练和推理的复杂性。 </li>
+<li><strong>条件视觉变换器（C - ViT）编码器</strong>：基于上述提出的框架，正式定义了C - ViT编码器架构，用于构建与模态无关的基于ViT的图像分割或分类模型。C - ViT编码器有两个子层，即多头自注意力机制（MSA）和多层感知机（MLP），在每个子层之前都使用CIN替换了传统的层归一化（LN）。C - ViT编码器可以推广到Swin - 变压器模型中。 实验结果表明，该框架和C - ViT编码器在多模态全心脏分割（MM - WHS）2017挑战赛数据集上，相较于其他方法，显著提高了分割准确性，同时降低了训练和推理的复杂性。</li>
 </ol>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p>数据集：<strong>Multi-modality Whole Heart Segmentation Challenge 2017 (MM-WHS 2017) dataset</strong></p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-16.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_16-03-16.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-05-28_16-03-16"></p>
@@ -872,7 +758,7 @@ mjx-container[display="true"] + br {
 <li>基于条件实例归一化（CIN）定义通用条件模型，可应用于所有先进医学图像分割架构。</li>
 <li>开发新的条件视觉变压器（C - ViT）编码器，用于创建基于ViT的条件模型。 </li>
 <li>该框架在心脏子结构分割的多模态公共数据集上达到了跨模态医学图像分割的新水平，不仅利用辅助模态帮助目标模态分割，也能对辅助模态高质量分割。 </li>
-<li>未来可在更多模态数据集测试，以无监督域适应方式扩展框架，实现单标注模态训练并适应无标注域。 </li>
+<li>未来可在更多模态数据集测试，以无监督域适应方式扩展框架，实现单标注模态训练并适应无标注域。</li>
 </ol>
 
       </div>

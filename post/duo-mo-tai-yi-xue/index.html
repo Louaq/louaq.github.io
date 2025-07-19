@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -845,6 +731,8 @@ mjx-container[display="true"] + br {
 <p> T1ce: 对比增强 T1 加权成像          </p>
 <p>  T2w: T2加权成像</p>
 <p> FLAIR:  流体衰减反转恢复</p>
+</blockquote>
+<blockquote>
 <p>融合多模态医学图像进行分割已经成了研究热点</p>
 </blockquote>
 <h2 id="多模态医学图像分割数据集"><a href="#多模态医学图像分割数据集" class="headerlink" title="多模态医学图像分割数据集"></a>多模态医学图像分割数据集</h2><ul>
@@ -871,23 +759,22 @@ mjx-container[display="true"] + br {
 <h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><blockquote>
 <p>交叉熵损失（Cross-Entropy loss， CE）函数：交叉熵损失是最常用的损失函数之一，对每个像素的类别预测进行单独评估，然后对所有像素点进行平均。</p>
 </blockquote>
-<script type="math/tex; mode=display">
-Loss_{\mathrm{CE}}=-\sum_{i\in N}\sum_{l\in L}y_{i}^{l}\log\hat{y}_{i}^{l}</script><blockquote>
+<p>$$<br>Loss_{\mathrm{CE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p>
+<blockquote>
 <p>加权交叉熵损失（Weighted Cross-Entropy loss， WCE）函数：在医学图像分割任务中由于大部分像素点属于背景类，因此在计算损失时对不同类别的像素点赋予不同的权重是合理的，并可以缓解类别不平衡问题</p>
 </blockquote>
-<script type="math/tex; mode=display">
-Loss_{\mathrm{WCE}}=-\sum_{i\in N}\sum_{l\in L}w_{l}y_{i}^{l}\log\hat{y}_{i}^{l}</script><blockquote>
+<p>$$<br>Loss_{\mathrm{WCE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}w_{l}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p>
+<blockquote>
 <p>骰子损失（DICE loss）：骰子损失同样是医学图像分割中常用的损失函数之一。它可以衡量预测结果和真实结果之间重合度</p>
 </blockquote>
-<script type="math/tex; mode=display">
-Loss_{\mathrm{Dice}}=1-2\frac{\sum_{l\in L}\sum_{i\in N}y_{i}^{l}\hat{y}_{i}^{l}+\varepsilon}{\sum_{l\in L}\sum_{i\in N}\left(y_{i}^{l}+\hat{y}_{i}^{l}\right)+\varepsilon}</script><p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上</p>
-<script type="math/tex; mode=display">
-p_t=\begin{cases}p_t,&y=1\\1-p_t,&\text{其他}\end{cases}</script><script type="math/tex; mode=display">
-Loss_{\mathrm{FL}}(p_{t})=-\alpha_{t}(1-p_{t})^{\gamma}\log(p_{t})</script><blockquote>
-<p>其中：y ∈ { - 1，+ 1}代表像素点的真实类别；pt衡量了模型预测结果与真实值之间的差异，值越大表示越接近；γ为可调节因子，可以平滑地调整简单样本的权重降低的速度。当γ &gt; 0时，可以减小简单样本的相对损失，把重点放在困难样本上；当γ = 0时，焦点损失变为交叉熵损失。</p>
+<p>$$<br>Loss_{\mathrm{Dice}}&#x3D;1-2\frac{\sum_{l\in L}\sum_{i\in N}y_{i}^{l}\hat{y}<em>{i}^{l}+\varepsilon}{\sum</em>{l\in L}\sum_{i\in N}\left(y_{i}^{l}+\hat{y}_{i}^{l}\right)+\varepsilon}<br>$$</p>
+<p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上<br>$$<br>p_t&#x3D;\begin{cases}p_t,&amp;y&#x3D;1\1-p_t,&amp;\text{其他}\end{cases}<br>$$</p>
+<p>$$<br>Loss_{\mathrm{FL}}(p_{t})&#x3D;-\alpha_{t}(1-p_{t})^{\gamma}\log(p_{t})<br>$$</p>
+<blockquote>
+<p>其中：y ∈ { - 1，+ 1}代表像素点的真实类别；pt衡量了模型预测结果与真实值之间的差异，值越大表示越接近；γ为可调节因子，可以平滑地调整简单样本的权重降低的速度。当γ &gt; 0时，可以减小简单样本的相对损失，把重点放在困难样本上；当γ &#x3D; 0时，焦点损失变为交叉熵损失。</p>
 </blockquote>
 <p>三种融合方法：<strong>输入级融合、中间层融合以及决策级融合</strong></p>
-<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 杨鸿杰,徐巧枝,于磊. 基于深度学习的多模态医学影像分割研究综述[J]. 计算机应用研究,2022,39(5):1297-1306. DOI:10.19734/j.issn.1001-3695.2021.10.0424.</p>
+<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 杨鸿杰,徐巧枝,于磊. 基于深度学习的多模态医学影像分割研究综述[J]. 计算机应用研究,2022,39(5):1297-1306. DOI:10.19734&#x2F;j.issn.1001-3695.2021.10.0424.</p>
 
       </div>
       <div class="post-tags-categories">

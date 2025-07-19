@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -851,23 +737,21 @@ mjx-container[display="true"] + br {
 <h3 id="整体架构-DANIE框架主要包含三个关键组件："><a href="#整体架构-DANIE框架主要包含三个关键组件：" class="headerlink" title="整体架构 DANIE框架主要包含三个关键组件："></a>整体架构 DANIE框架主要包含三个关键组件：</h3><ol>
 <li><strong>嵌入层（Embedding Layer）</strong>：输入图像首先通过单独的嵌入层提取信息表示，再输入到双注意力编码器。对于自注意力感知（Self-attentional Perception，SAP）流，嵌入层将输入图像划分为多个图像块，并为每个图像块学习一个向量表示；对于分层注意力感知（Hierarchical-attentional Perception，HAP）流，嵌入层应用卷积滤波器提取分层特征，保留图像中的局部关系。 </li>
 <li><strong>双注意力编码器（Dual Attention Encoder，DAE）</strong>：将特征图输入到双流模块学习多维特征。    <ul>
-<li><strong>自注意力感知（SAP）</strong>：采用多头自注意力（Multi-head Self-attention，MHA）捕获全局空间关系。MHA是自注意力机制的扩展，通过并行应用多个自注意力块，将输出拼接并投影回原始维度，得到编码全局空间依赖关系的潜在表示。    <ul>
-<li><strong>分层注意力感知（HAP）</strong>：引入分层注意力流，包括通道注意力和空间注意力，以突出重要特征，并设计动态校准有效集成这些特征，确保精确定位细节。 </li>
-</ul>
-</li>
+<li><strong>自注意力感知（SAP）</strong>：采用多头自注意力（Multi-head Self-attention，MHA）捕获全局空间关系。MHA是自注意力机制的扩展，通过并行应用多个自注意力块，将输出拼接并投影回原始维度，得到编码全局空间依赖关系的潜在表示。    </li>
+<li><strong>分层注意力感知（HAP）</strong>：引入分层注意力流，包括通道注意力和空间注意力，以突出重要特征，并设计动态校准有效集成这些特征，确保精确定位细节。</li>
 </ul>
 </li>
 <li><strong>联合保留（Joint Preservation，JP）</strong>：有效聚合空间 - 通道依赖关系，对自注意力感知和分层注意力感知进行轻量级处理，实现特征的互补融合。   <ul>
 <li><strong>增强自注意力感知器（Enhancing Self-Attentional Perceptron，ES）</strong>：在自注意力块之后对特征的通道维度进行全局建模，捕获通道依赖关系，补充自注意力机制在捕获通道间相关性方面的不足。    </li>
 <li><strong>增强分层注意力感知器（Enhancing Hierarchical-Attentional Perceptron，EH）</strong>：在提取局部精细特征的基础上引入非局部交互，增强模型准确分割目标的能力。   </li>
-<li><strong>聚合（Aggregation）</strong>：融合来自两个感知器模块的特征，经过卷积块处理后，通过加法聚合生成最终预测图。<h3 id="模型优势"><a href="#模型优势" class="headerlink" title="模型优势"></a>模型优势</h3></li>
+<li><strong>聚合（Aggregation）</strong>：融合来自两个感知器模块的特征，经过卷积块处理后，通过加法聚合生成最终预测图。</li>
 </ul>
 </li>
 </ol>
-<ul>
+<h3 id="模型优势"><a href="#模型优势" class="headerlink" title="模型优势"></a>模型优势</h3><ul>
 <li><strong>特征表示强大</strong>：聚合全局和局部空间 - 通道特征，获得强大的复合表示，更深入理解复杂细节。</li>
 <li><strong>有效利用依赖关系</strong>：设计DAE捕获全局空间信息和局部区域的空间 - 通道依赖关系，JP学习复合特征表示，整合多种维度依赖关系并确保相互补充。</li>
-<li><strong>性能优越</strong>：在五个具有挑战性的基准数据集（Synapse、ACDC、ISIC 2017、ISIC 2018和GlaS）上表现优于现有最先进的方法，同时在计算成本上更具优势。 </li>
+<li><strong>性能优越</strong>：在五个具有挑战性的基准数据集（Synapse、ACDC、ISIC 2017、ISIC 2018和GlaS）上表现优于现有最先进的方法，同时在计算成本上更具优势。</li>
 </ul>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
 <p>数据集：Synapse、ACDC、Skin Lesion Segmentation、GlaS</p>
@@ -895,7 +779,7 @@ mjx-container[display="true"] + br {
 <ol>
 <li><strong>方法优势</strong>：DANIE利用双注意力编码器逐步、有选择地学习目标的关键部分，联合保留设计提升了分割性能，使编码器能捕捉互补特征。</li>
 <li><strong>性能表现</strong>：在Synapse、ACDC、ISIC 2017、ISIC 2018和GlaS五个流行医学数据集上，DANIE显著优于先前的先进方法，能准确分割大小器官，在不同医学成像数据模态上表现良好。</li>
-<li><strong>平衡特性</strong>：DANIE实现了计算复杂度和分割精度的最佳平衡，证明了利用各种依赖关系协同建模语义信息的有效性。 </li>
+<li><strong>平衡特性</strong>：DANIE实现了计算复杂度和分割精度的最佳平衡，证明了利用各种依赖关系协同建模语义信息的有效性。</li>
 </ol>
 
       </div>
@@ -976,7 +860,7 @@ mjx-container[display="true"] + br {
 1. 层次化Transformer编码器改进
 多尺度特征融合机制：
 
-将编码器分为3个阶段（浅层/中层/深层），每阶段
+将编码器分为3个阶段（浅层&#x2F;中层&#x
       </div> -->
     </a>
   </div>

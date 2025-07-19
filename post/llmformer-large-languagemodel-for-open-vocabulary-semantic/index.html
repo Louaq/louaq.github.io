@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -853,9 +739,8 @@ mjx-container[display="true"] + br {
 <li><strong>LLM先验引导的分割（LLM-Prior-Guided Segmentation）</strong>：引入了三种新型注意力模块，分别是语义注意力（Semantic Attention）、缩放视觉注意力（Scaled Visual Attention）和关系注意力（Relation Attention），以利用LLM的先验知识进行开放词汇语义分割。</li>
 </ul>
 </li>
-</ol>
-<ol>
-<li>关键组件</li>
+<li><p>关键组件</p>
+</li>
 </ol>
 <ul>
 <li><strong>语义注意力（Semantic Attention）</strong>：将对象和属性先验知识嵌入到掩码嵌入中，以增强开放词汇对象的发现、掩码预测和分类能力。该模块通过多头交叉注意力机制，捕捉对象先验与掩码之间的对应关系。</li>
@@ -891,7 +776,7 @@ mjx-container[display="true"] + br {
 <ol>
 <li><strong>方法有效性</strong>：提出语义、缩放视觉和关系三种注意力模块，利用LLM的对象、属性和关系先验知识进行分割，大量实验证明LLMFormer及各注意力模块有效。 </li>
 <li><strong>性能优势</strong>：在ADE20K、Pascal Context和Pascal VOC等数据集上显著优于现有方法，绝对提升最高达7.2%，还能在无预定义候选类别的情况下预测OV分割结果，更适用于实际应用。</li>
-<li><strong>未来方向</strong>：当前工作虽提升了OV识别能力，但LLM参数多致速度慢，且存在细粒度分类和边界分割问题，未来将研究效率、细粒度分类和分割问题。 </li>
+<li><strong>未来方向</strong>：当前工作虽提升了OV识别能力，但LLM参数多致速度慢，且存在细粒度分类和边界分割问题，未来将研究效率、细粒度分类和分割问题。</li>
 </ol>
 <blockquote>
 <p>不足及展望：使用LLM带来了巨大的参数量，导致速度减小；本文当前的工作关注于提升开放词汇的分类能力，其他的细粒度分类和边界框分割问题没有涉及，这也是未来工作的研究方法。</p>

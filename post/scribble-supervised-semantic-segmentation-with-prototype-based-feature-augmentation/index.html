@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -836,17 +722,16 @@ mjx-container[display="true"] + br {
         <p><strong>Hohai University, Nanjing, China</strong></p>
 <p><strong>RMIT University, Melbourne, Australia</strong></p>
 <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a><strong>摘要</strong></h2><p><strong>Scribble-supervised semantic segmentation</strong> presents a cost-effective training method that utilizes annotations generated through scribbling. It is valued in attaining high performance while minimizing annotation costs, which has made it highly regarded among researchers. Scribble supervision propagates information from labeled pixels to the surrounding unlabeled pixels, enabling semantic segmentation for the entire image. However, existing methods often ignore the features of classified pixels during feature<br>propagation. To address these limitations, this paper proposes a prototype-based feature augmentation method that leverages feature prototypes to augment scribble supervision. Experimental results demonstrate that our approach achieves state-of-the-art performance on the PASCAL VOC 2012 dataset in scribble-supervised semantic segmentation tasks. The code is available at<br><a target="_blank" rel="noopener" href="https://github.com/TranquilChan/PFA">https://github.com/TranquilChan/PFA</a>.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a><strong>翻译</strong></h2><p><strong>涂鸦监督语义分割（Scribble-supervised semantic segmentation）</strong>提出了一种经济高效的训练方法，通过使用涂鸦生成的标注进行模型训练。该方法因能在显著降低标注成本的同时实现高性能表现，因此备受研究人员推崇。其核心原理是通过将已标注像素的信息传递至相邻未标注区域，从而完成整幅图像的语义分割。然而，我们发现现有方法在特征传递过程中普遍忽视已分类像素的特征特性。针对这一局限性，本文提出基于原型（prototype）的特征增强方法，通过挖掘特征原型（feature prototypes）的统计特性来强化涂鸦监督效果。实验表明，我们的方法在 PASCAL VOC 2012 数据集的涂鸦监督语义分割任务中达到了当前最佳水平，相关代码已开源：<a target="_blank" rel="noopener" href="https://github.com/TranbilChan/PFA。">https://github.com/TranbilChan/PFA。</a></p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a><strong>翻译</strong></h2><p>**涂鸦监督语义分割（Scribble-supervised semantic segmentation）**提出了一种经济高效的训练方法，通过使用涂鸦生成的标注进行模型训练。该方法因能在显著降低标注成本的同时实现高性能表现，因此备受研究人员推崇。其核心原理是通过将已标注像素的信息传递至相邻未标注区域，从而完成整幅图像的语义分割。然而，我们发现现有方法在特征传递过程中普遍忽视已分类像素的特征特性。针对这一局限性，本文提出基于原型（prototype）的特征增强方法，通过挖掘特征原型（feature prototypes）的统计特性来强化涂鸦监督效果。实验表明，我们的方法在 PASCAL VOC 2012 数据集的涂鸦监督语义分割任务中达到了当前最佳水平，相关代码已开源：<a target="_blank" rel="noopener" href="https://github.com/TranbilChan/PFA%E3%80%82">https://github.com/TranbilChan/PFA。</a></p>
 <h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a><strong>研究背景</strong></h2><p><strong>标注成本问题</strong>：深度学习技术推动了深度神经网络在图像分割的发展，但是，对于标注像素级别的样本需要大量的人力和财力，并且其标注过程也非常繁琐。因此，研究者越来越关注利用涂鸦标签进行监督学习的方法。<strong>涂鸦标签属于弱监督学习</strong>，相比像素级标注，能显著减少标注工作量、提高效率，且比点、边界框和图像级标签提供更多关键语义信息。</p>
 <p><strong>现有方法的局限性</strong>：现有涂鸦监督语义分割方法主要依赖<strong>正则化损失、一致性损失、伪建议、辅助任务和标签扩散</strong>等，但这些方法存在一定缺陷。例如，正则化方法常忽略利用高层语义信息，一致性损失未在类别层面提供直接监督，伪标签方法耗时，辅助任务会引入额外数据和预测误差，标签扩散主要依赖局部信息，且许多方法忽略了正确分类像素特征在指导边界区域像素分类中的作用。 基于以上背景，作者提出基于原型的特征增强方法，以解决现有方法的不足，提高涂鸦监督语义分割的性能。 </p>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a><strong>研究现状</strong></h2><ul>
-<li><strong>标注方式</strong>：图像语义分割任务训练通常需大量高质量标注样本，像素级标注耗时耗力，因此弱监督学习方法受关注，如使用涂鸦、点、边界框和图像级标签等。其中，涂鸦监督能提供更多关键语义信息，表现更优。</li>
-</ul>
-<ul>
-<li><strong>现有方法</strong>：现有涂鸦监督语义分割方法主要依赖正则化损失、一致性损失、伪建议、辅助任务和标签扩散等，但这些方法存在一定局限性。</li>
-</ul>
-<ul>
-<li><strong>原型方法</strong>：特征原型在计算机视觉任务中用于增强模型识别能力，部分方法在弱监督语义分割中探索了原型的使用，但未充分发挥其特征增强和引导作用。</li>
+<li><p><strong>标注方式</strong>：图像语义分割任务训练通常需大量高质量标注样本，像素级标注耗时耗力，因此弱监督学习方法受关注，如使用涂鸦、点、边界框和图像级标签等。其中，涂鸦监督能提供更多关键语义信息，表现更优。</p>
+</li>
+<li><p><strong>现有方法</strong>：现有涂鸦监督语义分割方法主要依赖正则化损失、一致性损失、伪建议、辅助任务和标签扩散等，但这些方法存在一定局限性。</p>
+</li>
+<li><p><strong>原型方法</strong>：特征原型在计算机视觉任务中用于增强模型识别能力，部分方法在弱监督语义分割中探索了原型的使用，但未充分发挥其特征增强和引导作用。</p>
+</li>
 </ul>
 <h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a><strong>提出的模型</strong></h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-11_19-29-04"></p>
 <ul>
@@ -869,13 +754,12 @@ mjx-container[display="true"] + br {
 </ul>
 <h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a><strong>结论</strong></h2><p>作者提出了一种基于原型的特征增强方法用于涂鸦监督语义分割，得出以下结论：</p>
 <ul>
-<li>从<strong>涂鸦监督</strong>初始结果的置信部分提取原型，利用这些原型增强初始特征，并根据涂鸦监督的具体情况采用不同原型策略，能以正确分类像素的原型引导错误分类像素的分类，提升预测性能。</li>
-</ul>
-<ul>
-<li>实验结果表明，该方法在PASCAL VOC 2012数据集上达到了最先进的性能，相比当前最优方法TEL，使用稍弱的骨干网络MiT-B1仍使mIoU提高了0.6%。</li>
-</ul>
-<ul>
-<li><strong>未来计划将此方法应用于其他任务，以挖掘其巨大潜力和应用价值 （下一个创新点）</strong></li>
+<li><p>从<strong>涂鸦监督</strong>初始结果的置信部分提取原型，利用这些原型增强初始特征，并根据涂鸦监督的具体情况采用不同原型策略，能以正确分类像素的原型引导错误分类像素的分类，提升预测性能。</p>
+</li>
+<li><p>实验结果表明，该方法在PASCAL VOC 2012数据集上达到了最先进的性能，相比当前最优方法TEL，使用稍弱的骨干网络MiT-B1仍使mIoU提高了0.6%。</p>
+</li>
+<li><p><strong>未来计划将此方法应用于其他任务，以挖掘其巨大潜力和应用价值 （下一个创新点）</strong></p>
+</li>
 </ul>
 
       </div>

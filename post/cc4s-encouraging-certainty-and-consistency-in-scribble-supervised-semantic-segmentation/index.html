@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -840,14 +726,16 @@ mjx-container[display="true"] + br {
 <ul>
 <li><strong>数据标注难题</strong>：基于深度学习的语义分割方法虽表现出色，但需大量细粒度标注的训练数据。以Cityscapes为例，手动生成像素级语义分割标注平均耗时3 - 5分钟，收集大规模标注数据集并非易事。</li>
 <li><strong>弱监督方法兴起</strong>：为缓解数据标注压力，多种弱监督标注策略应运而生，如<strong>图像级监督、边界框监督、点监督和涂鸦监督</strong>等。其中，涂鸦监督因<strong>标注方式友好</strong>且能提供有效监督信息，受到越来越多关注。</li>
-<li><strong>涂鸦监督现存问题</strong>：尽管涂鸦监督语义分割取得了一定进展，但仍存在预测结果不确定和不一致的问题。标注稀疏会导致预测结果不确定，而标注的多样性会使网络难以学习到稳定一致的分割模式，从而产生不一致的预测结果。 基于以上背景，作者提出了CC4S方法，以提高涂鸦监督语义分割的确定性和一致性，减少标注稀疏和多样性带来的影响。 </li>
+<li><strong>涂鸦监督现存问题</strong>：尽管涂鸦监督语义分割取得了一定进展，但仍存在预测结果不确定和不一致的问题。标注稀疏会导致预测结果不确定，而标注的多样性会使网络难以学习到稳定一致的分割模式，从而产生不一致的预测结果。 基于以上背景，作者提出了CC4S方法，以提高涂鸦监督语义分割的确定性和一致性，减少标注稀疏和多样性带来的影响。</li>
 </ul>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-20_16-12-13.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-20_16-12-13.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-20_16-12-13"></p>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><blockquote>
 <p>弱监督语义分割：分为四种，图像级监督、边界框监督、点监督和涂鸦监督。图像级监督仅为整个图像提供类别标签，缺乏定位信息；边界框监督仍然缺乏可靠和有效的措施来产生高质量的物体掩膜；点监督通过在每个图像对象内标记带有类别信息的点来完成注释；涂鸦监督是一种用户友好的弱监督形式。</p>
+</blockquote>
+<blockquote>
 <p>涂鸦监督语义分割：现有方法包括利用辅助任务信息、图割算法传播标注、在损失函数引入分割正则化等，但仍存在预测不确定和不一致问题。</p>
 </blockquote>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种名为<strong>CC4S（Encouraging Certainty and Consistency in Scribble-Supervised Semantic Segmentation）</strong>的模型，旨在解决涂鸦监督语义分割任务中预测结果的<strong>不确定性和不一致性</strong>问题</p>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p>本文提出了一种名为<strong>CC4S（Encouraging Certainty and Consistency in Scribble-Supervised Semantic Segmentation）<strong>的模型，旨在解决涂鸦监督语义分割任务中预测结果的</strong>不确定性和不一致性</strong>问题</p>
 <p>核心网络包含两个模块：</p>
 <ul>
 <li><strong>ResNet骨干网络</strong>：用于提取图像的特征。</li>
@@ -865,7 +753,7 @@ mjx-container[display="true"] + br {
 <li>仅使用涂鸦注释进行语义分割会导致预测结果<strong>不确定和不一致</strong>。为此，提出了两种策略，即减少神经表示的不确定性以产生可靠结果，以及在神经特征空间进行自监督以保证输出的一致性。</li>
 <li>结合<strong>伪标签再训练</strong>，该方法达到了最先进的性能，甚至可与全标签监督方法相媲美，且整个过程无需额外信息或注释准备要求。</li>
 <li>大量的消融实验和中间可视化验证了所提解决方案的有效性。</li>
-<li>该方法在涂鸦<strong>随机丢弃或按比例缩小</strong>的困难情况下也能表现良好，具有较强的鲁棒性。 </li>
+<li>该方法在涂鸦<strong>随机丢弃或按比例缩小</strong>的困难情况下也能表现良好，具有较强的鲁棒性。</li>
 </ol>
 
       </div>

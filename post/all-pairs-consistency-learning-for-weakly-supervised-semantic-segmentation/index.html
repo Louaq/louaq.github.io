@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -844,7 +730,7 @@ mjx-container[display="true"] + br {
 <li><strong>WSSS的意义与挑战</strong>：WSSS旨在利用图像级标签、点、涂鸦和边界框等弱标签，缓解像素级标注的繁琐和高成本问题。其中，图像级WSSS仅使用类别标签监督像素级预测，尤为具有挑战性。 </li>
 <li><strong>现有方法的不足</strong>：现有图像级WSSS方法通常依赖基于卷积神经网络的类激活图（CAM）生成伪分割标签，但CAM存在激活不完整和不准确的问题，这是由于图像标签和像素级分割监督之间的差距导致的。</li>
 <li><strong>一致性正则化的局限</strong>：现有工作使用增强不变一致性来改进CAM，考虑了区域激活一致性，但忽略了跨视图的成对一致性，即区域亲和性一致性。激活一致性只能发现新视图中的激活，无法解决未激活区域和背景噪声问题。</li>
-<li><strong>本文的研究动机</strong>：鉴于亲和性是上下文编码的一种方式，且上下文对像素级预测至关重要，本文提出全对一致性正则化（ACR）方法，同时强制区域激活一致性和区域亲和性一致性，以提高WSSS的性能。 </li>
+<li><strong>本文的研究动机</strong>：鉴于亲和性是上下文编码的一种方式，且上下文对像素级预测至关重要，本文提出全对一致性正则化（ACR）方法，同时强制区域激活一致性和区域亲和性一致性，以提高WSSS的性能。</li>
 </ul>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><p><strong>弱监督语义分割方法多样</strong>：采用图像级标签、涂鸦、点和边界框等弱标签，避免像素级标注的繁琐。图像级弱监督语义分割常依赖类激活图（CAM）生成伪分割标签，且有多种方法对其进行优化。</p>

@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -838,7 +724,7 @@ mjx-container[display="true"] + br {
 <h2 id="研究背景："><a href="#研究背景：" class="headerlink" title="研究背景："></a><strong>研究背景：</strong></h2><ol>
 <li><strong>多模态融合的重要性</strong>：语义分割旨在为场景中每个像素分配语义类别，随着传感器技术发展，多模态融合用于分割成为图像解释核心问题。深度学习推动下，深度多模态融合展现出比单模态分割更显著的优势。 </li>
 <li><strong>现存方法的挑战</strong>：现有多模态分割方法主要分为基于对齐和基于聚合的融合，但面临诸多挑战。一方面，不同成像机制的模态存在异质差距，基于对齐的融合因信息交换弱，常提供无效的跨模态融合；另一方面，不同模态有效信息不同，基于聚合的融合易忽略模态内传播，导致模态间知识共享和模态内信息处理失衡。 </li>
-<li><strong>全微调方法的局限</strong>：多模态方法常采用基于RGB的预训练分割器，全微调虽有效，但效率低、参数存储负担大，且因样本标注有限，无法充分利用预训练模型知识获得通用表示。 </li>
+<li><strong>全微调方法的局限</strong>：多模态方法常采用基于RGB的预训练分割器，全微调虽有效，但效率低、参数存储负担大，且因样本标注有限，无法充分利用预训练模型知识获得通用表示。</li>
 </ol>
 <h2 id="研究现状："><a href="#研究现状：" class="headerlink" title="研究现状："></a><strong>研究现状：</strong></h2><ul>
 <li><strong>多模态图像分割主流方法</strong>：以深度多模态融合为主，旨在利用多数据源增强细粒度细节和像素级语义，主要分为基于对齐和基于聚合的融合方法。前者通过条件损失对齐子网络嵌入，后者运用特定算子组合多模态子网络。</li>
@@ -852,16 +738,16 @@ mjx-container[display="true"] + br {
 <li><strong>整体架构</strong>    <ul>
 <li><strong>输入处理</strong>：将RGB图像和辅助模态图像输入到补丁嵌入层，生成对应的RGB标记和辅助模态标记。    </li>
 <li><strong>提示生成</strong>：把标记送入分组提示器，生成特定于模态的提示。    </li>
-<li><strong>特征融合</strong>：将学习到的提示作为残差添加到原始RGB流中，再输入到基础模型的下一层。 </li>
+<li><strong>特征融合</strong>：将学习到的提示作为残差添加到原始RGB流中，再输入到基础模型的下一层。</li>
 </ul>
 </li>
 <li><strong>主要组件</strong>    <ul>
 <li><strong>类感知单模态提示器（Class-Aware Uni-Modal Prompter，CUP）</strong>：通过引入特定于模态的类标记，对辅助模态的视觉概念进行分层渐进分组，平衡模态内和模态间的语义传播，提高空间信息的适应性。    </li>
-<li><strong>对齐诱导跨模态提示器（Alignment-Induced Cross-Modal Prompter，ACP）</strong>：根据显式分组的语义相似性，聚合辅助模态的类感知表示，将其他数据源的关键模式整合到RGB流中，生成新的跨模态对齐诱导提示，辅助建模模态公共统计信息。 </li>
+<li><strong>对齐诱导跨模态提示器（Alignment-Induced Cross-Modal Prompter，ACP）</strong>：根据显式分组的语义相似性，聚合辅助模态的类感知表示，将其他数据源的关键模式整合到RGB流中，生成新的跨模态对齐诱导提示，辅助建模模态公共统计信息。</li>
 </ul>
 </li>
 <li><strong>优化策略</strong>：使用基于RGB的预训练基础模型的参数初始化多模态分割模型，在提示调优过程中，仅更新分组提示器和分割头的梯度值，以少量提示参数促进模型快速收敛，并有效继承预训练基础模型的先验知识。 </li>
-<li><strong>实验验证</strong>：在多个下游多模态图像分割任务（RGB - D、RGB - T、RGB - SAR分割）上进行了广泛实验，结果表明GoPT仅训练不到1%的模型参数，就能在各项指标上取得优于现有方法的性能，展现出高效性和优越性。 </li>
+<li><strong>实验验证</strong>：在多个下游多模态图像分割任务（RGB - D、RGB - T、RGB - SAR分割）上进行了广泛实验，结果表明GoPT仅训练不到1%的模型参数，就能在各项指标上取得优于现有方法的性能，展现出高效性和优越性。</li>
 </ol>
 <h2 id="实验过程（与SOTA方法的对比）："><a href="#实验过程（与SOTA方法的对比）：" class="headerlink" title="实验过程（与SOTA方法的对比）："></a><strong>实验过程（与SOTA方法的对比）：</strong></h2><p>数据集：NYUDv2、SUN RGB-D、MFNet、PST900、WHU-OS</p>
 <p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-02-29.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_15-02-29.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-03-06_15-02-29"></p>

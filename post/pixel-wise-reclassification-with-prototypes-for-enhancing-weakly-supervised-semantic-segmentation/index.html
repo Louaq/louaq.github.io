@@ -79,123 +79,9 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
-<meta name="generator" content="Hexo 7.3.0"><style>mjx-container[jax="SVG"] {
-  direction: ltr;
-}
-
-mjx-container[jax="SVG"] > svg {
-  overflow: visible;
-}
-
-mjx-container[jax="SVG"][display="true"] {
-  display: block;
-  text-align: center;
-  margin: 1em 0;
-}
-
-mjx-container[jax="SVG"][justify="left"] {
-  text-align: left;
-}
-
-mjx-container[jax="SVG"][justify="right"] {
-  text-align: right;
-}
-
-g[data-mml-node="merror"] > g {
-  fill: red;
-  stroke: red;
-}
-
-g[data-mml-node="merror"] > rect[data-background] {
-  fill: yellow;
-  stroke: none;
-}
-
-g[data-mml-node="mtable"] > line[data-line] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > rect[data-frame] {
-  stroke-width: 70px;
-  fill: none;
-}
-
-g[data-mml-node="mtable"] > .mjx-dashed {
-  stroke-dasharray: 140;
-}
-
-g[data-mml-node="mtable"] > .mjx-dotted {
-  stroke-linecap: round;
-  stroke-dasharray: 0,140;
-}
-
-g[data-mml-node="mtable"] > svg {
-  overflow: visible;
-}
-
-[jax="SVG"] mjx-tool {
-  display: inline-block;
-  position: relative;
-  width: 0;
-  height: 0;
-}
-
-[jax="SVG"] mjx-tool > mjx-tip {
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-mjx-tool > mjx-tip {
-  display: inline-block;
-  padding: .2em;
-  border: 1px solid #888;
-  font-size: 70%;
-  background-color: #F8F8F8;
-  color: black;
-  box-shadow: 2px 2px 5px #AAAAAA;
-}
-
-g[data-mml-node="maction"][data-toggle] {
-  cursor: pointer;
-}
-
-mjx-status {
-  display: block;
-  position: fixed;
-  left: 1em;
-  bottom: 1em;
-  min-width: 25%;
-  padding: .2em .4em;
-  border: 1px solid #888;
-  font-size: 90%;
-  background-color: #F8F8F8;
-  color: black;
-}
-
-foreignObject[data-mjx-xml] {
-  font-family: initial;
-  line-height: normal;
-  overflow: visible;
-}
-
-.MathJax path {
-  stroke-width: 3;
-}
-
-mjx-container[display="true"] {
-  overflow: auto hidden;
-}
-
-mjx-container[display="true"] + br {
-  display: none;
-}
-</style><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
 </head>
 
   
@@ -840,7 +726,7 @@ mjx-container[display="true"] + br {
 <li><strong>WSSS的目标与流程</strong>：WSSS旨在利用图像级标注数据集完成像素级分类任务，以降低数据标注成本。当前主流方法遵循三阶段流程，其中生成高质量伪掩码对最终分割模型的性能至关重要。 </li>
 <li><strong>现有方法的局限性</strong>：最常用的细化方法IRN在细化种子区域时，因缺乏语义信息指导，可能导致部分错误的细化方向，产生大量错误的伪掩码。</li>
 <li><strong>原型学习的潜力</strong>：近年来，研究发现原型学习可助力语义分割，它能从少量类样本中归纳特定类别的特征，实现特征的像素级分类，还能保留更多非学习参数以预测多样特征。 </li>
-<li><strong>本文的研究动机</strong>：基于上述背景，作者提出基于<strong>原型的伪掩码重分类后处理方法</strong>（<strong>PtReCl</strong>），利用原型的类别区分性恢复伪掩码中误分类的像素，以提高伪掩码质量和分割性能。 </li>
+<li><strong>本文的研究动机</strong>：基于上述背景，作者提出基于<strong>原型的伪掩码重分类后处理方法</strong>（<strong>PtReCl</strong>），利用原型的类别区分性恢复伪掩码中误分类的像素，以提高伪掩码质量和分割性能。</li>
 </ul>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>多阶段WSSS框架</strong>：主流方法分三步，先训练分类模型生成种子区域，再用细化方法生成伪掩码，最后用伪掩码训练全监督语义分割模型。</li>

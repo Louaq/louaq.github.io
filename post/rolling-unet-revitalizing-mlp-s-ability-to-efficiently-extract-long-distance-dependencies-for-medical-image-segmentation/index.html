@@ -79,8 +79,6 @@
         
             
         
-            <script src="https://cdn.bootcss.com/mathjax/2.7.3/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-        
     
 
 <meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/atom.xml" title="Louaq" type="application/atom+xml">
@@ -728,7 +726,7 @@
 <li><strong>CNN的局限性</strong>：基于卷积神经网络（CNN）的医疗图像分割方法虽有发展，如U-Net及其变体，但卷积操作的固有局部性使其难以学习清晰的全局和远程语义信息。 </li>
 <li><strong>Transformer的问题</strong>：受自然语言处理中Transformer成功的启发，研究者将其引入视觉领域，但它需要大量训练数据，计算复杂度高，且在捕捉局部特征方面表现不佳，如Vision Transformer和Swin Transformer等。 </li>
 <li><strong>CNN与Transformer结合的不足</strong>：一些方法尝试结合CNN和Transformer，但仍无法很好地平衡性能和计算成本。</li>
-<li><strong>MLP的困境</strong>：多层感知器（MLP）理论上是通用逼近器，但计算量大、易过拟合，输入扁平化限制分辨率，虽有改进工作，但在医疗图像分割领域应用较少，且现有模型难以兼顾局部和全局特征。 因此，文章提出Rolling-Unet，结合CNN和MLP，以有效提取和融合局部特征与长距离依赖关系，实现更准确的医疗图像分割。 </li>
+<li><strong>MLP的困境</strong>：多层感知器（MLP）理论上是通用逼近器，但计算量大、易过拟合，输入扁平化限制分辨率，虽有改进工作，但在医疗图像分割领域应用较少，且现有模型难以兼顾局部和全局特征。 因此，文章提出Rolling-Unet，结合CNN和MLP，以有效提取和融合局部特征与长距离依赖关系，实现更准确的医疗图像分割。</li>
 </ol>
 <h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
 <li><strong>CNN 方法</strong>：以 U-Net 为代表，后续有 UNet++、Att - UNet 等改进模型，通过引入注意力机制、图像金字塔等技术提升性能，但受卷积操作局部性限制，<strong>难以学习全局和远程语义信息</strong>。</li>
@@ -771,7 +769,7 @@
 <ol>
 <li>多方向的远程依赖并非严格意义上的全局感受野，是MLP的一种折中，但R - MLP模块灵活，组合使用可捕获大规模区域甚至全局特征，未来将深入探索。 </li>
 <li>在四个不同数据集上，Rolling - Unet在初级和次级模型中表现最佳，尤其在BUSI和ISIC 2018数据集上优势显著，能有效提取目标轮廓，提升分割性能。 </li>
-<li>消融实验表明，融合远程依赖和局部上下文信息至关重要，同时提取并融合二者效果最佳。未来，作者还将研究其在三维医学图像分割及其他图像任务中的潜力。 </li>
+<li>消融实验表明，融合远程依赖和局部上下文信息至关重要，同时提取并融合二者效果最佳。未来，作者还将研究其在三维医学图像分割及其他图像任务中的潜力。</li>
 </ol>
 
       </div>
@@ -833,7 +831,7 @@
 1. 层次化Transformer编码器改进
 多尺度特征融合机制：
 
-将编码器分为3个阶段（浅层/中层/深层），每阶段
+将编码器分为3个阶段（浅层&#x2F;中层&#x
       </div> -->
     </a>
   </div>
