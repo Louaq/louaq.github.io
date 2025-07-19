@@ -38,15 +38,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/messageBoard/index.html</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/me/index.html</loc>
     
     <lastmod>2025-07-19</lastmod>
@@ -65,7 +56,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/google513a5f2ce4c8f95c.html</loc>
+    <loc>https://louaq.github.io/messageBoard/index.html</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -74,7 +65,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/gallery/index.html</loc>
+    <loc>https://louaq.github.io/google513a5f2ce4c8f95c.html</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -191,7 +182,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/gallery/index.html</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -218,7 +209,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
+    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -227,7 +218,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -300,24 +291,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -434,6 +407,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/fpl-filtered-pseudo-label-based-unsupervised-cross-modality-adaptation-for-3d-medical-image-segmentation/</loc>
     
     <lastmod>2025-07-19</lastmod>
@@ -470,7 +452,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</loc>
+    <loc>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -479,7 +461,16 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-fcn/</loc>
+    <loc>https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -497,7 +488,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -506,7 +497,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -552,24 +543,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -650,52 +623,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/adaptive-cross-feature-fusion-network-with-inconsistency-guidance-for-multi-modal-brain-tumor-segmentation/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-19</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/post/fcn/20250224-fcn/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -714,6 +642,78 @@
   
   <url>
     <loc>https://louaq.github.io/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/adaptive-cross-feature-fusion-network-with-inconsistency-guidance-for-multi-modal-brain-tumor-segmentation/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-19</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/</loc>
     
     <lastmod>2025-07-19</lastmod>
     
@@ -768,13 +768,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/ACFNet/</loc>
-    <lastmod>2025-07-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/tags/Medical-Image-Segmentation/</loc>
     <lastmod>2025-07-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -783,6 +776,13 @@
   
   <url>
     <loc>https://louaq.github.io/tags/Dual-Attention-Encoder/</loc>
+    <lastmod>2025-07-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/tags/ACFNet/</loc>
     <lastmod>2025-07-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1062,13 +1062,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Sentence-Embeddings/</loc>
-    <lastmod>2025-07-19</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/tags/SFC/</loc>
     <lastmod>2025-07-19</lastmod>
     <changefreq>weekly</changefreq>
@@ -1077,6 +1070,13 @@
   
   <url>
     <loc>https://louaq.github.io/tags/semantic-segmentation/</loc>
+    <lastmod>2025-07-19</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/tags/Sentence-Embeddings/</loc>
     <lastmod>2025-07-19</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
