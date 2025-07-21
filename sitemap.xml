@@ -137,15 +137,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/post/segament-anything/</loc>
     
     <lastmod>2025-07-21</lastmod>
@@ -254,6 +245,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/msgfusion-medical-semantic-guided-two-branch-network-for-multimodal-brain-image-fusion/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-07-21</lastmod>
@@ -353,6 +353,42 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/high-quality-segmentation-for-ultra-high-resolution-images/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-07-21</lastmod>
@@ -425,42 +461,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/msgfusion-medical-semantic-guided-two-branch-network-for-multimodal-brain-image-fusion/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/high-quality-segmentation-for-ultra-high-resolution-images/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</loc>
     
     <lastmod>2025-07-21</lastmod>
@@ -480,6 +480,42 @@
   
   <url>
     <loc>https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
     
     <lastmod>2025-07-21</lastmod>
     
@@ -560,6 +596,42 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/automatic-brain-segmentation-for-petmr-dual-modal-images-through-a-cross-fusion-mechanism/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/brain-tumor-segmentation-based-on-the-dual-path-network-of-multi-modal-mri-images/</loc>
+    
+    <lastmod>2025-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/</loc>
     
     <lastmod>2025-07-21</lastmod>
@@ -605,34 +677,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
     
     <lastmod>2025-07-21</lastmod>
     
@@ -678,51 +723,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/automatic-brain-segmentation-for-petmr-dual-modal-images-through-a-cross-fusion-mechanism/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/brain-tumor-segmentation-based-on-the-dual-path-network-of-multi-modal-mri-images/</loc>
-    
-    <lastmod>2025-07-21</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</loc>
     
     <lastmod>2025-07-21</lastmod>
     
