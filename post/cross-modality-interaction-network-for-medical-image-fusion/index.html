@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>关于我 | Louaq</title>
+  <title>Cross-Modality Interaction Network for Medical Image Fusion | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -658,17 +658,52 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-5f7cb7e900b9dcf5354c3d4d2c5cc3c2_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        关于我
+        Cross-Modality Interaction Network for Medical Image Fusion
       </span>
     </div>
     
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2025-07-24 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              医学图像分割
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> 字数统计: 2.8k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> 阅读时长: 10分钟 |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
     
   </div>
   
@@ -684,9 +719,91 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h1 id="个人介绍"><a href="#个人介绍" class="headerlink" title="个人介绍"></a>个人介绍</h1>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>Multi-modal medical image fusion</strong> maximizes the complementary information from diverse modality images by integrating source images. The fused medical image could offer enhanced richness and improved accuracy compared to the source images. Unfortunately, the existing deep learning-based medical image fusion methods generally rely on convolutional operations, which may not effectively capture global information such as spatial relationships or shape features within and across image modalities. To address this problem, we propose a unified AI-Generated Content (AIGC)-based medical image fusion, termed Cross-Modal Interactive Network (CMINet). The CMINet integrates a recursive transformer with an interactive Convolutional Neural Network. Specifically, the recursive transformer is designed to capture extended spatial and temporal dependencies within modalities, while the interactive CNN aims to extract and merge local features across modalities. Benefiting from cross-modality interaction learning, the proposed method can generate fused images with rich structural and functional information. Additionally, the architecture of the recursive network is structured to reduce parameter count, which could be beneficial for deployment on resource-constrained devices. Comprehensive experiments on multi-model medical images (MRI and CT, MRI and PET, and MRI and SPECT) demonstrate that the proposed method outperforms the state-ofthe-art fusion methods subjectively and objectively.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p><strong>多模态医学图像融合</strong>通过整合源图像最大化来自不同模态图像的互补信息。与源图像相比，融合后的医学图像可以提供更丰富和更准确的信息。不幸的是，现有的基于深度学习的医学图像融合方法通常依赖于卷积操作，这可能无法有效捕捉图像模态内部和跨模态的空间关系或形状特征等全局信息。为了解决这个问题，我们提出了一种基于AI生成内容（AIGC）的统一医学图像融合方法，称为跨模态交互网络（CMINet）。CMINet集成了递归Transformer和交互卷积神经网络。具体来说，递归Transformer旨在捕捉模态内的扩展空间和时间依赖性，而交互CNN则旨在提取和合并跨模态的局部特征。得益于跨模态交互学习，所提出的方法能够生成具有丰富结构和功能信息的融合图像。此外，递归网络的架构被设计为减少参数数量，这对资源受限设备上的部署可能有益。在多模态医学图像（MRI和CT、MRI和PET、MRI和SPECT）上的综合实验表明，所提出的方法在主观和客观上都优于现有的融合方法。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>本文聚焦于医学图像融合领域，其研究背景主要源于以下几方面：</p>
+<ol>
+<li><strong>多模态医学成像的需求</strong>：随着AI生成内容（AIGC）的发展，多模态医学成像成为提供人体组织和结构丰富信息的重要手段。不同模态图像（如CT、MRI、PET、SPECT）聚焦不同类型信息，为克服单模态图像的局限性，图像融合技术应运而生，可将不同模态图像数据整合为统一图像，满足人类视觉感知和机器检测需求。</li>
+<li><strong>现有图像融合方法的不足</strong>：传统图像融合方法通常需通过复杂的数学变换将原始图像映射到变换域，其变换技术复杂，难以在医疗系统上实现实时计算。深度学习驱动的图像融合方法虽有进展，但基于卷积神经网络（CNN）的方法一般依赖卷积运算，难以有效捕捉图像模态内和跨模态的全局信息，如空间关系或形状特征。</li>
+<li><strong>研究目的</strong>：为解决上述问题，作者提出基于AIGC的医学图像融合方法——跨模态交互网络（CMINet），旨在充分利用局部和全局信息，实现更好的特征互补，同时降低模型参数数量和复杂度，以在资源受限的设备上部署。</li>
+</ol>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
+<li><strong>传统方法</strong>：通过数学变换将原图像映射到变换域，如 NSCT 和 NSST，再进行活动测量和制定融合规则实现图像融合，但变换技术复杂，难以在医疗系统实现实时计算。</li>
+<li><strong>深度学习方法</strong>：成为主流，可分为 CNN 与 GAN 两类。CNN 方法用并行卷积网络提取特征并融合；GAN 方法由生成器和判别器构成，通过对抗学习生成融合图像。</li>
+<li><strong>Transformer 方法</strong>：因强大的长程建模能力，在图像融合领域得到应用，部分研究将 CNN 与 Transformer 结合，以提升提取全局语义信息的能力。</li>
+</ul>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_10-59-34.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_10-59-34.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-24_10-59-34"></p>
+<p>给定两个源图像 $I_a \in R^{C_a×H×W}$ 和 $I_b \in R^{C_b×H×W}$（$H$、$W$ 和 $C$ 分别代表图像的高度、宽度和通道数），CMINet的处理流程如下：</p>
+<ol>
+<li><strong>全局特征提取</strong>：通过视觉Transformer模块 $H_a^{TF}(·)$ 和 $H_b^{TF}(·)$ 从预处理后的源图像 $I_a$ 和 $I_b$ 中提取全局特征：${F_{a_{global}}, F_{b_{global}}} &#x3D; {H_a^{TF}(I_a), H_b^{TF}(I_b)}$ 。</li>
+<li><strong>浅层局部特征提取</strong>：将全局特征连接起来，并传递给头部模块以提取浅层局部特征：$F_{shallow} &#x3D; H_{head}(Cat(F_{a_{global}}, F_{b_{global}}))$ ，其中 $Cat(·)$ 表示通道连接，$H_{head}$ 是浅层特征提取模块。</li>
+<li><strong>深层局部特征提取</strong>：将浅层局部特征 $F_{shallow}$ 发送到交互式CNN进行深层局部特征提取：$F_{deep} &#x3D; H_{cnn}(F_{shallow})$ ，其中 $H_{cnn}(·)$ 代表交互式CNN，$F_{deep}$ 表示深层局部特征。交互式CNN由三对参数共享的局部特征提取（LFE）模块和通道注意力（CA）模块组成。</li>
+<li><strong>融合图像重建</strong>：设计尾部模块 $H_{tail}$ 来重建融合图像：$I_f &#x3D; H_{tail}(F_{deep})$ ，其中 $I_f$ 是包含丰富结构和功能信息的融合图像。</li>
+</ol>
+<h3 id="模型各部分组件及作用"><a href="#模型各部分组件及作用" class="headerlink" title="模型各部分组件及作用"></a>模型各部分组件及作用</h3><h4 id="模态内知识交互"><a href="#模态内知识交互" class="headerlink" title="模态内知识交互"></a>模态内知识交互</h4><p>引入基于双分支递归Transformer的模态内交互部分，每个阶段的Transformer（TF）模块由多头自注意力（MHSA）、多层感知机（MLP）和两个层归一化（LN）层组成。通过结合RNN和Transformer，该框架可以利用Transformer的全局上下文理解能力和RNN的局部顺序处理优势。</p>
+<h4 id="模态间知识交互"><a href="#模态间知识交互" class="headerlink" title="模态间知识交互"></a>模态间知识交互</h4><p>基于交互式CNN设计模态间交互部分，包括：</p>
+<ol>
+<li><strong>局部特征提取（LFE）模块</strong>：由卷积层和门控双注意力（GDA）单元组成，采用密集连接模式，同时引入局部残差学习，以促进信息的传递和特征的重用，增强模型捕捉医学图像详细信息的能力。</li>
+<li><strong>门控双注意力（GDA）单元</strong>：由1×1卷积层、双注意力机制（空间注意力SA和通道注意力CA）和门控自适应双归一化（GADN）块组成。利用多分支结构提取不同层次的特征，并通过注意力机制选择重要的特征信息。</li>
+<li><strong>门控自适应归一化（GADN）块</strong>：引入三个可学习参数 $\alpha$、$\beta$ 和 $\gamma$ 来调节每个通道的权重，通过门控自适应操作调整特征的权重，使模型能够选择性地强调或弱化不同特征。</li>
+</ol>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><ul>
+<li><strong>结构保留</strong>：使用结构相似性指数（SSIM）建立结构损失函数，限制融合图像与源图像之间的结构相似性：$L_{SSIM} &#x3D; 1 - SSIM(I_f, max{I_a, I_b})$ 。</li>
+<li><strong>纹理保留</strong>：使用梯度算子来增强对源图像纹理细节的捕捉和保留：$L_{TEX} &#x3D; |\nabla I_f - max{\nabla I_a, \nabla I_b}|_2$ 。</li>
+<li><strong>强度调节</strong>：设计像素损失函数，使融合结果的像素强度分布与源图像相近：$L_{PIX} &#x3D; \frac{1}{HW}(|I_f - I_a|_F^2 + |I_f - I_b|_F^2)$ 。</li>
+<li><strong>总损失函数</strong>：$L &#x3D; \lambda_1L_{SSIM} + \lambda_2L_{TEX} + \lambda_3L_{PIX}$ ，其中 $\lambda_1$、$\lambda_2$ 和 $\lambda_3$ 是用于控制各子损失项平衡的超参数。</li>
+</ul>
+<h2 id="实验数据集和设置"><a href="#实验数据集和设置" class="headerlink" title="实验数据集和设置"></a>实验数据集和设置</h2><ol>
+<li>数据集与训练细节<ul>
+<li><strong>数据集</strong>：基于<strong>哈佛医学院的全脑图谱数</strong>据库构建训练和测试数据集。训练集包含160对CT与MRI图像、245对PET与MRI图像、333对SPECT与MRI图像，所有图像均调整为64×64尺寸。测试集从三个数据集中各选24对图像。</li>
+<li><strong>训练设置</strong>：学习率初始化为0.0002，批量大小为16，采用Adam进行网络优化。超参数λ1、λ2和λ3分别设为10、100和1。实验在NVIDIA GeForce RTX 3090 GPU上借助PyTorch框架完成。</li>
+</ul>
+</li>
+<li>实验配置<ul>
+<li><strong>对比方法</strong>：将CMINet与9种先进方法（CSF、DensFuse、FusionGAN、PMGI、RFN - Nest、SDNet、STDFusionNet、U2Fusion和UMF - CMGR）进行对比。</li>
+<li><strong>评估指标</strong>：采用Mutual Information（MI）、Spatial Frequency（SF）、Visual Information Fidelity（VIF）和$Q_{abf}$这四个指标进行定量评估，指标值越高表明融合性能越好。</li>
+</ul>
+</li>
+</ol>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><ol>
+<li>多模态医学图像融合实验<ul>
+<li><strong>CT和MRI图像融合</strong>：定性结果显示，其他9种融合技术在保留CT图像密集结构完整性方面存在明显不足，而CMINet能有效保留CT图像的高密度结构特征和MRI图像的纹理细节信息。定量结果表明，CMINet在MI、SF、VIF和Qabf指标上排名第一。</li>
+<li><strong>PET和MRI图像融合</strong>：定性结果显示，多数融合结果中MRI的边缘信息受PET图像背景影响，而CMINet能保留MRI图像细节并避免颜色信息失真。定量结果表明，CMINet在SF和Qabf指标上表现显著优越，在MI和VIF指标上位居第二。</li>
+<li><strong>SPECT和MRI图像融合</strong>：定性结果显示，CMINet在融合结果中能有效保留MRI图像的细节和边缘，不受SPECT图像背景干扰。定量结果表明，CMINet在MI、SF、VIF和Qabf指标上表现优越。</li>
+</ul>
+</li>
+</ol>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-03-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-03-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-24_11-03-37"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-03-41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-03-41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-24_11-03-41"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-03-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-03-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-24_11-03-59"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
+<li><strong>模态知识交互消融实验</strong>：设计三种不同配置评估模态内和模态间知识交互的作用。结果表明，同时应用模态内和模态间知识交互在MI、SF、VIF和Qabf指标上取得最佳效果，说明该方法能有效利用不同模态间的互补信息。</li>
+<li><strong>递归步骤消融实验</strong>：使用1 - 4不同级别的递归，评估模型在CT和MRI图像融合任务上的定量性能。结果显示，模型在两个递归步骤时达到最佳性能，递归步骤过多或过少都会导致性能下降，因此合理选择递归步骤数量很重要。</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-04-39.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-04-39.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-24_11-04-39"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-04-43.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_11-04-43.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-24_11-04-43"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了基于AIGC的医学图像融合方法CMINet，并得出以下结论：</p>
+<ol>
+<li><strong>优势显著</strong>：CMINet利用双分支递归变压器和交互式CNN，充分利用全局和局部信息，克服了CNN网络的局限性。递归结构有效减少了模型的参数数量。</li>
+<li><strong>信息互补</strong>：该方法能有效利用不同模态图像的互补信息，递归变压器捕获模态内的长期依赖关系，交互式CNN聚焦模态间的深度局部信息。</li>
+<li><strong>效果良好</strong>：在多种多模态医学图像融合任务中，CMINet能有效保留源图像的结构信息和丰富的纹理细节。</li>
+</ol>
+<p>未来，作者计划提升医学图像融合的实时性能。</p>
+
       </div>
       <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/Medical-Image-Segmentation/" class="">
+              Medical Image Segmentation
+            </a>
+          
+            <a href="/tags/Dual-Attention-Encoder/" class="">
+              Dual Attention Encoder
+            </a>
+          
+        </div>
         
       </div>
       
@@ -697,7 +814,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/me/index.html" target="_blank" title="关于我">https://louaq.github.io/me/index.html</a>
+    <a href="/post/cross-modality-interaction-network-for-medical-image-fusion/" target="_blank" title="Cross-Modality Interaction Network for Medical Image Fusion">https://louaq.github.io/post/cross-modality-interaction-network-for-medical-image-fusion/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -716,6 +833,23 @@
 
 
 
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-e22aaad20d20634f506f57fff0fcbc17_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/post/a-cascaded-framework-with-cross-modality-transfer-learning-for-whole-heart-segmentation/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">A cascaded framework with cross-modality transfer learning for whole heart segmentation</div>
+      </div>
+      <!-- <div class="content">
+        摘要Automatic and accurate segmentation of the whole heart str
+      </div> -->
+    </a>
+  </div>
 
 </div>
 
@@ -835,7 +969,29 @@
   <div class="layout_sticky">    
     
       
-      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%90%84%E9%83%A8%E5%88%86%E7%BB%84%E4%BB%B6%E5%8F%8A%E4%BD%9C%E7%94%A8"><span class="toc-text">模型各部分组件及作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%80%81%E5%86%85%E7%9F%A5%E8%AF%86%E4%BA%A4%E4%BA%92"><span class="toc-text">模态内知识交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%A8%A1%E6%80%81%E9%97%B4%E7%9F%A5%E8%AF%86%E4%BA%A4%E4%BA%92"><span class="toc-text">模态间知识交互</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8C%E8%AE%BE%E7%BD%AE"><span class="toc-text">实验数据集和设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
       
   <section class="widget side_recent_post">
     
@@ -960,136 +1116,6 @@
       </div>
     </div>
   </section>
-
-      
-  <section class="widget side_archives">
-    
-    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/07/"><span class="card-archive-list-date">七月 2025</span><span class="card-archive-list-count">16</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">六月 2025</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/03/"><span class="card-archive-list-date">三月 2025</span><span class="card-archive-list-count">19</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><span class="card-archive-list-count">1</span></a></li></ul></div>
-  </section>
-
-      <section class="widget side_webinfo">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: ">站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>68 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2025/03/23'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-        <div class="webinfo-item">
-          <div>本站总字数：</div>
-          <div>142.5k 字</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          
-            <div id="last-update" style="display: none;">Thu Jul 24 2025 03:14:30 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-07-24 日</div>
-          
-        </div>
-        
-        <script>
-          function timeago(dateTimeStamp) {
-              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
-              var hour = minute * 60;
-              var day = hour * 24;
-              var week = day * 7;
-              var month = day * 30;
-              var now = new Date().getTime(); //获取当前时间毫秒
-              var diffValue = now - dateTimeStamp; //时间差
-              if (diffValue < 0) {
-                  return;
-              }
-              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
-              var hourC = diffValue / hour;
-              var dayC = diffValue / day;
-              var weekC = diffValue / week;
-              var monthC = diffValue / month;
-              if (monthC >= 1 && monthC <= 3) {
-                  result = " " + parseInt(monthC) + " 月前"
-              } else if (weekC >= 1 && weekC <= 3) {
-                  result = " " + parseInt(weekC) + " 周前"
-              } else if (dayC >= 1 && dayC <= 6) {
-                  result = " " + parseInt(dayC) + " 天前"
-              } else if (hourC >= 1 && hourC <= 23) {
-                  result = " " + parseInt(hourC) + " 小时前"
-              } else if (minC >= 1 && minC <= 59) {
-                  result = " " + parseInt(minC) + " 分钟前"
-              } else if (diffValue >= 0 && diffValue <= minute) {
-                  result = "刚刚"
-              } else {
-                  var datetime = new Date();
-                  datetime.setTime(dateTimeStamp);
-                  var Nyear = datetime.getFullYear();
-                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
-                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-                  result = Nyear + "-" + Nmonth + "-" + Ndate
-              }
-              return result;
-          }
-          var lastUpDate = document.getElementById('last-update').innerHTML;
-          try {
-            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
-          } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-07-24 日';
-          }
-        </script>
-        
-      
-    </div>
-  </div>
-</section>
-      
-  
 
     
   </div>
@@ -1218,6 +1244,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
