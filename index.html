@@ -281,38 +281,34 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
-                <a href="/messageBoard" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-comment-dots" aria-hidden="true"></i>
-                  
-                  <span class="name">留言板</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/talk" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-bookmark" aria-hidden="true"></i>
-                  
-                  <span class="name">说一说</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(8)">
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
                   <span>
                     
                       <i class="fas fa-link"></i>
                     
                     <span class="name">友情链接</span>
                   </span>
-                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(8)}" aria-hidden="true"></i>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
                 </a>
-                <ul class="drawer-sub-menu" v-if="isOpen(8)">
+                <ul class="drawer-sub-menu" v-if="isOpen(6)">
+                  
+                  <li>
+                    <a href="/messageBoard">
+                      
+                      <i class="fas fa-comment-dots" style="margin-top: -20px;"></i>
+                      
+                      <span>留言板</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <i class="fas fa-bookmark" style="margin-top: -20px;"></i>
+                      
+                      <span>说一说</span>
+                    </a>
+                  </li>
                   
                   <li>
                     <a href="/gallery">
@@ -476,28 +472,6 @@
           
             <li class="menu-item" style="position: relative;">
               
-                <a href="/messageBoard" class="menu-item-link" title="留言板">
-                  
-                    <i class="fas fa-comment-dots" aria-hidden="true"></i>
-                  
-                  <span class="name">留言板</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/talk" class="menu-item-link" title="说一说">
-                  
-                    <i class="fas fa-bookmark" aria-hidden="true"></i>
-                  
-                  <span class="name">说一说</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
                 <a href="javascript:;" class="menu-item-link" title="友情链接">
                   
                     <i class="fas fa-link"></i>
@@ -506,6 +480,24 @@
                   <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
                 </a>
                 <ul class="sub-menu">
+                  
+                  <li>
+                    <a href="/messageBoard">
+                      
+                      <i class="fas fa-comment-dots" style="margin-top: -20px;"></i>
+                      
+                      <span>留言板</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/talk">
+                      
+                      <i class="fas fa-bookmark" style="margin-top: -20px;"></i>
+                      
+                      <span>说一说</span>
+                    </a>
+                  </li>
                   
                   <li>
                     <a href="/gallery">
@@ -2986,8 +2978,8 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Tue Jul 29 2025 08:48:38 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-07-29 日</div>
+            <div id="last-update" style="display: none;">Wed Jul 30 2025 06:22:35 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2025-07-30 日</div>
           
         </div>
         
@@ -3037,7 +3029,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-07-29 日';
+            document.getElementById('last-update-show').innerHTML = '2025-07-30 日';
           }
         </script>
         
