@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>多模态医学图像分割综述 | Louaq</title>
+  <title>Multi-modal disease segmentation with continual learning and adaptive decision fusion | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -650,21 +650,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        多模态医学图像分割综述
+        Multi-modal disease segmentation with continual learning and adaptive decision fusion
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-06-25 |
+          <i class="fas fa-calendar"></i> 发表于：2025-07-31 |
         </span>
       
 
@@ -682,11 +682,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.1k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 2.7k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 4分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
           </span>
   
           
@@ -711,74 +711,72 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h2><p><strong>多模态医学图像分割</strong>：多模态医学图像分割指<strong>融合多模态图像的信息</strong>以提高分割性能。常见的医学图像主<br>要有计算机断层扫描（Computed Tomography， <strong>CT</strong>）、磁共振成像（Magnetic Resonance Imaging， <strong>MRI</strong>）和正电子发射断层扫描（Positron Emission computed Tomography， <strong>PET</strong>）等。</p>
+        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>Multi-modal disease segmentation</strong> is essential for the diagnosis and treatment of patients. Advanced algorithms have been proposed, however, two challenging issues remain unsolved, i.e., lacked knowledge share and limited modal relation. To this end, we develop a novel framework for multi-modal disease segmentation. It is based on improved continual learning and adaptive decision fusion. Specifically, continual learning with 𝑘-means sampling is developed to highlight knowledge share from multi-modal medical images. In addition, we propose an adaptive decision fusion technique that uses the Naive Bayesian algorithm to improve the relationship between different modalities. To evaluate our proposed model, we chose two typical tasks, i.e., myocardial pathology segmentation and brain tumor segmentation. Four benchmark datasets, i.e., myocardial pathology segmentation challenge 2020 (MyoPS 2020), brain tumor segmentation challenge 2018 (BraTS 2018), BraTS 2019, and BraTS 2020, are utilized to train and test our framework. Both the qualitative and quantitative results demonstrate that our proposed model is effective and has advantages over peer state-of-the-art (SOTA) methods.</p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>多模态疾病分割对于患者的诊断和治疗至关重要。尽管已经提出了先进的算法，但仍有两个挑战性问题未解决，即缺乏知识共享和模态关系有限。为此，我们开发了一种新颖的多模态疾病分割框架，该框架基于<strong>改进的连续学习和自适应决策融合</strong>。具体来说，利用𝑘-means采样的连续学习被开发用于突出多模态医学图像中的知识共享。此外，我们提出了一种自适应决策融合技术，利用朴素贝叶斯算法改善不同模态之间的关系。为了评估我们提出的模型，我们选择了两个典型任务，即心肌病理分割和脑肿瘤分割。四个基准数据集，即心肌病理分割挑战赛2020 (MyoPS 2020)、脑肿瘤分割挑战赛2018 (BraTS 2018)、BraTS 2019和BraTS 2020被用于训练和测试我们的框架。定性和定量结果均表明我们提出的模型是有效的，并且相较于同行的先进方法（SOTA）具有优势。</p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p><strong>多模态疾病分割</strong>对患者的诊断和治疗至关重要，但目前仍面临两大挑战。一方面，现有基于监督学习网络和自监督学习的疾病分割模型，前者依赖大量手动标注，耗费人力和时间；后者虽能在标签有限时提升分割性能，但存在知识共享不足的问题。另一方面，不同模态间的关系有限，使得模型在处理多模态数据时，因模态差异大导致性能下降。</p>
+<p>当前，持续学习和自适应融合技术为解决上述问题带来新思路。持续学习可帮助模型保留知识，自适应融合能增强模态间的关系。然而，尚未有研究将持续学习应用于多模态疾病分割。</p>
+<p>基于此，作者开发了一种名为CLBF - Net的新型框架，该框架基于改进的持续学习和自适应决策融合，旨在突出多模态医学图像的知识共享和模态关系，以提高多模态疾病分割的效果，这也是撰写本文的目的。</p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><h3 id="多模态医学图像分割方法"><a href="#多模态医学图像分割方法" class="headerlink" title="多模态医学图像分割方法"></a>多模态医学图像分割方法</h3><ul>
+<li><strong>基于监督学习网络的方法</strong>：该类方法通常基于监督学习网络自动提取特征并决策，如Martin等人提出的两阶段网络用于准确心肌分割和小感兴趣区域检测；Zhou等人开发的多阶段模型利用额外约束信息提高分割精度；Li等人采用两个并行卷积神经网络提取各模态特定特征。不过，这些方法依赖大量手动标签，收集过程耗时费力。</li>
+<li><strong>基于自监督学习的方法</strong>：此类型通过自监督学习将多模态图像编码为嵌入空间，例如Wang等人开发的自动加权框架利用强化学习优化自监督学习层之间的交互；Yang等人引入的灵活模型能够整合多个多模态输入；Shi等人开发的自蒸馏方法在像素和语义层面平衡不同模态的优化。虽然自监督学习在标签有限时能提升分割性能，但仍未解决知识共享不足和模态关系有限的问题。</li>
+</ul>
+<h3 id="持续学习和自适应融合的发展"><a href="#持续学习和自适应融合的发展" class="headerlink" title="持续学习和自适应融合的发展"></a>持续学习和自适应融合的发展</h3><ul>
+<li><strong>持续学习</strong>：能帮助模型随时间保留知识，常见策略是基于排练的方法，如黑暗经验回放（DER），通过在缓冲区存储先前数据或特征并在后续训练中重放来保留知识。</li>
+<li><strong>自适应融合</strong>：被证明可有效增强模态关系，例如Zhu等人基于图卷积设计的自适应融合块用于脑肿瘤分割；Mu等人应用的自适应融合策略结合互补预测，有效处理病变因颜色不一致导致的显著变异性。</li>
+</ul>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><h3 id="框架架构"><a href="#框架架构" class="headerlink" title="框架架构"></a>框架架构</h3><p>主要包含多模态持续预训练学习和自适应决策融合微调两个组件：</p>
 <ul>
-<li>CT图像是肌肉及骨骼疾病，如骨肿瘤、骨折等疾病的常用诊断成像</li>
-<li>MRI图像能提供较好的软组织对比度</li>
-<li>功能性影像（例如PET）缺乏解剖特征，但能提供疾病的定量代谢和功能信息</li>
+<li><strong>多模态持续预训练学习</strong>：各模态输入按顺序输入到具有持续预训练学习的骨干网络，生成不同的模态模型$C_n$。使用掩码图像预训练任务从多模态数据中提取通用表示，为防止灾难性遗忘，用基于排练的持续学习策略，通过K-means 采样将先前模态数据的一小部分存储在缓冲区。</li>
+<li><strong>自适应决策融合微调</strong>：采用朴素贝叶斯算法的决策融合技术，增强不同模态之间的关系。将多模态数据并行输入到预训练的编码器和解码器以得到预测可能性掩码，通过贝叶斯推理计算每个预测掩码的可靠性，将可靠性值归一化转换为权重，通过加权求和得到像素分数。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_19-44-11.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_19-44-11"></p>
-<blockquote>
-<p> T1w: T1 加权成像 </p>
-<p> T1ce: 对比增强 T1 加权成像          </p>
-<p>  T2w: T2加权成像</p>
-<p> FLAIR:  流体衰减反转恢复</p>
-</blockquote>
-<blockquote>
-<p>融合多模态医学图像进行分割已经成了研究热点</p>
-</blockquote>
-<h2 id="多模态医学图像分割数据集"><a href="#多模态医学图像分割数据集" class="headerlink" title="多模态医学图像分割数据集"></a>多模态医学图像分割数据集</h2><ul>
-<li><p>脑肿瘤分割（Brain Tumor Segmentation， BraTS）数据集</p>
-</li>
-<li><p>缺血性中风病变分割（Ischemic Stroke LEsion Segmentation， ISLES）数据集</p>
-</li>
-<li><p>MR 脑图像分割（MR Brain image Segmentation，MRBrainS）数 据 集</p>
-</li>
-<li><p>新生儿脑分割（Neonatal Brain Segmentation， NeoBrainS）数据集</p>
-</li>
-<li><p>组合（CT-MR）腹部器官分 割 （Combined CT-MR Healthy Abdominal Organ Segmentation， CHAOS）数据集</p>
-</li>
-<li><p>婴儿脑 MRI 分割（6-month Infant brain MRI segmentation， Iseg）数据集</p>
-</li>
-<li><p>多模态MR图像自动椎间盘定位分割（automatic InterVertebral Disc localization and segmentation from 3D MR images， IVDM3Seg）数据集</p>
-</li>
+<h3 id="骨干网络"><a href="#骨干网络" class="headerlink" title="骨干网络"></a>骨干网络</h3><p>使用三个特定维度的分词器将医学数据转换为令牌序列，标准视觉Transformer（ViT）作为编码器进行序列到序列的表示学习。遵循掩码自动编码器（MAE）方法，随机掩码50%的令牌序列，仅将未掩码的令牌输入到编码器，然后通过基于Transformer的解码器重建缺失的令牌，使用均方误差（MSE）损失确保原始图像和重建图像在掩码区域的一致性。</p>
+<h3 id="多模态持续学习"><a href="#多模态持续学习" class="headerlink" title="多模态持续学习"></a>多模态持续学习</h3><p>采用顺序预训练方法，每个阶段专注于特定成像模态，防止模态数据冲突，但可能导致灾难性遗忘，因此使用基于排练的持续学习保留先验知识。在每个阶段，预训练包括使用当前模态数据的掩码图像建模（MIM）和辅助特征蒸馏任务。</p>
+<h3 id="自适应决策融合"><a href="#自适应决策融合" class="headerlink" title="自适应决策融合"></a>自适应决策融合</h3><p>基于不同模态的预测掩码，使用贝叶斯推理确定其可靠性，将可靠性值归一化为权重，结合预测概率计算背景样本分数，以提高多模态疾病分割的鲁棒性。</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-07-48.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-07-48.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-31_16-07-48"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-08-15.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-08-15.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-31_16-08-15"></p>
+<h2 id="实验设置"><a href="#实验设置" class="headerlink" title="实验设置"></a>实验设置</h2><ol>
+<li><strong>实验数据集</strong>：使用了四个高质量且开放获取的数据集，分别是<strong>MyoPS 2020</strong>、<strong>BraTS 2018</strong>、<strong>BraTS 2019</strong>和BraTS 2020。其中，MyoPS 2020用于心肌病理分割，其余三个数据集用于脑肿瘤分割。</li>
+<li><strong>评估标准</strong>：采用了Dice分数、Hausdorff距离（HD）、准确率、精确率、灵敏度、特异度和F1分数等指标来评估模型性能。同时，通过浮点运算次数（FLOPs）、参数数量和每秒帧数（FPS）来衡量模型的时间复杂度和计算成本。</li>
+<li>实验设置<ul>
+<li><strong>硬件和软件环境</strong>：硬件使用NVIDIA RTX - 3090，软件环境为PyTorch 11.1和Python 3.7。</li>
+<li><strong>预训练阶段</strong>：设置训练轮数（epoch）为500，优化器为AdamW，初始学习率为1e - 4，在第200和400个epoch后学习率降低为原来的0.1倍。批量大小为24，采样数K固定为5。所有图像调整为512×512像素。</li>
+<li><strong>微调阶段</strong>：继续使用AdamW优化器，根据具体下游任务调整超参数，损失权重λu和λf分别设置为0.4和0.6。混合策略（mixup strategy）中，持续掩码向量λc设置为0.5。</li>
 </ul>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-03-33.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-03-33.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-03-33"></p>
-<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>数据预处理对后续分割任务有重要影响；尤其对多模态医学图像进行分割时，由于图像具有强度不一、对比度各异、噪声较大等特点，为使图像像素值分布更统一、网络训练更平滑，需要将图像经过预处理操作后再送入分割网络。如图所示，典型的预处理技术主要有<strong>图像配准、偏置场校正、图像重采样、强度值归一化</strong>等。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-04-42.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-04-42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-04-42"></p>
-<p>数据增强通过对训练数据集中的图像进行变换（旋转、平移、缩放、翻转、扭曲以及加入某些噪声如高斯噪声等），增加了可用的训练数据。数据增强技术在医学图像的分割任务中有着广泛的应用。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-05-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-25_20-05-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-06-25_20-05-25"></p>
-<h2 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h2><blockquote>
-<p>交叉熵损失（Cross-Entropy loss， CE）函数：交叉熵损失是最常用的损失函数之一，对每个像素的类别预测进行单独评估，然后对所有像素点进行平均。</p>
-</blockquote>
-<p>$$<br>Loss_{\mathrm{CE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p>
-<blockquote>
-<p>加权交叉熵损失（Weighted Cross-Entropy loss， WCE）函数：在医学图像分割任务中由于大部分像素点属于背景类，因此在计算损失时对不同类别的像素点赋予不同的权重是合理的，并可以缓解类别不平衡问题</p>
-</blockquote>
-<p>$$<br>Loss_{\mathrm{WCE}}&#x3D;-\sum_{i\in N}\sum_{l\in L}w_{l}y_{i}^{l}\log\hat{y}_{i}^{l}<br>$$</p>
-<blockquote>
-<p>骰子损失（DICE loss）：骰子损失同样是医学图像分割中常用的损失函数之一。它可以衡量预测结果和真实结果之间重合度</p>
-</blockquote>
-<p>$$<br>Loss_{\mathrm{Dice}}&#x3D;1-2\frac{\sum_{l\in L}\sum_{i\in N}y_{i}^{l}\hat{y}<em>{i}^{l}+\varepsilon}{\sum</em>{l\in L}\sum_{i\in N}\left(y_{i}^{l}+\hat{y}_{i}^{l}\right)+\varepsilon}<br>$$</p>
-<p>焦点损失（Focal loss，FL）：焦点损失最初是为目标检测任务设计的。它通过向交叉熵损失引入一个调节因子γ和一个参数α使模型将训练重点放在困难像素点上<br>$$<br>p_t&#x3D;\begin{cases}p_t,&amp;y&#x3D;1\1-p_t,&amp;\text{其他}\end{cases}<br>$$</p>
-<p>$$<br>Loss_{\mathrm{FL}}(p_{t})&#x3D;-\alpha_{t}(1-p_{t})^{\gamma}\log(p_{t})<br>$$</p>
-<blockquote>
-<p>其中：y ∈ { - 1，+ 1}代表像素点的真实类别；pt衡量了模型预测结果与真实值之间的差异，值越大表示越接近；γ为可调节因子，可以平滑地调整简单样本的权重降低的速度。当γ &gt; 0时，可以减小简单样本的相对损失，把重点放在困难样本上；当γ &#x3D; 0时，焦点损失变为交叉熵损失。</p>
-</blockquote>
-<p>三种融合方法：<strong>输入级融合、中间层融合以及决策级融合</strong></p>
-<h2 id="参考文献："><a href="#参考文献：" class="headerlink" title="参考文献："></a>参考文献：</h2><p>[1] 杨鸿杰,徐巧枝,于磊. 基于深度学习的多模态医学影像分割研究综述[J]. 计算机应用研究,2022,39(5):1297-1306. DOI:10.19734&#x2F;j.issn.1001-3695.2021.10.0424.</p>
+</li>
+</ol>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><ul>
+<li><strong>分割实验</strong>：在四个数据集上进行多模态疾病分割实验，分为心肌病理分割和脑肿瘤分割两个任务。设置十个随机种子评估模型的鲁棒性。结果显示，模型在脑肿瘤分割数据集上的表现优于心肌病理分割数据集。</li>
+<li><strong>对比实验</strong>：将模型与其他相关工作在心肌病理和脑肿瘤分割任务上进行对比。定量结果表明，该模型在多个指标上优于之前的SOTA方法；定性结果显示，模型的预测掩码与真实标签的相似度更高。</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-10-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-10-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-31_16-10-25"></p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-10-54.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-10-54.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-31_16-10-54"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ul>
+<li>消融实验<ul>
+<li><strong>持续学习的贡献</strong>：分析了有无持续学习、特征蒸馏（FD）、k - means采样和混合策略（MS）对模型性能的影响。结果表明，持续学习能够有效促进多模态知识共享，提升多模态疾病分割性能。</li>
+<li><strong>自适应决策融合的贡献</strong>：分析了有无自适应决策融合（ADF）以及与其他融合方法（如平均权重（AW）、多特征推理块（MFIB）和深度标签融合（DLF））的对比。结果显示，基于贝叶斯算法的决策融合能够有效融合多模态掩码的不确定分数，提高分割性能。</li>
+</ul>
+</li>
+<li><strong>超参数优化</strong>：分析了Transformer编码器中单通道特征提取模块的数量NS和分类分支的数量NM对模型性能的影响。结果表明，NS &#x3D; 8和NL &#x3D; 8时模型性能最佳。同时，模型在计算资源使用上实现了性能和效率的平衡。</li>
+</ul>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-11-27.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-31_16-11-27.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-31_16-11-27"></p>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>者提出了基于持续学习和贝叶斯融合的CLB -Net框架用于多模态疾病分割，得出以下结论：</p>
+<ol>
+<li>实验在心肌病理分割和脑肿瘤分割两个典型任务、四个基准数据集上进行，结果表明该框架有效，相比其他先进算法具有优势。</li>
+<li>持续学习结合k - 均值采样增强了多模态知识共享，贝叶斯自适应决策融合技术提升了不同模态间的关系，有效改善了多模态疾病分割效果。</li>
+<li>指出当前研究仍存在处理多模态数据计算资源和时间需求大、涉及患者隐私保护和模型安全等挑战。未来计划结合多中心临床数据、减少模型参数、提高临床数据传输安全性来优化框架。</li>
+</ol>
 
       </div>
       <div class="post-tags-categories">
         
         <div class="tags">
           
-            <a href="/tags/%E5%A4%9A%E6%A8%A1%E6%80%81/" class="">
-              多模态
+            <a href="/tags/Continual-Learning/" class="">
+              Continual Learning
             </a>
           
-            <a href="/tags/%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="">
-              医学图像分割
+            <a href="/tags/Bayesian-Fusion/" class="">
+              Bayesian Fusion
             </a>
           
         </div>
@@ -792,7 +790,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/duo-mo-tai-yi-xue/" target="_blank" title="多模态医学图像分割综述">https://louaq.github.io/post/duo-mo-tai-yi-xue/</a>
+    <a href="/post/multi-modal-disease-segmentation-with-continual-learning-and-adaptive-decision-fusion/" target="_blank" title="Multi-modal disease segmentation with continual learning and adaptive decision fusion">https://louaq.github.io/post/multi-modal-disease-segmentation-with-continual-learning-and-adaptive-decision-fusion/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -810,43 +808,24 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">BSAFusion A Bidirectional Stepwise Feature Alignment Network for Unaligned Medical Image Fusion</div>
-      </div>
-      
-      <!-- <div class="content">
-        
-昆明理工大学
-
-
-医学图像对齐是指将同一患者或不同患者的多幅医学图像进行空间配准，使得图像中的解剖结构在空间位置上达到
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/" class="post-nav-link">
+    <a href="/post/multi-modality-medical-image-segmentation-via-adversarial-learning-with-cv-energy-functional/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation</div>
+        <div class="title-text">Multi-modality medical image segmentation via adversarial learning with CV energy functional</div>
       </div>
       <!-- <div class="content">
-        摘要U-Net is a widely used model for medical image segmentatio
+        
+部分难懂
+
+摘要Medical image processing methods based on deep lear
       </div> -->
     </a>
   </div>
@@ -981,7 +960,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-text">多模态医学图像分割数据集</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">数据预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%8C%AE%EF%BC%9A"><span class="toc-text">参考文献：</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2%E6%96%B9%E6%B3%95"><span class="toc-text">多模态医学图像分割方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0%E5%92%8C%E8%87%AA%E9%80%82%E5%BA%94%E8%9E%8D%E5%90%88%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-text">持续学习和自适应融合的发展</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A1%86%E6%9E%B6%E6%9E%B6%E6%9E%84"><span class="toc-text">框架架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%AA%A8%E5%B9%B2%E7%BD%91%E7%BB%9C"><span class="toc-text">骨干网络</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E6%8C%81%E7%BB%AD%E5%AD%A6%E4%B9%A0"><span class="toc-text">多模态持续学习</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E5%86%B3%E7%AD%96%E8%9E%8D%E5%90%88"><span class="toc-text">自适应决策融合</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-text">实验设置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
