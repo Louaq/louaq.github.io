@@ -682,7 +682,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 754 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 750 |
           </span>
   
           <span class="min2read">
@@ -712,10 +712,15 @@
     <article class="post post-detail">
       <div class="post-content">
         <h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>BraTS2021 脑肿瘤分割</p>
-<h2 id="所需指令"><a href="#所需指令" class="headerlink" title="所需指令"></a>所需指令</h2><p> nnUNetv2_convert_MSD_dataset -i D:\nnunet\nnUNet_raw\Task44_example</p>
-<p> nnUNetv2_plan_and_preprocess -d 44 –verify_dataset_integrity</p>
-<p> nnUNetv2_train 44 2d all -tr nnUNetTrainer_500epochs</p>
-<p> nnUNetv2_predict -i D:&#x2F;nnunet&#x2F;nnUNet_raw&#x2F;Dataset044_example &#x2F;imagesTs -o output -d 44 -c 2d -f all</p>
+<h2 id="所需指令"><a href="#所需指令" class="headerlink" title="所需指令"></a>所需指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_convert_MSD_dataset -i D:\nnunet\nnUNet_raw\Task44_example</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_train 2 3d_fullres all -<span class="built_in">tr</span> nnUNetTrainer_250epochs</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_predict -i D:/nnunet/nnUNet_raw/Dataset044_example /imagesTs -o output -d 44 -c 2d -f all</span><br></pre></td></tr></table></figure>
+
+
+
 <h2 id="方法1：通过命令行参数（部分参数）"><a href="#方法1：通过命令行参数（部分参数）" class="headerlink" title="方法1：通过命令行参数（部分参数）"></a>方法1：通过命令行参数（部分参数）</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 基本训练命令</span></span><br><span class="line">nnUNetv2_train DATASET_ID CONFIG FOLD [其他参数]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一些可用的命令行参数：</span></span><br><span class="line">nnUNetv2_train 001 2d <span class="number">0</span> --npz  <span class="comment"># 使用npz格式保存</span></span><br><span class="line">nnUNetv2_train 001 2d <span class="number">0</span> --c    <span class="comment"># 继续之前的训练</span></span><br><span class="line">nnUNetv2_train 001 2d <span class="number">0</span> --val  <span class="comment"># 同时进行验证</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="方法2：修改配置文件中的默认参数"><a href="#方法2：修改配置文件中的默认参数" class="headerlink" title="方法2：修改配置文件中的默认参数"></a>方法2：修改配置文件中的默认参数</h2><p>找到并编辑nnUNetTrainer类文件：</p>
