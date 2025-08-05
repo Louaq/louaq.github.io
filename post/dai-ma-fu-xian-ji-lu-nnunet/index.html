@@ -696,7 +696,7 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 750 |
+            <i class="fas fa-file-text-o"></i> 字数统计: 747 |
           </span>
   
           <span class="min2read">
@@ -726,12 +726,7 @@
     <article class="post post-detail">
       <div class="post-content">
         <h2 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h2><p>BraTS2021 脑肿瘤分割</p>
-<h2 id="所需指令"><a href="#所需指令" class="headerlink" title="所需指令"></a>所需指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_convert_MSD_dataset -i D:\nnunet\nnUNet_raw\Task44_example</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity</span><br></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_train 2 3d_fullres all -<span class="built_in">tr</span> nnUNetTrainer_250epochs</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_predict -i D:/nnunet/nnUNet_raw/Dataset044_example /imagesTs -o output -d 44 -c 2d -f all</span><br></pre></td></tr></table></figure>
+<h2 id="所需指令"><a href="#所需指令" class="headerlink" title="所需指令"></a>所需指令</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_convert_MSD_dataset -i D:\nnunet\nnUNet_raw\Task44_example</span><br><span class="line"></span><br><span class="line">nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity</span><br><span class="line"></span><br><span class="line">nnUNetv2_train 2 3d_fullres all -<span class="built_in">tr</span> nnUNetTrainer_250epochs</span><br><span class="line"></span><br><span class="line">nnUNetv2_predict -i D:/nnunet/nnUNet_raw/Dataset044_example /imagesTs -o output -d 44 -c 2d -f all</span><br></pre></td></tr></table></figure>
 
 
 
