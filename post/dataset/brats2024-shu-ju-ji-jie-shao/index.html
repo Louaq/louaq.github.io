@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Louaq</title>
+  <title>BraTs2024数据集处理及python读取.nii文件 | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -542,14 +542,14 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        
+        BraTs2024数据集处理及python读取.nii文件
       </span>
     </div>
     
@@ -560,6 +560,15 @@
         </span>
       
 
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/BraTs2024%E6%95%B0%E6%8D%AE%E9%9B%86/" class="post-detail-header_category">
+              BraTs2024数据集
+            </a>
+          
+        </span>
       
 
       
@@ -594,8 +603,7 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <p>title: BraTs2024数据集处理及python读取.nii文件<br>date: 2025-08-12 21:05:00<br>expires: 2025-08-21 23:59:59<br>mathjax: true<br>excerpt: “BraTs2024数据集”<br>categories: BraTs2024数据集<br>tags: [BraTs2024数据集]</p>
-<p><strong>一、BraTS-GLI2024介绍</strong></p>
+        <p><strong>一、BraTS-GLI2024介绍</strong></p>
 <p>国际脑肿瘤分割(BraTS)挑战。自2012年以来，BraTS一直专注于为成人脑胶质瘤的描述生成基准环境和数据集。今年挑战的重点仍然是产生一个共同的基准环境，但与2023年类似，该数据集将大幅扩展到约4,500例，以解决额外的i)人口(例如撒哈拉以南非洲患者)，ii)肿瘤(例如脑膜瘤)，iii)临床问题(例如缺失数据)，以及iv)技术考虑(例如增强)。具体而言，BraTS 2024的重点是确定当前最先进的算法，用于(任务1)使用新数据集处理治疗后胶质瘤，(任务2)服务不足的撒哈拉以南非洲脑胶质瘤患者群体，(任务3)使用新数据集处理放疗脑膜瘤，(任务4)脑转移，(任务5)儿科脑肿瘤患者，(任务7和8)全局和局部缺失数据，(任务9)有用的增强技术，以及(任务10)使用新数据集处理病理学。值得注意的是，所有数据都是常规的临床获得的，脑肿瘤患者的多位点多参数磁共振成像(mpMRI)扫描。所有数据集的真实参考注释由神经放射学专家为训练、验证和测试数据集中的每个主题创建和批准，以定量评估参与算法的性能。   神经胶质瘤是成人中最常见的恶性原发性脑肿瘤，其中弥漫性神经胶质瘤最为常见。弥漫性神经胶质瘤的特点是其在中枢神经系统内的浸润性生长模式，由于其生物行为、预后和对治疗的反应多变，给治疗和监测带来了巨大挑战。弥漫性神经胶质瘤的治疗涉及针对肿瘤特征和患者健康状况的多模式方法，包括手术、放射治疗和全身治疗。MRI 仍然是弥漫性神经胶质瘤治疗后成像的黄金标准。它提供了有关肿瘤大小、位置和形态随时间变化的重要信息。弥漫性神经胶质瘤的治疗后成像是患者管理的基本组成部分，它决定了治疗的变化并与临床结果相关。脑肿瘤分割 (BraTS) 挑战赛旨在确定当前最先进的脑中枢神经系统肿瘤分割算法。训练和盲验证数据可用于构建和评估分割算法。盲法验证数据预测的评估指标将立即返回给参与者，并附上不断更新的排行榜。2024 年 BraTS 治疗后胶质瘤子挑战赛的目的是开发一种自动多室脑肿瘤分割算法，用于治疗后 MRI 上的高级别和低级别弥漫性胶质瘤。从该挑战赛中开发的数据和算法可用于创建客观评估残留肿瘤体积的工具，以进行治疗计划和结果预测。</p>
 <p><strong>二、BraTS-GLI2024任务</strong></p>
 <p>肿瘤亚区域分割。注释包括增强组织（ET - 标签 3）、周围非增强 FLAIR 高信号（SNFH）- 标签 2）、非增强肿瘤核心（NETC - 标签 1）和切除腔（RC - 标签 4）。</p>
@@ -632,6 +640,14 @@
       </div>
       <div class="post-tags-categories">
         
+        <div class="tags">
+          
+            <a href="/tags/BraTs2024%E6%95%B0%E6%8D%AE%E9%9B%86/" class="">
+              BraTs2024数据集
+            </a>
+          
+        </div>
+        
       </div>
       
         <div class="copyright">
@@ -641,7 +657,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/dataset/brats2024-shu-ju-ji-jie-shao/" target="_blank" title="">https://louaq.github.io/post/dataset/brats2024-shu-ju-ji-jie-shao/</a>
+    <a href="/post/dataset/brats2024-shu-ju-ji-jie-shao/" target="_blank" title="BraTs2024数据集处理及python读取.nii文件">https://louaq.github.io/post/dataset/brats2024-shu-ju-ji-jie-shao/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -663,16 +679,16 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
     <a href="/post/dataset/brats2023-men-shu-ju-ji-jie-shao/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text"></div>
+        <div class="title-text">BraTs2023数据集处理及python读取.nii文件</div>
       </div>
       
       <!-- <div class="content">
-        title: BraTs2023数据集处理及python读取.nii文件date: 2025-08-12 21:05:0
+        数据集信息BraTS2023-MEN(Brain Tumor Segmentation 2023 Meningioma 
       </div> -->
     </a>
   </div>
@@ -683,15 +699,15 @@
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
     <a href="/post/dataset/brats2019-shu-ju-ji-chu-li-ji-python-du-qu.nii-wen-jian/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text"></div>
+        <div class="title-text">BraTs2019数据集处理及python读取.nii文件</div>
       </div>
       <!-- <div class="content">
-        title: BraTs2019数据集处理及python读取.nii文件date: 2025-08-12 21:05:0
+        数据集 BraTS 是MICCAI脑肿瘤分割比赛的数据集，BraTs 2018中的训练集( training set) 
       </div> -->
     </a>
   </div>
@@ -861,7 +877,7 @@
             <div class="post-img-box">
               <a href="/post/dataset/brats2023-men-shu-ju-ji-jie-shao/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -870,7 +886,7 @@
                   <span class="post-date">08-12</span>
                 
               </div>
-              <a class="post-title" href="/post/dataset/brats2023-men-shu-ju-ji-jie-shao/">暂无标题</a>
+              <a class="post-title" href="/post/dataset/brats2023-men-shu-ju-ji-jie-shao/">BraTs2023数据集处理及python读取.nii文件</a>
             </div>
           </div>
         
@@ -882,7 +898,7 @@
             <div class="post-img-box">
               <a href="/post/dataset/brats2024-shu-ju-ji-jie-shao/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -891,7 +907,7 @@
                   <span class="post-date">08-12</span>
                 
               </div>
-              <a class="post-title" href="/post/dataset/brats2024-shu-ju-ji-jie-shao/">暂无标题</a>
+              <a class="post-title" href="/post/dataset/brats2024-shu-ju-ji-jie-shao/">BraTs2024数据集处理及python读取.nii文件</a>
             </div>
           </div>
         
@@ -903,7 +919,7 @@
             <div class="post-img-box">
               <a href="/post/dataset/brats2019-shu-ju-ji-chu-li-ji-python-du-qu.nii-wen-jian/" class="post-img " style="background-size: cover; 
                 background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" class="lazyload placeholder" data-srcset="https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
               </a>
             </div>
             <div class="post-date-title">
@@ -912,7 +928,7 @@
                   <span class="post-date">08-12</span>
                 
               </div>
-              <a class="post-title" href="/post/dataset/brats2019-shu-ju-ji-chu-li-ji-python-du-qu.nii-wen-jian/">暂无标题</a>
+              <a class="post-title" href="/post/dataset/brats2019-shu-ju-ji-chu-li-ji-python-du-qu.nii-wen-jian/">BraTs2019数据集处理及python读取.nii文件</a>
             </div>
           </div>
         
@@ -1089,6 +1105,59 @@
 		height: 100%;
 	}
 </style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
