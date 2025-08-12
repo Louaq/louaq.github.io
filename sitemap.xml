@@ -20,6 +20,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/myjson/talk.json</loc>
+    
+    <lastmod>2025-08-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/pdf/index.html</loc>
     
     <lastmod>2025-08-12</lastmod>
@@ -29,7 +38,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/myjson/talk.json</loc>
+    <loc>https://louaq.github.io/me/index.html</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -48,15 +57,6 @@
   
   <url>
     <loc>https://louaq.github.io/messageBoard/index.html</loc>
-    
-    <lastmod>2025-08-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/me/index.html</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -129,6 +129,15 @@
   
   <url>
     <loc>https://louaq.github.io/huoban/index.html</loc>
+    
+    <lastmod>2025-08-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -245,7 +254,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</loc>
+    <loc>https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -255,6 +264,15 @@
   
   <url>
     <loc>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</loc>
+    
+    <lastmod>2025-08-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -362,7 +380,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</loc>
+    <loc>https://louaq.github.io/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -452,15 +470,6 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</loc>
-    
-    <lastmod>2025-08-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://louaq.github.io/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/</loc>
     
     <lastmod>2025-08-12</lastmod>
@@ -470,7 +479,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/</loc>
+    <loc>https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -552,15 +561,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/</loc>
-    
-    <lastmod>2025-08-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -677,7 +677,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
+    <loc>https://louaq.github.io/post/entropy-aware-dynamic-path-selection-network-for-multi-modality-medical-image-fusion/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -686,7 +686,7 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/post/entropy-aware-dynamic-path-selection-network-for-multi-modality-medical-image-fusion/</loc>
+    <loc>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -803,6 +803,15 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
+    
+    <lastmod>2025-08-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/post/brain-tumor-segmentation-based-on-the-dual-path-network-of-multi-modal-mri-images/</loc>
     
     <lastmod>2025-08-12</lastmod>
@@ -813,15 +822,6 @@
   
   <url>
     <loc>https://louaq.github.io/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/</loc>
-    
-    <lastmod>2025-08-12</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</loc>
     
     <lastmod>2025-08-12</lastmod>
     
@@ -991,6 +991,20 @@
   </url>
   
   <url>
+    <loc>https://louaq.github.io/tags/Diffusion-Probability-Model-DPM/</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://louaq.github.io/tags/Brain-tumor/</loc>
+    <lastmod>2025-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>https://louaq.github.io/tags/Multi-modal-MRI-Images/</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>weekly</changefreq>
@@ -1006,20 +1020,6 @@
   
   <url>
     <loc>https://louaq.github.io/tags/boundary-shape-correction/</loc>
-    <lastmod>2025-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/tags/Diffusion-Probability-Model-DPM/</loc>
-    <lastmod>2025-08-12</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>https://louaq.github.io/tags/Brain-tumor/</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1229,14 +1229,14 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Feature-Self-Reinforcement/</loc>
+    <loc>https://louaq.github.io/tags/Prompt-and-Transfer/</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Prompt-and-Transfer/</loc>
+    <loc>https://louaq.github.io/tags/Feature-Self-Reinforcement/</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -1250,14 +1250,14 @@
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/Feature-Enhancement-Network/</loc>
+    <loc>https://louaq.github.io/tags/U-Net/</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>https://louaq.github.io/tags/U-Net/</loc>
+    <loc>https://louaq.github.io/tags/Feature-Enhancement-Network/</loc>
     <lastmod>2025-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
