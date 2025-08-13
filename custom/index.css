@@ -1,12 +1,4 @@
 .post-detail-header {
-    background-image: none!important;
-    background-color: transparent!important;
+    height: 60vh;
     
-}
-.post-detail-header-mask {
-    background: transparent!important;
-}
-#appBgSwiper {
-    filter: brightness(0.8);
-    background: rgba(0, 0, 0, .3)!important;
 }
