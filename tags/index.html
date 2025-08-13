@@ -577,22 +577,6 @@
                 </a>
                 
                 
-                <a href="/tags/Cross-Modality-Medical-Image-Segmentation/" title="Cross-Modality Medical Image Segmentation: 1">
-                    <span class="tag-content"
-                        title="Cross-Modality Medical Image Segmentation" style="background-color: #FEF9E7;">Cross-Modality Medical Image Segmentation
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Vision-Transformers/" title="Vision Transformers: 1">
-                    <span class="tag-content"
-                        title="Vision Transformers" style="background-color: #F9E79F;">Vision Transformers
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/tags/Transformer/" title="Transformer: 1">
                     <span class="tag-content"
                         title="Transformer" style="background-color: #F5EEF8;">Transformer
@@ -605,6 +589,22 @@
                     <span class="tag-content"
                         title="Few-Shot Semantic Segmentation" style="background-color: #E8F8F5;">Few-Shot Semantic Segmentation
                         <span class="tag-length">2</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Cross-Modality-Medical-Image-Segmentation/" title="Cross-Modality Medical Image Segmentation: 1">
+                    <span class="tag-content"
+                        title="Cross-Modality Medical Image Segmentation" style="background-color: #FEF9E7;">Cross-Modality Medical Image Segmentation
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Vision-Transformers/" title="Vision Transformers: 1">
+                    <span class="tag-content"
+                        title="Vision Transformers" style="background-color: #F9E79F;">Vision Transformers
+                        <span class="tag-length">1</span>
                     </span>
                 </a>
                 
@@ -809,14 +809,6 @@
                 </a>
                 
                 
-                <a href="/tags/Domain-Generalization/" title="Domain Generalization: 1">
-                    <span class="tag-content"
-                        title="Domain Generalization" style="background-color: #FFF;">Domain Generalization
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
                 <a href="/tags/%E6%A8%A1%E6%8B%9F%E5%9B%BE%E5%83%8F%E9%97%B4%E6%93%A6%E9%99%A4/" title="模拟图像间擦除: 1">
                     <span class="tag-content"
                         title="模拟图像间擦除" style="background-color: #E8F8F5;">模拟图像间擦除
@@ -828,6 +820,14 @@
                 <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%92%B8%E9%A6%8F/" title="注意力蒸馏: 1">
                     <span class="tag-content"
                         title="注意力蒸馏" style="background-color: #F9E79F;">注意力蒸馏
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
+                <a href="/tags/Domain-Generalization/" title="Domain Generalization: 1">
+                    <span class="tag-content"
+                        title="Domain Generalization" style="background-color: #FFF;">Domain Generalization
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -1813,6 +1813,59 @@
 
 <!-- markdown代码一键复制功能 -->
 
+  <link rel="stylesheet" href="https://unpkg.com/v-plugs-ayu/lib/ayu.css">
+  <script src="https://unpkg.com/v-plugs-ayu/lib/ayu.umd.min.js"></script>
+  <script src="/js/clipboard/clipboard.min.js"></script>
+  <div id="appCopy">
+  </div>
+  <script data-pjax>
+    var vm = new Vue({
+      el: '#appCopy',
+      data: {
+      },
+      computed: {
+      },
+      mounted() {
+        const that = this;
+        var copy = '复制';
+        /* code */
+        var initCopyCode = function () {
+          var copyHtml = '';
+          copyHtml += '<button class="btn-copy" data-clipboard-snippet="" style="position:absolute;top:0;right:0;z-index:1;">';
+          copyHtml += '<i class="fas fa-copy"></i><span>' + copy + '</span>';
+          copyHtml += '</button>';
+          $(".post-detail pre").not('.gutter pre').wrap("<div class='codeBox' style='position:relative;width:100%;'></div>")
+          $(".post-detail pre").not('.gutter pre').before(copyHtml);
+          new ClipboardJS('.btn-copy', {
+            target: function (trigger) {
+              return trigger.nextElementSibling;
+            }
+          });
+        }
+        initCopyCode();
+        $('.btn-copy').unbind('click').bind('click', function () {
+          doSomething();
+        })
+        $(document).unbind('keypress').bind('keypress', function (e) {
+          if (e.ctrlKey && e.keyCode == 67) {
+            doSomething();
+          }
+        })
+
+        function doSomething() {
+          that.$notify({
+            title: "成功",
+            content: "代码已复制，请遵守相关授权协议。",
+            type: 'success'
+          })
+        }
+      },
+      methods: {
+      },
+      created() { }
+    })
+  </script>
+  
 
 <!-- 图片懒加载 -->
 <script defer src="https://unpkg.com/vanilla-lazyload@17.1.0/dist/lazyload.min.js"></script>
