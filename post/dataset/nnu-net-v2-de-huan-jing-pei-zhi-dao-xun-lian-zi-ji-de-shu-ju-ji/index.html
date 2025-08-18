@@ -578,7 +578,7 @@
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 7分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 6分钟 |
           </span>
   
           
@@ -603,10 +603,7 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="一、说明"><a href="#一、说明" class="headerlink" title="一、说明"></a>一、说明</h2><ol>
-<li>学习参加阿里云平台的竞赛第一次接触nnUNet任务，若有错误麻烦指出，谢谢啦</li>
-<li>竞赛是关于牙齿的分割任务，背景说明和数据集下载地址为：<a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/competition/entrance/532087/information">MICCAI 2023 Challenges ：STS-基于3D CBCT的牙齿分割任务</a></li>
-</ol>
+        <p>一、说明<br>nnU-Net v2的环境配置到训练自己的数据集</p>
 <h2 id="二、所需的环境配置"><a href="#二、所需的环境配置" class="headerlink" title="二、所需的环境配置"></a>二、所需的环境配置</h2><p>官方文档地址：<a target="_blank" rel="noopener" href="https://github.com/MIC-DKFZ/nnUNet/blob/master/readme.md">GitHub-nnUNet</a>  </p>
 <ol>
 <li>版本要求：python &gt;(或&#x3D;) 3.9，pytorch&gt;1.12.0 （之前使用的环境python版本为3.8.10，在安装nnU-Net时报错。torch最好的GPU版本的）  </li>
@@ -903,7 +900,7 @@ paper: https://w
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%AF%B4%E6%98%8E"><span class="toc-text">一、说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%89%80%E9%9C%80%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">二、所需的环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81nnUNet%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">三、nnUNet框架的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">四、数据集的准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%AE%BE%E7%BD%AE%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E8%AE%BE%E7%BD%AE%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-text">五、设置读取文件路径设置（重要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">六、数据集的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">七、数据集预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">八、模型训练</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%89%80%E9%9C%80%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">二、所需的环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81nnUNet%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">三、nnUNet框架的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">四、数据集的准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%AE%BE%E7%BD%AE%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E8%AE%BE%E7%BD%AE%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-text">五、设置读取文件路径设置（重要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">六、数据集的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">七、数据集预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">八、模型训练</span></a></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
