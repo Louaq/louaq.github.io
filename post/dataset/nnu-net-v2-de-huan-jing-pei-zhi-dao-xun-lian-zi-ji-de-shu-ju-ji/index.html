@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Louaq</title>
+  <title>nnU-Net v2的环境配置到训练自己的数据集 | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -528,1268 +528,295 @@
 </header>
         <!-- 内容区域 -->
         
-  <!-- 首页轮播 -->
+<!-- prismjs 代码高亮 -->
+
+
+
+
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
+
+
+  <!-- 文章详情页顶部图片和标题 -->
+
+
+
+
+<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
+  background-position: center center;position: relative;background-image:url('https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png')">
+  <div class="post-detail-header-mask"></div>
+  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
-
-  <link href="/js/vue-typed-js/index.css" rel="stylesheet">
-
-
-
-
-
-
-<div class="swiper-length" style="display: none;">9</div>
-<div id="appSwiper"
-  class=""
-  @mouseenter="stopAutoPlay()" 
-  @mouseleave="startAutoPlay()"
->
-  <swiper v-cloak ref="mySwiper" :options="swiperOptions" @slideChangeTransitionEnd="slideChangeTransitionEnd">
-    
-      
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7kamkav50qu6DIYPAqF0DqJ1DGxwDIiw.png" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/ymjew503t0l000d6xujz7kamkav50qu6DIYPAqF0DqJ1DGxwDIiw.png" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/">
-                        BTSegDiff Brain tumor segmentation based on multimodal MRI Dynamically guided diffusion probability model
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">在脑肿瘤的治疗中，准确的诊断和治疗严重依赖于可靠的脑肿瘤分割，而多模态磁共振成像（MRI）通过提供有价值的补充信息发挥关键作用</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">
-                        Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocyxuegif80y9DIYPAqF0DqJ1DGxwDIiw.png" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocyxuegif80y9DIYPAqF0DqJ1DGxwDIiw.png" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/">
-                        MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">多模态图像融合(MMIF)需要合成具有详细纹理和突出目标的图像</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/">
-                        A nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://pic3.zhimg.com/80/v2-e5c15010b8ba4608a1974403a02a2da0_1440w.webp" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/">
-                        Mirror U-Net Marrying Multimodal Fission with Multi-task Learning for Semantic Segmentation in Medical Imaging
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">云想衣裳花想容，春风拂槛露华浓</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/duo-mo-tai-yi-xue/">
-                        多模态医学图像分割综述
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">基本概念多模态医学图像分割：多模态医学图像分割指融合多模态图像的信息以提高分割性能。常见的医学图像主要有计算机断层扫描（Computed Tomography， CT）、磁共振成像（Magnetic Resonance Imaging， M</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/duo-mo-tai-yi-xue/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0n000d6xujp024483w79ml0DIYPAqF0DqJ1DGxwDIiw.jpg" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0n000d6xujp024483w79ml0DIYPAqF0DqJ1DGxwDIiw.jpg" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/">
-                        A Simple and Robust Framework for Cross-Modality Medical Image Segmentation applied to Vision Transformers
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">云想衣裳花想容，春风拂槛露华浓</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7rjbcezj0f1jDIYPAqF0DqJ1DGxwDIiw.jpg" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32x7rjbcezj0f1jDIYPAqF0DqJ1DGxwDIiw.jpg" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/transunet-de-gai-jin/">
-                        Unet的改进
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">云想衣裳花想容，春风拂槛露华浓</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/transunet-de-gai-jin/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-      
-        
-        
-          
-          <swiper-slide>
-            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" style=" background-size: 300000px; 
-            background-position: left center;" style="position: relative;">
-              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
-              <div class="flag" style="z-index: 2;">
-                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" style="height: 100%; background-size: cover; 
-                  background-position: center center;">
-                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
-                </div>
-                <div class="flag-text">
-                  <div class="flag-text-content">
-                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
-                      <a href="/post/latex/visual-studio-code/">
-                        vscode配置latex环境
-                      </a>
-                    </div>
-                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">介绍vscode如何配置latex环境</div>
-                  </div>
-                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/latex/visual-studio-code/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
-                </div>
-              </div>
-            </div>
-
-          </swiper-slide>
-        
-      
-    <div class="swiper-pagination" slot="pagination" pointer style="display: none;"></div>
-    <div class="swiper-button-prev swiper-button-white" pointer slot="button-prev" style=""></div>
-    <div class="swiper-button-next swiper-button-white" pointer slot="button-next" style=""></div>
-    
-  </swiper>
-  
-    <div id="scroll-down" @click="toPostContent()">
-      <a href="javascript:;">
-        <i class="fas fa-angle-down scroll-down-effects"></i>
-      </a>
+  <div class="post-detail-header_info-box">
+    <div class="title-box">
+      <span class="title">
+        nnU-Net v2的环境配置到训练自己的数据集
+      </span>
     </div>
-  
-  <canvas id="header_canvas"style="position:absolute;bottom:0;width:100%;pointer-events:none;"></canvas>
     
+    
+      
+        <span class="post-detail-header_date">
+          <i class="fas fa-calendar"></i> 发表于：2025-08-18 |
+        </span>
+      
+
+      
+        <span class="post-detail-header_categories">
+          <i class="iconfont iconbookmark1"></i> 分类：
+          
+            <a href="/categories/nnUNet/" class="post-detail-header_category">
+              nnUNet
+            </a>
+          
+        </span>
+      
+
+      
+        <div class="post-detail-header_wordcount">
+          <span class="totalcount">
+            <i class="fas fa-file-text-o"></i> 字数统计: 1.8k |
+          </span>
+  
+          <span class="min2read">
+            <i class="fas fa-clock"></i> 阅读时长: 7分钟 |
+          </span>
+  
+          
+            <span class="reading">
+              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
+            </span>
+          
+        </div>
+      
+    
+  </div>
+  
+  
 </div>
 
 
 
-<script>
-  var autoplay = JSON.parse('true');
-  var delay = '4000';
-  var loop = JSON.parse('false') ? false : JSON.parse('true');
-  var effect = 'fade';
-  var swiperLength = parseInt(document.querySelector(".swiper-length").innerText);
-  var defaultDesc = '煮酒洗净尘嚣，论知交,万般付之一笑，共偕老,最是人间留不住，朱颜辞镜花辞树';
-  defaultDesc = defaultDesc.split(',');
-  var defaultDescTypedLoop = JSON.parse('true');
-  var vm = new Vue({
-    el: '#appSwiper',
-    data: {
-      defaultDesc: defaultDesc,
-      defaultDescTypedLoop,
-      swiperOptions: {
-        pagination: {
-          el: '.swiper-pagination',
-          clickable: true // 允许点击小圆点跳转
-        },
-        loop: loop ? true : false,
-        effect, // fade
-        autoplay: (autoplay && swiperLength > 1) ? {
-  　　　　delay,
-  　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
-    　　} : false,
-        navigation: {
-          nextEl: '.swiper-button-next',
-          prevEl: '.swiper-button-prev',
-        },
-        lazy: {
-          loadPrevNext: true,
-        },
-        on:{
-          init: function() {
-            swiperAnimateCache(this); //隐藏动画元素 
-            swiperAnimate(this); //初始化完成开始动画
-          }, 
-          slideChangeTransitionEnd: function(){ 
-            swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
-          } 
-        }
-        // Some Swiper option/callback...
-      }
-    },
-    computed: {
-      swiper() {
-        return this.$refs.mySwiper.$swiper
-      }
-    },
-    mounted() {
-      // console.log('Current Swiper instance object', this.swiper)
-      // this.swiper.slideTo(0, 1000, false)
-    },
-    methods: {
-      stopAutoPlay() {
-        (autoplay && swiperLength > 1) && this.swiper.autoplay.stop();
-      },
-      startAutoPlay() {
-        (autoplay && swiperLength > 1) && this.swiper.autoplay.start();
-      },
-      slideChangeTransitionEnd() {
-        console.log('1');
-      },
-      toPostContent() {
-        const fullHeight = $(window).height() - 60;
-        $('html,body').animate({scrollTop: fullHeight},500);
-      }
-    },
-    created() {}
-  })
+
+
+<div class="post-detail-content post-row" 
+  style="padding-top: 0px;">
+  <div class="main-content">
+    <article class="post post-detail">
+      <div class="post-content">
+        <h2 id="一、说明"><a href="#一、说明" class="headerlink" title="一、说明"></a>一、说明</h2><ol>
+<li>学习参加阿里云平台的竞赛第一次接触nnUNet任务，若有错误麻烦指出，谢谢啦</li>
+<li>竞赛是关于牙齿的分割任务，背景说明和数据集下载地址为：<a target="_blank" rel="noopener" href="https://tianchi.aliyun.com/competition/entrance/532087/information">MICCAI 2023 Challenges ：STS-基于3D CBCT的牙齿分割任务</a></li>
+</ol>
+<h2 id="二、所需的环境配置"><a href="#二、所需的环境配置" class="headerlink" title="二、所需的环境配置"></a>二、所需的环境配置</h2><p>官方文档地址：<a target="_blank" rel="noopener" href="https://github.com/MIC-DKFZ/nnUNet/blob/master/readme.md">GitHub-nnUNet</a>  </p>
+<ol>
+<li>版本要求：python &gt;(或&#x3D;) 3.9，pytorch&gt;1.12.0 （之前使用的环境python版本为3.8.10，在安装nnU-Net时报错。torch最好的GPU版本的）  </li>
+<li>创建虚拟环境：在pycharm中打开终端，输入命令行：<code>conda create -n nnUNet python=3.9</code>，创建一个名字为nnUNet的虚拟环境，并且指定python为3.9的版本<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/9f1caa3026001cc7caf05d3dff439295.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/9f1caa3026001cc7caf05d3dff439295.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="创建虚拟环境"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/de8d37169baea59b927d6ca1da9b1a63.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/de8d37169baea59b927d6ca1da9b1a63.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/0368fa13db18c6c5393c92574ccfa669.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/0368fa13db18c6c5393c92574ccfa669.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述">  </li>
+<li>在虚拟环境中安装torch：<br>（1） 首先输入：<code>nvidia-smi</code> 查看信息，下图中的CUDA Version:12.0是指CUDA最高版本为12.0，即安装GPU版本的torch 的时候，安装12.0以下的版本<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/dc6babba2d6e7d897fa6c0ee605bd08b.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/dc6babba2d6e7d897fa6c0ee605bd08b.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></li>
+</ol>
+<p>（2） 打开Pytorch官网：<a target="_blank" rel="noopener" href="https://pytorch.org/">Pytorch地址</a>，在此界面下拉，按照自己配置选择，然后复制给出的命令行<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b601eca2dae7bc675be22ddfab7909a2.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b601eca2dae7bc675be22ddfab7909a2.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/cc48616ee57f0fa7615389db089affd4.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/cc48616ee57f0fa7615389db089affd4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>（3) 回到pycharm终端，进入粘贴此代码，进行torch安装</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/e5173ff81c6c1f7fbe7b270afc474c26.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/e5173ff81c6c1f7fbe7b270afc474c26.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/06185ac43474e03d5694503868785362.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/06185ac43474e03d5694503868785362.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/01b0b58b242f0dfb0e7b6a9ba46fecb4.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/01b0b58b242f0dfb0e7b6a9ba46fecb4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<h2 id="三、nnUNet框架的安装"><a href="#三、nnUNet框架的安装" class="headerlink" title="三、nnUNet框架的安装"></a>三、nnUNet框架的安装</h2><p>**注意：**环境已经安装配好之后，接下来的所有操作都在此环境中，即：都需要先激活虚拟环境。<a target="_blank" rel="noopener" href="https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/installation_instructions.md">GitHub-文档说明link</a>  </p>
+<ol>
+<li>安装nnUNet：（1）激活虚拟环境，（2）使用此命令行：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install nnunetv2</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>创建nnUNet代码副本，和直接在GitHub上下载下来一样效果，继续在终端的虚拟环境中，按顺序分别执行以下3个命令行：（**注意：**最后一个命令最后有一个<code>.</code>）其中，<code>pip install -e .</code>的目的：（1）安装nnUNet需要的python包；（2）向终端添加新的命令，这些命令用于后续整个nnU-Net pipeline的执行，这些命令都有一个前缀：<code>nnUNetv2_</code></li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/MIC-DKFZ/nnUNet.git</span><br><span class="line"><span class="built_in">cd</span> nnUNet</span><br><span class="line">pip install -e .</span><br></pre></td></tr></table></figure>
+
+<p>具体步骤如下图：<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/e137f3ae8891c34667937d4b1f2b793e.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/e137f3ae8891c34667937d4b1f2b793e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7ccfb68516b87a1ecb86f478521bd32a.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7ccfb68516b87a1ecb86f478521bd32a.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/43fdc9c278a761d3d405309f224f6f1a.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/43fdc9c278a761d3d405309f224f6f1a.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<ol start="3">
+<li>安装隐藏层（可选，可以不安装），hiddenlayer 使 nnU-net 能够生成网络拓扑图</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install --upgrade git+https://github.com/FabianIsensee/hiddenlayer.git</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b9596997c68a5d22506b060a43e23f8e.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b9596997c68a5d22506b060a43e23f8e.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<h2 id="四、数据集的准备"><a href="#四、数据集的准备" class="headerlink" title="四、数据集的准备"></a>四、数据集的准备</h2><p>得到克隆之后的副本，即：<strong><code>名为 nnUNet 的文件夹</code></strong>，参照官方文档，准备数据集。<a target="_blank" rel="noopener" href="https://github.com/MIC-DKFZ/nnUNet/blob/master/documentation/dataset_format.md">GitHub-文档说明link</a>  </p>
+<ol>
+<li>数据集文件夹结构：按照如下步骤创建文件夹，存放相应的数据集<br>（1） 在 <strong><code>名为 nnUNet 的文件夹</code></strong> 中创建一个名为 <strong><code>名为 GATASET 的文件夹</code></strong> 的文件夹<br>（2） 在 <strong><code>名为 GATASET 的文件夹</code></strong> 中创建3个文件夹，命名分别为：<strong><code>nnUNet_raw</code></strong>、<strong><code>nnUNet_preprocessed</code></strong> 和 <strong><code>nnUNet_trained_models</code></strong>。如下图所示：</li>
+</ol>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/c4ae1e1f81bd93f52574415e13e6ae78.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/c4ae1e1f81bd93f52574415e13e6ae78.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>（3) 在 <strong><code>名为 nnUNet_raw 的文件夹</code></strong> 中创建1个 <strong><code>名为 Dataset001_Teeth 的文件夹</code></strong></p>
+<blockquote>
+<p>说明1：文件夹命名为：Dataset+三位整数+任务名，<code>Dataset001_Teeth</code>中数据集ID为1，任务名为Teeth。此文件夹下存放需要的训练数据集<code>imageTr</code>、测试集<code>imageTs</code>、标签<code>labelsTr</code>。其中<code>imageTs</code> 是与<code>imageTr</code>中一一对应的标签，文件中都是nii.gz文件。<code>imageTs</code>是可选项，可以没有。如下图所示</p>
+</blockquote>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/8ae544c2cb75b57e6d29bca386680160.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/8ae544c2cb75b57e6d29bca386680160.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/a73e5e753f6a49692d0bf2d4e01db7cb.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/a73e5e753f6a49692d0bf2d4e01db7cb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/0c49bc0086fb6a49408bdb149fc5a080.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/0c49bc0086fb6a49408bdb149fc5a080.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/116fd22a16f68c81bc333eafd3131807.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/116fd22a16f68c81bc333eafd3131807.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<blockquote>
+<p>说明2：json文件是对三个文件夹内容的字典呈现。先在 <code>Dataset001_Teeth</code>文件夹下创建一个空白的dataset.json文件，然后运行以下代码写入相应的 json文件</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">import json</span><br><span class="line"></span><br><span class="line">nnUNet_dir = &#x27;/root/autodl-tmp/nnU-Net/nnUNet/DATASET/&#x27; #此路径根据自己实际修改</span><br><span class="line"></span><br><span class="line">def sts_json()<span class="punctuation">:</span></span><br><span class="line">    info = <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;channel_names&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;0&quot;</span><span class="punctuation">:</span> <span class="string">&quot;CBCT&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;labels&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">            <span class="attr">&quot;background&quot;</span><span class="punctuation">:</span> <span class="number">0</span><span class="punctuation">,</span></span><br><span class="line">            <span class="attr">&quot;Teeth&quot;</span><span class="punctuation">:</span> <span class="number">1</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;numTraining&quot;</span><span class="punctuation">:</span> <span class="number">12</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;file_ending&quot;</span><span class="punctuation">:</span> <span class="string">&quot;.nii.gz&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">    with open(nnUNet_dir + &#x27;nnUNet_raw/Dataset001_Teeth/dataset.json&#x27;<span class="punctuation">,</span></span><br><span class="line">              &#x27;w&#x27;) as f<span class="punctuation">:</span></span><br><span class="line">        json.dump(info<span class="punctuation">,</span> f<span class="punctuation">,</span> indent=<span class="number">4</span>)</span><br><span class="line"></span><br><span class="line">sts_json()</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>运行后生成的 json文件内容如下：</p>
+</blockquote>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/c5ec2824f26c5035f3ef5d6886da09cb.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/c5ec2824f26c5035f3ef5d6886da09cb.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<h2 id="五、设置读取文件路径设置（重要）"><a href="#五、设置读取文件路径设置（重要）" class="headerlink" title="五、设置读取文件路径设置（重要）"></a>五、设置读取文件路径设置（重要）</h2><ol>
+<li><p>需要让nnUNet知道文件存放在哪里，否则执行数据处理等一下相关操作都会报错，如下图<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/82cfd1ddfcac5fedc51a36bf2f288695.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/82cfd1ddfcac5fedc51a36bf2f288695.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/5bcd4862b16d7dafcc340779df9ee939.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/5bcd4862b16d7dafcc340779df9ee939.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+</li>
+<li><p><strong>方法一：</strong>(自己使用的方法一)<br>（1） 找到<code>root</code>文件夹下的<code>.bashrc</code>文件（**注：**这里自己租用的云平台的服务器，若是自己的服务器在home文件夹下找 .bashrc文件，若没有，在home目录下使用Ctrl+h，显示隐藏文件）<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/5ff79d28073be772873a0a71b45682c6.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/5ff79d28073be772873a0a71b45682c6.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>（2) 打开<code>.bashrc</code>文件，在最后添加此三行内容，记得要更新一下修改后的文件，具体说明如下图</p>
+</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> nnUNet_raw=<span class="string">&quot;/root/autodl-tmp/nnU-Net/nnUNet/DATASET/nnUNet_raw&quot;</span></span><br><span class="line"><span class="built_in">export</span> nnUNet_preprocessed=<span class="string">&quot;/root/autodl-tmp/nnU-Net/nnUNet/DATASET/nnUNet_preprocessed&quot;</span></span><br><span class="line"><span class="built_in">export</span> nnUNet_results=<span class="string">&quot;/root/autodl-tmp/nnU-Net/nnUNet/DATASET/nnUNet_trained_models&quot;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6b04d3eb183444caf2f085a12149bd68.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/6b04d3eb183444caf2f085a12149bd68.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<ol start="3">
+<li><strong>方法二：</strong></li>
+</ol>
+<p><img src="https://i-blog.csdnimg.cn/blog_migrate/ebe2de684b113d2ab1777598b69f538a.png" class="lazyload placeholder" data-srcset="https://i-blog.csdnimg.cn/blog_migrate/ebe2de684b113d2ab1777598b69f538a.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>4 注：更新文档可以点击按钮更新，然后在终端使用命令行<code>source .bashrc</code>更新，如下图<br>（1）<img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/fa472dc72c8900a87589bf945436ef99.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/fa472dc72c8900a87589bf945436ef99.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br>（2）<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/62de176ab1255809dc9dbc0f8a0bb8ef.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/62de176ab1255809dc9dbc0f8a0bb8ef.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<h2 id="六、数据集的转换"><a href="#六、数据集的转换" class="headerlink" title="六、数据集的转换"></a>六、数据集的转换</h2><ol>
+<li>此任务的数据集不需要格式转换，此步骤是为了将数据集转换成上述imageTr文件夹里面图片中显示的样子：<code>名字_000X</code> 的形式</li>
+<li>数据集转换的指令：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNet_convert_decathlon_task -i /root/autodl-tmp/nnU-Net/nnUNet/DATASET/nnUNet_raw/Dataset001_Teeth</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>此步骤参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_68239345/article/details/128886376">link</a></li>
+</ol>
+<h2 id="七、数据集预处理"><a href="#七、数据集预处理" class="headerlink" title="七、数据集预处理"></a>七、数据集预处理</h2><ol>
+<li>此步骤对数据进行：裁剪crop，重采样resample以及标准化normalization，具体论文中有讲解，或参看此博文：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u014264373/article/details/116792649">nnU-Net论文解读</a>。将提取数据集指纹（一组特定于数据集的属性，例如图像大小、体素间距、强度信息等）。此信息用于设计三种 <a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=U-Net&spm=1001.2101.3001.7020">U-Net</a> 配置。每个管道都在其自己的数据集预处理版本上运行  </li>
+<li>继续在虚拟环境中执行一下命令行：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_plan_and_preprocess -d DATASET_ID --verify_dataset_integrity  </span><br></pre></td></tr></table></figure>
+
+<p>此命令行中的DATASRT_ID根据自己任务修改，此任务中，<code>Dataset001_Teeth</code> 中可知ID为<code>1</code> 所以执行的命令为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity  </span><br></pre></td></tr></table></figure>
+
+<p>具体如下图所示：<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b1b1b7d1fe609cf5ed5bbb4378a837b7.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/b1b1b7d1fe609cf5ed5bbb4378a837b7.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d7136ee39fe458a76a66a70602e00450.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d7136ee39fe458a76a66a70602e00450.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<ol start="3">
+<li>运行后将在 nnUNet_preprocessed 文件夹中创建一个以数据集命名的新子文件夹。命令完成后，将出现一个 dataset_fingerprint.json 文件以及一个 nnUNetPlans.json 文件。还有一些子文件夹包含 UNet 配置的预处理数据。<br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7b4fe6f4ae9367519bac57aa3544cc98.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7b4fe6f4ae9367519bac57aa3544cc98.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></li>
+</ol>
+<h2 id="八、模型训练"><a href="#八、模型训练" class="headerlink" title="八、模型训练"></a>八、模型训练</h2><ol>
+<li>这是五折交叉验证，可以使用代码直接一折一折接着跑<br>（1.1） 创建一个<code>tst.sh</code> 文件，并写入此代码：</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> fold <span class="keyword">in</span> &#123;<span class="number">0.</span><span class="number">.4</span>&#125;</span><br><span class="line">do </span><br><span class="line">    <span class="comment"># echo &quot;nnUNetv2_train 1 3d_lowres $fold&quot;</span></span><br><span class="line">    nnUNetv2_train <span class="number">1</span> 3d_lowres $fold </span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<p>（1.2） 在虚拟环境下的终端运行此 <code>tst.sh</code> 文件，使用 <code>source</code>命令可以执行脚本（<a target="_blank" rel="noopener" href="https://blog.csdn.net/GX_1_11_real/article/details/80990250">参考link</a>），具体命令行为：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">source</span> /root/autodl-tmp/nnU-Net/sts.sh</span><br></pre></td></tr></table></figure>
+
+<p>具体为下图所示：</p>
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d84191aa7954548aab6dfbe52e0b11a4.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d84191aa7954548aab6dfbe52e0b11a4.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/cef78c7b6f3b166747a45a99f4f271e7.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/cef78c7b6f3b166747a45a99f4f271e7.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<ol start="2">
+<li>也可以使用代码一折跑完，再次运行代码跑第二折：<br>进入虚拟环境，使用命令行：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_train 1 3d_lowres 0   <span class="comment"># 其中1表示数据集ID，上述提及过。0表示第1折</span></span><br></pre></td></tr></table></figure>
+
+<p>设置的是1000 epoch，第一折的1000epoch跑结束之后，修改命令行中的折数，即最后一个数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2_train 1 3d_lowres 1   <span class="comment"># 其中1表示数据集ID，上述提及过。1表示第2折</span></span><br></pre></td></tr></table></figure>
+
+<p>直到跑完5折交叉验证。</p>
+<ol start="3">
+<li>在正常运行代码后遇到的问题：<br>（1） 不小心碰到键盘或者Ctrl+C会中断实验，此代码会50个epoch保存一下checkpoint ，若中断使用：原来指令后面加<code>--c</code>可以接着运行，用运行第一折时中断为例：</li>
+</ol>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nnUNetv2 train 1 3d_lowres 0 --c</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7429e0deb61f97783f31c71bb702f8ec.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7429e0deb61f97783f31c71bb702f8ec.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"><br><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/221f20096c3ed7c326c2be9ec3b11c35.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/221f20096c3ed7c326c2be9ec3b11c35.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="在这里插入图片描述"></p>
+<p>（2）nohup 后台挂起，使用<code>nohup+运行的命令行+&amp;</code>，这样断网什么的不会影响进程</p>
+<p>转载自CSDN博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_45521766/article/details/131539779">https://blog.csdn.net/m0_45521766/article/details/131539779</a></p>
+
+      </div>
+      <div class="post-tags-categories">
+        
+        <div class="tags">
+          
+            <a href="/tags/nnUNet/" class="">
+              nnUNet
+            </a>
+          
+        </div>
+        
+      </div>
+      
+        <div class="copyright">
+  <ul class="post-copyright">
+    <li class="post-copyright-author">
+    <strong>作者:  </strong>Louaq</a>
+    </li>
+    <li class="post-copyright-link">
+    <strong>文章链接:  </strong>
+    <a href="/post/dataset/nnu-net-v2-de-huan-jing-pei-zhi-dao-xun-lian-zi-ji-de-shu-ju-ji/" target="_blank" title="nnU-Net v2的环境配置到训练自己的数据集">https://louaq.github.io/post/dataset/nnu-net-v2-de-huan-jing-pei-zhi-dao-xun-lian-zi-ji-de-shu-ju-ji/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>版权声明:   </strong>
+      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
+      许可协议。转载请注明出处!
+    </li>
+  </ul>
+<div>
+      
+    </article>
+    <!-- 上一篇文章和下一篇文章 -->
+    
+      <!-- 文章详情页的上一页和下一页 -->
+<div class="post-nav">
+
+
+
+
+
+  
+  <div class="post-nav-next post-nav-item">
+    <div class="post-nav-img" style="background-size: cover; 
+      background-position: center center;">
+      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+    </div>
+    <a href="/post/dataset/nnunetv1-zai-zi-ji-shu-ju-ji-shang-xun-lian/" class="post-nav-link">
+      <div class="title">
+        下一篇: <i class="fas fa-angle-right"></i>
+        <div class="title-text">nnUNetv1在自己数据集上训练</div>
+      </div>
+      <!-- <div class="content">
+        本文只讲述nnunetv1的在2D图像的上复现步骤，对于实现细节可以阅读原文和代码！
+
+paper: https://w
+      </div> -->
+    </a>
+  </div>
+
+</div>
+
+    
+    
+
+    <!-- 打赏 -->
+    
+
+    <!-- 分享 -->
+    
+      <!-- https://github.com/overtrue/share.js -->
+<!-- 文章详情页的分享 -->
+<div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+
+<script defer src="/js/shareJs/social-share.min.js"></script>
 </script>
 
 <style>
-#appSwiper {
-  position: relative;
-  user-select: none;
-  overflow: hidden;
-  font-family: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif;
-}
-.default-excerpt {
-  font-size: 1.6em;
-  margin-top: 1em;
-  color: #eee;
-}
-.bottom-one-btn {
-  margin-top: 15px;
-}
-.swiper-container {
-  overflow: hidden;
-  z-index: 0;
-}
-.swiper-slide {
-  height: 350px;
-  position: relative;
-}
-.swiper-button-prev,
-.swiper-button-next {
-  padding: 10px 10px;
-  transition: background 0.2s;
-}
-.swiper-button-prev:hover,
-.swiper-button-next:hover {
-  background: rgba(0, 0, 0, 0.2);
-}
-.swiper-slide .item {
-  width: 100%;
-  height: 100%;
-}
-.flag {
-  position: relative;
-  width: 70%;
-  margin: 0 auto;
-  color: #ffffff;
-  height: 100%;
-  background: #000;
-}
-.flag img {
-  min-height: 100%;
-}
-.flag-text {
-  position: absolute;
-  top: 50px;
-  left: 50px;
-  width: 80%;
-  height: 280px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  z-index: 9999;
-}
-.flag-text .title {
-  font-size: 1.8em;
-}
-.flag-text .title a {
-  color: #fff;
-  transition: color 0.3s;
-}
-.flag-text .title a:hover {
-  color: rgba(66, 185, 133, 0.8);
-}
-.flag-text .excerpt {
-  color: #eee;
-  width: 70%;
-  line-height: 30px;
-  height: 150px;
-  margin-top: 2%;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 5;
-  overflow: hidden;
-}
-.swiper-pagination-bullet-active {
-  opacity: 1;
-  background-color: #42b983;
-}
-.img-mask {
-  opacity:0.6; filter: alpha(opacity=60);
-}
-.flag-text .read-more {
-  margin-bottom: 30px;
-  padding: 5px 15px;
-  color: #ffffff;
-  border-radius: 20px;
-}
-#scroll-down {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2.5em;
-  color: #fff;
-  cursor: pointer;
-  z-index: 2;
-}
-#scroll-down a {
-  color: #fff;
-}
-@-webkit-keyframes rightan
-  {
-  
-  0%
-  {
-    transform: translateY(0);
-    opacity: 0.5;
+  .social-share {
+    margin: 20px 0;
   }
-  50% {
-    transform: translateY(-30px);
-    opacity: 1;
-  }
-  100%
-  {
-    transform: translateY(0);
-    opacity: 0.5;
-  }
-}
-.scroll-down-effects {
-  animation: rightan 1.5s infinite;
-}
-/* 当头部导航设置为背景透明的时候 */
-.swiper-slide {
-  height: 400px;
-}
-.flag-text {
-  top: 80px;
-}
-
-@media (min-width: 992px) {
-  .swiper-button-prev {
-    margin-left: 15%;
-    transform: translateX(-180%);
-  }
-  .swiper-button-next {
-    margin-right: 15%;
-    transform: translateX(180%);
-  }
-  .flag-text .title {
-    width: 80%;
-    line-height: 35px;
-    max-height: 70px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-}
-@media screen and (max-width: 1200px) { 
-  .flag {
-    width: 80%;
-  }
-  .swiper-button-prev {
-    margin-left: 10%;
-    transform: translateX(-180%);
-  }
-  .swiper-button-next {
-    margin-right: 10%;
-    transform: translateX(180%);
-  }
-}
-@media (max-width: 992px) {
-  .flag {
-    width: 100%;
-  }
-  .flag-text .title {
-    font-size: 1.5em;
-    margin-top: 50px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-  }
-  .flag-text {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 80%;
-    height: 100%;
-    margin-left: 50%;
-    transform: translateX(-50%);
-  }
-  .flag-text .excerpt {
-    width: 100%;
-    line-height: 25px;
-    height: 125px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 5;
-    overflow: hidden;
-  }
-  .flag-text .read-more {
-    margin-bottom: 80px;
-  }
-}
-@media (max-width: 992px) and (min-width: 551px) {
-  .flag-text .excerpt {
-    width: 70%;
-  }
-}
-@media (max-width: 551px) {
-  .swiper-slide {
-    height: 250px;
-  }
-  .flag-text .title {
-    line-height: 30px;
-    max-height: 60px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
-    margin-top: 20px;
-  }
-  .flag-text .excerpt {
-    font-size: 1em;
-    line-height: 20px;
-    height: 80px;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 4;
-  }
-  .flag-text .excerpt { 
-    margin-top: 10px;
-  }
-  .flag-text .read-more {
-    margin-top: 10px;
-    margin-bottom: 50px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    transform: scale(0.5);
-  }
-  .swiper-button-prev {
-    left: 0;
-  }
-  .swiper-button-next {
-    right: 0;
-  }
-}
-/* 当头部导航设置为背景透明的时候 */
-  @media (max-width: 992px) {
-    .flag-text {
-      top: 60px;
-      height: 80%;
-    }
-  }
-  @media (max-width: 551px) {
-    .swiper-slide {
-      height: 310px;
-    }
-  }
-
-/* 文字或者按钮居中显示 */
-
-  .flag-text {
-    left: 10%;
-  }
-  .flag-text .flag-text-content {
-    width: 100%;
-    text-align: center;
-  }
-  .flag-text .title {
-    width: 100%;
-    text-align: center;
-  }
-  .flag-text .excerpt { 
-    width: 100%;
-    text-align: center;
-  }
-  .bottom-one-btn {
-    display: flex;
-    justify-content: center;
-  }
-  .default-excerpt {
-    display: flex;
-    justify-content: center;
-    font-size: 1.6em;
-  }
-  .flag-text-btns {
-    justify-content: center;
-  }
-  @media (min-width: 992px) {
-    .flag-text .excerpt {
-      line-height: 30px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 5;
-      overflow: hidden;
-    }
-  }
-  @media (max-width: 992px) {
-    .flag-text {
-      margin-left: 0;
-      transform: translateX(0);
-    }
-  }
-
-
-
-
-/* 全屏显示 */
-
-  .flag {
-    width: 100%;
-  }
-  .swiper-slide {
-    height: 100vh;
-  }
-  .flag-text {
-    top: 50%;
-    left: 15%;
-    transform: translateY(-50%);
-    width: 70%;
-    height: auto;
-  }
-  .flag-text .title {
-    font-size: 2.8em;
-    line-height: 1.5em;
-    max-height: none;
-  }
-  .flag-text .excerpt {
-    font-size: 1.25em;
-    height: 150px;
-  }
-  .flag-text .read-more {
-    margin-top: 10px;
-  }
-  .swiper-button-prev,
-  .swiper-button-next {
-    margin-top: -60px!important;
-  }
-  .swiper-btn-color,
-  .swiper-btn-color2 {
-    background-color: transparent;
-    border: 1px solid #fff;
-  }
-  .swiper-btn-color:hover,
-  .swiper-btn-color2:hover {
-    background-color: rgba(66, 185, 133, 0.8);
-    border: 1px solid rgba(66, 185, 133, 0.8)!important;
-  }
-  .flag-text-btns {
-    justify-content: center;
-  }
-  .swiper-button-prev {
-    margin-left: 10px;
-    transform: translateX(0);
-    border-radius: 50%;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-  }
-  .swiper-button-next {
-    margin-right: 10px;
-    transform: translateX(0);
-    border-radius: 50%;
-    padding: 0;
-    width: 50px;
-    height: 50px;
-  }
-  .swiper-button-next:after, .swiper-button-prev:after {
-    font-size: 1.2em;
-  }
-  @media (min-width: 992px) {
-    .flag-text .excerpt {
-      line-height: 35px;
-      height: 175px;
-    }
-    .default-excerpt {
-      min-height: 150px;
-    }
-    .typed-element {
-      align-items: unset;
-    }
-  }
-  @media (max-width: 992px) {
-    .flag-text {
-      margin-left: 0;
-      height: 60%;
-      top: 55%;
-    }
-    .flag-text .title {
-      font-size: 2.4em;
-      margin-top: 0;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
-      overflow: hidden;
-    }
-    .flag-text .excerpt {
-      line-height: 35px;
-      height: 185px;
-    }
-    .flag-text .read-more {
-      margin-top: 20px;
-    }
-  }
-  @media (max-width: 551px) {
-    .flag-text {
-      height: 60%;
-    }
-    .flag-text .title {
-      font-size: 2.2em;
-    }
-    .flag-text .excerpt {
-      line-height: 30px;
-    }
-    .flag-text .read-more {
-      margin-top: 50px;
-      padding: 10px 30px;
-    }
-    .swiper-button-prev {
-      margin-left: 0;
-    }
-    .swiper-button-next {
-      margin-right: 0;
-    }
-    .default-excerpt {
-      margin-top: 1em;
-    }
-  }
-
-
-/* video */
-.swiper-video {
-  width: 100%;
-  height: 100%;
-}
-.swiper-video video {
-  pointer-events: none;
-}
-.swiper-video-maskBox{
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background-color: #000;
-  opacity: 0.2;
-  z-index: 1;
-}
-@media (min-width: 992px) {
-  
-    .swiper-video {
-      display: none;
-    }
-    .swiper-default-bgImg {
-      display: block;  
-    }
-  
-}
-@media (max-width: 992px) {
-  .swiper-video {
-    display: none;
-  }
-  .swiper-default-bgImg {
-    display: block;  
-  }
-}
-/* video-end */
 </style>
 
 
-<div id="l_main">
-  <div class="l_content">
-    <!-- 自定义的内容 -->
     
-  
-
-    <!-- 首页座右铭 -->
     
-    <!-- 首页公告 -->
+    <!-- 评论 -->
+    <!-- 评论 -->
+
+  <div id="myComment">
     
-    <!-- 首页文章置顶 -->
-    
-
-
-
-    <div class="bg-floor" id="home-bg-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
-    <!-- 每一篇文章卡片 -->
-    <!-- hash算法 -->
-
-<section class="posts">
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-02-24</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/fcn/20250224-yu-yi-fen-ge-gai-shu/">语义分割概述</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/fcn/20250224-yu-yi-fen-ge-gai-shu/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            云想衣裳花想容，春风拂槛露华浓
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/fcn/20250224-yu-yi-fen-ge-gai-shu/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/fcn/20250224-yu-yi-fen-ge-gai-shu/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-02-06</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/">深度学习环境配置2——windows下的torch=1.2.0环境配置</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/CUDA/" rel="tag">CUDA</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Deep-Learning/" rel="tag">Deep Learning</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/cudnn/" rel="tag">cudnn</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            CUDA环境安装
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntytwrzyj0on6DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="flex-direction: row-reverse;   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2024-12-29</span>
-          </div>
-          <div class="post-title">
-            <a class="post-title-link" href="/post/latex/visual-studio-code/">vscode配置latex环境</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-    <i class="iconfont icontag"></i>
-    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/latex/" rel="tag">latex</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/vscode/" rel="tag">vscode</a></li></ul>
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/latex/">latex</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/latex/visual-studio-code/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            介绍vscode如何配置latex环境
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/latex/visual-studio-code/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/latex/visual-studio-code/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
+      <section id="waline-box">
+  <div id="waline-comment"></div>
 </section>
-    <!-- 翻页 -->
-    
-  <!-- <nav class="page-nav">
-    <a class="extend prev" rel="prev" href="/page/8/">上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span>
-  </nav> -->
-  <div class="page-nav">
-    
-      <a href="/page/8/"
-         class="page-nav-pre">
-         <i class="fas fa-angle-left"></i><span class="ml-5">上一页</span>
-      </a>
-    
-    <div class="page-info">
-        <div class="page-info-text">9 / 9</div>
-    </div>
     
   </div>
 
+
+<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
+
+
   </div>
 
+  <!-- 目录 -->
   <aside id='l_side'>
   
     
@@ -1864,7 +891,29 @@
   <div class="layout_sticky">    
     
       
-      
+<section class="widget side_toc">
+  
+  <header>
+    
+      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
+    
+  </header>
+
+
+  <div class='content'>
+    <div class="toc-main">
+      <div class="toc-content">
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%AF%B4%E6%98%8E"><span class="toc-text">一、说明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%89%80%E9%9C%80%E7%9A%84%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE"><span class="toc-text">二、所需的环境配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81nnUNet%E6%A1%86%E6%9E%B6%E7%9A%84%E5%AE%89%E8%A3%85"><span class="toc-text">三、nnUNet框架的安装</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">四、数据集的准备</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E8%AE%BE%E7%BD%AE%E8%AF%BB%E5%8F%96%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E8%AE%BE%E7%BD%AE%EF%BC%88%E9%87%8D%E8%A6%81%EF%BC%89"><span class="toc-text">五、设置读取文件路径设置（重要）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E7%9A%84%E8%BD%AC%E6%8D%A2"><span class="toc-text">六、数据集的转换</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%95%B0%E6%8D%AE%E9%9B%86%E9%A2%84%E5%A4%84%E7%90%86"><span class="toc-text">七、数据集预处理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83"><span class="toc-text">八、模型训练</span></a></li></ol> -->
+        <div class="toc"></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- 手机端目录按钮 -->
+<div id="toc-mobile-btn">
+  <i class="fas fa-list-ul" aria-hidden="true"></i>
+</div>
+
       
   <section class="widget side_recent_post">
     
@@ -1990,146 +1039,216 @@
     </div>
   </section>
 
-      
-  <section class="widget side_archives">
-    
-    <header><a style="color: red" href='/archives/'><i class="fas fa-archive fa-fw" aria-hidden="true"></i><span class='name'>归档</span></a></header><div class="content"><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">八月 2025</span><span class="card-archive-list-count">8</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/07/"><span class="card-archive-list-date">七月 2025</span><span class="card-archive-list-count">23</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">六月 2025</span><span class="card-archive-list-count">7</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">五月 2025</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/04/"><span class="card-archive-list-date">四月 2025</span><span class="card-archive-list-count">13</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/03/"><span class="card-archive-list-date">三月 2025</span><span class="card-archive-list-count">19</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/02/"><span class="card-archive-list-date">二月 2025</span><span class="card-archive-list-count">9</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2024/12/"><span class="card-archive-list-date">十二月 2024</span><span class="card-archive-list-count">1</span></a></li></ul></div>
-  </section>
-
-      <section class="widget side_webinfo">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-chart-line fa-fw" aria-hidden="true"></i><span class='name' style="color: ">站点信息</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="webinfo">
-      
-        <div class="webinfo-item">
-          <div>文章数目：</div>
-          <div>83 篇</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>已运行时间：</div>
-          <div id="webinfo-runtime-count" publish_date="03/24/2020 21:34:09"></div>
-        </div>
-        <script>
-          var BirthDay = new Date(new Date('2025/03/23'));
-          var today = new Date();
-          var timeold = (today.getTime() - BirthDay.getTime());
-          var daysold = Math.floor(timeold / (24 * 60 * 60 * 1000));
-          document.getElementById('webinfo-runtime-count').innerHTML = daysold + ' 天';
-        </script>
-      
-
-
-      
-        <div class="webinfo-item">
-          <div>本站总字数：</div>
-          <div>179.5k 字</div>
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站访客数：</div>
-          
-          <div><span id="busuanzi_value_site_uv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 人</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>本站总访问量：</div>
-          
-          <div><span id="busuanzi_value_site_pv"><i class="fas fa-fan fa-spin fa-fw" aria-hidden="true"></i></span> 次</div>
-          
-        </div>
-      
-
-      
-        <div class="webinfo-item">
-          <div>最后活动时间：</div>
-          
-            <div id="last-update" style="display: none;">Mon Aug 18 2025 12:14:52 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-08-18 日</div>
-          
-        </div>
-        
-        <script>
-          function timeago(dateTimeStamp) {
-              var minute = 1000 * 60; //把分，时，天，周，半个月，一个月用毫秒表示
-              var hour = minute * 60;
-              var day = hour * 24;
-              var week = day * 7;
-              var month = day * 30;
-              var now = new Date().getTime(); //获取当前时间毫秒
-              var diffValue = now - dateTimeStamp; //时间差
-              if (diffValue < 0) {
-                  return;
-              }
-              var minC = diffValue / minute; //计算时间差的分，时，天，周，月
-              var hourC = diffValue / hour;
-              var dayC = diffValue / day;
-              var weekC = diffValue / week;
-              var monthC = diffValue / month;
-              if (monthC >= 1 && monthC <= 3) {
-                  result = " " + parseInt(monthC) + " 月前"
-              } else if (weekC >= 1 && weekC <= 3) {
-                  result = " " + parseInt(weekC) + " 周前"
-              } else if (dayC >= 1 && dayC <= 6) {
-                  result = " " + parseInt(dayC) + " 天前"
-              } else if (hourC >= 1 && hourC <= 23) {
-                  result = " " + parseInt(hourC) + " 小时前"
-              } else if (minC >= 1 && minC <= 59) {
-                  result = " " + parseInt(minC) + " 分钟前"
-              } else if (diffValue >= 0 && diffValue <= minute) {
-                  result = "刚刚"
-              } else {
-                  var datetime = new Date();
-                  datetime.setTime(dateTimeStamp);
-                  var Nyear = datetime.getFullYear();
-                  var Nmonth = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
-                  var Ndate = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-                  var Nhour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
-                  var Nminute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
-                  var Nsecond = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
-                  result = Nyear + "-" + Nmonth + "-" + Ndate
-              }
-              return result;
-          }
-          var lastUpDate = document.getElementById('last-update').innerHTML;
-          try {
-            document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
-          } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-08-18 日';
-          }
-        </script>
-        
-      
-    </div>
-  </div>
-</section>
-      
-  
-
     
   </div>
 </aside>
+
+  <!-- 图片放大 Wrap images with fancybox support -->
+  <script defer src="/js/wrapImage.js"></script>
 </div>
-<!-- 花瓣和雪花飘落 -->
-<!-- 雪花和花瓣特效 -->
+
+<!-- 文章详情页背景图 -->
+<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
+	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
+	<transition-group tag="ul" :name="names">
+		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
+			<img :src="image" class="bg-swiper-img no-lazy">
+		</li>
+	</transition-group>
+</div>
+<script>
+	var vm = new Vue({
+		el: '#appBgSwiper',
+		data: {
+			names: '' || 'fade' || 'fade', // translate-fade fade
+			mark: 0,
+			img: [],
+			bgColor: '',
+			time: null
+		},
+		methods: {   //添加方法
+			change(i, m) {
+				if (i > m) {
+					// this.names = 'fade';
+				} else if (i < m) {
+					// this.names = 'fade';
+				} else {
+					return;
+				}
+				this.mark = i;
+			},
+			prev() {
+				// this.names = 'fade';
+				this.mark--;
+				if (this.mark === -1) {
+					this.mark = 3;
+					return
+				}
+			},
+			next() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			autoPlay() {
+				// this.names = 'fade';
+				this.mark++;
+				if (this.mark === this.img.length) {
+					this.mark = 0;
+					return
+				}
+			},
+			play() {
+				let bgImgDelay = '' || '180000'
+				let delay = parseInt(bgImgDelay) || 180000;
+				this.time = setInterval(this.autoPlay, delay);
+			},
+			enter() {
+				clearInterval(this.time);
+			},
+			leave() {
+				this.play();
+			}
+		},
+		created() {
+			this.play()
+		},
+		beforeDestroy() {
+			clearInterval(this.time);
+		},
+		mounted() {
+			let prop = '' || '';
+			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
+			if (isImg) {
+				let img = prop.split(',');
+				let configRoot = '/'
+				let arrImg = [];
+				img.forEach(el => {
+					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
+					var objExp = new RegExp(Expression);
+
+					if (objExp.test(el)) {
+						// http or https
+						arrImg.push(el);
+					} else {
+						// 非http or https开头
+						// 本地文件
+						let firstStr = el.charAt(0);
+						if (firstStr == '/') {
+							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
+						}
+						el = configRoot + el;
+						arrImg.push(el);
+					}
+				})
+				this.img = arrImg;
+			} else {
+				this.bgColor = prop;
+			}
+		}
+	})
+</script>
+
+<style>
+	.bg-swiper-box {
+		position: absolute;
+		display: block;
+		width: 100%;
+		height: 100%;
+	}
+
+	.bg-swiper-img {
+		object-fit: cover;
+		width: 100%;
+		height: 100%;
+	}
+</style>
+
+
+  <script>
+  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    // 文章章节标题不能为 “MathJax” ，否则会报错。
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
 
 
 
-<!-- 灯笼 -->
+
+  <script>
+  function loadMermaid() {
+    if (document.getElementsByClassName('mermaid').length) {
+      if (window.mermaidJsLoad) mermaid.init()
+      else {
+        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
+          window.mermaidJsLoad = true
+          mermaid.initialize({
+            theme: 'default',
+          })
+          if ('true') {
+            mermaid.init();
+          }
+        })
+      }
+    }
+  };
+  document.addEventListener("DOMContentLoaded", function () {
+    loadMermaid();
+  })
+
+  document.addEventListener('pjax:complete', function () {
+    loadMermaid();
+  })
+  
+</script>
 
 
       </main>
