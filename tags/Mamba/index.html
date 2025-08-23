@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Hybrid cross-modality fusion network for medical image segmentation with contrastive learning | Louaq</title>
+  <title>标签: Mamba | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -528,694 +528,109 @@
 </header>
         <!-- 内容区域 -->
         
-<!-- prismjs 代码高亮 -->
 
+<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"></div>
+<div class="bg-light-floor-tagDetail" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -3;"></div>
 
-
-
-<div class="bg-dark-floor" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -1;"></div>
-
-
-  <!-- 文章详情页顶部图片和标题 -->
-
-
-
-
-<div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://picx.zhimg.com/80/v2-b44931ea513e5f7b3b06f2703f79653c_1440w.webp')">
-  <div class="post-detail-header-mask"></div>
-  <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
-  
-  <div class="post-detail-header_info-box">
-    <div class="title-box">
-      <span class="title">
-        Hybrid cross-modality fusion network for medical image segmentation with contrastive learning
-      </span>
-    </div>
-    
-    
-      
-        <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-07-25 |
-        </span>
-      
-
-      
-        <span class="post-detail-header_categories">
-          <i class="iconfont iconbookmark1"></i> 分类：
-          
-            <a href="/categories/%E5%A4%9A%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              多医学图像分割
-            </a>
-          
-        </span>
-      
-
-      
-        <div class="post-detail-header_wordcount">
-          <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 2.5k |
-          </span>
-  
-          <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 9分钟 |
-          </span>
-  
-          
-            <span class="reading">
-              <i class="fas fa-eye"></i> 阅读量：<span id="busuanzi_value_page_pv"></span>
-            </span>
-          
-        </div>
-      
-    
+<div class="tag-header" style="background-image: url('https://vip.123pan.cn/1816472581/ymjew503t0m000d6xujzns6nfwgh6p6vDIYPAqF0DqJ1DGxwDIiw.jpg');">
+  <div class="tag-header-title">
+    tag
   </div>
+  <div class="tag-header-desc">
   
-  
-</div>
-
-
-
-
-
-<div class="post-detail-content post-row" 
-  style="padding-top: 0px;">
-  <div class="main-content">
-    <article class="post post-detail">
-      <div class="post-content">
-        <h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p><strong>Medical image segmentation has been widely adopted</strong> in artificial intelligence-based clinical applications. The integration of medical texts into image segmentation models has significantly improved the segmentation performance. It is crucial to design an effective fusion manner to integrate the paired image and text features. Existing multi-modal medical image segmentation methods fuse the paired image and text features through a non-local attention mechanism, which lacks local interaction. Besides, they lack a mechanism to enhance the relevance of the paired features and keep the discriminability of unpaired features in the training process, which limits the segmentation performance. To solve the above problem, we propose a hybrid cross-modality fusion network (HCFNet) based on contrastive learning for medical image segmentation. The key designs of our proposed method are a multi-stage cross-modality contrastive loss and a hybrid cross-modality feature decoder. The multi-stage cross-modality contrastive loss is utilized to enhance the discriminability of the paired features and separate the unpaired features. Furthermore, the hybrid cross-modality feature decoder conducts local and non-local cross-modality feature interaction by a local cross-modality fusion module and a non-local cross-modality fusion module, respectively. Experimental results show that our method achieved state-of-the-art results on two public medical image segmentation datasets.</p>
-<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>医学图像分割已广泛应用于基于人工智能的临床应用中。将医学文本整合到图像分割模型中显著提高了分割性能。设计有效的融合方式以整合成对的图像和文本特征至关重要。现有的多模态医学图像分割方法通过非局部注意机制融合成对的图像和文本特征，但缺乏局部交互。此外，它们缺乏增强成对特征相关性和在训练过程中保持未配对特征可辨性的机制，这限制了分割性能。为解决上述问题，我们提出了一种基于对比学习的<strong>混合跨模态融合网络</strong>（HCFNet）用于医学图像分割。我们提出方法的关键设计是多阶段跨模态对比损失和混合跨模态特征解码器。多阶段跨模态对比损失用于增强成对特征的可辨性并分离未配对特征。此外，混合跨模态特征解码器分别通过局部跨模态融合模块和非局部跨模态融合模块进行局部和非局部跨模态特征交互。实验结果表明，我们的方法在两个公共医学图像分割数据集上达到了最先进的结果。</p>
-<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>医学图像分割在基于人工智能的临床应用中至关重要，能辅助诊断、治疗规划和个性化医疗发展。但单模态（仅基于医学图像）的分割方法存在不足，如受图像质量和标注数据稀缺的影响。</p>
-<p>为解决这些问题，研究人员开始采用多模态学习框架，将医学文本融入图像分割模型，以提高分割性能。然而，现有的多模态医学图像分割方法存在局限性：一是通过非局部注意力机制融合图像和文本特征，缺乏局部交互；二是在训练过程中缺乏增强配对特征相关性和区分非配对特征的机制，限制了分割性能。</p>
-<p>基于此，本文提出了一种基于对比学习的混合跨模态融合网络（HCFNet）用于医学图像分割，旨在设计有效的融合方式，增强配对特征的可区分性，分离非配对特征，同时实现局部和非局部跨模态特征交互，以提升医学图像分割的性能。</p>
-<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ul>
-<li><strong>单模态医学图像分割</strong>：CNN和Transformer等深度学习技术广泛应用，如U-Net、UNet++、基于Transformer的方法等。为解决数据不足问题，半监督技术被引入。</li>
-<li><strong>多模态医学图像分割</strong>：利用文本辅助图像分割受关注，CLIP可通过对比学习连接图像与自然语言，LViT、GLoRIA等方法将医学文本融入分割过程。</li>
-<li><strong>对比学习</strong>：在多模态学习中广泛应用，如MMGL框架在半监督心脏图像分割中取得显著效果。</li>
-</ul>
-<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-08-58.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-08-58.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-25_11-08-58"></p>
-<p>论文提出了一种基于对比学习的混合跨模态融合网络（Hybrid Cross-Modality Fusion Network，HCFNet）用于医学图像分割。</p>
-<ol>
-<li><strong>整体架构</strong>：主要由双模态特征编码器、混合跨模态特征解码器和分割头三部分组成。同时还设计了多阶段跨模态对比损失，用于增强配对特征的可区分性并分离非配对特征。在训练阶段，冻结了文本编码器模块的权重以减少训练参数的数量。</li>
-<li>双模态特征编码器<ul>
-<li><strong>图像编码器</strong>：采用ConvNeXt - Tiny作为视觉编码器，提取输入图像不同阶段的特征。</li>
-<li><strong>文本编码器</strong>：使用CXR - BERT从文本输入中提取文本特征。</li>
-<li><strong>多阶段跨模态对比损失</strong>：利用图像特征和文本特征计算该损失，通过最小化该损失，使模型提高对图像 - 文本特征对的理解能力，增强匹配对的相似性，降低不匹配对的相似性。</li>
-</ul>
-</li>
-<li>混合跨模态特征解码器：包含三个混合跨模态特征融合层，每层由非局部跨模态融合模块（NLCFM）、局部跨模态融合模块（LCFM）和融合块组成。<ul>
-<li><strong>非局部跨模态融合模块（NLCFM）</strong>：利用多头交叉注意力（MHCA）机制，将语言和图像特征进行融合，增强视觉表示。</li>
-<li><strong>局部跨模态融合模块（LCFM）</strong>：利用文本特征生成缩放和平移调制矩阵，对图像特征进行调制和增强，使模型更关注局部细节。</li>
-<li><strong>融合块</strong>：将非局部特征和局部特征进行拼接和上采样操作，结合局部和非局部融合结果，得到更全面的特征表示。</li>
-</ul>
-</li>
-<li><strong>分割头</strong>：主要由子像素卷积和1×1卷积组成。子像素卷积将解码器输出的特征上采样到原始图像大小，1×1卷积调整通道数量，得到最终的预测结果。</li>
-<li><strong>损失函数</strong>：最终的训练损失函数包括交叉熵损失、Dice损失和多阶段跨模态对比损失，通过综合这些损失，优化模型性能。</li>
-</ol>
-<h2 id="数据集和实验设置"><a href="#数据集和实验设置" class="headerlink" title="数据集和实验设置"></a>数据集和实验设置</h2><h3 id="1-数据集和评估指标"><a href="#1-数据集和评估指标" class="headerlink" title="1. 数据集和评估指标"></a>1. 数据集和评估指标</h3><ul>
-<li>数据集：<ul>
-<li><strong>MosMedData+</strong>：由莫斯科市医院提供，包含2729张肺部感染的CT扫描切片，其中训练集2183张，验证集273张，测试集273张，且有受影响肺部区域的文本描述。</li>
-<li><strong>QaTa - COV19</strong>：由卡塔尔大学和坦佩雷大学的研究人员整理，包含9258张显示COVID - 19感染区域的X射线图像，训练集5716张，验证集1429张，测试集2113张，有肺部感染区域的文本描述。</li>
-</ul>
-</li>
-<li><strong>评估指标</strong>：使用Dice值和平均交并比（mIoU）作为评估指标。</li>
-</ul>
-<h3 id="2-实现细节"><a href="#2-实现细节" class="headerlink" title="2. 实现细节"></a>2. 实现细节</h3><p>使用PyTorch，采用单块NVIDIA 3090 24G GPU进行训练和测试。使用由Dice损失、交叉熵损失和多阶段跨模态对比损失组成的复合损失函数，网络使用AdamW优化器进行训练，批量大小为32，采用余弦退火学习率策略，初始学习率为3e - 4，最小学习率为1e - 6，还实现了早停机制。</p>
-<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><p>将提出的HCFNet与现有的单模态和多模态医学图像分割方法在QaTa - COV19和MosMedData+数据集上进行比较。结果表明，HCFNet在两个数据集上都取得了最优性能，在Dice值和mIoU方面优于其他方法，且在计算成本和速度方面也有较好表现。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-13-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-13-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-25_11-13-59"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-14-03.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-14-03.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-25_11-14-03"></p>
-<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><h3 id="消融实验"><a href="#消融实验" class="headerlink" title="消融实验"></a>消融实验</h3><ul>
-<li><strong>不同模块对分割性能的影响</strong>：在基线模型基础上分别引入多阶段跨模态对比损失（MCCL）和局部跨模态融合模块（LCFM），结果显示两者都能提升模型性能，且结合使用效果更佳。</li>
-<li><strong>非局部跨模态融合模块中融合方式的影响</strong>：NLCFM和LCFM结合使用能取得最佳结果，单独使用LCFM会使Dice值下降。</li>
-<li><strong>骨干网络选择的影响</strong>：将图像编码器ConvNeXt - Tiny替换为ResNet18会使Dice和mIoU分别降低4.0%和5.32%。</li>
-</ul>
-<h3 id="可视化结果比较"><a href="#可视化结果比较" class="headerlink" title="可视化结果比较"></a>可视化结果比较</h3><p>在QaTa - COV19和MosMedData+数据集上，将HCFNet与Threads、TGANet和UCTransNet等方法进行可视化结果比较，HCFNet的分割结果更优，边界更准确，对小目标的分割效果更好。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-15-25.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-15-25.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-25_11-15-25"></p>
-<h2 id="泛化实验"><a href="#泛化实验" class="headerlink" title="泛化实验"></a>泛化实验</h2><p>将HCFNet应用于遥感实体分割任务，在RefSegRS数据集上进行实验，并与LAVT、CrossVLT等最新方法比较，结果表明HCFNet在oIoU和mIoU指标上取得了最优性能，证明了其良好的泛化能力。</p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-16-41.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-25_11-16-41.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-07-25_11-16-41"></p>
-<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>作者提出了<strong>基于对比学习的混合跨模态融合网络</strong>（HCFNet）用于医学图像分割，并得出以下结论：</p>
-<ul>
-<li><strong>模型有效性</strong>：多阶段跨模态对比损失增强了配对特征的可区分性，分离了未配对特征；混合跨模态特征解码器中的非局部和局部跨模态融合模块能有效融合特征，提升模型对多模态特征的理解。</li>
-<li><strong>实验验证</strong>：在MosMedData+和Qata - COV19数据集上的实验结果表明，HCFNet的分割性能优于现有单模态和多模态医学图像分割方法，且计算成本较低。</li>
-<li><strong>泛化能力</strong>：HCFNet在遥感实体分割任务中也取得了最优结果，展现出良好的泛化能力。</li>
-</ul>
-<p>总体而言，HCFNet为医学图像分割提供了有效的解决方案，具备实际应用价值。</p>
-<blockquote>
-<p>展望：在未来的工作中，我们打算与重庆大学肿瘤医院合作，收集其他解剖结构的多模态医学图像分割数据集。此外，我们将更加注重构建更高效的分割结构。</p>
-</blockquote>
-
-      </div>
-      <div class="post-tags-categories">
-        
-        <div class="tags">
-          
-            <a href="/tags/Medical-Image-Segmentation/" class="">
-              Medical Image Segmentation
-            </a>
-          
-        </div>
-        
-      </div>
-      
-        <div class="copyright">
-  <ul class="post-copyright">
-    <li class="post-copyright-author">
-    <strong>作者:  </strong>Louaq</a>
-    </li>
-    <li class="post-copyright-link">
-    <strong>文章链接:  </strong>
-    <a href="/post/hybrid-cross-modality-fusion-network-for-medical-image-segmentation-with-contrastive-learning/" target="_blank" title="Hybrid cross-modality fusion network for medical image segmentation with contrastive learning">https://louaq.github.io/post/hybrid-cross-modality-fusion-network-for-medical-image-segmentation-with-contrastive-learning/</a>
-    </li>
-    <li class="post-copyright-license">
-      <strong>版权声明:   </strong>
-      本网站所有文章除特别声明外,均采用 <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">CC BY-NC-ND 4.0</a>
-      许可协议。转载请注明出处!
-    </li>
-  </ul>
-<div>
-      
-    </article>
-    <!-- 上一篇文章和下一篇文章 -->
-    
-      <!-- 文章详情页的上一页和下一页 -->
-<div class="post-nav">
-
-
-
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" class="lazyload placeholder" data-srcset="https://picx.zhimg.com/80/v2-9c50d3af0bc62a0e8b6e89e24c769317_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/matr-multimodal-medical-image-fusion-via-multiscale-adaptive-transformer/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">MATR Multimodal Medical Image Fusion via Multiscale Adaptive Transformer</div>
-      </div>
-      
-      <!-- <div class="content">
-        摘要Owing to the limitations of imaging sensors, it is challen
-      </div> -->
-    </a>
-  </div>
-
-
-
-  
-  <div class="post-nav-next post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
-    </div>
-    <a href="/post/cross-modality-interaction-network-for-medical-image-fusion/" class="post-nav-link">
-      <div class="title">
-        下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">Cross-Modality Interaction Network for Medical Image Fusion</div>
-      </div>
-      <!-- <div class="content">
-        摘要Multi-modal medical image fusion maximizes the complementa
-      </div> -->
-    </a>
-  </div>
-
-</div>
-
-    
-    
-
-    <!-- 打赏 -->
-    
-
-    <!-- 分享 -->
-    
-      <!-- https://github.com/overtrue/share.js -->
-<!-- 文章详情页的分享 -->
-<div class="social-share" data-sites="qq,qzone,wechat,weibo,douban" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
-
-<script defer src="/js/shareJs/social-share.min.js"></script>
-</script>
-
-<style>
-  .social-share {
-    margin: 20px 0;
+    <span class="title" id="tag-header-desc"></span>
+    <script>
+  function typedFn() {
+    const el = '#tag-header-desc';
+    const type = 'tagDetail';
+    let desc = '愿你如风，被人温柔以待'
+    var typed = new Typed(el, {
+      strings: [desc],
+      startDelay: 100,
+      typeSpeed: 100,
+      loop: true,
+      backSpeed: 50,
+      showCursor: true
+    });
   }
-</style>
-
-
-    
-    
-    <!-- 评论 -->
-    <!-- 评论 -->
-
-  <div id="myComment">
-    
-      <section id="waline-box">
-  <div id="waline-comment"></div>
-</section>
+  typedFn();
+</script>
     
   </div>
+  <div class="mask-box"></div>
+</div>
 
 
-<!-- 还需要在后面这个地址里设置script, comment script in themes\hexo-theme-bamboo\layout\_partial\scripts\index.ejs -->
 
-
+<div class="tag">
+  <div class="tag-name">
+    <div class="name" style="background-color: #F8F9F9;">Mamba 分类</div>
   </div>
+  <!-- 每一篇文章卡片 -->
+  <!-- hash算法 -->
 
-  <!-- 目录 -->
-  <aside id='l_side'>
+<section class="posts">
   
     
-      <section class="widget side_blogger">
-  <div class='content'>
-    
-      
-        <a class='avatar flat-box circle' href='/about/'>
-          <img src='/img/b.jpg'/>
+    <article class="post reveal" style="flex-direction: row-reverse;   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2025-08-23</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/post/mamba-ssm/windows-an-zhuang-mamba/">Windows安装mamba</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+    <i class="iconfont icontag"></i>
+    <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Mamba/" rel="tag">Mamba</a></li></ul>
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/Mamba/">Mamba</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/post/mamba-ssm/windows-an-zhuang-mamba/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            Windows安装mamba
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/post/mamba-ssm/windows-an-zhuang-mamba/">
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/post/mamba-ssm/windows-an-zhuang-mamba/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
-      
-    
-    
-      <div class='text'>
-        
-          <h2>Louaq</h2>
-        
-        
-          <p>keep coding</p>
-
-        
-        
-          <p><span id="jinrishici-sentence">Louaq</span></p>
-          <script src="https://sdk.jinrishici.com/v2/browser/jinrishici.js" charset="utf-8"></script>
-        
       </div>
-    
-    
-      <div class="social-wrapper">
-        
-          
-            <a href="/atom.xml"
-              class="social fas fa-rss flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="mailto:yang_syy@qq.com"
-              class="social fas fa-envelope flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-            <a href="https://github.com/Louaq"
-              class="social fab fa-github flat-btn"
-              target="_blank"
-              rel="external nofollow noopener noreferrer">
-              
-            </a>
-          
-        
-          
-        
-      </div>
-    
-  </div>
+    </article>
+  
 </section>
-
-    
-  
-  
-  
-    
-  
-
-  <div class="layout_sticky">    
-    
-      
-<section class="widget side_toc">
-  
-  <header>
-    
-      <i style="color: " class="fas fa-list fa-fw" aria-hidden="true"></i><span class='name' style="color: ">本文目录</span>
-    
-  </header>
-
-
-  <div class='content'>
-    <div class="toc-main">
-      <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8C%E5%AE%9E%E9%AA%8C%E8%AE%BE%E7%BD%AE"><span class="toc-text">数据集和实验设置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%95%B0%E6%8D%AE%E9%9B%86%E5%92%8C%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-text">1. 数据集和评估指标</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-text">2. 实现细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B6%88%E8%9E%8D%E5%AE%9E%E9%AA%8C"><span class="toc-text">消融实验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E8%A7%86%E5%8C%96%E7%BB%93%E6%9E%9C%E6%AF%94%E8%BE%83"><span class="toc-text">可视化结果比较</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B3%9B%E5%8C%96%E5%AE%9E%E9%AA%8C"><span class="toc-text">泛化实验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a></li></ol> -->
-        <div class="toc"></div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- 手机端目录按钮 -->
-<div id="toc-mobile-btn">
-  <i class="fas fa-list-ul" aria-hidden="true"></i>
 </div>
 
-      
-  <section class="widget side_recent_post">
-    
-  <header>
-    
-      <a style="color: " href='/tags/'><i class="fas fa-book fa-fw" aria-hidden="true"></i><span class='name'>最新文章</span></a>
-    
-  </header>
-
-
-    <div class='content'>
-      
-      <!-- hash算法 -->
-      
-      <div class="aside-list">
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/mamba-ssm/windows-an-zhuang-mamba/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-23</span>
-                
-              </div>
-              <a class="post-title" href="/post/mamba-ssm/windows-an-zhuang-mamba/">Windows安装mamba</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/dataset/nnu-net-v2-de-huan-jing-pei-zhi-dao-xun-lian-zi-ji-de-shu-ju-ji/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-18</span>
-                
-              </div>
-              <a class="post-title" href="/post/dataset/nnu-net-v2-de-huan-jing-pei-zhi-dao-xun-lian-zi-ji-de-shu-ju-ji/">nnU-Net v2的环境配置到训练自己的数据集</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/dataset/nnunetv1-zai-zi-ji-shu-ju-ji-shang-xun-lian/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-18</span>
-                
-              </div>
-              <a class="post-title" href="/post/dataset/nnunetv1-zai-zi-ji-shu-ju-ji-shang-xun-lian/">nnUNetv1在自己数据集上训练</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/dataset/brats2023-men-shu-ju-ji-jie-shao/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb91bw3gsd3DIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-12</span>
-                
-              </div>
-              <a class="post-title" href="/post/dataset/brats2023-men-shu-ju-ji-jie-shao/">BraTs2023数据集处理及python读取.nii文件</a>
-            </div>
-          </div>
-        
-          <div class="aside-list-item">
-            
-            
-            
-
-            <div class="post-img-box">
-              <a href="/post/dataset/brats2024-shu-ju-ji-jie-shao/" class="post-img " style="background-size: cover; 
-                background-position: center center;">
-                <img class="lazyload lazyload placeholder" style="width:100%;height:100%;object-fit:cover;" data-src="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" class="lazyload placeholder" data-srcset="https://pic3.zhimg.com/v2-a5267dfbf175991d4b3a69b41f3f678a_b.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-              </a>
-            </div>
-            <div class="post-date-title">
-              <div>
-                
-                  <span class="post-date">08-12</span>
-                
-              </div>
-              <a class="post-title" href="/post/dataset/brats2024-shu-ju-ji-jie-shao/">BraTs2024数据集处理及python读取.nii文件</a>
-            </div>
-          </div>
-        
-      </div>
-    </div>
-  </section>
-
-    
-  </div>
-</aside>
-
-  <!-- 图片放大 Wrap images with fancybox support -->
-  <script defer src="/js/wrapImage.js"></script>
-</div>
-
-<!-- 文章详情页背景图 -->
-<div id="appBgSwiper" style="position: fixed;left: 0;top: 0;width: 100%;height: 100%;z-index: -2;"
-	:style="{'background-color': bgColor ? bgColor : 'transparent'}">
-	<transition-group tag="ul" :name="names">
-		<li v-for='(image,index) in img' :key='index' v-show="index === mark" class="bg-swiper-box">
-			<img :src="image" class="bg-swiper-img no-lazy">
-		</li>
-	</transition-group>
-</div>
-<script>
-	var vm = new Vue({
-		el: '#appBgSwiper',
-		data: {
-			names: '' || 'fade' || 'fade', // translate-fade fade
-			mark: 0,
-			img: [],
-			bgColor: '',
-			time: null
-		},
-		methods: {   //添加方法
-			change(i, m) {
-				if (i > m) {
-					// this.names = 'fade';
-				} else if (i < m) {
-					// this.names = 'fade';
-				} else {
-					return;
-				}
-				this.mark = i;
-			},
-			prev() {
-				// this.names = 'fade';
-				this.mark--;
-				if (this.mark === -1) {
-					this.mark = 3;
-					return
-				}
-			},
-			next() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			autoPlay() {
-				// this.names = 'fade';
-				this.mark++;
-				if (this.mark === this.img.length) {
-					this.mark = 0;
-					return
-				}
-			},
-			play() {
-				let bgImgDelay = '' || '180000'
-				let delay = parseInt(bgImgDelay) || 180000;
-				this.time = setInterval(this.autoPlay, delay);
-			},
-			enter() {
-				clearInterval(this.time);
-			},
-			leave() {
-				this.play();
-			}
-		},
-		created() {
-			this.play()
-		},
-		beforeDestroy() {
-			clearInterval(this.time);
-		},
-		mounted() {
-			let prop = '' || '';
-			let isImg = prop.includes('.bmp') || prop.includes('.jpg') || prop.includes('.png') || prop.includes('.tif') || prop.includes('.gif') || prop.includes('.pcx') || prop.includes('.tga') || prop.includes('.exif') || prop.includes('.fpx') || prop.includes('.psd') || prop.includes('.cdr') || prop.includes('.pcd') || prop.includes('.dxf') || prop.includes('.ufo') || prop.includes('.eps') || prop.includes('.ai') || prop.includes('.raw') || prop.includes('.WMF') || prop.includes('.webp') || prop.includes('.jpeg') || prop.includes('http://') || prop.includes('https://')
-			if (isImg) {
-				let img = prop.split(',');
-				let configRoot = '/'
-				let arrImg = [];
-				img.forEach(el => {
-					var Expression = /http(s)?:\/\/([\w-]+\.)+[\w-]+(\/[\w- .\/?%&=]*)?/;
-					var objExp = new RegExp(Expression);
-
-					if (objExp.test(el)) {
-						// http or https
-						arrImg.push(el);
-					} else {
-						// 非http or https开头
-						// 本地文件
-						let firstStr = el.charAt(0);
-						if (firstStr == '/') {
-							el = el.substr(1); // 删除第一个字符 '/',因为 configRoot最后一个字符为 /
-						}
-						el = configRoot + el;
-						arrImg.push(el);
-					}
-				})
-				this.img = arrImg;
-			} else {
-				this.bgColor = prop;
-			}
-		}
-	})
-</script>
-
-<style>
-	.bg-swiper-box {
-		position: absolute;
-		display: block;
-		width: 100%;
-		height: 100%;
-	}
-
-	.bg-swiper-img {
-		object-fit: cover;
-		width: 100%;
-		height: 100%;
-	}
-</style>
-
-
-  <script>
-  // https://github.com/theme-next/hexo-theme-next/blob/master/layout/_third-party/math/mathjax.swig
-  if (typeof MathJax === 'undefined') {
-    window.MathJax = {
-      loader: {
-        source: {
-          '[tex]/amsCd': '[tex]/amscd',
-          '[tex]/AMScd': '[tex]/amscd'
-        }
-      },
-      tex: {
-        inlineMath: {'[+]': [['$', '$']]},
-        tags: 'ams'
-      },
-      options: {
-        renderActions: {
-          findScript: [10, doc => {
-            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-              const display = !!node.type.match(/; *mode=display/);
-              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-              const text = document.createTextNode('');
-              node.parentNode.replaceChild(text, node);
-              math.start = {node: text, delim: '', n: 0};
-              math.end = {node: text, delim: '', n: 0};
-              doc.math.push(math);
-            });
-          }, '', false],
-          insertedScript: [200, () => {
-            document.querySelectorAll('mjx-container').forEach(node => {
-              let target = node.parentNode;
-              if (target.nodeName.toLowerCase() === 'li') {
-                target.parentNode.classList.add('has-jax');
-              }
-            });
-          }, '', false]
-        }
-      }
-    };
-    (function () {
-      var script = document.createElement('script');
-      script.src = 'https://unpkg.com/mathjax@3.0/es5/tex-mml-chtml.js';
-      script.defer = true;
-      document.head.appendChild(script);
-    })();
-  } else {
-    // 文章章节标题不能为 “MathJax” ，否则会报错。
-    MathJax.startup.document.state(0);
-    MathJax.texReset();
-    MathJax.typeset();
-  }
-</script>
-
-
-
-
-  <script>
-  function loadMermaid() {
-    if (document.getElementsByClassName('mermaid').length) {
-      if (window.mermaidJsLoad) mermaid.init()
-      else {
-        loadScript('https://unpkg.com/mermaid/dist/mermaid.min.js').then(() => {
-          window.mermaidJsLoad = true
-          mermaid.initialize({
-            theme: 'default',
-          })
-          if ('true') {
-            mermaid.init();
-          }
-        })
-      }
-    }
-  };
-  document.addEventListener("DOMContentLoaded", function () {
-    loadMermaid();
-  })
-
-  document.addEventListener('pjax:complete', function () {
-    loadMermaid();
-  })
+<div class="w-70">
   
-</script>
-
+</div>
 
       </main>
     </div>
