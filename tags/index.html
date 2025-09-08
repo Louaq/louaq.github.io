@@ -697,6 +697,14 @@
                 </a>
                 
                 
+                <a href="/tags/Multi-modal-MRI-Images/" title="Multi-modal MRI Images: 1">
+                    <span class="tag-content"
+                        title="Multi-modal MRI Images" style="background-color: #FEF9E7;">Multi-modal MRI Images
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/tags/multi-modality-spatial-information/" title="multi-modality spatial information: 1">
                     <span class="tag-content"
                         title="multi-modality spatial information" style="background-color: #85C1E9;">multi-modality spatial information
@@ -708,14 +716,6 @@
                 <a href="/tags/boundary-shape-correction/" title="boundary shape correction: 1">
                     <span class="tag-content"
                         title="boundary shape correction" style="background-color: #F8F9F9;">boundary shape correction
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/Multi-modal-MRI-Images/" title="Multi-modal MRI Images: 1">
-                    <span class="tag-content"
-                        title="Multi-modal MRI Images" style="background-color: #FEF9E7;">Multi-modal MRI Images
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -825,6 +825,14 @@
                 </a>
                 
                 
+                <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%92%B8%E9%A6%8F/" title="注意力蒸馏: 1">
+                    <span class="tag-content"
+                        title="注意力蒸馏" style="background-color: #F9E79F;">注意力蒸馏
+                        <span class="tag-length">1</span>
+                    </span>
+                </a>
+                
+                
                 <a href="/tags/LLMFormer/" title="LLMFormer: 1">
                     <span class="tag-content"
                         title="LLMFormer" style="background-color: #F9EBEA;">LLMFormer
@@ -836,14 +844,6 @@
                 <a href="/tags/Decoupled-Feature-Queries/" title="Decoupled Feature Queries: 1">
                     <span class="tag-content"
                         title="Decoupled Feature Queries" style="background-color: #F8F9F9;">Decoupled Feature Queries
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/tags/%E6%B3%A8%E6%84%8F%E5%8A%9B%E8%92%B8%E9%A6%8F/" title="注意力蒸馏: 1">
-                    <span class="tag-content"
-                        title="注意力蒸馏" style="background-color: #F9E79F;">注意力蒸馏
                         <span class="tag-length">1</span>
                     </span>
                 </a>
@@ -1917,33 +1917,68 @@
 <!-- 评论所需js -->
 
   
-        <script src="/js/waline/waline.min.js"></script>
-<script type="text/javascript">
-  comment_el = '#waline-comment';
-  var waline;
-  loadWaline = function () {
-    if (!$(comment_el).length) {
-      return;
-    }
-    var walineEmoji = 'https://cdn.jsdelivr.net/gh/walinejs/emojis/weibo';
-    walineEmoji = walineEmoji.split(',')
+        <script type="text/javascript">
+  var utteranceComment = {};
 
-    waline = Waline({
-      el: comment_el,
-      serverURL: 'https://waline-comments-inky.vercel.app/',
-      lang: 'zh-CN',
-      vistor: '',
-      emoji: walineEmoji,
-      login: 'enable',
-      pageSize: '10',
-      copyright: true
-    });
+  function check_utterance() {
+    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
+    if (isDark) {
+      utteranceComment.Theme = 'github-dark';
+    } else {
+      utteranceComment.Theme = 'github-light';
+    }
+
+    return document.getElementById("gitment-container");
   }
-  $(document).ready(loadWaline);
+  comment_el = '#gitment-container';
+  load_utterance = function () {
+    if ($(comment_el).length) {
+      // 匿名函数，防止污染全局变量
+      const HEAD = check_utterance();
+
+      var utterances = document.createElement('script');
+      utterances.type = 'text/javascript';
+      utterances.async = true;
+      utterances.setAttribute('issue-term', 'pathname')
+      utterances.setAttribute('theme', utteranceComment.Theme)
+      utterances.setAttribute('repo', 'Louaq/louaq.github.io')
+      utterances.crossorigin = 'anonymous';
+      utterances.src = 'https://utteranc.es/client.js';
+      // content 是要插入评论的地方
+      document.getElementById('gitment-container').appendChild(utterances);
+
+    }
+  }
+
+  function dark_utterance() {
+    const HEAD = check_utterance();
+    if (!HEAD) return;
+    const message = {
+      type: 'set-theme',
+      theme: utteranceComment.Theme
+    };
+    const utteranceIframe = document.querySelector('iframe');
+    utteranceIframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+
+  $(document).ready(load_utterance);
   document.addEventListener('pjax:complete', function () {
-    loadWaline();
+    load_utterance();
   });
+
+  $('.dark').click(function () {
+    setTimeout(() => {
+      dark_utterance();
+    });
+  })
+
 </script>
+
+<style>
+  .utterances {
+    max-width: inherit !important;
+  }
+</style>
       
 
 
