@@ -281,12 +281,58 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
+                <a href="/gallery" class="drawer-menu-item-link">
+                  
+                    <i class="fas fa-music" aria-hidden="true"></i>
+                  
+                  <span class="name">图库</span>
+                </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
                 <a href="/me" class="drawer-menu-item-link">
                   
                     <i class="fas fa-film" aria-hidden="true"></i>
                   
                   <span class="name">关于我</span>
                 </a>
+              
+            </li>
+          
+            <li class="drawer-box-content_item" style="position: relative;">
+              
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(8)">
+                  <span>
+                    
+                      <i class="fas fa-link"></i>
+                    
+                    <span class="name">更多</span>
+                  </span>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(8)}" aria-hidden="true"></i>
+                </a>
+                <ul class="drawer-sub-menu" v-if="isOpen(8)">
+                  
+                  <li>
+                    <a href="/messageBoard">
+                      
+                      <i class="fas fa-comment-dots" style="margin-top: -20px;"></i>
+                      
+                      <span>留言板</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/huoban">
+                      
+                      <i class="fas fa-film" style="margin-top: -20px;"></i>
+                      
+                      <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                </ul>
               
             </li>
           
@@ -430,12 +476,56 @@
           
             <li class="menu-item" style="position: relative;">
               
+                <a href="/gallery" class="menu-item-link" title="图库">
+                  
+                    <i class="fas fa-music" aria-hidden="true"></i>
+                  
+                  <span class="name">图库</span>
+                </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
                 <a href="/me" class="menu-item-link" title="关于我">
                   
                     <i class="fas fa-film" aria-hidden="true"></i>
                   
                   <span class="name">关于我</span>
                 </a>
+              
+            </li>
+          
+            <li class="menu-item" style="position: relative;">
+              
+                <a href="javascript:;" class="menu-item-link" title="更多">
+                  
+                    <i class="fas fa-link"></i>
+                  
+                  <span class="name">更多</span>
+                  <i class="fas fa-chevron-down arrow" aria-hidden="true"></i>
+                </a>
+                <ul class="sub-menu">
+                  
+                  <li>
+                    <a href="/messageBoard">
+                      
+                      <i class="fas fa-comment-dots" style="margin-top: -20px;"></i>
+                      
+                      <span>留言板</span>
+                    </a>
+                  </li>
+                  
+                  <li>
+                    <a href="/huoban">
+                      
+                      <i class="fas fa-film" style="margin-top: -20px;"></i>
+                      
+                      <span>伙伴</span>
+                    </a>
+                  </li>
+                  
+                </ul>
               
             </li>
           
@@ -2321,7 +2411,7 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Sat Nov 01 2025 09:18:31 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update" style="display: none;">Sat Nov 01 2025 12:50:42 GMT+0000 (Coordinated Universal Time)</div>
             <div id="last-update-show">2025-11-01 日</div>
           
         </div>
