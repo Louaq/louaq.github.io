@@ -6,7 +6,7 @@
   <link href="https://louaq.github.io/atom.xml" rel="self"/>
   
   <link href="https://louaq.github.io/"/>
-  <updated>2025-10-07T08:30:18.624Z</updated>
+  <updated>2025-11-01T08:46:16.070Z</updated>
   <id>https://louaq.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://louaq.github.io/post/mamba-ssm/windows-an-zhuang-mamba/"/>
     <id>https://louaq.github.io/post/mamba-ssm/windows-an-zhuang-mamba/</id>
     <published>2025-08-23T15:25:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">Windows安装mamba</summary>
@@ -40,7 +40,7 @@
     <link href="https://louaq.github.io/post/dataset/nnu-net-v2-de-huan-jing-pei-zhi-dao-xun-lian-zi-ji-de-shu-ju-ji/"/>
     <id>https://louaq.github.io/post/dataset/nnu-net-v2-de-huan-jing-pei-zhi-dao-xun-lian-zi-ji-de-shu-ju-ji/</id>
     <published>2025-08-18T20:13:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">nnU-Net v2的环境配置到训练自己的数据集</summary>
@@ -59,7 +59,7 @@
     <link href="https://louaq.github.io/post/dataset/nnunetv1-zai-zi-ji-shu-ju-ji-shang-xun-lian/"/>
     <id>https://louaq.github.io/post/dataset/nnunetv1-zai-zi-ji-shu-ju-ji-shang-xun-lian/</id>
     <published>2025-08-18T14:30:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">nnUNetv1在自己数据集上训练</summary>
@@ -78,7 +78,7 @@
     <link href="https://louaq.github.io/post/dataset/brats2023-men-shu-ju-ji-jie-shao/"/>
     <id>https://louaq.github.io/post/dataset/brats2023-men-shu-ju-ji-jie-shao/</id>
     <published>2025-08-12T21:05:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">BraTs2023数据集</summary>
@@ -97,7 +97,7 @@
     <link href="https://louaq.github.io/post/dataset/brats2024-shu-ju-ji-jie-shao/"/>
     <id>https://louaq.github.io/post/dataset/brats2024-shu-ju-ji-jie-shao/</id>
     <published>2025-08-12T21:05:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">BraTs2024数据集</summary>
@@ -116,7 +116,7 @@
     <link href="https://louaq.github.io/post/dataset/brats2019-shu-ju-ji-chu-li-ji-python-du-qu.nii-wen-jian/"/>
     <id>https://louaq.github.io/post/dataset/brats2019-shu-ju-ji-chu-li-ji-python-du-qu.nii-wen-jian/</id>
     <published>2025-08-12T21:05:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">BraTs数据集</summary>
@@ -135,7 +135,7 @@
     <link href="https://louaq.github.io/post/duo-mo-tai-yi-xue-tu-xiang-shu-ju-ji/"/>
     <id>https://louaq.github.io/post/duo-mo-tai-yi-xue-tu-xiang-shu-ju-ji/</id>
     <published>2025-08-02T21:11:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">多模态医学图像数据集</summary>
@@ -154,7 +154,7 @@
     <link href="https://louaq.github.io/post/dai-ma-fu-xian-ji-lu-nnunet/"/>
     <id>https://louaq.github.io/post/dai-ma-fu-xian-ji-lu-nnunet/</id>
     <published>2025-08-02T21:05:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -173,7 +173,7 @@
     <link href="https://louaq.github.io/post/dai-ma-fu-xian-ji-lu-bsafusion/"/>
     <id>https://louaq.github.io/post/dai-ma-fu-xian-ji-lu-bsafusion/</id>
     <published>2025-08-01T08:45:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">代码复现记录</summary>
@@ -192,7 +192,7 @@
     <link href="https://louaq.github.io/post/multi-modal-disease-segmentation-with-continual-learning-and-adaptive-decision-fusion/"/>
     <id>https://louaq.github.io/post/multi-modal-disease-segmentation-with-continual-learning-and-adaptive-decision-fusion/</id>
     <published>2025-07-31T16:15:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">多模态疾病分割对于患者的诊断和治疗至关重要</summary>
@@ -213,7 +213,7 @@
     <link href="https://louaq.github.io/post/multi-modality-medical-image-segmentation-via-adversarial-learning-with-cv-energy-functional/"/>
     <id>https://louaq.github.io/post/multi-modality-medical-image-segmentation-via-adversarial-learning-with-cv-energy-functional/</id>
     <published>2025-07-30T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">基于深度学习的医学图像处理方法逐渐成为主流</summary>
@@ -232,7 +232,7 @@
     <link href="https://louaq.github.io/post/entropy-aware-dynamic-path-selection-network-for-multi-modality-medical-image-fusion/"/>
     <id>https://louaq.github.io/post/entropy-aware-dynamic-path-selection-network-for-multi-modality-medical-image-fusion/</id>
     <published>2025-07-29T17:12:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">深度学习在多模态医学图像融合（MMIF）中取得了显著成功</summary>
@@ -251,7 +251,7 @@
     <link href="https://louaq.github.io/post/multiscale-frequency-guided-image-analyses-for-mixed-modality-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/multiscale-frequency-guided-image-analyses-for-mixed-modality-medical-image-segmentation/</id>
     <published>2025-07-28T17:20:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">不同成像仪器生成的医学图像通常具有不同的模态</summary>
@@ -270,7 +270,7 @@
     <link href="https://louaq.github.io/post/a-novel-3d-unsupervised-domain-adaptation-framework-for-cross-modality-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/a-novel-3d-unsupervised-domain-adaptation-framework-for-cross-modality-medical-image-segmentation/</id>
     <published>2025-07-27T16:21:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">我们考虑了跨模态医学图像分割中的体积（3D）无监督域适应（UDA）问题</summary>
@@ -289,7 +289,7 @@
     <link href="https://louaq.github.io/post/matr-multimodal-medical-image-fusion-via-multiscale-adaptive-transformer/"/>
     <id>https://louaq.github.io/post/matr-multimodal-medical-image-fusion-via-multiscale-adaptive-transformer/</id>
     <published>2025-07-25T13:59:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">多模态医学图像融合是一种将不同模态中的互补信息合并的有效方法</summary>
@@ -310,7 +310,7 @@
     <link href="https://louaq.github.io/post/hybrid-cross-modality-fusion-network-for-medical-image-segmentation-with-contrastive-learning/"/>
     <id>https://louaq.github.io/post/hybrid-cross-modality-fusion-network-for-medical-image-segmentation-with-contrastive-learning/</id>
     <published>2025-07-25T11:05:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">医学图像分割已广泛应用于基于人工智能的临床应用中</summary>
@@ -329,7 +329,7 @@
     <link href="https://louaq.github.io/post/cross-modality-interaction-network-for-medical-image-fusion/"/>
     <id>https://louaq.github.io/post/cross-modality-interaction-network-for-medical-image-fusion/</id>
     <published>2025-07-24T09:14:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">多模态医学图像融合通过整合源图像最大化来自不同模态图像的互补信息</summary>
@@ -350,7 +350,7 @@
     <link href="https://louaq.github.io/post/a-cascaded-framework-with-cross-modality-transfer-learning-for-whole-heart-segmentation/"/>
     <id>https://louaq.github.io/post/a-cascaded-framework-with-cross-modality-transfer-learning-for-whole-heart-segmentation/</id>
     <published>2025-07-22T16:57:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">从三维心脏图像中自动且准确地分割整个心脏结构</summary>
@@ -369,7 +369,7 @@
     <link href="https://louaq.github.io/post/diff-if-multi-modality-image-fusion-via-diffusion-model-with-fusion-knowledge-prior/"/>
     <id>https://louaq.github.io/post/diff-if-multi-modality-image-fusion-via-diffusion-model-with-fusion-knowledge-prior/</id>
     <published>2025-07-21T16:20:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">多模态图像融合（MMIF）旨在聚合来自不同源图像域的互补信息</summary>
@@ -388,7 +388,7 @@
     <link href="https://louaq.github.io/post/brain-tumor-segmentation-based-on-the-dual-path-network-of-multi-modal-mri-images/"/>
     <id>https://louaq.github.io/post/brain-tumor-segmentation-based-on-the-dual-path-network-of-multi-modal-mri-images/</id>
     <published>2025-07-19T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">由于肿瘤呈浸润性生长，胶质瘤的边界通常与脑组织融合</summary>
@@ -409,7 +409,7 @@
     <link href="https://louaq.github.io/post/fpl-filtered-pseudo-label-based-unsupervised-cross-modality-adaptation-for-3d-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/fpl-filtered-pseudo-label-based-unsupervised-cross-modality-adaptation-for-3d-medical-image-segmentation/</id>
     <published>2025-07-18T16:27:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">将医学图像分割模型适应到新的领域对于提高其跨领域的可迁移性至关重要</summary>
@@ -428,7 +428,7 @@
     <link href="https://louaq.github.io/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/"/>
     <id>https://louaq.github.io/post/brain-tumor-segmentation-in-mri-with-multi-modality-spatial-information-enhancement-and-boundary-shape-correction/</id>
     <published>2025-07-16T19:28:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">脑肿瘤分割在医学研究和临床诊断中具有优先指导意义</summary>
@@ -449,7 +449,7 @@
     <link href="https://louaq.github.io/post/adaptive-cross-feature-fusion-network-with-inconsistency-guidance-for-multi-modal-brain-tumor-segmentation/"/>
     <id>https://louaq.github.io/post/adaptive-cross-feature-fusion-network-with-inconsistency-guidance-for-multi-modal-brain-tumor-segmentation/</id>
     <published>2025-07-16T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">在当代人工智能背景下，近年来提出了越来越多基于深度学习（DL）的分割方法</summary>
@@ -468,7 +468,7 @@
     <link href="https://louaq.github.io/post/msgfusion-medical-semantic-guided-two-branch-network-for-multimodal-brain-image-fusion/"/>
     <id>https://louaq.github.io/post/msgfusion-medical-semantic-guided-two-branch-network-for-multimodal-brain-image-fusion/</id>
     <published>2025-07-15T14:20:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">多模态图像融合在医学图像分析和应用中起着至关重要的作用</summary>
@@ -493,7 +493,7 @@
     <link href="https://louaq.github.io/post/automatic-brain-segmentation-for-petmr-dual-modal-images-through-a-cross-fusion-mechanism/"/>
     <id>https://louaq.github.io/post/automatic-brain-segmentation-for-petmr-dual-modal-images-through-a-cross-fusion-mechanism/</id>
     <published>2025-07-10T17:23:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">不同脑区和组织的精确分割通常是神经科学中检测和诊断各种神经系统疾病的前提</summary>
@@ -512,7 +512,7 @@
     <link href="https://louaq.github.io/post/mr-duo-mo-tai-shu-ju/"/>
     <id>https://louaq.github.io/post/mr-duo-mo-tai-shu-ju/</id>
     <published>2025-07-09T21:30:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">转换后的.npy文件数量与原始.nii文件数量的关系</summary>
@@ -531,7 +531,7 @@
     <link href="https://louaq.github.io/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/"/>
     <id>https://louaq.github.io/post/flexible-fusion-network-for-multi-modal-brain-tumor-segmentation/</id>
     <published>2025-07-08T17:38:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">自动化脑肿瘤分割对于辅助脑疾病诊断和评估疾病进展至关重要</summary>
@@ -550,7 +550,7 @@
     <link href="https://louaq.github.io/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/"/>
     <id>https://louaq.github.io/post/mactfusion-lightweight-cross-transformer-for-adaptive-multimodal-medical-image-fusion/</id>
     <published>2025-07-07T17:18:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">多模态医学图像融合旨在整合来自不同医学图像模态的互补信息</summary>
@@ -569,7 +569,7 @@
     <link href="https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/"/>
     <id>https://louaq.github.io/post/btsegdiff-brain-tumor-segmentation-based-on-multimodal-mri-dynamically-guided-diffusion-probability-model/</id>
     <published>2025-07-06T20:30:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">在脑肿瘤的治疗中，准确的诊断和治疗严重依赖于可靠的脑肿瘤分割，而多模态磁共振成像（MRI）通过提供有价值的补充信息发挥关键作用</summary>
@@ -590,7 +590,7 @@
     <link href="https://louaq.github.io/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/</id>
     <published>2025-07-05T10:24:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时</summary>
@@ -611,7 +611,7 @@
     <link href="https://louaq.github.io/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/"/>
     <id>https://louaq.github.io/post/mlfuse-multi-scenario-feature-joint-learning-for-multi-modality-image-fusion/</id>
     <published>2025-07-03T17:01:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">多模态图像融合(MMIF)需要合成具有详细纹理和突出目标的图像</summary>
@@ -630,7 +630,7 @@
     <link href="https://louaq.github.io/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/"/>
     <id>https://louaq.github.io/post/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/</id>
     <published>2025-07-02T09:34:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征</summary>
@@ -651,7 +651,7 @@
     <link href="https://louaq.github.io/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/"/>
     <id>https://louaq.github.io/post/mirror-u-net-marrying-multimodal-fission-with-multi-task-learning-for-semantic-segmentation-in-medical-imaging/</id>
     <published>2025-06-30T14:24:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -672,7 +672,7 @@
     <link href="https://louaq.github.io/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/"/>
     <id>https://louaq.github.io/post/bsafusion-a-bidirectional-stepwise-feature-alignment-network-for-unaligned-medical-image-fusion/</id>
     <published>2025-06-26T19:23:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">如果可以在统一的处理框架内使用单阶段方法同时对未对齐的多模态医学图像进行对齐和融合，不仅能实现双任务的相互促进，还能帮助降低模型的复杂性</summary>
@@ -693,7 +693,7 @@
     <link href="https://louaq.github.io/post/duo-mo-tai-yi-xue/"/>
     <id>https://louaq.github.io/post/duo-mo-tai-yi-xue/</id>
     <published>2025-06-25T19:36:21.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
       
@@ -720,7 +720,7 @@
     <link href="https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/rethinking-u-net-task-adaptive-mixture-of-skip-connections-for-enhanced-medical-image-segmentation/</id>
     <published>2025-06-23T10:37:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">混合专家系统（Mixture of Experts, MoE）</summary>
@@ -739,7 +739,7 @@
     <link href="https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/"/>
     <id>https://louaq.github.io/post/frp/pei-zhi-shi-bai-deng-lu-chang-shi-xian-zhi/</id>
     <published>2025-06-08T21:13:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
       
@@ -765,7 +765,7 @@
     <link href="https://louaq.github.io/post/frp/shi-yong-fail2ban-bao-hu-fu-wu-qi-mian-shou-ke-yi-ip-gong-ji/"/>
     <id>https://louaq.github.io/post/frp/shi-yong-fail2ban-bao-hu-fu-wu-qi-mian-shou-ke-yi-ip-gong-ji/</id>
     <published>2025-06-08T21:11:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
       
@@ -791,7 +791,7 @@
     <link href="https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/"/>
     <id>https://louaq.github.io/post/frp/frp-pei-he-nginx-shi-xian-yu-ming-fang-wen-windows-yuan-cheng-zhuo-mian/</id>
     <published>2025-06-08T21:10:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
       
@@ -817,7 +817,7 @@
     <link href="https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/"/>
     <id>https://louaq.github.io/post/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/</id>
     <published>2025-05-28T15:47:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -838,7 +838,7 @@
     <link href="https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/dual-attention-encoder-with-joint-preservation-for-medical-image-segmentation/</id>
     <published>2025-05-26T12:28:21.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">DANIE医学图像分割网络</summary>
@@ -859,7 +859,7 @@
     <link href="https://louaq.github.io/post/transunet-de-gai-jin/"/>
     <id>https://louaq.github.io/post/transunet-de-gai-jin/</id>
     <published>2025-05-12T17:04:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -878,7 +878,7 @@
     <link href="https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/"/>
     <id>https://louaq.github.io/post/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extract-long-distance-dependencies-for-medical-image-segmentation/</id>
     <published>2025-04-22T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -899,7 +899,7 @@
     <link href="https://louaq.github.io/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/"/>
     <id>https://louaq.github.io/post/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation-on-medical-image/</id>
     <published>2025-04-16T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -920,7 +920,7 @@
     <link href="https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/pixel-wise-reclassification-with-prototypes-for-enhancing-weakly-supervised-semantic-segmentation/</id>
     <published>2025-04-13T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -939,7 +939,7 @@
     <link href="https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/"/>
     <id>https://louaq.github.io/post/fcn/20250412-ruo-jian-du-yu-yi-fen-ge/</id>
     <published>2025-04-12T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -956,7 +956,7 @@
     <link href="https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/knowledge-transfer-with-simulated-inter-image-erasing-for-weakly-supervised-semantic-segmentation/</id>
     <published>2025-04-11T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -975,7 +975,7 @@
     <link href="https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/sfc-shared-feature-calibration-in-weakly-supervised-semantic-segmentation/</id>
     <published>2025-04-10T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -996,7 +996,7 @@
     <link href="https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/"/>
     <id>https://louaq.github.io/post/weakclip-adapting-clip-for-weakly-supervised-semantic/</id>
     <published>2025-04-09T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1017,7 +1017,7 @@
     <link href="https://louaq.github.io/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/all-pairs-consistency-learning-for-weakly-supervised-semantic-segmentation/</id>
     <published>2025-04-07T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1036,7 +1036,7 @@
     <link href="https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/self-supervised-vision-transformers-for-semantic-segmentation/</id>
     <published>2025-04-03T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1057,7 +1057,7 @@
     <link href="https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/a-transformer-based-adaptive-prototype-matching-network-for-few-shot-semantic-segmentation/</id>
     <published>2025-04-02T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.618Z</updated>
+    <updated>2025-11-01T08:46:16.064Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1078,7 +1078,7 @@
     <link href="https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/dsmf-net-dual-semantic-metric-learning-fusion-network-for-few-shot-aerial-image-semantic-segmentation/</id>
     <published>2025-04-02T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1099,7 +1099,7 @@
     <link href="https://louaq.github.io/post/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/"/>
     <id>https://louaq.github.io/post/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/</id>
     <published>2025-04-02T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1118,7 +1118,7 @@
     <link href="https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/"/>
     <id>https://louaq.github.io/post/stronger-fewer-superior-harnessing-vision-foundation-models/</id>
     <published>2025-04-01T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1137,7 +1137,7 @@
     <link href="https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/</id>
     <published>2025-03-31T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1156,7 +1156,7 @@
     <link href="https://louaq.github.io/post/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/class-tokens-infusion-for-weakly-supervised-semantic-segmentation/</id>
     <published>2025-03-29T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1175,7 +1175,7 @@
     <link href="https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/"/>
     <id>https://louaq.github.io/post/use-universal-segment-embeddings-for-open-vocabulary-image-segmentation/</id>
     <published>2025-03-26T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1194,7 +1194,7 @@
     <link href="https://louaq.github.io/post/llmformer-large-languagemodel-for-open-vocabulary-semantic/"/>
     <id>https://louaq.github.io/post/llmformer-large-languagemodel-for-open-vocabulary-semantic/</id>
     <published>2025-03-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1213,7 +1213,7 @@
     <link href="https://louaq.github.io/post/corrmatch-label-propagation-via-correlation-matching-for-semi-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/corrmatch-label-propagation-via-correlation-matching-for-semi-supervised-semantic-segmentation/</id>
     <published>2025-03-22T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1232,7 +1232,7 @@
     <link href="https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/cc4s-encouraging-certainty-and-consistency-in-scribble-supervised-semantic-segmentation/</id>
     <published>2025-03-20T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1253,7 +1253,7 @@
     <link href="https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/"/>
     <id>https://louaq.github.io/post/scaling-upmulti-domain-semantic-segmentation-with-sentence/</id>
     <published>2025-03-18T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1272,7 +1272,7 @@
     <link href="https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/"/>
     <id>https://louaq.github.io/post/scribbl-hides-class-promoting-scribble-based-weakly-supervised-semantic-segmentation-with-its-class-label/</id>
     <published>2025-03-18T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1291,7 +1291,7 @@
     <link href="https://louaq.github.io/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/"/>
     <id>https://louaq.github.io/post/learning-generalized-medical-image-segmentation-from-decoupled-feature-queries/</id>
     <published>2025-03-17T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.621Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1312,7 +1312,7 @@
     <link href="https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/progressive-feature-self-reinforcement-for-weakly-supervised-semantic-segmentation/</id>
     <published>2025-03-13T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1333,7 +1333,7 @@
     <link href="https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/"/>
     <id>https://louaq.github.io/post/fcn/20250312-pytorch-jiao-cheng/</id>
     <published>2025-03-12T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1350,7 +1350,7 @@
     <link href="https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/relevant-intrinsic-feature-enhancement-network-for-few-shot-semantic-segmentation/</id>
     <published>2025-03-11T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1369,7 +1369,7 @@
     <link href="https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/"/>
     <id>https://louaq.github.io/post/scribble-supervised-semantic-segmentation-with-prototype-based-feature-augmentation/</id>
     <published>2025-03-11T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1390,7 +1390,7 @@
     <link href="https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/"/>
     <id>https://louaq.github.io/post/cross-domain-few-shot-semantic-segmentation-via-doubly-matching-transformation/</id>
     <published>2025-03-10T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.065Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1411,7 +1411,7 @@
     <link href="https://louaq.github.io/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/"/>
     <id>https://louaq.github.io/post/prompt-and-transfer-dynamic-class-aware-enhancement-for-few-shot-segmentation/</id>
     <published>2025-03-08T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1430,7 +1430,7 @@
     <link href="https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/"/>
     <id>https://louaq.github.io/post/prompting-multi-modal-image-segmentation-with-semantic-grouping/</id>
     <published>2025-03-06T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1449,7 +1449,7 @@
     <link href="https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/"/>
     <id>https://louaq.github.io/post/disentangle-then-parse-night-time-semantic-segmentation-with-illumination-disentanglement/</id>
     <published>2025-03-04T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.619Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1470,7 +1470,7 @@
     <link href="https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/"/>
     <id>https://louaq.github.io/post/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-segmentation/</id>
     <published>2025-03-04T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.622Z</updated>
+    <updated>2025-11-01T08:46:16.068Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1489,7 +1489,7 @@
     <link href="https://louaq.github.io/post/high-quality-segmentation-for-ultra-high-resolution-images/"/>
     <id>https://louaq.github.io/post/high-quality-segmentation-for-ultra-high-resolution-images/</id>
     <published>2025-03-02T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.067Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1508,7 +1508,7 @@
     <link href="https://louaq.github.io/post/segament-anything/"/>
     <id>https://louaq.github.io/post/segament-anything/</id>
     <published>2025-02-27T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.623Z</updated>
+    <updated>2025-11-01T08:46:16.069Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1527,7 +1527,7 @@
     <link href="https://louaq.github.io/post/mo-ban/"/>
     <id>https://louaq.github.io/post/mo-ban/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
       
@@ -1551,7 +1551,7 @@
     <link href="https://louaq.github.io/post/jing-du-mo-ban/"/>
     <id>https://louaq.github.io/post/jing-du-mo-ban/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1564,11 +1564,11 @@
   </entry>
   
   <entry>
-    <title>FCN</title>
-    <link href="https://louaq.github.io/post/fcn/20250224-fcn/"/>
-    <id>https://louaq.github.io/post/fcn/20250224-fcn/</id>
+    <title>FCN模型讲解</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1581,11 +1581,11 @@
   </entry>
   
   <entry>
-    <title>FCN模型讲解</title>
-    <link href="https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/"/>
-    <id>https://louaq.github.io/post/fcn/20250224-fcn-mo-xing-jiang-jie/</id>
+    <title>FCN</title>
+    <link href="https://louaq.github.io/post/fcn/20250224-fcn/"/>
+    <id>https://louaq.github.io/post/fcn/20250224-fcn/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1602,7 +1602,7 @@
     <link href="https://louaq.github.io/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/"/>
     <id>https://louaq.github.io/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1619,7 +1619,7 @@
     <link href="https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/"/>
     <id>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1636,7 +1636,7 @@
     <link href="https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/"/>
     <id>https://louaq.github.io/post/fcn/20250224-yu-yi-fen-ge-gai-shu/</id>
     <published>2025-02-24T12:00:00.000Z</published>
-    <updated>2025-10-07T08:30:18.620Z</updated>
+    <updated>2025-11-01T08:46:16.066Z</updated>
     
     
     <summary type="html">云想衣裳花想容，春风拂槛露华浓</summary>
@@ -1653,7 +1653,7 @@
     <link href="https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/"/>
     <id>https://louaq.github.io/post/windows-xia-de-torch-1.2.0-huan-jing-pei-zhi/</id>
     <published>2025-02-06T16:27:00.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">CUDA环境安装</summary>
@@ -1678,7 +1678,7 @@
     <link href="https://louaq.github.io/post/latex/visual-studio-code/"/>
     <id>https://louaq.github.io/post/latex/visual-studio-code/</id>
     <published>2024-12-29T13:24:01.000Z</published>
-    <updated>2025-10-07T08:30:18.624Z</updated>
+    <updated>2025-11-01T08:46:16.070Z</updated>
     
     
     <summary type="html">介绍vscode如何配置latex环境</summary>
