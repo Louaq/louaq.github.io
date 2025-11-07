@@ -44,7 +44,7 @@ export const siteConfig: SiteConfig = {
   // { type: "image", value: "https://example.com/logo.png", alt: "Firefly Logo" }
   navbarLogo: {
     type: "image",
-    value: "/assets/images/LiuYingPure3.svg",
+    value: "/assets/images/favicon.png",
     alt: "🍀",
   },
   navbarTitle: "louaq", // 导航栏标题，可以设置为与 title 不同的值，如果不设置则使用 title
@@ -90,7 +90,7 @@ export const siteConfig: SiteConfig = {
     // 背景图片配置
     src: {
       // 桌面背景图片
-      desktop: "/assets/images/d1.webp",
+      desktop: "https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdqxhgku328DIYPAqF0DqJ1DGxwDIiw.jpg",
       // 移动背景图片
       mobile: "/assets/images/m1.webp",
     },
@@ -104,7 +104,7 @@ export const siteConfig: SiteConfig = {
       
       homeText: {
         // 主页显示自定义文本（全局开关）
-        enable: true,
+        enable: false,
         // 主页横幅主标题
         title: "Coding!",
         // 主页横幅副标题
@@ -125,7 +125,7 @@ export const siteConfig: SiteConfig = {
       },
       credit: {
         enable: {
-          desktop: true, // 桌面端显示横幅图片来源文本
+          desktop: false, // 桌面端显示横幅图片来源文本
           mobile: false, // 移动端显示横幅图片来源文本
         },
         text: {
@@ -144,7 +144,7 @@ export const siteConfig: SiteConfig = {
       waves: {
         enable: {
           desktop: true, // 桌面端启用波浪动画效果
-          mobile: true, // 移动端启用波浪动画效果
+          mobile: false, // 移动端启用波浪动画效果
         },
         performance: {
           quality: "high",

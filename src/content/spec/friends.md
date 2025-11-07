@@ -12,8 +12,8 @@ description: "与优秀的朋友们一起成长"
 ```yaml
 站点名称: louaq
 站点描述: 致力于探索如何利用计算机视觉和深度学习技术
-站点链接: https://blog.cuteleaf.cn
-头像链接: https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640
+站点链接: https://astroal.netlify.app/
+头像链接: https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb9gzw3hp0dDIYPAqF0DqJ1DGxwDIiw.jpg
 
 ```
 
