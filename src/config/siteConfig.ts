@@ -6,18 +6,18 @@ import { fontConfig } from "./fontConfig";
 const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
-  title: "Firefly",
-  subtitle: "Demo site",
+  title: "louaq",
+  subtitle: "科研论文分享",
   description:
-    "Firefly 是一款基于 Astro 框架开发的清新美观且现代化个人博客主题，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
+    "作为一个对医学影像与人工智能交叉领域充满热情的研究者，我致力于探索如何利用计算机视觉和深度学习技术，更好地理解和分析复杂的医学影像数据，为临床诊断提供更精准的辅助工具",
   keywords: [
-    "Firefly",
-    "Fuwari",
-    "Astro",
-    "ACGN",
-    "博客",
-    "技术博客",
-    "静态博客",
+    "louaq",
+    "多模态",
+    "医学图像分析",
+    "AIGC",
+    "计算机视觉",
+    "论文",
+    "CVPR",
   ],
 
   lang: SITE_LANG,
@@ -31,7 +31,7 @@ export const siteConfig: SiteConfig = {
   favicon: [
     // 留空以使用默认 favicon
     {
-      src: "/assets/images/favicon.ico", // 图标文件路径
+      src: "/assets/images/favicon.png", // 图标文件路径
       theme: "light", // 可选，指定主题 'light' | 'dark'
       sizes: "32x32", // 可选，图标大小
     },
@@ -47,7 +47,7 @@ export const siteConfig: SiteConfig = {
     value: "/assets/images/LiuYingPure3.svg",
     alt: "🍀",
   },
-  navbarTitle: "Firefly", // 导航栏标题，可以设置为与 title 不同的值，如果不设置则使用 title
+  navbarTitle: "louaq", // 导航栏标题，可以设置为与 title 不同的值，如果不设置则使用 title
 
   // 追番配置
   bangumi: {
@@ -62,8 +62,8 @@ export const siteConfig: SiteConfig = {
 
   // 页面开关配置 - 控制特定页面的访问权限，设为false会返回404
   pages: {
-    anime: true, // 追番页面开关
-    sponsor: true, // 赞助页面开关
+    anime: false, // 追番页面开关
+    sponsor: false, // 赞助页面开关
     guestbook: true, // 留言板页面开关，需要配置评论系统
   },
 
@@ -106,7 +106,7 @@ export const siteConfig: SiteConfig = {
         // 主页显示自定义文本（全局开关）
         enable: true,
         // 主页横幅主标题
-        title: "Lovely firefly!",
+        title: "Coding!",
         // 主页横幅副标题
         subtitle: [
           "In Reddened Chrysalis, I Once Rest",

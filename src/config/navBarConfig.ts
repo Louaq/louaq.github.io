@@ -9,25 +9,25 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
   ];
 
   // 支持自定义导航栏链接,并且支持多级菜单
-  links.push({
-    name: "链接",
-    url: "/links/",
-    icon: "material-symbols:link",
-    children: [
-      {
-        name: "GitHub",
-        url: "https://github.com/CuteLeaf/Firefly",
-        external: true,
-        icon: "fa6-brands:github",
-      },
-      {
-        name: "Bilibili",
-        url: "https://space.bilibili.com/38932988",
-        external: true,
-        icon: "fa6-brands:bilibili",
-      },
-    ],
-  });
+  //links.push({
+    //name: "链接",
+    //url: "/links/",
+    //icon: "material-symbols:link",
+    //children: [
+      //{
+        //name: "GitHub",
+        //url: "https://github.com/CuteLeaf/Firefly",
+        //external: true,
+        //icon: "fa6-brands:github",
+      //},
+      //{
+        //name: "Bilibili",
+        //url: "https://space.bilibili.com/38932988",
+        //external: true,
+        //icon: "fa6-brands:bilibili",
+      //},
+    //],
+  //});
 
   links.push(LinkPreset.Friends);
 
@@ -36,16 +36,18 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
     links.push(LinkPreset.Guestbook);
   }
 
-  links.push({
-    name: "关于",
-    url: "/content/",
-    icon: "material-symbols:info",
-    children: [
-      ...(siteConfig.pages.anime ? [LinkPreset.Anime] : []), // 根据配置决定是否添加追番页面
-      ...(siteConfig.pages.sponsor ? [LinkPreset.Sponsor] : []), // 根据配置决定是否添加赞助页面
-      LinkPreset.About,
-    ],
-  });
+  links.push(LinkPreset.About);
+
+  //links.push({
+    //name: "关于",
+    //url: "/content/",
+    //icon: "material-symbols:info",
+    //children: [
+      //...(siteConfig.pages.anime ? [LinkPreset.Anime] : []), // 根据配置决定是否添加追番页面
+      //...(siteConfig.pages.sponsor ? [LinkPreset.Sponsor] : []), // 根据配置决定是否添加赞助页面
+      //LinkPreset.About,
+    //],
+  //});
   // 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出
   return { links } as NavBarConfig;
 };

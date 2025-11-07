@@ -9,7 +9,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
   enable: true,
 
   // 侧边栏位置：左侧left或右侧right
-  position: "left",
+  position: "right",
 
   // 侧边栏组件配置列表
   components: [
