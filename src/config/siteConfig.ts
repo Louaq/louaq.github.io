@@ -90,9 +90,9 @@ export const siteConfig: SiteConfig = {
     // 背景图片配置
     src: {
       // 桌面背景图片
-      desktop: "https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdqxhgku328DIYPAqF0DqJ1DGxwDIiw.jpg",
+      desktop: "https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xy0d471bcpnbxDIYPAqF0DqJ1DGxwDIiw.webp",
       // 移动背景图片
-      mobile: "/assets/images/m1.webp",
+      mobile: "https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32xhph486vqadpqDIYPAqF0DqJ1DGxwDIiw.webp",
     },
 
     // Banner模式特有配置
