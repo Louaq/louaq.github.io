@@ -38,7 +38,7 @@ export const adConfig2: AdConfig = {
     url: "about/",
     external: false,
   },
-  closable: true,
+  closable: false,
   displayCount: -1,
   padding: {
     // all: "1rem",

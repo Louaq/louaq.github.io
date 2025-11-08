@@ -5,15 +5,25 @@ export const profileConfig: ProfileConfig = {
   name: "Louaq",
   bio: "Hello, I'm Louaq.",
   links: [
-    //{
-      //name: "Bilibli",
-      //icon: "fa6-brands:bilibili",
-      //url: "https://space.bilibili.com/38932988",
-    //},
+    {
+      name: "Email",
+      icon: "mdi:email",
+      url: "mailto:yang_syy@qq.com",
+    },
+    {
+      name: "Bilibli",
+      icon: "fa6-brands:bilibili",
+      url: "https://space.bilibili.com/397523112",
+    },
     {
       name: "GitHub",
       icon: "fa6-brands:github",
       url: "https://github.com/Louaq",
-    }
+    },
+    {
+      name: "RSS",
+      icon: "fa6-solid:rss",
+      url: "/rss.xml",
+    },
   ],
 };

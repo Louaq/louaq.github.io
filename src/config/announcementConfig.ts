@@ -1,13 +1,13 @@
 import type { AnnouncementConfig } from "../types/config";
 
 export const announcementConfig: AnnouncementConfig = {
-  title: "公告", // 公告标题
-  content: "欢迎来到我的博客", // 公告内容
-  closable: true, // 允许用户关闭公告
+  title: "重要提醒",
+  content: "网站将于今晚 22:00-24:00 进行维护，期间可能无法访问。",
+  closable: false, // 重要提醒不可关闭
   link: {
-    enable: true, // 启用链接
-    text: "了解更多", // 链接文本
-    url: "/about/", // 链接 URL
-    external: false, // 内部链接
+    enable: false, // 不需要链接
+    text: "",
+    url: "",
+    external: false,
   },
 };
