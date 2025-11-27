@@ -6,7 +6,6 @@ description: 治疗后胶质瘤分割完整实现版本。
 tags: [脑肿瘤, 医学图像分割]
 category: 医学图像
 draft: false
-image: "api"
 ---
 
 **一、BraTS-GLI2024介绍**
