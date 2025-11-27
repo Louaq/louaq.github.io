@@ -1,8 +1,10 @@
 ---
-import BackToTop from "@components/control/BackToTop.astro";
+import BackToTop from "@components/common/controls/BackToTop.astro";
 import Footer from "@components/layout/Footer.astro";
 import Navbar from "@components/layout/Navbar.astro";
 import SideBar from "@components/layout/SideBar.astro";
+import LeftSideBar from "@components/layout/LeftSideBar.astro";
+import RightSideBar from "@components/layout/RightSideBar.astro";
 import SpineModel from "@components/widget/SpineModel.astro";
 import Live2DWidget from "@components/widget/Live2DWidget.astro";
 import type { MarkdownHeading } from "astro";
@@ -11,7 +13,6 @@ import FullscreenWallpaper from "@/components/misc/FullscreenWallpaper.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
 import ImageWrapper from "@/components/misc/ImageWrapper.astro";
 import TypewriterText from "@/components/content/TypewriterText.astro";
-//import TOC from "@/components/widget/TOC.astro";
 import FloatingTOC from "@/components/interactive/FloatingTOC.astro";
 import { siteConfig, live2dModelConfig } from "@/config";
 import {
@@ -20,7 +21,7 @@ import {
 	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "@/constants/constants";
 import { getBackgroundImages, isHomePage } from "@/utils/layout-utils";
-import { getResponsiveSidebarConfig, generateGridClasses, generateSidebarClasses, generateMainContentClasses } from "@/utils/responsive-utils";
+import { getResponsiveSidebarConfig, generateGridClasses, generateSidebarClasses, generateRightSidebarClasses, generateMainContentClasses } from "@/utils/responsive-utils";
 import Layout from "./Layout.astro";
 
 interface Props {
@@ -84,6 +85,17 @@ const hasBannerLink = !!(creditUrlDesktop || creditUrlMobile);
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 
+// 随机选择副标题（当打字机关闭且为数组时）
+const getRandomSubtitle = () => {
+  const subtitle = siteConfig.backgroundWallpaper.banner?.homeText?.subtitle;
+  if (Array.isArray(subtitle)) {
+    const randomIndex = Math.floor(Math.random() * subtitle.length);
+    return subtitle[randomIndex];
+  }
+  return subtitle;
+};
+const randomSubtitle = getRandomSubtitle();
+
 // 主页横幅文本只在首页且全局开关为 true 时显示，不区分设备
 const homeTextEnable = siteConfig.backgroundWallpaper.banner?.homeText?.enable;
 const showHomeText = isBannerMode && !!homeTextEnable && isHomePageCheck;
@@ -94,15 +106,16 @@ const mobileNonHomeBannerClass = !isHomePageCheck ? "mobile-hide-banner" : "";
 const mainPanelTop = isBannerMode && isBackgroundEnabled
 	? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
 	: "5.5rem";
-const mobileNonHomeMainTop = !isHomePageCheck ? "5.5rem" : mainPanelTop;
 
 // 当banner模式被禁用时，主内容区域应该始终从顶栏下面开始
+// 非首页在小于1024px时会通过 mobile-main-no-banner CSS类覆盖top值为5.5rem
 const finalMainPanelTop = isBannerMode && isBackgroundEnabled ? mainPanelTop : "5.5rem";
 
 // 获取响应式侧边栏配置
 const sidebarConfig = getResponsiveSidebarConfig();
 const { gridCols } = generateGridClasses(sidebarConfig);
 const sidebarClass = generateSidebarClasses(sidebarConfig);
+const rightSidebarClass = sidebarConfig.isBothSidebars ? generateRightSidebarClasses(sidebarConfig) : "";
 const mainContentClass = generateMainContentClasses(sidebarConfig);
 
 // 检查是否应该启用半透明效果
@@ -192,9 +205,7 @@ const transparentClass = shouldEnableTransparency
                                     pauseTime={siteConfig.backgroundWallpaper.banner.homeText.typewriter.pauseTime}
                                 />
                             ) : (
-                                Array.isArray(siteConfig.backgroundWallpaper.banner.homeText.subtitle) 
-                                    ? siteConfig.backgroundWallpaper.banner.homeText.subtitle[0] 
-                                    : siteConfig.backgroundWallpaper.banner.homeText.subtitle
+                                randomSubtitle
                             )}
                         </h2>
                     )}
@@ -310,18 +321,37 @@ const transparentClass = shouldEnableTransparency
             </a>}
 
 
-            {(sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && <SideBar class={`${sidebarClass} ${transparentClass}`} headings={headings}></SideBar>}
-
+            {/* 渲染侧边栏 - 根据配置决定使用单侧或双侧边栏 */}
+            {sidebarConfig.isBothSidebars ? (
+                <>
+                    {/* 左侧边栏 */}
+                    {sidebarConfig.hasLeftComponents && (sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
+                        <LeftSideBar class={`${sidebarClass} ${transparentClass}`} headings={headings}></LeftSideBar>
+                    )}
+                </>
+            ) : (
+                <>
+                    {/* 单侧边栏布局 */}
+                    {(sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
+                        <SideBar class={`${sidebarClass} ${transparentClass}`} headings={headings}></SideBar>
+                    )}
+                </>
+            )}
+                    
+            {/* 主内容区 - 始终渲染，确保 Swup 容器存在 */}
             <main id="swup-container" class={`${mainContentClass} transition-main`}>
                 <div id="content-wrapper" class="onload-animation transition-leaving">
-                    <!-- the overflow-hidden here prevent long text break the layout-->
-                    <!-- make id different from windows.swup global property -->
                     <slot></slot>
                     <div class="footer col-span-2 onload-animation hidden lg:block">
                         <Footer></Footer>
                     </div>
                 </div>
             </main>
+            
+            {/* 右侧边栏 - 仅双侧边栏模式 */}
+            {sidebarConfig.isBothSidebars && sidebarConfig.hasRightComponents && (sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
+                <RightSideBar class={`${rightSidebarClass} ${transparentClass}`} headings={headings}></RightSideBar>
+            )}
 
             <div class="footer col-span-2 onload-animation block lg:hidden">
                 <Footer></Footer>
@@ -335,9 +365,111 @@ const transparentClass = shouldEnableTransparency
 </div>
 
 <!-- 悬浮TOC组件 -->
-{siteConfig.toc.enable && <FloatingTOC headings={headings}></FloatingTOC>}
+<FloatingTOC headings={headings}></FloatingTOC>
 
-<!-- #toc needs to exist for Swup to work normally -->
-{!siteConfig.toc.enable && <div id="toc"></div>}
+<!-- 立即执行脚本：防止刷新时右侧栏闪烁 -->
+<script is:inline define:vars={{ isBothSidebars: sidebarConfig.isBothSidebars }}>
+  (function() {
+    // 立即检查并应用保存的布局状态
+    const savedLayout = localStorage.getItem('postListLayout');
+    if (savedLayout) {
+      const rightSidebar = document.getElementById('right-sidebar');
+      const mainGrid = document.getElementById('main-grid');
+      
+      if (savedLayout === 'grid') {
+        if (isBothSidebars && rightSidebar) {
+          rightSidebar.style.display = 'none';
+        }
+        if (mainGrid) {
+          mainGrid.classList.add('grid-layout-active');
+        }
+      } else {
+        if (isBothSidebars && rightSidebar) {
+          rightSidebar.style.display = '';
+        }
+        if (mainGrid) {
+          mainGrid.classList.remove('grid-layout-active');
+        }
+      }
+    }
+  })();
+</script>
 </Layout>
+
+<style is:global>
+  /* 网格布局激活时，调整主网格为两列布局 */
+  @media (min-width: 1024px) {
+    #main-grid.grid-layout-active {
+      grid-template-columns: 17.5rem 1fr !important;
+    }
+  }
+  
+  /* 确保在网格模式下右侧边栏完全不占空间 */
+  #main-grid.grid-layout-active #right-sidebar {
+    display: none !important;
+  }
+  
+  /* 在低于1200px时隐藏右侧边栏 */
+  @media (max-width: 1199px) {
+    #right-sidebar {
+      display: none !important;
+    }
+    
+    /* 同时调整网格布局为两列 */
+    #main-grid {
+      grid-template-columns: 17.5rem 1fr !important;
+    }
+  }
+  
+  /* 在1024px-1199px之间，确保平板端也正确显示 */
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    #main-grid {
+      grid-template-columns: 17.5rem 1fr !important;
+    }
+  }
+  
+  /* 文章详情页布局切换动画 - 简洁优雅的淡入淡出 */
+  #post-container {
+    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+  }
+  
+  #post-container.layout-switching {
+    animation: gentleFade 0.4s ease-in-out;
+  }
+  
+  @keyframes gentleFade {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.92;
+      transform: scale(0.995);
+    }
+  }
+  
+  /* 主内容区布局切换动画 - 平滑宽度过渡 */
+  #swup-container {
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  #swup-container.layout-transitioning {
+    animation: smoothWidth 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  @keyframes smoothWidth {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.96;
+    }
+  }
+  
+  /* 右侧栏平滑过渡 */
+  #right-sidebar {
+    transition: opacity 0.35s ease-in-out, 
+                transform 0.35s ease-in-out;
+  }
+</style>
 

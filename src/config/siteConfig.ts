@@ -6,10 +6,11 @@ import { fontConfig } from "./fontConfig";
 const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
-  title: "louaq",
-  subtitle: "科研论文分享",
+  title: "Firefly",
+  subtitle: "Demo site",
+  site_url: "https://firefly.cuteleaf.cn",
   description:
-    "作为一个对医学影像与人工智能交叉领域充满热情的研究者，我致力于探索如何利用计算机视觉和深度学习技术，更好地理解和分析复杂的医学影像数据，为临床诊断提供更精准的辅助工具",
+    "Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
   keywords: [
     "louaq",
     "多模态",
@@ -49,7 +50,10 @@ export const siteConfig: SiteConfig = {
   },
   navbarTitle: "louaq", // 导航栏标题，可以设置为与 title 不同的值，如果不设置则使用 title
 
-  // 追番配置
+  // 站点开始日期，用于统计运行天数
+  siteStartDate: "2025-01-01", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
+
+  // bangumi配置
   bangumi: {
     userId: "1163581", // 在此处设置你的Bangumi用户ID
   },
@@ -61,15 +65,17 @@ export const siteConfig: SiteConfig = {
   generateOgImages: false,
 
   // 页面开关配置 - 控制特定页面的访问权限，设为false会返回404
+  // bangumi的数据为编译时获取的，所以不是实时数据，请配置bangumi.userId
   pages: {
-    anime: false, // 追番页面开关
-    sponsor: false, // 赞助页面开关
+    sponsor: true, // 赞助页面开关
     guestbook: true, // 留言板页面开关，需要配置评论系统
+    bangumi: true, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
   },
 
   // 文章列表布局配置
   postListLayout: {
     // 默认布局模式："list" 列表模式（单列布局），"grid" 网格模式（双列布局）
+    // 如果sidebarConfig.ts中侧边栏配置启用了"both"双侧边栏，则无法使用文章列表"grid"网格（双列）布局
     defaultMode: "list",
     // 是否允许用户切换布局
     allowSwitch: true,
@@ -78,7 +84,7 @@ export const siteConfig: SiteConfig = {
   // 分页配置
   pagination: {
     // 每页显示的文章数量
-    postsPerPage: 10,
+    postsPerPage: 8,
   },
 
   backgroundWallpaper: {
@@ -92,7 +98,7 @@ export const siteConfig: SiteConfig = {
       // 桌面背景图片
       desktop: "https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xy0d471bcpnbxDIYPAqF0DqJ1DGxwDIiw.webp",
       // 移动背景图片
-      mobile: "https://vip.123pan.cn/1816472581/ymjew503t0l000d7w32xhph486vqadpqDIYPAqF0DqJ1DGxwDIiw.webp",
+      mobile: "/assets/images/m3.webp",
     },
 
     // Banner模式特有配置
@@ -117,7 +123,9 @@ export const siteConfig: SiteConfig = {
           "In Finalized Morrow, I Full Bloom",
         ],
         typewriter: {
-          enable: true, // 启用副标题打字机效果
+          //打字机开启 → 循环显示所有副标题
+          //打字机关闭 → 每次刷新随机显示一条副标题
+          enable: false, // 启用副标题打字机效果
           speed: 100, // 打字速度（毫秒）
           deleteSpeed: 50, // 删除速度（毫秒）
           pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
@@ -125,16 +133,16 @@ export const siteConfig: SiteConfig = {
       },
       credit: {
         enable: {
-          desktop: false, // 桌面端显示横幅图片来源文本
-          mobile: false, // 移动端显示横幅图片来源文本
+          desktop: true, // 桌面端显示横幅图片来源文本
+          mobile: true, // 移动端显示横幅图片来源文本
         },
         text: {
           desktop: "Pixiv - 晚晚喵", // 桌面端要显示的来源文本
-          mobile: "Mobile Credit", // 移动端要显示的来源文本
+          mobile: "Pixiv - KiraraShss", // 移动端要显示的来源文本
         },
         url: {
           desktop: "https://www.pixiv.net/artworks/135490046", // 桌面端原始艺术品或艺术家页面的 URL 链接
-          mobile: "", // 移动端原始艺术品或艺术家页面的 URL 链接
+          mobile: "https://www.pixiv.net/users/42715864", // 移动端原始艺术品或艺术家页面的 URL 链接
         },
       },
       navbar: {
@@ -165,15 +173,6 @@ export const siteConfig: SiteConfig = {
       opacity: 0.8, // 壁纸透明度
       blur: 1, // 背景模糊程度
     },
-  },
-
-  // 目录功能
-  toc: {
-    // 目录功能开关
-    enable: true,
-    // 目录深度，1-3，1 表示只显示 h1 标题，2 表示显示 h1 和 h2 标题，依此类推
-    // depth在新版已弃用
-    depth: 3,
   },
 
   // 字体配置

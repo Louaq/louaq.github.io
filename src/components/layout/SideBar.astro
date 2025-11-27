@@ -5,8 +5,10 @@ import Announcement from "@/components/widget/Announcement.astro";
 import Categories from "@/components/widget/Categories.astro";
 import Profile from "@/components/content/Profile.astro";
 import Tags from "@/components/widget/Tags.astro";
-import TOC from "@/components/widget/TOC.astro";
 import Advertisement from "@/components/widget/Advertisement.astro";
+import SiteStats from "@/components/widget/SiteStats.astro";
+import Calendar from "@/components/widget/Calendar.astro";
+import SidebarTOC from "@/components/widget/SidebarTOC.astro";
 
 interface Props {
   class?: string;
@@ -15,20 +17,53 @@ interface Props {
 
 const { class: className, headings } = Astro.props;
 
-// 获取配置的组件列表
-const topComponents = widgetManager.getComponentsByPosition("top");
-const stickyComponents = widgetManager.getComponentsByPosition("sticky");
+// 获取配置的侧边栏位置
+const sidebarPosition = widgetManager.getConfig().position;
+const targetSidebar = sidebarPosition === "left" ? "left" : undefined;
+
+// 获取配置的组件列表 - 根据 position 配置决定显示哪一侧
+const topComponents = widgetManager.getComponentsByPosition("top", targetSidebar);
+const stickyComponents = widgetManager.getComponentsByPosition("sticky", targetSidebar);
+
+// 组件类型到ID的映射
+const componentTypeToId = {
+  stats: "site-stats",
+  calendar: "calendar-widget",
+  sidebarToc: "sidebar-toc",
+  profile: "profile",
+  announcement: "announcement",
+  categories: "categories",
+  tags: "tags",
+  advertisement: "advertisement",
+};
 
 // 提取客户端需要的数据
-const breakpoints = widgetManager.getBreakpoints();
 const sidebarConfig = {
-  breakpoints: breakpoints,
   shouldShowSidebar: {
     mobile: widgetManager.shouldShowSidebar("mobile"),
     tablet: widgetManager.shouldShowSidebar("tablet"),
     desktop: widgetManager.shouldShowSidebar("desktop"),
   },
+  breakpoints: {
+    mobile: 768,
+    tablet: 1024,
+    desktop: 1280,
+  },
 };
+
+// 提取组件的 showOnPostPage 配置
+const componentsConfig = (() => {
+  const components = targetSidebar === "left" 
+    ? widgetManager.getConfig().leftComponents 
+    : [...widgetManager.getConfig().leftComponents, ...widgetManager.getConfig().rightComponents];
+  
+  return components
+    .filter(c => c.enable)
+    .map(c => ({
+      id: componentTypeToId[c.type as keyof typeof componentTypeToId],
+      showOnPostPage: c.showOnPostPage ?? true,
+    }));
+})();
 
 // 组件映射表
 const componentMap = {
@@ -36,8 +71,10 @@ const componentMap = {
   announcement: Announcement,
   categories: Categories,
   tags: Tags,
-  toc: TOC,
+  sidebarToc: SidebarTOC,
   advertisement: Advertisement,
+  stats: SiteStats,
+  calendar: Calendar,
 };
 
 // 渲染组件的辅助函数
@@ -46,7 +83,9 @@ function renderComponent(component: any, index: number, _components: any[]) {
     componentMap[component.type as keyof typeof componentMap];
   if (!ComponentToRender) return null;
 
-  const componentClass = widgetManager.getComponentClass(component, index);
+  // 使用配置的侧边栏位置，如果是 both 则默认为 left
+  const sidebar = targetSidebar || "left";
+  const componentClass = widgetManager.getComponentClass(component, sidebar, index);
   const componentStyle = widgetManager.getComponentStyle(component, index);
 
   return {
@@ -54,7 +93,7 @@ function renderComponent(component: any, index: number, _components: any[]) {
     props: {
       class: componentClass,
       style: componentStyle,
-      headings: component.type === "toc" ? headings : undefined,
+      headings: component.type === "sidebarToc" ? headings : undefined,
       configId: component.configId, // 传递configId给Advertisement组件
       ...component.customProps,
     },
@@ -83,7 +122,7 @@ function renderComponent(component: any, index: number, _components: any[]) {
     stickyComponents.length > 0 && (
       <div
         id="sidebar-sticky"
-        class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4"
+        class="transition-all duration-700 flex flex-col w-full gap-4 sticky top-4"
       >
         {stickyComponents.map((component, index) => {
           const renderData = renderComponent(
@@ -123,7 +162,37 @@ function renderComponent(component: any, index: number, _components: any[]) {
   }
 </style>
 
-<script define:vars={{ sidebarConfig }}>
+<script define:vars={{ sidebarConfig, componentsConfig }}>
+  // 根据 showOnPostPage 配置控制组件显示
+  function toggleComponentsVisibility() {
+    const isPostPage = window.location.pathname.includes("/posts/");
+    
+    const sidebar = document.getElementById('sidebar');
+    if (!sidebar) return;
+    
+    const widgets = sidebar.querySelectorAll('widget-layout');
+    
+    widgets.forEach((widget) => {
+      const widgetId = widget.getAttribute('data-id');
+      const componentConfig = componentsConfig.find(c => c.id === widgetId);
+      
+      if (componentConfig) {
+        // 特殊处理：侧边栏TOC只在文章详情页显示
+        if (widgetId === 'sidebar-toc') {
+          widget.style.display = isPostPage ? '' : 'none';
+        }
+        // 其他组件的 showOnPostPage 含义：
+        // true: 在文章页和非文章页都显示（默认行为）
+        // false: 只在非文章页显示，文章页隐藏
+        else if (isPostPage && !componentConfig.showOnPostPage) {
+          widget.style.display = 'none';
+        } else {
+          widget.style.display = '';
+        }
+      }
+    });
+  }
+
   // 响应式布局管理
   class SidebarManager {
     constructor() {
@@ -133,6 +202,8 @@ function renderComponent(component: any, index: number, _components: any[]) {
 
     init() {
       this.updateResponsiveDisplay();
+      toggleComponentsVisibility();
+      
       window.addEventListener("resize", () => this.updateResponsiveDisplay());
 
       // 监听SWUP内容替换事件
@@ -141,6 +212,7 @@ function renderComponent(component: any, index: number, _components: any[]) {
           // 延迟执行以确保DOM已更新
           setTimeout(() => {
             this.updateResponsiveDisplay();
+            toggleComponentsVisibility();
           }, 100);
         });
       }
@@ -171,6 +243,14 @@ function renderComponent(component: any, index: number, _components: any[]) {
     }
   }
 
-  // 初始化侧边栏管理器
-  new SidebarManager();
+  // 页面加载时执行
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      toggleComponentsVisibility();
+      new SidebarManager();
+    });
+  } else {
+    toggleComponentsVisibility();
+    new SidebarManager();
+  }
 </script>

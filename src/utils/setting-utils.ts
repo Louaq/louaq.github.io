@@ -7,7 +7,7 @@ import {
   WALLPAPER_OVERLAY,
   WALLPAPER_NONE,
 } from "@constants/constants";
-import { siteConfig } from "../config";
+import { siteConfig, expressiveCodeConfig } from "../config";
 import type { LIGHT_DARK_MODE, WALLPAPER_MODE } from "@/types/config";
 
 // Declare global functions
@@ -104,7 +104,7 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
   // 1. dark类状态是否改变
   // 2. expressiveCode主题是否需要更新
   const needsThemeChange = currentIsDark !== targetIsDark;
-  const expectedTheme = targetIsDark ? "github-dark" : "github-light";
+  const expectedTheme = targetIsDark ? expressiveCodeConfig.darkTheme : expressiveCodeConfig.lightTheme;
   const needsCodeThemeUpdate = currentTheme !== expectedTheme;
 
   // 如果既不需要主题切换也不需要代码主题更新，直接返回
@@ -112,42 +112,23 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
     return;
   }
 
-  // 只在需要主题切换时添加过渡保护
+  // 批量 DOM 操作，减少重绘
   if (needsThemeChange) {
-    document.documentElement.classList.add("is-theme-transitioning");
+    // 添加过渡保护类（但会导致大量重绘，所以使用更轻量的方式）
+    // document.documentElement.classList.add("is-theme-transitioning");
+    
+    // 直接切换主题，利用 CSS 变量的特性让浏览器优化过渡
+    if (targetIsDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
   }
 
-  // 使用 requestAnimationFrame 确保在下一帧执行，避免闪屏
-  requestAnimationFrame(() => {
-    // 应用主题变化
-    if (needsThemeChange) {
-      if (targetIsDark) {
-        document.documentElement.classList.add("dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-      }
-    }
-
-    // Set the theme for Expressive Code based on current mode
-    const expressiveTheme = targetIsDark ? "github-dark" : "github-light";
-    document.documentElement.setAttribute("data-theme", expressiveTheme);
-
-    // 强制重新渲染代码块 - 解决从首页进入文章页面时的渲染问题
-    if (needsCodeThemeUpdate) {
-      // 触发 expressice code 重新渲染
-      setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("theme-change"));
-      }, 0);
-    }
-
-    // 在下一帧快速移除保护类，使用微任务确保DOM更新完成
-    if (needsThemeChange) {
-      // 使用 requestAnimationFrame 确保在下一帧移除过渡保护类
-      requestAnimationFrame(() => {
-        document.documentElement.classList.remove("is-theme-transitioning");
-      });
-    }
-  });
+  // Set the theme for Expressive Code based on current mode
+  if (needsCodeThemeUpdate) {
+    document.documentElement.setAttribute("data-theme", expectedTheme);
+  }
 }
 
 // 系统主题监听器引用
@@ -188,11 +169,14 @@ export function setupSystemThemeListener() {
   // 处理系统主题变化的回调
   const handleSystemThemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
     const isDark = e.matches;
+    const currentIsDark = document.documentElement.classList.contains("dark");
     
-    // 添加过渡保护以避免闪屏
-    document.documentElement.classList.add("is-theme-transitioning");
+    // 如果主题状态没有变化，直接返回
+    if (currentIsDark === isDark) {
+      return;
+    }
     
-    // 应用系统主题，但不保存到 localStorage
+    // 直接应用系统主题，不使用过渡保护类以避免大量重绘
     if (isDark) {
       document.documentElement.classList.add("dark");
     } else {
@@ -200,15 +184,10 @@ export function setupSystemThemeListener() {
     }
     
     // Set the theme for Expressive Code
-    const expressiveTheme = isDark ? "github-dark" : "github-light";
+    const expressiveTheme = isDark ? expressiveCodeConfig.darkTheme : expressiveCodeConfig.lightTheme;
     document.documentElement.setAttribute("data-theme", expressiveTheme);
     
-    // 移除过渡保护
-    requestAnimationFrame(() => {
-      document.documentElement.classList.remove("is-theme-transitioning");
-    });
-    
-    // 触发自定义事件通知其他组件
+    // 触发自定义事件通知其他组件（仅在真正切换时触发）
     window.dispatchEvent(new CustomEvent("theme-change"));
   };
   
@@ -370,22 +349,23 @@ function showBannerMode() {
 	if (bannerWrapper) {
 		// 检查当前是否为首页
 		const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
+		const isMobile = window.innerWidth < 1024;
 		
-		// 先设置display，然后使用requestAnimationFrame确保渲染
-		bannerWrapper.style.display = 'block';
-		bannerWrapper.style.setProperty('display', 'block', 'important');
-		requestAnimationFrame(() => {
-			bannerWrapper.classList.remove('hidden');
-			bannerWrapper.classList.remove('opacity-0');
-			bannerWrapper.classList.add('opacity-100');
-			
-			// 移动端非首页时隐藏banner
-			if (!isHomePage) {
-				bannerWrapper.classList.add('mobile-hide-banner');
-			} else {
+		// 移动端非首页时，不显示banner；桌面端始终显示
+		if (isMobile && !isHomePage) {
+			bannerWrapper.style.display = 'none';
+			bannerWrapper.classList.add('mobile-hide-banner');
+		} else {
+			// 首页或桌面端：先设置display，然后使用requestAnimationFrame确保渲染
+			bannerWrapper.style.display = 'block';
+			bannerWrapper.style.setProperty('display', 'block', 'important');
+			requestAnimationFrame(() => {
+				bannerWrapper.classList.remove('hidden');
+				bannerWrapper.classList.remove('opacity-0');
+				bannerWrapper.classList.add('opacity-100');
 				bannerWrapper.classList.remove('mobile-hide-banner');
-			}
-		});
+			});
+		}
 	}
 
 	// 显示横幅图片来源文本
@@ -418,7 +398,9 @@ function showBannerMode() {
 	const mainContentWrapper = document.querySelector('.absolute.w-full.z-30');
 	if (mainContentWrapper) {
 		const isHomePage = window.location.pathname === '/' || window.location.pathname === '';
-		if (!isHomePage) {
+		const isMobile = window.innerWidth < 1024;
+		// 只在移动端非首页时调整主内容位置
+		if (isMobile && !isHomePage) {
 			mainContentWrapper.classList.add('mobile-main-no-banner');
 		} else {
 			mainContentWrapper.classList.remove('mobile-main-no-banner');

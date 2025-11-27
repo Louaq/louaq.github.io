@@ -10,15 +10,16 @@ import type {
 export type SiteConfig = {
   title: string;
   subtitle: string;
+  site_url: string;
   description?: string; // 网站描述，用于生成 <meta name="description">
   keywords?: string[]; // 站点关键词，用于生成 <meta name="keywords">
 
   lang:
-    | "en"
-    | "zh_CN"
-    | "zh_TW"
-    | "ja"
-    | "ru";
+  | "en"
+  | "zh_CN"
+  | "zh_TW"
+  | "ja"
+  | "ru";
 
   themeColor: {
     hue: number;
@@ -29,16 +30,15 @@ export type SiteConfig = {
   // 字体配置
   font: FontConfig;
 
+  // 站点开始日期，用于计算运行天数
+  siteStartDate?: string; // 格式: "YYYY-MM-DD"
+
   // 添加bangumi配置
   bangumi?: {
     userId?: string; // Bangumi用户ID
   };
 
   backgroundWallpaper: BackgroundWallpaperConfig;
-  toc: {
-    enable: boolean;
-    depth: 1 | 2 | 3;
-  };
   generateOgImages: boolean;
   favicon: Array<{
     src: string;
@@ -56,9 +56,9 @@ export type SiteConfig = {
 
   // 页面开关配置
   pages: {
-    anime: boolean; // 追番页面开关
     sponsor: boolean; // 赞助页面开关
     guestbook: boolean; // 留言板页面开关
+    bangumi: boolean
   };
 
   // 文章列表布局配置
@@ -84,9 +84,9 @@ export enum LinkPreset {
   Archive = 1,
   About = 2,
   Friends = 3,
-  Anime = 4,
-  Sponsor = 5,
-  Guestbook = 6,
+  Sponsor = 4,
+  Guestbook = 5,
+  Bangumi = 6,
 }
 
 export type NavBarLink = {
@@ -213,7 +213,12 @@ export type BlogPostData = {
 };
 
 export type ExpressiveCodeConfig = {
-  theme: string;
+  /** @deprecated 使用 darkTheme 和 lightTheme 代替 */
+  theme?: string;
+  /** 暗色主题名称（用于暗色模式） */
+  darkTheme: string;
+  /** 亮色主题名称（用于亮色模式） */
+  lightTheme: string;
 };
 
 export type AnnouncementConfig = {
@@ -242,12 +247,12 @@ export type FontItem = {
   display?: "auto" | "block" | "swap" | "fallback" | "optional"; // font-display 属性
   unicodeRange?: string; // Unicode 范围，用于字体子集化
   format?:
-    | "woff"
-    | "woff2"
-    | "truetype"
-    | "opentype"
-    | "embedded-opentype"
-    | "svg"; // 字体格式，仅当 src 为本地文件时需要
+  | "woff"
+  | "woff2"
+  | "truetype"
+  | "opentype"
+  | "embedded-opentype"
+  | "svg"; // 字体格式，仅当 src 为本地文件时需要
 };
 
 // 字体配置
@@ -270,6 +275,8 @@ export type CoverImageConfig = {
   fallback?: string; // 当API请求失败时的备用图片路径
   // 加载指示器配置
   loading?: {
+    // 加载指示器开关
+    enable: boolean;
     image?: string; // 自定义加载图片路径（相对于public目录），默认 "/assets/images/loading.gif"
     backgroundColor?: string; // 加载指示器背景颜色，默认与loading.gif背景色一致 (#fefefe)
   };
@@ -290,19 +297,22 @@ export type WidgetComponentType =
   | "announcement"
   | "categories"
   | "tags"
-  | "toc"
+  | "sidebarToc"
   | "advertisement"
+  | "stats"
+  | "calendar"
   | "custom";
 
 export type WidgetComponentConfig = {
   type: WidgetComponentType; // 组件类型
   enable: boolean; // 是否启用该组件
   order: number; // 显示顺序，数字越小越靠前
-  position: "top" | "sticky"; // 组件位置：顶部固定区域或粘性区域
+  position: "top" | "sticky"; // 组件位置：top=固定在顶部，sticky=粘性定位（可滚动）
   class?: string; // 自定义CSS类名
   style?: string; // 自定义内联样式
   animationDelay?: number; // 动画延迟时间（毫秒）
   configId?: string; // 配置ID，用于广告组件指定使用哪个配置
+  showOnPostPage?: boolean; // 是否在文章详情页显示（仅右侧边栏组件有效）
   responsive?: {
     hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
     collapseThreshold?: number; // 折叠阈值
@@ -312,22 +322,18 @@ export type WidgetComponentConfig = {
 
 export type SidebarLayoutConfig = {
   enable: boolean; // 是否启用侧边栏
-  position: "left" | "right"; // 侧边栏位置：左侧或右侧
-  components: WidgetComponentConfig[]; // 组件配置列表
+  position: "left" | "both"; // 侧边栏位置：左侧或双侧
+  leftComponents: WidgetComponentConfig[]; // 左侧边栏组件配置列表
+  rightComponents: WidgetComponentConfig[]; // 右侧边栏组件配置列表
   defaultAnimation: {
     enable: boolean; // 是否启用默认动画
     baseDelay: number; // 基础延迟时间（毫秒）
     increment: number; // 每个组件递增的延迟时间（毫秒）
   };
   responsive: {
-    breakpoints: {
-      mobile: number; // 移动端断点（px）
-      tablet: number; // 平板端断点（px）
-      desktop: number; // 桌面端断点（px）
-    };
     layout: {
       mobile: "hidden" | "bottom" | "drawer" | "sidebar"; // 移动端布局模式
-      tablet: "sidebar" | "bottom" | "drawer"; // 平板端布局模式
+      tablet: "hidden" | "sidebar" | "bottom" | "drawer"; // 平板端布局模式
       desktop: "sidebar"; // 桌面端布局模式
     };
   };
@@ -425,12 +431,12 @@ export type BackgroundWallpaperConfig = {
   mode: "banner" | "overlay" | "none"; // 壁纸模式：banner横幅模式、overlay全屏透明覆盖模式或none纯色背景
   switchable?: boolean; // 是否允许用户通过导航栏切换壁纸模式，默认true
   src:
-    | string
-    | string[]
-    | {
-        desktop?: string | string[];
-        mobile?: string | string[];
-      }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
+  | string
+  | string[]
+  | {
+    desktop?: string | string[];
+    mobile?: string | string[];
+  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
 
   // Banner模式特有配置
   banner?: {
@@ -467,34 +473,34 @@ export type BackgroundWallpaperConfig = {
     };
     credit?: {
       enable:
-        | boolean
-        | {
-            desktop: boolean; // 桌面端是否显示横幅图片来源文本
-            mobile: boolean; // 移动端是否显示横幅图片来源文本
-          }; // 是否显示横幅图片来源文本，支持布尔值或分别设置桌面端和移动端
+      | boolean
+      | {
+        desktop: boolean; // 桌面端是否显示横幅图片来源文本
+        mobile: boolean; // 移动端是否显示横幅图片来源文本
+      }; // 是否显示横幅图片来源文本，支持布尔值或分别设置桌面端和移动端
       text:
-        | string
-        | {
-            desktop: string; // 桌面端显示的来源文本
-            mobile: string; // 移动端显示的来源文本
-          }; // 横幅图片来源文本，支持字符串或分别设置桌面端和移动端
+      | string
+      | {
+        desktop: string; // 桌面端显示的来源文本
+        mobile: string; // 移动端显示的来源文本
+      }; // 横幅图片来源文本，支持字符串或分别设置桌面端和移动端
       url?:
-        | string
-        | {
-            desktop: string; // 桌面端原始艺术品或艺术家页面的 URL 链接
-            mobile: string; // 移动端原始艺术品或艺术家页面的 URL 链接
-          }; // 原始艺术品或艺术家页面的 URL 链接，支持字符串或分别设置桌面端和移动端
+      | string
+      | {
+        desktop: string; // 桌面端原始艺术品或艺术家页面的 URL 链接
+        mobile: string; // 移动端原始艺术品或艺术家页面的 URL 链接
+      }; // 原始艺术品或艺术家页面的 URL 链接，支持字符串或分别设置桌面端和移动端
     };
     navbar?: {
       transparentMode?: "semi" | "full" | "semifull"; // 导航栏透明模式
     };
     waves?: {
       enable:
-        | boolean
-        | {
-            desktop: boolean; // 桌面端是否启用波浪动画效果
-            mobile: boolean; // 移动端是否启用波浪动画效果
-          }; // 是否启用波浪动画效果，支持布尔值或分别设置桌面端和移动端
+      | boolean
+      | {
+        desktop: boolean; // 桌面端是否启用波浪动画效果
+        mobile: boolean; // 移动端是否启用波浪动画效果
+      }; // 是否启用波浪动画效果，支持布尔值或分别设置桌面端和移动端
       performance?: {
         quality: "high" | "medium" | "low"; // 渲染质量：high=高质量，medium=中等质量，low=低质量
         hardwareAcceleration: boolean; // 是否启用硬件加速
