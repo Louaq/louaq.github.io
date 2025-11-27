@@ -714,17 +714,17 @@
 </ul>
 <h3 id="核心创新模块"><a href="#核心创新模块" class="headerlink" title="核心创新模块"></a>核心创新模块</h3><p>（1）校正伪监督（Rectified Pseudo Supervision） 针对伪标签噪声问题，通过<strong>不确定性估计</strong>和<strong>一致性正则化</strong>优化伪监督： </p>
 <ul>
-<li><strong>伪监督生成</strong>：对原始输入进行两种强度增强（亮度、对比度、高斯噪声），生成两个视图（xφ1, xφ2），并通过温度锐化（Temperature Sharpening）生成伪标签，计算交叉熵损失（Lp）。</li>
-<li><strong>不确定性估计</strong>：通过KL散度（Dkl）衡量模型预测的不确定性，动态调整伪标签权重，降低噪声影响：    ( L_{urp} &#x3D; e^{-D_{kl}} L_p + D_{kl} ) - <strong>一致性正则化</strong>：强制两个增强视图的预测结果一致，通过余弦距离（cosine distance）计算一致性损失（Lcr），最终整流伪监督损失为：    ( L_{rp} &#x3D; L_{urp}(φ1, y) + L_{urp}(φ2, y) + L_{cr}(φ1, φ2) )</li>
+<li><strong>伪监督生成</strong>：对原始输入进行两种强度增强（亮度、对比度、高斯噪声），生成两个视图（$x_{φ1}$, $x_{φ2}$），并通过温度锐化（Temperature Sharpening）生成伪标签，计算交叉熵损失（Lp）。</li>
+<li><strong>不确定性估计</strong>：通过KL散度（Dkl）衡量模型预测的不确定性，动态调整伪标签权重，降低噪声影响：    $L_{urp} &#x3D; e^{-D_{kl}} L_p + D_{kl}$ - <strong>一致性正则化</strong>：强制两个增强视图的预测结果一致，通过余弦距离（cosine distance）计算一致性损失（Lcr），最终整流伪监督损失为：    $L_{rp} &#x3D; L_{urp}(φ1, y) + L_{urp}(φ2, y) + L_{cr}(φ1, φ2)$</li>
 </ul>
 <p>(2) 双向体素对比学习（Bidirectional Voxel Contrastive Learning）为增强特征空间的类分离性，设计双向对比损失，拉近同类体素距离并推远异类体素：</p>
 <ul>
-<li><strong>正样本对</strong>：同一输入的两个增强视图中空间对应位置的体素特征（uφ1, uφ2）。 </li>
-<li><strong>负样本对</strong>：通过<strong>置信负采样策略</strong>（Confident Negative Sampling），基于伪标签筛选高置信度的异类体素作为负样本（u−）。</li>
-<li><strong>双向InfoNCE损失</strong>：同时计算uφ1→uφ2和uφ2→uφ1的对比损失，公式为：    ( L_{bc} &#x3D; L_c(ψ1, ψ2) + L_c(ψ2, ψ1) )，其中( L_c )为InfoNCE损失。</li>
+<li><strong>正样本对</strong>：同一输入的两个增强视图中空间对应位置的体素特征（$u_{φ1}$, $u_{φ2}$）。 </li>
+<li><strong>负样本对</strong>：通过<strong>置信负采样策略</strong>（Confident Negative Sampling），基于伪标签筛选高置信度的异类体素作为负样本$u^−$。</li>
+<li><strong>双向InfoNCE损失</strong>：同时计算uφ1→uφ2和uφ2→uφ1的对比损失，公式为：    $L_{bc} &#x3D; L_c(ψ1, ψ2) + L_c(ψ2, ψ1)$，其中$L_c$为InfoNCE损失。</li>
 </ul>
 <h3 id="训练与优化"><a href="#训练与优化" class="headerlink" title="训练与优化"></a>训练与优化</h3><ul>
-<li><strong>混合精度训练</strong>和<strong>梯度检查点</strong>：减少显存占用，加速训练。 - <strong>损失平衡</strong>：通过超参数α和β平衡整流伪监督损失（Lrp）和双向对比损失（Lbc），整体无监督损失为：    ( ℓ_{unsup} &#x3D; αL_{rp} + βL_{bc} )。</li>
+<li><strong>混合精度训练</strong>和<strong>梯度检查点</strong>：减少显存占用，加速训练。 - <strong>损失平衡</strong>：通过超参数α和β平衡整流伪监督损失（Lrp）和双向对比损失（Lbc），整体无监督损失为：    $ℓ_{unsup} &#x3D; αL_{rp} + βL_{bc}$。</li>
 </ul>
 <p><img src="https://pic1.imgdb.cn/item/6927b3143203f7be00353f59.png" class="lazyload placeholder" data-srcset="https://pic1.imgdb.cn/item/6927b3143203f7be00353f59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-11-27_10-09-44"></p>
 <h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><h3 id="数据集"><a href="#数据集" class="headerlink" title="数据集"></a>数据集</h3><blockquote>
