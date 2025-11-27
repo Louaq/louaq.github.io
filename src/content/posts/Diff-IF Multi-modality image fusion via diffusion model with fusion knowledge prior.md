@@ -7,9 +7,6 @@ excerpt: "多模态图像融合（MMIF）旨在聚合来自不同源图像域的
 categories: 多模态医学图像分割
 tags: [Multi-modality image fusion]
 ---
-
-武汉大学
-
 ## 摘要
 
 **Multi-modality image fusion (MMIF)** aims to aggregate the complementary information from diverse source image domains. As the generative adversarial network-based methods have been the primary choice and demonstrated satisfactory fusion performance, they suffer from the unstable training and mode collapse. To tackle this challenge, we propose a novel diffusion model for MMIF incorporating fusion knowledge prior, termed as Diff-IF. Diff-IF proposes a trainable diffusion model paradigm for multi-modality image fusion, resolving the issue of lacking the ground truth for the diffusion model in image fusion tasks. It decomposes the diffusion-based image fusion method into conditional diffusion model and fusion knowledge prior with the targeted search to derive the prior distribution for the specific image fusion task. In particular, the forward diffusion process is guided by the fusion knowledge prior distribution through targeted search, while the reverse diffusion process is designed to generate high-quality fused images. Extensive experiments demonstrate that Diff-IF achieves outstanding performance, including exemplary visual preservation, and good preservation of weak textures, across various MMIF tasks such as infrared-visible image fusion and medical image fusion. The code will be available at https://github.com/XunpengYi/Diff-IF.
