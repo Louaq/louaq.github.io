@@ -270,28 +270,6 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
-                <a href="/talk" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-bookmark" aria-hidden="true"></i>
-                  
-                  <span class="name">说一说</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
-                <a href="/gallery" class="drawer-menu-item-link">
-                  
-                    <i class="fas fa-music" aria-hidden="true"></i>
-                  
-                  <span class="name">图库</span>
-                </a>
-              
-            </li>
-          
-            <li class="drawer-box-content_item" style="position: relative;">
-              
                 <a href="/me" class="drawer-menu-item-link">
                   
                     <i class="fas fa-film" aria-hidden="true"></i>
@@ -303,16 +281,16 @@
           
             <li class="drawer-box-content_item" style="position: relative;">
               
-                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(8)">
+                <a href="javascript:;" class="drawer-menu-item-link has-children" @click="openOrCloseMenu(6)">
                   <span>
                     
                       <i class="fas fa-link"></i>
                     
                     <span class="name">更多</span>
                   </span>
-                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(8)}" aria-hidden="true"></i>
+                  <i class="fas fa-chevron-left arrow " :class="{'icon-rotate': isOpen(6)}" aria-hidden="true"></i>
                 </a>
-                <ul class="drawer-sub-menu" v-if="isOpen(8)">
+                <ul class="drawer-sub-menu" v-if="isOpen(6)">
                   
                   <li>
                     <a href="/messageBoard">
@@ -459,28 +437,6 @@
                     <i class="fas fa-bookmark" aria-hidden="true"></i>
                   
                   <span class="name">组会汇报</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/talk" class="menu-item-link" title="说一说">
-                  
-                    <i class="fas fa-bookmark" aria-hidden="true"></i>
-                  
-                  <span class="name">说一说</span>
-                </a>
-              
-            </li>
-          
-            <li class="menu-item" style="position: relative;">
-              
-                <a href="/gallery" class="menu-item-link" title="图库">
-                  
-                    <i class="fas fa-music" aria-hidden="true"></i>
-                  
-                  <span class="name">图库</span>
                 </a>
               
             </li>
@@ -741,35 +697,21 @@
   <div class="post-nav-prev post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdq45gkt9k5DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdq45gkt9k5DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
     </div>
-    <a href="/post/fcn/20250224-fcn/" class="post-nav-link">
+    <a href="/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/" class="post-nav-link">
       <div class="title">
         <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">FCN</div>
+        <div class="title-text">语义分割基础</div>
       </div>
       
       <!-- <div class="content">
-        FCN
+        1. 基本概念1.1 什么是图像分割预测目标的轮廓
 
 
-FCN基本原理
+1.2 图像分割的应用场景
+医学图像分割：医学影像，CT照片等
 
-
-FCN细节
-
-
-
-
-
-FCN结果
-SegNetSegNet的基本原理
-
-
-
-
-
-UNet
       </div> -->
     </a>
   </div>
@@ -780,20 +722,16 @@ UNet
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-573ac3e25de03fad9c32add5a05e5cfc_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-83ea273b88e119d9615aed0d89aad4ab_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/fcn/20250224-tu-xiang-fen-ge-ji-chu/" class="post-nav-link">
+    <a href="/post/fcn/20250224-yu-yi-fen-ge-shang-cai-yang/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">语义分割基础</div>
+        <div class="title-text">语义分割上采样</div>
       </div>
       <!-- <div class="content">
-        1. 基本概念1.1 什么是图像分割预测目标的轮廓
-
-
-1.2 图像分割的应用场景
-医学图像分割：医学影像，CT照片等
-
+        上采样
+可以将较小的 feature 映射回一个较大的 feature map，这样的操作称为上采样，常用的上采样包括转
       </div> -->
     </a>
   </div>
