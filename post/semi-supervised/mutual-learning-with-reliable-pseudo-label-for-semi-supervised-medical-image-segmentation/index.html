@@ -22,7 +22,7 @@
 </script>
 
 
-  <title>Stronger, Fewer, &amp; Superior Harnessing Vision Foundation Models for Domain Generalized Semantic Segmentation（DGSS） | Louaq</title>
+  <title>Mutual learning with reliable pseudo label for semi-supervised medical image segmentation | Louaq</title>
 
   <link rel="icon" type="image/png" href="/img/favicon.png">
   <link rel="stylesheet" href="https://at.alicdn.com/t/font_1911880_c1nvbyezg17.css">
@@ -588,21 +588,21 @@
 
 
 <div class="post-detail-header" id="thumbnail_canvas" style="background-repeat: no-repeat; background-size: cover; 
-  background-position: center center;position: relative;background-image:url('https://pic3.zhimg.com/80/v2-7cfc909ebe8d83683909846edd6b5232_1440w.webp')">
+  background-position: center center;position: relative;background-image:url('https://pic1.zhimg.com/80/v2-03a22891ccba9bccf6424dfd7cbf4be7_1440w.webp')">
   <div class="post-detail-header-mask"></div>
   <canvas id="header_canvas"style="position:absolute;bottom:0;pointer-events:none;"></canvas>
   
   <div class="post-detail-header_info-box">
     <div class="title-box">
       <span class="title">
-        Stronger, Fewer, &amp; Superior Harnessing Vision Foundation Models for Domain Generalized Semantic Segmentation（DGSS）
+        Mutual learning with reliable pseudo label for semi-supervised medical image segmentation
       </span>
     </div>
     
     
       
         <span class="post-detail-header_date">
-          <i class="fas fa-calendar"></i> 发表于：2025-04-01 |
+          <i class="fas fa-calendar"></i> 发表于：2025-11-28 |
         </span>
       
 
@@ -610,8 +610,8 @@
         <span class="post-detail-header_categories">
           <i class="iconfont iconbookmark1"></i> 分类：
           
-            <a href="/categories/%E9%A2%86%E5%9F%9F%E6%B3%9B%E5%8C%96%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/" class="post-detail-header_category">
-              领域泛化语义分割
+            <a href="/categories/%E5%8D%8A%E7%9B%91%E7%9D%A3%E5%8C%BB%E5%AD%A6%E5%9B%BE%E5%83%8F%E5%88%86%E5%89%B2/" class="post-detail-header_category">
+              半监督医学图像分割
             </a>
           
         </span>
@@ -620,11 +620,11 @@
       
         <div class="post-detail-header_wordcount">
           <span class="totalcount">
-            <i class="fas fa-file-text-o"></i> 字数统计: 1.5k |
+            <i class="fas fa-file-text-o"></i> 字数统计: 2.8k |
           </span>
   
           <span class="min2read">
-            <i class="fas fa-clock"></i> 阅读时长: 5分钟 |
+            <i class="fas fa-clock"></i> 阅读时长: 10分钟 |
           </span>
   
           
@@ -649,45 +649,112 @@
   <div class="main-content">
     <article class="post post-detail">
       <div class="post-content">
-        <h2 id="中国科学技术大学，上海人工智能实验室"><a href="#中国科学技术大学，上海人工智能实验室" class="headerlink" title="中国科学技术大学，上海人工智能实验室"></a><strong>中国科学技术大学，上海人工智能实验室</strong></h2><p><a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git">https://github.com/w1oves/Rein.git</a></p>
-<blockquote>
-<p>摘要：In this paper, we first assess and harness various Vision Foundation Models (VFMs) in the context of Domain Generalized Semantic Segmentation (DGSS). Driven by the motivation that Leveraging Stronger pre-trained models and Fewer trainable parameters for Superior generaliz- ability, we introduce a robust fine-tuning approach, namely “Rein”, to parameter-efficiently harness VFMs for DGSS. Built upon a set of trainable tokens, each linked to distinct instances, Rein precisely refines and forwards the feature maps from each layer to the next layer within the backbone. This process produces diverse refinements for different categories within a single image. With fewer trainable parameters, Rein efficiently fine-tunes VFMs for DGSS tasks, surprisingly surpassing full parameter fine-tuning. Extensive experiments across various settings demonstrate that Rein significantly outperforms state-of-the-art methods. Remarkably, with just an extra 1% of trainable parameters within the frozen backbone, Rein achieves a mIoU of78.4% on the Cityscapes, without accessing any real urban-scene datasets. Code is available at <a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git">https://github.com/w1oves/Rein.git</a>.</p>
+        <blockquote>
+<p>Medical Image Analysis</p>
 </blockquote>
-<blockquote>
-<p>翻译：在本文中，我们首先在领域泛化语义分割（DGSS）任务中，评估并应用了多种视觉基础模型（VFM）。我们提出的动机是：“通过利用更强大的预训练模型和更少的可训练参数，获得更好的泛化能力”。基于此，我们提出了一种高效的微调方法——“Rein”，该方法能够以参数高效的方式利用VFM来解决DGSS任务。Rein方法依赖于一组可训练的标记，每个标记与特定实例对应，能够精确地细化并将特征图从每一层传递到骨干网络的下一层。这样，Rein能够在单张图像中为不同的类别生成多样化的细化结果。通过减少可训练的参数，Rein在微调VFM时，效果出乎意料地优于完全参数微调。通过广泛的实验验证，Rein显著超越了现有的最先进方法。值得一提的是，仅在冻结的骨干网络中增加1%的可训练参数，Rein便在Cityscapes数据集上达到了78.4%的mIoU，而且无需使用任何真实的城市场景数据集。代码已发布，您可以通过<a target="_blank" rel="noopener" href="https://github.com/w1oves/Rein.git%E8%AE%BF%E9%97%AE%E3%80%82">https://github.com/w1oves/Rein.git访问。</a></p>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>Semi-supervised learning has garnered significant interest as a method to alleviate the burden of data<br>annotation. Recently, semi-supervised medical image segmentation has garnered significant interest that can<br>alleviate the burden of densely annotated data. Substantial advancements have been achieved by integrating<br>consistency-regularization and pseudo-labeling techniques. The quality of the pseudo-labels is crucial in this<br>regard. Unreliable pseudo-labeling can result in the introduction of noise, leading the model to converge to<br>suboptimal solutions. To address this issue, we propose learning from reliable pseudo-labels. In this paper,<br>we tackle two critical questions in learning from reliable pseudo-labels: which pseudo-labels are reliable and<br>how reliable are they? Specifically, we conduct a comparative analysis of two subnetworks to address both<br>challenges. Initially, we compare the prediction confidence of the two subnetworks. A higher confidence score<br>indicates a more reliable pseudo-label. Subsequently, we utilize intra-class similarity to assess the reliability<br>of the pseudo-labels to address the second challenge. The greater the intra-class similarity of the predicted<br>classes, the more reliable the pseudo-label. The subnetwork selectively incorporates knowledge imparted by<br>the other subnetwork model, contingent on the reliability of the pseudo labels. By reducing the introduction of<br>noise from unreliable pseudo-labels, we are able to improve the performance of segmentation. To demonstrate<br>the superiority of our approach, we conducted an extensive set of experiments on three datasets: Left Atrium,<br>Pancreas-CT and Brats-2019. The experimental results demonstrate that our approach achieves state-of-the-art<br>performance. Code is available at: <a target="_blank" rel="noopener" href="https://github.com/Jiawei0o0/mutual-learning-with-reliable-pseudo-labels">https://github.com/Jiawei0o0/mutual-learning-with-reliable-pseudo-labels</a></p>
+<h2 id="翻译"><a href="#翻译" class="headerlink" title="翻译"></a>翻译</h2><p>半监督学习作为一种减轻数据标注负担的方法，已经引起了广泛关注。最近，半监督医学图像分割引起了极大的关注，它可以减轻密集标注数据的负担。通过结合一致性正则化和伪标签技术，已经取得了实质性进展。在这方面，伪标签的质量至关重要。不可靠的伪标签会导致噪声的引入，使模型收敛到次优解。为了解决这个问题，我们提出从可靠的伪标签中学习。在本文中，我们解决了从可靠伪标签中学习的两个关键问题：<strong>哪些伪标签是可靠</strong>的以及<strong>它们有多可靠</strong>？具体而言，我们针对这两个挑战进行了两个子网络的比较分析。首先，我们比较两个子网络的预测置信度。更高的置信度得分表明伪标签更可靠。随后，我们利用类内相似性来评估伪标签的可靠性，以解决第二个挑战。预测类别的类内相似性越高，伪标签就越可靠。子网络有选择地整合来自另一个子网络模型的知识，这取决于伪标签的可靠性。通过减少不可靠伪标签引入的噪声，我们能够提高分割的性能。为了展示我们方法的优越性，我们在三个数据集上进行了大量实验：左心房、胰腺-CT和Brats-2019。实验结果表明，我们的方法达到了最先进的性能。代码可在以下网址获取：<a target="_blank" rel="noopener" href="https://github.com/Jiawei0o0/mutual-learning-with-reliable-pseudo-labels">https://github.com/Jiawei0o0/mutual-learning-with-reliable-pseudo-labels</a></p>
+<h2 id="研究背景"><a href="#研究背景" class="headerlink" title="研究背景"></a>研究背景</h2><p>医学图像分割是计算机辅助诊断系统的关键组成部分，但深度卷积神经网络（CNN）的优异性能依赖于大量像素级标注数据。医学图像的密集标注成本高、耗时长，半监督学习通过结合少量标注数据和大量未标注数据缓解这一问题，成为研究热点。现有半监督分割方法主要集成一致性正则化与伪标签技术，但伪标签质量对模型性能至关重要。不可靠的伪标签会引入噪声，导致模型收敛到次优解。传统方法通过固定阈值筛选高置信度伪标签，但阈值选择困难：低阈值可能保留噪声，高阈值会限制未标注数据利用并偏向多数类。因此，本文针对两个核心问题展开研究：如何识别可靠伪标签，以及如何量化其可靠性，旨在通过可靠伪标签的互学习减少噪声影响，提升半监督医学图像分割性能。</p>
+<p><img src="https://pic1.imgdb.cn/item/6928fd4b3203f7be0039a421.png" class="lazyload placeholder" data-srcset="https://pic1.imgdb.cn/item/6928fd4b3203f7be0039a421.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-11-28_09-38-33"></p>
+<h2 id="研究现状"><a href="#研究现状" class="headerlink" title="研究现状"></a>研究现状</h2><ol>
+<li><strong>核心方向</strong>：半监督医学图像分割，通过结合<strong>一致性正则化</strong>与<strong>伪标签技术</strong>，利用有限标注数据和大量无标注数据训练模型，缓解医学图像密集标注的高成本问题。</li>
+<li><strong>主流方法</strong>：<ul>
+<li><strong>一致性正则化</strong>：通过数据&#x2F;特征&#x2F;模型层面的扰动，强制模型输出一致预测（如UA-MT、URPC）。</li>
+<li><strong>伪标签技术</strong>：生成高置信度伪标签指导无标注数据学习（如MC-Net、SS-Net）。</li>
+<li><strong>混合策略</strong>：多子网络交叉监督融合上述两种方法（如CCT、AC-MT），提升性能。</li>
+</ul>
+</li>
+</ol>
+<h2 id="提出的模型"><a href="#提出的模型" class="headerlink" title="提出的模型"></a>提出的模型</h2><p><img src="https://pic1.imgdb.cn/item/6928fdeb3203f7be0039abc9.png" class="lazyload placeholder" data-srcset="https://pic1.imgdb.cn/item/6928fdeb3203f7be0039abc9.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-11-28_09-41-21"></p>
+<p>本文提出了一种基于可靠伪标签的互学习半监督医学图像分割模型，主要创新点包括双子网互学习框架及可靠性评估机制两方面： </p>
+<h3 id="核心框架"><a href="#核心框架" class="headerlink" title="核心框架"></a>核心框架</h3><ol>
+<li><strong>两个子网络结构</strong>     - 共享编码器+两个差异化解码器（采用不同上采样技术），生成两类伪标签   - 目标：解决传统伪标签方法中阈值筛选导致的噪声引入和类别偏见问题 </li>
+<li><strong>互学习机制</strong></li>
+</ol>
+<ul>
+<li>两个解码器通过比较预测置信度实现双向知识蒸馏     </li>
+<li>仅当对方子网预测置信度更高时才进行学习，避免噪声累积</li>
+</ul>
+<h3 id="可靠性评估方法"><a href="#可靠性评估方法" class="headerlink" title="可靠性评估方法"></a>可靠性评估方法</h3><ol>
+<li><strong>伪标签可靠性筛选（WR模块）</strong></li>
+</ol>
+<ul>
+<li><strong>置信度比较</strong>：计算两个子网的预测置信度矩阵（如式8）    </li>
+<li><strong>动态掩码</strong>：通过指示函数生成0-1掩码，仅保留高置信度伪标签（如式9）     </li>
+<li><strong>优势</strong>：无需人工设定阈值，自适应过滤低质量伪标签</li>
+</ul>
+<ol start="2">
+<li><strong>可靠性量化评估（HR模块）</strong></li>
+</ol>
+<ul>
+<li><strong>类内语义一致性</strong>：</li>
+</ul>
+<ol>
+<li>基于伪标签生成类别原型（Class Prototype）      </li>
+<li>计算像素特征与类别原型的余弦相似度       </li>
+<li>通过MSE距离度量预测概率与特征相似度的一致性（如式13）</li>
+</ol>
+<ul>
+<li><strong>可靠性权重</strong>：距离越小权重越高，降低不可靠伪标签的学习权重</li>
+</ul>
+<h3 id="损失函数设计"><a href="#损失函数设计" class="headerlink" title="损失函数设计"></a>损失函数设计</h3><p> $$Loss &#x3D; \gamma(L_{dice}^a + L_{dice}^b) + \beta(\lambda_{wr}^a\lambda_{hr}^aL_{ce}(y_b,y_p^a) + \lambda_{wr}^b\lambda_{hr}^bL_{ce}(y_a,y_p^b)) $$ </p>
+<ul>
+<li><strong>监督损失</strong>：带标签数据的Dice损失   </li>
+<li><strong>无监督损失</strong>：结合可靠性权重（WR×HR）的交叉熵损失   </li>
+<li><strong>动态平衡参数</strong>：β采用时间依赖的高斯升温函数</li>
+</ul>
+<h2 id="实验（Compared-with-SOTA）"><a href="#实验（Compared-with-SOTA）" class="headerlink" title="实验（Compared with SOTA）"></a>实验（Compared with SOTA）</h2><blockquote>
+<p>数据集: <strong>Left Atrium (LA) 数据集</strong>, <strong>Pancreas-CT 数据集</strong>, <strong>Brats-2019 数据集</strong></p>
 </blockquote>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-26_21-13-37"></p>
-<p><img src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-59.png" class="lazyload placeholder" data-srcset="https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-59.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-02-26_21-13-59"></p>
-<p>​                                                                                <strong>模型结构图</strong></p>
-<p><strong>本文的研究背景：</strong> </p>
-<ul>
-<li><strong>传统DGSS方法的局限</strong>：以往DGSS方法着重提升模型在多未见领域的预测准确性，但多采用VGGNet、MobileNetV2和ResNet等经典骨干网络，且依赖复杂数据增强和领域不变特征提取策略，对更强的VFMs在DGSS中的效能探索不足。 </li>
-<li><strong>VFMs的潜力与挑战</strong>：近年来，CLIP、MAE、SAM等大规模VFMs显著提升了计算机视觉任务的性能，其在不同未知场景下展现出强大泛化能力。然而，将VFMs用于DGSS任务存在挑战，常用数据集规模远小于ImageNet，对VFMs大量可训练参数进行微调会导致泛化能力受限，且现有的参数高效微调策略大多不适用于DGSS。-</li>
-<li><strong>研究动机</strong>：基于利用更强预训练模型和更少可训练参数实现更优泛化能力的动机，作者评估并利用VFMs进行DGSS研究，提出“Rein”微调方法，以高效利用VFMs解决DGSS问题。</li>
+<h3 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h3><ul>
+<li><strong>网络架构</strong>：采用V-Net作为 backbone，包含一个共享编码器和两个不同的解码器（使用不同的上采样技术）。</li>
+<li><strong>训练配置</strong>：PyTorch框架，NVIDIA RTX 3090 GPU；优化器为SGD（初始学习率10⁻²，权重衰减10⁻⁴）；批大小4（2个标记样本+2个未标记样本）；训练迭代次数15k。</li>
+<li><strong>评价指标</strong>：Dice系数、Jaccard系数、95% Hausdorff距离（95HD）、平均表面距离（ASD）。</li>
 </ul>
-<p><strong>研究现状：</strong></p>
-<ul>
-<li><strong>领域广义语义分割（DGSS）</strong>：传统方法聚焦提升模型跨多未见领域的预测准确性，采用复杂数据增强和领域不变特征提取策略，多使用VGGNet、MobileNetV2等旧骨干网络。 </li>
-<li><strong>视觉基础模型（VFMs）</strong>：如CLIP、MAE、SAM等在计算机视觉挑战中表现出色，具有显著的跨场景泛化能力，但在DGSS任务中的表现缺乏专门研究。 </li>
-<li><strong>参数高效微调（PEFT）</strong>：在自然语言处理领域取得成功，部分方法开始应用于计算机视觉，但大多不是为DGSS设计，难以对单张图像中不同实例的特征进行细化。</li>
+<h3 id="对比实验"><a href="#对比实验" class="headerlink" title="对比实验"></a>对比实验</h3><ol>
+<li><strong>与现有半监督方法对比</strong><ul>
+<li><strong>LA数据集</strong>：在10%标记数据下，所提方法Dice系数达89.86%，较UA-MT（84.58%）、MC-Net+（88.39%）等方法显著提升；20%标记数据时Dice达91.02%，接近全监督V-Net（91.33%）。</li>
+<li><strong>Pancreas-CT数据集</strong>：10%标记数据下Dice达75.93%，较URPC（73.53%）提升2.4%；20%标记数据时Dice达81.53%，较MC-Net+（79.37%）提升2.16%。</li>
+<li><strong>Brats-2019数据集</strong>：10%标记数据下Dice达84.29%，较AC-MT（83.77%）提升0.52%；20%标记数据时Dice达85.47%，较AC-MT（84.63%）提升0.84%。</li>
 </ul>
-<p><strong>研究思路：</strong></p>
-<p>本文聚焦于在领域泛化语义分割（DGSS）中利用视觉基础模型（VFMs），研究思路清晰，具体如下：</p>
-<ol>
-<li><strong>提出问题</strong>：先前DGSS方法多采用传统骨干网络，而大规模VFMs虽在计算机视觉挑战中表现出色，但在DGSS中的性能及利用方式尚不明确。因此，作者提出评估VFMs在DGSS中的性能以及如何有效利用VFMs的问题。</li>
-<li><strong>构建框架</strong>：以利用更强预训练模型和更少可训练参数实现更优泛化能力为动机，作者引入<strong>Rein</strong>微调方法，在骨干网络层间嵌入该机制，以有效利用VFMs的强大能力。</li>
-<li><strong>选择方法</strong>：选择CLIP、MAE、SAM、EVA02和DINOv2等五种不同训练策略和数据集的VFMs进行评估。设置“Full”和“Freeze”两个基本基线，并提出“Rein”方法。采用AdamW优化器，设置特定学习率、迭代次数、批量大小等进行训练。</li>
-<li><strong>分析数据</strong>：在多个数据集和三种泛化设置下进行实验，对比Rein与现有DGSS和参数高效微调（PEFT）方法的性能。通过消融实验分析Rein各组件的有效性、令牌长度和秩对模型性能的影响，以及训练速度、GPU内存使用和模型存储要求。</li>
-<li><strong>得出结论</strong>：实验表明，冻结的VFMs性能优于先前DGSS方法，Rein以更少可训练参数显著增强VFMs的泛化能力，大幅超越现有方法。证明了VFMs在DGSS领域的巨大潜力以及Rein方法的有效性。</li>
+</li>
 </ol>
-<p><strong>本文的创新点：</strong> </p>
-<ol>
-<li><strong>评估并利用视觉基础模型（VFMs）</strong>：首次在**领域泛化语义分割（DGSS）**中评估多种VFMs，证实其强大泛化能力，为该领域建立重要基准。 </li>
-<li><strong>提出“Rein”微调方法</strong>：通过可学习令牌对特征图进行实例级细化，以较少可训练参数有效利用VFMs，显著提升泛化性，超越现有方法。</li>
-<li><strong>设计优化策略</strong>：采用层共享MLP权重和低秩token序列，减少参数冗余，提高训练效率。</li>
+<p><img src="https://pic1.imgdb.cn/item/692900053203f7be0039ba42.png" class="lazyload placeholder" data-srcset="https://pic1.imgdb.cn/item/692900053203f7be0039ba42.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-11-28_09-50-14"></p>
+<p><img src="https://pic1.imgdb.cn/item/692900073203f7be0039ba53.png" class="lazyload placeholder" data-srcset="https://pic1.imgdb.cn/item/692900073203f7be0039ba53.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-11-28_09-50-04"></p>
+<p><img src="https://pic1.imgdb.cn/item/692900143203f7be0039baa9.png" class="lazyload placeholder" data-srcset="https://pic1.imgdb.cn/item/692900143203f7be0039baa9.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="Snipaste_2025-11-28_09-50-33"></p>
+<h2 id="实验（Ablation-Experiments）​​"><a href="#实验（Ablation-Experiments）​​" class="headerlink" title="实验（Ablation Experiments）​​"></a>实验（Ablation Experiments）​​</h2><ol>
+<li><ul>
+<li><strong>关键组件验证</strong>：对比交叉熵损失（CE）、可靠伪标签选择（WR）、可靠性评估（HR）的组合效果。结果显示，同时使用WR和HR时性能最优（LA数据集Dice 89.86%，Pancreas-CT数据集Dice 75.93%）。</li>
+<li><strong>可靠性度量方法对比</strong>：对比特征相似度（Sim）、最大概率（Prob）、乘积（Multiply）、平均（Avg）等方法，所提基于MSE的度量方法效果最佳（LA数据集Dice 89.86%）。</li>
+<li><strong>解码器数量扩展</strong>：在LA数据集上，3个解码器性能略低于2个解码器；在Pancreas-CT数据集上，3个解码器在10%标记数据下Dice提升1.72%，但整体增益有限。</li>
+</ul>
+</li>
+<li><strong>阈值方法对比</strong>：与基于阈值筛选高置信伪标签的方法相比，所提无阈值的互学习策略在LA数据集上Dice更高（89.86% vs 阈值0.5时的88.60%），且避免了阈值选择难题。</li>
+<li><strong>超参数敏感性分析</strong>：超参数γ（平衡监督与无监督损失）在0.5时性能最优，过小将导致标记数据训练不足，过大则削弱互学习约束。</li>
 </ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>本文针对半监督医学图像分割中伪标签质量影响模型性能的核心问题，提出了一种基于可靠伪标签的互学习框架，主要工作总结如下：</p>
+<h3 id="核心贡献"><a href="#核心贡献" class="headerlink" title="核心贡献"></a>核心贡献</h3><ol>
+<li><strong>可靠伪标签学习框架</strong><br>提出双子网互学习机制解决两个关键问题：<ul>
+<li><strong>哪些伪标签可靠？</strong> 通过比较两个子网的预测置信度（式8-9），选择置信度更高的伪标签作为监督信号，避免低质量预测误导模型。</li>
+<li><strong>伪标签可靠性如何？</strong> 引入类内语义一致性度量（式10-13），通过计算特征与类原型的余弦相似度及预测概率的MSE距离，量化伪标签可靠性并赋予权重。</li>
+</ul>
+</li>
+<li><strong>互学习策略</strong><br>两个子网采用不同上采样技术，仅在对方预测置信度更高时进行知识融合（图2），同时利用可靠性权重动态调整监督强度，减少噪声干扰。</li>
+<li><strong>实验验证</strong><br>在Left Atrium、Pancreas-CT和Brats-2019数据集上，10%&#x2F;20%标注数据设置下均达到SOTA性能：<ul>
+<li>Left Atrium（10%标注）：Dice达89.86%（较基线提升10.33%），95HD降至6.91 voxels</li>
+<li>Pancreas-CT（10%标注）：Dice达75.93%（较基线提升21.99%）</li>
+<li>Brats-2019（10%标注）：Dice达84.29%（较SOTA AC-MT提升0.52%）</li>
+</ul>
+</li>
+</ol>
+<h3 id="关键发现"><a href="#关键发现" class="headerlink" title="关键发现"></a>关键发现</h3><ul>
+<li><strong>阈值无关筛选</strong>：相比传统阈值筛选高置信伪标签，互学习机制可自适应区分可靠样本，缓解类别不平衡导致的偏见。</li>
+<li><strong>类内一致性增益</strong>：结合特征相似度与预测概率的可靠性度量（式13），较单一指标（概率&#x2F;相似度）提升1.26%-1.66% Dice。</li>
+<li><strong>子网数量影响</strong>：双子网性能优于三子网（LA数据集Dice下降0.48%），表明过多子网可能引入冗余噪声。</li>
+</ul>
+<h3 id="未来方向"><a href="#未来方向" class="headerlink" title="未来方向"></a>未来方向</h3><p>计划整合类间差异性度量，通过联合类内相似度与类间区分度进一步优化伪标签质量评估，提升模型在低标注数据下的鲁棒性。</p>
 <blockquote>
-<p>写作启发：<strong>领域泛化语义分割（DGSS）</strong>、<strong>视觉基础模型（VFMs）</strong>、<strong>参数高效微调（PEFT</strong>）</p>
+<p>本文提提出的伪标签互学习确定可靠的伪标签值得思考，同时还需要度量具体的可靠性，即<strong>哪些伪标签是可靠的和有多可靠</strong></p>
 </blockquote>
 
       </div>
@@ -695,8 +762,8 @@
         
         <div class="tags">
           
-            <a href="/tags/Vision-Foundation-Models/" class="">
-              Vision Foundation Models
+            <a href="/tags/Semi-Supervised-Medical-Image-Segmentation/" class="">
+              Semi-Supervised Medical Image Segmentation
             </a>
           
         </div>
@@ -710,7 +777,7 @@
     </li>
     <li class="post-copyright-link">
     <strong>文章链接:  </strong>
-    <a href="/post/medical-image-seg/stronger-fewer-superior-harnessing-vision-foundation-models/" target="_blank" title="Stronger, Fewer, &amp; Superior Harnessing Vision Foundation Models for Domain Generalized Semantic Segmentation（DGSS）">https://louaq.github.io/post/medical-image-seg/stronger-fewer-superior-harnessing-vision-foundation-models/</a>
+    <a href="/post/semi-supervised/mutual-learning-with-reliable-pseudo-label-for-semi-supervised-medical-image-segmentation/" target="_blank" title="Mutual learning with reliable pseudo label for semi-supervised medical image segmentation">https://louaq.github.io/post/semi-supervised/mutual-learning-with-reliable-pseudo-label-for-semi-supervised-medical-image-segmentation/</a>
     </li>
     <li class="post-copyright-license">
       <strong>版权声明:   </strong>
@@ -728,46 +795,24 @@
 
 
 
-  
-  <div class="post-nav-prev post-nav-item">
-    <div class="post-nav-img" style="background-size: cover; 
-      background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-    </div>
-    <a href="/post/medical-image-seg/kill-two-birds-with-one-stone-domain-generalization-for-semantic-segmentation-via-network-pruning/" class="post-nav-link">
-      <div class="title">
-        <i class="fas fa-angle-left"></i> 上一篇:
-        <div class="title-text">Kill Two Birds with One Stone Domain Generalization for Semantic Segmentation via Network Pruning</div>
-      </div>
-      
-      <!-- <div class="content">
-        
-浙江大学、内华达大学
-
-::: tip
-启发
-:::
-摘要Deep models are notoriously kn
-      </div> -->
-    </a>
-  </div>
-
 
 
   
   <div class="post-nav-next post-nav-item">
     <div class="post-nav-img" style="background-size: cover; 
       background-position: center center;">
-      <img class="lazyload lazyload placeholder" src="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" class="lazyload placeholder" data-srcset="https://pic4.zhimg.com/80/v2-e434e3a2888fb4efb1844845b8791d1f_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
+      <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocyxuegif80y9DIYPAqF0DqJ1DGxwDIiw.png" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocyxuegif80y9DIYPAqF0DqJ1DGxwDIiw.png" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" src="" alt="">
     </div>
-    <a href="/post/medical-image-seg/lgad-local-and-global-attention-distillation-for-efficient-semantic-segmentation/" class="post-nav-link">
+    <a href="/post/semi-supervised/rcps-rectified-contrastive-pseudo-supervision-for-semi-supervised-medical-image-segmentation/" class="post-nav-link">
       <div class="title">
         下一篇: <i class="fas fa-angle-right"></i>
-        <div class="title-text">LGAD Local and Global Attention Distillation for Efficient Semantic Segmentation</div>
+        <div class="title-text">RCPS Rectified Contrastive Pseudo Supervision for Semi-Supervised Medical Image Segmentation</div>
       </div>
       <!-- <div class="content">
-        Shaoxing University、Central South University
-摘要Efficient sem
+        
+IEEE JOURNAL OF BIOMEDICAL AND HEALTH INFORMATICS
+
+摘要Medica
       </div> -->
     </a>
   </div>
@@ -904,7 +949,7 @@
   <div class='content'>
     <div class="toc-main">
       <div class="toc-content">
-        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%AD%E5%9B%BD%E7%A7%91%E5%AD%A6%E6%8A%80%E6%9C%AF%E5%A4%A7%E5%AD%A6%EF%BC%8C%E4%B8%8A%E6%B5%B7%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E5%AE%9E%E9%AA%8C%E5%AE%A4"><span class="toc-text">中国科学技术大学，上海人工智能实验室</span></a></li></ol> -->
+        <!-- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%91%98%E8%A6%81"><span class="toc-text">摘要</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BF%BB%E8%AF%91"><span class="toc-text">翻译</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E8%83%8C%E6%99%AF"><span class="toc-text">研究背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%A0%94%E7%A9%B6%E7%8E%B0%E7%8A%B6"><span class="toc-text">研究现状</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8F%90%E5%87%BA%E7%9A%84%E6%A8%A1%E5%9E%8B"><span class="toc-text">提出的模型</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%A1%86%E6%9E%B6"><span class="toc-text">核心框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%9D%A0%E6%80%A7%E8%AF%84%E4%BC%B0%E6%96%B9%E6%B3%95"><span class="toc-text">可靠性评估方法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0%E8%AE%BE%E8%AE%A1"><span class="toc-text">损失函数设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Compared-with-SOTA%EF%BC%89"><span class="toc-text">实验（Compared with SOTA）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E7%BB%86%E8%8A%82"><span class="toc-text">实现细节</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%B9%E6%AF%94%E5%AE%9E%E9%AA%8C"><span class="toc-text">对比实验</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%9E%E9%AA%8C%EF%BC%88Ablation-Experiments%EF%BC%89%E2%80%8B%E2%80%8B"><span class="toc-text">实验（Ablation Experiments）​​</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%93%E8%AE%BA"><span class="toc-text">结论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E8%B4%A1%E7%8C%AE"><span class="toc-text">核心贡献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B3%E9%94%AE%E5%8F%91%E7%8E%B0"><span class="toc-text">关键发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9C%AA%E6%9D%A5%E6%96%B9%E5%90%91"><span class="toc-text">未来方向</span></a></li></ol></li></ol> -->
         <div class="toc"></div>
       </div>
     </div>
