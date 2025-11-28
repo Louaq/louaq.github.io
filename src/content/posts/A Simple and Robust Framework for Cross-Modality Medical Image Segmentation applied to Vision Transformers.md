@@ -5,7 +5,7 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
 categories: 医学图像分割
-tags: [Cross-Modality Medical Image Segmentation, Vision Transformers]
+tags: [Vision Transformers]
 ---
 
 Centre des Mat´eriaux、Centre de Mise en Forme des Mat´eriaux、Centre de Morphologie Math´ematique

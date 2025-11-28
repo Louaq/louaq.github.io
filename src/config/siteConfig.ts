@@ -6,11 +6,11 @@ import { fontConfig } from "./fontConfig";
 const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
-  title: "Firefly",
-  subtitle: "Demo site",
-  site_url: "https://firefly.cuteleaf.cn",
+  title: "Louaq",
+  subtitle: "coding",
+  site_url: "https://astroal.netlify.app/",
   description:
-    "Firefly 是一款基于 Astro 框架和 Fuwari 模板开发的清新美观且现代化个人博客主题模板，专为技术爱好者和内容创作者设计。该主题融合了现代 Web 技术栈，提供了丰富的功能模块和高度可定制的界面，让您能够轻松打造出专业且美观的个人博客网站。",
+    "注于多模态医学图像领域的研究者与爱好者。在这个日新月异的医学影像技术世界里，我希望通过这个小小的平台，与大家分享我对前沿论文的阅读心得、技术分析以及实践经验",
   keywords: [
     "louaq",
     "多模态",
@@ -51,7 +51,7 @@ export const siteConfig: SiteConfig = {
   navbarTitle: "louaq", // 导航栏标题，可以设置为与 title 不同的值，如果不设置则使用 title
 
   // 站点开始日期，用于统计运行天数
-  siteStartDate: "2025-01-01", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
+  siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
 
   // bangumi配置
   bangumi: {
@@ -67,9 +67,9 @@ export const siteConfig: SiteConfig = {
   // 页面开关配置 - 控制特定页面的访问权限，设为false会返回404
   // bangumi的数据为编译时获取的，所以不是实时数据，请配置bangumi.userId
   pages: {
-    sponsor: true, // 赞助页面开关
+    sponsor: false, // 赞助页面开关
     guestbook: true, // 留言板页面开关，需要配置评论系统
-    bangumi: true, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
+    bangumi: false, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
   },
 
   // 文章列表布局配置
@@ -96,7 +96,7 @@ export const siteConfig: SiteConfig = {
     // 背景图片配置
     src: {
       // 桌面背景图片
-      desktop: "https://vip.123pan.cn/1816472581/ymjew503t0m000d7w32xy0d471bcpnbxDIYPAqF0DqJ1DGxwDIiw.webp",
+      desktop: "https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1f.jpg",
       // 移动背景图片
       mobile: "/assets/images/m3.webp",
     },
@@ -133,8 +133,8 @@ export const siteConfig: SiteConfig = {
       },
       credit: {
         enable: {
-          desktop: true, // 桌面端显示横幅图片来源文本
-          mobile: true, // 移动端显示横幅图片来源文本
+          desktop: false, // 桌面端显示横幅图片来源文本
+          mobile: false, // 移动端显示横幅图片来源文本
         },
         text: {
           desktop: "Pixiv - 晚晚喵", // 桌面端要显示的来源文本

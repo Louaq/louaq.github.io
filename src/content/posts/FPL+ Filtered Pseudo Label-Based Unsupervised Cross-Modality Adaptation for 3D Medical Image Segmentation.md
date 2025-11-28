@@ -5,7 +5,7 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "将医学图像分割模型适应到新的领域对于提高其跨领域的可迁移性至关重要"
 categories: 多模态医学图像分割
-tags: [Unsupervised Domain Adaptation]
+tags: [无监督域适应]
 ---
 
 ## 摘要

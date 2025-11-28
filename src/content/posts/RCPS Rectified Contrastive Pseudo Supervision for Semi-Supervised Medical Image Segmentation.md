@@ -4,7 +4,7 @@ published: 2025-11-27 12:00:00
 expires: 2025-12-21 23:59:59
 mathjax: true
 categories: 医学图像分割
-tags: [Medical Image Segmentation, Dual Attention Encoder]
+tags: [Medical Image Segmentation]
 pinned: true
 
 ---

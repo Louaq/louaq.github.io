@@ -5,7 +5,7 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "由于肿瘤呈浸润性生长，胶质瘤的边界通常与脑组织融合"
 categories: 多模态医学图像分割
-tags: [Medical Image Segmentation, Multi-modal MRI Images]
+tags: [Medical Image Segmentation]
 ---
 
 ## 摘要
