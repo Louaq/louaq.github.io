@@ -4,7 +4,7 @@ published: 2025-07-21 16:20:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态图像融合（MMIF）旨在聚合来自不同源图像域的互补信息"
-categories: 多模态医学图像分割
+category: 多模态医学图像分割
 tags: [Multi-modality image fusion]
 ---
 ## 摘要

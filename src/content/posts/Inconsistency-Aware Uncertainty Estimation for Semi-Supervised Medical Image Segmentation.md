@@ -3,7 +3,7 @@ title: Inconsistency-Aware Uncertainty Estimation for Semi-Supervised Medical Im
 published: 2025-11-25 12:00:00
 expires: 2025-12-21 23:59:59
 mathjax: true
-categories: 半监督医学图像分割
+category: 半监督医学图像分割
 tags: [半监督医学图像分割]
 pinned: true
 ---
