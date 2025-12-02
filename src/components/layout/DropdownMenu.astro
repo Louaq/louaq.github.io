@@ -1,10 +1,10 @@
 ---
 import { Icon } from "astro-icon/components";
+import DropdownItem from "@/components/common/base/DropdownItem.astro";
+import DropdownPanel from "@/components/common/base/DropdownPanel.astro";
 import { LinkPresets } from "@/constants/link-presets";
 import { LinkPreset, type NavBarLink } from "@/types/config";
 import { url } from "@/utils/url-utils";
-import DropdownPanel from "@/components/common/base/DropdownPanel.astro";
-import DropdownItem from "@/components/common/base/DropdownItem.astro";
 
 interface Props {
 	link: NavBarLink;
@@ -21,20 +21,21 @@ if (!link) {
 // 转换子菜单中的LinkPreset为NavBarLink
 const processedLink = {
 	...link,
-	children: link.children?.map((child: NavBarLink | LinkPreset): NavBarLink | null => {
-		if (typeof child === "number") {
-			// 检查 LinkPreset 是否存在于 LinkPresets 中
-			if (child in LinkPresets) {
-				return LinkPresets[child as LinkPreset];
+	children: link.children
+		?.map((child: NavBarLink | LinkPreset): NavBarLink | null => {
+			if (typeof child === "number") {
+				// 检查 LinkPreset 是否存在于 LinkPresets 中
+				if (child in LinkPresets) {
+					return LinkPresets[child as LinkPreset];
+				}
+				return null;
 			}
-			return null;
-		}
-		return child;
-	}).filter((child): child is NavBarLink => child !== null),
+			return child;
+		})
+		.filter((child): child is NavBarLink => child !== null),
 };
 
 const hasChildren = processedLink.children && processedLink.children.length > 0;
-
 ---
 
 <div class:list={["dropdown-container", className]} data-dropdown>
@@ -122,14 +123,14 @@ const hasChildren = processedLink.children && processedLink.children.length > 0;
 		const dropdowns = document.querySelectorAll('[data-dropdown]');
 		
 		dropdowns.forEach(dropdown => {
-			const trigger = dropdown.querySelector('[data-dropdown-trigger]');
+			const trigger = dropdown.querySelector('[data-dropdown-trigger]') as HTMLElement | null;
 			const menu = dropdown.querySelector('[data-dropdown-menu]');
-			const items = dropdown.querySelectorAll('.dropdown-item');
+			const items = dropdown.querySelectorAll('.dropdown-item') as NodeListOf<HTMLElement>;
 			
 			if (!trigger || !menu) return;
 			
 			// 键盘事件处理
-			trigger.addEventListener('keydown', function(e) {
+			trigger.addEventListener('keydown', function(e: KeyboardEvent) {
 				if (e.key === 'Enter' || e.key === ' ') {
 					e.preventDefault();
 					toggleDropdown(dropdown, trigger, menu);
@@ -146,7 +147,7 @@ const hasChildren = processedLink.children && processedLink.children.length > 0;
 			
 			// 菜单项键盘导航
 			items.forEach((item, index) => {
-				item.addEventListener('keydown', function(e) {
+				item.addEventListener('keydown', function(e: KeyboardEvent) {
 					if (e.key === 'ArrowDown') {
 						e.preventDefault();
 						const nextIndex = (index + 1) % items.length;
@@ -166,7 +167,7 @@ const hasChildren = processedLink.children && processedLink.children.length > 0;
 		// 点击外部关闭下拉菜单
 		document.addEventListener('click', function(e) {
 			dropdowns.forEach(dropdown => {
-				if (!dropdown.contains(e.target)) {
+				if (!dropdown.contains(e.target as Node)) {
 					const trigger = dropdown.querySelector('[data-dropdown-trigger]');
 					const menu = dropdown.querySelector('[data-dropdown-menu]');
 					if (trigger && menu) {
@@ -177,22 +178,22 @@ const hasChildren = processedLink.children && processedLink.children.length > 0;
 		});
 	});
 	
-	function toggleDropdown(dropdown, trigger, menu) {
+	function toggleDropdown(_dropdown: Element, trigger: Element, menu: Element) {
 		const isOpen = trigger.getAttribute('aria-expanded') === 'true';
 		if (isOpen) {
-			closeDropdown(dropdown, trigger, menu);
+			closeDropdown(_dropdown, trigger, menu);
 		} else {
-			openDropdown(dropdown, trigger, menu);
+			openDropdown(_dropdown, trigger, menu);
 		}
 	}
 	
-	function openDropdown(dropdown, trigger, menu) {
+	function openDropdown(_dropdown: Element, trigger: Element, menu: Element) {
 		trigger.setAttribute('aria-expanded', 'true');
 		menu.classList.remove('opacity-0', 'invisible', 'pointer-events-none', 'translate-y-[-8px]');
 		menu.classList.add('opacity-100', 'visible', 'pointer-events-auto', 'translate-y-0');
 	}
 	
-	function closeDropdown(dropdown, trigger, menu) {
+	function closeDropdown(_dropdown: Element, trigger: Element, menu: Element) {
 		trigger.setAttribute('aria-expanded', 'false');
 		menu.classList.add('opacity-0', 'invisible', 'pointer-events-none', 'translate-y-[-8px]');
 		menu.classList.remove('opacity-100', 'visible', 'pointer-events-auto', 'translate-y-0');

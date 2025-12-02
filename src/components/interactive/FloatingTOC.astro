@@ -1,20 +1,20 @@
 ---
-import { Icon } from "astro-icon/components";
 import type { MarkdownHeading } from "astro";
-import { i18n } from "@/i18n/translation";
-import I18nKey from "@/i18n/i18nKey";
+import { Icon } from "astro-icon/components";
 import TOCStyles from "@/components/common/styles/TOCStyles.astro";
 import { sidebarLayoutConfig } from "@/config/sidebarConfig";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
 
 interface Props {
-  headings: MarkdownHeading[];
+	headings: MarkdownHeading[];
 }
 
-let { headings = [] } = Astro.props;
+let { headings: _ = [] } = Astro.props;
 
 // 检查侧边栏目录组件是否启用
 const sidebarTocComponent = sidebarLayoutConfig.rightComponents?.find(
-  (c) => c.type === "sidebarToc"
+	(c) => c.type === "sidebarToc",
 );
 const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
 ---
@@ -317,7 +317,8 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
 
     // 监听外部链接点击
     document.addEventListener("click", (e) => {
-      const link = e.target.closest("a");
+      const target = e.target as Element | null;
+      const link = target?.closest("a");
       if (!link || !link.href) return;
 
       const href = link.getAttribute("href");
@@ -410,7 +411,8 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
       const tocContent = document.getElementById("floating-toc-content");
       if (tocContent) {
         tocContent.addEventListener("click", (e) => {
-          const anchor = e.target.closest('a[href^="#"]');
+          const target = e.target as Element | null;
+          const anchor = target?.closest('a[href^="#"]');
           if (anchor) {
             window.tocInternalNavigation = true;
           }
@@ -450,7 +452,7 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
     });
 
     // 监听窗口大小变化
-    let resizeTimeout;
+    let resizeTimeout: ReturnType<typeof setTimeout>;
     window.addEventListener('resize', () => {
       clearTimeout(resizeTimeout);
       resizeTimeout = setTimeout(() => {

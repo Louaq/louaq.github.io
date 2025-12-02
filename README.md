@@ -8,7 +8,7 @@
 > 
 > ![Node.js >= 20](https://img.shields.io/badge/node.js-%3E%3D20-brightgreen) 
 ![pnpm >= 9](https://img.shields.io/badge/pnpm-%3E%3D9-blue)
-![Astro](https://img.shields.io/badge/Astro-5.16.0-orange)
+![Astro](https://img.shields.io/badge/Astro-5.16.3-orange)
 </div>
 
 
@@ -19,7 +19,7 @@
 [**🍀我的博客**](https://blog.cuteleaf.cn) 
 
 📖 README：
-**[简体中文](README.md)** | **[English](README.en.md)** | **[日本語](README.ja.md)** | **[Русский](README.ru.md)**
+**[简体中文](README.md)** | **[English](README.en.md)** | **[日本語](docs/README.ja.md)** | **[Русский](docs/README.ru.md)**
 
 ⚡ 静态站点生成: 基于Astro的超快加载速度和SEO优化
 
@@ -70,13 +70,14 @@
 - [x] **友情链接** - 精美的友链展示卡片
 - [x] **广告组件** - 支持自定义侧边栏广告内容
 - [x] **番组计划** - 基于 Bangumi API 的追番和游戏记录展示
-- [x] **评论系统** - 集成 Twikoo、Waline、Giscus、Disqus 评论系统
+- [x] **评论系统** - 集成 Twikoo、Waline、Giscus、Disqus、Artalk 评论系统
 - [x] **访问量统计** - 支持调用 Waline、Twikoo 自带的访问量追踪
 - [x] **音乐播放器** - 基于 APlayer，支持本地音乐和 Meting API 在线音乐
 
 ### 内容增强
 - [x] **图片灯箱** - Fancybox 图片预览功能
 - [x] **浮动目录** - 动态显示文章目录，支持锚点跳转，在侧边栏目录隐藏后显示
+- [x] **邮箱保护** - 让自动化爬虫程序无法直接爬到邮箱地址，被垃圾邮件骚扰
 - [x] **侧边栏目录** - 动态显示文章目录，支持锚点跳转
 - [x] **增强代码块** - 基于 Expressive Code，支持代码折叠、行号、语言标识
 - [x] **数学公式支持** - KaTeX 渲染引擎，支持行内和块级公式
@@ -137,6 +138,17 @@
 
 ### 平台托管部署
 - **参考[官方指南](https://docs.astro.build/zh-cn/guides/deploy/)将博客部署至 Vercel, Netlify, GitHub Pages, Cloudflare Pages, EdgeOne Pages 等。**
+
+   框架预设： `Astro`
+
+   根目录： `./`
+
+   输出目录： `dist`
+
+   构建命令： `pnpm run build`
+
+   安装命令： `pnpm install`
+
 
 ## 📖 配置说明
 
@@ -218,12 +230,13 @@ lang: zh-CN      # 仅当文章语言与 `siteConfig.ts` 中的网站语言不�
 ## 🙏 致谢
 
 - 非常感谢 [saicaca](https://github.com/saicaca) 开发的 [Fuwari](https://github.com/saicaca/fuwari) 模板，Firefly 就是基于这个模板二次开发
-- 参考了博主 [霞葉](https://kasuha.com) 分享的 [Bangumi 收藏展示页面方案](https://kasuha.com/posts/fuwari-enhance-ep2/)
+- 参考了博主 [霞葉](https://kasuha.com) 分享的 [Bangumi 收藏展示](https://kasuha.com/posts/fuwari-enhance-ep2/) 和 [邮箱保护/图片标题](https://kasuha.com/posts/fuwari-enhance-ep1/) 方案
 - 参考了 [Mizuki](https://github.com/matsuzaka-yuki/Mizuki) 的横幅标题/多级菜单导航栏/樱花特效/KaTeX/Fancybox方案
 - 使用了 [Astro](https://astro.build) 和 [Tailwind CSS](https://tailwindcss.com) 构建
 - 使用了 [MetingJS](https://github.com/metowolf/MetingJS) 和 [APlayer](https://github.com/MoePlayer/APlayer) 音乐播放器
 - 使用了b站up [公公的日常](https://space.bilibili.com/3546750017080050) 提供的Q版 `流萤` 看板娘切片数据模型
 - 图标来自 [Iconify](https://iconify.design/)
+- 流萤部分相关图片素材版权归游戏 [《崩坏：星穹铁道》](https://sr.mihoyo.com/) 开发商 [米哈游](https://www.mihoyo.com/) 所有。
 
 ## 🍀 贡献者
 
