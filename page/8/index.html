@@ -186,7 +186,7 @@
       <main class="main" id="pjax-container">
         <!-- 头部导航 -->
         
-<header class="header no-swiper " 
+<header class="header  " 
   id="navHeader"
   style="position: fixed;
   left: 0; top: 0; z-index: 10;width: 100%;"
@@ -574,6 +574,948 @@
 </header>
         <!-- 内容区域 -->
         
+  <!-- 首页轮播 -->
+  
+
+  <link href="/js/vue-typed-js/index.css" rel="stylesheet">
+
+
+
+
+
+
+<div class="swiper-length" style="display: none;">4</div>
+<div id="appSwiper"
+  class=""
+  @mouseenter="stopAutoPlay()" 
+  @mouseleave="startAutoPlay()"
+>
+  <swiper v-cloak ref="mySwiper" :options="swiperOptions" @slideChangeTransitionEnd="slideChangeTransitionEnd">
+    
+      
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="https://pic1.imgdb.cn/item/6919c43e3203f7be000aeb19.jpg" style=" background-size: 300000px; 
+            background-position: left center;" style="position: relative;">
+              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="https://pic1.imgdb.cn/item/6919c43e3203f7be000aeb19.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
+                      <a href="/post/medical-image-seg/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/">
+                        Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时</div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/medical-image-seg/asymmetric-adaptive-heterogeneous-network-for-multi-modality-medical-image-segmentation/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+        
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" style=" background-size: 300000px; 
+            background-position: left center;" style="position: relative;">
+              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="https://pic2.zhimg.com/80/v2-63bbdb5b76b8d349ad35ff4281efbd37_1440w.webp" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
+                      <a href="/post/medical-image-seg/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/">
+                        A nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征</div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/medical-image-seg/a-nested-self-supervised-learning-framework-for-3-d-semantic-segmentation-driven-multi-modal-medical-image-fusion/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0n000d6xujp024483w79ml0DIYPAqF0DqJ1DGxwDIiw.jpg" style=" background-size: 300000px; 
+            background-position: left center;" style="position: relative;">
+              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0n000d6xujp024483w79ml0DIYPAqF0DqJ1DGxwDIiw.jpg" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
+                      <a href="/post/medical-image-seg/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/">
+                        A Simple and Robust Framework for Cross-Modality Medical Image Segmentation applied to Vision Transformers
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">云想衣裳花想容，春风拂槛露华浓</div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/medical-image-seg/a-simple-and-robust-framework-for-cross-modality-medical-image-segmentation-applied-to-vision-transformers/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+      
+        
+        
+          
+          <swiper-slide>
+            <div class="item swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" style=" background-size: 300000px; 
+            background-position: left center;" style="position: relative;">
+              <div class="swiper-bgmask" style="position: absolute;top: 0;left: 0;width: 100%;height: 100%;"></div>
+              <div class="flag" style="z-index: 2;">
+                <div class="img-mask swiper-lazy" data-background="https://vip.123pan.cn/1816472581/yk6baz03t0l000d6xujntz00jd19juxaDIYPAqF0DqJ1DGxwDIiw.png" style="height: 100%; background-size: cover; 
+                  background-position: center center;">
+                  <div class="swiper-lazy-preloader swiper-lazy-preloader-white"></div>  
+                </div>
+                <div class="flag-text">
+                  <div class="flag-text-content">
+                    <div class="title ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">
+                      <a href="/post/latex/visual-studio-code/">
+                        vscode配置latex环境
+                      </a>
+                    </div>
+                    <div class="excerpt ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s">介绍vscode如何配置latex环境</div>
+                  </div>
+                  <div class="bottom-one-btn ani animated" swiper-animate-effect="fadeInDown" swiper-animate-duration="0.2s" swiper-animate-delay="0.1s"><a href="/post/latex/visual-studio-code/" class="read-more swiper-btn-color" style="display: inline-block; z-index:1;">阅读更多</a></div>
+                </div>
+              </div>
+            </div>
+
+          </swiper-slide>
+        
+      
+    <div class="swiper-pagination" slot="pagination" pointer style="display: none;"></div>
+    <div class="swiper-button-prev swiper-button-white" pointer slot="button-prev" style=""></div>
+    <div class="swiper-button-next swiper-button-white" pointer slot="button-next" style=""></div>
+    
+  </swiper>
+  
+    <div id="scroll-down" @click="toPostContent()">
+      <a href="javascript:;">
+        <i class="fas fa-angle-down scroll-down-effects"></i>
+      </a>
+    </div>
+  
+  <canvas id="header_canvas"style="position:absolute;bottom:0;width:100%;pointer-events:none;"></canvas>
+    
+</div>
+
+
+
+<script>
+  var autoplay = JSON.parse('true');
+  var delay = '4000';
+  var loop = JSON.parse('false') ? false : JSON.parse('true');
+  var effect = 'fade';
+  var swiperLength = parseInt(document.querySelector(".swiper-length").innerText);
+  var defaultDesc = '煮酒洗净尘嚣，论知交,万般付之一笑，共偕老,最是人间留不住，朱颜辞镜花辞树';
+  defaultDesc = defaultDesc.split(',');
+  var defaultDescTypedLoop = JSON.parse('true');
+  var vm = new Vue({
+    el: '#appSwiper',
+    data: {
+      defaultDesc: defaultDesc,
+      defaultDescTypedLoop,
+      swiperOptions: {
+        pagination: {
+          el: '.swiper-pagination',
+          clickable: true // 允许点击小圆点跳转
+        },
+        loop: loop ? true : false,
+        effect, // fade
+        autoplay: (autoplay && swiperLength > 1) ? {
+  　　　　delay,
+  　　　　disableOnInteraction: false // 手动切换之后继续自动轮播
+    　　} : false,
+        navigation: {
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        },
+        lazy: {
+          loadPrevNext: true,
+        },
+        on:{
+          init: function() {
+            swiperAnimateCache(this); //隐藏动画元素 
+            swiperAnimate(this); //初始化完成开始动画
+          }, 
+          slideChangeTransitionEnd: function(){ 
+            swiperAnimate(this); //每个slide切换结束时也运行当前slide动画
+          } 
+        }
+        // Some Swiper option/callback...
+      }
+    },
+    computed: {
+      swiper() {
+        return this.$refs.mySwiper.$swiper
+      }
+    },
+    mounted() {
+      // console.log('Current Swiper instance object', this.swiper)
+      // this.swiper.slideTo(0, 1000, false)
+    },
+    methods: {
+      stopAutoPlay() {
+        (autoplay && swiperLength > 1) && this.swiper.autoplay.stop();
+      },
+      startAutoPlay() {
+        (autoplay && swiperLength > 1) && this.swiper.autoplay.start();
+      },
+      slideChangeTransitionEnd() {
+        console.log('1');
+      },
+      toPostContent() {
+        const fullHeight = $(window).height() - 60;
+        $('html,body').animate({scrollTop: fullHeight},500);
+      }
+    },
+    created() {}
+  })
+</script>
+
+<style>
+#appSwiper {
+  position: relative;
+  user-select: none;
+  overflow: hidden;
+  font-family: Titillium Web,'PingFang SC','Hiragino Sans GB','Microsoft JhengHei','Microsoft YaHei',sans-serif;
+}
+.default-excerpt {
+  font-size: 1.6em;
+  margin-top: 1em;
+  color: #eee;
+}
+.bottom-one-btn {
+  margin-top: 15px;
+}
+.swiper-container {
+  overflow: hidden;
+  z-index: 0;
+}
+.swiper-slide {
+  height: 350px;
+  position: relative;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  padding: 10px 10px;
+  transition: background 0.2s;
+}
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+.swiper-slide .item {
+  width: 100%;
+  height: 100%;
+}
+.flag {
+  position: relative;
+  width: 70%;
+  margin: 0 auto;
+  color: #ffffff;
+  height: 100%;
+  background: #000;
+}
+.flag img {
+  min-height: 100%;
+}
+.flag-text {
+  position: absolute;
+  top: 50px;
+  left: 50px;
+  width: 80%;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  z-index: 9999;
+}
+.flag-text .title {
+  font-size: 1.8em;
+}
+.flag-text .title a {
+  color: #fff;
+  transition: color 0.3s;
+}
+.flag-text .title a:hover {
+  color: rgba(66, 185, 133, 0.8);
+}
+.flag-text .excerpt {
+  color: #eee;
+  width: 70%;
+  line-height: 30px;
+  height: 150px;
+  margin-top: 2%;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 5;
+  overflow: hidden;
+}
+.swiper-pagination-bullet-active {
+  opacity: 1;
+  background-color: #42b983;
+}
+.img-mask {
+  opacity:0.6; filter: alpha(opacity=60);
+}
+.flag-text .read-more {
+  margin-bottom: 30px;
+  padding: 5px 15px;
+  color: #ffffff;
+  border-radius: 20px;
+}
+#scroll-down {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5em;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2;
+}
+#scroll-down a {
+  color: #fff;
+}
+@-webkit-keyframes rightan
+  {
+  
+  0%
+  {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+  100%
+  {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+}
+.scroll-down-effects {
+  animation: rightan 1.5s infinite;
+}
+/* 当头部导航设置为背景透明的时候 */
+.swiper-slide {
+  height: 400px;
+}
+.flag-text {
+  top: 80px;
+}
+
+@media (min-width: 992px) {
+  .swiper-button-prev {
+    margin-left: 15%;
+    transform: translateX(-180%);
+  }
+  .swiper-button-next {
+    margin-right: 15%;
+    transform: translateX(180%);
+  }
+  .flag-text .title {
+    width: 80%;
+    line-height: 35px;
+    max-height: 70px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+}
+@media screen and (max-width: 1200px) { 
+  .flag {
+    width: 80%;
+  }
+  .swiper-button-prev {
+    margin-left: 10%;
+    transform: translateX(-180%);
+  }
+  .swiper-button-next {
+    margin-right: 10%;
+    transform: translateX(180%);
+  }
+}
+@media (max-width: 992px) {
+  .flag {
+    width: 100%;
+  }
+  .flag-text .title {
+    font-size: 1.5em;
+    margin-top: 50px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+  }
+  .flag-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80%;
+    height: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
+  .flag-text .excerpt {
+    width: 100%;
+    line-height: 25px;
+    height: 125px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 5;
+    overflow: hidden;
+  }
+  .flag-text .read-more {
+    margin-bottom: 80px;
+  }
+}
+@media (max-width: 992px) and (min-width: 551px) {
+  .flag-text .excerpt {
+    width: 70%;
+  }
+}
+@media (max-width: 551px) {
+  .swiper-slide {
+    height: 250px;
+  }
+  .flag-text .title {
+    line-height: 30px;
+    max-height: 60px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    margin-top: 20px;
+  }
+  .flag-text .excerpt {
+    font-size: 1em;
+    line-height: 20px;
+    height: 80px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+  }
+  .flag-text .excerpt { 
+    margin-top: 10px;
+  }
+  .flag-text .read-more {
+    margin-top: 10px;
+    margin-bottom: 50px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    transform: scale(0.5);
+  }
+  .swiper-button-prev {
+    left: 0;
+  }
+  .swiper-button-next {
+    right: 0;
+  }
+}
+/* 当头部导航设置为背景透明的时候 */
+  @media (max-width: 992px) {
+    .flag-text {
+      top: 60px;
+      height: 80%;
+    }
+  }
+  @media (max-width: 551px) {
+    .swiper-slide {
+      height: 310px;
+    }
+  }
+
+/* 文字或者按钮居中显示 */
+
+  .flag-text {
+    left: 10%;
+  }
+  .flag-text .flag-text-content {
+    width: 100%;
+    text-align: center;
+  }
+  .flag-text .title {
+    width: 100%;
+    text-align: center;
+  }
+  .flag-text .excerpt { 
+    width: 100%;
+    text-align: center;
+  }
+  .bottom-one-btn {
+    display: flex;
+    justify-content: center;
+  }
+  .default-excerpt {
+    display: flex;
+    justify-content: center;
+    font-size: 1.6em;
+  }
+  .flag-text-btns {
+    justify-content: center;
+  }
+  @media (min-width: 992px) {
+    .flag-text .excerpt {
+      line-height: 30px;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 5;
+      overflow: hidden;
+    }
+  }
+  @media (max-width: 992px) {
+    .flag-text {
+      margin-left: 0;
+      transform: translateX(0);
+    }
+  }
+
+
+
+
+/* 全屏显示 */
+
+  .flag {
+    width: 100%;
+  }
+  .swiper-slide {
+    height: 100vh;
+  }
+  .flag-text {
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+    width: 70%;
+    height: auto;
+  }
+  .flag-text .title {
+    font-size: 2.8em;
+    line-height: 1.5em;
+    max-height: none;
+  }
+  .flag-text .excerpt {
+    font-size: 1.25em;
+    height: 150px;
+  }
+  .flag-text .read-more {
+    margin-top: 10px;
+  }
+  .swiper-button-prev,
+  .swiper-button-next {
+    margin-top: -60px!important;
+  }
+  .swiper-btn-color,
+  .swiper-btn-color2 {
+    background-color: transparent;
+    border: 1px solid #fff;
+  }
+  .swiper-btn-color:hover,
+  .swiper-btn-color2:hover {
+    background-color: rgba(66, 185, 133, 0.8);
+    border: 1px solid rgba(66, 185, 133, 0.8)!important;
+  }
+  .flag-text-btns {
+    justify-content: center;
+  }
+  .swiper-button-prev {
+    margin-left: 10px;
+    transform: translateX(0);
+    border-radius: 50%;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .swiper-button-next {
+    margin-right: 10px;
+    transform: translateX(0);
+    border-radius: 50%;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+  }
+  .swiper-button-next:after, .swiper-button-prev:after {
+    font-size: 1.2em;
+  }
+  @media (min-width: 992px) {
+    .flag-text .excerpt {
+      line-height: 35px;
+      height: 175px;
+    }
+    .default-excerpt {
+      min-height: 150px;
+    }
+    .typed-element {
+      align-items: unset;
+    }
+  }
+  @media (max-width: 992px) {
+    .flag-text {
+      margin-left: 0;
+      height: 60%;
+      top: 55%;
+    }
+    .flag-text .title {
+      font-size: 2.4em;
+      margin-top: 0;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+    .flag-text .excerpt {
+      line-height: 35px;
+      height: 185px;
+    }
+    .flag-text .read-more {
+      margin-top: 20px;
+    }
+  }
+  @media (max-width: 551px) {
+    .flag-text {
+      height: 60%;
+    }
+    .flag-text .title {
+      font-size: 2.2em;
+    }
+    .flag-text .excerpt {
+      line-height: 30px;
+    }
+    .flag-text .read-more {
+      margin-top: 50px;
+      padding: 10px 30px;
+    }
+    .swiper-button-prev {
+      margin-left: 0;
+    }
+    .swiper-button-next {
+      margin-right: 0;
+    }
+    .default-excerpt {
+      margin-top: 1em;
+    }
+  }
+
+
+/* video */
+.swiper-video {
+  width: 100%;
+  height: 100%;
+}
+.swiper-video video {
+  pointer-events: none;
+}
+.swiper-video-maskBox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: #000;
+  opacity: 0.2;
+  z-index: 1;
+}
+@media (min-width: 992px) {
+  
+    .swiper-video {
+      display: none;
+    }
+    .swiper-default-bgImg {
+      display: block;  
+    }
+  
+}
+@media (max-width: 992px) {
+  .swiper-video {
+    display: none;
+  }
+  .swiper-default-bgImg {
+    display: block;  
+  }
+}
+/* video-end */
+</style>
+
 
 <div id="l_main">
   <div class="l_content">
@@ -1037,57 +1979,6 @@
             <span class="post-time">2025-02-24</span>
           </div>
           <div class="post-title">
-            <a class="post-title-link" href="/post/mo-ban/">模板</a>
-          </div>
-          <div class="post-meta">
-            <div class="post-tags">
-              <!-- 文章详情页的标签 -->
-
-            </div>
-            <div class="post-categories">
-              <!-- 文章详情页的分类 -->
-
-<div class="article-category">
-  <i class="iconfont iconbookmark1"></i>
-  <a class="article-category-link" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-</div>
-
-
-            </div>
-          </div>
-          <div class="post-img-mobile">
-            <a href="/post/mo-ban/" style="background-size: cover; 
-              background-position: center center;">
-              <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-            </a>
-          </div>
-          <div class="post-content">
-            摘要翻译研究背景研究现状提出的模型实验（Compared with SOTA）实验（Ablation Experiments）:1st_place_medal:结论
-          </div>
-        </div>
-        <div class="post-more">
-          <a href="/post/mo-ban/">
-            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
-          </a>
-        </div>
-      </div>
-      <div class="post-img">
-        <a href="/post/mo-ban/" style="background-size: cover; 
-          background-position: center center;">
-          <img class="lazyload lazyload placeholder" src="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" class="lazyload placeholder" data-srcset="https://pica.zhimg.com/80/v2-61f99f8dcf899f54cad2a1aa28b21e44_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
-        </a>
-      </div>
-    </article>
-  
-    
-    <article class="post reveal" style="   ">
-      <div class="post-main">
-        <div class="post-info">
-          <div class="post-time">
-            <i class="fas fa-clock" aria-hidden="true"></i>
-            <span class="post-time">2025-02-24</span>
-          </div>
-          <div class="post-title">
             <a class="post-title-link" href="/post/jing-du-mo-ban/">精读模板</a>
           </div>
           <div class="post-meta">
@@ -1118,7 +2009,7 @@
         </div>
         <div class="post-more">
           <a href="/post/jing-du-mo-ban/">
-            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+            <i class="iconfont iconmore" pointer style="float: right;  " title="阅读更多"></i>
           </a>
         </div>
       </div>
@@ -1126,6 +2017,57 @@
         <a href="/post/jing-du-mo-ban/" style="background-size: cover; 
           background-position: center center;">
           <img class="lazyload lazyload placeholder" src="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" class="lazyload placeholder" data-srcset="https://pic2.zhimg.com/80/v2-29e78b52051ce542adf6d786d61fbd19_1440w.webp" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+        </a>
+      </div>
+    </article>
+  
+    
+    <article class="post reveal" style="   ">
+      <div class="post-main">
+        <div class="post-info">
+          <div class="post-time">
+            <i class="fas fa-clock" aria-hidden="true"></i>
+            <span class="post-time">2025-02-24</span>
+          </div>
+          <div class="post-title">
+            <a class="post-title-link" href="/post/fcn/20250224-fcn/">FCN</a>
+          </div>
+          <div class="post-meta">
+            <div class="post-tags">
+              <!-- 文章详情页的标签 -->
+
+            </div>
+            <div class="post-categories">
+              <!-- 文章详情页的分类 -->
+
+<div class="article-category">
+  <i class="iconfont iconbookmark1"></i>
+  <a class="article-category-link" href="/categories/%E8%AF%AD%E4%B9%89%E5%88%86%E5%89%B2/">语义分割</a>
+</div>
+
+
+            </div>
+          </div>
+          <div class="post-img-mobile">
+            <a href="/post/fcn/20250224-fcn/" style="background-size: cover; 
+              background-position: center center;">
+              <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdq45gkt9k5DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdq45gkt9k5DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
+            </a>
+          </div>
+          <div class="post-content">
+            云想衣裳花想容，春风拂槛露华浓
+          </div>
+        </div>
+        <div class="post-more">
+          <a href="/post/fcn/20250224-fcn/">
+            <i class="iconfont iconmore" pointer style="  " title="阅读更多"></i>
+          </a>
+        </div>
+      </div>
+      <div class="post-img">
+        <a href="/post/fcn/20250224-fcn/" style="background-size: cover; 
+          background-position: center center;">
+          <img class="lazyload lazyload placeholder" src="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdq45gkt9k5DIYPAqF0DqJ1DGxwDIiw.jpg" class="lazyload placeholder" data-srcset="https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxdq45gkt9k5DIYPAqF0DqJ1DGxwDIiw.jpg" srcset="https://pic1.zhimg.com/v2-cd38920285d125be80b3eb504052c550_b.webp" alt="">
         </a>
       </div>
     </article>
@@ -1428,8 +2370,8 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Fri Nov 28 2025 02:22:11 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-11-28 日</div>
+            <div id="last-update" style="display: none;">Tue Dec 02 2025 13:41:20 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2025-12-02 日</div>
           
         </div>
         
@@ -1479,7 +2421,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-11-28 日';
+            document.getElementById('last-update-show').innerHTML = '2025-12-02 日';
           }
         </script>
         
