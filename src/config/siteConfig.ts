@@ -108,91 +108,33 @@ export const siteConfig: SiteConfig = {
       // 如果不知道怎么配置百分百之类的配置，推荐直接使用：'center'居中，'top'顶部居中，'bottom' 底部居中，'left'左侧居中，'right'右侧居中
       position: "0% 20%",
       
-      homeText: {
-        // 主页显示自定义文本（全局开关）
-        enable: false,
-        // 主页横幅主标题
-        title: "Coding!",
-        // 主页横幅副标题
-        subtitle: [
-          "In Reddened Chrysalis, I Once Rest",
-          "From Shattered Sky, I Free Fall",
-          "Amidst Silenced Stars, I Deep Sleep",
-          "Upon Lighted Fyrefly, I Soon Gaze",
-          "From Undreamt Night, I Thence Shine",
-          "In Finalized Morrow, I Full Bloom",
-        ],
-        typewriter: {
-          //打字机开启 → 循环显示所有副标题
-          //打字机关闭 → 每次刷新随机显示一条副标题
-          enable: false, // 启用副标题打字机效果
-          speed: 100, // 打字速度（毫秒）
-          deleteSpeed: 50, // 删除速度（毫秒）
-          pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
-        },
-      },
-      credit: {
-        enable: {
-          desktop: false, // 桌面端显示横幅图片来源文本
-          mobile: false, // 移动端显示横幅图片来源文本
-        },
-        text: {
-          desktop: "Pixiv - 晚晚喵", // 桌面端要显示的来源文本
-          mobile: "Pixiv - KiraraShss", // 移动端要显示的来源文本
-        },
-        url: {
-          desktop: "https://www.pixiv.net/artworks/135490046", // 桌面端原始艺术品或艺术家页面的 URL 链接
-          mobile: "https://www.pixiv.net/users/42715864", // 移动端原始艺术品或艺术家页面的 URL 链接
-        },
-      },
-      navbar: {
-        transparentMode: "semifull", // 导航栏透明模式："semi" 半透明加圆角，"full" 完全透明，"semifull" 动态透明
-      },
-      // 波浪动画效果配置，开启可能会影响页面性能，请根据实际情况开启
-      waves: {
-        enable: {
-          desktop: true, // 桌面端启用波浪动画效果
-          mobile: false, // 移动端启用波浪动画效果
-        },
-        performance: {
-          quality: "high",
-          hardwareAcceleration: true, // 是否启用硬件加速
-        },
-        // 性能优化说明：
-        // quality: "high" - 最佳视觉效果，但GPU占用较高，适合高性能设备
-        // quality: "medium" - 平衡性能和质量，适合中等性能设备
-        // quality: "low" - 最低GPU占用，动画更简单，适合低性能设备
-        // hardwareAcceleration: true - 启用GPU加速，提升性能但增加GPU占用
-        // hardwareAcceleration: false - 禁用GPU加速，降低GPU占用但可能影响性能
-      },
-    },
-	homeText: {
-		// 主页显示自定义文本（全局开关）
-		enable: true,
-		// 主页横幅主标题
-		title: "Lovely firefly!",
-		// 主页横幅副标题
-		subtitle: [
-			"In Reddened Chrysalis, I Once Rest",
-			"From Shattered Sky, I Free Fall",
-			"Amidst Silenced Stars, I Deep Sleep",
-			"Upon Lighted Fyrefly, I Soon Gaze",
-			"From Undreamt Night, I Thence Shine",
-			"In Finalized Morrow, I Full Bloom",
-		],
-		typewriter: {
-			//打字机开启 → 循环显示所有副标题
-			//打字机关闭 → 每次刷新随机显示一条副标题
-			enable: false, // 启用副标题打字机效果
-			speed: 100, // 打字速度（毫秒）
-			deleteSpeed: 50, // 删除速度（毫秒）
-			pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
-		    },
-		},
+      			homeText: {
+				// 主页显示自定义文本（全局开关）
+				enable: false,
+				// 主页横幅主标题
+				title: "Lovely firefly!",
+				// 主页横幅副标题
+				subtitle: [
+					"In Reddened Chrysalis, I Once Rest",
+					"From Shattered Sky, I Free Fall",
+					"Amidst Silenced Stars, I Deep Sleep",
+					"Upon Lighted Fyrefly, I Soon Gaze",
+					"From Undreamt Night, I Thence Shine",
+					"In Finalized Morrow, I Full Bloom",
+				],
+				typewriter: {
+					//打字机开启 → 循环显示所有副标题
+					//打字机关闭 → 每次刷新随机显示一条副标题
+					enable: false, // 启用副标题打字机效果
+					speed: 100, // 打字速度（毫秒）
+					deleteSpeed: 50, // 删除速度（毫秒）
+					pauseTime: 2000, // 完全显示后的暂停时间（毫秒）
+				},
+			},
 			credit: {
 				enable: {
-					desktop: true, // 桌面端显示横幅图片来源文本
-					mobile: true, // 移动端显示横幅图片来源文本
+					desktop: false, // 桌面端显示横幅图片来源文本
+					mobile: false, // 移动端显示横幅图片来源文本
 				},
 				text: {
 					desktop: "Pixiv - 晚晚喵", // 桌面端要显示的来源文本
@@ -232,8 +174,6 @@ export const siteConfig: SiteConfig = {
 			blur: 1, // 背景模糊程度
 		},
 	},
-
-	// 字体配置
-	// 在src/config/fontConfig.ts中配置具体字体
 	font: fontConfig,
+
 };
