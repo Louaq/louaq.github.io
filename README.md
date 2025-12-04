@@ -266,6 +266,6 @@ lang: zh-CN      # 仅当文章语言与 `siteConfig.ts` 中的网站语言不�
 ```bash
 git fetch upstream
 
-git checkout main  # 或者 master，取决于你的默认分支名
-git merge upstream/main  # 或 upstream/master
+git checkout master  # 或者 master，取决于你的默认分支名
+git merge upstream/master  # 或 upstream/master
 ```
