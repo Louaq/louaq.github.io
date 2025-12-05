@@ -621,7 +621,10 @@
 
   <div id="myComment">
     
-      <div id="giscus_container"></div>
+      <div id="tcomment_container">
+  <div id="tcomment"></div>
+</div>
+
     
   </div>
 
@@ -904,8 +907,8 @@
         <div class="webinfo-item">
           <div>最后活动时间：</div>
           
-            <div id="last-update" style="display: none;">Wed Dec 03 2025 01:02:17 GMT+0000 (Coordinated Universal Time)</div>
-            <div id="last-update-show">2025-12-03 日</div>
+            <div id="last-update" style="display: none;">Fri Dec 05 2025 12:10:52 GMT+0000 (Coordinated Universal Time)</div>
+            <div id="last-update-show">2025-12-05 日</div>
           
         </div>
         
@@ -955,7 +958,7 @@
           try {
             document.getElementById('last-update-show').innerHTML = timeago(new Date(lastUpDate));
           } catch (error) {
-            document.getElementById('last-update-show').innerHTML = '2025-12-03 日';
+            document.getElementById('last-update-show').innerHTML = '2025-12-05 日';
           }
         </script>
         
@@ -1784,59 +1787,51 @@
 <!-- 评论所需js -->
 
   
-        <script>
-  var giscusComment = {};
+        <script src="https://cdn.bootcdn.net/ajax/libs/twikoo/1.6.31/twikoo.all.min.js"></script>
 
-  function check_giscus() {
-    let isDark = JSON.parse(localStorage.getItem('dark')) || JSON.parse('false');
-    if (isDark) {
-      giscusComment.Theme = 'dark';
-    } else {
-      giscusComment.Theme = 'light';
+<script type="text/javascript">
+  comment_el = '#tcomment';
+  isLightGalleryTwikoo = false
+  load_twikoo = function () {
+    if ($(comment_el).length) {
+      twikoo.init({
+        envId: 'https://twikoo-ruddy-beta.vercel.app',
+        el: '#tcomment',
+        region: '',
+        path: '',
+        onCommentLoaded: function () {
+          if (!isLightGalleryTwikoo) { // 评论图片放大
+            return;
+          }
+          var commentContents = document.getElementsByClassName('tk-content');
+          for (var i = 0; i < commentContents.length; i++) {
+            var commentItem = commentContents[i];
+            var imgEls = commentItem.getElementsByTagName('img');
+            if (imgEls.length > 0) {
+              for (var j = 0; j < imgEls.length; j++) {
+                var imgEl = imgEls[j];
+                var aEl = document.createElement('a');
+                aEl.setAttribute('class', 'tk-lg-link');
+                aEl.setAttribute('href', imgEl.getAttribute('src'));
+                aEl.setAttribute('data-src', imgEl.getAttribute('src'));
+                aEl.appendChild(imgEl.cloneNode(false));
+                imgEl.parentNode.insertBefore(aEl, imgEl.nextSibling);
+                imgEl.remove();
+              }
+              lightGallery(commentItem, {
+                selector: '.tk-lg-link',
+                share: false
+              });
+            }
+          }
+        }
+      })
     }
-
-    return document.getElementById("giscus_container");
   }
-
-  function load_giscus() {
-    const HEAD = check_giscus();
-    if (!HEAD) return;
-    let cfg = {"on":true,"theme":{"light":"light","dark":"dark"},"repo":"Louaq/louaq.github.io","repo-id":"R_kgDOONTfcA","category":"Announcements","category-id":"DIC_kwDOONTfcM4CvH3w","mapping":"pathname","reactions-enabled":"1","emit-metadata":"0","lang":"zh-CN"};
-    const script = document.createElement('script');
-    script.setAttribute('src', 'https://giscus.app/client.js');
-    Object.keys(cfg).forEach(k => {
-      if (k != "theme") {
-        script.setAttribute('data-' + k, cfg[k]);
-      }
-    })
-    script.setAttribute('data-theme', giscusComment.Theme);
-    script.setAttribute('crossorigin', "anonymous");
-    HEAD.appendChild(script);
-  }
-
-  function dark_giscus() {
-    const HEAD = check_giscus();
-    if (!HEAD) return;
-
-    const message = {
-      setConfig: {
-        theme: giscusComment.Theme
-      }
-    };
-    const giscusIframe = document.querySelector('iframe.giscus-frame');
-    giscusIframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
-  }
-
-  $(document).ready(load_giscus);
+  $(document).ready(load_twikoo);
   document.addEventListener('pjax:complete', function () {
-    load_giscus();
+    load_twikoo();
   });
-
-  $('.dark').click(function () {
-    setTimeout(() => {
-      dark_giscus();
-    });
-  })
 </script>
       
 
