@@ -32,9 +32,9 @@ import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://astroal.netlify.app/",
+	site: "https://louaq.github.io",
 
-	base: "/",
+	base: "",
 	trailingSlash: "always",
 	integrations: [
 		tailwind({
