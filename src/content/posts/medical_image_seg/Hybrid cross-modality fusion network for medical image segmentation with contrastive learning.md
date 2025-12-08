@@ -1,6 +1,6 @@
 ---
 title: Hybrid cross-modality fusion network for medical image segmentation with contrastive learning
-date: 2025-07-25 11:05:00
+published: 2025-07-25 11:05:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "医学图像分割已广泛应用于基于人工智能的临床应用中"

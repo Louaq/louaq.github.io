@@ -1,6 +1,6 @@
 ---
 title: Multi-modality medical image segmentation via adversarial learning with CV energy functional
-date: 2025-07-30 12:00:00
+published: 2025-07-30 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "基于深度学习的医学图像处理方法逐渐成为主流"

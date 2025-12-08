@@ -1,6 +1,6 @@
 ---
 title: MsgFusion Medical Semantic Guided Two-Branch Network for Multimodal Brain Image Fusion
-date: 2025-07-15 14:20:00
+published: 2025-07-15 14:20:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态图像融合在医学图像分析和应用中起着至关重要的作用"

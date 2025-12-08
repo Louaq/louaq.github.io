@@ -1,6 +1,6 @@
 ---
 title: Unet的改进
-date: 2025-05-12 17:04:00
+published: 2025-05-12 17:04:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"

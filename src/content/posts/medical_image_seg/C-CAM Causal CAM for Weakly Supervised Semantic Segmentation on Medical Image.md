@@ -1,6 +1,6 @@
 ---
 title: C-CAM Causal CAM for Weakly Supervised Semantic Segmentation on Medical Image
-date: 2025-04-16 12:00:00
+published: 2025-04-16 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"

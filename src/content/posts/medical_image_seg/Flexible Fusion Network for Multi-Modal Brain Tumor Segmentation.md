@@ -1,6 +1,6 @@
 ---
 title: Flexible Fusion Network for Multi-Modal Brain Tumor Segmentation
-date: 2025-07-08 17:38:00
+published: 2025-07-08 17:38:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "自动化脑肿瘤分割对于辅助脑疾病诊断和评估疾病进展至关重要"

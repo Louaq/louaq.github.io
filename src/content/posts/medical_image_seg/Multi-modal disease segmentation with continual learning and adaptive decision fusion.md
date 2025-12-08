@@ -1,6 +1,6 @@
 ---
 title: Multi-modal disease segmentation with continual learning and adaptive decision fusion
-date: 2025-07-31 16:15:00
+published: 2025-07-31 16:15:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态疾病分割对于患者的诊断和治疗至关重要"

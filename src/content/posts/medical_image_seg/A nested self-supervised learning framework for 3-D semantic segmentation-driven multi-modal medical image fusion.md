@@ -1,6 +1,6 @@
 ---
 title: A nested self-supervised learning framework for 3-D semantic segmentation-driven multi-modal medical image fusion
-date: 2025-07-02 09:34:00
+published: 2025-07-02 09:34:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征"

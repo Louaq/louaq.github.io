@@ -1,6 +1,6 @@
 ---
 title: Cross-Modality Interaction Network for Medical Image Fusion
-date: 2025-07-24 09:14:00
+published: 2025-07-24 09:14:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态医学图像融合通过整合源图像最大化来自不同模态图像的互补信息"

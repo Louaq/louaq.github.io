@@ -1,6 +1,6 @@
 ---
 title: A Novel 3D Unsupervised Domain Adaptation Framework for Cross-Modality Medical Image Segmentation
-date: 2025-07-27 16:21:00
+published: 2025-07-27 16:21:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "我们考虑了跨模态医学图像分割中的体积（3D）无监督域适应（UDA）问题"

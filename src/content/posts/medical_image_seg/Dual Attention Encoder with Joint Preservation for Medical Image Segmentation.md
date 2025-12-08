@@ -1,6 +1,6 @@
 ---
 title: Dual Attention Encoder with Joint Preservation for Medical Image Segmentation
-date: 2025-05-26 12:28:21
+published: 2025-05-26 12:28:21
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "DANIE医学图像分割网络"

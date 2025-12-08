@@ -1,7 +1,7 @@
 ---
 title: Entropy-aware dynamic path selection network for multi-modality medical image fusion
-date: 2025-07-29 17:12:00
-expires: 2025-08-21 23:59:59
+published: 2025-07-29 17:12:00 
+expires: 2025-08-21 23:59:59  
 mathjax: true
 excerpt: "深度学习在多模态医学图像融合（MMIF）中取得了显著成功"
 categories: 多模态医学图像分割

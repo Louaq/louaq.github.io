@@ -1,6 +1,6 @@
 ---
 title: 代码复现记录BSAFusion
-date: 2025-08-01 08:45:00
+published: 2025-08-01 08:45:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "代码复现记录"

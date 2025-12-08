@@ -1,6 +1,6 @@
 ---
 title: FRP配合Nginx实现域名访问Windows远程桌面的配置方案
-date:  2025-06-08 21:10:00
+published:  2025-06-08 21:10:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 categories: frp

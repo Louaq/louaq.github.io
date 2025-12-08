@@ -1,6 +1,6 @@
 ---
 title: FPL+ Filtered Pseudo Label-Based Unsupervised Cross-Modality Adaptation for 3D Medical Image Segmentation
-date: 2025-07-18 16:27:00
+published: 2025-07-18 16:27:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "将医学图像分割模型适应到新的领域对于提高其跨领域的可迁移性至关重要"

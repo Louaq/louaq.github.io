@@ -1,6 +1,6 @@
 ---
 title: MATR Multimodal Medical Image Fusion via Multiscale Adaptive Transformer
-date: 2025-07-25 13:59:00
+published: 2025-07-25 13:59:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态医学图像融合是一种将不同模态中的互补信息合并的有效方法"

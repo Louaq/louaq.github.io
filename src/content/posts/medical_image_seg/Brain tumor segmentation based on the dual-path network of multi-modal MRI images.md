@@ -1,6 +1,6 @@
 ---
 title: Brain tumor segmentation based on the dual-path network of multi-modal MRI images
-date: 2025-07-19 12:00:00
+published: 2025-07-19 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "由于肿瘤呈浸润性生长，胶质瘤的边界通常与脑组织融合"

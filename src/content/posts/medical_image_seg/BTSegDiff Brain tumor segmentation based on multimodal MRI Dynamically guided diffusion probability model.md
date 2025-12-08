@@ -1,6 +1,6 @@
 ---
 title: BTSegDiff Brain tumor segmentation based on multimodal MRI Dynamically guided diffusion probability model
-date: 2025-07-06 20:30:00
+published: 2025-07-06 20:30:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "在脑肿瘤的治疗中，准确的诊断和治疗严重依赖于可靠的脑肿瘤分割，而多模态磁共振成像（MRI）通过提供有价值的补充信息发挥关键作用"

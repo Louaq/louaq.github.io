@@ -1,6 +1,6 @@
 ---
 title: Automatic Brain Segmentation for PET/MR Dual-Modal Images Through a Cross-Fusion Mechanism
-date: 2025-07-10 17:23:00
+published: 2025-07-10 17:23:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "不同脑区和组织的精确分割通常是神经科学中检测和诊断各种神经系统疾病的前提"

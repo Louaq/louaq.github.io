@@ -1,6 +1,6 @@
 ---
 title: A cascaded framework with cross-modality transfer learning for whole heart segmentation
-date: 2025-07-22 16:57:00
+published: 2025-07-22 16:57:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "从三维心脏图像中自动且准确地分割整个心脏结构"

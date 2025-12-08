@@ -1,10 +1,10 @@
 ---
 title: Windows安装mamba
-date: 2025-08-23 15:25:00
+published: 2025-08-23 15:25:00
 expires: 2025-09-21 23:59:59
 mathjax: true
 excerpt: "Windows安装mamba"
-categories: Mamba
+category: Mamba
 tags: [Mamba]
 --- 
 

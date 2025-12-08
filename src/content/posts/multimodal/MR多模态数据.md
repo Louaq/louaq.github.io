@@ -1,6 +1,6 @@
 ---
 title: .nii数据的预处理
-date: 2025-07-09 21:30:00
+published: 2025-07-09 21:30:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "转换后的.npy文件数量与原始.nii文件数量的关系"

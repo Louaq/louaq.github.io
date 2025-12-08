@@ -1,6 +1,6 @@
 ---
 title: MLFuse Multi-Scenario Feature Joint Learning for Multi-Modality Image Fusion
-date: 2025-07-03 17:01:00
+published: 2025-07-03 17:01:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态图像融合(MMIF)需要合成具有详细纹理和突出目标的图像"

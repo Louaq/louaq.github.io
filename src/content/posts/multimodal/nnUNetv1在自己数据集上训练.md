@@ -1,6 +1,6 @@
 ---
 title: nnUNetv1在自己数据集上训练
-date: 2025-08-18 14:30:00
+published: 2025-08-18 14:30:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "nnUNetv1在自己数据集上训练"

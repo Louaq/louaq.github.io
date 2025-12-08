@@ -1,6 +1,6 @@
 ---
 title: A Simple and Robust Framework for Cross-Modality Medical Image Segmentation applied to Vision Transformers
-date: 2025-05-28 15:47:00
+published: 2025-05-28 15:47:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"

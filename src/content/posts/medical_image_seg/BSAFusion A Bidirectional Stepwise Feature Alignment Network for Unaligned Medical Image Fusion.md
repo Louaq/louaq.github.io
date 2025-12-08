@@ -1,6 +1,6 @@
 ---
 title: BSAFusion A Bidirectional Stepwise Feature Alignment Network for Unaligned Medical Image Fusion
-date: 2025-06-26 19:23:00
+published: 2025-06-26 19:23:00
 expires: 2025-08-21 23:59:59
 excerpt: "如果可以在统一的处理框架内使用单阶段方法同时对未对齐的多模态医学图像进行对齐和融合，不仅能实现双任务的相互促进，还能帮助降低模型的复杂性"
 mathjax: true

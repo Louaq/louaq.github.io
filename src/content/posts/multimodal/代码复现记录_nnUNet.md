@@ -1,6 +1,6 @@
 ---
 title: 代码复现记录nnUNet
-date: 2025-08-02 21:05:00
+published: 2025-08-02 21:05:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"

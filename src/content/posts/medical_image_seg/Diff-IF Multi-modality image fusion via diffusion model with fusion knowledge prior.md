@@ -1,6 +1,6 @@
 ---
 title: Diff-IF Multi-modality image fusion via diffusion model with fusion knowledge prior
-date: 2025-07-21 16:20:00
+published: 2025-07-21 16:20:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态图像融合（MMIF）旨在聚合来自不同源图像域的互补信息"

@@ -1,6 +1,6 @@
 ---
 title: BraTs2024数据集处理及python读取.nii文件
-date: 2025-08-12 21:05:00
+published: 2025-08-12 21:05:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "BraTs2024数据集"

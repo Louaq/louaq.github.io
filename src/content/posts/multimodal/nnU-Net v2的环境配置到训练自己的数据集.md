@@ -1,7 +1,7 @@
 ---
 title: nnU-Net v2的环境配置到训练自己的数据集
-date: 2025-08-18 20:13:00
-expires: 2025-08-21 23:59:59
+published: 2025-08-18 20:13:00
+expires: 2025-08-21 23:59:59  
 mathjax: true
 excerpt: "nnU-Net v2的环境配置到训练自己的数据集"
 categories: nnUNet

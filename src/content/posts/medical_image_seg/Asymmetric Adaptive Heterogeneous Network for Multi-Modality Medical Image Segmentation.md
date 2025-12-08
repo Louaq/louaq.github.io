@@ -1,6 +1,6 @@
 ---
 title: Asymmetric Adaptive Heterogeneous Network for Multi-Modality Medical Image Segmentation
-date: 2025-07-05 10:24:00
+published: 2025-07-05 10:24:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "现有的多模态医学图像分割研究往往在不加区分地聚合所有模态，并采用多个对称编码器或解码器进行特征提取和融合时"

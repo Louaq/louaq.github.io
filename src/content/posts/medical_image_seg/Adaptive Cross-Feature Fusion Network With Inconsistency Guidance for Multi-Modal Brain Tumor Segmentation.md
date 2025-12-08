@@ -1,6 +1,6 @@
 ---
 title: Adaptive Cross-Feature Fusion Network With Inconsistency Guidance for Multi-Modal Brain Tumor Segmentation
-date: 2025-07-16 12:00:00
+published: 2025-07-16 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "在当代人工智能背景下，近年来提出了越来越多基于深度学习（DL）的分割方法"

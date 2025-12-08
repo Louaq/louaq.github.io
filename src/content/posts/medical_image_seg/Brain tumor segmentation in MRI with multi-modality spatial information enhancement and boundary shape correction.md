@@ -1,6 +1,6 @@
 ---
 title: Brain tumor segmentation in MRI with multi-modality spatial information enhancement and boundary shape correction
-date: 2025-07-16 19:28:00
+published: 2025-07-16 19:28:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "脑肿瘤分割在医学研究和临床诊断中具有优先指导意义"

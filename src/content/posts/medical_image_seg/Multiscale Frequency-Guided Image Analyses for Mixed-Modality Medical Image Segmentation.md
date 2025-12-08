@@ -1,6 +1,6 @@
 ---
 title: Multiscale Frequency-Guided Image Analyses for Mixed-Modality Medical Image Segmentation
-date: 2025-07-28 17:20:00
+published: 2025-07-28 17:20:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "不同成像仪器生成的医学图像通常具有不同的模态"

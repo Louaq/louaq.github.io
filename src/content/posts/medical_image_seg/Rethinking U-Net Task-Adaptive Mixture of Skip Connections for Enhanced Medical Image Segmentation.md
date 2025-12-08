@@ -1,6 +1,6 @@
 ---
 title: Rethinking U-Net Task-Adaptive Mixture of Skip Connections for Enhanced Medical Image Segmentation
-date: 2025-06-23 10:37:00
+published: 2025-06-23 10:37:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "混合专家系统（Mixture of Experts, MoE）"

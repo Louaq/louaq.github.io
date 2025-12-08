@@ -1,6 +1,6 @@
 ---
 title: MACTFusion Lightweight Cross Transformer for Adaptive Multimodal Medical Image Fusion
-date: 2025-07-07 17:18:00
+published: 2025-07-07 17:18:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "多模态医学图像融合旨在整合来自不同医学图像模态的互补信息"
