@@ -8,6 +8,9 @@ export const commentConfig: CommentConfig = {
     lang: "zh-CN", // 设置 Twikoo 评论系统语言
     visitorCount: true, // 文章访问量统计功能。
   },
+
+
+
   //waline评论系统配置
   waline: {
     serverURL: "https://waline-comments-inky.vercel.app",
