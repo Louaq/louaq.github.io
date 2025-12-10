@@ -9,8 +9,6 @@ export const commentConfig: CommentConfig = {
     visitorCount: true, // 文章访问量统计功能。
   },
 
-
-
   //waline评论系统配置
   waline: {
     serverURL: "https://waline-comments-inky.vercel.app",
