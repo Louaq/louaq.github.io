@@ -52,6 +52,7 @@
     "node-html-parser": "^7.0.1",
     "overlayscrollbars": "^2.13.0",
     "pagefind": "^1.4.0",
+    "pdfjs-dist": "^5.4.449",
     "photoswipe": "^5.4.4",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
