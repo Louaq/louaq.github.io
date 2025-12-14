@@ -12,7 +12,7 @@ tags: [nnUNet]
 
 > paper: https://www.nature.com/articles/s41592-020-01008-z
 
-> github: https://github.com/MIC-DKFZ/[nnUNet](https://so.csdn.net/so/search?q=nnUNet&spm=1001.2101.3001.7020)
+> github: https://github.com/MIC-DKFZ/nnUNet
 
 ## 复现步骤：
 
