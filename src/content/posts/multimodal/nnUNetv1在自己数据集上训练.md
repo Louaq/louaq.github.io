@@ -35,7 +35,7 @@ pip install -e .  #最后这个点也不能忽略
 
 切换到nnUNetFrame文件夹中创建**DATASET**文件夹，并在**DATASET**文件夹下创建nnUNet\_preprocessed，nnUNet\_raw， nnUNet\_trained\_models文件夹，在文件夹nnUNet\_raw，创建nnUNet\_cropped\_data文件夹和nnUNet\_raw\_data文件夹，文件夹结构如下：  
 
-![](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/acb51b0c6bbe4ed2bc060066443a7652.png)
+![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/acb51b0c6bbe4ed2bc060066443a7652.png)
 
 
 
