@@ -155,7 +155,7 @@ export const siteConfig: SiteConfig = {
 				},
 				performance: {
 					quality: "high",
-					hardwareAcceleration: true, // 是否启用硬件加速
+					hardwareAcceleration: false, // 是否启用硬件加速  
 				},
 				// 性能优化说明：
 				// quality: "high" - 最佳视觉效果，但GPU占用较高，适合高性能设备
