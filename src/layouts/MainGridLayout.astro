@@ -1,5 +1,6 @@
 ---
 import BackToTop from "@components/common/controls/BackToTop.astro";
+import OverlayWallpaper from "@components/interactive/OverlayWallpaper.astro";
 import Footer from "@components/layout/Footer.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
@@ -11,7 +12,6 @@ import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
 import TypewriterText from "@/components/content/TypewriterText.astro";
 import FloatingTOC from "@/components/interactive/FloatingTOC.astro";
-import FullscreenWallpaper from "@/components/misc/FullscreenWallpaper.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
 import ImageWrapper from "@/components/misc/ImageWrapper.astro";
 import { live2dModelConfig, siteConfig } from "@/config";
@@ -164,7 +164,7 @@ const navbarWidthFull = siteConfig.navbarWidthFull ?? false;
 
 <!-- 全屏透明覆盖壁纸 - 如果允许切换则始终渲染，否则只渲染当前模式 -->
 {(isWallpaperSwitchable || isOverlayMode) && (
-	<FullscreenWallpaper config={{
+	<OverlayWallpaper config={{
 		src: {
 			desktop: typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : '',
 			mobile: typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : ''
