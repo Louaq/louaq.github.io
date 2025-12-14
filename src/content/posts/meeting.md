@@ -12,12 +12,12 @@ pinned: true
 # 组会内容
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
-| 20250401 | 图像分割 | <a href="/public/assets/pdf/汇报_0401.pdf" target="_blank">汇报_0401</a> |
-| 20250415 | 图像分割 | <a href="/public/assets/pdf/汇报_0415.pdf" target="_blank">汇报_0415</a> |
-| 20250723 | 图像分割 | <a href="/public/assets/pdf/汇报_0723.pdf" target="_blank">汇报_0723</a> |
-| 20250731 | 脑肿瘤分割 | <a href="/public/assets/pdf/汇报_0731.pdf" target="_blank">汇报_0731</a> |
-| 20251113 | 脑肿瘤分割 | <a href="/public/assets/pdf/20251113论文复现代码.pdf" target="_blank">论文复现代码</a> |
-| 20251127 | 脑肿瘤分割 | <a href="/public/assets/pdf/汇报_1127.pdf" target="_blank">汇报_1127</a> |
+| 20250401 | 图像分割 | <a href="/assets/pdf/汇报_0401.pdf" target="_blank">汇报_0401</a> |
+| 20250415 | 图像分割 | <a href="/assets/pdf/汇报_0415.pdf" target="_blank">汇报_0415</a> |
+| 20250723 | 图像分割 | <a href="/assets/pdf/汇报_0723.pdf" target="_blank">汇报_0723</a> |
+| 20250731 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_0731.pdf" target="_blank">汇报_0731</a> |
+| 20251113 | 脑肿瘤分割 | <a href="/assets/pdf/20251113论文复现代码.pdf" target="_blank">论文复现代码</a> |
+| 20251127 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_1127.pdf" target="_blank">汇报_1127</a> |
 
 # CCF分区信息
 | 时间 | 内容 | PDF |
