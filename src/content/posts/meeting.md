@@ -22,5 +22,5 @@ pinned: true
 # CCF分区信息
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
-| 2022 | 中国计算机学会推荐国际学术会议和期刊目录 | <a href="/public/assets/pdf/中国计算机学会推荐国际学术会议和期刊目录-2022更名版.pdf" target="_blank">CCF分区</a> |
-| 2025 | 中文期刊分区 | <a href="/public/assets/pdf/【2025】计算领域高质量科技期刊分级目录.pdf" target="_blank">计算领域高质量科技期刊分级目录</a> |
+| 2022 | 中国计算机学会推荐国际学术会议和期刊目录 | <a href="/assets/pdf/中国计算机学会推荐国际学术会议和期刊目录-2022更名版.pdf" target="_blank">CCF分区</a> |
+| 2025 | 中文期刊分区 | <a href="/assets/pdf/【2025】计算领域高质量科技期刊分级目录.pdf" target="_blank">计算领域高质量科技期刊分级目录</a> |
