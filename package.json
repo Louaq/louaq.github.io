@@ -33,7 +33,7 @@
     "@iconify-json/fa6-regular": "^1.2.4",
     "@iconify-json/fa6-solid": "^1.2.4",
     "@iconify-json/material-symbols": "^1.2.50",
-    "@iconify-json/simple-icons": "^1.2.62",
+    "@iconify-json/simple-icons": "^1.2.63",
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.7.0",
     "@tailwindcss/typography": "^0.5.16",
@@ -68,7 +68,7 @@
     "satori": "^0.18.2",
     "sharp": "^0.34.5",
     "stylus": "^0.64.0",
-    "svelte": "^5.45.10",
+    "svelte": "^5.46.0",
     "tailwindcss": "^3.4.19",
     "typescript": "^5.9.2",
     "unist-util-visit": "^5.0.0"
