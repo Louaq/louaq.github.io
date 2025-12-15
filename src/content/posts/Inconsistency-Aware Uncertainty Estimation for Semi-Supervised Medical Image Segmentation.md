@@ -10,8 +10,10 @@ image: https://pic1.imgdb.cn/item/6919c4403203f7be000aeb22.jpg
 ---
 
 
+:::note
+理论性较强！！！
+:::
 
-> 理论性较强！！！
 
 ## 摘要
 
