@@ -5,7 +5,6 @@ expires: 2025-12-21 23:59:59
 mathjax: true
 category: 半监督医学图像分割
 tags: [Medical Image Segmentation]
-pinned: true
 image: https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1e.jpg
 
 ---
