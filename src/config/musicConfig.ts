@@ -3,7 +3,7 @@ import type { MusicPlayerConfig } from "../types/config";
 // 音乐播放器配置
 export const musicPlayerConfig: MusicPlayerConfig = {
   // 基础功能开关
-  enable: false, // 启用音乐播放器功能
+  enable: true, // 启用音乐播放器功能
 
 	// 使用方式：'meting' 或 'local'
 	mode: "meting", // "meting" 使用 Meting API，"local" 使用本地音乐列表
@@ -21,7 +21,7 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 		type: "playlist",
 
 		// 歌单/专辑/单曲 ID 或搜索关键词
-		id: "10046455237", // 网易云音乐歌单ID示例
+		id: "2321957752", // 网易云音乐歌单ID示例
 
 		// 认证 token（可选）
 		auth: "",
@@ -97,7 +97,7 @@ export const musicPlayerConfig: MusicPlayerConfig = {
 		// 移动端配置
 		mobile: {
 			// 在移动端是否隐藏
-			hide: false,
+			hide: true,
 
 			// 移动端断点（小于此宽度时应用移动端配置）
 			breakpoint: 768,
