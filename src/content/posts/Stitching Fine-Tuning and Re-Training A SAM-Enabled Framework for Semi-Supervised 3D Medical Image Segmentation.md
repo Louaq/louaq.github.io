@@ -8,6 +8,11 @@ category: 半监督医学图像分割
 tags: [SAM]
 ---
 
+
+:::note
+代码不完整，缺少文件，不能复现
+:::
+
 ## 摘要
 
 Segment Anything Model (SAM) fine-tuning has shown remarkable performance in medical image segmentation in a fully supervised manner, but requires precise annotations. To reduce the annotation cost and maintain satisfactory performance, in this work, we leverage the capabilities of SAM for establishing semi-supervised medical image segmentation models. Rethinking the requirements of effectiveness, efficiency, and compatibility, we propose a three-stage framework, i.e., Stitching, Fine-tuning, and Re-training (SFR). The current fine-tuning approaches mostly involve 2D slice-wise fine-tuning that disregards the contextual information between adjacent slices. Our stitching strategy mitigates the mismatch between natural and 3D medical images. The stitched images are then used for fine-tuning SAM, providing robust initialization of pseudo-labels. Afterwards, we train a 3D semi-supervised segmentation model while maintaining the same parameter size as the conventional segmenter such as V-Net. Our SFR framework is plug-and-play, and easily compatible with various popular semi-supervised methods. We also develop an extended framework SFR+ with selective fine-tuning and re-training through confidence estimation. Extensive experiments validate that our SFR and SFR+ achieve significant improvements in both moderate annotation and scarce annotation across five datasets. In particular, SFR framework improves the Dice score of Mean Teacher from 29.68% to 74.40% with only one labeled data of LA dataset. The code is available at https://github.com/ShumengLI/SFR
