@@ -17,6 +17,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import PostMetadata from "@/components/content/PostMeta.astro";
 import RandomCoverImage from "@/components/misc/RandomCoverImage.astro";
+import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
 import { profileConfig } from "@/config/profileConfig";
 import { siteConfig } from "@/config/siteConfig";
@@ -163,7 +164,7 @@ const jsonLd = {
       <!-- always show cover as long as it has one -->
 
       {
-        processedImage && (
+        processedImage && coverImageConfig.enableInPost && (
           <div style="margin-top:1rem;">
             <RandomCoverImage
               id="post-cover"
