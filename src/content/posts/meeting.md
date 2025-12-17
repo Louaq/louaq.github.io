@@ -1,7 +1,7 @@
 ---
 title: 组会汇报
-published: 2025-11-24 12:00:00
-expires: 2025-12-21 23:59:59
+published: 2025-12-17 21:29:00
+expires: 2025-12-31 23:59:59
 mathjax: true
 category: 汇报
 tags: [组会]
@@ -21,7 +21,7 @@ pinned: true
 | 20250731 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_0731.pdf" target="_blank">汇报_0731</a> |
 | 20251113 | 脑肿瘤分割 | <a href="/assets/pdf/20251113论文复现代码.pdf" target="_blank">论文复现代码</a> |
 | 20251127 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_1127.pdf" target="_blank">汇报_1127</a> |
-
+| 20251217 | 医学图像融合 | <a href="/assets/pdf/汇报_1217.pdf" target="_blank">汇报_1217</a> |
 :::note
  CCF分区信息
 :::
