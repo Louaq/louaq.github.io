@@ -13,13 +13,13 @@ description: "与优秀的朋友们一起成长"
 站点名称: louaq
 站点描述: 致力于探索如何利用计算机视觉和深度学习技术
 站点链接: https://louaq.io/
-头像链接: https://vip.123pan.cn/1816472581/ymjew503t0n000d6xuk03nb9gzw3hp0dDIYPAqF0DqJ1DGxwDIiw.jpg
+头像链接: https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.jpg
 
 ```
 
 ## ✉️申请友链
 
-请将您的网站信息发送邮件至：`yang_syy@qq.com`
+请将您的网站信息发送邮件至：`astroal@qq.com`
 
 **邮件标题**：`友链申请 - [您的站点名称]`
 
