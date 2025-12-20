@@ -8,7 +8,7 @@ const SITE_LANG = "zh_CN";
 export const siteConfig: SiteConfig = {
   title: "Louaq",
   subtitle: "论文阅读笔记",
-  site_url: "https://louaq.io/",
+  site_url: "https://louaq.io",
 
   description:
     "注于多模态医学图像领域的研究者与爱好者。在这个日新月异的医学影像技术世界里，我希望通过这个小小的平台，与大家分享我对前沿论文的阅读心得、技术分析以及实践经验",
