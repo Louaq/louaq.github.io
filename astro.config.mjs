@@ -32,7 +32,7 @@ import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 
 // https://astro.build/config
 export default defineConfig({
-	site: "https://louaq.github.io",
+	site: "https://louaq.io",
 
 	base: "",
 	trailingSlash: "always",
