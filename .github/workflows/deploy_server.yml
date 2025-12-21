@@ -57,11 +57,11 @@ jobs:
           script_stop: true
           script: |
             # 确保目标目录存在并设置权限
-            sudo mkdir -p /root/www/visualmedical.org
-            sudo chown -R root:www-data /root/www/visualmedical.org
+            sudo mkdir -p /opt/1panel/www/sites/visualmedical.org/index
+            sudo chown -R root:www-data /opt/1panel/www/sites/visualmedical.org/index
             
             # 清理目标目录
-            sudo rm -rf /root/www/visualmedical.org/*
+            sudo rm -rf /opt/1panel/www/sites/visualmedical.org/index/*
             
             # 清理临时文件（如果有）
             rm -rf /tmp/dist
@@ -74,7 +74,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 45663  # 使用正确的 SSH 端口
           source: 'dist/*'
-          target: '/root/www/visualmedical.org/'
+          target: '/opt/1panel/www/sites/visualmedical.org/index/'
           strip_components: 1
 
       - name: 🔧 设置权限
@@ -87,8 +87,8 @@ jobs:
           script_stop: true
           script: |
             # 设置正确的权限
-            chmod -R 755 /root/www/visualmedical.org
-            sudo chown -R root:www-data /root/www/visualmedical.org
+            chmod -R 755 /opt/1panel/www/sites/visualmedical.org/index/
+            sudo chown -R root:www-data /opt/1panel/www/sites/visualmedical.org/index/
             
             echo "✅ 部署完成！"
 
