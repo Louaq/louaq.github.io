@@ -18,13 +18,35 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          cache: 'npm'
+          # 对于pnpm项目不使用npm缓存
+          # cache: 'pnpm'
+          # cache-dependency-path: 'pnpm-lock.yaml'
+
+      - name: 📦 安装 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8  # 使用最新的 pnpm 8.x 版本，根据您的需要调整
+          run_install: false
+
+      - name: 📦 获取 pnpm 存储目录
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 🔄 设置 pnpm 缓存
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
       - name: 📦 安装依赖
-        run: npm ci
+        run: pnpm install
 
       - name: 🔨 构建项目
-        run: npm run build
+        run: pnpm build
         env:
           NODE_ENV: production
 
@@ -52,7 +74,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: 'dist/*'
+          source: 'dist/*'  # Astro 默认输出到 dist 目录
           target: '/root/www/visualmedical.org/'
           strip_components: 1
 
