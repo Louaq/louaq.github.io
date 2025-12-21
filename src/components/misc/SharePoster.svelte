@@ -33,34 +33,23 @@ onMount(() => {
 	}
 });
 
-function loadImage(src: string): Promise<HTMLImageElement> {
+function loadImage(src: string): Promise<HTMLImageElement | null> {
 	return new Promise((resolve) => {
 		const img = new Image();
 		img.crossOrigin = "anonymous";
 		img.onload = () => resolve(img);
 		img.onerror = () => {
 			if (!src.includes("images.weserv.nl")) {
-				console.warn(
-					`Failed to load image directly, retrying with proxy: ${src}`,
-				);
 				const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(src)}&output=png`;
 				const proxyImg = new Image();
 				proxyImg.crossOrigin = "anonymous";
 				proxyImg.onload = () => resolve(proxyImg);
 				proxyImg.onerror = () => {
-					console.warn(`Failed to load image with proxy: ${src}`);
-					const fallback = new Image();
-					fallback.src =
-						"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-					fallback.onload = () => resolve(fallback);
+					resolve(null);
 				};
 				proxyImg.src = proxyUrl;
 			} else {
-				console.warn(`Failed to load image: ${src}`);
-				const fallback = new Image();
-				fallback.src =
-					"data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-				fallback.onload = () => resolve(fallback);
+				resolve(null);
 			}
 		};
 		img.src = src;
