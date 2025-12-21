@@ -3,7 +3,7 @@ title: Semi-Supervised Medical Image Segmentation Using Adversarial Consistency 
 published: 2025-12-17 16:32:00
 expires: 2025-12-31 23:59:59
 mathjax: true
-excerpt: "流行的半监督医学图像"
+description: "流行的半监督医学图像"
 category: 半监督医学图像分割
 tags: [TMI]
 ---

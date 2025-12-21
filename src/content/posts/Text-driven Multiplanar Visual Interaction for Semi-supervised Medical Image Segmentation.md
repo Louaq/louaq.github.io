@@ -3,7 +3,7 @@ title: Text-driven Multiplanar Visual Interaction for Semi-supervised Medical Im
 published: 2025-12-15 15:34:00
 expires: 2025-21-31 23:59:59
 mathjax: true
-excerpt: "半监督医学图像分割"
+description: "半监督医学图像分割"
 category: 半监督
 tags: [医学图像分割]
 ---

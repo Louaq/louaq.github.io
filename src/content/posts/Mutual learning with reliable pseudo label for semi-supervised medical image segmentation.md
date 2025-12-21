@@ -3,6 +3,7 @@ title: Mutual learning with reliable pseudo label for semi-supervised medical im
 published: 2025-11-27 14:00:00
 expires: 2025-12-21 23:59:59
 category: 半监督医学图像分割
+description: Semi-supervised learning has garnered
 tags: [Medical Image Segmentation, Dual Attention Encoder]
 ---
 

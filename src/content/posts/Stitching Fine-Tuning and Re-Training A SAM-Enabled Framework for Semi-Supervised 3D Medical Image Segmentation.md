@@ -3,7 +3,7 @@ title: Stitching Fine-Tuning and Re-Training A SAM-Enabled Framework for Semi-Su
 published: 2025-12-16 14:44:00
 expires: 2025-12-31 23:59:59
 mathjax: true
-excerpt: "Segment Anything Model（SAM）"
+description: "Segment Anything Model（SAM）"
 category: 半监督医学图像分割
 tags: [SAM]
 ---

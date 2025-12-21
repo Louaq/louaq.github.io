@@ -3,7 +3,7 @@ title: AMVLM Alignment-Multiplicity Aware Vision-Language Model for Semi-Supervi
 published: 2025-12-19 15:38:00
 expires: 2025-12-31 23:59:59
 mathjax: true
-excerpt: "在半监督医学图像分割（SSMIS）中"
+description: "在半监督医学图像分割（SSMIS）中"
 category: 文本引导半监督医学图像分割
 tags: [TMI]
 ---

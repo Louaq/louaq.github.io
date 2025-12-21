@@ -109,18 +109,38 @@ async function generatePoster() {
 	generating = true;
 	try {
 		const scale = 2;
-		const width = 425 * scale;
-		const padding = 24 * scale;
+		const width = 450 * scale;
+		const padding = 32 * scale;
 
 		// 1. Prepare resources
 		const qrCodeUrl = await QRCode.toDataURL(url, {
-			margin: 1,
-			width: 100 * scale,
+			margin: 0,
+			width: 120 * scale,
 			color: { dark: "#000000", light: "#ffffff" },
 		});
+		
+		// 多张固定默认图片，随机选择一张
+		const defaultCoverImages = [
+			"https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb15.jpg",
+			"https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1e.jpg",
+			"https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1b.jpg",
+			"https://pic1.imgdb.cn/item/6919c43e3203f7be000aeb1a.jpg",
+			"https://pic1.imgdb.cn/item/6919c43e3203f7be000aeb19.jpg",
+			"https://pic1.imgdb.cn/item/6919c4403203f7be000aeb22.jpg",
+			"https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb16.jpg"
+		];
+		// 根据标题生成一个稳定的随机索引（同一标题总是选择相同的图片）
+		const hashCode = title.split('').reduce((acc, char) => {
+			return ((acc << 5) - acc) + char.charCodeAt(0);
+		}, 0);
+		const randomIndex = Math.abs(hashCode) % defaultCoverImages.length;
+		const defaultCoverImage = defaultCoverImages[randomIndex];
+		
+		const finalCoverImage = coverImage || defaultCoverImage;
+		
 		const [qrImg, coverImg, avatarImg] = await Promise.all([
 			loadImage(qrCodeUrl),
-			coverImage ? loadImage(coverImage) : Promise.resolve(null),
+			loadImage(finalCoverImage),
 			avatar ? loadImage(avatar) : Promise.resolve(null),
 		]);
 
@@ -130,102 +150,89 @@ async function generatePoster() {
 		if (!ctx) throw new Error("Canvas context not available");
 
 		canvas.width = width;
-		// Initial height estimation, will be adjusted
-		canvas.height = 1000 * scale;
+		canvas.height = 1200 * scale;
+
+		// Parse Date - 使用当前系统日期
+		let dateObj: { day: string; month: string; year: string } | null = null;
+		try {
+			const d = new Date(); // 使用当前系统时间
+			dateObj = {
+				day: d.getDate().toString().padStart(2, "0"),
+				month: (d.getMonth() + 1).toString().padStart(2, "0"),
+				year: d.getFullYear().toString(),
+			};
+		} catch (e) {}
 
 		// 3. Layout Calculation
 		const contentWidth = width - padding * 2;
-		let currentY = 0;
+		let currentY = padding; // 从顶部padding开始，不再有header
 
-		// Cover
-		const coverHeight = (coverImage ? 200 : 120) * scale;
+		// Cover image area (always show with default image)
+		const coverHeight = 280 * scale;
 		currentY += coverHeight;
-		currentY += padding; // Gap after cover
+		currentY += padding * 1.5;
 
-		// Meta (Date on Cover) - No extra height needed
+		// Title and info section (需要为右侧日历留出空间)
+		const dateBoxW = 80 * scale; // 日历宽度稍微增大
+		const dateBoxH = 80 * scale; // 日历高度稍微增大
+		const infoContentWidth = contentWidth - dateBoxW - padding; // 文字区域宽度减去日历宽度
 
 		// Title
-		ctx.font = `700 ${24 * scale}px 'Roboto', sans-serif`;
-		const titleLines = getLines(ctx, title, contentWidth);
-		const titleLineHeight = 30 * scale;
-		const titleHeight = titleLines.length * titleLineHeight;
+		ctx.font = `700 ${32 * scale}px 'Roboto', sans-serif`; // 字体从26增大到32
+		const titleLines = getLines(ctx, title, infoContentWidth);
+		const titleLineHeight = 44 * scale; // 行高从36增大到44
+		const titleHeight = Math.min(titleLines.length, 3) * titleLineHeight;
 		currentY += titleHeight;
-		currentY += 16 * scale; // Gap
+		currentY += padding; // Gap
 
 		// Description
 		let descHeight = 0;
 		if (description) {
-			ctx.font = `${14 * scale}px 'Roboto', sans-serif`;
-			const descLines = getLines(ctx, description, contentWidth - 16 * scale); // minus border width and gap
-			// Limit to 6 lines
-			const maxDescLines = 6;
+			ctx.font = `400 ${18 * scale}px 'Roboto', sans-serif`; // 字体从15增大到18
+			const descLines = getLines(ctx, description, infoContentWidth);
+			const maxDescLines = 4;
 			const displayDescLines = descLines.slice(0, maxDescLines);
-			const descLineHeight = 25 * scale; // 1.8 line-height approx
+			const descLineHeight = 30 * scale; // 行高从26增大到30
 			descHeight = displayDescLines.length * descLineHeight;
 			currentY += descHeight;
-			// currentY += 24 * scale; // Gap to footer (Removed to reduce whitespace)
-		} else {
-			currentY += 8 * scale; // Smaller gap if no desc
+			currentY += padding * 1.5; // 减少描述后的间距，从1.5改为0.5
 		}
 
-		// Footer (Author + QR)
-		// Footer top border + padding
-		currentY += 24 * scale;
-		const footerHeight = 64 * scale; // Avatar/QR height
+		// Footer
+		const footerHeight = 80 * scale;
 		currentY += footerHeight;
-		currentY += padding; // Bottom padding
+		currentY += padding * 0.2; // 减少底部padding，从padding改为padding * 0.5
 
 		// 4. Resize Canvas to fit content
 		canvas.height = currentY;
 
 		// 5. Draw Content
-		// Fill Background
-		ctx.fillStyle = "#ffffff";
+		// Fill Background with soft color
+		const gradient1 = ctx.createLinearGradient(0, 0, 0, canvas.height);
+		gradient1.addColorStop(0, "#f0f9f4");
+		gradient1.addColorStop(1, "#fafbfc");
+		ctx.fillStyle = gradient1;
 		ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-		// Draw Decorative Circles
-		ctx.save();
-		ctx.globalAlpha = 0.1;
-		ctx.fillStyle = themeColor;
+		// 移除顶部header装饰
 
-		// Top Right Circle
-		// CSS: top: -50px, right: -50px, width: 150px, height: 150px
-		// Radius = 75px
-		// Center X = width + 50 - 75 = width - 25
-		// Center Y = -50 + 75 = 25
-		ctx.beginPath();
-		ctx.arc(width - 25 * scale, 25 * scale, 75 * scale, 0, Math.PI * 2);
-		ctx.fill();
+		// Reset Y for content (从顶部padding开始)
+		let drawY = padding;
 
-		// Bottom Left Circle
-		// Adjusted to cover the avatar
-		ctx.beginPath();
-		ctx.arc(10 * scale, canvas.height - 10 * scale, 50 * scale, 0, Math.PI * 2);
-		ctx.fill();
-		ctx.restore();
-
-		// Parse Date
-		let dateObj: { day: string; month: string; year: string } | null = null;
-		try {
-			const d = new Date(pubDate);
-			if (!Number.isNaN(d.getTime())) {
-				dateObj = {
-					day: d.getDate().toString().padStart(2, "0"),
-					month: (d.getMonth() + 1).toString().padStart(2, "0"),
-					year: d.getFullYear().toString(),
-				};
-			}
-		} catch (e) {}
-
-		// Draw Cover
+		// Draw Cover Image with enhanced styling (always show)
 		if (coverImg) {
+			ctx.save();
+			
+			// Rounded rectangle clip for cover
+			const coverY = drawY;
+			const coverRadius = 14 * scale;
+			drawRoundedRect(ctx, padding, coverY, contentWidth, coverHeight, coverRadius);
+			ctx.clip();
+
 			// Object-fit: cover implementation
 			const imgRatio = coverImg.width / coverImg.height;
-			const targetRatio = width / coverHeight;
-			let sx: number;
-			let sy: number;
-			let sWidth: number;
-			let sHeight: number;
+			const targetRatio = contentWidth / coverHeight;
+			let sx: number, sy: number, sWidth: number, sHeight: number;
 
 			if (imgRatio > targetRatio) {
 				sHeight = coverImg.height;
@@ -238,202 +245,317 @@ async function generatePoster() {
 				sx = 0;
 				sy = (coverImg.height - sHeight) / 2;
 			}
-			ctx.drawImage(
-				coverImg,
-				sx,
-				sy,
-				sWidth,
-				sHeight,
-				0,
-				0,
-				width,
-				coverHeight,
-			);
-		} else {
-			ctx.save();
-			ctx.fillStyle = themeColor;
-			ctx.globalAlpha = 0.2;
-			ctx.fillRect(0, 0, width, coverHeight);
+			
+			ctx.drawImage(coverImg, sx, sy, sWidth, sHeight, padding, coverY, contentWidth, coverHeight);
 			ctx.restore();
-		}
 
-		// Draw Date Overlay
-		if (dateObj) {
-			const dateBoxW = 60 * scale;
-			const dateBoxH = 60 * scale;
-			const dateBoxX = padding;
-			const dateBoxY = coverHeight - dateBoxH;
-
-			// Background (Semi-transparent black)
-			ctx.fillStyle = "rgba(0, 0, 0, 0.3)";
-			drawRoundedRect(ctx, dateBoxX, dateBoxY, dateBoxW, dateBoxH, 4 * scale);
-			ctx.fill();
-
-			// Day
-			ctx.fillStyle = "#ffffff";
-			ctx.textAlign = "center";
-			ctx.textBaseline = "middle";
-			ctx.font = `700 ${30 * scale}px 'Roboto', sans-serif`;
-			ctx.fillText(dateObj.day, dateBoxX + dateBoxW / 2, dateBoxY + 24 * scale);
-
-			// Line
-			ctx.beginPath();
-			ctx.strokeStyle = "rgba(255, 255, 255, 0.6)";
-			ctx.lineWidth = 1 * scale;
-			ctx.moveTo(dateBoxX + 10 * scale, dateBoxY + 42 * scale);
-			ctx.lineTo(dateBoxX + dateBoxW - 10 * scale, dateBoxY + 42 * scale);
+			// Enhanced cover border with gradient
+			ctx.save();
+			const borderGradient = ctx.createLinearGradient(padding, coverY, padding, coverY + coverHeight);
+			borderGradient.addColorStop(0, "rgba(0, 0, 0, 0.08)");
+			borderGradient.addColorStop(1, "rgba(0, 0, 0, 0.03)");
+			ctx.strokeStyle = borderGradient;
+			ctx.lineWidth = 2 * scale;
+			drawRoundedRect(ctx, padding, coverY, contentWidth, coverHeight, coverRadius);
 			ctx.stroke();
+			ctx.restore();
+			
+			// Add subtle inner shadow effect
+			ctx.save();
+			ctx.globalCompositeOperation = "multiply";
+			ctx.globalAlpha = 0.03;
+			const shadowGradient = ctx.createLinearGradient(padding, coverY, padding, coverY + 30 * scale);
+			shadowGradient.addColorStop(0, "rgba(0, 0, 0, 0.3)");
+			shadowGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+			ctx.fillStyle = shadowGradient;
+			drawRoundedRect(ctx, padding, coverY, contentWidth, 30 * scale, coverRadius);
+			ctx.fill();
+			ctx.restore();
 
-			// Year Month
-			ctx.font = `${10 * scale}px 'Roboto', sans-serif`;
-			ctx.fillText(
-				`${dateObj.year} ${dateObj.month}`,
-				dateBoxX + dateBoxW / 2,
-				dateBoxY + 51 * scale,
-			);
+			drawY += coverHeight + padding * 1.5;
 		}
 
-		// Reset Y for drawing
-		let drawY = coverHeight + padding;
+		// 记录标题开始位置，用于计算日历位置
+		const titleStartY = drawY;
 
-		// Draw Title
+		// Draw Title with enhanced shadow and highlight
 		ctx.textBaseline = "top";
 		ctx.textAlign = "left";
-		ctx.font = `700 ${24 * scale}px 'Roboto', sans-serif`;
-		ctx.fillStyle = "#111827";
-		titleLines.forEach((line) => {
+		ctx.save();
+		
+		// Multiple shadow layers for depth
+		ctx.shadowColor = "rgba(0, 0, 0, 0.08)";
+		ctx.shadowBlur = 4 * scale;
+		ctx.shadowOffsetY = 2 * scale;
+		
+		ctx.font = `800 ${32 * scale}px 'Roboto', sans-serif`; // 增大字体
+		ctx.fillStyle = "#0f172a";
+		
+		titleLines.slice(0, 3).forEach((line, index) => {
+			// Add subtle highlight effect
+			if (index === 0) {
+				ctx.save();
+				ctx.globalAlpha = 0.5;
+				ctx.fillStyle = themeColor;
+				ctx.fillText(line, padding - 1 * scale, drawY - 1 * scale);
+				ctx.restore();
+			}
+			ctx.fillStyle = "#0f172a";
 			ctx.fillText(line, padding, drawY);
 			drawY += titleLineHeight;
 		});
-		drawY += 16 * scale - (titleLineHeight - 24 * scale); // Adjust for line-height diff
+		ctx.restore();
+		
+		// Add decorative underline for title
+		ctx.save();
+		const underlineGradient = ctx.createLinearGradient(padding, 0, padding + 60 * scale, 0);
+		underlineGradient.addColorStop(0, themeColor);
+		underlineGradient.addColorStop(1, "rgba(85, 142, 136, 0)");
+		ctx.fillStyle = underlineGradient;
+		ctx.fillRect(padding, drawY + 4 * scale, 60 * scale, 3 * scale);
+		ctx.restore();
+		
+		drawY += padding - titleLineHeight + (32 * scale); // 调整字体大小
 
-		// Draw Description
+		// Draw Description with enhanced styling
 		if (description) {
-			// Draw vertical line
-			ctx.fillStyle = "#e5e7eb";
-			const descLineH = descHeight; // Approximate
-			// Extend the line slightly above and below the text
-			drawRoundedRect(
-				ctx,
-				padding,
-				drawY - 8 * scale,
-				4 * scale,
-				descLineH + 8 * scale,
-				2 * scale,
-			);
-			ctx.fill();
+			// Add decorative quote mark or icon
+			ctx.save();
+			ctx.fillStyle = themeColor;
+			ctx.globalAlpha = 0.15;
+			ctx.font = `900 ${48 * scale}px 'Roboto', sans-serif`;
+			ctx.fillText('"', padding - 4 * scale, drawY - 12 * scale);
+			ctx.restore();
+			
+			// Description text with better spacing
+			ctx.font = `400 ${18 * scale}px 'Roboto', sans-serif`; // 增大字体
+			ctx.fillStyle = "#475569";
+			const descLines = getLines(ctx, description, infoContentWidth);
+			const maxDescLines = 4;
 
-			ctx.font = `${14 * scale}px 'Roboto', sans-serif`;
-			ctx.fillStyle = "#4b5563";
-			const descLines = getLines(ctx, description, contentWidth - 16 * scale);
-			const maxDescLines = 6;
-
-			descLines.slice(0, maxDescLines).forEach((line) => {
-				ctx.fillText(line, padding + 16 * scale, drawY);
-				drawY += 25 * scale; // line height
+			descLines.slice(0, maxDescLines).forEach((line, index) => {
+				// Add subtle fade effect on last line
+				if (index === maxDescLines - 1 && descLines.length > maxDescLines) {
+					ctx.save();
+					const fadeGradient = ctx.createLinearGradient(padding, drawY, padding + infoContentWidth, drawY);
+					fadeGradient.addColorStop(0, "#475569");
+					fadeGradient.addColorStop(0.8, "#475569");
+					fadeGradient.addColorStop(1, "rgba(71, 85, 105, 0)");
+					ctx.fillStyle = fadeGradient;
+					ctx.fillText(line + "...", padding, drawY);
+					ctx.restore();
+				} else {
+					ctx.fillText(line, padding, drawY);
+				}
+				drawY += 30 * scale; // 增大行高
 			});
-			// drawY += 24 * scale; // Removed to reduce whitespace
-		} else {
-			drawY += 8 * scale;
+			drawY += padding * 1.5 - (30 * scale); // 减少描述后的间距，从1.5改为0.5
 		}
 
-		// Draw Footer Divider
-		drawY += 24 * scale; // Spacing before line
-		ctx.beginPath();
-		ctx.strokeStyle = "#f3f4f6";
-		ctx.lineWidth = 1 * scale;
-		ctx.moveTo(padding, drawY);
-		ctx.lineTo(width - padding, drawY);
-		ctx.stroke();
-		drawY += 24 * scale; // Spacing after line
+		// Draw Date box on the right side (在标题和描述的右侧)
+		if (dateObj) {
+			const dateBoxX = width - padding - dateBoxW;
+			const dateBoxY = titleStartY;
 
-		// Draw Footer Content
-		const footerY = drawY;
-
-		// Left: Author
-		if (avatarImg) {
+			// Date box background with enhanced shadow
 			ctx.save();
-			const avatarSize = 64 * scale;
-			const avatarX = padding;
-
-			// Circle clip
+			ctx.shadowColor = "rgba(0, 0, 0, 0.12)";
+			ctx.shadowBlur = 16 * scale;
+			ctx.shadowOffsetY = 6 * scale;
+			
+			// Gradient background for date box
+			const dateGradient = ctx.createLinearGradient(dateBoxX, dateBoxY, dateBoxX, dateBoxY + dateBoxH);
+			dateGradient.addColorStop(0, "#ffffff");
+			dateGradient.addColorStop(1, "#f8f9fa");
+			ctx.fillStyle = dateGradient;
+			drawRoundedRect(ctx, dateBoxX, dateBoxY, dateBoxW, dateBoxH, 12 * scale);
+			ctx.fill();
+			ctx.restore();
+			
+			// 添加顶部装饰条
+			ctx.save();
+			ctx.fillStyle = "#ef4444"; // 红色装饰条
+			drawRoundedRect(ctx, dateBoxX, dateBoxY, dateBoxW, 8 * scale, 12 * scale);
+			ctx.fill();
+			ctx.restore();
+			
+			// 添加左上角装饰点
+			ctx.save();
+			ctx.fillStyle = "#ffffff";
 			ctx.beginPath();
-			ctx.arc(
-				avatarX + avatarSize / 2,
-				footerY + avatarSize / 2,
-				avatarSize / 2,
-				0,
-				Math.PI * 2,
-			);
-			ctx.closePath();
-			ctx.clip();
-
-			ctx.drawImage(avatarImg, avatarX, footerY, avatarSize, avatarSize);
+			ctx.arc(dateBoxX + 12 * scale, dateBoxY + 4 * scale, 2 * scale, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.restore();
+			
+			// 添加右上角装饰点
+			ctx.save();
+			ctx.fillStyle = "#ffffff";
+			ctx.beginPath();
+			ctx.arc(dateBoxX + dateBoxW - 12 * scale, dateBoxY + 4 * scale, 2 * scale, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.restore();
+			
+			// 添加微妙的边框
+			ctx.save();
+			ctx.strokeStyle = "rgba(0, 0, 0, 0.08)";
+			ctx.lineWidth = 1 * scale;
+			drawRoundedRect(ctx, dateBoxX, dateBoxY, dateBoxW, dateBoxH, 12 * scale);
+			ctx.stroke();
 			ctx.restore();
 
-			// Border for avatar
+			// Day number with gradient (增大字体)
+			const dayGradient = ctx.createLinearGradient(dateBoxX, dateBoxY + dateBoxH * 0.35, dateBoxX, dateBoxY + dateBoxH * 0.55);
+			dayGradient.addColorStop(0, "#1a202c");
+			dayGradient.addColorStop(1, "#2d3748");
+			ctx.fillStyle = dayGradient;
+			ctx.textAlign = "center";
+			ctx.textBaseline = "middle";
+			ctx.font = `800 ${40 * scale}px 'Roboto', sans-serif`;
+			
+			// 给数字添加微妙阴影
+			ctx.save();
+			ctx.shadowColor = "rgba(0, 0, 0, 0.15)";
+			ctx.shadowBlur = 2 * scale;
+			ctx.shadowOffsetY = 1 * scale;
+			ctx.fillText(dateObj.day, dateBoxX + dateBoxW / 2, dateBoxY + dateBoxH * 0.45);
+			ctx.restore();
+
+			// Elegant divider line with decorative dots
 			ctx.beginPath();
-			ctx.arc(
-				avatarX + (64 * scale) / 2,
-				footerY + (64 * scale) / 2,
-				(64 * scale) / 2,
-				0,
-				Math.PI * 2,
-			);
-			ctx.strokeStyle = "#ffffff";
-			ctx.lineWidth = 2 * scale;
+			const lineGradient = ctx.createLinearGradient(dateBoxX + 14 * scale, 0, dateBoxX + dateBoxW - 14 * scale, 0);
+			lineGradient.addColorStop(0, "rgba(226, 232, 240, 0)");
+			lineGradient.addColorStop(0.5, "#cbd5e0");
+			lineGradient.addColorStop(1, "rgba(226, 232, 240, 0)");
+			ctx.strokeStyle = lineGradient;
+			ctx.lineWidth = 1.5 * scale;
+			ctx.moveTo(dateBoxX + 14 * scale, dateBoxY + dateBoxH * 0.68);
+			ctx.lineTo(dateBoxX + dateBoxW - 14 * scale, dateBoxY + dateBoxH * 0.68);
 			ctx.stroke();
-		}
+			
+			// 添加分割线两端的装饰小圆点
+			ctx.save();
+			ctx.fillStyle = "#cbd5e0";
+			ctx.beginPath();
+			ctx.arc(dateBoxX + 14 * scale, dateBoxY + dateBoxH * 0.68, 1.5 * scale, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.beginPath();
+			ctx.arc(dateBoxX + dateBoxW - 14 * scale, dateBoxY + dateBoxH * 0.68, 1.5 * scale, 0, Math.PI * 2);
+			ctx.fill();
+			ctx.restore();
 
-		const authorTextX = padding + (avatar ? 64 * scale + 16 * scale : 0);
-		const textCenterY = footerY + 32 * scale;
-
-		ctx.fillStyle = "#9ca3af";
-		ctx.font = `${12 * scale}px 'Roboto', sans-serif`;
-		ctx.fillText(i18n(I18nKey.author), authorTextX, textCenterY - 20 * scale);
-
-		ctx.fillStyle = "#1f2937";
-		ctx.font = `700 ${20 * scale}px 'Roboto', sans-serif`;
-		ctx.fillText(author, authorTextX, textCenterY + 4 * scale);
-
-		// Right: QR Code
-		const qrSize = 64 * scale;
-		const qrX = width - padding - qrSize;
-
-		// QR Background/Shadow effect (simplified as border)
-		ctx.fillStyle = "#ffffff";
-		// Shadow simulation
-		ctx.shadowColor = "rgba(0, 0, 0, 0.05)";
-		ctx.shadowBlur = 4 * scale;
-		ctx.shadowOffsetY = 2 * scale;
-		drawRoundedRect(ctx, qrX, footerY, qrSize, qrSize, 4 * scale);
-		ctx.fill();
-		ctx.shadowColor = "transparent"; // Reset shadow
-
-		// Draw QR
-		const qrInnerSize = 56 * scale;
-		const qrPadding = (qrSize - qrInnerSize) / 2;
-		if (qrImg) {
-			ctx.drawImage(
-				qrImg,
-				qrX + qrPadding,
-				footerY + qrPadding,
-				qrInnerSize,
-				qrInnerSize,
+			// Month and Year with icon-like decoration
+			ctx.fillStyle = "#64748b";
+			ctx.font = `600 ${13 * scale}px 'Roboto', sans-serif`;
+			ctx.fillText(
+				`${dateObj.year}.${dateObj.month}`,
+				dateBoxX + dateBoxW / 2,
+				dateBoxY + dateBoxH * 0.87
 			);
+			
+			// 添加底部微妙的装饰图案（小圆点）
+			ctx.save();
+			ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
+			for (let i = 0; i < 3; i++) {
+				const dotX = dateBoxX + dateBoxW / 2 - 8 * scale + i * 8 * scale;
+				const dotY = dateBoxY + dateBoxH - 6 * scale;
+				ctx.beginPath();
+				ctx.arc(dotX, dotY, 1.5 * scale, 0, Math.PI * 2);
+				ctx.fill();
+			}
+			ctx.restore();
 		}
 
-		// Site Info (Left of QR)
-		const siteInfoX = qrX - 16 * scale;
+		// Draw Footer with enhanced divider
+		const footerY = drawY;
+		
+		// Elegant gradient divider
+		ctx.save();
+		const dividerGradient = ctx.createLinearGradient(padding, footerY, width - padding, footerY);
+		dividerGradient.addColorStop(0, "rgba(0, 0, 0, 0)");
+		dividerGradient.addColorStop(0.5, "rgba(0, 0, 0, 0.1)");
+		dividerGradient.addColorStop(1, "rgba(0, 0, 0, 0)");
+		ctx.strokeStyle = dividerGradient;
+		ctx.lineWidth = 1.5 * scale;
+		ctx.beginPath();
+		ctx.moveTo(padding, footerY);
+		ctx.lineTo(width - padding, footerY);
+		ctx.stroke();
+		ctx.restore();
+		
+		drawY += padding * 0.8; // 减少分割线后的间距，从0.8改为0.4
+
+		// Left: Enhanced Author info with avatar
+		ctx.textAlign = "left";
+		ctx.textBaseline = "middle";
+		
+		const avatarSize = 52 * scale;
+		const avatarX = padding;
+		const avatarCenterY = drawY + avatarSize / 2;
+
+		if (avatarImg) {
+			// Circle clip for avatar
+			ctx.save();
+			ctx.beginPath();
+			ctx.arc(avatarX + avatarSize / 2, avatarCenterY, avatarSize / 2, 0, Math.PI * 2);
+			ctx.closePath();
+			ctx.clip();
+			ctx.drawImage(avatarImg, avatarX, drawY, avatarSize, avatarSize);
+			ctx.restore();
+
+			// Simple avatar border
+			ctx.save();
+			ctx.strokeStyle = "rgba(0, 0, 0, 0.1)";
+			ctx.lineWidth = 2 * scale;
+			ctx.beginPath();
+			ctx.arc(avatarX + avatarSize / 2, avatarCenterY, avatarSize / 2, 0, Math.PI * 2);
+			ctx.stroke();
+			ctx.restore();
+		}
+
+		// Author text with icon
+		const authorTextX = avatarX + (avatar ? avatarSize + 14 * scale : 0);
+		
+		ctx.fillStyle = "#64748b";
+		ctx.font = `500 ${14 * scale}px 'Roboto', sans-serif`; // 从12增大到14
+		ctx.fillText(i18n(I18nKey.author), authorTextX, avatarCenterY - 16 * scale);
+
+		// Author name with gradient
+		const authorNameGradient = ctx.createLinearGradient(
+			authorTextX, avatarCenterY, 
+			authorTextX + 100 * scale, avatarCenterY
+		);
+		authorNameGradient.addColorStop(0, "#1e293b");
+		authorNameGradient.addColorStop(1, "#334155");
+		ctx.fillStyle = authorNameGradient;
+		ctx.font = `700 ${22 * scale}px 'Roboto', sans-serif`; // 从19增大到22
+		ctx.fillText(author, authorTextX, avatarCenterY + 12 * scale);
+
+		// Right: Simple QR Code
+		const qrSize = 76 * scale;
+		const qrX = width - padding - qrSize;
+		const qrY = drawY - 8 * scale;
+
+		// 直接绘制二维码，不添加背景、阴影和边框
+		ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+
+		// Site info with enhanced styling
 		ctx.textAlign = "right";
+		const siteInfoX = qrX - 16 * scale;
+		
+		ctx.fillStyle = "#94a3b8";
+		ctx.font = `500 ${13 * scale}px 'Roboto', sans-serif`; // 从11增大到13
+		ctx.fillText(i18n(I18nKey.scanToRead), siteInfoX, avatarCenterY - 14 * scale);
 
-		ctx.fillStyle = "#9ca3af";
-		ctx.font = `${12 * scale}px 'Roboto', sans-serif`;
-		ctx.fillText(i18n(I18nKey.scanToRead), siteInfoX, textCenterY - 20 * scale);
-
-		ctx.fillStyle = "#1f2937";
-		ctx.font = `700 ${20 * scale}px 'Roboto', sans-serif`;
-		ctx.fillText(siteTitle, siteInfoX, textCenterY + 4 * scale);
+		// Site title with gradient
+		const siteTitleGradient = ctx.createLinearGradient(
+			siteInfoX - 100 * scale, avatarCenterY, 
+			siteInfoX, avatarCenterY
+		);
+		siteTitleGradient.addColorStop(0, "#334155");
+		siteTitleGradient.addColorStop(1, "#1e293b");
+		ctx.fillStyle = siteTitleGradient;
+		ctx.font = `700 ${20 * scale}px 'Roboto', sans-serif`; // 从18增大到20
+		ctx.fillText(siteTitle, siteInfoX, avatarCenterY + 12 * scale);
 
 		// Finalize
 		posterImage = canvas.toDataURL("image/png");
