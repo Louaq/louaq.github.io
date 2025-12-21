@@ -18,14 +18,11 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-          # 对于pnpm项目不使用npm缓存
-          # cache: 'pnpm'
-          # cache-dependency-path: 'pnpm-lock.yaml'
 
       - name: 📦 安装 pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8  # 使用最新的 pnpm 8.x 版本，根据您的需要调整
+          version: 8
           run_install: false
 
       - name: 📦 获取 pnpm 存储目录
@@ -56,6 +53,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 45663  # 使用正确的 SSH 端口
           script_stop: true
           script: |
             # 确保目标目录存在并设置权限
@@ -74,7 +72,8 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          source: 'dist/*'  # Astro 默认输出到 dist 目录
+          port: 45663  # 使用正确的 SSH 端口
+          source: 'dist/*'
           target: '/root/www/visualmedical.org/'
           strip_components: 1
 
@@ -84,6 +83,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 45663  # 使用正确的 SSH 端口
           script_stop: true
           script: |
             # 设置正确的权限
@@ -91,23 +91,6 @@ jobs:
             sudo chown -R root:www-data /root/www/visualmedical.org
             
             echo "✅ 部署完成！"
-
-      # - name: 🔄 重载 Nginx
-      #   if: success()
-      #   uses: appleboy/ssh-action@v1.0.0
-      #   with:
-      #     host: ${{ secrets.HOST }}
-      #     username: ${{ secrets.USERNAME }}
-      #     key: ${{ secrets.SSH_PRIVATE_KEY }}
-      #     script: |
-      #       echo "🔄 重载 Nginx..."
-      #       if sudo nginx -t; then
-      #         sudo systemctl reload nginx
-      #         echo "✅ Nginx 重载成功"
-      #       else
-      #         echo "❌ Nginx 配置测试失败"
-      #         exit 1
-      #       fi
 
       - name: 🎉 部署成功通知
         if: success()
@@ -122,6 +105,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 45663  # 使用正确的 SSH 端口
           script: |
             echo "❌ 部署失败，清理临时文件..."
 
