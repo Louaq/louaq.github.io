@@ -130,15 +130,9 @@ async function generatePoster() {
 			color: { dark: "#000000", light: "#ffffff" },
 		});
 		
-		// 使用随机API图片作为默认封面，添加时间戳参数避免缓存
-		// 使用代理服务解决CORS问题
-		let finalCoverImage = coverImage;
-		if (!coverImage) {
-			const timestamp = Date.now();
-			const randomApiUrl = `https://api.yppp.net/pc.php?t=${timestamp}`;
-			// 使用 images.weserv.nl 代理来解决CORS问题
-			finalCoverImage = `https://images.weserv.nl/?url=${encodeURIComponent(randomApiUrl)}&output=png`;
-		}
+		// 使用固定默认图片以提高生成速度
+		const defaultCoverImage = "https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb16.jpg";
+		const finalCoverImage = coverImage || defaultCoverImage;
 		
 		const [qrImg, coverImg, avatarImg] = await Promise.all([
 			loadImage(qrCodeUrl),
