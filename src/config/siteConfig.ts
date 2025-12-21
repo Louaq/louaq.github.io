@@ -32,7 +32,7 @@ export const siteConfig: SiteConfig = {
   favicon: [
     // 留空以使用默认 favicon
     {
-      src: "/assets/images/favicon.png", // 图标文件路径
+      src: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png", // 图标文件路径
       theme: "light", // 可选，指定主题 'light' | 'dark'
       sizes: "32x32", // 可选，图标大小
     },
@@ -103,7 +103,7 @@ export const siteConfig: SiteConfig = {
       // 桌面背景图片
       desktop: "https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1f.jpg",
       // 移动背景图片
-      mobile: "/assets/images/m3.webp",
+      mobile: "https://pic1.imgdb.cn/item/69478e432bbc57ce9111cdcb.webp",
     },
 
     // Banner模式特有配置
