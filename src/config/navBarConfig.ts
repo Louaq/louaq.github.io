@@ -44,6 +44,14 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
   links.push(LinkPreset.About);
 
+	// 添加开往链接
+	links.push({
+		name: "开往",
+		url: "https://www.travellings.cn/go.html",
+		external: true,
+		icon: "material-symbols:rocket-launch",
+	});
+
   //links.push({
     //name: "关于",
     //url: "/content/",
