@@ -19,6 +19,8 @@ export const siteConfig: SiteConfig = {
     "计算机视觉",
     "论文",
     "CVPR",
+	"ECCV",
+	"ICCV"
   ],
 
 	lang: SITE_LANG,

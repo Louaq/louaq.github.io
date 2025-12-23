@@ -5,13 +5,23 @@ import type { FriendLink } from "../types/config";
 // 友链配置
 export const friendsConfig: FriendLink[] = [
   {
-    title: "louaq",
+    title: "夏叶",
     imgurl:
       "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
     desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
     siteurl: "https://blog.cuteleaf.cn",
     tags: ["Blog"],
     weight: 10, // 权重，数字越大排序越靠前
+    enabled: true, // 是否启用
+  },
+  {
+    title: "聚合图床",
+    imgurl:
+      "https://www.superbed.cn/favicon.ico",
+    desc: "免费图片上传",
+    siteurl: "https://www.superbed.cn/",
+    tags: ["image"],
+    weight: 9, // 权重，数字越大排序越靠前
     enabled: true, // 是否启用
   },
 ];
