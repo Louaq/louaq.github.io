@@ -1,7 +1,7 @@
 <script lang="ts">
 import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
-import { DARK_MODE, LIGHT_MODE } from "@/constants/constants";
+import { DARK_MODE, LIGHT_MODE, SYSTEM_MODE } from "@/constants/constants";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 import {
 	applyThemeToDocument,
@@ -22,9 +22,16 @@ type WindowWithSwup = Window & { swup?: SwupInstance };
 
 let currentMode: LIGHT_DARK_MODE = $state(LIGHT_MODE);
 
-// 切换主题（在亮色和暗色之间）
+// 切换主题（在亮色、暗色和系统模式之间循环）
 function toggleTheme() {
-	const newMode = currentMode === LIGHT_MODE ? DARK_MODE : LIGHT_MODE;
+	let newMode: LIGHT_DARK_MODE;
+	if (currentMode === LIGHT_MODE) {
+		newMode = DARK_MODE;
+	} else if (currentMode === DARK_MODE) {
+		newMode = SYSTEM_MODE;
+	} else {
+		newMode = LIGHT_MODE;
+	}
 	currentMode = newMode;
 	setTheme(newMode);
 }
@@ -33,32 +40,15 @@ function toggleTheme() {
 onMount(() => {
 	// 立即获取并设置正确的主题
 	const storedTheme = getStoredTheme();
-	// 如果存储的是SYSTEM_MODE，转换为实际的亮色或暗色模式
-	if (storedTheme === "SYSTEM_MODE") {
-		const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-		currentMode = isSystemDark ? DARK_MODE : LIGHT_MODE;
-		setTheme(currentMode);
-	} else {
-		currentMode = storedTheme;
-	}
+	currentMode = storedTheme;
 
 	// 确保DOM状态与存储的主题一致
-	const currentTheme = document.documentElement.classList.contains("dark")
-		? DARK_MODE
-		: LIGHT_MODE;
-	if (currentMode !== currentTheme) {
-		applyThemeToDocument(currentMode);
-	}
+	applyThemeToDocument(currentMode);
 
 	// 添加Swup监听
 	const handleContentReplace = () => {
 		const newTheme = getStoredTheme();
-		if (newTheme === "SYSTEM_MODE") {
-			const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-			currentMode = isSystemDark ? DARK_MODE : LIGHT_MODE;
-		} else {
-			currentMode = newTheme;
-		}
+		currentMode = newTheme;
 	};
 
 	// 检查Swup是否已经加载
@@ -77,12 +67,7 @@ onMount(() => {
 	// 监听主题变化事件
 	const handleThemeChange = () => {
 		const newTheme = getStoredTheme();
-		if (newTheme === "SYSTEM_MODE") {
-			const isSystemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-			currentMode = isSystemDark ? DARK_MODE : LIGHT_MODE;
-		} else {
-			currentMode = newTheme;
-		}
+		currentMode = newTheme;
 	};
 
 	window.addEventListener("theme-change", handleThemeChange);
@@ -95,7 +80,7 @@ onMount(() => {
 </script>
 
 <button 
-    aria-label="Toggle Light/Dark Mode" 
+    aria-label="Toggle Light/Dark/System Mode" 
     onclick={toggleTheme}
     class="relative btn-plain scale-animation rounded-lg h-11 w-11 active:scale-90" 
     id="scheme-switch"
@@ -105,5 +90,8 @@ onMount(() => {
     </div>
     <div class="absolute transition-opacity duration-200" class:opacity-0={currentMode !== DARK_MODE} class:opacity-100={currentMode === DARK_MODE}>
         <Icon icon="material-symbols:dark-mode-outline-rounded" class="text-[1.25rem]"></Icon>
+    </div>
+    <div class="absolute transition-opacity duration-200" class:opacity-0={currentMode !== SYSTEM_MODE} class:opacity-100={currentMode === SYSTEM_MODE}>
+        <Icon icon="material-symbols:computer-outline" class="text-[1.25rem]"></Icon>
     </div>
 </button>
