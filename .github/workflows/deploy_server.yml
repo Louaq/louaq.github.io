@@ -32,7 +32,7 @@ jobs:
           echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
       - name: 🔄 设置 pnpm 缓存
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
           key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
@@ -48,7 +48,7 @@ jobs:
           NODE_ENV: production
 
       - name: 💾 上传构建产物
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: dist
           path: dist/
@@ -71,13 +71,13 @@ jobs:
             host_secret: 'HOST_2'
             username_secret: 'USERNAME_2'
             ssh_key_secret: 'SSH_PRIVATE_KEY_2'
-            port: 53808  # 第二个服务器的端口
-            path: '/opt/1panel/www/sites/louaq.com/index'  # 第二个服务器的路径
-      fail-fast: false  # 即使一个服务器失败，继续部署到其他服务器
+            port: 53808
+            path: '/opt/1panel/www/sites/louaq.com/index'
+      fail-fast: false
 
     steps:
       - name: 📥 下载构建产物
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
