@@ -1,5 +1,6 @@
 ---
 import Icon from "@/components/misc/Icon.astro";
+import ClientPagination from "@/components/common/controls/ClientPagination.astro";
 import { siteConfig } from "@/config";
 import { watchlistConfig, type WatchlistItem } from "@/config/watchlistConfig";
 import I18nKey from "@/i18n/i18nKey";
@@ -38,6 +39,9 @@ const categories = [
 	{ key: "documentary", name: i18n(I18nKey.watchlistCategoryDocumentary), icon: "material-symbols:documentary", items: categorizedItems.documentary },
 	{ key: "other", name: i18n(I18nKey.watchlistCategoryOther), icon: "material-symbols:category", items: categorizedItems.other },
 ].filter(category => category.items.length > 0); // 只显示有内容的分类
+
+// 每页显示的数量
+const itemsPerPage = 6;
 
 // 获取构建时间
 const buildTime = new Date().toLocaleString("zh-CN", {
@@ -108,29 +112,51 @@ const statusColor = {
 					</p>
 				</div>
 
+			<!-- 标签页导航 -->
+			{
+				categories.length > 0 && (
+					<div class="border-b border-gray-200 dark:border-gray-700 mb-6">
+						<nav class="flex space-x-8" aria-label="Tabs">
+							{categories.map((category, index) => (
+								<button
+									class:list={[
+										"whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200",
+										{
+											"border-[var(--primary)] text-[var(--primary)]":
+												index === 0,
+											"border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300":
+												index !== 0,
+										},
+									]}
+									data-tab={category.key}
+									type="button"
+								>
+									{category.name}
+									<span class="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2 rounded-full text-xs">
+										{category.items.length}
+									</span>
+								</button>
+							))}
+						</nav>
+					</div>
+				)
+			}
+
 			<!-- 内容区域 -->
 			{
 				categories.length > 0 ? (
-					<div class="space-y-10">
-						{categories.map((category) => (
-							<div class="category-section">
-								{/* 分类标题 */}
-								<div class="flex items-center gap-3 mb-6">
-									<div class="h-7 w-7 rounded-lg bg-[var(--primary)]/10 flex items-center justify-center">
-										<Icon icon={category.icon} class="text-[1.25rem] text-[var(--primary)]" />
-									</div>
-									<h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100">
-										{category.name}
-									</h2>
-									<span class="text-sm text-neutral-500 dark:text-neutral-500">
-										({category.items.length})
-									</span>
-								</div>
-
+					<>
+						{categories.map((category, index) => (
+							<div
+								class:list={["category-section", { hidden: index !== 0 }]}
+								data-section={category.key}
+							>
 								{/* 分类内容网格 */}
 								<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 									{category.items.map((item: WatchlistItem) => (
-										<div class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-neutral-200 dark:border-neutral-700">
+										<div 
+											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-neutral-200 dark:border-neutral-700"
+											data-item-section={category.key}>
 											{/* 封面图 */}
 											<div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
 												<img
@@ -243,9 +269,17 @@ const statusColor = {
 										</div>
 									))}
 								</div>
+
+								{/* 分页控件 */}
+								<ClientPagination
+									totalItems={category.items.length}
+									itemsPerPage={itemsPerPage}
+									currentPage={1}
+									sectionId={category.key}
+								/>
 							</div>
 						))}
-					</div>
+					</>
 				) : (
 					<div class="text-center py-16">
 						<div class="inline-flex items-center justify-center w-16 h-16 bg-[var(--btn-regular-bg)] rounded-full mb-6 border border-[var(--line-divider)]">
@@ -268,6 +302,66 @@ const statusColor = {
 	</div>
 </MainGridLayout>
 
+<script>
+	function initTabNavigation() {
+		const tabButtons = document.querySelectorAll("[data-tab]");
+		const sections = document.querySelectorAll("[data-section]");
+
+		tabButtons.forEach((button) => {
+			button.addEventListener("click", (event) => {
+				const currentButton = event.currentTarget as HTMLButtonElement;
+				const targetTab = currentButton.dataset.tab;
+
+				// Update active tab
+				tabButtons.forEach((btn) => {
+					btn.classList.remove(
+						"border-[var(--primary)]",
+						"text-[var(--primary)]",
+					);
+					btn.classList.add(
+						"border-transparent",
+						"text-gray-500",
+						"hover:text-gray-700",
+						"hover:border-gray-300",
+						"dark:text-gray-400",
+						"dark:hover:text-gray-300",
+					);
+				});
+
+				currentButton.classList.remove(
+					"border-transparent",
+					"text-gray-500",
+					"hover:text-gray-700",
+					"hover:border-gray-300",
+					"dark:text-gray-400",
+					"dark:hover:text-gray-300",
+				);
+				currentButton.classList.add(
+					"border-[var(--primary)]",
+					"text-[var(--primary)]",
+				);
+
+				// Show/hide sections
+				sections.forEach((section) => {
+					const htmlSection = section as HTMLElement;
+					if (htmlSection.dataset.section === targetTab) {
+						htmlSection.classList.remove("hidden");
+					} else {
+						htmlSection.classList.add("hidden");
+					}
+				});
+			});
+		});
+	}
+
+	// Initialize when DOM is ready
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initTabNavigation);
+	} else {
+		initTabNavigation();
+	}
+</script>
+
 <style>
 	/* 自定义样式 */
 	.line-clamp-2 {
@@ -278,13 +372,18 @@ const statusColor = {
 	}
 
 	.category-section {
-		padding-bottom: 2rem;
-		border-bottom: 1px solid var(--line-divider);
+		animation: fadeIn 0.3s ease-in-out;
 	}
 
-	.category-section:last-child {
-		border-bottom: none;
-		padding-bottom: 0;
+	@keyframes fadeIn {
+		from {
+			opacity: 0;
+			transform: translateY(10px);
+		}
+		to {
+			opacity: 1;
+			transform: translateY(0);
+		}
 	}
 </style>
 
