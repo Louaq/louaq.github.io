@@ -38,4 +38,9 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/bangumi/",
 		icon: "material-symbols:movie",
 	},
+	[LinkPreset.Watchlist]: {
+		name: i18n(I18nKey.watchlist),
+		url: "/watchlist/",
+		icon: "material-symbols:video-library",
+	},
 };

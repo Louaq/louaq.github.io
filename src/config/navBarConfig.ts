@@ -42,6 +42,11 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		links.push(LinkPreset.Guestbook);
 	}
 
+	// 根据配置决定是否添加观影清单页面
+	if (siteConfig.pages.watchlist) {
+		links.push(LinkPreset.Watchlist);
+	}
+
   links.push(LinkPreset.About);
 
 	// 添加开往链接
@@ -49,7 +54,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		name: "开往",
 		url: "https://www.travellings.cn/go.html",
 		external: true,
-		icon: "material-symbols:rocket-launch",
+		icon: "material-symbols:subway-rounded",
 	});
 
   //links.push({

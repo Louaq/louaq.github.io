@@ -56,6 +56,7 @@ export type SiteConfig = {
 		sponsor: boolean; // 赞助页面开关
 		guestbook: boolean; // 留言板页面开关
 		bangumi: boolean;
+		watchlist: boolean; // 观影清单页面开关
 	};
 
 	// 文章列表布局配置
@@ -89,6 +90,7 @@ export enum LinkPreset {
 	Sponsor = 4,
 	Guestbook = 5,
 	Bangumi = 6,
+	Watchlist = 7,
 }
 
 export type NavBarLink = {

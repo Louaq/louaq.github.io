@@ -59,6 +59,17 @@ export const en: Translation = {
 	[Key.publishedAt]: "Published at",
 	[Key.license]: "License",
 	[Key.bangumi]: "Bangumi",
+	[Key.watchlist]: "Watchlist",
+	[Key.watchlistTitle]: "My Watchlist",
+	[Key.watchlistSubtitle]: "Record recently watched anime and TV shows",
+	[Key.watchlistEmpty]: "No watch records",
+	[Key.watchlistEmptyReason]: "No watch records have been added yet, go to the config file to add some",
+	[Key.watchlistLastUpdated]: "Last updated",
+	[Key.watchlistCategoryAnime]: "Anime",
+	[Key.watchlistCategoryMovie]: "Movies",
+	[Key.watchlistCategoryTV]: "TV Series",
+	[Key.watchlistCategoryDocumentary]: "Documentaries",
+	[Key.watchlistCategoryOther]: "Other",
 
 	// Bangumi Filter and Status Text
 	[Key.bangumiTitle]: "My Bangumi",

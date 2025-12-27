@@ -54,6 +54,17 @@ enum I18nKey {
 	guestbook = "guestbook",
 	guestbookDescription = "guestbookDescription",
 	bangumi = "bangumi",
+	watchlist = "watchlist",
+	watchlistTitle = "watchlistTitle",
+	watchlistSubtitle = "watchlistSubtitle",
+	watchlistEmpty = "watchlistEmpty",
+	watchlistEmptyReason = "watchlistEmptyReason",
+	watchlistLastUpdated = "watchlistLastUpdated",
+	watchlistCategoryAnime = "watchlistCategoryAnime",
+	watchlistCategoryMovie = "watchlistCategoryMovie",
+	watchlistCategoryTV = "watchlistCategoryTV",
+	watchlistCategoryDocumentary = "watchlistCategoryDocumentary",
+	watchlistCategoryOther = "watchlistCategoryOther",
 
 	// 番组计划筛选和状态文本
 	bangumiTitle = "bangumiTitle",

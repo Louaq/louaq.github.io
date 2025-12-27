@@ -57,6 +57,17 @@ export const zh_CN: Translation = {
 	[Key.publishedAt]: "发布于",
 	[Key.license]: "许可协议",
 	[Key.bangumi]: "番组计划",
+	[Key.watchlist]: "观影清单",
+	[Key.watchlistTitle]: "我的观影清单",
+	[Key.watchlistSubtitle]: "记录最近观看的动漫与影视作品",
+	[Key.watchlistEmpty]: "暂无观影记录",
+	[Key.watchlistEmptyReason]: "还没有添加任何观影记录，快去配置文件中添加吧",
+	[Key.watchlistLastUpdated]: "最后更新于",
+	[Key.watchlistCategoryAnime]: "动漫",
+	[Key.watchlistCategoryMovie]: "电影",
+	[Key.watchlistCategoryTV]: "电视剧",
+	[Key.watchlistCategoryDocumentary]: "纪录片",
+	[Key.watchlistCategoryOther]: "其他",
 
 	// 番组计划筛选和状态文本
 	[Key.bangumiTitle]: "我的番组计划",
