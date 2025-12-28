@@ -21,10 +21,6 @@ const {
 
 <WidgetLayout id="countdown-widget" name={title} class={className} style={style}>
   <div class="countdown-container px-2">
-    <div class="text-center mb-3">
-      <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">{description}</p>
-    </div>
-    
     <!-- 倒计时数字显示 -->
     <div class="grid grid-cols-4 gap-2">
       <div class="countdown-item">
@@ -42,14 +38,6 @@ const {
       <div class="countdown-item">
         <div class="countdown-value" id="countdown-seconds">0</div>
         <div class="countdown-label">秒</div>
-      </div>
-    </div>
-    
-    <!-- 目标日期显示 -->
-    <div class="text-center mt-3">
-      <div class="flex items-center justify-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
-        <Icon name="material-symbols:calendar-today" class="text-base" />
-        <span id="target-date-display">{targetDate}</span>
       </div>
     </div>
   </div>
