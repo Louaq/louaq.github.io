@@ -576,6 +576,9 @@ function disableAnimation() {
   function setClickOutsideToClose(panel: string, ignores: string[]) {
     document.addEventListener("click", (event) => {
       let panelDom = document.getElementById(panel);
+      // Check if panelDom exists before accessing classList
+      if (!panelDom) return;
+      
       let tDom = event.target;
       if (!(tDom instanceof Node)) return; // Ensure the event target is an HTML Node
       for (let ig of ignores) {
@@ -584,7 +587,7 @@ function disableAnimation() {
           return;
         }
       }
-      panelDom!.classList.add("float-panel-closed");
+      panelDom.classList.add("float-panel-closed");
     });
   }
   setClickOutsideToClose("display-setting", [

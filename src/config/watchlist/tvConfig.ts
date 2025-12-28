@@ -52,5 +52,21 @@ export const tvItems: WatchlistItem[] = [
 		tags: ["喜剧", "剧情", "武侠"],
 		enabled: true,
 	},
+	{
+		title: "异人之下之决战！碧游村",
+		cover: "https://pic1.imgdb.cn/item/69509caf161224305eb311ea.webp",
+		type: "tv",
+		status: "watching",
+		rating: 8.4,
+		episodes: {
+			current: 1,
+			total: 13,
+		},
+		startDate: "2025-08-06",
+		comment: "天堂地狱哪都通，杀人放火临时工",
+		link: "https://movie.douban.com/subject/36575783/",
+		tags: ["剧情", "奇幻"],
+		enabled: true,
+	},
 ];
 
