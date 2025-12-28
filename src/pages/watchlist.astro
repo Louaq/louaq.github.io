@@ -95,7 +95,7 @@ const statusColor = {
 	<div
 		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
 	>
-		<div class="card-base z-10 px-9 py-6 relative w-full">
+		<div class="card-base z-10 px-9 pt-6 pb-1 relative w-full">
 			<!-- 页面标题 -->
 			<div class="relative w-full mb-8">
 				<div class="mb-6">
@@ -135,26 +135,24 @@ const statusColor = {
 								class:list={["category-section", { hidden: category.key !== activeTab }]}
 								data-section={category.key}
 							>
-								{/* 分类内容网格 */}
-								<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-									{category.items.map((item: WatchlistItem) => (
-										<div 
-											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-neutral-200 dark:border-neutral-700"
+								{/* 分类内容网格容器 */}
+								<div class="pagination-container" data-container-section={category.key}>
+									<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+										{category.items.map((item: WatchlistItem) => (
+										<a 
+											href={item.link}
+											target="_blank"
+											rel="noopener noreferrer"
+											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-300 border border-neutral-200 dark:border-neutral-700 hover:scale-105 block"
 											data-item-section={category.key}>
 											{/* 封面图 */}
 											<div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
 												<img
 													src={item.cover}
 													alt={item.title}
-													class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+													class="w-full h-full object-cover pointer-events-none"
 													loading="lazy"
 												/>
-												{/* 类型标签 */}
-												<div class="absolute top-2 left-2">
-													<span class="px-2 py-1 text-xs font-medium rounded-md bg-black/60 text-white backdrop-blur-sm">
-														{typeText[item.type]}
-													</span>
-												</div>
 												{/* 评分 */}
 												{watchlistConfig.display.showRating && item.rating && item.rating > 0 && (
 													<div class="absolute top-2 right-2">
@@ -168,7 +166,7 @@ const statusColor = {
 													</div>
 												)}
 												{/* 状态标签 */}
-												<div class="absolute bottom-2 left-2">
+												<div class="absolute top-2 left-2">
 													<span
 														class={`px-2 py-1 text-xs font-medium rounded-md ${statusColor[item.status]}`}
 													>
@@ -177,24 +175,32 @@ const statusColor = {
 												</div>
 											</div>
 
-											{/* 信息区 */}
-											<div class="p-4">
-												<h3 class="text-lg font-bold text-neutral-900 dark:text-neutral-100 mb-2 line-clamp-2">
+											{/* 悬浮时显示的信息覆盖层 */}
+											<div class="absolute inset-x-0 bottom-0 bg-black/85 text-white p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+												{/* 标题 */}
+												<h3 class="text-base font-bold mb-2 line-clamp-2">
 													{item.title}
 												</h3>
+
+												{/* 类型标签 */}
+												<div class="mb-2">
+													<span class="px-2 py-1 text-xs font-medium rounded-md bg-white/20 text-white">
+														{typeText[item.type]}
+													</span>
+												</div>
 
 												{/* 观看进度 */}
 												{watchlistConfig.display.showProgress &&
 													item.episodes &&
 													item.episodes.total && (
-														<div class="mb-3">
-															<div class="flex items-center justify-between text-xs text-neutral-600 dark:text-neutral-400 mb-1">
+														<div class="mb-2">
+															<div class="flex items-center justify-between text-xs text-white/80 mb-1">
 																<span>观看进度</span>
 																<span>
 																	{item.episodes.current || 0}/{item.episodes.total}
 																</span>
 															</div>
-															<div class="w-full bg-neutral-200 dark:bg-neutral-700 rounded-full h-1.5">
+															<div class="w-full bg-white/20 rounded-full h-1.5">
 																<div
 																	class="bg-[var(--primary)] h-1.5 rounded-full transition-all duration-300"
 																	style={{
@@ -207,25 +213,30 @@ const statusColor = {
 
 												{/* 评价 */}
 												{item.comment && (
-													<p class="text-sm text-neutral-600 dark:text-neutral-400 mb-3 line-clamp-2">
+													<p class="text-sm text-white/90 mb-2 line-clamp-2">
 														{item.comment}
 													</p>
 												)}
 
 												{/* 标签 */}
 												{item.tags && item.tags.length > 0 && (
-													<div class="flex flex-wrap gap-2 mb-3">
+													<div class="flex flex-wrap gap-1.5 mb-2">
 														{item.tags.slice(0, 3).map((tag) => (
-															<span class="px-2 py-0.5 text-xs rounded-md bg-neutral-100 dark:bg-neutral-700 text-neutral-700 dark:text-neutral-300">
+															<span class="px-2 py-0.5 text-xs rounded-full bg-white/20 text-white/90">
 																{tag}
 															</span>
 														))}
+														{item.tags.length > 3 && (
+															<span class="px-2 py-0.5 text-xs rounded-full bg-white/20 text-white/60">
+																+{item.tags.length - 3}
+															</span>
+														)}
 													</div>
 												)}
 
 												{/* 观看日期 */}
 												{(item.startDate || item.endDate) && (
-													<div class="text-xs text-neutral-500 dark:text-neutral-500">
+													<div class="text-xs text-white/70">
 														{item.status === "completed" && item.endDate ? (
 															<span>完成于 {item.endDate}</span>
 														) : item.startDate ? (
@@ -233,24 +244,8 @@ const statusColor = {
 														) : null}
 													</div>
 												)}
-
-												{/* 链接 */}
-												{item.link && (
-													<a
-														href={item.link}
-														target="_blank"
-														rel="noopener noreferrer"
-														class="mt-3 flex items-center gap-1 text-sm text-[var(--primary)] hover:underline"
-													>
-														<span>查看详情</span>
-														<Icon
-															icon="material-symbols:arrow-outward"
-															class="text-sm"
-														/>
-													</a>
-												)}
 											</div>
-										</div>
+										</a>
 									))}
 								</div>
 
@@ -261,6 +256,7 @@ const statusColor = {
 									currentPage={1}
 									sectionId={category.key}
 								/>
+								</div>
 							</div>
 						))}
 					</>
@@ -308,6 +304,22 @@ const statusColor = {
 			opacity: 1;
 			transform: translateY(0);
 		}
+	}
+
+	/* 固定分页容器高度，防止切换页面时高度变化 */
+	.pagination-container {
+		/* 移除固定高度，让容器根据内容自适应 */
+	}
+
+	/* 为卡片添加淡入淡出过渡效果 */
+	.pagination-container [data-item-section] {
+		transition: opacity 0.2s ease-in-out;
+	}
+
+	/* 确保悬浮层正确显示 */
+	.pagination-container a[data-item-section] {
+		position: relative;
+		overflow: hidden;
 	}
 </style>
 
