@@ -329,6 +329,7 @@ export type WidgetComponentType =
 	| "advertisement"
 	| "stats"
 	| "calendar"
+	| "countdown"
 	| "custom";
 
 export type WidgetComponentConfig = {

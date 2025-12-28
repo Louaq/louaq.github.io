@@ -30,12 +30,34 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			animationDelay: 0,
 		},
 		{
+			// 组件类型：倒计时组件
+			type: "countdown",
+			// 是否启用该组件
+			enable: true,
+			// 组件显示顺序
+			order: 2,
+			// 组件位置
+			position: "sticky",
+			// 是否在文章详情页显示
+			showOnPostPage: false,
+			// CSS 类名
+			class: "onload-animation",
+			// 动画延迟时间
+			animationDelay: 250,
+			// 自定义属性：配置倒计时目标日期和标题
+			customProps: {
+				targetDate: "2026-01-01",
+				title: "2026新年倒计时",
+				description: "距离2026年还有",
+			},
+		},
+		{
 			// 组件类型：公告组件
 			type: "announcement",
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 2,
+			order: 3,
 			// 组件位置
 			position: "top",
 			// CSS 类名
@@ -49,7 +71,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 3,
+			order: 4,
 			// 组件位置
 			position: "sticky",
 			// CSS 类名
@@ -111,7 +133,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件位置
 			position: "top",
 			// 是否在文章详情页显示
-			showOnPostPage: true,
+			showOnPostPage: false,
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
@@ -131,9 +153,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 250,
+			animationDelay: 300,
 		},
-				{
+		{
 			// 组件类型：侧边栏目录组件（只在文章详情页显示）
 			type: "sidebarToc",
 			// 是否启用该组件
@@ -147,7 +169,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 250,
+			animationDelay: 350,
 		},
 		{
 			// 组件类型：广告栏组件 2
@@ -163,7 +185,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 350,
+			animationDelay: 400,
 			// 配置ID：使用第二个广告配置
 			configId: "ad2",
 		},

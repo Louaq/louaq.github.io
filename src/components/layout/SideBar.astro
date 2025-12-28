@@ -5,6 +5,7 @@ import Advertisement from "@/components/widget/Advertisement.astro";
 import Announcement from "@/components/widget/Announcement.astro";
 import Calendar from "@/components/widget/Calendar.astro";
 import Categories from "@/components/widget/Categories.astro";
+import Countdown from "@/components/widget/Countdown.astro";
 import SidebarTOC from "@/components/widget/SidebarTOC.astro";
 import SiteStats from "@/components/widget/SiteStats.astro";
 import Tags from "@/components/widget/Tags.astro";
@@ -36,6 +37,7 @@ const stickyComponents = widgetManager.getComponentsByPosition(
 const componentTypeToId = {
 	stats: "site-stats",
 	calendar: "calendar-widget",
+	countdown: "countdown-widget",
 	sidebarToc: "sidebar-toc",
 	profile: "profile",
 	announcement: "announcement",
@@ -86,6 +88,7 @@ const componentMap = {
 	advertisement: Advertisement,
 	stats: SiteStats,
 	calendar: Calendar,
+	countdown: Countdown,
 };
 
 // 渲染组件的辅助函数

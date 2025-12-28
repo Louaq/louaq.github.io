@@ -1,0 +1,168 @@
+---
+import { Icon } from "astro-icon/components";
+import WidgetLayout from "./WidgetLayout.astro";
+
+interface Props {
+	class?: string;
+	style?: string;
+	targetDate?: string; // 倒计时目标日期，格式: "YYYY-MM-DD"
+	title?: string; // 倒计时标题
+	description?: string; // 倒计时描述
+}
+
+const { 
+	class: className, 
+	style,
+	targetDate = "2025-12-31",
+	title = "新年倒计时",
+	description = "距离新年还有"
+} = Astro.props;
+---
+
+<WidgetLayout id="countdown-widget" name={title} class={className} style={style}>
+  <div class="countdown-container px-2">
+    <div class="text-center mb-3">
+      <p class="text-sm text-neutral-600 dark:text-neutral-400 mb-2">{description}</p>
+    </div>
+    
+    <!-- 倒计时数字显示 -->
+    <div class="grid grid-cols-4 gap-2">
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdown-days">0</div>
+        <div class="countdown-label">天</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdown-hours">0</div>
+        <div class="countdown-label">时</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdown-minutes">0</div>
+        <div class="countdown-label">分</div>
+      </div>
+      <div class="countdown-item">
+        <div class="countdown-value" id="countdown-seconds">0</div>
+        <div class="countdown-label">秒</div>
+      </div>
+    </div>
+    
+    <!-- 目标日期显示 -->
+    <div class="text-center mt-3">
+      <div class="flex items-center justify-center gap-2 text-xs text-neutral-500 dark:text-neutral-400">
+        <Icon name="material-symbols:calendar-today" class="text-base" />
+        <span id="target-date-display">{targetDate}</span>
+      </div>
+    </div>
+  </div>
+</WidgetLayout>
+
+<script is:inline define:vars={{ targetDate }}>
+  function initCountdown() {
+    // 解析目标日期
+    const target = new Date(targetDate).getTime();
+    
+    // 计算一年的总毫秒数
+    const yearStart = new Date(new Date().getFullYear(), 0, 1).getTime();
+    const yearEnd = new Date(new Date().getFullYear() + 1, 0, 1).getTime();
+    const yearTotal = yearEnd - yearStart;
+    
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = target - now;
+      
+      // 如果倒计时结束
+      if (distance < 0) {
+        document.getElementById('countdown-days').textContent = '0';
+        document.getElementById('countdown-hours').textContent = '0';
+        document.getElementById('countdown-minutes').textContent = '0';
+        document.getElementById('countdown-seconds').textContent = '0';
+        return;
+      }
+      
+      // 计算天、时、分、秒
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+      
+      // 更新显示
+      const daysEl = document.getElementById('countdown-days');
+      const hoursEl = document.getElementById('countdown-hours');
+      const minutesEl = document.getElementById('countdown-minutes');
+      const secondsEl = document.getElementById('countdown-seconds');
+      
+      if (daysEl) daysEl.textContent = String(days);
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    }
+    
+    // 初始更新
+    updateCountdown();
+    
+    // 每秒更新一次
+    const intervalId = setInterval(updateCountdown, 1000);
+    
+    // 清理函数
+    return () => clearInterval(intervalId);
+  }
+  
+  // 页面加载时初始化
+  let cleanupFn;
+  
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      cleanupFn = initCountdown();
+    });
+  } else {
+    cleanupFn = initCountdown();
+  }
+  
+  // 页面切换时重新初始化
+  document.addEventListener('swup:contentReplaced', () => {
+    if (cleanupFn) {
+      cleanupFn();
+    }
+    setTimeout(() => {
+      cleanupFn = initCountdown();
+    }, 100);
+  });
+  
+  // 页面卸载时清理
+  window.addEventListener('beforeunload', () => {
+    if (cleanupFn) {
+      cleanupFn();
+    }
+  });
+</script>
+
+<style>
+  .countdown-container {
+    user-select: none;
+  }
+  
+  .countdown-item {
+    @apply flex flex-col items-center justify-center;
+    @apply bg-neutral-100 dark:bg-neutral-800;
+    @apply rounded-lg p-2;
+    @apply transition-all duration-300;
+  }
+  
+  .countdown-item:hover {
+    @apply transform scale-105;
+    @apply shadow-md;
+  }
+  
+  .countdown-value {
+    @apply text-2xl font-bold;
+    @apply text-[var(--primary)];
+    @apply tabular-nums;
+    line-height: 1.2;
+  }
+  
+  .countdown-label {
+    @apply text-xs;
+    @apply text-neutral-600 dark:text-neutral-400;
+    @apply mt-1;
+  }
+</style>
+
