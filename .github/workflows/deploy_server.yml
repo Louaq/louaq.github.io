@@ -67,12 +67,6 @@ jobs:
             ssh_key_secret: 'SSH_PRIVATE_KEY'
             port: 45663
             path: '/opt/1panel/www/sites/visualmedical.org/index'
-          - name: 'Server-2'
-            host_secret: 'HOST_2'
-            username_secret: 'USERNAME_2'
-            ssh_key_secret: 'SSH_PRIVATE_KEY_2'
-            port: 53808
-            path: '/opt/1panel/www/sites/louaq.com/index'
       fail-fast: false
 
     steps:
