@@ -24,6 +24,16 @@ export const friendsConfig: FriendLink[] = [
     weight: 9, // 权重，数字越大排序越靠前
     enabled: true, // 是否启用
   },
+  {
+    title: "最美博客",
+    imgurl:
+      "https://file.poetize.cn/webAvatar/Sara116383637867956",
+    desc: "最美博客",
+    siteurl: "https://poetize.cn/",
+    tags: ["zuimei"],
+    weight: 8, // 权重，数字越大排序越靠前
+    enabled: true, // 是否启用
+  },
 ];
 
 // 获取启用的友链并按权重排序
