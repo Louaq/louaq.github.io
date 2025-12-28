@@ -27,8 +27,8 @@ export const friendsConfig: FriendLink[] = [
   {
     title: "最美博客",
     imgurl:
-      "https://file.poetize.cn/webAvatar/Sara116383637867956",
-    desc: "最美博客",
+      "https://s1.ax1x.com/2022/11/10/z9E7X4.jpg",
+    desc: "这是一个 Vue2 Vue3 与 SpringBoot 结合的产物",
     siteurl: "https://poetize.cn/",
     tags: ["zuimei"],
     weight: 8, // 权重，数字越大排序越靠前
