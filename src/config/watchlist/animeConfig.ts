@@ -244,5 +244,21 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻", "武侠"],
 		enabled: true,
 	},
+	{
+		title: "神墓 年番",
+		cover: "https://pic1.imgdb.cn/item/695108c5a0c391c56de5e331.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 1,
+			total: 52,
+		},
+		startDate: "2025-08-08",
+		comment: "神墓年番很好看，非常惊喜",
+		link: "https://movie.douban.com/subject/36597288/",
+		tags: ["动作", "动画", "奇幻"],
+		enabled: true,
+	},
 ];
 
