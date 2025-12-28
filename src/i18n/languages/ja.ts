@@ -59,6 +59,17 @@ export const ja: Translation = {
 	[Key.publishedAt]: "公開日",
 	[Key.license]: "ライセンス",
 	[Key.bangumi]: "バングミ",
+	[Key.watchlist]: "視聴",
+	[Key.watchlistTitle]: "私の視聴リスト",
+	[Key.watchlistSubtitle]: "最近視聴したアニメとテレビ番組を記録する",
+	[Key.watchlistEmpty]: "視聴記録なし",
+	[Key.watchlistEmptyReason]: "視聴記録がまだ追加されていません。設定ファイルに追加してください",
+	[Key.watchlistLastUpdated]: "最終更新日",
+	[Key.watchlistCategoryAnime]: "アニメ",
+	[Key.watchlistCategoryMovie]: "映画",
+	[Key.watchlistCategoryTV]: "テレビ番組",
+	[Key.watchlistCategoryDocumentary]: "ドキュメンタリー",
+	[Key.watchlistCategoryOther]: "その他",
 
 	// バングミフィルターと状態文本
 	[Key.bangumiTitle]: "私のバングミ",

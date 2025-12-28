@@ -59,6 +59,17 @@ export const ru: Translation = {
 	[Key.publishedAt]: "Опубликовано",
 	[Key.license]: "Лицензия",
 	[Key.bangumi]: "Бангуми",
+	[Key.watchlist]: "Просмотр",
+	[Key.watchlistTitle]: "Мой список просмотра",
+	[Key.watchlistSubtitle]: "Запись последних просмотренных аниме и телесериалов",
+	[Key.watchlistEmpty]: "Нет данных",
+	[Key.watchlistEmptyReason]: "Нет данных были добавлены, перейдите в файл конфигурации для добавления",
+	[Key.watchlistLastUpdated]: "Последнее обновление",
+	[Key.watchlistCategoryAnime]: "Аниме",
+	[Key.watchlistCategoryMovie]: "Фильмы",
+	[Key.watchlistCategoryTV]: "Телесериалы",
+	[Key.watchlistCategoryDocumentary]: "Документальные фильмы",
+	[Key.watchlistCategoryOther]: "Другое",
 
 	// Фильтр и статус Бангуми текст
 	[Key.bangumiTitle]: "Мой план группы",

@@ -3,7 +3,7 @@ import type { Translation } from "../translation";
 
 export const zh_TW: Translation = {
 	[Key.home]: "首頁",
-	[Key.about]: "關於我",
+	[Key.about]: "關於",
 	[Key.archive]: "歸檔",
 	[Key.search]: "搜尋",
 	[Key.searchNoResults]: "找不到相關結果。",
@@ -57,6 +57,17 @@ export const zh_TW: Translation = {
 	[Key.publishedAt]: "發布於",
 	[Key.license]: "許可協議",
 	[Key.bangumi]: "番組計劃",
+	[Key.watchlist]: "觀影",
+	[Key.watchlistTitle]: "我的觀影清單",
+	[Key.watchlistSubtitle]: "記錄最近觀看的動畫與影視作品",
+	[Key.watchlistEmpty]: "暫無觀影記錄",
+	[Key.watchlistEmptyReason]: "還沒有添加任何觀影記錄，快去配置文件中添加吧",
+	[Key.watchlistLastUpdated]: "最後更新於",
+	[Key.watchlistCategoryAnime]: "動畫",
+	[Key.watchlistCategoryMovie]: "電影",
+	[Key.watchlistCategoryTV]: "電視劇",
+	[Key.watchlistCategoryDocumentary]: "紀錄片",
+	[Key.watchlistCategoryOther]: "其他",
 
 	// 番組計劃
 	[Key.bangumiTitle]: "我的番組計劃",
