@@ -1,0 +1,492 @@
+---
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { widgetManager } from "@/utils/widget-manager";
+import WidgetLayout from "./WidgetLayout.astro";
+
+const COLLAPSED_HEIGHT = "12rem";
+
+// 使用统一的组件管理器检查是否应该折叠
+const allComponents = [
+	...widgetManager.getConfig().leftComponents,
+	...widgetManager.getConfig().rightComponents,
+];
+const douyinHotComponent = allComponents.find((c) => c.type === "douyinHot");
+// 默认显示10条，超过则折叠
+const isCollapsed = douyinHotComponent
+	? widgetManager.isCollapsed(douyinHotComponent, 10)
+	: true;
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+const className = Astro.props.class;
+const style = Astro.props.style;
+---
+
+<WidgetLayout
+	name="抖音热搜"
+	id="douyin-hot"
+	isCollapsed={isCollapsed}
+	collapsedHeight={COLLAPSED_HEIGHT}
+	class={className}
+	style={style}
+>
+	<div class="douyin-hot-container">
+		<div class="loading-state text-center py-3 text-neutral-400">
+			<div class="loading-spinner"></div>
+			<span class="loading-text text-xs">加载中...</span>
+		</div>
+		<div class="error-state hidden text-center py-3 text-red-500 text-xs">
+			加载失败，请稍后重试
+		</div>
+		<div class="hot-list-wrapper hidden">
+			<ul class="hot-list"></ul>
+			<div class="update-time">
+				<span class="update-text">0小时2分钟</span>
+				<button class="refresh-btn" type="button" aria-label="刷新抖音热搜" title="刷新">
+					<svg class="refresh-icon" data-v-7524c4fe="" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+						<path fill-rule="evenodd" clip-rule="evenodd" d="M1.90321 7.29677C1.90321 10.341 4.11041 12.4147 6.58893 12.8439C6.87255 12.893 7.06266 13.1627 7.01355 13.4464C6.96444 13.73 6.69471 13.9201 6.41109 13.871C3.49942 13.3668 0.86084 10.9127 0.86084 7.29677C0.860839 5.76009 1.55996 4.55245 2.37639 3.63377C2.96124 2.97568 3.63034 2.44135 4.16846 2.03202L2.53205 2.03202C2.25591 2.03202 2.03205 1.80816 2.03205 1.53202C2.03205 1.25588 2.25591 1.03202 2.53205 1.03202L5.53205 1.03202C5.80819 1.03202 6.03205 1.25588 6.03205 1.53202L6.03205 4.53202C6.03205 4.80816 5.80819 5.03202 5.53205 5.03202C5.25591 5.03202 5.03205 4.80816 5.03205 4.53202L5.03205 2.68645L5.03054 2.68759L5.03045 2.68766L5.03044 2.68767L5.03043 2.68767C4.45896 3.11868 3.76059 3.64538 3.15554 4.3262C2.44102 5.13021 1.90321 6.10154 1.90321 7.29677ZM13.0109 7.70321C13.0109 4.69115 10.8505 2.6296 8.40384 2.17029C8.12093 2.11718 7.93465 1.84479 7.98776 1.56188C8.04087 1.27898 8.31326 1.0927 8.59616 1.14581C11.4704 1.68541 14.0532 4.12605 14.0532 7.70321C14.0532 9.23988 13.3541 10.4475 12.5377 11.3662C11.9528 12.0243 11.2837 12.5586 10.7456 12.968L12.3821 12.968C12.6582 12.968 12.8821 13.1918 12.8821 13.468C12.8821 13.7441 12.6582 13.968 12.3821 13.968L9.38205 13.968C9.10591 13.968 8.88205 13.7441 8.88205 13.468L8.88205 10.468C8.88205 10.1918 9.10591 9.96796 9.38205 9.96796C9.65819 9.96796 9.88205 10.1918 9.88205 10.468L9.88205 12.3135L9.88362 12.3123C10.4551 11.8813 11.1535 11.3546 11.7585 10.6738C12.4731 9.86976 13.0109 8.89844 13.0109 7.70321Z" fill="currentColor"></path>
+					</svg>
+				</button>
+			</div>
+		</div>
+	</div>
+</WidgetLayout>
+
+<style is:global>
+	/* 容器 */
+	.douyin-hot-container {
+		font-size: 13px;
+	}
+
+	/* 加载动画 */
+	.douyin-hot-container .loading-spinner {
+		width: 16px;
+		height: 16px;
+		border: 2px solid rgba(0, 0, 0, 0.1);
+		border-top-color: rgba(0, 0, 0, 0.4);
+		border-radius: 50%;
+		margin: 0 auto 0.25rem;
+		animation: spin 0.6s linear infinite;
+	}
+
+	.dark .douyin-hot-container .loading-spinner {
+		border-color: rgba(255, 255, 255, 0.1);
+		border-top-color: rgba(255, 255, 255, 0.4);
+	}
+
+	@keyframes spin {
+		to { transform: rotate(360deg); }
+	}
+
+	/* 列表包装器 */
+	.douyin-hot-container .hot-list-wrapper {
+		position: relative;
+	}
+
+	/* 热搜列表 */
+	.douyin-hot-container .hot-list {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		max-height: 390px;
+		overflow-y: auto;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+	}
+
+	.douyin-hot-container .hot-list::-webkit-scrollbar {
+		width: 4px;
+	}
+
+	.douyin-hot-container .hot-list::-webkit-scrollbar-thumb {
+		background: rgba(0, 0, 0, 0.1);
+		border-radius: 2px;
+	}
+
+	.dark .douyin-hot-container .hot-list::-webkit-scrollbar-thumb {
+		background: rgba(255, 255, 255, 0.15);
+	}
+
+	/* 热搜项 */
+	.douyin-hot-container .hot-item {
+		display: flex;
+		align-items: center;
+		padding: 10px 4px;
+		cursor: pointer;
+		transition: background-color 0.15s;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.dark .douyin-hot-container .hot-item {
+		border-bottom-color: rgba(255, 255, 255, 0.05);
+	}
+
+	.douyin-hot-container .hot-item:last-child {
+		border-bottom: none;
+	}
+
+	.douyin-hot-container .hot-item:hover {
+		background-color: rgba(0, 0, 0, 0.02);
+	}
+
+	.dark .douyin-hot-container .hot-item:hover {
+		background-color: rgba(255, 255, 255, 0.03);
+	}
+
+	/* 排名数字 */
+	.douyin-hot-container .hot-index {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 18px;
+		height: 18px;
+		margin-right: 8px;
+		font-size: 11px;
+		font-weight: 600;
+		color: #999;
+		background: #f5f5f5;
+		border-radius: 2px;
+		flex-shrink: 0;
+	}
+
+	.dark .douyin-hot-container .hot-index {
+		background: rgba(255, 255, 255, 0.08);
+		color: #888;
+	}
+
+	/* 前三名 - 橙红色圆形 */
+	.douyin-hot-container .hot-index.top-1,
+	.douyin-hot-container .hot-index.top-2,
+	.douyin-hot-container .hot-index.top-3 {
+		background: #fe2c55;
+		color: white;
+		border-radius: 50%;
+	}
+
+	/* 内容区域 */
+	.douyin-hot-container .hot-content {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		min-width: 0;
+	}
+
+	/* 标题 */
+	.douyin-hot-container .hot-title {
+		flex: 1;
+		font-size: 13px;
+		line-height: 1.3;
+		color: #333;
+		margin: 0;
+		font-weight: 400;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		padding-right: 8px;
+	}
+
+	.dark .douyin-hot-container .hot-title {
+		color: #ddd;
+	}
+
+	/* 热度值 */
+	.douyin-hot-container .hot-value {
+		font-size: 11px;
+		color: #999;
+		white-space: nowrap;
+		flex-shrink: 0;
+	}
+
+	.dark .douyin-hot-container .hot-value {
+		color: #888;
+	}
+
+	/* 更新时间 */
+	.douyin-hot-container .update-time {
+		padding: 8px 6px;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		font-size: 11px;
+		color: #999;
+		border-top: 1px solid rgba(0, 0, 0, 0.05);
+	}
+
+	.dark .douyin-hot-container .update-time {
+		color: #888;
+		border-top-color: rgba(255, 255, 255, 0.05);
+	}
+
+	.douyin-hot-container .refresh-btn {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 22px;
+		height: 22px;
+		border-radius: 999px;
+		border: none;
+		background: transparent;
+		color: inherit;
+		cursor: pointer;
+		transition: background-color 0.15s, color 0.15s;
+	}
+
+	.douyin-hot-container .update-text {
+		flex: 1;
+		text-align: left;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.douyin-hot-container .refresh-btn:hover {
+		background: rgba(0, 0, 0, 0.04);
+		color: #666;
+	}
+
+	.dark .douyin-hot-container .refresh-btn:hover {
+		background: rgba(255, 255, 255, 0.06);
+		color: #bbb;
+	}
+
+	.douyin-hot-container .refresh-btn:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	.douyin-hot-container .refresh-icon.is-spinning {
+		animation: refreshSpin 0.8s linear infinite;
+	}
+
+	@keyframes refreshSpin {
+		to { transform: rotate(360deg); }
+	}
+</style>
+
+<script>
+	// API返回的原始数据格式
+	interface DouyinAPIItem {
+		word: string;              // 热搜标题
+		hot_value: number;         // 热度值
+		position: number;          // 排名位置
+		group_id: string;          // 话题ID
+		sentence_id: string;       // 句子ID
+		label?: number;            // 标签
+		word_cover?: {             // 封面图
+			url_list: string[];
+		};
+	}
+
+	interface DouyinAPIResponse {
+		code: number;              // 状态码
+		msg: string;               // 消息
+		data: DouyinAPIItem[];     // 数据列表
+	}
+
+
+	// 初始化组件 - 直接实例化和调用
+	function initDouyinHot() {
+		const container = document.querySelector(".douyin-hot-container");
+		if (!container) {
+			return;
+		}
+
+		// 防止重复初始化导致多重定时器/重复绑定（SWUP 会触发多次）
+		const anyContainer = container as any;
+		if (anyContainer._douyinHotInterval) {
+			clearInterval(anyContainer._douyinHotInterval);
+			anyContainer._douyinHotInterval = null;
+		}
+
+		const loadingState = container.querySelector(".loading-state");
+		const errorState = container.querySelector(".error-state");
+		const hotListWrapper = container.querySelector(".hot-list-wrapper");
+		const hotList = container.querySelector(".hot-list");
+		const updateText = container.querySelector(".update-text");
+		const refreshBtn = container.querySelector(".refresh-btn") as HTMLButtonElement | null;
+		const refreshIcon = container.querySelector(".refresh-icon") as SVGElement | null;
+
+		let inFlight = false;
+
+		// 显示加载状态
+		function showLoading() {
+			if (loadingState) loadingState.classList.remove("hidden");
+			if (errorState) errorState.classList.add("hidden");
+			if (hotListWrapper) hotListWrapper.classList.add("hidden");
+			setRefreshing(false);
+		}
+
+		// 显示错误状态
+		function showError() {
+			if (loadingState) loadingState.classList.add("hidden");
+			if (errorState) errorState.classList.remove("hidden");
+			if (hotListWrapper) hotListWrapper.classList.add("hidden");
+			setRefreshing(false);
+		}
+
+		// 显示热搜列表
+		function showHotList() {
+			if (loadingState) loadingState.classList.add("hidden");
+			if (errorState) errorState.classList.add("hidden");
+			if (hotListWrapper) hotListWrapper.classList.remove("hidden");
+			setRefreshing(false);
+		}
+
+		function setRefreshing(refreshing: boolean) {
+			if (refreshBtn) refreshBtn.disabled = refreshing;
+			if (refreshIcon) {
+				if (refreshing) refreshIcon.classList.add("is-spinning");
+				else refreshIcon.classList.remove("is-spinning");
+			}
+		}
+
+		// 格式化数字
+		function formatNumber(num: string | number): string {
+			const n = typeof num === "string" ? parseInt(num) : num;
+			if (n >= 100000000) {
+				return (n / 100000000).toFixed(1) + "亿";
+			}
+			if (n >= 10000) {
+				return (n / 10000).toFixed(1) + "万";
+			}
+			return String(n);
+		}
+
+		// HTML转义
+		function escapeHtml(text: string): string {
+			const div = document.createElement("div");
+			div.textContent = text;
+			return div.innerHTML;
+		}
+
+		// 渲染热搜列表 - 简洁样式：排名+标题+热度
+		function renderHotList(items: any[]) {
+			if (!hotList) return;
+
+			hotList.innerHTML = items
+				.map((item, index) => `
+					<li class="hot-item" data-url="${item.url}">
+						<span class="hot-index ${index < 3 ? `top-${index + 1}` : ""}">${index + 1}</span>
+						<div class="hot-content">
+							<div class="hot-title">${escapeHtml(item.title)}</div>
+							<div class="hot-value">${item.hot}</div>
+						</div>
+					</li>
+				`)
+				.join("");
+
+			// 添加点击事件
+			hotList.querySelectorAll(".hot-item").forEach((item) => {
+				item.addEventListener("click", () => {
+					const url = item.getAttribute("data-url");
+					if (url) {
+						window.open(url, "_blank");
+					}
+				});
+			});
+		}
+
+		// 获取抖音热搜
+		async function fetchDouyinHot(opts?: { silent?: boolean }) {
+			if (inFlight) return;
+			inFlight = true;
+			try {
+				if (!opts?.silent) showLoading();
+				else setRefreshing(true);
+
+				const response = await fetch("https://v2.xxapi.cn/api/douyinhot", {
+					method: "GET",
+					headers: {
+						"Accept": "application/json",
+					},
+				});
+
+				if (!response.ok) {
+					throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+				}
+
+				const result = await response.json();
+
+				if (result.code !== 200) {
+					throw new Error(result.msg || "API返回错误");
+				}
+
+				if (!result.data || !Array.isArray(result.data) || result.data.length === 0) {
+					throw new Error("没有可用的热搜数据");
+				}
+
+				// 转换数据格式
+				const hotList = result.data.map((item: any) => ({
+					index: item.position,
+					title: item.word,
+					hot: formatNumber(item.hot_value),
+					url: `https://www.douyin.com/search/${encodeURIComponent(item.word)}`,
+				}));
+
+				renderHotList(hotList.slice(0, 20));
+				// 更新“多久前”显示（用 event_time 的最大值估算更新时间）
+				try {
+					const latestEventTimeSec = Math.max(
+						...result.data.map((x: any) => Number(x.event_time || 0)),
+					);
+					if (updateText && latestEventTimeSec > 0) {
+						updateText.textContent = formatAgo(latestEventTimeSec * 1000);
+					}
+				} catch {
+					// ignore
+				}
+				showHotList();
+			} catch (error) {
+				// 静默失败：保持 UI 的 error-state，不在控制台打印
+				showError();
+			} finally {
+				inFlight = false;
+				setRefreshing(false);
+			}
+		}
+
+		function formatAgo(tsMs: number): string {
+			const diff = Math.max(0, Date.now() - tsMs);
+			const m = Math.floor(diff / 60000);
+			const h = Math.floor(m / 60);
+			const d = Math.floor(h / 24);
+			if (d > 0) return `${d}天${h % 24}小时`;
+			if (h > 0) return `${h}小时${m % 60}分钟`;
+			return `${m}分钟`;
+		}
+
+		// 立即执行一次
+		fetchDouyinHot();
+
+		// 每5分钟刷新一次
+		anyContainer._douyinHotInterval = setInterval(
+			() => fetchDouyinHot({ silent: true }),
+			5 * 60 * 1000,
+		);
+
+		// 手动刷新按钮
+		if (refreshBtn) {
+			refreshBtn.onclick = () => fetchDouyinHot({ silent: true });
+		}
+	}
+
+	// 页面加载完成后初始化
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initDouyinHot);
+	} else {
+		// 如果页面已经加载完成，直接执行
+		initDouyinHot();
+	}
+
+	// 支持 SWUP 页面切换
+	if (typeof window !== "undefined" && (window as any).swup) {
+		(window as any).swup.hooks.on("content:replace", () => {
+			setTimeout(initDouyinHot, 100);
+		});
+	}
+</script>
+
