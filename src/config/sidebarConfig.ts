@@ -117,7 +117,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 动画延迟时间
 			animationDelay: 300,
 			// 配置ID：使用第一个广告配置
-			configId: "ad1",
+			configId: "ad2",
 		},
 	],
 
