@@ -23,6 +23,7 @@ pinned: true
 | 20251113 | 脑肿瘤分割 | <a href="/assets/pdf/20251113论文复现代码.pdf" target="_blank">论文复现代码</a> |
 | 20251127 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_1127.pdf" target="_blank">汇报_1127</a> |
 | 20251217 | 医学图像融合 | <a href="/assets/pdf/汇报_1217.pdf" target="_blank">汇报_1217</a> |
+| 202601XX | 半监督图像分割 | <a href="/assets/pdf/汇报_01xx.pdf" target="_blank">汇报_01xx</a> |
 :::note
  CCF分区信息
 :::

@@ -1,4 +1,5 @@
 import { getSortedPosts } from "@/utils/content-utils";
+import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 
 export async function GET() {
 	const posts = await getSortedPosts();
@@ -6,7 +7,7 @@ export async function GET() {
 	const allPostsData = posts.map((post) => ({
 		id: post.id,
 		title: post.data.title,
-		published: post.data.published.getTime(),
+		published: formatDateToYYYYMMDD(post.data.published),
 	}));
 
 	return new Response(JSON.stringify(allPostsData));

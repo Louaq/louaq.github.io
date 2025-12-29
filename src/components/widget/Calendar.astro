@@ -118,13 +118,13 @@ const currentLang = siteConfig.lang || "en";
       postDateMap = {};
       const yearsSet = new Set();
       allPostsData.forEach(post => {
-        const date = new Date(post.published);
-        const dateKey = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+        const dateKey = post.published; // 直接使用YYYY-MM-DD格式的日期字符串
+        const year = Number.parseInt(dateKey.substring(0, 4));
         if (!postDateMap[dateKey]) {
           postDateMap[dateKey] = [];
         }
         postDateMap[dateKey].push({ id: post.id, title: post.title, published: post.published });
-        yearsSet.add(date.getFullYear());
+        yearsSet.add(year);
       });
       
       availableYears = Array.from(yearsSet).sort((a, b) => b - a);
@@ -261,8 +261,8 @@ const currentLang = siteConfig.lang || "en";
     
     // 获取当月所有文章
     const currentMonthPosts = allPostsData.filter(post => {
-      const date = new Date(post.published);
-      return date.getFullYear() === currentYear && date.getMonth() === currentMonth;
+      const [year, month] = post.published.split('-').map(Number);
+      return year === currentYear && month === currentMonth + 1;
     });
     
     // 显示当月文章列表
@@ -279,9 +279,9 @@ const currentLang = siteConfig.lang || "en";
     // Calculate which months have posts for the currently displayed year
     const monthsWithPosts = new Set();
     allPostsData.forEach(post => {
-        const date = new Date(post.published);
-        if (date.getFullYear() === displayYear) {
-            monthsWithPosts.add(date.getMonth());
+        const [year, month] = post.published.split('-').map(Number);
+        if (year === displayYear) {
+            monthsWithPosts.add(month - 1); // 转换为0-11的月份索引
         }
     });
 
@@ -344,8 +344,8 @@ const currentLang = siteConfig.lang || "en";
     
     if (postsList) {
       postsList.innerHTML = currentMonthPosts.map(post => {
-        const date = new Date(post.published);
-        const dateStr = `${date.getMonth() + 1}-${date.getDate()}`;
+        const [year, month, day] = post.published.split('-').map(Number);
+        const dateStr = `${month}-${day}`;
         return `
         <a href="/posts/${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
           <span class="truncate">${post.title}</span>
@@ -399,8 +399,8 @@ const currentLang = siteConfig.lang || "en";
         if (posts.length > 0 && postsList) {
           // 渲染文章列表
           postsList.innerHTML = posts.map(post => {
-            const date = new Date(post.published);
-            const dateStr = `${date.getMonth() + 1}-${date.getDate()}`;
+            const [year, month, day] = post.published.split('-').map(Number);
+            const dateStr = `${month}-${day}`;
             return `
             <a href="/posts/${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
               <span class="truncate">${post.title}</span>

@@ -32,8 +32,8 @@ interface Group {
 let groups: Group[] = [];
 
 function formatDate(date: Date) {
-	const month = (date.getMonth() + 1).toString().padStart(2, "0");
-	const day = date.getDate().toString().padStart(2, "0");
+	const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+	const day = date.getUTCDate().toString().padStart(2, "0");
 	return `${month}-${day}`;
 }
 
@@ -69,7 +69,7 @@ onMount(async () => {
 
 	const grouped = filteredPosts.reduce(
 		(acc, post) => {
-			const year = post.data.published.getFullYear();
+			const year = post.data.published.getUTCFullYear();
 			if (!acc[year]) {
 				acc[year] = [];
 			}
