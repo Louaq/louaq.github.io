@@ -270,21 +270,16 @@ const style = Astro.props.style;
 <script>
 	// API返回的原始数据格式
 	interface DouyinAPIItem {
-		word: string;              // 热搜标题
-		hot_value: number;         // 热度值
-		position: number;          // 排名位置
-		group_id: string;          // 话题ID
-		sentence_id: string;       // 句子ID
-		label?: number;            // 标签
-		word_cover?: {             // 封面图
-			url_list: string[];
-		};
+		id: string;                // 热搜ID
+		title: string;             // 热搜标题
+		url: string;               // 热搜链接
 	}
 
 	interface DouyinAPIResponse {
-		code: number;              // 状态码
-		msg: string;               // 消息
-		data: DouyinAPIItem[];     // 数据列表
+		status: string;            // 状态
+		id: string;                // 源ID
+		updatedTime: number;       // 更新时间戳
+		items: DouyinAPIItem[];    // 数据列表
 	}
 
 
@@ -363,7 +358,7 @@ const style = Astro.props.style;
 			return div.innerHTML;
 		}
 
-		// 渲染热搜列表 - 简洁样式：排名+标题+热度
+		// 渲染热搜列表 - 简洁样式：排名+标题
 		function renderHotList(items: any[]) {
 			if (!hotList) return;
 
@@ -373,7 +368,6 @@ const style = Astro.props.style;
 						<span class="hot-index ${index < 3 ? `top-${index + 1}` : ""}">${index + 1}</span>
 						<div class="hot-content">
 							<div class="hot-title">${escapeHtml(item.title)}</div>
-							<div class="hot-value">${item.hot}</div>
 						</div>
 					</li>
 				`)
@@ -398,7 +392,7 @@ const style = Astro.props.style;
 				if (!opts?.silent) showLoading();
 				else setRefreshing(true);
 
-				const response = await fetch("https://v2.xxapi.cn/api/douyinhot", {
+				const response = await fetch("/api/douyin.json", {
 					method: "GET",
 					headers: {
 						"Accept": "application/json",
@@ -411,33 +405,26 @@ const style = Astro.props.style;
 
 				const result = await response.json();
 
-				if (result.code !== 200) {
-					throw new Error(result.msg || "API返回错误");
+				if (result.status !== "success") {
+					throw new Error(result.status || "API返回错误");
 				}
 
-				if (!result.data || !Array.isArray(result.data) || result.data.length === 0) {
+				if (!result.items || !Array.isArray(result.items) || result.items.length === 0) {
 					throw new Error("没有可用的热搜数据");
 				}
 
 				// 转换数据格式
-				const hotList = result.data.map((item: any) => ({
-					index: item.position,
-					title: item.word,
-					hot: formatNumber(item.hot_value),
-					url: `https://www.douyin.com/search/${encodeURIComponent(item.word)}`,
+				const hotList = result.items.map((item: any, index: number) => ({
+					index: index + 1,
+					title: item.title,
+					hot: "",  // 新API不提供热度值，留空
+					url: item.url,
 				}));
 
-				renderHotList(hotList.slice(0, 20));
-				// 更新“多久前”显示（用 event_time 的最大值估算更新时间）
-				try {
-					const latestEventTimeSec = Math.max(
-						...result.data.map((x: any) => Number(x.event_time || 0)),
-					);
-					if (updateText && latestEventTimeSec > 0) {
-						updateText.textContent = formatAgo(latestEventTimeSec * 1000);
-					}
-				} catch {
-					// ignore
+				renderHotList(hotList.slice(0, 30));
+				// 更新"多久前"显示（使用 updatedTime）
+				if (updateText && result.updatedTime) {
+					updateText.textContent = formatAgo(result.updatedTime);
 				}
 				showHotList();
 			} catch (error) {
