@@ -1,9 +1,20 @@
 import type { APIRoute } from 'astro';
 
-export const GET: APIRoute = async () => {
+export const GET: APIRoute = async ({ request }) => {
 	try {
-		const response = await fetch('https://newsnow.louaq.com/api/s?id=douyin', {
+		const url = new URL(request.url);
+		// 只要带了 ts 参数，就认为是“手动强制刷新”，不走缓存
+		const force = url.searchParams.has('ts');
+		const ts = url.searchParams.get('ts') || '';
+
+		const upstreamUrl = force
+			? `https://newsnow.louaq.com/api/s?id=douyin&ts=${encodeURIComponent(ts)}`
+			: 'https://newsnow.louaq.com/api/s?id=douyin';
+
+		const response = await fetch(upstreamUrl, {
 			method: 'GET',
+			// 尽量避免服务端 fetch 复用缓存（不同运行时支持不同；不支持也没关系）
+			cache: force ? 'no-store' : 'default',
 			headers: {
 				'Accept': 'application/json',
 			},
@@ -29,7 +40,7 @@ export const GET: APIRoute = async () => {
 			status: 200,
 			headers: {
 				'Content-Type': 'application/json',
-				'Cache-Control': 'public, max-age=300', // 缓存5分钟
+				'Cache-Control': force ? 'no-store' : 'public, max-age=300', // 手动刷新不缓存；自动刷新缓存5分钟
 			},
 		});
 	} catch (error) {

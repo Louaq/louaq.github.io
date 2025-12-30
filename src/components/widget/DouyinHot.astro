@@ -385,15 +385,22 @@ const style = Astro.props.style;
 		}
 
 		// 获取抖音热搜
-		async function fetchDouyinHot(opts?: { silent?: boolean }) {
+		// silent: 不打断当前列表显示，只展示按钮旋转
+		// force: 强制绕过浏览器缓存（用于手动刷新）
+		async function fetchDouyinHot(opts?: { silent?: boolean; force?: boolean }) {
 			if (inFlight) return;
 			inFlight = true;
 			try {
 				if (!opts?.silent) showLoading();
 				else setRefreshing(true);
 
-				const response = await fetch("/api/douyin.json", {
+				const url = opts?.force
+					? `/api/douyin.json?ts=${Date.now()}`
+					: "/api/douyin.json";
+
+				const response = await fetch(url, {
 					method: "GET",
+					cache: opts?.force ? "no-store" : "default",
 					headers: {
 						"Accept": "application/json",
 					},
@@ -457,7 +464,12 @@ const style = Astro.props.style;
 
 		// 手动刷新按钮
 		if (refreshBtn) {
-			refreshBtn.onclick = () => fetchDouyinHot({ silent: true });
+			// 用 addEventListener 避免被其他逻辑覆盖 onclick
+			refreshBtn.addEventListener("click", (e) => {
+				e.preventDefault();
+				e.stopPropagation();
+				fetchDouyinHot({ silent: true, force: true });
+			});
 		}
 	}
 
