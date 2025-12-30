@@ -396,6 +396,7 @@ const style = Astro.props.style;
 
 				const apiUrl = "https://newsnow.louaq.com/api/s?id=douyin";
 				const url = opts?.force ? `${apiUrl}&_t=${Date.now()}` : apiUrl;
+				
 
 				const response = await fetch(url, {
 					method: "GET",
@@ -411,7 +412,8 @@ const style = Astro.props.style;
 
 				const result = await response.json();
 
-				if (result.status !== "success") {
+				// status 可能是 "success" 或 "cache"，都是有效响应
+				if (result.status !== "success" && result.status !== "cache") {
 					throw new Error(result.status || "API返回错误");
 				}
 
@@ -434,7 +436,11 @@ const style = Astro.props.style;
 				}
 				showHotList();
 			} catch (error) {
-				// 静默失败：保持 UI 的 error-state，不在控制台打印
+				// 打印错误信息用于调试
+				console.error("[抖音热搜] 加载失败:", error);
+				if (error instanceof Error) {
+					console.error("[抖音热搜] 错误详情:", error.message);
+				}
 				showError();
 			} finally {
 				inFlight = false;
