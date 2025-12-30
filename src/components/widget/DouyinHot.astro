@@ -394,9 +394,8 @@ const style = Astro.props.style;
 				if (!opts?.silent) showLoading();
 				else setRefreshing(true);
 
-				const url = opts?.force
-					? `/api/douyin.json?ts=${Date.now()}`
-					: "/api/douyin.json";
+				const apiUrl = "https://newsnow.louaq.com/api/s?id=douyin";
+				const url = opts?.force ? `${apiUrl}&_t=${Date.now()}` : apiUrl;
 
 				const response = await fetch(url, {
 					method: "GET",
