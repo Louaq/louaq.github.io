@@ -373,7 +373,8 @@ const currentLang = siteConfig.lang || "en";
         const dateKey = dayElement.getAttribute('data-date');
         const hasPost = dayElement.getAttribute('data-has-post') === 'true';
         
-        if (!hasPost || !dateKey) return;
+        // 如果没有日期键（空白格子），直接返回
+        if (!dateKey) return;
         
         // 切换选中状态
         if (currentSelectedDay === dayElement) {
@@ -396,17 +397,27 @@ const currentLang = siteConfig.lang || "en";
         // 获取该日期的文章
         const posts = postDateMap[dateKey] || [];
         
-        if (posts.length > 0 && postsList) {
-          // 渲染文章列表
-          postsList.innerHTML = posts.map(post => {
-            const [year, month, day] = post.published.split('-').map(Number);
-            const dateStr = `${month}-${day}`;
-            return `
-            <a href="/posts/${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
-              <span class="truncate">${post.title}</span>
-              <span class="text-xs text-neutral-500 dark:text-neutral-400 ml-2 whitespace-nowrap">${dateStr}</span>
-            </a>
-          `}).join('');
+        if (postsList) {
+          if (posts.length > 0) {
+            // 渲染文章列表
+            postsList.innerHTML = posts.map(post => {
+              const [year, month, day] = post.published.split('-').map(Number);
+              const dateStr = `${month}-${day}`;
+              return `
+              <a href="/posts/${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
+                <span class="truncate">${post.title}</span>
+                <span class="text-xs text-neutral-500 dark:text-neutral-400 ml-2 whitespace-nowrap">${dateStr}</span>
+              </a>
+            `}).join('');
+          } else {
+            // 没有文章时显示提示信息
+            const [year, month, day] = dateKey.split('-').map(Number);
+            postsList.innerHTML = `
+              <div class="flex items-center text-sm text-neutral-700 dark:text-neutral-300 px-2 py-1">
+                <span>${year}年${month}月${day}日暂无文章</span>
+              </div>
+            `;
+          }
           
           // 显示分割线
           if (divider) {
@@ -486,7 +497,8 @@ const currentLang = siteConfig.lang || "en";
     min-height: 32px;
   }
   
-  .calendar-day[data-has-post="true"]:hover {
+  .calendar-day[data-date]:hover {
     transform: translateY(-2px);
+    background-color: var(--btn-plain-bg-hover);
   }
 </style>
