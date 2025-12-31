@@ -55,8 +55,10 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
     icon: "material-symbols:info",
     children: [
       LinkPreset.About,
-	  LinkPreset.Watchlist,
-      
+	  ...(siteConfig.pages.watchlist ? [LinkPreset.Watchlist] : []), // 根据配置决定是否添加观影清单页面
+	  ...(siteConfig.pages.sponsor ? [LinkPreset.Sponsor] : []), // 根据配置决定是否添加赞助页面
+	  ...(siteConfig.pages.bangumi ? [LinkPreset.Bangumi] : []), // 根据配置决定是否添加番组计划页面
+
     ],
   });
   // 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出

@@ -1,5 +1,5 @@
 ---
-title: new year
+title: New year
 published: 2025-12-31 12:00:00
 expires: 2026-01-21 23:59:59
 description: "new year"
@@ -7,4 +7,6 @@ category: 博客
 tags: [元旦]
 ---
 
-## 后面再写
+## 你好 2026！
+
+![https://pic1.imgdb.cn/item/6954b62a8801094e3ab22332.jpg](https://pic1.imgdb.cn/item/6954b62a8801094e3ab22332.jpg)
