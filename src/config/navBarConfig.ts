@@ -55,6 +55,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
     icon: "material-symbols:info",
     children: [
       LinkPreset.About,
+	  ...(siteConfig.pages.albums ? [LinkPreset.Albums] : []), // 根据配置决定是否添加相册页面
 	  ...(siteConfig.pages.watchlist ? [LinkPreset.Watchlist] : []), // 根据配置决定是否添加观影清单页面
 	  ...(siteConfig.pages.sponsor ? [LinkPreset.Sponsor] : []), // 根据配置决定是否添加赞助页面
 	  ...(siteConfig.pages.bangumi ? [LinkPreset.Bangumi] : []), // 根据配置决定是否添加番组计划页面

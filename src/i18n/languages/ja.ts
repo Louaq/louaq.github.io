@@ -254,4 +254,12 @@ export const ja: Translation = {
 	[Key.copyLink]: "リンクをコピー",
 	[Key.savePoster]: "ポスターを保存",
 	[Key.scanToRead]: "QRコードで読む",
+
+	// アルバム
+	[Key.albums]: "アルバム",
+	[Key.albumsSubtitle]: "人生の美しい瞬間を記録する",
+	[Key.albumsEmpty]: "アルバムがありません",
+	[Key.albumsEmptyDesc]: "まだアルバムが追加されていません",
+	[Key.albumsPhotoCount]: "枚の写真",
+	[Key.albumsPhotosCount]: "枚の写真",
 };

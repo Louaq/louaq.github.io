@@ -57,6 +57,7 @@ export type SiteConfig = {
 		guestbook: boolean; // 留言板页面开关
 		bangumi: boolean;
 		watchlist: boolean; // 观影清单页面开关
+		albums: boolean; // 相册页面开关
 	};
 
 	// 文章列表布局配置
@@ -91,6 +92,7 @@ export enum LinkPreset {
 	Guestbook = 5,
 	Bangumi = 6,
 	Watchlist = 7,
+	Albums = 8,
 }
 
 export type NavBarLink = {

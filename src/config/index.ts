@@ -32,6 +32,7 @@ export { fontConfig } from "./fontConfig"; // 字体配置
 export { footerConfig } from "./footerConfig"; // 页脚配置
 export { getEnabledFriends } from "./friendsConfig"; // 友链配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
+export { albumsConfig } from "./albumsConfig"; // 相册配置
 // 组件配置
 export { musicPlayerConfig } from "./musicConfig"; // 音乐播放器配置
 export { navBarConfig, navBarSearchConfig } from "./navBarConfig"; // 导航栏配置与搜索配置

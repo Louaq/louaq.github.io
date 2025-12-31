@@ -248,4 +248,12 @@ export const zh_TW: Translation = {
 	[Key.copyLink]: "複製連結",
 	[Key.savePoster]: "保存海報",
 	[Key.scanToRead]: "掃碼閱讀文章",
+
+	// 相冊
+	[Key.albums]: "相冊",
+	[Key.albumsSubtitle]: "記錄生活中的美好瞬間",
+	[Key.albumsEmpty]: "暫無相冊",
+	[Key.albumsEmptyDesc]: "還沒有添加任何相冊",
+	[Key.albumsPhotoCount]: "張照片",
+	[Key.albumsPhotosCount]: "張照片",
 };

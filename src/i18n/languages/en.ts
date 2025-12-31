@@ -255,4 +255,12 @@ export const en: Translation = {
 	[Key.copyLink]: "Copy Link",
 	[Key.savePoster]: "Save Poster",
 	[Key.scanToRead]: "Scan to Read",
+
+	// Albums
+	[Key.albums]: "Albums",
+	[Key.albumsSubtitle]: "Capturing beautiful moments in life",
+	[Key.albumsEmpty]: "No Albums",
+	[Key.albumsEmptyDesc]: "No albums have been added yet",
+	[Key.albumsPhotoCount]: "photo",
+	[Key.albumsPhotosCount]: "photos",
 };

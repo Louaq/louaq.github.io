@@ -246,4 +246,12 @@ export const zh_CN: Translation = {
 	[Key.copyLink]: "复制链接",
 	[Key.savePoster]: "保存海报",
 	[Key.scanToRead]: "扫码阅读文章",
+
+	// 相册
+	[Key.albums]: "相册",
+	[Key.albumsSubtitle]: "记录生活中的美好瞬间",
+	[Key.albumsEmpty]: "暂无相册",
+	[Key.albumsEmptyDesc]: "还没有添加任何相册",
+	[Key.albumsPhotoCount]: "张照片",
+	[Key.albumsPhotosCount]: "张照片",
 };

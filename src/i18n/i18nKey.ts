@@ -240,6 +240,14 @@ enum I18nKey {
 	copyLink = "copyLink",
 	savePoster = "savePoster",
 	scanToRead = "scanToRead",
+
+	// 相册
+	albums = "albums",
+	albumsSubtitle = "albumsSubtitle",
+	albumsEmpty = "albumsEmpty",
+	albumsEmptyDesc = "albumsEmptyDesc",
+	albumsPhotoCount = "albumsPhotoCount",
+	albumsPhotosCount = "albumsPhotosCount",
 }
 
 export default I18nKey;

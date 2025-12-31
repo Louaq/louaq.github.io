@@ -256,4 +256,12 @@ export const ru: Translation = {
 	[Key.copyLink]: "Копировать ссылку",
 	[Key.savePoster]: "Сохранить постер",
 	[Key.scanToRead]: "Сканируйте, чтобы прочитать",
+
+	// Альбомы
+	[Key.albums]: "Альбомы",
+	[Key.albumsSubtitle]: "Запечатление прекрасных моментов жизни",
+	[Key.albumsEmpty]: "Нет альбомов",
+	[Key.albumsEmptyDesc]: "Альбомы еще не добавлены",
+	[Key.albumsPhotoCount]: "фото",
+	[Key.albumsPhotosCount]: "фото",
 };
