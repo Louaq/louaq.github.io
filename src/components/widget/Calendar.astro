@@ -265,8 +265,24 @@ const currentLang = siteConfig.lang || "en";
       return year === currentYear && month === currentMonth + 1;
     });
     
-    // 显示当月文章列表
-    showMonthlyPosts(currentMonthPosts);
+    // 如果是当前月份，默认显示今天的文章
+    if (isCurrentMonth) {
+      const todayDateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(currentDate).padStart(2, '0')}`;
+      const todayPosts = postDateMap[todayDateKey] || [];
+      showDailyPosts(todayDateKey, todayPosts);
+      
+      // 自动选中今天的日期格子
+      setTimeout(() => {
+        const todayElement = document.querySelector(`.calendar-day[data-date="${todayDateKey}"]`);
+        if (todayElement) {
+          todayElement.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
+          todayElement.setAttribute('data-selected', 'true');
+        }
+      }, 0);
+    } else {
+      // 如果不是当前月份，显示当月所有文章
+      showMonthlyPosts(currentMonthPosts);
+    }
     
     // 添加点击事件监听
     setupClickHandlers(currentMonthPosts);
@@ -360,70 +376,92 @@ const currentLang = siteConfig.lang || "en";
     }
   }
   
-  // 设置日历格子点击事件
-  function setupClickHandlers(currentMonthPosts) {
-    const calendarDays = document.querySelectorAll('.calendar-day[data-date]');
+  // 显示指定日期的文章
+  function showDailyPosts(dateKey, posts) {
     const postsList = document.getElementById('calendar-posts-list');
     const divider = document.getElementById('calendar-posts-divider');
     
-    let currentSelectedDay = null;
+    if (postsList) {
+      if (posts.length > 0) {
+        postsList.innerHTML = posts.map(post => {
+          const [year, month, day] = post.published.split('-').map(Number);
+          const dateStr = `${month}-${day}`;
+          return `
+          <a href="/posts/${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
+            <span class="truncate">${post.title}</span>
+            <span class="text-xs text-neutral-500 dark:text-neutral-400 ml-2 whitespace-nowrap">${dateStr}</span>
+          </a>
+        `}).join('');
+      } else {
+        // 没有文章时显示提示信息
+        const [year, month, day] = dateKey.split('-').map(Number);
+        postsList.innerHTML = `
+          <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400 px-2 py-1">
+            <span>${year}年${month}月${day}日暂无文章</span>
+          </div>
+        `;
+      }
+      
+      // 显示分割线
+      if (divider) {
+        divider.style.display = 'block';
+      }
+    }
+  }
+  
+  // 设置日历格子点击事件
+  function setupClickHandlers(currentMonthPosts) {
+    const calendarDays = document.querySelectorAll('.calendar-day[data-date]');
+    const now = new Date();
+    const isCurrentMonth = displayYear === now.getFullYear() && displayMonth === now.getMonth();
+    const todayDateKey = isCurrentMonth ? `${displayYear}-${String(displayMonth + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}` : null;
     
     calendarDays.forEach(dayElement => {
       dayElement.addEventListener('click', () => {
         const dateKey = dayElement.getAttribute('data-date');
-        const hasPost = dayElement.getAttribute('data-has-post') === 'true';
         
         // 如果没有日期键（空白格子），直接返回
         if (!dateKey) return;
         
+        // 获取当前选中的元素
+        const currentSelectedDay = document.querySelector('.calendar-day[data-selected="true"]');
+        
         // 切换选中状态
         if (currentSelectedDay === dayElement) {
-          // 取消选中，恢复显示当月所有文章
+          // 取消选中，根据是否是当前月份决定显示内容
           dayElement.classList.remove('bg-[var(--primary)]', 'bg-opacity-10');
-          currentSelectedDay = null;
-          showMonthlyPosts(currentMonthPosts);
+          dayElement.removeAttribute('data-selected');
+          
+          if (isCurrentMonth) {
+            // 如果是当前月份，恢复显示今天的文章
+            const todayPosts = postDateMap[todayDateKey] || [];
+            showDailyPosts(todayDateKey, todayPosts);
+            // 重新选中今天
+            const todayElement = document.querySelector(`.calendar-day[data-date="${todayDateKey}"]`);
+            if (todayElement) {
+              todayElement.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
+              todayElement.setAttribute('data-selected', 'true');
+            }
+          } else {
+            // 如果不是当前月份，显示当月所有文章
+            showMonthlyPosts(currentMonthPosts);
+          }
           return;
         }
         
         // 移除之前选中的样式
         if (currentSelectedDay) {
           currentSelectedDay.classList.remove('bg-[var(--primary)]', 'bg-opacity-10');
+          currentSelectedDay.removeAttribute('data-selected');
         }
         
         // 添加选中样式
         dayElement.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
-        currentSelectedDay = dayElement;
+        dayElement.setAttribute('data-selected', 'true');
         
-        // 获取该日期的文章
+        // 获取该日期的文章并显示
         const posts = postDateMap[dateKey] || [];
-        
-        if (postsList) {
-          if (posts.length > 0) {
-            // 渲染文章列表
-            postsList.innerHTML = posts.map(post => {
-              const [year, month, day] = post.published.split('-').map(Number);
-              const dateStr = `${month}-${day}`;
-              return `
-              <a href="/posts/${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
-                <span class="truncate">${post.title}</span>
-                <span class="text-xs text-neutral-500 dark:text-neutral-400 ml-2 whitespace-nowrap">${dateStr}</span>
-              </a>
-            `}).join('');
-          } else {
-            // 没有文章时显示提示信息
-            const [year, month, day] = dateKey.split('-').map(Number);
-            postsList.innerHTML = `
-              <div class="flex items-center text-sm text-neutral-700 dark:text-neutral-300 px-2 py-1">
-                <span>${year}年${month}月${day}日暂无文章</span>
-              </div>
-            `;
-          }
-          
-          // 显示分割线
-          if (divider) {
-            divider.style.display = 'block';
-          }
-        }
+        showDailyPosts(dateKey, posts);
       });
     });
   }
