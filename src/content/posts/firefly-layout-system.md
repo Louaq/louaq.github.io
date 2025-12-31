@@ -232,6 +232,48 @@ export const siteConfig: SiteConfig = {
 
 ---
 
+### 2.2.1 封面位置：顶部 vs 右侧
+
+网格模式支持两种封面摆放方式，通过配置进行切换：
+
+```typescript
+// src/config/siteConfig.ts
+export const siteConfig: SiteConfig = {
+  postListLayout: {
+    defaultMode: "grid",
+    allowSwitch: true,
+    grid: {
+      masonry: true,
+      coverPosition: "top", // 或 "right"
+    },
+  },
+};
+```
+
+#### 封面置于顶部（coverPosition: "top"）
+
+- 封面图位于卡片上方，文本在下方，整体更“图文型”，适合视觉内容丰富的文章。
+- 封面宽度占满卡片；摘要与标签在封面下自然排列，整体节奏更均衡。
+- 移动端在卡片有封面时，置顶按钮采用半透明毛玻璃背景，覆盖在图片之上也能保持可读性。
+- 与瀑布流（masonry）更契合：图文高度差异大时纵向堆叠更自然，减少左右列空白。
+
+![顶部封面](./images/masonry.webp)
+
+#### 封面置于右侧（coverPosition: "right"）
+
+- 文本在左、封面在右，更利于快速浏览文字型内容，信息密度更高。
+- 卡片高度更加稳定，列表观感更整齐；无封面文章在桌面端会显示进入按钮，便于操作。
+- 适合标题与元信息为主、封面作为辅助点缀的内容形态。
+
+![右侧封面](./images/grid_cover_right.webp)
+
+#### 使用建议
+- 视觉型内容（摄影、设计、插图）优先选择“顶部”。
+- 文字密集、需要高效扫读的列表页优先选择“右侧”，但封面内容会变窄。
+- 图文混合且开启瀑布流时，“顶部”通常更协调
+
+---
+
 ## 三、布局冲突分析 ⚠️
 
 ### 3.1 为什么双侧边栏与网格模式冲突？
