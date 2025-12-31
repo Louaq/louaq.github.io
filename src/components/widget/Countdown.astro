@@ -5,7 +5,7 @@ import WidgetLayout from "./WidgetLayout.astro";
 interface Props {
 	class?: string;
 	style?: string;
-	targetDate?: string; // 倒计时目标日期，格式: "YYYY-MM-DD"
+	targetDate?: string; // 倒计时目标日期时间，格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
 	title?: string; // 倒计时标题
 	description?: string; // 倒计时描述
 }
@@ -13,7 +13,7 @@ interface Props {
 const { 
 	class: className, 
 	style,
-	targetDate = "2025-12-31",
+	targetDate = "2025-12-31 23:59:59",
 	title = "新年倒计时",
 	description = "距离新年还有"
 } = Astro.props;
@@ -45,8 +45,33 @@ const {
 
 <script is:inline define:vars={{ targetDate }}>
   function initCountdown() {
-    // 解析目标日期
-    const target = new Date(targetDate).getTime();
+    // 解析目标日期，确保使用本地时区
+    // 手动解析日期字符串以避免时区问题
+    let target;
+    if (targetDate.includes(' ') || targetDate.includes('T')) {
+      // 包含时间的格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DDTHH:MM:SS"
+      const parts = targetDate.replace('T', ' ').split(' ');
+      const dateParts = parts[0].split('-');
+      const timeParts = parts[1] ? parts[1].split(':') : ['0', '0', '0'];
+      
+      target = new Date(
+        parseInt(dateParts[0]), // 年
+        parseInt(dateParts[1]) - 1, // 月 (0-11)
+        parseInt(dateParts[2]), // 日
+        parseInt(timeParts[0] || '0'), // 时
+        parseInt(timeParts[1] || '0'), // 分
+        parseInt(timeParts[2] || '0')  // 秒
+      ).getTime();
+    } else {
+      // 仅日期格式: "YYYY-MM-DD"
+      const dateParts = targetDate.split('-');
+      target = new Date(
+        parseInt(dateParts[0]),
+        parseInt(dateParts[1]) - 1,
+        parseInt(dateParts[2]),
+        0, 0, 0
+      ).getTime();
+    }
     
     // 计算一年的总毫秒数
     const yearStart = new Date(new Date().getFullYear(), 0, 1).getTime();
