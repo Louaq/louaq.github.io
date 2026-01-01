@@ -396,7 +396,7 @@ const currentLang = siteConfig.lang || "en";
         // 没有文章时显示提示信息
         const [year, month, day] = dateKey.split('-').map(Number);
         postsList.innerHTML = `
-          <div class="flex items-center text-sm text-neutral-500 dark:text-neutral-400 px-2 py-1">
+          <div class="flex items-center text-sm text-neutral-700 dark:text-neutral-300 px-2 py-1">
             <span>${year}年${month}月${day}日暂无文章</span>
           </div>
         `;
