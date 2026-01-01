@@ -115,8 +115,6 @@ const style = Astro.props.style;
 		display: flex;
 		align-items: center;
 		padding: 10px 4px;
-		cursor: pointer;
-		transition: background-color 0.15s;
 		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 	}
 
@@ -126,14 +124,6 @@ const style = Astro.props.style;
 
 	.douyin-hot-container .hot-item:last-child {
 		border-bottom: none;
-	}
-
-	.douyin-hot-container .hot-item:hover {
-		background-color: rgba(0, 0, 0, 0.02);
-	}
-
-	.dark .douyin-hot-container .hot-item:hover {
-		background-color: rgba(255, 255, 255, 0.03);
 	}
 
 	/* 排名数字 */
@@ -364,7 +354,7 @@ const style = Astro.props.style;
 
 			hotList.innerHTML = items
 				.map((item, index) => `
-					<li class="hot-item" data-url="${item.url}">
+					<li class="hot-item">
 						<span class="hot-index ${index < 3 ? `top-${index + 1}` : ""}">${index + 1}</span>
 						<div class="hot-content">
 							<div class="hot-title">${escapeHtml(item.title)}</div>
@@ -372,16 +362,6 @@ const style = Astro.props.style;
 					</li>
 				`)
 				.join("");
-
-			// 添加点击事件
-			hotList.querySelectorAll(".hot-item").forEach((item) => {
-				item.addEventListener("click", () => {
-					const url = item.getAttribute("data-url");
-					if (url) {
-						window.open(url, "_blank");
-					}
-				});
-			});
 		}
 
 		// 获取抖音热搜
