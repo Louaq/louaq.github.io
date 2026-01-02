@@ -139,11 +139,8 @@ const statusColor = {
 								<div class="pagination-container" data-container-section={category.key}>
 									<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 										{category.items.map((item: WatchlistItem) => (
-										<a 
-											href={item.link}
-											target="_blank"
-											rel="noopener noreferrer"
-											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-neutral-200 dark:border-neutral-700 block"
+										<div 
+											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-neutral-200 dark:border-neutral-700 block cursor-default"
 											data-item-section={category.key}>
 											{/* 封面图 */}
 											<div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
@@ -245,7 +242,7 @@ const statusColor = {
 													</div>
 												)}
 											</div>
-										</a>
+										</div>
 									))}
 								</div>
 
