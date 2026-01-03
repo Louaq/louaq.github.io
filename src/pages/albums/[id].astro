@@ -236,29 +236,7 @@ export async function getStaticPaths() {
 </style>
 
 <script>
-  import { Fancybox } from '@fancyapps/ui';
-  import '@fancyapps/ui/dist/fancybox/fancybox.css';
-
-  document.addEventListener('DOMContentLoaded', () => {
-    // 初始化 Fancybox
-    Fancybox.bind('[data-fancybox="gallery"]', {
-      Toolbar: {
-        display: {
-          left: ['infobar'],
-          middle: [],
-          right: ['slideshow', 'zoom', 'fullscreen', 'close'],
-        },
-      },
-      Thumbs: {
-        type: 'classic',
-      },
-      Images: {
-        zoom: true,
-      },
-      Carousel: {
-        infinite: true,
-      },
-    });
-  });
+  // Fancybox 已由全局 `src/components/effects/FancyboxManager.astro` 统一初始化
+  // 这里避免重复 bind（重复预加载/解码可能触发 EncodingError 且表现为未捕获 Promise）
 </script>
 

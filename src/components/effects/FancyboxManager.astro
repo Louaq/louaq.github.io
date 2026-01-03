@@ -6,12 +6,152 @@ import "@/styles/fancybox-custom.css";
 
 <script>
   let Fancybox: any;
+  const W = window as any;
+
+  function installEncodingErrorGuardOnce() {
+    if (W.__encodingErrorGuardInstalled) return;
+    W.__encodingErrorGuardInstalled = true;
+
+    // 1) 修复根因：某些情况下第三方库会对 <img> 过早调用 createImageBitmap / decode，
+    //    即使图片最终能正常显示，也可能抛出 EncodingError。
+    //    这里对 “HTMLImageElement + EncodingError” 做一次等待+重试，避免偶发解码失败。
+    const originalCreateImageBitmap = window.createImageBitmap?.bind(window);
+    if (typeof originalCreateImageBitmap === "function") {
+      window.createImageBitmap = (async (...args: any[]) => {
+        try {
+          return await originalCreateImageBitmap(...args);
+        } catch (err: any) {
+          const first = args[0];
+          const name = err?.name;
+          const msg = String(err?.message ?? err ?? "");
+
+          const isEncodingError =
+            name === "EncodingError" || /cannot be decoded/i.test(msg);
+
+          if (isEncodingError && first instanceof HTMLImageElement) {
+            // 等待图片完成加载（避免对未完成资源过早 bitmap）
+            const img = first;
+            try {
+              if (!img.complete || img.naturalWidth === 0) {
+                await new Promise<void>((resolve, reject) => {
+                  const onLoad = () => cleanup(resolve);
+                  const onError = () =>
+                    cleanup(() =>
+                      reject(new Error("image load failed before retry"))
+                    );
+                  const cleanup = (cb: () => void) => {
+                    img.removeEventListener("load", onLoad);
+                    img.removeEventListener("error", onError);
+                    cb();
+                  };
+                  img.addEventListener("load", onLoad, { once: true });
+                  img.addEventListener("error", onError, { once: true });
+                });
+              }
+
+              // decode() 会在图像可安全渲染时 resolve
+              if (typeof (img as any).decode === "function") {
+                await (img as any).decode();
+              }
+
+              // 重试一次
+              return await originalCreateImageBitmap(...args);
+            } catch {
+              // 重试仍失败：交给上层 error 处理（比如跳过 slide）
+              throw err;
+            }
+          }
+
+          throw err;
+        }
+      }) as any;
+    }
+
+    // 2) 同理：decode() 在 src 被快速替换（例如预加载/切换 slide）时会以 EncodingError reject。
+    //    这种 reject 多数是“时序竞争”而非真实图片损坏；做一次重试/吞掉可消除根因。
+    const originalDecode = (HTMLImageElement.prototype as any).decode;
+    if (typeof originalDecode === "function") {
+      (HTMLImageElement.prototype as any).decode = function () {
+        const img = this as HTMLImageElement;
+        const startSrc = img.currentSrc || img.src;
+
+        return Promise.resolve()
+          .then(() => originalDecode.call(img))
+          .catch(async (err: any) => {
+            const name = err?.name;
+            const msg = String(err?.message ?? err ?? "");
+            const isEncodingError =
+              name === "EncodingError" || /cannot be decoded/i.test(msg);
+
+            if (!isEncodingError) throw err;
+
+            const curSrc = img.currentSrc || img.src;
+
+            // src 已变化：这类 EncodingError 通常是预期的竞争，直接对当前 src 再 decode 一次；
+            // 如果仍失败也不必让它冒泡为未捕获 Promise（上层很可能已经放弃旧 src）。
+            if (curSrc !== startSrc) {
+              try {
+                return await originalDecode.call(img);
+              } catch {
+                return;
+              }
+            }
+
+            // 图片已完整：有些浏览器仍可能给出 EncodingError（边界情况），此时视为成功
+            if (img.complete && img.naturalWidth > 0) return;
+
+            // 等待加载完成后重试一次
+            try {
+              await new Promise<void>((resolve, reject) => {
+                const onLoad = () => cleanup(resolve);
+                const onError = () =>
+                  cleanup(() => reject(new Error("image load failed")));
+                const cleanup = (cb: () => void) => {
+                  img.removeEventListener("load", onLoad);
+                  img.removeEventListener("error", onError);
+                  cb();
+                };
+                img.addEventListener("load", onLoad, { once: true });
+                img.addEventListener("error", onError, { once: true });
+              });
+              try {
+                await originalDecode.call(img);
+              } catch {
+                // 仍失败：交给上层 error 逻辑，但不抛未捕获
+              }
+              return;
+            } catch {
+              return;
+            }
+          });
+      };
+    }
+
+    // Fancybox 内部会对图片调用 decode()/createImageBitmap，远端图片返回非图片内容（403/HTML/损坏）时
+    // 可能以 “Uncaught (in promise) EncodingError: The source image cannot be decoded.” 形式冒泡。
+    // 这里做兜底避免整站控制台被未捕获 Promise 污染；同时给出可检索的警告信息。
+    window.addEventListener("unhandledrejection", (event) => {
+      const r: any = (event as any).reason;
+      const name = r?.name;
+      const msg = String(r?.message ?? r ?? "");
+
+      if (name === "EncodingError" || /cannot be decoded/i.test(msg)) {
+        event.preventDefault();
+        // 如果你仍然看到这里的 warning，通常意味着图片资源本身真的不可解码（损坏/返回 HTML/被防盗链）
+        console.warn("[Fancybox] 图片解码失败(已兜底):", r);
+      }
+    });
+  }
 
   async function setup() {
+    installEncodingErrorGuardOnce();
+
     const selectors = [
       ".custom-md img, #post-cover img, .moment-images img",
       ".moment-images a[data-fancybox]",
-      "[data-fancybox]:not(.moment-images a)"
+      // 这里不包含相册页的 gallery（gallery 用更克制的配置单独 bind）
+      '[data-fancybox]:not(.moment-images a):not([data-fancybox="gallery"])',
+      '[data-fancybox="gallery"]'
     ];
 
     // 检查页面是否存在需要 Fancybox 的元素
@@ -24,6 +164,23 @@ import "@/styles/fancybox-custom.css";
       const mod = await import("@fancyapps/ui");
       Fancybox = mod.Fancybox;
     }
+
+    // 相册页（如 wallpaper）通常图片很多：减少自动缩略图与预加载，降低解码失败对体验的影响
+    // 注意：必须放在通用 bind 之前，以便更具体的 selector 优先生效
+    Fancybox.bind('[data-fancybox="gallery"]', {
+      Thumbs: {
+        autoStart: false,
+      },
+      preload: 1,
+      Carousel: {
+        preload: 1,
+      },
+      on: {
+        error: (_fb: any, slide: any) => {
+          console.warn("[Fancybox] slide 加载失败:", slide?.src || slide);
+        },
+      },
+    });
 
     // 通用配置
     const commonOptions = {
@@ -67,6 +224,11 @@ import "@/styles/fancybox-custom.css";
         minScale: 1,
       },
       caption: false,
+      on: {
+        error: (_fb: any, slide: any) => {
+          console.warn("[Fancybox] slide 加载失败:", slide?.src || slide);
+        },
+      },
     };
 
     // 绑定图片
@@ -86,7 +248,7 @@ import "@/styles/fancybox-custom.css";
     });
 
     // 绑定其他
-    Fancybox.bind("[data-fancybox]:not(.moment-images a)", commonOptions);
+    Fancybox.bind('[data-fancybox]:not(.moment-images a):not([data-fancybox="gallery"])', commonOptions);
   }
 
   function cleanupFancybox() {
