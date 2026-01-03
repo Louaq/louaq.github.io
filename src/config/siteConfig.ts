@@ -188,6 +188,15 @@ export const siteConfig: SiteConfig = {
 			blur: 1, // 背景模糊程度
 		},
 	},
+
+	// 统计分析
+	analytics: {
+		// Microsoft Clarity ID
+		clarityId: "uvjyzziqby",
+	},
+
+	// 字体配置
+	// 在src/config/fontConfig.ts中配置具体字体
 	font: fontConfig,
 
 };
