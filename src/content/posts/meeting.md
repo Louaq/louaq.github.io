@@ -20,6 +20,7 @@ pinned: true
 | 20250415 | 图像分割 | <a href="/assets/pdf/汇报_0415.pdf" target="_blank">汇报_0415</a> |
 | 20250723 | 图像分割 | <a href="/assets/pdf/汇报_0723.pdf" target="_blank">汇报_0723</a> |
 | 20250731 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_0731.pdf" target="_blank">汇报_0731</a> |
+| 20250918 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_0918.pdf" target="_blank">汇报_0918</a> |
 | 20251113 | 脑肿瘤分割 | <a href="/assets/pdf/20251113论文复现代码.pdf" target="_blank">论文复现代码</a> |
 | 20251127 | 脑肿瘤分割 | <a href="/assets/pdf/汇报_1127.pdf" target="_blank">汇报_1127</a> |
 | 20251217 | 医学图像融合 | <a href="/assets/pdf/汇报_1217.pdf" target="_blank">汇报_1217</a> |
