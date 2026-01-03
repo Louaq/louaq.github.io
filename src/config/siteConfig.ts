@@ -23,12 +23,14 @@ export const siteConfig: SiteConfig = {
 	"ICCV"
   ],
 
-	lang: SITE_LANG,
-
+	// 主题色
 	themeColor: {
-		hue: 165, // 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		fixed: false, // 对访问者隐藏主题色选择器
-		defaultMode: "system", // 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
+		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
+		hue: 165,
+		// 是否对访问者隐藏主题色选择器
+		fixed: false,
+		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
+		defaultMode: "system",
 	},
 
   favicon: [
@@ -85,7 +87,6 @@ export const siteConfig: SiteConfig = {
 		defaultMode: "list",
 		// 是否允许用户切换布局
 		allowSwitch: true,
-
 		// 网格布局配置，仅在 defaultMode 为 "grid" 或允许切换布局时生效
 		grid: {
 			// 是否开启瀑布流布局，同时有封面图和无封面图的混合文章推荐开启
