@@ -192,7 +192,7 @@ export const siteConfig: SiteConfig = {
 	// 统计分析
 	analytics: {
 		// Microsoft Clarity ID
-		clarityId: "tx9equrgr6",
+		clarityId: "uvjyzziqby",
 	},
 
 	// 字体配置
