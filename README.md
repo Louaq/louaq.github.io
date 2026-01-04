@@ -3,6 +3,8 @@
 ## Update
 
 ```yaml
+git pull
+
 git fetch upstream
 
 git checkout master  # 或者 master，取决于你的默认分支名
