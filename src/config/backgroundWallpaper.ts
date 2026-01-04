@@ -8,9 +8,9 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 背景图片配置
 	src: {
 		// 桌面背景图片
-		desktop: "/assets/images/d1.webp",
+		desktop: "https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1f.jpg",
 		// 移动背景图片
-		mobile: "/assets/images/m1.webp",
+		mobile: "https://pic1.imgdb.cn/item/69478e432bbc57ce9111cdcb.webp",
 	},
 	// Banner模式特有配置
 	banner: {
@@ -22,7 +22,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		// 主页横幅文字
 		homeText: {
 			// 是否启用主页横幅文字
-			enable: true,
+			enable: false,
 			// 主页横幅主标题
 			title: "Lovely firefly!",
 			// 主页横幅副标题
