@@ -220,12 +220,12 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
             <div class="w-4/5 lg:w-3/4 text-center mb-0">
                 <div class="flex flex-col">
                     {backgroundWallpaper.banner?.homeText?.title && (
-                        <h1 class="banner-title text-6xl lg:text-8xl text-white drop-shadow-lg mb-2 lg:mb-4">
+                        <h1 class="banner-title font-bold text-5xl lg:text-6xl text-white mb-2 lg:mb-4">
                             {backgroundWallpaper.banner.homeText.title}
                         </h1>
                     )}
                     {backgroundWallpaper.banner?.homeText?.subtitle && (
-                        <h2 id="banner-subtitle" class="banner-subtitle text-xl lg:text-3xl text-white/90 drop-shadow-md" data-subtitles={JSON.stringify(backgroundWallpaper.banner.homeText.subtitle)}>
+                        <h2 id="banner-subtitle" class="banner-subtitle text-lg lg:text-2xl text-white/90" data-subtitles={JSON.stringify(backgroundWallpaper.banner.homeText.subtitle)}>
                             {backgroundWallpaper.banner.homeText.typewriter?.enable ? (
                                 <TypewriterText 
                                     text={backgroundWallpaper.banner.homeText.subtitle}
@@ -425,48 +425,10 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 <!-- 悬浮TOC组件 -->
 <FloatingTOC headings={headings}></FloatingTOC>
 
-<!-- 立即执行脚本：防止刷新时右侧栏闪烁 -->
-<script is:inline define:vars={{ isBothSidebars: sidebarConfig.isBothSidebars }}>
-  (function() {
-    // 立即检查并应用保存的布局状态
-    const savedLayout = localStorage.getItem('postListLayout');
-    if (savedLayout) {
-      const rightSidebar = document.getElementById('right-sidebar');
-      const mainGrid = document.getElementById('main-grid');
-      
-      if (savedLayout === 'grid') {
-        if (isBothSidebars && rightSidebar) {
-          rightSidebar.style.display = 'none';
-        }
-        if (mainGrid) {
-          mainGrid.classList.add('grid-layout-active');
-        }
-      } else {
-        if (isBothSidebars && rightSidebar) {
-          rightSidebar.style.display = '';
-        }
-        if (mainGrid) {
-          mainGrid.classList.remove('grid-layout-active');
-        }
-      }
-    }
-  })();
-</script>
+
 </Layout>
 
 <style is:global>
-  /* 网格布局激活时，调整主网格为两列布局 */
-  @media (min-width: 1024px) {
-    #main-grid.grid-layout-active {
-      grid-template-columns: 17.5rem 1fr !important;
-    }
-  }
-  
-  /* 确保在网格模式下右侧边栏完全不占空间 */
-  #main-grid.grid-layout-active #right-sidebar {
-    display: none !important;
-  }
-  
   /* 在低于1200px时隐藏右侧边栏 */
   @media (max-width: 1199px) {
     #right-sidebar {
@@ -486,48 +448,21 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
     }
   }
   
-  /* 文章详情页布局切换动画 - 简洁优雅的淡入淡出 */
-  #post-container {
-    transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
-  }
-  
-  #post-container.layout-switching {
-    animation: gentleFade 0.4s ease-in-out;
-  }
-  
-  @keyframes gentleFade {
-    0%, 100% {
-      opacity: 1;
-      transform: scale(1);
-    }
-    50% {
-      opacity: 0.92;
-      transform: scale(0.995);
-    }
-  }
-  
-  /* 主内容区布局切换动画 - 平滑宽度过渡 */
-  #swup-container {
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  #swup-container.layout-transitioning {
-    animation: smoothWidth 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  
-  @keyframes smoothWidth {
-    0%, 100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.96;
-    }
-  }
+
   
   /* 右侧栏平滑过渡 */
   #right-sidebar {
     transition: opacity 0.35s ease-in-out, 
                 transform 0.35s ease-in-out;
+  }
+
+  /* 横幅文字阴影 - 更柔和的扩散效果 */
+  .banner-title {
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
+  }
+  
+  .banner-subtitle {
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
   }
 </style>
 
