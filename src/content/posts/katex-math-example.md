@@ -1,6 +1,7 @@
 ---
 title: KaTeX 数学公式示例
-published: 1970-01-01
+published: 2026-01-04
+updated: 2026-01-31
 description: 展示 Firefly 主题对 KaTeX 数学公式的支持，包括行内公式、块级公式和复杂数学符号。
 image: api
 tags: [KaTeX, Math, 示例]
