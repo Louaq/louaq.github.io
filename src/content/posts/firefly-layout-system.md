@@ -1,6 +1,6 @@
 ---
 title: Firefly 布局系统详解
-published: 2025-12-16
+published: 1970-01-01
 description: 深入了解 Firefly 的布局系统，包括侧边栏布局（左侧/双侧）和文章列表布局（列表/网格），以及为什么双侧边栏与网格模式会冲突的技术原理。
 image: api
 tags: [Firefly, 布局, 博客, 使用指南]

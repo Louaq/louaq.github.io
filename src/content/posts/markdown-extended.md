@@ -1,7 +1,6 @@
 ---
 title: Markdown 扩展功能
-published: 2026-01-04
-updated: 2026-01-31
+published: 1970-01-01
 description: '了解 Firefly 中的 Markdown 功能'
 image: ''
 tags: [演示, 示例, Markdown, Firefly]
