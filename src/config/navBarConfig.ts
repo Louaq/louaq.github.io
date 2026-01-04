@@ -9,14 +9,18 @@ import { siteConfig } from "./siteConfig";
 
 // 根据页面开关动态生成导航栏配置
 const getDynamicNavBarConfig = (): NavBarConfig => {
+	// 基础导航栏链接
 	const links: (NavBarLink | LinkPreset)[] = [
+		// 主页
 		LinkPreset.Home,
+
+		// 归档
 		LinkPreset.Archive,
 	];
 
 	links.push(LinkPreset.Friends);
 
-	// 根据配置决定是否添加留言板页面
+	// 根据配置决定是否添加留言板，在siteConfig关闭pages.guestbook时导航栏不显示留言板
 	if (siteConfig.pages.guestbook) {
 		links.push(LinkPreset.Guestbook);
 	}
@@ -72,6 +76,7 @@ export const navBarSearchConfig: NavBarSearchConfig = {
 	// 选择PageFind时：NavBarSearchMethod.PageFind,
 	// 选择MeiliSearch时：NavBarSearchMethod.MeiliSearch,
 	method: NavBarSearchMethod.PageFind,
+
 	// 当选择 MeiliSearch 时的配置
 	meiliSearchConfig: {
 		INDEX_NAME: "posts",
