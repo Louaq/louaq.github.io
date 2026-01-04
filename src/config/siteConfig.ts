@@ -50,8 +50,8 @@ export const siteConfig: SiteConfig = {
 		// { type: "image", value: "https://example.com/logo.png", alt: "Firefly Logo" }
 		logo: {
 			type: "image",
-			value: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png",
-			alt: "🍀",
+			value: "/assets/images/favicon.png",
+			alt: "louaq",
 		},
 		// 导航栏标题
 		title: "louaq",
