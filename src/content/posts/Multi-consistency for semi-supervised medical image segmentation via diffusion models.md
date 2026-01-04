@@ -12,6 +12,8 @@ tags: [扩散模型]
 :::
 
 
+::github{repo="yunzhuC/MCSD"}
+
 ## 摘要
 
 Medical image segmentation presents a formidable challenge, compounded by the scarcity of annotated data in numerous datasets. Semi-supervised methods offer viable solutions to mitigate that, while the image generation capability of diffusion models has shown potential in capturing semantically meaningful information. This paper introduces Multi-Consistency for semi-supervised medical image Segmentation via Diffusion Models (MCSD). We propose a Diffusion-based Feature-guided Module (DFM) that extracts features from pre-trained diffusion models and uses multi-scale features to guide multi-consistency segmentation networks. Additionally, we introduce the Dual-branch Image Consistency (DIC) strategy, which performs multi-consistency learning by generating two independent strong augmented images and optimizing the network by encouraging consistency between strong and weak inputs at multiple levels of features and images. Our method outperforms current approaches, demonstrating its effectiveness in semi-supervised medical image segmentation through experimental results for various labeled data ratios. Furthermore, this work points out the potentiality of diffusion models in semi-supervised medical image segmentation and offers suggestions for improving their use in medical imaging tasks. The code is available at https://github.com/yunzhuC/MCSD

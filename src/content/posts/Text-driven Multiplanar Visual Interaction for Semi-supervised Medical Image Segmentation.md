@@ -7,7 +7,7 @@ description: "半监督医学图像分割"
 category: 半监督
 tags: [医学图像分割]
 ---
-
+::github{repo="taozh2017/Text-SemiSeg"}
 ## 摘要
 
 Semi-supervised medical image segmentation plays a critical method in mitigating the high cost of data annotation. When labeled data is limited, textual information can provide additional context to enhance visual semantic understanding. However, research exploring the use of textual data to enhance visual semantic embeddings in 3D medical imaging tasks remains scarce. In this paper, we propose a novel text-driven multiplanar visual interaction framework for semisupervised medical image segmentation (termed Text-SemiSeg), which consists of three main modules: Text-enhanced Multiplanar Representation (TMR), Category-aware Semantic Alignment (CSA), and Dynamic Cognitive Augmentation (DCA). Specifically, TMR facilitates text-visual interaction through planar mapping, thereby enhancing the category awareness of visual features. CSA performs cross-modal semantic alignment between the text features with introduced learnable variables and the intermediate layer of visual features. DCA reduces the distribution discrepancy between labeled and unlabeled data through their interaction, thus improving the model’s robustness. Finally, experiments on three public datasets demonstrate that our model effectively enhances visual features with textual information and outperforms other methods. Our code is available at https://github.com/taozh2017/Text-SemiSeg

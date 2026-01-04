@@ -7,7 +7,7 @@ description: Semi-supervised learning has garnered
 tags: [Medical Image Segmentation, Dual Attention Encoder]
 ---
 
-> Medical Image Analysis
+::github{repo="Jiawei0o0/mutual-learning-with-reliable-pseudo-labels"}
 
 ## 摘要
 

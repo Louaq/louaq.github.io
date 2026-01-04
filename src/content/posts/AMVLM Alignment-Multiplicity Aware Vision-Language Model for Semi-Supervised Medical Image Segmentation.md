@@ -8,31 +8,12 @@ category: 文本引导半监督医学图像分割
 tags: [TMI]
 ---
 
-
-
 :::note
-
 本文的角度新颖，可以作为一种思路，但是论文中有部分笔误的地方，如下所示：
-
 :::
 
-1.  $L^{fine}_{V2T}$应该是$L^{fine}_{V2V}$，对应文中的内容
 
-   ![Snipaste_2025-12-19_20-06-01](https://pic1.imgdb.cn/item/69453f8d2ce92a4f931254a5.png)
-
-<img src="https://pic1.imgdb.cn/item/69453efa2ce92a4f9312533a.png" alt="Snipaste_2025-12-19_20-03-08"  />
-
-
-
-
-
-2.  我不理解为什么是$i$和$j$，不是$n$和$m$？
-
-
-
-![Snipaste_2025-12-19_20-03-30](https://pic1.imgdb.cn/item/69453f172ce92a4f931253ab.png)
-
-3. 部分数据集没有给出text annotation
+::github{repo="QingtaoPan/AMVLM"}
 
 ## 摘要
 
