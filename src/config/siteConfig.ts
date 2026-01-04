@@ -50,7 +50,7 @@ export const siteConfig: SiteConfig = {
 		// { type: "image", value: "https://example.com/logo.png", alt: "Firefly Logo" }
 		logo: {
 			type: "image",
-			value: "/assets/images/firefly.png",
+			value: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png",
 			alt: "🍀",
 		},
 		// 导航栏标题
