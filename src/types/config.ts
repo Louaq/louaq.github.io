@@ -54,6 +54,7 @@ export type SiteConfig = {
 
 	showLastModified: boolean; // 控制"上次编辑"卡片显示的开关
 	outdatedThreshold?: number; // 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
+	sharePoster?: boolean; // 是否显示分享海报按钮
 
 	// 页面开关配置
 	pages: {
@@ -508,6 +509,8 @@ export type BackgroundWallpaperConfig = {
 			enable: boolean; // 是否在首页显示自定义文字（全局开关）
 			title?: string; // 主标题
 			subtitle?: string | string[]; // 副标题，支持单个字符串或字符串数组
+			titleSize?: string; // 主标题字体大小，如 "3.5rem"
+			subtitleSize?: string; // 副标题字体大小，如 "1.5rem"
 			typewriter?: {
 				enable: boolean; // 是否启用打字机效果
 				speed: number; // 打字速度（毫秒）
