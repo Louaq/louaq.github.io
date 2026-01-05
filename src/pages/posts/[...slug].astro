@@ -19,6 +19,7 @@ import utc from "dayjs/plugin/utc";
 import PostMetadata from "@/components/content/PostMeta.astro";
 import RandomCoverImage from "@/components/misc/RandomCoverImage.astro";
 import SharePoster from "@/components/misc/SharePoster.svelte";
+import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
 import { profileConfig } from "@/config/profileConfig";
@@ -203,9 +204,42 @@ const jsonLd = {
         )
       }
 
-      <Markdown class="mb-6 markdown-content onload-animation">
-        <Content />
-      </Markdown>
+      {/* 密码保护 */}
+      {entry.data.password ? (
+        <div id="password-protection-wrapper">
+          <PasswordProtection 
+            client:load
+            postId={entry.id}
+            password={entry.data.password}
+          />
+          <div id="protected-content" style="display: none;">
+            <Markdown class="mb-6 markdown-content onload-animation">
+              <Content />
+            </Markdown>
+          </div>
+        </div>
+      ) : (
+        <Markdown class="mb-6 markdown-content onload-animation">
+          <Content />
+        </Markdown>
+      )}
+      
+      <script is:inline>
+        // 监听密码解锁事件
+        window.addEventListener('password-unlocked', function() {
+          const wrapper = document.getElementById('password-protection-wrapper');
+          const protectedContent = document.getElementById('protected-content');
+          
+          if (wrapper && protectedContent) {
+            // 隐藏密码输入界面，显示文章内容
+            const passwordCard = wrapper.querySelector('.password-protection-container');
+            if (passwordCard) {
+              passwordCard.style.display = 'none';
+            }
+            protectedContent.style.display = 'block';
+          }
+        });
+      </script>
 
       {/* 赞助按钮 & 分享按钮 */}
       <div class="mb-6 rounded-xl onload-animation">
