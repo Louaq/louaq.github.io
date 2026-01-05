@@ -123,6 +123,9 @@ export const siteConfig: SiteConfig = {
 	// 在src/config/fontConfig.ts中配置具体字体
 	font: fontConfig,
 
+	// 文章密码保护配置
+	// 当文章的password字段设置为true时，将使用此密码
+	postPassword: "123456",
 
     // 站点语言，在本配置文件顶部SITE_LANG定义
 	lang: SITE_LANG,

@@ -87,6 +87,9 @@ export type SiteConfig = {
 	analytics?: {
 		clarityId?: string; // Microsoft Clarity ID
 	};
+
+	// 文章密码保护配置
+	postPassword?: string; // 当文章的password字段设置为true时使用的全局密码
 };
 
 export type Favicon = {
