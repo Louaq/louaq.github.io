@@ -97,10 +97,6 @@ export class WidgetManager {
 	 * @param sidebar 侧边栏位置：'left' | 'right'
 	 */
 	hasComponentsInSidebar(sidebar: "left" | "right"): boolean {
-		if (this.config.position !== "both") {
-			return false;
-		}
-
 		const components =
 			sidebar === "left"
 				? this.config.leftComponents
@@ -119,10 +115,6 @@ export class WidgetManager {
 		sidebar: "left" | "right",
 		deviceType: "mobile" | "tablet" | "desktop",
 	): boolean {
-		if (this.config.position !== "both") {
-			return false;
-		}
-
 		// 双侧边栏模式下，右侧边栏在平板端隐藏
 		if (deviceType === "tablet" && sidebar === "right") {
 			return false;
@@ -184,7 +176,7 @@ export class WidgetManager {
 
 		// 双侧边栏模式下，右侧边栏的组件在平板端自动隐藏
 		// 使用 Tailwind 标准断点：lg(1024px) 以下全部隐藏
-		if (this.config.position === "both" && sidebar === "right") {
+		if (sidebar === "right") {
 			classes.push("hidden", "lg:block");
 		}
 
