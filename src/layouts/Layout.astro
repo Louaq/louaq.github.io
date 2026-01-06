@@ -2,6 +2,7 @@
 import FancyboxManager from "@components/effects/FancyboxManager.astro";
 import KatexManager from "@components/effects/KatexManager.astro";
 import SakuraEffect from "@components/effects/SakuraEffect.astro";
+import FestivalDecoration from "@components/effects/FestivalDecoration.astro";
 import FontManager from "@components/interactive/FontManager.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 import MusicPlayer from "@components/widget/MusicPlayer.astro";
@@ -22,10 +23,12 @@ import { defaultFavicons } from "@/constants/icon";
 import type { Favicon } from "@/types/config";
 import { getDefaultBackground, isHomePage } from "@/utils/layout-utils";
 import { url } from "@/utils/url-utils";
+import { shouldApplyGrayscale } from "@/utils/festival-manager";
 
 import "@/styles/navbar.css";
 import "@/styles/layout-styles.css";
 import "@/styles/waves.css";
+import "@/styles/grayscale.css";
 
 interface Props {
 	title?: string;
@@ -89,6 +92,9 @@ const siteLang = lang.replace("_", "-");
 
 // 使用固定的banner偏移量，position配置用于图片定位
 const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
+
+// 检查是否应该启用全站变灰
+const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 ---
 
 <!doctype html>
@@ -434,7 +440,7 @@ const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
   <body
     class="min-h-screen"
     class:list={[
-      { "lg:is-home": isHomePageCheck, "enable-banner": enableBanner },
+      { "lg:is-home": isHomePageCheck, "enable-banner": enableBanner, "grayscale-mode": isGrayscaleEnabled },
       ...(siteConfig.font.enable && siteConfig.font.selected
         ? (Array.isArray(siteConfig.font.selected)
             ? siteConfig.font.selected
@@ -463,6 +469,9 @@ const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
     
     <!-- KaTeX Manager -->
     <KatexManager />
+
+    <!-- Festival Decoration -->
+    <FestivalDecoration />
   </body>
 </html>
 

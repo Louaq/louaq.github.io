@@ -127,6 +127,52 @@ export const siteConfig: SiteConfig = {
 	// 当文章的password字段设置为true时，将使用此密码
 	postPassword: "123456",
 
+	// 全站变灰配置
+	// 手动控制：true = 启用变灰，false = 关闭变灰
+	// 适用于特殊纪念日（如清明节、国家公祭日等）
+	grayscale: {
+		enable: false, // 设置为 true 启用全站变灰，false 关闭
+	},
+
+	// 节假日装饰配置
+	festivalDecoration: {
+		enable: true, // 是否启用节假日装饰
+		festivals: [
+		{
+			name: "春节",
+			startDate: "01-20",
+			endDate: "02-10",
+			decorationType: "spring-festival",
+			customStyles: {
+				lanterns: {
+					enable: true,
+					leftText: "新春", // 左侧灯笼文字
+					rightText: "快乐", // 右侧灯笼文字
+				},
+				fireworks: false, // 烟花效果
+			},
+		},
+		{
+			name: "圣诞节",
+			startDate: "12-20",
+			endDate: "12-26",
+			decorationType: "christmas",
+			customStyles: {
+				snowflake: true, // 雪花效果
+			},
+		},
+		{
+			name: "万圣节",
+			startDate: "10-25",
+			endDate: "11-01",
+			decorationType: "halloween",
+			customStyles: {
+				pumpkins: true, // 南瓜效果
+			},
+		},
+		],
+	},
+
     // 站点语言，在本配置文件顶部SITE_LANG定义
 	lang: SITE_LANG,
 

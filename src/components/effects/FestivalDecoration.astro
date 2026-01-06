@@ -1,0 +1,532 @@
+---
+/**
+ * 节假日装饰组件
+ * 根据配置显示不同的节日装饰效果
+ */
+
+import { siteConfig } from "@/config";
+import { getActiveFestival, getDecorationClassName } from "@/utils/festival-manager";
+
+// 获取当前激活的节假日装饰
+const activeFestival = getActiveFestival(siteConfig.festivalDecoration);
+const decorationClass = activeFestival ? getDecorationClassName(activeFestival.decorationType) : null;
+
+// 处理灯笼配置
+const lanternConfig = activeFestival?.customStyles?.lanterns;
+const showLanterns = typeof lanternConfig === 'boolean' ? lanternConfig : lanternConfig?.enable ?? false;
+const leftText = typeof lanternConfig === 'object' ? lanternConfig.leftText : '';
+const rightText = typeof lanternConfig === 'object' ? lanternConfig.rightText : '';
+---
+
+{activeFestival && (
+	<div class={`festival-decoration ${decorationClass || ''}`} data-festival={activeFestival.name}>
+		<!-- 灯笼效果（春节） -->
+		{showLanterns && (
+			<div class="lanterns-container">
+				<div class="lantern lantern-left">
+					<div class="lantern-body">
+						<div class="lantern-bottom-cap"></div>
+						<div class="lantern-light"></div>
+						{leftText && <div class="lantern-text">{leftText}</div>}
+					</div>
+					<div class="lantern-tassel"></div>
+				</div>
+				<div class="lantern lantern-right">
+					<div class="lantern-body">
+						<div class="lantern-bottom-cap"></div>
+						<div class="lantern-light"></div>
+						{rightText && <div class="lantern-text">{rightText}</div>}
+					</div>
+					<div class="lantern-tassel"></div>
+				</div>
+			</div>
+		)}
+
+		<!-- 雪花效果（圣诞节） -->
+		{activeFestival.customStyles?.snowflake && (
+			<div class="snowflakes-container">
+				{Array.from({ length: 30 }).map((_, i) => (
+					<div class="snowflake" style={`
+						left: ${Math.random() * 100}%;
+						animation-delay: ${Math.random() * 10}s;
+						animation-duration: ${5 + Math.random() * 10}s;
+					`}>❄</div>
+				))}
+			</div>
+		)}
+
+		<!-- 烟花效果（春节） -->
+		{activeFestival.customStyles?.fireworks && (
+			<div class="fireworks-container" id="fireworks-container"></div>
+		)}
+
+		<!-- 南瓜效果（万圣节） -->
+		{activeFestival.customStyles?.pumpkins && (
+			<div class="pumpkins-container">
+				<div class="pumpkin pumpkin-left">🎃</div>
+				<div class="pumpkin pumpkin-right">🎃</div>
+			</div>
+		)}
+
+		<!-- 爱心效果（情人节） -->
+		{activeFestival.customStyles?.hearts && (
+			<div class="hearts-container">
+				{Array.from({ length: 20 }).map((_, i) => (
+					<div class="heart" style={`
+						left: ${Math.random() * 100}%;
+						animation-delay: ${Math.random() * 5}s;
+						animation-duration: ${3 + Math.random() * 4}s;
+					`}>💕</div>
+				))}
+			</div>
+		)}
+	</div>
+)}
+
+<style>
+	/* 基础样式 */
+	.festival-decoration {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		pointer-events: none;
+		z-index: 9999;
+		overflow: hidden;
+	}
+
+	/* 灯笼效果 */
+	.lanterns-container {
+		position: fixed;
+		top: 80px;
+		width: 100%;
+		height: auto;
+		pointer-events: none;
+		z-index: 100;
+	}
+
+	.lantern {
+		position: fixed;
+		width: 70px;
+		height: 110px;
+		animation: swing 3s ease-in-out infinite;
+		filter: drop-shadow(2px 4px 8px rgba(0, 0, 0, 0.3));
+		/* 设置旋转中心点为顶部连接点 */
+		transform-origin: center -35px;
+	}
+
+	/* 悬挂连接线 - 从网站顶部延伸下来 */
+	.lantern::before {
+		content: '';
+		position: absolute;
+		top: -65px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 2px;
+		height: 65px;
+		background: linear-gradient(to bottom, 
+			rgba(139, 69, 19, 0.2) 0%,
+			rgba(139, 69, 19, 0.4) 30%,
+			rgba(139, 69, 19, 0.6) 60%,
+			rgba(139, 69, 19, 0.9) 100%);
+		box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+	}
+
+	.lantern-left {
+		left: 20px;
+		top: 65px;
+		animation-delay: 0s;
+	}
+
+	.lantern-right {
+		right: 20px;
+		top: 65px;
+		animation-delay: 1s;
+	}
+
+	.lantern-body {
+		width: 100%;
+		height: 90px;
+		background: linear-gradient(to bottom, 
+			#ff4444 0%, 
+			#ff1111 20%,
+			#ff3333 40%,
+			#ff1111 60%,
+			#cc0000 100%);
+		border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
+		position: relative;
+		box-shadow: 
+			0 0 20px rgba(255, 68, 68, 0.6),
+			inset 0 -5px 15px rgba(0, 0, 0, 0.2),
+			inset 0 5px 15px rgba(255, 200, 0, 0.3);
+		overflow: visible;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.lantern-text {
+		position: relative;
+		color: #ffeb3b;
+		font-size: 18px;
+		font-weight: bold;
+		text-align: center;
+		z-index: 2;
+		text-shadow: 
+			0 0 10px rgba(255, 235, 59, 0.8),
+			0 0 20px rgba(255, 235, 59, 0.6),
+			1px 1px 2px rgba(0, 0, 0, 0.5);
+		writing-mode: vertical-rl;
+		letter-spacing: 3px;
+		user-select: none;
+	}
+
+	/* 灯笼顶部盖子 */
+	.lantern-body::before {
+		content: '';
+		position: absolute;
+		top: -8px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 50%;
+		height: 12px;
+		background: linear-gradient(to bottom, #8b4513, #654321);
+		border-radius: 8px 8px 0 0;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+		z-index: 10;
+	}
+
+	/* 顶部连接环 */
+	.lantern-body::after {
+		content: '';
+		position: absolute;
+		top: -18px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 8px;
+		height: 8px;
+		background: #654321;
+		border-radius: 50%;
+		box-shadow: 
+			inset 0 1px 2px rgba(0, 0, 0, 0.5),
+			0 1px 2px rgba(255, 255, 255, 0.2);
+		z-index: 11;
+	}
+
+
+	/* 灯笼底部盖子 */
+	.lantern-bottom-cap {
+		position: absolute;
+		bottom: -8px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 50%;
+		height: 12px;
+		background: linear-gradient(to bottom, #654321, #8b4513);
+		border-radius: 0 0 8px 8px;
+		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+		z-index: 10;
+	}
+
+	.lantern-light {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		width: 60px;
+		height: 60px;
+		background: radial-gradient(circle, rgba(255, 255, 200, 0.6) 0%, rgba(255, 200, 0, 0.2) 70%, transparent 100%);
+		border-radius: 50%;
+		animation: glow 2s ease-in-out infinite;
+		z-index: 1;
+	}
+
+	.lantern-tassel {
+		width: 6px;
+		height: 35px;
+		background: linear-gradient(to bottom, #cc0000 0%, #ff6666 50%, #ffcc00 100%);
+		margin: 0 auto;
+		position: relative;
+		border-radius: 3px;
+	}
+
+	.lantern-tassel::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 10px;
+		height: 10px;
+		background: #8b4513;
+		border-radius: 50%;
+	}
+
+	.lantern-tassel::after {
+		content: '';
+		position: absolute;
+		bottom: -12px;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 0;
+		height: 0;
+		border-left: 8px solid transparent;
+		border-right: 8px solid transparent;
+		border-top: 12px solid #ffcc00;
+	}
+
+	/* 摆动动画 - 以顶部连接点为中心旋转 */
+	@keyframes swing {
+		0%, 100% {
+			transform: rotate(-3deg);
+		}
+		50% {
+			transform: rotate(3deg);
+		}
+	}
+
+	@keyframes glow {
+		0%, 100% {
+			opacity: 0.6;
+		}
+		50% {
+			opacity: 1;
+		}
+	}
+
+	/* 雪花效果 */
+	.snowflakes-container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.snowflake {
+		position: absolute;
+		top: -20px;
+		color: #fff;
+		font-size: 1.5em;
+		user-select: none;
+		cursor: default;
+		animation: fall linear infinite;
+		text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+	}
+
+	@keyframes fall {
+		0% {
+			top: -10%;
+			opacity: 1;
+		}
+		100% {
+			top: 110%;
+			opacity: 0.5;
+		}
+	}
+
+	/* 南瓜效果 */
+	.pumpkins-container {
+		position: absolute;
+		width: 100%;
+		bottom: 20px;
+	}
+
+	.pumpkin {
+		position: absolute;
+		font-size: 3em;
+		animation: bounce 2s ease-in-out infinite;
+		filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.3));
+	}
+
+	.pumpkin-left {
+		left: 5%;
+		animation-delay: 0s;
+	}
+
+	.pumpkin-right {
+		right: 5%;
+		animation-delay: 1s;
+	}
+
+	@keyframes bounce {
+		0%, 100% {
+			transform: translateY(0);
+		}
+		50% {
+			transform: translateY(-20px);
+		}
+	}
+
+	/* 爱心效果 */
+	.hearts-container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.heart {
+		position: absolute;
+		top: 100%;
+		font-size: 1.5em;
+		user-select: none;
+		cursor: default;
+		animation: float-up linear infinite;
+		filter: drop-shadow(0 0 5px rgba(255, 100, 150, 0.5));
+	}
+
+	@keyframes float-up {
+		0% {
+			top: 110%;
+			opacity: 1;
+			transform: rotate(0deg);
+		}
+		100% {
+			top: -10%;
+			opacity: 0;
+			transform: rotate(360deg);
+		}
+	}
+
+	/* 烟花效果容器 */
+	.fireworks-container {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+	}
+
+	/* 移动端适配 */
+	@media (max-width: 768px) {
+		.lantern {
+			width: 50px;
+			height: 80px;
+			transform-origin: center -30px;
+		}
+
+		.lantern::before {
+			top: -50px;
+			height: 50px;
+		}
+
+		.lantern-left {
+			left: 10px;
+			top: 50px;
+		}
+
+		.lantern-right {
+			right: 10px;
+			top: 50px;
+		}
+
+		.lantern-body {
+			height: 70px;
+		}
+
+		.lantern-text {
+			font-size: 14px;
+			letter-spacing: 2px;
+		}
+
+		.snowflake,
+		.heart {
+			font-size: 1em;
+		}
+
+		.pumpkin {
+			font-size: 2em;
+		}
+	}
+
+	/* 平板适配 */
+	@media (min-width: 769px) and (max-width: 1024px) {
+		.lantern {
+			width: 60px;
+			height: 95px;
+			transform-origin: center -32px;
+		}
+
+		.lantern::before {
+			top: -58px;
+			height: 58px;
+		}
+
+		.lantern-left {
+			left: 15px;
+			top: 58px;
+		}
+
+		.lantern-right {
+			right: 15px;
+			top: 58px;
+		}
+
+		.lantern-text {
+			font-size: 16px;
+		}
+	}
+</style>
+
+{activeFestival?.customStyles?.fireworks && (
+	<script>
+		// 简单的烟花效果实现
+		function createFirework() {
+			const container = document.getElementById('fireworks-container');
+			if (!container) return;
+
+			const firework = document.createElement('div');
+			firework.style.position = 'absolute';
+			firework.style.left = Math.random() * 100 + '%';
+			firework.style.top = Math.random() * 50 + 30 + '%';
+			firework.style.width = '4px';
+			firework.style.height = '4px';
+			firework.style.borderRadius = '50%';
+			firework.style.background = `hsl(${Math.random() * 360}, 100%, 60%)`;
+			firework.style.boxShadow = `0 0 10px currentColor`;
+			
+			container.appendChild(firework);
+
+			// 创建爆炸效果
+			setTimeout(() => {
+				for (let i = 0; i < 30; i++) {
+					const particle = document.createElement('div');
+					particle.style.position = 'absolute';
+					particle.style.left = firework.style.left;
+					particle.style.top = firework.style.top;
+					particle.style.width = '3px';
+					particle.style.height = '3px';
+					particle.style.borderRadius = '50%';
+					particle.style.background = firework.style.background;
+					particle.style.boxShadow = firework.style.boxShadow;
+					
+					const angle = (Math.PI * 2 * i) / 30;
+					const velocity = 2 + Math.random() * 3;
+					const vx = Math.cos(angle) * velocity;
+					const vy = Math.sin(angle) * velocity;
+
+					container.appendChild(particle);
+
+					let x = 0, y = 0;
+					const animate = () => {
+						x += vx;
+						y += vy;
+						particle.style.transform = `translate(${x}px, ${y}px)`;
+						particle.style.opacity = String(Math.max(0, 1 - Math.abs(x + y) / 100));
+
+						if (Math.abs(x) < 100 && Math.abs(y) < 100) {
+							requestAnimationFrame(animate);
+						} else {
+							particle.remove();
+						}
+					};
+					animate();
+				}
+				firework.remove();
+			}, 500);
+		}
+
+		// 定期创建烟花
+		setInterval(createFirework, 2000);
+	</script>
+)}
+

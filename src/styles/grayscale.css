@@ -1,0 +1,38 @@
+/**
+ * 全站变灰样式
+ * 用于特殊纪念日
+ */
+
+/* 全站变灰效果 */
+body.grayscale-mode {
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+}
+
+/* 确保所有子元素也应用变灰 */
+body.grayscale-mode * {
+	filter: inherit;
+}
+
+/* 可选：为某些特殊元素保留颜色（如果需要的话） */
+body.grayscale-mode .preserve-color {
+	filter: none !important;
+	-webkit-filter: none !important;
+}
+
+/* 添加一个提示横幅（可选） */
+body.grayscale-mode::before {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 3px;
+	background: #333;
+	z-index: 10000;
+	pointer-events: none;
+}
+

@@ -9,5 +9,3 @@ pinned: true
 ---
 
 ## 你好 2026！
-
-![https://pic1.imgdb.cn/item/6954b62a8801094e3ab22332.jpg](https://pic1.imgdb.cn/item/6954b62a8801094e3ab22332.jpg)

@@ -90,6 +90,33 @@ export type SiteConfig = {
 
 	// 文章密码保护配置
 	postPassword?: string; // 当文章的password字段设置为true时使用的全局密码
+
+	// 全站变灰配置
+	grayscale?: {
+		enable: boolean; // 手动控制是否启用全站变灰（true=启用，false=关闭）
+	};
+
+	// 节假日装饰配置
+	festivalDecoration?: {
+		enable: boolean; // 是否启用节假日装饰
+		festivals?: {
+			name: string; // 节日名称
+			startDate: string; // 开始日期，格式："MM-DD"
+			endDate: string; // 结束日期，格式："MM-DD"
+			decorationType: "spring-festival" | "christmas" | "halloween" | "valentines" | "custom"; // 装饰类型
+			customStyles?: {
+				snowflake?: boolean; // 雪花效果
+				fireworks?: boolean; // 烟花效果
+				lanterns?: boolean | {
+					enable: boolean; // 是否启用灯笼效果
+					leftText?: string; // 左侧灯笼文字
+					rightText?: string; // 右侧灯笼文字
+				}; // 灯笼效果
+				pumpkins?: boolean; // 南瓜效果
+				hearts?: boolean; // 爱心效果
+			};
+		}[];
+	};
 };
 
 export type Favicon = {
