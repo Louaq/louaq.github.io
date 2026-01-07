@@ -376,7 +376,6 @@ export type WidgetComponentType =
 	| "calendar"
 	| "countdown"
 	| "douyinHot"
-	| "randomPoetry"
 	| "custom";
 
 export type WidgetComponentConfig = {

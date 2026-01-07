@@ -125,20 +125,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 配置ID：使用第一个广告配置
 			configId: "ad2",
 		},
-		{
-			// 组件类型：随机诗词组件
-			type: "randomPoetry",
-			// 是否启用该组件
-			enable: true,
-			// 组件显示顺序
-			order: 6,
-			// 组件位置
-			position: "sticky",
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 350,
-		},
 	],
 
 	// 右侧边栏组件配置列表
