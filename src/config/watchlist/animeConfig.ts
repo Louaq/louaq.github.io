@@ -120,10 +120,10 @@ export const animeItems: WatchlistItem[] = [
 		title: "凡人修仙传：外海风云",
 		cover: "https://pic1.imgdb.cn/item/694fc810161224305eb30829.webp",
 		type: "anime",
-		status: "watching",
+		status: "completed",
 		rating: 9.6,
 		episodes: {
-			current: 175,
+			current: 176,
 			total: 176,
 		},
 		startDate: "2025-11-18",
@@ -155,7 +155,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		episodes: {
-			current: 3,
+			current: 4,
 			total: 26,
 		},
 		startDate: "2025-12-25",
@@ -280,7 +280,7 @@ export const animeItems: WatchlistItem[] = [
 		title: "武动乾坤 第六季",
 		cover: "https://pic1.imgdb.cn/item/69511d3ca0c391c56de5e574.webp",
 		type: "anime",
-		status: "watching",
+		status: "completed",
 		rating: 0.0,
 		episodes: {
 			current: 3,
