@@ -40,9 +40,15 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 		  {
 			name: "状态",
-			url: "https://louaq.com",
+			url: "http://status.louaq.com",
 			external: true,
 			icon: "material-symbols:cloud-done-rounded",
+		  },
+		  {
+			name: "AI",
+			url: "https://ai.louaq.com",
+			external: true,
+			icon: "material-symbols:smart-toy-rounded",
 		  },
 		  {
 			name: "开往",
