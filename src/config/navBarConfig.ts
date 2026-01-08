@@ -45,12 +45,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			icon: "material-symbols:cloud-done-rounded",
 		  },
 		  {
-			name: "AI",
-			url: "https://ai.louaq.com",
-			external: true,
-			icon: "material-symbols:smart-toy-rounded",
-		  },
-		  {
 			name: "开往",
 			url: "https://www.travellings.cn/go.html",
 			external: true,
