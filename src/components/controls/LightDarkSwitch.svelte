@@ -1,6 +1,8 @@
 <script lang="ts">
 import Icon from "@iconify/svelte";
 import { onMount } from "svelte";
+import DropdownItem from "@/components/common/DropdownItem.svelte";
+import DropdownPanel from "@/components/common/DropdownPanel.svelte";
 import { DARK_MODE, LIGHT_MODE, SYSTEM_MODE } from "@/constants/constants";
 import type { LIGHT_DARK_MODE } from "@/types/config.ts";
 import {
