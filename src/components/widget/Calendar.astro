@@ -430,26 +430,8 @@ const postUrlPrefix = url("/posts/");
         // 获取当前选中的元素
         const currentSelectedDay = document.querySelector('.calendar-day[data-selected="true"]');
         
-        // 切换选中状态
+        // 如果点击的是已选中的日期，不做任何操作
         if (currentSelectedDay === dayElement) {
-          // 取消选中，根据是否是当前月份决定显示内容
-          dayElement.classList.remove('bg-[var(--primary)]', 'bg-opacity-10');
-          dayElement.removeAttribute('data-selected');
-          
-          if (isCurrentMonth) {
-            // 如果是当前月份，恢复显示今天的文章
-            const todayPosts = postDateMap[todayDateKey] || [];
-            showDailyPosts(todayDateKey, todayPosts);
-            // 重新选中今天
-            const todayElement = document.querySelector(`.calendar-day[data-date="${todayDateKey}"]`);
-            if (todayElement) {
-              todayElement.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
-              todayElement.setAttribute('data-selected', 'true');
-            }
-          } else {
-            // 如果不是当前月份，显示当月所有文章
-            showMonthlyPosts(currentMonthPosts);
-          }
           return;
         }
         
@@ -466,23 +448,8 @@ const postUrlPrefix = url("/posts/");
         // 获取该日期的文章并显示
         const posts = postDateMap[dateKey] || [];
         
-        if (posts.length > 0 && postsList) {
-          // 渲染文章列表
-          postsList.innerHTML = posts.map(post => {
-            const date = new Date(post.published);
-            const dateStr = `${date.getMonth() + 1}-${date.getDate()}`;
-            return `
-            <a href="${postUrlPrefix}${post.id}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
-              <span class="truncate">${post.title}</span>
-              <span class="text-xs text-neutral-500 dark:text-neutral-400 ml-2 whitespace-nowrap">${dateStr}</span>
-            </a>
-          `}).join('');
-          
-          // 显示分割线
-          if (divider) {
-            divider.style.display = 'block';
-          }
-        }
+        // 调用showDailyPosts函数来显示文章或"暂无文章"提示
+        showDailyPosts(dateKey, posts);
       });
     });
   }
