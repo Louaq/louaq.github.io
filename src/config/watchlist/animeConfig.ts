@@ -264,7 +264,7 @@ export const animeItems: WatchlistItem[] = [
 		title: "紫川 第二季",
 		cover: "https://pic1.imgdb.cn/item/69511be1a0c391c56de5e537.webp",
 		type: "anime",
-		status: "completed",
+		status: "watching",
 		rating: 0.0,
 		episodes: {
 			current: 52,
@@ -289,6 +289,23 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2025-11-20",
 		comment: "对打就是魔法对轰",
 		link: "https://movie.douban.com/subject/37449197/",
+		tags: ["动作", "动画", "奇幻"],
+		enabled: true,
+	},
+
+	{
+		title: "大主宰 年番2",
+		cover: "https://pic1.imgdb.cn/item/6961dc0d7488ce4061905c9e.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 3,
+			total: 52,
+		},
+		startDate: "2026-01-09",
+		comment: "感觉制作组收了力，在赶进度",
+		link: "https://movie.douban.com/subject/36882237/",
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
 	},
