@@ -68,6 +68,12 @@ export const siteConfig: SiteConfig = {
 		userId: "1163581", // 在此处设置你的Bangumi用户ID
 	},
 
+	// 提醒框（Admonitions）配置，修改后需要重启开发服务器才能生效
+	// 主题：'github' | 'obsidian' | 'vitepress'，每个主题风格和语法不同，可根据喜好选择
+	rehypeCallouts: {
+		theme: "github",
+	},
+
 	// 文章页底部的"上次编辑时间"卡片开关
 	showLastModified: true,
 
