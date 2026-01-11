@@ -110,12 +110,26 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			//},
 		//},
 		{
+			// 组件类型：最近评论组件
+			type: "recentComments",
+			// 是否启用该组件
+			enable: true,
+			// 组件显示顺序
+			order: 5,
+			// 组件位置
+			position: "sticky",
+			// CSS 类名
+			class: "onload-animation",
+			// 动画延迟时间
+			animationDelay: 200,
+		},
+		{
 			// 组件类型：广告栏组件 1
 			type: "advertisement",
 			// 是否启用该组件
 			enable: false,
 			// 组件显示顺序
-			order: 5,
+			order: 6,
 			// 组件位置
 			position: "sticky",
 			// CSS 类名

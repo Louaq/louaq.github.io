@@ -11,7 +11,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 8.9,
 		episodes: {
-			current: 120,
+			current: 121,
 			total: 128,
 		},
 		startDate: "2025-02-24",
@@ -27,7 +27,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 7.4,
 		episodes: {
-			current: 137,
+			current: 138,
 			total: 156,
 		},
 		startDate: "2024-08-06",
@@ -91,7 +91,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 7.9,
 		episodes: {
-			current: 247,
+			current: 248,
 			total: 286,
 		},
 		startDate: "2025-10-03",
@@ -107,7 +107,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		episodes: {
-			current: 4,
+			current: 5,
 			total: 26,
 		},
 		startDate: "2025-12-20",
@@ -139,7 +139,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		episodes: {
-			current: 53,
+			current: 54,
 			total: 104,
 		},
 		startDate: "2025-10-19",

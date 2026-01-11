@@ -34,23 +34,10 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
     // 支持自定义导航栏链接,并且支持多级菜单
 	links.push({
-		name: "链接",
-		url: "/links/",
-		icon: "material-symbols:link",
-		children: [
-		  {
-			name: "状态",
-			url: "http://status.louaq.com",
-			external: true,
-			icon: "material-symbols:cloud-done-rounded",
-		  },
-		  {
-			name: "开往",
-			url: "https://www.travellings.cn/go.html",
-			external: true,
-			icon: "material-symbols:subway-rounded",
-		  },
-		],
+		name: "状态",
+		url: "http://status.louaq.com",
+		external: true,
+		icon: "material-symbols:cloud-done-rounded",
 	  });
 
   links.push({

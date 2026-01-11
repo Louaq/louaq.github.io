@@ -1,0 +1,233 @@
+---
+import { Icon } from "astro-icon/components";
+import WidgetLayout from "@/components/widget/WidgetLayout.astro";
+import { commentConfig } from "@/config/commentConfig";
+import { url } from "@/utils/url-utils";
+
+const commentType = commentConfig.type;
+const twikooConfig = commentConfig.twikoo;
+const walineConfig = commentConfig.waline;
+---
+
+<WidgetLayout id="recent-comments" name="最近评论" class={Astro.props.class}>
+  <div id="recent-comments-list" class="space-y-3 px-2 py-2">
+    <div class="flex items-center justify-center py-8 text-neutral-400">
+      <Icon name="material-symbols:chat-outline" class="text-2xl mr-2" />
+      <span>加载中...</span>
+    </div>
+  </div>
+</WidgetLayout>
+
+<!-- 加载 Twikoo SDK -->
+{commentType === 'twikoo' && (
+  <script is:inline src={url("/assets/js/firefly-twikoo-1.6.44.all.min.js")}></script>
+)}
+
+<script define:vars={{ commentType, twikooConfig, walineConfig }}>
+  // 格式化时间
+  function formatTime(timestamp) {
+    const now = Date.now();
+    const diff = now - timestamp;
+    const minute = 60 * 1000;
+    const hour = minute * 60;
+    const day = hour * 24;
+    const week = day * 7;
+    const month = day * 30;
+
+    if (diff < minute) {
+      return '刚刚';
+    } else if (diff < hour) {
+      return Math.floor(diff / minute) + ' 分钟前';
+    } else if (diff < day) {
+      return Math.floor(diff / hour) + ' 小时前';
+    } else if (diff < week) {
+      return Math.floor(diff / day) + ' 天前';
+    } else if (diff < month) {
+      return Math.floor(diff / week) + ' 周前';
+    } else {
+      const date = new Date(timestamp);
+      return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    }
+  }
+
+  // 截取评论内容
+  function truncateContent(content, maxLength = 80) {
+    // 移除 HTML 标签
+    const text = content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+    if (text.length <= maxLength) {
+      return text;
+    }
+    return text.substring(0, maxLength) + '...';
+  }
+
+  // 获取 Twikoo 最近评论
+  async function fetchTwikooComments() {
+    try {
+      
+      // 等待 Twikoo SDK 加载
+      if (typeof twikoo === 'undefined') {
+        await new Promise(resolve => {
+          const checkTwikoo = setInterval(() => {
+            if (typeof twikoo !== 'undefined') {
+              clearInterval(checkTwikoo);
+              resolve();
+            }
+          }, 100);
+          // 最多等待 5 秒
+          setTimeout(() => {
+            clearInterval(checkTwikoo);
+            resolve();
+          }, 5000);
+        });
+      }
+
+      if (typeof twikoo === 'undefined') {
+        return [];
+      }
+      
+      // 使用 Twikoo SDK 的 getRecentComments 方法
+      const comments = await twikoo.getRecentComments({
+        envId: twikooConfig.envId,
+        pageSize: 5,
+        includeReply: false,
+      });
+      
+      
+      if (comments && Array.isArray(comments)) {
+        return comments;
+      }
+      
+      return [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  // 获取 Waline 最近评论
+  async function fetchWalineComments() {
+    try {
+      
+      if (!walineConfig || !walineConfig.serverURL) {
+        return [];
+      }
+
+      const response = await fetch(`${walineConfig.serverURL}/comment?type=recent&count=5`);
+      const result = await response.json();
+      
+      if (result && result.data && Array.isArray(result.data)) {
+        return result.data;
+      }
+      
+      return [];
+    } catch (error) {
+      return [];
+    }
+  }
+
+  // 渲染评论列表
+  function renderComments(comments) {
+    const container = document.getElementById('recent-comments-list');
+    if (!container) {
+      return;
+    }
+
+
+    if (!comments || comments.length === 0) {
+      container.innerHTML = `
+        <div class="flex flex-col items-center justify-center py-8 text-neutral-400">
+          <svg class="w-12 h-12 mb-2 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          <span>暂无评论</span>
+        </div>
+      `;
+      return;
+    }
+
+    const html = comments.map(comment => {
+      // Twikoo 字段: avatar, nick, created, commentText, url
+      // Waline 字段: avatar, nick, createdAt, text/orig, url
+      const avatar = comment.avatar || `https://cravatar.cn/avatar/${comment.mailMd5 || ''}?d=mp`;
+      const nick = comment.nick || '访客';
+      
+      // 处理时间戳（Twikoo 是毫秒，Waline 可能是秒或毫秒）
+      let timestamp = comment.created || comment.createdAt || comment.time || 0;
+      if (typeof timestamp === 'string') {
+        timestamp = new Date(timestamp).getTime();
+      } else if (timestamp < 10000000000) {
+        // 如果是秒级时间戳，转换为毫秒
+        timestamp = timestamp * 1000;
+      }
+      const time = formatTime(timestamp);
+      
+      // 处理评论内容（优先使用纯文本）
+      const content = truncateContent(comment.commentText || comment.comment || comment.orig || comment.text || '无内容');
+      
+      // 处理 URL
+      const commentUrl = comment.url || '#';
+
+      return `
+        <a href="${commentUrl}" class="block group hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg p-2 transition-colors">
+          <div class="flex gap-2">
+            <img src="${avatar}" alt="${nick}" class="w-8 h-8 rounded-full flex-shrink-0" onerror="this.src='https://cravatar.cn/avatar/?d=mp'" />
+            <div class="flex-1 min-w-0">
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">${nick}</span>
+                <span class="text-xs text-neutral-400 flex-shrink-0 ml-2">${time}</span>
+              </div>
+              <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">${content}</p>
+            </div>
+          </div>
+        </a>
+      `;
+    }).join('');
+
+    container.innerHTML = html;
+  }
+
+  // 初始化最近评论
+  async function initRecentComments() {
+    let comments = [];
+
+    if (commentType === 'twikoo') {
+      comments = await fetchTwikooComments();
+    } else if (commentType === 'waline') {
+      comments = await fetchWalineComments();
+    } else {
+
+    }
+
+    renderComments(comments);
+  }
+
+  // 页面加载时初始化
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initRecentComments);
+  } else {
+    initRecentComments();
+  }
+
+  // Swup 页面切换后重新初始化
+  if (window.swup && window.swup.hooks) {
+    window.swup.hooks.on("content:replace", function () {
+      setTimeout(initRecentComments, 200);
+    });
+  } else {
+    document.addEventListener("swup:enable", function () {
+      if (window.swup && window.swup.hooks) {
+        window.swup.hooks.on("content:replace", function () {
+          setTimeout(initRecentComments, 200);
+        });
+      }
+    });
+  }
+</script>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>

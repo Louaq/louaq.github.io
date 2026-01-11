@@ -25,5 +25,10 @@ export const profileConfig: ProfileConfig = {
       icon: "fa6-solid:rss",
       url: "/rss.xml",
     },
+    {
+			name: "开往",
+			url: "https://www.travellings.cn/go.html",
+			icon: "material-symbols:subway-rounded",
+		  },
   ],
 };

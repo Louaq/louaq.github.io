@@ -7,6 +7,7 @@ import Categories from "@/components/widget/Categories.astro";
 import Countdown from "@/components/widget/Countdown.astro";
 import DouyinHot from "@/components/widget/DouyinHot.astro";
 import Profile from "@/components/widget/Profile.astro";
+import RecentComments from "@/components/widget/RecentComments.astro";
 import SidebarTOC from "@/components/widget/SidebarTOC.astro";
 import SiteStats from "@/components/widget/SiteStats.astro";
 import Tags from "@/components/widget/Tags.astro";
@@ -46,6 +47,7 @@ const componentTypeToId = {
 	tags: "tags",
 	advertisement: "advertisement",
 	douyinHot: "douyin-hot",
+	recentComments: "recent-comments",
 };
 
 // 提取客户端需要的数据
@@ -92,6 +94,7 @@ const componentMap = {
 	calendar: Calendar,
 	countdown: Countdown,
 	douyinHot: DouyinHot,
+	recentComments: RecentComments,
 };
 
 // 渲染组件的辅助函数
