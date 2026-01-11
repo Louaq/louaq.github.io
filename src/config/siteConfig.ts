@@ -42,6 +42,13 @@ export const siteConfig: SiteConfig = {
     },
   ],
   // 导航栏配置
+	// 网站Card样式配置
+	card: {
+		// 是否开启卡片边框和阴影，开启后让网站更有立体感
+		border: true,
+	},
+
+	// 导航栏配置
 	navbar: {
 		// 导航栏Logo
 		// 支持三种类型：Astro图标库，本地图片，网络图片
