@@ -4,7 +4,7 @@ export const commentConfig: CommentConfig = {
   type: 'twikoo', // 当前启用的评论系统类型: none, twikoo, waline, giscus, disqus，默认为none，即不启用评论系统。
   //twikoo评论系统配置
   twikoo: {
-    envId: "https://twikoo-ruddy-beta.vercel.app",
+    envId: "https://twikoo.louaq.com",
     lang: "zh-CN", // 设置 Twikoo 评论系统语言
     visitorCount: true, // 文章访问量统计功能。
   },
