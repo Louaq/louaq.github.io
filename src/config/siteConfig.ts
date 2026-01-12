@@ -41,7 +41,6 @@ export const siteConfig: SiteConfig = {
       sizes: "32x32", // 可选，图标大小
     },
   ],
-  // 导航栏配置
 	// 网站Card样式配置
 	card: {
 		// 是否开启卡片边框和阴影，开启后让网站更有立体感
