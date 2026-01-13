@@ -144,7 +144,6 @@ const fontFamilyStyle = generateFontFamilyStyle();
   if (document.fonts && typeof document.fonts.ready !== "undefined") {
     document.fonts.ready
       .then(() => {
-        console.log("All fonts have been loaded");
 
         // 触发自定义事件，通知字体加载完成
         document.dispatchEvent(new CustomEvent("fontsLoaded"));
