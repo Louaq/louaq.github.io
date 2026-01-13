@@ -52,8 +52,50 @@ const walineConfig = commentConfig.waline;
 
   // 截取评论内容
   function truncateContent(content, maxLength = 80) {
-    // 移除 HTML 标签
-    const text = content.replace(/<[^>]*>/g, '').replace(/&nbsp;/g, ' ').trim();
+    if (!content || typeof content !== 'string') {
+      return '无内容';
+    }
+    
+    // 创建一个临时 DOM 元素来解析 HTML
+    const tempDiv = document.createElement('div');
+    tempDiv.innerHTML = content;
+    
+    // 提取文本内容，包括图片的 alt 文本
+    let text = '';
+    const walker = document.createTreeWalker(
+      tempDiv,
+      NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT,
+      null
+    );
+    
+    let node;
+    while (node = walker.nextNode()) {
+      if (node.nodeType === Node.TEXT_NODE) {
+        text += node.textContent;
+      } else if (node.nodeType === Node.ELEMENT_NODE) {
+        // 如果是图片标签，提取 alt 文本
+        if (node.tagName === 'IMG' && node.alt) {
+          text += `[图片: ${node.alt}]`;
+        }
+      }
+    }
+    
+    // 如果没有提取到文本，尝试简单替换
+    if (!text.trim()) {
+      text = content
+        .replace(/<img[^>]*alt=["']([^"']*)["'][^>]*>/gi, '[图片: $1]')
+        .replace(/<img[^>]*>/gi, '[图片]')
+        .replace(/<[^>]*>/g, '')
+        .replace(/&nbsp;/g, ' ')
+        .trim();
+    }
+    
+    // 如果仍然为空，使用默认文本
+    if (!text.trim()) {
+      return '[图片评论]';
+    }
+    
+    // 截取长度
     if (text.length <= maxLength) {
       return text;
     }
@@ -145,41 +187,74 @@ const walineConfig = commentConfig.waline;
     }
 
     const html = comments.map(comment => {
-      // Twikoo 字段: avatar, nick, created, commentText, url
-      // Waline 字段: avatar, nick, createdAt, text/orig, url
-      const avatar = comment.avatar || `https://cravatar.cn/avatar/${comment.mailMd5 || ''}?d=mp`;
-      const nick = comment.nick || '访客';
-      
-      // 处理时间戳（Twikoo 是毫秒，Waline 可能是秒或毫秒）
-      let timestamp = comment.created || comment.createdAt || comment.time || 0;
-      if (typeof timestamp === 'string') {
-        timestamp = new Date(timestamp).getTime();
-      } else if (timestamp < 10000000000) {
-        // 如果是秒级时间戳，转换为毫秒
-        timestamp = timestamp * 1000;
-      }
-      const time = formatTime(timestamp);
-      
-      // 处理评论内容（优先使用纯文本）
-      const content = truncateContent(comment.commentText || comment.comment || comment.orig || comment.text || '无内容');
-      
-      // 处理 URL
-      const commentUrl = comment.url || '#';
+      try {
+        // Twikoo 字段: avatar, nick, created, commentText, url
+        // Waline 字段: avatar, nick, createdAt, text/orig, url
+        const avatar = comment.avatar || `https://cravatar.cn/avatar/${comment.mailMd5 || ''}?d=mp`;
+        const nick = comment.nick || '访客';
+        
+        // 处理时间戳（Twikoo 是毫秒，Waline 可能是秒或毫秒）
+        let timestamp = comment.created || comment.createdAt || comment.time || 0;
+        if (typeof timestamp === 'string') {
+          timestamp = new Date(timestamp).getTime();
+        } else if (timestamp < 10000000000) {
+          // 如果是秒级时间戳，转换为毫秒
+          timestamp = timestamp * 1000;
+        }
+        const time = formatTime(timestamp);
+        
+        // 处理评论内容（优先使用纯文本）
+        let content = '';
+        try {
+          const rawContent = comment.commentText || comment.comment || comment.orig || comment.text || '';
+          content = truncateContent(rawContent);
+        } catch (error) {
+          // 如果处理失败，检查是否包含图片
+          const rawContent = comment.commentText || comment.comment || comment.orig || comment.text || '';
+          if (rawContent && (rawContent.includes('<img') || rawContent.includes('<IMG'))) {
+            content = '[图片评论]';
+          } else {
+            content = '无内容';
+          }
+        }
+        
+        // 处理 URL
+        const commentUrl = comment.url || '#';
 
-      return `
-        <a href="${commentUrl}" class="block group hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg p-2 transition-colors">
-          <div class="flex gap-2">
-            <img src="${avatar}" alt="${nick}" class="w-8 h-8 rounded-full flex-shrink-0" onerror="this.src='https://cravatar.cn/avatar/?d=mp'" />
-            <div class="flex-1 min-w-0">
-              <div class="flex items-center justify-between mb-1">
-                <span class="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">${nick}</span>
-                <span class="text-xs text-neutral-400 flex-shrink-0 ml-2">${time}</span>
+        return `
+          <a href="${commentUrl}" class="block group hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg p-2 transition-colors">
+            <div class="flex gap-2">
+              <img src="${avatar}" alt="${nick}" class="w-8 h-8 rounded-full flex-shrink-0" onerror="this.src='https://cravatar.cn/avatar/?d=mp'" />
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">${nick}</span>
+                  <span class="text-xs text-neutral-400 flex-shrink-0 ml-2">${time}</span>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">${content}</p>
               </div>
-              <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">${content}</p>
             </div>
-          </div>
-        </a>
-      `;
+          </a>
+        `;
+      } catch (error) {
+        // 如果整个评论处理失败，返回一个基本的评论项
+        const avatar = comment.avatar || 'https://cravatar.cn/avatar/?d=mp';
+        const nick = comment.nick || '访客';
+        const commentUrl = comment.url || '#';
+        return `
+          <a href="${commentUrl}" class="block group hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg p-2 transition-colors">
+            <div class="flex gap-2">
+              <img src="${avatar}" alt="${nick}" class="w-8 h-8 rounded-full flex-shrink-0" onerror="this.src='https://cravatar.cn/avatar/?d=mp'" />
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                  <span class="text-sm font-medium text-neutral-900 dark:text-neutral-100 truncate">${nick}</span>
+                  <span class="text-xs text-neutral-400 flex-shrink-0 ml-2">刚刚</span>
+                </div>
+                <p class="text-sm text-neutral-600 dark:text-neutral-400 line-clamp-2">[图片评论]</p>
+              </div>
+            </div>
+          </a>
+        `;
+      }
     }).join('');
 
     container.innerHTML = html;
