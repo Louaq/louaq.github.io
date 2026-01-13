@@ -63,7 +63,6 @@ export async function processCoverImage(
 		// 注意：如果API返回的是JSON格式，需要特殊处理
 		return apiUrl;
 	} catch (error) {
-		console.warn("Failed to process random image API:", error);
 		// 即使出错，如果enable为false也不返回fallback，直接返回空字符串
 		if (!randomCoverImage.enable) {
 			return "";
@@ -125,7 +124,6 @@ export function processCoverImageSync(
 
 		return apiUrl;
 	} catch (error) {
-		console.warn("Failed to process random image API:", error);
 		// 即使出错，如果enable为false也不返回fallback，直接返回空字符串
 		if (!randomCoverImage.enable) {
 			return "";

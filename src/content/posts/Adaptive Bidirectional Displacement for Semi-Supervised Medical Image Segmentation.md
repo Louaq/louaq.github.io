@@ -7,7 +7,7 @@ category: 半监督医学图像分割
 tags: [CVPR]
 ---
 
-::github{repo="chyupc/ABD"}
+::github{repo="Star-chy/ABD"}
 
 ## 摘要
 

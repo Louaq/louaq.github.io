@@ -149,7 +149,7 @@ const fontFamilyStyle = generateFontFamilyStyle();
         document.dispatchEvent(new CustomEvent("fontsLoaded"));
       })
       .catch((error: Error) => {
-        console.warn("Font loading failed:", error);
+        // 静默处理字体加载错误
       });
   }
 

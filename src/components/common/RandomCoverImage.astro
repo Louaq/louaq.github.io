@@ -56,9 +56,6 @@ if (isLocal) {
 		.replace(/\\/g, "/");
 	const file = files[normalizedPath];
 	if (!file) {
-		console.error(
-			`\n[ERROR] Image file not found: ${normalizedPath.replace("../../", "src/")}`,
-		);
 		img = null; // 设置为 null 而不是继续调用
 	} else {
 		img = await file();
@@ -480,7 +477,6 @@ const watermarkStyles = showWatermark
         sessionStorage.setItem(navigationCheckKey, 'refresh');
         return true;
       } catch (e) {
-        console.warn('Unable to detect page refresh type, clearing cache as fallback', e);
         return true;
       }
     }
@@ -497,11 +493,8 @@ const watermarkStyles = showWatermark
         keysToRemove.forEach(function(key) {
           localStorage.removeItem(key);
         });
-        if (keysToRemove.length > 0) {
-          console.log('Cleared ' + keysToRemove.length + ' API failure records on page refresh');
-        }
       } catch (e) {
-        console.warn('Failed to clear API failure cache', e);
+        // 静默处理缓存清理错误
       }
     }
     

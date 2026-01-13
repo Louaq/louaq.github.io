@@ -56,9 +56,6 @@ export function initIconLoader() {
 		// 监听图标加载错误
 		iconElement.addEventListener("error", () => {
 			// 保持显示fallback
-			if (iconName) {
-				console.warn(`Failed to load icon: ${iconName}`);
-			}
 		});
 
 		// 使用MutationObserver监听shadow DOM变化

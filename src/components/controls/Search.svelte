@@ -91,7 +91,6 @@ const search = async (keyword: string, isDesktop: boolean): Promise<void> => {
 			result = searchResults;
 			setPanelVisibility(true, isDesktop);
 		} catch (error) {
-			console.error("Search error:", error);
 			result = [];
 			setPanelVisibility(false, isDesktop);
 		} finally {

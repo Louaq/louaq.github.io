@@ -79,8 +79,6 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 		await navigator.clipboard.writeText(text);
 		return true;
 	} catch (clipboardErr) {
-		console.warn("Clipboard API 失败，尝试备用方案:", clipboardErr);
-
 		// 备用方案：使用 document.execCommand
 		const textArea = document.createElement("textarea");
 		textArea.value = text;
@@ -99,7 +97,6 @@ export async function copyToClipboard(text: string): Promise<boolean> {
 			}
 			return true;
 		} catch (execErr) {
-			console.error("execCommand 也失败了:", execErr);
 			throw new Error("所有复制方法都失败了");
 		} finally {
 			document.body.removeChild(textArea);
@@ -116,7 +113,6 @@ export async function handleCodeCopy(target: Element): Promise<void> {
 	const codeEle = preEle?.querySelector("code");
 
 	if (!codeEle) {
-		console.warn("未找到代码元素");
 		return;
 	}
 
@@ -145,7 +141,6 @@ export async function handleCodeCopy(target: Element): Promise<void> {
 
 		target.setAttribute("data-timeout-id", newTimeoutId.toString());
 	} catch (err) {
-		console.error("复制失败:", err);
 		// 可以在这里添加用户提示
 	}
 }

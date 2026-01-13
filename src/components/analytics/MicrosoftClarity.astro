@@ -8,8 +8,41 @@ const { clarityId } = Astro.props;
 
 <script is:inline data-swup-ignore-script define:vars={{ clarityId }}>
     (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+        try {
+            // 初始化 clarity 函数队列
+            c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+            
+            // 创建并配置脚本标签
+            t=l.createElement(r);
+            t.async=1;
+            t.src="https://www.clarity.ms/tag/"+i;
+            
+            // 添加错误处理，静默处理加载失败（可能是被广告拦截器阻止）
+            t.onerror = function() {
+                this.onerror = null;
+                // 即使脚本加载失败，也保持 clarity 函数可用，避免其他代码报错
+                if (!c[a].q) {
+                    c[a].q = [];
+                }
+            };
+            
+            // 查找插入位置
+            y=l.getElementsByTagName(r)[0];
+            if (y && y.parentNode) {
+                y.parentNode.insertBefore(t,y);
+            } else if (l.head) {
+                l.head.appendChild(t);
+            }
+        } catch (e) {
+            // 静默处理所有错误，避免控制台报错
+            // 确保 clarity 函数仍然可用
+            try {
+                if (!c[a]) {
+                    c[a] = function(){(c[a].q=c[a].q||[]).push(arguments)};
+                }
+            } catch (innerE) {
+                // 忽略
+            }
+        }
     })(window, document, "clarity", "script", clarityId);
 </script>

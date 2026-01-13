@@ -17,7 +17,6 @@ export function navigateToPage(
 ): void {
 	// 检查 URL 是否有效
 	if (!url || typeof url !== "string") {
-		console.warn("navigateToPage: Invalid URL provided");
 		return;
 	}
 
@@ -50,7 +49,6 @@ export function navigateToPage(
 				window.swup.navigate(url);
 			}
 		} catch (error) {
-			console.error("Swup navigation failed:", error);
 			// 降级到普通跳转
 			fallbackNavigation(url, options);
 		}
@@ -127,11 +125,11 @@ export function preloadPage(url: string): void {
 	}
 
 	// 如果 Swup 可用，使用其预加载功能
-	if (isSwupReady() && window.swup.preload) {
+		if (isSwupReady() && window.swup.preload) {
 		try {
 			window.swup.preload(url);
 		} catch (error) {
-			console.warn("Failed to preload page:", error);
+			// 静默处理预加载错误
 		}
 	}
 }

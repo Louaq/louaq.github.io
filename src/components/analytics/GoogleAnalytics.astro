@@ -7,13 +7,53 @@ const { analyticsId } = Astro.props;
 ---
 
 <!-- Google tag (gtag.js) -->
-<script is:inline data-swup-ignore-script async src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}></script>
-<script is:inline data-swup-ignore-script define:vars={{analyticsId}}>window.dataLayer = window.dataLayer || [];
-
-function gtag() {
-    dataLayer.push(arguments);
-}
-
-gtag('js', new Date());
-gtag('config', analyticsId);
+<script is:inline data-swup-ignore-script define:vars={{analyticsId}}>
+(function() {
+    try {
+        // 初始化 dataLayer
+        window.dataLayer = window.dataLayer || [];
+        
+        // 创建 gtag 函数
+        function gtag() {
+            try {
+                if (window.dataLayer) {
+                    window.dataLayer.push(arguments);
+                }
+            } catch (e) {
+                // 静默处理错误
+            }
+        }
+        
+        // 暴露 gtag 到全局
+        window.gtag = gtag;
+        
+        // 尝试加载 Google Analytics 脚本
+        const script = document.createElement('script');
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
+        script.onerror = function() {
+            // 脚本加载失败时静默处理（可能是被广告拦截器阻止）
+            this.onerror = null;
+        };
+        script.onload = function() {
+            // 脚本加载成功后初始化
+            try {
+                gtag('js', new Date());
+                gtag('config', analyticsId);
+            } catch (e) {
+                // 静默处理初始化错误
+            }
+        };
+        
+        // 查找第一个 script 标签作为插入位置
+        const firstScript = document.getElementsByTagName('script')[0];
+        if (firstScript && firstScript.parentNode) {
+            firstScript.parentNode.insertBefore(script, firstScript);
+        } else {
+            document.head.appendChild(script);
+        }
+    } catch (e) {
+        // 静默处理所有错误
+    }
+})();
 </script>
