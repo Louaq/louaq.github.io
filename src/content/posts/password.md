@@ -6,6 +6,7 @@ tags: [私密]
 category: 日记
 password: true
 pinned: true
+drft: true
 ---
 
 
