@@ -30,10 +30,5 @@ export const profileConfig: ProfileConfig = {
 			url: "https://www.travellings.cn/go.html",
 			icon: "material-symbols:subway-rounded",
 		},
-		{
-			name: "AI",
-			url: "http://chat.louaq.com",
-			icon: "material-symbols:smart-toy",
-		},
   ],
 };
