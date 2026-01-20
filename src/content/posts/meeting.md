@@ -16,6 +16,7 @@ pinned: true
 
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
+| 20260121 | 半监督图像分割 | <a href="/assets/pdf/汇报_0122.pdf" target="_blank">汇报_0121</a> |
 | 20260107 | 半监督图像分割 | <a href="/assets/pdf/汇报_0115.pdf" target="_blank">汇报_0115</a> |
 | 20260107 | 半监督图像分割 | <a href="/assets/pdf/汇报20260107.pdf" target="_blank">汇报_0107</a> |
 
