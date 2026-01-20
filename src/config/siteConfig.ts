@@ -154,7 +154,7 @@ export const siteConfig: SiteConfig = {
 
 	// 节假日装饰配置
 	festivalDecoration: {
-		enable: true, // 是否启用节假日装饰
+		enable: false, // 是否启用节假日装饰
 		festivals: [
 		{
 			name: "春节",
