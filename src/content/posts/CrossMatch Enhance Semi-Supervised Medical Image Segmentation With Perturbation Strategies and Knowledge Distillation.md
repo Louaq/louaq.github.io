@@ -1,6 +1,6 @@
 ---
 title: CrossMatch Enhance Semi-Supervised Medical Image Segmentation With Perturbation Strategies and Knowledge Distillation
-published: 2026-04-22 12:00:00
+published: 2026-01-22 12:00:00
 expires: 2026-08-21 23:59:59
 description: "半监督学习医学图像分割提出了一个独特的挑战"
 category: 半监督医学图像分割
