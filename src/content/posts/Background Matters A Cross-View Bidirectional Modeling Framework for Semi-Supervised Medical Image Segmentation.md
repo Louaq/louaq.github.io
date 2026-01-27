@@ -5,6 +5,7 @@ expires: 2026-01-31 23:59:59
 description: "半监督医学图像分割(SSMIS)利用"
 category: 半监督医学图像分割
 tags: [TIP]
+pinned: true
 ---
 
 :::note
