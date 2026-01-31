@@ -188,6 +188,12 @@ export const ru: Translation = {
 	[Key.pageViewsLoading]: "Загрузка...",
 	[Key.pageViewsError]: "Статистика недоступна",
 
+	// Макет списка сообщений
+	[Key.postListLayout]: "Макет списка сообщений",
+	[Key.postListLayoutList]: "Список",
+	[Key.postListLayoutGrid]: "Сетка",
+
+
 	// Закреплено
 	[Key.pinned]: "Закреплено",
 
@@ -251,6 +257,12 @@ export const ru: Translation = {
 	[Key.calendarOctober]: "Окт",
 	[Key.calendarNovember]: "Ноя",
 	[Key.calendarDecember]: "Дек",
+
+	// Конфигурация блоков коллапсируемого кода
+	[Key.codeCollapsibleShowMore]: "Показать больше",
+	[Key.codeCollapsibleShowLess]: "Показать меньше",
+	[Key.codeCollapsibleExpanded]: "Блок кода развернут",
+	[Key.codeCollapsibleCollapsed]: "Блок кода свернут",
 
 	[Key.shareArticle]: "Поделиться",
 	[Key.generatingPoster]: "Создание постера...",

@@ -174,6 +174,10 @@ enum I18nKey {
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
 	pageViewsError = "pageViewsError",
+	// 文章布局
+	postListLayout = "postListLayout",
+	postListLayoutList = "postListLayoutList",
+	postListLayoutGrid = "postListLayoutGrid",
 
 	// 置顶
 	pinned = "pinned",
@@ -235,6 +239,10 @@ enum I18nKey {
 	calendarOctober = "calendarOctober",
 	calendarNovember = "calendarNovember",
 	calendarDecember = "calendarDecember",
+	codeCollapsibleShowMore = "codeCollapsibleShowMore",
+	codeCollapsibleShowLess = "codeCollapsibleShowLess",
+	codeCollapsibleExpanded = "codeCollapsibleExpanded",
+	codeCollapsibleCollapsed = "codeCollapsibleCollapsed",
 
 	shareArticle = "shareArticle",
 	generatingPoster = "generatingPoster",

@@ -40,19 +40,31 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		icon: "material-symbols:cloud-done-rounded",
 	  });
 
-  links.push({
-    name: "关于",
-    url: "/content/",
-    icon: "material-symbols:info",
-    children: [
-      LinkPreset.About,
-	  ...(siteConfig.pages.albums ? [LinkPreset.Albums] : []), // 根据配置决定是否添加相册页面
-	  ...(siteConfig.pages.watchlist ? [LinkPreset.Watchlist] : []), // 根据配置决定是否添加观影清单页面
-	  ...(siteConfig.pages.sponsor ? [LinkPreset.Sponsor] : []), // 根据配置决定是否添加赞助页面
-	  ...(siteConfig.pages.bangumi ? [LinkPreset.Bangumi] : []), // 根据配置决定是否添加番组计划页面
+  // 构建子菜单，确保所有项都是有效的
+	const aboutChildren: (NavBarLink | LinkPreset)[] = [
+		LinkPreset.About,
+	];
+	
+	// 根据配置添加子菜单项
+	if (siteConfig.pages.albums) {
+		aboutChildren.push(LinkPreset.Albums);
+	}
+	if (siteConfig.pages.watchlist) {
+		aboutChildren.push(LinkPreset.Watchlist);
+	}
+	if (siteConfig.pages.sponsor) {
+		aboutChildren.push(LinkPreset.Sponsor);
+	}
+	if (siteConfig.pages.bangumi) {
+		aboutChildren.push(LinkPreset.Bangumi);
+	}
 
-    ],
-  });
+	links.push({
+		name: "关于",
+		url: "/content/",
+		icon: "material-symbols:info",
+		children: aboutChildren,
+	});
   // 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出
   return { links } as NavBarConfig;
 };

@@ -46,7 +46,7 @@ export const zh_TW: Translation = {
 	[Key.postCount]: "篇文章",
 	[Key.postsCount]: "篇文章",
 
-	[Key.themeColor]: "主題色",
+	[Key.themeColor]: "主題色相",
 
 	[Key.lightMode]: "亮色",
 	[Key.darkMode]: "暗色",
@@ -181,6 +181,12 @@ export const zh_TW: Translation = {
 	[Key.pageViewsLoading]: "載入中...",
 	[Key.pageViewsError]: "統計不可用",
 
+	// 文章佈局
+	[Key.postListLayout]: "文章佈局",
+	[Key.postListLayoutList]: "清單",
+	[Key.postListLayoutGrid]: "網格",
+
+
 	// 置頂
 	[Key.pinned]: "置頂",
 
@@ -243,6 +249,13 @@ export const zh_TW: Translation = {
 	[Key.calendarOctober]: "10月",
 	[Key.calendarNovember]: "11月",
 	[Key.calendarDecember]: "12月",
+
+
+	// 代碼區塊折疊配置
+	[Key.codeCollapsibleShowMore]: "顯示更多",
+	[Key.codeCollapsibleShowLess]: "顯示更少",
+	[Key.codeCollapsibleExpanded]: "代碼區塊已展開",
+	[Key.codeCollapsibleCollapsed]: "代碼區塊已折疊",
 
 	[Key.shareArticle]: "分享",
 	[Key.generatingPoster]: "海報生成中...",

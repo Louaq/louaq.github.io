@@ -74,7 +74,7 @@ export type SiteConfig = {
 	pages: {
 		sponsor: boolean; // 赞助页面开关
 		guestbook: boolean; // 留言板页面开关
-		bangumi: boolean;
+		bangumi: boolean; // 番组计划页面开关
 		watchlist: boolean; // 观影清单页面开关
 		albums: boolean; // 相册页面开关
 	};
@@ -104,33 +104,32 @@ export type SiteConfig = {
 	};
 
 	// 文章密码保护配置
-	postPassword?: string; // 当文章的password字段设置为true时使用的全局密码
+	postPassword?: string; // 当文章的 password 字段设置为 true 时使用的默认密码
 
 	// 全站变灰配置
 	grayscale?: {
-		enable: boolean; // 手动控制是否启用全站变灰（true=启用，false=关闭）
+		enable: boolean; // 是否启用全站变灰效果
 	};
 
 	// 节假日装饰配置
 	festivalDecoration?: {
 		enable: boolean; // 是否启用节假日装饰
-		festivals?: {
+		festivals?: Array<{
 			name: string; // 节日名称
-			startDate: string; // 开始日期，格式："MM-DD"
-			endDate: string; // 结束日期，格式："MM-DD"
-			decorationType: "spring-festival" | "christmas" | "halloween" | "valentines" | "custom"; // 装饰类型
+			startDate: string; // 开始日期，格式：MM-DD
+			endDate: string; // 结束日期，格式：MM-DD
+			decorationType: string; // 装饰类型
 			customStyles?: {
-				snowflake?: boolean; // 雪花效果
-				fireworks?: boolean; // 烟花效果
-				lanterns?: boolean | {
-					enable: boolean; // 是否启用灯笼效果
-					leftText?: string; // 左侧灯笼文字
-					rightText?: string; // 右侧灯笼文字
-				}; // 灯笼效果
-				pumpkins?: boolean; // 南瓜效果
-				hearts?: boolean; // 爱心效果
+				lanterns?: {
+					enable: boolean;
+					leftText?: string;
+					rightText?: string;
+				};
+				fireworks?: boolean;
+				snowflake?: boolean;
+				pumpkins?: boolean;
 			};
-		}[];
+		}>;
 	};
 };
 
@@ -277,6 +276,15 @@ export type ExpressiveCodeConfig = {
 	darkTheme: string;
 	/** 亮色主题名称（用于亮色模式） */
 	lightTheme: string;
+	/** 代码块折叠插件配置 */
+	pluginCollapsible?: PluginCollapsibleConfig;
+};
+
+export type PluginCollapsibleConfig = {
+	enable: boolean; // 是否启用代码块折叠功能
+	lineThreshold: number; // 触发折叠的行数阈值
+	previewLines: number; // 折叠时显示的预览行数
+	defaultCollapsed: boolean; // 默认是否折叠
 };
 
 export type AnnouncementConfig = {
@@ -366,22 +374,28 @@ export type WidgetComponentType =
 	| "sidebarToc"
 	| "advertisement"
 	| "stats"
-	| "calendar"
-	| "countdown"
-	| "douyinHot"
-	| "recentComments"
-	| "custom";
+	| "calendar";
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型
 	enable: boolean; // 是否启用该组件
-	order: number; // 显示顺序，数字越小越靠前
 	position: "top" | "sticky"; // 组件位置：top=固定在顶部，sticky=粘性定位（可滚动）
-	class?: string; // 自定义CSS类名
-	style?: string; // 自定义内联样式
-	animationDelay?: number; // 动画延迟时间（毫秒）
 	configId?: string; // 配置ID，用于广告组件指定使用哪个配置
-	showOnPostPage?: boolean; // 是否在文章详情页显示（仅右侧边栏组件有效）
+	showOnPostPage?: boolean; // 是否在文章详情页显示
+	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
+	responsive?: {
+		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
+		collapseThreshold?: number; // 折叠阈值
+	};
+	customProps?: Record<string, unknown>; // 自定义属性，用于扩展组件功能
+};
+
+export type MobileBottomComponentConfig = {
+	type: WidgetComponentType; // 组件类型
+	enable: boolean; // 是否启用该组件
+	configId?: string; // 配置ID，用于广告组件指定使用哪个配置
+	showOnPostPage?: boolean; // 是否在文章详情页显示
+	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
 	responsive?: {
 		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
 		collapseThreshold?: number; // 折叠阈值
@@ -395,18 +409,7 @@ export type SidebarLayoutConfig = {
 	showRightSidebarOnPostPage?: boolean; // 当position为left时，是否在文章详情页显示右侧边栏
 	leftComponents: WidgetComponentConfig[]; // 左侧边栏组件配置列表
 	rightComponents: WidgetComponentConfig[]; // 右侧边栏组件配置列表
-	defaultAnimation: {
-		enable: boolean; // 是否启用默认动画
-		baseDelay: number; // 基础延迟时间（毫秒）
-		increment: number; // 每个组件递增的延迟时间（毫秒）
-	};
-	responsive: {
-		layout: {
-			mobile: "hidden" | "bottom" | "drawer" | "sidebar"; // 移动端布局模式
-			tablet: "hidden" | "sidebar" | "bottom" | "drawer"; // 平板端布局模式
-			desktop: "sidebar"; // 桌面端布局模式
-		};
-	};
+	mobileBottomComponents: MobileBottomComponentConfig[]; // 移动端底部组件配置列表（<768px显示）
 };
 
 export type SakuraConfig = {

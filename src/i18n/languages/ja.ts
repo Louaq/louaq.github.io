@@ -186,6 +186,11 @@ export const ja: Translation = {
 	[Key.pageViewsLoading]: "読み込み中...",
 	[Key.pageViewsError]: "統計利用不可",
 
+	// 投稿リストレイアウト
+	[Key.postListLayout]: "投稿リストレイアウト",
+	[Key.postListLayoutList]: "リスト",
+	[Key.postListLayoutGrid]: "グリッド",
+
 	// ピン留め
 	[Key.pinned]: "ピン留め",
 
@@ -249,6 +254,12 @@ export const ja: Translation = {
 	[Key.calendarOctober]: "10月",
 	[Key.calendarNovember]: "11月",
 	[Key.calendarDecember]: "12月",
+
+	// コードブロック折りたたみ設定
+	[Key.codeCollapsibleShowMore]: "もっと表示",
+	[Key.codeCollapsibleShowLess]: "少なく表示",
+	[Key.codeCollapsibleExpanded]: "コードブロックが展開されました",
+	[Key.codeCollapsibleCollapsed]: "コードブロックが折りたたまれました",
 
 	[Key.shareArticle]: "共有",
 	[Key.generatingPoster]: "ポスター生成中...",

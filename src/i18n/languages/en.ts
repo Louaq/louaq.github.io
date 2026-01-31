@@ -187,6 +187,11 @@ export const en: Translation = {
 	[Key.pageViewsLoading]: "Loading...",
 	[Key.pageViewsError]: "Stats unavailable",
 
+	// Post List Layout
+	[Key.postListLayout]: "Post List Layout",
+	[Key.postListLayoutList]: "List",
+	[Key.postListLayoutGrid]: "Grid",
+
 	// Pinned
 	[Key.pinned]: "Pinned",
 
@@ -250,6 +255,12 @@ export const en: Translation = {
 	[Key.calendarOctober]: "Oct",
 	[Key.calendarNovember]: "Nov",
 	[Key.calendarDecember]: "Dec",
+
+	// Code Block Collapsible Configuration
+	[Key.codeCollapsibleShowMore]: "Show more",
+	[Key.codeCollapsibleShowLess]: "Show less",
+	[Key.codeCollapsibleExpanded]: "Code block expanded",
+	[Key.codeCollapsibleCollapsed]: "Code block collapsed",
 
 	[Key.shareArticle]: "Share",
 	[Key.generatingPoster]: "Generating Poster...",

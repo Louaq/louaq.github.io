@@ -16,6 +16,11 @@ import type { WALLPAPER_MODE } from "@/types/config";
 
 let mode: WALLPAPER_MODE = $state(backgroundWallpaper.mode);
 
+/**
+ * 壁纸模式切换按钮
+ * 目前已弃用，已集成至DisplaySettingsIntegrated.svelte，当前文件保留以备将来可能的单独使用
+ */
+ 
 // 在组件挂载时从localStorage读取保存的模式
 onMount(() => {
 	mode = getStoredWallpaperMode();
