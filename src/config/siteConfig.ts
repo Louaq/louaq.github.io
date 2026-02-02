@@ -69,6 +69,9 @@ export const siteConfig: SiteConfig = {
   // 站点开始日期，用于统计运行天数
   siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
 
+
+
+
 	// bangumi配置
 	bangumi: {
 		userId: "1163581", // 在此处设置你的Bangumi用户ID
