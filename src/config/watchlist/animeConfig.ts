@@ -335,7 +335,7 @@ export const animeItems: WatchlistItem[] = [
 			current: 7,
 			total: 26,
 		},
-		startDate: "2026-12-28",
+		startDate: "2025-12-28",
 		comment: "少见的暗黑系画风",
 		link: "https://movie.douban.com/subject/36596819/",
 		tags: ["动作", "动画", "奇幻","古装","武侠"],
