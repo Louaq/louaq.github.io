@@ -20,8 +20,25 @@ jobs:
     steps:
       - name: Checkout your repository using git
         uses: actions/checkout@v4
-      - name: Install, build, and upload your site
-        uses: withastro/action@v3
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: latest
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build site (Algolia)
+        run: pnpm build:algolia
         env:
           # 让构建产物启用 Algolia（Navbar 会按此切换到 Algolia 搜索）
           PUBLIC_ALGOLIA_APP_ID: ${{ secrets.PUBLIC_ALGOLIA_APP_ID }}
@@ -31,10 +48,11 @@ jobs:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
           ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          # 用 pnpm 构建；并在 build 阶段自动上传 Algolia index
-          package-manager: pnpm@latest
-          build-command: pnpm build:algolia
+          path: dist
 
   deploy:
     needs: build
