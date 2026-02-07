@@ -66,6 +66,17 @@ export const siteConfig: SiteConfig = {
 		// 导航栏图标和标题是否跟随主题色
 		followTheme: false,
 	},
+
+	// 搜索引擎配置
+	search: {
+		// 搜索引擎类型: "pagefind" 或 "algolia"
+		// pagefind: 本地搜索,无需配置,构建时自动生成索引
+		// algolia: 云端搜索,需要配置 Algolia 账号和密钥
+		engine: "algolia", // 切换到 algolia (需要配置环境变量)
+		// 注意: 如果选择 "algolia",请确保已配置环境变量:
+		// PUBLIC_ALGOLIA_APP_ID, PUBLIC_ALGOLIA_SEARCH_KEY, PUBLIC_ALGOLIA_INDEX_NAME
+		// ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY (用于构建时上传索引)
+	},
   // 站点开始日期，用于统计运行天数
   siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
 

@@ -7,6 +7,7 @@
     "start": "astro dev",
     "check": "astro check",
     "build": "astro build && pagefind --site dist",
+    "build:algolia": "astro build",
     "preview": "astro preview",
     "astro": "astro",
     "type-check": "tsc --noEmit --isolatedDeclarations",
@@ -16,6 +17,7 @@
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
+    "@algolia/client-search": "^5.48.0",
     "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/rss": "^4.0.15",
@@ -36,6 +38,7 @@
     "@iconify/svelte": "^4.2.0",
     "@swup/astro": "^1.7.0",
     "@tailwindcss/typography": "^0.5.16",
+    "algoliasearch": "^5.48.0",
     "astro": "5.16.15",
     "astro-expressive-code": "^0.41.6",
     "astro-icon": "^1.1.5",
@@ -45,6 +48,8 @@
     "glob": "^11.1.0",
     "gray-matter": "^4.0.3",
     "hastscript": "^9.0.1",
+    "instantsearch.css": "^8.10.0",
+    "instantsearch.js": "^4.87.1",
     "katex": "^0.16.28",
     "marked": "^16.4.2",
     "mdast-util-to-string": "^4.0.0",
