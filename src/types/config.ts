@@ -374,12 +374,19 @@ export type WidgetComponentType =
 	| "sidebarToc"
 	| "advertisement"
 	| "stats"
-	| "calendar";
+	| "calendar"
+	| "countdown"
+	| "douyinHot"
+	| "recentComments";
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型
 	enable: boolean; // 是否启用该组件
 	position: "top" | "sticky"; // 组件位置：top=固定在顶部，sticky=粘性定位（可滚动）
+	order?: number; // 组件显示顺序（数字越小越靠前）
+	class?: string; // CSS 类名，用于应用样式和动画
+	animationDelay?: number; // 动画延迟时间（毫秒），用于错开动画效果
+	style?: string; // 自定义内联样式
 	configId?: string; // 配置ID，用于广告组件指定使用哪个配置
 	showOnPostPage?: boolean; // 是否在文章详情页显示
 	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
@@ -409,7 +416,19 @@ export type SidebarLayoutConfig = {
 	showRightSidebarOnPostPage?: boolean; // 当position为left时，是否在文章详情页显示右侧边栏
 	leftComponents: WidgetComponentConfig[]; // 左侧边栏组件配置列表
 	rightComponents: WidgetComponentConfig[]; // 右侧边栏组件配置列表
-	mobileBottomComponents: MobileBottomComponentConfig[]; // 移动端底部组件配置列表（<768px显示）
+	mobileBottomComponents?: MobileBottomComponentConfig[]; // 移动端底部组件配置列表（<768px显示）
+	defaultAnimation?: {
+		enable: boolean; // 是否启用默认动画
+		baseDelay: number; // 基础延迟时间（毫秒）
+		increment: number; // 递增延迟时间（毫秒），每个组件依次增加的延迟
+	};
+	responsive?: {
+		layout: {
+			mobile: "hidden" | "drawer" | "sidebar"; // 移动端布局模式：hidden=不显示侧边栏，drawer=抽屉模式，sidebar=显示侧边栏
+			tablet: "hidden" | "drawer" | "sidebar"; // 平板端布局模式
+			desktop: "hidden" | "drawer" | "sidebar"; // 桌面端布局模式
+		};
+	};
 };
 
 export type SakuraConfig = {

@@ -122,6 +122,10 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			class: "onload-animation",
 			// 动画延迟时间
 			animationDelay: 200,
+			// 自定义属性：配置显示的评论数量
+			customProps: {
+				count: 3, // 显示最近的3条评论
+			},
 		},
 		{
 			// 组件类型：广告栏组件 1
@@ -244,9 +248,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 使用 Tailwind 标准断点：mobile(<768px), tablet(768px-1023px), desktop(>=1024px)
 		layout: {
 			// 移动端：<768px
-			mobile: "sidebar",
+			mobile: "hidden",
 			// 平板端：768px-1023px
-			tablet: "sidebar",
+			tablet: "hidden",
 			// 桌面端：>=1024px
 			desktop: "sidebar",
 		},

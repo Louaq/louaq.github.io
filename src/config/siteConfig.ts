@@ -122,7 +122,7 @@ export const siteConfig: SiteConfig = {
 			// 网格模式列数：2 或 3
 			// 2列是默认模式，在任何侧边栏配置下均可生效
 			// 3列模式仅在单侧边栏（或无侧边栏）时生效，
-			columns: 3,
+			columns: 2,
 		},
 	},
 
