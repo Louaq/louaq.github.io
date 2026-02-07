@@ -357,5 +357,21 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
 	},
+	{
+		title: "神墓 年番 (2025)",
+		cover: "https://pic1.imgdb.cn/item/695108c5a0c391c56de5e331.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 28,
+			total: 52,
+		},
+		startDate: "2025-08-08",
+		comment: "完全响应号召，要给民众看点血腥的场面",
+		link: "https://movie.douban.com/subject/36597288/",
+		tags: ["动作", "动画", "奇幻"],
+		enabled: true,
+	},
 ];
 
