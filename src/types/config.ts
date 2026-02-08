@@ -68,7 +68,7 @@ export type SiteConfig = {
 
 	// 搜索引擎配置
 	search?: {
-		engine: "pagefind" | "algolia"; // 搜索引擎类型：pagefind=本地搜索，algolia=云端搜索
+		engine: "algolia"; // 搜索引擎：仅支持 Algolia
 	};
 
 	showLastModified: boolean; // 控制"上次编辑"卡片显示的开关
@@ -133,6 +133,7 @@ export type SiteConfig = {
 				fireworks?: boolean;
 				snowflake?: boolean;
 				pumpkins?: boolean;
+				hearts?: boolean;
 			};
 		}>;
 	};
@@ -162,14 +163,6 @@ export type NavBarLink = {
 	external?: boolean;
 	icon?: string; // 菜单项图标
 	children?: (NavBarLink | LinkPreset)[]; // 支持子菜单，可以是NavBarLink或LinkPreset
-};
-
-export enum NavBarSearchMethod {
-	PageFind = 0,
-}
-
-export type NavBarSearchConfig = {
-	method: NavBarSearchMethod;
 };
 
 export type NavBarConfig = {

@@ -157,9 +157,6 @@ const jsonLd = {
       <!-- title -->
       <div class="relative onload-animation">
         <h1
-          data-pagefind-body
-          data-pagefind-weight="10"
-          data-pagefind-meta="title"
           class="transition w-full block font-bold mb-3
                     text-3xl md:text-[2.25rem]/[2.75rem]
                     text-black/90 dark:text-white/90
@@ -210,7 +207,7 @@ const jsonLd = {
           <PasswordProtection 
             client:load
             postId={entry.id}
-            password={typeof entry.data.password === 'boolean' ? siteConfig.postPassword : entry.data.password}
+            password={typeof entry.data.password === 'boolean' ? (siteConfig.postPassword ?? "") : entry.data.password}
           />
           <div id="protected-content" style="display: none;">
             <Markdown class="mb-6 markdown-content onload-animation">

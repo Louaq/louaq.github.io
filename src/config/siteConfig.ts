@@ -68,11 +68,9 @@ export const siteConfig: SiteConfig = {
 
 	// 搜索引擎配置
 	search: {
-		// 搜索引擎类型: "pagefind" 或 "algolia"
-		// pagefind: 本地搜索,无需配置,构建时自动生成索引
-		// algolia: 云端搜索,需要配置 Algolia 账号和密钥
-		engine: "algolia", // 切换到 algolia (需要配置环境变量)
-		// 注意: 如果选择 "algolia",请确保已配置环境变量:
+		// Algolia 云端搜索（需要配置环境变量）
+		engine: "algolia",
+		// 注意：请确保已配置环境变量:
 		// PUBLIC_ALGOLIA_APP_ID, PUBLIC_ALGOLIA_SEARCH_KEY, PUBLIC_ALGOLIA_INDEX_NAME
 		// ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY (用于构建时上传索引)
 	},

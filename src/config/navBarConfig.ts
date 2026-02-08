@@ -2,8 +2,6 @@ import {
 	LinkPreset,
 	type NavBarConfig,
 	type NavBarLink,
-	type NavBarSearchConfig,
-	NavBarSearchMethod,
 } from "../types/config";
 import { siteConfig } from "./siteConfig";
 
@@ -67,11 +65,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	});
   // 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出
   return { links } as NavBarConfig;
-};
-
-// 导航搜索配置
-export const navBarSearchConfig: NavBarSearchConfig = {
-	method: NavBarSearchMethod.PageFind,
 };
 
 export const navBarConfig: NavBarConfig = getDynamicNavBarConfig();

@@ -65,7 +65,8 @@ export class WidgetManager {
 			components = allComponents.filter((component) => component.enable);
 		}
 
-		return components.sort((a, b) => a.order - b.order);
+		// order 为可选字段：未设置时按 0 处理
+		return components.sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
 	}
 
 	/**
@@ -146,10 +147,11 @@ export class WidgetManager {
 			return component.animationDelay;
 		}
 
-		if (this.config.defaultAnimation.enable) {
+		const defaultAnim = this.config.defaultAnimation;
+		if (defaultAnim?.enable) {
 			return (
-				this.config.defaultAnimation.baseDelay +
-				index * this.config.defaultAnimation.increment
+				defaultAnim.baseDelay +
+				index * defaultAnim.increment
 			);
 		}
 
@@ -234,7 +236,7 @@ export class WidgetManager {
 			return false;
 		}
 
-		const layoutMode = this.config.responsive.layout[deviceType];
+		const layoutMode = this.config.responsive?.layout?.[deviceType] ?? "sidebar";
 		return layoutMode === "sidebar";
 	}
 
