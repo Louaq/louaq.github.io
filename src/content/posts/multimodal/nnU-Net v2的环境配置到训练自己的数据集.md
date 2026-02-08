@@ -135,7 +135,7 @@ export nnUNet_results="/root/autodl-tmp/nnU-Net/nnUNet/DATASET/nnUNet_trained_mo
 
 3. **方法二：**
 
-![在这里插入图片描述](https://i-blog.csdnimg.cn/blog_migrate/ebe2de684b113d2ab1777598b69f538a.png)  
+![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ebe2de684b113d2ab1777598b69f538a.png)  
 4 注：更新文档可以点击按钮更新，然后在终端使用命令行`source .bashrc`更新，如下图  
 （1）![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/fa472dc72c8900a87589bf945436ef99.png)  
 （2）  
