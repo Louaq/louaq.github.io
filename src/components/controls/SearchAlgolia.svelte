@@ -9,35 +9,38 @@ const ALGOLIA_APP_ID = import.meta.env.PUBLIC_ALGOLIA_APP_ID;
 const ALGOLIA_SEARCH_KEY = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY;
 const ALGOLIA_INDEX_NAME = import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME || "blog";
 
-let initialized = false;
-let searchClient: any = null;
+let initialized = $state(false);
+let searchClient: any = $state(null);
 
-let isOpen = false;
-let query = "";
-let results: any[] = [];
-let isSearching = false;
+let isOpen = $state(false);
+let query = $state("");
+let results: any[] = $state([]);
+let isSearching = $state(false);
 let debounceTimer: NodeJS.Timeout;
-let activeIndex = -1;
+let activeIndex = $state(-1);
 let prevBodyOverflow: string | null = null;
 const hitsPerPage = 20;
-let page = 0;
-let nbHits = 0;
-let nbPages = 0;
-let hasMore = false;
-let isLoadingMore = false;
+let page = $state(0);
+let nbHits = $state(0);
+let nbPages = $state(0);
+let hasMore = $state(false);
+let isLoadingMore = $state(false);
 let requestSeq = 0;
-let listEl: HTMLDivElement | null = null;
+let listEl: HTMLDivElement | null = $state(null);
 let lastScrolledIndex = -1;
 
-let modalInputEl: HTMLInputElement | null = null;
+let modalInputEl: HTMLInputElement | null = $state(null);
 
 // 简易 Portal：将节点移动到 document.body，避免被页面滚动/transform 影响
 function portal(node: HTMLElement) {
 	if (typeof document === "undefined") return;
 	document.body.appendChild(node);
 	return {
-		// 交给 Svelte 在块销毁时移除节点（此时节点位于 body 下也可正常 detach）
-		destroy() {},
+		destroy() {
+			if (node.parentNode) {
+				node.parentNode.removeChild(node);
+			}
+		},
 	};
 }
 
@@ -301,20 +304,26 @@ const handleInputKeydown = (e: KeyboardEvent) => {
 };
 
 // 输入防抖
-$: if (isOpen) {
-	clearTimeout(debounceTimer);
-	debounceTimer = setTimeout(() => void doSearch(query, { reset: true }), 250);
-}
+$effect(() => {
+	if (isOpen) {
+		// 读取 query 以建立依赖
+		const _q = query;
+		clearTimeout(debounceTimer);
+		debounceTimer = setTimeout(() => void doSearch(_q, { reset: true }), 250);
+	}
+});
 
 // 键盘上下选择时，让高亮项随之滚动到可视区域
-$: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex) {
-	lastScrolledIndex = activeIndex;
-	// 等 DOM 更新后再滚动
-	tick().then(() => {
-		const active = listEl?.querySelector<HTMLAnchorElement>("a.algolia-item.is-active");
-		active?.scrollIntoView({ block: "nearest" });
-	});
-}
+$effect(() => {
+	if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex) {
+		lastScrolledIndex = activeIndex;
+		// 等 DOM 更新后再滚动
+		tick().then(() => {
+			const active = listEl?.querySelector<HTMLAnchorElement>("a.algolia-item.is-active");
+			active?.scrollIntoView({ block: "nearest" });
+		});
+	}
+});
 </script>
 
 <!-- 触发器：桌面端显示一个“搜索框样式”的按钮，点击后弹窗内搜索 -->
@@ -329,7 +338,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
       outline-none focus:outline-none focus-visible:outline-none
       focus-visible:border-[var(--primary)]
       focus-visible:ring-2 focus-visible:ring-[var(--primary)]/25"
-	on:click={openModal}
+	onclick={openModal}
 >
 	<svg
 		width="20"
@@ -354,7 +363,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 <!-- 触发器：移动端保留搜索按钮 -->
 <button
 	type="button"
-	on:click={openModal}
+	onclick={openModal}
 	aria-label="Open search"
 	class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90"
 >
@@ -379,11 +388,12 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 {#if isOpen}
 	<div class="algolia-portal-root" use:portal>
 		<!-- 遮罩层（portal 到 body，避免被滚动/transform 影响） -->
+		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
 			class="algolia-backdrop"
 			role="presentation"
-			on:click|stopPropagation|preventDefault={closeModal}
-			on:mousedown|stopPropagation|preventDefault={closeModal}
+			onclick={(e) => { e.stopPropagation(); e.preventDefault(); closeModal(); }}
+			onmousedown={(e) => { e.stopPropagation(); e.preventDefault(); closeModal(); }}
 		></div>
 
 		<!-- 弹窗（portal 到 body，始终在视口顶层） -->
@@ -417,7 +427,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 					bind:value={query}
 					placeholder={i18n(I18nKey.search)}
 					class="algolia-input"
-					on:keydown={handleInputKeydown}
+					onkeydown={handleInputKeydown}
 				/>
 			</div>
 		</div>
@@ -437,8 +447,8 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 						<a
 							href={item.url}
 							class="algolia-item {idx === activeIndex ? 'is-active' : ''}"
-							on:click={(e) => handleResultClick(e, item.url)}
-							on:mouseenter={() => (activeIndex = idx)}
+							onclick={(e) => handleResultClick(e, item.url)}
+							onmouseenter={() => (activeIndex = idx)}
 						>
 							<div class="algolia-title">
 								{@html item.title}
@@ -460,7 +470,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 						<button
 							type="button"
 							class="algolia-more-btn"
-							on:click={loadMore}
+							onclick={loadMore}
 							disabled={isLoadingMore}
 						>
 							{isLoadingMore ? "加载中…" : "加载更多"}
