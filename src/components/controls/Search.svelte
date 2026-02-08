@@ -14,6 +14,7 @@ let result: SearchResult[] = [];
 let isSearching = false;
 let initialized = false;
 let debounceTimer: NodeJS.Timeout;
+let desktopInputEl: HTMLInputElement | null = null;
 
 // --- Mocks for Dev Mode ---
 const fakeResult: SearchResult[] = [
@@ -107,6 +108,15 @@ onMount(() => {
 		if (keywordMobile) search(keywordMobile, false);
 	};
 
+	// Ctrl/Cmd + K 聚焦桌面端输入框（对应导航栏提示）
+	const onKeydown = (e: KeyboardEvent) => {
+		if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+			e.preventDefault();
+			desktopInputEl?.focus();
+		}
+	};
+	document.addEventListener("keydown", onKeydown);
+
 	if (import.meta.env.DEV) {
 		initializePagefind();
 	} else {
@@ -123,6 +133,8 @@ onMount(() => {
 			});
 		}
 	}
+
+	return () => document.removeEventListener("keydown", onKeydown);
 });
 
 // --- Reactive Statements ---
@@ -135,17 +147,24 @@ $: if (initialized && (keywordMobile || keywordMobile === "")) {
 </script>
 
 <!-- search bar for desktop view -->
-<div id="search-bar" class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg
-      bg-black/[0.04] hover:bg-black/[0.06] focus-within:bg-black/[0.06]
-      dark:bg-white/5 dark:hover:bg-white/10 dark:focus-within:bg-white/10
-">
+<div
+	id="search-bar"
+	class="hidden lg:flex relative transition-all items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
+      bg-black/[0.06] hover:bg-black/[0.08] active:bg-black/[0.10]
+      dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:active:bg-white/[0.14]
+	  border border-transparent hover:border-[var(--primary)] focus-within:border-[var(--primary)]
+      outline-none focus-within:outline-none focus-within:ring-2 focus-within:ring-[var(--primary)]/25"
+>
     <Icon icon="material-symbols:search"
-          class="absolute text-[1.25rem] pointer-events-none ml-3 transition my-auto text-black/30 dark:text-white/30"></Icon>
-    <input placeholder="{i18n(I18nKey.search)}" bind:value={keywordDesktop}
+          class="text-[1.25rem] pointer-events-none mr-2 transition my-auto text-black/35 dark:text-white/35"></Icon>
+    <input
+		bind:this={desktopInputEl}
+		placeholder="{i18n(I18nKey.search)}"
+		bind:value={keywordDesktop}
            on:focus={() => search(keywordDesktop, true)}
-           class="transition-all pl-10 text-sm bg-transparent outline-0
-         h-full w-40 active:w-60 focus:w-60 text-black/50 dark:text-white/50"
-    >
+           class="transition-all text-sm bg-transparent outline-0 h-full flex-1 text-black/55 dark:text-white/55"
+    />
+	<span class="ml-3 text-xs text-black/35 dark:text-white/35 select-none">Ctrl K</span>
 </div>
 
 <!-- toggle btn for phone/tablet view -->
@@ -155,7 +174,7 @@ $: if (initialized && (keywordMobile || keywordMobile === "")) {
 </button>
 
 <!-- search panel -->
-<div id="search-panel" class="float-panel float-panel-closed search-panel absolute md:w-[30rem]
+<div id="search-panel" class="float-panel float-panel-closed search-panel absolute md:w-[26rem]
 top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
 
     <!-- search bar inside panel for phone/tablet -->
@@ -181,7 +200,9 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
             <a href={item.url}
                on:click={(e) => handleResultClick(e, item.url)}
                class="transition first-of-type:mt-2 lg:first-of-type:mt-0 group block
-           rounded-xl text-lg px-3 py-2 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
+           rounded-xl text-lg px-3 py-2 border border-black/5 dark:border-white/10
+		   hover:border-black/10 dark:hover:border-white/15
+		   hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
                 <div class="transition text-90 inline-flex font-bold group-hover:text-[var(--primary)]">
                     {@html item.meta.title}
                     <Icon icon="fa6-solid:chevron-right"
@@ -213,7 +234,9 @@ top-20 left-4 md:left-[unset] right-4 shadow-2xl rounded-2xl p-2">
         {#if result.length > 5}
             <a href={getSearchUrl(keywordDesktop || keywordMobile)}
                on:click={(e) => handleResultClick(e, getSearchUrl(keywordDesktop || keywordMobile))}
-               class="transition first-of-type:mt-2 lg:first-of-type:mt-0 group block rounded-xl text-lg px-3 py-2 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] text-[var(--primary)] font-bold text-center">
+               class="transition first-of-type:mt-2 lg:first-of-type:mt-0 group block rounded-xl text-lg px-3 py-2
+			   border border-black/5 dark:border-white/10 hover:border-black/10 dark:hover:border-white/15
+			   hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] text-[var(--primary)] font-bold text-center">
                 <span class="inline-flex items-center">
                     {i18n(I18nKey.searchViewMore).replace('{count}', (result.length - 5).toString())}
                     <Icon icon="fa6-solid:arrow-right" class="transition text-[0.75rem] ml-1"></Icon>

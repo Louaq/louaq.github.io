@@ -321,10 +321,14 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 <button
 	type="button"
 	aria-label="Open search"
-	class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-lg px-3 w-52
-      bg-black/[0.04] hover:bg-black/[0.06] focus:bg-black/[0.06]
-      dark:bg-white/5 dark:hover:bg-white/10 dark:focus:bg-white/10
-      text-black/50 dark:text-white/50 text-sm"
+	class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
+      bg-black/[0.06] hover:bg-black/[0.08] active:bg-black/[0.10]
+      dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:active:bg-white/[0.14]
+      text-black/55 dark:text-white/55 text-sm
+      border border-transparent hover:border-[var(--primary)]
+      outline-none focus:outline-none focus-visible:outline-none
+      focus-visible:border-[var(--primary)]
+      focus-visible:ring-2 focus-visible:ring-[var(--primary)]/25"
 	on:click={openModal}
 >
 	<svg
@@ -344,7 +348,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 		/>
 	</svg>
 	<span class="flex-1 text-left">{i18n(I18nKey.search)}</span>
-	<span class="text-xs opacity-60">Ctrl K</span>
+	<span class="text-xs text-black/35 dark:text-white/35">Ctrl K</span>
 </button>
 
 <!-- 触发器：移动端保留搜索按钮 -->
@@ -482,6 +486,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 				</span>
 			</div>
 			<div class="algolia-brand" aria-label="Algolia" role="img">
+				<span class="algolia-brand-text">Search by</span>
 				<svg
 					width="77"
 					height="19"
@@ -577,7 +582,7 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 		top: 14vh;
 		left: 50%;
 		transform: translateX(-50%);
-		width: min(680px, calc(100vw - 2rem));
+		width: min(560px, calc(100vw - 2rem));
 		max-height: 72vh;
 		display: flex;
 		flex-direction: column;
@@ -751,19 +756,25 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 		text-decoration: none;
 		color: inherit;
 		background: transparent;
-		border: 1px solid transparent;
+		border: 1px solid rgba(17, 24, 39, 0.08);
 		overflow: hidden;
 	}
 	.algolia-item:hover {
 		background: rgba(17, 24, 39, 0.04);
+		border-color: rgba(17, 24, 39, 0.14);
 	}
 	:global([data-theme="dark"]) .algolia-item:hover {
 		background: rgba(255, 255, 255, 0.06);
+		border-color: rgba(255, 255, 255, 0.16);
+	}
+	:global([data-theme="dark"]) .algolia-item {
+		border-color: rgba(255, 255, 255, 0.1);
 	}
 
 	.algolia-item.is-active {
 		background: rgba(37, 99, 235, 1);
 		color: white;
+		border-color: rgba(255, 255, 255, 0.22);
 	}
 	.algolia-item.is-active :global(mark) {
 		background-color: rgba(255, 255, 255, 0.22);
@@ -847,6 +858,16 @@ $: if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex
 	.algolia-brand {
 		display: inline-flex;
 		align-items: center;
+		gap: 0.5rem;
+	}
+
+	.algolia-brand-text {
+		font-size: 0.75rem;
+		color: rgba(107, 114, 128, 1);
+		white-space: nowrap;
+	}
+	:global([data-theme="dark"]) .algolia-brand-text {
+		color: rgba(156, 163, 175, 1);
 	}
 
 	.algolia-brand-svg {
