@@ -425,7 +425,12 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
   <body
     class="min-h-screen"
     class:list={[
-      { "lg:is-home": isHomePageCheck, "enable-banner": enableBanner, "enable-card-border": siteConfig.card?.border },
+      {
+        "lg:is-home": isHomePageCheck,
+        "enable-banner": enableBanner,
+        "enable-card-border": siteConfig.card?.border,
+        "grayscale-mode": isGrayscaleEnabled,
+      },
       ...(siteConfig.font.enable && siteConfig.font.selected
         ? (Array.isArray(siteConfig.font.selected)
             ? siteConfig.font.selected

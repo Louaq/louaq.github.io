@@ -3,8 +3,17 @@
  * 用于特殊纪念日
  */
 
-/* 全站变灰效果 */
-body.grayscale-mode {
+/*
+ * 注意：
+ * 不要对 body/html 直接设置 filter，否则会改变 position: fixed 的参照系，
+ * 导致返回顶部等悬浮按钮位置异常（fixed 不再以视口为参照）。
+ * 因此这里把灰度滤镜应用到页面主要层级与悬浮控件自身。
+ */
+
+/* 页面主要区域变灰（避免影响 fixed 定位） */
+body.grayscale-mode #top-row,
+body.grayscale-mode #banner-wrapper,
+body.grayscale-mode #main-grid {
 	filter: grayscale(100%);
 	-webkit-filter: grayscale(100%);
 	-moz-filter: grayscale(100%);
@@ -12,8 +21,20 @@ body.grayscale-mode {
 	-o-filter: grayscale(100%);
 }
 
-/* 确保所有子元素也应用变灰 */
-body.grayscale-mode * {
+/* 悬浮控件本身也变灰，但不影响其 fixed 定位 */
+body.grayscale-mode .floating-controls-container {
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+}
+
+/* 确保子元素也继承变灰 */
+body.grayscale-mode #top-row *,
+body.grayscale-mode #banner-wrapper *,
+body.grayscale-mode #main-grid *,
+body.grayscale-mode .floating-controls-container * {
 	filter: inherit;
 }
 

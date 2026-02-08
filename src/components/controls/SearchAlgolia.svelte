@@ -567,7 +567,7 @@ $effect(() => {
 
 <style>
 	:global(mark) {
-		background-color: rgba(var(--primary-rgb), 0.2);
+		background-color: color-mix(in oklch, var(--primary) 22%, transparent);
 		color: var(--primary);
 		padding: 0.1em 0.2em;
 		border-radius: 3px;
@@ -640,12 +640,12 @@ $effect(() => {
 		box-shadow: none;
 	}
 	.algolia-input-wrap:focus-within {
-		border-color: rgba(37, 99, 235, 1);
-		box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.18);
+		border-color: var(--primary);
+		box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 28%, transparent);
 	}
 	:global([data-theme="dark"]) .algolia-input-wrap:focus-within {
-		border-color: rgba(59, 130, 246, 1);
-		box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.22);
+		border-color: var(--primary);
+		box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 32%, transparent);
 	}
 
 	.algolia-search-icon {

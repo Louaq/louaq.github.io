@@ -137,28 +137,6 @@ function renderComponent(
   }
 </div>
 
-<!-- 响应式样式和JavaScript -->
-<style>
-  /* 响应式断点样式 */
-  @media (max-width: 768px) {
-    #right-sidebar {
-      display: var(--sidebar-mobile-display, block);
-    }
-  }
-
-  @media (min-width: 769px) and (max-width: 1024px) {
-    #right-sidebar {
-      display: var(--sidebar-tablet-display, block);
-    }
-  }
-
-  @media (min-width: 1025px) {
-    #right-sidebar {
-      display: var(--sidebar-desktop-display, block);
-    }
-  }
-</style>
-
 <script is:inline define:vars={{ rightComponentsConfig }}>
   // 根据 showOnPostPage 配置控制组件显示
   function toggleComponentsVisibility() {

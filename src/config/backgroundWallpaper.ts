@@ -8,7 +8,7 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 	// 背景图片配置
 	src: {
 		// 桌面背景图片
-		desktop: "https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1f.jpg",
+		desktop: "https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg",
 		// 移动背景图片
 		mobile: "https://pic1.imgdb.cn/item/69478e432bbc57ce9111cdcb.webp",
 	},

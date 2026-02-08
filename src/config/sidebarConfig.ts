@@ -248,7 +248,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 使用 Tailwind 标准断点：mobile(<768px), tablet(768px-1023px), desktop(>=1024px)
 		layout: {
 			// 移动端：<768px
-			mobile: "hidden",
+			mobile: "drawer",
 			// 平板端：768px-1023px
 			tablet: "hidden",
 			// 桌面端：>=1024px
