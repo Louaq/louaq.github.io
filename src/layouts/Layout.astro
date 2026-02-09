@@ -920,7 +920,6 @@ function disableAnimation() {
     document.addEventListener("swup:enable", setup);
   }
 
-  let backToTopBtn = document.getElementById("back-to-top-btn");
   let toc = document.getElementById("toc-wrapper");
   let navbar = document.getElementById("navbar-wrapper");
 
@@ -931,16 +930,6 @@ function disableAnimation() {
 
     // 使用批量DOM操作优化性能
     const operations: (() => void)[] = [];
-
-    if (backToTopBtn) {
-      operations.push(() => {
-        if (scrollTop > bannerHeight) {
-          backToTopBtn.classList.remove("hide");
-        } else {
-          backToTopBtn.classList.add("hide");
-        }
-      });
-    }
 
     if (bannerEnabled && toc) {
       operations.push(() => {

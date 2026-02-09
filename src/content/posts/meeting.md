@@ -10,8 +10,9 @@ pinned: true
 ---
 
 
+
 :::note
-2026年组会内容
+## 2026年组会内容
 :::
 
 | 时间 | 内容 | PDF |
@@ -23,7 +24,7 @@ pinned: true
 
 
 :::note
-2025年组会内容
+## 2025年组会内容
 :::
 
 | 时间 | 内容 | PDF |
@@ -39,7 +40,7 @@ pinned: true
 | 20251230 | 半监督图像分割 | <a href="/assets/pdf/汇报_1230.pdf" target="_blank">汇报_1230</a> |
 
 :::note
-CCF分区信息
+## CCF分区信息
 :::
 
 | 时间 | 内容 | PDF |

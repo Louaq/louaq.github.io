@@ -62,6 +62,14 @@ const buildTime = new Date().toLocaleString("zh-CN", {
 	minute: "2-digit",
 });
 
+// 生成稳定的锚点 id，供全站搜索跳转定位
+const makeWatchAnchorId = (item: WatchlistItem) => {
+	const raw = `${item.type} ${item.title}`.trim();
+	const base = encodeURIComponent(raw).replace(/%/g, "").replace(/[()]/g, "");
+	const short = base.length > 80 ? base.slice(0, 80) : base;
+	return `watch-${short}` || "watch";
+};
+
 // 状态文本映射
 const statusText = {
 	watching: "观看中",
@@ -141,6 +149,7 @@ const statusColor = {
 										{category.items.map((item: WatchlistItem) => (
 										<div 
 											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-neutral-200 dark:border-neutral-700 block cursor-default"
+											id={makeWatchAnchorId(item)}
 											data-item-section={category.key}>
 											{/* 封面图 */}
 											<div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">

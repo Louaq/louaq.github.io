@@ -48,6 +48,30 @@ export default function algolia(): AstroIntegration {
             objects: records 
           });
 
+          // 尽量保证“全站搜索”体验：设置可搜索字段与摘要
+          // 注意：设置失败不应影响构建流程
+          try {
+            await client.setSettings({
+              indexName: ALGOLIA_INDEX_NAME,
+              indexSettings: {
+                searchableAttributes: [
+                  "title",
+                  "description",
+                  "content",
+                  "tags",
+                  "category",
+                  "type",
+                ],
+                attributesToSnippet: ["content:30"],
+                snippetEllipsisText: "…",
+              },
+            });
+          } catch (e) {
+            logger.warn(
+              `Algolia setSettings failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+            );
+          }
+
           logger.info(`✓ Successfully uploaded ${records.length} records to Algolia index: ${ALGOLIA_INDEX_NAME}`);
         } catch (error) {
           logger.error(`✗ Error uploading to Algolia: ${error instanceof Error ? error.message : String(error)}`);

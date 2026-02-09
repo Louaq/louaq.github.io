@@ -31,6 +31,23 @@ let lastScrolledIndex = -1;
 
 let modalInputEl: HTMLInputElement | null = $state(null);
 
+const typeLabel = (t: string | undefined): string => {
+	switch (t) {
+		case "post":
+			return "文章";
+		case "page":
+			return "页面";
+		case "friend":
+			return "友链";
+		case "album":
+			return "相册";
+		case "watchlist":
+			return "观影";
+		default:
+			return "内容";
+	}
+};
+
 // 简易 Portal：将节点移动到 document.body，避免被页面滚动/transform 影响
 function portal(node: HTMLElement) {
 	if (typeof document === "undefined") return;
@@ -161,6 +178,7 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 					page: 0,
 					hitsPerPage,
 					attributesToRetrieve: [
+						"type",
 						"title",
 						"description",
 						"content",
@@ -184,6 +202,7 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 
 		results = (res0?.hits || []).map((hit: any) => ({
 			url: hit.url,
+			type: hit.type,
 			title: highlightText(hit.title, trimmed),
 			description: hit.description ? highlightText(hit.description, trimmed) : "",
 			excerpt: hit._snippetResult?.content?.value || "",
@@ -223,6 +242,7 @@ const loadMore = async () => {
 					page: nextPage,
 					hitsPerPage,
 					attributesToRetrieve: [
+						"type",
 						"title",
 						"description",
 						"content",
@@ -240,6 +260,7 @@ const loadMore = async () => {
 		const res0 = response?.results?.[0];
 		const newHits = (res0?.hits || []).map((hit: any) => ({
 			url: hit.url,
+			type: hit.type,
 			title: highlightText(hit.title, trimmed),
 			description: hit.description ? highlightText(hit.description, trimmed) : "",
 			excerpt: hit._snippetResult?.content?.value || "",
@@ -450,12 +471,17 @@ $effect(() => {
 							onclick={(e) => handleResultClick(e, item.url)}
 							onmouseenter={() => (activeIndex = idx)}
 						>
-							<div class="algolia-title">
-								{@html item.title}
+							<div class="algolia-title-row">
+								<div class="algolia-title">
+									{@html item.title}
+								</div>
+								{#if item.type}
+									<span class="algolia-badge">{typeLabel(item.type)}</span>
+								{/if}
 							</div>
-							{#if item.excerpt}
+							{#if item.excerpt || item.description}
 								<div class="algolia-excerpt">
-									{@html item.excerpt}
+									{@html item.excerpt || item.description}
 								</div>
 							{/if}
 						</a>
@@ -798,6 +824,29 @@ $effect(() => {
 		-webkit-line-clamp: 1;
 		overflow: hidden;
 		line-height: 1.2;
+	}
+
+	.algolia-title-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 0.6rem;
+	}
+
+	.algolia-badge {
+		flex: none;
+		font-size: 0.7rem;
+		line-height: 1;
+		padding: 0.3rem 0.45rem;
+		border-radius: 999px;
+		border: 1px solid rgba(17, 24, 39, 0.12);
+		color: rgba(55, 65, 81, 0.85);
+		background: rgba(17, 24, 39, 0.03);
+	}
+	:global([data-theme="dark"]) .algolia-badge {
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		color: rgba(229, 231, 235, 0.9);
+		background: rgba(255, 255, 255, 0.06);
 	}
 
 	.algolia-excerpt {
