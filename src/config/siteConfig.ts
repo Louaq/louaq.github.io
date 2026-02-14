@@ -67,6 +67,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 搜索引擎配置
+
 	search: {
 		// Algolia 云端搜索（需要配置环境变量）
 		engine: "algolia",
