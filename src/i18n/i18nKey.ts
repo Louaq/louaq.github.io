@@ -174,6 +174,12 @@ enum I18nKey {
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
 	pageViewsError = "pageViewsError",
+
+	// 横幅设置
+	bannerSettings = "bannerSettings",
+	bannerTitle = "bannerTitle",
+	wavesAnimation = "wavesAnimation",
+	
 	// 文章布局
 	postListLayout = "postListLayout",
 	postListLayoutList = "postListLayoutList",

@@ -23,6 +23,8 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 		homeText: {
 			// 是否启用主页横幅文字
 			enable: false,
+			// 是否允许用户通过控制面板切换横幅标题显示
+			switchable: true,
 			// 主页横幅主标题
 			title: "Lovely firefly!",
 			// 主页横幅主标题字体大小
@@ -89,6 +91,8 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 				// 移动端是否启用波浪动画效果
 				mobile: true,
 			},
+			// 是否允许用户通过控制面板切换水波纹动画
+			switchable: true,
 		},
 	},
 	// 全屏透明覆盖模式特有配置

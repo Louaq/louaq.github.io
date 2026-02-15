@@ -132,6 +132,12 @@ export const ja: Translation = {
 	[Key.bangumiUpdatedAt]: "ビルド時間",
 	[Key.bangumiDataStatic]: "静的データ",
 
+
+	// バナー設定
+	[Key.bannerSettings]: "バナー設定",
+	[Key.bannerTitle]: "バナータイトル",
+	[Key.wavesAnimation]: "波アニメーション",
+
 	// ページネーション
 	[Key.paginationFirst]: "最初",
 	[Key.paginationPrev]: "前へ",

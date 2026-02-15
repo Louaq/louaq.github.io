@@ -203,6 +203,11 @@ export const ru: Translation = {
 	[Key.wallpaperOverlayMode]: "Прозрачный",
 	[Key.wallpaperNoneMode]: "Однотонный фон",
 
+	// Настройки баннера
+	[Key.bannerSettings]: "Настройки баннера",
+	[Key.bannerTitle]: "Заголовок баннера",
+	[Key.wavesAnimation]: "Анимация волн",
+
 	// Страница спонсоров
 	[Key.sponsor]: "Спонсор",
 	[Key.sponsorTitle]: "Поддержать меня",

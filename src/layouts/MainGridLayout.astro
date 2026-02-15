@@ -63,12 +63,15 @@ const isBackgroundEnabled = backgroundWallpaper.mode !== "none";
 const isWallpaperSwitchable = backgroundWallpaper.switchable ?? true;
 
 // 检查是否启用波浪动画效果
+const wavesSwitchable = backgroundWallpaper.banner?.waves?.switchable ?? false;
 const wavesConfig = backgroundWallpaper.banner?.waves?.enable;
 // 处理分设备控制的波浪动画
 const wavesEnabledOnDesktop =
 	typeof wavesConfig === "object" ? wavesConfig.desktop : wavesConfig;
 const wavesEnabledOnMobile =
 	typeof wavesConfig === "object" ? wavesConfig.mobile : wavesConfig;
+// 是否需要渲染水波纹元素（任一设备启用 或 允许用户切换）
+const shouldRenderWaves = wavesEnabledOnDesktop || wavesEnabledOnMobile || wavesSwitchable;
 
 // 处理分设备控制的横幅信贷显示
 const creditEnableConfig = backgroundWallpaper.banner?.credit?.enable;
@@ -273,10 +276,12 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
     </script>
     
     <!-- Water waves effect - 始终渲染以便动态切换 -->
-    {(wavesEnabledOnDesktop || wavesEnabledOnMobile) ? (
-    <div class={`waves absolute -bottom-[1px] h-[10vh] max-h-[9.375rem] min-h-[3.125rem] w-full md:h-[15vh] 
-        ${!wavesEnabledOnMobile ? 'hidden' : ''} ${!wavesEnabledOnDesktop ? 'md:hidden' : ''} ${wavesEnabledOnDesktop ? 'md:block' : ''}`} 
-        id="header-waves" 
+    
+    <!-- Water waves effect - 如果允许切换或任一设备启用则渲染 -->
+    {shouldRenderWaves ? (
+    <div class={`waves absolute -bottom-px h-[10vh] max-h-37.5 min-h-12.5 w-full md:h-[15vh]
+        ${!wavesEnabledOnMobile ? 'hidden' : ''} ${!wavesEnabledOnDesktop ? 'md:hidden' : ''} ${wavesEnabledOnDesktop ? 'md:block' : ''}`}
+        id="header-waves"
         style="transform: translateZ(0); will-change: fill;">
         <svg
             class="waves"

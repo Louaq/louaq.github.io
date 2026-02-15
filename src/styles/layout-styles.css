@@ -1,5 +1,27 @@
 /* Layout specific styles */
 
+/* User controlled visibility - 通过 html 属性控制，在渲染前就生效 */
+/* 用户关闭时隐藏 */
+html[data-waves-enabled="false"] #header-waves {
+    display: none !important;
+}
+
+/* 用户开启时强制显示（覆盖默认的 hidden 类） */
+html[data-waves-enabled="true"] #header-waves {
+    display: block !important;
+}
+
+html[data-banner-title-enabled="false"] .banner-text-overlay {
+    display: none !important;
+}
+
+html[data-banner-title-enabled="true"] .banner-text-overlay {
+    display: flex !important;
+}
+
+.banner-text-overlay.user-hidden {
+    display: none !important;
+}
 /* Banner text styles */
 .banner-title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);

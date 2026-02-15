@@ -187,6 +187,11 @@ export const en: Translation = {
 	[Key.pageViewsLoading]: "Loading...",
 	[Key.pageViewsError]: "Stats unavailable",
 
+	// Banner Settings
+	[Key.bannerSettings]: "Banner Settings",
+	[Key.bannerTitle]: "Banner Title",
+	[Key.wavesAnimation]: "Waves Animation",
+
 	// Post List Layout
 	[Key.postListLayout]: "Post List Layout",
 	[Key.postListLayoutList]: "List",

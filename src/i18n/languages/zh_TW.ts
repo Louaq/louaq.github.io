@@ -196,6 +196,11 @@ export const zh_TW: Translation = {
 	[Key.wallpaperOverlayMode]: "全屏透明",
 	[Key.wallpaperNoneMode]: "純色背景",
 
+	// 橫幅設置
+	[Key.bannerSettings]: "橫幅設置",
+	[Key.bannerTitle]: "橫幅標題",
+	[Key.wavesAnimation]: "水波紋動畫",
+
 	// 贊助頁面
 	[Key.sponsor]: "贊助",
 	[Key.sponsorTitle]: "贊助支持",
