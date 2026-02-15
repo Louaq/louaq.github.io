@@ -11,17 +11,12 @@
 
 /* 其他组件样式 */
 
-/* 水波纹开关：整行与轨道关闭时使用主题色浅色（全局生效，避免组件内 Stylus 不生效） */
-#display-setting .waves-toggle-row,
+/* 水波纹开关：轨道样式（全局生效，避免组件内 Stylus 不生效） */
 #display-setting .waves-toggle-track {
-  background-color: var(--waves-toggle-bg);
+  background-color: var(--btn-regular-bg-active);
 }
 #display-setting .waves-toggle-track-on {
   background-color: var(--primary);
-}
-#display-setting .waves-toggle-icon,
-#display-setting .waves-toggle-label {
-  color: var(--primary);
 }
 
 /* 确保平滑滚动 */

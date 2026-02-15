@@ -286,11 +286,14 @@ $effect(() => {
                 <!-- Waves Animation Switch（背景与图标/开关随主题色变化） -->
                 {#if isWavesSwitchable}
                 <button
-                    class="waves-toggle-row w-full rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
+                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
+                    class:ring-1={wavesEnabled}
+                    class:ring-[var(--primary)]={wavesEnabled}
+                    class:opacity-60={!wavesEnabled}
                     onclick={toggleWavesEnabled}
                 >
-                    <Icon icon="material-symbols:airwave-rounded" class="waves-toggle-icon text-[1.25rem] shrink-0"></Icon>
-                    <span class="waves-toggle-label text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
+                    <Icon icon="material-symbols:airwave-rounded" class="text-[1.25rem] shrink-0"></Icon>
+                    <span class="text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
                     <div class="waves-toggle-track w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:waves-toggle-track-on={wavesEnabled}>
                         <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
