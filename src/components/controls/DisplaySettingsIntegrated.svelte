@@ -276,27 +276,23 @@ $effect(() => {
                     <span class="text-sm flex-1">{i18n(I18nKey.bannerTitle)}</span>
                     <div class="w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:bg-(--primary)={bannerTitleEnabled}
-                         class:bg-neutral-300={!bannerTitleEnabled}
-                         class:dark:bg-neutral-600={!bannerTitleEnabled}>
+                         class:bg-(--btn-regular-bg-active)={!bannerTitleEnabled}>
                         <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
                              class:left-0.5={!bannerTitleEnabled}
                              class:left-5={bannerTitleEnabled}></div>
                     </div>
                 </button>
                 {/if}
-                <!-- Waves Animation Switch -->
+                <!-- Waves Animation Switch（背景与图标/开关随主题色变化） -->
                 {#if isWavesSwitchable}
                 <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
-                    class:bg-(--btn-regular-bg-hover)={wavesEnabled}
+                    class="waves-toggle-row w-full rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
                     onclick={toggleWavesEnabled}
                 >
-                    <Icon icon="material-symbols:airwave-rounded" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
-                    <div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-                         class:bg-(--primary)={wavesEnabled}
-                         class:bg-neutral-300={!wavesEnabled}
-                         class:dark:bg-neutral-600={!wavesEnabled}>
+                    <Icon icon="material-symbols:airwave-rounded" class="waves-toggle-icon text-[1.25rem] shrink-0"></Icon>
+                    <span class="waves-toggle-label text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
+                    <div class="waves-toggle-track w-10 h-5 rounded-full transition-all duration-200 relative"
+                         class:waves-toggle-track-on={wavesEnabled}>
                         <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
                              class:left-0.5={!wavesEnabled}
                              class:left-5={wavesEnabled}></div>
@@ -366,6 +362,7 @@ $effect(() => {
 
 
 <style lang="stylus">
+    /* 水波纹切换颜色已移至 main.css 全局，此处仅保留滑块等样式 */
     #display-setting
       input[type="range"]
         -webkit-appearance none
