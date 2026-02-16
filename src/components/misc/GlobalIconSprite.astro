@@ -1,0 +1,70 @@
+---
+import { Icon } from "astro-icon/components";
+
+// 说明：
+// - astro-icon 会把重复图标优化成 <symbol>/<use> 的 sprite 形式
+// - Swup 是“局部替换容器”的 SPA 导航：某些 <symbol> 可能被替换掉，但页面上仍残留 <use>
+// - 结果就是：图标偶发空白，手动刷新（整页重建 sprite）后恢复
+// - 这里把站内用到的 material-symbols 预先在“非 Swup 容器”里渲染一遍，确保 <symbol> 始终存在
+
+// 只放「通过 astro-icon 的 <Icon name="..."> 在服务端渲染」的图标，
+// 避免把仅运行时（iconify-icon / @iconify/svelte）或不存在的图标塞进来导致构建失败。
+const icons = [
+  // Banner overlay (MainGridLayout)
+  "material-symbols:calendar-month-outline-rounded",
+  "material-symbols:history-rounded",
+  "material-symbols:schedule-outline-rounded",
+  "material-symbols:notes-rounded",
+  "material-symbols:folder-outline-rounded",
+  "material-symbols:tag-rounded",
+  "material-symbols:copyright-outline-rounded",
+
+  // PostMeta
+  "material-symbols:pinboard",
+  "material-symbols:calendar-today-outline-rounded",
+  "material-symbols:edit-calendar-outline-rounded",
+  "material-symbols:book-2-outline-rounded",
+  "material-symbols:article-outline-rounded",
+  "material-symbols:visibility-outline-rounded",
+
+  // Navbar / dropdown
+  "material-symbols:home-pin-outline",
+  "material-symbols:palette-outline",
+  "material-symbols:menu-rounded",
+  "material-symbols:keyboard-arrow-down-rounded",
+
+  // Pagination / common
+  "material-symbols:chevron-left-rounded",
+  "material-symbols:chevron-right-rounded",
+  "material-symbols:more-horiz",
+
+  // Widgets
+  "material-symbols:chat-outline",
+  "material-symbols:close",
+
+  // rss page
+  "material-symbols:rss-feed",
+  "material-symbols:link",
+  "material-symbols:article",
+  "material-symbols:help-outline",
+
+  // 404 page
+  "material-symbols:error-outline",
+  "material-symbols:home",
+  "material-symbols:sentiment-sad",
+  "material-symbols:search-off",
+
+  // used as dynamic name in posts/[...slug].astro
+  "material-symbols:favorite",
+  "material-symbols:share",
+];
+---
+
+<div
+  aria-hidden="true"
+  style="position:absolute;width:0;height:0;overflow:hidden;visibility:hidden;pointer-events:none;"
+>
+  {icons.map((name) => (
+    <Icon name={name} />
+  ))}
+</div>

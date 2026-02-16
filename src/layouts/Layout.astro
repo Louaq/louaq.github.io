@@ -8,6 +8,7 @@ import MusicPlayer from "@components/features/MusicPlayer.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 import FestivalDecoration from "@components/features/FestivalDecoration.astro";
+import GlobalIconSprite from "@/components/misc/GlobalIconSprite.astro";
 
 import {
 	backgroundWallpaper,
@@ -471,6 +472,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     ]}
     data-page-type={pageType}
   >
+    <!-- 固化 astro-icon 的 symbol sprite，避免 Swup 局部替换后 <use> 找不到 <symbol> 导致图标空白 -->
+    <GlobalIconSprite />
+
 
     <!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
     {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
