@@ -185,6 +185,8 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 
       // 获取存储的主题，如果没有则使用默认值
       const theme = localStorage.getItem("theme") || defaultMode;
+      // 记录“主题模式”（light/dark/system），用于纯 CSS 控制按钮图标，避免刷新时按钮闪烁/重载感
+      document.documentElement.setAttribute("data-theme-mode", theme);
 
       // 获取系统主题
       function getSystemTheme() {
@@ -216,6 +218,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         "data-theme",
         isDark ? darkTheme : lightTheme
       );
+      // 暴露给后续纯脚本按钮使用（避免组件/模块加载导致按钮短暂不一致）
+      document.documentElement.dataset.expressiveDarkTheme = darkTheme;
+      document.documentElement.dataset.expressiveLightTheme = lightTheme;
 
       // Load the hue from local storage
       const hue = localStorage.getItem("hue") || configHue;

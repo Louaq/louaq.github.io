@@ -26,6 +26,26 @@ html {
     scrollbar-gutter: stable;
 }
 
+/* 明暗/系统模式按钮：纯 CSS 控制图标显示，避免刷新时“重新加载/闪一下” */
+#scheme-switch .theme-icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 200ms ease;
+}
+html[data-theme-mode="light"] #scheme-switch .theme-icon-light {
+    opacity: 1;
+}
+html[data-theme-mode="dark"] #scheme-switch .theme-icon-dark {
+    opacity: 1;
+}
+html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
+    opacity: 1;
+}
+
 /* 页面顶部渐变高光效果 */
 .top-gradient-highlight {
     position: fixed;
