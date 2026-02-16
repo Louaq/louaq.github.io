@@ -18,7 +18,14 @@ let results: any[] = $state([]);
 let isSearching = $state(false);
 let debounceTimer: NodeJS.Timeout;
 let activeIndex = $state(-1);
-let prevBodyOverflow: string | null = null;
+let prevScrollLock:
+	| {
+			bodyOverflow: string;
+			bodyPaddingRight: string;
+			htmlOverflow: string;
+			htmlPaddingRight: string;
+	  }
+	| null = null;
 const hitsPerPage = 20;
 let page = $state(0);
 let nbHits = $state(0);
@@ -30,6 +37,54 @@ let listEl: HTMLDivElement | null = $state(null);
 let lastScrolledIndex = -1;
 
 let modalInputEl: HTMLInputElement | null = $state(null);
+
+function lockScroll() {
+	if (typeof document === "undefined") return;
+	if (prevScrollLock) return;
+
+	const html = document.documentElement;
+	const body = document.body;
+
+	prevScrollLock = {
+		bodyOverflow: body.style.overflow,
+		bodyPaddingRight: body.style.paddingRight,
+		htmlOverflow: html.style.overflow,
+		htmlPaddingRight: html.style.paddingRight,
+	};
+
+	// 先计算滚动条宽度（必须在 overflow hidden 之前）
+	const scrollbarWidth = window.innerWidth - html.clientWidth;
+
+	// 锁滚动（同时锁 html/body，覆盖不同浏览器的滚动容器差异）
+	html.style.overflow = "hidden";
+	body.style.overflow = "hidden";
+
+	// 用 padding-right 抵消滚动条消失导致的视口变宽（Windows 下最常见抖动来源）
+	// 如果浏览器已支持 scrollbar-gutter: stable，则无需（且不应）再做 padding 补偿，否则会过度补偿导致导航栏抖动
+	const hasStableScrollbarGutter =
+		typeof CSS !== "undefined" &&
+		typeof CSS.supports === "function" &&
+		CSS.supports("scrollbar-gutter: stable");
+
+	if (!hasStableScrollbarGutter && scrollbarWidth > 0) {
+		const computed = window.getComputedStyle(body).paddingRight;
+		body.style.paddingRight = `calc(${computed} + ${scrollbarWidth}px)`;
+	}
+}
+
+function unlockScroll() {
+	if (typeof document === "undefined") return;
+	if (!prevScrollLock) return;
+
+	const html = document.documentElement;
+	const body = document.body;
+
+	body.style.overflow = prevScrollLock.bodyOverflow;
+	body.style.paddingRight = prevScrollLock.bodyPaddingRight;
+	html.style.overflow = prevScrollLock.htmlOverflow;
+	html.style.paddingRight = prevScrollLock.htmlPaddingRight;
+	prevScrollLock = null;
+}
 
 const typeLabel = (t: string | undefined): string => {
 	switch (t) {
@@ -89,18 +144,18 @@ onMount(async () => {
 onDestroy(() => clearTimeout(debounceTimer));
 onDestroy(() => {
 	// 组件卸载时兜底恢复滚动
-	if (typeof document !== "undefined") {
-		document.body.style.overflow = prevBodyOverflow ?? "";
-	}
+	unlockScroll();
 });
 
 const openModal = async () => {
-	// 锁定背景滚动，避免滚动导致弹窗“丢失/穿透”
-	if (typeof document !== "undefined") {
-		prevBodyOverflow = document.body.style.overflow;
-		document.body.style.overflow = "hidden";
-	}
 	isOpen = true;
+	// 锁定背景滚动，避免滚动导致弹窗“丢失/穿透”
+	// 注意：先打开弹窗，再锁滚动；即使锁滚动异常，也不应阻止弹窗出现
+	try {
+		lockScroll();
+	} catch (e) {
+		console.error("lockScroll failed:", e);
+	}
 	await tick();
 	modalInputEl?.focus();
 	activeIndex = -1;
@@ -123,8 +178,10 @@ const closeModal = () => {
 	hasMore = false;
 	isLoadingMore = false;
 	// 恢复背景滚动
-	if (typeof document !== "undefined") {
-		document.body.style.overflow = prevBodyOverflow ?? "";
+	try {
+		unlockScroll();
+	} catch (e) {
+		console.error("unlockScroll failed:", e);
 	}
 };
 

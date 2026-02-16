@@ -22,6 +22,8 @@
 /* 确保平滑滚动 */
 html {
     scroll-behavior: smooth;
+    /* 避免弹窗锁滚动时滚动条消失导致页面左右抖动 */
+    scrollbar-gutter: stable;
 }
 
 /* 页面顶部渐变高光效果 */
