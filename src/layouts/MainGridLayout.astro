@@ -37,11 +37,21 @@ import Layout from "./Layout.astro";
 interface Props {
 	title?: string;
 	banner?: string;
+	bannerBasePath?: string;
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
 	postSlug?: string;
 	headings?: MarkdownHeading[];
+	postBannerMeta?: {
+		title: string;
+		published?: string;
+		updated?: string;
+		category?: string;
+		tags?: string[];
+		words?: number;
+		minutes?: number;
+	};
 }
 
 const backgroundImages = getBackgroundImages();
@@ -49,11 +59,13 @@ const backgroundImages = getBackgroundImages();
 const {
 	title,
 	banner,
+	bannerBasePath,
 	description,
 	lang,
 	setOGTypeArticle,
 	postSlug,
 	headings = [],
+	postBannerMeta,
 } = Astro.props;
 
 // 检查背景壁纸模式和是否允许切换
@@ -110,6 +122,7 @@ const creditUrlMobile =
 
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
+const isPostPageCheck = postSlug !== undefined;
 
 // 随机选择副标题（当打字机关闭且为数组时）
 const getRandomSubtitle = () => {
@@ -123,10 +136,47 @@ const getRandomSubtitle = () => {
 const randomSubtitle = getRandomSubtitle();
 
 // 主页横幅文本只在首页且全局开关为 true 时显示，不区分设备
-const homeTextEnable = backgroundWallpaper.banner?.homeText?.enable;
-const showHomeText = isBannerMode && !!homeTextEnable && isHomePageCheck;
+const homeTextEnable = backgroundWallpaper.banner?.homeText?.enable ?? false;
+const homeTextSwitchable = backgroundWallpaper.banner?.homeText?.switchable ?? false;
+const shouldRenderHomeTextOverlay = homeTextEnable || homeTextSwitchable;
+const showHomeText = isBannerMode && shouldRenderHomeTextOverlay && isHomePageCheck;
 // 手机端非首页不显示banner的CSS类
-const mobileNonHomeBannerClass = !isHomePageCheck ? "mobile-hide-banner" : "";
+const mobileNonHomeBannerClass =
+	!isHomePageCheck && !isPostPageCheck ? "mobile-hide-banner" : "";
+
+const bannerSrc =
+	typeof banner === "string" && banner.trim() !== "" ? banner.trim() : "";
+const hasCustomBanner = bannerSrc !== "";
+const resolvedBannerBasePath = bannerBasePath || "/";
+
+const toSrcList = (src: unknown): string[] => {
+	if (Array.isArray(src)) {
+		return src.filter((s): s is string => typeof s === "string" && s.trim() !== "");
+	}
+	if (typeof src === "string" && src.trim() !== "") {
+		return [src.trim()];
+	}
+	return [];
+};
+
+const wallpaperDesktopList = toSrcList(backgroundImages.desktop);
+const wallpaperMobileList = toSrcList(backgroundImages.mobile);
+
+const bannerDesktopList = hasCustomBanner
+	? [bannerSrc]
+	: wallpaperDesktopList.length > 0
+		? wallpaperDesktopList
+		: wallpaperMobileList;
+const bannerMobileList = hasCustomBanner
+	? [bannerSrc]
+	: wallpaperMobileList.length > 0
+		? wallpaperMobileList
+		: wallpaperDesktopList;
+
+const overlayDesktopSrc = bannerDesktopList[0] || "";
+const overlayMobileSrc = bannerMobileList[0] || "";
+const shouldUseTemplateForBannerImages =
+	!hasCustomBanner && (bannerMobileList.length > 1 || bannerDesktopList.length > 1);
 
 // 计算主内容区域位置，考虑手机端非首页时banner被隐藏
 const mainPanelTop =
@@ -167,8 +217,8 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 {(isWallpaperSwitchable || isOverlayMode) && (
 	<OverlayWallpaper config={{
 		src: {
-			desktop: typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : '',
-			mobile: typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : ''
+			desktop: overlayDesktopSrc,
+			mobile: overlayMobileSrc
 		},
 		zIndex: backgroundWallpaper.overlay?.zIndex,
 		opacity: backgroundWallpaper.overlay?.opacity,
@@ -199,27 +249,112 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 {(isWallpaperSwitchable || isBannerMode) && (
 <div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`} style={isWallpaperSwitchable ? `top: -${BANNER_HEIGHT_EXTEND}vh; display: none;` : `top: -${BANNER_HEIGHT_EXTEND}vh`}>
     <!-- 背景图片显示 -->
-    <div class="relative h-full w-full">
-        <!-- Mobile: use mobile-specific image -->
-        <ImageWrapper 
-            alt="Mobile background image of the blog" 
-            class:list={["block lg:hidden object-cover h-full w-full transition duration-700 opacity-100"]}
-            src={typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : (typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : '')} 
+    <div
+      class="relative h-full w-full"
+      id="banner-images-container"
+      data-mobile-count={bannerMobileList.length}
+      data-desktop-count={bannerDesktopList.length}
+    >
+      <!-- Mobile: 默认渲染第一张，其余放入 template 避免浏览器预加载 -->
+      {bannerMobileList.length > 0 && (
+        <div class="banner-image-slot-mobile absolute inset-0 block lg:hidden">
+          <ImageWrapper
+            alt="Mobile background image of the blog"
+            class:list={["h-full w-full transition duration-700 opacity-100"]}
+            src={bannerMobileList[0]}
             position={backgroundWallpaper.banner?.position}
-        />
-        <!-- Desktop: use desktop-specific image -->
-        <ImageWrapper 
-            id="banner" 
-            alt="Desktop background image of the blog" 
-            class:list={["hidden lg:block object-cover h-full transition duration-700 opacity-100"]}
-            src={typeof backgroundImages.desktop === 'string' ? backgroundImages.desktop : (typeof backgroundImages.mobile === 'string' ? backgroundImages.mobile : '')} 
+            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
+          />
+        </div>
+      )}
+      {bannerMobileList.slice(1).map((src) => (
+        <template class="banner-tpl-mobile">
+          <ImageWrapper
+            alt="Mobile background image of the blog"
+            class:list={["h-full w-full transition duration-700 opacity-100"]}
+            src={src}
             position={backgroundWallpaper.banner?.position}
-        />
+            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
+          />
+        </template>
+      ))}
+
+      <!-- Desktop: 默认渲染第一张，其余放入 template -->
+      {bannerDesktopList.length > 0 && (
+        <div class="banner-image-slot-desktop absolute inset-0 hidden lg:block">
+          <ImageWrapper
+            id="banner"
+            alt="Desktop background image of the blog"
+            class:list={["h-full transition duration-700 opacity-100"]}
+            src={bannerDesktopList[0]}
+            position={backgroundWallpaper.banner?.position}
+            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
+          />
+        </div>
+      )}
+      {bannerDesktopList.slice(1).map((src) => (
+        <template class="banner-tpl-desktop">
+          <ImageWrapper
+            id="banner"
+            alt="Desktop background image of the blog"
+            class:list={["h-full transition duration-700 opacity-100"]}
+            src={src}
+            position={backgroundWallpaper.banner?.position}
+            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
+          />
+        </template>
+      ))}
     </div>
+
+    <!-- 客户端随机选择背景图（仅多图时启用；使用 template 避免预加载） -->
+    {shouldUseTemplateForBannerImages && (
+      <script is:inline>
+        (function randomizeBannerImage() {
+          var container = document.getElementById("banner-images-container");
+          if (!container) return;
+
+          var mobileCount = parseInt(container.dataset.mobileCount || "0", 10);
+          var desktopCount = parseInt(container.dataset.desktopCount || "0", 10);
+          if (mobileCount <= 1 && desktopCount <= 1) return;
+
+          // F5 刷新重置，Swup 切换保留
+          if (typeof window.__bannerRandomIndex === "undefined") {
+            window.__bannerRandomIndex = {
+              mobile: mobileCount > 1 ? Math.floor(Math.random() * mobileCount) : 0,
+              desktop:
+                desktopCount > 1 ? Math.floor(Math.random() * desktopCount) : 0,
+            };
+          }
+
+          // 从 template 替换默认图片（index 0 = 已渲染的默认图，>0 = template）
+          function applyRandom(slotClass, tplClass, randomIndex) {
+            if (randomIndex === 0) return;
+            var slot = container.querySelector("." + slotClass);
+            var templates = container.querySelectorAll("." + tplClass);
+            if (!slot || !templates.length) return;
+            var tpl = templates[randomIndex - 1];
+            if (!tpl) return;
+            slot.innerHTML = "";
+            slot.appendChild(tpl.content.cloneNode(true));
+          }
+
+          applyRandom(
+            "banner-image-slot-mobile",
+            "banner-tpl-mobile",
+            window.__bannerRandomIndex.mobile
+          );
+          applyRandom(
+            "banner-image-slot-desktop",
+            "banner-tpl-desktop",
+            window.__bannerRandomIndex.desktop
+          );
+        })();
+      </script>
+    )}
     
     <!-- Home page text overlay - 始终渲染以便切换模式时控制显示 -->
-    {(isWallpaperSwitchable || showHomeText) && homeTextEnable && (
-        <div class={`banner-text-overlay absolute inset-0 z-20 flex items-center justify-center ${!showHomeText ? 'hidden' : ''}`}>
+    {(isWallpaperSwitchable || showHomeText) && shouldRenderHomeTextOverlay && (
+        <div data-banner-text-overlay="home" class={`banner-text-overlay absolute inset-0 z-20 flex items-center justify-center ${!showHomeText ? 'hidden' : ''}`}>
             <div class="w-4/5 lg:w-3/4 text-center mb-0">
                 <div class="flex flex-col">
                     {backgroundWallpaper.banner?.homeText?.title && (
@@ -245,6 +380,60 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
             </div>
         </div>
     )}
+
+	<!-- Post banner meta overlay -->
+	{postBannerMeta?.title && (
+		<div
+			data-banner-text-overlay="post"
+			class={`banner-text-overlay absolute inset-0 z-20 flex items-center justify-center ${
+				!(isBannerMode && isPostPageCheck) ? "hidden" : ""
+			}`}
+		>
+			<div class="w-11/12 lg:w-3/4 text-center mb-0 px-2">
+				<h1 class="banner-title font-bold text-white mb-3 leading-tight text-3xl md:text-4xl">
+					{postBannerMeta.title}
+				</h1>
+				<div class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-white/85 text-sm md:text-base">
+					{postBannerMeta.published && (
+						<span class="inline-flex items-center gap-1">
+							<Icon name="material-symbols:calendar-month-outline-rounded" class="text-lg" />
+							<span>{postBannerMeta.published}</span>
+						</span>
+					)}
+					{postBannerMeta.updated && (
+						<span class="inline-flex items-center gap-1">
+							<Icon name="material-symbols:history-rounded" class="text-lg" />
+							<span>{postBannerMeta.updated}</span>
+						</span>
+					)}
+					{typeof postBannerMeta.minutes === "number" && (
+						<span class="inline-flex items-center gap-1">
+							<Icon name="material-symbols:schedule-outline-rounded" class="text-lg" />
+							<span>{postBannerMeta.minutes} min</span>
+						</span>
+					)}
+					{typeof postBannerMeta.words === "number" && (
+						<span class="inline-flex items-center gap-1">
+							<Icon name="material-symbols:notes-rounded" class="text-lg" />
+							<span>{postBannerMeta.words} words</span>
+						</span>
+					)}
+					{postBannerMeta.category && (
+						<span class="inline-flex items-center gap-1">
+							<Icon name="material-symbols:folder-outline-rounded" class="text-lg" />
+							<span>{postBannerMeta.category}</span>
+						</span>
+					)}
+					{postBannerMeta.tags && postBannerMeta.tags.length > 0 && (
+						<span class="inline-flex items-center gap-1">
+							<Icon name="material-symbols:tag-rounded" class="text-lg" />
+							<span>{postBannerMeta.tags.slice(0, 3).join(" / ")}</span>
+						</span>
+					)}
+				</div>
+			</div>
+		</div>
+	)}
     
     <script is:inline>
         function setRandomSubtitle() {

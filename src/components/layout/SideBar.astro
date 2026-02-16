@@ -21,6 +21,9 @@ interface Props {
 
 const { class: className, headings } = Astro.props;
 
+// 判断当前页面是否为文章页面（服务端渲染时确定），用于设置组件初始隐藏状态避免闪烁
+const isPostPage = Astro.url.pathname.includes("/posts/");
+
 // 获取配置的侧边栏位置
 const sidebarPosition = widgetManager.getConfig().position;
 const targetSidebar = sidebarPosition === "left" ? "left" : undefined;
@@ -65,6 +68,7 @@ const componentsConfig = (() => {
 		.map((c) => ({
 			id: componentTypeToId[c.type as keyof typeof componentTypeToId],
 			showOnPostPage: c.showOnPostPage ?? true,
+			showOnNonPostPage: c.showOnNonPostPage ?? true,
 		}));
 })();
 
@@ -102,10 +106,31 @@ function renderComponent(
 	);
 	const componentStyle = widgetManager.getComponentStyle(component, index);
 
+	// 根据 showOnPostPage / showOnNonPostPage 在服务端设置初始 hidden 状态，避免页面加载时闪烁
+	// 同时添加标记 class，方便调试或后续扩展
+	let finalClass = componentClass;
+	if (component.showOnPostPage === false) {
+		finalClass = `${finalClass} widget-hide-on-post`;
+		if (isPostPage) {
+			finalClass = `${finalClass} hidden`;
+		}
+	}
+	if (component.showOnNonPostPage === false) {
+		finalClass = `${finalClass} widget-hide-on-non-post`;
+		if (!isPostPage) {
+			finalClass = `${finalClass} hidden`;
+		}
+	}
+
+	// Sidebar TOC 只在文章详情页显示：服务端先隐藏非文章页，避免首屏闪烁
+	if (component.type === "sidebarToc" && !isPostPage) {
+		finalClass = `${finalClass} hidden`;
+	}
+
 	return {
 		Component: ComponentToRender,
 		props: {
-			class: componentClass,
+			class: finalClass,
 			style: componentStyle,
 			headings: headings ?? [],
 			configId: component.configId, // 传递configId给Advertisement组件
@@ -177,10 +202,14 @@ function renderComponent(
         // 其他组件的 showOnPostPage 含义：
         // true: 在文章页和非文章页都显示（默认行为）
         // false: 只在非文章页显示，文章页隐藏
-        else if (isPostPage && !componentConfig.showOnPostPage) {
-          widget.style.display = 'none';
-        } else {
-          widget.style.display = '';
+        else {
+          if (isPostPage && componentConfig.showOnPostPage === false) {
+            widget.style.display = 'none';
+          } else if (!isPostPage && componentConfig.showOnNonPostPage === false) {
+            widget.style.display = 'none';
+          } else {
+            widget.style.display = '';
+          }
         }
       }
     });

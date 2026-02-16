@@ -379,10 +379,13 @@ function showBannerMode() {
 	if (bannerWrapper) {
 		// 检查当前是否为首页
 		const isHomePage = checkIsHomePage(window.location.pathname);
+		const isPostPage =
+			(document.body?.dataset?.pageType === "post") ||
+			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 
 		// 移动端非首页时，不显示banner；桌面端始终显示
-		if (isMobile && !isHomePage) {
+		if (isMobile && !isHomePage && !isPostPage) {
 			bannerWrapper.style.display = "none";
 			bannerWrapper.classList.add("mobile-hide-banner");
 		} else {
@@ -404,22 +407,25 @@ function showBannerMode() {
 	if (creditDesktop) creditDesktop.style.display = "";
 	if (creditMobile) creditMobile.style.display = "";
 
-	// 显示横幅首页文本（如果启用且是首页）
-	const bannerTextOverlay = document.querySelector(".banner-text-overlay");
-	if (bannerTextOverlay) {
-		// 检查是否启用 homeText
-		const homeTextEnabled = backgroundWallpaper.banner?.homeText?.enable;
-
-		// 检查当前是否为首页
-		const isHomePage = checkIsHomePage(window.location.pathname);
-
-		// 只有在启用且在首页时才显示
-		if (homeTextEnabled && isHomePage) {
-			bannerTextOverlay.classList.remove("hidden");
+	// 显示横幅文字（首页/文章页分流）
+	const isHomePage = checkIsHomePage(window.location.pathname);
+	const isPostPage =
+		(document.body?.dataset?.pageType === "post") ||
+		/\/posts\/.+/.test(window.location.pathname);
+	const bannerTextOverlays = document.querySelectorAll(
+		"[data-banner-text-overlay]",
+	);
+	bannerTextOverlays.forEach((el) => {
+		const overlayType = el.getAttribute("data-banner-text-overlay");
+		const shouldShow =
+			(overlayType === "home" && isHomePage) ||
+			(overlayType === "post" && isPostPage);
+		if (shouldShow) {
+			el.classList.remove("hidden");
 		} else {
-			bannerTextOverlay.classList.add("hidden");
+			el.classList.add("hidden");
 		}
-	}
+	});
 
 	// 调整主内容位置
 	adjustMainContentPosition("banner");
@@ -428,9 +434,12 @@ function showBannerMode() {
 	const mainContentWrapper = document.querySelector(".absolute.w-full.z-30");
 	if (mainContentWrapper) {
 		const isHomePage = checkIsHomePage(window.location.pathname);
+		const isPostPage =
+			(document.body?.dataset?.pageType === "post") ||
+			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 		// 只在移动端非首页时调整主内容位置
-		if (isMobile && !isHomePage) {
+		if (isMobile && !isHomePage && !isPostPage) {
 			mainContentWrapper.classList.add("mobile-main-no-banner");
 		} else {
 			mainContentWrapper.classList.remove("mobile-main-no-banner");
@@ -490,10 +499,10 @@ function showOverlayMode() {
 	if (creditMobile) creditMobile.style.display = "none";
 
 	// 隐藏横幅首页文本
-	const bannerTextOverlay = document.querySelector(".banner-text-overlay");
-	if (bannerTextOverlay) {
-		bannerTextOverlay.classList.add("hidden");
-	}
+	const bannerTextOverlays = document.querySelectorAll(
+		"[data-banner-text-overlay]",
+	);
+	bannerTextOverlays.forEach((el) => el.classList.add("hidden"));
 
 	// 调整主内容透明度
 	adjustMainContentTransparency(true);
@@ -529,10 +538,10 @@ function hideAllWallpapers() {
 	if (creditMobile) creditMobile.style.display = "none";
 
 	// 隐藏横幅首页文本
-	const bannerTextOverlay = document.querySelector(".banner-text-overlay");
-	if (bannerTextOverlay) {
-		bannerTextOverlay.classList.add("hidden");
-	}
+	const bannerTextOverlays = document.querySelectorAll(
+		"[data-banner-text-overlay]",
+	);
+	bannerTextOverlays.forEach((el) => el.classList.add("hidden"));
 
 	// 调整主内容位置和透明度
 	adjustMainContentPosition("none");
@@ -761,14 +770,14 @@ export function applyBannerTitleEnabledToDocument(enabled: boolean): void {
 	// 更新 html 属性，CSS 会立即生效
 	document.documentElement.setAttribute("data-banner-title-enabled", String(enabled));
 	// 同时更新元素样式（兼容性）
-	const bannerTextOverlay = document.querySelector(
-		".banner-text-overlay",
-	) as HTMLElement;
-	if (bannerTextOverlay) {
+	const homeBannerTextOverlays = document.querySelectorAll(
+		'.banner-text-overlay[data-banner-text-overlay="home"]',
+	) as NodeListOf<HTMLElement>;
+	homeBannerTextOverlays.forEach((el) => {
 		if (enabled) {
-			bannerTextOverlay.classList.remove("user-hidden");
+			el.classList.remove("user-hidden");
 		} else {
-			bannerTextOverlay.classList.add("user-hidden");
+			el.classList.add("user-hidden");
 		}
-	}
+	});
 }

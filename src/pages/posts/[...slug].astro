@@ -96,11 +96,21 @@ const jsonLd = {
 
 <MainGridLayout
   banner={processedImage}
+  bannerBasePath={getFileDirFromPath(entry.filePath || "")}
   title={entry.data.title}
   description={entry.data.description}
   lang={entry.data.lang}
   setOGTypeArticle={true}
   postSlug={entry.id}
+  postBannerMeta={{
+    title: entry.data.title,
+    published: formatDateToYYYYMMDD(entry.data.published),
+    updated: entry.data.updated ? formatDateToYYYYMMDD(entry.data.updated) : undefined,
+    category: entry.data.category || undefined,
+    tags: entry.data.tags || [],
+    words: remarkPluginFrontmatter.words,
+    minutes: remarkPluginFrontmatter.minutes,
+  }}
   headings={headings}
 >
   <script

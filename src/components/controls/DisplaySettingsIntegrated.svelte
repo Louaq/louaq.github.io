@@ -45,10 +45,8 @@ const allowLayoutSwitch = siteConfig.postListLayout.allowSwitch;
 
 // 是否允许用户切换水波纹动画（只看 switchable 配置）
 const isWavesSwitchable = backgroundWallpaper.banner?.waves?.switchable ?? false;
-// 检查是否启用横幅标题配置
-const isBannerTitleEnabled = backgroundWallpaper.banner?.homeText?.enable ?? false;
-// 是否允许用户切换横幅标题
-const isBannerTitleSwitchable = isBannerTitleEnabled && (backgroundWallpaper.banner?.homeText?.switchable ?? false);
+// 是否允许用户切换首页横幅标题（只看 switchable 配置；用于“即使默认不启用，也能在面板中打开”）
+const isBannerTitleSwitchable = backgroundWallpaper.banner?.homeText?.switchable ?? false;
 // 是否有任何横幅设置可显示（后续添加新设置时在此处添加条件）
 const hasBannerSettings = isWavesSwitchable || isBannerTitleSwitchable;
 // 是否显示主题色设置（与 siteConfig.themeColor.fixed 相反）
@@ -269,14 +267,15 @@ $effect(() => {
                 {#if isBannerTitleSwitchable}
                 <button
                     class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
-                    class:bg-(--btn-regular-bg-hover)={bannerTitleEnabled}
+                    class:ring-1={bannerTitleEnabled}
+                    class:ring-[var(--primary)]={bannerTitleEnabled}
+                    class:opacity-60={!bannerTitleEnabled}
                     onclick={toggleBannerTitleEnabled}
                 >
                     <Icon icon="material-symbols:titlecase-rounded" class="text-[1.25rem] shrink-0"></Icon>
                     <span class="text-sm flex-1">{i18n(I18nKey.bannerTitle)}</span>
-                    <div class="w-10 h-5 rounded-full transition-all duration-200 relative"
-                         class:bg-(--primary)={bannerTitleEnabled}
-                         class:bg-(--btn-regular-bg-active)={!bannerTitleEnabled}>
+                    <div class="waves-toggle-track w-10 h-5 rounded-full transition-all duration-200 relative"
+                         class:waves-toggle-track-on={bannerTitleEnabled}>
                         <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
                              class:left-0.5={!bannerTitleEnabled}
                              class:left-5={bannerTitleEnabled}></div>

@@ -66,10 +66,8 @@ if (!banner || typeof banner !== "string" || banner.trim() === "") {
 	banner = getDefaultBackground();
 }
 
-// TODO don't use post cover as banner for now
-banner = getDefaultBackground();
-
 const enableBanner = backgroundWallpaper.mode === "banner";
+const pageType = isHomePageCheck ? "home" : postSlug ? "post" : "page";
 
 let pageTitle: string;
 if (title) {
@@ -171,6 +169,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         configHue,
         defaultMode: siteConfig.themeColor.defaultMode ?? "light",
         defaultWallpaperMode: backgroundWallpaper.mode,
+        defaultBannerTitleEnabled: backgroundWallpaper.banner?.homeText?.enable ?? false,
         isWallpaperSwitchable:
           backgroundWallpaper.switchable ?? true,
         darkTheme: expressiveCodeConfig.darkTheme,
@@ -309,11 +308,28 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             "[data-overlay-wallpaper]"
           );
 
-          // 检查当前是否为首页
-          const isHomePage =
-            window.location.pathname === baseUrl || 
-            (baseUrl !== '/' && window.location.pathname === baseUrl.replace(/\/$/, '')) ||
-            window.location.pathname === "/";
+          function isHomePath(pathname) {
+            const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "/";
+            return (
+              pathname === baseUrl ||
+              (baseUrl !== "/" && pathname === baseNoSlash) ||
+              pathname === "/"
+            );
+          }
+
+          function isPostPath(pathname) {
+            const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "";
+            const postsPrefix = `${baseNoSlash}/posts/`;
+            return pathname.startsWith(postsPrefix);
+          }
+
+          const pathname = window.location.pathname;
+          const isHomePage = isHomePath(pathname);
+          const isPostPage =
+            (document.body &&
+              document.body.dataset &&
+              document.body.dataset.pageType === "post") ||
+            isPostPath(pathname);
 
           if (wallpaperMode === WALLPAPER_OVERLAY) {
             // 全屏壁纸透明模式：显示全屏壁纸，隐藏banner
@@ -340,7 +356,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               const isMobile = window.innerWidth < 1024;
               // 移动端非首页时隐藏banner（初始状态直接隐藏，不需要动画）
               // 桌面端始终显示banner
-              if (isMobile && !isHomePage) {
+              if (isMobile && !isHomePage && !isPostPage) {
                 bannerWrapper.style.display = "none";
                 bannerWrapper.classList.add("mobile-hide-banner");
               } else {
@@ -361,7 +377,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           if (mainContentWrapper) {
             const isMobile = window.innerWidth < 1024;
             // 只在移动端非首页时调整主内容位置
-            if (isMobile && !isHomePage) {
+            if (isMobile && !isHomePage && !isPostPage) {
               mainContentWrapper.classList.add("mobile-main-no-banner");
             } else {
               mainContentWrapper.classList.remove("mobile-main-no-banner");
@@ -384,21 +400,22 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             if (creditMobile) creditMobile.style.display = "";
           }
 
-          // 处理banner homeText元素
-          const bannerTextOverlay = document.querySelector(
-            ".banner-text-overlay"
+          // 处理banner文字元素（首页/文章页分流）
+          const bannerTextOverlays = document.querySelectorAll(
+            "[data-banner-text-overlay]"
           );
-          if (bannerTextOverlay) {
-            const isHomePage =
-              window.location.pathname === baseUrl || 
-              (baseUrl !== '/' && window.location.pathname === baseUrl.replace(/\/$/, '')) ||
-              window.location.pathname === "/";
-            if (wallpaperMode === WALLPAPER_BANNER && isHomePage) {
-              bannerTextOverlay.classList.remove("hidden");
+          bannerTextOverlays.forEach((el) => {
+            const overlayType = el.getAttribute("data-banner-text-overlay");
+            const shouldShow =
+              wallpaperMode === WALLPAPER_BANNER &&
+              ((overlayType === "home" && isHomePage) ||
+                (overlayType === "post" && isPostPage));
+            if (shouldShow) {
+              el.classList.remove("hidden");
             } else {
-              bannerTextOverlay.classList.add("hidden");
+              el.classList.add("hidden");
             }
-          }
+          });
         });
       })();
       // 初始化水波纹动画状态 - 在 html 元素上设置属性，CSS 会立即生效
@@ -411,10 +428,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 
       // 初始化横幅标题显示状态 - 在 html 元素上设置属性，CSS 会立即生效
       (function applyBannerTitleEnabled() {
-        const bannerTitleEnabled = localStorage.getItem("bannerTitleEnabled");
-        if (bannerTitleEnabled !== null) {
-          document.documentElement.setAttribute("data-banner-title-enabled", bannerTitleEnabled);
-        }
+        const stored = localStorage.getItem("bannerTitleEnabled");
+        const enabled = stored !== null ? stored : String(defaultBannerTitleEnabled);
+        document.documentElement.setAttribute("data-banner-title-enabled", enabled);
       })();
     </script>
     <style
@@ -453,6 +469,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           ).map((fontId) => `font-${fontId}-enabled`)
         : []),
     ]}
+    data-page-type={pageType}
   >
 
     <!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
@@ -676,12 +693,24 @@ function disableAnimation() {
 		}
 	})
 */
-    window.swup.hooks.on("link:click", () => {
+    window.swup.hooks.on("link:click", (_visit: any, { el }: { el: HTMLAnchorElement }) => {
       // Remove the delay for the first time page load
       document.documentElement.style.setProperty("--content-delay", "0ms");
 
-      // 添加页面切换保护，防止导航栏闪烁
-      document.documentElement.classList.add("is-page-transitioning");
+      // 同页链接点击不需要过渡保护
+      const targetHref = el?.getAttribute("href") || "";
+      const targetPathname = (() => {
+        try {
+          return new URL(targetHref, window.location.origin).pathname;
+        } catch {
+          return targetHref;
+        }
+      })();
+      const isSamePage = pathsEqual(targetPathname, window.location.pathname);
+      if (!isSamePage) {
+        // 添加页面切换保护，防止导航栏闪烁
+        document.documentElement.classList.add("is-page-transitioning");
+      }
 
       // 简化navbar处理逻辑
       if (bannerEnabled) {
@@ -753,6 +782,12 @@ function disableAnimation() {
       // change banner height immediately when a link is clicked
       const bodyElement = document.querySelector("body");
       const isHomePage = pathsEqual(visit.to.url, url("/"));
+      const toPathname = new URL(visit.to.url, window.location.href).pathname;
+      const isPostPage = /\/posts\/.+/.test(toPathname);
+      const nextPageType = isHomePage ? "home" : isPostPage ? "post" : "page";
+      if (bodyElement) {
+        bodyElement.dataset.pageType = nextPageType;
+      }
 
       if (isHomePage) {
         bodyElement!.classList.add("lg:is-home");
@@ -761,14 +796,23 @@ function disableAnimation() {
       }
 
       // Control banner text visibility based on page
-      const bannerTextOverlay = document.querySelector(".banner-text-overlay");
-      if (bannerTextOverlay) {
-        if (isHomePage) {
-          bannerTextOverlay.classList.remove("hidden");
+      const wallpaperMode =
+        document.documentElement.getAttribute("data-wallpaper-mode") || "banner";
+      const bannerTextOverlays = document.querySelectorAll(
+        "[data-banner-text-overlay]"
+      );
+      bannerTextOverlays.forEach((el) => {
+        const overlayType = el.getAttribute("data-banner-text-overlay");
+        const shouldShow =
+          wallpaperMode === "banner" &&
+          ((overlayType === "home" && isHomePage) ||
+            (overlayType === "post" && isPostPage));
+        if (shouldShow) {
+          el.classList.remove("hidden");
         } else {
-          bannerTextOverlay.classList.add("hidden");
+          el.classList.add("hidden");
         }
-      }
+      });
 
       // Control navbar transparency based on page
       const navbar = document.getElementById("navbar");
@@ -805,7 +849,7 @@ function disableAnimation() {
       ) as HTMLElement | null;
 
       if (isMobile && bannerWrapper && mainContentWrapper) {
-        if (isHomePage) {
+        if (isHomePage || isPostPage) {
           // 首页：禁用主内容区域的过渡动画，防止文章列表下移
           mainContentWrapper.style.transition = "none";
           

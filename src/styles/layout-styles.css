@@ -11,12 +11,8 @@ html[data-waves-enabled="true"] #header-waves {
     display: block !important;
 }
 
-html[data-banner-title-enabled="false"] .banner-text-overlay {
+html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-overlay="home"] {
     display: none !important;
-}
-
-html[data-banner-title-enabled="true"] .banner-text-overlay {
-    display: flex !important;
 }
 
 .banner-text-overlay.user-hidden {
