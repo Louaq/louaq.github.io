@@ -42,10 +42,12 @@ interface Props {
 	lang?: string;
 	setOGTypeArticle?: boolean;
 	postSlug?: string;
+	pageTitleBanner?: boolean;
 }
 
 let { title, banner, description, lang, setOGTypeArticle, postSlug } =
 	Astro.props;
+const { pageTitleBanner } = Astro.props;
 
 // apply a class to the body element to decide the height of the banner, only used for initial page load
 // Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
@@ -329,6 +331,32 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             return pathname.startsWith(postsPrefix);
           }
 
+          function normalizePathname(pathname) {
+            const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "";
+            if (baseNoSlash && pathname.startsWith(baseNoSlash)) {
+              const rest = pathname.slice(baseNoSlash.length);
+              return rest === "" ? "/" : rest;
+            }
+            return pathname;
+          }
+
+          function isTitleBannerPagePath(pathname) {
+            const p = normalizePathname(pathname);
+            const prefixes = [
+              "/archive",
+              "/friends",
+              "/about",
+              "/albums",
+              "/bangumi",
+              "/guestbook",
+              "/watchlist",
+              "/sponsor",
+              "/rss",
+              "/404",
+            ];
+            return prefixes.some((prefix) => p === prefix || p.startsWith(prefix + "/"));
+          }
+
           const pathname = window.location.pathname;
           const isHomePage = isHomePath(pathname);
           const isPostPage =
@@ -336,8 +364,21 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               document.body.dataset &&
               document.body.dataset.pageType === "post") ||
             isPostPath(pathname);
+          const hasPageBanner =
+            (document.body &&
+              document.body.dataset &&
+              document.body.dataset.hasPageBanner === "true") ||
+            isTitleBannerPagePath(pathname);
 
-          if (wallpaperMode === WALLPAPER_OVERLAY) {
+          // 对"页面标题横幅"页面：强制显示 banner 壁纸与标题（不受用户壁纸模式影响）
+          const effectiveWallpaperMode = hasPageBanner ? WALLPAPER_BANNER : wallpaperMode;
+
+          if (hasPageBanner && document.body) {
+            document.body.classList.add("enable-banner");
+            document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
+          }
+
+          if (effectiveWallpaperMode === WALLPAPER_OVERLAY) {
             // 全屏壁纸透明模式：显示全屏壁纸，隐藏banner
             if (bannerWrapper) {
               bannerWrapper.style.display = "none";
@@ -347,7 +388,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               overlayWallpaper.classList.remove("hidden", "opacity-0");
               overlayWallpaper.classList.add("opacity-100");
             }
-          } else if (wallpaperMode === WALLPAPER_NONE) {
+          } else if (effectiveWallpaperMode === WALLPAPER_NONE) {
             // 纯色背景：隐藏所有壁纸
             if (bannerWrapper) {
               bannerWrapper.style.display = "none";
@@ -362,7 +403,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               const isMobile = window.innerWidth < 1024;
               // 移动端非首页时隐藏banner（初始状态直接隐藏，不需要动画）
               // 桌面端始终显示banner
-              if (isMobile && !isHomePage && !isPostPage) {
+              if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
                 bannerWrapper.style.display = "none";
                 bannerWrapper.classList.add("mobile-hide-banner");
               } else {
@@ -383,7 +424,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           if (mainContentWrapper) {
             const isMobile = window.innerWidth < 1024;
             // 只在移动端非首页时调整主内容位置
-            if (isMobile && !isHomePage && !isPostPage) {
+            if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
               mainContentWrapper.classList.add("mobile-main-no-banner");
             } else {
               mainContentWrapper.classList.remove("mobile-main-no-banner");
@@ -396,8 +437,8 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           );
           const creditMobile = document.getElementById("banner-credit-mobile");
           if (
-            wallpaperMode === WALLPAPER_OVERLAY ||
-            wallpaperMode === WALLPAPER_NONE
+            effectiveWallpaperMode === WALLPAPER_OVERLAY ||
+            effectiveWallpaperMode === WALLPAPER_NONE
           ) {
             if (creditDesktop) creditDesktop.style.display = "none";
             if (creditMobile) creditMobile.style.display = "none";
@@ -406,14 +447,21 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             if (creditMobile) creditMobile.style.display = "";
           }
 
-          // 处理banner文字元素（首页/文章页分流）
+
+          // 处理banner文字元素显示/隐藏
+          // Page overlay 通过条件渲染自动显示，只需要处理 home/post overlay
           const bannerTextOverlays = document.querySelectorAll(
             "[data-banner-text-overlay]"
           );
           bannerTextOverlays.forEach((el) => {
             const overlayType = el.getAttribute("data-banner-text-overlay");
+            if (overlayType === "page") {
+              // Page overlay 已经通过条件渲染正确显示，不需要额外处理
+              return;
+            }
+            // Home/Post overlay：按 effectiveWallpaperMode 决定
             const shouldShow =
-              wallpaperMode === WALLPAPER_BANNER &&
+              effectiveWallpaperMode === WALLPAPER_BANNER &&
               ((overlayType === "home" && isHomePage) ||
                 (overlayType === "post" && isPostPage));
             if (shouldShow) {
@@ -476,6 +524,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         : []),
     ]}
     data-page-type={pageType}
+    data-has-page-banner={pageTitleBanner ? "true" : "false"}
   >
     <!-- 固化 astro-icon 的 symbol sprite，避免 Swup 局部替换后 <use> 找不到 <symbol> 导致图标空白 -->
     <GlobalIconSprite />
@@ -516,32 +565,52 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 >
   @tailwind components;
   @layer components {
-    .enable-banner.is-home #banner-wrapper {
+    /* 首页：用 data-page-type 判断，避免类名不匹配 */
+    body.enable-banner[data-page-type="home"] #banner-wrapper {
+      @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
+    }
+    /* 对“页面标题横幅”页面，壁纸显示高度与首页一致 */
+    body.enable-banner[data-has-page-banner="true"] #banner-wrapper {
       @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #banner-wrapper {
       @apply h-[var(--banner-height-home)];
     }
 
-    .enable-banner.is-home #banner {
+    body.enable-banner[data-page-type="home"] #banner {
+      @apply h-[var(--banner-height-home)] translate-y-0;
+    }
+    body.enable-banner[data-has-page-banner="true"] #banner {
       @apply h-[var(--banner-height-home)] translate-y-0;
     }
     .enable-banner #banner {
       @apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)];
     }
-    .enable-banner.is-home #main-grid {
+    body.enable-banner[data-page-type="home"] #main-grid {
+      @apply translate-y-[var(--banner-height-extend)];
+    }
+    body.enable-banner[data-has-page-banner="true"] #main-grid {
       @apply translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #top-row {
       @apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300;
     }
-    .enable-banner.is-home #sidebar-sticky {
+    body.enable-banner[data-page-type="home"] #sidebar-sticky {
       @apply top-[calc(1rem_-_var(--banner-height-extend))];
     }
-    .enable-banner.is-home #left-sidebar-sticky {
+    body.enable-banner[data-page-type="home"] #left-sidebar-sticky {
       @apply top-[calc(1rem_-_var(--banner-height-extend))];
     }
-    .enable-banner.is-home #right-sidebar-sticky {
+    body.enable-banner[data-page-type="home"] #right-sidebar-sticky {
+      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+    }
+    body.enable-banner[data-has-page-banner="true"] #sidebar-sticky {
+      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+    }
+    body.enable-banner[data-has-page-banner="true"] #left-sidebar-sticky {
+      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+    }
+    body.enable-banner[data-has-page-banner="true"] #right-sidebar-sticky {
       @apply top-[calc(1rem_-_var(--banner-height-extend))];
     }
   }
@@ -782,8 +851,44 @@ function disableAnimation() {
       const toPathname = new URL(visit.to.url, window.location.href).pathname;
       const isPostPage = /\/posts\/.+/.test(toPathname);
       const nextPageType = isHomePage ? "home" : isPostPage ? "post" : "page";
+      const isTitleBannerPage = (() => {
+        try {
+          const baseUrl = import.meta.env.BASE_URL || "/";
+          const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "";
+          const normalize = (pathname: string) => {
+            if (baseNoSlash && pathname.startsWith(baseNoSlash)) {
+              const rest = pathname.slice(baseNoSlash.length);
+              return rest === "" ? "/" : rest;
+            }
+            return pathname;
+          };
+          const p = normalize(toPathname);
+          const prefixes = [
+            "/archive",
+            "/friends",
+            "/about",
+            "/albums",
+            "/bangumi",
+            "/guestbook",
+            "/watchlist",
+            "/sponsor",
+            "/rss",
+            "/404",
+          ];
+          return prefixes.some((prefix) => p === prefix || p.startsWith(prefix + "/"));
+        } catch {
+          return false;
+        }
+      })();
       if (bodyElement) {
         bodyElement.dataset.pageType = nextPageType;
+        bodyElement.dataset.hasPageBanner = String(isTitleBannerPage);
+        
+        // 对页面标题横幅页面：强制启用 banner 模式
+        if (isTitleBannerPage) {
+          bodyElement.classList.add("enable-banner");
+          bodyElement.classList.remove("no-banner-layout", "wallpaper-transparent");
+        }
       }
 
       if (isHomePage) {
@@ -792,24 +897,8 @@ function disableAnimation() {
         bodyElement!.classList.remove("lg:is-home");
       }
 
-      // Control banner text visibility based on page
-      const wallpaperMode =
-        document.documentElement.getAttribute("data-wallpaper-mode") || "banner";
-      const bannerTextOverlays = document.querySelectorAll(
-        "[data-banner-text-overlay]"
-      );
-      bannerTextOverlays.forEach((el) => {
-        const overlayType = el.getAttribute("data-banner-text-overlay");
-        const shouldShow =
-          wallpaperMode === "banner" &&
-          ((overlayType === "home" && isHomePage) ||
-            (overlayType === "post" && isPostPage));
-        if (shouldShow) {
-          el.classList.remove("hidden");
-        } else {
-          el.classList.add("hidden");
-        }
-      });
+      // Banner-wrapper 已经被 Swup 替换，overlay 会根据新页面自动更新
+      // 这里不需要手动处理 page overlay，它已经通过条件渲染正确显示
 
       // Control navbar transparency based on page
       const navbar = document.getElementById("navbar");
@@ -846,7 +935,7 @@ function disableAnimation() {
       ) as HTMLElement | null;
 
       if (isMobile && bannerWrapper && mainContentWrapper) {
-        if (isHomePage || isPostPage) {
+        if (isHomePage || isPostPage || isTitleBannerPage) {
           // 首页：禁用主内容区域的过渡动画，防止文章列表下移
           mainContentWrapper.style.transition = "none";
           
@@ -872,7 +961,12 @@ function disableAnimation() {
         }
       } else if (!isMobile && bannerWrapper) {
         // 桌面端：确保banner正常显示
-        bannerWrapper.style.display = "";
+        // 对页面标题横幅页面：强制显示（即使壁纸模式为 overlay/none）
+        if (isTitleBannerPage) {
+          bannerWrapper.style.display = "block";
+        } else {
+          bannerWrapper.style.display = "";
+        }
         bannerWrapper.classList.remove("mobile-hide-banner");
         if (mainContentWrapper) {
           mainContentWrapper.classList.remove("mobile-main-no-banner");

@@ -18,27 +18,15 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
 .banner-text-overlay.user-hidden {
     display: none !important;
 }
+
 /* Banner text styles */
 .banner-title {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-    animation: banner-fadeInUp 1s ease-out;
     font-weight: bold;
 }
 
 .banner-subtitle {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-    animation: banner-fadeInUp 1s ease-out 0.3s both;
-}
-
-@keyframes banner-fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
 }
 
 /* 移动端无侧边栏布局优化 */
@@ -70,7 +58,6 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
         height: 70vh !important; /* 保持较大高度优先显示banner */
         min-height: 450px;
         max-height: none; /* 移除最大高度限制 */
-        top: 0 !important; /* 移动端从顶部开始，避免被导航栏覆盖 */
     }
     
     /* 主内容区域位置调整 - 向上移动以部分遮挡banner */
@@ -125,7 +112,6 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
         height: 75vh !important;
         min-height: 500px;
         max-height: none; /* 移除最大高度限制 */
-        top: 0 !important; /* 移动端从顶部开始，避免被导航栏覆盖 */
     }
     
     /* 主内容区域位置调整 - 向上移动以部分遮挡banner */
@@ -180,7 +166,6 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
         height: 72vh !important;
         min-height: 520px;
         max-height: none; /* 移除最大高度限制 */
-        top: 0 !important; /* 移动端从顶部开始，避免被导航栏覆盖 */
     }
     
     /* 主内容区域位置调整 - 向上移动以部分遮挡banner */
@@ -234,7 +219,6 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
     #banner-wrapper:not(.mobile-hide-banner) {
         height: 70vh !important;
         min-height: 500px;
-        top: 0 !important; /* 移动端从顶部开始，避免被导航栏覆盖 */
     }
     
     /* 主内容区域位置调整 - 向上移动以部分遮挡banner */

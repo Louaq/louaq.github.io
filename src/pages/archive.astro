@@ -8,6 +8,6 @@ import { getSortedPostsList } from "@/utils/content-utils";
 const sortedPostsList = await getSortedPostsList();
 ---
 
-<MainGridLayout title={i18n(I18nKey.archive)}>
+<MainGridLayout title={i18n(I18nKey.archive)} pageTitleBanner={true}>
   <ArchivePanel sortedPosts={sortedPostsList} client:only="svelte" />
 </MainGridLayout>

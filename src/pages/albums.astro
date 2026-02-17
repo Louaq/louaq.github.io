@@ -8,7 +8,7 @@ import { scanAlbums } from "../utils/album-scanner";
 const albumsData = await scanAlbums();
 ---
 
-<MainGridLayout title={i18n(I18nKey.albums)} description={i18n(I18nKey.albumsSubtitle)}>
+<MainGridLayout title={i18n(I18nKey.albums)} description={i18n(I18nKey.albumsSubtitle)} pageTitleBanner={true}>
   <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32">
     <div class="card-base z-10 px-9 py-6 relative w-full">
       
