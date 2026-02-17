@@ -37,6 +37,12 @@ export type SiteConfig = {
 	// 可选：站点时区，使用 IANA 时区标识，例如 "Asia/Shanghai"、"UTC"
 	timezone?: string;
 
+	// RSS 输出配置
+	rss?: {
+		// 输出模式：full=输出全文（包含 content），summary=仅输出摘要（仅 description）
+		mode: "full" | "summary";
+	};
+
 	// 提醒框配置
 	rehypeCallouts: {
 		theme: "github" | "obsidian" | "vitepress";

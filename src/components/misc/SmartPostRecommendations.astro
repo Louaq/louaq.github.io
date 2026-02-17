@@ -1,0 +1,143 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getSortedPostsList } from "@utils/content-utils";
+import { formatDateToYYYYMMDD } from "@/utils/date-utils";
+import { getPostUrlBySlug, getTagUrl } from "@/utils/url-utils";
+
+type PostEntry = CollectionEntry<"posts">;
+
+interface Props {
+	currentEntry: PostEntry;
+	limit?: number;
+}
+
+const { currentEntry, limit = 6 } = Astro.props;
+const allPosts = await getSortedPostsList();
+
+const currentId = currentEntry.id;
+const currentTags = new Set(
+	(currentEntry.data.tags ?? [])
+		.map((t) => t.trim())
+		.filter(Boolean)
+		.map((t) => t.toLowerCase()),
+);
+const currentCategory = (currentEntry.data.category ?? "").toString().trim();
+const currentLang = (currentEntry.data.lang ?? "").toString().trim();
+
+function tokenizeTitle(s: string): string[] {
+	return s
+		.toLowerCase()
+		.split(/[\s\-_,.，。:：;；!?！？()（）[\]{}"“”'‘’/\\|]+/g)
+		.map((t) => t.trim())
+		.filter((t) => t.length >= 2)
+		.slice(0, 20);
+}
+
+const currentTitleTokens = new Set(tokenizeTitle(currentEntry.data.title ?? ""));
+const now = Date.now();
+
+function scorePost(p: { id: string; data: PostEntry["data"] }): number {
+	if (p.id === currentId) return Number.NEGATIVE_INFINITY;
+
+	let score = 0;
+
+	// 分类匹配
+	const cat = (p.data.category ?? "").toString().trim();
+	if (currentCategory && cat && cat === currentCategory) score += 6;
+
+	// 标签匹配
+	const tags = (p.data.tags ?? [])
+		.map((t) => t.trim())
+		.filter(Boolean)
+		.map((t) => t.toLowerCase());
+	let sharedTags = 0;
+	for (const t of tags) {
+		if (currentTags.has(t)) sharedTags++;
+	}
+	score += sharedTags * 4;
+
+	// 标题关键词轻量匹配（用于没有标签或标签较少的情况）
+	const titleTokens = tokenizeTitle(p.data.title ?? "");
+	let sharedTokens = 0;
+	for (const tok of titleTokens) {
+		if (currentTitleTokens.has(tok)) sharedTokens++;
+	}
+	score += Math.min(sharedTokens, 6) * 1.25;
+
+	// 语言匹配（轻权重）
+	const lang = (p.data.lang ?? "").toString().trim();
+	if (currentLang && lang && lang === currentLang) score += 1;
+
+	// 新近度加权（越新越靠前）
+	const days = Math.abs(now - new Date(p.data.published).getTime()) / 86_400_000;
+	score += 2 / (1 + days / 30);
+
+	return score;
+}
+
+const recommended = allPosts
+	.map((p) => ({ ...p, __score: scorePost(p) }))
+	.filter((p) => Number.isFinite(p.__score))
+	.sort((a, b) => b.__score - a.__score)
+	.slice(0, Math.max(0, limit));
+
+// 如果推荐不足，使用最新文章补齐
+if (recommended.length < limit) {
+	const used = new Set(recommended.map((p) => p.id));
+	for (const p of allPosts) {
+		if (p.id === currentId) continue;
+		if (used.has(p.id)) continue;
+		recommended.push({ ...p, __score: 0 });
+		used.add(p.id);
+		if (recommended.length >= limit) break;
+	}
+}
+---
+
+{
+	recommended.length > 0 && (
+		<section class="mb-4 onload-animation">
+			<div class="flex items-center justify-between gap-4 mb-4">
+				<h2 class="text-xl font-bold text-90">推荐文章</h2>
+				<div class="text-sm text-60 whitespace-nowrap">基于标签匹配 · 智能推荐</div>
+			</div>
+
+			<div class="flex flex-col gap-4">
+				{recommended.map((post) => (
+					<article class="card-base !shadow-none !rounded-lg h-[104px] p-4 border border-[var(--line-divider)] hover:border-[var(--primary)] transition-all duration-300 flex flex-col justify-between">
+						<h3 class="text-base font-semibold text-90 mb-2 hover:text-[var(--primary)] transition-colors line-clamp-1 leading-snug">
+							<a
+								href={getPostUrlBySlug(post.id)}
+								class="!no-underline hover:!no-underline focus:!no-underline"
+							>
+								{post.data.title}
+							</a>
+						</h3>
+
+						<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 text-xs text-60">
+							<time datetime={new Date(post.data.published).toISOString()} class="text-75">
+								{formatDateToYYYYMMDD(new Date(post.data.published))}
+							</time>
+
+							<div class="flex gap-2 flex-nowrap overflow-hidden">
+								{(post.data.tags ?? [])
+									.map((t) => t.trim())
+									.filter(Boolean)
+									.slice(0, 2)
+									.map((tag) => (
+										<a
+											href={getTagUrl(tag)}
+											class="btn-regular shrink-0 h-5 text-[0.7rem] px-2 py-1 rounded-md transition-all duration-200 hover:scale-105 active:scale-95"
+										>
+											#{tag}
+										</a>
+									))}
+							</div>
+						</div>
+					</article>
+				))}
+			</div>
+		</section>
+	)
+}
+

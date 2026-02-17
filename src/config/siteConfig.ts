@@ -90,6 +90,13 @@ export const siteConfig: SiteConfig = {
 	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
 	timezone: "Asia/Shanghai",
 
+	// RSS 输出配置
+	// - full：输出全文（RSS item 包含 content）
+	// - summary：仅输出摘要（只保留 description，兼容只想看摘要的阅读器）
+	rss: {
+		mode: "summary",
+	},
+
 	// 提醒框（Admonitions）配置，修改后需要重启开发服务器才能生效
 	// 主题：'github' | 'obsidian' | 'vitepress'，每个主题风格和语法不同，可根据喜好选择
 	rehypeCallouts: {

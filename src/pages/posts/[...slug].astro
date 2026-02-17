@@ -4,6 +4,7 @@ import * as path from "node:path";
 import Comment from "@components/comment/index.astro";
 import Markdown from "@components/common/Markdown.astro";
 import License from "@components/misc/License.astro";
+import SmartPostRecommendations from "@components/misc/SmartPostRecommendations.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
@@ -247,6 +248,10 @@ const jsonLd = {
           }
         });
       </script>
+
+      {/* 智能文章推荐 */}
+      <div class="border-t border-[var(--line-divider)] my-6 onload-animation" aria-hidden="true"></div>
+      <SmartPostRecommendations currentEntry={entry} />
 
       {/* 赞助按钮 & 分享按钮 */}
       {

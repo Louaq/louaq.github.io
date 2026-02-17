@@ -19,24 +19,35 @@ function stripInvalidXmlChars(str: string): string {
 	);
 }
 
-export async function GET(context: APIContext) {
+export async function GET(context: APIContext): Promise<Response> {
 	const blog = await getSortedPosts();
-	const renderers = await loadRenderers([getMDXRenderer()]);
-	const container = await AstroContainer.create({ renderers });
+	const rssMode = siteConfig.rss?.mode ?? "full";
+
+	const container =
+		rssMode === "full"
+			? await AstroContainer.create({
+					renderers: await loadRenderers([getMDXRenderer()]),
+				})
+			: null;
 	const feedItems: RSSFeedItem[] = [];
 	for (const post of blog) {
-		const { Content } = await render(post);
-		const rawContent = await container.renderToString(Content);
-		const cleanedContent = stripInvalidXmlChars(rawContent);
-		feedItems.push({
+		const baseItem: RSSFeedItem = {
 			title: post.data.title,
 			pubDate: post.data.published,
 			description: post.data.description || "",
 			link: url(`/posts/${post.id}/`),
-			content: sanitizeHtml(cleanedContent, {
+		};
+
+		if (rssMode === "full") {
+			const { Content } = await render(post);
+			const rawContent = await container?.renderToString(Content);
+			const cleanedContent = stripInvalidXmlChars(rawContent ?? "");
+			baseItem.content = sanitizeHtml(cleanedContent, {
 				allowedTags: sanitizeHtml.defaults.allowedTags.concat(["img"]),
-			}),
-		});
+			});
+		}
+
+		feedItems.push(baseItem);
 	}
 	return rss({
 		title: siteConfig.title,
