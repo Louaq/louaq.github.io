@@ -24,16 +24,15 @@ import { onMount } from "svelte";
 import { backgroundWallpaper, siteConfig } from "@/config";
 import type { WALLPAPER_MODE } from "@/types/config";
 
-let hue = $state(getHue());
+// 重要：避免在客户端初始化阶段读取 localStorage/window 导致 SSR/CSR DOM 不一致，影响 hydrate
+let hue = $state(getDefaultHue());
 const defaultHue = getDefaultHue();
 let wallpaperMode: WALLPAPER_MODE = $state(backgroundWallpaper.mode);
 const defaultWallpaperMode = backgroundWallpaper.mode;
 let currentLayout: "list" | "grid" = $state("list");
 const defaultLayout = siteConfig.postListLayout.defaultMode;
 let mounted = $state(false);
-let isSmallScreen = $state(
-	typeof window !== "undefined" ? window.innerWidth < 1200 : false,
-);
+let isSmallScreen = $state(false);
 let isSwitching = $state(false);
 
 let wavesEnabled = $state(true);
@@ -121,6 +120,9 @@ onMount(() => {
 	mounted = true;
 	checkScreenSize();
 
+	// 只在 mount 后读取本地偏好，避免 hydration mismatch
+	hue = getHue();
+
 	// 从localStorage读取保存的壁纸模式
 	wallpaperMode = getStoredWallpaperMode();
     	
@@ -177,9 +179,9 @@ $effect(() => {
             {i18n(I18nKey.themeColor)}
             <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} onclick={resetHue}>
-                <div class="text-[var(--btn-content)]">
+                <span class="text-[var(--btn-content)]">
                     <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
-                </div>
+                </span>
             </button>
         </div>
         <div class="flex gap-1">
@@ -204,9 +206,9 @@ $effect(() => {
                 {i18n(I18nKey.wallpaperMode)}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                         class:opacity-0={wallpaperMode === defaultWallpaperMode} class:pointer-events-none={wallpaperMode === defaultWallpaperMode} onclick={resetWallpaperMode}>
-                    <div class="text-[var(--btn-content)]">
+                    <span class="text-[var(--btn-content)]">
                         <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
-                    </div>
+                    </span>
                 </button>
             </div>
             <div class="space-y-1 px-1">
@@ -257,7 +259,7 @@ $effect(() => {
     {#if wallpaperMode === WALLPAPER_BANNER && hasBannerSettings}
         <div class="mt-2 mb-2">
             <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
-                before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
+                before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
                 {i18n(I18nKey.bannerSettings)}
@@ -274,12 +276,12 @@ $effect(() => {
                 >
                     <Icon icon="material-symbols:titlecase-rounded" class="text-[1.25rem] shrink-0"></Icon>
                     <span class="text-sm flex-1">{i18n(I18nKey.bannerTitle)}</span>
-                    <div class="waves-toggle-track w-10 h-5 rounded-full transition-all duration-200 relative"
+                    <span class="waves-toggle-track inline-block w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:waves-toggle-track-on={bannerTitleEnabled}>
-                        <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
+                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
                              class:left-0.5={!bannerTitleEnabled}
-                             class:left-5={bannerTitleEnabled}></div>
-                    </div>
+                             class:left-5={bannerTitleEnabled}></span>
+                    </span>
                 </button>
                 {/if}
                 <!-- Waves Animation Switch（背景与图标/开关随主题色变化） -->
@@ -293,12 +295,12 @@ $effect(() => {
                 >
                     <Icon icon="material-symbols:airwave-rounded" class="text-[1.25rem] shrink-0"></Icon>
                     <span class="text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
-                    <div class="waves-toggle-track w-10 h-5 rounded-full transition-all duration-200 relative"
+                    <span class="waves-toggle-track inline-block w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:waves-toggle-track-on={wavesEnabled}>
-                        <div class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
+                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
                              class:left-0.5={!wavesEnabled}
-                             class:left-5={wavesEnabled}></div>
-                    </div>
+                             class:left-5={wavesEnabled}></span>
+                    </span>
                 </button>
                 {/if}
             </div>
@@ -315,9 +317,9 @@ $effect(() => {
                 {i18n(I18nKey.postListLayout)}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                         class:opacity-0={currentLayout === defaultLayout} class:pointer-events-none={currentLayout === defaultLayout} onclick={resetLayout}>
-                    <div class="text-[var(--btn-content)]">
+                    <span class="text-[var(--btn-content)]">
                         <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
-                    </div>
+                    </span>
                 </button>
             </div>
             <div class="flex gap-2">

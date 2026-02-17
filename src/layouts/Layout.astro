@@ -544,9 +544,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     .enable-banner.is-home #right-sidebar-sticky {
       @apply top-[calc(1rem_-_var(--banner-height-extend))];
     }
-    .navbar-hidden {
-      @apply opacity-0 -translate-y-16;
-    }
   }
 </style>
 
@@ -554,7 +551,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
   import { pathsEqual, url } from "@/utils/url-utils";
   import {
     BANNER_HEIGHT,
-    BANNER_HEIGHT_HOME,
     BANNER_HEIGHT_EXTEND,
     // MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
   } from "@/constants/constants";
@@ -721,16 +717,8 @@ function disableAnimation() {
         document.documentElement.classList.add("is-page-transitioning");
       }
 
-      // 简化navbar处理逻辑
-      if (bannerEnabled) {
-        const navbar = document.getElementById("navbar-wrapper");
-        if (navbar && document.body.classList.contains("lg:is-home")) {
-          const threshold = window.innerHeight * (BANNER_HEIGHT / 100) - 88;
-          if (document.documentElement.scrollTop >= threshold) {
-            navbar.classList.add("navbar-hidden");
-          }
-        }
-      }
+      // 说明：此前这里会在滚动到 banner 下方时隐藏导航栏（navbar-hidden）。
+      // 用户需求为“导航栏固定且不随滚动消失”，因此不再在滚动/点击时自动隐藏导航栏。
     });
     window.swup.hooks.on("content:replace", () => {
       // 更新主网格布局类名
@@ -989,7 +977,6 @@ function disableAnimation() {
   }
 
   let toc = document.getElementById("toc-wrapper");
-  let navbar = document.getElementById("navbar-wrapper");
 
   // 优化的滚动处理函数
   function scrollFunction() {
@@ -1009,21 +996,7 @@ function disableAnimation() {
       });
     }
 
-    if (bannerEnabled && navbar) {
-      operations.push(() => {
-        const isHome =
-          document.body.classList.contains("lg:is-home") &&
-          window.innerWidth >= 1024;
-        const currentBannerHeight = isHome ? BANNER_HEIGHT_HOME : BANNER_HEIGHT;
-        const threshold = window.innerHeight * (currentBannerHeight / 100) - 88;
-
-        if (scrollTop >= threshold) {
-          navbar.classList.add("navbar-hidden");
-        } else {
-          navbar.classList.remove("navbar-hidden");
-        }
-      });
-    }
+    // 导航栏不再随滚动隐藏（保持始终可见）
 
     // 批量执行DOM操作
     if (operations.length > 0) {

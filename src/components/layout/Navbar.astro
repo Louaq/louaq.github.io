@@ -114,7 +114,7 @@ let links: NavBarLink[] = navBarConfig.links.map(
 <script>
 // 声明一个全局引用，方便切换 system 模式时移除监听
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-window.__themeSystemListener = window.__themeSystemListener || null;
+(window as any).__themeSystemListener = (window as any).__themeSystemListener || null;
 
 function loadButtonScript() {
     let settingBtn = document.getElementById("display-settings-switch");
@@ -167,24 +167,24 @@ function loadButtonScript() {
 
             const cleanupSystemListener = () => {
                 const mql = window.matchMedia("(prefers-color-scheme: dark)");
-                if (window.__themeSystemListener) {
-                    if (mql.removeEventListener) mql.removeEventListener("change", window.__themeSystemListener);
-                    else mql.removeListener(window.__themeSystemListener);
-                    window.__themeSystemListener = null;
+                if ((window as any).__themeSystemListener) {
+                    if (mql.removeEventListener) mql.removeEventListener("change", (window as any).__themeSystemListener);
+                    else mql.removeListener((window as any).__themeSystemListener);
+                    (window as any).__themeSystemListener = null;
                 }
             };
 
             const setupSystemListener = () => {
                 cleanupSystemListener();
                 const mql = window.matchMedia("(prefers-color-scheme: dark)");
-                const handler = (e) => applyResolvedTheme(!!e.matches);
+                const handler = (e: MediaQueryListEvent) => applyResolvedTheme(!!e.matches);
                 if (mql.addEventListener) mql.addEventListener("change", handler);
                 else mql.addListener(handler);
-                window.__themeSystemListener = handler;
+                (window as any).__themeSystemListener = handler;
                 applyResolvedTheme(!!mql.matches);
             };
 
-            const setMode = (mode) => {
+            const setMode = (mode: string) => {
                 html.setAttribute("data-theme-mode", mode);
                 localStorage.setItem("theme", mode);
                 if (mode === SYSTEM_MODE) setupSystemListener();
