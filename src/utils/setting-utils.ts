@@ -306,12 +306,13 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 		const body = document.body;
 		// “页面标题横幅”页面：强制使用 banner 展示（不受用户壁纸模式影响）
 		const hasPageBanner = body?.dataset?.hasPageBanner === "true";
-		const effectiveMode: WALLPAPER_MODE = hasPageBanner ? WALLPAPER_BANNER : mode;
+		const isPostPage = body?.dataset?.pageType === "post";
+		const effectiveMode: WALLPAPER_MODE = (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
 
 		// 移除所有壁纸相关的CSS类
 		body.classList.remove("enable-banner", "wallpaper-transparent");
-		// 页面标题横幅页面不允许透明/无横幅状态
-		if (hasPageBanner) {
+		// 页面标题横幅页面和文章页不允许透明/无横幅状态
+		if (hasPageBanner || isPostPage) {
 			body.classList.add("enable-banner");
 			body.classList.remove("wallpaper-transparent");
 		}
@@ -349,11 +350,12 @@ function ensureWallpaperState(mode: WALLPAPER_MODE) {
 	const body = document.body;
 	// “页面标题横幅”页面：强制使用 banner 展示（不受用户壁纸模式影响）
 	const hasPageBanner = body?.dataset?.hasPageBanner === "true";
-	const effectiveMode: WALLPAPER_MODE = hasPageBanner ? WALLPAPER_BANNER : mode;
+	const isPostPage = body?.dataset?.pageType === "post";
+	const effectiveMode: WALLPAPER_MODE = (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
 
 	// 移除所有壁纸相关的CSS类
 	body.classList.remove("enable-banner", "wallpaper-transparent");
-	if (hasPageBanner) {
+	if (hasPageBanner || isPostPage) {
 		body.classList.add("enable-banner");
 		body.classList.remove("wallpaper-transparent");
 	}

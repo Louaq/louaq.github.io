@@ -370,10 +370,10 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               document.body.dataset.hasPageBanner === "true") ||
             isTitleBannerPagePath(pathname);
 
-          // 对"页面标题横幅"页面：强制显示 banner 壁纸与标题（不受用户壁纸模式影响）
-          const effectiveWallpaperMode = hasPageBanner ? WALLPAPER_BANNER : wallpaperMode;
+          // 对"页面标题横幅"页面和文章页：强制显示 banner 壁纸与标题（不受用户壁纸模式影响）
+          const effectiveWallpaperMode = (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : wallpaperMode;
 
-          if (hasPageBanner && document.body) {
+          if ((hasPageBanner || isPostPage) && document.body) {
             document.body.classList.add("enable-banner");
             document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
           }
@@ -449,21 +449,19 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 
 
           // 处理banner文字元素显示/隐藏
-          // Page overlay 通过条件渲染自动显示，只需要处理 home/post overlay
+          // 所有 overlay 现在都通过条件渲染，但需要用 JS 控制 hidden 类
           const bannerTextOverlays = document.querySelectorAll(
             "[data-banner-text-overlay]"
           );
           bannerTextOverlays.forEach((el) => {
             const overlayType = el.getAttribute("data-banner-text-overlay");
-            if (overlayType === "page") {
-              // Page overlay 已经通过条件渲染正确显示，不需要额外处理
-              return;
-            }
-            // Home/Post overlay：按 effectiveWallpaperMode 决定
+            // 决定是否显示当前 overlay
             const shouldShow =
               effectiveWallpaperMode === WALLPAPER_BANNER &&
               ((overlayType === "home" && isHomePage) ||
-                (overlayType === "post" && isPostPage));
+                (overlayType === "post" && isPostPage) ||
+                (overlayType === "page" && hasPageBanner));
+            
             if (shouldShow) {
               el.classList.remove("hidden");
             } else {
@@ -573,6 +571,10 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     body.enable-banner[data-has-page-banner="true"] #banner-wrapper {
       @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
     }
+    /* 文章页，壁纸显示高度与首页一致 */
+    body.enable-banner[data-page-type="post"] #banner-wrapper {
+      @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
+    }
     .enable-banner #banner-wrapper {
       @apply h-[var(--banner-height-home)];
     }
@@ -583,6 +585,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     body.enable-banner[data-has-page-banner="true"] #banner {
       @apply h-[var(--banner-height-home)] translate-y-0;
     }
+    body.enable-banner[data-page-type="post"] #banner {
+      @apply h-[var(--banner-height-home)] translate-y-0;
+    }
     .enable-banner #banner {
       @apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)];
     }
@@ -590,6 +595,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       @apply translate-y-[var(--banner-height-extend)];
     }
     body.enable-banner[data-has-page-banner="true"] #main-grid {
+      @apply translate-y-[var(--banner-height-extend)];
+    }
+    body.enable-banner[data-page-type="post"] #main-grid {
       @apply translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #top-row {
@@ -611,6 +619,15 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       @apply top-[calc(1rem_-_var(--banner-height-extend))];
     }
     body.enable-banner[data-has-page-banner="true"] #right-sidebar-sticky {
+      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+    }
+    body.enable-banner[data-page-type="post"] #sidebar-sticky {
+      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+    }
+    body.enable-banner[data-page-type="post"] #left-sidebar-sticky {
+      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+    }
+    body.enable-banner[data-page-type="post"] #right-sidebar-sticky {
       @apply top-[calc(1rem_-_var(--banner-height-extend))];
     }
   }
@@ -805,6 +822,27 @@ function disableAnimation() {
           mainGrid.className = [...newClasses, ...gridClasses].join(" ");
         }
       }
+
+      // 处理 banner overlay 的显示（Swup 替换后需要重新设置）
+      const pageType = document.body?.dataset?.pageType;
+      const isHomePage = pageType === "home";
+      const isPostPage = pageType === "post";
+      const hasPageBanner = document.body?.dataset?.hasPageBanner === "true";
+      
+      const bannerTextOverlays = document.querySelectorAll("[data-banner-text-overlay]");
+      bannerTextOverlays.forEach((el) => {
+        const overlayType = el.getAttribute("data-banner-text-overlay");
+        const shouldShow =
+          (overlayType === "home" && isHomePage) ||
+          (overlayType === "post" && isPostPage) ||
+          (overlayType === "page" && hasPageBanner);
+        
+        if (shouldShow) {
+          el.classList.remove("hidden");
+        } else {
+          el.classList.add("hidden");
+        }
+      });
 
       // 只处理katex元素的容器，使用浏览器原生滚动条
       initCustomScrollbar();

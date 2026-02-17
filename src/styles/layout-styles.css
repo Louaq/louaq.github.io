@@ -15,6 +15,20 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
     display: none !important;
 }
 
+/* 文章页横幅标题总是显示，不受设置影响（仅桌面端） */
+@media (min-width: 1024px) {
+    html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-overlay="post"] {
+        display: flex !important;
+    }
+}
+
+/* 移动端隐藏文章页横幅标题和元信息 */
+@media (max-width: 1023px) {
+    .banner-text-overlay[data-banner-text-overlay="post"] {
+        display: none !important;
+    }
+}
+
 .banner-text-overlay.user-hidden {
     display: none !important;
 }
@@ -27,6 +41,20 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
 
 .banner-subtitle {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Post banner meta overlay - 文章元信息样式 */
+[data-banner-text-overlay="post"] .banner-title {
+    color: rgba(255, 255, 255, 0.98);
+    -webkit-text-stroke: 1px rgba(0, 0, 0, 0.5);
+    paint-order: stroke fill;
+    text-shadow:
+        2px 2px 6px rgba(0, 0, 0, 0.6),
+        0 0 12px rgba(0, 0, 0, 0.3);
+}
+
+[data-banner-text-overlay="post"] .flex {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
 /* 移动端无侧边栏布局优化 */
@@ -56,8 +84,6 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
     /* Banner wrapper 高度优化 - 优先保持banner显示 - 仅在首页应用 */
     #banner-wrapper:not(.mobile-hide-banner) {
         height: 70vh !important; /* 保持较大高度优先显示banner */
-        min-height: 450px;
-        max-height: none; /* 移除最大高度限制 */
     }
     
     /* 主内容区域位置调整 - 向上移动以部分遮挡banner */
