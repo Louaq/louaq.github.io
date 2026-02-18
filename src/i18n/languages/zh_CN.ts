@@ -59,7 +59,7 @@ export const zh_CN: Translation = {
 	[Key.license]: "许可协议",
 	[Key.bangumi]: "番组计划",
 	[Key.watchlist]: "观影",
-	[Key.watchlistTitle]: "我的观影清单",
+	[Key.watchlistTitle]: "观影清单",
 	[Key.watchlistSubtitle]: "记录最近观看的动漫与影视作品",
 	[Key.watchlistEmpty]: "暂无观影记录",
 	[Key.watchlistEmptyReason]: "还没有添加任何观影记录，快去配置文件中添加吧",

@@ -61,7 +61,7 @@ export const ja: Translation = {
 	[Key.license]: "ライセンス",
 	[Key.bangumi]: "バングミ",
 	[Key.watchlist]: "視聴",
-	[Key.watchlistTitle]: "私の視聴リスト",
+	[Key.watchlistTitle]: "視聴リスト",
 	[Key.watchlistSubtitle]: "最近視聴したアニメとテレビ番組を記録する",
 	[Key.watchlistEmpty]: "視聴記録なし",
 	[Key.watchlistEmptyReason]: "視聴記録がまだ追加されていません。設定ファイルに追加してください",

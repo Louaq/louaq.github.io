@@ -102,10 +102,10 @@ if (recommended.length < limit) {
 				<div class="text-sm text-60 whitespace-nowrap">基于标签匹配 · 智能推荐</div>
 			</div>
 
-			<div class="flex flex-col gap-4">
-				{recommended.map((post) => (
-					<article class="card-base !shadow-none !rounded-lg h-[104px] p-4 border border-[var(--line-divider)] hover:border-[var(--primary)] transition-all duration-300 flex flex-col justify-between relative cursor-pointer group">
-						<h3 class="text-base font-semibold text-90 mb-2 group-hover:text-[var(--primary)] transition-colors line-clamp-1 leading-snug">
+		<div class="flex flex-col gap-4">
+			{recommended.map((post) => (
+				<article class="rec-card card-base !shadow-none !rounded-lg h-[104px] p-4 border border-[var(--line-divider)] hover:border-[var(--primary)] flex flex-col justify-between relative cursor-pointer group">
+					<h3 class="text-base font-semibold text-90 mb-2 line-clamp-1 leading-snug">
 							<a
 								href={getPostUrlBySlug(post.id)}
 								class="!no-underline hover:!no-underline focus:!no-underline before:content-[''] before:absolute before:inset-0 before:z-0"
@@ -140,4 +140,17 @@ if (recommended.length < limit) {
 		</section>
 	)
 }
+
+<style is:global>
+.rec-card {
+	transition:
+		transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+		border-color 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+		box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.rec-card:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.12);
+}
+</style>
 

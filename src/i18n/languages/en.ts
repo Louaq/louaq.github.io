@@ -61,7 +61,7 @@ export const en: Translation = {
 	[Key.license]: "License",
 	[Key.bangumi]: "Bangumi",
 	[Key.watchlist]: "Watchlist",
-	[Key.watchlistTitle]: "My Watchlist",
+	[Key.watchlistTitle]: "Watchlist",
 	[Key.watchlistSubtitle]: "Record recently watched anime and TV shows",
 	[Key.watchlistEmpty]: "No watch records",
 	[Key.watchlistEmptyReason]: "No watch records have been added yet, go to the config file to add some",
