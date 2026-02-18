@@ -18,7 +18,8 @@ export type SiteConfig = {
 
 	themeColor: {
 		hue: number;
-		fixed: boolean;
+		fixed: boolean; // 是否隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
+		showModeSwitch?: boolean; // 是否显示明暗/跟随系统模式切换按钮，默认 true
 		defaultMode?: LIGHT_DARK_MODE; // 默认模式：浅色、深色或跟随系统
 	};
 
