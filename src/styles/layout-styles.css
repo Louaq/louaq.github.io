@@ -734,3 +734,31 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
         min-height: 50px !important;
     }
 }
+
+/* === 强制关闭横幅模式，彻底当成 overlay 布局 === */
+
+/* 无论任何模式，都完全隐藏横幅容器 */
+#banner-wrapper {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+}
+
+/* 主内容区域一律按无横幅布局，从导航栏正下方开始 */
+.absolute.w-full.z-30 {
+  top: 5.5rem !important;          /* 跟 Navbar 高度一致 */
+  transform: none !important;
+}
+
+/* 主网格不再因为 banner 上移/下移 */
+#main-grid {
+  transform: none !important;
+}
+
+/* 顶部行（放 Navbar 的那一行）高度固定为导航栏本身，不再被 banner 拉高 */
+#top-row {
+  height: 4.5rem !important;
+}

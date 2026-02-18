@@ -693,7 +693,10 @@ export function initWallpaperMode(): void {
 }
 
 export function getStoredWallpaperMode(): WALLPAPER_MODE {
-	// 检查是否在浏览器环境中
+	// 配置为 overlay 时强制返回 overlay，不读 localStorage，避免刷新仍显示 banner
+	if (backgroundWallpaper.mode === WALLPAPER_OVERLAY) {
+		return WALLPAPER_OVERLAY;
+	}
 	if (
 		typeof localStorage === "undefined" ||
 		typeof localStorage.getItem !== "function"

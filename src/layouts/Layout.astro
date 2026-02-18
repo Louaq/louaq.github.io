@@ -103,7 +103,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 ---
 
 <!doctype html>
-<html lang={siteLang} class="bg-[var(--page-bg)] text-[14px] md:text-[16px]">
+<html lang={siteLang} class="bg-[var(--page-bg)] text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode}>
   <head>
       {siteConfig.analytics?.googleAnalyticsId && (
               <GoogleAnalytics analyticsId={siteConfig.analytics.googleAnalyticsId} />
@@ -268,9 +268,12 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       const WALLPAPER_BANNER = "banner";
       const WALLPAPER_OVERLAY = "overlay";
       const WALLPAPER_NONE = "none";
-      const wallpaperMode = isWallpaperSwitchable
-        ? localStorage.getItem("wallpaperMode") || defaultWallpaperMode
-        : defaultWallpaperMode;
+      // 配置为 overlay 时强制使用 overlay，不读 localStorage，避免刷新仍显示 banner
+      const stored = isWallpaperSwitchable ? localStorage.getItem("wallpaperMode") : null;
+      const wallpaperMode =
+        defaultWallpaperMode === WALLPAPER_OVERLAY
+          ? WALLPAPER_OVERLAY
+          : (stored || defaultWallpaperMode);
 
       // 设置data-wallpaper-mode属性
       document.documentElement.setAttribute(
@@ -278,8 +281,22 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         wallpaperMode
       );
 
-      // 立即执行函数来处理DOM
-      (function applyWallpaperMode() {
+      // 先同步设置 body 类，避免首屏闪 banner
+      if (wallpaperMode === WALLPAPER_NONE || wallpaperMode === WALLPAPER_OVERLAY) {
+        if (document.body) {
+          document.body.classList.remove("enable-banner");
+          document.body.classList.add("no-banner-layout");
+        }
+        if (wallpaperMode === WALLPAPER_OVERLAY && document.body) {
+          document.body.classList.add("wallpaper-transparent");
+        }
+      } else if (document.body) {
+        document.body.classList.add("enable-banner");
+        document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
+      }
+
+      // DOM 就绪后再处理 banner/overlay 元素（此时 #banner-wrapper 已存在）
+      function runWallpaperVisibility() {
         // 使用 requestAnimationFrame 确保在下一帧之前执行
         requestAnimationFrame(function () {
           // 根据模式隐藏显示对应元素
@@ -478,7 +495,12 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             }
           });
         });
-      })();
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", runWallpaperVisibility);
+      } else {
+        runWallpaperVisibility();
+      }
       // 初始化水波纹动画状态 - 在 html 元素上设置属性，CSS 会立即生效
       (function applyWavesEnabled() {
         const wavesEnabled = localStorage.getItem("wavesEnabled");
@@ -571,6 +593,16 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     "banner-height": `${BANNER_HEIGHT}vh`,
   }}
 >
+  /* 默认 overlay/none 时首屏即隐藏横幅，避免刷新闪出 */
+  html[data-default-wallpaper="overlay"] #banner-wrapper,
+  html[data-default-wallpaper="none"] #banner-wrapper {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
+    pointer-events: none !important;
+  }
   @tailwind components;
   @layer components {
     /* 首页：用 data-page-type 判断，避免类名不匹配 */
