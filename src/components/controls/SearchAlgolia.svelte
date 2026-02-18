@@ -865,13 +865,16 @@ $effect(() => {
 	}
 
 	.algolia-item.is-active {
-		background: rgba(37, 99, 235, 1);
-		color: white;
-		border-color: rgba(255, 255, 255, 0.22);
+		background: transparent;
+		border-color: var(--primary);
+	}
+	:global([data-theme="dark"]) .algolia-item.is-active {
+		background: transparent;
+		border-color: var(--primary);
 	}
 	.algolia-item.is-active :global(mark) {
-		background-color: rgba(255, 255, 255, 0.22);
-		color: white;
+		background-color: color-mix(in oklch, var(--primary) 25%, transparent);
+		color: inherit;
 	}
 
 	.algolia-title {

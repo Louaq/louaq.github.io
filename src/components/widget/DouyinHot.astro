@@ -272,6 +272,9 @@ const style = Astro.props.style;
 		items: DouyinAPIItem[];    // 数据列表
 	}
 
+	const CACHE_KEY = "douyin-hot-cache";
+	const CACHE_TTL = 10 * 60 * 1000; // 10 分钟
+
 
 	// 初始化组件 - 直接实例化和调用
 	function initDouyinHot() {
@@ -366,7 +369,7 @@ const style = Astro.props.style;
 
 		// 获取抖音热搜
 		// silent: 不打断当前列表显示，只展示按钮旋转
-		// force: 强制绕过浏览器缓存（用于手动刷新）
+		// force: 强制绕过本地缓存和浏览器缓存（用于手动刷新）
 		async function fetchDouyinHot(opts?: { silent?: boolean; force?: boolean }) {
 			if (inFlight) return;
 			inFlight = true;
@@ -374,9 +377,41 @@ const style = Astro.props.style;
 				if (!opts?.silent) showLoading();
 				else setRefreshing(true);
 
+				const allowCache = !opts?.force;
+
+				// 先尝试从本地缓存读取，缓存时间 10 分钟
+				if (allowCache && typeof window !== "undefined" && "localStorage" in window) {
+					try {
+						const cachedRaw = window.localStorage.getItem(CACHE_KEY);
+						if (cachedRaw) {
+							const cached = JSON.parse(cachedRaw) as {
+								items?: any[];
+								updatedTime?: number;
+								cachedAt?: number;
+							} | null;
+
+							if (
+								cached &&
+								Array.isArray(cached.items) &&
+								cached.items.length > 0 &&
+								typeof cached.cachedAt === "number" &&
+								Date.now() - cached.cachedAt < CACHE_TTL
+							) {
+								renderHotList(cached.items);
+								if (updateText && cached.updatedTime) {
+									updateText.textContent = formatAgo(cached.updatedTime);
+								}
+								showHotList();
+								return;
+							}
+						}
+					} catch {
+						// 本地缓存解析失败则忽略，继续走网络请求
+					}
+				}
+
 				const apiUrl = "https://newsnow.louaq.com/api/s?id=douyin";
 				const url = opts?.force ? `${apiUrl}&_t=${Date.now()}` : apiUrl;
-				
 
 				const response = await fetch(url, {
 					method: "GET",
@@ -409,11 +444,33 @@ const style = Astro.props.style;
 					url: item.url,
 				}));
 
-				renderHotList(hotList.slice(0, 30));
+				const displayItems = hotList.slice(0, 30);
+				renderHotList(displayItems);
+
+				const effectiveUpdatedTime =
+					typeof result.updatedTime === "number" && !Number.isNaN(result.updatedTime)
+						? result.updatedTime
+						: Date.now();
+
 				// 更新"多久前"显示（使用 updatedTime）
-				if (updateText && result.updatedTime) {
-					updateText.textContent = formatAgo(result.updatedTime);
+				if (updateText) {
+					updateText.textContent = formatAgo(effectiveUpdatedTime);
 				}
+
+				// 写入本地缓存，供 10 分钟内的页面切换 / 刷新复用
+				if (typeof window !== "undefined" && "localStorage" in window) {
+					try {
+						const cachePayload = {
+							items: displayItems,
+							updatedTime: effectiveUpdatedTime,
+							cachedAt: Date.now(),
+						};
+						window.localStorage.setItem(CACHE_KEY, JSON.stringify(cachePayload));
+					} catch {
+						// 本地存储写入失败时忽略，不影响正常显示
+					}
+				}
+
 				showHotList();
 			} catch (error) {
 				// 打印错误信息用于调试
