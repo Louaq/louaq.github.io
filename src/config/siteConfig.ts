@@ -181,7 +181,7 @@ export const siteConfig: SiteConfig = {
 		{
 			name: "春节",
 			startDate: "01-20",
-			endDate: "02-10",
+			endDate: "02-28",
 			decorationType: "spring-festival",
 			customStyles: {
 				lanterns: {

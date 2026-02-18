@@ -5,7 +5,7 @@ export const fontConfig = {
 	// 是否预加载字体文件
 	preload: true,
 	// 当前选择的字体，支持多个字体组合
-	selected: ["system"],
+	selected: ["jetbrains-mono-nl", "noto-serif-sc"],
 
 	// 字体列表
 	fonts: {
@@ -16,6 +16,24 @@ export const fontConfig = {
 			src: "", // 系统字体无需 src
 			family:
 				"system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+		},
+
+		// Google Fonts - JetBrains Mono（页面中显示为 JetBrains Mono NL，与 Google 提供的 family 名一致）
+		"jetbrains-mono-nl": {
+			id: "jetbrains-mono-nl",
+			name: "JetBrains Mono NL",
+			src: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap",
+			family: "JetBrains Mono",
+			display: "swap" as const,
+		},
+
+		// Google Fonts - Noto Serif SC
+		"noto-serif-sc": {
+			id: "noto-serif-sc",
+			name: "Noto Serif SC",
+			src: "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap",
+			family: "Noto Serif SC",
+			display: "swap" as const,
 		},
 
 		// Google Fonts - Zen Maru Gothic
@@ -57,13 +75,21 @@ export const fontConfig = {
 		},
 	},
 
-	// 全局字体回退
+	// 全局字体回退（与 font-family 中顺序一致，含空格的名称需带引号）
 	fallback: [
-		"system-ui",
 		"-apple-system",
 		"BlinkMacSystemFont",
-		"Segoe UI",
-		"Roboto",
+		'"PingFang SC"',
+		'"Hiragino Sans GB"',
+		'"Microsoft YaHei"',
+		'"Segoe UI"',
+		'"Roboto"',
+		'"Helvetica Neue"',
+		"Helvetica",
+		"Arial",
 		"sans-serif",
+		'"Apple Color Emoji"',
+		'"Segoe UI Emoji"',
+		'"Segoe UI Symbol"',
 	],
 };
