@@ -373,23 +373,20 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           const isMobile = window.innerWidth < 1024;
           const mobilePostNoWallpaper = isMobile && isPostPage;
 
-          // 对"页面标题横幅"页面：强制显示 banner 壁纸与标题（不受用户壁纸模式影响）
-          // 文章详情页：移动端统一不显示壁纸
+          // 壁纸模式优先级最高：
+          // - 用户设置为 overlay/none 时，全站遵循该模式，不再强制显示横幅
+          // - 文章详情页在移动端统一不显示壁纸（保持原有体验）
           const effectiveWallpaperMode = mobilePostNoWallpaper
             ? WALLPAPER_NONE
-            : (hasPageBanner || isPostPage)
-              ? WALLPAPER_BANNER
-              : wallpaperMode;
+            : wallpaperMode;
 
           if (document.body) {
             if (mobilePostNoWallpaper) {
               // 移动端文章详情页：强制纯色背景（无 banner / 无 overlay）
               document.body.classList.remove("enable-banner", "wallpaper-transparent");
               document.body.classList.add("no-banner-layout");
-            } else if (hasPageBanner || isPostPage) {
-              document.body.classList.add("enable-banner");
-              document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
             }
+            // 其他情况统一交由前面的壁纸模式逻辑处理，确保壁纸模式具有最高优先级
           }
 
           if (effectiveWallpaperMode === WALLPAPER_OVERLAY) {
@@ -467,7 +464,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           );
           bannerTextOverlays.forEach((el) => {
             const overlayType = el.getAttribute("data-banner-text-overlay");
-            // 决定是否显示当前 overlay
+            // 仅在 banner 模式下，根据页面类型决定是否显示对应文字覆盖层
             const shouldShow =
               effectiveWallpaperMode === WALLPAPER_BANNER &&
               ((overlayType === "home" && isHomePage) ||
@@ -836,19 +833,32 @@ function disableAnimation() {
         }
       }
 
-      // 处理 banner overlay 的显示（Swup 替换后需要重新设置）
+      // 处理 banner overlay 的显示（Swup 替换后需要根据壁纸模式重新设置）
       const pageType = document.body?.dataset?.pageType;
       const isHomePage = pageType === "home";
       const isPostPage = pageType === "post";
       const hasPageBanner = document.body?.dataset?.hasPageBanner === "true";
+
+      const docEl = document.documentElement;
+      const wallpaperMode =
+        docEl.getAttribute("data-wallpaper-mode") || "banner";
+      const WALLPAPER_BANNER = "banner";
+      const WALLPAPER_NONE = "none";
+      const WALLPAPER_OVERLAY = "overlay";
+      const isMobile = window.innerWidth < 1024;
+      const mobilePostNoWallpaper = isMobile && isPostPage;
+      const effectiveWallpaperMode = mobilePostNoWallpaper
+        ? WALLPAPER_NONE
+        : wallpaperMode;
       
       const bannerTextOverlays = document.querySelectorAll("[data-banner-text-overlay]");
       bannerTextOverlays.forEach((el) => {
         const overlayType = el.getAttribute("data-banner-text-overlay");
         const shouldShow =
-          (overlayType === "home" && isHomePage) ||
-          (overlayType === "post" && isPostPage) ||
-          (overlayType === "page" && hasPageBanner);
+          effectiveWallpaperMode === WALLPAPER_BANNER &&
+          ((overlayType === "home" && isHomePage) ||
+            (overlayType === "post" && isPostPage) ||
+            (overlayType === "page" && hasPageBanner));
         
         if (shouldShow) {
           el.classList.remove("hidden");
@@ -944,10 +954,16 @@ function disableAnimation() {
         bodyElement.dataset.pageType = nextPageType;
         bodyElement.dataset.hasPageBanner = String(isTitleBannerPage);
         
-        // 对页面标题横幅页面：强制启用 banner 模式
-        if (isTitleBannerPage) {
+        // 壁纸模式优先级最高：仅在横幅模式下，且为页面标题横幅页面时才启用 banner 布局
+        const docEl = document.documentElement;
+        const wallpaperMode =
+          docEl.getAttribute("data-wallpaper-mode") || "banner";
+        if (isTitleBannerPage && wallpaperMode === "banner") {
           bodyElement.classList.add("enable-banner");
-          bodyElement.classList.remove("no-banner-layout", "wallpaper-transparent");
+          bodyElement.classList.remove(
+            "no-banner-layout",
+            "wallpaper-transparent"
+          );
         }
         // 移动端文章详情页：强制纯色背景（提前设置，避免跳转闪一下）
         const isMobile = window.innerWidth < 1024;
@@ -1032,9 +1048,11 @@ function disableAnimation() {
           }, 100);
         }
       } else if (!isMobile && bannerWrapper) {
-        // 桌面端：确保banner正常显示
-        // 对页面标题横幅页面：强制显示（即使壁纸模式为 overlay/none）
-        if (isTitleBannerPage) {
+        // 桌面端：在横幅模式下确保页面标题横幅正常显示
+        const docEl = document.documentElement;
+        const wallpaperMode =
+          docEl.getAttribute("data-wallpaper-mode") || "banner";
+        if (isTitleBannerPage && wallpaperMode === "banner") {
           bannerWrapper.style.display = "block";
         } else {
           bannerWrapper.style.display = "";
