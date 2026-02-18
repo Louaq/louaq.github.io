@@ -307,12 +307,14 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 		// “页面标题横幅”页面：强制使用 banner 展示（不受用户壁纸模式影响）
 		const hasPageBanner = body?.dataset?.hasPageBanner === "true";
 		const isPostPage = body?.dataset?.pageType === "post";
-		const effectiveMode: WALLPAPER_MODE = (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
+		const isMobile = window.innerWidth < 1024;
+		const effectiveMode: WALLPAPER_MODE =
+			isMobile && isPostPage ? WALLPAPER_NONE : (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
 
 		// 移除所有壁纸相关的CSS类
 		body.classList.remove("enable-banner", "wallpaper-transparent");
 		// 页面标题横幅页面和文章页不允许透明/无横幅状态
-		if (hasPageBanner || isPostPage) {
+		if ((hasPageBanner || isPostPage) && !(isMobile && isPostPage)) {
 			body.classList.add("enable-banner");
 			body.classList.remove("wallpaper-transparent");
 		}
@@ -351,11 +353,13 @@ function ensureWallpaperState(mode: WALLPAPER_MODE) {
 	// “页面标题横幅”页面：强制使用 banner 展示（不受用户壁纸模式影响）
 	const hasPageBanner = body?.dataset?.hasPageBanner === "true";
 	const isPostPage = body?.dataset?.pageType === "post";
-	const effectiveMode: WALLPAPER_MODE = (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
+	const isMobile = window.innerWidth < 1024;
+	const effectiveMode: WALLPAPER_MODE =
+		isMobile && isPostPage ? WALLPAPER_NONE : (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
 
 	// 移除所有壁纸相关的CSS类
 	body.classList.remove("enable-banner", "wallpaper-transparent");
-	if (hasPageBanner || isPostPage) {
+	if ((hasPageBanner || isPostPage) && !(isMobile && isPostPage)) {
 		body.classList.add("enable-banner");
 		body.classList.remove("wallpaper-transparent");
 	}
@@ -402,9 +406,13 @@ function showBannerMode() {
 			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 
+		// 移动端文章详情页：统一不显示壁纸/banner
 		// 移动端非首页时，不显示banner；但“页面标题横幅”页面例外要显示
 		// 桌面端始终显示
-		if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
+		if (isMobile && isPostPage) {
+			bannerWrapper.style.display = "none";
+			bannerWrapper.classList.add("mobile-hide-banner");
+		} else if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
 			bannerWrapper.style.display = "none";
 			bannerWrapper.classList.add("mobile-hide-banner");
 		} else {

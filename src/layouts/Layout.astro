@@ -370,12 +370,26 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               document.body.dataset.hasPageBanner === "true") ||
             isTitleBannerPagePath(pathname);
 
-          // 对"页面标题横幅"页面和文章页：强制显示 banner 壁纸与标题（不受用户壁纸模式影响）
-          const effectiveWallpaperMode = (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : wallpaperMode;
+          const isMobile = window.innerWidth < 1024;
+          const mobilePostNoWallpaper = isMobile && isPostPage;
 
-          if ((hasPageBanner || isPostPage) && document.body) {
-            document.body.classList.add("enable-banner");
-            document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
+          // 对"页面标题横幅"页面：强制显示 banner 壁纸与标题（不受用户壁纸模式影响）
+          // 文章详情页：移动端统一不显示壁纸
+          const effectiveWallpaperMode = mobilePostNoWallpaper
+            ? WALLPAPER_NONE
+            : (hasPageBanner || isPostPage)
+              ? WALLPAPER_BANNER
+              : wallpaperMode;
+
+          if (document.body) {
+            if (mobilePostNoWallpaper) {
+              // 移动端文章详情页：强制纯色背景（无 banner / 无 overlay）
+              document.body.classList.remove("enable-banner", "wallpaper-transparent");
+              document.body.classList.add("no-banner-layout");
+            } else if (hasPageBanner || isPostPage) {
+              document.body.classList.add("enable-banner");
+              document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
+            }
           }
 
           if (effectiveWallpaperMode === WALLPAPER_OVERLAY) {
@@ -400,10 +414,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           } else {
             // banner模式：显示banner，隐藏全屏壁纸
             if (bannerWrapper) {
-              const isMobile = window.innerWidth < 1024;
               // 移动端非首页时隐藏banner（初始状态直接隐藏，不需要动画）
               // 桌面端始终显示banner
-              if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
+              if (isMobile && (!isHomePage && !hasPageBanner)) {
                 bannerWrapper.style.display = "none";
                 bannerWrapper.classList.add("mobile-hide-banner");
               } else {
@@ -422,9 +435,8 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             ".absolute.w-full.z-30"
           );
           if (mainContentWrapper) {
-            const isMobile = window.innerWidth < 1024;
             // 只在移动端非首页时调整主内容位置
-            if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
+            if (isMobile && (!isHomePage && !hasPageBanner)) {
               mainContentWrapper.classList.add("mobile-main-no-banner");
             } else {
               mainContentWrapper.classList.remove("mobile-main-no-banner");
@@ -937,6 +949,12 @@ function disableAnimation() {
           bodyElement.classList.add("enable-banner");
           bodyElement.classList.remove("no-banner-layout", "wallpaper-transparent");
         }
+        // 移动端文章详情页：强制纯色背景（提前设置，避免跳转闪一下）
+        const isMobile = window.innerWidth < 1024;
+        if (isMobile && isPostPage) {
+          bodyElement.classList.remove("enable-banner", "wallpaper-transparent");
+          bodyElement.classList.add("no-banner-layout");
+        }
       }
 
       if (isHomePage) {
@@ -983,7 +1001,13 @@ function disableAnimation() {
       ) as HTMLElement | null;
 
       if (isMobile && bannerWrapper && mainContentWrapper) {
-        if (isHomePage || isPostPage || isTitleBannerPage) {
+        // 移动端文章详情页：统一不显示壁纸/banner
+        if (isPostPage) {
+          bannerWrapper.classList.add("mobile-hide-banner");
+          setTimeout(() => {
+            mainContentWrapper.classList.add("mobile-main-no-banner");
+          }, 0);
+        } else if (isHomePage || isTitleBannerPage) {
           // 首页：禁用主内容区域的过渡动画，防止文章列表下移
           mainContentWrapper.style.transition = "none";
           
