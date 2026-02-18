@@ -33,6 +33,8 @@ import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 import algolia from "./src/utils/algolia.ts";
 
+const isDev = process.env.NODE_ENV === "development";
+
 // https://astro.build/config
 export default defineConfig({
 	site: siteConfig.site_url,
@@ -55,8 +57,9 @@ export default defineConfig({
 				"#floating-toc-wrapper",
 			],
 			smoothScrolling: false,
-			cache: true,
-			preload: true,
+			// 开发模式下 Vite 依赖重优化会导致 swup 预加载/缓存命中旧的 deps，出现 504 (Outdated Optimize Dep)
+			cache: !isDev,
+			preload: !isDev,
 			accessibility: true,
 			updateHead: true,
 			updateBodyClass: false,

@@ -397,19 +397,31 @@ const initialLayoutClass =
     flex-direction: column-reverse !important;
   }
 
-  #post-list-container.grid-mode :global(.post-card-image) {
+  /* 仅对“有封面”的卡片固定整体高度与封面占比（无封面不受影响） */
+  #post-list-container.grid-mode :global(.has-cover.post-card-wrapper) {
+    aspect-ratio: 1 / 1 !important;
+  }
+
+  #post-list-container.grid-mode :global(.has-cover .post-card-image) {
     width: 100% !important;
     position: relative !important;
     top: auto !important;
     right: auto !important;
     bottom: auto !important;
     border-radius: var(--radius-large) var(--radius-large) 0 0 !important;
-    /*aspect-ratio: 16/9 !important;*/
+    flex: 0 0 50% !important;
+    height: 50% !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
   }
 
-  #post-list-container.grid-mode :global(.post-card-content) {
+  #post-list-container.grid-mode :global(.has-cover .post-card-content) {
     width: 100% !important;
     padding: 1rem !important;
+    flex: 1 1 50% !important;
+    height: 50% !important;
+    min-height: 0 !important;
+    overflow: hidden !important;
   }
 
   #post-list-container.grid-mode :global(.no-cover .post-card-content) {
@@ -438,6 +450,12 @@ const initialLayoutClass =
     overflow: hidden !important;
     -webkit-line-clamp: 3 !important;
     line-clamp: 3 !important;
+  }
+
+  /* 仅限制有封面卡片的标签区，避免把卡片顶高 */
+  #post-list-container.grid-mode :global(.has-cover .stats) {
+    max-height: 2.25rem !important;
+    overflow: hidden !important;
   }
 
   #post-list-container.grid-mode :global(.post-meta) {

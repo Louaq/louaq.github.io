@@ -76,6 +76,14 @@ if (processedImage) {
 
 dayjs.extend(utc);
 
+const lastModified = dayjs(entry.data.updated || entry.data.published);
+const now = dayjs();
+const daysDiff = now.diff(lastModified, "day");
+const outdatedThreshold = siteConfig.outdatedThreshold ?? 1;
+const shouldShowOutdatedNotice =
+	siteConfig.showLastModified && daysDiff >= outdatedThreshold;
+const lastModifiedDateStr = lastModified.format("YYYY-MM-DD");
+
 const jsonLd = {
 	"@context": "https://schema.org",
 	"@type": "BlogPosting",
@@ -170,6 +178,7 @@ const jsonLd = {
         <h1
           class="transition w-full block font-bold mb-3
                     text-3xl md:text-[2.25rem]/[2.75rem]
+                    truncate
                     text-black/90 dark:text-white/90
                     md:before:w-1 before:h-5 before:rounded-md before:bg-[var(--primary)]
                     before:absolute before:top-[0.75rem] before:left-[-1.125rem]"
@@ -194,6 +203,49 @@ const jsonLd = {
           )
         }
       </div>
+
+      <!-- 过期/过时提醒：置于正文前 -->
+      {
+        shouldShowOutdatedNotice && (
+          <div class="mb-6 onload-animation">
+            <div
+              class="post-outdated-notice rounded-xl px-4 py-3 flex gap-3"
+              role="note"
+            >
+              <div
+                class="post-outdated-notice__icon h-9 w-9 rounded-lg flex items-center justify-center flex-shrink-0"
+              >
+                <Icon name="material-symbols:warning-rounded" class="text-xl" />
+              </div>
+              <div class="min-w-0">
+                <div class="text-sm text-black/80 dark:text-white/80 leading-snug">
+                  {`${i18n(I18nKey.lastModifiedPrefix)}${lastModifiedDateStr}${
+                    daysDiff >= 1
+                      ? `，${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
+                      : ""
+                  }`}
+                </div>
+                <div class="text-xs text-black/60 dark:text-white/60 mt-1 leading-snug">
+                  {i18n(I18nKey.lastModifiedOutdated)}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+
+      <style>
+        .post-outdated-notice {
+          border: 1px solid
+            color-mix(in oklab, var(--primary) 35%, transparent);
+          background: color-mix(in oklab, var(--primary) 10%, transparent);
+        }
+
+        .post-outdated-notice__icon {
+          background: color-mix(in oklab, var(--primary) 16%, transparent);
+          color: var(--primary);
+        }
+      </style>
 
       <!-- always show cover as long as it has one -->
 
@@ -337,102 +389,56 @@ const jsonLd = {
     </div>
   </div>
 
-  <!-- 上次编辑时间 -->
   {
-    siteConfig.showLastModified && (() => {
-      const lastModified = dayjs(
-        entry.data.updated || entry.data.published
-      );
-      const now = dayjs();
-      const daysDiff = now.diff(lastModified, "day");
-      // 使用用户定义的阈值，如果没有定义则默认为1天
-      const outdatedThreshold = siteConfig.outdatedThreshold ?? 1;
-      const shouldShowOutdatedCard = daysDiff >= outdatedThreshold;
-
-      return shouldShowOutdatedCard ? (
-        <div class="card-base p-6 mb-4">
-          <div class="flex items-center gap-2">
-            <div class="transition h-9 w-9 rounded-lg overflow-hidden relative flex items-center justify-center mr-0">
-              <Icon
-                name="material-symbols:history-rounded"
-                class="text-4xl text-[var(--primary)] transition-transform group-hover:translate-x-0.5 bg-[var(--enter-btn-bg)] p-2 rounded-md"
-              />
-            </div>
-
-            {(() => {
-              const dateStr = lastModified.format("YYYY-MM-DD");
-              const isOutdated = daysDiff >= 1;
-
-              return (
-                <div class="flex flex-col gap-0.1">
-                  <div class="text-[1.0rem] leading-tight text-black/75 dark:text-white/75">
-                    {`${i18n(I18nKey.lastModifiedPrefix)}${dateStr}${
-                      isOutdated
-                        ? `，${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
-                        : ""
-                    }`}
+    (siteConfig.showPostPrevNext ?? true) &&
+      (entry.data.nextSlug || entry.data.prevSlug) && (
+        <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
+          <a
+            href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
+            class:list={[
+              "w-full font-bold overflow-hidden active:scale-95",
+              { "pointer-events-none": !entry.data.nextSlug },
+            ]}
+          >
+            {
+              entry.data.nextSlug && (
+                <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4">
+                  <Icon
+                    name="material-symbols:chevron-left-rounded"
+                    class="text-[2rem] text-[var(--primary)]"
+                  />
+                  <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+                    {entry.data.nextTitle}
                   </div>
-                  {isOutdated && (
-                    <p class="text-[0.8rem] leading-tight text-black/75 dark:text-white/75">
-                      {i18n(I18nKey.lastModifiedOutdated)}
-                    </p>
-                  )}
                 </div>
-              );
-            })()}
-          </div>
+              )
+            }
+          </a>
+
+          <a
+            href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
+            class:list={[
+              "w-full font-bold overflow-hidden active:scale-95",
+              { "pointer-events-none": !entry.data.prevSlug },
+            ]}
+          >
+            {
+              entry.data.prevSlug && (
+                <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
+                  <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
+                    {entry.data.prevTitle}
+                  </div>
+                  <Icon
+                    name="material-symbols:chevron-right-rounded"
+                    class="text-[2rem] text-[var(--primary)]"
+                  />
+                </div>
+              )
+            }
+          </a>
         </div>
-      ) : null;
-    })()
+      )
   }
-
-  <div
-    class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full"
-  >
-    <a
-      href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
-      class:list={[
-        "w-full font-bold overflow-hidden active:scale-95",
-        { "pointer-events-none": !entry.data.nextSlug },
-      ]}
-    >
-      {
-        entry.data.nextSlug && (
-          <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-start gap-4">
-            <Icon
-              name="material-symbols:chevron-left-rounded"
-              class="text-[2rem] text-[var(--primary)]"
-            />
-            <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-              {entry.data.nextTitle}
-            </div>
-          </div>
-        )
-      }
-    </a>
-
-    <a
-      href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
-      class:list={[
-        "w-full font-bold overflow-hidden active:scale-95",
-        { "pointer-events-none": !entry.data.prevSlug },
-      ]}
-    >
-      {
-        entry.data.prevSlug && (
-          <div class="btn-card rounded-2xl w-full h-[3.75rem] max-w-full px-4 flex items-center !justify-end gap-4">
-            <div class="overflow-hidden transition overflow-ellipsis whitespace-nowrap max-w-[calc(100%_-_3rem)] text-black/75 dark:text-white/75">
-              {entry.data.prevTitle}
-            </div>
-            <Icon
-              name="material-symbols:chevron-right-rounded"
-              class="text-[2rem] text-[var(--primary)]"
-            />
-          </div>
-        )
-      }
-    </a>
-  </div>
 
   <!-- 评论 -->
   {entry.data.comment && <Comment post={entry} />}

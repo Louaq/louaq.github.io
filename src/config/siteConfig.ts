@@ -109,6 +109,9 @@ export const siteConfig: SiteConfig = {
 	// 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
 	outdatedThreshold: 5,
 
+	// 文章页"上一篇/下一篇"导航开关
+	showPostPrevNext: false,
+
 	// 是否开启分享海报生成功能
 	sharePoster: true,
 
