@@ -82,5 +82,18 @@ export const movieItems: WatchlistItem[] = [
 		tags: ["剧情", "戏剧", "动画"],
 		enabled: true,
 	},
+	{
+		title: "飞驰人生3",
+		cover: "https://pic1.imgdb.cn/item/699561094e07536d0172302e.webp",
+		type: "movie",
+		status: "watching",
+		rating: 7.6,
+		startDate: "2026-02-17",
+		endDate: "2026-02-17",
+		comment: "这次赛车戏量大管饱，三部之最",
+		link: "https://movie.douban.com/subject/37311135",
+		tags: ["剧情", "戏剧", "动作"],
+		enabled: true,
+	},
 ];
 
