@@ -43,16 +43,6 @@ interface Props {
 	setOGTypeArticle?: boolean;
 	postSlug?: string;
 	headings?: MarkdownHeading[];
-	pageTitleBanner?: boolean;
-	postBannerMeta?: {
-		title: string;
-		published?: string;
-		updated?: string;
-		category?: string;
-		tags?: string[];
-		words?: number;
-		minutes?: number;
-	};
 }
 
 const backgroundImages = getBackgroundImages();
@@ -66,8 +56,6 @@ const {
 	setOGTypeArticle,
 	postSlug,
 	headings = [],
-	pageTitleBanner = false,
-	postBannerMeta,
 } = Astro.props;
 
 // 检查背景壁纸模式和是否允许切换
@@ -126,15 +114,6 @@ const creditUrlMobile =
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 const isPostPageCheck = postSlug !== undefined;
 
-const pageBannerTitle =
-	typeof title === "string" && title.trim() !== "" ? title.trim() : "";
-const pageBannerSubtitle =
-	typeof description === "string" && description.trim() !== ""
-		? description.trim()
-		: "";
-const showPageTitleBanner =
-	pageTitleBanner && pageBannerTitle !== "" && !isHomePageCheck && !isPostPageCheck;
-
 // 随机选择副标题（当打字机关闭且为数组时）
 const getRandomSubtitle = () => {
 	const subtitle = backgroundWallpaper.banner?.homeText?.subtitle;
@@ -153,9 +132,7 @@ const shouldRenderHomeTextOverlay = homeTextEnable || homeTextSwitchable;
 const showHomeText = isBannerMode && shouldRenderHomeTextOverlay && isHomePageCheck;
 // 手机端非首页不显示banner的CSS类
 const mobileNonHomeBannerClass =
-	!isHomePageCheck && !isPostPageCheck && !showPageTitleBanner
-		? "mobile-hide-banner"
-		: "";
+	!isHomePageCheck && !isPostPageCheck ? "mobile-hide-banner" : "";
 
 const bannerSrc =
 	typeof banner === "string" && banner.trim() !== "" ? banner.trim() : "";
@@ -223,7 +200,7 @@ const transparentClass = shouldEnableTransparency
 const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 ---
 
-<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug} pageTitleBanner={showPageTitleBanner}>
+<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
 
 
 <!-- 全屏透明覆盖壁纸 - 如果允许切换则始终渲染，否则只渲染当前模式 -->
@@ -394,74 +371,6 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
         </div>
     )}
 
-	<!-- Page title overlay - 页面标题横幅（归档/友链等） -->
-	{showPageTitleBanner && (
-		<div
-			data-banner-text-overlay="page"
-			class="banner-text-overlay page-banner-text-overlay absolute inset-0 z-20 flex items-center justify-center"
-		>
-			<div class="w-4/5 lg:w-3/4 text-center mb-0">
-				<div class="flex flex-col">
-					<h1 class="banner-title font-bold text-white mb-2 lg:mb-4 leading-tight text-4xl md:text-5xl">
-						{pageBannerTitle}
-					</h1>
-				</div>
-			</div>
-		</div>
-	)}
-
-	<!-- Post banner meta overlay - 文章页横幅标题和元信息 -->
-	{postBannerMeta?.title && (
-		<div
-			data-banner-text-overlay="post"
-			class="banner-text-overlay absolute inset-0 z-20 flex items-center justify-center onload-animation hidden"
-		>
-			<div class="w-11/12 lg:w-3/4 text-center mb-0 px-2">
-				<h1 class="banner-title font-bold text-white mb-4 leading-tight text-3xl md:text-4xl lg:text-5xl">
-					{postBannerMeta.title}
-				</h1>
-				<div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2.5 text-white/90 text-sm md:text-base">
-					{postBannerMeta.published && (
-						<span class="inline-flex items-center gap-1.5">
-							<Icon name="material-symbols:calendar-month-outline-rounded" class="text-xl" />
-							<span>{postBannerMeta.published}</span>
-						</span>
-					)}
-					{postBannerMeta.updated && postBannerMeta.updated !== postBannerMeta.published && (
-						<span class="inline-flex items-center gap-1.5">
-							<Icon name="material-symbols:history-rounded" class="text-xl" />
-							<span>{postBannerMeta.updated}</span>
-						</span>
-					)}
-					{typeof postBannerMeta.words === "number" && (
-						<span class="inline-flex items-center gap-1.5">
-							<Icon name="material-symbols:notes-rounded" class="text-xl" />
-							<span>{postBannerMeta.words} 字</span>
-						</span>
-					)}
-					{typeof postBannerMeta.minutes === "number" && (
-						<span class="inline-flex items-center gap-1.5">
-							<Icon name="material-symbols:schedule-outline-rounded" class="text-xl" />
-							<span>{postBannerMeta.minutes} 分钟</span>
-						</span>
-					)}
-					{postBannerMeta.category && (
-						<span class="inline-flex items-center gap-1.5">
-							<Icon name="material-symbols:folder-outline-rounded" class="text-xl" />
-							<span>{postBannerMeta.category}</span>
-						</span>
-					)}
-					{postBannerMeta.tags && postBannerMeta.tags.length > 0 && (
-						<span class="inline-flex items-center gap-1.5">
-							<Icon name="material-symbols:tag-rounded" class="text-xl" />
-							<span>{postBannerMeta.tags.slice(0, 3).join(" · ")}</span>
-						</span>
-					)}
-				</div>
-			</div>
-		</div>
-	)}
-    
     <script is:inline>
         function setRandomSubtitle() {
             const subtitleElement = document.getElementById('banner-subtitle');

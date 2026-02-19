@@ -72,9 +72,16 @@ const makeWatchAnchorId = (item: WatchlistItem) => {
 
 // 状态文本映射
 const statusText = {
-	watching: "观看中",
-	completed: "已完成",
-	plan_to_watch: "计划观看",
+	watching: "在看",
+	completed: "已看",
+	plan_to_watch: "想看",
+};
+
+// 状态图标映射
+const statusIcon = {
+	watching: "material-symbols:play-circle-outline-rounded",
+	completed: "material-symbols:check-circle-outline-rounded",
+	plan_to_watch: "material-symbols:bookmark-outline-rounded",
 };
 
 // 类型文本映射
@@ -99,7 +106,6 @@ const statusColor = {
 <MainGridLayout
 	title={i18n(I18nKey.watchlistTitle)}
 	description={i18n(I18nKey.watchlistSubtitle)}
-	pageTitleBanner={true}
 >
 	<div
 		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
@@ -175,8 +181,9 @@ const statusColor = {
 												{/* 状态标签 */}
 												<div class="absolute top-2 left-2">
 													<span
-														class={`px-2 py-1 text-xs font-medium rounded-md ${statusColor[item.status]}`}
+														class={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md ${statusColor[item.status]}`}
 													>
+														<Icon icon={statusIcon[item.status]} class="text-[0.9em]" />
 														{statusText[item.status]}
 													</span>
 												</div>

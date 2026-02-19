@@ -304,17 +304,15 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 	// 使用 requestAnimationFrame 确保在下一帧执行，避免闪屏
 	requestAnimationFrame(() => {
 		const body = document.body;
-		// “页面标题横幅”页面：强制使用 banner 展示（不受用户壁纸模式影响）
-		const hasPageBanner = body?.dataset?.hasPageBanner === "true";
 		const isPostPage = body?.dataset?.pageType === "post";
 		const isMobile = window.innerWidth < 1024;
 		const effectiveMode: WALLPAPER_MODE =
-			isMobile && isPostPage ? WALLPAPER_NONE : (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
+			isMobile && isPostPage ? WALLPAPER_NONE : isPostPage ? WALLPAPER_BANNER : mode;
 
 		// 移除所有壁纸相关的CSS类
 		body.classList.remove("enable-banner", "wallpaper-transparent");
-		// 页面标题横幅页面和文章页不允许透明/无横幅状态
-		if ((hasPageBanner || isPostPage) && !(isMobile && isPostPage)) {
+		// 文章页和首页允许 banner 模式
+		if (isPostPage && !(isMobile && isPostPage)) {
 			body.classList.add("enable-banner");
 			body.classList.remove("wallpaper-transparent");
 		}
@@ -350,16 +348,14 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 // 确保壁纸状态正确
 function ensureWallpaperState(mode: WALLPAPER_MODE) {
 	const body = document.body;
-	// “页面标题横幅”页面：强制使用 banner 展示（不受用户壁纸模式影响）
-	const hasPageBanner = body?.dataset?.hasPageBanner === "true";
 	const isPostPage = body?.dataset?.pageType === "post";
 	const isMobile = window.innerWidth < 1024;
 	const effectiveMode: WALLPAPER_MODE =
-		isMobile && isPostPage ? WALLPAPER_NONE : (hasPageBanner || isPostPage) ? WALLPAPER_BANNER : mode;
+		isMobile && isPostPage ? WALLPAPER_NONE : isPostPage ? WALLPAPER_BANNER : mode;
 
 	// 移除所有壁纸相关的CSS类
 	body.classList.remove("enable-banner", "wallpaper-transparent");
-	if ((hasPageBanner || isPostPage) && !(isMobile && isPostPage)) {
+	if (isPostPage && !(isMobile && isPostPage)) {
 		body.classList.add("enable-banner");
 		body.classList.remove("wallpaper-transparent");
 	}
@@ -384,7 +380,6 @@ function ensureWallpaperState(mode: WALLPAPER_MODE) {
 }
 
 function showBannerMode() {
-	const hasPageBanner = document.body?.dataset?.hasPageBanner === "true";
 	// 隐藏全屏壁纸（通过CSS类和display控制）
 	const overlayContainer = document.querySelector(
 		"[data-overlay-wallpaper]",
@@ -412,7 +407,7 @@ function showBannerMode() {
 		if (isMobile && isPostPage) {
 			bannerWrapper.style.display = "none";
 			bannerWrapper.classList.add("mobile-hide-banner");
-		} else if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
+		} else if (isMobile && !isHomePage && !isPostPage) {
 			bannerWrapper.style.display = "none";
 			bannerWrapper.classList.add("mobile-hide-banner");
 		} else {
@@ -444,10 +439,7 @@ function showBannerMode() {
 	);
 	bannerTextOverlays.forEach((el) => {
 		const overlayType = el.getAttribute("data-banner-text-overlay");
-		const shouldShow =
-			(overlayType === "home" && isHomePage) ||
-			(overlayType === "post" && isPostPage) ||
-			(overlayType === "page" && hasPageBanner);
+		const shouldShow = overlayType === "home" && isHomePage;
 		if (shouldShow) {
 			el.classList.remove("hidden");
 		} else {
@@ -467,7 +459,7 @@ function showBannerMode() {
 			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 		// 只在移动端非首页时调整主内容位置
-		if (isMobile && !isHomePage && !isPostPage && !hasPageBanner) {
+		if (isMobile && !isHomePage && !isPostPage) {
 			mainContentWrapper.classList.add("mobile-main-no-banner");
 		} else {
 			mainContentWrapper.classList.remove("mobile-main-no-banner");

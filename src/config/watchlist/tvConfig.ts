@@ -56,7 +56,7 @@ export const tvItems: WatchlistItem[] = [
 		title: "异人之下之决战！碧游村",
 		cover: "https://pic1.imgdb.cn/item/69509caf161224305eb311ea.webp",
 		type: "tv",
-		status: "watching",
+		status: "completed",
 		rating: 8.4,
 		episodes: {
 			current: 1,
