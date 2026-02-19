@@ -1,0 +1,137 @@
+---
+import Icon from "@/components/common/Icon.astro";
+import { watchlistConfig } from "@/config/watchlistConfig";
+import type { WatchlistItem } from "@/config/watchlistConfig";
+
+interface Props {
+	item: WatchlistItem;
+	isAboveFold?: boolean;
+}
+
+const { item, isAboveFold = false } = Astro.props;
+
+const statusText: Record<string, string> = {
+	watching: "在看",
+	completed: "已看",
+	plan_to_watch: "想看",
+};
+
+const typeText: Record<string, string> = {
+	anime: "动漫",
+	movie: "电影",
+	tv: "电视剧",
+	documentary: "纪录片",
+	other: "其他",
+};
+
+const statusColor: Record<string, string> = {
+	watching: "text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/20",
+	completed: "text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20",
+	plan_to_watch: "text-gray-600 dark:text-gray-400 bg-gray-50 dark:bg-gray-900/20",
+};
+---
+
+<div
+	class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-neutral-200 dark:border-neutral-700 block cursor-default"
+>
+	{/* 封面图 */}
+	<div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+		<img
+			src={item.cover}
+			alt={item.title}
+			class="w-full h-full object-cover pointer-events-none"
+			loading={isAboveFold ? "eager" : "lazy"}
+		/>
+		{/* 评分 */}
+		{watchlistConfig.display.showRating && item.rating && item.rating > 0 && (
+			<div class="absolute top-2 right-2">
+				<div class="flex items-center gap-1 px-2 py-1 rounded-md bg-black/60 text-white backdrop-blur-sm">
+					<Icon icon="material-symbols:star" class="text-yellow-400 text-sm" />
+					<span class="text-xs font-bold">{item.rating}</span>
+				</div>
+			</div>
+		)}
+		{/* 状态标签 */}
+		<div class="absolute top-2 left-2">
+			<span
+				class={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md ${statusColor[item.status]}`}
+			>
+				{statusText[item.status]}
+			</span>
+		</div>
+	</div>
+
+	{/* 悬浮时显示的信息覆盖层 */}
+	<div class="absolute inset-x-0 bottom-0 bg-black/85 text-white p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+		{/* 标题 */}
+		<h3 class="text-base font-bold mb-2 line-clamp-2">{item.title}</h3>
+
+		{/* 类型标签 */}
+		<div class="mb-2">
+			<span class="px-2 py-1 text-xs font-medium rounded-md bg-white/20 text-white">
+				{typeText[item.type]}
+			</span>
+		</div>
+
+		{/* 观看进度 */}
+		{watchlistConfig.display.showProgress && item.episodes && item.episodes.total && (
+			<div class="mb-2">
+				<div class="flex items-center justify-between text-xs text-white/80 mb-1">
+					<span>观看进度</span>
+					<span>
+						{item.episodes.current || 0}/{item.episodes.total}
+					</span>
+				</div>
+				<div class="w-full bg-white/20 rounded-full h-1.5">
+					<div
+						class="bg-[var(--primary)] h-1.5 rounded-full transition-all duration-300"
+						style={{
+							width: `${((item.episodes.current || 0) / item.episodes.total) * 100}%`,
+						}}
+					/>
+				</div>
+			</div>
+		)}
+
+		{/* 评价 */}
+		{item.comment && (
+			<p class="text-sm text-white/90 mb-2 line-clamp-2">{item.comment}</p>
+		)}
+
+		{/* 标签 */}
+		{item.tags && item.tags.length > 0 && (
+			<div class="flex flex-wrap gap-1.5 mb-2">
+				{item.tags.slice(0, 3).map((tag) => (
+					<span class="px-2 py-0.5 text-xs rounded-full bg-white/20 text-white/90">
+						{tag}
+					</span>
+				))}
+				{item.tags.length > 3 && (
+					<span class="px-2 py-0.5 text-xs rounded-full bg-white/20 text-white/60">
+						+{item.tags.length - 3}
+					</span>
+				)}
+			</div>
+		)}
+
+		{/* 观看日期 */}
+		{(item.startDate || item.endDate) && (
+			<div class="text-xs text-white/70">
+				{item.status === "completed" && item.endDate ? (
+					<span>完成于 {item.endDate}</span>
+				) : item.startDate ? (
+					<span>开始于 {item.startDate}</span>
+				) : null}
+			</div>
+		)}
+	</div>
+</div>
+
+<style>
+	.line-clamp-2 {
+		display: -webkit-box;
+		-webkit-line-clamp: 2;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+</style>
