@@ -250,7 +250,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 移动端：<768px
 			mobile: "drawer",
 			// 平板端：768px-1023px
-			tablet: "hidden",
+			tablet: "sidebar",
 			// 桌面端：>=1024px
 			desktop: "sidebar",
 		},

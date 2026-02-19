@@ -47,6 +47,7 @@ const hasCover =
 	processedImage !== "";
 
 const coverWidth = "clamp(220px, 32%, 320px)";
+const coverWidthTablet = "clamp(160px, 24%, 220px)";
 
 const { remarkPluginFrontmatter } = await render(entry);
 ---
@@ -69,7 +70,7 @@ const { remarkPluginFrontmatter } = await render(entry);
       {
         "order-2 md:order-none": hasCover,
         "w-full md:w-[calc(100%-52px-12px)]": !hasCover,
-        "w-full md:w-[calc(100%-var(--coverWidth)-1.5rem)]": hasCover,
+        "w-full md:w-[calc(100%-var(--coverWidthTablet)-1.5rem)] lg:w-[calc(100%-var(--coverWidth)-1.5rem)]": hasCover,
       },
     ]}
   >
@@ -152,7 +153,7 @@ const { remarkPluginFrontmatter } = await render(entry);
           "post-card-image",
           "group",
           "order-1 md:order-none",
-          "w-full md:w-(--coverWidth)",
+          "w-full md:w-[var(--coverWidthTablet)] lg:w-[var(--coverWidth)]",
           "aspect-2/1 md:aspect-auto",
           "relative md:my-4 md:mr-4 md:self-stretch",
           "rounded-t-[var(--radius-large)] md:rounded-xl overflow-hidden active:scale-95",
@@ -198,7 +199,7 @@ const { remarkPluginFrontmatter } = await render(entry);
   }
 </div>
 
-<style define:vars={{ coverWidth }}>
+<style define:vars={{ coverWidth, coverWidthTablet }}>
   /* Grid Mode Styles */
   :global(.grid-mode) .post-card-wrapper {
     height: 100% !important;
