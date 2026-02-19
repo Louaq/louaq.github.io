@@ -77,13 +77,6 @@ const statusText = {
 	plan_to_watch: "想看",
 };
 
-// 状态图标映射
-const statusIcon = {
-	watching: "material-symbols:play-circle-outline-rounded",
-	completed: "material-symbols:check-circle-outline-rounded",
-	plan_to_watch: "material-symbols:bookmark-outline-rounded",
-};
-
 // 类型文本映射
 const typeText = {
 	anime: "动漫",
@@ -183,7 +176,6 @@ const statusColor = {
 													<span
 														class={`inline-flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-md ${statusColor[item.status]}`}
 													>
-														<Icon icon={statusIcon[item.status]} class="text-[0.9em]" />
 														{statusText[item.status]}
 													</span>
 												</div>

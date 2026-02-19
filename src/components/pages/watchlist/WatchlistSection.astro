@@ -1,0 +1,96 @@
+---
+/**
+ * 观影分类区块组件
+ * 参考 Firefly BangumiSection：FilterControls + 卡片网格 + ClientPagination
+ */
+import ClientPagination from "@/components/common/ClientPagination.astro";
+import FilterControls from "@/components/pages/bangumi/FilterControls.astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import type { WatchlistItem } from "@/config/watchlistConfig";
+import WatchlistCard from "./WatchlistCard.astro";
+
+interface Props {
+	sectionId: string;
+	items: WatchlistItem[];
+	isActive: boolean;
+	itemsPerPage?: number;
+}
+
+const { sectionId, items, isActive, itemsPerPage = 6 } = Astro.props;
+
+// 状态筛选
+const statusCounts = items.reduce(
+	(acc, item) => {
+		acc[item.status] = (acc[item.status] || 0) + 1;
+		return acc;
+	},
+	{} as Record<string, number>,
+);
+
+const filterLabels: Record<string, string> = {
+	all: i18n(I18nKey.bangumiFilterAll),
+	watching: i18n(I18nKey.bangumiFilterWatching),
+	completed: i18n(I18nKey.bangumiFilterWatched),
+	plan_to_watch: i18n(I18nKey.bangumiFilterWish),
+};
+
+const filters = [
+	{ value: "all", label: filterLabels.all, count: items.length },
+	{ value: "watching", label: filterLabels.watching, count: statusCounts.watching || 0 },
+	{ value: "completed", label: filterLabels.completed, count: statusCounts.completed || 0 },
+	{ value: "plan_to_watch", label: filterLabels.plan_to_watch, count: statusCounts.plan_to_watch || 0 },
+].filter((f) => f.value === "all" || f.count > 0);
+
+// 生成锚点 id
+const makeWatchAnchorId = (item: WatchlistItem) => {
+	const raw = `${item.type} ${item.title}`.trim();
+	const base = encodeURIComponent(raw).replace(/%/g, "").replace(/[()]/g, "");
+	const short = base.length > 80 ? base.slice(0, 80) : base;
+	return `watch-${short}` || "watch";
+};
+---
+
+<div
+	class:list={["watchlist-section", { hidden: !isActive }]}
+	data-section={sectionId}
+>
+	{items.length > 0 ? (
+		<>
+			<FilterControls
+				filters={filters}
+				activeFilter="all"
+				sectionId={sectionId}
+			/>
+
+			<div class="pagination-container" data-container-section={sectionId}>
+				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+					{items.map((item, index) => (
+						<div
+							class="watchlist-item"
+							id={makeWatchAnchorId(item)}
+							data-item-section={sectionId}
+							data-item-status={item.status}
+						>
+							<WatchlistCard item={item} isAboveFold={index < itemsPerPage} />
+						</div>
+					))}
+				</div>
+
+				<ClientPagination
+					totalItems={items.length}
+					itemsPerPage={itemsPerPage}
+					currentPage={1}
+					sectionId={sectionId}
+				/>
+			</div>
+		</>
+	) : (
+		<div class="text-center py-12">
+			<h3 class="text-xl font-medium text-gray-600 dark:text-gray-400 mb-2">
+				暂无数据
+			</h3>
+			<p class="text-gray-500 dark:text-gray-500">此分类下暂无观影记录</p>
+		</div>
+	)}
+</div>

@@ -149,6 +149,7 @@ const pageNumbers = generatePageNumbers(currentPage, totalPages);
 <script is:inline define:vars={{ itemsPerPage, sectionId }}>
   function initPagination() {
     let currentPage = 1;
+    let isInitialLoad = true; // 首次加载时跳过淡入淡出，避免封面闪烁
 
     const pagination = document.querySelector(`[data-pagination-section="${sectionId}"]`);
     if (!pagination) return;
@@ -199,32 +200,34 @@ const pageNumbers = generatePageNumbers(currentPage, totalPages);
       const startIndex = (currentPage - 1) * itemsPerPage;
       const endIndex = startIndex + itemsPerPage;
 
-      // 先淡出所有可见项目
-      for (const item of items) {
-        if (item.style.display !== 'none') {
-          item.style.opacity = '0';
-        }
-      }
-
-      // 等待淡出动画完成后再切换显示
-      setTimeout(() => {
+      const applyVisibility = () => {
         // 隐藏所有项目
         for (const item of items) {
           item.style.display = 'none';
         }
-
-        // 显示当前页的项目并淡入
+        // 显示当前页的项目
         for (let i = startIndex; i < endIndex && i < items.length; i++) {
           items[i].style.display = 'block';
-          // 使用 requestAnimationFrame 确保淡入效果生效
-          requestAnimationFrame(() => {
-            items[i].style.opacity = '1';
-          });
+          items[i].style.opacity = '1';
         }
-
-        // 更新分页按钮
         updatePaginationButtons(totalPages);
-      }, 200);
+      };
+
+      if (isInitialLoad) {
+        // 首次加载：直接显示，不做淡入淡出，避免封面图二次刷新闪烁
+        isInitialLoad = false;
+        applyVisibility();
+      } else {
+        // 切换页码：使用淡入淡出动画
+        for (const item of items) {
+          if (item.style.display !== 'none') {
+            item.style.opacity = '0';
+          }
+        }
+        setTimeout(() => {
+          applyVisibility();
+        }, 200);
+      }
     }
 
     // 生成智能分页页码数组的JavaScript版本
