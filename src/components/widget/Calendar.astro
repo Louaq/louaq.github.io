@@ -105,13 +105,42 @@ const postUrlPrefix = url("/posts/");
 </WidgetLayout>
 
 <script is:inline define:vars={{ monthNames, weekDays, yearText, currentLang, calendarDataUrl, postUrlPrefix }}>
+  const STORAGE_KEY = 'calendar-widget-state';
+  
   // State variables
   let displayYear = new Date().getFullYear();
   let displayMonth = new Date().getMonth();
   let currentView = 'day'; // 'day' | 'month' | 'year'
+  let selectedDateKey = null; // 选中的日期 YYYY-MM-DD，null 表示按月份显示
   let postDateMap = {};
   let allPostsData = [];
   let availableYears = [];
+
+  function loadState() {
+    try {
+      const raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return false;
+      const state = JSON.parse(raw);
+      const now = new Date();
+      const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      if (state.displayYear != null && state.displayMonth >= 0 && state.displayMonth <= 11) {
+        displayYear = state.displayYear;
+        displayMonth = state.displayMonth;
+        currentView = state.currentView || 'day';
+        selectedDateKey = state.selectedDateKey;
+        return true;
+      }
+    } catch (e) {}
+    return false;
+  }
+
+  function saveState() {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify({
+        displayYear, displayMonth, currentView, selectedDateKey
+      }));
+    } catch (e) {}
+  }
 
   async function fetchData() {
     try {
@@ -269,24 +298,25 @@ const postUrlPrefix = url("/posts/");
       return year === currentYear && month === currentMonth + 1;
     });
     
-    // 如果是当前月份，默认显示今天的文章
-    if (isCurrentMonth) {
-      const todayDateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(currentDate).padStart(2, '0')}`;
-      const todayPosts = postDateMap[todayDateKey] || [];
-      showDailyPosts(todayDateKey, todayPosts);
-      
-      // 自动选中今天的日期格子
+    const todayDateKey = `${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-${String(currentDate).padStart(2, '0')}`;
+    const targetDateKey = selectedDateKey && selectedDateKey.startsWith(`${currentYear}-${String(currentMonth + 1).padStart(2, '0')}-`)
+      ? selectedDateKey : (isCurrentMonth ? todayDateKey : null);
+    
+    if (targetDateKey) {
+      const posts = postDateMap[targetDateKey] || [];
+      showDailyPosts(targetDateKey, posts);
       setTimeout(() => {
-        const todayElement = document.querySelector(`.calendar-day[data-date="${todayDateKey}"]`);
-        if (todayElement) {
-          todayElement.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
-          todayElement.setAttribute('data-selected', 'true');
+        const el = document.querySelector(`.calendar-day[data-date="${targetDateKey}"]`);
+        if (el) {
+          el.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
+          el.setAttribute('data-selected', 'true');
         }
       }, 0);
     } else {
-      // 如果不是当前月份，显示当月所有文章
       showMonthlyPosts(currentMonthPosts);
     }
+    selectedDateKey = targetDateKey;
+    saveState();
     
     // 添加点击事件监听
     setupClickHandlers(currentMonthPosts);
@@ -326,6 +356,8 @@ const postUrlPrefix = url("/posts/");
       el.addEventListener('click', () => {
         displayMonth = parseInt(el.getAttribute('data-month'));
         currentView = 'day';
+        selectedDateKey = null;
+        saveState();
         renderCalendar();
       });
     });
@@ -352,6 +384,8 @@ const postUrlPrefix = url("/posts/");
       el.addEventListener('click', () => {
         displayYear = parseInt(el.getAttribute('data-year'));
         currentView = 'month';
+        selectedDateKey = null;
+        saveState();
         renderCalendar();
       });
     });
@@ -445,10 +479,11 @@ const postUrlPrefix = url("/posts/");
         dayElement.classList.add('bg-[var(--primary)]', 'bg-opacity-10');
         dayElement.setAttribute('data-selected', 'true');
         
+        selectedDateKey = dateKey;
+        saveState();
+        
         // 获取该日期的文章并显示
         const posts = postDateMap[dateKey] || [];
-        
-        // 调用showDailyPosts函数来显示文章或"暂无文章"提示
         showDailyPosts(dateKey, posts);
       });
     });
@@ -464,9 +499,11 @@ const postUrlPrefix = url("/posts/");
           displayMonth = 11;
           displayYear--;
       }
+      selectedDateKey = null;
     } else if (currentView === 'month') {
       displayYear += delta;
     }
+    saveState();
     renderCalendar();
   }
 
@@ -475,15 +512,19 @@ const postUrlPrefix = url("/posts/");
       displayYear = now.getFullYear();
       displayMonth = now.getMonth();
       currentView = 'day';
+      selectedDateKey = `${displayYear}-${String(displayMonth + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      saveState();
       renderCalendar();
   }
 
   function initCalendar() {
-      // Reset to current date on init
       const now = new Date();
-      displayYear = now.getFullYear();
-      displayMonth = now.getMonth();
-      
+      if (!loadState()) {
+        displayYear = now.getFullYear();
+        displayMonth = now.getMonth();
+        currentView = 'day';
+        selectedDateKey = `${displayYear}-${String(displayMonth + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
+      }
       fetchData();
       
       // Bind events
