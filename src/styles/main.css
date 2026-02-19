@@ -248,7 +248,10 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     
  
     
-    .wallpaper-transparent #navbar > div {
+    /* 全屏壁纸模式导航栏透明 - 支持 body.wallpaper-transparent 与 html 属性，避免刷新首屏闪白 */
+    .wallpaper-transparent #navbar > div,
+    html[data-default-wallpaper="overlay"] #navbar > div,
+    html[data-wallpaper-mode="overlay"] #navbar > div {
     @apply bg-[var(--card-bg-transparent)] backdrop-blur-sm;
     border-radius: 0 0 var(--radius-large) var(--radius-large) !important;
 }

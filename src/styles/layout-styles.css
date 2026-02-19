@@ -410,6 +410,15 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
     min-height: calc(100vh - 5.5rem) !important;
 }
 
+/* overlay/none 模式时主内容区布局（通过 html 属性，首屏即生效，避免刷新闪出 banner 空白） */
+html[data-default-wallpaper="overlay"] .absolute.w-full.z-30,
+html[data-default-wallpaper="none"] .absolute.w-full.z-30,
+html[data-wallpaper-mode="overlay"] .absolute.w-full.z-30,
+html[data-wallpaper-mode="none"] .absolute.w-full.z-30 {
+    top: 5.5rem !important;
+    min-height: calc(100vh - 5.5rem) !important;
+}
+
 /* 移动端当banner被禁用时的布局样式 */
 @media (max-width: 1023px) {
     .absolute.w-full.z-30.no-banner-layout {

@@ -531,6 +531,35 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     ]}
     data-page-type={pageType}
   >
+    <!-- 壁纸模式：body 存在后立即设置类，避免文章详情页刷新时 banner 区域闪白 -->
+    <script
+      is:inline
+      define:vars={{
+        defaultWallpaperMode: backgroundWallpaper.mode,
+        isWallpaperSwitchable: backgroundWallpaper.switchable ?? true,
+      }}
+    >
+      (function () {
+        const WALLPAPER_OVERLAY = "overlay";
+        const WALLPAPER_NONE = "none";
+        const stored = isWallpaperSwitchable && typeof localStorage !== "undefined"
+          ? localStorage.getItem("wallpaperMode")
+          : null;
+        const mode = defaultWallpaperMode === WALLPAPER_OVERLAY
+          ? WALLPAPER_OVERLAY
+          : (stored || defaultWallpaperMode);
+        if (mode === WALLPAPER_OVERLAY || mode === WALLPAPER_NONE) {
+          document.body.classList.remove("enable-banner");
+          document.body.classList.add("no-banner-layout");
+          if (mode === WALLPAPER_OVERLAY) {
+            document.body.classList.add("wallpaper-transparent");
+          }
+        } else {
+          document.body.classList.add("enable-banner");
+          document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
+        }
+      })();
+    </script>
     <!-- 固化 astro-icon 的 symbol sprite，避免 Swup 局部替换后 <use> 找不到 <symbol> 导致图标空白 -->
     <GlobalIconSprite />
 
@@ -570,8 +599,11 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
   }}
 >
   /* 默认 overlay/none 时首屏即隐藏横幅，避免刷新闪出 */
+  /* 同时支持 data-wallpaper-mode（用户通过 localStorage 切换后的运行时值） */
   html[data-default-wallpaper="overlay"] #banner-wrapper,
-  html[data-default-wallpaper="none"] #banner-wrapper {
+  html[data-default-wallpaper="none"] #banner-wrapper,
+  html[data-wallpaper-mode="overlay"] #banner-wrapper,
+  html[data-wallpaper-mode="none"] #banner-wrapper {
     display: none !important;
     visibility: hidden !important;
     height: 0 !important;
@@ -891,7 +923,22 @@ function disableAnimation() {
       }
 
     });
-    window.swup.hooks.on("visit:start", (visit: { to: { url: string } }) => {
+    window.swup.hooks.on("visit:start", (visit: {
+      to: { url: string };
+      history?: { popstate?: boolean; direction?: string };
+      scroll?: { reset?: boolean };
+    }) => {
+      // 离开页面前保存滚动位置（用于回退时恢复）
+      const currentKey = "swup-scroll:" + (window.location.pathname + window.location.search + window.location.hash);
+      try {
+        sessionStorage.setItem(currentKey, String(window.scrollY || document.documentElement.scrollTop));
+      } catch (_e) { /* ignore */ }
+
+      // 回退/前进时：禁止 Swup 重置滚动，交由下方 page:view 恢复
+      if (visit.history?.popstate) {
+        if (visit.scroll) visit.scroll.reset = false;
+      }
+
       // Start progress bar
       const progressBar = document.getElementById("progress-bar");
       if (progressBar) {
@@ -1035,18 +1082,39 @@ function disableAnimation() {
         toc.classList.add("toc-not-ready");
       }
     });
-    window.swup.hooks.on("page:view", () => {
+    window.swup.hooks.on("page:view", (visit?: {
+      history?: { popstate?: boolean };
+    }) => {
       // hide the temp high element when the transition is done
       const heightExtend = document.getElementById("page-height-extend");
       if (heightExtend) {
         heightExtend.classList.remove("hidden");
       }
 
-      // 确保页面滚动到顶部，使用平滑滚动避免侧边栏闪烁
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
+      // 回退/前进：恢复之前保存的滚动位置；新页面：滚动到顶部
+      const isHistoryNav = visit?.history?.popstate === true;
+      const restoreKey = "swup-scroll:" + (window.location.pathname + window.location.search + window.location.hash);
+
+      if (isHistoryNav) {
+        let savedY: number | null = null;
+        try {
+          const stored = sessionStorage.getItem(restoreKey);
+          if (stored != null) {
+            savedY = parseInt(stored, 10);
+            sessionStorage.removeItem(restoreKey);
+          }
+        } catch (_e) { /* ignore */ }
+
+        if (savedY != null && !isNaN(savedY) && savedY > 0) {
+          const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
+          // 下一帧恢复，确保 DOM 已布局
+          requestAnimationFrame(() => {
+            window.scrollTo(0, Math.min(savedY!, maxY));
+          });
+        }
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
 
       // 在移动端恢复文章列表容器的过渡动画（在主内容区位置动画完成后）
       const isMobile = window.innerWidth < 1024;
