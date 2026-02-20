@@ -643,23 +643,13 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     .enable-banner #top-row {
       @apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300;
     }
-    body.enable-banner[data-page-type="home"] #sidebar-sticky {
-      @apply top-[calc(1rem_-_var(--banner-height-extend))];
-    }
-    body.enable-banner[data-page-type="home"] #left-sidebar-sticky {
-      @apply top-[calc(1rem_-_var(--banner-height-extend))];
-    }
-    body.enable-banner[data-page-type="home"] #right-sidebar-sticky {
-      @apply top-[calc(1rem_-_var(--banner-height-extend))];
-    }
-    body.enable-banner[data-page-type="post"] #sidebar-sticky {
-      @apply top-[calc(1rem_-_var(--banner-height-extend))];
-    }
-    body.enable-banner[data-page-type="post"] #left-sidebar-sticky {
-      @apply top-[calc(1rem_-_var(--banner-height-extend))];
-    }
+    body.enable-banner[data-page-type="home"] #sidebar-sticky,
+    body.enable-banner[data-page-type="home"] #left-sidebar-sticky,
+    body.enable-banner[data-page-type="home"] #right-sidebar-sticky,
+    body.enable-banner[data-page-type="post"] #sidebar-sticky,
+    body.enable-banner[data-page-type="post"] #left-sidebar-sticky,
     body.enable-banner[data-page-type="post"] #right-sidebar-sticky {
-      @apply top-[calc(1rem_-_var(--banner-height-extend))];
+      top: calc(var(--navbar-height) + 1rem);
     }
   }
 </style>

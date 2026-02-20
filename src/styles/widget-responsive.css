@@ -166,9 +166,9 @@
 }
 
 .sidebar-sticky-section {
-  /* 粘性组件区域 */
+  /* 粘性组件区域，top 需大于导航栏高度避免被遮挡 */
   position: sticky;
-  top: 1rem;
+  top: calc(var(--navbar-height, 4.5rem) + 1rem);
   z-index: 10;
 }
 
