@@ -5,6 +5,7 @@ export const fontConfig = {
 	// 是否预加载字体文件
 	preload: true,
 	// 当前选择的字体，支持多个字体组合
+	// "jetbrains-mono-nl", "noto-serif-sc"
 	selected: ["jetbrains-mono-nl", "noto-serif-sc"],
 
 	// 字体列表
@@ -16,6 +17,15 @@ export const fontConfig = {
 			src: "", // 系统字体无需 src
 			family:
 				"system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
+		},
+
+		// LXGW WenKai Screen R（霞鹜文楷屏幕版）
+		"lxgw-wenkai-screen-r": {
+			id: "lxgw-wenkai-screen-r",
+			name: "LXGW WenKai Screen R",
+			src: "https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreenr.min.css",
+			family: "LXGW WenKai Screen R",
+			display: "swap" as const,
 		},
 
 		// Google Fonts - JetBrains Mono（页面中显示为 JetBrains Mono NL，与 Google 提供的 family 名一致）
