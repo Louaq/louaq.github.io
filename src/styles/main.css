@@ -515,7 +515,8 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
   @apply w-full;
 }
 
-.post-list-container.grid-mode .post-card-item a[href] {
+/* 仅对标题链接应用截断样式，排除箭头按钮和封面图 */
+.post-list-container.grid-mode .post-card-item a[href]:not(.post-card-enter-btn):not(.post-card-image) {
   @apply text-xl before:h-4 before:top-[28px] before:left-[-18px] truncate;
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -526,12 +527,17 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
   max-height: 2.8em; /* 2行的高度 */
 }
 
-.post-list-container.grid-mode .post-card-item a[aria-label] {
+.post-list-container.grid-mode .post-card-item a[aria-label]:not(.post-card-enter-btn) {
   @apply hidden;
 }
 
-.post-list-container.grid-mode .post-card-item .btn-regular {
+.post-list-container.grid-mode .post-card-item .btn-regular:not(.post-card-enter-btn) {
   @apply hidden;
+}
+
+/* 网格模式下保持右侧箭头按钮可见 */
+.post-list-container.grid-mode .post-card-item .post-card-enter-btn {
+  @apply flex;
 }
 
 .post-list-container.grid-mode .post-card-item .line-clamp-1 {
