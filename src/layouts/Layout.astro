@@ -641,7 +641,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       @apply translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #top-row {
-      @apply h-[calc(var(--banner-height-home)_-_4.5rem)] transition-all duration-300;
+      @apply h-[4.5rem] transition-all duration-300;
     }
     body.enable-banner[data-page-type="home"] #sidebar-sticky,
     body.enable-banner[data-page-type="home"] #left-sidebar-sticky,
@@ -649,7 +649,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     body.enable-banner[data-page-type="post"] #sidebar-sticky,
     body.enable-banner[data-page-type="post"] #left-sidebar-sticky,
     body.enable-banner[data-page-type="post"] #right-sidebar-sticky {
-      top: calc(var(--navbar-height) + 1rem);
+      top: 1rem;
     }
   }
 </style>

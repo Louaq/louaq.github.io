@@ -279,7 +279,7 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         @apply transition-colors duration-150 rounded-md p-1.5 -m-1.5 expand-animation;
     }
     .float-panel {
-        @apply top-[5.25rem] rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition-colors duration-150 shadow-xl border border-black/5 dark:border-white/10
+        @apply top-4 rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition-colors duration-150 shadow-xl border border-black/5 dark:border-white/10
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
