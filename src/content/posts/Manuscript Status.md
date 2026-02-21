@@ -9,12 +9,13 @@ pinned: true
 ---
 
 催稿信模板-主题：
-```text
+
+:::important
 Subject: Inquiry Regarding Manuscript Status - Manuscript ID: [您的稿件编号]
-```
+:::
 
 催稿信模板-正文：
-```text
+:::important
 Dear [编辑姓名/Editor-in-Chief],
 
 I hope this email finds you well. I am writing to inquire about the status of my manuscript titled "[论文标题]" (Manuscript ID: [稿件编号]), which was submitted to [期刊名称] on [投稿日期].
@@ -28,12 +29,10 @@ Thank you very much for your time and consideration. I look forward to hearing f
 Best regards,
 
 [您的姓名]
-[您的职位/职称]
-[所属机构]
-[电子邮件地址]
-[联系电话]
 
-```
+[电子邮件地址]
+:::
+
 
 
 

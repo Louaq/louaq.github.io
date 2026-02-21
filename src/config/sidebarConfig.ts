@@ -53,8 +53,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// targetDate 支持格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
 			customProps: {
 				targetDate: "2026-02-26 00:00:00",
-				title: "开学倒计时",
-				description: "距离开学还有",
+				title: "返校倒计时",
+				description: "距离返校还有",
 			},
 		},
 		{
