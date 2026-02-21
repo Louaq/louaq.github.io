@@ -148,7 +148,7 @@ const statusColor = {
 									<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 										{category.items.map((item: WatchlistItem) => (
 										<div 
-											class="group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 border border-neutral-200 dark:border-neutral-700 block cursor-default"
+											class="watchlist-card group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl hover:scale-[1.03] border border-neutral-200 dark:border-neutral-700 block cursor-default"
 											id={makeWatchAnchorId(item)}
 											data-item-section={category.key}>
 											{/* 封面图 */}
@@ -182,18 +182,11 @@ const statusColor = {
 											</div>
 
 											{/* 悬浮时显示的信息覆盖层 */}
-											<div class="absolute inset-x-0 bottom-0 bg-black/85 text-white p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-500">
+											<div class="watchlist-card-overlay absolute inset-x-0 bottom-0 bg-black/85 text-white p-4 transform translate-y-full group-hover:translate-y-0">
 												{/* 标题 */}
 												<h3 class="text-base font-bold mb-2 line-clamp-2">
 													{item.title}
 												</h3>
-
-												{/* 类型标签 */}
-												<div class="mb-2">
-													<span class="px-2 py-1 text-xs font-medium rounded-md bg-white/20 text-white">
-														{typeText[item.type]}
-													</span>
-												</div>
 
 												{/* 观看进度 */}
 												{watchlistConfig.display.showProgress &&
@@ -217,13 +210,6 @@ const statusColor = {
 														</div>
 													)}
 
-												{/* 评价 */}
-												{item.comment && (
-													<p class="text-sm text-white/90 mb-2 line-clamp-2">
-														{item.comment}
-													</p>
-												)}
-
 												{/* 标签 */}
 												{item.tags && item.tags.length > 0 && (
 													<div class="flex flex-wrap gap-1.5 mb-2">
@@ -240,16 +226,6 @@ const statusColor = {
 													</div>
 												)}
 
-												{/* 观看日期 */}
-												{(item.startDate || item.endDate) && (
-													<div class="text-xs text-white/70">
-														{item.status === "completed" && item.endDate ? (
-															<span>完成于 {item.endDate}</span>
-														) : item.startDate ? (
-															<span>开始于 {item.startDate}</span>
-														) : null}
-													</div>
-												)}
 											</div>
 										</div>
 									))}
@@ -326,6 +302,19 @@ const statusColor = {
 	.pagination-container a[data-item-section] {
 		position: relative;
 		overflow: hidden;
+	}
+
+	/* 观影卡片平滑过渡（覆盖上方 transition，合并 opacity） */
+	.pagination-container .watchlist-card {
+		will-change: transform;
+		transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+			box-shadow 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+			opacity 0.2s ease-in-out;
+	}
+
+	.pagination-container .watchlist-card-overlay {
+		will-change: transform;
+		transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
 	}
 </style>
 
