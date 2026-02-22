@@ -20,7 +20,11 @@ export const siteConfig: SiteConfig = {
     "论文",
     "CVPR",
 	"ECCV",
-	"ICCV"
+	"ICCV",
+	"MICCAI",
+	"NeurIPS",
+	"TPAMI",
+	"TMI"
   ],
 
 	// 主题色
