@@ -159,6 +159,8 @@ export const siteConfig: SiteConfig = {
 
 	// 统计分析
 	analytics: {
+		// 是否启用 Google Analytics，默认 false，避免国内访问时出现 ERR_CONNECTION_CLOSED
+		enableGoogleAnalytics: false,
 		// Google Analytics ID
 		googleAnalyticsId: "G-WM2YMELY5N",
 		// Microsoft Clarity ID

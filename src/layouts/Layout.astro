@@ -105,7 +105,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 <!doctype html>
 <html lang={siteLang} class="bg-[var(--page-bg)] text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode}>
   <head>
-      {siteConfig.analytics?.googleAnalyticsId && (
+      {siteConfig.analytics?.enableGoogleAnalytics && siteConfig.analytics?.googleAnalyticsId && (
               <GoogleAnalytics analyticsId={siteConfig.analytics.googleAnalyticsId} />
       )}
       {siteConfig.analytics?.microsoftClarityId && (

@@ -112,6 +112,7 @@ export type SiteConfig = {
 
 	// 统计分析
 	analytics?: {
+		enableGoogleAnalytics?: boolean; // 是否启用 Google Analytics，默认 false，避免国内访问 ERR_CONNECTION_CLOSED
 		googleAnalyticsId?: string; // Google Analytics ID
 		microsoftClarityId?: string; // Microsoft Clarity ID
 	};
