@@ -274,6 +274,20 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     }
     .link {
         @apply transition-colors duration-150 rounded-md p-1 -m-1 expand-animation;
+        /* 多行链接时 hover 背景需完整覆盖每行，用元素自身背景替代 ::before */
+        box-decoration-break: clone;
+        -webkit-box-decoration-break: clone;
+    }
+    .link:hover {
+        background-color: var(--btn-plain-bg-hover);
+    }
+    .link:active {
+        background-color: var(--btn-plain-bg-active);
+    }
+    /* 禁用 expand-animation 的 ::before 背景，避免多行时覆盖不完整 */
+    .link:hover::before,
+    .link:active::before {
+        background: none !important;
     }
     .link-lg {
         @apply transition-colors duration-150 rounded-md p-1.5 -m-1.5 expand-animation;

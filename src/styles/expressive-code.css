@@ -36,7 +36,7 @@
 
 /* 透明模式下的代码块样式 */
 body.wallpaper-transparent .expressive-code,
-body.wallpaper-transparent .expressive-code *:not(.ec-collapse__toggle) {
+body.wallpaper-transparent .expressive-code *:not(.ec-collapse__toggle):not(.feedback) {
   background-color: transparent !important;
   background: transparent !important;
 }
@@ -44,4 +44,11 @@ body.wallpaper-transparent .expressive-code *:not(.ec-collapse__toggle) {
 body.wallpaper-transparent .expressive-code .frame {
   background-color: var(--card-bg-transparent) !important;
   background: var(--card-bg-transparent) !important;
+}
+
+/* 复制成功提示 "Copied!" 需排除透明背景，确保在透明模式下可见 */
+body.wallpaper-transparent .expressive-code .copy .feedback {
+  background-color: var(--primary) !important;
+  background: var(--primary) !important;
+  color: white !important;
 }
