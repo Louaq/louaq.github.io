@@ -8,13 +8,13 @@ tags: [TMI]
 pinned: true
 ---
 
-催稿信模板-主题：
+## 催稿信模板-主题：
 
 :::important
 Subject: Inquiry Regarding Manuscript Status - Manuscript ID: [您的稿件编号]
 :::
 
-催稿信模板-正文：
+## 催稿信模板-正文：
 :::important
 Dear [编辑姓名/Editor-in-Chief],
 
