@@ -566,16 +566,23 @@ $effect(() => {
 		<div class="algolia-footer">
 			<div class="algolia-hints">
 				<span class="hint">
-					<kbd class="keycap">⏎</kbd>
-					<span class="hint-text">to select</span>
+					<kbd class="keycap keycap-icon">
+						<Icon icon="lucide:arrow-down" width="14" height="14" />
+					</kbd>
+					<kbd class="keycap keycap-icon">
+						<Icon icon="lucide:arrow-up" width="14" height="14" />
+					</kbd>
+					<span class="hint-text">选择</span>
 				</span>
 				<span class="hint">
-					<kbd class="keycap">↓</kbd><kbd class="keycap">↑</kbd>
-					<span class="hint-text">to navigate</span>
+					<kbd class="keycap keycap-icon">
+						<Icon icon="lucide:corner-down-left" width="14" height="14" />
+					</kbd>
+					<span class="hint-text">确认</span>
 				</span>
 				<span class="hint">
 					<kbd class="keycap">esc</kbd>
-					<span class="hint-text">to close</span>
+					<span class="hint-text">关闭</span>
 				</span>
 			</div>
 			<div class="algolia-brand" aria-label="Algolia" role="img">
@@ -966,6 +973,9 @@ $effect(() => {
 		font-size: 0.75rem;
 		color: rgba(55, 65, 81, 1);
 		line-height: 1;
+	}
+	.keycap-icon {
+		padding: 0.25rem 0.375rem;
 	}
 	:global([data-theme="dark"]) .keycap {
 		background: rgba(31, 41, 55, 1);
