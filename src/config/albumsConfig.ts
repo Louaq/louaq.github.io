@@ -17,7 +17,7 @@ export const albumsConfig: AlbumConfig[] = [
 		description: "blog封面",
 		cover: "https://pic1.imgdb.cn/item/6919c4403203f7be000aeb20.jpg", // 封面图片路径
 		date: "2025-12-31",
-		location: "武汉",
+		location: "Dou",
 		tags: ["blog", "动漫"],
 		layout: "masonry", // 布局：masonry=瀑布流（默认）, grid=网格
 		photos: [
@@ -71,7 +71,7 @@ export const albumsConfig: AlbumConfig[] = [
 		description: "壁纸",
 		cover: "https://pic1.imgdb.cn/item/6919c4273203f7be000aea80.jpg",
 		date: "2025-12-31",
-		location: "武汉",
+		location: "Dou",
 		tags: ["壁纸", "动漫"],
 		layout: "grid", // 使用网格布局
 		photos: [
