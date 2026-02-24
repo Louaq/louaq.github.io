@@ -71,44 +71,44 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 动画延迟时间
 			animationDelay: 50,
 		},
-		{
-			// 组件类型：分类组件
-			type: "categories",
-			// 是否启用该组件
-			enable: true,
-			// 组件显示顺序
-			order: 4,
-			// 组件位置
-			position: "sticky",
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 150,
-			// 响应式配置
-			responsive: {
-				// 折叠阈值：当分类数量超过5个时自动折叠
-				collapseThreshold: 5,
-			},
-		},
-		//{
-			// 组件类型：标签组件
-			//type: "tags",
-			// 是否启用该组件
-			//enable: true,
-			// 组件显示顺序
-			//order: 4,
-			// 组件位置
-			//position: "sticky",
-			// CSS 类名
-			//class: "onload-animation",
-			// 动画延迟时间
-			//animationDelay: 250,
-			// 响应式配置
-			//responsive: {
-				// 折叠阈值：当标签数量超过20个时自动折叠
-				//collapseThreshold: 20,
-			//},
-		//},
+		// {
+		// 	// 组件类型：分类组件
+		// 	type: "categories",
+		// 	// 是否启用该组件
+		// 	enable: true,
+		// 	// 组件显示顺序
+		// 	order: 4,
+		// 	// 组件位置
+		// 	position: "sticky",
+		// 	// CSS 类名
+		// 	class: "onload-animation",
+		// 	// 动画延迟时间
+		// 	animationDelay: 150,
+		// 	// 响应式配置
+		// 	responsive: {
+		// 		// 折叠阈值：当分类数量超过5个时自动折叠
+		// 		collapseThreshold: 5,
+		// 	},
+		// },
+		// {
+		// 	//组件类型：标签组件
+		// 	type: "tags",
+		// 	//是否启用该组件
+		// 	enable: true,
+		// 	//组件显示顺序
+		// 	order: 4,
+		// 	//组件位置
+		// 	position: "sticky",
+		// 	//CSS 类名
+		// 	class: "onload-animation",
+		// 	//动画延迟时间
+		// 	animationDelay: 250,
+		// 	//响应式配置
+		// 	responsive: {
+		// 		//折叠阈值：当标签数量超过20个时自动折叠
+		// 		collapseThreshold: 20,
+		// 	},
+		// },
 		{
 			// 组件类型：最近评论组件
 			type: "recentComments",
