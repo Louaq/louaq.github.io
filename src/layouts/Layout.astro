@@ -828,6 +828,9 @@ function disableAnimation() {
       // 用户需求为“导航栏固定且不随滚动消失”，因此不再在滚动/点击时自动隐藏导航栏。
     });
     window.swup.hooks.on("content:replace", () => {
+      // 解除回退时的滚动锁定（content 已替换，page:view 会恢复目标页滚动）
+      (window as any).__swupScrollLockY = null;
+
       // 更新主网格布局类名
       const gridClassCarrier = document.getElementById("grid-class-carrier");
       if (gridClassCarrier) {
@@ -914,12 +917,16 @@ function disableAnimation() {
 
     });
     window.swup.hooks.on("visit:start", (visit: {
+      from?: { url: string; hash?: string };
       to: { url: string };
       history?: { popstate?: boolean; direction?: string };
       scroll?: { reset?: boolean };
     }) => {
       // 离开页面前保存滚动位置（用于回退时恢复）
-      const currentKey = "swup-scroll:" + (window.location.pathname + window.location.search + window.location.hash);
+      // 必须使用 visit.from 作为 key：回退时 window.location 可能已变为目标页，用错 key 会覆盖列表页的正确滚动值
+      const fromPath = visit.from?.url ?? (window.location.pathname + window.location.search);
+      const fromHash = visit.from?.hash ?? window.location.hash;
+      const currentKey = "swup-scroll:" + fromPath + (fromHash || "");
       try {
         sessionStorage.setItem(currentKey, String(window.scrollY || document.documentElement.scrollTop));
       } catch (_e) { /* ignore */ }
@@ -927,6 +934,20 @@ function disableAnimation() {
       // 回退/前进时：禁止 Swup 重置滚动，交由下方 page:view 恢复
       if (visit.history?.popstate) {
         if (visit.scroll) visit.scroll.reset = false;
+        // 锁定当前滚动位置，避免过渡期间出现“文章回滚到顶部”的闪烁
+        const scrollY = window.scrollY || document.documentElement.scrollTop;
+        if (scrollY > 0) {
+          (window as any).__swupScrollLockY = scrollY;
+          const tick = () => {
+            if ((window as any).__swupScrollLockY == null) return;
+            const current = window.scrollY || document.documentElement.scrollTop;
+            if (current !== (window as any).__swupScrollLockY) {
+              window.scrollTo(0, (window as any).__swupScrollLockY);
+            }
+            requestAnimationFrame(tick);
+          };
+          requestAnimationFrame(tick);
+        }
       }
 
       // Start progress bar
@@ -1153,6 +1174,9 @@ function disableAnimation() {
       }, 300);
     });
     window.swup.hooks.on("visit:end", (_visit: { to: { url: string } }) => {
+      // 兜底解除滚动锁定（visit 结束，无论成功或失败）
+      (window as any).__swupScrollLockY = null;
+
       // Finish progress bar
       const progressBar = document.getElementById("progress-bar");
       if (progressBar) {
