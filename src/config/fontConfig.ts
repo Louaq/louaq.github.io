@@ -5,11 +5,30 @@ export const fontConfig = {
 	// 是否预加载字体文件
 	preload: true,
 	// 当前选择的字体，支持多个字体组合
-	// "jetbrains-mono-nl", "noto-serif-sc"
-	selected: ["jetbrains-mono-nl", "noto-serif-sc"],
+	// "jetbrains-mono-nl", "noto-serif-sc", "harmonyos-sans-sc"
+	selected: ["harmonyos-regular"],
 
 	// 字体列表
 	fonts: {
+		// 华为鸿蒙字体 - HarmonyOS_Regular（B站 CDN 直接 woff2）
+		"harmonyos-regular": {
+			id: "harmonyos-regular",
+			name: "HarmonyOS Regular",
+			src: "https://s1.hdslb.com/bfs/static/jinkela/long/font/HarmonyOS_Regular.ao.woff2",
+			family: "HarmonyOS_Regular",
+			format: "woff2",
+			display: "swap" as const,
+		},
+
+		// 华为鸿蒙字体 - HarmonyOS Sans SC（CDN CSS 引入）
+		"harmonyos-sans-sc": {
+			id: "harmonyos-sans-sc",
+			name: "HarmonyOS Sans SC",
+			src: "https://jsd.cdn.zzko.cn/npm/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Regular.css",
+			family: "HarmonyOS Sans SC",
+			display: "swap" as const,
+		},
+
 		// 系统字体
 		system: {
 			id: "system",

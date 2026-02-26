@@ -57,23 +57,24 @@ const fontFamilyStyle = generateFontFamilyStyle();
 
 <!-- 字体样式表链接 -->{
   selectedFonts.map((font) => {
-    // 判断是否为外部链接
-    const isExternalUrl =
-      font.src.startsWith("http://") ||
-      font.src.startsWith("https://") ||
-      font.src.startsWith("//");
+    // 判断是否为直接字体文件（woff2/woff/ttf/otf）
+    const isDirectFontFile = /\.(woff2?|ttf|otf)(\?.*)?$/i.test(font.src);
+    // 判断是否为外部 CSS 链接
+    const isExternalCss =
+      (font.src.startsWith("http://") || font.src.startsWith("https://") || font.src.startsWith("//")) &&
+      !isDirectFontFile;
 
-    if (isExternalUrl) {
-      // 外部字体链接 (如 Google Fonts, CDN等)
+    if (isExternalCss) {
+      // 外部字体 CSS 链接 (如 Google Fonts, CDN 等)
       return <link rel="stylesheet" href={font.src} />;
     } else {
-      // 本地字体文件
+      // 本地或直接字体文件 URL，使用 @font-face
       return (
         <style
           set:html={`
         @font-face {
           font-family: "${font.family}";
-          src: url("${font.src}") ${font.format ? `format("${font.format}")` : ""};
+          src: url("${font.src}") ${font.format ? `format("${font.format}")` : "format(\"woff2\")"};
           ${font.weight ? `font-weight: ${font.weight};` : ""}
           ${font.style ? `font-style: ${font.style};` : ""}
           ${font.display ? `font-display: ${font.display};` : ""}
@@ -91,7 +92,10 @@ const fontFamilyStyle = generateFontFamilyStyle();
   fontConfig.enable &&
     fontConfig.preload &&
     selectedFonts
-      .filter((font) => !font.src.startsWith("http"))
+      .filter(
+        (font) =>
+          /\.(woff2?|ttf|otf)(\?.*)?$/i.test(font.src) || !font.src.startsWith("http")
+      )
       .map((font) => (
         <link
           rel="preload"
