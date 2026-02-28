@@ -43,9 +43,17 @@ jobs:
         run: pnpm install
 
       - name: 🔨 构建项目
-        run: pnpm build
+        run: pnpm build:algolia
         env:
           NODE_ENV: production
+          # 让构建产物启用 Algolia（Navbar 会按此切换到 Algolia 搜索）
+          PUBLIC_ALGOLIA_APP_ID: ${{ secrets.PUBLIC_ALGOLIA_APP_ID }}
+          PUBLIC_ALGOLIA_SEARCH_KEY: ${{ secrets.PUBLIC_ALGOLIA_SEARCH_KEY }}
+          PUBLIC_ALGOLIA_INDEX_NAME: ${{ secrets.PUBLIC_ALGOLIA_INDEX_NAME }}
+          # 构建完成后自动上传 Algolia index（用于 src/utils/algolia.ts 集成）
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
 
       - name: 💾 上传构建产物
         uses: actions/upload-artifact@v4
