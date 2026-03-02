@@ -87,6 +87,7 @@ export default defineConfig({
 			useDarkModeMediaQuery: false,
 			themeCssSelector: (theme) => `[data-theme='${theme.name}']`,
 			plugins: [
+				// pluginLanguageBadge 始终加载，开关通过 data-language-badge-enabled + CSS 控制
 				pluginLanguageBadge(),
 				pluginCollapsibleSections(),
 				pluginLineNumbers(),

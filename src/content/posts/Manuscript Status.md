@@ -10,6 +10,7 @@ pinned: true
 
 ## 催稿信模板-主题：
 
+
 :::important
 Subject: Inquiry Regarding Manuscript Status - Manuscript ID: [您的稿件编号]
 :::

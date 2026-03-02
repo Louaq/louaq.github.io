@@ -16,7 +16,7 @@ export const fontConfig = {
 			name: "HarmonyOS Regular",
 			src: "https://s1.hdslb.com/bfs/static/jinkela/long/font/HarmonyOS_Regular.ao.woff2",
 			family: "HarmonyOS_Regular",
-			format: "woff2",
+			format: "woff2" as const,
 			display: "swap" as const,
 		},
 

@@ -103,7 +103,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 ---
 
 <!doctype html>
-<html lang={siteLang} class="bg-[var(--page-bg)] text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode}>
+<html lang={siteLang} class="bg-[var(--page-bg)] text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode} data-language-badge-enabled={String(expressiveCodeConfig.pluginLanguageBadge?.enable !== false)}>
   <head>
       {siteConfig.analytics?.enableGoogleAnalytics && siteConfig.analytics?.googleAnalyticsId && (
               <GoogleAnalytics analyticsId={siteConfig.analytics.googleAnalyticsId} />

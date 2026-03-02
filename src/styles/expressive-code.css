@@ -9,8 +9,8 @@
       Consolas, "Liberation Mono", "Courier New", monospace;
   }
 
-  /* Language Badge 样式适配主题色和亮暗色 */
-  /* 覆盖 expressive-code-language-badge 插件的默认样式 */
+  /* Language Badge 样式：徽标在左边，复制按钮在右边 */
+  /* 覆盖 expressive-code-language-badge 插件默认的 right 定位 */
   [data-language]::before {
     color: var(--btn-content) !important;
     background: var(--btn-regular-bg) !important;
@@ -32,6 +32,11 @@
       background-color: var(--btn-regular-bg-active) !important;
     }
   }
+}
+
+/* pluginLanguageBadge.enable=false 时隐藏语言徽章 */
+html[data-language-badge-enabled="false"] .expressive-code [data-language]::before {
+  display: none !important;
 }
 
 /* 透明模式下的代码块样式 */
