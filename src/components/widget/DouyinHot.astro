@@ -432,37 +432,13 @@ const style = Astro.props.style;
 					}
 				}
 
-				let response: Response;
-				// 手动刷新时：优先直连源 API，绕过 GitHub Pages 静态代理与 CDN 缓存
-				if (opts?.force) {
-					try {
-						const directUrl = `${SOURCE_API_URL}&_t=${Date.now()}`;
-						const directRes = await fetchWithTimeout(directUrl, {
-							method: "GET",
-							cache: "no-store",
-							headers: { Accept: "application/json" },
-						});
-						if (directRes.ok && directRes.headers.get("content-type")?.includes("json")) {
-							response = directRes;
-						} else {
-							throw new Error("Direct fetch failed");
-						}
-					} catch {
-						// 兜底：再走本站代理，同样设置超时
-						response = await fetchWithTimeout(`/api/douyin.json?_t=${Date.now()}`, {
-							method: "GET",
-							cache: "no-store",
-							headers: { Accept: "application/json" },
-						});
-					}
-				} else {
-					// 自动刷新 / 首次加载：允许使用默认缓存策略，但仍然加超时
-					response = await fetchWithTimeout("/api/douyin.json", {
-						method: "GET",
-						cache: "default",
-						headers: { Accept: "application/json" },
-					});
-				}
+				// GitHub Pages / 静态部署无服务端，/api/douyin.json 不可用，始终直连源 API
+				const url = `${SOURCE_API_URL}&_t=${Date.now()}`;
+				const response = await fetchWithTimeout(url, {
+					method: "GET",
+					cache: "no-store",
+					headers: { Accept: "application/json" },
+				});
 
 				if (!response.ok) {
 					throw new Error(`HTTP ${response.status}: ${response.statusText}`);
@@ -541,10 +517,10 @@ const style = Astro.props.style;
 		// 立即执行一次
 		fetchDouyinHot();
 
-		// 每10分钟自动刷新一次（使用缓存逻辑）
+		// 每5分钟自动从接口获取更新
 		anyContainer._douyinHotInterval = setInterval(
 			() => fetchDouyinHot({ silent: true }),
-			10 * 60 * 1000,
+			5 * 60 * 1000,
 		);
 
 		// 手动刷新按钮
