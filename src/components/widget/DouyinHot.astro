@@ -410,10 +410,10 @@ const style = Astro.props.style;
 					}
 				}
 
-				const apiUrl = "https://newsnow.louaq.com/api/s?id=douyin";
-				const url = opts?.force ? `${apiUrl}&_t=${Date.now()}` : apiUrl;
+				const apiUrl = "/api/douyin.json";
+				const finalUrl = opts?.force ? `${apiUrl}?_t=${Date.now()}` : apiUrl;
 
-				const response = await fetch(url, {
+				const response = await fetch(finalUrl, {
 					method: "GET",
 					cache: opts?.force ? "no-store" : "default",
 					headers: {
