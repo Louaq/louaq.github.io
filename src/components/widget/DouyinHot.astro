@@ -370,6 +370,25 @@ const style = Astro.props.style;
 				.join("");
 		}
 
+		// 带超时的 fetch，避免网络异常时一直等待
+		async function fetchWithTimeout(
+			input: RequestInfo | URL,
+			init?: RequestInit,
+			timeoutMs = 10000,
+		): Promise<Response> {
+			const controller = new AbortController();
+			const id = window.setTimeout(() => controller.abort(), timeoutMs);
+			try {
+				const res = await fetch(input, {
+					...init,
+					signal: controller.signal,
+				});
+				return res;
+			} finally {
+				window.clearTimeout(id);
+			}
+		}
+
 		// 获取抖音热搜
 		// silent: 不打断当前列表显示，只展示按钮旋转
 		// force: 强制绕过本地缓存和浏览器缓存（用于手动刷新）
@@ -418,7 +437,7 @@ const style = Astro.props.style;
 				if (opts?.force) {
 					try {
 						const directUrl = `${SOURCE_API_URL}&_t=${Date.now()}`;
-						const directRes = await fetch(directUrl, {
+						const directRes = await fetchWithTimeout(directUrl, {
 							method: "GET",
 							cache: "no-store",
 							headers: { Accept: "application/json" },
@@ -429,14 +448,16 @@ const style = Astro.props.style;
 							throw new Error("Direct fetch failed");
 						}
 					} catch {
-						response = await fetch(`/api/douyin.json?_t=${Date.now()}`, {
+						// 兜底：再走本站代理，同样设置超时
+						response = await fetchWithTimeout(`/api/douyin.json?_t=${Date.now()}`, {
 							method: "GET",
 							cache: "no-store",
 							headers: { Accept: "application/json" },
 						});
 					}
 				} else {
-					response = await fetch("/api/douyin.json", {
+					// 自动刷新 / 首次加载：允许使用默认缓存策略，但仍然加超时
+					response = await fetchWithTimeout("/api/douyin.json", {
 						method: "GET",
 						cache: "default",
 						headers: { Accept: "application/json" },
@@ -520,10 +541,10 @@ const style = Astro.props.style;
 		// 立即执行一次
 		fetchDouyinHot();
 
-		// 每5分钟刷新一次
+		// 每10分钟自动刷新一次（使用缓存逻辑）
 		anyContainer._douyinHotInterval = setInterval(
 			() => fetchDouyinHot({ silent: true }),
-			5 * 60 * 1000,
+			10 * 60 * 1000,
 		);
 
 		// 手动刷新按钮
