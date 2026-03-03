@@ -10,11 +10,11 @@ export const profileConfig: ProfileConfig = {
       icon: "mdi:email",
       url: "mailto:yang_syy@qq.com",
     },
-    {
-      name: "Bilibli",
-      icon: "fa6-brands:bilibili",
-      url: "https://space.bilibili.com/397523112",
-    },
+    // {
+    //   name: "Bilibli",
+    //   icon: "fa6-brands:bilibili",
+    //   url: "https://space.bilibili.com/397523112",
+    // },
     {
       name: "GitHub",
       icon: "fa6-brands:github",
@@ -30,5 +30,10 @@ export const profileConfig: ProfileConfig = {
 			url: "https://www.travellings.cn/go.html",
 			icon: "material-symbols:subway-rounded",
 		},
+    {
+      name: "哪吒面板",
+      icon: "material-symbols:cloud-done-rounded",
+      url: "https://status.louaq.com",
+    }
   ],
 };
