@@ -24,7 +24,8 @@ export const siteConfig: SiteConfig = {
 	"MICCAI",
 	"NeurIPS",
 	"TPAMI",
-	"TMI"
+	"TMI",
+	"ACM MM"
   ],
 
 	// 主题色
