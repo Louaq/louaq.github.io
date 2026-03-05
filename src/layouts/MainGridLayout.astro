@@ -455,7 +455,11 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 </div>
 )}
 
-{/* 当壁纸未渲染时，添加空的 Swup 占位容器，避免 Swup 找不到容器而回退为整页加载 */}
+{/* 当 banner 未渲染时，添加空的 #banner-wrapper 占位，确保 Swup 能找到容器，避免回退为整页加载（侧边栏等会随之重新加载） */}
+{!(isWallpaperSwitchable || isBannerMode) && (
+    <div id="banner-wrapper" class="hidden" aria-hidden="true"></div>
+)}
+{/* 当壁纸未渲染时，添加其他空占位容器 */}
 {!(isWallpaperSwitchable || isBannerMode || isOverlayMode) && (
 <>
     <div id="banner-overlay-container" class="hidden"></div>
