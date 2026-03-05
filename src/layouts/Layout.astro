@@ -268,12 +268,14 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       const WALLPAPER_BANNER = "banner";
       const WALLPAPER_OVERLAY = "overlay";
       const WALLPAPER_NONE = "none";
-      // 配置为 overlay 时强制使用 overlay，不读 localStorage，避免刷新仍显示 banner
+      // 配置为 overlay/none 时强制使用配置，不读 localStorage，避免刷新仍显示其他壁纸
       const stored = isWallpaperSwitchable ? localStorage.getItem("wallpaperMode") : null;
       const wallpaperMode =
         defaultWallpaperMode === WALLPAPER_OVERLAY
           ? WALLPAPER_OVERLAY
-          : (stored || defaultWallpaperMode);
+          : defaultWallpaperMode === WALLPAPER_NONE
+            ? WALLPAPER_NONE
+            : (stored || defaultWallpaperMode);
 
       // 设置data-wallpaper-mode属性
       document.documentElement.setAttribute(
@@ -547,7 +549,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           : null;
         const mode = defaultWallpaperMode === WALLPAPER_OVERLAY
           ? WALLPAPER_OVERLAY
-          : (stored || defaultWallpaperMode);
+          : defaultWallpaperMode === WALLPAPER_NONE
+            ? WALLPAPER_NONE
+            : (stored || defaultWallpaperMode);
         if (mode === WALLPAPER_OVERLAY || mode === WALLPAPER_NONE) {
           document.body.classList.remove("enable-banner");
           document.body.classList.add("no-banner-layout");

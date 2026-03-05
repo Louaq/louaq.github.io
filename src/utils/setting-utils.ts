@@ -685,9 +685,12 @@ export function initWallpaperMode(): void {
 }
 
 export function getStoredWallpaperMode(): WALLPAPER_MODE {
-	// 配置为 overlay 时强制返回 overlay，不读 localStorage，避免刷新仍显示 banner
+	// 配置为 overlay/none 时强制使用配置，不读 localStorage，避免刷新仍显示其他壁纸
 	if (backgroundWallpaper.mode === WALLPAPER_OVERLAY) {
 		return WALLPAPER_OVERLAY;
+	}
+	if (backgroundWallpaper.mode === WALLPAPER_NONE) {
+		return WALLPAPER_NONE;
 	}
 	if (
 		typeof localStorage === "undefined" ||
