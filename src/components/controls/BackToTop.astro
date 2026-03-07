@@ -98,8 +98,13 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 4rem;
-    height: 4rem;
+    width: 3rem;
+    height: 3rem;
+    min-width: 3rem;
+    max-width: 3rem;
+    min-height: 3rem;
+    max-height: 3rem;
+    flex-shrink: 0;
     opacity: 1;
     pointer-events: auto;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -157,11 +162,15 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     opacity: 0.9;
   }
 
-  /* 响应式调整 */
+  /* 响应式调整 - 与 FloatingButton 保持一致 */
   @media (max-width: 768px) {
     #back-to-top-wrapper {
       width: 3rem;
       height: 3rem;
+      min-width: 3rem;
+      max-width: 3rem;
+      min-height: 3rem;
+      max-height: 3rem;
     }
 
     .progress-ring-bg,
@@ -174,6 +183,10 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     #back-to-top-wrapper {
       width: 2.5rem;
       height: 2.5rem;
+      min-width: 2.5rem;
+      max-width: 2.5rem;
+      min-height: 2.5rem;
+      max-height: 2.5rem;
     }
 
     .progress-ring-bg,
@@ -186,6 +199,10 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     #back-to-top-wrapper {
       width: 2rem;
       height: 2rem;
+      min-width: 2rem;
+      max-width: 2rem;
+      min-height: 2rem;
+      max-height: 2rem;
     }
 
     .progress-ring-bg,
@@ -198,6 +215,10 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     #back-to-top-wrapper {
       width: 1.75rem;
       height: 1.75rem;
+      min-width: 1.75rem;
+      max-width: 1.75rem;
+      min-height: 1.75rem;
+      max-height: 1.75rem;
     }
 
     .progress-ring-bg,
