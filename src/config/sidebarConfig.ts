@@ -52,9 +52,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 自定义属性：配置倒计时目标日期时间和标题
 			// targetDate 支持格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
 			customProps: {
-				targetDate: "2026-03-06 06:00:00",
-				title: "ECCV2026倒计时",
-				description: "距离ECCV2026还有",
+				targetDate: "2026-03-25 00:00:00",
+				title: "ACM MM 2026倒计时",
+				description: "距离ACM MM 2026还有",
 			},
 		},
 		{
