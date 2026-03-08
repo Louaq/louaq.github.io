@@ -114,11 +114,11 @@ export type SiteConfig = {
 	analytics?: {
 		enableGoogleAnalytics?: boolean; // 是否启用 Google Analytics，默认 false，避免国内访问 ERR_CONNECTION_CLOSED
 		googleAnalyticsId?: string; // Google Analytics ID
-		microsoftClarityId?: string; // Microsoft Clarity ID
 	};
 
 	// 文章密码保护配置
 	postPassword?: string; // 当文章的 password 字段设置为 true 时使用的默认密码
+	postPasswordHint?: string; // 密码提示文案，如 "示例文章密码123456"
 
 	// 全站变灰配置
 	grayscale?: {

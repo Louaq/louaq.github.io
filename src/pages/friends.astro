@@ -51,6 +51,21 @@ const description =
         }
       </div>
 
+      <!-- 搜索框 -->
+      {items.length > 0 && (
+        <div class="friend-search-wrapper mb-4">
+          <div class="friend-search-input-wrap">
+            <Icon icon="material-symbols:search" class="friend-search-icon" />
+            <input
+              type="text"
+              class="friend-search-input"
+              placeholder={i18n(I18nKey.searchTypeSomething)}
+              aria-label={i18n(I18nKey.search)}
+            />
+          </div>
+        </div>
+      )}
+
       <!-- 标签筛选 -->
       {
         items.length > 0 && (
@@ -81,6 +96,8 @@ const description =
               target="_blank"
               rel="noopener noreferrer"
               data-tags={item.tags?.join(",")}
+              data-title={item.title}
+              data-desc={item.desc}
               class="friend-card group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
             >
               {/* 背景装饰 - 仅悬停显示 */}
@@ -153,14 +170,31 @@ const description =
       class FriendFilter extends HTMLElement {
         constructor() {
           super();
+          this.applyFilters = this.applyFilters.bind(this);
         }
 
         connectedCallback() {
           this.addEventListener("click", this.handleClick);
+          const container = this.closest(".card-base");
+          if (container) {
+            const searchInput = container.querySelector(".friend-search-input");
+            if (searchInput) {
+              searchInput.addEventListener("input", this.applyFilters);
+              searchInput.addEventListener("keyup", this.applyFilters);
+            }
+          }
         }
 
         disconnectedCallback() {
           this.removeEventListener("click", this.handleClick);
+          const container = this.closest(".card-base");
+          if (container) {
+            const searchInput = container.querySelector(".friend-search-input");
+            if (searchInput) {
+              searchInput.removeEventListener("input", this.applyFilters);
+              searchInput.removeEventListener("keyup", this.applyFilters);
+            }
+          }
         }
 
         handleClick(e) {
@@ -168,27 +202,37 @@ const description =
           const button = target.closest("button");
           if (!button) return;
 
-          const selectedTag = button.dataset.tag;
           const filters = this.querySelectorAll("button");
+          filters.forEach((f) => {
+            f.classList.remove("friend-tag-btn-active");
+            if (f === button) f.classList.add("friend-tag-btn-active");
+          });
+          this.applyFilters();
+        }
+
+        applyFilters() {
           const container = this.closest(".card-base");
           if (!container) return;
 
+          const searchInput = container.querySelector(".friend-search-input");
+          const activeBtn = this.querySelector(".friend-tag-btn-active");
+          const selectedTag = activeBtn?.dataset.tag || "all";
+          const query = (searchInput?.value || "").trim().toLowerCase();
+
           const cards = container.querySelectorAll(".friend-card");
+          cards.forEach((cardEl) => {
+            const tags = (cardEl.dataset.tags || "").split(",").filter(Boolean);
+            const title = (cardEl.dataset.title || "").toLowerCase();
+            const desc = (cardEl.dataset.desc || "").toLowerCase();
 
-          filters.forEach((f) => {
-            f.classList.remove("friend-tag-btn-active");
-            if (f === button) {
-              f.classList.add("friend-tag-btn-active");
-            }
-          });
+            const tagMatch = selectedTag === "all" || tags.includes(selectedTag);
+            const searchMatch =
+              !query ||
+              title.includes(query) ||
+              desc.includes(query) ||
+              tags.some((t) => t.toLowerCase().includes(query));
 
-          cards.forEach((card) => {
-            const cardEl = card;
-            const tags = (cardEl.dataset.tags || "").split(",");
-            if (
-              selectedTag === "all" ||
-              (selectedTag && tags.includes(selectedTag))
-            ) {
+            if (tagMatch && searchMatch) {
               cardEl.style.display = "";
               cardEl.classList.add("animate-fade-in-up");
             } else {
@@ -203,6 +247,39 @@ const description =
   </script>
 
   <style is:global>
+    .friend-search-input-wrap {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border: 1px solid var(--line-divider);
+      border-radius: var(--radius-large, 0.75rem);
+      background: var(--card-bg);
+      transition: border-color 0.2s;
+    }
+    .friend-search-input-wrap:focus-within {
+      border-color: var(--primary);
+      outline: none;
+    }
+    .friend-search-icon {
+      color: var(--text-tertiary, #9ca3af);
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    .friend-search-input {
+      flex: 1;
+      min-width: 0;
+      border: none;
+      background: transparent;
+      font-size: 0.9375rem;
+      color: var(--text-primary);
+    }
+    .friend-search-input::placeholder {
+      color: var(--text-tertiary, #9ca3af);
+    }
+    .friend-search-input:focus {
+      outline: none;
+    }
     .friends-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));

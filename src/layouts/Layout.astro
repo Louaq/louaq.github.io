@@ -1,6 +1,5 @@
 ---
 import GoogleAnalytics from "@components/analytics/GoogleAnalytics.astro";
-import MicrosoftClarity from "@components/analytics/MicrosoftClarity.astro";
 import FancyboxManager from "@components/features/FancyboxManager.astro";
 import FontManager from "@components/features/FontManager.astro";
 import KatexManager from "@components/features/KatexManager.astro";
@@ -108,10 +107,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       {siteConfig.analytics?.enableGoogleAnalytics && siteConfig.analytics?.googleAnalyticsId && (
               <GoogleAnalytics analyticsId={siteConfig.analytics.googleAnalyticsId} />
       )}
-      {siteConfig.analytics?.microsoftClarityId && (
-              <MicrosoftClarity clarityId={siteConfig.analytics.microsoftClarityId} />
-      )}
-
     <title>{pageTitle}</title>
 
     <meta charset="UTF-8" />

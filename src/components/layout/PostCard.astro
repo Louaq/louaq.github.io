@@ -85,6 +85,13 @@ const { remarkPluginFrontmatter } = await render(entry);
         before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block"
     >
       <span class="min-w-0 flex-1 truncate">{title}</span>
+      {entry.data.password && (
+        <Icon
+          name="material-symbols:lock-outline"
+          class="inline text-2xl align-middle -translate-y-px text-inherit flex-shrink-0"
+          aria-label="加密"
+        />
+      )}
       <Icon
         class="text-[2rem] text-(--primary) md:hidden flex-shrink-0 -translate-y-[2px]"
         name="material-symbols:chevron-right-rounded"

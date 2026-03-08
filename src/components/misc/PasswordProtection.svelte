@@ -3,6 +3,7 @@
   
   export let postId: string;
   export let password: string;
+  export let hint: string = ""; // 可选密码提示，如 "示例文章密码123456"
   
   let inputPassword = "";
   let errorMessage = "";
@@ -176,15 +177,15 @@
 {#if !isUnlocked}
 <div class="password-protection-container">
   <div class="password-protection-card" class:shake={isShaking}>
-    <div class="lock-icon">
-      <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
-        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-      </svg>
+    <div class="shield-lock-icon">
+      <iconify-icon icon="material-symbols:shield-lock" width="48" height="48"></iconify-icon>
     </div>
     
-    <h2 class="password-title">此文章已加密</h2>
-    <p class="password-description">请输入密码查看文章内容</p>
+    <h2 class="password-title">密码保护</h2>
+    <p class="password-description">这篇文章已被密码保护,请输入密码查看内容。</p>
+    {#if hint}
+      <p class="password-hint">提示:{hint}</p>
+    {/if}
     
     <div class="password-input-group">
       <input 
@@ -233,11 +234,10 @@
   .password-protection-card {
     background: var(--card-bg);
     border-radius: var(--radius-large);
-    padding: 3rem 2rem;
+    padding: 2rem 1.5rem;
     max-width: 400px;
     width: 100%;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 15px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
   }
   
@@ -251,19 +251,19 @@
     20%, 40%, 60%, 80% { transform: translateX(5px); }
   }
   
-  .lock-icon {
+  .shield-lock-icon {
     color: var(--primary);
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
     display: inline-flex;
-    padding: 1rem;
-    background: var(--primary-bg, rgba(var(--primary-rgb, 74, 222, 128), 0.1));
+    padding: 0.625rem;
+    background: var(--primary-bg, rgba(var(--primary-rgb, 74, 222, 128), 0.12));
     border-radius: 50%;
   }
   
   .password-title {
-    font-size: 1.75rem;
+    font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.375rem;
     color: var(--text-primary, #1a1a1a);
   }
   
@@ -272,27 +272,38 @@
   }
   
   .password-description {
-    font-size: 1rem;
+    font-size: 0.875rem;
     color: var(--text-secondary, #666);
-    margin-bottom: 2rem;
+    margin-bottom: 0.375rem;
   }
   
   :global(.dark) .password-description {
     color: var(--text-secondary, #aaa);
   }
   
-  .password-input-group {
-    display: flex;
-    gap: 0.75rem;
+  .password-hint {
+    font-size: 0.8125rem;
+    color: var(--text-tertiary, #999);
     margin-bottom: 1rem;
   }
   
+  :global(.dark) .password-hint {
+    color: var(--text-tertiary, #888);
+  }
+  
+  .password-input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  
   .password-input {
-    flex: 1;
-    padding: 0.75rem 1rem;
+    width: 100%;
+    padding: 0.5rem 0.75rem;
     border: 2px solid var(--line-divider, #e5e5e5);
     border-radius: var(--radius-medium, 0.5rem);
-    font-size: 1rem;
+    font-size: 0.875rem;
     background: var(--input-bg, #fff);
     color: var(--text-primary, #1a1a1a);
     transition: all 0.3s ease;
@@ -323,16 +334,16 @@
   }
   
   .password-button {
-    padding: 0.75rem 2rem;
+    width: 100%;
+    padding: 0.5rem 1.25rem;
     background: var(--primary);
     color: white;
     border: none;
     border-radius: var(--radius-medium, 0.5rem);
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-    white-space: nowrap;
   }
   
   .password-button:hover {
@@ -370,7 +381,7 @@
     justify-content: center;
     gap: 0.5rem;
     color: #ef4444;
-    font-size: 0.875rem;
+    font-size: 0.8125rem;
     padding: 0.75rem 1rem;
     background: rgba(239, 68, 68, 0.1);
     border-radius: var(--radius-small, 0.375rem);
@@ -386,19 +397,11 @@
   /* 响应式设计 */
   @media (max-width: 640px) {
     .password-protection-card {
-      padding: 2rem 1.5rem;
+      padding: 1.5rem 1.25rem;
     }
     
     .password-title {
-      font-size: 1.5rem;
-    }
-    
-    .password-input-group {
-      flex-direction: column;
-    }
-    
-    .password-button {
-      width: 100%;
+      font-size: 1.125rem;
     }
   }
 </style>

@@ -164,8 +164,6 @@ export const siteConfig: SiteConfig = {
 		enableGoogleAnalytics: false,
 		// Google Analytics ID
 		googleAnalyticsId: "G-WM2YMELY5N",
-		// Microsoft Clarity ID
-		microsoftClarityId: "uvjyzziqby",
 	},
 
 	// 字体配置
@@ -175,6 +173,8 @@ export const siteConfig: SiteConfig = {
 	// 文章密码保护配置
 	// 当文章的password字段设置为true时，将使用此密码
 	postPassword: "123456",
+	// 密码提示文案，留空则不显示提示
+	postPasswordHint: "示例文章密码123456",
 
 	// 全站变灰配置
 	// 手动控制：true = 启用变灰，false = 关闭变灰

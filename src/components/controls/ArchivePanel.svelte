@@ -1,5 +1,6 @@
 <script lang="ts">
 import { onMount } from "svelte";
+import Icon from "@iconify/svelte";
 
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
@@ -21,6 +22,7 @@ interface Post {
 		tags: string[];
 		category?: string | null;
 		published: Date;
+		password?: string | boolean;
 	};
 }
 
@@ -136,9 +138,12 @@ onMount(async () => {
                         <div
                                 class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
                      group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
-                     text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden"
+                     text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden flex items-center gap-1"
                         >
-                            {post.data.title}
+                            <span class="min-w-0 truncate">{post.data.title}</span>
+                            {#if post.data.password}
+                                <Icon name="material-symbols:lock-outline" class="inline text-xl align-middle -translate-y-px text-inherit flex-shrink-0" aria-label="加密" />
+                            {/if}
                         </div>
 
                         <!-- tag list -->

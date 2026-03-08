@@ -122,7 +122,6 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 网站分析和统计集成组件。
 
 - `GoogleAnalytics.astro` - Google Analytics
-- `MicrosoftClarity.astro` - Microsoft Clarity
 
 ### 🔧 misc/ - 杂项工具组件
 
