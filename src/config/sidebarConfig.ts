@@ -17,6 +17,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	// 适用在只想用左侧单侧栏，但在文章详情页想用右侧栏的目录等组件的场景
 	showRightSidebarOnPostPage: true,
 
+
+
 	// 左侧边栏组件配置列表
 	// 组件位置position：top=顶部，sticky=粘性定位(会跟随页面滚动)
 	leftComponents: [
