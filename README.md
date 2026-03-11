@@ -1,13 +1,3 @@
 ## README
 
-## Update
-
-```yaml
-git pull
-
-git fetch upstream
-
-git checkout master  # 或者 master，取决于你的默认分支名
-
-git merge upstream/master  # 或 upstream/master
-```
+fork自[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)，原作者[https://github.com/CuteLeaf](https://github.com/CuteLeaf)
