@@ -279,3 +279,56 @@ body.wallpaper-transparent .float-panel {
         display: none !important;
     }
 }
+
+/* ============================================
+ * 导航栏条目 hover 时移除背景色变化
+ * ============================================ */
+#navbar .btn-plain:hover {
+    background-color: transparent !important;
+}
+#navbar .btn-plain:hover::before {
+    background: none !important;
+}
+#navbar .dropdown-item:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
+#navbar .mobile-menu-item a:hover,
+#navbar .mobile-menu-item button:hover {
+    background-color: transparent !important;
+}
