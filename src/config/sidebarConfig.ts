@@ -50,7 +50,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 250,
+			animationDelay: 0,
 			// 自定义属性：配置倒计时目标日期时间和标题
 			// targetDate 支持格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
 			customProps: {
@@ -71,7 +71,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 50,
+			animationDelay: 0,
 		},
 		// {
 		// 	// 组件类型：分类组件
@@ -123,7 +123,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 200,
+			animationDelay: 0,
 			// 自定义属性：配置显示的评论数量
 			customProps: {
 				count: 3, // 显示最近的3条评论
@@ -163,13 +163,13 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 200,
+			animationDelay: 0,
 		},
 		{
 			// 组件类型：日历组件
 			type: "calendar",
 			// 是否启用该组件
-			enable: true,
+			enable: false,
 			// 组件显示顺序
 			order: 2,
 			// 组件位置
@@ -179,7 +179,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 300,
+			animationDelay: 0,
 		},
 		{
 			// 组件类型：抖音热搜组件
@@ -195,7 +195,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 250,
+			animationDelay: 0,
 		},
 		{
 			// 组件类型：侧边栏目录组件（只在文章详情页显示）
