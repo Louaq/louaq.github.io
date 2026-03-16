@@ -20,6 +20,7 @@ export const ru: Translation = {
 	[Key.recentPosts]: "Последние посты",
 	[Key.postList]: "Список постов",
 	[Key.tableOfContents]: "Содержание",
+	[Key.tocEmpty]: "На этой странице нет оглавления",
 
 	// Объявление
 	[Key.announcement]: "Объявление",
