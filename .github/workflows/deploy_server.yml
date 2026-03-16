@@ -1,0 +1,160 @@
+name: 🚀 部署到自有服务器
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: 📦 构建项目
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: 📥 检出代码
+        uses: actions/checkout@v4
+
+      - name: 🟢 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: 📦 安装 pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8
+          run_install: false
+
+      - name: 📦 获取 pnpm 存储目录
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: 🔄 设置 pnpm 缓存
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: 📦 安装依赖
+        run: pnpm install
+
+      - name: 🔨 构建项目
+        run: pnpm build:algolia
+        env:
+          NODE_ENV: production
+          # 让构建产物启用 Algolia（Navbar 会按此切换到 Algolia 搜索）
+          PUBLIC_ALGOLIA_APP_ID: ${{ secrets.PUBLIC_ALGOLIA_APP_ID }}
+          PUBLIC_ALGOLIA_SEARCH_KEY: ${{ secrets.PUBLIC_ALGOLIA_SEARCH_KEY }}
+          PUBLIC_ALGOLIA_INDEX_NAME: ${{ secrets.PUBLIC_ALGOLIA_INDEX_NAME }}
+          # 构建完成后自动上传 Algolia index（用于 src/utils/algolia.ts 集成）
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+
+      - name: 💾 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  deploy:
+    name: 🚀 部署到服务器
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        server:
+          - name: 'Server-1'
+            host_secret: 'HOST'
+            username_secret: 'USERNAME'
+            ssh_key_secret: 'SSH_PRIVATE_KEY'
+            port: 45663
+            path: '/opt/1panel/www/sites/www.louaq.com/index'
+      fail-fast: false
+
+    steps:
+      - name: 📥 下载构建产物
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: 🚚 准备服务器 - ${{ matrix.server.name }}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          script_stop: true
+          script: |
+            # 确保目标目录存在并设置权限
+            sudo mkdir -p ${{ matrix.server.path }}
+            sudo chown -R root:www-data ${{ matrix.server.path }}
+            
+            # 清理目标目录
+            sudo rm -rf ${{ matrix.server.path }}/*
+            
+            # 清理临时文件（如果有）
+            rm -rf /tmp/dist
+
+      - name: 📤 上传到 ${{ matrix.server.name }}
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          source: 'dist/*'
+          target: ${{ matrix.server.path }}
+          strip_components: 1
+
+      - name: 🔧 设置权限 - ${{ matrix.server.name }}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          script_stop: true
+          script: |
+            # 设置正确的权限
+            chmod -R 755 ${{ matrix.server.path }}
+            sudo chown -R root:www-data ${{ matrix.server.path }}
+            
+            echo "✅ ${{ matrix.server.name }} 部署完成！"
+
+      - name: ❌ 部署失败处理 - ${{ matrix.server.name }}
+        if: failure()
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          script: |
+            echo "❌ ${{ matrix.server.name }} 部署失败，清理临时文件..."
+            rm -rf /tmp/website-build /tmp/visualmedical.org_deploy.sh /tmp/dist
+            echo "⚠️ 请检查部署日志并手动处理"
+
+  notify:
+    name: 📢 部署结果通知
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+      - name: 🎉 部署成功通知
+        if: needs.deploy.result == 'success'
+        run: |
+          echo "🎉 网站已成功部署到所有服务器！"
+          
+      - name: ⚠️ 部署部分失败通知
+        if: needs.deploy.result == 'failure'
+        run: |
+          echo "⚠️ 部署到部分服务器失败，请检查日志！"
