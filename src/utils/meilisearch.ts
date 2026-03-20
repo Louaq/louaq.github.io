@@ -15,6 +15,23 @@ async function waitForTask(options: {
 	const timeoutMs = options.timeoutMs ?? 60_000;
 	const start = Date.now();
 
+	const formatTaskError = (data: any) => {
+		// Meilisearch 的失败任务有时会把 error 返回为对象
+		if (!data) return "unknown error";
+		const err = data.error ?? data;
+		if (typeof err === "string") return err;
+		if (typeof err === "object") {
+			if (typeof err.message === "string") return err.message;
+			// 兜底：完整序列化，避免 [object Object]
+			try {
+				return JSON.stringify(err);
+			} catch {
+				return String(err);
+			}
+		}
+		return String(err);
+	};
+
 	while (Date.now() - start < timeoutMs) {
 		const res = await fetch(`${host}/tasks/${taskUid}`, {
 			headers: {
@@ -26,7 +43,9 @@ async function waitForTask(options: {
 
 		if (status === "succeeded") return data;
 		if (status === "failed") {
-			throw new Error(data?.error || `Meilisearch task failed: ${taskUid}`);
+			throw new Error(
+				`Meilisearch task failed (uid=${taskUid}): ${formatTaskError(data)}`,
+			);
 		}
 
 		// enqueued | processing
@@ -130,6 +149,8 @@ export default function meilisearch(): AstroIntegration {
 
 					logger.info(`Found ${records.length} records to upload to Meilisearch index: ${MEILISEARCH_INDEX_NAME}`);
 
+					let uploadSucceeded = true;
+
 					// 1) 尝试创建索引（如已存在会失败，这里忽略）
 					try {
 						const createRes = await meiliRequest({
@@ -153,10 +174,16 @@ export default function meilisearch(): AstroIntegration {
 									host,
 									adminKey: MEILISEARCH_ADMIN_KEY,
 									taskUid: json.taskUid,
+								}).catch((e) => {
+									uploadSucceeded = false;
+									logger.warn(
+										`Meilisearch create-index task failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+									);
 								});
 							}
 						}
 					} catch (e) {
+						uploadSucceeded = false;
 						logger.warn(`Meilisearch create-index failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
 					}
 
@@ -183,16 +210,25 @@ export default function meilisearch(): AstroIntegration {
 								adminKey: MEILISEARCH_ADMIN_KEY,
 								taskUid: json.taskUid,
 								timeoutMs: 30_000,
+							}).catch((e) => {
+								uploadSucceeded = false;
+								logger.warn(
+									`Meilisearch settings task failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+								);
 							});
 						}
 					} catch (e) {
+						uploadSucceeded = false;
 						logger.warn(`Meilisearch setSettings failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
 					}
 
 					// 3) 上传文档（按块，避免单次请求过大）
 					const chunkSize = Number(process.env.MEILISEARCH_UPLOAD_CHUNK_SIZE || 100);
+					let uploadedBatchCount = 0;
+					let taskSucceededBatchCount = 0;
 					for (let i = 0; i < records.length; i += chunkSize) {
 						const batch = records.slice(i, i + chunkSize);
+						uploadedBatchCount += 1;
 						logger.info(`Uploading batch ${i / chunkSize + 1} / ${Math.ceil(records.length / chunkSize)} ...`);
 
 						const { res: addRes, json: addJson } = await addDocumentsWithFallback({
@@ -223,15 +259,35 @@ export default function meilisearch(): AstroIntegration {
 								adminKey: MEILISEARCH_ADMIN_KEY,
 								taskUid: addJson.taskUid,
 								timeoutMs: 60_000,
-							}).catch((e) => {
-								logger.warn(
-									`Meilisearch upload wait failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
-								);
-							});
+							})
+								.then(() => {
+									taskSucceededBatchCount += 1;
+								})
+								.catch((e) => {
+									uploadSucceeded = false;
+									logger.warn(
+										`Meilisearch upload wait failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+									);
+								});
+						} else {
+							uploadSucceeded = false;
+							logger.warn(
+								`Meilisearch addDocuments returned no taskUid (batch ${i / chunkSize + 1}). body=${JSON.stringify(
+									addJson,
+								).slice(0, 500)}`,
+							);
 						}
 					}
 
-					logger.info(`✓ Successfully uploaded records to Meilisearch: ${MEILISEARCH_INDEX_NAME}`);
+					if (uploadSucceeded && taskSucceededBatchCount > 0) {
+						logger.info(
+							`✓ Successfully uploaded records to Meilisearch: ${MEILISEARCH_INDEX_NAME} (batches=${taskSucceededBatchCount}/${uploadedBatchCount})`,
+						);
+					} else {
+						logger.warn(
+							`Meilisearch upload finished with failures: index=${MEILISEARCH_INDEX_NAME}, batches=${taskSucceededBatchCount}/${uploadedBatchCount}. Check logs above.`,
+						);
+					}
 				} catch (error) {
 					logger.error(`✗ Meilisearch upload error: ${error instanceof Error ? error.message : String(error)}`);
 					// 不要让构建失败
