@@ -57,6 +57,43 @@ async function meiliRequest(options: {
 	});
 }
 
+async function addDocumentsWithFallback(options: {
+	host: string;
+	indexUid: string;
+	adminKey: string;
+	documents: unknown[];
+	logger: { info: Function; warn: Function; error: Function };
+}) {
+	const { host, indexUid, adminKey, documents, logger } = options;
+
+	// 兼容：不同 Meilisearch 版本对 /documents 的入参可能要求不同
+	// - 某些版本接受数组：POST /documents { ... body: documents[] }
+	// - 某些版本接受包装：POST /documents { documents: [...] }
+	const endpoint = `${host}/indexes/${indexUid}/documents`;
+
+	const tryAdd = async (body: unknown) => {
+		const res = await meiliRequest({
+			url: endpoint,
+			method: "POST",
+			adminKey,
+			body,
+		});
+		const json = await res.json().catch(() => ({}));
+		return { res, json };
+	};
+
+	// 1) 优先：数组形式
+	let { res, json } = await tryAdd(documents);
+	if (res.ok && json?.taskUid) return { res, json, used: "array" as const };
+
+	// 2) 回退：包装形式
+	logger.warn(
+		`Meilisearch addDocuments fallback triggered (status=${res.status}). Retrying with { documents: [...] } ...`,
+	);
+	({ res, json } = await tryAdd({ documents }));
+	return { res, json, used: "wrapped" as const };
+}
+
 /**
  * Meilisearch(=milisearch) 集成
  * 在构建完成后自动将索引数据上传到 Meilisearch（search.louaq.com）
@@ -158,16 +195,25 @@ export default function meilisearch(): AstroIntegration {
 						const batch = records.slice(i, i + chunkSize);
 						logger.info(`Uploading batch ${i / chunkSize + 1} / ${Math.ceil(records.length / chunkSize)} ...`);
 
-						const addRes = await meiliRequest({
-							url: `${host}/indexes/${MEILISEARCH_INDEX_NAME}/documents`,
-							method: "POST",
+						const { res: addRes, json: addJson } = await addDocumentsWithFallback({
+							host,
+							indexUid: MEILISEARCH_INDEX_NAME,
 							adminKey: MEILISEARCH_ADMIN_KEY,
-							body: batch,
+							documents: batch,
+							logger: { info: logger.info.bind(logger), warn: logger.warn.bind(logger), error: logger.error.bind(logger) },
 						});
-						const addJson = await addRes.json().catch(() => ({}));
 
 						if (!addRes.ok) {
-							logger.warn(`Meilisearch addDocuments failed (ignored): ${addRes.status} ${JSON.stringify(addJson).slice(0, 300)}`);
+							logger.warn(
+								`Meilisearch addDocuments failed: status=${addRes.status} body=${JSON.stringify(addJson).slice(0, 500)}`,
+							);
+							continue;
+						}
+
+						if (!addJson?.taskUid) {
+							logger.warn(
+								`Meilisearch addDocuments returned no taskUid (status=${addRes.status}). body=${JSON.stringify(addJson).slice(0, 500)}`,
+							);
 							continue;
 						}
 
@@ -178,7 +224,9 @@ export default function meilisearch(): AstroIntegration {
 								taskUid: addJson.taskUid,
 								timeoutMs: 60_000,
 							}).catch((e) => {
-								logger.warn(`Meilisearch upload wait failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
+								logger.warn(
+									`Meilisearch upload wait failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+								);
 							});
 						}
 					}
