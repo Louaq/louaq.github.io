@@ -75,7 +75,7 @@ export type SiteConfig = {
 
 	// 搜索引擎配置
 	search?: {
-		engine: "algolia"; // 搜索引擎：仅支持 Algolia
+		engine: "algolia" | "milisearch"; // 搜索引擎：Algolia / Milisearch(Meilisearch)
 	};
 
 	showLastModified: boolean; // 控制"上次编辑"卡片显示的开关

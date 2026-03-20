@@ -5,12 +5,23 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { navigateToPage } from "@utils/navigation-utils";
 
+interface Props {
+	engine?: "algolia" | "milisearch";
+}
+
+let { engine } : Props = $props();
+
 const ALGOLIA_APP_ID = import.meta.env.PUBLIC_ALGOLIA_APP_ID;
 const ALGOLIA_SEARCH_KEY = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY;
 const ALGOLIA_INDEX_NAME = import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME || "blog";
 
+const MEILISEARCH_HOST = import.meta.env.PUBLIC_MEILISEARCH_HOST || "https://search.louaq.com";
+const MEILISEARCH_SEARCH_KEY = import.meta.env.PUBLIC_MEILISEARCH_SEARCH_KEY;
+const MEILISEARCH_INDEX_NAME = import.meta.env.PUBLIC_MEILISEARCH_INDEX_NAME || "blog";
+
 let initialized = $state(false);
 let searchClient: any = $state(null);
+let searchEngine: "algolia" | "milisearch" = $state("algolia");
 
 let isOpen = $state(false);
 let query = $state("");
@@ -117,16 +128,27 @@ function portal(node: HTMLElement) {
 }
 
 onMount(async () => {
-	if (!ALGOLIA_APP_ID || !ALGOLIA_SEARCH_KEY) {
-		initialized = false;
-		return;
-	}
-	try {
-		const { liteClient } = await import("algoliasearch/lite");
-		searchClient = liteClient(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
-		initialized = true;
-	} catch {
-		initialized = false;
+	// 选择搜索引擎：优先使用外部传入的 engine，其次根据 Algolia 环境变量是否齐全自动判断
+	const selectedEngine: "algolia" | "milisearch" =
+		engine ?? (ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? "algolia" : "milisearch");
+	searchEngine = selectedEngine;
+
+	if (selectedEngine === "algolia") {
+		if (!ALGOLIA_APP_ID || !ALGOLIA_SEARCH_KEY) {
+			initialized = false;
+			return;
+		}
+		try {
+			const { liteClient } = await import("algoliasearch/lite");
+			searchClient = liteClient(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
+			initialized = true;
+		} catch {
+			initialized = false;
+		}
+	} else {
+		// Meilisearch(=milisearch) 不需要前置 SDK 初始化，直接用 fetch 查询
+		initialized = !!MEILISEARCH_HOST && !!MEILISEARCH_INDEX_NAME;
+		searchClient = null;
 	}
 
 	const onKeydown = (e: KeyboardEvent) => {
@@ -193,13 +215,21 @@ const handleResultClick = (event: Event, url: string): void => {
 
 const highlightText = (text: string, q: string): string => {
 	if (!q || !text) return text;
-	const safe = q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-	const regex = new RegExp(`(${safe})`, "gi");
+	// 支持空格分词：对每个 token 高亮，避免整句命中率过低
+	const tokens = q
+		.split(/\s+/g)
+		.map((t) => t.trim())
+		.filter(Boolean)
+		.slice(0, 8);
+	if (tokens.length === 0) return text;
+	const escaped = tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+	const regex = new RegExp(`(${escaped.join("|")})`, "gi");
 	return text.replace(regex, "<mark>$1</mark>");
 };
 
 const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
-	if (!initialized || !searchClient) return;
+	if (!initialized) return;
+	if (searchEngine === "algolia" && !searchClient) return;
 
 	const trimmed = keyword.trim();
 	if (!trimmed) {
@@ -227,46 +257,103 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 	isSearching = true;
 	const currentReq = ++requestSeq;
 	try {
-		const response = await searchClient.search({
-			requests: [
+		if (searchEngine === "algolia") {
+			const response = await searchClient.search({
+				requests: [
+					{
+						indexName: ALGOLIA_INDEX_NAME,
+						query: trimmed,
+						page: 0,
+						hitsPerPage,
+						attributesToRetrieve: [
+							"type",
+							"title",
+							"description",
+							"content",
+							"url",
+							"tags",
+							"category",
+						],
+						attributesToSnippet: ["content:30"],
+					},
+				],
+			});
+
+			// 如果期间发起了新的请求，丢弃旧结果
+			if (currentReq !== requestSeq) return;
+
+			const res0 = response?.results?.[0];
+			page = res0?.page ?? 0;
+			nbHits = res0?.nbHits ?? 0;
+			nbPages = res0?.nbPages ?? 0;
+			hasMore = page < nbPages - 1;
+
+			results = (res0?.hits || []).map((hit: any) => ({
+				url: hit.url,
+				type: hit.type,
+				title: highlightText(hit.title, trimmed),
+				description: hit.description ? highlightText(hit.description, trimmed) : "",
+				excerpt: hit._snippetResult?.content?.value || "",
+				tags: hit.tags || [],
+				category: hit.category || "",
+			}));
+			activeIndex = results.length > 0 ? 0 : -1;
+		} else {
+			// Meilisearch(=milisearch) 搜索（search.louaq.com）
+			const offset = page * hitsPerPage;
+			const headers: Record<string, string> = {
+				"Content-Type": "application/json",
+			};
+			if (MEILISEARCH_SEARCH_KEY) {
+				headers.Authorization = `Bearer ${MEILISEARCH_SEARCH_KEY}`;
+			}
+
+			const response = await fetch(
+				`${MEILISEARCH_HOST.replace(/\/$/, "")}/indexes/${MEILISEARCH_INDEX_NAME}/search`,
 				{
-					indexName: ALGOLIA_INDEX_NAME,
-					query: trimmed,
-					page: 0,
-					hitsPerPage,
-					attributesToRetrieve: [
-						"type",
-						"title",
-						"description",
-						"content",
-						"url",
-						"tags",
-						"category",
-					],
-					attributesToSnippet: ["content:30"],
+					method: "POST",
+					headers,
+					body: JSON.stringify({
+						q: trimmed,
+						limit: hitsPerPage,
+						offset,
+						attributesToRetrieve: [
+							"type",
+							"title",
+							"description",
+							"content",
+							"url",
+							"tags",
+							"category",
+						],
+					}),
 				},
-			],
-		});
+			);
 
-		// 如果期间发起了新的请求，丢弃旧结果
-		if (currentReq !== requestSeq) return;
+			const data = await response.json();
+			if (currentReq !== requestSeq) return;
 
-		const res0 = response?.results?.[0];
-		page = res0?.page ?? 0;
-		nbHits = res0?.nbHits ?? 0;
-		nbPages = res0?.nbPages ?? 0;
-		hasMore = page < nbPages - 1;
+			const hits = data?.hits || [];
+			nbHits = data?.estimatedTotalHits ?? 0;
+			nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
+			hasMore = offset + hitsPerPage < nbHits;
+			page = Math.floor(offset / hitsPerPage);
 
-		results = (res0?.hits || []).map((hit: any) => ({
-			url: hit.url,
-			type: hit.type,
-			title: highlightText(hit.title, trimmed),
-			description: hit.description ? highlightText(hit.description, trimmed) : "",
-			excerpt: hit._snippetResult?.content?.value || "",
-			tags: hit.tags || [],
-			category: hit.category || "",
-		}));
-		activeIndex = results.length > 0 ? 0 : -1;
+			results = hits.map((hit: any) => {
+				const content = typeof hit?.content === "string" ? hit.content : "";
+				const excerptRaw = content.replace(/\s+/g, " ").trim().slice(0, 180);
+				return {
+					url: hit.url,
+					type: hit.type,
+					title: highlightText(hit.title ?? "", trimmed),
+					description: hit.description ? highlightText(hit.description, trimmed) : "",
+					excerpt: excerptRaw ? highlightText(excerptRaw, trimmed) : "",
+					tags: hit.tags || [],
+					category: hit.category || "",
+				};
+			});
+			activeIndex = results.length > 0 ? 0 : -1;
+		}
 	} catch (error) {
 		// 保持静默失败，避免刷屏；必要时可打开 console
 		console.error("Search error:", error);
@@ -282,7 +369,8 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 };
 
 const loadMore = async () => {
-	if (!initialized || !searchClient) return;
+	if (!initialized) return;
+	if (searchEngine === "algolia" && !searchClient) return;
 	const trimmed = query.trim();
 	if (!trimmed) return;
 	if (!hasMore || isLoadingMore) return;
@@ -291,39 +379,102 @@ const loadMore = async () => {
 	const nextPage = page + 1;
 	const currentReq = ++requestSeq;
 	try {
-		const response = await searchClient.search({
-			requests: [
+		let newHits: any[] = [];
+
+		if (searchEngine === "algolia") {
+			const response = await searchClient.search({
+				requests: [
+					{
+						indexName: ALGOLIA_INDEX_NAME,
+						query: trimmed,
+						page: nextPage,
+						hitsPerPage,
+						attributesToRetrieve: [
+							"type",
+							"title",
+							"description",
+							"content",
+							"url",
+							"tags",
+							"category",
+						],
+						attributesToSnippet: ["content:30"],
+					},
+				],
+			});
+
+			if (currentReq !== requestSeq) return;
+
+			const res0 = response?.results?.[0];
+			newHits = (res0?.hits || []).map((hit: any) => ({
+				url: hit.url,
+				type: hit.type,
+				title: highlightText(hit.title, trimmed),
+				description: hit.description ? highlightText(hit.description, trimmed) : "",
+				excerpt: hit._snippetResult?.content?.value || "",
+				tags: hit.tags || [],
+				category: hit.category || "",
+			}));
+
+			page = res0?.page ?? nextPage;
+			nbHits = res0?.nbHits ?? nbHits;
+			nbPages = res0?.nbPages ?? nbPages;
+			hasMore = page < nbPages - 1;
+		} else {
+			// Meilisearch(=milisearch) 搜索（search.louaq.com）
+			const offset = nextPage * hitsPerPage;
+			const headers: Record<string, string> = {
+				"Content-Type": "application/json",
+			};
+			if (MEILISEARCH_SEARCH_KEY) {
+				headers.Authorization = `Bearer ${MEILISEARCH_SEARCH_KEY}`;
+			}
+
+			const response = await fetch(
+				`${MEILISEARCH_HOST.replace(/\/$/, "")}/indexes/${MEILISEARCH_INDEX_NAME}/search`,
 				{
-					indexName: ALGOLIA_INDEX_NAME,
-					query: trimmed,
-					page: nextPage,
-					hitsPerPage,
-					attributesToRetrieve: [
-						"type",
-						"title",
-						"description",
-						"content",
-						"url",
-						"tags",
-						"category",
-					],
-					attributesToSnippet: ["content:30"],
+					method: "POST",
+					headers,
+					body: JSON.stringify({
+						q: trimmed,
+						limit: hitsPerPage,
+						offset,
+						attributesToRetrieve: [
+							"type",
+							"title",
+							"description",
+							"content",
+							"url",
+							"tags",
+							"category",
+						],
+					}),
 				},
-			],
-		});
+			);
 
-		if (currentReq !== requestSeq) return;
+			const data = await response.json();
+			if (currentReq !== requestSeq) return;
 
-		const res0 = response?.results?.[0];
-		const newHits = (res0?.hits || []).map((hit: any) => ({
-			url: hit.url,
-			type: hit.type,
-			title: highlightText(hit.title, trimmed),
-			description: hit.description ? highlightText(hit.description, trimmed) : "",
-			excerpt: hit._snippetResult?.content?.value || "",
-			tags: hit.tags || [],
-			category: hit.category || "",
-		}));
+			const hits = data?.hits || [];
+			newHits = hits.map((hit: any) => {
+				const content = typeof hit?.content === "string" ? hit.content : "";
+				const excerptRaw = content.replace(/\s+/g, " ").trim().slice(0, 180);
+				return {
+					url: hit.url,
+					type: hit.type,
+					title: highlightText(hit.title ?? "", trimmed),
+					description: hit.description ? highlightText(hit.description, trimmed) : "",
+					excerpt: excerptRaw ? highlightText(excerptRaw, trimmed) : "",
+					tags: hit.tags || [],
+					category: hit.category || "",
+				};
+			});
+
+			page = nextPage;
+			nbHits = data?.estimatedTotalHits ?? nbHits;
+			nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
+			hasMore = offset + hitsPerPage < nbHits;
+		}
 
 		// 追加并去重（按 url）
 		const existing = new Set(results.map((r) => r.url));
@@ -335,11 +486,6 @@ const loadMore = async () => {
 			}
 		}
 		results = merged;
-
-		page = res0?.page ?? nextPage;
-		nbHits = res0?.nbHits ?? nbHits;
-		nbPages = res0?.nbPages ?? nbPages;
-		hasMore = page < nbPages - 1;
 	} catch (error) {
 		console.error("Load more error:", error);
 	} finally {
@@ -585,8 +731,9 @@ $effect(() => {
 					<span class="hint-text">关闭</span>
 				</span>
 			</div>
-			<div class="algolia-brand" aria-label="Algolia" role="img">
-				<span class="algolia-brand-text">Search by</span>
+			<div class="algolia-brand" aria-label={searchEngine === "milisearch" ? "Milisearch" : "Algolia"} role="img">
+				<span class="algolia-brand-text">{searchEngine === "milisearch" ? "Milisearch" : "Search by"}</span>
+				{#if searchEngine === "algolia"}
 				<svg
 					width="77"
 					height="19"
@@ -649,6 +796,7 @@ $effect(() => {
 						class="cls-1"
 					></path>
 				</svg>
+				{/if}
 			</div>
 		</div>
 	</div>

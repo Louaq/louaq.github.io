@@ -76,11 +76,9 @@ export const siteConfig: SiteConfig = {
 	// 搜索引擎配置
 
 	search: {
-		// Algolia 云端搜索（需要配置环境变量）
-		engine: "algolia",
-		// 注意：请确保已配置环境变量:
-		// PUBLIC_ALGOLIA_APP_ID, PUBLIC_ALGOLIA_SEARCH_KEY, PUBLIC_ALGOLIA_INDEX_NAME
-		// ALGOLIA_APP_ID, ALGOLIA_ADMIN_KEY (用于构建时上传索引)
+		// milisearch (Meilisearch) 搜索（需要配置环境变量；前端会访问 https://search.louaq.com）
+		// 如果未配置 Meilisearch 的 search key，组件会退回到未配置提示。
+		engine: "milisearch",
 	},
   // 站点开始日期，用于统计运行天数
   siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD

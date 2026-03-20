@@ -54,6 +54,13 @@ jobs:
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
           ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+          # 构建时自动上传 Meilisearch(=milisearch) 索引（用于 src/utils/meilisearch.ts 集成）
+          PUBLIC_MEILISEARCH_HOST: "https://search.louaq.com"
+          PUBLIC_MEILISEARCH_SEARCH_KEY: ${{ secrets.PUBLIC_MEILISEARCH_SEARCH_KEY }}
+          PUBLIC_MEILISEARCH_INDEX_NAME: ${{ secrets.PUBLIC_MEILISEARCH_INDEX_NAME || 'blog' }}
+          MEILISEARCH_HOST: "https://search.louaq.com"
+          MEILISEARCH_ADMIN_KEY: ${{ secrets.MEILISEARCH_ADMIN_KEY }}
+          MEILISEARCH_INDEX_NAME: ${{ secrets.MEILISEARCH_INDEX_NAME || 'blog' }}
 
       - name: 💾 上传构建产物
         uses: actions/upload-artifact@v4
