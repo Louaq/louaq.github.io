@@ -732,8 +732,8 @@ $effect(() => {
 				</span>
 			</div>
 			<div class="algolia-brand" aria-label={searchEngine === "milisearch" ? "Milisearch" : "Algolia"} role="img">
-				<span class="algolia-brand-text">{searchEngine === "milisearch" ? "Milisearch" : "Search by"}</span>
 				{#if searchEngine === "algolia"}
+				<span class="algolia-brand-text">Search by</span>
 				<svg
 					width="77"
 					height="19"
@@ -796,6 +796,12 @@ $effect(() => {
 						class="cls-1"
 					></path>
 				</svg>
+				{:else}
+				<img
+					src="/assets/images/meilisearch-logo-light.svg"
+					alt="Meilisearch"
+					class="algolia-brand-logo"
+				/>
 				{/if}
 			</div>
 		</div>
@@ -1151,5 +1157,12 @@ $effect(() => {
 		display: block;
 		height: 16px;
 		width: auto;
+	}
+
+	.algolia-brand-logo {
+		display: block;
+		height: 16px;
+		width: auto;
+		max-width: 96px;
 	}
 </style>
