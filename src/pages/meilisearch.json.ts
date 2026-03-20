@@ -1,5 +1,6 @@
 import { getCollection } from "astro:content";
 import type { APIRoute } from "astro";
+import { createHash } from "node:crypto";
 import { getEnabledFriends } from "../config/friendsConfig";
 import { sponsorConfig } from "../config/sponsorConfig";
 import { siteConfig } from "../config/siteConfig";
@@ -69,6 +70,32 @@ function makeAnchorId(prefix: string, raw: string): string {
 	return `${prefix}-${short}` || prefix;
 }
 
+/**
+ * Meilisearch 的 primary key `id` 有严格字符限制：
+ * 仅允许 a-z A-Z 0-9 - _，且 <= 511 bytes。
+ *
+ * 站内 objectID 可能包含 `/`、`:`、`.`、中文等非法字符，所以这里做稳定映射。
+ */
+function makeMeiliId(objectID: string): string {
+	const hash = createHash("sha256").update(objectID).digest("hex"); // 64 chars, [a-f0-9]
+
+	let base = objectID
+		.replace(/[^a-zA-Z0-9-_]/g, "-")
+		.replace(/-+/g, "-")
+		.replace(/^-|-$/g, "");
+
+	if (!base) base = "doc";
+
+	// 留出 hash 的空间，避免超过 511 bytes
+	const maxBaseBytes = 430;
+	// base 这里只包含 ASCII，直接 slice 字符即可
+	if (Buffer.byteLength(base, "utf8") > maxBaseBytes) {
+		base = base.slice(0, maxBaseBytes);
+	}
+
+	return `${base}-${hash.slice(0, 12)}`;
+}
+
 export const GET: APIRoute = async () => {
 	const posts = await getCollection("posts");
 	const spec = await getCollection("spec");
@@ -87,8 +114,8 @@ export const GET: APIRoute = async () => {
 
 		const objectID = post.id;
 		const rec: MeilisearchRecord = {
-			// 保持与旧索引兼容：沿用文章原 objectID
-			id: objectID,
+			// Meilisearch primaryKey：必须满足字符限制
+			id: makeMeiliId(objectID),
 			objectID,
 			type: "post",
 			title: post.data.title,
@@ -117,7 +144,7 @@ export const GET: APIRoute = async () => {
 
 		const objectID = `page:${page.id}`;
 		const rec: MeilisearchRecord = {
-			id: objectID,
+			id: makeMeiliId(objectID),
 			objectID,
 			type: "page",
 			title: meta.title,
@@ -131,8 +158,8 @@ export const GET: APIRoute = async () => {
 	// 2.5) 站点栏目入口页（不依赖 markdown 内容）
 	records.push(
 		shrinkRecordToFit({
-			id: "page:archive",
 			objectID: "page:archive",
+			id: makeMeiliId("page:archive"),
 			type: "page",
 			title: "归档",
 			description: "按时间浏览全部文章",
@@ -144,8 +171,8 @@ export const GET: APIRoute = async () => {
 	if (siteConfig.pages.bangumi) {
 		records.push(
 			shrinkRecordToFit({
-				id: "page:bangumi",
 				objectID: "page:bangumi",
+				id: makeMeiliId("page:bangumi"),
 				type: "page",
 				title: "Bangumi",
 				description: "追番与游戏",
@@ -160,7 +187,7 @@ export const GET: APIRoute = async () => {
 	for (const f of friends) {
 		const objectID = `friend:${f.siteurl}`;
 		const rec: MeilisearchRecord = {
-			id: objectID,
+			id: makeMeiliId(objectID),
 			objectID,
 			type: "friend",
 			title: f.title,
@@ -180,8 +207,8 @@ export const GET: APIRoute = async () => {
 		// 相册总览页
 		records.push(
 			shrinkRecordToFit({
-				id: "page:albums",
 				objectID: "page:albums",
+				id: makeMeiliId("page:albums"),
 				type: "page",
 				title: "相册",
 				description: "相册与照片集",
@@ -196,7 +223,7 @@ export const GET: APIRoute = async () => {
 		for (const a of albums) {
 			const objectID = `album:${a.id}`;
 			const rec: MeilisearchRecord = {
-				id: objectID,
+				id: makeMeiliId(objectID),
 				objectID,
 				type: "album",
 				title: a.title,
@@ -218,8 +245,8 @@ export const GET: APIRoute = async () => {
 		// 观影清单入口页
 		records.push(
 			shrinkRecordToFit({
-				id: "page:watchlist",
 				objectID: "page:watchlist",
+				id: makeMeiliId("page:watchlist"),
 				type: "page",
 				title: "观影清单",
 				description: "动漫 / 电影 / 电视剧 / 纪录片 / 其他",
@@ -234,7 +261,7 @@ export const GET: APIRoute = async () => {
 			const anchor = makeAnchorId("watch", `${it.type} ${it.title}`);
 			const objectID = `watchlist:${it.type}:${it.title}`;
 			const rec: MeilisearchRecord = {
-				id: objectID,
+				id: makeMeiliId(objectID),
 				objectID,
 				type: "watchlist",
 				title: it.title,
@@ -258,8 +285,8 @@ export const GET: APIRoute = async () => {
 		const enabledMethods = sponsorConfig.methods.filter((m) => m.enabled);
 		records.push(
 			shrinkRecordToFit({
-				id: "page:sponsor",
 				objectID: "page:sponsor",
+				id: makeMeiliId("page:sponsor"),
 				type: "page",
 				title: sponsorConfig.title || "赞助",
 				description: sponsorConfig.description || sponsorConfig.usage || "",
