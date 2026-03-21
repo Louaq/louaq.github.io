@@ -1,297 +1,112 @@
-:root {
-  --tk-text: black;
-  --code-block-text: #333; /* 调整为深色但在浅色背景下仍然舒适的值 */
+/* ===== Twikoo 主题色覆盖 ===== */
+/* 将 Element UI 的主色变量映射到当前站点主题色 */
+#tcomment {
+  --el-color-primary: var(--primary);
+  --el-color-primary-light-3: color-mix(in oklch, var(--primary) 70%, white);
+  --el-color-primary-light-5: color-mix(in oklch, var(--primary) 50%, white);
+  --el-color-primary-light-7: color-mix(in oklch, var(--primary) 30%, white);
+  --el-color-primary-light-8: color-mix(in oklch, var(--primary) 20%, white);
+  --el-color-primary-light-9: color-mix(in oklch, var(--primary) 10%, white);
+  --el-color-primary-dark-2: color-mix(in oklch, var(--primary) 80%, black);
+  --el-input-focus-border-color: var(--primary);
+  --el-button-bg-color: var(--primary);
+  --el-button-border-color: var(--primary);
 }
 
-html.dark {
-  --tk-text: #d1d5db;
-  --code-block-text: #d1d5db; /* 在深色模式下使用更亮的颜色 */
+/* ===== 输入框焦点边框 ===== */
+#tcomment .el-input__inner:focus,
+#tcomment .el-input.is-focus .el-input__inner,
+#tcomment .el-input__wrapper.is-focus,
+#tcomment .el-textarea__inner:focus,
+#tcomment .el-input-group__append:focus,
+#tcomment .el-input-group__prepend:focus {
+  border-color: var(--primary) !important;
+  outline: none;
 }
 
-.tk-comments {
-  @apply text-[var(--tk-text)];
+/* Element UI 2 focus ring */
+#tcomment .el-input__inner:focus {
+  border-color: var(--primary) !important;
 }
 
-.tk-submit {
-  .tk-avatar {
-    @apply hidden;
-  }
+/* ===== 主色按钮（发送） ===== */
+#tcomment .el-button--primary {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
 }
 
-/* Text Area */
-.tk-row {
-  .tk-col {
-    @apply flex-col-reverse;
-    .tk-input {
-      textarea {
-        @apply rounded-[var(--radius-large)] py-4 px-6 !min-h-[150px] focus:border-[var(--primary)]
-               border-[var(--line-divider)] bg-[var(--card-bg)] text-[var(--btn-content)]
-               placeholder:text-[var(--content-meta)] transition-all duration-300
-               focus:ring-2 focus:ring-[var(--primary)] focus:ring-opacity-20;
-        resize: vertical;
-      }
-    }
-  }
+#tcomment .el-button--primary:hover,
+#tcomment .el-button--primary:focus {
+  background-color: color-mix(in oklch, var(--primary) 85%, white) !important;
+  border-color: color-mix(in oklch, var(--primary) 85%, white) !important;
 }
 
-/* 表情和图片按钮位置调整 */
-.tk-row .tk-col .tk-actions {
-  @apply order-1 mt-4 mb-2 flex gap-2;
+#tcomment .el-button--primary:active {
+  background-color: color-mix(in oklch, var(--primary) 80%, black) !important;
+  border-color: color-mix(in oklch, var(--primary) 80%, black) !important;
 }
 
-.tk-row .tk-col .tk-meta-input {
-  @apply order-2;
+#tcomment .el-button--primary.is-disabled,
+#tcomment .el-button--primary:disabled {
+  background-color: color-mix(in oklch, var(--primary) 50%, white) !important;
+  border-color: color-mix(in oklch, var(--primary) 50%, white) !important;
+  opacity: 0.6;
 }
 
-/* 表情和图片按钮样式优化 */
-.tk-owo,
-.tk-upload {
-  @apply rounded-lg p-2 hover:bg-[var(--btn-plain-bg-hover)] transition-colors duration-200
-         border border-[var(--line-divider)] bg-[var(--card-bg)] text-[var(--btn-content)]
-         hover:border-[var(--primary)] hover:shadow-sm;
+/* ===== 链接颜色 ===== */
+#tcomment a {
+  color: var(--primary);
 }
 
-.tk-owo:hover,
-.tk-upload:hover {
-  @apply bg-[var(--btn-plain-bg-hover)] border-[var(--primary)] shadow-sm;
+#tcomment a:hover {
+  color: color-mix(in oklch, var(--primary) 80%, black);
 }
 
-/* Meta */
-.tk-meta-input {
-  @apply relative mt-4;
-  div {
-    @apply min-h-12 rounded-lg border border-[var(--line-divider)] bg-[var(--card-bg)] overflow-hidden
-           hover:border-[var(--primary)] hover:shadow-sm transition-all duration-200 flex items-center;
-
-    .el-input-group__prepend {
-      @apply !bg-[var(--btn-regular-bg)] !text-[var(--btn-content)] px-4 font-medium text-sm
-             border-r border-[var(--line-divider)] flex items-center justify-center min-w-[80px] flex-shrink-0
-             rounded-l-lg rounded-r-none;
-      min-height: inherit;
-    }
-
-    input {
-      @apply px-4 bg-transparent text-[var(--btn-content)] placeholder:text-[var(--content-meta)]
-             focus:!border-[var(--primary)] transition-all duration-200 flex-1
-             rounded-r-lg rounded-l-none;
-      min-height: inherit;
-
-      &::placeholder {
-        @apply text-[var(--content-meta)] opacity-70;
-      }
-
-      &:focus {
-        @apply outline-none;
-      }
-    }
-
-    &:focus-within {
-      @apply border-[var(--primary)] shadow-md;
-    }
-  }
+/* ===== 操作图标（点赞等）hover 色 ===== */
+#tcomment .tk-action-icon:hover,
+#tcomment .tk-action-icon.active {
+  color: var(--primary) !important;
+  fill: var(--primary) !important;
 }
 
-/* Button */
-.tk-row.actions {
-  @apply w-full !ml-0 !mt-6 flex gap-3 justify-end;
-  .__markdown {
-    @apply !hidden;
-  }
-  .tk-send,
-  .tk-cancel {
-    @apply border-none rounded-lg px-6 py-2 h-10 font-medium transition-all duration-300
-           !bg-[var(--btn-regular-bg)] hover:!bg-[var(--btn-regular-bg-hover)]
-           active:!bg-[var(--btn-regular-bg-active)] disabled:!bg-[var(--btn-regular-bg)]
-           !text-[var(--btn-content)] disabled:!text-[var(--content-meta)]
-           hover:scale-105 active:scale-95 shadow-sm hover:shadow-md;
-  }
+#tcomment .tk-action-icon svg {
+  fill: currentColor;
 }
 
-/* 隐藏预览按钮 */
-.tk-preview {
-  display: none !important;
+/* ===== 加载动画颜色 ===== */
+#tcomment .el-loading-spinner .circular .path {
+  stroke: var(--primary) !important;
 }
 
-/* 强制统一按钮样式 */
-.tk-send,
-.tk-cancel {
-  background: var(--btn-regular-bg) !important;
-  color: var(--btn-content) !important;
-  border: none !important;
-  border-radius: 0.5rem !important;
-  padding: 0.5rem 1.5rem !important;
-  height: 2.5rem !important;
-  font-weight: 500 !important;
-  transition: all 0.3s ease !important;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+/* ===== 图片/表情弹出面板选中态 ===== */
+#tcomment .tk-owo-item:hover,
+#tcomment .el-tabs__item.is-active,
+#tcomment .el-tabs__active-bar {
+  color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  background-color: var(--primary) !important;
 }
 
-.tk-send:hover,
-.tk-cancel:hover {
-  background: var(--btn-regular-bg-hover) !important;
-  transform: scale(1.05) !important;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1) !important;
+/* ===== 管理员标签 ===== */
+#tcomment .tk-tag-green {
+  background-color: var(--primary) !important;
+  border-color: var(--primary) !important;
+  color: white !important;
 }
 
-.tk-send:active,
-.tk-cancel:active {
-  background: var(--btn-regular-bg-active) !important;
-  transform: scale(0.95) !important;
+/* ===== 回复时的高亮引用 ===== */
+#tcomment .tk-ruser {
+  color: var(--primary);
 }
 
-.tk-send:disabled,
-.tk-cancel:disabled {
-  background: var(--btn-regular-bg) !important;
-  color: var(--content-meta) !important;
-  transform: none !important;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05) !important;
+/* ===== 展开/收起按钮 ===== */
+#tcomment .tk-expand {
+  color: var(--primary);
+  border-color: var(--btn-regular-bg, #f0f0f0);
 }
 
-/* Comment title */
-.tk-comments-title {
-  @apply hidden; /* 隐藏默认标题，使用自定义标题 */
-
-  .__comments svg {
-    @apply fill-[var(--primary)];
-  }
+#tcomment .tk-expand:hover {
+  color: color-mix(in oklch, var(--primary) 80%, black);
+  border-color: var(--primary);
 }
-
-.tk-comment {
-  @apply border-[1px] border-[var(--line-divider)] p-4 rounded-2xl hover:shadow-lg hover:border-[var(--primary)] transition-all duration-300;
-  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(var(--primary), 0.02) 100%);
-
-  .tk-action-icon svg {
-    @apply fill-[var(--primary)] hover:scale-110 transition-transform duration-200;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-    z-index: 2;
-  }
-}
-
-.tk-meta {
-  .tk-tag {
-    @apply border-none rounded-lg text-[var(--btn-content)];
-  }
-
-  .tk-tag-green {
-    @apply bg-[var(--btn-regular-bg)] dark:bg-[var(--primary)] dark:text-[var(--deep-text)];
-  }
-}
-
-/* Content & Preview */
-.tk-content,
-.tk-preview-container {
-  /* by @microsic
-    Make the picture type emoticons display without wrapping
-  */
-  img {
-    @apply inline !align-bottom;
-  }
-
-  a {
-    @apply underline text-[var(--primary)] font-medium;
-  }
-
-  .tk-ruser {
-    @apply no-underline;
-  }
-
-  :not(pre) > code {
-    @apply bg-[var(--inline-code-bg)] rounded-md text-[--inline-code-color] px-1 py-0.5 font-semibold;
-  }
-
-  li {
-    @apply before:content-["•"] before:text-[var(--primary)];
-  }
-}
-
-/* Replies */
-.tk-replies {
-
-
-  .tk-comment {
-    @apply border-l-4 border-l-[var(--btn-regular-bg)] p-3 border-opacity-30 hover:border-[var(--primary)] transition-all duration-300;
-    .tk-content {
-      > span:first-of-type {
-        @apply text-xs text-[var(--content-meta)];
-      }
-    }
-  }
-
-  /* 回复层级指示器 */
-  &::before {
-    content: '';
-    @apply absolute left-0 top-0 w-0.5 h-full bg-gradient-to-b  to-transparent opacity-30;
-  }
-}
-
-.twikoo .code-block {
-  pre {
-    @apply !rounded-xl;
-  }
-
-  /* Code block fall back */
-  pre:not([class]) {
-    @apply bg-[var(--codeblock-bg)] overflow-auto p-2 text-[var(--code-block-text)];
-  }
-
-  .copy-btn-icon {
-    width: inherit !important;
-    height: inherit !important;
-  }
-}
-
-.tk-expand-wrap .tk-expand,
-.tk-collapse-wrap .tk-expand {
-  @apply border-[1px]  border-[var(--line-divider)] rounded-lg mt-1 bg-[var(--btn-regular-bg)] text-[var(--btn-content)] hover:text-[var(--primary)] hover:bg-[var(--btn-regular-bg-hover)];
-}
-
-/* by @SirTamago
-Make the emoji component display correctly when there are too many emoji packs
-*/
-.card-base {
-  overflow: visible;
-}
-
-/* 防止 Twikoo 操作时的意外滚动 */
-.tk-action-icon,
-.tk-owo,
-.tk-submit,
-.tk-cancel,
-.tk-admin,
-.tk-delete,
-.tk-edit {
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
-
-/* 确保点击区域足够大 */
-.tk-action {
-  min-height: 24px;
-  display: flex;
-  align-items: center;
-}
-
-/* 防止表单提交时的意外跳转 */
-.tk-submit-wrapper {
-  position: relative;
-}
-
-/* 管理面板样式优化 */
-.tk-admin-panel {
-  position: relative;
-  z-index: 100;
-}
-
-
-
-.el-loading-spinner {
-  display: flex !important;
-  justify-content: center !important;
-
-}
-
-

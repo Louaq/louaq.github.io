@@ -30,7 +30,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件显示顺序（数字越小越靠前）
 			order: 1,
 			// 组件位置
-			position: "top",
+			position: "sticky",
 			// CSS 类名，用于应用样式和动画
 			class: "onload-animation",
 			// 动画延迟时间（毫秒），用于错开动画效果
@@ -115,7 +115,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件类型：最近评论组件
 			type: "recentComments",
 			// 是否启用该组件
-			enable: true,
+			enable: false,
 			// 组件显示顺序
 			order: 5,
 			// 组件位置
@@ -157,37 +157,37 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件显示顺序
 			order: 1,
 			// 组件位置
-			position: "top",
+			position: "sticky",
 			// 是否在文章详情页显示
-			showOnPostPage: false,
+			showOnPostPage: true,
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
 			animationDelay: 0,
 		},
-		{
-			// 组件类型：日历组件
-			type: "calendar",
-			// 是否启用该组件
-			enable: false,
-			// 组件显示顺序
-			order: 2,
-			// 组件位置
-			position: "top",
-			// 是否在文章详情页显示
-			showOnPostPage: false,
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 0,
-		},
+		// {
+		// 	// 组件类型：日历组件
+		// 	type: "calendar",
+		// 	// 是否启用该组件
+		// 	enable: false,
+		// 	// 组件显示顺序
+		// 	order: 2,
+		// 	// 组件位置
+		// 	position: "sticky",
+		// 	// 是否在文章详情页显示
+		// 	showOnPostPage: false,
+		// 	// CSS 类名
+		// 	class: "onload-animation",
+		// 	// 动画延迟时间
+		// 	animationDelay: 0,
+		// },
 		{
 			// 组件类型：抖音热搜组件
 			type: "douyinHot",
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 1.5,
+			order: 3,
 			// 组件位置
 			position: "sticky",
 			// 是否在文章详情页显示
@@ -203,7 +203,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 3,
+			order: 2,
 			// 组件位置
 			position: "sticky",
 			// 是否在文章详情页显示

@@ -424,7 +424,7 @@ html[data-wallpaper-mode="none"] .absolute.w-full.z-30 {
     .absolute.w-full.z-30.no-banner-layout {
         top: 5.5rem !important;
         min-height: calc(100vh - 5.5rem) !important;
-        transition: none !important; /* 移除过渡动画，立即应用位置 */
+        transition: none !important;
     }
 }
 

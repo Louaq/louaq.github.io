@@ -292,6 +292,29 @@ body.wallpaper-transparent .float-panel {
 }
 
 /* ============================================
+ * 固定导航栏：始终使用实心背景，取消所有透明效果
+ * 使用高于 banner 透明模式规则的选择器优先级 (0,3,2)
+ * ============================================ */
+body #top-row #navbar[data-transparent-mode] > div,
+body:has(#top-row) #navbar[data-transparent-mode] > div,
+body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
+    background: var(--card-bg) !important;
+    backdrop-filter: none !important;
+    border: 1px solid transparent !important;
+    box-shadow: var(--shadow-navbar) !important;
+    transition: none !important;
+}
+:root.dark body #top-row #navbar[data-transparent-mode] > div,
+:root.dark body:has(#top-row) #navbar[data-transparent-mode] > div,
+:root.dark body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
+    background: var(--card-bg) !important;
+    backdrop-filter: none !important;
+    border: 1px solid transparent !important;
+    box-shadow: var(--shadow-navbar-dark) !important;
+    transition: none !important;
+}
+
+/* ============================================
  * 导航栏条目 hover 时移除背景色变化
  * ============================================ */
 #navbar .btn-plain:hover {

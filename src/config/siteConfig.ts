@@ -175,7 +175,7 @@ export const siteConfig: SiteConfig = {
 	// 当文章的password字段设置为true时，将使用此密码
 	postPassword: "123456",
 	// 密码提示文案，留空则不显示提示
-	postPasswordHint: "示例文章密码123456",
+	postPasswordHint: "示例文章密码",
 
 	// 全站变灰配置
 	// 手动控制：true = 启用变灰，false = 关闭变灰
