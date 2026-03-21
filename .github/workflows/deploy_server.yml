@@ -149,9 +149,27 @@ jobs:
             rm -rf /tmp/website-build /tmp/visualmedical.org_deploy.sh /tmp/dist
             echo "⚠️ 请检查部署日志并手动处理"
 
+  purge_cache:
+    name: 🧹 清除 EdgeOne CDN 缓存
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: needs.deploy.result == 'success'
+
+    steps:
+      - name: 🧹 清除 EdgeOne 全站缓存
+        run: |
+          pip install tccli -q
+          tccli configure set secretId "${{ secrets.TENCENT_SECRET_ID }}"
+          tccli configure set secretKey "${{ secrets.TENCENT_SECRET_KEY }}"
+          tccli configure set region "ap-guangzhou"
+          tccli teo CreatePurgeTask \
+            --ZoneId "${{ secrets.EDGEONE_ZONE_ID }}" \
+            --Type "purge_all"
+          echo "✅ EdgeOne CDN 缓存已清除"
+
   notify:
     name: 📢 部署结果通知
-    needs: deploy
+    needs: [deploy, purge_cache]
     runs-on: ubuntu-latest
     if: always()
     
