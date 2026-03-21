@@ -1,14 +1,14 @@
 import type { ProfileConfig } from "../types/config";
 
 export const profileConfig: ProfileConfig = {
-  avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.jpg",
+  avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.webp",
   name: "Louaq",
   bio: "Hello, I'm Louaq.",
   links: [
     {
       name: "Email",
       icon: "mdi:email",
-      url: "mailto:yang_syy@qq.com",
+      url: "mailto:astroal@qq.com",
     },
     // {
     //   name: "Bilibli",
