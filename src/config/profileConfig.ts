@@ -3,7 +3,7 @@ import type { ProfileConfig } from "../types/config";
 export const profileConfig: ProfileConfig = {
   avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.webp",
   name: "Louaq",
-  bio: "Hello, I'm Louaq.",
+  bio: "Hello, I'm Louaq",
   links: [
     {
       name: "Email",
