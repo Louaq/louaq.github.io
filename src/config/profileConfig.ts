@@ -29,11 +29,6 @@ export const profileConfig: ProfileConfig = {
 			name: "开往",
 			url: "https://www.travellings.cn/go.html",
 			icon: "material-symbols:subway-rounded",
-		},
-    {
-      name: "哪吒面板",
-      icon: "material-symbols:cloud-done-rounded",
-      url: "https://status.louaq.com",
-    }
+		}
   ],
 };
