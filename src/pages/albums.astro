@@ -34,14 +34,14 @@ const albumsData = await scanAlbums();
                 <img 
                   src={album.cover} 
                   alt={album.title}
-                  class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  class="w-full h-full object-cover"
                   loading="lazy"
                 />
               </div>
               
               <!-- 相册信息 -->
               <div class="p-4">
-                <h3 class="font-bold text-lg text-neutral-900 dark:text-neutral-100 mb-2 group-hover:text-[var(--primary)] transition-colors">
+                <h3 class="font-bold text-lg text-neutral-900 dark:text-neutral-100 mb-2 transition-colors">
                   {album.title}
                 </h3>
                 
@@ -117,7 +117,7 @@ const albumsData = await scanAlbums();
   }
   
   .album-card:hover {
-    transform: translateY(-2px);
+    transform: none;
   }
   
   @keyframes fadeInUp {
