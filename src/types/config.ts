@@ -166,6 +166,8 @@ export enum LinkPreset {
 	Bangumi = 6,
 	Watchlist = 7,
 	Albums = 8,
+	Categories = 9,
+	Tags = 10,
 }
 
 export type NavBarLink = {
