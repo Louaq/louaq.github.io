@@ -112,6 +112,9 @@ export type SiteConfig = {
 		archivePageSize?: number; // 归档页每页显示的文章数量，未配置时默认20
 	};
 
+	// 扣子(Coze)智能体
+	coze?: CozeConfig;
+
 	// 统计分析
 	analytics?: {
 		enableGoogleAnalytics?: boolean; // 是否启用 Google Analytics，默认 false，避免国内访问 ERR_CONNECTION_CLOSED
@@ -771,6 +774,16 @@ export type MusicPlayerConfig = {
 			breakpoint?: number;
 		};
 	};
+};
+
+// 扣子(Coze)智能体配置
+export type CozeConfig = {
+    enable: boolean;  // 是否启用 Coze 智能体
+    botId: string;    // 智能体 Bot ID（浏览器地址栏 /bot/ 后面的数字）
+    token: string;    // 个人访问令牌 PAT（扣子 → 个人设置 → API Token，以 pat_ 开头）
+    title?: string;   // 聊天窗口标题，默认 "AI 助手"
+    lang?: string;    // 语言，默认 "zh-CN"
+    icon?: string;    // 自定义悬浮按钮图标 URL（可选）
 };
 
 // 赞助方式类型
