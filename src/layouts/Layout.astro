@@ -5,7 +5,6 @@ import FontManager from "@components/features/FontManager.astro";
 import KatexManager from "@components/features/KatexManager.astro";
 import MusicPlayer from "@components/features/MusicPlayer.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
-import CozeChat from "@components/features/CozeChat.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 import FestivalDecoration from "@components/features/FestivalDecoration.astro";
 import GlobalIconSprite from "@/components/misc/GlobalIconSprite.astro";
@@ -648,16 +647,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <!-- Festival Decoration -->
     <FestivalDecoration />
 
-    <!-- Coze AI 智能体 -->
-    {siteConfig.coze?.enable && siteConfig.coze.botId && siteConfig.coze.token && (
-        <CozeChat
-            botId={siteConfig.coze.botId}
-            token={siteConfig.coze.token}
-            title={siteConfig.coze.title}
-            lang={siteConfig.coze.lang}
-            icon={siteConfig.coze.icon}
-        />
-    )}
   </body>
 </html>
 
