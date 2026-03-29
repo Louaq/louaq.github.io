@@ -233,7 +233,7 @@ export const siteConfig: SiteConfig = {
 	// 2. Bot ID 在发布页面或 URL 中获取
 	// 3. Token 在 扣子 → 个人设置 → API Token 中创建
 	coze: {
-		enable: true,
+		enable: false,
 		botId: "7622598627789815854",
 		token: "pat_02xD2GdKjHq3DDkmiYbvmv0IuN3Gh0p1L2rn82pGfTnV4ygFCzbi5Gz4VVFnLnfL",
 		title: "AI 助手",
