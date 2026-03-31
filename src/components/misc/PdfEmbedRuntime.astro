@@ -1,0 +1,21 @@
+---
+/**
+ * Swup 替换主内容后，部分浏览器中 iframe 内 PDF 不会自动加载，需重置 src。
+ */
+---
+<script is:inline>
+(function () {
+	function reloadPdfIframes() {
+		document.querySelectorAll("iframe.pdf-embed-iframe[data-pdf-src]").forEach(function (el) {
+			var u = el.getAttribute("data-pdf-src");
+			if (!u) return;
+			try {
+				el.src = "";
+				el.src = u;
+			} catch (e) {}
+		});
+	}
+	document.addEventListener("swup:contentReplaced", reloadPdfIframes);
+	document.addEventListener("astro:page-load", reloadPdfIframes);
+})();
+</script>

@@ -8,6 +8,7 @@ import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 import FestivalDecoration from "@components/features/FestivalDecoration.astro";
 import GlobalIconSprite from "@/components/misc/GlobalIconSprite.astro";
+import PdfEmbedRuntime from "@/components/misc/PdfEmbedRuntime.astro";
 
 import {
 	backgroundWallpaper,
@@ -621,6 +622,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     </script>
     <!-- 固化 astro-icon 的 symbol sprite，避免 Swup 局部替换后 <use> 找不到 <symbol> 导致图标空白 -->
     <GlobalIconSprite />
+    <PdfEmbedRuntime />
 
     <div id="progress-bar"></div>
 

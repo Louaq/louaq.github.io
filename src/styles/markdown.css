@@ -141,3 +141,15 @@
       @apply bg-[var(--btn-plain-bg-active)];
     }
   }
+
+/* PDF 内嵌：覆盖 prose/typography 对 iframe 的 aspect-ratio，避免高度被算成 0 而整块消失 */
+.custom-md .pdf-embed {
+  display: block;
+  min-height: 320px;
+}
+.custom-md .pdf-embed .pdf-embed-iframe {
+  aspect-ratio: auto !important;
+  width: 100% !important;
+  min-height: 320px !important;
+  height: var(--pdf-embed-h, min(70vh, 42rem)) !important;
+}

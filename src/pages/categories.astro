@@ -5,6 +5,18 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getCategoryList } from "@/utils/content-utils";
 
 const categories = await getCategoryList();
+
+const counts = categories.map((c) => c.count);
+const minCount = counts.length ? Math.min(...counts) : 0;
+const maxCount = counts.length ? Math.max(...counts) : 0;
+/** 文章数越多字越大：在 minRem ~ maxRem 间按数量线性映射 */
+function fontSizeForCount(count: number): string {
+	if (maxCount === minCount) return "1rem";
+	const t = (count - minCount) / (maxCount - minCount);
+	const minRem = 0.8125;
+	const maxRem = 1.375;
+	return `${minRem + t * (maxRem - minRem)}rem`;
+}
 ---
 
 <MainGridLayout title={i18n(I18nKey.categories)} description={i18n(I18nKey.categories)}>
@@ -16,16 +28,15 @@ const categories = await getCategoryList();
             {categories.length === 0 ? (
                 <p class="text-black/50 dark:text-white/50">{i18n(I18nKey.uncategorized)}</p>
             ) : (
-                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="flex flex-wrap gap-x-5 gap-y-3">
                     {categories.map((cat) => (
                         <a
                             href={cat.url}
-                            class="group flex items-center justify-between rounded-[var(--radius-large)] border border-black/10 dark:border-white/10 px-5 py-4 transition-all hover:border-[var(--primary)]"
+                            style={{ fontSize: fontSizeForCount(cat.count) }}
+                            class="group inline-flex max-w-full items-baseline gap-[0.35em] font-medium text-black/80 underline-offset-4 transition-colors hover:text-[var(--primary)] dark:text-white/80"
                         >
-                            <span class="font-medium text-black/80 dark:text-white/80 group-hover:text-[var(--primary)] transition-colors">
-                                {cat.name}
-                            </span>
-                            <span class="ml-3 rounded-full bg-black/5 dark:bg-white/10 px-2.5 py-0.5 text-sm font-semibold text-black/60 dark:text-white/60">
+                            <span class="truncate">{cat.name}</span>
+                            <span class="shrink-0 text-[0.72em] font-semibold tabular-nums text-black/40 group-hover:text-[var(--primary)]/70 dark:text-white/45">
                                 {cat.count}
                             </span>
                         </a>
