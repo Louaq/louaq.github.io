@@ -217,9 +217,6 @@ export const zh_CN: Translation = {
 	[Key.sponsorButtonText]:
 		"如果这篇文章对你有帮助，欢迎分享给更多人或赞助支持！",
 
-	[Key.shareOnSocial]: "文章分享",
-	[Key.shareOnSocialDescription]: "如果这篇文章对你有帮助，欢迎分享给更多人！",
-
 	// 站点统计
 	[Key.siteStats]: "站点统计",
 	[Key.siteStatsPostCount]: "文章",
@@ -259,13 +256,6 @@ export const zh_CN: Translation = {
 	[Key.codeCollapsibleShowLess]: "显示更少",
 	[Key.codeCollapsibleExpanded]: "代码块已展开",
 	[Key.codeCollapsibleCollapsed]: "代码块已折叠",
-
-	[Key.shareArticle]: "分享",
-	[Key.generatingPoster]: "海报生成中...",
-	[Key.copied]: "已复制",
-	[Key.copyLink]: "复制链接",
-	[Key.savePoster]: "保存海报",
-	[Key.scanToRead]: "扫码阅读文章",
 
 	// 相册
 	[Key.albums]: "相册",

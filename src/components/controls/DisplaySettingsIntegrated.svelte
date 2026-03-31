@@ -51,6 +51,12 @@ const hasBannerSettings = isWavesSwitchable || isBannerTitleSwitchable;
 // 是否显示主题色设置（与 siteConfig.themeColor.fixed 相反）
 const showThemeColor = !siteConfig.themeColor.fixed;
 const hasAnyContent = showThemeColor || isWallpaperSwitchable || allowLayoutSwitch || hasBannerSettings;
+
+// 必须在 onMount 之前声明：$effect 放在 onMount 之后会触发 Svelte 5 effect_orphan（与 client:idle 组合时尤甚）
+$effect(() => {
+	setHue(hue);
+});
+
 function resetHue() {
 	hue = getDefaultHue();
 }
@@ -125,8 +131,8 @@ onMount(() => {
 
 	// 从localStorage读取保存的壁纸模式
 	wallpaperMode = getStoredWallpaperMode();
-    	
-    // 从localStorage读取水波纹动画状态
+
+	// 从localStorage读取水波纹动画状态
 	wavesEnabled = getStoredWavesEnabled();
 
 	// 从localStorage读取横幅标题状态
@@ -140,32 +146,18 @@ onMount(() => {
 		currentLayout = siteConfig.postListLayout.defaultMode;
 	}
 
-	// 监听窗口大小变化
-	window.addEventListener("resize", checkScreenSize);
-
-	return () => {
-		window.removeEventListener("resize", checkScreenSize);
-	};
-});
-
-// 监听布局变化事件
-onMount(() => {
 	const handleCustomEvent = (event: Event) => {
 		const customEvent = event as CustomEvent<{ layout: "list" | "grid" }>;
 		currentLayout = customEvent.detail.layout;
 	};
 
+	window.addEventListener("resize", checkScreenSize);
 	window.addEventListener("layoutChange", handleCustomEvent);
 
 	return () => {
+		window.removeEventListener("resize", checkScreenSize);
 		window.removeEventListener("layoutChange", handleCustomEvent);
 	};
-});
-
-$effect(() => {
-	if (hue || hue === 0) {
-		setHue(hue);
-	}
 });
 </script>
 

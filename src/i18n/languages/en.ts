@@ -225,10 +225,6 @@ export const en: Translation = {
 	[Key.sponsorButtonText]:
 		"If this article helped you, please share or support!",
 
-	[Key.shareOnSocial]: "Share Article",
-	[Key.shareOnSocialDescription]:
-		"If this article helped you, please share it with others!",
-
 	// Site Statistics
 	[Key.siteStats]: "Site Statistics",
 	[Key.siteStatsPostCount]: "Posts",
@@ -267,13 +263,6 @@ export const en: Translation = {
 	[Key.codeCollapsibleShowLess]: "Show less",
 	[Key.codeCollapsibleExpanded]: "Code block expanded",
 	[Key.codeCollapsibleCollapsed]: "Code block collapsed",
-
-	[Key.shareArticle]: "Share",
-	[Key.generatingPoster]: "Generating Poster...",
-	[Key.copied]: "Copied",
-	[Key.copyLink]: "Copy Link",
-	[Key.savePoster]: "Save Poster",
-	[Key.scanToRead]: "Scan to Read",
 
 	// Albums
 	[Key.albums]: "Albums",

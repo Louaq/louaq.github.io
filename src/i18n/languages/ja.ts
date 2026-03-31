@@ -225,10 +225,6 @@ export const ja: Translation = {
 	[Key.sponsorButtonText]:
 		"この記事が役に立ったなら、共有またはサポートをお願いします！",
 
-	[Key.shareOnSocial]: "記事を共有",
-	[Key.shareOnSocialDescription]:
-		"この記事が役に立ったなら、ぜひ他の人と共有してください！",
-
 	// サイト統計
 	[Key.siteStats]: "サイト統計",
 	[Key.siteStatsPostCount]: "記事",
@@ -267,13 +263,6 @@ export const ja: Translation = {
 	[Key.codeCollapsibleShowLess]: "少なく表示",
 	[Key.codeCollapsibleExpanded]: "コードブロックが展開されました",
 	[Key.codeCollapsibleCollapsed]: "コードブロックが折りたたまれました",
-
-	[Key.shareArticle]: "共有",
-	[Key.generatingPoster]: "ポスター生成中...",
-	[Key.copied]: "コピーしました",
-	[Key.copyLink]: "リンクをコピー",
-	[Key.savePoster]: "ポスターを保存",
-	[Key.scanToRead]: "QRコードで読む",
 
 	// アルバム
 	[Key.albums]: "アルバム",

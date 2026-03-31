@@ -22,9 +22,11 @@ export const siteConfig: SiteConfig = {
 	"ECCV",
 	"ICCV",
 	"MICCAI",
-	"NeurIPS",
 	"TPAMI",
 	"TMI",
+	"TMM",
+	"TIP",
+	"TNNLS",
 	"ACM MM"
   ],
 
@@ -115,9 +117,6 @@ export const siteConfig: SiteConfig = {
 	// 文章页"上一篇/下一篇"导航开关
 	showPostPrevNext: false,
 
-	// 是否开启分享海报生成功能
-	sharePoster: true,
-
 	// OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	generateOgImages: false,
 
@@ -157,14 +156,6 @@ export const siteConfig: SiteConfig = {
 		postsPerPage: 10,
 		// 归档页每页显示的文章数量，默认20
 		archivePageSize: 20,
-	},
-
-	// 统计分析
-	analytics: {
-		// 是否启用 Google Analytics，默认 false，避免国内访问时出现 ERR_CONNECTION_CLOSED
-		enableGoogleAnalytics: false,
-		// Google Analytics ID
-		googleAnalyticsId: "G-WM2YMELY5N",
 	},
 
 	// 字体配置

@@ -219,6 +219,14 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		// 开发时预打包 Swup 子入口，减少 504 Outdated Optimize Dep（依赖变更后仍建议重启 dev）
+		optimizeDeps: {
+			include: [
+				"@swup/astro/client",
+				"@swup/astro/serialise",
+				"@swup/astro/idle",
+			],
+		},
 		resolve: {
 			alias: {
 				"@rehype-callouts-theme": `rehype-callouts/theme/${siteConfig.rehypeCallouts.theme}`,

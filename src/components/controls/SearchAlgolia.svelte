@@ -7,9 +7,11 @@ import { navigateToPage } from "@utils/navigation-utils";
 
 interface Props {
 	engine?: "algolia" | "milisearch";
+	/** 首次挂载时是否直接打开搜索弹窗（用于懒加载入口） */
+	initialOpen?: boolean;
 }
 
-let { engine } : Props = $props();
+let { engine, initialOpen = false } : Props = $props();
 
 const ALGOLIA_APP_ID = import.meta.env.PUBLIC_ALGOLIA_APP_ID;
 const ALGOLIA_SEARCH_KEY = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY;
@@ -160,6 +162,12 @@ onMount(async () => {
 		}
 	};
 	document.addEventListener("keydown", onKeydown);
+
+	if (initialOpen) {
+		await tick();
+		await openModal();
+	}
+
 	return () => document.removeEventListener("keydown", onKeydown);
 });
 

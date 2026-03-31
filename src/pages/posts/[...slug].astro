@@ -1,10 +1,8 @@
 ---
 import { render } from "astro:content";
-import * as path from "node:path";
 import Comment from "@components/comment/index.astro";
 import Markdown from "@components/common/Markdown.astro";
 import License from "@components/misc/License.astro";
-import SmartPostRecommendations from "@components/misc/SmartPostRecommendations.astro";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
@@ -19,7 +17,6 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
-import SharePoster from "@/components/misc/SharePoster.svelte";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
@@ -49,30 +46,6 @@ const { remarkPluginFrontmatter } = await render(entry);
 
 // 处理随机图：如果image为"api"，则从配置的API获取随机图
 const processedImage = processCoverImageSync(entry.data.image, entry.id);
-
-let posterCoverUrl = processedImage;
-if (processedImage) {
-	const isLocal = !(
-		processedImage.startsWith("/") ||
-		processedImage.startsWith("http") ||
-		processedImage.startsWith("https") ||
-		processedImage.startsWith("data:")
-	);
-	if (isLocal) {
-		const basePath = getFileDirFromPath(entry.filePath || "");
-		const files = import.meta.glob<ImageMetadata>("../../**", {
-			import: "default",
-		});
-		let normalizedPath = path
-			.normalize(path.join("../../", basePath, processedImage))
-			.replace(/\\/g, "/");
-		const file = files[normalizedPath];
-		if (file) {
-			const img = await file();
-			posterCoverUrl = img.src;
-		}
-	}
-}
 
 dayjs.extend(utc);
 
@@ -264,7 +237,7 @@ const jsonLd = {
       {entry.data.password ? (
         <div id="password-protection-wrapper">
           <PasswordProtection 
-            client:load
+            client:idle
             postId={entry.id}
             password={typeof entry.data.password === 'boolean' ? (siteConfig.postPassword ?? "") : entry.data.password}
             hint={siteConfig.postPasswordHint ?? ""}
@@ -325,71 +298,32 @@ const jsonLd = {
         });
       </script>
 
-      {/* 智能文章推荐 */}
-      <div class="border-t border-[var(--line-divider)] my-6 onload-animation" aria-hidden="true"></div>
-      <SmartPostRecommendations currentEntry={entry} />
-
-      {/* 赞助按钮 & 分享按钮 */}
+      {/* 赞助按钮 */}
       {
-        (siteConfig.sharePoster || (sponsorConfig.showButtonInPost && siteConfig.pages.sponsor)) && (
+        sponsorConfig.showButtonInPost && siteConfig.pages.sponsor && (
           <div class="mb-6 rounded-xl onload-animation">
             <div class="p-6 bg-[var(--license-block-bg)] rounded-xl">
               <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div class="flex items-center gap-3 flex-1">
                   <div class="h-12 w-12 rounded-lg bg-[var(--primary)] flex items-center justify-center text-white dark:text-black/70 flex-shrink-0">
-                    <Icon
-                      name={sponsorConfig.showButtonInPost &&
-                      siteConfig.pages.sponsor
-                        ? "material-symbols:favorite"
-                        : "material-symbols:share"}
-                      class="text-2xl"
-                    />
+                    <Icon name="material-symbols:favorite" class="text-2xl" />
                   </div>
                   <div>
                     <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-100 mb-1">
-                      {
-                        sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
-                          ? i18n(I18nKey.sponsorButton)
-                          : i18n(I18nKey.shareOnSocial)
-                      }
+                      {i18n(I18nKey.sponsorButton)}
                     </h3>
                     <p class="text-sm text-neutral-600 dark:text-neutral-400">
-                      {
-                        sponsorConfig.showButtonInPost && siteConfig.pages.sponsor
-                          ? i18n(I18nKey.sponsorButtonText)
-                          : i18n(I18nKey.shareOnSocialDescription)
-                      }
+                      {i18n(I18nKey.sponsorButtonText)}
                     </p>
                   </div>
                 </div>
-                <div class="flex items-center gap-3">
-                  {
-                    siteConfig.sharePoster && (
-                      <SharePoster
-                        client:load
-                        title={entry.data.title}
-                        author={profileConfig.name}
-                        description={entry.data.description || entry.data.title}
-                        pubDate={formatDateToYYYYMMDD(entry.data.published)}
-                        coverImage={posterCoverUrl}
-                        url={Astro.url.href}
-                        siteTitle={siteConfig.title}
-                        avatar={profileConfig.avatar}
-                      />
-                    )
-                  }
-                  {
-                    sponsorConfig.showButtonInPost && siteConfig.pages.sponsor && (
-                      <a
-                        href={url("/sponsor/")}
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white dark:text-black/70 rounded-lg font-medium hover:bg-[var(--primary)]/80 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
-                      >
-                        <span>{i18n(I18nKey.sponsor)}</span>
-                        <Icon name="fa6-solid:arrow-right" class="text-sm" />
-                      </a>
-                    )
-                  }
-                </div>
+                <a
+                  href={url("/sponsor/")}
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-[var(--primary)] text-white dark:text-black/70 rounded-lg font-medium hover:bg-[var(--primary)]/80 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
+                >
+                  <span>{i18n(I18nKey.sponsor)}</span>
+                  <Icon name="fa6-solid:arrow-right" class="text-sm" />
+                </a>
               </div>
             </div>
           </div>

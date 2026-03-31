@@ -80,7 +80,6 @@ export type SiteConfig = {
 
 	showLastModified: boolean; // 控制"上次编辑"卡片显示的开关
 	outdatedThreshold?: number; // 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
-	sharePoster?: boolean; // 是否显示分享海报按钮
 	showPostPrevNext?: boolean; // 文章页是否显示上一篇/下一篇导航
 
 	// 页面开关配置
@@ -110,12 +109,6 @@ export type SiteConfig = {
 	pagination: {
 		postsPerPage: number; // 每页显示的文章数量
 		archivePageSize?: number; // 归档页每页显示的文章数量，未配置时默认20
-	};
-
-	// 统计分析
-	analytics?: {
-		enableGoogleAnalytics?: boolean; // 是否启用 Google Analytics，默认 false，避免国内访问 ERR_CONNECTION_CLOSED
-		googleAnalyticsId?: string; // Google Analytics ID
 	};
 
 	// 文章密码保护配置

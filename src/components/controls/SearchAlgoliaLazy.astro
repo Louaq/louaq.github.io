@@ -1,0 +1,131 @@
+---
+/**
+ * 首屏不加载搜索组件 JS；首次点击搜索按钮或 Ctrl/Cmd+K 时再动态 import + mount。
+ */
+import { i18n } from "@/i18n/translation";
+import I18nKey from "@/i18n/i18nKey";
+
+interface Props {
+	engine?: "algolia" | "milisearch";
+}
+
+const { engine } = Astro.props;
+const searchLabel = i18n(I18nKey.search);
+---
+
+<div
+	id="search-algolia-lazy-root"
+	class="contents flex items-center"
+	data-engine={engine ?? ""}
+>
+	<div id="search-algolia-placeholder" class="contents flex items-center">
+		<button
+			type="button"
+			id="search-lazy-trigger-desktop"
+			aria-label="Open search"
+			class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
+      bg-black/[0.06] hover:bg-black/[0.08] active:bg-black/[0.10]
+      dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:active:bg-white/[0.14]
+      text-black/55 dark:text-white/55 text-sm
+      border border-transparent hover:border-[var(--primary)]
+      outline-none focus:outline-none focus-visible:outline-none
+      focus-visible:border-[var(--primary)]
+      focus-visible:ring-2 focus-visible:ring-[var(--primary)]/25"
+		>
+			<svg
+				width="20"
+				height="20"
+				viewBox="0 0 20 20"
+				aria-hidden="true"
+				class="DocSearch-Search-Icon trigger-search-icon"
+			>
+				<path
+					d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
+					stroke="currentColor"
+					fill="none"
+					fill-rule="evenodd"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+			<span class="flex-1 text-left">{searchLabel}</span>
+			<span class="text-xs text-black/35 dark:text-white/35">Ctrl K</span>
+		</button>
+		<button
+			type="button"
+			id="search-lazy-trigger-mobile"
+			aria-label="Open search"
+			class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90"
+		>
+			<svg
+				width="20"
+				height="20"
+				viewBox="0 0 20 20"
+				aria-hidden="true"
+				class="DocSearch-Search-Icon mobile-search-icon"
+			>
+				<path
+					d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
+					stroke="currentColor"
+					fill="none"
+					fill-rule="evenodd"
+					stroke-linecap="round"
+					stroke-linejoin="round"
+				/>
+			</svg>
+		</button>
+	</div>
+</div>
+
+<script>
+	import { mount } from "svelte";
+
+	const root = document.getElementById("search-algolia-lazy-root");
+	const placeholder = document.getElementById("search-algolia-placeholder");
+	if (!root || !placeholder) {
+		throw new Error("search-algolia-lazy: root missing");
+	}
+
+	const raw = root.dataset.engine;
+	const engine =
+		raw === undefined || raw === ""
+			? undefined
+			: /** @type {"algolia" | "milisearch" | undefined} */ (raw);
+
+	let mounted = false;
+	let inflight = /** @type {Promise<void> | null} */ (null);
+
+	function onGlobalKey(/** @type {KeyboardEvent} */ e) {
+		if (mounted) return;
+		if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+			e.preventDefault();
+			void loadMount(true);
+		}
+	}
+
+	document.addEventListener("keydown", onGlobalKey);
+
+	async function loadMount(/** @type {boolean} */ initialOpen) {
+		if (mounted) return;
+		if (inflight) return inflight;
+		inflight = (async () => {
+			document.removeEventListener("keydown", onGlobalKey);
+			const { default: SearchAlgolia } = await import("./SearchAlgolia.svelte");
+			placeholder.remove();
+			mount(SearchAlgolia, {
+				target: root,
+				props: { engine, initialOpen },
+			});
+			mounted = true;
+		})();
+		await inflight;
+		inflight = null;
+	}
+
+	document
+		.getElementById("search-lazy-trigger-desktop")
+		?.addEventListener("click", () => void loadMount(true));
+	document
+		.getElementById("search-lazy-trigger-mobile")
+		?.addEventListener("click", () => void loadMount(true));
+</script>

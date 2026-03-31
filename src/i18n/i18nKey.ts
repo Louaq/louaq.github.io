@@ -211,9 +211,6 @@ enum I18nKey {
 	sponsorButton = "sponsorButton",
 	sponsorButtonText = "sponsorButtonText",
 
-	shareOnSocial = "shareOnSocial",
-	shareOnSocialDescription = "shareOnSocialDescription",
-
 	// 站点统计
 	siteStats = "siteStats",
 	siteStatsPostCount = "siteStatsPostCount",
@@ -250,13 +247,6 @@ enum I18nKey {
 	codeCollapsibleShowLess = "codeCollapsibleShowLess",
 	codeCollapsibleExpanded = "codeCollapsibleExpanded",
 	codeCollapsibleCollapsed = "codeCollapsibleCollapsed",
-
-	shareArticle = "shareArticle",
-	generatingPoster = "generatingPoster",
-	copied = "copied",
-	copyLink = "copyLink",
-	savePoster = "savePoster",
-	scanToRead = "scanToRead",
 
 	// 相册
 	albums = "albums",

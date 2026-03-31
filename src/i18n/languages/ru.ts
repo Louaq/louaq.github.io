@@ -227,10 +227,6 @@ export const ru: Translation = {
 	[Key.sponsorButtonText]:
 		"Если эта статья помогла вам, пожалуйста, поделитесь или поддержите!",
 
-	[Key.shareOnSocial]: "Поделиться статьей",
-	[Key.shareOnSocialDescription]:
-		"Если эта статья помогла вам, пожалуйста, поделитесь ею с другими!",
-
 	// Статистика сайта
 	[Key.siteStats]: "Статистика сайта",
 	[Key.siteStatsPostCount]: "Статьи",
@@ -269,13 +265,6 @@ export const ru: Translation = {
 	[Key.codeCollapsibleShowLess]: "Показать меньше",
 	[Key.codeCollapsibleExpanded]: "Блок кода развернут",
 	[Key.codeCollapsibleCollapsed]: "Блок кода свернут",
-
-	[Key.shareArticle]: "Поделиться",
-	[Key.generatingPoster]: "Создание постера...",
-	[Key.copied]: "Скопировано",
-	[Key.copyLink]: "Копировать ссылку",
-	[Key.savePoster]: "Сохранить постер",
-	[Key.scanToRead]: "Сканируйте, чтобы прочитать",
 
 	// Альбомы
 	[Key.albums]: "Альбомы",

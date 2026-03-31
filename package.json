@@ -59,7 +59,6 @@
     "node-html-parser": "^7.0.2",
     "overlayscrollbars": "^2.13.0",
     "photoswipe": "^5.4.4",
-    "qrcode": "^1.5.4",
     "reading-time": "^1.5.0",
     "rehype-autolink-headings": "^7.1.0",
     "rehype-callouts": "^2.1.2",
@@ -86,7 +85,6 @@
     "@rollup/plugin-yaml": "^4.1.2",
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.4",
-    "@types/qrcode": "^1.5.6",
     "@types/sanitize-html": "^2.16.0",
     "postcss-import": "^16.1.1",
     "postcss-nesting": "^13.0.2"
