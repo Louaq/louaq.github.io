@@ -25,8 +25,6 @@ declare global {
 		tocInternalNavigation: boolean;
 		iconifyLoaded: boolean;
 		// swup is defined in global.d.ts
-		// biome-ignore lint/suspicious/noExplicitAny: External library without types
-		spine: any;
 		closeAnnouncement: () => void;
 		// biome-ignore lint/suspicious/noExplicitAny: External library without types
 		__iconifyLoader: any;

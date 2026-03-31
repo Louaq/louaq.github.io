@@ -1,6 +1,6 @@
 ---
 title: 组会汇报
-published: 2026-01-27 21:29:00
+published: 2026-04-01 16:00:00
 expires: 2026-01-31 23:59:59
 mathjax: true
 category: 汇报
@@ -9,7 +9,8 @@ description: 汇报
 pinned: true
 ---
 
-
+<!-- 预览PDF -->
+<!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/CCF_2026_03.pdf" title="CCF 2026 推荐目录" height="660px"} -->
 
 :::note
 ## 2026年组会内容
@@ -48,8 +49,6 @@ ICLR, TMM升为CCF A, IJCAI将为CCF B
 :::
 
 ### CCF 推荐目录预览
-
-<!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/CCF_2026_03.pdf" title="CCF 2026 推荐目录" height="560px"} -->
 
 | 时间 | 内容 | PDF |
 |-------|-------|-------|

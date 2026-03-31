@@ -1,7 +1,5 @@
 ---
-import Live2DWidget from "@components/features/Live2DWidget.astro";
 import OverlayWallpaper from "@components/features/OverlayWallpaper.astro";
-import SpineModel from "@components/features/SpineModel.astro";
 import Footer from "@components/layout/Footer.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
@@ -15,7 +13,6 @@ import TypewriterText from "@/components/features/TypewriterText.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
 import {
 	backgroundWallpaper,
-	live2dModelConfig,
 	sidebarLayoutConfig,
 	siteConfig,
 } from "@/config";
@@ -577,8 +574,6 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
             </div>
         </div>
 
-        <SpineModel></SpineModel>
-        {live2dModelConfig.enable && <Live2DWidget config={live2dModelConfig} />}
     </div>
 </div>
 

@@ -126,28 +126,6 @@ export type SiteConfig = {
 	grayscale?: {
 		enable: boolean; // 是否启用全站变灰效果
 	};
-
-	// 节假日装饰配置
-	festivalDecoration?: {
-		enable: boolean; // 是否启用节假日装饰
-		festivals?: Array<{
-			name: string; // 节日名称
-			startDate: string; // 开始日期，格式：MM-DD
-			endDate: string; // 结束日期，格式：MM-DD
-			decorationType: string; // 装饰类型
-			customStyles?: {
-				lanterns?: {
-					enable: boolean;
-					leftText?: string;
-					rightText?: string;
-				};
-				fireworks?: boolean;
-				snowflake?: boolean;
-				pumpkins?: boolean;
-				hearts?: boolean;
-			};
-		}>;
-	};
 };
 
 export type Favicon = {
@@ -475,67 +453,6 @@ export type SakuraConfig = {
 	zIndex: number; // 层级，确保樱花在合适的层级显示
 };
 
-// Spine 看板娘配置
-export type SpineModelConfig = {
-	enable: boolean; // 是否启用 Spine 看板娘
-	model: {
-		path: string; // 模型文件路径 (.json)
-		scale?: number; // 模型缩放比例，默认1.0
-		x?: number; // X轴偏移，默认0
-		y?: number; // Y轴偏移，默认0
-	};
-	position: {
-		corner: "bottom-left" | "bottom-right" | "top-left" | "top-right"; // 显示位置
-		offsetX?: number; // 水平偏移量，默认20px
-		offsetY?: number; // 垂直偏移量，默认20px
-	};
-	size: {
-		width?: number; // 容器宽度，默认280px
-		height?: number; // 容器高度，默认400px
-	};
-	interactive?: {
-		enabled?: boolean; // 是否启用交互功能，默认true
-		clickAnimations?: string[]; // 点击时随机播放的动画列表
-		clickMessages?: string[]; // 点击时随机显示的文字消息
-		messageDisplayTime?: number; // 文字显示时间（毫秒），默认3000
-		idleAnimations?: string[]; // 待机动画列表
-		idleInterval?: number; // 待机动画切换间隔（毫秒），默认10000
-	};
-	responsive?: {
-		hideOnMobile?: boolean; // 是否在移动端隐藏，默认false
-		mobileBreakpoint?: number; // 移动端断点，默认768px
-	};
-	zIndex?: number; // 层级，默认1000
-	opacity?: number; // 透明度，0-1，默认1.0
-};
-
-// Live2D 看板娘配置
-export type Live2DModelConfig = {
-	enable: boolean; // 是否启用 Live2D 看板娘
-	model: {
-		path: string; // 模型文件夹路径或model3.json文件路径
-	};
-	position?: {
-		corner?: "bottom-left" | "bottom-right" | "top-left" | "top-right"; // 显示位置，默认bottom-right
-		offsetX?: number; // 水平偏移量，默认20px
-		offsetY?: number; // 垂直偏移量，默认20px
-	};
-	size?: {
-		width?: number; // 容器宽度，默认280px
-		height?: number; // 容器高度，默认250px
-	};
-	interactive?: {
-		enabled?: boolean; // 是否启用交互功能，默认true
-		// motions 和 expressions 将从模型 JSON 文件中自动读取
-		clickMessages?: string[]; // 点击时随机显示的文字消息
-		messageDisplayTime?: number; // 文字显示时间（毫秒），默认3000
-	};
-	responsive?: {
-		hideOnMobile?: boolean; // 是否在移动端隐藏，默认false
-		mobileBreakpoint?: number; // 移动端断点，默认768px
-	};
-};
-
 export type BackgroundWallpaperConfig = {
 	mode: "banner" | "overlay" | "none"; // 壁纸模式：banner横幅模式、overlay全屏透明覆盖模式或none纯色背景
 	switchable?: boolean; // 是否允许用户通过导航栏切换壁纸模式，默认true
@@ -670,107 +587,6 @@ export type FriendsPageConfig = {
 	showCustomContent?: boolean; // 是否显示自定义内容（friends.mdx）
 	showComment?: boolean; // 是否显示评论区，默认 true
 	randomizeSort?: boolean; // 是否打乱排序，如果为 true，将忽略 weight，随机排序
-};
-
-// 音乐播放器配置
-export type MusicPlayerConfig = {
-	// 基础功能开关
-	enable: boolean; // 启用音乐播放器功能
-
-	// 使用方式：'meting' 或 'local'
-	mode?: "meting" | "local"; // "meting" 使用 Meting API，"local" 使用本地音乐列表
-
-	// Meting API 配置
-	meting?: {
-		// Meting API 地址
-		api?: string;
-
-		// 音乐平台：netease=网易云音乐, tencent=QQ音乐, kugou=酷狗音乐, xiami=虾米音乐, baidu=百度音乐
-		server?: "netease" | "tencent" | "kugou" | "xiami" | "baidu";
-
-		// 类型：song=单曲, playlist=歌单, album=专辑, search=搜索, artist=艺术家
-		type?: "song" | "playlist" | "album" | "search" | "artist";
-
-		// 歌单/专辑/单曲 ID 或搜索关键词
-		id?: string;
-
-		// 认证 token（可选）
-		auth?: string;
-
-		// 备用 API 配置（当主 API 失败时使用）
-		fallbackApis?: string[];
-
-		// MetingJS 脚本路径（默认使用 CDN，也可配置为本地路径）
-		jsPath?: string;
-	};
-
-	// 本地音乐配置（当 mode 为 'local' 时使用）
-	local?: {
-		playlist?: Array<{
-			name: string; // 歌曲名称
-			artist: string; // 艺术家
-			url: string; // 音乐文件路径（相对于 public 目录）
-			cover?: string; // 封面图片路径（相对于 public 目录）
-			lrc?: string; // 歌词内容，支持 LRC 格式
-		}>;
-	};
-
-	// APlayer 配置选项
-	player?: {
-		// 是否固定模式（固定在页面底部）
-		fixed?: boolean;
-
-		// 是否迷你模式
-		mini?: boolean;
-
-		// 是否自动播放
-		autoplay?: boolean;
-
-		// 主题色
-		theme?: string;
-
-		// 循环模式：'all'=列表循环, 'one'=单曲循环, 'none'=不循环
-		loop?: "all" | "one" | "none";
-
-		// 播放顺序：'list'=列表顺序, 'random'=随机播放
-		order?: "list" | "random";
-
-		// 预加载：'none'=不预加载, 'metadata'=预加载元数据, 'auto'=自动
-		preload?: "none" | "metadata" | "auto";
-
-		// 默认音量 (0-1)
-		volume?: number;
-
-		// 是否互斥播放（同时只能播放一个播放器）
-		mutex?: boolean;
-
-		// 歌词类型：0=不显示, 1=显示（需要提供 lrc 字段）, 2=显示（从 HTML 内容读取）, 3=异步加载（从 API 获取）
-		lrcType?: 0 | 1 | 2 | 3;
-
-		// 歌词是否默认隐藏（当 lrcType 不为 0 时，可以通过此选项控制初始显示状态）
-		lrcHidden?: boolean;
-
-		// 播放列表是否默认折叠
-		listFolded?: boolean;
-
-		// 播放列表最大高度
-		listMaxHeight?: string;
-
-		// localStorage 存储键名
-		storageName?: string;
-	};
-
-	// 响应式配置
-	responsive?: {
-		// 移动端配置
-		mobile?: {
-			// 在移动端是否隐藏
-			hide?: boolean;
-
-			// 移动端断点（小于此宽度时应用移动端配置）
-			breakpoint?: number;
-		};
-	};
 };
 
 // 赞助方式类型

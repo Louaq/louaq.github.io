@@ -3,10 +3,8 @@ import GoogleAnalytics from "@components/analytics/GoogleAnalytics.astro";
 import FancyboxManager from "@components/features/FancyboxManager.astro";
 import FontManager from "@components/features/FontManager.astro";
 import KatexManager from "@components/features/KatexManager.astro";
-import MusicPlayer from "@components/features/MusicPlayer.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
-import FestivalDecoration from "@components/features/FestivalDecoration.astro";
 import GlobalIconSprite from "@/components/misc/GlobalIconSprite.astro";
 import PdfEmbedRuntime from "@/components/misc/PdfEmbedRuntime.astro";
 
@@ -631,9 +629,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <ConfigCarrier />
     <slot />
 
-    <!-- Music Player -->
-    <MusicPlayer />
-
     <!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
     <div id="page-height-extend" class="hidden h-[300vh]"></div>
 
@@ -645,9 +640,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     
     <!-- KaTeX Manager -->
     <KatexManager />
-
-    <!-- Festival Decoration -->
-    <FestivalDecoration />
 
   </body>
 </html>

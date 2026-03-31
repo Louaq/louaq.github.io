@@ -73,7 +73,7 @@ export const siteConfig: SiteConfig = {
 		followTheme: false,
 	},
 
-	// 搜索引擎配置
+	// 搜索引擎配置：algolia / milisearch
 
 	search: {
 		// milisearch (Meilisearch) 搜索（需要配置环境变量；前端会访问 https://search.louaq.com）
@@ -82,8 +82,6 @@ export const siteConfig: SiteConfig = {
 	},
   // 站点开始日期，用于统计运行天数
   siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
-
-
 
 
 	// bangumi配置
@@ -184,45 +182,6 @@ export const siteConfig: SiteConfig = {
 	// 适用于特殊纪念日（如清明节、国家公祭日等）
 	grayscale: {
 		enable: false, // 设置为 true 启用全站变灰，false 关闭
-	},
-
-	// 节假日装饰配置
-	festivalDecoration: {
-		enable: false, // 是否启用节假日装饰
-		festivals: [
-		{
-			name: "春节",
-			startDate: "01-20",
-			endDate: "02-28",
-			decorationType: "spring-festival",
-			customStyles: {
-				lanterns: {
-					enable: true,
-					leftText: "新春", // 左侧灯笼文字
-					rightText: "快乐", // 右侧灯笼文字
-				},
-				fireworks: false, // 烟花效果
-			},
-		},
-		{
-			name: "圣诞节",
-			startDate: "12-20",
-			endDate: "12-26",
-			decorationType: "christmas",
-			customStyles: {
-				snowflake: true, // 雪花效果
-			},
-		},
-		{
-			name: "万圣节",
-			startDate: "10-25",
-			endDate: "11-01",
-			decorationType: "halloween",
-			customStyles: {
-				pumpkins: true, // 南瓜效果
-			},
-		},
-		],
 	},
 
     // 站点语言，在本配置文件顶部SITE_LANG定义

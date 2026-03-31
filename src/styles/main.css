@@ -146,8 +146,6 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     /* 禁用复杂选择器元素的过渡 - 仅在非 View Transitions 模式下 */
     .is-theme-transitioning:not(.use-view-transition) .float-panel,
     .is-theme-transitioning:not(.use-view-transition) .float-panel *,
-    .is-theme-transitioning:not(.use-view-transition) .music-player,
-    .is-theme-transitioning:not(.use-view-transition) .music-player *,
     .is-theme-transitioning:not(.use-view-transition) .widget,
     .is-theme-transitioning:not(.use-view-transition) .widget *,
     .is-theme-transitioning:not(.use-view-transition) .dropdown-content,
