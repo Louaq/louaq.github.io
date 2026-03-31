@@ -49,7 +49,7 @@ ICLR, TMM升为CCF A, IJCAI将为CCF B
 
 ### CCF 推荐目录预览
 
-::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/CCF_2026_03.pdf" title="CCF 2026 推荐目录" height="560px"}
+<!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/CCF_2026_03.pdf" title="CCF 2026 推荐目录" height="560px"} -->
 
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
