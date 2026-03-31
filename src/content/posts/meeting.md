@@ -12,10 +12,8 @@ pinned: true
 <!-- 预览PDF -->
 <!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/CCF_2026_03.pdf" title="CCF 2026 推荐目录" height="660px"} -->
 
-:::note
-## 2026年组会内容
-:::
 
+## 2026年组会内容
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
 | 20260121 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0122.pdf" target="_blank">汇报_0121</a> |
@@ -24,10 +22,8 @@ pinned: true
 
 
 
-:::note
-## 2025年组会内容
-:::
 
+## 2025年组会内容
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
 | 20250401 | 图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0401.pdf" target="_blank">汇报_0401</a> |
@@ -40,15 +36,12 @@ pinned: true
 | 20251217 | 医学图像融合 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_1217.pdf" target="_blank">汇报_1217</a> |
 | 20251230 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_1230.pdf" target="_blank">汇报_1230</a> |
 
-:::note
-## CCF分区信息
-:::
 
-:::important
+## CCF分区信息
+
+:::note
 ICLR, TMM升为CCF A, IJCAI将为CCF B
 :::
-
-### CCF 推荐目录预览
 
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
