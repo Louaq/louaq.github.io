@@ -108,10 +108,10 @@ export const siteConfig: SiteConfig = {
 		theme: "github",
 	},
 
-	// 文章页底部的"上次编辑时间"卡片开关
+	// 文章页「上次编辑」相关展示：false 时隐藏元信息里的更新日期 + 正文前的过期提醒卡片
 	showLastModified: true,
 
-	// 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
+	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
 	outdatedThreshold: 5,
 
 	// 文章页"上一篇/下一篇"导航开关

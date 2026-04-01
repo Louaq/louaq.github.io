@@ -4,7 +4,7 @@ published: 2025-08-01 08:45:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "代码复现记录"
-categories: 多模态医学图像分割
+category: 多模态医学图像分割
 tags: [BSAFusion]
 ---
 

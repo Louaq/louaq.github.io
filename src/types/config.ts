@@ -78,8 +78,8 @@ export type SiteConfig = {
 		engine: "algolia" | "milisearch"; // 搜索引擎：Algolia / Milisearch(Meilisearch)
 	};
 
-	showLastModified: boolean; // 控制"上次编辑"卡片显示的开关
-	outdatedThreshold?: number; // 文章过期阈值（天数），超过此天数才显示"上次编辑"卡片
+	showLastModified: boolean; // 控制文章页元信息中的更新日期与正文前过期提醒卡片
+	outdatedThreshold?: number; // 过期提醒卡片：距上次编辑超过该天数才显示（元信息更新日期不受此限制）
 	showPostPrevNext?: boolean; // 文章页是否显示上一篇/下一篇导航
 
 	// 页面开关配置

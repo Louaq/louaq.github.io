@@ -34,6 +34,10 @@ export { footerConfig } from "./footerConfig"; // 页脚配置
 export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友链配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
 export { albumsConfig } from "./albumsConfig"; // 相册配置
+export {
+	categoriesPageConfig,
+	getCategoryCardStyle,
+} from "./categoriesPageConfig"; // 分类页卡片样式
 // 组件配置
 export { navBarConfig } from "./navBarConfig"; // 导航栏配置
 export { profileConfig } from "./profileConfig"; // 用户资料配置

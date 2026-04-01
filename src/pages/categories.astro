@@ -1,48 +1,91 @@
 ---
+import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { getCategoryCardStyle } from "@/config/categoriesPageConfig";
 import { getCategoryList } from "@/utils/content-utils";
 
 const categories = await getCategoryList();
-
-const counts = categories.map((c) => c.count);
-const minCount = counts.length ? Math.min(...counts) : 0;
-const maxCount = counts.length ? Math.max(...counts) : 0;
-/** 文章数越多字越大：在 minRem ~ maxRem 间按数量线性映射 */
-function fontSizeForCount(count: number): string {
-	if (maxCount === minCount) return "1rem";
-	const t = (count - minCount) / (maxCount - minCount);
-	const minRem = 0.8125;
-	const maxRem = 1.375;
-	return `${minRem + t * (maxRem - minRem)}rem`;
-}
 ---
 
 <MainGridLayout title={i18n(I18nKey.categories)} description={i18n(I18nKey.categories)}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
-        <div class="card-base z-10 px-9 py-6 relative w-full">
-            <h1 class="text-3xl font-bold text-black/90 dark:text-white/90 mb-6">
-                {i18n(I18nKey.categories)}
-            </h1>
-            {categories.length === 0 ? (
-                <p class="text-black/50 dark:text-white/50">{i18n(I18nKey.uncategorized)}</p>
-            ) : (
-                <div class="flex flex-wrap gap-x-5 gap-y-3">
-                    {categories.map((cat) => (
-                        <a
-                            href={cat.url}
-                            style={{ fontSize: fontSizeForCount(cat.count) }}
-                            class="group inline-flex max-w-full items-baseline gap-[0.35em] font-medium text-black/80 underline-offset-4 transition-colors hover:text-[var(--primary)] dark:text-white/80"
-                        >
-                            <span class="truncate">{cat.name}</span>
-                            <span class="shrink-0 text-[0.72em] font-semibold tabular-nums text-black/40 group-hover:text-[var(--primary)]/70 dark:text-white/45">
-                                {cat.count}
-                            </span>
-                        </a>
-                    ))}
+  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+    <div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
+      <h1
+        class="text-3xl font-bold text-black/90 dark:text-white/90 mb-8 tracking-tight"
+      >
+        {i18n(I18nKey.categories)}
+      </h1>
+      {
+        categories.length === 0 ? (
+          <p class="text-black/50 dark:text-white/50">
+            {i18n(I18nKey.uncategorized)}
+          </p>
+        ) : (
+          <div
+            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5"
+          >
+          {categories.map((cat, index) => {
+            const style = getCategoryCardStyle(cat.name, index);
+            return (
+              <a
+                href={cat.url}
+                class:list={[
+                  "category-page-card group card-base flex flex-col p-6 md:p-7 min-h-[11rem]",
+                  "border border-[var(--line-divider)] shadow-sm",
+                  "transition-all duration-200",
+                  "hover:shadow-md hover:border-[color-mix(in_oklab,var(--primary)_35%,var(--line-divider))]",
+                  "active:scale-[0.99]",
+                ]}
+                style={`--category-accent: ${style.accent}`}
+              >
+                <div
+                  class="mb-1 flex h-10 w-10 items-center justify-center rounded-lg"
+                  style={{
+                    background:
+                      "color-mix(in oklab, var(--category-accent) 14%, transparent)",
+                  }}
+                >
+                  <Icon
+                    name={style.icon}
+                    class="text-[1.5rem]"
+                    style={{ color: "var(--category-accent)" }}
+                  />
                 </div>
-            )}
-        </div>
+                <h2
+                  class="font-bold text-lg text-black/90 dark:text-white/90 leading-snug line-clamp-2 mt-1"
+                >
+                  {cat.name}
+                </h2>
+                {style.description.trim() !== "" && (
+                  <p class="text-sm text-black/50 dark:text-white/50 mt-1.5 leading-relaxed line-clamp-2">
+                    {style.description}
+                  </p>
+                )}
+                <div class="mt-auto pt-6 w-full">
+                  <div
+                    class="border-t border-dashed border-black/10 dark:border-white/15"
+                  />
+                  <div class="pt-4 flex items-center justify-between gap-3">
+                    <span
+                      class="text-sm font-semibold tabular-nums"
+                      style={{ color: "var(--category-accent)" }}
+                    >
+                      {`${cat.count} ${i18n(I18nKey.postsCount)}`}
+                    </span>
+                    <Icon
+                      name="material-symbols:arrow-forward-rounded"
+                      class="text-[1.25rem] text-black/40 dark:text-white/40 shrink-0 transition-transform group-hover:translate-x-0.5"
+                    />
+                  </div>
+                </div>
+              </a>
+            );
+          })}
+          </div>
+        )
+      }
     </div>
+  </div>
 </MainGridLayout>

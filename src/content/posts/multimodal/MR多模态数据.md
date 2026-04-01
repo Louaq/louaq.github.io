@@ -4,7 +4,7 @@ published: 2025-07-09 21:30:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "转换后的.npy文件数量与原始.nii文件数量的关系"
-categories: 数据集
+category: 数据集
 tags: [Dataset]
 ---
 > .nii数据的预处理，参考F2Net

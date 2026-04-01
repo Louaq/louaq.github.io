@@ -4,7 +4,7 @@ published: 2025-08-12 21:05:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "BraTs数据集"
-categories: BraTs数据集
+category: BraTs数据集
 tags: [BraTs数据集]
 ---
 

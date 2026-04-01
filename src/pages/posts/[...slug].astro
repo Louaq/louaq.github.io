@@ -167,6 +167,7 @@ const jsonLd = {
           tags={entry.data.tags}
           category={entry.data.category || undefined}
           id={entry.id}
+          hideUpdateDate={!siteConfig.showLastModified}
         />
         {
           !processedImage && (

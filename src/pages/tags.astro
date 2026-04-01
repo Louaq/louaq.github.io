@@ -7,20 +7,10 @@ import { getTagUrl } from "@/utils/url-utils";
 
 const tags = await getTagList();
 
-// 按首字母分组
-const groups: Map<string, typeof tags> = new Map();
-for (const tag of tags) {
-    const first = tag.name.trim().charAt(0).toUpperCase();
-    const key = /^[A-Z]$/.test(first) ? first : "#";
-    if (!groups.has(key)) groups.set(key, []);
-    groups.get(key)!.push(tag);
-}
-
-// 排序：字母 A-Z，非字母分组 "#" 放最后
-const sortedKeys = [...groups.keys()].sort((a, b) => {
-    if (a === "#") return 1;
-    if (b === "#") return -1;
-    return a.localeCompare(b);
+/** 不按字母序：按文章数从多到少，同数再按名称稳定排序 */
+const sortedTags = [...tags].sort((a, b) => {
+	if (b.count !== a.count) return b.count - a.count;
+	return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
 });
 ---
 
@@ -37,30 +27,31 @@ const sortedKeys = [...groups.keys()].sort((a, b) => {
             {tags.length === 0 ? (
                 <p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
             ) : (
-                <div class="space-y-0 divide-y divide-black/5 dark:divide-white/5">
-                    {sortedKeys.map((key) => (
-                        <div class="flex gap-6 py-4">
-                            <div class="w-8 shrink-0 pt-0.5">
-                                <span class="text-2xl font-bold text-[var(--primary)] opacity-80 select-none">
-                                    {key}
-                                </span>
-                            </div>
-                            <div class="flex flex-wrap gap-x-1 gap-y-2 flex-1">
-                                {groups.get(key)!.map((tag) => (
-                                    <a
-                                        href={getTagUrl(tag.name)}
-                                        class="group inline-flex items-center gap-1 px-2 py-0.5 rounded text-sm text-black/65 dark:text-white/65 hover:text-[var(--primary)] hover:bg-[var(--primary)]/8 transition-all"
-                                    >
-                                        <span class="group-hover:text-[var(--primary)] transition-colors">
-                                            {tag.name.trim()}
-                                        </span>
-                                        <span class="text-xs text-black/25 dark:text-white/25 group-hover:text-[var(--primary)]/50 transition-colors">
-                                            {tag.count}
-                                        </span>
-                                    </a>
-                                ))}
-                            </div>
-                        </div>
+                <div class="flex flex-wrap gap-2.5 md:gap-3 content-start">
+                    {sortedTags.map((tag) => (
+                        <a
+                            href={getTagUrl(tag.name)}
+                            class:list={[
+                                "tag-pill group inline-flex items-center gap-1.5 rounded-md pl-2.5 pr-1.5 py-1.5 text-sm",
+                                "bg-[#eeeeee] dark:bg-white/[0.08]",
+                                "transition-colors hover:bg-[#e4e4e4] dark:hover:bg-white/[0.12]",
+                                "no-underline",
+                            ]}
+                        >
+                            <span class="text-[#888888] dark:text-white/45 select-none shrink-0">#</span>
+                            <span class="text-[#444444] dark:text-neutral-100 font-medium leading-none">
+                                {tag.name.trim()}
+                            </span>
+                            <span
+                                class:list={[
+                                    "inline-flex items-center justify-center min-w-[1.25rem] rounded px-1.5 py-0.5 text-xs tabular-nums shrink-0",
+                                    "bg-white text-[#888888] dark:bg-neutral-800 dark:text-neutral-400",
+                                    "border border-black/[0.06] dark:border-white/10",
+                                ]}
+                            >
+                                {tag.count}
+                            </span>
+                        </a>
                     ))}
                 </div>
             )}
