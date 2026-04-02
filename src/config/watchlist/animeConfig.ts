@@ -373,5 +373,37 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
 	},
+	{
+		title: "沧元图 前传：东宁府的夏天",
+		cover: "https://pic1.imgdb.cn/item/69ce61ce38e406efb4374d50.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 1,
+			total: 3,
+		},
+		startDate: "2026-03-13",
+		comment: "第三季之前小小过渡一下，已经都是原创剧情了",
+		link: "https://movie.douban.com/subject/37516969/",
+		tags: ["动作", "动画", "奇幻"],
+		enabled: true,
+	},
+	{
+		title: "沧元图3",
+		cover: "https://pic1.imgdb.cn/item/69ce625d38e406efb4374d59.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 0,
+			total: 52,
+		},
+		startDate: "2026-04-03",
+		comment: "期待",
+		link: "https://movie.douban.com/subject/37462041/",
+		tags: ["动作", "动画", "奇幻","古装"],
+		enabled: true,
+	},
 ];
 

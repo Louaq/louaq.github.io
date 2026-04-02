@@ -73,7 +73,7 @@ export const movieItems: WatchlistItem[] = [
 		title: "飞驰人生3",
 		cover: "https://pic1.imgdb.cn/item/699561094e07536d0172302e.webp",
 		type: "movie",
-		status: "plan_to_watch",
+		status: "completed",
 		rating: 7.6,
 		startDate: "2026-02-17",
 		endDate: "2026-02-17",
