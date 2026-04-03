@@ -26,8 +26,8 @@ const categories = await getCategoryList();
           <div
             class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5"
           >
-          {categories.map((cat, index) => {
-            const style = getCategoryCardStyle(cat.name, index);
+          {categories.map((cat) => {
+            const style = getCategoryCardStyle(cat.name);
             return (
               <a
                 href={cat.url}
@@ -68,10 +68,7 @@ const categories = await getCategoryList();
                     class="border-t border-dashed border-black/10 dark:border-white/15"
                   />
                   <div class="pt-4 flex items-center justify-between gap-3">
-                    <span
-                      class="text-sm font-semibold tabular-nums"
-                      style={{ color: "var(--category-accent)" }}
-                    >
+                    <span class="text-sm font-semibold tabular-nums text-black dark:text-white">
                       {`${cat.count} ${i18n(I18nKey.postsCount)}`}
                     </span>
                     <Icon
