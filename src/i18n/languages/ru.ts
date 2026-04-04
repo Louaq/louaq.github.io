@@ -188,9 +188,6 @@ export const ru: Translation = {
 	[Key.pageViews]: "Просмотры",
 	[Key.pageViewsLoading]: "Загрузка...",
 	[Key.pageViewsError]: "Статистика недоступна",
-	[Key.footerTrafficTotal]: "Всего просмотров",
-	[Key.footerTrafficUv]: "Посетители",
-	[Key.footerTrafficPage]: "Эта страница",
 
 	// Макет списка сообщений
 	[Key.postListLayout]: "Макет списка сообщений",

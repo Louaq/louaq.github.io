@@ -2,8 +2,6 @@
 import fs from "node:fs";
 import path from "node:path";
 import { footerConfig, profileConfig } from "@/config";
-import I18nKey from "@/i18n/i18nKey";
-import { i18n } from "@/i18n/translation";
 import { url } from "@/utils/url-utils";
 
 const currentYear = new Date().getFullYear();
@@ -40,64 +38,9 @@ if (footerConfig.enable) {
     {
       customFooterHtml && (
         <div
-          class:list={[
-            "leading-tight [&_.copyright]:leading-tight",
-            footerConfig.visitorStats !== false ? "mb-0" : "mb-2",
-          ]}
+          class="mb-2 leading-tight [&_.copyright]:leading-tight"
           set:html={customFooterHtml}
         />
-      )
-    }
-    {
-      footerConfig.visitorStats !== false && (
-        <>
-          <div
-            class:list={[
-              "mb-1 flex flex-wrap items-center justify-center gap-x-1 gap-y-1 rounded-lg bg-[oklch(96%_0.01_var(--hue))] px-3 py-2 dark:bg-white/[0.06]",
-              customFooterHtml && "-mt-2",
-            ]}
-            aria-label="site traffic"
-          >
-            <span class="inline-flex flex-wrap items-center gap-x-1">
-              <span>{i18n(I18nKey.footerTrafficTotal)}</span>
-              <strong
-                class="font-semibold tabular-nums text-[var(--btn-content)]"
-                id="busuanzi_value_site_pv"
-              >
-                …
-              </strong>
-            </span>
-            <span class="mx-0.5 text-[var(--primary)] opacity-80" aria-hidden="true">
-              |
-            </span>
-            <span class="inline-flex flex-wrap items-center gap-x-1">
-              <span>{i18n(I18nKey.footerTrafficUv)}</span>
-              <strong
-                class="font-semibold tabular-nums text-[var(--btn-content)]"
-                id="busuanzi_value_site_uv"
-              >
-                …
-              </strong>
-            </span>
-            <span class="mx-0.5 text-[var(--primary)] opacity-80" aria-hidden="true">
-              |
-            </span>
-            <span class="inline-flex flex-wrap items-center gap-x-1">
-              <span>{i18n(I18nKey.footerTrafficPage)}</span>
-              <strong
-                class="font-semibold tabular-nums text-[var(--btn-content)]"
-                id="busuanzi_value_page_pv"
-              >
-                …
-              </strong>
-            </span>
-          </div>
-          <script
-            async
-            is:inline
-            src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"
-          />
-        </>
       )
     }
     &copy; <span id="copyright-year">{currentYear}</span>

@@ -179,9 +179,6 @@ export const zh_CN: Translation = {
 	[Key.pageViews]: "浏览量",
 	[Key.pageViewsLoading]: "加载中...",
 	[Key.pageViewsError]: "统计不可用",
-	[Key.footerTrafficTotal]: "总访问量",
-	[Key.footerTrafficUv]: "访客数",
-	[Key.footerTrafficPage]: "本页阅读",
 
 	// 文章布局
 	[Key.postListLayout]: "文章布局",

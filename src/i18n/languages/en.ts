@@ -187,9 +187,6 @@ export const en: Translation = {
 	[Key.pageViews]: "Views",
 	[Key.pageViewsLoading]: "Loading...",
 	[Key.pageViewsError]: "Stats unavailable",
-	[Key.footerTrafficTotal]: "Total visits",
-	[Key.footerTrafficUv]: "Visitors",
-	[Key.footerTrafficPage]: "This page",
 
 	// Banner Settings
 	[Key.bannerSettings]: "Banner Settings",
