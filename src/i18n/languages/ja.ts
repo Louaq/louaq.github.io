@@ -192,6 +192,9 @@ export const ja: Translation = {
 	[Key.pageViews]: "閲覧数",
 	[Key.pageViewsLoading]: "読み込み中...",
 	[Key.pageViewsError]: "統計利用不可",
+	[Key.footerTrafficTotal]: "総訪問数",
+	[Key.footerTrafficUv]: "訪問者数",
+	[Key.footerTrafficPage]: "このページ",
 
 	// 投稿リストレイアウト
 	[Key.postListLayout]: "投稿リストレイアウト",

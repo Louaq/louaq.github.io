@@ -181,6 +181,9 @@ export const zh_TW: Translation = {
 	[Key.pageViews]: "瀏覽量",
 	[Key.pageViewsLoading]: "載入中...",
 	[Key.pageViewsError]: "統計不可用",
+	[Key.footerTrafficTotal]: "總訪問量",
+	[Key.footerTrafficUv]: "訪客數",
+	[Key.footerTrafficPage]: "本頁閱讀",
 
 	// 文章佈局
 	[Key.postListLayout]: "文章佈局",

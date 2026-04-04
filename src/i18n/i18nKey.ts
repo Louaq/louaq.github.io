@@ -175,6 +175,12 @@ enum I18nKey {
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
 	pageViewsError = "pageViewsError",
+	/** 页脚不蒜子：站点总 PV */
+	footerTrafficTotal = "footerTrafficTotal",
+	/** 页脚不蒜子：访客 UV */
+	footerTrafficUv = "footerTrafficUv",
+	/** 页脚不蒜子：本页 PV */
+	footerTrafficPage = "footerTrafficPage",
 
 	// 横幅设置
 	bannerSettings = "bannerSettings",
