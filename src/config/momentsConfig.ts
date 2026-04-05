@@ -8,18 +8,6 @@ export const momentsPageConfig: MomentsPageConfig = {
 
 export const momentsPosts: MomentPost[] = [
 	{
-		id: "1",
-		author: "Louaq",
-		avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.webp",
-		content: "今天把博客加上了「朋友圈」页面，样式参考微信，记录一点生活与技术日常。",
-		images: [
-			"https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
-		],
-		time: "1 小时前",
-		// location: "上海",
-		enabled: true,
-	},
-	{
 		id: "2",
 		author: "Louaq",
 		avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.webp",
@@ -31,7 +19,7 @@ export const momentsPosts: MomentPost[] = [
 			"https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&q=80",
 			"https://images.unsplash.com/photo-1518837695005-2083093ee35b?w=400&q=80",
 		],
-		time: "昨天",
+		time: "1 小时前",
 		enabled: true,
 	},
 	{
@@ -39,7 +27,7 @@ export const momentsPosts: MomentPost[] = [
 		author: "Louaq",
 		avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.webp",
 		content: "分享一篇在读的论文笔记。",
-		time: "3 天前",
+		time: "6 小时前",
 		link: {
 			title: "站点文章列表",
 			url: "/archive/",
