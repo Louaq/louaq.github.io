@@ -3,7 +3,7 @@ import type { MomentPost, MomentsPageConfig } from "../types/config";
 export const momentsPageConfig: MomentsPageConfig = {
 	title: "",
 	description: "",
-	coverImage: "",
+	coverImage: "https://pic1.imgdb.cn/item/6919c43f3203f7be000aeb1f.jpg",
 };
 
 export const momentsPosts: MomentPost[] = [
@@ -16,7 +16,7 @@ export const momentsPosts: MomentPost[] = [
 			"https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80",
 		],
 		time: "1 小时前",
-		location: "上海",
+		// location: "上海",
 		enabled: true,
 	},
 	{
