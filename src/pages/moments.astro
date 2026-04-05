@@ -1,0 +1,349 @@
+---
+import { profileConfig } from "@/config/profileConfig";
+import {
+	getEnabledMoments,
+	momentsPageConfig,
+} from "@/config/momentsConfig";
+import { siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+
+if (!siteConfig.pages.moments) {
+	return Astro.redirect("/404/");
+}
+
+const posts = getEnabledMoments();
+const title = momentsPageConfig.title || i18n(I18nKey.moments);
+const description =
+	momentsPageConfig.description || i18n(I18nKey.momentsDescription);
+const coverSrc =
+	momentsPageConfig.coverImage?.trim() || profileConfig.avatar || "";
+const ownerName = profileConfig.name || "Me";
+
+function getMomentsGridClass(n: number): string {
+	if (n === 0) return "";
+	if (n === 1) return "moments-imgs moments-imgs--1";
+	if (n === 2) return "moments-imgs moments-imgs--2";
+	if (n === 3) return "moments-imgs moments-imgs--3";
+	if (n === 4) return "moments-imgs moments-imgs--4";
+	return "moments-imgs moments-imgs--many";
+}
+---
+
+<MainGridLayout title={title} description={description}>
+	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+		<div class="moments-root card-base z-10 relative w-full">
+		<h1 class="sr-only">{title}</h1>
+		<!-- 顶部封面 + 头像昵称（仿微信） -->
+		<header class="moments-header relative">
+			<div class="moments-cover-wrap">
+				{
+					coverSrc ? (
+						<img
+							src={coverSrc}
+							alt=""
+							class="moments-cover-img"
+							loading="eager"
+							decoding="async"
+						/>
+					) : (
+						<div class="moments-cover-fallback" />
+					)
+				}
+			</div>
+			<div class="moments-profile">
+				<span class="moments-nick">{ownerName}</span>
+				<div class="moments-avatar-ring">
+					<img
+						src={profileConfig.avatar || coverSrc}
+						alt=""
+						class="moments-avatar-img"
+						width="72"
+						height="72"
+						loading="eager"
+					/>
+				</div>
+			</div>
+		</header>
+
+		<!-- 动态列表 -->
+		<div class="moments-feed">
+			{
+				posts.length === 0 ? (
+					<p class="moments-empty px-4 py-8 text-center text-sm text-[var(--moments-sub)]">
+						{i18n(I18nKey.momentsEmpty)}
+					</p>
+				) : (
+					posts.map((post, idx) => {
+					const imgs = post.images?.filter(Boolean) ?? [];
+					const n = imgs.length;
+					const gridClass = getMomentsGridClass(n);
+					return (
+						<article
+							class:list={[
+								"moments-item",
+								idx === posts.length - 1 && "moments-item--last",
+							]}
+						>
+							<img
+								src={post.avatar}
+								alt=""
+								class="moments-item-avatar"
+								width="44"
+								height="44"
+								loading="lazy"
+							/>
+							<div class="moments-item-main">
+								<div class="moments-author">{post.author}</div>
+								{post.content ? (
+									<p class="moments-text whitespace-pre-wrap">{post.content}</p>
+								) : null}
+								{n > 0 ? (
+									<div class={gridClass}>
+										{imgs.map((src) => (
+											<a
+												href={src}
+												target="_blank"
+												rel="noopener noreferrer"
+												class="moments-img-cell"
+											>
+												<img src={src} alt="" loading="lazy" />
+											</a>
+										))}
+									</div>
+								) : null}
+								{post.link ? (
+									<a
+										href={post.link.url}
+										class="moments-link-card"
+										target={post.link.url.startsWith("http") ? "_blank" : undefined}
+										rel={post.link.url.startsWith("http") ? "noopener noreferrer" : undefined}
+									>
+										<span class="moments-link-title">{post.link.title}</span>
+									</a>
+								) : null}
+								<div class="moments-meta">
+									<span class="moments-time">{post.time}</span>
+									{post.location ? (
+										<span class="moments-loc">{post.location}</span>
+									) : null}
+									<button
+										type="button"
+										class="moments-more"
+										aria-label={i18n(I18nKey.more)}
+									>
+										<span class="moments-more-dots" />
+									</button>
+								</div>
+							</div>
+						</article>
+					);
+				})
+				)
+			}
+		</div>
+		</div>
+	</div>
+
+	<style is:global>
+		:root.dark .moments-root {
+			--moments-line: rgba(255, 255, 255, 0.08);
+			--moments-text: #e5e5e5;
+			--moments-sub: #8e8e93;
+			--moments-name: #7d90a9;
+			--moments-link-bg: #2c2c2e;
+		}
+		:root:not(.dark) .moments-root {
+			--moments-line: rgba(0, 0, 0, 0.06);
+			--moments-text: #333;
+			--moments-sub: #888;
+			--moments-name: #576b95;
+			--moments-link-bg: #f7f7f7;
+		}
+
+		.moments-header {
+			min-height: 200px;
+		}
+		.moments-cover-wrap {
+			height: 220px;
+			overflow: hidden;
+			background: #ccc;
+		}
+		.moments-cover-img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+		.moments-cover-fallback {
+			height: 100%;
+			background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+		}
+		.moments-profile {
+			display: flex;
+			align-items: flex-end;
+			justify-content: flex-end;
+			gap: 0.75rem;
+			padding: 0 1rem 0.75rem;
+			margin-top: -36px;
+			position: relative;
+			z-index: 2;
+		}
+		.moments-nick {
+			font-size: 1.125rem;
+			font-weight: 600;
+			color: #fff;
+			text-shadow: 0 1px 3px rgba(0, 0, 0, 0.65);
+			padding-bottom: 0.25rem;
+		}
+		.moments-avatar-ring {
+			flex-shrink: 0;
+			padding: 2px;
+			border-radius: 0.5rem;
+			background: #fff;
+			box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+		}
+		:root.dark .moments-avatar-ring {
+			background: #1c1c1e;
+		}
+		.moments-avatar-img {
+			display: block;
+			width: 72px;
+			height: 72px;
+			border-radius: 0.375rem;
+			object-fit: cover;
+		}
+
+		.moments-feed {
+			padding: 0.5rem 0 1rem;
+		}
+		.moments-item {
+			display: flex;
+			gap: 0.65rem;
+			padding: 0.75rem 1rem;
+			border-bottom: 1px solid var(--moments-line);
+		}
+		.moments-item--last {
+			border-bottom: none;
+		}
+		.moments-item-avatar {
+			flex-shrink: 0;
+			width: 44px;
+			height: 44px;
+			border-radius: 4px;
+			object-fit: cover;
+		}
+		.moments-item-main {
+			flex: 1;
+			min-width: 0;
+		}
+		.moments-author {
+			font-size: 0.9375rem;
+			font-weight: 600;
+			color: var(--moments-name);
+			margin-bottom: 0.35rem;
+		}
+		.moments-text {
+			font-size: 0.9375rem;
+			line-height: 1.55;
+			color: var(--moments-text);
+			margin: 0 0 0.5rem;
+		}
+
+		.moments-imgs {
+			display: grid;
+			gap: 4px;
+			margin-bottom: 0.5rem;
+			max-width: 280px;
+		}
+		.moments-imgs--1 {
+			grid-template-columns: 1fr;
+			max-width: 220px;
+		}
+		.moments-imgs--2 {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.moments-imgs--3 {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		.moments-imgs--4 {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.moments-imgs--many {
+			grid-template-columns: repeat(3, 1fr);
+		}
+		.moments-img-cell {
+			display: block;
+			overflow: hidden;
+			border-radius: 2px;
+			background: #00000014;
+		}
+		.moments-img-cell img {
+			width: 100%;
+			height: 100%;
+			aspect-ratio: 1;
+			object-fit: cover;
+			vertical-align: middle;
+		}
+		.moments-imgs--1 .moments-img-cell img {
+			aspect-ratio: 4 / 3;
+			max-height: 200px;
+		}
+
+		.moments-link-card {
+			display: block;
+			padding: 0.5rem 0.65rem;
+			margin-bottom: 0.5rem;
+			background: var(--moments-link-bg);
+			border-radius: 4px;
+			font-size: 0.8125rem;
+			color: var(--moments-name);
+			text-decoration: none;
+			border: 1px solid var(--moments-line);
+		}
+		.moments-link-card:hover {
+			opacity: 0.9;
+		}
+		.moments-meta {
+			display: flex;
+			align-items: center;
+			flex-wrap: wrap;
+			gap: 0.5rem;
+			font-size: 0.75rem;
+			color: var(--moments-sub);
+		}
+		.moments-time {
+			flex: 1;
+			min-width: 0;
+		}
+		.moments-loc::before {
+			content: "";
+		}
+		.moments-more {
+			margin-left: auto;
+			width: 28px;
+			height: 20px;
+			border: none;
+			border-radius: 4px;
+			background: transparent;
+			cursor: default;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			padding: 0;
+		}
+		.moments-more:hover {
+			background: rgba(0, 0, 0, 0.05);
+		}
+		:root.dark .moments-more:hover {
+			background: rgba(255, 255, 255, 0.06);
+		}
+		.moments-more-dots {
+			width: 18px;
+			height: 12px;
+			background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 16'%3E%3Ccircle cx='4' cy='8' r='2' fill='%23888'/%3E%3Ccircle cx='12' cy='8' r='2' fill='%23888'/%3E%3Ccircle cx='20' cy='8' r='2' fill='%23888'/%3E%3C/svg%3E")
+				center / contain no-repeat;
+		}
+	</style>
+</MainGridLayout>

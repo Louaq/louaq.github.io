@@ -131,6 +131,7 @@ export const siteConfig: SiteConfig = {
     bangumi: false, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
     watchlist: true, // 观影清单页面开关
     albums: false, // 相册页面开关
+    moments: true, // 朋友圈页面开关
   },
 
 	// 文章列表布局配置

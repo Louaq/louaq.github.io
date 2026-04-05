@@ -129,54 +129,6 @@ function portal(node: HTMLElement) {
 	};
 }
 
-onMount(async () => {
-	// 选择搜索引擎：优先使用外部传入的 engine，其次根据 Algolia 环境变量是否齐全自动判断
-	const selectedEngine: "algolia" | "milisearch" =
-		engine ?? (ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? "algolia" : "milisearch");
-	searchEngine = selectedEngine;
-
-	if (selectedEngine === "algolia") {
-		if (!ALGOLIA_APP_ID || !ALGOLIA_SEARCH_KEY) {
-			initialized = false;
-			return;
-		}
-		try {
-			const { liteClient } = await import("algoliasearch/lite");
-			searchClient = liteClient(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
-			initialized = true;
-		} catch {
-			initialized = false;
-		}
-	} else {
-		// Meilisearch(=milisearch) 不需要前置 SDK 初始化，直接用 fetch 查询
-		initialized = !!MEILISEARCH_HOST && !!MEILISEARCH_INDEX_NAME;
-		searchClient = null;
-	}
-
-	const onKeydown = (e: KeyboardEvent) => {
-		if (e.key === "Escape" && isOpen) closeModal();
-		// Ctrl/Cmd + K 打开
-		if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
-			e.preventDefault();
-			openModal();
-		}
-	};
-	document.addEventListener("keydown", onKeydown);
-
-	if (initialOpen) {
-		await tick();
-		await openModal();
-	}
-
-	return () => document.removeEventListener("keydown", onKeydown);
-});
-
-onDestroy(() => clearTimeout(debounceTimer));
-onDestroy(() => {
-	// 组件卸载时兜底恢复滚动
-	unlockScroll();
-});
-
 const openModal = async () => {
 	isOpen = true;
 	// 锁定背景滚动，避免滚动导致弹窗“丢失/穿透”
@@ -555,6 +507,66 @@ $effect(() => {
 			active?.scrollIntoView({ block: "nearest" });
 		});
 	}
+});
+
+// 放在依赖的函数与 $effect 之后注册，避免 Svelte 5 + Astro 岛水合时 lifecycle_outside_component
+onMount(() => {
+	let disposed = false;
+	let keydownHandler: ((e: KeyboardEvent) => void) | undefined;
+
+	void (async () => {
+		const selectedEngine: "algolia" | "milisearch" =
+			engine ?? (ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? "algolia" : "milisearch");
+		searchEngine = selectedEngine;
+
+		if (selectedEngine === "algolia") {
+			if (!ALGOLIA_APP_ID || !ALGOLIA_SEARCH_KEY) {
+				initialized = false;
+				return;
+			}
+			try {
+				const { liteClient } = await import("algoliasearch/lite");
+				if (disposed) return;
+				searchClient = liteClient(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
+				initialized = true;
+			} catch {
+				initialized = false;
+			}
+		} else {
+			initialized = !!MEILISEARCH_HOST && !!MEILISEARCH_INDEX_NAME;
+			searchClient = null;
+		}
+
+		if (disposed) return;
+
+		const onKeydown = (e: KeyboardEvent) => {
+			if (e.key === "Escape" && isOpen) closeModal();
+			if ((e.ctrlKey || e.metaKey) && (e.key === "k" || e.key === "K")) {
+				e.preventDefault();
+				openModal();
+			}
+		};
+		keydownHandler = onKeydown;
+		document.addEventListener("keydown", onKeydown);
+
+		if (initialOpen) {
+			await tick();
+			if (disposed) return;
+			await openModal();
+		}
+	})();
+
+	return () => {
+		disposed = true;
+		if (keydownHandler) {
+			document.removeEventListener("keydown", keydownHandler);
+		}
+	};
+});
+
+onDestroy(() => clearTimeout(debounceTimer));
+onDestroy(() => {
+	unlockScroll();
 });
 </script>
 

@@ -59,6 +59,9 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	if (siteConfig.pages.watchlist) {
 		aboutChildren.push(LinkPreset.Watchlist);
 	}
+	if (siteConfig.pages.moments) {
+		aboutChildren.push(LinkPreset.Moments);
+	}
 	if (siteConfig.pages.sponsor) {
 		aboutChildren.push(LinkPreset.Sponsor);
 	}

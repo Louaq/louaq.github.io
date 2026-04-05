@@ -248,6 +248,11 @@ enum I18nKey {
 	codeCollapsibleExpanded = "codeCollapsibleExpanded",
 	codeCollapsibleCollapsed = "codeCollapsibleCollapsed",
 
+	// 朋友圈
+	moments = "moments",
+	momentsDescription = "momentsDescription",
+	momentsEmpty = "momentsEmpty",
+
 	// 相册
 	albums = "albums",
 	albumsSubtitle = "albumsSubtitle",

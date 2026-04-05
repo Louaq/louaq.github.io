@@ -90,6 +90,7 @@ export type SiteConfig = {
 		bangumi: boolean; // 番组计划页面开关
 		watchlist: boolean; // 观影清单页面开关
 		albums: boolean; // 相册页面开关
+		moments: boolean; // 朋友圈页面开关
 	};
 
 	// 文章列表布局配置
@@ -139,6 +140,7 @@ export enum LinkPreset {
 	Albums = 8,
 	Categories = 9,
 	Tags = 10,
+	Moments = 11,
 }
 
 export type NavBarLink = {
@@ -580,6 +582,26 @@ export type FriendsPageConfig = {
 	showCustomContent?: boolean; // 是否显示自定义内容（friends.mdx）
 	showComment?: boolean; // 是否显示评论区，默认 true
 	randomizeSort?: boolean; // 是否打乱排序，如果为 true，将忽略 weight，随机排序
+};
+
+/** 单条朋友圈动态 */
+export type MomentPost = {
+	id: string;
+	author: string;
+	avatar: string;
+	content: string;
+	images?: string[];
+	time: string;
+	location?: string;
+	link?: { title: string; url: string };
+	enabled?: boolean;
+};
+
+export type MomentsPageConfig = {
+	title?: string;
+	description?: string;
+	/** 顶部封面图，留空则使用与头像相同的图做模糊背景 */
+	coverImage?: string;
 };
 
 // 赞助方式类型

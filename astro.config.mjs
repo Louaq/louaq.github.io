@@ -228,6 +228,8 @@ export default defineConfig({
 			],
 		},
 		resolve: {
+			// 避免多份 svelte 运行时导致 onMount 报 lifecycle_outside_component
+			dedupe: ["svelte"],
 			alias: {
 				"@rehype-callouts-theme": `rehype-callouts/theme/${siteConfig.rehypeCallouts.theme}`,
 			},

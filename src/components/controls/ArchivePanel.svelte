@@ -6,15 +6,16 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { getPostUrlBySlug } from "@/utils/url-utils";
 
-export let tags: string[] = [];
-export let categories: string[] = [];
-export let sortedPosts: Post[] = [];
-export let pageSize: number = 20;
+interface Props {
+	sortedPosts: Post[];
+	pageSize?: number;
+}
+let { sortedPosts, pageSize = 20 }: Props = $props();
 
-const params = new URLSearchParams(window.location.search);
-tags = params.has("tag") ? params.getAll("tag") : [];
-categories = params.has("category") ? params.getAll("category") : [];
-const uncategorized = params.get("uncategorized");
+/** Svelte 5 下勿对 export props 再赋值；URL 筛选用本地 $state，在 onMount 中读取 */
+let tags = $state<string[]>([]);
+let categories = $state<string[]>([]);
+let uncategorized = $state<string | null>(null);
 
 interface Post {
 	id: string;
@@ -32,11 +33,11 @@ interface Group {
 	posts: Post[];
 }
 
-let groups: Group[] = [];
-let currentPage = 1;
-let totalPages = 1;
-let totalCount = 0;
-let allFilteredPosts: Post[] = [];
+let groups = $state<Group[]>([]);
+let currentPage = $state(1);
+let totalPages = $state(1);
+let totalCount = $state(0);
+let allFilteredPosts = $state<Post[]>([]);
 
 function formatDate(date: Date) {
 	const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
@@ -103,7 +104,12 @@ function getPageNumbers(): (number | "...")[] {
 	return pages;
 }
 
-onMount(async () => {
+onMount(() => {
+	const params = new URLSearchParams(window.location.search);
+	tags = params.has("tag") ? params.getAll("tag") : [];
+	categories = params.has("category") ? params.getAll("category") : [];
+	uncategorized = params.get("uncategorized");
+
 	let filteredPosts: Post[] = sortedPosts;
 
 	if (tags.length > 0) {

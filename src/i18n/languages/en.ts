@@ -264,6 +264,10 @@ export const en: Translation = {
 	[Key.codeCollapsibleExpanded]: "Code block expanded",
 	[Key.codeCollapsibleCollapsed]: "Code block collapsed",
 
+	[Key.moments]: "Moments",
+	[Key.momentsDescription]: "Notes and daily bits, styled like WeChat Moments",
+	[Key.momentsEmpty]: "No posts yet",
+
 	// Albums
 	[Key.albums]: "Albums",
 	[Key.albumsSubtitle]: "Capturing beautiful moments in life",

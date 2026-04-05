@@ -266,6 +266,10 @@ export const ru: Translation = {
 	[Key.codeCollapsibleExpanded]: "Блок кода развернут",
 	[Key.codeCollapsibleCollapsed]: "Блок кода свернут",
 
+	[Key.moments]: "Моменты",
+	[Key.momentsDescription]: "Заметки и будни в стиле WeChat",
+	[Key.momentsEmpty]: "Пока нет записей",
+
 	// Альбомы
 	[Key.albums]: "Альбомы",
 	[Key.albumsSubtitle]: "Запечатление прекрасных моментов жизни",

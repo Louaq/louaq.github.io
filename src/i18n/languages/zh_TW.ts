@@ -260,6 +260,10 @@ export const zh_TW: Translation = {
 	[Key.codeCollapsibleExpanded]: "代碼區塊已展開",
 	[Key.codeCollapsibleCollapsed]: "代碼區塊已折疊",
 
+	[Key.moments]: "朋友圈",
+	[Key.momentsDescription]: "隨想與日常，樣式參考微信朋友圈",
+	[Key.momentsEmpty]: "暫無動態",
+
 	// 相冊
 	[Key.albums]: "相冊",
 	[Key.albumsSubtitle]: "記錄生活中的美好瞬間",

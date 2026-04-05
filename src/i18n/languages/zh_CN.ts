@@ -257,6 +257,10 @@ export const zh_CN: Translation = {
 	[Key.codeCollapsibleExpanded]: "代码块已展开",
 	[Key.codeCollapsibleCollapsed]: "代码块已折叠",
 
+	[Key.moments]: "朋友圈",
+	[Key.momentsDescription]: "随想与日常，样式参考微信朋友圈",
+	[Key.momentsEmpty]: "暂无动态",
+
 	// 相册
 	[Key.albums]: "相册",
 	[Key.albumsSubtitle]: "记录生活中的美好瞬间",

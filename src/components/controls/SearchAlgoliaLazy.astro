@@ -8,4 +8,4 @@ interface Props {
 const { engine } = Astro.props;
 ---
 
-<SearchAlgolia engine={engine} client:load />
+<SearchAlgolia engine={engine} client:only="svelte" />

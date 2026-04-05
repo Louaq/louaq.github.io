@@ -52,13 +52,9 @@ const hasBannerSettings = isWavesSwitchable || isBannerTitleSwitchable;
 const showThemeColor = !siteConfig.themeColor.fixed;
 const hasAnyContent = showThemeColor || isWallpaperSwitchable || allowLayoutSwitch || hasBannerSettings;
 
-// 必须在 onMount 之前声明：$effect 放在 onMount 之后会触发 Svelte 5 effect_orphan（与 client:idle 组合时尤甚）
-$effect(() => {
-	setHue(hue);
-});
-
 function resetHue() {
 	hue = getDefaultHue();
+	setHue(hue);
 }
 
 function resetWallpaperMode() {
@@ -128,6 +124,7 @@ onMount(() => {
 
 	// 只在 mount 后读取本地偏好，避免 hydration mismatch
 	hue = getHue();
+	setHue(hue);
 
 	// 从localStorage读取保存的壁纸模式
 	wallpaperMode = getStoredWallpaperMode();
@@ -185,7 +182,8 @@ onMount(() => {
     </div>
     <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded select-none">
         <input aria-label={i18n(I18nKey.themeColor)} type="range" min="0" max="360" bind:value={hue}
-               class="slider" id="colorSlider" step="5" style="width: 100%">
+               class="slider" id="colorSlider" step="5" style="width: 100%"
+               oninput={() => setHue(hue)}>
     </div>
 
     <!-- Wallpaper Mode Section -->

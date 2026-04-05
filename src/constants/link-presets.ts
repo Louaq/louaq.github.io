@@ -58,4 +58,9 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/tags/",
 		icon: "material-symbols:tag",
 	},
+	[LinkPreset.Moments]: {
+		name: i18n(I18nKey.moments),
+		url: "/moments/",
+		icon: "material-symbols:photo-camera",
+	},
 };
