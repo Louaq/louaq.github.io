@@ -405,5 +405,21 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻","古装"],
 		enabled: true,
 	},
+	{
+		title: "遮天剧场版 背棺战王腾",
+		cover: "https://pic1.imgdb.cn/item/69d31810441d1611011352c8.webp",
+		type: "anime",
+		status: "completed",
+		rating: 0.0,
+		episodes: {
+			current: 1,
+			total: 1,
+		},
+		startDate: "2026-04-04",
+		comment: "打斗效果还是可以的",
+		link: "https://movie.douban.com/subject/37646317/",
+		tags: ["动画", "奇幻"],
+		enabled: true,
+	},
 ];
 

@@ -112,24 +112,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 	},
 		// },
 		{
-			// 组件类型：最近评论组件
-			type: "recentComments",
-			// 是否启用该组件
-			enable: false,
-			// 组件显示顺序
-			order: 5,
-			// 组件位置
-			position: "sticky",
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 0,
-			// 自定义属性：配置显示的评论数量
-			customProps: {
-				count: 3, // 显示最近的3条评论
-			},
-		},
-		{
 			// 组件类型：广告栏组件 1
 			type: "advertisement",
 			// 是否启用该组件
