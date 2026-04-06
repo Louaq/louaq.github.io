@@ -225,6 +225,7 @@ export default defineConfig({
 				"@swup/astro/client",
 				"@swup/astro/serialise",
 				"@swup/astro/idle",
+				"medium-zoom",
 			],
 		},
 		resolve: {

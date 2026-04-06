@@ -1,5 +1,5 @@
 ---
-import FancyboxManager from "@components/features/FancyboxManager.astro";
+import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
 import FontManager from "@components/features/FontManager.astro";
 import KatexManager from "@components/features/KatexManager.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
@@ -631,8 +631,8 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <!-- Sakura Effect -->
     <SakuraEffect />
 
-    <!-- Fancybox Manager -->
-    <FancyboxManager />
+    <!-- medium-zoom：点击图片放大，再点击关闭 -->
+    <ImageLightboxManager />
     
     <!-- KaTeX Manager -->
     <KatexManager />

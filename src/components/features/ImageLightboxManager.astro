@@ -1,0 +1,78 @@
+---
+import "medium-zoom/dist/style.css";
+import "@/styles/image-zoom.css";
+---
+
+<script>
+  import mediumZoom from "medium-zoom";
+
+  /** @type {import("medium-zoom").Zoom | null} */
+  let zoom = null;
+  /** @type {AbortController | null} */
+  let anchorGuard = null;
+
+  function destroy() {
+    anchorGuard?.abort();
+    anchorGuard = null;
+    if (zoom) {
+      zoom.detach();
+      zoom = null;
+    }
+  }
+
+  /** 将 a[data-fancybox] 上的大图地址同步到内部 img 的 data-zoom-src */
+  function syncZoomSrcFromAnchors() {
+    for (const a of document.querySelectorAll(".moment-images a[data-fancybox]")) {
+      const img = a.querySelector("img");
+      if (!img) continue;
+      const hi = a.dataset.src || a.getAttribute("href");
+      if (hi && !img.dataset.zoomSrc) {
+        img.dataset.zoomSrc = hi;
+      }
+    }
+  }
+
+  /** 避免点击图片时触发外层 a[href] 跳转（相册等） */
+  function attachAnchorImageGuards(signal) {
+    const handler = (e) => {
+      const t = e.target;
+      if (t instanceof HTMLImageElement && t.closest("a")) {
+        e.preventDefault();
+      }
+    };
+    for (const root of [
+      document.querySelector("#photo-container"),
+      document.querySelector(".moment-images"),
+    ]) {
+      if (root) {
+        root.addEventListener("click", handler, { capture: true, signal });
+      }
+    }
+  }
+
+  function setup() {
+    destroy();
+    syncZoomSrcFromAnchors();
+
+    const nodes = document.querySelectorAll(
+      ".custom-md img, #post-cover img, .moment-images img, #photo-container img",
+    );
+    if (nodes.length === 0) return;
+
+    anchorGuard = new AbortController();
+    attachAnchorImageGuards(anchorGuard.signal);
+
+    zoom = mediumZoom(nodes, {
+      margin: 24,
+      background: "rgba(0, 0, 0, 0.88)",
+    });
+  }
+
+  function onVisitStart() {
+    void zoom?.close().catch(() => {});
+  }
+
+  setup();
+  document.addEventListener("swup:content:replace", setup);
+  document.addEventListener("swup:visit:start", onVisitStart);
+</script>
