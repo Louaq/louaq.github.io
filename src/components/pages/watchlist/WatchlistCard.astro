@@ -5,10 +5,9 @@ import type { WatchlistItem } from "@/config/watchlistConfig";
 
 interface Props {
 	item: WatchlistItem;
-	isAboveFold?: boolean;
 }
 
-const { item, isAboveFold = false } = Astro.props;
+const { item } = Astro.props;
 
 const statusText: Record<string, string> = {
 	watching: "在看",
@@ -40,7 +39,7 @@ const statusColor: Record<string, string> = {
 			src={item.cover}
 			alt={item.title}
 			class="w-full h-full object-cover pointer-events-none"
-			loading={isAboveFold ? "eager" : "lazy"}
+			loading="eager"
 		/>
 		{/* 评分 */}
 		{watchlistConfig.display.showRating && item.rating && item.rating > 0 && (

@@ -92,7 +92,7 @@ function getMomentsGridClass(n: number): string {
 								class="moments-item-avatar"
 								width="44"
 								height="44"
-								loading="lazy"
+								loading="eager"
 							/>
 							<div class="moments-item-main">
 								<div class="moments-author">{post.author}</div>
@@ -108,7 +108,7 @@ function getMomentsGridClass(n: number): string {
 												rel="noopener noreferrer"
 												class="moments-img-cell"
 											>
-												<img src={src} alt="" loading="lazy" />
+												<img src={src} alt="" loading="eager" />
 											</a>
 										))}
 									</div>

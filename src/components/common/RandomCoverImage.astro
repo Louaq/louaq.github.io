@@ -172,7 +172,7 @@ const watermarkStyles = showWatermark
       style={imageStyle}
       width={preview ? 400 : 1200}
       height={preview ? 300 : 800}
-      loading="lazy"
+      loading="eager"
       format="webp"
       quality={preview ? 80 : 90}
       widths={preview ? [200, 400, 600] : [800, 1200, 1600, 2000]}
@@ -219,7 +219,7 @@ const watermarkStyles = showWatermark
         preview ? 'random-cover-preview-image' : 'random-cover-full-image'
       ]}
       style={imageStyle}
-      loading="lazy"
+      loading="eager"
       decoding="async"
       data-preview={preview ? "true" : "false"}
       data-seed={seed || ""}

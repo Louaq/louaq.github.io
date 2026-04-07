@@ -56,7 +56,7 @@ export const commentConfig: CommentConfig = {
 		// 获取 Giscus 评论系统语言
 		lang: "zh-CN",
 		// 获取 Giscus 评论系统加载方式
-		loading: "lazy",
+		loading: "eager",
 	},
 
 	//disqus评论系统配置

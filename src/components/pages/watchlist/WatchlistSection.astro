@@ -65,14 +65,14 @@ const makeWatchAnchorId = (item: WatchlistItem) => {
 
 			<div class="pagination-container" data-container-section={sectionId}>
 				<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-					{items.map((item, index) => (
+					{items.map((item) => (
 						<div
 							class="watchlist-item"
 							id={makeWatchAnchorId(item)}
 							data-item-section={sectionId}
 							data-item-status={item.status}
 						>
-							<WatchlistCard item={item} isAboveFold={index < itemsPerPage} />
+							<WatchlistCard item={item} />
 						</div>
 					))}
 				</div>

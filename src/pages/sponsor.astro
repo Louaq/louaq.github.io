@@ -79,7 +79,7 @@ const showSponsorsList = sponsorConfig.showSponsorsList !== false;
                               src={url(method.qrCode)}
                               alt={`${method.name} ${i18n(I18nKey.scanToSponsor)}`}
                               class="w-full h-full object-contain"
-                              loading="lazy"
+                              loading="eager"
                             />
                           </div>
                         )}

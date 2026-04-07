@@ -505,64 +505,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <!-- Font Manager -->
     <FontManager />
 
-    <!-- Global Image Lazy Loading -->
-    <script is:inline>
-    (function() {
-      var EAGER_SELECTORS = [
-        'img[fetchpriority="high"]',
-        'img[loading="eager"]',
-        '.navbar img',
-        'nav img'
-      ].join(',');
-
-      function shouldSkip(img) {
-        if (img.hasAttribute('loading')) return true;
-        if (img.matches && img.matches(EAGER_SELECTORS)) return true;
-        if (img.closest && img.closest('nav, .navbar')) return true;
-        return false;
-      }
-
-      function applyLazy(img) {
-        if (!shouldSkip(img)) {
-          img.setAttribute('loading', 'lazy');
-          img.setAttribute('decoding', 'async');
-        }
-      }
-
-      function processAll() {
-        var imgs = document.querySelectorAll('img:not([loading])');
-        for (var i = 0; i < imgs.length; i++) applyLazy(imgs[i]);
-      }
-
-      var mo = new MutationObserver(function(mutations) {
-        for (var i = 0; i < mutations.length; i++) {
-          var nodes = mutations[i].addedNodes;
-          for (var j = 0; j < nodes.length; j++) {
-            var n = nodes[j];
-            if (n.nodeType !== 1) continue;
-            if (n.tagName === 'IMG') applyLazy(n);
-            if (n.querySelectorAll) {
-              var nested = n.querySelectorAll('img:not([loading])');
-              for (var k = 0; k < nested.length; k++) applyLazy(nested[k]);
-            }
-          }
-        }
-      });
-
-      if (document.body) {
-        processAll();
-        mo.observe(document.body, { childList: true, subtree: true });
-      } else {
-        document.addEventListener('DOMContentLoaded', function() {
-          processAll();
-          mo.observe(document.body, { childList: true, subtree: true });
-        });
-      }
-
-      document.addEventListener('swup:contentReplaced', processAll);
-      document.addEventListener('astro:page-load', processAll);
-    })();
-    </script>
   </head>
   <body
     class="min-h-screen"

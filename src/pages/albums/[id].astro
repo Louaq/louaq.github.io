@@ -31,7 +31,7 @@ export async function getStaticPaths() {
       src={album.cover || album.photos[0]?.src}
       alt={album.title}
       class="absolute inset-0 w-full h-full object-cover"
-      loading="lazy"
+      loading="eager"
     />
     <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
 
@@ -112,7 +112,7 @@ export async function getStaticPaths() {
             src={photo.src}
             alt={photo.title || `Photo ${index + 1}`}
             class="w-full h-auto object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="lazy"
+            loading="eager"
           />
           
           {(photo.title || photo.description) && (
