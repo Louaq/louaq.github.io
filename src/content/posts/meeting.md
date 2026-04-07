@@ -17,7 +17,7 @@ pinned: true
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
 | 20260121 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0122.pdf" target="_blank">汇报_0121</a> |
-| 20260107 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0115.pdf" target="_blank">汇报_0115</a> |
+| 20260115 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0115.pdf" target="_blank">汇报_0115</a> |
 | 20260107 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0107.pdf" target="_blank">汇报_0107</a> |
 
 
