@@ -155,8 +155,6 @@ export const siteConfig: SiteConfig = {
 	pagination: {
 		// 每页显示的文章数量
 		postsPerPage: 10,
-		// 归档页每页显示的文章数量，默认20
-		archivePageSize: 20,
 	},
 
 	// 字体配置

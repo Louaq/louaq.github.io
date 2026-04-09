@@ -8,9 +8,8 @@ import { getPostUrlBySlug } from "@/utils/url-utils";
 
 interface Props {
 	sortedPosts: Post[];
-	pageSize?: number;
 }
-let { sortedPosts, pageSize = 20 }: Props = $props();
+let { sortedPosts }: Props = $props();
 
 /** Svelte 5 下勿对 export props 再赋值；URL 筛选用本地 $state，在 onMount 中读取 */
 let tags = $state<string[]>([]);
@@ -34,10 +33,6 @@ interface Group {
 }
 
 let groups = $state<Group[]>([]);
-let currentPage = $state(1);
-let totalPages = $state(1);
-let totalCount = $state(0);
-let allFilteredPosts = $state<Post[]>([]);
 
 function formatDate(date: Date) {
 	const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
@@ -71,39 +66,6 @@ function buildGroups(posts: Post[]): Group[] {
 	return groupedArray;
 }
 
-function goToPage(page: number) {
-	if (page < 1 || page > totalPages) return;
-	currentPage = page;
-
-	const url = new URL(window.location.href);
-	if (page === 1) {
-		url.searchParams.delete("page");
-	} else {
-		url.searchParams.set("page", String(page));
-	}
-	window.history.replaceState(null, "", url.toString());
-
-	const start = (currentPage - 1) * pageSize;
-	const end = start + pageSize;
-	groups = buildGroups(allFilteredPosts.slice(start, end));
-
-	window.scrollTo({ top: 0, behavior: "smooth" });
-}
-
-function getPageNumbers(): (number | "...")[] {
-	if (totalPages <= 7) {
-		return Array.from({ length: totalPages }, (_, i) => i + 1);
-	}
-	const pages: (number | "...")[] = [1];
-	if (currentPage > 3) pages.push("...");
-	const start = Math.max(2, currentPage - 1);
-	const end = Math.min(totalPages - 1, currentPage + 1);
-	for (let i = start; i <= end; i++) pages.push(i);
-	if (currentPage < totalPages - 2) pages.push("...");
-	pages.push(totalPages);
-	return pages;
-}
-
 onMount(() => {
 	const params = new URLSearchParams(window.location.search);
 	tags = params.has("tag") ? params.getAll("tag") : [];
@@ -134,20 +96,7 @@ onMount(() => {
 		.slice()
 		.sort((a, b) => b.data.published.getTime() - a.data.published.getTime());
 
-	allFilteredPosts = filteredPosts;
-	totalCount = filteredPosts.length;
-	totalPages = Math.max(1, Math.ceil(totalCount / pageSize));
-
-	const pageParam = new URLSearchParams(window.location.search).get("page");
-	const initialPage = Math.min(
-		Math.max(1, pageParam ? Number.parseInt(pageParam, 10) : 1),
-		totalPages,
-	);
-	currentPage = initialPage;
-
-	const start = (currentPage - 1) * pageSize;
-	const end = start + pageSize;
-	groups = buildGroups(filteredPosts.slice(start, end));
+	groups = buildGroups(filteredPosts);
 });
 </script>
 
@@ -218,58 +167,3 @@ onMount(() => {
         </div>
     {/each}
 </div>
-
-<!-- 分页控件：放在 card-base 外，使 btn-card 背景色可见 -->
-{#if totalPages > 1}
-    <div class="flex flex-col gap-4 items-center mt-4">
-        <div class="flex flex-row gap-3 justify-center">
-            <!-- 上一页 -->
-            <button
-                    on:click={() => goToPage(currentPage - 1)}
-                    aria-label="上一页"
-                    class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 {currentPage === 1 ? 'disabled' : ''}"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M14 18l-6-6 6-6 1.4 1.4-4.6 4.6 4.6 4.6z"/>
-                </svg>
-            </button>
-
-            <!-- 页码 -->
-            <div class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold">
-                {#each getPageNumbers() as page}
-                    {#if page === "..."}
-                        <span class="w-11 h-11 flex items-center justify-center text-50 select-none">…</span>
-                    {:else if page === currentPage}
-                        <div class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center font-bold text-white dark:text-black/70">
-                            {page}
-                        </div>
-                    {:else}
-                        <button
-                                on:click={() => goToPage(page)}
-                                aria-label={`第 ${page} 页`}
-                                class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]"
-                        >
-                            {page}
-                        </button>
-                    {/if}
-                {/each}
-            </div>
-
-            <!-- 下一页 -->
-            <button
-                    on:click={() => goToPage(currentPage + 1)}
-                    aria-label="下一页"
-                    class="btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11 {currentPage === totalPages ? 'disabled' : ''}"
-            >
-                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
-                    <path fill="currentColor" d="M9.4 18 8 16.6l4.6-4.6L8 7.4 9.4 6l6 6z"/>
-                </svg>
-            </button>
-        </div>
-
-        <!-- 页面信息 -->
-        <div class="text-sm text-50">
-            第 {currentPage} / {totalPages} 页，共 {totalCount} 篇文章
-        </div>
-    </div>
-{/if}
