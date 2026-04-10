@@ -108,7 +108,10 @@ export type SiteConfig = {
 
 	// 分页配置
 	pagination: {
-		postsPerPage: number; // 每页显示的文章数量
+		/** 首页等列表每页文章数；归档未单独设置时与其相同 */
+		postsPerPage: number;
+		/** 仅归档页；不设则用 postsPerPage */
+		archivePostsPerPage?: number;
 	};
 
 	// 文章密码保护配置
