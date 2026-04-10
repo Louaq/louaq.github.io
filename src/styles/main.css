@@ -321,6 +321,13 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
             @apply expand-animation;
         }
     }
+
+    /* 归档时间轴行：禁用 hover 时 transform/缩放（避免与 expand-animation 或浏览器默认感混淆） */
+    .archive-row-link:hover,
+    .archive-row-link:active,
+    .archive-row-link:focus-visible {
+        transform: none;
+    }
     .current-theme-btn {
         @apply bg-[var(--btn-plain-bg-hover)] text-[var(--primary)];
     }

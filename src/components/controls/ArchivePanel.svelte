@@ -7,6 +7,7 @@ import { i18n } from "@/i18n/translation";
 import { getPostUrlBySlug } from "@/utils/url-utils";
 
 interface Props {
+	/** 全部文章（支持 URL 上 tag / category / uncategorized 筛选） */
 	sortedPosts: Post[];
 }
 let { sortedPosts }: Props = $props();
@@ -68,8 +69,12 @@ function buildGroups(posts: Post[]): Group[] {
 
 onMount(() => {
 	const params = new URLSearchParams(window.location.search);
-	tags = params.has("tag") ? params.getAll("tag") : [];
-	categories = params.has("category") ? params.getAll("category") : [];
+	tags = params.has("tag")
+		? params.getAll("tag").map((t) => t.trim()).filter(Boolean)
+		: [];
+	categories = params.has("category")
+		? params.getAll("category").map((c) => c.trim()).filter(Boolean)
+		: [];
 	uncategorized = params.get("uncategorized");
 
 	let filteredPosts: Post[] = sortedPosts;
@@ -78,18 +83,23 @@ onMount(() => {
 		filteredPosts = filteredPosts.filter(
 			(post) =>
 				Array.isArray(post.data.tags) &&
-				post.data.tags.some((tag) => tags.includes(tag)),
+				post.data.tags.some((tag) =>
+					tags.some((urlTag) => urlTag === tag.trim()),
+				),
 		);
 	}
 
 	if (categories.length > 0) {
-		filteredPosts = filteredPosts.filter(
-			(post) => post.data.category && categories.includes(post.data.category),
-		);
+		filteredPosts = filteredPosts.filter((post) => {
+			const c = post.data.category?.trim();
+			return Boolean(c) && categories.includes(c);
+		});
 	}
 
 	if (uncategorized) {
-		filteredPosts = filteredPosts.filter((post) => !post.data.category);
+		filteredPosts = filteredPosts.filter(
+			(post) => !post.data.category?.trim(),
+		);
 	}
 
 	filteredPosts = filteredPosts
@@ -122,15 +132,18 @@ onMount(() => {
                 <a
                         href={getPostUrlBySlug(post.id)}
                         aria-label={post.data.title}
-                        class="group btn-plain !block h-10 w-full rounded-lg hover:text-[initial]"
+                        class="group archive-row-link !block h-10 w-full rounded-lg text-black/75 dark:text-white/75
+                        transition-colors duration-150
+                        hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
+                        hover:text-[initial]"
                 >
                     <div class="flex flex-row justify-start items-center h-full">
                         <!-- date -->
-                        <div class="w-[15%] md:w-[10%] transition text-sm text-right text-50">
+                        <div class="w-[15%] md:w-[10%] transition-colors text-sm text-right text-50">
                             {formatDate(post.data.published)}
                         </div>
 
-                        <!-- dot and line -->
+                        <!-- dot and line（圆点 hover 纵向拉长，整行仍无 btn-plain 缩放） -->
                         <div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
                             <div
                                     class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
@@ -144,8 +157,8 @@ onMount(() => {
 
                         <!-- post title -->
                         <div
-                                class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold
-                     group-hover:translate-x-1 transition-all group-hover:text-[var(--primary)]
+                                class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold transition-colors duration-150
+                     group-hover:text-[var(--primary)]
                      text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden flex items-center gap-1"
                         >
                             <span class="min-w-0 truncate">{post.data.title}</span>
@@ -156,7 +169,7 @@ onMount(() => {
 
                         <!-- tag list -->
                         <div
-                                class="hidden md:block md:w-[15%] text-left text-sm transition
+                                class="hidden md:block md:w-[15%] text-left text-sm transition-colors duration-150
                      whitespace-nowrap overflow-ellipsis overflow-hidden text-30"
                         >
                             {formatTag(post.data.tags)}

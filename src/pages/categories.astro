@@ -3,86 +3,55 @@ import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getCategoryCardStyle } from "@/config/categoriesPageConfig";
 import { getCategoryList } from "@/utils/content-utils";
 
 const categories = await getCategoryList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.categories)} description={i18n(I18nKey.categories)}>
-  <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
-    <div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
-      <h1
-        class="text-3xl font-bold text-black/90 dark:text-white/90 mb-8 tracking-tight"
-      >
-        {i18n(I18nKey.categories)}
-      </h1>
-      {
-        categories.length === 0 ? (
-          <p class="text-black/50 dark:text-white/50">
-            {i18n(I18nKey.uncategorized)}
-          </p>
-        ) : (
-          <div
-            class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-5"
-          >
-          {categories.map((cat) => {
-            const style = getCategoryCardStyle(cat.name);
-            return (
-              <a
-                href={cat.url}
-                class:list={[
-                  "category-page-card group card-base flex flex-col p-6 md:p-7 min-h-[11rem]",
-                  "border border-[var(--line-divider)] shadow-sm",
-                  "transition-all duration-200",
-                  "hover:shadow-md hover:border-[color-mix(in_oklab,var(--primary)_35%,var(--line-divider))]",
-                  "active:scale-[0.99]",
-                ]}
-                style={`--category-accent: ${style.accent}`}
-              >
-                <div
-                  class="mb-1 flex h-10 w-10 items-center justify-center rounded-lg"
-                  style={{
-                    background:
-                      "color-mix(in oklab, var(--category-accent) 14%, transparent)",
-                  }}
-                >
-                  <Icon
-                    name={style.icon}
-                    class="text-[1.5rem]"
-                    style={{ color: "var(--category-accent)" }}
-                  />
-                </div>
-                <h2
-                  class="font-bold text-lg text-black/90 dark:text-white/90 leading-snug line-clamp-2 mt-1"
-                >
-                  {cat.name}
-                </h2>
-                {style.description.trim() !== "" && (
-                  <p class="text-sm text-black/50 dark:text-white/50 mt-1.5 leading-relaxed line-clamp-2">
-                    {style.description}
-                  </p>
-                )}
-                <div class="mt-auto pt-6 w-full">
-                  <div
-                    class="border-t border-dashed border-black/10 dark:border-white/15"
-                  />
-                  <div class="pt-4 flex items-center justify-between gap-3">
-                    <span class="text-sm font-semibold tabular-nums text-black dark:text-white">
-                      {`${cat.count} ${i18n(I18nKey.postsCount)}`}
-                    </span>
-                    <Icon
-                      name="material-symbols:arrow-forward-rounded"
-                      class="text-[1.25rem] text-black/40 dark:text-white/40 shrink-0 transition-transform group-hover:translate-x-0.5"
-                    />
-                  </div>
-                </div>
-              </a>
-            );
-          })}
-          </div>
-        )
-      }
-    </div>
-  </div>
+	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+		<div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
+			<h1
+				class="text-3xl font-bold text-black/90 dark:text-white/90 mb-6 md:mb-7 tracking-tight"
+			>
+				{i18n(I18nKey.categories)}
+			</h1>
+			{
+				categories.length === 0 ? (
+					<p class="text-black/50 dark:text-white/50">
+						{i18n(I18nKey.uncategorized)}
+					</p>
+				) : (
+					<ul class="categories-page-list list-none m-0 p-0">
+						{categories.map((cat) => (
+							<li class="m-0 p-0 border-b border-black/[0.06] dark:border-white/[0.08] last:border-0">
+								<a
+									href={cat.url}
+									class="categories-page-row group flex items-center justify-between gap-4 py-3.5 md:py-4 px-1 -mx-1 rounded-lg transition-colors duration-150 hover:bg-black/[0.035] dark:hover:bg-white/[0.06] active:bg-black/[0.05] dark:active:bg-white/[0.08]"
+								>
+									<span class="flex items-center gap-3 min-w-0">
+										<Icon
+											name="material-symbols:folder-outline-rounded"
+											class="shrink-0 text-[1.35rem] text-neutral-500 dark:text-neutral-500 opacity-[0.92]"
+											aria-hidden="true"
+										/>
+										<span
+											class="text-[0.9375rem] md:text-base font-medium text-neutral-800 dark:text-neutral-200 truncate"
+										>
+											{cat.name}
+										</span>
+									</span>
+									<span
+										class="shrink-0 text-sm tabular-nums text-neutral-400 dark:text-neutral-500"
+									>
+										({cat.count})
+									</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</div>
+	</div>
 </MainGridLayout>

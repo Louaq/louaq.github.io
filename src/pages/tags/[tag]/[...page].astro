@@ -1,0 +1,50 @@
+---
+import type { GetStaticPaths } from "astro";
+import Pagination from "@/components/common/Pagination.astro";
+import PostPage from "@/components/layout/PostPage.astro";
+import { siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { getSortedPosts, getTagList } from "@/utils/content-utils";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const tags = await getTagList();
+	const allPosts = await getSortedPosts();
+	const pageSize = siteConfig.pagination.postsPerPage;
+
+	return tags.flatMap((tagItem) => {
+		const name = tagItem.name.trim();
+		const filtered = allPosts.filter(
+			(p) =>
+				Array.isArray(p.data.tags) &&
+				p.data.tags.some((t) => t.trim() === name),
+		);
+		return paginate(filtered, {
+			pageSize,
+			params: { tag: tagItem.name },
+		});
+	});
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const tagParam = Astro.params.tag!;
+const tagEncoded = encodeURIComponent(tagParam);
+const paginationRoot = `tags/${tagEncoded}`;
+const title = `#${tagParam} · ${i18n(I18nKey.tags)}`;
+const len = page.data.length;
+---
+
+<MainGridLayout title={title} description={title}>
+	<PostPage page={page} />
+	{
+		page.lastPage > 1 && (
+			<Pagination
+				class="mx-auto onload-animation"
+				page={page}
+				pageUrlRoot={paginationRoot}
+				style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>

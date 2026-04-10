@@ -592,7 +592,8 @@ export type MomentPost = {
 	avatar: string;
 	content: string;
 	images?: string[];
-	time: string;
+	/** ISO 8601 发布时间，页面仅展示日期（无时分秒），仍按站点 lang / timezone */
+	publishedAt: string;
 	location?: string;
 	link?: { title: string; url: string };
 	enabled?: boolean;

@@ -8,6 +8,7 @@ import { siteConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { formatDateI18n } from "@/utils/date-utils";
 
 if (!siteConfig.pages.moments) {
 	return Astro.redirect("/404/");
@@ -124,7 +125,12 @@ function getMomentsGridClass(n: number): string {
 									</a>
 								) : null}
 								<div class="moments-meta">
-									<span class="moments-time">{post.time}</span>
+									<time
+										class="moments-time"
+										datetime={post.publishedAt}
+									>
+										{formatDateI18n(post.publishedAt)}
+									</time>
 									{post.location ? (
 										<span class="moments-loc">{post.location}</span>
 									) : null}

@@ -1,0 +1,52 @@
+---
+import type { GetStaticPaths } from "astro";
+import Pagination from "@/components/common/Pagination.astro";
+import PostPage from "@/components/layout/PostPage.astro";
+import { siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+import { getCategoryList, getSortedPosts } from "@/utils/content-utils";
+
+export const getStaticPaths = (async ({ paginate }) => {
+	const categories = await getCategoryList();
+	const allPosts = await getSortedPosts();
+	const pageSize = siteConfig.pagination.postsPerPage;
+	const uncategorizedLabel = i18n(I18nKey.uncategorized);
+
+	return categories.flatMap((cat) => {
+		const filtered = allPosts.filter((p) => {
+			const c = p.data.category?.trim();
+			if (cat.name === uncategorizedLabel) {
+				return !c;
+			}
+			return c === cat.name;
+		});
+		return paginate(filtered, {
+			pageSize,
+			params: { category: cat.name },
+		});
+	});
+}) satisfies GetStaticPaths;
+
+const { page } = Astro.props;
+const categoryParam = Astro.params.category!;
+const categoryEncoded = encodeURIComponent(categoryParam);
+const paginationRoot = `categories/${categoryEncoded}`;
+const title = `${categoryParam} · ${i18n(I18nKey.categories)}`;
+const len = page.data.length;
+---
+
+<MainGridLayout title={title} description={title}>
+	<PostPage page={page} />
+	{
+		page.lastPage > 1 && (
+			<Pagination
+				class="mx-auto onload-animation"
+				page={page}
+				pageUrlRoot={paginationRoot}
+				style={`animation-delay: calc(var(--content-delay) + ${len * 50}ms)`}
+			/>
+		)
+	}
+</MainGridLayout>

@@ -27,18 +27,20 @@ export function getPostUrlBySlug(slug: string): string {
 }
 
 export function getTagUrl(tag: string): string {
-	if (!tag) return url("/archive/");
-	return url(`/archive/?tag=${encodeURIComponent(tag.trim())}`);
+	if (!tag) return url("/tags/");
+	return url(`/tags/${encodeURIComponent(tag.trim())}/`);
 }
 
 export function getCategoryUrl(category: string | null): string {
+	const uncategorizedLabel = i18n(I18nKey.uncategorized);
 	if (
 		!category ||
 		category.trim() === "" ||
-		category.trim().toLowerCase() === i18n(I18nKey.uncategorized).toLowerCase()
-	)
-		return url("/archive/?uncategorized=true");
-	return url(`/archive/?category=${encodeURIComponent(category.trim())}`);
+		category.trim().toLowerCase() === uncategorizedLabel.toLowerCase()
+	) {
+		return url(`/categories/${encodeURIComponent(uncategorizedLabel)}/`);
+	}
+	return url(`/categories/${encodeURIComponent(category.trim())}/`);
 }
 
 export function getDir(path: string): string {
