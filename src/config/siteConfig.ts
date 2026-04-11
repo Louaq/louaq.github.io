@@ -70,7 +70,7 @@ export const siteConfig: SiteConfig = {
 		// 导航栏标题
 		title: "louaq",
 		// 全宽导航栏，导航栏是否占满屏幕宽度，true：占满，false：不占满
-		widthFull: false,
+		widthFull: true,
 		// 导航栏图标和标题是否跟随主题色
 		followTheme: false,
 	},
