@@ -27,16 +27,16 @@ const categories = await getCategoryList();
 							<li class="m-0 p-0 border-b border-black/[0.06] dark:border-white/[0.08] last:border-0">
 								<a
 									href={cat.url}
-									class="categories-page-row group flex items-center justify-between gap-4 py-3.5 md:py-4 px-1 -mx-1 rounded-lg transition-colors duration-150 hover:bg-black/[0.035] dark:hover:bg-white/[0.06] active:bg-black/[0.05] dark:active:bg-white/[0.08]"
+									class="categories-page-row group flex items-center justify-between gap-4 py-3.5 md:py-4 px-1 -mx-1 rounded-lg text-black/75 dark:text-white/75 transition-colors duration-150 hover:text-[initial]"
 								>
 									<span class="flex items-center gap-3 min-w-0">
 										<Icon
 											name="material-symbols:folder-outline-rounded"
-											class="shrink-0 text-[1.35rem] text-neutral-500 dark:text-neutral-500 opacity-[0.92]"
+											class="shrink-0 text-[1.35rem] text-neutral-500 dark:text-neutral-500 opacity-[0.92] transition-colors duration-150 group-hover:text-[var(--primary)]"
 											aria-hidden="true"
 										/>
 										<span
-											class="text-[0.9375rem] md:text-base font-medium text-neutral-800 dark:text-neutral-200 truncate"
+											class="text-[0.9375rem] md:text-base font-medium text-neutral-800 dark:text-neutral-200 truncate transition-colors duration-150 group-hover:text-[var(--primary)]"
 										>
 											{cat.name}
 										</span>

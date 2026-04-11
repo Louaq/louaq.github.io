@@ -27,19 +27,21 @@ const sortedTags = [...tags].sort((a, b) => {
             {tags.length === 0 ? (
                 <p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
             ) : (
-                <div class="flex flex-wrap gap-2.5 md:gap-3 content-start">
+                <div
+                    class="grid w-full gap-2.5 md:gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr))]"
+                >
                     {sortedTags.map((tag) => (
                         <a
                             href={getTagUrl(tag.name)}
                             class:list={[
-                                "tag-pill group inline-flex items-center gap-1.5 rounded-md pl-2.5 pr-1.5 py-1.5 text-sm",
+                                "tag-pill group flex w-full min-w-0 items-center gap-1.5 rounded-md pl-2.5 pr-1.5 py-1.5 text-sm",
                                 "bg-[#eeeeee] dark:bg-white/[0.08]",
                                 "transition-colors hover:bg-[#e4e4e4] dark:hover:bg-white/[0.12]",
                                 "no-underline",
                             ]}
                         >
-                            <span class="text-[#888888] dark:text-white/45 select-none shrink-0">#</span>
-                            <span class="text-[#444444] dark:text-neutral-100 font-medium leading-none">
+                            <span class="text-[#888888] dark:text-white/45 select-none shrink-0 transition-colors group-hover:text-[var(--primary)]">#</span>
+                            <span class="min-w-0 flex-1 truncate text-[#444444] dark:text-neutral-100 font-medium leading-none">
                                 {tag.name.trim()}
                             </span>
                             <span
