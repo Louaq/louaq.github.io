@@ -74,45 +74,80 @@ html.is-animating .transition-swup-fade {
 .onload-animation:nth-child(5) { animation-delay: 0ms; }
 
 /* --------------------------------------------------------------------------
-   4. Navigation Progress Bar
+   4. Navigation Progress Bar（胶囊条：白底轨道 + 主题色填充，顶部水平居中）
    -------------------------------------------------------------------------- */
 
 #progress-bar {
-    --progress-height: 3px;
     --progress-duration: 8s;
+    --progress-track-w: 6rem;
+    --progress-track-h: 6px;
 
     position: fixed;
-    top: 0;
+    top: max(0.5rem, env(safe-area-inset-top, 0px));
     left: 0;
-    width: 0;
-    height: var(--progress-height);
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: var(--progress-track-w);
+    height: var(--progress-track-h);
     z-index: 9999;
     pointer-events: none;
-    background: var(--primary);
-    box-shadow: 0 0 8px color-mix(in oklch, var(--primary) 60%, transparent);
+    border-radius: 9999px;
+    background: #fff;
+    box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.12),
+        0 1px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
     opacity: 0;
 }
 
-@keyframes progress-loading {
-    0% { width: 0; }
-    100% { width: 95%; }
+#progress-bar .progress-bar-fill {
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: var(--primary);
+    transform-origin: left center;
+}
+
+@keyframes progress-pill-loading {
+    0% {
+        width: 0%;
+    }
+    100% {
+        width: 95%;
+    }
 }
 
 #progress-bar.loading {
     opacity: 1;
+}
+
+#progress-bar.loading .progress-bar-fill {
     width: 0;
-    animation: progress-loading var(--progress-duration) cubic-bezier(0.1, 0.05, 0.1, 1) forwards;
+    animation: progress-pill-loading var(--progress-duration) cubic-bezier(0.1, 0.05, 0.1, 1) forwards;
 }
 
 #progress-bar.finishing {
+    opacity: 1;
+}
+
+#progress-bar.finishing .progress-bar-fill {
     animation: none;
     width: 100%;
-    opacity: 1;
     transition: width 200ms ease-out;
 }
 
 #progress-bar.done {
-    width: 100%;
     opacity: 0;
     transition: opacity 300ms ease-out;
+}
+
+#progress-bar.done .progress-bar-fill {
+    width: 100%;
+}
+
+:root.dark #progress-bar {
+    box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.2),
+        0 1px 6px rgba(0, 0, 0, 0.35);
 }

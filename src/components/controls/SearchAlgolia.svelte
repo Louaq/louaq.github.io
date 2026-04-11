@@ -574,7 +574,7 @@ onDestroy(() => {
 <button
 	type="button"
 	aria-label="Open search"
-	class="hidden lg:flex transition-all items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
+	class="hidden shrink-0 lg:flex items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
       bg-black/[0.06] hover:bg-black/[0.08] active:bg-black/[0.10]
       dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:active:bg-white/[0.14]
       text-black/55 dark:text-white/55 text-sm

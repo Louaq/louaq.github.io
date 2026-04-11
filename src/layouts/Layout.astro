@@ -560,7 +560,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <GlobalIconSprite />
     <PdfEmbedRuntime />
 
-    <div id="progress-bar"></div>
+    <div id="progress-bar" aria-hidden="true">
+      <div class="progress-bar-fill"></div>
+    </div>
 
     <!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
     {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
@@ -633,7 +635,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       @apply translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #top-row {
-      @apply h-[4.5rem] transition-all duration-300;
+      @apply h-[4.5rem] transition-[height,transform,opacity] duration-300;
     }
     body.enable-banner[data-page-type="home"] #sidebar-sticky,
     body.enable-banner[data-page-type="home"] #left-sidebar-sticky,

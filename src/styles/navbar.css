@@ -25,7 +25,10 @@
     background: var(--card-bg);
     border: 1px solid transparent;
     border-radius: 0 0 0.75rem 0.75rem;
-    transition: all var(--duration-medium) var(--ease-standard);
+    /* 勿用 transition:all，否则会过渡布局相关属性，首屏/水合时易产生水平漂移感 */
+    transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius;
+    transition-duration: var(--duration-medium);
+    transition-timing-function: var(--ease-standard);
 }
 
 /* ============================================
@@ -43,7 +46,9 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "full" */
@@ -54,7 +59,9 @@
         border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (static) */
@@ -65,7 +72,9 @@
         border: 1px solid transparent !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (scrolled) */
@@ -76,7 +85,9 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 }
 
@@ -94,7 +105,9 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "full" */
@@ -105,7 +118,9 @@
         border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (static) */
@@ -116,7 +131,9 @@
         border: 1px solid transparent !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (scrolled) */
@@ -127,7 +144,9 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-duration: 0.3s !important;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 }
 
@@ -312,6 +331,31 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
     border: 1px solid transparent !important;
     box-shadow: var(--shadow-navbar-dark) !important;
     transition: none !important;
+}
+
+/* 搜索岛：SSR(client:load) + 桌面固定槽宽；岛用 contents 避免多包一层产生宽度差 */
+.navbar-search-slot {
+    display: contents;
+}
+@media (min-width: 1024px) {
+    .navbar-search-slot {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+        width: calc(11rem + 0.5rem);
+        min-width: calc(11rem + 0.5rem);
+        min-height: 2.75rem;
+        box-sizing: border-box;
+    }
+    .navbar-search-slot > astro-island {
+        display: contents;
+    }
+}
+@media (min-width: 1280px) {
+    .navbar-search-slot {
+        width: calc(13rem + 0.5rem);
+        min-width: calc(13rem + 0.5rem);
+    }
 }
 
 /* ============================================
