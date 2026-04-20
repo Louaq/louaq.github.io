@@ -1,6 +1,5 @@
 <script lang="ts">
 import { onDestroy, onMount, tick } from "svelte";
-import Icon from "@iconify/svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { navigateToPage } from "@utils/navigation-utils";
@@ -682,7 +681,7 @@ onDestroy(() => {
 			{:else if isSearching}
 				<div class="algolia-empty">{i18n(I18nKey.searchLoading)}</div>
 			{:else if !query.trim()}
-				<div class="algolia-empty algolia-empty-centered">No recent searches</div>
+				<div class="algolia-empty algolia-empty-centered"></div>
 			{:else if results.length === 0}
 				<div class="algolia-empty">{i18n(I18nKey.searchNoResults)}</div>
 			{:else}
@@ -729,31 +728,70 @@ onDestroy(() => {
 			{/if}
 		</div>
 
-		<div class="algolia-footer">
-			<div class="algolia-hints">
-				<span class="hint">
-					<kbd class="keycap keycap-icon">
-						<Icon icon="lucide:arrow-down" width="14" height="14" />
+		<footer class="docsearch-modal-footer">
+			<ul class="docsearch-modal-footer-commands" role="list">
+				<li>
+					<kbd class="docsearch-modal-footer-commands-key">
+						<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+							<g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd">
+								<path
+									d="M3 14a1 1 0 0 1 1-1h12a3 3 0 0 0 3-3V6a1 1 0 1 1 2 0v4a5 5 0 0 1-5 5H4a1 1 0 0 1-1-1z"
+								></path>
+								<path
+									d="M3.293 14.707a1 1 0 0 1 0-1.414l4-4a1 1 0 0 1 1.414 1.414L5.414 14l3.293 3.293a1 1 0 1 1-1.414 1.414l-4-4z"
+								></path>
+							</g>
+						</svg>
 					</kbd>
-					<kbd class="keycap keycap-icon">
-						<Icon icon="lucide:arrow-up" width="14" height="14" />
+					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.searchKbdSelect)}</span>
+				</li>
+				<li>
+					<kbd class="docsearch-modal-footer-commands-key">
+						<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+							<path
+								fill="currentColor"
+								d="M12 4a1 1 0 0 1 1 1v11.586l4.293-4.293a1 1 0 0 1 1.414 1.414l-6 6a1 1 0 0 1-1.414 0l-6-6a1 1 0 1 1 1.414-1.414L11 16.586V5a1 1 0 0 1 1-1z"
+							></path>
+						</svg>
 					</kbd>
-					<span class="hint-text">选择</span>
-				</span>
-				<span class="hint">
-					<kbd class="keycap keycap-icon">
-						<Icon icon="lucide:corner-down-left" width="14" height="14" />
+					<kbd class="docsearch-modal-footer-commands-key">
+						<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" aria-hidden="true">
+							<path
+								fill="currentColor"
+								d="M12 4a1 1 0 0 1 .707.293l6 6a1 1 0 0 1-1.414 1.414L13 7.414V19a1 1 0 1 1-2 0V7.414l-4.293 4.293a1 1 0 0 1-1.414-1.414l6-6A1 1 0 0 1 12 4z"
+							></path>
+						</svg>
 					</kbd>
-					<span class="hint-text">确认</span>
-				</span>
-				<span class="hint">
-					<kbd class="keycap">esc</kbd>
-					<span class="hint-text">关闭</span>
-				</span>
-			</div>
-			<div class="algolia-brand" aria-label={searchEngine === "milisearch" ? "Milisearch" : "Algolia"} role="img">
+					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.searchKbdSwitch)}</span>
+				</li>
+				<li>
+					<kbd class="docsearch-modal-footer-commands-key">
+						<svg width="15" height="15" viewBox="0 0 15 15" aria-hidden="true">
+							<g
+								fill="none"
+								stroke="currentColor"
+								stroke-linecap="round"
+								stroke-linejoin="round"
+								stroke-width="1.2"
+							>
+								<path
+									d="M13.6167 8.936c-.1065.3583-.6883.962-1.4875.962-.7993 0-1.653-.9165-1.653-2.1258v-.5678c0-1.2548.7896-2.1016 1.653-2.1016.8634 0 1.3601.4778 1.4875 1.0724M9 6c-.1352-.4735-.7506-.9219-1.46-.8972-.7092.0246-1.344.57-1.344 1.2166s.4198.8812 1.3445.9805C8.465 7.3992 8.968 7.9337 9 8.5c.032.5663-.454 1.398-1.4595 1.398C6.6593 9.898 6 9 5.963 8.4851m-1.4748.5368c-.2635.5941-.8099.876-1.5443.876s-1.7073-.6248-1.7073-2.204v-.4603c0-1.0416.721-2.131 1.7073-2.131.9864 0 1.6425 1.031 1.5443 2.2492h-2.956"
+								></path>
+							</g>
+						</svg>
+					</kbd>
+					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.announcementClose)}</span>
+				</li>
+			</ul>
+			<span class="docsearch-modal-footer-logo" aria-label={searchEngine === "milisearch" ? "Meilisearch" : "Algolia"}>
 				{#if searchEngine === "algolia"}
-				<span class="algolia-brand-text">Search by</span>
+					<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchBy)}</span>
+					<a
+						class="docsearch-modal-footer-logo-link"
+						href="https://www.algolia.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
 				<svg
 					width="77"
 					height="19"
@@ -761,7 +799,7 @@ onDestroy(() => {
 					role="img"
 					xmlns="http://www.w3.org/2000/svg"
 					viewBox="0 0 2196.2 500"
-					class="algolia-brand-svg"
+					class="docsearch-modal-footer-logo-icon docsearch-modal-footer-algolia-mark"
 				>
 					<defs>
 						<style>
@@ -816,15 +854,34 @@ onDestroy(() => {
 						class="cls-1"
 					></path>
 				</svg>
+					</a>
 				{:else}
-				<img
-					src="/assets/images/meilisearch-logo-light.svg"
-					alt="Meilisearch"
-					class="algolia-brand-logo"
-				/>
+					<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchProvidedBy)}</span>
+					<a
+						class="docsearch-modal-footer-logo-link"
+						href="https://www.meilisearch.com/"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<img
+							src="/assets/images/meilisearch-logo-light.svg"
+							alt="Meilisearch"
+							width="110"
+							height="16"
+							class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-light"
+						/>
+						<img
+							src="/assets/images/meilisearch-logo-dark.svg"
+							alt=""
+							width="110"
+							height="16"
+							class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-dark"
+							aria-hidden="true"
+						/>
+					</a>
 				{/if}
-			</div>
-		</div>
+			</span>
+		</footer>
 	</div>
 	</div>
 {/if}
@@ -844,6 +901,9 @@ onDestroy(() => {
 		background: rgba(0, 0, 0, 0.22);
 		z-index: 2147483646;
 	}
+	:global(html.dark) .algolia-backdrop {
+		background: rgba(0, 0, 0, 0.55);
+	}
 
 	.algolia-portal-root {
 		position: fixed;
@@ -853,11 +913,11 @@ onDestroy(() => {
 
 	.algolia-modal {
 		position: fixed;
-		top: 14vh;
+		top: 12vh;
 		left: 50%;
 		transform: translateX(-50%);
 		width: min(560px, calc(100vw - 2rem));
-		max-height: min(520px, 58vh);
+		max-height: min(380px, 46vh);
 		display: flex;
 		flex-direction: column;
 		border-radius: 5px;
@@ -871,10 +931,32 @@ onDestroy(() => {
 		border: 1px solid rgba(0, 0, 0, 0.06);
 	}
 
-	:global([data-theme="dark"]) .algolia-modal {
-		background: rgba(17, 24, 39, 0.96);
-		color: rgba(255, 255, 255, 0.92);
-		border: 1px solid rgba(255, 255, 255, 0.08);
+	/* 无搜索词时的空闲态：总高约 160–180px，接近 DocSearch 紧凑面板（图一） */
+	.algolia-modal:has(.algolia-empty-centered) {
+		max-height: none;
+		height: auto;
+	}
+	.algolia-modal:has(.algolia-empty-centered) .algolia-header {
+		padding: 0.625rem 0.75rem 0.5rem;
+	}
+	.algolia-modal:has(.algolia-empty-centered) .algolia-body {
+		flex: 0 0 auto;
+		min-height: 0;
+		overflow: visible;
+		padding: 0.2rem 0.5rem 0.35rem;
+	}
+	.algolia-modal:has(.algolia-empty-centered) .algolia-empty-centered {
+		min-height: 2.25rem;
+		padding: 0.25rem 0.75rem;
+	}
+
+	:global(html.dark) .algolia-modal {
+		background: #1e293b;
+		color: #e2e8f0;
+		border: 1px solid rgba(148, 163, 184, 0.22);
+		box-shadow:
+			0 28px 90px rgba(0, 0, 0, 0.55),
+			0 0 0 1px rgba(15, 23, 42, 0.5);
 	}
 
 	.algolia-header {
@@ -882,10 +964,6 @@ onDestroy(() => {
 		gap: 0.5rem;
 		align-items: center;
 		padding: 0.75rem 0.75rem 0.6rem 0.75rem;
-		border-bottom: 1px solid rgba(17, 24, 39, 0.08);
-	}
-	:global([data-theme="dark"]) .algolia-header {
-		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	}
 
 	.algolia-input-wrap {
@@ -898,16 +976,16 @@ onDestroy(() => {
 		border: 1px solid rgba(17, 24, 39, 0.12);
 		box-shadow: 0 1px 0 rgba(17, 24, 39, 0.04);
 	}
-	:global([data-theme="dark"]) .algolia-input-wrap {
-		background: rgba(31, 41, 55, 1);
-		border: 1px solid rgba(255, 255, 255, 0.12);
+	:global(html.dark) .algolia-input-wrap {
+		background: #0f172a;
+		border: 1px solid rgba(148, 163, 184, 0.28);
 		box-shadow: none;
 	}
 	.algolia-input-wrap:focus-within {
 		border-color: var(--primary);
 		box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 28%, transparent);
 	}
-	:global([data-theme="dark"]) .algolia-input-wrap:focus-within {
+	:global(html.dark) .algolia-input-wrap:focus-within {
 		border-color: var(--primary);
 		box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 32%, transparent);
 	}
@@ -920,8 +998,8 @@ onDestroy(() => {
 		color: rgba(17, 24, 39, 0.35);
 		pointer-events: none;
 	}
-	:global([data-theme="dark"]) .algolia-search-icon {
-		color: rgba(255, 255, 255, 0.45);
+	:global(html.dark) .algolia-search-icon {
+		color: #60a5fa;
 	}
 
 	.DocSearch-Search-Icon {
@@ -932,7 +1010,7 @@ onDestroy(() => {
 		margin-right: 0.5rem;
 		color: rgba(17, 24, 39, 0.3);
 	}
-	:global([data-theme="dark"]) .trigger-search-icon {
+	:global(html.dark) .trigger-search-icon {
 		color: rgba(255, 255, 255, 0.35);
 	}
 
@@ -951,6 +1029,12 @@ onDestroy(() => {
 		color: inherit;
 		font-size: 1rem;
 	}
+	.algolia-input::placeholder {
+		color: #64748b;
+	}
+	:global(html.dark) .algolia-input::placeholder {
+		color: #94a3b8;
+	}
 
 	.algolia-body {
 		padding: 0.35rem 0.5rem 0.5rem 0.5rem;
@@ -962,6 +1046,11 @@ onDestroy(() => {
 	.algolia-empty {
 		padding: 0.75rem;
 		opacity: 0.8;
+		color: #4b5563;
+	}
+	:global(html.dark) .algolia-empty {
+		color: #cbd5e1;
+		opacity: 0.95;
 	}
 	.algolia-empty-centered {
 		min-height: 3.5rem;
@@ -971,8 +1060,8 @@ onDestroy(() => {
 		justify-content: center;
 		color: rgba(107, 114, 128, 1);
 	}
-	:global([data-theme="dark"]) .algolia-empty-centered {
-		color: rgba(156, 163, 175, 1);
+	:global(html.dark) .algolia-empty-centered {
+		color: #cbd5e1;
 	}
 
 	.algolia-list {
@@ -994,7 +1083,7 @@ onDestroy(() => {
 		font-size: 0.8rem;
 		color: rgba(107, 114, 128, 1);
 	}
-	:global([data-theme="dark"]) .algolia-more-meta {
+	:global(html.dark) .algolia-more-meta {
 		color: rgba(156, 163, 175, 1);
 	}
 
@@ -1014,12 +1103,12 @@ onDestroy(() => {
 		opacity: 0.6;
 		cursor: not-allowed;
 	}
-	:global([data-theme="dark"]) .algolia-more-btn {
+	:global(html.dark) .algolia-more-btn {
 		border: 1px solid rgba(255, 255, 255, 0.14);
 		background: rgba(31, 41, 55, 1);
 		color: rgba(229, 231, 235, 1);
 	}
-	:global([data-theme="dark"]) .algolia-more-btn:hover {
+	:global(html.dark) .algolia-more-btn:hover {
 		background: rgba(255, 255, 255, 0.06);
 	}
 
@@ -1040,11 +1129,11 @@ onDestroy(() => {
 		background: rgba(17, 24, 39, 0.04);
 		border-color: rgba(17, 24, 39, 0.14);
 	}
-	:global([data-theme="dark"]) .algolia-item:hover {
+	:global(html.dark) .algolia-item:hover {
 		background: rgba(255, 255, 255, 0.06);
 		border-color: rgba(255, 255, 255, 0.16);
 	}
-	:global([data-theme="dark"]) .algolia-item {
+	:global(html.dark) .algolia-item {
 		border-color: rgba(255, 255, 255, 0.1);
 	}
 
@@ -1052,7 +1141,7 @@ onDestroy(() => {
 		background: transparent;
 		border-color: var(--primary);
 	}
-	:global([data-theme="dark"]) .algolia-item.is-active {
+	:global(html.dark) .algolia-item.is-active {
 		background: transparent;
 		border-color: var(--primary);
 	}
@@ -1087,7 +1176,7 @@ onDestroy(() => {
 		color: rgba(55, 65, 81, 0.85);
 		background: rgba(17, 24, 39, 0.03);
 	}
-	:global([data-theme="dark"]) .algolia-badge {
+	:global(html.dark) .algolia-badge {
 		border: 1px solid rgba(255, 255, 255, 0.14);
 		color: rgba(229, 231, 235, 0.9);
 		background: rgba(255, 255, 255, 0.06);
@@ -1104,88 +1193,116 @@ onDestroy(() => {
 		line-height: 1.2;
 	}
 
-	.algolia-footer {
+	.docsearch-modal-footer {
 		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
 		justify-content: space-between;
 		align-items: center;
+		gap: 0.5rem 1rem;
 		padding: 0.5rem 0.75rem;
 		background: rgba(249, 250, 251, 1);
 		border-top: 1px solid rgba(17, 24, 39, 0.08);
 	}
-	:global([data-theme="dark"]) .algolia-footer {
-		background: rgba(15, 23, 42, 1);
-		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	:global(html.dark) .docsearch-modal-footer {
+		background: #0f172a;
+		border-top: 1px solid rgba(148, 163, 184, 0.18);
 	}
 
-	.algolia-hints {
+	.docsearch-modal-footer-commands {
 		display: flex;
-		gap: 0.75rem;
-		align-items: center;
 		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.65rem 1rem;
+		list-style: none;
+		margin: 0;
+		padding: 0;
 	}
-	.hint {
-		display: inline-flex;
+	.docsearch-modal-footer-commands li {
+		display: flex;
 		align-items: center;
 		gap: 0.35rem;
 	}
-	.hint-text {
-		font-size: 0.75rem;
-		color: rgba(107, 114, 128, 1);
-	}
-	:global([data-theme="dark"]) .hint-text {
-		color: rgba(156, 163, 175, 1);
-	}
-
-	.keycap {
+	.docsearch-modal-footer-commands-key {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		height: 20px;
-		min-width: 20px;
-		padding: 0 6px;
-		border-radius: 6px;
-		border: 1px solid rgba(17, 24, 39, 0.18);
-		background: rgba(255, 255, 255, 1);
-		box-shadow: 0 1px 0 rgba(17, 24, 39, 0.08);
-		font-size: 0.75rem;
-		color: rgba(55, 65, 81, 1);
+		min-width: 1.5rem;
+		height: 1.375rem;
+		padding: 0 0.35rem;
+		border-radius: 0.25rem;
+		border: 1px solid #d1d5db;
+		background: linear-gradient(180deg, #ffffff 0%, #f3f4f6 100%);
+		box-shadow:
+			0 1px 1px rgba(15, 23, 42, 0.06),
+			inset 0 -1px 0 rgba(15, 23, 42, 0.04);
+		color: #374151;
 		line-height: 1;
 	}
-	.keycap-icon {
-		padding: 0.25rem 0.375rem;
+	.docsearch-modal-footer-commands-key :global(svg) {
+		display: block;
+		flex-shrink: 0;
 	}
-	:global([data-theme="dark"]) .keycap {
-		background: rgba(31, 41, 55, 1);
-		border: 1px solid rgba(255, 255, 255, 0.16);
-		color: rgba(229, 231, 235, 1);
-		box-shadow: none;
+	:global(html.dark) .docsearch-modal-footer-commands-key {
+		border-color: rgba(148, 163, 184, 0.35);
+		background: linear-gradient(180deg, #374151 0%, #1f2937 100%);
+		color: #e5e7eb;
+		box-shadow:
+			0 1px 1px rgba(0, 0, 0, 0.2),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	}
+	.docsearch-modal-footer-commands-label {
+		font-size: 0.75rem;
+		color: #6b7280;
+		white-space: nowrap;
+	}
+	:global(html.dark) .docsearch-modal-footer-commands-label {
+		color: #9ca3af;
 	}
 
-	.algolia-brand {
+	.docsearch-modal-footer-logo {
 		display: inline-flex;
 		align-items: center;
 		gap: 0.5rem;
+		margin-left: auto;
 	}
-
-	.algolia-brand-text {
+	.docsearch-modal-footer-logo-label {
 		font-size: 0.75rem;
-		color: rgba(107, 114, 128, 1);
+		color: #6b7280;
 		white-space: nowrap;
 	}
-	:global([data-theme="dark"]) .algolia-brand-text {
-		color: rgba(156, 163, 175, 1);
+	:global(html.dark) .docsearch-modal-footer-logo-label {
+		color: #9ca3af;
 	}
-
-	.algolia-brand-svg {
-		display: block;
-		height: 16px;
-		width: auto;
+	.docsearch-modal-footer-logo-link {
+		display: inline-flex;
+		align-items: center;
+		line-height: 0;
+		color: inherit;
+		text-decoration: none;
 	}
-
-	.algolia-brand-logo {
+	.docsearch-modal-footer-logo-link:hover {
+		opacity: 0.9;
+	}
+	.docsearch-modal-footer-logo-icon {
 		display: block;
-		height: 16px;
 		width: auto;
-		max-width: 96px;
+		height: 1.125rem;
+		max-width: 6.875rem;
+		object-fit: contain;
+		object-position: left center;
+	}
+	.docsearch-modal-footer-algolia-mark {
+		height: 1rem;
+		max-width: 5rem;
+	}
+	.docsearch-modal-footer-logo-dark {
+		display: none;
+	}
+	:global(html.dark) .docsearch-modal-footer-logo-light {
+		display: none;
+	}
+	:global(html.dark) .docsearch-modal-footer-logo-dark {
+		display: block;
 	}
 </style>
