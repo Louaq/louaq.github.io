@@ -857,7 +857,7 @@ onDestroy(() => {
 		left: 50%;
 		transform: translateX(-50%);
 		width: min(560px, calc(100vw - 2rem));
-		max-height: 72vh;
+		max-height: min(520px, 58vh);
 		display: flex;
 		flex-direction: column;
 		border-radius: 5px;
@@ -953,8 +953,10 @@ onDestroy(() => {
 	}
 
 	.algolia-body {
-		padding: 0.5rem 0.5rem 0.75rem 0.5rem;
+		padding: 0.35rem 0.5rem 0.5rem 0.5rem;
 		overflow: auto;
+		flex: 1 1 auto;
+		min-height: 0;
 	}
 
 	.algolia-empty {
@@ -962,7 +964,8 @@ onDestroy(() => {
 		opacity: 0.8;
 	}
 	.algolia-empty-centered {
-		height: 180px;
+		min-height: 3.5rem;
+		padding: 0.5rem 0.75rem 0.65rem 0.75rem;
 		display: flex;
 		align-items: center;
 		justify-content: center;
