@@ -251,9 +251,21 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     .wallpaper-transparent #navbar > div,
     html[data-default-wallpaper="overlay"] #navbar > div,
     html[data-wallpaper-mode="overlay"] #navbar > div {
-    @apply bg-[var(--card-bg-transparent)] backdrop-blur-sm;
-    border-radius: 0 0 var(--radius-large) var(--radius-large) !important;
-}
+        @apply bg-[var(--card-bg-transparent)] backdrop-blur-sm;
+        border-radius: 0 0 var(--radius-large) var(--radius-large) !important;
+    }
+
+    /* 移动端：backdrop-filter 易失效，半透明底会导致正文与图标叠在一起 */
+    @media (max-width: 1023px) {
+        .wallpaper-transparent #navbar > div,
+        html[data-default-wallpaper="overlay"] #navbar > div,
+        html[data-wallpaper-mode="overlay"] #navbar > div {
+            background-color: var(--card-bg) !important;
+            background-image: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+        }
+    }
     
     .wallpaper-transparent .btn-card {
         @apply bg-[var(--card-bg-transparent)];
@@ -599,5 +611,19 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
 
 /* 分页信息样式 */
 .pagination-info {
-  @apply text-sm text-[var(--text-secondary)] text-center mb-2;
+    @apply text-sm text-[var(--text-secondary)] text-center mb-2;
+}
+
+/*
+ * 移动端导航栏：Banner 半透明规则（navbar.css）特异性高于 #top-row 实心规则，
+ * 且 overlay 使用 card-bg-transparent 时 blur 常不生效。此处放在 main.css 末尾、
+ * 与 Banner 规则同特异性且更晚，统一强制实心背景。
+ */
+@media (max-width: 1023px) {
+    body #top-row #navbar[data-transparent-mode][data-is-home] > div {
+        background-color: var(--card-bg) !important;
+        background-image: none !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
 }
