@@ -1,13 +1,134 @@
 ---
-import ArchivePanel from "@components/controls/ArchivePanel.svelte";
+import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
-import { getSortedPostsList } from "@/utils/content-utils";
+import { getArchivePostsList } from "@/utils/content-utils";
+import { getPostUrlBySlug } from "@/utils/url-utils";
 
-const sortedPostsList = await getSortedPostsList();
+const posts = await getArchivePostsList();
+
+interface Group {
+	year: number;
+	posts: typeof posts;
+}
+
+const grouped: Record<number, typeof posts> = {};
+for (const post of posts) {
+	const year = post.published.getUTCFullYear();
+	(grouped[year] ??= []).push(post);
+}
+const groups: Group[] = Object.keys(grouped)
+	.map(Number)
+	.sort((a, b) => b - a)
+	.map((year) => ({ year, posts: grouped[year] }));
+
+function formatDate(date: Date) {
+	const month = (date.getUTCMonth() + 1).toString().padStart(2, "0");
+	const day = date.getUTCDate().toString().padStart(2, "0");
+	return `${month}-${day}`;
+}
+
+function formatTags(tagList: string[]) {
+	return tagList.map((t) => `#${t}`).join(" ");
+}
+
+const labelSingular = i18n(I18nKey.postCount);
+const labelPlural = i18n(I18nKey.postsCount);
 ---
-
 <MainGridLayout title={i18n(I18nKey.archive)}>
-	<ArchivePanel sortedPosts={sortedPostsList} client:only="svelte" />
+	<div class="card-base px-8 py-6" id="archive-list"
+		data-label-singular={labelSingular} data-label-plural={labelPlural}>
+		{groups.map((group) => (
+			<div class="archive-year-group" data-year={group.year}>
+				<div class="flex flex-row w-full items-center h-[3.75rem]">
+					<div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
+						{group.year}
+					</div>
+					<div class="w-[15%] md:w-[10%]">
+						<div class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
+					</div>
+					<div class="w-[70%] md:w-[80%] transition text-left text-50 archive-year-count">
+						{group.posts.length} {group.posts.length === 1 ? labelSingular : labelPlural}
+					</div>
+				</div>
+				{group.posts.map((post) => (
+					<a
+						href={getPostUrlBySlug(post.id)}
+						aria-label={post.title}
+						data-tags={post.tags.join(",")}
+						data-category={post.category}
+						class="group archive-row-link !block h-10 w-full rounded-lg text-black/75 dark:text-white/75
+							transition-colors duration-150
+							hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
+							hover:text-[initial]"
+					>
+						<div class="flex flex-row justify-start items-center h-full">
+							<div class="w-[15%] md:w-[10%] transition-colors text-sm text-right text-50">
+								{formatDate(post.published)}
+							</div>
+							<div class="w-[15%] md:w-[10%] relative dash-line h-full flex items-center">
+								<div class="transition-all mx-auto w-1 h-1 rounded group-hover:h-5
+									bg-[oklch(0.5_0.05_var(--hue))] group-hover:bg-[var(--primary)]
+									outline outline-4 z-50
+									outline-[var(--card-bg)]
+									group-hover:outline-[var(--btn-plain-bg-hover)]
+									group-active:outline-[var(--btn-plain-bg-active)]"></div>
+							</div>
+							<div class="w-[70%] md:max-w-[65%] md:w-[65%] text-left font-bold transition-colors duration-150
+								group-hover:text-[var(--primary)]
+								text-75 pr-8 whitespace-nowrap overflow-ellipsis overflow-hidden flex items-center gap-1">
+								<span class="min-w-0 truncate">{post.title}</span>
+								{post.password && (
+									<Icon name="material-symbols:lock-outline"
+										class="inline text-xl align-middle -translate-y-px text-inherit flex-shrink-0"
+										aria-label="加密" />
+								)}
+							</div>
+							<div class="hidden md:block md:w-[15%] text-left text-sm transition-colors duration-150
+								whitespace-nowrap overflow-ellipsis overflow-hidden text-30">
+								{formatTags(post.tags)}
+							</div>
+						</div>
+					</a>
+				))}
+			</div>
+		))}
+	</div>
 </MainGridLayout>
+<script>
+	document.addEventListener("DOMContentLoaded", () => {
+		const params = new URLSearchParams(window.location.search);
+		const tags = params.getAll("tag").map((t) => t.trim()).filter(Boolean);
+		const categories = params.getAll("category").map((c) => c.trim()).filter(Boolean);
+		const uncategorized = params.get("uncategorized");
+
+		if (!tags.length && !categories.length && !uncategorized) return;
+
+		const list = document.getElementById("archive-list");
+		const labelS = list?.dataset.labelSingular || "";
+		const labelP = list?.dataset.labelPlural || "";
+
+		for (const row of document.querySelectorAll<HTMLElement>(".archive-row-link")) {
+			const postTags = (row.dataset.tags || "").split(",").filter(Boolean);
+			const postCat = row.dataset.category || "";
+			let hide = false;
+
+			if (tags.length && !postTags.some((t) => tags.includes(t))) hide = true;
+			if (categories.length && !categories.includes(postCat)) hide = true;
+			if (uncategorized && postCat) hide = true;
+
+			if (hide) row.style.display = "none";
+		}
+
+		for (const group of document.querySelectorAll<HTMLElement>(".archive-year-group")) {
+			const visible = group.querySelectorAll(".archive-row-link:not([style*='display: none'])");
+			const countEl = group.querySelector(".archive-year-count");
+			if (!visible.length) {
+				group.style.display = "none";
+			} else if (countEl) {
+				countEl.textContent = `${visible.length} ${visible.length === 1 ? labelS : labelP}`;
+			}
+		}
+	});
+</script>

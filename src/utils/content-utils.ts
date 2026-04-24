@@ -51,6 +51,25 @@ export async function getSortedPostsList(): Promise<PostForList[]> {
 
 	return sortedPostsList;
 }
+export type ArchivePost = {
+	id: string;
+	title: string;
+	published: Date;
+	tags: string[];
+	category: string;
+	password: boolean;
+};
+export async function getArchivePostsList(): Promise<ArchivePost[]> {
+	const posts = await getRawSortedPosts();
+	return posts.map(({ id, data }) => ({
+		id,
+		title: data.title,
+		published: data.published,
+		tags: data.tags ?? [],
+		category: data.category?.trim() ?? "",
+		password: !!data.password,
+	}));
+}
 export type Tag = {
 	name: string;
 	count: number;
