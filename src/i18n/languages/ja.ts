@@ -152,6 +152,10 @@ export const ja: Translation = {
 	[Key.paginationOf]: "ページ、全",
 	[Key.paginationTotal]: "ページ、合計",
 	[Key.paginationRecords]: "件",
+	[Key.paginationCompact]: "{current} / {total} ページ",
+	[Key.paginationJumpTo]: "ページ移動",
+	[Key.paginationJumpPageUnit]: "ページ",
+	[Key.paginationGo]: "移動",
 
 	// 404ページ
 	[Key.notFound]: "404",

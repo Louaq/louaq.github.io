@@ -144,6 +144,10 @@ export const zh_TW: Translation = {
 	[Key.paginationOf]: "頁，共",
 	[Key.paginationTotal]: "頁，總計",
 	[Key.paginationRecords]: "條記錄",
+	[Key.paginationCompact]: "第 {current} / 共 {total}",
+	[Key.paginationJumpTo]: "跳轉到",
+	[Key.paginationJumpPageUnit]: "頁",
+	[Key.paginationGo]: "前往",
 
 	// 404頁面
 	[Key.notFound]: "404",

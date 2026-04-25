@@ -139,6 +139,14 @@ enum I18nKey {
 	paginationOf = "paginationOf",
 	paginationTotal = "paginationTotal",
 	paginationRecords = "paginationRecords",
+	/** 中间页码文案，含 {current}、{total}，如：第 {current} / 共 {total} */
+	paginationCompact = "paginationCompact",
+	/** 跳转行：前缀，如「跳转到」 */
+	paginationJumpTo = "paginationJumpTo",
+	/** 跳转行：页码后单位，如「页」；部分语言可置空 */
+	paginationJumpPageUnit = "paginationJumpPageUnit",
+	/** 跳转提交按钮 */
+	paginationGo = "paginationGo",
 
 	// 404页面
 	notFound = "notFound",

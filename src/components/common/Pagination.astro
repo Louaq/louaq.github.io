@@ -1,6 +1,8 @@
 ---
 import type { Page } from "astro";
 import { Icon } from "astro-icon/components";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
 import { url } from "@/utils/url-utils";
 
 interface Props {
@@ -12,40 +14,7 @@ interface Props {
 }
 
 const { page, style, pageUrlRoot = "" } = Astro.props;
-
-const HIDDEN = -1;
-
 const className = Astro.props.class;
-
-const ADJ_DIST = 2;
-const VISIBLE = ADJ_DIST * 2 + 1;
-
-// for test
-let count = 1;
-let l = page.currentPage;
-let r = page.currentPage;
-while (0 < l - 1 && r + 1 <= page.lastPage && count + 2 <= VISIBLE) {
-	count += 2;
-	l--;
-	r++;
-}
-while (0 < l - 1 && count < VISIBLE) {
-	count++;
-	l--;
-}
-while (r + 1 <= page.lastPage && count < VISIBLE) {
-	count++;
-	r++;
-}
-
-let pages: number[] = [];
-if (l > 1) pages.push(1);
-if (l === 3) pages.push(2);
-if (l > 3) pages.push(HIDDEN);
-for (let i = l; i <= r; i++) pages.push(i);
-if (r < page.lastPage - 2) pages.push(HIDDEN);
-if (r === page.lastPage - 2) pages.push(page.lastPage - 1);
-if (r < page.lastPage) pages.push(page.lastPage);
 
 const root = pageUrlRoot.replace(/^\/+|\/+$/g, "");
 
@@ -57,75 +26,135 @@ const getPageUrl = (p: number) => {
 	if (p === 1) return url(`/${root}/`);
 	return url(`/${root}/${p}/`);
 };
+
+const pageUrls = Array.from({ length: page.lastPage }, (_, i) => getPageUrl(i + 1));
+
+const compactLabel = i18n(I18nKey.paginationCompact)
+	.replace("{current}", String(page.currentPage))
+	.replace("{total}", String(page.lastPage));
+
+const jumpUnit = i18n(I18nKey.paginationJumpPageUnit);
+const hasJumpUnit = jumpUnit.length > 0;
+
+const btnClass =
+	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11";
+const btnDisabledClass =
+	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] opacity-40 pointer-events-none cursor-not-allowed shrink-0 min-h-11";
+
+const jumpInputClass =
+	"w-14 min-w-12 max-w-24 rounded-md border border-[var(--line-divider)] bg-[var(--card-bg)] px-2 py-1.5 text-center text-sm font-medium text-neutral-800 tabular-nums outline-none transition-none dark:text-neutral-200 focus:border-[var(--line-divider)] focus:shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0";
+const jumpBtnClass =
+	"shrink-0 border-0 bg-transparent px-1.5 py-2 min-h-11 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity cursor-pointer";
 ---
 
-<div class:list={[className, "flex flex-col gap-4 items-center"]} style={style}>
-  <!-- 分页信息 - 已禁用 -->
-  <!--
-  {
-    page.lastPage > 1 && (
-      <div class="text-sm text-[var(--text-secondary)] text-center">
-        第 {page.currentPage} 页，共 {page.lastPage} 页
-      </div>
-    )
-  }
-  -->
+{
+	page.lastPage > 1 && (
+		<div
+			class:list={[className, "flex w-full max-w-full flex-col items-center"]}
+			style={style}
+		>
+			<nav
+				class="flex w-full max-w-full flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2 px-1 sm:gap-x-3"
+				aria-label="Pagination"
+			>
+				{page.url.prev ? (
+					<a href={page.url.prev} class={btnClass}>
+						<Icon
+							name="material-symbols:chevron-left-rounded"
+							class="text-[1.125rem] opacity-90"
+						/>
+						{i18n(I18nKey.paginationPrev)}
+					</a>
+				) : (
+					<span class={btnDisabledClass} aria-disabled="true">
+						<Icon
+							name="material-symbols:chevron-left-rounded"
+							class="text-[1.125rem]"
+						/>
+						{i18n(I18nKey.paginationPrev)}
+					</span>
+				)}
 
-  <!-- 分页控件 -->
-  <div class="flex flex-row gap-3 justify-center">
-    <a
-      href={page.url.prev || ""}
-      aria-label={page.url.prev ? "Previous Page" : null}
-      class:list={[
-        "btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
-        { disabled: page.url.prev == undefined },
-      ]}
-    >
-      <Icon
-        name="material-symbols:chevron-left-rounded"
-        class="text-[1.75rem]"
-      />
-    </a>
-    <div
-      class="bg-[var(--card-bg)] flex flex-row rounded-lg items-center text-neutral-700 dark:text-neutral-300 font-bold"
-    >
-      {
-        pages.map((p) => {
-          if (p == HIDDEN)
-            return <Icon name="material-symbols:more-horiz" class="mx-1" />;
-          if (p == page.currentPage)
-            return (
-              <div
-                class="h-11 w-11 rounded-lg bg-[var(--primary)] flex items-center justify-center
-                        font-bold text-white dark:text-black/70"
-              >
-                {p}
-              </div>
-            );
-          return (
-            <a
-              href={url(getPageUrl(p))}
-              aria-label={`Page ${p}`}
-              class="btn-card w-11 h-11 rounded-lg overflow-hidden active:scale-[0.85]"
-            >
-              {p}
-            </a>
-          );
-        })
-      }
-    </div>
-    <a
-      href={page.url.next || ""}
-      aria-label={page.url.next ? "Next Page" : null}
-      class:list={[
-        "btn-card overflow-hidden rounded-lg text-[var(--primary)] w-11 h-11",
-        { disabled: page.url.next == undefined },
-      ]}
-    >
-      <Icon
-        name="material-symbols:chevron-right-rounded"
-        class="text-[1.75rem]"
-      />
-    </a>
-  </div>
-</div>
+				<span class="text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center shrink">
+					{compactLabel}
+				</span>
+
+				{page.url.next ? (
+					<a href={page.url.next} class={btnClass}>
+						{i18n(I18nKey.paginationNext)}
+						<Icon
+							name="material-symbols:chevron-right-rounded"
+							class="text-[1.125rem] opacity-90"
+						/>
+					</a>
+				) : (
+					<span class={btnDisabledClass} aria-disabled="true">
+						{i18n(I18nKey.paginationNext)}
+						<Icon
+							name="material-symbols:chevron-right-rounded"
+							class="text-[1.125rem]"
+						/>
+					</span>
+				)}
+
+				<form
+					class="inline-flex max-w-full flex-wrap items-center gap-1.5 text-sm text-neutral-600 dark:text-neutral-400"
+					data-pagination-jump
+					data-page-urls={JSON.stringify(pageUrls)}
+				>
+					<label class="inline-flex min-w-0 max-w-full flex-wrap items-center gap-1.5">
+						<input
+							type="text"
+							name="page"
+							class={jumpInputClass}
+							inputmode="numeric"
+							pattern="[0-9]*"
+							autocomplete="off"
+							maxlength={6}
+							aria-label={compactLabel}
+						/>
+						{hasJumpUnit && <span class="shrink-0 whitespace-nowrap">{jumpUnit}</span>}
+					</label>
+					<button type="submit" class={jumpBtnClass}>
+						{i18n(I18nKey.paginationGo)}
+					</button>
+				</form>
+			</nav>
+		</div>
+	)
+}
+
+{page.lastPage > 1 && (
+	<script is:inline>
+		(function () {
+			function bindJump() {
+				document.querySelectorAll("[data-pagination-jump]").forEach(function (form) {
+					if (form.dataset.jumpBound) return;
+					const raw = form.getAttribute("data-page-urls");
+					if (!raw) return;
+					let list;
+					try {
+						list = JSON.parse(raw);
+					} catch {
+						return;
+					}
+					if (!list || !list.length) return;
+					form.dataset.jumpBound = "1";
+					form.addEventListener("submit", function (e) {
+						e.preventDefault();
+						const input = form.querySelector('input[name="page"]');
+						if (!input) return;
+						const n = parseInt(String(input.value).trim(), 10);
+						if (!Number.isFinite(n)) return;
+						const p = Math.max(1, Math.min(n, list.length));
+						const target = list[p - 1];
+						if (target) window.location.href = target;
+					});
+				});
+			}
+			if (document.readyState === "loading")
+				document.addEventListener("DOMContentLoaded", bindJump);
+			else bindJump();
+		})();
+	</script>
+)}
