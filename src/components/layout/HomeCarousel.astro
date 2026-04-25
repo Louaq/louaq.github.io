@@ -137,21 +137,21 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 	)
 }
 
-<script>
-	function setupCarousel(root: HTMLElement) {
-		const track = root.querySelector(".carousel-track") as HTMLElement | null;
+<script is:inline data-astro-rerun>
+	function setupCarousel(root) {
+		const track = root.querySelector(".carousel-track");
 		if (!track) return;
-		const slides = Array.from(root.querySelectorAll(".carousel-slide")) as HTMLElement[];
+		const slides = Array.from(root.querySelectorAll(".carousel-slide"));
 		const total = slides.length;
 		if (total === 0) return;
 
-		const dots = Array.from(root.querySelectorAll(".carousel-dot")) as HTMLButtonElement[];
-		const prevBtn = root.querySelector(".carousel-prev") as HTMLButtonElement | null;
-		const nextBtn = root.querySelector(".carousel-next") as HTMLButtonElement | null;
+		const dots = Array.from(root.querySelectorAll(".carousel-dot"));
+		const prevBtn = root.querySelector(".carousel-prev");
+		const nextBtn = root.querySelector(".carousel-next");
 		const autoplayMs = Number(root.getAttribute("data-autoplay") || "0");
 
 		let current = 0;
-		let timer: ReturnType<typeof setInterval> | null = null;
+		let timer = null;
 
 		const render = () => {
 			slides.forEach((slide, i) => {
@@ -208,7 +208,7 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 
 	function initHomeCarousel() {
 		document.querySelectorAll("[data-home-carousel]").forEach((carousel) => {
-			const el = carousel as HTMLElement;
+			const el = carousel;
 			if (el.dataset.inited === "true") return;
 			el.dataset.inited = "true";
 			setupCarousel(el);
@@ -217,6 +217,7 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 
 	document.addEventListener("DOMContentLoaded", initHomeCarousel);
 	document.addEventListener("astro:page-load", initHomeCarousel);
+	window.addEventListener("pageshow", initHomeCarousel);
 </script>
 
 <style>
