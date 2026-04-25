@@ -27,24 +27,19 @@ const getPageUrl = (p: number) => {
 	return url(`/${root}/${p}/`);
 };
 
-const pageUrls = Array.from({ length: page.lastPage }, (_, i) => getPageUrl(i + 1));
+const firstPageHref = getPageUrl(1);
+const lastPageHref = getPageUrl(page.lastPage);
+const isFirst = page.currentPage === 1;
+const isLast = page.currentPage === page.lastPage;
 
 const compactLabel = i18n(I18nKey.paginationCompact)
 	.replace("{current}", String(page.currentPage))
 	.replace("{total}", String(page.lastPage));
 
-const jumpUnit = i18n(I18nKey.paginationJumpPageUnit);
-const hasJumpUnit = jumpUnit.length > 0;
-
 const btnClass =
-	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11";
+	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11 sm:min-h-12 sm:px-2 sm:py-2.5 sm:text-base";
 const btnDisabledClass =
-	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] opacity-40 pointer-events-none cursor-not-allowed shrink-0 min-h-11";
-
-const jumpInputClass =
-	"w-14 min-w-12 max-w-24 rounded-md border border-[var(--line-divider)] bg-[var(--card-bg)] px-2 py-1.5 text-center text-sm font-medium text-neutral-800 tabular-nums outline-none transition-none dark:text-neutral-200 focus:border-[var(--line-divider)] focus:shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0";
-const jumpBtnClass =
-	"shrink-0 border-0 bg-transparent px-1.5 py-2 min-h-11 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity cursor-pointer";
+	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] opacity-40 pointer-events-none cursor-not-allowed shrink-0 min-h-11 sm:min-h-12 sm:px-2 sm:py-2.5 sm:text-base";
 ---
 
 {
@@ -57,11 +52,29 @@ const jumpBtnClass =
 				class="flex w-full max-w-full flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2 px-1 sm:gap-x-3"
 				aria-label="Pagination"
 			>
+				{!isFirst ? (
+					<a href={firstPageHref} class={btnClass}>
+						<Icon
+							name="material-symbols:first-page-rounded"
+							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
+						/>
+						{i18n(I18nKey.paginationFirst)}
+					</a>
+				) : (
+					<span class={btnDisabledClass} aria-disabled="true">
+						<Icon
+							name="material-symbols:first-page-rounded"
+							class="text-[1.125rem] sm:text-[1.25rem]"
+						/>
+						{i18n(I18nKey.paginationFirst)}
+					</span>
+				)}
+
 				{page.url.prev ? (
 					<a href={page.url.prev} class={btnClass}>
 						<Icon
 							name="material-symbols:chevron-left-rounded"
-							class="text-[1.125rem] opacity-90"
+							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
 						/>
 						{i18n(I18nKey.paginationPrev)}
 					</a>
@@ -69,13 +82,13 @@ const jumpBtnClass =
 					<span class={btnDisabledClass} aria-disabled="true">
 						<Icon
 							name="material-symbols:chevron-left-rounded"
-							class="text-[1.125rem]"
+							class="text-[1.125rem] sm:text-[1.25rem]"
 						/>
 						{i18n(I18nKey.paginationPrev)}
 					</span>
 				)}
 
-				<span class="text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center shrink">
+				<span class="shrink text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center sm:text-base">
 					{compactLabel}
 				</span>
 
@@ -84,7 +97,7 @@ const jumpBtnClass =
 						{i18n(I18nKey.paginationNext)}
 						<Icon
 							name="material-symbols:chevron-right-rounded"
-							class="text-[1.125rem] opacity-90"
+							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
 						/>
 					</a>
 				) : (
@@ -92,69 +105,29 @@ const jumpBtnClass =
 						{i18n(I18nKey.paginationNext)}
 						<Icon
 							name="material-symbols:chevron-right-rounded"
-							class="text-[1.125rem]"
+							class="text-[1.125rem] sm:text-[1.25rem]"
 						/>
 					</span>
 				)}
 
-				<form
-					class="inline-flex max-w-full flex-wrap items-center gap-1.5 text-sm text-neutral-600 dark:text-neutral-400"
-					data-pagination-jump
-					data-page-urls={JSON.stringify(pageUrls)}
-				>
-					<label class="inline-flex min-w-0 max-w-full flex-wrap items-center gap-1.5">
-						<input
-							type="text"
-							name="page"
-							class={jumpInputClass}
-							inputmode="numeric"
-							pattern="[0-9]*"
-							autocomplete="off"
-							maxlength={6}
-							aria-label={compactLabel}
+				{!isLast ? (
+					<a href={lastPageHref} class={btnClass}>
+						{i18n(I18nKey.paginationLast)}
+						<Icon
+							name="material-symbols:last-page-rounded"
+							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
 						/>
-						{hasJumpUnit && <span class="shrink-0 whitespace-nowrap">{jumpUnit}</span>}
-					</label>
-					<button type="submit" class={jumpBtnClass}>
-						{i18n(I18nKey.paginationGo)}
-					</button>
-				</form>
+					</a>
+				) : (
+					<span class={btnDisabledClass} aria-disabled="true">
+						{i18n(I18nKey.paginationLast)}
+						<Icon
+							name="material-symbols:last-page-rounded"
+							class="text-[1.125rem] sm:text-[1.25rem]"
+						/>
+					</span>
+				)}
 			</nav>
 		</div>
 	)
 }
-
-{page.lastPage > 1 && (
-	<script is:inline>
-		(function () {
-			function bindJump() {
-				document.querySelectorAll("[data-pagination-jump]").forEach(function (form) {
-					if (form.dataset.jumpBound) return;
-					const raw = form.getAttribute("data-page-urls");
-					if (!raw) return;
-					let list;
-					try {
-						list = JSON.parse(raw);
-					} catch {
-						return;
-					}
-					if (!list || !list.length) return;
-					form.dataset.jumpBound = "1";
-					form.addEventListener("submit", function (e) {
-						e.preventDefault();
-						const input = form.querySelector('input[name="page"]');
-						if (!input) return;
-						const n = parseInt(String(input.value).trim(), 10);
-						if (!Number.isFinite(n)) return;
-						const p = Math.max(1, Math.min(n, list.length));
-						const target = list[p - 1];
-						if (target) window.location.href = target;
-					});
-				});
-			}
-			if (document.readyState === "loading")
-				document.addEventListener("DOMContentLoaded", bindJump);
-			else bindJump();
-		})();
-	</script>
-)}

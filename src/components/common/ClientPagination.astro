@@ -18,16 +18,8 @@ const compactLabel = compactTemplate
 	.replace("{current}", String(currentPage))
 	.replace("{total}", String(totalPages));
 
-const jumpUnit = i18n(I18nKey.paginationJumpPageUnit);
-const hasJumpUnit = jumpUnit.length > 0;
-
 const btnClass =
-	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:opacity-100";
-
-const jumpInputClass =
-	"w-14 min-w-12 max-w-24 rounded-md border border-[var(--line-divider)] bg-[var(--card-bg)] px-2 py-1.5 text-center text-sm font-medium text-neutral-800 tabular-nums outline-none transition-none dark:text-neutral-200 focus:border-[var(--line-divider)] focus:shadow-none focus:outline-none focus:ring-0 focus:ring-offset-0";
-const jumpBtnClass =
-	"shrink-0 border-0 bg-transparent px-1.5 py-2 min-h-11 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity cursor-pointer disabled:cursor-not-allowed disabled:opacity-40";
+	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11 sm:min-h-12 sm:px-2 sm:py-2.5 sm:text-base disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:opacity-100";
 ---
 
 {
@@ -43,6 +35,21 @@ const jumpBtnClass =
 				<button
 					type="button"
 					class={btnClass}
+					data-page="first"
+					data-section={sectionId}
+					disabled={currentPage === 1}
+					aria-label={i18n(I18nKey.paginationFirst)}
+				>
+					<Icon
+						name="material-symbols:first-page-rounded"
+						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
+					/>
+					{i18n(I18nKey.paginationFirst)}
+				</button>
+
+				<button
+					type="button"
+					class={btnClass}
 					data-page="prev"
 					data-section={sectionId}
 					disabled={currentPage === 1}
@@ -50,14 +57,14 @@ const jumpBtnClass =
 				>
 					<Icon
 						name="material-symbols:chevron-left-rounded"
-						class="text-[1.125rem] opacity-90"
+						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
 					/>
 					{i18n(I18nKey.paginationPrev)}
 				</button>
 
 				<span
 					data-compact-label
-					class="text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center shrink"
+					class="shrink text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center sm:text-base"
 				>
 					{compactLabel}
 				</span>
@@ -73,35 +80,24 @@ const jumpBtnClass =
 					{i18n(I18nKey.paginationNext)}
 					<Icon
 						name="material-symbols:chevron-right-rounded"
-						class="text-[1.125rem] opacity-90"
+						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
 					/>
 				</button>
 
-				<form
-					class="inline-flex max-w-full flex-wrap items-center gap-1.5 text-sm text-neutral-600 dark:text-neutral-400"
-					data-client-pagination-jump
+				<button
+					type="button"
+					class={btnClass}
+					data-page="last"
+					data-section={sectionId}
+					disabled={currentPage === totalPages}
+					aria-label={i18n(I18nKey.paginationLast)}
 				>
-					<label class="inline-flex min-w-0 max-w-full flex-wrap items-center gap-1.5">
-						<input
-							type="text"
-							name="clientPage"
-							class={jumpInputClass}
-							data-jump-input
-							data-jump-max={totalPages}
-							inputmode="numeric"
-							pattern="[0-9]*"
-							autocomplete="off"
-							maxlength={6}
-							aria-label={compactLabel}
-						/>
-						{hasJumpUnit && (
-							<span class="shrink-0 whitespace-nowrap">{jumpUnit}</span>
-						)}
-					</label>
-					<button type="submit" class={jumpBtnClass} data-jump-submit>
-						{i18n(I18nKey.paginationGo)}
-					</button>
-				</form>
+					{i18n(I18nKey.paginationLast)}
+					<Icon
+						name="material-symbols:last-page-rounded"
+						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
+					/>
+				</button>
 			</nav>
 		</div>
 	)
@@ -125,13 +121,6 @@ const jumpBtnClass =
 		);
 		if (!pagination) return;
 
-		const jumpForm = pagination.querySelector(
-			"[data-client-pagination-jump]",
-		);
-		const jumpInput = jumpForm
-			? jumpForm.querySelector("[data-jump-input]")
-			: null;
-
 		function setCompactLabel(totalPages) {
 			const el = pagination.querySelector("[data-compact-label]");
 			if (el) {
@@ -142,43 +131,26 @@ const jumpBtnClass =
 		}
 
 		function setNavDisabled(totalPages) {
+			pagination.querySelectorAll('[data-page="first"]').forEach((btn) => {
+				btn.disabled = currentPage === 1;
+			});
 			pagination.querySelectorAll('[data-page="prev"]').forEach((btn) => {
 				btn.disabled = currentPage === 1;
 			});
 			pagination.querySelectorAll('[data-page="next"]').forEach((btn) => {
 				btn.disabled = currentPage === totalPages;
 			});
-		}
-
-		function syncJumpInput(totalPages) {
-			if (!jumpInput) return;
-			jumpInput.setAttribute(
-				"data-jump-max",
-				String(Math.max(1, totalPages)),
-			);
-		}
-
-		if (jumpForm) {
-			jumpForm.addEventListener("submit", function (e) {
-				e.preventDefault();
-				if (!jumpInput) return;
-				const n = parseInt(String(jumpInput.value).trim(), 10);
-				if (!Number.isFinite(n)) return;
-				const items = document.querySelectorAll(
-					`[data-item-section="${sectionId}"]:not(.hidden)`,
-				);
-				const totalPages = Math.ceil(items.length / itemsPerPage);
-				const maxP = Math.max(1, totalPages);
-				currentPage = Math.max(1, Math.min(n, maxP));
-				updatePage();
-				jumpInput.value = "";
+			pagination.querySelectorAll('[data-page="last"]').forEach((btn) => {
+				btn.disabled = currentPage === totalPages;
 			});
 		}
 
 		pagination.querySelectorAll("[data-page]").forEach((button) => {
 			button.addEventListener("click", function () {
 				const page = this.dataset.page;
-				if (page === "prev") {
+				if (page === "first") {
+					currentPage = 1;
+				} else if (page === "prev") {
 					currentPage = Math.max(1, currentPage - 1);
 				} else if (page === "next") {
 					const items = document.querySelectorAll(
@@ -186,6 +158,12 @@ const jumpBtnClass =
 					);
 					const totalPages = Math.ceil(items.length / itemsPerPage);
 					currentPage = Math.min(totalPages, currentPage + 1);
+				} else if (page === "last") {
+					const items = document.querySelectorAll(
+						`[data-item-section="${sectionId}"]:not(.hidden)`,
+					);
+					const totalPages = Math.ceil(items.length / itemsPerPage);
+					currentPage = Math.max(1, totalPages);
 				}
 				updatePage();
 			});
@@ -193,7 +171,6 @@ const jumpBtnClass =
 
 		pagination.addEventListener("updatePagination", function () {
 			currentPage = 1;
-			if (jumpInput) jumpInput.value = "";
 			updatePage();
 		});
 
@@ -220,7 +197,6 @@ const jumpBtnClass =
 				}
 				setCompactLabel(totalPages);
 				setNavDisabled(totalPages);
-				syncJumpInput(totalPages);
 			};
 
 			if (isInitialLoad) {
