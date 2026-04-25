@@ -1,13 +1,15 @@
 ---
 title: 组会汇报
-published: 2026-04-14 14:10:00
+published: 2026-04-25 14:10:00
 expires: 2026-01-31 23:59:59
 mathjax: true
 category: 汇报
 tags: [组会]
 description: 汇报
 pinned: true
-password: true
+homeCarousel: true
+homeCarouselOrder: 1
+homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb15.jpg
 ---
 
 <!-- 预览PDF -->

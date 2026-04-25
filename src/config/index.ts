@@ -32,6 +32,7 @@ export { expressiveCodeConfig } from "./expressiveCodeConfig"; // 代码高亮�
 export { fontConfig } from "./fontConfig"; // 字体配置
 export { footerConfig } from "./footerConfig"; // 页脚配置
 export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友链配置
+export { homeCarouselConfig } from "./homeCarouselConfig"; // 首页轮播配置
 export { licenseConfig } from "./licenseConfig"; // 许可证配置
 export { albumsConfig } from "./albumsConfig"; // 相册配置
 export {

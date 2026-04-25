@@ -12,7 +12,7 @@ export const adConfig1: AdConfig = {
 	},
 
 	// 是否允许关闭广告
-	closable: true,
+	closable: false,
 
 	// 显示次数限制，-1为无限制
 	displayCount: -1,

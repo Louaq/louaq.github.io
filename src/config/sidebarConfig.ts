@@ -209,9 +209,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
-			animationDelay: 400,
+			animationDelay: 0,
 			// 配置ID：使用第二个广告配置
-			configId: "ad2",
+			configId: "ad1",
 		},
 	],
 

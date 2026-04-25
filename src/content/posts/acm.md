@@ -5,6 +5,9 @@ expires: 2026-08-21 23:59:59
 description: "ACM模板调整"
 category: ACM
 tags: [ACM]
+homeCarousel: true
+homeCarouselOrder: 2
+homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 ---
 
 删除图中的1，2处信息：

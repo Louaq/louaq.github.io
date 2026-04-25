@@ -1,8 +1,9 @@
 ---
 import type { GetStaticPaths } from "astro";
+import HomeCarousel from "@/components/layout/HomeCarousel.astro";
 import Pagination from "@/components/common/Pagination.astro";
 import PostPage from "@/components/layout/PostPage.astro";
-import { siteConfig } from "@/config";
+import { homeCarouselConfig, siteConfig } from "@/config";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@/utils/content-utils";
 export const getStaticPaths = (async ({ paginate }) => {
@@ -16,9 +17,26 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 
 const len = page.data.length;
+const allPosts = await getSortedPosts();
+const featuredPosts = allPosts
+	.filter((post) => post.data.homeCarousel)
+	.sort((a, b) => {
+		const orderA = a.data.homeCarouselOrder ?? Number.MAX_SAFE_INTEGER;
+		const orderB = b.data.homeCarouselOrder ?? Number.MAX_SAFE_INTEGER;
+		if (orderA !== orderB) return orderA - orderB;
+		return b.data.published.getTime() - a.data.published.getTime();
+	})
+	.slice(0, homeCarouselConfig.maxItems);
+const showCarousel = homeCarouselConfig.enable && page.currentPage === 1;
 ---
 
 <MainGridLayout>
+  {showCarousel && (
+    <HomeCarousel
+      posts={featuredPosts}
+      autoplayMs={homeCarouselConfig.autoplayMs}
+    />
+  )}
   <PostPage page={page} />
   {
     page.total > page.size && (
