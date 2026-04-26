@@ -8,17 +8,17 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import {
-	getDefaultHue,
-	getHue,
-	getStoredWallpaperMode,
-    getStoredWavesEnabled,
-	getDefaultWavesEnabled,
-	getStoredBannerTitleEnabled,
 	getDefaultBannerTitleEnabled,
+	getDefaultHue,
+	getDefaultWavesEnabled,
+	getHue,
+	getStoredBannerTitleEnabled,
+	getStoredWallpaperMode,
+	getStoredWavesEnabled,
+	setBannerTitleEnabled,
 	setHue,
 	setWallpaperMode,
-    setWavesEnabled,
-	setBannerTitleEnabled,
+	setWavesEnabled,
 } from "@utils/setting-utils";
 import { onMount } from "svelte";
 import { backgroundWallpaper, siteConfig } from "@/config";
@@ -43,14 +43,20 @@ const isWallpaperSwitchable = backgroundWallpaper.switchable ?? true;
 const allowLayoutSwitch = siteConfig.postListLayout.allowSwitch;
 
 // 是否允许用户切换水波纹动画（只看 switchable 配置）
-const isWavesSwitchable = backgroundWallpaper.banner?.waves?.switchable ?? false;
+const isWavesSwitchable =
+	backgroundWallpaper.banner?.waves?.switchable ?? false;
 // 是否允许用户切换首页横幅标题（只看 switchable 配置；用于“即使默认不启用，也能在面板中打开”）
-const isBannerTitleSwitchable = backgroundWallpaper.banner?.homeText?.switchable ?? false;
+const isBannerTitleSwitchable =
+	backgroundWallpaper.banner?.homeText?.switchable ?? false;
 // 是否有任何横幅设置可显示（后续添加新设置时在此处添加条件）
 const hasBannerSettings = isWavesSwitchable || isBannerTitleSwitchable;
 // 是否显示主题色设置（与 siteConfig.themeColor.fixed 相反）
 const showThemeColor = !siteConfig.themeColor.fixed;
-const hasAnyContent = showThemeColor || isWallpaperSwitchable || allowLayoutSwitch || hasBannerSettings;
+const hasAnyContent =
+	showThemeColor ||
+	isWallpaperSwitchable ||
+	allowLayoutSwitch ||
+	hasBannerSettings;
 
 function resetHue() {
 	hue = getDefaultHue();
@@ -158,7 +164,7 @@ onMount(() => {
 });
 </script>
 
-<div id="display-setting" class="float-panel float-panel-closed absolute transition-all w-80 right-4 px-4 py-4">
+<div id="display-setting" class="float-panel float-panel-closed absolute transition-all right-4 w-80 max-w-[calc(100vw-2rem)] px-4 py-4">
     <!-- Theme Color Section -->
     <div class="flex flex-row gap-2 mb-2 items-center justify-between">
         <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
@@ -358,6 +364,9 @@ onMount(() => {
 <style lang="stylus">
     /* 水波纹切换颜色已移至 main.css 全局，此处仅保留滑块等样式 */
     #display-setting
+      top calc(4.5rem + 0.875rem)
+      max-height calc(100vh - 5.75rem)
+      overflow-y auto
       input[type="range"]
         -webkit-appearance none
         height 1.5rem

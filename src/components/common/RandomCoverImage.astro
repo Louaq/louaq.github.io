@@ -17,6 +17,8 @@ interface Props {
 	seed?: string; // 用于生成随机图API的种子（文章slug）
 	preview?: boolean; // 是否是预览模式（文章列表页），true为预览模式（小尺寸），false为详情页（大尺寸）
 	fallback?: string; // 图片加载失败时的备用图片
+	loading?: "eager" | "lazy";
+	deferSrc?: boolean;
 }
 
 const {
@@ -28,6 +30,8 @@ const {
 	seed,
 	preview = false,
 	fallback,
+	loading = "eager",
+	deferSrc = false,
 } = Astro.props;
 const className = Astro.props.class;
 
@@ -97,6 +101,10 @@ const getFallbackUrl = (src: string): string => {
 // 图片样式
 const imageClass = "w-full h-full object-cover";
 const imageStyle = `object-position: ${position || "center"}; image-rendering: -webkit-optimize-contrast;`;
+const shouldDeferRemoteSrc = deferSrc && !isLocal;
+const transparentPlaceholder =
+	"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E";
+const remoteSrc = isPublic ? url(src) : src;
 
 // 水印配置
 const watermark = randomCoverImage.watermark;
@@ -172,7 +180,7 @@ const watermarkStyles = showWatermark
       style={imageStyle}
       width={preview ? 400 : 1200}
       height={preview ? 300 : 800}
-      loading="eager"
+      loading={loading}
       format="webp"
       quality={preview ? 80 : 90}
       widths={preview ? [200, 400, 600] : [800, 1200, 1600, 2000]}
@@ -212,15 +220,16 @@ const watermarkStyles = showWatermark
   <!-- 远程图片（包括随机图API和普通远程图片） -->
   {!isLocal && (
     <img 
-      src={isPublic ? url(src) : src} 
+      src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc} 
       alt={alt || ""} 
       class:list={[
         imageClass,
         preview ? 'random-cover-preview-image' : 'random-cover-full-image'
       ]}
       style={imageStyle}
-      loading="eager"
+      loading={loading}
       decoding="async"
+      data-lazy-src={shouldDeferRemoteSrc ? remoteSrc : ""}
       data-preview={preview ? "true" : "false"}
       data-seed={seed || ""}
       data-api-urls={allApiUrls.length > 0 ? JSON.stringify(allApiUrls) : ""}

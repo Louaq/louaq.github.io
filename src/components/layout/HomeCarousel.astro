@@ -25,7 +25,7 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 			<div class="carousel-track-wrap relative overflow-hidden">
 				<div class="carousel-track flex">
 					{
-						posts.map((post) => {
+						posts.map((post, index) => {
 							const image = processCoverImageSync(post.data.image, post.id);
 							const carouselImage = post.data.homeCarouselImage?.trim() || "";
 							const finalImage = carouselImage || image;
@@ -69,6 +69,8 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 														class="h-full w-full object-cover"
 														seed={post.id}
 														preview={true}
+														loading={index === 0 ? "eager" : "lazy"}
+														deferSrc={index > 0}
 													/>
 												</div>
 											) : (
@@ -152,8 +154,23 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 
 		let current = 0;
 		let timer = null;
+		let touchStartX = 0;
+		let touchStartY = 0;
+		let touchTracking = false;
+
+		const loadSlideImage = (index) => {
+			const slide = slides[index];
+			if (!slide) return;
+			const image = slide.querySelector("img[data-lazy-src]");
+			if (!image) return;
+			const lazySrc = image.getAttribute("data-lazy-src");
+			if (!lazySrc) return;
+			image.setAttribute("src", lazySrc);
+			image.removeAttribute("data-lazy-src");
+		};
 
 		const render = () => {
+			loadSlideImage(current);
 			slides.forEach((slide, i) => {
 				slide.classList.toggle("is-active", i === current);
 			});
@@ -179,28 +196,68 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 			}
 		};
 
-		prevBtn?.addEventListener("click", () => {
+		const goTo = (index) => {
 			if (total <= 1) return;
-			current = (current - 1 + total) % total;
+			current = (index + total) % total;
 			render();
 			start();
+		};
+
+		prevBtn?.addEventListener("click", () => {
+			goTo(current - 1);
 		});
 		nextBtn?.addEventListener("click", () => {
-			if (total <= 1) return;
-			current = (current + 1) % total;
-			render();
-			start();
+			goTo(current + 1);
 		});
 		dots.forEach((dot, i) => {
 			dot.addEventListener("click", () => {
-				current = i;
-				render();
-				start();
+				goTo(i);
 			});
 		});
 
 		root.addEventListener("mouseenter", stop);
 		root.addEventListener("mouseleave", start);
+
+		root.addEventListener(
+			"touchstart",
+			(event) => {
+				if (total <= 1) return;
+				const touch = event.touches[0];
+				if (!touch) return;
+				touchStartX = touch.clientX;
+				touchStartY = touch.clientY;
+				touchTracking = true;
+				stop();
+			},
+			{ passive: true },
+		);
+
+		root.addEventListener(
+			"touchend",
+			(event) => {
+				if (!touchTracking || total <= 1) return;
+				touchTracking = false;
+				const touch = event.changedTouches[0];
+				if (!touch) {
+					start();
+					return;
+				}
+				const deltaX = touch.clientX - touchStartX;
+				const deltaY = touch.clientY - touchStartY;
+				const isHorizontalSwipe = Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY) * 1.2;
+				if (isHorizontalSwipe) {
+					goTo(deltaX < 0 ? current + 1 : current - 1);
+				} else {
+					start();
+				}
+			},
+			{ passive: true },
+		);
+
+		root.addEventListener("touchcancel", () => {
+			touchTracking = false;
+			start();
+		});
 
 		render();
 		start();
@@ -230,6 +287,7 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 		border-radius: inherit;
 		overflow: hidden;
 		background: color-mix(in oklab, var(--card-bg) 82%, black 18%);
+		touch-action: pan-y;
 	}
 
 	.home-carousel .carousel-slide {
