@@ -20,6 +20,7 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg
 ## 2026年组会内容
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
+| 20260421 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_20260421.pdf" target="_blank">汇报_0421</a> |
 | 20260121 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0122.pdf" target="_blank">汇报_0121</a> |
 | 20260115 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0115.pdf" target="_blank">汇报_0115</a> |
 | 20260107 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0107.pdf" target="_blank">汇报_0107</a> |
