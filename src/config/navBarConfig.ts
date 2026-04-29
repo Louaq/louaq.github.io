@@ -40,12 +40,12 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 //   links.push(LinkPreset.About);
 
     // 支持自定义导航栏链接,并且支持多级菜单
-	links.push({
-		name: "状态",
-		url: "https://status.louaq.io",
-		external: true,
-		icon: "material-symbols:cloud-done-rounded",
-	  });
+	// links.push({
+	// 	name: "状态",
+	// 	url: "https:/xxxxxxxxxx.com",
+	// 	external: true,
+	// 	icon: "material-symbols:cloud-done-rounded",
+	//   });
 
   // 构建子菜单，确保所有项都是有效的
 	const aboutChildren: (NavBarLink | LinkPreset)[] = [
