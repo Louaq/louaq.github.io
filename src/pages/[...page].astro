@@ -1,11 +1,15 @@
 ---
 import type { GetStaticPaths } from "astro";
-import HomeCarousel from "@/components/layout/HomeCarousel.astro";
+import HomeCarousel, {
+	type CarouselSlide,
+} from "@/components/layout/HomeCarousel.astro";
 import Pagination from "@/components/common/Pagination.astro";
 import PostPage from "@/components/layout/PostPage.astro";
 import { homeCarouselConfig, siteConfig } from "@/config";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@/utils/content-utils";
+import { processCoverImageSync } from "@/utils/image-utils";
+import { getFileDirFromPath, getPostUrlBySlug } from "@/utils/url-utils";
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
 	// 使用配置中的文章数量
@@ -18,7 +22,35 @@ const { page } = Astro.props;
 
 const len = page.data.length;
 const allPosts = await getSortedPosts();
-const featuredPosts = allPosts
+
+// 1) 手动配置的轮播项（优先级最高，按数组定义顺序展示）
+const manualSlides: CarouselSlide[] = homeCarouselConfig.manualItems.map(
+	(item, index) => {
+		const meta: { icon: string; text: string }[] = [];
+		if (item.date?.trim()) {
+			meta.push({ icon: "lucide:calendar-days", text: item.date.trim() });
+		}
+		if (item.category?.trim()) {
+			meta.push({ icon: "lucide:folder", text: item.category.trim() });
+		}
+		(item.tags || []).slice(0, 2).forEach((tag) => {
+			const text = tag.trim();
+			if (text) meta.push({ icon: "lucide:tag", text: `#${text}` });
+		});
+		return {
+			href: item.href,
+			title: item.title,
+			image: item.image,
+			basePath: "/",
+			seed: `manual-${index}`,
+			openInNewTab: item.openInNewTab,
+			meta,
+		};
+	},
+);
+
+// 2) 文章项（按 homeCarouselOrder 升序，发布时间降序作为次级排序）
+const postSlides: CarouselSlide[] = allPosts
 	.filter((post) => post.data.homeCarousel)
 	.sort((a, b) => {
 		const orderA = a.data.homeCarouselOrder ?? Number.MAX_SAFE_INTEGER;
@@ -26,14 +58,43 @@ const featuredPosts = allPosts
 		if (orderA !== orderB) return orderA - orderB;
 		return b.data.published.getTime() - a.data.published.getTime();
 	})
-	.slice(0, homeCarouselConfig.maxItems);
+	.map((post) => {
+		const carouselImage = post.data.homeCarouselImage?.trim() || "";
+		const coverImage = processCoverImageSync(post.data.image, post.id);
+		const finalImage = carouselImage || coverImage;
+		const publishedText = post.data.published.toLocaleDateString("zh-CN", {
+			year: "numeric",
+			month: "2-digit",
+			day: "2-digit",
+		});
+		const meta: { icon: string; text: string }[] = [
+			{ icon: "lucide:calendar-days", text: publishedText },
+		];
+		if (post.data.category?.trim()) {
+			meta.push({ icon: "lucide:folder", text: post.data.category.trim() });
+		}
+		(post.data.tags || []).slice(0, 2).forEach((tag) => {
+			meta.push({ icon: "lucide:tag", text: `#${tag.trim()}` });
+		});
+		return {
+			href: getPostUrlBySlug(post.id),
+			title: post.data.title,
+			image: finalImage,
+			basePath: getFileDirFromPath(post.filePath || ""),
+			seed: post.id,
+			meta,
+		};
+	});
+
+// 手动项始终排在前面，文章项紧随其后
+const featuredSlides: CarouselSlide[] = [...manualSlides, ...postSlides];
 const showCarousel = homeCarouselConfig.enable && page.currentPage === 1;
 ---
 
 <MainGridLayout>
   {showCarousel && (
     <HomeCarousel
-      posts={featuredPosts}
+      slides={featuredSlides}
       autoplayMs={homeCarouselConfig.autoplayMs}
     />
   )}
