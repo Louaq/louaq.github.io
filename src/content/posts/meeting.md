@@ -10,6 +10,7 @@ pinned: true
 homeCarousel: true
 homeCarouselOrder: 1
 homeCarouselImage: https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg
+password: true
 ---
 
 <!-- 预览PDF -->
