@@ -1,0 +1,156 @@
+---
+import { Icon } from "astro-icon/components";
+import type { HomeTopNoticeItem, HomeTopNoticeTone } from "@/types/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+
+interface Props {
+	items: HomeTopNoticeItem[];
+}
+
+const { items } = Astro.props;
+
+const toneClass: Record<HomeTopNoticeTone, string> = {
+	info: "bg-sky-500/[0.12] dark:bg-sky-400/10 text-sky-950 dark:text-sky-50 border-sky-400/35",
+	warning:
+		"bg-amber-500/[0.14] dark:bg-amber-400/10 text-amber-950 dark:text-amber-50 border-amber-400/35",
+	success:
+		"bg-emerald-500/[0.12] dark:bg-emerald-400/10 text-emerald-950 dark:text-emerald-50 border-emerald-400/35",
+	error:
+		"bg-red-500/[0.12] dark:bg-red-400/10 text-red-950 dark:text-red-50 border-red-400/35",
+	neutral:
+		"bg-neutral-500/[0.1] dark:bg-neutral-400/10 text-neutral-900 dark:text-neutral-100 border-neutral-400/28",
+	tip: "bg-violet-500/[0.12] dark:bg-violet-400/10 text-violet-950 dark:text-violet-50 border-violet-400/35",
+	urgent:
+		"bg-orange-600/[0.14] dark:bg-orange-400/12 text-orange-950 dark:text-orange-50 border-orange-500/40",
+};
+
+const defaultIcon: Record<HomeTopNoticeTone, string> = {
+	info: "fa6-solid:circle-info",
+	warning: "fa6-solid:triangle-exclamation",
+	success: "fa6-solid:circle-check",
+	error: "fa6-solid:circle-xmark",
+	neutral: "fa6-solid:bullhorn",
+	tip: "fa6-solid:lightbulb",
+	urgent: "fa6-solid:bolt",
+};
+
+function barToneClasses(type: HomeTopNoticeTone | undefined): string {
+	const tone = type ?? "warning";
+	return toneClass[tone] ?? toneClass.warning;
+}
+
+function resolveIcon(item: HomeTopNoticeItem): string | undefined {
+	if (item.icon?.trim()) return item.icon;
+	const tone = item.type ?? "warning";
+	return defaultIcon[tone] ?? defaultIcon.warning;
+}
+
+function storageKeyFor(item: HomeTopNoticeItem, index: number): string {
+	const base = item.dismissKey?.trim() || "default";
+	return items.length > 1
+		? `homeTopNoticeDismissed:${base}:${index}`
+		: `homeTopNoticeDismissed:${base}`;
+}
+---
+
+<div class="home-top-notice-stack mb-4 flex flex-col gap-2">
+	{
+		items.map((item, i) => {
+			const tone = item.type ?? "warning";
+			const iconName = resolveIcon(item);
+			const storageKey = storageKeyFor(item, i);
+			const closable = item.closable === true;
+			return (
+				<div
+					class:list={[
+						"home-top-notice rounded-xl border shadow-sm backdrop-blur-sm overflow-hidden",
+						barToneClasses(tone),
+					]}
+					data-home-top-notice-item
+					data-storage-key={storageKey}
+					data-closable={closable ? "true" : "false"}
+					id={`home-top-notice-${i}`}
+					role="region"
+					aria-label={item.title || "站点通知"}
+				>
+					<div class="max-w-[var(--page-width)] mx-auto px-3 md:px-4 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-sm">
+						<div class="flex flex-1 min-w-0 items-start sm:items-center gap-2 sm:gap-3 justify-center sm:justify-start text-center sm:text-left">
+							{iconName && (
+								<Icon
+									name={iconName}
+									class="shrink-0 mt-0.5 sm:mt-0 text-[1.125rem] opacity-90"
+									aria-hidden="true"
+								/>
+							)}
+							<div class="min-w-0 leading-snug">
+								{item.title && (
+									<span class="font-semibold mr-1.5">{item.title}</span>
+								)}
+								<span class="opacity-95">{item.content}</span>
+							</div>
+						</div>
+						<div class="flex shrink-0 items-center justify-center sm:justify-end gap-2">
+							{item.link?.enable && item.link.url?.trim() && (
+								<a
+									href={item.link.url}
+									target={item.link.external ? "_blank" : "_self"}
+									rel={
+										item.link.external ? "noopener noreferrer" : undefined
+									}
+									class="btn-regular rounded-lg px-3 py-1.5 text-xs font-medium whitespace-nowrap active:scale-95 transition-transform"
+								>
+									{item.link.text}
+								</a>
+							)}
+							{closable && (
+								<button
+									type="button"
+									class="rounded-lg h-8 w-8 inline-flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+									data-home-top-notice-close
+									aria-label={i18n(I18nKey.announcementClose)}
+								>
+									<Icon name="fa6-solid:xmark" class="text-sm" />
+								</button>
+							)}
+						</div>
+					</div>
+				</div>
+			);
+		})
+	}
+</div>
+
+<script>
+	function hideHomeTopNotice(el) {
+		if (!el) return;
+		el.style.display = "none";
+		el.setAttribute("aria-hidden", "true");
+	}
+
+	function bindHomeTopNotice() {
+		document.querySelectorAll("[data-home-top-notice-item]").forEach((node) => {
+			const el = node;
+			if (!(el instanceof HTMLElement)) return;
+			if (el.dataset.bound === "1") return;
+			el.dataset.bound = "1";
+
+			const key = el.dataset.storageKey || "";
+			const canClose = el.dataset.closable === "true";
+
+			if (canClose && key && localStorage.getItem(key) === "true") {
+				hideHomeTopNotice(el);
+				return;
+			}
+
+			const btn = el.querySelector("[data-home-top-notice-close]");
+			btn?.addEventListener("click", () => {
+				if (key) localStorage.setItem(key, "true");
+				hideHomeTopNotice(el);
+			});
+		});
+	}
+
+	document.addEventListener("DOMContentLoaded", bindHomeTopNotice);
+	document.addEventListener("swup:contentReplaced", bindHomeTopNotice);
+</script>

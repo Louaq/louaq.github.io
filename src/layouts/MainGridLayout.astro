@@ -1,6 +1,7 @@
 ---
 import OverlayWallpaper from "@components/features/OverlayWallpaper.astro";
 import Footer from "@components/layout/Footer.astro";
+import HomeTopNotice from "@components/layout/HomeTopNotice.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
 import RightSideBar from "@components/layout/RightSideBar.astro";
@@ -13,6 +14,7 @@ import TypewriterText from "@/components/features/TypewriterText.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
 import {
 	backgroundWallpaper,
+	getNormalizedHomeTopNoticeItems,
 	sidebarLayoutConfig,
 	siteConfig,
 } from "@/config";
@@ -195,6 +197,9 @@ const transparentClass = shouldEnableTransparency
 	: "";
 
 const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
+
+const homeTopNoticeItems = getNormalizedHomeTopNoticeItems();
+const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
@@ -532,6 +537,9 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
                     
             {/* 主内容区 - 始终渲染，确保 Swup 容器存在 */}
             <main id="swup-container" class={`${mainContentClass} transition-main`}>
+                {showHomeTopNotice && (
+                  <HomeTopNotice items={homeTopNoticeItems} />
+                )}
                 {/* 携带网格布局类名，用于JS更新父容器 */}
                 <div id="grid-class-carrier" data-grid-class={gridCols} class="hidden"></div>
                 {/* 备用 h1 标题 - 当主页横幅文本未启用时，提供隐藏的主标题 */}

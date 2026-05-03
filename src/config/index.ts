@@ -4,6 +4,9 @@
 // 类型导出
 export type {
 	AnnouncementConfig,
+	HomeTopNoticeConfig,
+	HomeTopNoticeItem,
+	HomeTopNoticeTone,
 	BackgroundWallpaperConfig,
 	CommentConfig,
 	CoverImageConfig,
@@ -23,6 +26,7 @@ export type {
 } from "../types/config";
 export { adConfig1, adConfig2 } from "./adConfig"; // 广告配置
 export { announcementConfig } from "./announcementConfig"; // 公告配置
+export { homeTopNoticeConfig, getNormalizedHomeTopNoticeItems } from "./homeTopNoticeConfig"; // 首页顶部通知
 // 样式配置
 export { backgroundWallpaper } from "./backgroundWallpaper"; // 背景壁纸配置
 // 功能配置
