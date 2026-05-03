@@ -10,12 +10,12 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 
 	// 侧边栏位置：left=左侧，both=双侧
 	// 开启双侧边栏后，右侧组件会在宽度低于1200px时隐藏
-	position: "both",
+	position: "left",
 
 	// 使用左侧单侧栏时，是否在文章详情页显示右侧边栏
 	// 当position为left时开启此项后，文章详情页将显示双侧边栏，主页等其他页面保持左侧单侧边栏
 	// 适用在只想用左侧单侧栏，但在文章详情页想用右侧栏的目录等组件的场景
-	showRightSidebarOnPostPage: true,
+	showRightSidebarOnPostPage: false,
 
 
 
@@ -129,91 +129,8 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		},
 	],
 
-	// 右侧边栏组件配置列表
-	rightComponents: [
-		{
-			// 组件类型：站点统计组件
-			type: "stats",
-			// 是否启用该组件
-			enable: true,
-			// 组件显示顺序
-			order: 1,
-			// 组件位置
-			position: "sticky",
-			// 是否在文章详情页显示
-			showOnPostPage: false,
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 0,
-		},
-		// {
-		// 	// 组件类型：日历组件
-		// 	type: "calendar",
-		// 	// 是否启用该组件
-		// 	enable: false,
-		// 	// 组件显示顺序
-		// 	order: 2,
-		// 	// 组件位置
-		// 	position: "sticky",
-		// 	// 是否在文章详情页显示
-		// 	showOnPostPage: false,
-		// 	// CSS 类名
-		// 	class: "onload-animation",
-		// 	// 动画延迟时间
-		// 	animationDelay: 0,
-		// },
-		{
-			// 组件类型：抖音热搜组件
-			type: "douyinHot",
-			// 是否启用该组件
-			enable: true,
-			// 组件显示顺序
-			order: 3,
-			// 组件位置
-			position: "sticky",
-			// 是否在文章详情页显示
-			showOnPostPage: false,
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 0,
-		},
-		{
-			// 组件类型：侧边栏目录组件（只在文章详情页显示）
-			type: "sidebarToc",
-			// 是否启用该组件
-			enable: true,
-			// 组件显示顺序
-			order: 2,
-			// 组件位置
-			position: "sticky",
-			// 是否在文章详情页显示
-			showOnPostPage: true,
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 350,
-		},
-		{
-			// 组件类型：广告栏组件 2
-			type: "advertisement",
-			// 是否启用该组件
-			enable: false,
-			// 组件显示顺序
-			order: 4,
-			// 组件位置
-			position: "sticky",
-			// 是否在文章详情页显示
-			showOnPostPage: true,
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 0,
-			// 配置ID：使用第二个广告配置
-			configId: "ad1",
-		},
-	],
+	// 右侧边栏组件配置列表（已禁用：使用单侧栏布局）
+	rightComponents: [],
 
 	// 默认动画配置
 	defaultAnimation: {

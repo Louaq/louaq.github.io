@@ -1,0 +1,96 @@
+---
+import type { MarkdownHeading } from "astro";
+import "@/styles/toc.css";
+import WidgetLayout from "@/components/common/WidgetLayout.astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+
+interface Props {
+	headings: MarkdownHeading[];
+	class?: string;
+	style?: string;
+}
+
+const { headings: _headings = [], class: className, style } = Astro.props;
+---
+
+<div class:list={["post-page-toc-wrap", className]} style={style}>
+  <WidgetLayout
+    name={i18n(I18nKey.tableOfContents)}
+    id="post-page-toc-widget"
+  >
+    <div class="toc-scroll-container">
+      <div class="toc-content" id="post-page-toc-content">
+        <!-- TOC 内容由 TOCManager 从正文标题生成 -->
+      </div>
+    </div>
+  </WidgetLayout>
+</div>
+
+<style lang="stylus">
+/* 与右侧栏目录一致：视口宽度 <1200px 时改用悬浮目录 */
+.post-page-toc-wrap
+	display: none
+	@media (min-width: 1200px)
+		display: block
+
+.post-page-toc-wrap .toc-scroll-container
+	max-height: calc(100vh - 20rem)
+</style>
+
+<script>
+	import { TOCManager } from "@/utils/tocUtils";
+
+	if (typeof window.PostPageTOC === "undefined") {
+		window.PostPageTOC = {
+			manager: null,
+		};
+	}
+
+	function initPostPageTOC() {
+		const tocContent = document.getElementById("post-page-toc-content");
+		if (!tocContent) return;
+
+		try {
+			if (window.PostPageTOC.manager) {
+				window.PostPageTOC.manager.cleanup();
+			}
+
+			window.PostPageTOC.manager = new TOCManager({
+				contentId: "post-page-toc-content",
+				indicatorId: "post-page-toc-indicator",
+				maxLevel: 3,
+				scrollOffset: 80,
+			});
+
+			window.PostPageTOC.manager.init();
+		} catch (error) {
+			console.error("Failed to load TOCManager for PostPageTOC:", error);
+		}
+	}
+
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", initPostPageTOC);
+	} else {
+		initPostPageTOC();
+	}
+
+	document.addEventListener("swup:contentReplaced", () => {
+		setTimeout(initPostPageTOC, 100);
+	});
+
+	document.addEventListener("astro:page-load", () => {
+		setTimeout(initPostPageTOC, 100);
+	});
+
+	window.addEventListener("popstate", () => {
+		setTimeout(initPostPageTOC, 200);
+	});
+
+	window.addEventListener("hashchange", () => {
+		if (!window.tocInternalNavigation) {
+			setTimeout(initPostPageTOC, 100);
+		}
+		window.tocInternalNavigation = false;
+	});
+</script>
