@@ -4,6 +4,7 @@ import Footer from "@components/layout/Footer.astro";
 import HomeTopNotice from "@components/layout/HomeTopNotice.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
+import PostPageTOC from "@components/layout/PostPageTOC.astro";
 import RightSideBar from "@components/layout/RightSideBar.astro";
 import SideBar from "@components/layout/SideBar.astro";
 import type { MarkdownHeading } from "astro";
@@ -585,6 +586,28 @@ const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
     </div>
 </div>
 
+{/* fuwari 风格的悬浮目录 - 文章页且足够宽屏时显示在主内容区右侧外部
+   注意：所有页面都必须渲染 #post-toc-floating-layer 容器，因为它已注册为 swup container；
+   非文章页渲染为空占位即可。 */}
+<div
+    id="post-toc-floating-layer"
+    class:list={[
+        "absolute w-full z-30 pointer-events-none post-toc-floating-layer",
+        { "is-post-page": isPostPageCheck },
+    ]}
+    style={`top: ${finalMainPanelTop}`}
+>
+    {isPostPageCheck && (
+        <div class="relative max-w-[var(--page-width)] mx-auto">
+            <div class="post-toc-wrapper absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)]">
+                <div class="post-toc-inner-wrapper fixed top-[5.5rem] w-[var(--toc-width)] max-h-[calc(100vh-7rem)] pointer-events-auto pr-2 pb-4 overflow-y-auto overflow-x-hidden hide-scrollbar">
+                    <PostPageTOC headings={headings} />
+                </div>
+            </div>
+        </div>
+    )}
+</div>
+
 <FloatingControls headings={headings} />
 
 
@@ -625,6 +648,26 @@ const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
   
   .banner-subtitle {
     text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
+  }
+
+  /* fuwari 风格悬浮目录：默认隐藏，仅在文章页 + 屏幕足够宽时显示
+     非文章页（无 .is-post-page）始终隐藏，防止 swup 路由切换出现残留 */
+  .post-toc-floating-layer {
+    display: none;
+  }
+  @media (min-width: 1400px) {
+    .post-toc-floating-layer.is-post-page {
+      display: block;
+    }
+  }
+
+  /* 隐藏滚动条 */
+  .hide-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 </style>
 

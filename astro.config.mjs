@@ -58,6 +58,7 @@ export default defineConfig({
 				"#swup-container",
 				"#right-sidebar-dynamic",
 				"#floating-toc-wrapper",
+				"#post-toc-floating-layer",
 			],
 			smoothScrolling: false,
 			// 开发模式下 Vite 依赖重优化会导致 swup 预加载/缓存命中旧的 deps，出现 504 (Outdated Optimize Dep)

@@ -192,8 +192,8 @@ const { remarkPluginFrontmatter } = await render(entry);
         aria-label={title}
         class:list={[
           "post-card-enter-btn",
-          "hidden md:flex btn-regular w-13",
-          "absolute right-3 top-3 bottom-3 rounded-xl bg-(--enter-btn-bg)",
+          "hidden md:flex btn-regular w-13 h-[182px]",
+          "absolute right-3 top-1/2 -translate-y-1/2 rounded-xl bg-(--enter-btn-bg)",
           "hover:bg-(--enter-btn-bg-hover) active:bg-(--enter-btn-bg-active) active:scale-95",
         ]}
       >
@@ -218,6 +218,12 @@ const { remarkPluginFrontmatter } = await render(entry);
 
   :global(.grid-mode) .stats {
     margin-top: auto !important;
+  }
+
+  /* 鼠标悬浮在文章标题时，强制使用主题色（覆盖 typography / 默认 a 等可能的颜色） */
+  .post-card-title:hover,
+  .post-card-title:hover :global(*) {
+    color: var(--primary) !important;
   }
 
 </style>

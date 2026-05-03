@@ -2,8 +2,6 @@
 import type { MarkdownHeading } from "astro";
 import "@/styles/toc.css";
 import WidgetLayout from "@/components/common/WidgetLayout.astro";
-import I18nKey from "@/i18n/i18nKey";
-import { i18n } from "@/i18n/translation";
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -15,10 +13,7 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 ---
 
 <div class:list={["post-page-toc-wrap", className]} style={style}>
-  <WidgetLayout
-    name={i18n(I18nKey.tableOfContents)}
-    id="post-page-toc-widget"
-  >
+  <WidgetLayout id="post-page-toc-widget">
     <div class="toc-scroll-container">
       <div class="toc-content" id="post-page-toc-content">
         <!-- TOC 内容由 TOCManager 从正文标题生成 -->
@@ -33,6 +28,12 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 	display: none
 	@media (min-width: 1200px)
 		display: block
+
+/* 去掉 WidgetLayout 默认的 px-4 / pt-4 / pb-4 内边距，让目录条目更贴近卡片边缘 */
+.post-page-toc-wrap :global(widget-layout)
+	padding-bottom: 0
+.post-page-toc-wrap :global(widget-layout > .collapse-wrapper)
+	padding: 0
 
 .post-page-toc-wrap .toc-scroll-container
 	max-height: calc(100vh - 20rem)

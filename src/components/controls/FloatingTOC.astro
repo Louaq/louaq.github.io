@@ -239,6 +239,12 @@ const showRightSidebarOnPostPage =
       return false;
     }
 
+    // 大屏文章页会通过 MainGridLayout 显示独立悬浮目录（fuwari 风格），
+    // 无需再显示浮动按钮，避免重复
+    if (window.innerWidth >= 1400) {
+      return false;
+    }
+
     // 获取侧边栏位置配置
     const wrapper = document.querySelector('.floating-toc-wrapper');
     let sidebarPosition = wrapper?.getAttribute('data-sidebar-position') || 'left';
@@ -249,16 +255,16 @@ const showRightSidebarOnPostPage =
         sidebarPosition = 'both';
     }
 
-    // 如果是单侧边栏模式（左侧），则始终显示悬浮目录（因为右侧边栏不存在）
+    // 如果是单侧边栏模式（左侧），中小屏幕始终显示悬浮目录按钮
     if (sidebarPosition === 'left') {
         return true;
     }
-    
-    // 检查屏幕宽度
+
+    // 双侧边栏模式：检查屏幕宽度
     const isSmallScreen = window.innerWidth < 1200;
-    
-    // 显示条件：网格模式 OR 小屏幕 OR 侧边栏目录未启用
-    return  isSmallScreen || !isSidebarTocEnabled;
+
+    // 显示条件：小屏幕 OR 侧边栏目录未启用
+    return isSmallScreen || !isSidebarTocEnabled;
   }
 
   // 更新悬浮目录的显示状态

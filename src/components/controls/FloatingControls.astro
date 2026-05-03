@@ -1,7 +1,5 @@
 ---
 import type { MarkdownHeading } from "astro";
-import BackToComment from "./BackToComment.astro";
-import BackToHome from "./BackToHome.astro";
 import BackToTop from "./BackToTop.astro";
 import FloatingTOC from "./FloatingTOC.astro";
 
@@ -14,8 +12,6 @@ const { headings } = Astro.props;
 
 <div class="floating-controls-container">
   <FloatingTOC headings={headings ?? []} />
-  <BackToComment />
-  <BackToHome />
   <BackToTop />
 </div>
 
