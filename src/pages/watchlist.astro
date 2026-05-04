@@ -50,6 +50,36 @@ const tabs = categories.map(category => ({
 
 const activeTab = tabs[0]?.id || "anime";
 
+// 根据 URL hash 在首屏绘制前修正栏目（内联 CSS + script），避免先闪默认 tab 再跳转
+const watchlistTabIds = tabs.map((t) => t.id);
+const watchlistTabIdsJson = JSON.stringify(watchlistTabIds);
+const watchlistRestoreCss =
+	watchlistTabIds.length > 0
+		? watchlistTabIds
+				.map(
+					(id) => `
+html[data-watchlist-restore="${id}"] .watchlist-tabs-root .category-section:not([data-section="${id}"]) {
+	display: none !important;
+}
+html[data-watchlist-restore="${id}"] .watchlist-tabs-root .category-section[data-section="${id}"] {
+	display: block !important;
+}
+html[data-watchlist-restore="${id}"] .watchlist-tabs-root nav button[data-tab="${id}"] {
+	border-bottom-color: var(--primary);
+	color: var(--primary);
+}
+html[data-watchlist-restore="${id}"] .watchlist-tabs-root nav button[data-tab]:not([data-tab="${id}"]) {
+	border-bottom-color: transparent;
+	color: rgb(107 114 128);
+}
+html.dark[data-watchlist-restore="${id}"] .watchlist-tabs-root nav button[data-tab]:not([data-tab="${id}"]) {
+	color: rgb(156 163 175);
+}
+`,
+				)
+				.join("\n")
+		: "";
+
 // 每页显示的数量
 const itemsPerPage = 9;
 
@@ -128,6 +158,27 @@ const statusColor = {
 			{
 				tabs.length > 0 ? (
 					<>
+						{watchlistRestoreCss ? (
+							<style is:inline set:html={watchlistRestoreCss} />
+						) : null}
+						<script is:inline define:vars={{ watchlistTabIdsJson }}>
+							(function () {
+								try {
+									var ids = JSON.parse(watchlistTabIdsJson);
+									var h =
+										typeof location !== "undefined" && location.hash
+											? location.hash.slice(1).replace(/^\/+|\/+$/g, "")
+											: "";
+									if (h && ids.indexOf(h) !== -1) {
+										document.documentElement.setAttribute(
+											"data-watchlist-restore",
+											h,
+										);
+									}
+								} catch (e) {}
+							})();
+						</script>
+						<div class="watchlist-tabs-root">
 						<TabNav tabs={tabs} activeTab={activeTab} />
 
 						<!-- 内容区域 -->
@@ -235,6 +286,7 @@ const statusColor = {
 								</div>
 							</div>
 						))}
+						</div>
 					</>
 				) : (
 					<div class="text-center py-16">

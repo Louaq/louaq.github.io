@@ -39,45 +39,111 @@ const { tabs, activeTab } = Astro.props;
 </div>
 
 <script>
-  function initTabNavigation() {
-    const tabButtons = document.querySelectorAll('[data-tab]');
-    const sections = document.querySelectorAll('[data-section]');
+  let tabNavAbort: AbortController | null = null;
 
-    tabButtons.forEach(button => {
-      button.addEventListener('click', (event) => {
-        const currentButton = event.currentTarget as HTMLButtonElement;
-        const targetTab = currentButton.dataset.tab;
-
-        // Update active tab
-        tabButtons.forEach(btn => {
-          btn.classList.remove('border-[var(--primary)]', 'text-[var(--primary)]');
-          btn.classList.add('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300');
-        });
-
-        currentButton.classList.remove('border-transparent', 'text-gray-500', 'hover:text-gray-700', 'hover:border-gray-300', 'dark:text-gray-400', 'dark:hover:text-gray-300');
-        currentButton.classList.add('border-[var(--primary)]', 'text-[var(--primary)]');
-
-        // Show/hide sections
-        sections.forEach(section => {
-          const htmlSection = section as HTMLElement;
-          if (htmlSection.dataset.section === targetTab) {
-            htmlSection.classList.remove('hidden');
-          } else {
-            htmlSection.classList.add('hidden');
-          }
-        });
-      });
-    });
+  function getValidTabIds(): string[] {
+    return Array.from(document.querySelectorAll("[data-tab]"))
+      .map((el) => (el as HTMLButtonElement).dataset.tab)
+      .filter((id): id is string => Boolean(id));
   }
 
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initTabNavigation);
+  function applyWatchlistTab(tabId: string | undefined, syncHash: boolean) {
+    const validIds = getValidTabIds();
+    if (validIds.length === 0) return;
+
+    const resolved =
+      tabId && validIds.includes(tabId) ? tabId : validIds[0];
+    if (!resolved) return;
+
+    const tabButtons = document.querySelectorAll("[data-tab]");
+    const sections = document.querySelectorAll("[data-section]");
+
+    tabButtons.forEach((btn) => {
+      const isActive = (btn as HTMLButtonElement).dataset.tab === resolved;
+      if (isActive) {
+        btn.classList.remove(
+          "border-transparent",
+          "text-gray-500",
+          "hover:text-gray-700",
+          "hover:border-gray-300",
+          "dark:text-gray-400",
+          "dark:hover:text-gray-300",
+        );
+        btn.classList.add(
+          "border-[var(--primary)]",
+          "text-[var(--primary)]",
+        );
+      } else {
+        btn.classList.remove(
+          "border-[var(--primary)]",
+          "text-[var(--primary)]",
+        );
+        btn.classList.add(
+          "border-transparent",
+          "text-gray-500",
+          "hover:text-gray-700",
+          "hover:border-gray-300",
+          "dark:text-gray-400",
+          "dark:hover:text-gray-300",
+        );
+      }
+    });
+
+    sections.forEach((section) => {
+      const htmlSection = section as HTMLElement;
+      if (htmlSection.dataset.section === resolved) {
+        htmlSection.classList.remove("hidden");
+      } else {
+        htmlSection.classList.add("hidden");
+      }
+    });
+
+    if (syncHash) {
+      const next = `#${resolved}`;
+      if (location.hash !== next) {
+        history.replaceState(null, "", next);
+      }
+    }
+  }
+
+  function initTabNavigation() {
+    tabNavAbort?.abort();
+    tabNavAbort = new AbortController();
+    const { signal } = tabNavAbort;
+
+    const hashTab = location.hash.slice(1).replace(/^\/+|\/+$/g, "");
+    applyWatchlistTab(hashTab || undefined, false);
+    document.documentElement.removeAttribute("data-watchlist-restore");
+
+    document.querySelectorAll("[data-tab]").forEach((button) => {
+      button.addEventListener(
+        "click",
+        (event) => {
+          const targetTab = (event.currentTarget as HTMLButtonElement).dataset
+            .tab;
+          if (!targetTab) return;
+          applyWatchlistTab(targetTab, true);
+        },
+        { signal },
+      );
+    });
+
+    window.addEventListener(
+      "hashchange",
+      () => {
+        const id = location.hash.slice(1).replace(/^\/+|\/+$/g, "");
+        applyWatchlistTab(id || undefined, false);
+      },
+      { signal },
+    );
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTabNavigation);
   } else {
     initTabNavigation();
   }
 
-  // Re-initialize on Astro page navigation (for View Transitions)
-  document.addEventListener('astro:page-load', initTabNavigation);
+  document.addEventListener("astro:page-load", initTabNavigation);
 </script>
 
