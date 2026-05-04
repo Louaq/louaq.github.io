@@ -275,12 +275,4 @@ export const ja: Translation = {
 	[Key.moments]: "モーメンツ",
 	[Key.momentsDescription]: "つぶやきと日常（WeChat風の見た目）",
 	[Key.momentsEmpty]: "投稿はまだありません",
-
-	// アルバム
-	[Key.albums]: "アルバム",
-	[Key.albumsSubtitle]: "人生の美しい瞬間を記録する",
-	[Key.albumsEmpty]: "アルバムがありません",
-	[Key.albumsEmptyDesc]: "まだアルバムが追加されていません",
-	[Key.albumsPhotoCount]: "枚の写真",
-	[Key.albumsPhotosCount]: "枚の写真",
 };

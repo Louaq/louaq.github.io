@@ -264,14 +264,6 @@ enum I18nKey {
 	moments = "moments",
 	momentsDescription = "momentsDescription",
 	momentsEmpty = "momentsEmpty",
-
-	// 相册
-	albums = "albums",
-	albumsSubtitle = "albumsSubtitle",
-	albumsEmpty = "albumsEmpty",
-	albumsEmptyDesc = "albumsEmptyDesc",
-	albumsPhotoCount = "albumsPhotoCount",
-	albumsPhotosCount = "albumsPhotosCount",
 }
 
 export default I18nKey;

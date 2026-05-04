@@ -4,7 +4,6 @@ import { createHash } from "node:crypto";
 import { getEnabledFriends } from "../config/friendsConfig";
 import { sponsorConfig } from "../config/sponsorConfig";
 import { siteConfig } from "../config/siteConfig";
-import { scanAlbums } from "../utils/album-scanner";
 import { watchlistConfig } from "../config/watchlist";
 
 // 截断文本到指定字节大小，避免单条记录过大导致 Meilisearch 入库失败
@@ -35,7 +34,7 @@ type MeilisearchRecord = {
 	id: string;
 	// 保留 objectID 字段，便于和旧 Algolia 记录互相对照
 	objectID: string;
-	type: "post" | "page" | "friend" | "album" | "watchlist";
+	type: "post" | "page" | "friend" | "watchlist";
 	title: string;
 	description?: string;
 	content: string;
@@ -200,45 +199,7 @@ export const GET: APIRoute = async () => {
 		records.push(shrinkRecordToFit(rec));
 	}
 
-	// 4) 相册（如果页面开启，则索引相册列表与每个相册）
-	if (siteConfig.pages.albums) {
-		const albums = await scanAlbums();
-
-		// 相册总览页
-		records.push(
-			shrinkRecordToFit({
-				objectID: "page:albums",
-				id: makeMeiliId("page:albums"),
-				type: "page",
-				title: "相册",
-				description: "相册与照片集",
-				content: albums
-					.map((a) => `${a.title}\n${a.description ?? ""}\n${(a.tags ?? []).join(" ")}`)
-					.join("\n\n"),
-				url: "/albums/",
-			}),
-		);
-
-		// 每个相册详情页
-		for (const a of albums) {
-			const objectID = `album:${a.id}`;
-			const rec: MeilisearchRecord = {
-				id: makeMeiliId(objectID),
-				objectID,
-				type: "album",
-				title: a.title,
-				description: a.description ?? "",
-				content: [a.title, a.description, a.location, ...(a.tags ?? [])].filter(Boolean).join("\n"),
-				url: `/albums/${a.id}/`,
-				tags: a.tags ?? [],
-				category: a.location ?? "",
-				updated: new Date(a.date).toISOString(),
-			};
-			records.push(shrinkRecordToFit(rec));
-		}
-	}
-
-	// 5) 观影清单（如果页面开启，则索引每条作品并跳到锚点）
+	// 4) 观影清单（如果页面开启，则索引每条作品并跳到锚点）
 	if (siteConfig.pages.watchlist) {
 		const enabledItems = watchlistConfig.items.filter((it) => it.enabled);
 
@@ -280,7 +241,7 @@ export const GET: APIRoute = async () => {
 		}
 	}
 
-	// 6) 赞助页（如果页面开启）
+	// 5) 赞助页（如果页面开启）
 	if (siteConfig.pages.sponsor) {
 		const enabledMethods = sponsorConfig.methods.filter((m) => m.enabled);
 		records.push(

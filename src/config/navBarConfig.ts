@@ -53,9 +53,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	];
 	
 	// 根据配置添加子菜单项
-	if (siteConfig.pages.albums) {
-		aboutChildren.push(LinkPreset.Albums);
-	}
 	if (siteConfig.pages.watchlist) {
 		aboutChildren.push(LinkPreset.Watchlist);
 	}

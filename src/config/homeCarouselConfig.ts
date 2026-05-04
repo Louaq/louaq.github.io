@@ -28,13 +28,13 @@ export const homeCarouselConfig: HomeCarouselConfig = {
 	// 首页轮播总开关
 	enable: true,
 	// 自动轮播间隔（毫秒），设置为 0 可关闭自动播放
-	autoplayMs: 5000,
+	autoplayMs: 10000,
 	// 手动轮播项列表（顺序即展示顺序，且整体排在文章项之前）
 	manualItems: [
 		// 示例：
 		{
 			title: "",
-			image: "https://pic1.imgdb.cn/item/69f1eecce65d5dd64e2f760a.webp",
+			image: "https://pic1.imgdb.cn/item/69f84824c32b4b1956182133.webp",
 			href: "",
 			date: "",
 			category: "",

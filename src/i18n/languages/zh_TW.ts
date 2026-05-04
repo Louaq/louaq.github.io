@@ -271,12 +271,4 @@ export const zh_TW: Translation = {
 	[Key.moments]: "朋友圈",
 	[Key.momentsDescription]: "隨想與日常，樣式參考微信朋友圈",
 	[Key.momentsEmpty]: "暫無動態",
-
-	// 相冊
-	[Key.albums]: "相冊",
-	[Key.albumsSubtitle]: "記錄生活中的美好瞬間",
-	[Key.albumsEmpty]: "暫無相冊",
-	[Key.albumsEmptyDesc]: "還沒有添加任何相冊",
-	[Key.albumsPhotoCount]: "張照片",
-	[Key.albumsPhotosCount]: "張照片",
 };

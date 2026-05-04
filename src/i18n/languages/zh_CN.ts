@@ -268,12 +268,4 @@ export const zh_CN: Translation = {
 	[Key.moments]: "朋友圈",
 	[Key.momentsDescription]: "随想与日常，样式参考微信朋友圈",
 	[Key.momentsEmpty]: "暂无动态",
-
-	// 相册
-	[Key.albums]: "相册",
-	[Key.albumsSubtitle]: "记录生活中的美好瞬间",
-	[Key.albumsEmpty]: "暂无相册",
-	[Key.albumsEmptyDesc]: "还没有添加任何相册",
-	[Key.albumsPhotoCount]: "张照片",
-	[Key.albumsPhotosCount]: "张照片",
 };

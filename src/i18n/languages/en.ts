@@ -275,12 +275,4 @@ export const en: Translation = {
 	[Key.moments]: "Moments",
 	[Key.momentsDescription]: "Notes and daily bits, styled like WeChat Moments",
 	[Key.momentsEmpty]: "No posts yet",
-
-	// Albums
-	[Key.albums]: "Albums",
-	[Key.albumsSubtitle]: "Capturing beautiful moments in life",
-	[Key.albumsEmpty]: "No Albums",
-	[Key.albumsEmptyDesc]: "No albums have been added yet",
-	[Key.albumsPhotoCount]: "photo",
-	[Key.albumsPhotosCount]: "photos",
 };

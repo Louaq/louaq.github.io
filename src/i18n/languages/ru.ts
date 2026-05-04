@@ -277,12 +277,4 @@ export const ru: Translation = {
 	[Key.moments]: "Моменты",
 	[Key.momentsDescription]: "Заметки и будни в стиле WeChat",
 	[Key.momentsEmpty]: "Пока нет записей",
-
-	// Альбомы
-	[Key.albums]: "Альбомы",
-	[Key.albumsSubtitle]: "Запечатление прекрасных моментов жизни",
-	[Key.albumsEmpty]: "Нет альбомов",
-	[Key.albumsEmptyDesc]: "Альбомы еще не добавлены",
-	[Key.albumsPhotoCount]: "фото",
-	[Key.albumsPhotosCount]: "фото",
 };

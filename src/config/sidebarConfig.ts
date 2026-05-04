@@ -79,13 +79,13 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 	// 是否启用该组件
 		// 	enable: true,
 		// 	// 组件显示顺序
-		// 	order: 4,
+		// 	order: 3,
 		// 	// 组件位置
 		// 	position: "sticky",
 		// 	// CSS 类名
 		// 	class: "onload-animation",
 		// 	// 动画延迟时间
-		// 	animationDelay: 150,
+		// 	animationDelay: 0,
 		// 	// 响应式配置
 		// 	responsive: {
 		// 		// 折叠阈值：当分类数量超过5个时自动折叠

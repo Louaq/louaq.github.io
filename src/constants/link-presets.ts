@@ -43,11 +43,6 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/watchlist/",
 		icon: "material-symbols:video-library",
 	},
-	[LinkPreset.Albums]: {
-		name: i18n(I18nKey.albums),
-		url: "/albums/",
-		icon: "material-symbols:photo-library",
-	},
 	[LinkPreset.Categories]: {
 		name: i18n(I18nKey.categories),
 		url: "/categories/",
