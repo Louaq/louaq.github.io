@@ -16,7 +16,7 @@ import type {
  * 如需临时关闭整块通知区域，将 enable 设为 false 即可。
  */
 export const homeTopNoticeConfig: HomeTopNoticeConfig = {
-	enable: true,
+	enable: false,
 	items: [
 		{
 			title: "重要通知",
