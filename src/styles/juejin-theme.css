@@ -672,11 +672,6 @@ widget-layout .widget-title::before {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* 已固定的文章卡片：左侧加蓝色细边作为强调 */
-:root.dark .post-card-wrapper.pinned {
-  border-left-color: var(--juejin-primary) !important;
-}
-
 /* 移动端置顶卡：仅左侧强调条用主色，其余三边与普通卡片同色（避免 hover 整卡描边发蓝） */
 @media (max-width: 767px) {
   #post-list-container .post-card-wrapper.pinned.card-base,
