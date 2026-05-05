@@ -3,9 +3,14 @@ import type { GetStaticPaths } from "astro";
 import HomeCarousel, {
 	type CarouselSlide,
 } from "@/components/layout/HomeCarousel.astro";
+import HomeTopNotice from "@/components/layout/HomeTopNotice.astro";
 import Pagination from "@/components/common/Pagination.astro";
 import PostPage from "@/components/layout/PostPage.astro";
-import { homeCarouselConfig, siteConfig } from "@/config";
+import {
+	getNormalizedHomeTopNoticeItems,
+	homeCarouselConfig,
+	siteConfig,
+} from "@/config";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@/utils/content-utils";
 import { processCoverImageSync } from "@/utils/image-utils";
@@ -89,6 +94,8 @@ const postSlides: CarouselSlide[] = allPosts
 // 手动项始终排在前面，文章项紧随其后
 const featuredSlides: CarouselSlide[] = [...manualSlides, ...postSlides];
 const showCarousel = homeCarouselConfig.enable && page.currentPage === 1;
+const homeTopNoticeItems = getNormalizedHomeTopNoticeItems();
+const showHomeTopNotice = page.currentPage === 1 && homeTopNoticeItems.length > 0;
 ---
 
 <MainGridLayout>
@@ -98,6 +105,7 @@ const showCarousel = homeCarouselConfig.enable && page.currentPage === 1;
       autoplayMs={homeCarouselConfig.autoplayMs}
     />
   )}
+  {showHomeTopNotice && <HomeTopNotice items={homeTopNoticeItems} />}
   <PostPage page={page} />
   {
     page.total > page.size && (

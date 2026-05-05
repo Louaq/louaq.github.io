@@ -45,7 +45,7 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 }
 ---
 
-<div class="home-top-notice-stack mb-4 flex flex-col gap-2">
+<div class="home-top-notice-stack mt-3 mb-3 flex flex-col gap-2">
 	{
 		items.map((item, i) => {
 			const tone = item.type ?? "warning";
@@ -53,19 +53,19 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 			return (
 				<div
 					class:list={[
-						"home-top-notice rounded-xl border shadow-sm backdrop-blur-sm overflow-hidden",
+						"home-top-notice rounded-md border overflow-hidden",
 						barToneClasses(tone),
 					]}
 					id={`home-top-notice-${i}`}
 					role="region"
 					aria-label={item.title || "站点通知"}
 				>
-					<div class="max-w-[var(--page-width)] mx-auto px-3 md:px-4 py-2.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-sm">
+					<div class="max-w-[var(--page-width)] mx-auto px-3 md:px-4 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[13px] md:text-sm">
 						<div class="flex flex-1 min-w-0 items-start sm:items-center gap-2 sm:gap-3 justify-center sm:justify-start text-center sm:text-left">
 							{iconName && (
 								<Icon
 									name={iconName}
-									class="shrink-0 mt-0.5 sm:mt-0 text-[1.125rem] opacity-90"
+									class="shrink-0 mt-0.5 sm:mt-0 text-base opacity-85"
 									aria-hidden="true"
 								/>
 							)}
@@ -84,7 +84,7 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 									rel={
 										item.link.external ? "noopener noreferrer" : undefined
 									}
-									class="btn-regular rounded-lg px-3 py-1.5 text-xs font-medium whitespace-nowrap active:scale-95 transition-transform"
+									class="btn-regular rounded-md px-2.5 py-1 text-xs font-medium whitespace-nowrap active:scale-95 transition-transform"
 								>
 									{item.link.text}
 								</a>

@@ -251,6 +251,16 @@
   color: color-mix(in oklch, var(--tk-muted) 75%, var(--tk-bg) 25%);
 }
 
+/* 评论信息输入区：取消圆角边框，保持直角 */
+.twikoo .el-input__wrapper,
+.twikoo .el-input__inner,
+.twikoo .el-textarea__inner,
+.twikoo .el-input-group__append,
+.twikoo .el-input-group__prepend,
+.twikoo .tk-sort-select {
+  border-radius: 0 !important;
+}
+
 /* 输入组前后缀：背景与文字色跟随主题 */
 .twikoo .el-input-group__append,
 .twikoo .el-input-group__prepend {

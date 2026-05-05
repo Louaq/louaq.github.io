@@ -5,40 +5,54 @@
 
 /* ===== 基础变量定义 ===== */
 :root {
-  --radius-large: 1rem;
+  /* 稀土掘金风格：圆角更小 */
+  --radius-large: 4px;
   --content-delay: 150ms;
+
+  /* 掘金主色（直接使用其品牌色） */
+  --juejin-primary: #1e80ff;
+  --juejin-primary-hover: #4a98ff;
+  --juejin-primary-active: #0066e0;
+  --juejin-text-primary: #1d2129;
+  --juejin-text-secondary: #4e5969;
+  --juejin-text-tertiary: #8a919f;
+  --juejin-bg-page: #f4f5f5;
+  --juejin-bg-card: #ffffff;
+  --juejin-border: #e4e6eb;
+  --juejin-border-hover: #c2c8d1;
+  --juejin-tag-bg: #f4f5f5;
 }
 
 /* ===== 主题相关变量 ===== */
 :root {
-  --primary: oklch(0.70 0.14 var(--hue));
-  --page-bg: oklch(0.95 0.01 var(--hue));
-  --card-bg: white;
+  --primary: var(--juejin-primary);
+  --page-bg: var(--juejin-bg-page);
+  --card-bg: var(--juejin-bg-card);
   --card-bg-transparent: rgba(255, 255, 255, 0.8);
   
-  --btn-content: oklch(0.55 0.12 var(--hue));
-  --btn-regular-bg: oklch(0.95 0.025 var(--hue));
-  --btn-regular-bg-hover: oklch(0.9 0.05 var(--hue));
-  --btn-regular-bg-active: oklch(0.85 0.08 var(--hue));
-  --waves-toggle-bg: oklch(0.92 0.045 var(--hue));
+  --btn-content: var(--juejin-primary);
+  --btn-regular-bg: var(--juejin-tag-bg);
+  --btn-regular-bg-hover: #e9eaec;
+  --btn-regular-bg-active: #dcdee0;
+  --waves-toggle-bg: #e9eaec;
   
-  --btn-plain-bg-hover: oklch(0.95 0.025 var(--hue));
-  --btn-plain-bg-active: oklch(0.98 0.01 var(--hue));
+  --btn-plain-bg-hover: rgba(30, 128, 255, 0.08);
+  --btn-plain-bg-active: rgba(30, 128, 255, 0.12);
   
-  --btn-card-bg-hover: oklch(0.98 0.005 var(--hue));
-  --btn-card-bg-active: oklch(0.9 0.03 var(--hue));
+  --btn-card-bg-hover: #f7f8fa;
+  --btn-card-bg-active: #ebedf0;
   
   --enter-btn-bg: var(--btn-regular-bg);
   --enter-btn-bg-hover: var(--btn-regular-bg-hover);
   --enter-btn-bg-active: var(--btn-regular-bg-active);
   
-  --deep-text: oklch(0.25 0.02 var(--hue));
-  --title-active: oklch(0.6 0.1 var(--hue));
+  --deep-text: var(--juejin-text-primary);
+  --title-active: var(--juejin-primary-active);
   
-  --line-divider: rgba(0, 0, 0, 0.08);
-  --line-color: rgba(0, 0, 0, 0.1);
-  --meta-divider: rgba(0, 0, 0, 0.2);
-  --content-meta: rgba(0, 0, 0, 0.7);
+  --line-divider: var(--juejin-border);
+  --line-color: var(--juejin-border);
+  --meta-divider: var(--juejin-border-hover);
+  --content-meta: var(--juejin-text-secondary);
   
   --inline-code-bg: var(--btn-regular-bg);
   --inline-code-color: var(--btn-content);
@@ -100,29 +114,29 @@
   );
 }
 
-/* 暗色主题变量 */
+/* 暗色主题变量 - 稀土掘金暗色风格 */
 :root.dark {
-  --primary: oklch(0.75 0.14 var(--hue));
-  --page-bg: oklch(0.16 0.014 var(--hue));
-  --card-bg: oklch(0.23 0.015 var(--hue));
-  --card-bg-transparent: rgba(23, 23, 23, 0.8);
+  --primary: #4a98ff;
+  --page-bg: #17171a;
+  --card-bg: #22222a;
+  --card-bg-transparent: rgba(34, 34, 42, 0.8);
   
-  --btn-content: oklch(0.75 0.1 var(--hue));
-  --btn-regular-bg: oklch(0.33 0.035 var(--hue));
-  --btn-regular-bg-hover: oklch(0.38 0.04 var(--hue));
-  --btn-regular-bg-active: oklch(0.43 0.045 var(--hue));
-  --waves-toggle-bg: oklch(0.38 0.05 var(--hue));
+  --btn-content: #4a98ff;
+  --btn-regular-bg: #2d2d35;
+  --btn-regular-bg-hover: #383841;
+  --btn-regular-bg-active: #43434d;
+  --waves-toggle-bg: #383841;
   
-  --btn-plain-bg-hover: oklch(0.30 0.035 var(--hue));
-  --btn-plain-bg-active: oklch(0.27 0.025 var(--hue));
+  --btn-plain-bg-hover: rgba(74, 152, 255, 0.12);
+  --btn-plain-bg-active: rgba(74, 152, 255, 0.18);
   
-  --btn-card-bg-hover: oklch(0.3 0.03 var(--hue));
-  --btn-card-bg-active: oklch(0.35 0.035 var(--hue));
+  --btn-card-bg-hover: #2d2d35;
+  --btn-card-bg-active: #383841;
   
   --line-divider: rgba(255, 255, 255, 0.08);
   --line-color: rgba(255, 255, 255, 0.1);
   --meta-divider: rgba(255, 255, 255, 0.2);
-  --content-meta: rgba(255, 255, 255, 0.6);
+  --content-meta: rgba(255, 255, 255, 0.65);
   
   --selection-bg: oklch(0.40 0.08 var(--hue));
   --codeblock-bg: oklch(0.17 0.015 var(--hue));

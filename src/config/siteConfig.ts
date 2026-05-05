@@ -33,7 +33,8 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 255,
+		// 掘金蓝 #1e80ff 对应 hue ≈ 250
+		hue: 250,
 		// 是否对访问者隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
 		fixed: false,
 		// 是否显示明暗/跟随系统模式切换按钮，与 fixed 独立配置
@@ -70,7 +71,7 @@ export const siteConfig: SiteConfig = {
 		// 导航栏标题
 		title: "louaq",
 		// 全宽导航栏，导航栏是否占满屏幕宽度，true：占满，false：不占满
-		widthFull: false,
+		widthFull: true,
 		// 导航栏图标和标题是否跟随主题色
 		followTheme: false,
 	},
@@ -109,7 +110,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 文章页「上次编辑」相关展示：false 时隐藏元信息里的更新日期 + 正文前的过期提醒卡片
-	showLastModified: true,
+	showLastModified: false,
 
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
 	outdatedThreshold: 5,
@@ -125,7 +126,7 @@ export const siteConfig: SiteConfig = {
   pages: {
 
 	// 友链页面开关
-	friends: false,
+	friends: true,
     sponsor: false, // 赞助页面开关
     guestbook: false, // 留言板页面开关，需要配置评论系统
     bangumi: false, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
@@ -152,7 +153,7 @@ export const siteConfig: SiteConfig = {
 	// 分页配置
 	pagination: {
 		// 首页每页文章数
-		postsPerPage: 15,
+		postsPerPage: 10,
 	},
 
 	// 字体配置

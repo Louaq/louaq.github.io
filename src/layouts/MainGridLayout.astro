@@ -1,12 +1,9 @@
 ---
 import OverlayWallpaper from "@components/features/OverlayWallpaper.astro";
 import Footer from "@components/layout/Footer.astro";
-import HomeTopNotice from "@components/layout/HomeTopNotice.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
 import PostPageTOC from "@components/layout/PostPageTOC.astro";
-import RightSideBar from "@components/layout/RightSideBar.astro";
-import SideBar from "@components/layout/SideBar.astro";
 import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
 import ImageWrapper from "@/components/common/ImageWrapper.astro";
@@ -15,8 +12,6 @@ import TypewriterText from "@/components/features/TypewriterText.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
 import {
 	backgroundWallpaper,
-	getNormalizedHomeTopNoticeItems,
-	sidebarLayoutConfig,
 	siteConfig,
 } from "@/config";
 import {
@@ -25,13 +20,7 @@ import {
 	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
 } from "@/constants/constants";
 import { getBackgroundImages, isHomePage } from "@/utils/layout-utils";
-import {
-	generateGridClasses,
-	generateMainContentClasses,
-	generateRightSidebarClasses,
-	generateSidebarClasses,
-	getResponsiveSidebarConfig,
-} from "@/utils/responsive-utils";
+import { getResponsiveSidebarConfig } from "@/utils/responsive-utils";
 import Layout from "./Layout.astro";
 
 interface Props {
@@ -179,15 +168,12 @@ const mainPanelTop =
 const finalMainPanelTop =
 	isBannerMode && isBackgroundEnabled ? mainPanelTop : "5.5rem";
 
-// 获取响应式侧边栏配置
-// 传入是否为文章详情页的标志，用于控制是否显示右侧边栏
+// 获取响应式侧边栏配置（仅用于读取一些通用 flag，例如是否显示侧栏）
 const sidebarConfig = getResponsiveSidebarConfig(postSlug !== undefined);
-const { gridCols } = generateGridClasses(sidebarConfig);
-const sidebarClass = generateSidebarClasses(sidebarConfig);
-const rightSidebarClass = sidebarConfig.isBothSidebars
-	? generateRightSidebarClasses(sidebarConfig)
-	: "";
-const mainContentClass = generateMainContentClasses(sidebarConfig);
+
+// 单侧栏布局：左侧 17rem 原 widget（profile/倒计时/公告） + 主内容区
+// 移动端 (<768px) 单栏，由 grid-cols-1 控制
+const gridCols = "grid-cols-1 md:grid-cols-[17rem_1fr]";
 
 // 检查是否应该启用半透明效果
 const shouldEnableTransparency = isOverlayMode && isBackgroundEnabled;
@@ -199,8 +185,6 @@ const transparentClass = shouldEnableTransparency
 
 const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 
-const homeTopNoticeItems = getNormalizedHomeTopNoticeItems();
-const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
@@ -517,30 +501,15 @@ const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
             </a>}
 
 
-            {/* 渲染侧边栏 - 根据配置决定使用单侧或双侧边栏 */}
+            {/* 左侧栏：原有 widget（profile / 倒计时 / 公告） */}
             <div id="left-sidebar-wrapper" class="contents">
-                {sidebarConfig.isBothSidebars ? (
-                    <>
-                        {/* 左侧边栏 */}
-                        {sidebarConfig.hasLeftComponents && (sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
-                            <LeftSideBar class={`${sidebarClass} ${transparentClass}`} headings={headings}></LeftSideBar>
-                        )}
-                    </>
-                ) : (
-                    <>
-                        {/* 单侧边栏布局 */}
-                        {(sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
-                            <SideBar class={`${sidebarClass} ${transparentClass}`} headings={headings}></SideBar>
-                        )}
-                    </>
-                )}
+                <div class="hidden md:block md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-2 onload-animation md:h-full">
+                    <LeftSideBar headings={headings} class="md:h-full" />
+                </div>
             </div>
-                    
+
             {/* 主内容区 - 始终渲染，确保 Swup 容器存在 */}
-            <main id="swup-container" class={`${mainContentClass} transition-main`}>
-                {showHomeTopNotice && (
-                  <HomeTopNotice items={homeTopNoticeItems} />
-                )}
+            <main id="swup-container" class="transition-swup-fade overflow-hidden w-full md:col-start-2 md:col-end-3 transition-main">
                 {/* 携带网格布局类名，用于JS更新父容器 */}
                 <div id="grid-class-carrier" data-grid-class={gridCols} class="hidden"></div>
                 {/* 备用 h1 标题 - 当主页横幅文本未启用时，提供隐藏的主标题 */}
@@ -554,29 +523,10 @@ const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
                     </div>
                 </div>
             </main>
-            
-            {/* 右侧边栏 - 仅双侧边栏模式 */}
-            {/* 
-                如果全局配置为双侧栏(position: both)，则使用静态容器(不被swup替换)，避免闪烁。
-                如果全局配置为单侧栏(position: left)，则使用动态容器(被swup替换)，以便在文章页显示右侧栏。
-                注意：为了满足swup要求所有containers必须存在，我们在两种模式下都必须渲染 #right-sidebar-dynamic。
-            */}
-            {sidebarLayoutConfig.position === "both" ? (
-                <>
-                    <div id="right-sidebar-static" class="contents">
-                        {sidebarConfig.isBothSidebars && sidebarConfig.hasRightComponents && (sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
-                            <RightSideBar class={`${rightSidebarClass} ${transparentClass}`} headings={headings}></RightSideBar>
-                        )}
-                    </div>
-                    <div id="right-sidebar-dynamic" class="hidden"></div>
-                </>
-            ) : (
-                <div id="right-sidebar-dynamic" class="contents">
-                    {sidebarConfig.isBothSidebars && sidebarConfig.hasRightComponents && (sidebarConfig.mobileShowSidebar || sidebarConfig.tabletShowSidebar || sidebarConfig.desktopShowSidebar) && (
-                        <RightSideBar class={`${rightSidebarClass} ${transparentClass}`} headings={headings}></RightSideBar>
-                    )}
-                </div>
-            )}
+
+            {/* 占位容器：保留 swup container 不变 */}
+            <div id="right-sidebar-static" class="hidden"></div>
+            <div id="right-sidebar-dynamic" class="hidden"></div>
 
             <div class="footer col-span-2 onload-animation block lg:hidden">
                 <Footer></Footer>
@@ -614,22 +564,10 @@ const showHomeTopNotice = isHomePageCheck && homeTopNoticeItems.length > 0;
 </Layout>
 
 <style is:global>
-  /* 在低于1200px时隐藏右侧边栏 */
-  @media (max-width: 1199px) {
-    #right-sidebar {
-      display: none !important;
-    }
-    
-    /* 同时调整网格布局为两列 */
+  /* 主网格使用单侧栏布局（左 17rem + 主区 1fr） */
+  @media (min-width: 768px) {
     #main-grid {
-      grid-template-columns: 17.5rem 1fr !important;
-    }
-  }
-  
-  /* 在1024px-1199px之间，确保平板端也正确显示 */
-  @media (min-width: 1024px) and (max-width: 1199px) {
-    #main-grid {
-      grid-template-columns: 17.5rem 1fr !important;
+      grid-template-columns: 17rem 1fr !important;
     }
   }
   

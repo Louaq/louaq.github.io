@@ -1,0 +1,91 @@
+---
+/**
+ * 掘金风格 "推荐 / 最新" Tab 切换
+ *
+ * 静态站点没有真正的"推荐"算法；这里仅作为视觉风格还原：
+ * 默认展示"推荐"（实际渲染最新文章），点击"最新"会跳到归档页。
+ */
+import { url } from "@/utils/url-utils";
+
+interface Props {
+  active?: "recommend" | "latest";
+}
+
+const { active = "recommend" } = Astro.props;
+---
+
+<div class="juejin-post-tabs" role="tablist" aria-label="文章筛选">
+  <a
+    href={url("/")}
+    class:list={["juejin-post-tab", { active: active === "recommend" }]}
+    role="tab"
+    aria-selected={active === "recommend"}
+  >
+    推荐
+  </a>
+  <a
+    href={url("/archive/")}
+    class:list={["juejin-post-tab", { active: active === "latest" }]}
+    role="tab"
+    aria-selected={active === "latest"}
+  >
+    最新
+  </a>
+</div>
+
+<style is:global>
+  .juejin-post-tabs {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0.5rem 1.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--juejin-border);
+    border-radius: var(--radius-large);
+    margin-bottom: 0.75rem;
+  }
+  :root.dark .juejin-post-tabs {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .juejin-post-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    height: 2.25rem;
+    padding: 0 0.25rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--juejin-text-secondary);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  :root.dark .juejin-post-tab {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .juejin-post-tab:hover {
+    color: var(--juejin-primary);
+  }
+
+  .juejin-post-tab.active {
+    color: var(--juejin-text-primary);
+    font-weight: 700;
+  }
+  :root.dark .juejin-post-tab.active {
+    color: rgba(255, 255, 255, 0.95);
+  }
+
+  /* 选中下划线（短粗蓝条） */
+  .juejin-post-tab.active::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -0.5rem;
+    transform: translateX(-50%);
+    width: 1.5rem;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--juejin-primary);
+  }
+</style>

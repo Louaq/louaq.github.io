@@ -5,102 +5,130 @@ import { profileConfig } from "@/config/profileConfig";
 import { url } from "@/utils/url-utils";
 ---
 
-<div class="card-base p-3">
-  <a
-    aria-label="Go to About Page"
-    href={url("/about/")}
-    class="group block relative mx-auto mt-1 lg:mx-0 lg:mt-0 mb-3
-       max-w-[12rem] lg:max-w-none overflow-hidden rounded-xl active:scale-95"
-  >
-    <div
-      class="absolute transition pointer-events-none group-hover:bg-black/30 group-active:bg-black/50
-        w-full h-full z-50 flex items-center justify-center"
+<div class="card-base profile-card-juejin p-4">
+  <!-- 头部：左圆形头像 + 右侧名字与个性签名 -->
+  <div class="flex items-center gap-3 min-w-0">
+    <a
+      aria-label="Go to About Page"
+      href={url("/about/")}
+      class="profile-avatar-link group relative flex-shrink-0 block w-12 h-12 rounded-full overflow-hidden active:scale-95"
     >
-      <Icon
-        name="fa6-regular:address-card"
-        class="transition opacity-0 scale-90 group-hover:scale-100 group-hover:opacity-100 text-white text-5xl"
+      <div
+        class="absolute inset-0 transition pointer-events-none z-10
+          group-hover:bg-black/30 group-active:bg-black/50
+          flex items-center justify-center"
+      >
+        <Icon
+          name="fa6-regular:address-card"
+          class="transition opacity-0 scale-75 group-hover:scale-100 group-hover:opacity-100 text-white text-lg"
+        />
+      </div>
+      <ImageWrapper
+        src={profileConfig.avatar || ""}
+        alt="Profile Image of the Author"
+        class="w-12 h-12 object-cover"
       />
-    </div>
-    <ImageWrapper
-      src={profileConfig.avatar || ""}
-      alt="Profile Image of the Author"
-      class="mx-auto lg:w-full h-full lg:mt-0"
-    />
-  </a>
-  <div class="px-2">
-    <div
-      class="font-bold text-xl text-center mb-1 dark:text-neutral-50 transition"
-    >
-      {profileConfig.name}
-    </div>
-    <div
-      class="h-1 w-5 bg-[var(--primary)] mx-auto rounded-full mb-2 transition"
-    >
-    </div>
-    <div class="text-center text-neutral-400 mb-2.5 transition">
-      {profileConfig.bio}
-    </div>
-        <div class="flex flex-wrap gap-2 justify-center mb-1">
-            {profileConfig.links.length > 1 && profileConfig.links.map(item =>
-                    {
-                    const showName = item.showName;
-                    const className = showName 
-                        ? "btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95" 
-                        : "btn-regular rounded-lg h-10 w-10 active:scale-90";
+    </a>
 
-                    if (item.url.startsWith("mailto:")) {
-                        const encodedEmail = Buffer.from(item.url.replace("mailto:", "")).toString("base64");
-                        return <a rel="me" aria-label={item.name} href="#" data-encoded-email={encodedEmail} onclick={`
-                                            (function() {
-                                                const encodedEmail = this.getAttribute('data-encoded-email');
-                                                const decodedEmail = atob(encodedEmail);
-                                                this.href = 'mailto:' + decodedEmail;
-                                                this.removeAttribute('data-encoded-email');
-                                                this.removeAttribute('onclick');
-                                                this.click();
-                                                return false;
-                                            }).call(this);
-                                        `.replace(/\s+/g, " ").trim()
-                                    },
-                                    class={className}>
-                            <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                            {showName && item.name}
-                        </a>
-                    } else {
-                        return <a rel="me" aria-label={item.name} href={item.url} target="_blank" class={className}>
-                            <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                            {showName && item.name}
-                        </a>
-                    }
-                    }
-            )}
-            {profileConfig.links.length == 1 && (function(item){
-                if (item.url.startsWith("mailto:")) {
-                        const encodedEmail = Buffer.from(item.url.replace("mailto:", "")).toString("base64");
-                        return <a rel="me" aria-label={item.name} href="#" data-encoded-email={encodedEmail} onclick={`
-                                            (function() {
-                                                const encodedEmail = this.getAttribute('data-encoded-email');
-                                                const decodedEmail = atob(encodedEmail);
-                                                this.href = 'mailto:' + decodedEmail;
-                                                this.removeAttribute('data-encoded-email');
-                                                this.removeAttribute('onclick');
-                                                this.click();
-                                                return false;
-                                            }).call(this);
-                                        `.replace(/\s+/g, " ").trim()
-                                    },
-                                    class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                            <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                            {item.name}
-                        </a>
-                    } else {
-                        return <a rel="me" aria-label={item.name} href={item.url} target="_blank"
-                                            class="btn-regular rounded-lg h-10 gap-2 px-3 font-bold active:scale-95">
-                                <Icon name={item.icon} class="text-[1.5rem]"></Icon>
-                                {item.name}
-                            </a>
-                    }
-            })(profileConfig.links[0])}
-        </div>
+    <div class="flex flex-col min-w-0 flex-1">
+      <a
+        href={url("/about/")}
+        class="profile-name font-bold text-base leading-tight truncate dark:text-neutral-50 transition"
+      >
+        {profileConfig.name}
+      </a>
+      <div
+        class="profile-bio text-xs text-neutral-400 mt-0.5 truncate transition"
+        title={profileConfig.bio}
+      >
+        {profileConfig.bio}
+      </div>
+    </div>
   </div>
+
+  <!-- 链接图标按钮：紧凑方形按钮 -->
+  {profileConfig.links.length > 0 && (
+    <div class="profile-links flex flex-wrap gap-1.5 mt-3">
+      {profileConfig.links.map((item) => {
+        if (item.url.startsWith("mailto:")) {
+          const encodedEmail = Buffer.from(
+            item.url.replace("mailto:", ""),
+          ).toString("base64");
+          return (
+            <a
+              rel="me"
+              aria-label={item.name}
+              href="#"
+              data-encoded-email={encodedEmail}
+              onclick={`
+                (function() {
+                  const encodedEmail = this.getAttribute('data-encoded-email');
+                  const decodedEmail = atob(encodedEmail);
+                  this.href = 'mailto:' + decodedEmail;
+                  this.removeAttribute('data-encoded-email');
+                  this.removeAttribute('onclick');
+                  this.click();
+                  return false;
+                }).call(this);
+              `
+                .replace(/\s+/g, " ")
+                .trim()}
+              class="profile-link-btn"
+              title={item.name}
+            >
+              <Icon name={item.icon} class="text-base" />
+            </a>
+          );
+        }
+        return (
+          <a
+            rel="me"
+            aria-label={item.name}
+            href={item.url}
+            target="_blank"
+            class="profile-link-btn"
+            title={item.name}
+          >
+            <Icon name={item.icon} class="text-base" />
+          </a>
+        );
+      })}
+    </div>
+  )}
 </div>
+
+<style is:global>
+  .profile-card-juejin {
+    border-radius: var(--radius-large);
+  }
+
+  .profile-card-juejin .profile-name:hover {
+    color: var(--juejin-primary, var(--primary));
+  }
+
+  .profile-card-juejin .profile-link-btn {
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    background: var(--juejin-tag-bg, rgba(0, 0, 0, 0.05));
+    color: var(--juejin-text-secondary, rgba(0, 0, 0, 0.65));
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  :root.dark .profile-card-juejin .profile-link-btn {
+    background: rgba(255, 255, 255, 0.06);
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .profile-card-juejin .profile-link-btn:hover {
+    background: rgba(30, 128, 255, 0.1);
+    color: var(--juejin-primary, var(--primary));
+  }
+
+  :root.dark .profile-card-juejin .profile-link-btn:hover {
+    background: rgba(74, 152, 255, 0.15);
+  }
+</style>

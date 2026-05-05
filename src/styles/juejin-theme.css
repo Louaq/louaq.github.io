@@ -1,0 +1,1035 @@
+/* =============================================================
+ * 全局基础风格
+ * ============================================================= */
+html,
+body {
+  font-family: "HarmonyOS_Regular", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background-color: var(--page-bg) !important;
+  color: var(--juejin-text-primary);
+}
+
+:root.dark body {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+/* 选择高亮：掘金风格的浅蓝 */
+::selection {
+  background-color: rgba(30, 128, 255, 0.2) !important;
+  color: var(--juejin-primary);
+}
+:root.dark ::selection {
+  background-color: rgba(74, 152, 255, 0.3) !important;
+  color: #fff;
+}
+
+/* =============================================================
+ * 卡片：白底 + 极小圆角 + 细边框 + 微阴影
+ * ============================================================= */
+.card-base,
+.card-base-transparent {
+  border-radius: var(--radius-large) !important;
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--juejin-border);
+  box-shadow: none !important;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+:root.dark .card-base,
+:root.dark .card-base-transparent {
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.enable-card-border .card-base,
+.enable-card-border .card-base-transparent {
+  border-radius: var(--radius-large) !important;
+  border: 1px solid var(--juejin-border) !important;
+  box-shadow: none !important;
+}
+
+:root.dark .enable-card-border .card-base,
+:root.dark .enable-card-border .card-base-transparent {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 卡片 hover：边框变蓝 + 微阴影 */
+.card-base:hover,
+.enable-card-border .card-base:hover {
+  border-color: var(--juejin-border) !important;
+  box-shadow: none !important;
+}
+
+:root.dark .card-base:hover,
+:root.dark .enable-card-border .card-base:hover {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: none !important;
+}
+
+/* =============================================================
+ * 导航栏：白底 + 细边框 + 紧凑 + 蓝色 hover
+ * ============================================================= */
+#navbar > div {
+  background: var(--card-bg) !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid var(--juejin-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+}
+
+:root.dark #navbar > div {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* 让导航栏所有透明模式都使用同样的实色 */
+#navbar[data-transparent-mode] > div,
+#navbar[data-transparent-mode].scrolled > div,
+body:has(#banner-wrapper) #navbar[data-transparent-mode] > div,
+body:has(#banner-wrapper) #navbar[data-transparent-mode].scrolled > div,
+#banner-wrapper ~ * #navbar[data-transparent-mode] > div,
+#banner-wrapper ~ * #navbar[data-transparent-mode].scrolled > div,
+body.wallpaper-transparent #navbar > div {
+  background: var(--card-bg) !important;
+  border-radius: 0 !important;
+  border: none !important;
+  border-bottom: 1px solid var(--juejin-border) !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+:root.dark #navbar[data-transparent-mode] > div,
+:root.dark #navbar[data-transparent-mode].scrolled > div,
+:root.dark body:has(#banner-wrapper) #navbar[data-transparent-mode] > div,
+:root.dark
+  body:has(#banner-wrapper)
+  #navbar[data-transparent-mode].scrolled
+  > div,
+:root.dark #banner-wrapper ~ * #navbar[data-transparent-mode] > div,
+:root.dark
+  #banner-wrapper
+  ~ *
+  #navbar[data-transparent-mode].scrolled
+  > div,
+:root.dark body.wallpaper-transparent #navbar > div {
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/*
+ * 移动端：navbar.css 中 Banner 首页 semi/semifull 规则特异性更高，
+ * 会用 0.75rem 底部圆角覆盖上面的 flat 样式，此处再强制拉平。
+ */
+@media (max-width: 1023px) {
+  #banner-wrapper ~ * #navbar[data-transparent-mode="semi"][data-is-home="true"]
+    > div,
+  body:has(#banner-wrapper)
+    #navbar[data-transparent-mode="semi"][data-is-home="true"]
+    > div,
+  #banner-wrapper
+    ~ *
+    #navbar[data-transparent-mode="semifull"][data-is-home="true"]
+    > div,
+  body:has(#banner-wrapper)
+    #navbar[data-transparent-mode="semifull"][data-is-home="true"]
+    > div,
+  #banner-wrapper
+    ~ *
+    #navbar[data-transparent-mode="semifull"][data-is-home="true"].scrolled
+    > div,
+  body:has(#banner-wrapper)
+    #navbar[data-transparent-mode="semifull"][data-is-home="true"].scrolled
+    > div {
+    border-radius: 0 !important;
+  }
+}
+
+/* 导航栏菜单项 hover 时变成蓝色 */
+#navbar .btn-plain {
+  border-radius: 6px !important;
+  color: var(--juejin-text-primary) !important;
+  font-weight: 500;
+}
+:root.dark #navbar .btn-plain {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+#navbar .btn-plain:hover {
+  color: var(--juejin-primary) !important;
+  background-color: transparent !important;
+}
+
+/* 下拉菜单：掘金风格小圆角 */
+.dropdown-content {
+  border-radius: 6px !important;
+  border: 1px solid var(--juejin-border) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
+}
+:root.dark .dropdown-content {
+  border-color: rgba(255, 255, 255, 0.1) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
+}
+
+.dropdown-item {
+  border-radius: 4px !important;
+  margin: 0 4px;
+}
+.dropdown-item:hover {
+  background-color: rgba(30, 128, 255, 0.08) !important;
+  color: var(--juejin-primary) !important;
+}
+:root.dark .dropdown-item:hover {
+  background-color: rgba(74, 152, 255, 0.12) !important;
+}
+
+/* =============================================================
+ * 文章卡片（PostCard）：紧凑型 + 蓝色标题 hover
+ * ============================================================= */
+.post-card-wrapper {
+  border-radius: var(--radius-large) !important;
+}
+
+/* 缩短文章卡片的内边距，让其更紧凑（接近掘金的紧凑列表风格） */
+.post-card-wrapper .post-card-content {
+  padding-top: 1.125rem !important;
+  padding-bottom: 1.125rem !important;
+}
+
+@media (min-width: 768px) {
+  .post-card-wrapper .post-card-content {
+    padding-top: 1.25rem !important;
+    padding-bottom: 1.25rem !important;
+  }
+}
+
+/* 卡片之间的间距更紧凑 */
+#post-list-container.list-mode {
+  gap: 0.5rem !important;
+}
+
+@media (min-width: 768px) {
+  #post-list-container.list-mode {
+    gap: 0.75rem !important;
+  }
+}
+
+/* 标题字号略减、字重保持，hover 蓝色 */
+#post-list-container.list-mode .post-card-title,
+#post-list-container .post-card-title,
+.post-card-title {
+  font-size: 1.125rem !important;
+  line-height: 1.5 !important;
+  color: var(--juejin-text-primary) !important;
+  font-weight: 600 !important;
+}
+:root.dark #post-list-container.list-mode .post-card-title,
+:root.dark .post-card-title {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+@media (min-width: 768px) {
+  #post-list-container.list-mode .post-card-title,
+  .post-card-title {
+    font-size: 18px !important;
+  }
+}
+
+.post-card-title:hover,
+.post-card-title:hover * {
+  color: var(--juejin-primary) !important;
+}
+
+/* 标题左侧的竖线变细 */
+.post-card-title::before {
+  width: 3px !important;
+  border-radius: 2px !important;
+  background-color: var(--juejin-primary) !important;
+}
+
+/* 描述文字偏灰 */
+.post-card-wrapper .description {
+  color: var(--juejin-text-secondary) !important;
+  font-size: 0.875rem !important;
+  line-height: 1.6 !important;
+}
+:root.dark .post-card-wrapper .description {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* 文章封面图圆角 */
+.post-card-image {
+  border-radius: 4px !important;
+  overflow: hidden;
+}
+
+/* 标签：掘金风格的浅灰背景 */
+.post-card-wrapper .stats .btn-regular {
+  background-color: var(--juejin-tag-bg) !important;
+  color: var(--juejin-text-tertiary) !important;
+  border-radius: 2px !important;
+  font-weight: normal !important;
+  padding: 2px 8px !important;
+  height: auto !important;
+  font-size: 0.75rem !important;
+  border: none !important;
+}
+:root.dark .post-card-wrapper .stats .btn-regular {
+  background-color: rgba(255, 255, 255, 0.06) !important;
+  color: rgba(255, 255, 255, 0.55) !important;
+}
+.post-card-wrapper .stats .btn-regular:hover {
+  background-color: rgba(30, 128, 255, 0.1) !important;
+  color: var(--juejin-primary) !important;
+}
+:root.dark .post-card-wrapper .stats .btn-regular:hover {
+  background-color: rgba(74, 152, 255, 0.15) !important;
+}
+
+/* =============================================================
+ * 元信息（PostMeta）：紧凑 + 浅灰
+ * ============================================================= */
+.post-meta {
+  font-size: 0.8125rem !important;
+  color: var(--juejin-text-tertiary) !important;
+}
+:root.dark .post-meta {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+.post-meta .meta-icon {
+  width: 1.25rem !important;
+  height: 1.25rem !important;
+  background-color: transparent !important;
+  margin-right: 0.25rem !important;
+  color: var(--juejin-text-tertiary) !important;
+}
+:root.dark .post-meta .meta-icon {
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/* =============================================================
+ * 按钮：常规按钮风格（btn-regular）
+ * ============================================================= */
+.btn-regular {
+  border-radius: 4px !important;
+  font-weight: 500;
+}
+
+/* 主题色按钮 */
+.btn-regular.success,
+.btn-regular-dark.success {
+  background-color: var(--juejin-primary) !important;
+  color: #fff !important;
+}
+.btn-regular.success:hover,
+.btn-regular-dark.success:hover {
+  background-color: var(--juejin-primary-hover) !important;
+}
+
+/* =============================================================
+ * 链接默认样式
+ * ============================================================= */
+a {
+  text-decoration: none;
+}
+.link {
+  color: var(--juejin-primary) !important;
+}
+
+/* =============================================================
+ * 侧边栏 widget：掘金风格白卡片 + 标题
+ * ============================================================= */
+.widget {
+  border-radius: var(--radius-large) !important;
+}
+
+/* widget 内的标题（h2/h3）变成掘金黑色 */
+.widget h1,
+.widget h2,
+.widget h3,
+.widget h4 {
+  color: var(--juejin-text-primary);
+}
+:root.dark .widget h1,
+:root.dark .widget h2,
+:root.dark .widget h3,
+:root.dark .widget h4 {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+/* =============================================================
+ * 个人资料卡：掘金风格头像 + 名字
+ * ============================================================= */
+/* 头像区域：圆形 + 居中 */
+.card-base.p-3 > a:first-child {
+  border-radius: var(--radius-large) !important;
+}
+
+/* 个人资料下的"分隔线"色调用蓝 */
+.card-base .h-1.w-5 {
+  background-color: var(--juejin-primary) !important;
+}
+
+/* =============================================================
+ * 分页 / 翻页：掘金风格
+ * ============================================================= */
+.pagination button,
+.pagination a {
+  border-radius: 4px !important;
+}
+
+/* =============================================================
+ * 滚动条：更细更浅
+ * ============================================================= */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.3);
+}
+:root.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+:root.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* =============================================================
+ * 文章页：内容卡片紧凑化
+ * ============================================================= */
+#post-cover,
+.custom-md img {
+  border-radius: 4px !important;
+}
+
+/* =============================================================
+ * 倒计时 / Countdown widget：掘金风格数字
+ * ============================================================= */
+.widget [class*="text-"] {
+  letter-spacing: 0;
+}
+
+/* =============================================================
+ * 公告 / Announcement
+ * ============================================================= */
+.widget .announcement,
+.widget .countdown {
+  font-size: 0.875rem;
+}
+
+/* =============================================================
+ * 顶部 Banner（如有）：与卡片融合，去除强阴影
+ * ============================================================= */
+#banner-wrapper {
+  background-color: var(--page-bg);
+}
+
+/* =============================================================
+ * Tag / 分类按钮（公共按钮链接）
+ * ============================================================= */
+.btn-card {
+  border-radius: 4px !important;
+}
+
+/* =============================================================
+ * Footer 简化
+ * ============================================================= */
+footer {
+  color: var(--juejin-text-tertiary);
+  font-size: 0.875rem;
+}
+:root.dark footer {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* =============================================================
+ * Float Panel（搜索框、菜单等）
+ * ============================================================= */
+.float-panel {
+  border-radius: 6px !important;
+  border-color: var(--juejin-border) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+:root.dark .float-panel {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* =============================================================
+ * 输入框：搜索栏掘金风格
+ * ============================================================= */
+input[type="text"],
+input[type="search"] {
+  border-radius: 6px !important;
+}
+
+/* 移除 link-underline 的虚线下划线（掘金风格更简洁） */
+.link-underline {
+  text-decoration: none !important;
+}
+.link-underline:hover {
+  color: var(--juejin-primary) !important;
+}
+
+/* =============================================================
+ * 文章详情页中的链接（保留可点击的视觉提示）
+ * ============================================================= */
+.custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
+  color: var(--juejin-primary);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(30, 128, 255, 0.3);
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain):hover {
+  color: var(--juejin-primary-hover);
+  border-bottom-color: var(--juejin-primary-hover);
+}
+:root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
+  color: var(--juejin-primary);
+  border-bottom-color: rgba(74, 152, 255, 0.3);
+}
+
+/* =============================================================
+ * 主内容区域整体留白与卡片间距
+ * ============================================================= */
+@media (min-width: 1024px) {
+  /* 主网格内卡片之间的垂直间距更紧凑 */
+  #main-grid {
+    gap: 0.75rem !important;
+  }
+}
+
+/* =============================================================
+ * 「关于」/「文章」等页面的正文 h1/h2/h3
+ * ============================================================= */
+.custom-md h1,
+.custom-md h2,
+.custom-md h3,
+.custom-md h4 {
+  color: var(--juejin-text-primary);
+}
+:root.dark .custom-md h1,
+:root.dark .custom-md h2,
+:root.dark .custom-md h3,
+:root.dark .custom-md h4 {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* =============================================================
+ * Widget 标题：左侧蓝色竖线（掘金子标题视觉）
+ * ============================================================= */
+.widget-title::before,
+widget-layout .widget-title::before {
+  background-color: var(--juejin-primary) !important;
+  width: 3px !important;
+  height: 16px !important;
+  border-radius: 2px !important;
+}
+
+/* =============================================================
+ * 倒计时 Widget：方块样式适配掘金
+ * ============================================================= */
+.countdown-item {
+  border-radius: 4px !important;
+  background: var(--juejin-tag-bg) !important;
+}
+:root.dark .countdown-item {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+.countdown-value {
+  color: var(--juejin-primary) !important;
+  font-weight: 700 !important;
+}
+
+/* =============================================================
+ * 首页轮播 HomeCarousel：圆角更小
+ * ============================================================= */
+.swiper,
+.swiper-slide {
+  border-radius: var(--radius-large) !important;
+  overflow: hidden;
+}
+
+/* =============================================================
+ * HomeTopNotice 顶部通知条：紧凑型卡片
+ * ============================================================= */
+#home-top-notice,
+.home-top-notice {
+  border-radius: 4px !important;
+  border: 1px solid var(--juejin-border) !important;
+  background: color-mix(in oklch, var(--card-bg) 96%, var(--juejin-primary) 4%) !important;
+  box-shadow: none !important;
+}
+:root.dark #home-top-notice,
+:root.dark .home-top-notice {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: color-mix(in oklch, var(--card-bg) 93%, #4a98ff 7%) !important;
+}
+
+.home-top-notice-stack .home-top-notice {
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.home-top-notice-stack .home-top-notice:hover {
+  border-color: var(--juejin-border) !important;
+  box-shadow: none !important;
+}
+
+/* =============================================================
+ * 文章详情页：标题层次感 + 卡片样式
+ * ============================================================= */
+.custom-md h1 {
+  font-size: 1.875rem !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid var(--juejin-border);
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+.custom-md h2 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.custom-md h3 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+:root.dark .custom-md h1 {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 文章引用块：掘金风格的浅蓝左边框 */
+.custom-md blockquote {
+  border-left: 3px solid var(--juejin-primary) !important;
+  background: rgba(30, 128, 255, 0.04) !important;
+  border-radius: 0 4px 4px 0 !important;
+  padding: 0.75rem 1rem !important;
+  color: var(--juejin-text-secondary);
+}
+:root.dark .custom-md blockquote {
+  background: rgba(74, 152, 255, 0.08) !important;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* 文章内联代码 */
+.custom-md :not(pre) > code {
+  background: var(--juejin-tag-bg) !important;
+  color: #c7254e !important;
+  border-radius: 3px !important;
+  padding: 2px 6px !important;
+  font-size: 0.875em !important;
+  border: none !important;
+}
+:root.dark .custom-md :not(pre) > code {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ff7b85 !important;
+}
+
+/* =============================================================
+ * 文章 banner（如有）：掘金风格圆角
+ * ============================================================= */
+#post-cover {
+  border-radius: var(--radius-large) !important;
+}
+
+/* =============================================================
+ * 表格样式：掘金风格
+ * ============================================================= */
+.custom-md table {
+  border-collapse: collapse;
+  border: 1px solid var(--juejin-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.custom-md th {
+  background: var(--juejin-tag-bg);
+  font-weight: 600;
+}
+.custom-md th,
+.custom-md td {
+  border: 1px solid var(--juejin-border);
+  padding: 0.5rem 0.75rem;
+}
+:root.dark .custom-md table,
+:root.dark .custom-md th,
+:root.dark .custom-md td {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+:root.dark .custom-md th {
+  background: rgba(255, 255, 255, 0.06);
+}
+
+/* 已固定的文章卡片：左侧加蓝色细边作为强调 */
+:root.dark .post-card-wrapper.pinned {
+  border-left-color: var(--juejin-primary) !important;
+}
+
+/* 移动端置顶卡：仅左侧强调条用主色，其余三边与普通卡片同色（避免 hover 整卡描边发蓝） */
+@media (max-width: 767px) {
+  #post-list-container .post-card-wrapper.pinned.card-base,
+  #post-list-container .post-card-wrapper.pinned.card-base:hover {
+    border-top-color: var(--juejin-border) !important;
+    border-right-color: var(--juejin-border) !important;
+    border-bottom-color: var(--juejin-border) !important;
+    box-shadow: none !important;
+  }
+  :root.dark #post-list-container .post-card-wrapper.pinned.card-base,
+  :root.dark #post-list-container .post-card-wrapper.pinned.card-base:hover {
+    border-top-color: rgba(255, 255, 255, 0.08) !important;
+    border-right-color: rgba(255, 255, 255, 0.08) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+  }
+}
+
+/* =============================================================
+ * 友链卡片 / 一些通用按钮链接
+ * ============================================================= */
+.btn-card {
+  border: 1px solid var(--juejin-border) !important;
+  background: var(--card-bg) !important;
+}
+:root.dark .btn-card {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+.btn-card:hover {
+  border-color: var(--juejin-border) !important;
+  background: rgba(30, 128, 255, 0.04) !important;
+  box-shadow: none !important;
+}
+:root.dark .btn-card:hover {
+  border-color: rgba(255, 255, 255, 0.08) !important;
+  background: rgba(74, 152, 255, 0.06) !important;
+  box-shadow: none !important;
+}
+
+/* =============================================================
+ * 文章列表"信息流"风格（掘金紧凑卡片）：
+ *  - 一个外层大白卡 + 行间细分割线
+ *  - 每条紧凑：标题(黑) → 描述(1 行) → 底部 meta + 标签
+ *  - 右侧小封面图（130x80）
+ * ============================================================= */
+@media (min-width: 768px) {
+  /* 列表外壳：单一白卡 */
+  #post-list-container.list-mode {
+    background: var(--card-bg) !important;
+    border: 1px solid var(--juejin-border) !important;
+    border-radius: var(--radius-large) !important;
+    padding: 0 !important;
+    gap: 0 !important;
+  }
+  :root.dark #post-list-container.list-mode {
+    border-color: rgba(255, 255, 255, 0.08) !important;
+  }
+
+  /* 每条卡片：去边框 + 行分割线 */
+  #post-list-container.list-mode .post-card-wrapper {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid var(--juejin-border) !important;
+    flex-direction: row !important;
+    align-items: stretch !important;
+  }
+  :root.dark #post-list-container.list-mode .post-card-wrapper {
+    border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+  }
+  #post-list-container.list-mode .post-card-wrapper:last-child {
+    border-bottom: none !important;
+  }
+
+  /* hover：浅蓝底，无放大 */
+  #post-list-container.list-mode .post-card-wrapper:hover {
+    background: rgba(30, 128, 255, 0.02) !important;
+    border-color: var(--juejin-border) !important;
+    box-shadow: none !important;
+  }
+  :root.dark #post-list-container.list-mode .post-card-wrapper:hover {
+    background: rgba(74, 152, 255, 0.04) !important;
+    border-bottom-color: rgba(255, 255, 255, 0.06) !important;
+  }
+
+  /* 隐藏标题左侧小竖线 */
+  #post-list-container.list-mode .post-card-title::before {
+    display: none !important;
+  }
+
+  /* ====== 内容区：紧凑 flex 布局 ====== */
+  #post-list-container.list-mode .post-card-content {
+    padding: 18px 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 6px !important;
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+
+  /* 有封面时：内容区让位给封面图 */
+  #post-list-container.list-mode .has-cover .post-card-content {
+    width: calc(100% - 150px) !important;
+    flex: 1 1 auto !important;
+  }
+
+  /* ====== 标题：黑色粗体，hover 蓝色 ====== */
+  #post-list-container.list-mode .post-card-title {
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+    font-weight: 600 !important;
+    color: var(--juejin-text-primary) !important;
+    margin: 0 0 2px 0 !important;
+    order: 1;
+    /* 单行省略 */
+    display: block !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+  :root.dark #post-list-container.list-mode .post-card-title {
+    color: rgba(255, 255, 255, 0.92) !important;
+  }
+  #post-list-container.list-mode .post-card-title:hover,
+  #post-list-container.list-mode .post-card-title:hover * {
+    color: var(--juejin-primary) !important;
+  }
+
+  /* ====== 描述：1 行省略，14px 灰色 ====== */
+  #post-list-container.list-mode .description {
+    font-size: 0.875rem !important;
+    line-height: 1.55 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: var(--juejin-text-secondary) !important;
+    order: 2;
+    flex-grow: 0 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 1 !important;
+    line-clamp: 1 !important;
+    -webkit-box-orient: vertical !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+  }
+  :root.dark #post-list-container.list-mode .description {
+    color: rgba(255, 255, 255, 0.55) !important;
+  }
+
+  /* ====== 顶部 meta（日期/分类/字数）：缩小 + 简化 ====== */
+  #post-list-container.list-mode .post-meta {
+    order: 3;
+    margin: 6px 0 0 0 !important;
+    gap: 12px !important;
+    row-gap: 4px !important;
+    font-size: 0.8125rem !important;
+    color: var(--juejin-text-tertiary) !important;
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    overflow: hidden !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta {
+    color: rgba(255, 255, 255, 0.45) !important;
+  }
+
+  /* meta 内的图标框：去掉灰色背景，仅保留小图标 */
+  #post-list-container.list-mode .post-meta .meta-icon {
+    width: auto !important;
+    height: auto !important;
+    background: transparent !important;
+    color: var(--juejin-text-tertiary) !important;
+    margin-right: 4px !important;
+    padding: 0 !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta .meta-icon {
+    color: rgba(255, 255, 255, 0.45) !important;
+  }
+  #post-list-container.list-mode .post-meta .meta-icon svg {
+    width: 0.95rem !important;
+    height: 0.95rem !important;
+  }
+  /* meta 文字 */
+  #post-list-container.list-mode .post-meta .text-50,
+  #post-list-container.list-mode .post-meta .text-sm {
+    font-size: 0.8125rem !important;
+    color: var(--juejin-text-tertiary) !important;
+    font-weight: 400 !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta .text-50,
+  :root.dark #post-list-container.list-mode .post-meta .text-sm {
+    color: rgba(255, 255, 255, 0.45) !important;
+  }
+  /* 置顶徽标缩小 */
+  #post-list-container.list-mode .post-meta .pinned-btn {
+    padding: 1px 6px !important;
+    font-size: 0.6875rem !important;
+    border-radius: 2px !important;
+    background: rgba(30, 128, 255, 0.08) !important;
+    color: var(--juejin-primary) !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta .pinned-btn {
+    background: rgba(74, 152, 255, 0.15) !important;
+  }
+  #post-list-container.list-mode .post-meta .pinned-btn .text-xl {
+    font-size: 0.875rem !important;
+  }
+
+  /* ====== 底部标签：移到 meta 右侧（abs 定位） ====== */
+  #post-list-container.list-mode .post-card-content {
+    position: relative !important;
+  }
+  #post-list-container.list-mode .stats {
+    order: 4;
+    margin: 0 !important;
+    margin-top: -1.625rem !important; /* 拉到 meta 同一行 */
+    margin-left: auto !important;
+    align-self: flex-end !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+  }
+  /* 标签外观：浅灰小标签 */
+  #post-list-container.list-mode .stats .btn-regular {
+    height: 22px !important;
+    line-height: 22px !important;
+    padding: 0 8px !important;
+    font-size: 0.6875rem !important;
+    border-radius: 2px !important;
+    background-color: var(--juejin-tag-bg) !important;
+    color: var(--juejin-text-tertiary) !important;
+    font-weight: 400 !important;
+    border: none !important;
+  }
+  :root.dark #post-list-container.list-mode .stats .btn-regular {
+    background-color: rgba(255, 255, 255, 0.06) !important;
+    color: rgba(255, 255, 255, 0.5) !important;
+  }
+  #post-list-container.list-mode .stats .btn-regular:hover {
+    background-color: rgba(30, 128, 255, 0.1) !important;
+    color: var(--juejin-primary) !important;
+  }
+
+  /* ====== 右侧封面图：小尺寸 130x80（4:2.5） ====== */
+  #post-list-container.list-mode .post-card-image {
+    width: 130px !important;
+    max-width: 130px !important;
+    height: auto !important;
+    aspect-ratio: 16 / 10 !important;
+    border-radius: 4px !important;
+    margin: 18px 20px 18px 0 !important;
+    align-self: center !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* 移动端：保留竖排但缩小行高，封面图更窄 */
+@media (max-width: 767px) {
+  #post-list-container.list-mode .post-card-wrapper {
+    border-radius: var(--radius-large) !important;
+  }
+  #post-list-container.list-mode .post-card-content {
+    padding: 14px 16px !important;
+  }
+  #post-list-container.list-mode .post-card-title {
+    font-size: 18px !important;
+    line-height: 1.45 !important;
+  }
+}
+
+/* =============================================================
+ * 全宽 / 居中：让页面 max-width 略宽，匹配掘金 ~1200px 内容区
+ * ============================================================= */
+@media (min-width: 1280px) {
+  .max-w-\[var\(--page-width\)\] {
+    max-width: 1200px !important;
+  }
+}
+
+/* =============================================================
+ * Footer 简化（掘金底部不显眼）
+ * ============================================================= */
+.footer .border-dashed {
+  border-style: solid !important;
+  border-color: var(--juejin-border) !important;
+}
+
+/* =============================================================
+ * 主网格列间距更紧凑（掘金的栏间留白比较小）
+ * ============================================================= */
+#main-grid {
+  gap: 12px !important;
+}
+
+@media (min-width: 1280px) {
+  #main-grid {
+    gap: 16px !important;
+  }
+}
+
+/* =============================================================
+ * 顶部导航栏：选中态下的菜单项加底部蓝色短线
+ * ============================================================= */
+#navbar .navbar-link-active {
+  color: var(--juejin-primary) !important;
+}
+
+/* =============================================================
+ * 导航栏 logo 旁加掘金风格的"NEW" 角标
+ * 通过 ::after 注入，避免修改组件 markup
+ * ============================================================= */
+#navbar a[aria-label="Go to Home Page"],
+#navbar a[href$="/"]:has(img):first-child {
+  position: relative;
+}
+
+/* =============================================================
+ * 主网格中卡片区底部留白（避免被悬浮按钮遮挡）
+ * ============================================================= */
+#post-list-container {
+  margin-bottom: 1rem !important;
+}
+
+
+/* =============================================================
+ * 列表模式下：标签条更紧凑（限制最多 3 个标签视觉上的清爽）
+ * ============================================================= */
+@media (min-width: 768px) {
+  #post-list-container.list-mode .post-card-wrapper .stats {
+    gap: 6px !important;
+  }
+  #post-list-container.list-mode .post-card-wrapper .stats .btn-regular {
+    height: 22px !important;
+    padding: 0 6px !important;
+    font-size: 0.6875rem !important;
+    line-height: 22px !important;
+  }
+}
+
+/* =============================================================
+ * 主导航的菜单项：更紧凑、字号小一点
+ * ============================================================= */
+#navbar .btn-plain.h-11 {
+  height: 2.5rem !important;
+  padding: 0 0.75rem !important;
+  font-size: 0.9375rem !important;
+}
+
+/* 顶层导航文本 */
+#navbar a.btn-plain {
+  font-size: 0.9375rem !important;
+}
+
+/* =============================================================
+ * 导航栏右侧"创作"按钮（如果存在）/ Logo 标题不要过粗
+ * ============================================================= */
+#navbar a[href="/"] {
+  font-weight: 600 !important;
+}
