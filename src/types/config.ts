@@ -306,9 +306,6 @@ export type HomeTopNoticeItem = {
 	content: string;
 	icon?: string;
 	type?: HomeTopNoticeTone;
-	closable?: boolean;
-	/** 每条可单独指定；多条时未指定则用顶层 dismissKey 加序号 */
-	dismissKey?: string;
 	link?: {
 		enable: boolean;
 		text: string;
@@ -317,24 +314,11 @@ export type HomeTopNoticeItem = {
 	};
 };
 
-/** 首页顶部重要通知（主栏顶部），与侧边栏公告独立配置 */
+/** 首页顶部重要通知（主栏顶部），与侧边栏公告独立配置
+ *  - 多条通知统一通过 items 数组配置，自上而下排列。 */
 export type HomeTopNoticeConfig = {
 	enable: boolean;
-	/** 多条通知自上而下排列；非空时优先于下方单条字段 title/content/... */
-	items?: HomeTopNoticeItem[];
-	title?: string;
-	content?: string;
-	icon?: string;
-	type?: HomeTopNoticeTone;
-	closable?: boolean;
-	/** 关闭状态写入 localStorage 时的键后缀；发布新通知时可改成新字符串 */
-	dismissKey?: string;
-	link?: {
-		enable: boolean;
-		text: string;
-		url: string;
-		external?: boolean;
-	};
+	items: HomeTopNoticeItem[];
 };
 
 // 单个字体配置

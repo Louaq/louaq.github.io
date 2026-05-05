@@ -1,8 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
 import type { HomeTopNoticeItem, HomeTopNoticeTone } from "@/types/config";
-import I18nKey from "@/i18n/i18nKey";
-import { i18n } from "@/i18n/translation";
 
 interface Props {
 	items: HomeTopNoticeItem[];
@@ -45,13 +43,6 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 	const tone = item.type ?? "warning";
 	return defaultIcon[tone] ?? defaultIcon.warning;
 }
-
-function storageKeyFor(item: HomeTopNoticeItem, index: number): string {
-	const base = item.dismissKey?.trim() || "default";
-	return items.length > 1
-		? `homeTopNoticeDismissed:${base}:${index}`
-		: `homeTopNoticeDismissed:${base}`;
-}
 ---
 
 <div class="home-top-notice-stack mb-4 flex flex-col gap-2">
@@ -59,17 +50,12 @@ function storageKeyFor(item: HomeTopNoticeItem, index: number): string {
 		items.map((item, i) => {
 			const tone = item.type ?? "warning";
 			const iconName = resolveIcon(item);
-			const storageKey = storageKeyFor(item, i);
-			const closable = item.closable === true;
 			return (
 				<div
 					class:list={[
 						"home-top-notice rounded-xl border shadow-sm backdrop-blur-sm overflow-hidden",
 						barToneClasses(tone),
 					]}
-					data-home-top-notice-item
-					data-storage-key={storageKey}
-					data-closable={closable ? "true" : "false"}
 					id={`home-top-notice-${i}`}
 					role="region"
 					aria-label={item.title || "站点通知"}
@@ -90,8 +76,8 @@ function storageKeyFor(item: HomeTopNoticeItem, index: number): string {
 								<span class="opacity-95">{item.content}</span>
 							</div>
 						</div>
-						<div class="flex shrink-0 items-center justify-center sm:justify-end gap-2">
-							{item.link?.enable && item.link.url?.trim() && (
+						{item.link?.enable && item.link.url?.trim() && (
+							<div class="flex shrink-0 items-center justify-center sm:justify-end gap-2">
 								<a
 									href={item.link.url}
 									target={item.link.external ? "_blank" : "_self"}
@@ -102,18 +88,8 @@ function storageKeyFor(item: HomeTopNoticeItem, index: number): string {
 								>
 									{item.link.text}
 								</a>
-							)}
-							{closable && (
-								<button
-									type="button"
-									class="rounded-lg h-8 w-8 inline-flex items-center justify-center hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
-									data-home-top-notice-close
-									aria-label={i18n(I18nKey.announcementClose)}
-								>
-									<Icon name="fa6-solid:xmark" class="text-sm" />
-								</button>
-							)}
-						</div>
+							</div>
+						)}
 					</div>
 				</div>
 			);
@@ -122,35 +98,21 @@ function storageKeyFor(item: HomeTopNoticeItem, index: number): string {
 </div>
 
 <script>
-	function hideHomeTopNotice(el) {
-		if (!el) return;
-		el.style.display = "none";
-		el.setAttribute("aria-hidden", "true");
-	}
-
-	function bindHomeTopNotice() {
-		document.querySelectorAll("[data-home-top-notice-item]").forEach((node) => {
-			const el = node;
-			if (!(el instanceof HTMLElement)) return;
-			if (el.dataset.bound === "1") return;
-			el.dataset.bound = "1";
-
-			const key = el.dataset.storageKey || "";
-			const canClose = el.dataset.closable === "true";
-
-			if (canClose && key && localStorage.getItem(key) === "true") {
-				hideHomeTopNotice(el);
-				return;
+	function pruneLegacyDismissKeys() {
+		try {
+			const prefix = "homeTopNoticeDismissed:";
+			const removable: string[] = [];
+			for (let i = 0; i < localStorage.length; i++) {
+				const k = localStorage.key(i);
+				if (k && k.startsWith(prefix)) removable.push(k);
 			}
-
-			const btn = el.querySelector("[data-home-top-notice-close]");
-			btn?.addEventListener("click", () => {
-				if (key) localStorage.setItem(key, "true");
-				hideHomeTopNotice(el);
-			});
-		});
+			for (const k of removable) localStorage.removeItem(k);
+		} catch (_e) {
+			// localStorage 不可用时静默忽略
+		}
 	}
 
-	document.addEventListener("DOMContentLoaded", bindHomeTopNotice);
-	document.addEventListener("swup:contentReplaced", bindHomeTopNotice);
+	pruneLegacyDismissKeys();
+	document.addEventListener("DOMContentLoaded", pruneLegacyDismissKeys);
+	document.addEventListener("swup:contentReplaced", pruneLegacyDismissKeys);
 </script>

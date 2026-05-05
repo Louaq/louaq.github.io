@@ -33,7 +33,7 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 355,
+		hue: 255,
 		// 是否对访问者隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
 		fixed: false,
 		// 是否显示明暗/跟随系统模式切换按钮，与 fixed 独立配置
@@ -115,7 +115,7 @@ export const siteConfig: SiteConfig = {
 	outdatedThreshold: 5,
 
 	// 文章页"上一篇/下一篇"导航开关
-	showPostPrevNext: false,
+	showPostPrevNext: true,
 
 	// OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	generateOgImages: false,

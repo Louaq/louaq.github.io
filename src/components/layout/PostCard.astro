@@ -57,10 +57,14 @@ const { remarkPluginFrontmatter } = await render(entry);
     "post-card-wrapper",
     hasCover ? "has-cover" : "no-cover",
     pinned ? "pinned" : "",
-    "card-base flex flex-col md:flex-row w-full rounded-[var(--radius-large)] overflow-hidden relative",
+    "card-base flex flex-col md:flex-row w-full rounded-[var(--radius-large)] overflow-hidden relative cursor-pointer",
     className,
   ]}
   style={style}
+  data-url={url}
+  role="link"
+  tabindex="0"
+  aria-label={title}
 >
   <!-- pinned icon -->
   <div
@@ -185,26 +189,73 @@ const { remarkPluginFrontmatter } = await render(entry);
     )
   }
 
-  {
-    !hasCover && (
-      <a
-        href={url}
-        aria-label={title}
-        class:list={[
-          "post-card-enter-btn",
-          "hidden md:flex btn-regular w-13 h-[182px]",
-          "absolute right-3 top-1/2 -translate-y-1/2 rounded-xl bg-(--enter-btn-bg)",
-          "hover:bg-(--enter-btn-bg-hover) active:bg-(--enter-btn-bg-active) active:scale-95",
-        ]}
-      >
-        <Icon
-          name="material-symbols:chevron-right-rounded"
-          class="transition text-(--primary) text-4xl mx-auto"
-        />
-      </a>
-    )
-  }
 </div>
+
+<script>
+  function initPostCardClick() {
+    const cards = document.querySelectorAll<HTMLElement>(
+      ".post-card-wrapper[data-url]"
+    );
+    cards.forEach((card) => {
+      if (card.dataset.cardClickBound === "1") return;
+      card.dataset.cardClickBound = "1";
+
+      const url = card.getAttribute("data-url");
+      if (!url) return;
+
+      let startX = 0;
+      let startY = 0;
+
+      card.addEventListener("mousedown", (e) => {
+        startX = e.clientX;
+        startY = e.clientY;
+      });
+
+      card.addEventListener("click", (e) => {
+        const target = e.target as HTMLElement | null;
+        if (!target) return;
+
+        // 点击的是链接、按钮等交互元素时，由元素自己处理
+        if (target.closest("a, button, input, textarea, select, label, [role='button']")) {
+          return;
+        }
+
+        // 拖动选择文字时不跳转
+        const dx = Math.abs(e.clientX - startX);
+        const dy = Math.abs(e.clientY - startY);
+        if (dx > 5 || dy > 5) return;
+
+        // 如果用户选中了文字，不跳转
+        const selection = window.getSelection();
+        if (selection && selection.toString().length > 0) return;
+
+        // 中键 / Ctrl+Click / Cmd+Click 等组合在新窗口打开
+        if (e.ctrlKey || e.metaKey || e.shiftKey || (e as MouseEvent).button === 1) {
+          window.open(url, "_blank", "noopener");
+          return;
+        }
+
+        window.location.href = url;
+      });
+
+      // 键盘可访问性：Enter / Space 触发跳转
+      card.addEventListener("keydown", (e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          const target = e.target as HTMLElement | null;
+          if (target && target !== card && target.closest("a, button, input, textarea, select")) {
+            return;
+          }
+          e.preventDefault();
+          window.location.href = url;
+        }
+      });
+    });
+  }
+
+  initPostCardClick();
+  document.addEventListener("astro:page-load", initPostCardClick);
+  document.addEventListener("astro:after-swap", initPostCardClick);
+</script>
 
 <style define:vars={{ coverWidth, coverWidthTablet }}>
   /* Grid Mode Styles */
@@ -224,6 +275,18 @@ const { remarkPluginFrontmatter } = await render(entry);
   .post-card-title:hover,
   .post-card-title:hover :global(*) {
     color: var(--primary) !important;
+  }
+
+  /* 整个卡片可点击，悬浮时让标题也变成主题色，提供更好的视觉反馈 */
+  .post-card-wrapper:hover .post-card-title,
+  .post-card-wrapper:hover .post-card-title :global(*) {
+    color: var(--primary);
+  }
+
+  /* 键盘聚焦时给卡片轮廓 */
+  .post-card-wrapper:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
   }
 
 </style>
