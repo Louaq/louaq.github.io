@@ -401,6 +401,51 @@ a {
 }
 
 /* =============================================================
+ * 代码块横向滚动条：增强可见性（仅代码块）
+ * ============================================================= */
+.custom-md .expressive-code .frame,
+.custom-md pre[class*="language-"] {
+  overflow: hidden;
+}
+.custom-md .expressive-code pre,
+.custom-md pre[class*="language-"] {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 2px;
+}
+.custom-md .expressive-code pre::-webkit-scrollbar,
+.custom-md pre[class*="language-"]::-webkit-scrollbar {
+  height: 7px;
+}
+.custom-md .expressive-code pre::-webkit-scrollbar-track,
+.custom-md pre[class*="language-"]::-webkit-scrollbar-track {
+  background: color-mix(in oklch, var(--primary) 14%, transparent);
+  border-radius: 999px;
+}
+.custom-md .expressive-code pre::-webkit-scrollbar-thumb,
+.custom-md pre[class*="language-"]::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--primary) 62%, transparent);
+  border-radius: 999px;
+}
+.custom-md .expressive-code pre::-webkit-scrollbar-thumb:hover,
+.custom-md pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 78%, transparent);
+}
+
+:root.dark .custom-md .expressive-code pre::-webkit-scrollbar-track,
+:root.dark .custom-md pre[class*="language-"]::-webkit-scrollbar-track {
+  background: color-mix(in oklch, var(--primary) 24%, transparent);
+}
+:root.dark .custom-md .expressive-code pre::-webkit-scrollbar-thumb,
+:root.dark .custom-md pre[class*="language-"]::-webkit-scrollbar-thumb {
+  background: color-mix(in oklch, var(--primary) 72%, white 8%);
+}
+:root.dark .custom-md .expressive-code pre::-webkit-scrollbar-thumb:hover,
+:root.dark .custom-md pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
+  background: color-mix(in oklch, var(--primary) 84%, white 12%);
+}
+
+/* =============================================================
  * 文章页：内容卡片紧凑化
  * ============================================================= */
 #post-cover,
