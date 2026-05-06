@@ -8,6 +8,7 @@ import { removeFileExtension } from "@/utils/url-utils";
 
 import { profileConfig } from "../../config/profileConfig";
 import { siteConfig } from "../../config/siteConfig";
+import { fontConfig } from "../../config/fontConfig";
 
 type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
@@ -45,7 +46,7 @@ async function fetchNotoSansSCFonts() {
 	if (fontCache) return fontCache;
 	try {
 		const cssResp = await fetch(
-			"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap",
+			fontConfig.og.cssUrl,
 		);
 		if (!cssResp.ok) throw new Error("Failed to fetch Google Fonts CSS");
 		const cssText = await cssResp.text();
@@ -61,8 +62,8 @@ async function fetchNotoSansSCFonts() {
 			return urlMatch ? urlMatch[1] : null;
 		};
 
-		const regularUrl = getUrlForWeight(400);
-		const boldUrl = getUrlForWeight(700);
+		const regularUrl = getUrlForWeight(fontConfig.og.weights.regular);
+		const boldUrl = getUrlForWeight(fontConfig.og.weights.bold);
 
 		if (!regularUrl || !boldUrl) {
 			console.warn(
@@ -151,7 +152,7 @@ export async function GET({
 				flexDirection: "column",
 				backgroundColor: backgroundColor,
 				fontFamily:
-					'"Noto Sans SC", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
+					`"${fontConfig.og.family}", ${fontConfig.og.fallback.join(", ")}`,
 				padding: "60px",
 			},
 			children: [
@@ -322,17 +323,17 @@ export async function GET({
 	const fonts: FontOptions[] = [];
 	if (fontRegular) {
 		fonts.push({
-			name: "Noto Sans SC",
+			name: fontConfig.og.family,
 			data: fontRegular,
-			weight: 400,
+			weight: fontConfig.og.weights.regular,
 			style: "normal",
 		});
 	}
 	if (fontBold) {
 		fonts.push({
-			name: "Noto Sans SC",
+			name: fontConfig.og.family,
 			data: fontBold,
-			weight: 700,
+			weight: fontConfig.og.weights.bold,
 			style: "normal",
 		});
 	}

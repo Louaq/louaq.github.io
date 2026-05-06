@@ -53,6 +53,9 @@ const generateFontFamilyStyle = () => {
 };
 
 const fontFamilyStyle = generateFontFamilyStyle();
+const selectedFontFamilyCss = selectedFonts.map((font) => `"${font.family}"`).join(", ");
+const fallbackFontFamilyCss = (fontConfig.fallback || []).join(", ");
+const monoFallbackFontFamilyCss = (fontConfig.monoFallback || []).join(", ");
 ---
 
 <!-- 字体样式表链接 -->{
@@ -108,40 +111,34 @@ const fontFamilyStyle = generateFontFamilyStyle();
 }
 
 <!-- 全局字体样式 -->
-{
-  fontConfig.enable && fontFamilyStyle && (
-    <style
-      set:html={`
-    :root {
-      --font-family-custom: ${selectedFonts.map((font) => `"${font.family}"`).join(", ")};
-      --font-family-fallback: ${(fontConfig.fallback || []).join(", ")};
-    }
-    
-    /* 应用自定义字体到body */
-    body {
-      ${fontFamilyStyle}
-    }
-    
-    /* 为每个选中的字体生成对应的CSS类 */
-    ${selectedFonts
-      .map((font) => {
-        return `
-        .font-${font.id},
-        .font-${font.id} * {
-          font-family: "${font.family}", var(--font-family-fallback) !important;
-        }
-      `;
-      })
-      .join("\n")}
-    
-    /* 为整体启用字体的body添加类名 */
-    ${fontClasses.map((className) => `.${className}`).join(",\n")} {
-      /* 字体相关的全局样式可以在这里添加 */
-    }
-  `}
-    />
-  )
-}
+<style
+  set:html={`
+  :root {
+    --font-family-custom: ${selectedFontFamilyCss};
+    --font-family-fallback: ${fallbackFontFamilyCss};
+    --font-family-mono-fallback: ${monoFallbackFontFamilyCss};
+  }
+  
+  ${fontConfig.enable && fontFamilyStyle ? `body { ${fontFamilyStyle} }` : ""}
+  
+  /* 为每个选中的字体生成对应的CSS类 */
+  ${selectedFonts
+    .map((font) => {
+      return `
+      .font-${font.id},
+      .font-${font.id} * {
+        font-family: "${font.family}", var(--font-family-fallback) !important;
+      }
+    `;
+    })
+    .join("\n")}
+  
+  /* 为整体启用字体的body添加类名 */
+  ${fontClasses.map((className) => `.${className}`).join(",\n")} {
+    /* 字体相关的全局样式可以在这里添加 */
+  }
+`}
+/>
 
 <script>
   // 字体加载优化和错误处理

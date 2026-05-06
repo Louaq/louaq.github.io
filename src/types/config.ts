@@ -346,7 +346,17 @@ export type FontConfig = {
 	selected: string | string[]; // 当前选择的字体ID，支持单个或多个字体组合
 	fonts: Record<string, FontItem>; // 字体库，以ID为键的对象
 	fallback?: string[]; // 全局字体回退列表
+	monoFallback?: string[]; // 代码字体回退列表
 	preload?: boolean; // 是否预加载字体文件以提高性能
+	og?: {
+		family: string; // OpenGraph 使用的字体族
+		cssUrl: string; // OpenGraph 获取字体的 CSS 地址
+		weights: {
+			regular: number;
+			bold: number;
+		};
+		fallback: string[];
+	};
 };
 
 export type FooterConfig = {

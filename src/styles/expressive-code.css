@@ -4,9 +4,7 @@
   }
 
   .title {
-    font-family:
-      "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco,
-      Consolas, "Liberation Mono", "Courier New", monospace;
+    font-family: var(--font-family-mono-fallback);
   }
 
   /* Language Badge 样式：徽标在左边，复制按钮在右边 */

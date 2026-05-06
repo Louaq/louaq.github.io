@@ -3,9 +3,7 @@
  * ============================================================= */
 html,
 body {
-  font-family: "HarmonyOS_Regular", -apple-system, BlinkMacSystemFont, "PingFang SC",
-    "Hiragino Sans GB", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: var(--font-family-custom), var(--font-family-fallback);
   -webkit-font-smoothing: antialiased;
 }
 
@@ -1022,9 +1020,7 @@ widget-layout .widget-title::before {
   font-size: 0.9375rem !important;
 }
 
-/* =============================================================
- * 导航栏右侧"创作"按钮（如果存在）/ Logo 标题不要过粗
- * ============================================================= */
+/* 首页与非首页保持一致：取消首页链接额外加粗 */
 #navbar a[href="/"] {
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }

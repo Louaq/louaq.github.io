@@ -33,11 +33,11 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	}
 
 	// 根据配置决定是否添加观影清单页面
-// 	if (siteConfig.pages.watchlist) {
-// 		links.push(LinkPreset.Watchlist);
-// 	}
+	if (siteConfig.pages.watchlist) {
+		links.push(LinkPreset.Watchlist);
+	}
 
-//   links.push(LinkPreset.About);
+   links.push(LinkPreset.About);
 
     // 支持自定义导航栏链接,并且支持多级菜单
 	// links.push({
@@ -48,27 +48,27 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	//   });
 
   // 构建子菜单，确保所有项都是有效的
-	const aboutChildren: (NavBarLink | LinkPreset)[] = [
-		LinkPreset.About,
-	];
+	// const aboutChildren: (NavBarLink | LinkPreset)[] = [
+	// 	LinkPreset.About,
+	// ];
 	
 	// 根据配置添加子菜单项
-	if (siteConfig.pages.watchlist) {
-		aboutChildren.push(LinkPreset.Watchlist);
-	}
-	if (siteConfig.pages.sponsor) {
-		aboutChildren.push(LinkPreset.Sponsor);
-	}
-	if (siteConfig.pages.bangumi) {
-		aboutChildren.push(LinkPreset.Bangumi);
-	}
+	// if (siteConfig.pages.watchlist) {
+	// 	aboutChildren.push(LinkPreset.Watchlist);
+	// }
+	// if (siteConfig.pages.sponsor) {
+	// 	aboutChildren.push(LinkPreset.Sponsor);
+	// }
+	// if (siteConfig.pages.bangumi) {
+	// 	aboutChildren.push(LinkPreset.Bangumi);
+	// }
 
-	links.push({
-		name: "关于",
-		url: "/content/",
-		icon: "material-symbols:info",
-		children: aboutChildren,
-	});
+	// links.push({
+	// 	name: "关于",
+	// 	url: "/content/",
+	// 	icon: "material-symbols:info",
+	// 	children: aboutChildren,
+	// });
   // 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出
   return { links } as NavBarConfig;
 };
