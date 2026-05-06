@@ -18,11 +18,11 @@ body {
 
 /* 选择高亮：掘金风格的浅蓝 */
 ::selection {
-  background-color: rgba(30, 128, 255, 0.2) !important;
+  background-color: color-mix(in oklch, var(--primary) 20%, transparent) !important;
   color: var(--juejin-primary);
 }
 :root.dark ::selection {
-  background-color: rgba(74, 152, 255, 0.3) !important;
+  background-color: color-mix(in oklch, var(--primary) 30%, transparent) !important;
   color: #fff;
 }
 
@@ -177,11 +177,11 @@ body.wallpaper-transparent #navbar > div {
   margin: 0 4px;
 }
 .dropdown-item:hover {
-  background-color: rgba(30, 128, 255, 0.08) !important;
+  background-color: color-mix(in oklch, var(--primary) 8%, transparent) !important;
   color: var(--juejin-primary) !important;
 }
 :root.dark .dropdown-item:hover {
-  background-color: rgba(74, 152, 255, 0.12) !important;
+  background-color: color-mix(in oklch, var(--primary) 12%, transparent) !important;
 }
 
 /* =============================================================
@@ -280,11 +280,11 @@ body.wallpaper-transparent #navbar > div {
   color: rgba(255, 255, 255, 0.55) !important;
 }
 .post-card-wrapper .stats .btn-regular:hover {
-  background-color: rgba(30, 128, 255, 0.1) !important;
+  background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
   color: var(--juejin-primary) !important;
 }
 :root.dark .post-card-wrapper .stats .btn-regular:hover {
-  background-color: rgba(74, 152, 255, 0.15) !important;
+  background-color: color-mix(in oklch, var(--primary) 15%, transparent) !important;
 }
 
 /* =============================================================
@@ -483,7 +483,7 @@ input[type="search"] {
 .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);
   text-decoration: none;
-  border-bottom: 1px solid rgba(30, 128, 255, 0.3);
+  border-bottom: 1px solid color-mix(in oklch, var(--primary) 30%, transparent);
   transition: border-color 0.15s ease, color 0.15s ease;
 }
 .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain):hover {
@@ -492,7 +492,7 @@ input[type="search"] {
 }
 :root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);
-  border-bottom-color: rgba(74, 152, 255, 0.3);
+  border-bottom-color: color-mix(in oklch, var(--primary) 30%, transparent);
 }
 
 /* =============================================================
@@ -569,7 +569,7 @@ widget-layout .widget-title::before {
 :root.dark #home-top-notice,
 :root.dark .home-top-notice {
   border-color: rgba(255, 255, 255, 0.08) !important;
-  background: color-mix(in oklch, var(--card-bg) 93%, #4a98ff 7%) !important;
+  background: color-mix(in oklch, var(--card-bg) 93%, var(--primary) 7%) !important;
 }
 
 .home-top-notice-stack .home-top-notice {
@@ -612,13 +612,13 @@ widget-layout .widget-title::before {
 /* 文章引用块：掘金风格的浅蓝左边框 */
 .custom-md blockquote {
   border-left: 3px solid var(--juejin-primary) !important;
-  background: rgba(30, 128, 255, 0.04) !important;
+  background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
   border-radius: 0 4px 4px 0 !important;
   padding: 0.75rem 1rem !important;
   color: var(--juejin-text-secondary);
 }
 :root.dark .custom-md blockquote {
-  background: rgba(74, 152, 255, 0.08) !important;
+  background: color-mix(in oklch, var(--primary) 8%, transparent) !important;
   color: rgba(255, 255, 255, 0.75);
 }
 
@@ -699,12 +699,12 @@ widget-layout .widget-title::before {
 }
 .btn-card:hover {
   border-color: var(--juejin-border) !important;
-  background: rgba(30, 128, 255, 0.04) !important;
+  background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
   box-shadow: none !important;
 }
 :root.dark .btn-card:hover {
   border-color: rgba(255, 255, 255, 0.08) !important;
-  background: rgba(74, 152, 255, 0.06) !important;
+  background: color-mix(in oklch, var(--primary) 6%, transparent) !important;
   box-shadow: none !important;
 }
 
@@ -746,12 +746,12 @@ widget-layout .widget-title::before {
 
   /* hover：浅蓝底，无放大 */
   #post-list-container.list-mode .post-card-wrapper:hover {
-    background: rgba(30, 128, 255, 0.02) !important;
+    background: color-mix(in oklch, var(--primary) 2%, transparent) !important;
     border-color: var(--juejin-border) !important;
     box-shadow: none !important;
   }
   :root.dark #post-list-container.list-mode .post-card-wrapper:hover {
-    background: rgba(74, 152, 255, 0.04) !important;
+    background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
     border-bottom-color: rgba(255, 255, 255, 0.06) !important;
   }
 
@@ -866,11 +866,11 @@ widget-layout .widget-title::before {
     padding: 1px 6px !important;
     font-size: 0.6875rem !important;
     border-radius: 2px !important;
-    background: rgba(30, 128, 255, 0.08) !important;
+    background: color-mix(in oklch, var(--primary) 8%, transparent) !important;
     color: var(--juejin-primary) !important;
   }
   :root.dark #post-list-container.list-mode .post-meta .pinned-btn {
-    background: rgba(74, 152, 255, 0.15) !important;
+    background: color-mix(in oklch, var(--primary) 15%, transparent) !important;
   }
   #post-list-container.list-mode .post-meta .pinned-btn .text-xl {
     font-size: 0.875rem !important;
@@ -906,7 +906,7 @@ widget-layout .widget-title::before {
     color: rgba(255, 255, 255, 0.5) !important;
   }
   #post-list-container.list-mode .stats .btn-regular:hover {
-    background-color: rgba(30, 128, 255, 0.1) !important;
+    background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
     color: var(--juejin-primary) !important;
   }
 

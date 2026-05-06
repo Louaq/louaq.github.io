@@ -5,14 +5,17 @@
 
 /* ===== 基础变量定义 ===== */
 :root {
+  /* 与 Layout 内联脚本、主题色滑块一致；可由 JS 覆盖 */
+  --hue: 250;
+
   /* 稀土掘金风格：圆角更小 */
   --radius-large: 4px;
   --content-delay: 150ms;
 
-  /* 掘金主色（直接使用其品牌色） */
-  --juejin-primary: #1e80ff;
-  --juejin-primary-hover: #4a98ff;
-  --juejin-primary-active: #0066e0;
+  /* 掘金主色：由色相滑块 --hue 驱动（oklch 第三维） */
+  --juejin-primary: oklch(0.58 0.20 var(--hue));
+  --juejin-primary-hover: oklch(0.64 0.17 var(--hue));
+  --juejin-primary-active: oklch(0.47 0.22 var(--hue));
   --juejin-text-primary: #1d2129;
   --juejin-text-secondary: #4e5969;
   --juejin-text-tertiary: #8a919f;
@@ -36,8 +39,8 @@
   --btn-regular-bg-active: #dcdee0;
   --waves-toggle-bg: #e9eaec;
   
-  --btn-plain-bg-hover: rgba(30, 128, 255, 0.08);
-  --btn-plain-bg-active: rgba(30, 128, 255, 0.12);
+  --btn-plain-bg-hover: unquote('color-mix(in oklch, var(--primary) 10%, transparent)');
+  --btn-plain-bg-active: unquote('color-mix(in oklch, var(--primary) 16%, transparent)');
   
   --btn-card-bg-hover: #f7f8fa;
   --btn-card-bg-active: #ebedf0;
@@ -116,19 +119,23 @@
 
 /* 暗色主题变量 - 稀土掘金暗色风格 */
 :root.dark {
-  --primary: #4a98ff;
+  --juejin-primary: oklch(0.70 0.155 var(--hue));
+  --juejin-primary-hover: oklch(0.76 0.13 var(--hue));
+  --juejin-primary-active: oklch(0.62 0.17 var(--hue));
+
+  --primary: var(--juejin-primary);
   --page-bg: #17171a;
   --card-bg: #22222a;
   --card-bg-transparent: rgba(34, 34, 42, 0.8);
   
-  --btn-content: #4a98ff;
+  --btn-content: var(--juejin-primary);
   --btn-regular-bg: #2d2d35;
   --btn-regular-bg-hover: #383841;
   --btn-regular-bg-active: #43434d;
   --waves-toggle-bg: #383841;
   
-  --btn-plain-bg-hover: rgba(74, 152, 255, 0.12);
-  --btn-plain-bg-active: rgba(74, 152, 255, 0.18);
+  --btn-plain-bg-hover: unquote('color-mix(in oklch, var(--primary) 14%, transparent)');
+  --btn-plain-bg-active: unquote('color-mix(in oklch, var(--primary) 20%, transparent)');
   
   --btn-card-bg-hover: #2d2d35;
   --btn-card-bg-active: #383841;
