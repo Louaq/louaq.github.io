@@ -20,11 +20,11 @@ export const fontConfig = {
 			display: "swap" as const,
 		},
 
-		// 华为鸿蒙字体 - HarmonyOS Sans SC（CDN CSS 引入）
+		// 华为鸿蒙字体 - HarmonyOS Sans SC（国内 elemecdn 同步 npm，等价 unpkg 路径；备用：cdn.jsdelivr.net/npm/...）
 		"harmonyos-sans-sc": {
 			id: "harmonyos-sans-sc",
 			name: "HarmonyOS Sans SC",
-			src: "https://jsd.cdn.zzko.cn/npm/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Regular.css",
+			src: "https://npm.elemecdn.com/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Regular.css",
 			family: "HarmonyOS Sans SC",
 			display: "swap" as const,
 		},

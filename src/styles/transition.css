@@ -6,26 +6,29 @@
    1. Swup Page Transitions
    -------------------------------------------------------------------------- */
 
+:root {
+    /* 页面切换淡入淡出：保持较短，避免拖沓 */
+    --swup-fade-duration: 180ms;
+    --swup-fade-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    :root {
+        --swup-fade-duration: 1ms;
+    }
+}
+
 /* Main Content Transition */
 .transition-main {
-    transition: opacity 1ms linear;
+    transition: opacity var(--swup-fade-duration) var(--swup-fade-easing);
 }
 
-/* Leaving Animation */
+/* Leaving Animation（内层包装，与主栏同步淡出） */
 .transition-leaving {
-    transition: opacity 1ms linear;
+    transition: opacity var(--swup-fade-duration) var(--swup-fade-easing);
 }
 
-/* State: Changing (Swup) */
-html.is-changing .transition-main {
-    transition: opacity 1ms linear;
-}
-
-html.is-leaving .transition-main {
-    transition: opacity 1ms linear;
-}
-
-/* State: Animating (Entering) */
+/* State: Animating（旧内容淡出） */
 html.is-animating .transition-main {
     opacity: 0;
 }
@@ -35,9 +38,9 @@ html.is-animating.is-leaving .transition-leaving {
     opacity: 0;
 }
 
-/* Swup Fade Fallback */
-html.is-changing .transition-swup-fade {
-    transition: opacity 1ms linear;
+/* Swup 容器淡出 / 新内容淡入（依赖 html 类名切换时 opacity 复位） */
+.transition-swup-fade {
+    transition: opacity var(--swup-fade-duration) var(--swup-fade-easing);
 }
 
 html.is-animating .transition-swup-fade {
@@ -72,82 +75,3 @@ html.is-animating .transition-swup-fade {
 .onload-animation:nth-child(3) { animation-delay: 0ms; }
 .onload-animation:nth-child(4) { animation-delay: 0ms; }
 .onload-animation:nth-child(5) { animation-delay: 0ms; }
-
-/* --------------------------------------------------------------------------
-   4. Navigation Progress Bar（胶囊条：白底轨道 + 主题色填充，顶部水平居中）
-   -------------------------------------------------------------------------- */
-
-#progress-bar {
-    --progress-duration: 8s;
-    --progress-track-w: 6rem;
-    --progress-track-h: 6px;
-
-    position: fixed;
-    top: max(0.5rem, env(safe-area-inset-top, 0px));
-    left: 0;
-    right: 0;
-    margin-left: auto;
-    margin-right: auto;
-    width: var(--progress-track-w);
-    height: var(--progress-track-h);
-    z-index: 9999;
-    pointer-events: none;
-    border-radius: 9999px;
-    background: #fff;
-    box-shadow:
-        0 0 0 1px rgba(0, 0, 0, 0.12),
-        0 1px 4px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    opacity: 0;
-}
-
-#progress-bar .progress-bar-fill {
-    height: 100%;
-    width: 0;
-    border-radius: inherit;
-    background: var(--primary);
-    transform-origin: left center;
-}
-
-@keyframes progress-pill-loading {
-    0% {
-        width: 0%;
-    }
-    100% {
-        width: 95%;
-    }
-}
-
-#progress-bar.loading {
-    opacity: 1;
-}
-
-#progress-bar.loading .progress-bar-fill {
-    width: 0;
-    animation: progress-pill-loading var(--progress-duration) cubic-bezier(0.1, 0.05, 0.1, 1) forwards;
-}
-
-#progress-bar.finishing {
-    opacity: 1;
-}
-
-#progress-bar.finishing .progress-bar-fill {
-    animation: none;
-    width: 100%;
-    transition: width 200ms ease-out;
-}
-
-#progress-bar.done {
-    opacity: 0;
-    transition: opacity 300ms ease-out;
-}
-
-#progress-bar.done .progress-bar-fill {
-    width: 100%;
-}
-
-:root.dark #progress-bar {
-    box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.2),
-        0 1px 6px rgba(0, 0, 0, 0.35);
-}

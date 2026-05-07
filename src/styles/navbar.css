@@ -31,6 +31,16 @@
     transition-timing-function: var(--ease-standard);
 }
 
+/*
+ * 移动端：border none ↔ 全边距 1px（Swup 回首页 / Banner 规则切换）时，
+ * 过渡 border-color 在 WebKit 上易插值出黑色描边，故不做过渡。
+ */
+@media (max-width: 1023px) {
+    #navbar>div {
+        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius;
+    }
+}
+
 /* ============================================
  * 桌面端 - 亮色主题 - Banner模式
  * 适用: 桌面端(≥1024px) + Banner模式 + 亮色主题
@@ -105,7 +115,7 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
         transition-duration: 0.3s !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -118,7 +128,7 @@
         border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
         transition-duration: 0.3s !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -131,7 +141,7 @@
         border: 1px solid transparent !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
         transition-duration: 0.3s !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -144,7 +154,7 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
+        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
         transition-duration: 0.3s !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
@@ -254,6 +264,11 @@ body:has(#banner-wrapper) #navbar[data-transparent-mode="semifull"][data-enable-
     background: transparent !important;
     border: 1px solid transparent !important;
     box-shadow: none !important;
+    transition: none !important;
+}
+
+/* Swup 导航期间统一关掉导航栏过渡（含 border），避免回顶/回首页时黑边一闪 */
+.is-page-transitioning #navbar>div {
     transition: none !important;
 }
 

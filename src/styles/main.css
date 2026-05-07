@@ -57,7 +57,7 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.05) 80%, transparent 100%);
     pointer-events: none;
     z-index: 20;
-    transition: all var(--duration-medium) var(--ease-standard);
+    transition: background var(--duration-medium) var(--ease-standard);
 }
 
 /* 暗色主题下的渐变高光效果 */
@@ -70,7 +70,7 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     /* 为整个文档根元素设置视图过渡 */
     ::view-transition-old(root),
     ::view-transition-new(root) {
-        animation-duration: 0.5s;
+        animation-duration: 0.18s;
         animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
         /* 使用混合模式使颜色过渡更平滑 */
         mix-blend-mode: normal;
@@ -78,7 +78,7 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     
     /* 视图过渡组 - 使用交叉淡化效果 */
     ::view-transition-group(root) {
-        animation-duration: 0.5s;
+        animation-duration: 0.18s;
         animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     }
     
@@ -116,14 +116,8 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         }
     }
     
-    /* 确保边框和分隔线元素在主题切换时有更明确的过渡时长 */
-    .transition,
-    [class*="border"],
-    [class*="transition"] {
-        transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        transition-duration: 0.15s;
-    }
+    /* 已移除对 [class*="transition"] / [class*="border"] 的全局过渡：
+     * Tailwind 中大量类名含 "transition" / "border"，会导致主题切换时海量节点同时插值，明显卡顿。 */
     
     /* 主题过渡保护类 - 仅在非 View Transitions 模式下使用 */
     /* 当使用 View Transitions API 时，浏览器会自动处理过渡，不需要禁用 transition */
@@ -273,9 +267,9 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         /* @apply backdrop-blur-sm; */
     }
     
-    h1, h2, h3, h4, h5, h6, p, a, span, li, ul, ol, blockquote, code, pre, table, th, td, strong {
-        @apply transition-colors duration-150;
-    }
+    /* 不在全局标题/正文上统一 transition-colors：页面节点极多，深浅色切换会同步触发大量合成层与重绘。
+     * 卡片、按钮、浮动层等仍保留各自的 transition（见 .card-base、.btn-plain、.float-panel）。 */
+    
     .card-shadow {
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
     }
@@ -610,12 +604,15 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
 }
 
 /*
- * 移动端导航栏：Banner 半透明规则（navbar.css）特异性高于 #top-row 实心规则，
- * 且 overlay 使用 card-bg-transparent 时 blur 常不生效。此处放在 main.css 末尾、
- * 与 Banner 规则同特异性且更晚，统一强制实心背景。
+ * 移动端导航栏：Banner 半透明规则（navbar.css）在深色 :root.dark 下特异性更高，
+ * 会盖过仅含 body #top-row 的实心规则，导致首页仍为 rgba/透明。此处补齐 :root.dark /
+ * html.dark，并统一用 background 简写覆盖 navbar 中的半透底。
  */
 @media (max-width: 1023px) {
+    :root.dark body #top-row #navbar[data-transparent-mode][data-is-home] > div,
+    html.dark body #top-row #navbar[data-transparent-mode][data-is-home] > div,
     body #top-row #navbar[data-transparent-mode][data-is-home] > div {
+        background: var(--card-bg) !important;
         background-color: var(--card-bg) !important;
         background-image: none !important;
         backdrop-filter: none !important;

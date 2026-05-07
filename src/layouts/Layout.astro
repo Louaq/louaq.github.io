@@ -561,10 +561,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <GlobalIconSprite />
     <PdfEmbedRuntime />
 
-    <div id="progress-bar" aria-hidden="true">
-      <div class="progress-bar-fill"></div>
-    </div>
-
     <!-- 页面顶部渐变高光效果 - 只在full和semifull模式下显示 -->
     {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
     <ConfigCarrier />
@@ -945,15 +941,6 @@ function disableAnimation() {
         }
       }
 
-      // Start progress bar
-      const progressBar = document.getElementById("progress-bar");
-      if (progressBar) {
-        progressBar.classList.remove("finishing", "done");
-        // Force reflow so the animation restarts cleanly
-        void progressBar.offsetWidth;
-        progressBar.classList.add("loading");
-      }
-
       // change banner height immediately when a link is clicked
       const bodyElement = document.querySelector("body");
       const isHomePage = pathsEqual(visit.to.url, url("/"));
@@ -1172,19 +1159,6 @@ function disableAnimation() {
       // 兜底解除滚动锁定（visit 结束，无论成功或失败）
       (window as any).__swupScrollLockY = null;
 
-      // Finish progress bar
-      const progressBar = document.getElementById("progress-bar");
-      if (progressBar) {
-        progressBar.classList.remove("loading");
-        progressBar.classList.add("finishing");
-        setTimeout(() => {
-          progressBar.classList.remove("finishing");
-          progressBar.classList.add("done");
-          setTimeout(() => {
-            progressBar.classList.remove("done");
-          }, 300);
-        }, 200);
-      }
       setTimeout(() => {
         const heightExtend = document.getElementById("page-height-extend");
         if (heightExtend) {

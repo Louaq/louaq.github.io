@@ -146,11 +146,12 @@ body.wallpaper-transparent #navbar > div {
   }
 }
 
-/* 导航栏菜单项 hover 时变成蓝色 */
+/* 导航栏菜单项：加粗 + 字号 16px（搜索触发器单独用组件类，不受此条影响） */
 #navbar .btn-plain {
   border-radius: 6px !important;
   color: var(--juejin-text-primary) !important;
-  font-weight: 500;
+  font-weight: 700 !important;
+  font-size: 16px !important;
 }
 :root.dark #navbar .btn-plain {
   color: rgba(255, 255, 255, 0.85) !important;
@@ -1039,20 +1040,9 @@ widget-layout .widget-title::before {
 }
 
 /* =============================================================
- * 主导航的菜单项：更紧凑、字号小一点
+ * 主导航的菜单项：更紧凑（字号由上方 #navbar .btn-plain 统一为 16px）
  * ============================================================= */
 #navbar .btn-plain.h-11 {
   height: 2.5rem !important;
   padding: 0 0.75rem !important;
-  font-size: 0.9375rem !important;
-}
-
-/* 顶层导航文本 */
-#navbar a.btn-plain {
-  font-size: 0.9375rem !important;
-}
-
-/* 首页与非首页保持一致：取消首页链接额外加粗 */
-#navbar a[href="/"] {
-  font-weight: 500 !important;
 }
