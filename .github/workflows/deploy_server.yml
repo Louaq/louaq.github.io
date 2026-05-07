@@ -1,80 +1,246 @@
-deploy:
-  name: 🚀 部署到服务器
-  needs: build
-  runs-on: ubuntu-latest
-  strategy:
-    matrix:
-      server:
-        - name: 'Server-1'
-          host_secret: 'HOST'
-          username_secret: 'USERNAME'
-          ssh_key_secret: 'SSH_PRIVATE_KEY'
-          port: 45663
-          path: '/opt/1panel/www/sites/www.louaq.com/index'
-    fail-fast: false
+name: 🚀 部署到自有服务器
 
-  steps:
-    - name: 📥 下载构建产物
-      uses: actions/download-artifact@v4
-      with:
-        name: dist
-        path: dist/
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
 
-    - name: 🚚 准备服务器 - ${{ matrix.server.name }}
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets[matrix.server.host_secret] }}
-        username: ${{ secrets[matrix.server.username_secret] }}
-        key: ${{ secrets[matrix.server.ssh_key_secret] }}
-        port: ${{ matrix.server.port }}
-        script_stop: true
-        script: |
-          sudo mkdir -p ${{ matrix.server.path }}
-          sudo chown -R root:www-data ${{ matrix.server.path }}
-          
-          # 只清理临时目录，不清理正式网站目录
-          rm -rf /tmp/louaq-dist
-          mkdir -p /tmp/louaq-dist
+concurrency:
+  group: deploy-louaq-${{ github.ref }}
+  cancel-in-progress: true
 
-    - name: 📤 上传构建产物到临时目录
-      uses: appleboy/scp-action@v0.1.4
-      with:
-        host: ${{ secrets[matrix.server.host_secret] }}
-        username: ${{ secrets[matrix.server.username_secret] }}
-        key: ${{ secrets[matrix.server.ssh_key_secret] }}
-        port: ${{ matrix.server.port }}
-        source: 'dist/*'
-        target: /tmp/louaq-dist
-        strip_components: 1
+jobs:
+  build:
+    name: 📦 构建项目
+    runs-on: ubuntu-latest
 
-    - name: 🔧 增量发布到正式目录
-      uses: appleboy/ssh-action@v1.0.0
-      with:
-        host: ${{ secrets[matrix.server.host_secret] }}
-        username: ${{ secrets[matrix.server.username_secret] }}
-        key: ${{ secrets[matrix.server.ssh_key_secret] }}
-        port: ${{ matrix.server.port }}
-        script_stop: true
-        script: |
-          # 确保 Astro 静态资源目录存在
-          sudo mkdir -p ${{ matrix.server.path }}/_astro
+    steps:
+      - name: 📥 检出代码
+        uses: actions/checkout@v4
 
-          # 1. 先同步新的 _astro 资源，不删除旧资源
-          if [ -d /tmp/louaq-dist/_astro ]; then
-            sudo rsync -av /tmp/louaq-dist/_astro/ ${{ matrix.server.path }}/_astro/
-          fi
+      - name: 🟢 设置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-          # 2. 再同步 HTML 和其他资源，但排除 _astro，避免删除旧 hash 资源
-          sudo rsync -av --delete --exclude='_astro/' /tmp/louaq-dist/ ${{ matrix.server.path }}/
+      - name: 📦 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 8
+          run_install: false
 
-          # 3. 清理 30 天以前的旧 Astro 构建资源
-          sudo find ${{ matrix.server.path }}/_astro -type f -mtime +30 -delete
+      - name: 📦 获取 pnpm 存储目录
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
 
-          # 4. 设置权限
-          sudo chmod -R 755 ${{ matrix.server.path }}
-          sudo chown -R root:www-data ${{ matrix.server.path }}
+      - name: 🔄 设置 pnpm 缓存
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
 
-          # 5. 清理临时目录
-          rm -rf /tmp/louaq-dist
+      - name: 📦 安装依赖
+        run: pnpm install --frozen-lockfile
 
-          echo "✅ ${{ matrix.server.name }} 部署完成！"
+      - name: 🔨 构建项目
+        run: pnpm build:algolia
+        env:
+          NODE_ENV: production
+
+          # Algolia 搜索
+          PUBLIC_ALGOLIA_APP_ID: ${{ secrets.PUBLIC_ALGOLIA_APP_ID }}
+          PUBLIC_ALGOLIA_SEARCH_KEY: ${{ secrets.PUBLIC_ALGOLIA_SEARCH_KEY }}
+          PUBLIC_ALGOLIA_INDEX_NAME: ${{ secrets.PUBLIC_ALGOLIA_INDEX_NAME }}
+
+          ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
+          ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
+
+          # Meilisearch 搜索
+          PUBLIC_MEILISEARCH_HOST: "https://search.louaq.com"
+          PUBLIC_MEILISEARCH_SEARCH_KEY: ${{ secrets.PUBLIC_MEILISEARCH_SEARCH_KEY }}
+          PUBLIC_MEILISEARCH_INDEX_NAME: ${{ secrets.PUBLIC_MEILISEARCH_INDEX_NAME || 'blog' }}
+
+          MEILISEARCH_HOST: "https://search.louaq.com"
+          MEILISEARCH_ADMIN_KEY: ${{ secrets.MEILISEARCH_ADMIN_KEY }}
+          MEILISEARCH_INDEX_NAME: ${{ secrets.MEILISEARCH_INDEX_NAME || 'blog' }}
+
+      - name: 💾 上传构建产物
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 1
+
+  deploy:
+    name: 🚀 部署到服务器
+    needs: build
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        server:
+          - name: 'Server-1'
+            host_secret: 'HOST'
+            username_secret: 'USERNAME'
+            ssh_key_secret: 'SSH_PRIVATE_KEY'
+            port: 45663
+            path: '/opt/1panel/www/sites/www.louaq.com/index'
+
+    steps:
+      - name: 📥 下载构建产物
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: 🚚 准备服务器临时目录 - ${{ matrix.server.name }}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          script_stop: true
+          script: |
+            set -e
+
+            SITE_PATH="${{ matrix.server.path }}"
+            TEMP_PATH="/tmp/louaq-dist-${{ github.run_id }}"
+
+            echo "📁 创建正式目录：$SITE_PATH"
+            sudo mkdir -p "$SITE_PATH"
+
+            echo "🧹 清理本次部署临时目录：$TEMP_PATH"
+            rm -rf "$TEMP_PATH"
+            mkdir -p "$TEMP_PATH"
+
+            echo "🔐 设置正式目录权限"
+            sudo chown -R root:www-data "$SITE_PATH"
+            sudo chmod -R 755 "$SITE_PATH"
+
+      - name: 📤 上传构建产物到服务器临时目录 - ${{ matrix.server.name }}
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          source: 'dist/*'
+          target: '/tmp/louaq-dist-${{ github.run_id }}'
+          strip_components: 1
+
+      - name: 🔧 增量发布到正式目录 - ${{ matrix.server.name }}
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          script_stop: true
+          script: |
+            set -e
+
+            SITE_PATH="${{ matrix.server.path }}"
+            TEMP_PATH="/tmp/louaq-dist-${{ github.run_id }}"
+
+            echo "🚀 开始增量部署"
+            echo "临时目录：$TEMP_PATH"
+            echo "正式目录：$SITE_PATH"
+
+            if [ ! -d "$TEMP_PATH" ]; then
+              echo "❌ 临时目录不存在：$TEMP_PATH"
+              exit 1
+            fi
+
+            # 确保 Astro 静态资源目录存在
+            sudo mkdir -p "$SITE_PATH/_astro"
+
+            echo "📦 1. 同步新的 /_astro/ 静态资源，但不删除旧 hash 文件"
+            if [ -d "$TEMP_PATH/_astro" ]; then
+              sudo rsync -av "$TEMP_PATH/_astro/" "$SITE_PATH/_astro/"
+            else
+              echo "⚠️ 未发现 $TEMP_PATH/_astro，跳过 _astro 同步"
+            fi
+
+            echo "📄 2. 同步 HTML 和其他资源，排除 /_astro/"
+            sudo rsync -av --delete \
+              --exclude="_astro/" \
+              "$TEMP_PATH/" "$SITE_PATH/"
+
+            echo "🧹 3. 清理 30 天以前的旧 /_astro/ 资源"
+            if [ -d "$SITE_PATH/_astro" ]; then
+              sudo find "$SITE_PATH/_astro" -type f -mtime +30 -delete
+            fi
+
+            echo "🔐 4. 设置权限"
+            sudo chmod -R 755 "$SITE_PATH"
+            sudo chown -R root:www-data "$SITE_PATH"
+
+            echo "🧹 5. 清理临时目录"
+            rm -rf "$TEMP_PATH"
+
+            echo "✅ ${{ matrix.server.name }} 部署完成"
+
+      - name: ❌ 部署失败处理 - ${{ matrix.server.name }}
+        if: failure()
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets[matrix.server.host_secret] }}
+          username: ${{ secrets[matrix.server.username_secret] }}
+          key: ${{ secrets[matrix.server.ssh_key_secret] }}
+          port: ${{ matrix.server.port }}
+          script: |
+            echo "❌ ${{ matrix.server.name }} 部署失败，清理临时目录..."
+            rm -rf "/tmp/louaq-dist-${{ github.run_id }}"
+            echo "⚠️ 请检查部署日志并手动处理"
+
+  purge_cache:
+    name: 🧹 清除 EdgeOne CDN 缓存
+    needs: deploy
+    runs-on: ubuntu-latest
+    if: needs.deploy.result == 'success'
+
+    steps:
+      - name: 🧹 清除 EdgeOne 全站缓存
+        run: |
+          set -e
+
+          pip install tccli -q
+
+          tccli configure set secretId "${{ secrets.TENCENT_SECRET_ID }}"
+          tccli configure set secretKey "${{ secrets.TENCENT_SECRET_KEY }}"
+          tccli configure set region "ap-guangzhou"
+
+          tccli teo CreatePurgeTask \
+            --ZoneId "${{ secrets.EDGEONE_ZONE_ID }}" \
+            --Type "purge_all"
+
+          echo "✅ EdgeOne CDN 全站缓存已清除"
+
+  notify:
+    name: 📢 部署结果通知
+    needs: [deploy, purge_cache]
+    runs-on: ubuntu-latest
+    if: always()
+
+    steps:
+      - name: 🎉 部署成功通知
+        if: needs.deploy.result == 'success' && needs.purge_cache.result == 'success'
+        run: |
+          echo "🎉 网站已成功部署，EdgeOne CDN 缓存已清除！"
+
+      - name: ⚠️ 部署成功但缓存清理失败
+        if: needs.deploy.result == 'success' && needs.purge_cache.result == 'failure'
+        run: |
+          echo "⚠️ 网站已部署成功，但 EdgeOne CDN 缓存清理失败，请手动刷新缓存。"
+
+      - name: ❌ 部署失败通知
+        if: needs.deploy.result == 'failure'
+        run: |
+          echo "❌ 网站部署失败，请检查 deploy job 日志。"
