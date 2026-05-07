@@ -401,48 +401,38 @@ a {
 }
 
 /* =============================================================
- * 代码块横向滚动条：增强可见性（仅代码块）
+ * 代码块横向滚动
+ * Expressive Code 的 pre 为 flex，子元素 code 默认为 flex:1 0 100% 且 flex-shrink:0，
+ * 宽行无法让 pre 产生有效 scrollport。横向滚动改由 pre > code 承担，并允许子项收缩。
+ * 滚动条外观沿用上方全局 ::-webkit-scrollbar，不对代码块单独套主题色。
  * ============================================================= */
-.custom-md .expressive-code .frame,
-.custom-md pre[class*="language-"] {
+.custom-md .expressive-code .frame {
   overflow: hidden;
+  min-width: 0;
 }
-.custom-md .expressive-code pre,
+
+.custom-md .expressive-code pre {
+  overflow-x: visible;
+  overflow-y: hidden;
+  min-width: 0;
+  max-width: 100%;
+  padding-bottom: 2px;
+}
+
+.custom-md .expressive-code pre > code {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  overflow-x: auto !important;
+  max-width: 100%;
+}
+
+/* 非 EC 的 fenced pre（若存在）仍在 pre 上滚动 */
 .custom-md pre[class*="language-"] {
   overflow-x: auto;
   overflow-y: hidden;
+  max-width: 100%;
+  min-width: 0;
   padding-bottom: 2px;
-}
-.custom-md .expressive-code pre::-webkit-scrollbar,
-.custom-md pre[class*="language-"]::-webkit-scrollbar {
-  height: 7px;
-}
-.custom-md .expressive-code pre::-webkit-scrollbar-track,
-.custom-md pre[class*="language-"]::-webkit-scrollbar-track {
-  background: color-mix(in oklch, var(--primary) 14%, transparent);
-  border-radius: 999px;
-}
-.custom-md .expressive-code pre::-webkit-scrollbar-thumb,
-.custom-md pre[class*="language-"]::-webkit-scrollbar-thumb {
-  background: color-mix(in oklch, var(--primary) 62%, transparent);
-  border-radius: 999px;
-}
-.custom-md .expressive-code pre::-webkit-scrollbar-thumb:hover,
-.custom-md pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in oklch, var(--primary) 78%, transparent);
-}
-
-:root.dark .custom-md .expressive-code pre::-webkit-scrollbar-track,
-:root.dark .custom-md pre[class*="language-"]::-webkit-scrollbar-track {
-  background: color-mix(in oklch, var(--primary) 24%, transparent);
-}
-:root.dark .custom-md .expressive-code pre::-webkit-scrollbar-thumb,
-:root.dark .custom-md pre[class*="language-"]::-webkit-scrollbar-thumb {
-  background: color-mix(in oklch, var(--primary) 72%, white 8%);
-}
-:root.dark .custom-md .expressive-code pre::-webkit-scrollbar-thumb:hover,
-:root.dark .custom-md pre[class*="language-"]::-webkit-scrollbar-thumb:hover {
-  background: color-mix(in oklch, var(--primary) 84%, white 12%);
 }
 
 /* =============================================================
