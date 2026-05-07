@@ -18,30 +18,16 @@ jobs:
       - name: 📥 检出代码
         uses: actions/checkout@v4
 
+      - name: 📦 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          run_install: false
+
       - name: 🟢 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
-
-      - name: 📦 安装 pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 8
-          run_install: false
-
-      - name: 📦 获取 pnpm 存储目录
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - name: 🔄 设置 pnpm 缓存
-        uses: actions/cache@v4
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
+          cache: 'pnpm'
 
       - name: 📦 安装依赖
         run: pnpm install --frozen-lockfile
@@ -50,21 +36,15 @@ jobs:
         run: pnpm build:algolia
         env:
           NODE_ENV: production
-
-          # Algolia 搜索
           PUBLIC_ALGOLIA_APP_ID: ${{ secrets.PUBLIC_ALGOLIA_APP_ID }}
           PUBLIC_ALGOLIA_SEARCH_KEY: ${{ secrets.PUBLIC_ALGOLIA_SEARCH_KEY }}
           PUBLIC_ALGOLIA_INDEX_NAME: ${{ secrets.PUBLIC_ALGOLIA_INDEX_NAME }}
-
           ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
           ALGOLIA_ADMIN_KEY: ${{ secrets.ALGOLIA_ADMIN_KEY }}
           ALGOLIA_INDEX_NAME: ${{ secrets.ALGOLIA_INDEX_NAME }}
-
-          # Meilisearch 搜索
           PUBLIC_MEILISEARCH_HOST: "https://search.louaq.com"
           PUBLIC_MEILISEARCH_SEARCH_KEY: ${{ secrets.PUBLIC_MEILISEARCH_SEARCH_KEY }}
           PUBLIC_MEILISEARCH_INDEX_NAME: ${{ secrets.PUBLIC_MEILISEARCH_INDEX_NAME || 'blog' }}
-
           MEILISEARCH_HOST: "https://search.louaq.com"
           MEILISEARCH_ADMIN_KEY: ${{ secrets.MEILISEARCH_ADMIN_KEY }}
           MEILISEARCH_INDEX_NAME: ${{ secrets.MEILISEARCH_INDEX_NAME || 'blog' }}
