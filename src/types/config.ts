@@ -153,16 +153,52 @@ export type NavBarConfig = {
 	links: (NavBarLink | LinkPreset)[];
 };
 
+export type ProfileLinkItem = {
+	name: string;
+	url: string;
+	icon: string;
+	showName?: boolean;
+};
+
+/** 资料卡次要标签（如「优秀作者」），样式接近掘金侧边栏芯片 */
+export type ProfileBadgeItem = {
+	text: string;
+	/** 站内路径或外链；不写则为纯文本 */
+	href?: string;
+	icon?: string;
+};
+
+/** 资料卡单列统计的来源 */
+export type ProfileStatValueMode =
+	| "literal"
+	| "postCount"
+	| "randomReads"
+	| "randomFollowers";
+
+/** 资料卡底部数据列（大字 + 灰色说明） */
+export type ProfileStatItem = {
+	label: string;
+	/** valueMode 为 literal（默认）时使用；可省略则用「—」 */
+	value?: string;
+	href?: string;
+	/** 默认 literal；postCount / random* 时不使用 value */
+	valueMode?: ProfileStatValueMode;
+	/** randomReads / randomFollowers 时在闭区间内随机（整数），不写则用内置默认区间 */
+	randomMin?: number;
+	randomMax?: number;
+};
+
 export type ProfileConfig = {
 	avatar?: string;
 	name: string;
 	bio?: string;
-	links: {
-		name: string;
-		url: string;
-		icon: string;
-		showName?: boolean;
-	}[];
+	/** 昵称右侧等级文案，如 "LV.5"；留空则不显示 */
+	level?: string;
+	/** 简介下方标签行 */
+	badges?: ProfileBadgeItem[];
+	/** 底栏数据（文章 / 阅读 / 粉丝等），留空则整块不渲染 */
+	stats?: ProfileStatItem[];
+	links: ProfileLinkItem[];
 };
 
 export type LicenseConfig = {
@@ -300,9 +336,10 @@ export type HomeTopNoticeTone =
 	| "tip"
 	| "urgent";
 
-/** 单条首页顶部通知 */
+/** 单条首页顶部通知；正文 content 可含安全 HTML（仓库内配置），如 <a href="/x">说明</a> */
 export type HomeTopNoticeItem = {
 	title?: string;
+	/** 可与纯文本混排的 HTML 字符串，常用 <a href>、<strong> 等 */
 	content: string;
 	icon?: string;
 	type?: HomeTopNoticeTone;

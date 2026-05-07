@@ -93,9 +93,11 @@ const postSlides: CarouselSlide[] = allPosts
 
 // 手动项始终排在前面，文章项紧随其后
 const featuredSlides: CarouselSlide[] = [...manualSlides, ...postSlides];
-const showCarousel = homeCarouselConfig.enable && page.currentPage === 1;
+// 所有分页共用同一轮播区块，避免翻页后轮播消失导致版心跳动
+const showCarousel = homeCarouselConfig.enable;
 const homeTopNoticeItems = getNormalizedHomeTopNoticeItems();
-const showHomeTopNotice = page.currentPage === 1 && homeTopNoticeItems.length > 0;
+// 与轮播一致：各分页均显示，避免翻页后通告消失
+const showHomeTopNotice = homeTopNoticeItems.length > 0;
 ---
 
 <MainGridLayout>

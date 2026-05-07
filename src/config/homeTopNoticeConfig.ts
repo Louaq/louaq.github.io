@@ -8,20 +8,21 @@ import type {
  *
  * 用法：在 items 数组中添加任意条数的通知，每条可独立设置：
  *  - title    : 通知标题（可选）
- *  - content  : 通知正文（必填，空字符串会被忽略）
- *  - type     : 配色 / 默认图标，info / warning / success / error / neutral / tip / urgent
- *  - icon     : 自定义图标（不填则按 type 取默认图标）
+ *  - content  : 通知正文（必填，空字符串会被忽略）；可按 HTML 书写，例如
+ *               '维护说明见<a href="/posts/foo/">此文</a>。' 外链请自行加 target="_blank" rel="noopener noreferrer"
+ *  - type     : 配色，info / warning / success / error / neutral / tip / urgent
+ *  - icon     : 预留字段（当前组件不展示图标）
  *  - link     : 末尾的跳转按钮，可选
  *
  * 如需临时关闭整块通知区域，将 enable 设为 false 即可。
  */
 export const homeTopNoticeConfig: HomeTopNoticeConfig = {
-	enable: false,
+	enable: true,
 	items: [
 		{
 			title: "重要通知",
 			content: "今晚23:00-24:00 进行维护，期间可能无法访问",
-			type: "warning",
+			type: "info",
 			icon: "fa6-solid:triangle-exclamation",
 			link: {
 				enable: false,

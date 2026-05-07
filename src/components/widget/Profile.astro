@@ -2,16 +2,84 @@
 import { Icon } from "astro-icon/components";
 import ImageWrapper from "@/components/common/ImageWrapper.astro";
 import { profileConfig } from "@/config/profileConfig";
+import type { ProfileStatItem } from "@/types/config";
+import { getSortedPosts } from "@/utils/content-utils";
 import { url } from "@/utils/url-utils";
+
+/** 站内路径走 BASE_URL，外链/raw mailto 原样 */
+function resolveProfileHref(href?: string): string | undefined {
+	const h = href?.trim();
+	if (!h) return undefined;
+	if (/^https?:\/\//i.test(h) || h.startsWith("mailto:")) return h;
+	return url(h.startsWith("/") ? h : `/${h}`);
+}
+
+function randomInclusiveInt(min: number, max: number): number {
+	const lo = Math.min(min, max);
+	const hi = Math.max(min, max);
+	return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+}
+
+/** 阅读量：偏大数字 → 掘金风格 235k / 1.2M */
+function formatReadStat(n: number): string {
+	if (n >= 1_000_000) {
+		const m = n / 1_000_000;
+		const t = m >= 10 ? Math.round(m) : Math.round(m * 10) / 10;
+		return `${String(t).replace(/\.0$/, "")}M`;
+	}
+	const k = n / 1000;
+	const t = k >= 100 ? Math.round(k) : Math.round(k * 10) / 10;
+	return `${String(t).replace(/\.0$/, "")}k`;
+}
+
+/** 粉丝量：可从几百到数万 */
+function formatFollowerStat(n: number): string {
+	if (n < 1000) return String(n);
+	const k = n / 1000;
+	const t = Math.round(k * 10) / 10;
+	return `${String(t).replace(/\.0$/, "")}k`;
+}
+
+function resolveStatDisplayValue(
+	stat: ProfileStatItem,
+	postCount: number,
+): string {
+	const mode = stat.valueMode ?? "literal";
+	if (mode === "postCount") return String(postCount);
+	if (mode === "randomReads") {
+		const min = stat.randomMin ?? 12_000;
+		const max = stat.randomMax ?? 980_000;
+		return formatReadStat(randomInclusiveInt(min, max));
+	}
+	if (mode === "randomFollowers") {
+		const min = stat.randomMin ?? 80;
+		const max = stat.randomMax ?? 18_000;
+		return formatFollowerStat(randomInclusiveInt(min, max));
+	}
+	const v = stat.value?.trim();
+	return v !== undefined && v !== "" ? v : "—";
+}
+
+const sortedPosts = await getSortedPosts();
+const postCount = sortedPosts.length;
+
+const level = profileConfig.level?.trim();
+const badges = profileConfig.badges?.filter((b) => (b.text ?? "").trim()) ?? [];
+const stats = profileConfig.stats?.filter((s) => (s.label ?? "").trim()) ?? [];
+const statsResolved = stats.map((s) => ({
+	...s,
+	displayValue: resolveStatDisplayValue(s, postCount),
+}));
+const statCols = statsResolved.length;
 ---
 
 <div class="card-base profile-card-juejin p-4">
-  <!-- 头部：左圆形头像 + 右侧名字与个性签名 -->
-  <div class="flex items-center gap-3 min-w-0">
+  <!-- 上：头像 + 昵称/等级、简介、标签 -->
+  <div class="flex gap-3 min-w-0 items-start">
     <a
       aria-label="Go to About Page"
       href={url("/about/")}
-      class="profile-avatar-link group relative flex-shrink-0 block w-12 h-12 rounded-full overflow-hidden active:scale-95"
+      class="profile-avatar-link group relative shrink-0 block w-14 h-14 rounded-full overflow-hidden active:scale-95"
     >
       <div
         class="absolute inset-0 transition pointer-events-none z-10
@@ -26,29 +94,126 @@ import { url } from "@/utils/url-utils";
       <ImageWrapper
         src={profileConfig.avatar || ""}
         alt="Profile Image of the Author"
-        class="w-12 h-12 object-cover"
+        class="w-14 h-14 object-cover"
       />
     </a>
 
-    <div class="flex flex-col min-w-0 flex-1">
-      <a
-        href={url("/about/")}
-        class="profile-name font-bold text-base leading-tight truncate dark:text-neutral-50 transition"
-      >
-        {profileConfig.name}
-      </a>
-      <div
-        class="profile-bio text-xs text-neutral-400 mt-0.5 truncate transition"
-        title={profileConfig.bio}
-      >
-        {profileConfig.bio}
+    <div class="flex min-w-0 flex-1 flex-col gap-1.5">
+      <div class="flex flex-wrap items-center gap-2">
+        <a
+          href={url("/about/")}
+          class="profile-name font-bold text-lg leading-snug text-neutral-900 dark:text-neutral-50 transition"
+        >
+          {profileConfig.name}
+        </a>
+        {
+          level && (
+            <span
+              class="profile-level-badge inline-flex items-center rounded px-1.5 py-0 text-[11px] font-semibold leading-5 text-white"
+              aria-label={`等级 ${level}`}
+            >
+              {level}
+            </span>
+          )
+        }
       </div>
+      {
+        profileConfig.bio?.trim() && (
+          <div
+            class="profile-bio text-[16px] leading-snug text-neutral-500 dark:text-neutral-400 line-clamp-2"
+            title={profileConfig.bio}
+          >
+            {profileConfig.bio}
+          </div>
+        )
+      }
+      {
+        badges.length > 0 && (
+          <div class="flex flex-wrap gap-2 pt-0.5">
+            {badges.map((b) => {
+              const hr = resolveProfileHref(b.href);
+              const iconNode = b.icon?.trim() ? (
+                <Icon
+                  name={b.icon.trim()}
+                  class="text-[13px] opacity-90 shrink-0"
+                  aria-hidden="true"
+                />
+              ) : null;
+              const textNode = <span class="truncate">{b.text.trim()}</span>;
+              const chevron =
+                hr != null ? (
+                  <Icon
+                    name="fa6-solid:chevron-right"
+                    class="text-[9px] shrink-0 opacity-70"
+                    aria-hidden="true"
+                  />
+                ) : null;
+
+              return hr ? (
+                <a
+                  href={hr}
+                  class="profile-badge-chip min-w-0"
+                  target={/^https?:/i.test(hr) ? "_blank" : undefined}
+                  rel={/^https?:/i.test(hr) ? "noopener noreferrer" : undefined}
+                >
+                  {iconNode}
+                  {textNode}
+                  {chevron}
+                </a>
+              ) : (
+                <span class="profile-badge-chip min-w-0">
+                  {iconNode}
+                  {textNode}
+                </span>
+              );
+            })}
+          </div>
+        )
+      }
     </div>
   </div>
 
-  <!-- 链接图标按钮：紧凑方形按钮 -->
+  <!-- 中：三列统计（掘金式） -->
+  {
+    statsResolved.length > 0 && (
+      <div
+        class="profile-stats-row mt-4 border-t border-neutral-200/90 pt-4 dark:border-white/10"
+        style={`display:grid;grid-template-columns:repeat(${statCols},minmax(0,1fr));gap:0.5rem`}
+      >
+        {statsResolved.map((s) => {
+          const hr = resolveProfileHref(s.href);
+          const valueNode = (
+            <span class="profile-stat-value font-bold text-neutral-900 tabular-nums dark:text-neutral-50">
+              {s.displayValue}
+            </span>
+          );
+          return (
+            <div class="profile-stat-cell flex min-w-0 flex-col items-center gap-1 text-center">
+              {hr ? (
+                <a
+                  href={hr}
+                  class="profile-stat-value-link leading-none transition hover:opacity-80"
+                  target={/^https?:/i.test(hr) ? "_blank" : undefined}
+                  rel={/^https?:/i.test(hr) ? "noopener noreferrer" : undefined}
+                >
+                  {valueNode}
+                </a>
+              ) : (
+                valueNode
+              )}
+              <span class="profile-stat-label text-xs text-neutral-500 dark:text-neutral-400">
+                {s.label.trim()}
+              </span>
+            </div>
+          );
+        })}
+      </div>
+    )
+  }
+
+  <!-- 下：社交图标 -->
   {profileConfig.links.length > 0 && (
-    <div class="profile-links flex flex-wrap gap-1.5 mt-3">
+    <div class="profile-links mt-4 flex flex-wrap gap-2">
       {profileConfig.links.map((item) => {
         if (item.url.startsWith("mailto:")) {
           const encodedEmail = Buffer.from(
@@ -76,7 +241,7 @@ import { url } from "@/utils/url-utils";
               class="profile-link-btn"
               title={item.name}
             >
-              <Icon name={item.icon} class="text-base" />
+              <Icon name={item.icon} class="text-xl" />
             </a>
           );
         }
@@ -89,7 +254,7 @@ import { url } from "@/utils/url-utils";
             class="profile-link-btn"
             title={item.name}
           >
-            <Icon name={item.icon} class="text-base" />
+            <Icon name={item.icon} class="text-xl" />
           </a>
         );
       })}
@@ -106,13 +271,53 @@ import { url } from "@/utils/url-utils";
     color: var(--juejin-primary, var(--primary));
   }
 
+  .profile-level-badge {
+    background: var(--juejin-primary, #1e80ff);
+  }
+
+  :root.dark .profile-level-badge {
+    background: color-mix(in oklch, var(--primary) 88%, #1e3a5f);
+  }
+
+  .profile-badge-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    max-width: 100%;
+    border-radius: 4px;
+    padding: 0.125rem 0.5rem;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 500;
+    background: color-mix(in oklch, var(--primary) 12%, transparent);
+    color: var(--juejin-primary, var(--primary));
+    transition: opacity 0.15s ease, background 0.15s ease;
+  }
+
+  a.profile-badge-chip:hover {
+    opacity: 0.92;
+    background: color-mix(in oklch, var(--primary) 18%, transparent);
+  }
+
+  :root.dark .profile-badge-chip {
+    background: color-mix(in oklch, var(--primary) 22%, transparent);
+    color: oklch(0.82 0.06 var(--hue, 252));
+  }
+
+  .profile-stats-row .profile-stat-value,
+  .profile-stats-row .profile-stat-value-link .profile-stat-value {
+    font-size: 1.25rem;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+  }
+
   .profile-card-juejin .profile-link-btn {
-    width: 32px;
-    height: 32px;
+    width: 40px;
+    height: 40px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 6px;
+    border-radius: 8px;
     background: var(--juejin-tag-bg, rgba(0, 0, 0, 0.05));
     color: var(--juejin-text-secondary, rgba(0, 0, 0, 0.65));
     transition: background 0.15s ease, color 0.15s ease;

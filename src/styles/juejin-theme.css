@@ -592,28 +592,20 @@ widget-layout .widget-title::before {
 }
 
 /* =============================================================
- * HomeTopNotice 顶部通知条：紧凑型卡片
+ * HomeTopNotice 顶部通知条：仅统一圆角，配色由组件 Tailwind tone 承担
+ * （勿再覆盖 background/border，否则会冲淡 warning/urgent 对比度）
  * ============================================================= */
-#home-top-notice,
-.home-top-notice {
-  border-radius: 4px !important;
-  border: 1px solid var(--juejin-border) !important;
-  background: color-mix(in oklch, var(--card-bg) 96%, var(--juejin-primary) 4%) !important;
-  box-shadow: none !important;
-}
-:root.dark #home-top-notice,
-:root.dark .home-top-notice {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: color-mix(in oklch, var(--card-bg) 93%, var(--primary) 7%) !important;
-}
-
 .home-top-notice-stack .home-top-notice {
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  border-radius: 4px;
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
 }
 
 .home-top-notice-stack .home-top-notice:hover {
-  border-color: var(--juejin-border) !important;
-  box-shadow: none !important;
+  filter: brightness(1.03);
+}
+
+:root.dark .home-top-notice-stack .home-top-notice:hover {
+  filter: brightness(1.06);
 }
 
 /* =============================================================

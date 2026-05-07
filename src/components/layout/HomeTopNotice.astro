@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import type { HomeTopNoticeItem, HomeTopNoticeTone } from "@/types/config";
 
 interface Props {
@@ -9,39 +8,25 @@ interface Props {
 const { items } = Astro.props;
 
 const toneClass: Record<HomeTopNoticeTone, string> = {
-	info: "bg-sky-500/[0.12] dark:bg-sky-400/10 text-sky-950 dark:text-sky-50 border-sky-400/35",
+	info:
+		"bg-sky-100 dark:bg-sky-950/85 text-sky-950 dark:text-sky-50 shadow-[0_1px_3px_-1px_rgb(14_116_144/0.12)]",
 	warning:
-		"bg-amber-500/[0.14] dark:bg-amber-400/10 text-amber-950 dark:text-amber-50 border-amber-400/35",
+		"bg-amber-100 dark:bg-amber-950/92 text-amber-950 dark:text-amber-50 shadow-[0_2px_6px_-1px_rgb(146_64_14/0.15)]",
 	success:
-		"bg-emerald-500/[0.12] dark:bg-emerald-400/10 text-emerald-950 dark:text-emerald-50 border-emerald-400/35",
+		"bg-emerald-100 dark:bg-emerald-950/85 text-emerald-950 dark:text-emerald-50 shadow-[0_1px_3px_-1px_rgb(6_95_70/0.12)]",
 	error:
-		"bg-red-500/[0.12] dark:bg-red-400/10 text-red-950 dark:text-red-50 border-red-400/35",
+		"bg-red-100 dark:bg-red-950/92 text-red-950 dark:text-red-50 shadow-[0_2px_6px_-1px_rgb(185_28_28/0.15)]",
 	neutral:
-		"bg-neutral-500/[0.1] dark:bg-neutral-400/10 text-neutral-900 dark:text-neutral-100 border-neutral-400/28",
-	tip: "bg-violet-500/[0.12] dark:bg-violet-400/10 text-violet-950 dark:text-violet-50 border-violet-400/35",
+		"bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-sm shadow-black/5 dark:shadow-none",
+	tip:
+		"bg-violet-100 dark:bg-violet-950/85 text-violet-950 dark:text-violet-50 shadow-[0_1px_3px_-1px_rgb(91_33_182/0.14)]",
 	urgent:
-		"bg-orange-600/[0.14] dark:bg-orange-400/12 text-orange-950 dark:text-orange-50 border-orange-500/40",
-};
-
-const defaultIcon: Record<HomeTopNoticeTone, string> = {
-	info: "fa6-solid:circle-info",
-	warning: "fa6-solid:triangle-exclamation",
-	success: "fa6-solid:circle-check",
-	error: "fa6-solid:circle-xmark",
-	neutral: "fa6-solid:bullhorn",
-	tip: "fa6-solid:lightbulb",
-	urgent: "fa6-solid:bolt",
+		"bg-orange-100 dark:bg-orange-950/95 text-orange-950 dark:text-orange-50 shadow-[0_2px_8px_-1px_rgb(234_88_12/0.2)]",
 };
 
 function barToneClasses(type: HomeTopNoticeTone | undefined): string {
 	const tone = type ?? "warning";
 	return toneClass[tone] ?? toneClass.warning;
-}
-
-function resolveIcon(item: HomeTopNoticeItem): string | undefined {
-	if (item.icon?.trim()) return item.icon;
-	const tone = item.type ?? "warning";
-	return defaultIcon[tone] ?? defaultIcon.warning;
 }
 ---
 
@@ -49,31 +34,23 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 	{
 		items.map((item, i) => {
 			const tone = item.type ?? "warning";
-			const iconName = resolveIcon(item);
 			return (
 				<div
 					class:list={[
-						"home-top-notice rounded-md border overflow-hidden",
+						"home-top-notice rounded-md overflow-hidden",
 						barToneClasses(tone),
 					]}
 					id={`home-top-notice-${i}`}
 					role="region"
 					aria-label={item.title || "站点通知"}
 				>
-					<div class="max-w-[var(--page-width)] mx-auto px-3 md:px-4 py-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[13px] md:text-sm">
-						<div class="flex flex-1 min-w-0 items-start sm:items-center gap-2 sm:gap-3 justify-center sm:justify-start text-center sm:text-left">
-							{iconName && (
-								<Icon
-									name={iconName}
-									class="shrink-0 mt-0.5 sm:mt-0 text-base opacity-85"
-									aria-hidden="true"
-								/>
-							)}
-							<div class="min-w-0 leading-snug">
+					<div class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[15px] md:text-[16px] leading-relaxed">
+						<div class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left">
+							<div class="min-w-0">
 								{item.title && (
-									<span class="font-semibold mr-1.5">{item.title}</span>
+									<span class="font-bold mr-1.5 tracking-tight text-[1.05em]">{item.title}</span>
 								)}
-								<span class="opacity-95">{item.content}</span>
+								<span class="notice-content-inline" set:html={item.content} />
 							</div>
 						</div>
 						{item.link?.enable && item.link.url?.trim() && (
@@ -84,7 +61,7 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 									rel={
 										item.link.external ? "noopener noreferrer" : undefined
 									}
-									class="btn-regular rounded-md px-2.5 py-1 text-xs font-medium whitespace-nowrap active:scale-95 transition-transform"
+									class="btn-regular rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap active:scale-95 transition-transform"
 								>
 									{item.link.text}
 								</a>
@@ -116,3 +93,19 @@ function resolveIcon(item: HomeTopNoticeItem): string | undefined {
 	document.addEventListener("DOMContentLoaded", pruneLegacyDismissKeys);
 	document.addEventListener("swup:contentReplaced", pruneLegacyDismissKeys);
 </script>
+
+<style is:global>
+	/* content 支持 HTML（如 <a href>）；样式与通知条文案色一致 */
+	.notice-content-inline a {
+		color: inherit;
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+		text-decoration-thickness: min(2px, 0.1em);
+	}
+	.notice-content-inline a:focus-visible {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+		border-radius: 2px;
+	}
+</style>

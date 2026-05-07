@@ -176,13 +176,13 @@
 
 /* Profile 组件 */
 .widget-container[data-widget-type="profile"] {
-  /* 用户资料组件始终保持固定高度 */
-  min-height: 120px;
+  /* 掘金式资料卡：头像 + 标签 + 数据行 + 社交按钮 */
+  min-height: 220px;
 }
 
 @media (max-width: 767px) {
   .widget-container[data-widget-type="profile"] {
-    min-height: 100px;
+    min-height: 200px;
   }
 }
 
