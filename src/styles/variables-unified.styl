@@ -82,7 +82,12 @@
   --scrollbar-bg: var(--scrollbar-bg-light);
   --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
   --scrollbar-bg-active: var(--scrollbar-bg-active-light);
-  
+
+  /* 首页通告条 / 文章过期提示：底色与字色随 --primary 变化 */
+  --notice-themed-bg: unquote('color-mix(in oklch, var(--primary) 11%, var(--card-bg))');
+  --notice-themed-fg: unquote('color-mix(in oklch, var(--primary) 34%, var(--deep-text))');
+  --notice-themed-shadow: unquote('0 1px 3px -1px color-mix(in oklch, var(--primary) 22%, transparent)');
+
   --display-light-icon: 1;
   --display-dark-icon: 0;
   
@@ -160,7 +165,11 @@
   --scrollbar-bg: var(--scrollbar-bg-dark);
   --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
   --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
-  
+
+  --notice-themed-bg: unquote('color-mix(in oklch, var(--primary) 17%, var(--card-bg))');
+  --notice-themed-fg: unquote('color-mix(in oklch, var(--primary) 9%, rgba(255, 255, 255, 0.92))');
+  --notice-themed-shadow: unquote('0 1px 3px -1px color-mix(in oklch, var(--primary) 26%, transparent)');
+
   --display-light-icon: 0;
   --display-dark-icon: 1;
   

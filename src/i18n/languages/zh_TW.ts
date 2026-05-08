@@ -178,6 +178,8 @@ export const zh_TW: Translation = {
 	[Key.lastModifiedPrefix]: "最後更新於 ",
 	[Key.lastModifiedOutdated]: "部分內容可能已過時",
 	[Key.lastModifiedDaysAgo]: "距今已過 {days} 天",
+	[Key.lastModifiedNoticeTitle]: "溫馨提示",
+	[Key.lastModifiedNoticeJoiner]: "。",
 	[Key.year]: "年",
 	[Key.month]: "月",
 	[Key.day]: "日",

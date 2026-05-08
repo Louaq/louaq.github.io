@@ -189,6 +189,8 @@ export const ja: Translation = {
 	[Key.lastModifiedPrefix]: "最終更新日：",
 	[Key.lastModifiedOutdated]: "一部の内容が古くなっている可能性があります",
 	[Key.lastModifiedDaysAgo]: "{days}日前",
+	[Key.lastModifiedNoticeTitle]: "お知らせ",
+	[Key.lastModifiedNoticeJoiner]: "。",
 	[Key.year]: "年",
 	[Key.month]: "月",
 	[Key.day]: "日",

@@ -176,6 +176,10 @@ enum I18nKey {
 	lastModifiedPrefix = "lastModifiedPrefix",
 	lastModifiedOutdated = "lastModifiedOutdated",
 	lastModifiedDaysAgo = "lastModifiedDaysAgo",
+	/** 与首页通告条一致：加粗前缀 + 正文一行 */
+	lastModifiedNoticeTitle = "lastModifiedNoticeTitle",
+	/** 连接「更新日期」与「过时说明」的标点（如中文。「」，英文 ". "） */
+	lastModifiedNoticeJoiner = "lastModifiedNoticeJoiner",
 	year = "year",
 	month = "month",
 	day = "day",

@@ -20,6 +20,13 @@
   background-color: var(--primary);
 }
 
+/* 首页通告条、文章过期提示：随主题色 --primary 变化 */
+.home-top-notice.home-top-notice--theme {
+  background: var(--notice-themed-bg);
+  color: var(--notice-themed-fg);
+  box-shadow: var(--notice-themed-shadow);
+}
+
 /* 确保平滑滚动 */
 html {
     scroll-behavior: smooth;

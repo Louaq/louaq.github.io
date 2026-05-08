@@ -11,40 +11,26 @@ const categories = await getCategoryList();
 <MainGridLayout title={i18n(I18nKey.categories)} description={i18n(I18nKey.categories)}>
 	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
 		<div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
-			<h1
-				class="text-3xl font-bold text-black/90 dark:text-white/90 mb-6 md:mb-7 tracking-tight"
-			>
-				{i18n(I18nKey.categories)}
-			</h1>
 			{
 				categories.length === 0 ? (
 					<p class="text-black/50 dark:text-white/50">
 						{i18n(I18nKey.uncategorized)}
 					</p>
 				) : (
-					<ul class="categories-page-list list-none m-0 p-0">
+					<ul class="categories-page-list flex flex-wrap items-center gap-x-6 gap-y-3 md:gap-x-8 list-none m-0 p-0">
 						{categories.map((cat) => (
-							<li class="m-0 p-0 border-b border-black/[0.06] dark:border-white/[0.08] last:border-0">
+							<li class="m-0 p-0">
 								<a
 									href={cat.url}
-									class="categories-page-row group flex items-center justify-between gap-4 py-3.5 md:py-4 px-1 -mx-1 rounded-lg text-black/75 dark:text-white/75 transition-colors duration-150 hover:text-[initial]"
+									class="categories-page-chip group inline-flex items-center gap-1.5 py-0.5 rounded-md text-neutral-900 dark:text-neutral-100 transition-colors duration-150 hover:text-[var(--primary)]"
 								>
-									<span class="flex items-center gap-3 min-w-0">
-										<Icon
-											name="material-symbols:folder-outline-rounded"
-											class="shrink-0 text-[1.35rem] text-neutral-500 dark:text-neutral-500 opacity-[0.92] transition-colors duration-150 group-hover:text-[var(--primary)]"
-											aria-hidden="true"
-										/>
-										<span
-											class="text-[0.9375rem] md:text-base font-medium text-neutral-800 dark:text-neutral-200 truncate transition-colors duration-150 group-hover:text-[var(--primary)]"
-										>
-											{cat.name}
-										</span>
-									</span>
-									<span
-										class="shrink-0 text-sm tabular-nums text-neutral-400 dark:text-neutral-500"
-									>
-										({cat.count})
+									<Icon
+										name="material-symbols:folder-rounded"
+										class="shrink-0 text-[1.0625rem] text-current opacity-90"
+										aria-hidden="true"
+									/>
+									<span class="text-[0.9375rem] md:text-base font-normal tabular-nums">
+										{cat.name}({cat.count})
 									</span>
 								</a>
 							</li>

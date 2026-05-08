@@ -185,6 +185,8 @@ export const ru: Translation = {
 	[Key.lastModifiedPrefix]: "Последнее обновление: ",
 	[Key.lastModifiedOutdated]: "Некоторый контент может быть устаревшим",
 	[Key.lastModifiedDaysAgo]: "{days} дней назад",
+	[Key.lastModifiedNoticeTitle]: "Внимание",
+	[Key.lastModifiedNoticeJoiner]: ". ",
 	[Key.year]: "год",
 	[Key.month]: "месяц",
 	[Key.day]: "день",

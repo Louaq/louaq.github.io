@@ -176,6 +176,8 @@ export const zh_CN: Translation = {
 	[Key.lastModifiedPrefix]: "最后更新于 ",
 	[Key.lastModifiedOutdated]: "部分内容可能已过时",
 	[Key.lastModifiedDaysAgo]: "距今已过 {days} 天",
+	[Key.lastModifiedNoticeTitle]: "温馨提示",
+	[Key.lastModifiedNoticeJoiner]: "。",
 	[Key.year]: "年",
 	[Key.month]: "月",
 	[Key.day]: "日",

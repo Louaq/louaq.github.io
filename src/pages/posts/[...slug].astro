@@ -56,6 +56,17 @@ const outdatedThreshold = siteConfig.outdatedThreshold ?? 1;
 const shouldShowOutdatedNotice =
 	siteConfig.showLastModified && daysDiff >= outdatedThreshold;
 const lastModifiedDateStr = lastModified.format("YYYY-MM-DD");
+const commaBeforeDays = siteConfig.lang.startsWith("zh")
+	? "，"
+	: siteConfig.lang === "ja"
+		? "、"
+		: ", ";
+const lastModifiedMain = `${i18n(I18nKey.lastModifiedPrefix)}${lastModifiedDateStr}${
+	daysDiff >= 1
+		? `${commaBeforeDays}${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
+		: ""
+}`;
+const staleNoticeBody = `${lastModifiedMain}${i18n(I18nKey.lastModifiedNoticeJoiner)}${i18n(I18nKey.lastModifiedOutdated)}`;
 
 const jsonLd = {
 	"@context": "https://schema.org",
@@ -180,42 +191,28 @@ const jsonLd = {
       {!entry.data.password && shouldShowOutdatedNotice && (
         <div class="mb-6 onload-animation">
           <div
-            class="post-outdated-notice rounded-xl px-4 py-3 flex gap-3"
+            class:list={[
+              "home-top-notice home-top-notice--theme post-outdated-notice rounded-md overflow-hidden",
+            ]}
             role="note"
           >
             <div
-              class="post-outdated-notice__icon h-9 w-9 rounded-lg flex items-center justify-center flex-shrink-0"
+              class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
             >
-              <Icon name="material-symbols:warning-rounded" class="text-xl" />
-            </div>
-            <div class="min-w-0">
-              <div class="text-sm text-black/80 dark:text-white/80 leading-snug">
-                {`${i18n(I18nKey.lastModifiedPrefix)}${lastModifiedDateStr}${
-                  daysDiff >= 1
-                    ? `，${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
-                    : ""
-                }`}
-              </div>
-              <div class="text-xs text-black/60 dark:text-white/60 mt-1 leading-snug">
-                {i18n(I18nKey.lastModifiedOutdated)}
+              <div
+                class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left"
+              >
+                <div class="min-w-0">
+                  <span class="font-bold mr-1.5 tracking-tight text-[1.05em]">
+                    {i18n(I18nKey.lastModifiedNoticeTitle)}
+                  </span>
+                  <span>{staleNoticeBody}</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
-
-      <style>
-        .post-outdated-notice {
-          border: 1px solid
-            color-mix(in oklab, var(--primary) 35%, transparent);
-          background: color-mix(in oklab, var(--primary) 10%, transparent);
-        }
-
-        .post-outdated-notice__icon {
-          background: color-mix(in oklab, var(--primary) 16%, transparent);
-          color: var(--primary);
-        }
-      </style>
 
       <!-- always show cover as long as it has one -->
 
@@ -248,24 +245,23 @@ const jsonLd = {
             {shouldShowOutdatedNotice && (
               <div class="mb-6 onload-animation">
                 <div
-                  class="post-outdated-notice rounded-xl px-4 py-3 flex gap-3"
+                  class:list={[
+                    "home-top-notice home-top-notice--theme post-outdated-notice rounded-md overflow-hidden",
+                  ]}
                   role="note"
                 >
                   <div
-                    class="post-outdated-notice__icon h-9 w-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                    class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
                   >
-                    <Icon name="material-symbols:warning-rounded" class="text-xl" />
-                  </div>
-                  <div class="min-w-0">
-                    <div class="text-sm text-black/80 dark:text-white/80 leading-snug">
-                      {`${i18n(I18nKey.lastModifiedPrefix)}${lastModifiedDateStr}${
-                        daysDiff >= 1
-                          ? `，${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
-                          : ""
-                      }`}
-                    </div>
-                    <div class="text-xs text-black/60 dark:text-white/60 mt-1 leading-snug">
-                      {i18n(I18nKey.lastModifiedOutdated)}
+                    <div
+                      class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left"
+                    >
+                      <div class="min-w-0">
+                        <span class="font-bold mr-1.5 tracking-tight text-[1.05em]">
+                          {i18n(I18nKey.lastModifiedNoticeTitle)}
+                        </span>
+                        <span>{staleNoticeBody}</span>
+                      </div>
                     </div>
                   </div>
                 </div>

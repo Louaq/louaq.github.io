@@ -1,44 +1,20 @@
 ---
-import type { HomeTopNoticeItem, HomeTopNoticeTone } from "@/types/config";
+import type { HomeTopNoticeItem } from "@/types/config";
 
 interface Props {
 	items: HomeTopNoticeItem[];
 }
 
 const { items } = Astro.props;
-
-const toneClass: Record<HomeTopNoticeTone, string> = {
-	info:
-		"bg-sky-100 dark:bg-sky-950/85 text-sky-950 dark:text-sky-50 shadow-[0_1px_3px_-1px_rgb(14_116_144/0.12)]",
-	warning:
-		"bg-amber-100 dark:bg-amber-950/92 text-amber-950 dark:text-amber-50 shadow-[0_2px_6px_-1px_rgb(146_64_14/0.15)]",
-	success:
-		"bg-emerald-100 dark:bg-emerald-950/85 text-emerald-950 dark:text-emerald-50 shadow-[0_1px_3px_-1px_rgb(6_95_70/0.12)]",
-	error:
-		"bg-red-100 dark:bg-red-950/92 text-red-950 dark:text-red-50 shadow-[0_2px_6px_-1px_rgb(185_28_28/0.15)]",
-	neutral:
-		"bg-neutral-100 dark:bg-neutral-900 text-neutral-900 dark:text-neutral-100 shadow-sm shadow-black/5 dark:shadow-none",
-	tip:
-		"bg-violet-100 dark:bg-violet-950/85 text-violet-950 dark:text-violet-50 shadow-[0_1px_3px_-1px_rgb(91_33_182/0.14)]",
-	urgent:
-		"bg-orange-100 dark:bg-orange-950/95 text-orange-950 dark:text-orange-50 shadow-[0_2px_8px_-1px_rgb(234_88_12/0.2)]",
-};
-
-function barToneClasses(type: HomeTopNoticeTone | undefined): string {
-	const tone = type ?? "warning";
-	return toneClass[tone] ?? toneClass.warning;
-}
 ---
 
 <div class="home-top-notice-stack mt-3 mb-3 flex flex-col gap-2">
 	{
 		items.map((item, i) => {
-			const tone = item.type ?? "warning";
 			return (
 				<div
 					class:list={[
-						"home-top-notice rounded-md overflow-hidden",
-						barToneClasses(tone),
+						"home-top-notice home-top-notice--theme rounded-md overflow-hidden",
 					]}
 					id={`home-top-notice-${i}`}
 					role="region"

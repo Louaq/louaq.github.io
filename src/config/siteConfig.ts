@@ -110,13 +110,13 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 文章页「上次编辑」相关展示：false 时隐藏元信息里的更新日期 + 正文前的过期提醒卡片
-	showLastModified: false,
+	showLastModified: true,
 
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
 	outdatedThreshold: 5,
 
 	// 文章页"上一篇/下一篇"导航开关
-	showPostPrevNext: true,
+	showPostPrevNext: false,
 
 	// OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	generateOgImages: false,
@@ -126,9 +126,9 @@ export const siteConfig: SiteConfig = {
   pages: {
 
 	// 友链页面开关
-	friends: false,
+	friends: true,
     sponsor: false, // 赞助页面开关
-    guestbook: false, // 留言板页面开关，需要配置评论系统
+    guestbook: true, // 留言板页面开关，需要配置评论系统
     bangumi: false, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
     watchlist: true, // 观影清单页面开关
   },

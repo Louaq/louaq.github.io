@@ -184,6 +184,8 @@ export const en: Translation = {
 	[Key.lastModifiedPrefix]: "Last updated on ",
 	[Key.lastModifiedOutdated]: "Some content may be outdated",
 	[Key.lastModifiedDaysAgo]: "{days} days ago",
+	[Key.lastModifiedNoticeTitle]: "Note",
+	[Key.lastModifiedNoticeJoiner]: ". ",
 	[Key.year]: "year",
 	[Key.month]: "month",
 	[Key.day]: "day",

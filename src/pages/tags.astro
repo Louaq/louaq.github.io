@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
@@ -12,51 +13,59 @@ const sortedTags = [...tags].sort((a, b) => {
 	if (b.count !== a.count) return b.count - a.count;
 	return a.name.localeCompare(b.name, undefined, { sensitivity: "base" });
 });
+
+/** 图1：柔和底色轮换（含深色模式近似色） */
+const PASTEL_CHIP = [
+	"bg-[#f9e4e8] text-[#555e67] hover:brightness-[0.97] dark:bg-rose-950/38 dark:text-rose-50 dark:hover:bg-rose-950/52",
+	"bg-[#fdf6e3] text-[#555e67] hover:brightness-[0.97] dark:bg-amber-950/35 dark:text-amber-50 dark:hover:bg-amber-950/48",
+	"bg-[#eee8f5] text-[#555e67] hover:brightness-[0.97] dark:bg-violet-950/38 dark:text-violet-100 dark:hover:bg-violet-950/50",
+	"bg-[#e6f3f7] text-[#555e67] hover:brightness-[0.97] dark:bg-sky-950/38 dark:text-sky-50 dark:hover:bg-sky-950/50",
+	"bg-[#e6f4ea] text-[#555e67] hover:brightness-[0.97] dark:bg-emerald-950/35 dark:text-emerald-50 dark:hover:bg-emerald-950/48",
+	"bg-[#f0f0f0] text-[#555e67] hover:brightness-[0.97] dark:bg-neutral-800/55 dark:text-neutral-100 dark:hover:bg-neutral-800/70",
+] as const;
+
+/** 与标签名绑定，颜色不随排序变化 */
+function pastelChipClass(tagName: string): string {
+	let h = 0;
+	for (let i = 0; i < tagName.length; i++) h = (h * 31 + tagName.charCodeAt(i)) | 0;
+	const idx = Math.abs(h) % PASTEL_CHIP.length;
+	return PASTEL_CHIP[idx];
+}
 ---
 
 <MainGridLayout title={i18n(I18nKey.tags)} description={i18n(I18nKey.tags)}>
-    <div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
-        <div class="card-base z-10 px-9 py-6 relative w-full">
-            <div class="flex items-baseline justify-between mb-8">
-                <h1 class="text-3xl font-bold text-black/90 dark:text-white/90">
-                    {i18n(I18nKey.tags)}
-                </h1>
-                <span class="text-sm text-black/40 dark:text-white/40">{tags.length} 个标签</span>
-            </div>
-
-            {tags.length === 0 ? (
-                <p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
-            ) : (
-                <div
-                    class="grid w-full gap-2.5 md:gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr))]"
-                >
-                    {sortedTags.map((tag) => (
-                        <a
-                            href={getTagUrl(tag.name)}
-                            class:list={[
-                                "tag-pill group flex w-full min-w-0 items-center gap-1.5 rounded-md pl-2.5 pr-1.5 py-1.5 text-sm",
-                                "bg-[#eeeeee] dark:bg-white/[0.08]",
-                                "transition-colors hover:bg-[#e4e4e4] dark:hover:bg-white/[0.12]",
-                                "no-underline",
-                            ]}
-                        >
-                            <span class="text-[#888888] dark:text-white/45 select-none shrink-0 transition-colors group-hover:text-[var(--primary)]">#</span>
-                            <span class="min-w-0 flex-1 truncate text-[#444444] dark:text-neutral-100 font-medium leading-none">
-                                {tag.name.trim()}
-                            </span>
-                            <span
-                                class:list={[
-                                    "inline-flex items-center justify-center min-w-[1.25rem] rounded px-1.5 py-0.5 text-xs tabular-nums shrink-0",
-                                    "bg-white text-[#888888] dark:bg-neutral-800 dark:text-neutral-400",
-                                    "border border-black/[0.06] dark:border-white/10",
-                                ]}
-                            >
-                                {tag.count}
-                            </span>
-                        </a>
-                    ))}
-                </div>
-            )}
-        </div>
-    </div>
+	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+		<div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
+			{tags.length === 0 ? (
+				<p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
+			) : (
+				<ul class="tags-page-cloud flex flex-wrap gap-2.5 md:gap-3 list-none m-0 p-0">
+					{sortedTags.map((tag) => {
+						const name = tag.name.trim();
+						return (
+							<li class="m-0 p-0">
+								<a
+									href={getTagUrl(tag.name)}
+									class:list={[
+										"tags-page-chip group inline-flex items-center gap-1.5 rounded px-3 py-1 text-sm no-underline",
+										"transition-[filter,background-color] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
+										pastelChipClass(name),
+									]}
+								>
+									<Icon
+										name="material-symbols:tag-rounded"
+										class="shrink-0 text-[1rem] text-current opacity-85"
+										aria-hidden="true"
+									/>
+									<span class="font-normal tabular-nums leading-none">
+										{name}({tag.count})
+									</span>
+								</a>
+							</li>
+						);
+					})}
+				</ul>
+			)}
+		</div>
+	</div>
 </MainGridLayout>

@@ -13,15 +13,18 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 删除图中的1，2处信息：
 ![](https://pic1.imgdb.cn/item/69c3bae236bbc571055c8665.webp)
 
-```txt
-\settopmatter{printacmref=false} % Removes citation information below abstract
-\renewcommand\footnotetextcopyrightpermission[1]{} % removes footnote with conference information in first column
-\pagestyle{plain} % removes running headers
+```tex
+% Removes citation information below abstract
+\settopmatter{printacmref=false} 
+% removes footnote with conference information in first column
+\renewcommand\footnotetextcopyrightpermission[1]{} 
+% removes running headers
+\pagestyle{plain} 
 
 ```
 
 删除acmSubmissionID后面的```*```，注释\authornotemark[1]，大概138行左右
-```txt
+```tex
 %\authornotemark[1]
 ```
 
