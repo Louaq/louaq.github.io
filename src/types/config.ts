@@ -190,6 +190,12 @@ export type ProfileStatItem = {
 
 export type ProfileConfig = {
 	avatar?: string;
+	/** 资料卡顶部封面图（侧栏头图） */
+	cover?: string;
+	/** 头像右下角认证角标 */
+	verified?: boolean;
+	/** 封面右上「⋯」跳转，默认 /about/ */
+	menuHref?: string;
 	name: string;
 	bio?: string;
 	/** 昵称右侧等级文案，如 "LV.5"；留空则不显示 */

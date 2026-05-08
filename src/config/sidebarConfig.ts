@@ -36,29 +36,29 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 动画延迟时间（毫秒），用于错开动画效果
 			animationDelay: 0,
 		},
-		{
-			// 组件类型：倒计时组件
-			type: "countdown",
-			// 是否启用该组件
-			enable: true,
-			// 组件显示顺序
-			order: 2,
-			// 组件位置
-			position: "sticky",
-			// 是否在文章详情页显示
-			showOnPostPage: true,
-			// CSS 类名
-			class: "onload-animation",
-			// 动画延迟时间
-			animationDelay: 0,
-			// 自定义属性：配置倒计时目标日期时间和标题
-			// targetDate 支持格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
-			customProps: {
-				targetDate: "2026-05-08 00:00:00",
-				title: "汇报倒计时",
-				description: "距离汇报还有",
-			},
-		},
+		// {
+		// 	// 组件类型：倒计时组件
+		// 	type: "countdown",
+		// 	// 是否启用该组件
+		// 	enable: true,
+		// 	// 组件显示顺序
+		// 	order: 2,
+		// 	// 组件位置
+		// 	position: "sticky",
+		// 	// 是否在文章详情页显示
+		// 	showOnPostPage: true,
+		// 	// CSS 类名
+		// 	class: "onload-animation",
+		// 	// 动画延迟时间
+		// 	animationDelay: 0,
+		// 	// 自定义属性：配置倒计时目标日期时间和标题
+		// 	// targetDate 支持格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
+		// 	customProps: {
+		// 		targetDate: "2026-05-08 00:00:00",
+		// 		title: "汇报倒计时",
+		// 		description: "距离汇报还有",
+		// 	},
+		// },
 		{
 			// 组件类型：公告组件
 			type: "announcement",
@@ -89,7 +89,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 响应式配置
 			responsive: {
 				// 折叠阈值：当分类数量超过5个时自动折叠
-				collapseThreshold: 5,
+				collapseThreshold: 20,
 			},
 		},
 		// {

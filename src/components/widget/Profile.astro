@@ -2,8 +2,9 @@
 import { Icon } from "astro-icon/components";
 import ImageWrapper from "@/components/common/ImageWrapper.astro";
 import { profileConfig } from "@/config/profileConfig";
-import type { ProfileStatItem } from "@/types/config";
-import { getSortedPosts } from "@/utils/content-utils";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { getCategoryList, getTagList } from "@/utils/content-utils";
 import { url } from "@/utils/url-utils";
 
 /** 站内路径走 BASE_URL，外链/raw mailto 原样 */
@@ -14,102 +15,80 @@ function resolveProfileHref(href?: string): string | undefined {
 	return url(h.startsWith("/") ? h : `/${h}`);
 }
 
-function randomInclusiveInt(min: number, max: number): number {
-	const lo = Math.min(min, max);
-	const hi = Math.max(min, max);
-	return Math.floor(Math.random() * (hi - lo + 1)) + lo;
-}
-
-/** 阅读量：偏大数字 → 掘金风格 235k / 1.2M */
-function formatReadStat(n: number): string {
-	if (n >= 1_000_000) {
-		const m = n / 1_000_000;
-		const t = m >= 10 ? Math.round(m) : Math.round(m * 10) / 10;
-		return `${String(t).replace(/\.0$/, "")}M`;
-	}
-	const k = n / 1000;
-	const t = k >= 100 ? Math.round(k) : Math.round(k * 10) / 10;
-	return `${String(t).replace(/\.0$/, "")}k`;
-}
-
-/** 粉丝量：可从几百到数万 */
-function formatFollowerStat(n: number): string {
-	if (n < 1000) return String(n);
-	const k = n / 1000;
-	const t = Math.round(k * 10) / 10;
-	return `${String(t).replace(/\.0$/, "")}k`;
-}
-
-function resolveStatDisplayValue(
-	stat: ProfileStatItem,
-	postCount: number,
-): string {
-	const mode = stat.valueMode ?? "literal";
-	if (mode === "postCount") return String(postCount);
-	if (mode === "randomReads") {
-		const min = stat.randomMin ?? 12_000;
-		const max = stat.randomMax ?? 980_000;
-		return formatReadStat(randomInclusiveInt(min, max));
-	}
-	if (mode === "randomFollowers") {
-		const min = stat.randomMin ?? 80;
-		const max = stat.randomMax ?? 18_000;
-		return formatFollowerStat(randomInclusiveInt(min, max));
-	}
-	const v = stat.value?.trim();
-	return v !== undefined && v !== "" ? v : "—";
-}
-
-const sortedPosts = await getSortedPosts();
-const postCount = sortedPosts.length;
-
 const level = profileConfig.level?.trim();
-const badges = profileConfig.badges?.filter((b) => (b.text ?? "").trim()) ?? [];
-const stats = profileConfig.stats?.filter((s) => (s.label ?? "").trim()) ?? [];
-const statsResolved = stats.map((s) => ({
-	...s,
-	displayValue: resolveStatDisplayValue(s, postCount),
-}));
-const statCols = statsResolved.length;
+const coverSrc = profileConfig.cover?.trim();
+const menuHref = resolveProfileHref(profileConfig.menuHref) ?? url("/about/");
+const verified = profileConfig.verified === true;
+
+const tags = await getTagList();
+const categories = await getCategoryList();
+const tagCount = tags.length;
+const categoryCount = categories.length;
+
+const githubItem = profileConfig.links.find(
+	(l) => /github\.com/i.test(l.url) || (l.icon ?? "").toLowerCase().includes("github"),
+);
+const emailItem = profileConfig.links.find((l) => l.url.startsWith("mailto:"));
+
+const primaryEmailEncoded =
+	emailItem?.url.startsWith("mailto:")
+		? Buffer.from(emailItem.url.replace("mailto:", "")).toString("base64")
+		: undefined;
+
+const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== emailItem);
 ---
 
-<div class="card-base profile-card-juejin p-4">
-  <!-- 上：头像 + 昵称/等级、简介、标签 -->
-  <div class="flex gap-3 min-w-0 items-start">
-    <a
-      aria-label="Go to About Page"
-      href={url("/about/")}
-      class="profile-avatar-link group relative shrink-0 block w-14 h-14 rounded-full overflow-hidden active:scale-95"
+<div class="card-base profile-card-hero overflow-hidden p-0 rounded-2xl shadow-sm border border-black/[0.06] dark:border-white/10">
+  <!-- 头图区 -->
+  <div class="profile-cover-wrap relative h-[6.5rem]">
+    {
+      coverSrc ? (
+        <div
+          class="absolute inset-0 bg-cover bg-center"
+          style={`background-image:url(${JSON.stringify(coverSrc)})`}
+        />
+      ) : (
+        <div class="absolute inset-0 bg-gradient-to-br from-slate-500 via-slate-600 to-slate-800" />
+      )
+    }
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
+      aria-hidden="true"
+    />
+
+    <div
+      class="profile-hero-avatar absolute left-4 bottom-0 z-20 block h-16 w-16 translate-y-1/2 rounded-full"
     >
-      <div
-        class="absolute inset-0 transition pointer-events-none z-10
-          group-hover:bg-black/30 group-active:bg-black/50
-          flex items-center justify-center"
-      >
-        <Icon
-          name="fa6-regular:address-card"
-          class="transition opacity-0 scale-75 group-hover:scale-100 group-hover:opacity-100 text-white text-lg"
+      <div class="relative h-full w-full overflow-hidden rounded-full">
+        <ImageWrapper
+          src={profileConfig.avatar || ""}
+          alt="Profile Image of the Author"
+          class="h-full w-full object-cover"
         />
       </div>
-      <ImageWrapper
-        src={profileConfig.avatar || ""}
-        alt="Profile Image of the Author"
-        class="w-14 h-14 object-cover"
-      />
-    </a>
+      {
+        verified && (
+          <span
+            class="pointer-events-none absolute bottom-0 right-0 z-30 flex h-5 w-5 translate-x-0.5 translate-y-0.5 items-center justify-center rounded-full border-2 border-white bg-[var(--juejin-primary,#1e80ff)] text-[10px] font-extrabold leading-none text-white shadow-sm dark:border-neutral-900"
+            aria-label="verified"
+          >
+            V
+          </span>
+        )
+      }
+    </div>
 
-    <div class="flex min-w-0 flex-1 flex-col gap-1.5">
+    <div class="absolute bottom-2.5 left-0 right-3 z-10 min-w-0 pl-[5.25rem] text-white">
       <div class="flex flex-wrap items-center gap-2">
-        <a
-          href={url("/about/")}
-          class="profile-name font-bold text-lg leading-snug text-neutral-900 dark:text-neutral-50 transition"
+        <span
+          class="profile-hero-name truncate text-lg font-bold leading-snug text-white drop-shadow-sm"
         >
           {profileConfig.name}
-        </a>
+        </span>
         {
           level && (
             <span
-              class="profile-level-badge inline-flex items-center rounded px-1.5 py-0 text-[11px] font-semibold leading-5 text-white"
+              class="inline-flex shrink-0 items-center rounded px-1.5 py-0 text-[11px] font-semibold leading-5 text-white/95 ring-1 ring-white/35 bg-white/15"
               aria-label={`等级 ${level}`}
             >
               {level}
@@ -117,115 +96,56 @@ const statCols = statsResolved.length;
           )
         }
       </div>
-      {
-        profileConfig.bio?.trim() && (
-          <div
-            class="profile-bio text-[16px] leading-snug text-neutral-500 dark:text-neutral-400 line-clamp-2"
-            title={profileConfig.bio}
-          >
-            {profileConfig.bio}
-          </div>
-        )
-      }
-      {
-        badges.length > 0 && (
-          <div class="flex flex-wrap gap-2 pt-0.5">
-            {badges.map((b) => {
-              const hr = resolveProfileHref(b.href);
-              const iconNode = b.icon?.trim() ? (
-                <Icon
-                  name={b.icon.trim()}
-                  class="text-[13px] opacity-90 shrink-0"
-                  aria-hidden="true"
-                />
-              ) : null;
-              const textNode = <span class="truncate">{b.text.trim()}</span>;
-              const chevron =
-                hr != null ? (
-                  <Icon
-                    name="fa6-solid:chevron-right"
-                    class="text-[9px] shrink-0 opacity-70"
-                    aria-hidden="true"
-                  />
-                ) : null;
-
-              return hr ? (
-                <a
-                  href={hr}
-                  class="profile-badge-chip min-w-0"
-                  target={/^https?:/i.test(hr) ? "_blank" : undefined}
-                  rel={/^https?:/i.test(hr) ? "noopener noreferrer" : undefined}
-                >
-                  {iconNode}
-                  {textNode}
-                  {chevron}
-                </a>
-              ) : (
-                <span class="profile-badge-chip min-w-0">
-                  {iconNode}
-                  {textNode}
-                </span>
-              );
-            })}
-          </div>
-        )
-      }
+      <div class="mt-1 flex flex-wrap gap-x-4 gap-y-0.5 text-sm text-white/90">
+        <span class="transition">
+          {tagCount} {i18n(I18nKey.tags)}
+        </span>
+        <span class="transition">
+          {categoryCount} {i18n(I18nKey.categories)}
+        </span>
+      </div>
     </div>
   </div>
 
-  <!-- 中：三列统计（掘金式） -->
-  {
-    statsResolved.length > 0 && (
-      <div
-        class="profile-stats-row mt-4 border-t border-neutral-200/90 pt-4 dark:border-white/10"
-        style={`display:grid;grid-template-columns:repeat(${statCols},minmax(0,1fr));gap:0.5rem`}
-      >
-        {statsResolved.map((s) => {
-          const hr = resolveProfileHref(s.href);
-          const valueNode = (
-            <span class="profile-stat-value font-bold text-neutral-900 tabular-nums dark:text-neutral-50">
-              {s.displayValue}
-            </span>
-          );
-          return (
-            <div class="profile-stat-cell flex min-w-0 flex-col items-center gap-1 text-center">
-              {hr ? (
-                <a
-                  href={hr}
-                  class="profile-stat-value-link leading-none transition hover:opacity-80"
-                  target={/^https?:/i.test(hr) ? "_blank" : undefined}
-                  rel={/^https?:/i.test(hr) ? "noopener noreferrer" : undefined}
-                >
-                  {valueNode}
-                </a>
-              ) : (
-                valueNode
-              )}
-              <span class="profile-stat-label text-xs text-neutral-500 dark:text-neutral-400">
-                {s.label.trim()}
-              </span>
-            </div>
-          );
-        })}
-      </div>
-    )
-  }
+  <!-- 白色内容区 -->
+  <div class="profile-hero-body px-4 pb-4 pt-10 dark:bg-transparent">
+    {
+      profileConfig.bio?.trim() && (
+        <p
+          class="text-[15px] leading-snug text-neutral-500 dark:text-neutral-400 line-clamp-3"
+          title={profileConfig.bio}
+        >
+          {profileConfig.bio}
+        </p>
+      )
+    }
 
-  <!-- 下：社交图标 -->
-  {profileConfig.links.length > 0 && (
-    <div class="profile-links mt-4 flex flex-wrap gap-2">
-      {profileConfig.links.map((item) => {
-        if (item.url.startsWith("mailto:")) {
-          const encodedEmail = Buffer.from(
-            item.url.replace("mailto:", ""),
-          ).toString("base64");
-          return (
-            <a
-              rel="me"
-              aria-label={item.name}
-              href="#"
-              data-encoded-email={encodedEmail}
-              onclick={`
+    {
+      (githubItem || emailItem || iconLinks.length > 0) && (
+        <div class="profile-actions-row mt-4 flex flex-nowrap items-center gap-2 overflow-x-auto pb-0.5 min-h-10">
+          {
+            githubItem && (
+              <a
+                href={githubItem.url}
+                target="_blank"
+                rel="me noopener noreferrer"
+                class="profile-link-btn shrink-0"
+                aria-label={githubItem.name}
+                title={githubItem.name}
+              >
+                <Icon name="fa6-brands:github" class="text-xl" aria-hidden="true" />
+              </a>
+            )
+          }
+          {
+            emailItem &&
+              (primaryEmailEncoded ? (
+                <a
+                  rel="me"
+                  aria-label={emailItem.name}
+                  href="#"
+                  data-encoded-email={primaryEmailEncoded}
+                  onclick={`
                 (function() {
                   const encodedEmail = this.getAttribute('data-encoded-email');
                   const decodedEmail = atob(encodedEmail);
@@ -236,104 +156,103 @@ const statCols = statsResolved.length;
                   return false;
                 }).call(this);
               `
-                .replace(/\s+/g, " ")
-                .trim()}
-              class="profile-link-btn"
-              title={item.name}
-            >
-              <Icon name={item.icon} class="text-xl" />
-            </a>
-          );
-        }
-        return (
-          <a
-            rel="me"
-            aria-label={item.name}
-            href={item.url}
-            target="_blank"
-            class="profile-link-btn"
-            title={item.name}
-          >
-            <Icon name={item.icon} class="text-xl" />
-          </a>
-        );
-      })}
-    </div>
-  )}
+                    .replace(/\s+/g, " ")
+                    .trim()}
+                  class:list={["profile-link-btn shrink-0"]}
+                  title={emailItem.name}
+                >
+                  <Icon name="mdi:email" class="text-xl" aria-hidden="true" />
+                </a>
+              ) : (
+                <a
+                  href={emailItem.url}
+                  class:list={["profile-link-btn shrink-0"]}
+                  aria-label={emailItem.name}
+                  title={emailItem.name}
+                >
+                  <Icon name="mdi:email" class="text-xl" aria-hidden="true" />
+                </a>
+              ))
+          }
+          {iconLinks.map((item) => {
+            if (item.url.startsWith("mailto:")) {
+              const encodedEmail = Buffer.from(
+                item.url.replace("mailto:", ""),
+              ).toString("base64");
+              return (
+                <a
+                  rel="me"
+                  aria-label={item.name}
+                  href="#"
+                  data-encoded-email={encodedEmail}
+                  onclick={`
+                (function() {
+                  const encodedEmail = this.getAttribute('data-encoded-email');
+                  const decodedEmail = atob(encodedEmail);
+                  this.href = 'mailto:' + decodedEmail;
+                  this.removeAttribute('data-encoded-email');
+                  this.removeAttribute('onclick');
+                  this.click();
+                  return false;
+                }).call(this);
+              `
+                    .replace(/\s+/g, " ")
+                    .trim()}
+                  class="profile-link-btn shrink-0"
+                  title={item.name}
+                >
+                  <Icon name={item.icon} class="text-xl" />
+                </a>
+              );
+            }
+            const isExt = /^https?:/i.test(item.url);
+            return (
+              <a
+                rel="me"
+                aria-label={item.name}
+                href={item.url}
+                target={isExt ? "_blank" : undefined}
+                class="profile-link-btn shrink-0"
+                title={item.name}
+              >
+                <Icon name={item.icon} class="text-xl" />
+              </a>
+            );
+          })}
+        </div>
+      )
+    }
+  </div>
 </div>
 
 <style is:global>
-  .profile-card-juejin {
-    border-radius: var(--radius-large);
-  }
-
-  .profile-card-juejin .profile-name:hover {
-    color: var(--juejin-primary, var(--primary));
-  }
-
-  .profile-level-badge {
-    background: var(--juejin-primary, #1e80ff);
-  }
-
-  :root.dark .profile-level-badge {
-    background: color-mix(in oklch, var(--primary) 88%, #1e3a5f);
-  }
-
-  .profile-badge-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.25rem;
-    max-width: 100%;
-    border-radius: 4px;
-    padding: 0.125rem 0.5rem;
-    font-size: 12px;
-    line-height: 1.35;
-    font-weight: 500;
-    background: color-mix(in oklch, var(--primary) 12%, transparent);
-    color: var(--juejin-primary, var(--primary));
-    transition: opacity 0.15s ease, background 0.15s ease;
-  }
-
-  a.profile-badge-chip:hover {
-    opacity: 0.92;
-    background: color-mix(in oklch, var(--primary) 18%, transparent);
-  }
-
-  :root.dark .profile-badge-chip {
-    background: color-mix(in oklch, var(--primary) 22%, transparent);
-    color: oklch(0.82 0.06 var(--hue, 252));
-  }
-
-  .profile-stats-row .profile-stat-value,
-  .profile-stats-row .profile-stat-value-link .profile-stat-value {
-    font-size: 1.25rem;
-    line-height: 1.25;
-    letter-spacing: -0.02em;
-  }
-
-  .profile-card-juejin .profile-link-btn {
+  /* 社交行：浅灰圆角底 + 蓝灰图标 */
+  .profile-card-hero .profile-link-btn {
     width: 40px;
     height: 40px;
+    box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 8px;
-    background: var(--juejin-tag-bg, rgba(0, 0, 0, 0.05));
-    color: var(--juejin-text-secondary, rgba(0, 0, 0, 0.65));
+    border-radius: 12px;
+    background: rgba(0, 0, 0, 0.055);
+    color: #475569;
+    border: none;
     transition: background 0.15s ease, color 0.15s ease;
   }
 
-  :root.dark .profile-card-juejin .profile-link-btn {
-    background: rgba(255, 255, 255, 0.06);
-    color: rgba(255, 255, 255, 0.7);
+  :root.dark .profile-card-hero .profile-link-btn {
+    background: rgba(255, 255, 255, 0.07);
+    color: #94a3b8;
   }
 
-  .profile-card-juejin .profile-link-btn:hover {
-    background: color-mix(in oklch, var(--primary) 10%, transparent);
-    color: var(--juejin-primary, var(--primary));
+  .profile-card-hero .profile-link-btn:hover {
+    background: rgba(0, 0, 0, 0.09);
+    color: #334155;
   }
 
-  :root.dark .profile-card-juejin .profile-link-btn:hover {
-    background: color-mix(in oklch, var(--primary) 15%, transparent);
+  :root.dark .profile-card-hero .profile-link-btn:hover {
+    background: rgba(255, 255, 255, 0.11);
+    color: #cbd5e1;
   }
 </style>

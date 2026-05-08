@@ -2,23 +2,15 @@ import type { ProfileConfig } from "../types/config";
 
 export const profileConfig: ProfileConfig = {
   avatar: "https://pic1.imgdb.cn/item/6919c42d3203f7be000aeabc.webp",
+  /** 侧栏 Profile 头图，可改成本地 / 任意图床 */
+  cover:
+    "https://pic1.imgdb.cn/item/69ed731cde2d74e282b73f88.webp",
+  verified: true,
+  menuHref: "/about/",
   name: "Louaq",
   bio: "晚来天欲雪,能饮一杯无",
   /** 掘金式等级角标，不需要可删或设为空 */
   level: "LV.5",
-  badges: [
-    {
-      text: "优秀作者",
-      href: "/about/",
-      icon: "fa6-solid:crown",
-    },
-  ],
-  /** 文章数为真实 posts 篇数；阅读、粉丝为固定展示文案（自行修改 value） */
-  stats: [
-    { label: "文章", valueMode: "postCount", href: "/archive/" },
-    { label: "阅读", value: "2k" },
-    { label: "粉丝", value: "1.3k" },
-  ],
   links: [
     {
       name: "Email",

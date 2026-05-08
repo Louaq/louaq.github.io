@@ -1,5 +1,4 @@
 ---
-import ButtonLink from "@/components/common/ButtonLink.astro";
 import WidgetLayout from "@/components/common/WidgetLayout.astro";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
@@ -31,13 +30,25 @@ const style = Astro.props.style;
 <WidgetLayout name={i18n(I18nKey.categories)} id="categories" isCollapsed={isCollapsed} collapsedHeight={COLLAPSED_HEIGHT}
                 class={className} style={style}
 >
-    {categories.map((c) =>
-        <ButtonLink
-            url={c.url}
-            badge={String(c.count)}
-            label={`View all posts in the ${c.name.trim()} category`}
-        >
-            {c.name.trim()}
-        </ButtonLink>
-    )}
+    <div class="flex flex-wrap gap-x-3 gap-y-2 text-[0.9375rem] leading-normal">
+        {categories.map((c) => (
+            <a
+                href={c.url}
+                class:list={[
+                    "inline-flex max-w-full min-w-0 items-baseline gap-0 rounded-xl px-1.5 py-0.5 -mx-1.5",
+                    "no-underline transition-colors",
+                    "hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]",
+                ]}
+                aria-label={`View all posts in the ${c.name.trim()} category`}
+            >
+                <span class="shrink-0 text-[#999] dark:text-neutral-500 select-none">#</span>
+                <span class="min-w-0 truncate text-[#333] dark:text-neutral-200">
+                    {c.name.trim()}
+                </span>
+                <sup class="ml-0.5 shrink-0 align-super text-[0.65em] font-normal leading-none text-[#999] dark:text-neutral-500">
+                    {c.count}
+                </sup>
+            </a>
+        ))}
+    </div>
 </WidgetLayout>
