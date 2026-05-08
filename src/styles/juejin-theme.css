@@ -598,17 +598,7 @@ widget-layout .widget-title::before {
  * ============================================================= */
 .home-top-notice-stack .home-top-notice {
   border-radius: 4px;
-  transition: filter 0.2s ease, box-shadow 0.2s ease;
 }
-
-.home-top-notice-stack .home-top-notice:hover {
-  filter: brightness(1.03);
-}
-
-:root.dark .home-top-notice-stack .home-top-notice:hover {
-  filter: brightness(1.06);
-}
-
 /* =============================================================
  * 文章详情页：标题层次感 + 卡片样式
  * ============================================================= */

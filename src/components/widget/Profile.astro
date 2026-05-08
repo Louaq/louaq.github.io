@@ -226,7 +226,7 @@ const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== em
 </div>
 
 <style is:global>
-  /* 社交行：浅灰圆角底 + 蓝灰图标 */
+  /* 社交行：浅灰圆角底 + 图标色随 --primary / 色相滑块 */
   .profile-card-hero .profile-link-btn {
     width: 40px;
     height: 40px;
@@ -234,25 +234,23 @@ const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== em
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 12px;
+    border-radius: 0.5em;
     background: rgba(0, 0, 0, 0.055);
-    color: #475569;
+    color: var(--primary);
     border: none;
     transition: background 0.15s ease, color 0.15s ease;
   }
 
   :root.dark .profile-card-hero .profile-link-btn {
     background: rgba(255, 255, 255, 0.07);
-    color: #94a3b8;
   }
 
   .profile-card-hero .profile-link-btn:hover {
     background: rgba(0, 0, 0, 0.09);
-    color: #334155;
+    color: var(--juejin-primary-hover);
   }
 
   :root.dark .profile-card-hero .profile-link-btn:hover {
     background: rgba(255, 255, 255, 0.11);
-    color: #cbd5e1;
   }
 </style>
