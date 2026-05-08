@@ -75,14 +75,9 @@ body {
   background: var(--card-bg) !important;
   border-radius: 0 !important;
   border: none !important;
-  border-bottom: 1px solid var(--juejin-border) !important;
-  box-shadow: none !important;
   backdrop-filter: none !important;
 }
 
-:root.dark #navbar > div {
-  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
-}
 
 /* 让导航栏所有透明模式都使用同样的实色 */
 #navbar[data-transparent-mode] > div,
@@ -95,8 +90,6 @@ body.wallpaper-transparent #navbar > div {
   background: var(--card-bg) !important;
   border-radius: 0 !important;
   border: none !important;
-  border-bottom: 1px solid var(--juejin-border) !important;
-  box-shadow: none !important;
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
@@ -114,9 +107,6 @@ body.wallpaper-transparent #navbar > div {
   ~ *
   #navbar[data-transparent-mode].scrolled
   > div,
-:root.dark body.wallpaper-transparent #navbar > div {
-  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
-}
 
 /*
  * 移动端：navbar.css 中 Banner 首页 semi/semifull 规则特异性更高，
