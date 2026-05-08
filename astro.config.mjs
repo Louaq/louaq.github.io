@@ -68,6 +68,15 @@ export default defineConfig({
 			updateHead: true,
 			updateBodyClass: false,
 			globalInstance: true,
+			// @swup/astro 仅合并 data-no-swup 与其「ignore」选项到 ignoreVisit，单独的 ignoreVisit 配置不会生效
+			ignore: (url) => {
+				try {
+					const pathname = new URL(url, "https://swup-ignore.local").pathname;
+					return pathname.toLowerCase().endsWith(".xml");
+				} catch {
+					return false;
+				}
+			},
 			// 滚动相关配置优化
 			resolveUrl: (url) => url,
 			animateHistoryBrowsing: false,

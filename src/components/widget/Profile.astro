@@ -15,6 +15,15 @@ function resolveProfileHref(href?: string): string | undefined {
 	return url(h.startsWith("/") ? h : `/${h}`);
 }
 
+/** Swup 会按 HTML 取同站链接；rss.xml 等需整页打开，用默认的 data-no-swup 忽略规则 */
+function isNonHtmlInternalPath(profileUrl?: string): boolean {
+	const h = profileUrl?.trim();
+	if (!h || /^https?:\/\//i.test(h) || h.startsWith("mailto:")) return false;
+	const pathOnly = (h.split("?")[0] ?? "").split("#")[0] ?? "";
+	const normalized = pathOnly.startsWith("/") ? pathOnly : `/${pathOnly}`;
+	return normalized.toLowerCase().endsWith(".xml");
+}
+
 const level = profileConfig.level?.trim();
 const coverSrc = profileConfig.cover?.trim();
 const menuHref = resolveProfileHref(profileConfig.menuHref) ?? url("/about/");
@@ -206,14 +215,17 @@ const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== em
               );
             }
             const isExt = /^https?:/i.test(item.url);
+            const internalHref = resolveProfileHref(item.url) ?? item.url;
+            const skipSwup = !isExt && isNonHtmlInternalPath(item.url);
             return (
               <a
                 rel="me"
                 aria-label={item.name}
-                href={item.url}
+                href={internalHref}
                 target={isExt ? "_blank" : undefined}
                 class="profile-link-btn shrink-0"
                 title={item.name}
+                {...(skipSwup ? { "data-no-swup": "" } : {})}
               >
                 <Icon name={item.icon} class="text-xl" />
               </a>
