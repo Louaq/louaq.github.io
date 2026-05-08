@@ -67,6 +67,48 @@ if (footerConfig.enable) {
       target="_blank"
       href="https://github.com/CuteLeaf/Firefly">Firefly</a
     ><br />
+    <span
+      class="mt-1 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1"
+    >
+      <span class="text-50">托管于</span>
+      <a
+        class="transition link inline-flex items-center gap-1 text-[var(--primary)] font-medium"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://github.com/"
+      >
+        <img
+          src={url("/assets/images/icons8-github.svg")}
+          alt=""
+          width={28}
+          height={28}
+          class="h-7 w-auto shrink-0 object-contain align-[-0.125em]"
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>Pages</span>
+      </a>
+      <span class="text-50">与</span>
+      <a
+        class="transition link inline-flex items-center gap-1 text-[var(--primary)] font-medium"
+        target="_blank"
+        rel="noopener noreferrer"
+        href="https://www.netlify.com/"
+      >
+        <img
+          src={url("/assets/images/icons8-netlify.svg")}
+          alt=""
+          width={28}
+          height={28}
+          class="h-7 w-auto shrink-0 object-contain align-[-0.125em]"
+          aria-hidden="true"
+          loading="lazy"
+          decoding="async"
+        />
+        <span>Netlify</span>
+      </a>
+    </span>
     <!-- 
       注意：请勿随意修改或删除 "Powered by Astro & Firefly" 部分，这是对开源项目的尊重和支持。
       如果您需要在底部增加内容，请在src/config/footerConfig.ts中修改enable属性为true，然后编辑src/config/FooterConfig.html文件。
