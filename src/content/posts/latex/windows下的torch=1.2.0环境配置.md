@@ -77,10 +77,10 @@ C:\\Program Files\\NVIDIA GPU Computing Toolkit\\CUDA\\v10.0
 
 Win+R启动cmd，在命令提示符内输入以下命令：
 
-```txt
+```bash
 conda create –n pytorch python=3.6
 ```
-```txt
+```bash
 activate pytorch
 ```
 
@@ -92,7 +92,7 @@ activate pytorch
 
 由于我们所有的操作都要在对应环境中进行，所以在进行库的安装前需要先激活环境。
 
-```txt
+```bash
 activate pytorch 
 ```
 
@@ -105,7 +105,7 @@ activate pytorch
 [https://pytorch.org/get-started/previous-versions/](https://pytorch.org/get-started/previous-versions/)  
 官网推荐的安装代码如下，我使用的是Cuda10的版本，不太懂为什么要写3个=才能正确定位，两个=会定位到cuda92的whl：
 
-```txt
+```bash
 # CUDA 10.0
 pip install torch===1.2.0 torchvision===0.4.0 -f https://download.pytorch.org/whl/torch_stable.html
 ```
@@ -148,7 +148,7 @@ h5py==2.10.0
 ![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/7f76e6ad79f6bed1e2f4676b627354d3.png)  
 使用如下指令安装即可。**下述指令中，requirements.txt前方的路径是我将文件放在桌面的路径，各位同学根据自己的电脑修改。**
 
-```txt
+```bash
 pip install -r C:\Users\33232\Desktop\requirements.txt
 
 ```
@@ -159,7 +159,7 @@ pip install -r C:\Users\33232\Desktop\requirements.txt
 ![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/28006284902c6a57318e718daccee1a8.png)  
 修改txt文件的内容，并且把后缀改成ini
 
-```txt
+```bash
 [global]
 index-url = http://pypi.mirrors.ustc.edu.cn/simple
 [install]
