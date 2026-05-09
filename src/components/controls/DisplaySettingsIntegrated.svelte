@@ -164,7 +164,7 @@ onMount(() => {
 });
 </script>
 
-<div id="display-setting" class="float-panel float-panel-closed absolute transition-all right-4 w-80 max-w-[calc(100vw-2rem)] px-4 py-4">
+<div id="display-setting" class="float-panel float-panel-closed absolute left-auto top-full right-0 z-[60] mt-1.5 w-80 max-w-[calc(100vw-2rem)] translate-x-0 px-4 py-4 transition-all">
     <!-- Theme Color Section -->
     <div class="flex flex-row gap-2 mb-2 items-center justify-between">
         <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
@@ -362,10 +362,10 @@ onMount(() => {
 
 
 <style lang="stylus">
-    /* 水波纹切换颜色已移至 main.css 全局，此处仅保留滑块等样式 */
+    /* 覆盖 .float-panel 的 top-4，改为紧贴触发按钮所在行底部 */
     #display-setting
-      top calc(4.5rem + 0.875rem)
-      max-height calc(100vh - 5.75rem)
+      top 100% !important
+      max-height calc(100vh - 6rem)
       overflow-y auto
       input[type="range"]
         -webkit-appearance none

@@ -237,6 +237,10 @@
   --duration-slow: 250ms
   --duration-slower: 300ms
   
+  /* 深浅色切换：表面色统一过渡（与 View Transition root ~180ms 对齐） */
+  --theme-transition-duration: 180ms
+  --theme-transition-easing: var(--ease-standard)
+  
   /* 动画延迟 */
   --delay-none: 0ms;
   --delay-short: 30ms
@@ -399,5 +403,11 @@
     --container-width: var(--container-lg);
     --widget-gap: var(--widget-gap-desktop);
     --sidebar-width: var(--sidebar-width-desktop);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --theme-transition-duration: 1ms;
   }
 }

@@ -42,7 +42,7 @@ html {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity 200ms ease;
+    transition: opacity var(--theme-transition-duration) var(--theme-transition-easing);
 }
 html[data-theme-mode="light"] #scheme-switch .theme-icon-light {
     opacity: 1;
@@ -64,7 +64,7 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     background: linear-gradient(to bottom, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.3) 30%, rgba(255, 255, 255, 0.15) 60%, rgba(255, 255, 255, 0.05) 80%, transparent 100%);
     pointer-events: none;
     z-index: 20;
-    transition: background var(--duration-medium) var(--ease-standard);
+    transition: background var(--theme-transition-duration) var(--theme-transition-easing);
 }
 
 /* 暗色主题下的渐变高光效果 */
@@ -218,25 +218,36 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         transform: translateZ(0);
     }
     
+    /* 卡片表面过渡由 juejin-theme.css 与下方 enable-card-border 规则统一为 --theme-transition-* */
+
     .card-base {
-        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition-colors duration-150;
+        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)];
     }
     .card-base-transparent {
-        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg-transparent)] backdrop-blur-sm transition-colors duration-150;
+        @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg-transparent)] backdrop-blur-sm;
     }
 
     /* 开启边框和阴影效果时的样式 */
     .enable-card-border .card-base {
-        @apply transition-all duration-300 border border-[var(--line-divider)] shadow-sm;
+        @apply border border-[var(--line-divider)] shadow-sm;
+        transition-property: background-color, border-color, box-shadow, color;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
     }
     .enable-card-border .card-base-transparent {
-        @apply transition-all duration-300 border border-[var(--line-divider)] shadow-sm;
+        @apply border border-[var(--line-divider)] shadow-sm;
+        transition-property: background-color, border-color, box-shadow, color, backdrop-filter;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
     }
 
     /* 导航栏样式适配 */
     .enable-card-border #navbar > div:not(.absolute) {
-        @apply transition-all duration-300 border shadow-sm;
+        @apply border shadow-sm;
         border-color: var(--line-divider) !important;
+        transition-property: background-color, border-color, box-shadow, backdrop-filter, color;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
     }
     
     /* 全屏壁纸模式下的半透明效果 */
@@ -274,8 +285,8 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         /* @apply backdrop-blur-sm; */
     }
     
-    /* 不在全局标题/正文上统一 transition-colors：页面节点极多，深浅色切换会同步触发大量合成层与重绘。
-     * 卡片、按钮、浮动层等仍保留各自的 transition（见 .card-base、.btn-plain、.float-panel）。 */
+    /* 不在全局标题/正文上统一 transition-colors：节点过多时易造成重绘压力。
+     * 深浅色切换时由 body、--theme-transition-* 与各卡片/面板规则统一表面过渡节奏。 */
     
     .card-shadow {
         @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)]
@@ -305,7 +316,10 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         @apply transition-colors duration-150 rounded-md p-1.5 -m-1.5 expand-animation;
     }
     .float-panel {
-        @apply top-4 rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition-colors duration-150 shadow-xl border border-black/5 dark:border-white/10
+        @apply top-4 rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] shadow-xl border border-black/5 dark:border-white/10;
+        transition-property: background-color, border-color, color;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
     }
     .float-panel-closed {
         @apply -translate-y-1 opacity-0 pointer-events-none
@@ -318,15 +332,21 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
     }
 
     .btn-card {
-        @apply transition-colors duration-150 flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
-        active:bg-[var(--btn-card-bg-active)]
+        @apply flex items-center justify-center bg-[var(--card-bg)] hover:bg-[var(--btn-card-bg-hover)]
+        active:bg-[var(--btn-card-bg-active)];
+        transition-property: background-color, border-color, color;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
     }
     .btn-card.disabled {
         @apply pointer-events-none text-black/10 dark:text-white/10
     }
     .btn-plain {
-        @apply transition-colors duration-150 relative flex items-center justify-center bg-none
+        @apply relative flex items-center justify-center bg-none
         text-black/75 hover:text-[var(--primary)] dark:text-white/75 dark:hover:text-[var(--primary)];
+        transition-property: color, background-color;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
         &:not(.scale-animation) {
             @apply hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]
         }
@@ -345,8 +365,11 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         @apply bg-[var(--btn-plain-bg-hover)] text-[var(--primary)];
     }
     .btn-regular {
-        @apply transition-colors duration-150 flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
-        text-[var(--btn-content)] dark:text-white/75
+        @apply flex items-center justify-center bg-[var(--btn-regular-bg)] hover:bg-[var(--btn-regular-bg-hover)] active:bg-[var(--btn-regular-bg-active)]
+        text-[var(--btn-content)] dark:text-white/75;
+        transition-property: color, background-color, border-color;
+        transition-duration: var(--theme-transition-duration);
+        transition-timing-function: var(--theme-transition-easing);
     }
 
     .link-underline {

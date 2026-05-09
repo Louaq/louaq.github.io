@@ -47,11 +47,11 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                 <div class="mobile-dropdown" data-mobile-dropdown>
                     <button 
                         class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8 w-full text-left
-                            hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition"
+                            hover:bg-[#eeeff0] dark:hover:bg-[#2d2d35] transition"
                         data-mobile-dropdown-trigger
                         aria-expanded="false"
                     >
-                        <div class="flex items-center transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+                        <div class="flex items-center transition text-[#000000B3] dark:text-white/75">
                             {link.icon && <Icon icon={link.icon} class="text-[1.1rem] mr-2" />}
                             {link.name}
                         </div>
@@ -68,10 +68,10 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                             return (
                                 <a href={child.external ? child.url : url(child.url)} 
                                    class="group flex justify-between items-center py-2 pl-6 pr-1 rounded-lg gap-8
-                                       hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition"
+                                       hover:bg-[#eeeff0] dark:hover:bg-[#2d2d35] transition"
                                    target={child.external ? "_blank" : null}
                                 >
-                                    <div class="flex items-center transition text-black/60 dark:text-white/60 font-medium group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+                                    <div class="flex items-center transition text-black/60 dark:text-white/60 font-medium">
                                         {child.icon && <Icon icon={child.icon} class="text-[1.1rem] mr-2" />}
                                         {child.name}
                                     </div>
@@ -86,11 +86,11 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
             ) : (
                 <!-- 普通链接项目 -->
                 <a href={link.external ? link.url : url(link.url)} class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
-                    hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)] transition
+                    hover:bg-[#eeeff0] dark:hover:bg-[#2d2d35] transition
                 "
                    target={link.external ? "_blank" : null}
                 >
-                    <div class="flex items-center transition text-black/75 dark:text-white/75 font-bold group-hover:text-[var(--primary)] group-active:text-[var(--primary)]">
+                    <div class="flex items-center transition text-[#000000B3] dark:text-white/75">
                         {link.icon && <Icon icon={link.icon} class="text-[1.1rem] mr-2" />}
                         {link.name}
                     </div>

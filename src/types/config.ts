@@ -69,7 +69,6 @@ export type SiteConfig = {
 			alt?: string; // 图片alt文本
 		};
 		title?: string; // 导航栏标题，如果不设置则使用 title
-		widthFull?: boolean; // 导航栏是否占满屏幕宽度
 		followTheme?: boolean; // 导航栏图标和标题是否跟随主题色
 	};
 

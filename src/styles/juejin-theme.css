@@ -10,6 +10,9 @@ body {
 body {
   background-color: var(--page-bg) !important;
   color: var(--juejin-text-primary);
+  transition-property: background-color, color;
+  transition-duration: var(--theme-transition-duration);
+  transition-timing-function: var(--theme-transition-easing);
 }
 
 :root.dark body {
@@ -35,7 +38,9 @@ body {
   background-color: var(--card-bg) !important;
   border: 1px solid var(--juejin-border);
   box-shadow: none !important;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition-property: background-color, border-color, box-shadow, color;
+  transition-duration: var(--theme-transition-duration);
+  transition-timing-function: var(--theme-transition-easing);
 }
 
 :root.dark .card-base,
@@ -135,20 +140,111 @@ body.wallpaper-transparent #navbar > div {
   }
 }
 
-/* 导航栏菜单项：加粗 + 字号 16px（搜索触发器单独用组件类，不受此条影响） */
+/* 导航栏菜单项：字号 16px（搜索触发器单独用组件类，不受此条影响） */
 #navbar .btn-plain {
   border-radius: 6px !important;
-  color: var(--juejin-text-primary) !important;
-  font-weight: 700 !important;
+  color: #000000b3 !important;
   font-size: 16px !important;
+  font-weight: 400 !important;
 }
 :root.dark #navbar .btn-plain {
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
 #navbar .btn-plain:hover {
-  color: var(--juejin-primary) !important;
+  color: #000000b3 !important;
+  background-color: #eeeff0 !important;
+}
+:root.dark #navbar .btn-plain:hover {
+  color: rgba(255, 255, 255, 0.85) !important;
+  /* 与亮色 #eeeff0 同级：中性略提亮，非主题色晕染 */
+  background-color: #2d2d35 !important;
+}
+
+#navbar .btn-plain:active {
+  color: #000000b3 !important;
+  background-color: #eeeff0 !important;
+}
+:root.dark #navbar .btn-plain:active {
+  color: rgba(255, 255, 255, 0.85) !important;
+  background-color: #2d2d35 !important;
+}
+
+/* Logo / 站点标题：无悬浮背景与字色变化（非跟随主题时字色与默认栏一致） */
+#navbar a.navbar-brand-link:hover,
+#navbar a.navbar-brand-link:active {
   background-color: transparent !important;
+}
+#navbar a.navbar-brand-link:not(.navbar-brand-link--follow-theme):hover,
+#navbar a.navbar-brand-link:not(.navbar-brand-link--follow-theme):active {
+  color: #000000b3 !important;
+}
+:root.dark
+  #navbar
+  a.navbar-brand-link:not(.navbar-brand-link--follow-theme):hover,
+:root.dark
+  #navbar
+  a.navbar-brand-link:not(.navbar-brand-link--follow-theme):active {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 深色：品牌链接仍带 .btn-plain，需高于 #navbar .btn-plain:hover/:active，彻底取消悬浮/点击底色与字色变化 */
+:root.dark #navbar a.navbar-brand-link.btn-plain:hover,
+:root.dark #navbar a.navbar-brand-link.btn-plain:active {
+  background-color: transparent !important;
+}
+:root.dark
+  #navbar
+  a.navbar-brand-link:not(.navbar-brand-link--follow-theme).btn-plain:hover,
+:root.dark
+  #navbar
+  a.navbar-brand-link:not(.navbar-brand-link--follow-theme).btn-plain:active {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 深色 + 跟随主题色：悬浮时勿套用通用 .btn-plain 的灰白色字色 */
+:root.dark #navbar a.navbar-brand-link.navbar-brand-link--follow-theme.btn-plain:hover,
+:root.dark #navbar a.navbar-brand-link.navbar-brand-link--follow-theme.btn-plain:active {
+  color: var(--primary) !important;
+}
+
+/* 主题选择器、明暗模式切换：无悬浮背景与字色变化（必须含 .btn-plain，否则盖不过 #navbar .btn-plain:hover） */
+#navbar button.navbar-util-no-hover:hover,
+#navbar button.navbar-util-no-hover:active {
+  background-color: transparent !important;
+  color: #000000b3 !important;
+}
+#navbar button.navbar-util-no-hover.btn-plain:hover,
+#navbar button.navbar-util-no-hover.btn-plain:active {
+  background-color: transparent !important;
+  color: #000000b3 !important;
+}
+:root.dark #navbar button.navbar-util-no-hover:hover,
+:root.dark #navbar button.navbar-util-no-hover:active {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+:root.dark #navbar button.navbar-util-no-hover.btn-plain:hover,
+:root.dark #navbar button.navbar-util-no-hover.btn-plain:active {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 选中态菜单：悬浮时有背景；点击保持与悬浮一致，不再加深 */
+#navbar .navbar-link-active:hover {
+  color: var(--juejin-primary) !important;
+  background-color: #eeeff0 !important;
+}
+:root.dark #navbar .navbar-link-active:hover {
+  color: var(--juejin-primary) !important;
+  background-color: #2d2d35 !important;
+}
+#navbar .navbar-link-active:active {
+  color: var(--juejin-primary) !important;
+  background-color: #eeeff0 !important;
+}
+:root.dark #navbar .navbar-link-active:active {
+  background-color: #2d2d35 !important;
 }
 
 /* 下拉菜单：掘金风格小圆角 */
@@ -167,11 +263,25 @@ body.wallpaper-transparent #navbar > div {
   margin: 0 4px;
 }
 .dropdown-item:hover {
-  background-color: color-mix(in oklch, var(--primary) 8%, transparent) !important;
-  color: var(--juejin-primary) !important;
+  background-color: #eeeff0 !important;
+  color: #000000b3 !important;
 }
 :root.dark .dropdown-item:hover {
-  background-color: color-mix(in oklch, var(--primary) 12%, transparent) !important;
+  background-color: #2d2d35 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.dropdown-item:active {
+  background-color: #eeeff0 !important;
+  color: #000000b3 !important;
+}
+:root.dark .dropdown-item:active {
+  background-color: #2d2d35 !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.dropdown-item.current-theme-btn:hover {
+  color: var(--primary) !important;
 }
 
 /* =============================================================

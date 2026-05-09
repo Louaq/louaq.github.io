@@ -183,8 +183,6 @@ const transparentClass = shouldEnableTransparency
 	? "wallpaper-transparent"
 	: "";
 
-const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
-
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
@@ -216,7 +214,7 @@ const navbarWidthFull = siteConfig.navbar.widthFull ?? false;
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>
-<div id="top-row" class="z-50 pointer-events-none fixed top-0 left-0 right-0 transition-[opacity,transform] duration-700" class:list={[navbarWidthFull ? "" : "px-0 md:px-0"]}>
+<div id="top-row" class="z-50 pointer-events-none fixed top-0 left-0 right-0 transition-[opacity,transform] duration-700">
     <div id="navbar-wrapper" class="pointer-events-auto transition-[opacity,transform] duration-700">
         <Navbar></Navbar>
     </div>

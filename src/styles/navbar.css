@@ -27,7 +27,7 @@
     border-radius: 0 0 0.75rem 0.75rem;
     /* 勿用 transition:all，否则会过渡布局相关属性，首屏/水合时易产生水平漂移感 */
     transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius;
-    transition-duration: var(--duration-medium);
+    transition-duration: var(--theme-transition-duration);
     transition-timing-function: var(--ease-standard);
 }
 
@@ -57,7 +57,7 @@
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
         transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -70,7 +70,7 @@
         border-radius: 0 !important;
         box-shadow: none !important;
         transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -83,7 +83,7 @@
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
         transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -96,7 +96,7 @@
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
         transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 }
@@ -113,10 +113,9 @@
         backdrop-filter: blur(var(--navbar-glass-blur, 20px)) !important;
         background: rgba(255, 255, 255, var(--opacity-55)) !important;
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
-        border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
         transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -129,7 +128,7 @@
         border-radius: 0 !important;
         box-shadow: none !important;
         transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -142,7 +141,7 @@
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
         transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
@@ -155,7 +154,7 @@
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
         transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: 0.3s !important;
+        transition-duration: var(--theme-transition-duration) !important;
         transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 }
@@ -298,17 +297,13 @@ body.wallpaper-transparent .float-panel {
 }
 
 /* ============================================
- * 全宽导航栏适配 (Full Width Navbar)
- * 确保在开启全宽模式时覆盖所有圆角和宽度限制
- * 针对所有模式（Banner模式、壁纸模式、透明模式）统一去除圆角
- * 使用高优先级选择器确保覆盖原主题样式
- * 仅在桌面端 (min-width: 1024px) 生效，移动端保留圆角
+ * 顶栏背景：始终横向铺满视口（桌面端顶边无圆角）
  * ============================================ */
 @media (min-width: 1024px) {
-    #navbar-wrapper #navbar[data-full-width="true"] > div,
-    body:has(#banner-wrapper) #navbar-wrapper #navbar[data-full-width="true"] > div,
-    body.wallpaper-transparent #navbar-wrapper #navbar[data-full-width="true"] > div,
-    #navbar-wrapper #navbar[data-full-width="true"].scrolled > div {
+    #navbar-wrapper #navbar > div,
+    body:has(#banner-wrapper) #navbar-wrapper #navbar > div,
+    body.wallpaper-transparent #navbar-wrapper #navbar > div,
+    #navbar-wrapper #navbar.scrolled > div {
         border-radius: 0 !important;
         width: 100% !important;
         max-width: none !important;
@@ -335,7 +330,6 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
     background: var(--card-bg) !important;
     backdrop-filter: none !important;
     border: 1px solid transparent !important;
-    border-radius: 0 0 0.75rem 0.75rem !important;
     box-shadow: var(--shadow-navbar) !important;
     transition: none !important;
 }
@@ -349,7 +343,7 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
     transition: none !important;
 }
 
-body #top-row #navbar[data-full-width="true"] > div {
+body #top-row #navbar > div {
     border-radius: 0 !important;
 }
 
@@ -378,54 +372,8 @@ body #top-row #navbar[data-full-width="true"] > div {
     }
 }
 
-/* ============================================
- * 导航栏条目 hover 时移除背景色变化
- * ============================================ */
-#navbar .btn-plain:hover {
-    background-color: transparent !important;
-}
-#navbar .btn-plain:hover::before {
+/* 导航栏 expand-animation：禁用 ::before 悬浮层，背景由 juejin-theme #navbar .btn-plain 控制 */
+#navbar .btn-plain:hover::before,
+#navbar .btn-plain:active::before {
     background: none !important;
 }
-#navbar .dropdown-item:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
-#navbar .mobile-menu-item button:hover {
-    background-color: transparent !important;
-}
-
