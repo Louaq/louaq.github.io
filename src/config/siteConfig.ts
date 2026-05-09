@@ -36,7 +36,7 @@ export const siteConfig: SiteConfig = {
 		// 掘金蓝 #1e80ff 对应 hue ≈ 250
 		hue: 250,
 		// 是否对访问者隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
-		fixed: false,
+		fixed: true,
 		// 是否显示明暗/跟随系统模式切换按钮，与 fixed 独立配置
 		showModeSwitch: true,
 		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
