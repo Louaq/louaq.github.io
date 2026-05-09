@@ -27,15 +27,15 @@ export const profileConfig: ProfileConfig = {
       icon: "fa6-brands:github",
       url: "https://github.com/Louaq",
     },
+        {
+      name: "RSS",
+      icon: "fa6-solid:rss",
+      url: "/rss.xml",
+    },
     {
 			name: "开往",
 			url: "https://www.travellings.cn/go.html",
 			icon: "material-symbols:subway-rounded",
-		},
-    {
-      name: "RSS",
-      icon: "fa6-solid:rss",
-      url: "/rss.xml",
-    }
+		}
   ],
 };

@@ -8,7 +8,7 @@ interface Props {
 const { engine } = Astro.props;
 ---
 
-<!-- client:load：首屏 SSR 出与客户端一致的触发器 DOM，避免 client:only 空白→注水造成的搜索框水平位移 -->
+<!-- client:only：避免 SearchAlgolia 注水失败（多根节点 / portal / chunk 与 SSR 不一致）；首屏搜索槽可能短暂为空直至 JS 就绪 -->
 <div class="navbar-search-slot">
-	<SearchAlgolia engine={engine} client:load />
+	<SearchAlgolia engine={engine} client:only="svelte" />
 </div>

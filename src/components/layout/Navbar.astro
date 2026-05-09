@@ -51,8 +51,10 @@ let links: NavBarLink[] = navBarConfig.links.map(
 <div id="navbar" class="z-50" style={`--navbar-glass-blur: ${navbarBlur}px;`} data-transparent-mode={navbarTransparentMode} data-enable-blur={String(navbarEnableBlur)} data-is-home={isHomePageCheck} data-full-width={navbarWidthFull}>
     <div class:list={[
         className,
-        "!overflow-visible relative h-[4.5rem] mx-auto px-4",
-        navbarWidthFull ? "" : "w-full max-w-[var(--page-width)]",
+        "!overflow-visible relative h-[4.5rem] mx-auto",
+        navbarWidthFull
+            ? "w-full px-4"
+            : "w-[calc(100%_-_1rem)] max-w-[calc(var(--page-width)_-_1rem)] px-2 md:w-[calc(100%_-_2rem)] md:max-w-[calc(var(--page-width)_-_2rem)] md:px-4",
     ]}>
         <div
             class:list={[
@@ -133,7 +135,8 @@ let links: NavBarLink[] = navBarConfig.links.map(
         </div>
         </div>
         <NavMenuPanel links={links}></NavMenuPanel>
-        <DisplaySettings client:load></DisplaySettings>
+        <!-- client:only：避免 Svelte 5 + Astro 岛屿注水与 SSR DOM 不一致（get_first_child / node.remove） -->
+        <DisplaySettings client:only="svelte"></DisplaySettings>
     </div>
 </div>
 

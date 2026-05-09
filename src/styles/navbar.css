@@ -335,6 +335,7 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
     background: var(--card-bg) !important;
     backdrop-filter: none !important;
     border: 1px solid transparent !important;
+    border-radius: 0 0 0.75rem 0.75rem !important;
     box-shadow: var(--shadow-navbar) !important;
     transition: none !important;
 }
@@ -346,6 +347,10 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
     border: 1px solid transparent !important;
     box-shadow: var(--shadow-navbar-dark) !important;
     transition: none !important;
+}
+
+body #top-row #navbar[data-full-width="true"] > div {
+    border-radius: 0 !important;
 }
 
 /* 搜索岛：SSR(client:load) + 桌面固定槽宽；岛用 contents 避免多包一层产生宽度差 */
@@ -388,8 +393,7 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
 #navbar .mobile-menu-item a:hover,
 #navbar .mobile-menu-item button:hover {
     background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
+}#navbar .mobile-menu-item a:hover,
 #navbar .mobile-menu-item button:hover {
     background-color: transparent !important;
 }
@@ -416,8 +420,7 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
 #navbar .mobile-menu-item a:hover,
 #navbar .mobile-menu-item button:hover {
     background-color: transparent !important;
-}
-#navbar .mobile-menu-item a:hover,
+}#navbar .mobile-menu-item a:hover,
 #navbar .mobile-menu-item button:hover {
     background-color: transparent !important;
 }
@@ -425,3 +428,4 @@ body:has(#top-row) #navbar[data-transparent-mode].scrolled > div {
 #navbar .mobile-menu-item button:hover {
     background-color: transparent !important;
 }
+
