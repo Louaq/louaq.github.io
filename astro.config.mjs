@@ -95,6 +95,8 @@ export default defineConfig({
 			},
 		}),
 		expressiveCode({
+			// 默认会把 ec.*.css 以外链形式插在正文第一个代码块前，需二次请求，易出现代码块“先丑后美”的 FOUC
+			emitExternalStylesheet: false,
 			themes: [expressiveCodeConfig.darkTheme, expressiveCodeConfig.lightTheme],
 			useDarkModeMediaQuery: false,
 			themeCssSelector: (theme) => `[data-theme='${theme.name}']`,
