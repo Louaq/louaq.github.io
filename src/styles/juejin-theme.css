@@ -230,6 +230,30 @@ body.wallpaper-transparent #navbar > div {
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
+/* 移动端折叠菜单：双 ID 提高优先级，覆盖 .btn-plain/:active 与 scale-animation 的 ::before 底色 */
+#navbar #nav-menu-switch {
+  -webkit-tap-highlight-color: transparent;
+}
+#navbar #nav-menu-switch:hover,
+#navbar #nav-menu-switch:active,
+#navbar #nav-menu-switch:focus,
+#navbar #nav-menu-switch:focus-visible {
+  background-color: transparent !important;
+  color: #000000b3 !important;
+}
+:root.dark #navbar #nav-menu-switch:hover,
+:root.dark #navbar #nav-menu-switch:active,
+:root.dark #navbar #nav-menu-switch:focus,
+:root.dark #navbar #nav-menu-switch:focus-visible {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+#navbar #nav-menu-switch:hover::before,
+#navbar #nav-menu-switch:active::before {
+  background: none !important;
+  background-color: transparent !important;
+}
+
 /* 选中态菜单：悬浮时有背景；点击保持与悬浮一致，不再加深 */
 #navbar .navbar-link-active:hover {
   color: var(--juejin-primary) !important;
