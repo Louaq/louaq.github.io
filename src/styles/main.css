@@ -482,6 +482,16 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         @apply w-8 h-8 transition-colors duration-150 rounded-md flex items-center justify-center bg-[var(--btn-regular-bg)]
         text-[var(--btn-content)] mr-2
     }
+    .post-meta .meta-icon {
+        @apply text-[var(--primary)];
+    }
+    .post-card-wrapper .stats .btn-regular {
+        @apply text-[var(--primary)] bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
+    }
+    .post-card-wrapper .stats .btn-regular:hover,
+    .post-card-wrapper .stats .btn-regular:active {
+        @apply bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] text-[var(--primary)] dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
+    }
     .with-divider {
         @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-[var(--meta-divider)] before:text-sm
         before:font-medium before:first-of-type:hidden before:transition-colors before:duration-150

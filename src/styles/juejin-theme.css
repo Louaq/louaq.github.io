@@ -388,10 +388,10 @@ body.wallpaper-transparent #navbar > div {
   overflow: hidden;
 }
 
-/* 标签：掘金风格的浅灰背景 */
+/* 标签：主题色浅底 + 主题色文字 */
 .post-card-wrapper .stats .btn-regular {
-  background-color: var(--juejin-tag-bg) !important;
-  color: var(--juejin-text-tertiary) !important;
+  background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
+  color: var(--primary) !important;
   border-radius: 2px !important;
   font-weight: normal !important;
   padding: 2px 8px !important;
@@ -400,15 +400,8 @@ body.wallpaper-transparent #navbar > div {
   border: none !important;
 }
 :root.dark .post-card-wrapper .stats .btn-regular {
-  background-color: rgba(255, 255, 255, 0.06) !important;
-  color: rgba(255, 255, 255, 0.55) !important;
-}
-.post-card-wrapper .stats .btn-regular:hover {
-  background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
-  color: var(--juejin-primary) !important;
-}
-:root.dark .post-card-wrapper .stats .btn-regular:hover {
-  background-color: color-mix(in oklch, var(--primary) 15%, transparent) !important;
+  background-color: color-mix(in oklch, var(--primary) 14%, transparent) !important;
+  color: var(--primary) !important;
 }
 
 /* =============================================================
@@ -426,10 +419,10 @@ body.wallpaper-transparent #navbar > div {
   height: 1.25rem !important;
   background-color: transparent !important;
   margin-right: 0.25rem !important;
-  color: var(--juejin-text-tertiary) !important;
+  color: var(--primary) !important;
 }
 :root.dark .post-meta .meta-icon {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: var(--primary) !important;
 }
 
 /* =============================================================
@@ -629,12 +622,6 @@ input[type="search"] {
 }
 
 /* 移除 link-underline 的虚线下划线（掘金风格更简洁） */
-.link-underline {
-  text-decoration: none !important;
-}
-.link-underline:hover {
-  color: var(--juejin-primary) !important;
-}
 
 /* =============================================================
  * 文章详情页中的链接（保留可点击的视觉提示）
@@ -642,16 +629,10 @@ input[type="search"] {
 .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);
   text-decoration: none;
-  border-bottom: 1px solid color-mix(in oklch, var(--primary) 30%, transparent);
   transition: border-color 0.15s ease, color 0.15s ease;
-}
-.custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain):hover {
-  color: var(--juejin-primary-hover);
-  border-bottom-color: var(--juejin-primary-hover);
 }
 :root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);
-  border-bottom-color: color-mix(in oklch, var(--primary) 30%, transparent);
 }
 
 /* =============================================================
@@ -985,12 +966,12 @@ widget-layout .widget-title::before {
     width: auto !important;
     height: auto !important;
     background: transparent !important;
-    color: var(--juejin-text-tertiary) !important;
+    color: var(--primary) !important;
     margin-right: 4px !important;
     padding: 0 !important;
   }
   :root.dark #post-list-container.list-mode .post-meta .meta-icon {
-    color: rgba(255, 255, 255, 0.45) !important;
+    color: var(--primary) !important;
   }
   #post-list-container.list-mode .post-meta .meta-icon svg {
     width: 0.95rem !important;
@@ -1035,25 +1016,21 @@ widget-layout .widget-title::before {
     gap: 6px !important;
     flex-wrap: nowrap !important;
   }
-  /* 标签外观：浅灰小标签 */
+  /* 标签：主题色浅底 */
   #post-list-container.list-mode .stats .btn-regular {
     height: 22px !important;
     line-height: 22px !important;
     padding: 0 8px !important;
     font-size: 0.6875rem !important;
     border-radius: 2px !important;
-    background-color: var(--juejin-tag-bg) !important;
-    color: var(--juejin-text-tertiary) !important;
+    background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
+    color: var(--primary) !important;
     font-weight: 400 !important;
     border: none !important;
   }
   :root.dark #post-list-container.list-mode .stats .btn-regular {
-    background-color: rgba(255, 255, 255, 0.06) !important;
-    color: rgba(255, 255, 255, 0.5) !important;
-  }
-  #post-list-container.list-mode .stats .btn-regular:hover {
-    background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
-    color: var(--juejin-primary) !important;
+    background-color: color-mix(in oklch, var(--primary) 14%, transparent) !important;
+    color: var(--primary) !important;
   }
 
   /* ====== 右侧封面图：小尺寸 130x80（4:2.5） ====== */

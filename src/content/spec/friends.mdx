@@ -100,8 +100,8 @@ export const notes = [
               <div class="flex-1 min-h-[0.5rem] my-1.5 shrink-0" style="width: 2px; background-color: var(--line-divider, #e5e7eb);"></div>
             </div>
             <div class="pb-4">
-              <p class="font-semibold text-sm mb-1">步骤 2：评论区留言</p>
-              <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">申请模板，把内容复制修改后到评论区</p>
+              <p class="font-semibold text-sm mb-1">步骤 2：邮箱申请</p>
+              <p class="text-xs text-neutral-500 dark:text-neutral-400 leading-relaxed">申请模板，把内容复制修改后发送到邮箱: astroal@qq.com</p>
               <div class="relative rounded-lg bg-black/5 dark:bg-white/5 p-4 pr-10 text-[0.7rem] leading-relaxed overflow-x-auto whitespace-pre">
                 <button onclick="navigator.clipboard.writeText('站点名称：您的站点名称\n站点描述：您的站点描述\n站点链接：您的站点链接\n头像链接：您的站点头像');this.querySelectorAll('svg')[0].classList.add('hidden');this.querySelectorAll('svg')[1].classList.remove('hidden');setTimeout(()=>{this.querySelectorAll('svg')[0].classList.remove('hidden');this.querySelectorAll('svg')[1].classList.add('hidden')},1500)" class="absolute top-2 right-2 w-7 h-7 flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 text-(--btn-content) hover:opacity-80 transition-opacity cursor-pointer">
                   <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
@@ -126,7 +126,6 @@ export const notes = [
       </div>
     </div>
   </div>
-
   {/* 底部：注意事项 */}
   <div class="mt-4 rounded-2xl border border-(--line-divider) overflow-hidden">
     <div class="p-5 sm:p-6">
