@@ -21,9 +21,12 @@ tags: [期刊]
 
 ## 平均审稿速度
 
-**期刊官网数据：**
-平均Submission to first decision: 5 days; Submission to decision after review: 62 days; Submission to acceptance: 147 days; Acceptance to online publication: 7 days;
-**网友分享经验：**
+**期刊官网数据：** <br>
+平均Submission to first decision: 5 days; <br>
+Submission to decision after review: 62 days; <br>
+Submission to acceptance: 147 days; <br>
+Acceptance to online publication: 7 days; <br>
+**网友分享经验：** <br>
 平均13.8个月
 
 
