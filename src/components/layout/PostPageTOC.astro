@@ -13,7 +13,7 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 ---
 
 <div class:list={["post-page-toc-wrap", className]} style={style}>
-  <WidgetLayout id="post-page-toc-widget">
+  <WidgetLayout id="post-page-toc-widget" class="toc-widget-plain">
     <div class="toc-scroll-container">
       <div class="toc-content" id="post-page-toc-content">
         <!-- TOC 内容由 TOCManager 从正文标题生成 -->
@@ -31,9 +31,11 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 
 /* 去掉 WidgetLayout 默认的 px-4 / pt-4 / pb-4 内边距，让目录条目更贴近卡片边缘 */
 .post-page-toc-wrap :global(widget-layout)
+	display: block
 	padding-bottom: 0
 .post-page-toc-wrap :global(widget-layout > .collapse-wrapper)
 	padding: 0
+	border-radius: inherit
 
 .post-page-toc-wrap .toc-scroll-container
 	max-height: calc(100vh - 20rem)

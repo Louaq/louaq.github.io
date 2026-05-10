@@ -10,5 +10,5 @@ homeCarouselOrder: 4
 homeCarouselImage: https://pic1.imgdb.cn/item/6919c43a3203f7be000aeb08.jpg
 ---
 
-桃花影落飞神剑，碧海潮生按玉箫
-![](https://pic1.imgdb.cn/item/69969a76cf2ff308a14698f0.webp)
+## 桃花影落飞神剑，碧海潮生按玉箫
+![](https://pic1.imgdb.cn/item/69969a76cf2ff308a14698f0.webp?w=300)

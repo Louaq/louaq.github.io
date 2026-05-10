@@ -17,7 +17,7 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 <WidgetLayout 
   name={i18n(I18nKey.tableOfContents)} 
   id="sidebar-toc"
-  class={className}
+  class:list={["toc-widget-plain", className]}
   style={style}
 >
   <div class="toc-scroll-container">

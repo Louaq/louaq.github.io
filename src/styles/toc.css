@@ -31,6 +31,7 @@
 	contain: layout;
 	align-items: stretch;
 	padding: 0.125rem 0;
+	isolation: isolate;
 }
 
 /* TOC 链接样式 */
@@ -52,6 +53,7 @@
 	overflow: hidden;
 	box-sizing: border-box;
 	position: relative;
+	z-index: 1;
 	padding: 0.48rem 0.62rem;
 	min-height: 2.2rem;
 }
@@ -143,7 +145,32 @@
 	border-radius: 0.875rem;
 	transition: top 0.18s ease, height 0.18s ease, opacity 0.14s ease;
 	box-shadow: 0 6px 18px -14px color-mix(in oklab, var(--primary) 55%, transparent);
-	z-index: -1;
+	z-index: 0;
+}
+
+/* 目录 Widget：无卡片底色与描边，贴合页面背景 */
+widget-layout.card-base.toc-widget-plain,
+.toc-widget-plain.card-base {
+	background: transparent !important;
+
+	border: none !important;
+
+	box-shadow: none !important;
+}
+
+:root.dark widget-layout.card-base.toc-widget-plain,
+:root.dark .toc-widget-plain.card-base {
+	background: transparent !important;
+
+	border: none !important;
+}
+
+widget-layout.card-base.toc-widget-plain:hover,
+.enable-card-border widget-layout.card-base.toc-widget-plain:hover,
+.toc-widget-plain.card-base:hover {
+	border: none !important;
+
+	box-shadow: none !important;
 }
 
 @media (max-width: 768px) {

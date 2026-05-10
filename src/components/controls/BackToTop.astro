@@ -11,17 +11,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     onclick="backToTop()"
     class=""
   />
-  <!-- 圆形进度条 -->
-  <svg class="progress-ring" viewBox="0 0 120 120">
-    <circle cx="60" cy="60" r="40" class="progress-ring-bg"></circle>
-    <circle
-      cx="60"
-      cy="60"
-      r="40"
-      class="progress-ring-circle"
-      style="--progress: 0%"
-    ></circle>
-  </svg>
 </div>
 
 <script is:raw is:inline>
@@ -30,20 +19,12 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     window.scroll({ top: 0, behavior: "smooth" });
   }
 
-  function calculateScrollProgress() {
-    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-    const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-    return Math.min(scrollPercent, 100);
-  }
-
   // 响应式返回顶部按钮管理器
   if (typeof window.BackToTopManager === "undefined") {
     window.BackToTopManager = class BackToTopManager {
       constructor() {
         this.wrapper = document.getElementById("back-to-top-wrapper");
         this.button = document.getElementById("back-to-top-btn");
-        this.progressRing = document.querySelector(".progress-ring-circle");
         this.init();
       }
 
@@ -57,7 +38,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
         const updateVisibility = () => {
           const scrollTop =
             window.pageYOffset || document.documentElement.scrollTop;
-          const scrollPercent = calculateScrollProgress();
 
           // 当滚动超过200px时显示按钮
           if (scrollTop > 200) {
@@ -65,30 +45,30 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
           } else {
             this.wrapper.classList.add("hide");
           }
-
-          // 更新进度条
-          if (this.progressRing) {
-            this.progressRing.style.setProperty("--progress", scrollPercent + "%");
-          }
         };
 
         window.addEventListener("scroll", updateVisibility, { passive: true });
+        window.addEventListener("load", updateVisibility);
+        window.addEventListener("pageshow", updateVisibility);
+        updateVisibility();
+        // 浏览器恢复滚动位置常在首帧布局之后，双 rAF 对齐 scroll restoration 时机
+        requestAnimationFrame(() => {
+          requestAnimationFrame(updateVisibility);
+        });
       }
     };
   }
-  // ... existing initialization logic ...
-  // 页面加载完成后初始化
-  document.addEventListener("DOMContentLoaded", () => {
-    new BackToTopManager();
-  });
 
-  // 如果页面已经加载完成，立即初始化
+  function initBackToTopManager() {
+    new BackToTopManager();
+  }
+
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      new BackToTopManager();
+    document.addEventListener("DOMContentLoaded", initBackToTopManager, {
+      once: true,
     });
   } else {
-    new BackToTopManager();
+    initBackToTopManager();
   }
 </script>
 
@@ -126,42 +106,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     height: 100%;
   }
 
-  /* 圆形进度条样式 */
-  .progress-ring {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    transform: rotate(-90deg);
-    pointer-events: none;
-  }
-
-  .progress-ring-bg {
-    fill: none;
-    stroke: rgba(0, 0, 0, 0.08);
-    stroke-width: 4;
-  }
-
-  .progress-ring-circle {
-    fill: none;
-    stroke: var(--primary);
-    stroke-width: 4;
-    stroke-linecap: round;
-    stroke-dasharray: 251.33; /* 2 * π * 40 */
-    stroke-dashoffset: calc(251.33 * (1 - var(--progress, 0%) / 100%));
-    transition: stroke-dashoffset 0.3s ease;
-    opacity: 0.8;
-  }
-
-  /* 暗色主题 */
-  :global(.dark) .progress-ring-bg {
-    stroke: rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.dark) .progress-ring-circle {
-    opacity: 0.9;
-  }
-
   /* 响应式调整 - 与 FloatingButton 保持一致 */
   @media (max-width: 768px) {
     #back-to-top-wrapper {
@@ -171,11 +115,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
       max-width: 3rem;
       min-height: 3rem;
       max-height: 3rem;
-    }
-
-    .progress-ring-bg,
-    .progress-ring-circle {
-      stroke-width: 3;
     }
   }
 
@@ -188,11 +127,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
       min-height: 2.5rem;
       max-height: 2.5rem;
     }
-
-    .progress-ring-bg,
-    .progress-ring-circle {
-      stroke-width: 2.5;
-    }
   }
 
   @media (max-width: 360px) {
@@ -204,11 +138,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
       min-height: 2rem;
       max-height: 2rem;
     }
-
-    .progress-ring-bg,
-    .progress-ring-circle {
-      stroke-width: 2;
-    }
   }
 
   @media (max-width: 320px) {
@@ -219,11 +148,6 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
       max-width: 1.75rem;
       min-height: 1.75rem;
       max-height: 1.75rem;
-    }
-
-    .progress-ring-bg,
-    .progress-ring-circle {
-      stroke-width: 1.5;
     }
   }
 </style>
