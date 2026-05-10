@@ -66,10 +66,10 @@ export const siteConfig: SiteConfig = {
 		logo: {
 			type: "image",
 			value: "/assets/images/favicon.png",
-			alt: "louaq",
+			alt: "",
 		},
 		// 导航栏标题
-		title: "louaq",
+		title: "",
 		// 导航栏图标和标题是否跟随主题色
 		followTheme: false,
 	},
