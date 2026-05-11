@@ -36,10 +36,10 @@ const showRightSidebarOnPostPage =
   <!-- 悬浮TOC面板 - 移到 Wrapper 内部以便相对定位 -->
   <div
     id="floating-toc-panel"
-    class="floating-toc-panel hide w-80 max-h-[24rem] overflow-hidden rounded-2xl md:w-80 w-[calc(100vw-2rem)] md:max-h-[24rem] max-h-[calc(100vh-8rem)]"
+    class="floating-toc-panel hide w-80 max-h-[24rem] overflow-hidden rounded-2xl border border-black/5 shadow-xl dark:border-white/10 md:w-80 w-[calc(100vw-2rem)] md:max-h-[24rem] max-h-[calc(100vh-8rem)]"
     >
     <div
-        class="p-4 border-b border-black/10 dark:border-white/10 sticky top-0 z-10 bg-transparent"
+        class="p-4 border-b border-black/10 dark:border-white/10 sticky top-0 z-10 bg-[var(--card-bg)]"
     >
         <div class="flex items-center justify-between">
         <h3
@@ -57,7 +57,7 @@ const showRightSidebarOnPostPage =
         </div>
     </div>
 
-    <div class="toc-scroll-container p-4">
+    <div class="toc-scroll-container p-4 bg-[var(--card-bg)]">
         <div
         class="toc-content"
         id="floating-toc-content"
@@ -86,6 +86,7 @@ const showRightSidebarOnPostPage =
 	overflow: hidden
 	box-sizing: border-box
 	z-index: 1001
+	background-color: var(--card-bg)
 	
 	&.show
 		transform: translateY(0)
@@ -123,14 +124,6 @@ const showRightSidebarOnPostPage =
 		max-height: 28rem
 		bottom: calc(100% + 1rem)
 
-/* 暗色主题半透明效果 */
-:global(.dark) .floating-toc-panel
-	background-color: rgba(0, 0, 0, 0.6) !important
-	backdrop-filter: blur(20px)
-	-webkit-backdrop-filter: blur(20px)
-
-:global(.dark) .floating-toc-panel .p-4
-	background-color: rgba(0, 0, 0, 0.8) !important
 </style>
 
 <script>
