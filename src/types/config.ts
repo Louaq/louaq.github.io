@@ -81,6 +81,13 @@ export type SiteConfig = {
 	outdatedThreshold?: number; // 过期提醒卡片：距上次编辑超过该天数才显示（元信息更新日期不受此限制）
 	showPostPrevNext?: boolean; // 文章页是否显示上一篇/下一篇导航
 
+	/**
+	 * 文章 /posts/ 路径策略（frontmatter 的 slug 仍优先于本项）。
+	 * - hash：由源文件 id（稳定）派生短十六进制段，无需手写
+	 * - legacy：沿用「id 去扩展名」（旧版长路径）
+	 */
+	postPathMode?: "hash" | "legacy";
+
 	// 页面开关配置
 	pages: {
 		friends: boolean; // 友链页面开关

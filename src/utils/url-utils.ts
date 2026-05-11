@@ -1,3 +1,4 @@
+import { siteConfig } from "@/config/siteConfig";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 
@@ -7,6 +8,47 @@ import { i18n } from "@i18n/translation";
  */
 export function removeFileExtension(id: string): string {
 	return id.replace(/\.(md|mdx|markdown)$/i, "");
+}
+
+/** frontmatter 可能影响路径的字段 */
+export type PostPathSource = {
+	slug?: string | null;
+};
+
+const POST_PATH_HASH_HEX_CHARS = 12;
+
+/** 纯 JS 确定性短 id（浏览器与 Node 一致），用于 URL，非加密用途 */
+export function getStablePostPathId(contentId: string): string {
+	let h1 = 5381;
+	for (let i = 0; i < contentId.length; i++) {
+		h1 = ((h1 << 5) + h1) ^ contentId.charCodeAt(i);
+		h1 >>>= 0;
+	}
+	let h2 = 2166136261;
+	for (let i = 0; i < contentId.length; i++) {
+		h2 ^= contentId.charCodeAt(i);
+		h2 = Math.imul(h2, 16777619);
+		h2 >>>= 0;
+	}
+	const part1 = h1.toString(16).padStart(8, "0");
+	const part2 = h2.toString(16).padStart(8, "0");
+	return (part1 + part2).slice(0, POST_PATH_HASH_HEX_CHARS);
+}
+
+/**
+ * 文章在 /posts/… 下的路径段：优先 `slug`，其次由 postPathMode 决定 hash 或 legacy。
+ */
+export function getResolvedPostPath(id: string, data: PostPathSource): string {
+	const custom = data.slug?.trim();
+	if (custom) {
+		return custom
+			.replace(/^[\\/]+|[\\/]+$/g, "")
+			.replace(/\\/g, "/");
+	}
+	if (siteConfig.postPathMode === "legacy") {
+		return removeFileExtension(id);
+	}
+	return getStablePostPathId(id);
 }
 
 export function pathsEqual(path1: string, path2: string) {
@@ -24,6 +66,13 @@ export function getPostUrlBySlug(slug: string): string {
 	// 移除文件扩展名（如 .md, .mdx 等）
 	const slugWithoutExt = removeFileExtension(slug);
 	return url(`/posts/${slugWithoutExt}/`);
+}
+
+export function getPostUrlForEntry(entry: {
+	id: string;
+	data: PostPathSource;
+}): string {
+	return getPostUrlBySlug(getResolvedPostPath(entry.id, entry.data));
 }
 
 export function getTagUrl(tag: string): string {

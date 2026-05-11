@@ -4,7 +4,7 @@ import Icon from "@iconify/svelte";
 
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
-import { getPostUrlBySlug } from "@/utils/url-utils";
+import { getPostUrlBySlug, getResolvedPostPath } from "@/utils/url-utils";
 
 interface Props {
 	/** 全部文章（支持 URL 上 tag / category / uncategorized 筛选） */
@@ -25,6 +25,7 @@ interface Post {
 		category?: string | null;
 		published: Date;
 		password?: string | boolean;
+		slug?: string;
 	};
 }
 
@@ -130,7 +131,7 @@ onMount(() => {
 
             {#each group.posts as post}
                 <a
-                        href={getPostUrlBySlug(post.id)}
+                        href={getPostUrlBySlug(getResolvedPostPath(post.id, post.data))}
                         aria-label={post.data.title}
                         class="group archive-row-link !block h-10 w-full rounded-lg text-black/75 dark:text-white/75
                         transition-colors duration-150

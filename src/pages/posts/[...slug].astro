@@ -10,7 +10,7 @@ import { getSortedPosts } from "@utils/content-utils";
 import {
 	getFileDirFromPath,
 	getPostUrlBySlug,
-	removeFileExtension,
+	getResolvedPostPath,
 } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import dayjs from "dayjs";
@@ -29,9 +29,19 @@ import { url } from "@/utils/url-utils";
 
 export async function getStaticPaths() {
 	const blogEntries = await getSortedPosts();
+	const seen = new Map<string, string>();
+	for (const entry of blogEntries) {
+		const segment = getResolvedPostPath(entry.id, entry.data);
+		const dup = seen.get(segment);
+		if (dup !== undefined) {
+			throw new Error(
+				`文章路径冲突：「${segment}」同时对应 ${dup} 与 ${entry.id}`,
+			);
+		}
+		seen.set(segment, entry.id);
+	}
 	return blogEntries.map((entry) => {
-		// 将 id 转换为 slug（移除扩展名）以匹配路由参数
-		const slug = removeFileExtension(entry.id);
+		const slug = getResolvedPostPath(entry.id, entry.data);
 		return {
 			params: { slug },
 			props: { entry },
@@ -94,7 +104,7 @@ const jsonLd = {
   description={entry.data.description}
   lang={entry.data.lang}
   setOGTypeArticle={true}
-  postSlug={entry.id}
+  postSlug={getResolvedPostPath(entry.id, entry.data)}
   headings={headings}
 >
   <script
@@ -178,6 +188,7 @@ const jsonLd = {
           tags={entry.data.tags}
           category={entry.data.category || undefined}
           id={entry.id}
+          postPathSlug={getResolvedPostPath(entry.id, entry.data)}
           hideUpdateDate={!siteConfig.showLastModified}
         />
         {

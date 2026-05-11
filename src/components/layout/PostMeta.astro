@@ -4,7 +4,7 @@ import { commentConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
-import { getCategoryUrl, getTagUrl } from "@/utils/url-utils";
+import { getCategoryUrl, getPostUrlBySlug, getTagUrl, removeFileExtension } from "@/utils/url-utils";
 
 export interface Props {
 	published: Date;
@@ -16,6 +16,8 @@ export interface Props {
 	isHome?: boolean;
 	className?: string;
 	id?: string;
+	/** 解析后的 /posts/ 路径段（hash、legacy 或自定义 slug）；未传时用 id 去扩展名 */
+	postPathSlug?: string;
 	words?: number;
 	minutes?: number;
 	showWordCount?: boolean; // 是否显示字数统计，默认false显示标签
@@ -33,6 +35,7 @@ const {
 	isHome,
 	className = "",
 	id,
+	postPathSlug,
 	words,
 	minutes,
 	showWordCount = false,
@@ -40,7 +43,8 @@ const {
 	pinned,
 } = Astro.props;
 
-const path = customPath || (id ? `/posts/${id}` : "");
+const slugForPath = postPathSlug ?? (id ? removeFileExtension(id) : "");
+const path = customPath || (slugForPath ? getPostUrlBySlug(slugForPath) : "");
 ---
 
 <div

@@ -6,6 +6,8 @@ const postsCollection = defineCollection({
 	loader: glob({ pattern: "**/*.{md,mdx}", base: "./src/content/posts" }),
 	schema: z.object({
 		title: z.string(),
+		/** 自定义 /posts/ 路径段；不设则由 siteConfig.postPathMode 决定（默认短 hash） */
+		slug: z.string().optional(),
 		published: z.date(),
 		updated: z.date().optional(),
 		draft: z.boolean().optional().default(false),

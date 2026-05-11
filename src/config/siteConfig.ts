@@ -116,6 +116,9 @@ export const siteConfig: SiteConfig = {
 	// 文章页"上一篇/下一篇"导航开关
 	showPostPrevNext: false,
 
+	// 文章 URL：hash=自动生成稳定短 id；legacy=旧版「文件名去扩展名」长路径
+	postPathMode: "hash",
+
 	// OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
 	generateOgImages: false,
 

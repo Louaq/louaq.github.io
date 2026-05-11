@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { commentConfig } from "@/config/commentConfig";
 import Key from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
-import { removeFileExtension } from "@/utils/url-utils";
+import { getResolvedPostPath, removeFileExtension } from "@/utils/url-utils";
 import Artalk from "./Artalk.astro";
 import Disqus from "./Disqus.astro";
 import Giscus from "./Giscus.astro";
@@ -19,7 +19,10 @@ const { post, customPath } = Astro.props;
 const { id } = post;
 
 // 根据页面类型确定路径
-const slug = removeFileExtension(id);
+const slug =
+	post.collection === "posts"
+		? getResolvedPostPath(id, post.data)
+		: removeFileExtension(id);
 const path =
 	customPath || (post.collection === "posts" ? `/posts/${slug}` : `/${slug}`);
 const url = `${Astro.site?.href}${path}`;

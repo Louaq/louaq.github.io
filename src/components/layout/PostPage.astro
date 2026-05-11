@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { getPostUrlBySlug } from "@utils/url-utils";
+import { getPostUrlForEntry } from "@utils/url-utils";
 import PostCard from "@/components/layout/PostCard.astro";
 import { sidebarLayoutConfig, siteConfig } from "@/config";
 
@@ -46,7 +46,7 @@ const initialLayoutClass =
         category={entry.data.category}
         published={entry.data.published}
         updated={entry.data.updated}
-        url={getPostUrlBySlug(entry.id)}
+        url={getPostUrlForEntry(entry)}
         image={entry.data.image}
         description={entry.data.description}
         draft={entry.data.draft}

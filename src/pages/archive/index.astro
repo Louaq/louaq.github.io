@@ -54,7 +54,7 @@ const labelPlural = i18n(I18nKey.postsCount);
 				</div>
 				{group.posts.map((post) => (
 					<a
-						href={getPostUrlBySlug(post.id)}
+						href={getPostUrlBySlug(post.pathSlug)}
 						aria-label={post.title}
 						data-tags={post.tags.join(",")}
 						data-category={post.category}

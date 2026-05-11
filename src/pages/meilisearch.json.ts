@@ -1,4 +1,5 @@
 import { getCollection } from "astro:content";
+import { getPostUrlForEntry } from "@/utils/url-utils";
 import type { APIRoute } from "astro";
 import { createHash } from "node:crypto";
 import { getEnabledFriends } from "../config/friendsConfig";
@@ -124,7 +125,7 @@ export const GET: APIRoute = async () => {
 			updated: (post.data.updated ?? post.data.published).toISOString(),
 			tags: post.data.tags || [],
 			category: post.data.category || "",
-			url: `/posts/${post.id}/`,
+			url: getPostUrlForEntry(post),
 		};
 		records.push(shrinkRecordToFit(rec));
 	}

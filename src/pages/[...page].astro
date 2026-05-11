@@ -14,7 +14,7 @@ import {
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@/utils/content-utils";
 import { processCoverImageSync } from "@/utils/image-utils";
-import { getFileDirFromPath, getPostUrlBySlug } from "@/utils/url-utils";
+import { getFileDirFromPath, getPostUrlForEntry } from "@/utils/url-utils";
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
 	// 使用配置中的文章数量
@@ -82,7 +82,7 @@ const postSlides: CarouselSlide[] = allPosts
 			meta.push({ icon: "lucide:tag", text: `#${tag.trim()}` });
 		});
 		return {
-			href: getPostUrlBySlug(post.id),
+			href: getPostUrlForEntry(post),
 			title: post.data.title,
 			image: finalImage,
 			basePath: getFileDirFromPath(post.filePath || ""),
