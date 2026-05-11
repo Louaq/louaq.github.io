@@ -8,7 +8,7 @@
 
 :root {
     /* 页面切换淡入淡出：保持较短，避免拖沓 */
-    --swup-fade-duration: 180ms;
+    --swup-fade-duration: 100ms;
     --swup-fade-easing: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
