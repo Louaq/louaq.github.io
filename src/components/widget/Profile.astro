@@ -24,27 +24,18 @@ function isNonHtmlInternalPath(profileUrl?: string): boolean {
 	return normalized.toLowerCase().endsWith(".xml");
 }
 
+function isGithubLink(item: { url: string; icon?: string }): boolean {
+	return /github\.com/i.test(item.url) || (item.icon ?? "").toLowerCase().includes("github");
+}
+
 const level = profileConfig.level?.trim();
 const coverSrc = profileConfig.cover?.trim();
-const menuHref = resolveProfileHref(profileConfig.menuHref) ?? url("/about/");
 const verified = profileConfig.verified === true;
 
 const tags = await getTagList();
 const categories = await getCategoryList();
 const tagCount = tags.length;
 const categoryCount = categories.length;
-
-const githubItem = profileConfig.links.find(
-	(l) => /github\.com/i.test(l.url) || (l.icon ?? "").toLowerCase().includes("github"),
-);
-const emailItem = profileConfig.links.find((l) => l.url.startsWith("mailto:"));
-
-const primaryEmailEncoded =
-	emailItem?.url.startsWith("mailto:")
-		? Buffer.from(emailItem.url.replace("mailto:", "")).toString("base64")
-		: undefined;
-
-const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== emailItem);
 ---
 
 <div class="card-base profile-card-hero overflow-hidden p-0 rounded-2xl shadow-sm border border-black/[0.06] dark:border-white/10">
@@ -130,31 +121,21 @@ const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== em
     }
 
     {
-      (githubItem || emailItem || iconLinks.length > 0) && (
-        <div class="profile-actions-row mt-4 flex flex-nowrap items-center gap-2 overflow-x-auto pb-0.5 min-h-10">
-          {
-            githubItem && (
-              <a
-                href={githubItem.url}
-                target="_blank"
-                rel="me noopener noreferrer"
-                class="profile-link-btn shrink-0"
-                aria-label={githubItem.name}
-                title={githubItem.name}
-              >
-                <Icon name="fa6-brands:github" class="text-xl" aria-hidden="true" />
-              </a>
-            )
-          }
-          {
-            emailItem &&
-              (primaryEmailEncoded ? (
-                <a
-                  rel="me"
-                  aria-label={emailItem.name}
-                  href="#"
-                  data-encoded-email={primaryEmailEncoded}
-                  onclick={`
+      profileConfig.links.length > 0 && (
+        <div class="profile-actions-row mt-4 w-full min-h-10 overflow-x-auto pb-0.5">
+          <div class="profile-actions-track mx-auto flex w-max flex-nowrap items-center gap-2">
+            {profileConfig.links.map((item) => {
+              if (item.url.startsWith("mailto:")) {
+                const encodedEmail = Buffer.from(
+                  item.url.replace("mailto:", ""),
+                ).toString("base64");
+                return (
+                  <a
+                    rel="me"
+                    aria-label={item.name}
+                    href="#"
+                    data-encoded-email={encodedEmail}
+                    onclick={`
                 (function() {
                   const encodedEmail = this.getAttribute('data-encoded-email');
                   const decodedEmail = atob(encodedEmail);
@@ -165,72 +146,47 @@ const iconLinks = profileConfig.links.filter((l) => l !== githubItem && l !== em
                   return false;
                 }).call(this);
               `
-                    .replace(/\s+/g, " ")
-                    .trim()}
-                  class:list={["profile-link-btn shrink-0"]}
-                  title={emailItem.name}
-                >
-                  <Icon name="mdi:email" class="text-xl" aria-hidden="true" />
-                </a>
-              ) : (
-                <a
-                  href={emailItem.url}
-                  class:list={["profile-link-btn shrink-0"]}
-                  aria-label={emailItem.name}
-                  title={emailItem.name}
-                >
-                  <Icon name="mdi:email" class="text-xl" aria-hidden="true" />
-                </a>
-              ))
-          }
-          {iconLinks.map((item) => {
-            if (item.url.startsWith("mailto:")) {
-              const encodedEmail = Buffer.from(
-                item.url.replace("mailto:", ""),
-              ).toString("base64");
+                      .replace(/\s+/g, " ")
+                      .trim()}
+                    class="profile-link-btn shrink-0"
+                    title={item.name}
+                  >
+                    <Icon name={item.icon} class="text-xl" aria-hidden="true" />
+                  </a>
+                );
+              }
+              if (isGithubLink(item)) {
+                return (
+                  <a
+                    href={item.url}
+                    target="_blank"
+                    rel="me noopener noreferrer"
+                    class="profile-link-btn shrink-0"
+                    aria-label={item.name}
+                    title={item.name}
+                  >
+                    <Icon name={item.icon} class="text-xl" aria-hidden="true" />
+                  </a>
+                );
+              }
+              const isExt = /^https?:/i.test(item.url);
+              const internalHref = resolveProfileHref(item.url) ?? item.url;
+              const skipSwup = !isExt && isNonHtmlInternalPath(item.url);
               return (
                 <a
                   rel="me"
                   aria-label={item.name}
-                  href="#"
-                  data-encoded-email={encodedEmail}
-                  onclick={`
-                (function() {
-                  const encodedEmail = this.getAttribute('data-encoded-email');
-                  const decodedEmail = atob(encodedEmail);
-                  this.href = 'mailto:' + decodedEmail;
-                  this.removeAttribute('data-encoded-email');
-                  this.removeAttribute('onclick');
-                  this.click();
-                  return false;
-                }).call(this);
-              `
-                    .replace(/\s+/g, " ")
-                    .trim()}
+                  href={internalHref}
+                  target={isExt ? "_blank" : undefined}
                   class="profile-link-btn shrink-0"
                   title={item.name}
+                  {...(skipSwup ? { "data-no-swup": "" } : {})}
                 >
                   <Icon name={item.icon} class="text-xl" />
                 </a>
               );
-            }
-            const isExt = /^https?:/i.test(item.url);
-            const internalHref = resolveProfileHref(item.url) ?? item.url;
-            const skipSwup = !isExt && isNonHtmlInternalPath(item.url);
-            return (
-              <a
-                rel="me"
-                aria-label={item.name}
-                href={internalHref}
-                target={isExt ? "_blank" : undefined}
-                class="profile-link-btn shrink-0"
-                title={item.name}
-                {...(skipSwup ? { "data-no-swup": "" } : {})}
-              >
-                <Icon name={item.icon} class="text-xl" />
-              </a>
-            );
-          })}
+            })}
+          </div>
         </div>
       )
     }

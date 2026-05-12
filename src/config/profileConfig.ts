@@ -17,17 +17,17 @@ export const profileConfig: ProfileConfig = {
       icon: "mdi:email",
       url: "mailto:astroal@qq.com",
     },
+    // {
+    //   name: "Bilibli",
+    //   icon: "fa6-brands:bilibili",
+    //   url: "https://space.bilibili.com/397523112",
+    // },
+    // {
+    //   name: "GitHub",
+    //   icon: "fa6-brands:github",
+    //   url: "https://github.com/Louaq",
+    // },
     {
-      name: "Bilibli",
-      icon: "fa6-brands:bilibili",
-      url: "https://space.bilibili.com/397523112",
-    },
-    {
-      name: "GitHub",
-      icon: "fa6-brands:github",
-      url: "https://github.com/Louaq",
-    },
-        {
       name: "RSS",
       icon: "fa6-solid:rss",
       url: "/rss.xml",

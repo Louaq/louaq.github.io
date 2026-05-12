@@ -75,10 +75,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	// 搜索引擎配置：algolia / milisearch
-
 	search: {
-		// milisearch (Meilisearch) 搜索（需要配置环境变量；前端会访问 https://search.louaq.com）
-		// 如果未配置 Meilisearch 的 search key，组件会退回到未配置提示。
 		engine: "milisearch",
 	},
   // 站点开始日期，用于统计运行天数
