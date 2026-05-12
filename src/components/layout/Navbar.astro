@@ -199,14 +199,31 @@ function loadButtonScript() {
             };
 
             const setMode = (mode: string) => {
-                html.setAttribute("data-theme-mode", mode);
-                localStorage.setItem("theme", mode);
-                if (mode === SYSTEM_MODE) setupSystemListener();
-                else {
-                    cleanupSystemListener();
-                    applyResolvedTheme(mode === DARK_MODE);
+                const applyMode = () => {
+                    html.setAttribute("data-theme-mode", mode);
+                    localStorage.setItem("theme", mode);
+                    if (mode === SYSTEM_MODE) setupSystemListener();
+                    else {
+                        cleanupSystemListener();
+                        applyResolvedTheme(mode === DARK_MODE);
+                    }
+                    window.dispatchEvent(new CustomEvent("theme-change"));
+                };
+
+                if ((document as any).startViewTransition) {
+                    html.classList.add("is-theme-transitioning", "use-view-transition");
+                    const transition = (document as any).startViewTransition(applyMode);
+                    transition.finished.finally(() => {
+                        html.classList.remove("is-theme-transitioning", "use-view-transition");
+                    });
+                    return;
                 }
-                window.dispatchEvent(new CustomEvent("theme-change"));
+
+                html.classList.add("is-theme-transitioning");
+                applyMode();
+                window.setTimeout(() => {
+                    html.classList.remove("is-theme-transitioning");
+                }, 180);
             };
 
             const current = getStoredMode();

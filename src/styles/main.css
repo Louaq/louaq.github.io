@@ -134,6 +134,12 @@ html[data-theme-mode="system"] #scheme-switch .theme-icon-system {
         transition: none !important;
         animation: none !important;
     }
+
+    .is-theme-transitioning.use-view-transition *,
+    .is-theme-transitioning.use-view-transition *::before,
+    .is-theme-transitioning.use-view-transition *::after {
+        transition: none !important;
+    }
     
     /* 在主题切换时禁用代码块的复杂效果以提升性能 */
     /* 使用 View Transitions 时也需要禁用代码块动画，因为它们太多了 */
