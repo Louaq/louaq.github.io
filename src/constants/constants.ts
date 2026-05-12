@@ -1,9 +1,8 @@
-export const PAGE_SIZE = 8;
+﻿export const PAGE_SIZE = 8;
 
 export const LIGHT_MODE = "light",
-	DARK_MODE = "dark",
-	SYSTEM_MODE = "system";
-export const DEFAULT_THEME = LIGHT_MODE; // 仅作为向后兼容的默认值，实际使用 siteConfig.themeColor.defaultMode
+	DARK_MODE = "dark";
+export const DEFAULT_THEME = LIGHT_MODE; // 浠呬綔涓哄悜鍚庡吋瀹圭殑榛樿鍊硷紝瀹為檯浣跨敤 siteConfig.themeColor.defaultMode
 
 // Wallpaper modes
 export const WALLPAPER_BANNER = "banner",
@@ -23,3 +22,5 @@ export const PAGE_WIDTH = 75;
 
 // Category constants
 export const UNCATEGORIZED = "uncategorized";
+
+

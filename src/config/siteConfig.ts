@@ -39,8 +39,8 @@ export const siteConfig: SiteConfig = {
 		fixed: true,
 		// 是否显示明暗/跟随系统模式切换按钮，与 fixed 独立配置
 		showModeSwitch: true,
-		// 默认模式："light" 亮色，"dark" 暗色，"system" 跟随系统
-		defaultMode: "system",
+		// 默认模式："light" 亮色，"dark" 暗色
+		defaultMode: "light",
 	},
 
   favicon: [

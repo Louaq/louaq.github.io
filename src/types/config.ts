@@ -1,7 +1,6 @@
-import type {
+﻿import type {
 	DARK_MODE,
 	LIGHT_MODE,
-	SYSTEM_MODE,
 	WALLPAPER_BANNER,
 	WALLPAPER_NONE,
 	WALLPAPER_OVERLAY,
@@ -11,47 +10,47 @@ export type SiteConfig = {
 	title: string;
 	subtitle: string;
 	site_url: string;
-	description?: string; // 网站描述，用于生成 <meta name="description">
-	keywords?: string[]; // 站点关键词，用于生成 <meta name="keywords">
+	description?: string; // 缃戠珯鎻忚堪锛岀敤浜庣敓鎴?<meta name="description">
+	keywords?: string[]; // 绔欑偣鍏抽敭璇嶏紝鐢ㄤ簬鐢熸垚 <meta name="keywords">
 
 	lang: "en" | "zh_CN" | "zh_TW" | "ja" | "ru";
 
 	themeColor: {
 		hue: number;
-		fixed: boolean; // 是否隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
-		showModeSwitch?: boolean; // 是否显示明暗/跟随系统模式切换按钮，默认 true
-		defaultMode?: LIGHT_DARK_MODE; // 默认模式：浅色、深色或跟随系统
+		fixed: boolean; // 鏄惁闅愯棌涓婚鑹查€夋嫨鍣紙璋冭壊鐩樻寜閽強闈㈡澘鍐呬富棰樿壊婊戝潡锛?
+		showModeSwitch?: boolean; // 鏄惁鏄剧ず鏄庢殫/璺熼殢绯荤粺妯″紡鍒囨崲鎸夐挳锛岄粯璁?true
+		defaultMode?: LIGHT_DARK_MODE; // 榛樿妯″紡锛氭祬鑹层€佹繁鑹叉垨璺熼殢绯荤粺
 	};
 
-	// 卡片样式配置
+	// 鍗＄墖鏍峰紡閰嶇疆
 	card: {
-		// 是否开启卡片边框和阴影立体效果
+		// 鏄惁寮€鍚崱鐗囪竟妗嗗拰闃村奖绔嬩綋鏁堟灉
 		border: boolean;
 	};
 
-	// 字体配置
+	// 瀛椾綋閰嶇疆
 	font: FontConfig;
 
-	// 站点开始日期，用于计算运行天数
-	siteStartDate?: string; // 格式: "YYYY-MM-DD"
+	// 绔欑偣寮€濮嬫棩鏈燂紝鐢ㄤ簬璁＄畻杩愯澶╂暟
+	siteStartDate?: string; // 鏍煎紡: "YYYY-MM-DD"
 
-	// 可选：站点时区，使用 IANA 时区标识，例如 "Asia/Shanghai"、"UTC"
+	// 鍙€夛細绔欑偣鏃跺尯锛屼娇鐢?IANA 鏃跺尯鏍囪瘑锛屼緥濡?"Asia/Shanghai"銆?UTC"
 	timezone?: string;
 
-	// RSS 输出配置
+	// RSS 杈撳嚭閰嶇疆
 	rss?: {
-		// 输出模式：full=输出全文（包含 content），summary=仅输出摘要（仅 description）
+		// 杈撳嚭妯″紡锛歠ull=杈撳嚭鍏ㄦ枃锛堝寘鍚?content锛夛紝summary=浠呰緭鍑烘憳瑕侊紙浠?description锛?
 		mode: "full" | "summary";
 	};
 
-	// 提醒框配置
+	// 鎻愰啋妗嗛厤缃?
 	rehypeCallouts: {
 		theme: "github" | "obsidian" | "vitepress";
 	};
 
-	// 添加bangumi配置
+	// 娣诲姞bangumi閰嶇疆
 	bangumi?: {
-		userId?: string; // Bangumi用户ID
+		userId?: string; // Bangumi鐢ㄦ埛ID
 	};
 
 	generateOgImages: boolean;
@@ -62,69 +61,69 @@ export type SiteConfig = {
 	}>;
 
 	navbar: {
-		/** 导航栏Logo图标，可选类型：icon库、本地图片、网络图片链接 */
+		/** 瀵艰埅鏍廘ogo鍥炬爣锛屽彲閫夌被鍨嬶細icon搴撱€佹湰鍦板浘鐗囥€佺綉缁滃浘鐗囬摼鎺?*/
 		logo?: {
 			type: "icon" | "image" | "url";
-			value: string; // icon名、本地图片路径或网络图片url
-			alt?: string; // 图片alt文本
+			value: string; // icon鍚嶃€佹湰鍦板浘鐗囪矾寰勬垨缃戠粶鍥剧墖url
+			alt?: string; // 鍥剧墖alt鏂囨湰
 		};
-		title?: string; // 导航栏标题，如果不设置则使用 title
-		followTheme?: boolean; // 导航栏图标和标题是否跟随主题色
+		title?: string; // 瀵艰埅鏍忔爣棰橈紝濡傛灉涓嶈缃垯浣跨敤 title
+		followTheme?: boolean; // 瀵艰埅鏍忓浘鏍囧拰鏍囬鏄惁璺熼殢涓婚鑹?
 	};
 
-	// 搜索引擎配置
+	// 鎼滅储寮曟搸閰嶇疆
 	search?: {
-		engine: "algolia" | "milisearch"; // 搜索引擎：Algolia / Milisearch(Meilisearch)
+		engine: "algolia" | "milisearch"; // 鎼滅储寮曟搸锛欰lgolia / Milisearch(Meilisearch)
 	};
 
-	showLastModified: boolean; // 控制文章页元信息中的更新日期与正文前过期提醒卡片
-	outdatedThreshold?: number; // 过期提醒卡片：距上次编辑超过该天数才显示（元信息更新日期不受此限制）
-	showPostPrevNext?: boolean; // 文章页是否显示上一篇/下一篇导航
+	showLastModified: boolean; // 鎺у埗鏂囩珷椤靛厓淇℃伅涓殑鏇存柊鏃ユ湡涓庢鏂囧墠杩囨湡鎻愰啋鍗＄墖
+	outdatedThreshold?: number; // 杩囨湡鎻愰啋鍗＄墖锛氳窛涓婃缂栬緫瓒呰繃璇ュぉ鏁版墠鏄剧ず锛堝厓淇℃伅鏇存柊鏃ユ湡涓嶅彈姝ら檺鍒讹級
+	showPostPrevNext?: boolean; // 鏂囩珷椤垫槸鍚︽樉绀轰笂涓€绡?涓嬩竴绡囧鑸?
 
 	/**
-	 * 文章 /posts/ 路径策略（frontmatter 的 slug 仍优先于本项）。
-	 * - hash：由源文件 id（稳定）派生短十六进制段，无需手写
-	 * - legacy：沿用「id 去扩展名」（旧版长路径）
+	 * 鏂囩珷 /posts/ 璺緞绛栫暐锛坒rontmatter 鐨?slug 浠嶄紭鍏堜簬鏈」锛夈€?
+	 * - hash锛氱敱婧愭枃浠?id锛堢ǔ瀹氾級娲剧敓鐭崄鍏繘鍒舵锛屾棤闇€鎵嬪啓
+	 * - legacy锛氭部鐢ㄣ€宨d 鍘绘墿灞曞悕銆嶏紙鏃х増闀胯矾寰勶級
 	 */
 	postPathMode?: "hash" | "legacy";
 
-	// 页面开关配置
+	// 椤甸潰寮€鍏抽厤缃?
 	pages: {
-		friends: boolean; // 友链页面开关
-		sponsor: boolean; // 赞助页面开关
-		guestbook: boolean; // 留言板页面开关
-		bangumi: boolean; // 番组计划页面开关
-		watchlist: boolean; // 观影清单页面开关
+		friends: boolean; // 鍙嬮摼椤甸潰寮€鍏?
+		sponsor: boolean; // 璧炲姪椤甸潰寮€鍏?
+		guestbook: boolean; // 鐣欒█鏉块〉闈㈠紑鍏?
+		bangumi: boolean; // 鐣粍璁″垝椤甸潰寮€鍏?
+		watchlist: boolean; // 瑙傚奖娓呭崟椤甸潰寮€鍏?
 	};
 
-	// 文章列表布局配置
+	// 鏂囩珷鍒楄〃甯冨眬閰嶇疆
 	postListLayout: {
-		defaultMode: "list" | "grid"; // 默认布局模式：list=列表模式，grid=网格模式
-		allowSwitch: boolean; // 是否允许用户切换布局
+		defaultMode: "list" | "grid"; // 榛樿甯冨眬妯″紡锛歭ist=鍒楄〃妯″紡锛実rid=缃戞牸妯″紡
+		allowSwitch: boolean; // 鏄惁鍏佽鐢ㄦ埛鍒囨崲甯冨眬
 		grid: {
-			// 网格布局配置，仅在 defaultMode 为 "grid" 或允许切换布局时生效
-			// 是否开启瀑布流布局
+			// 缃戞牸甯冨眬閰嶇疆锛屼粎鍦?defaultMode 涓?"grid" 鎴栧厑璁稿垏鎹㈠竷灞€鏃剁敓鏁?
+			// 鏄惁寮€鍚€戝竷娴佸竷灞€
 			masonry: boolean;
-			// 网格模式列数：2 或 3，默认为 2。注意：3列模式仅在单侧边栏（或无侧边栏）且屏幕宽度足够时生效
+			// 缃戞牸妯″紡鍒楁暟锛? 鎴?3锛岄粯璁や负 2銆傛敞鎰忥細3鍒楁ā寮忎粎鍦ㄥ崟渚ц竟鏍忥紙鎴栨棤渚ц竟鏍忥級涓斿睆骞曞搴﹁冻澶熸椂鐢熸晥
 			columns?: 2 | 3;
 		};
 	};
 
-	// 分页配置
+	// 鍒嗛〉閰嶇疆
 	pagination: {
-		/** 首页等列表每页文章数；归档未单独设置时与其相同 */
+		/** 棣栭〉绛夊垪琛ㄦ瘡椤垫枃绔犳暟锛涘綊妗ｆ湭鍗曠嫭璁剧疆鏃朵笌鍏剁浉鍚?*/
 		postsPerPage: number;
-		/** 仅归档页；不设则用 postsPerPage */
+		/** 浠呭綊妗ｉ〉锛涗笉璁惧垯鐢?postsPerPage */
 		archivePostsPerPage?: number;
 	};
 
-	// 文章密码保护配置
-	postPassword?: string; // 当文章的 password 字段设置为 true 时使用的默认密码
-	postPasswordHint?: string; // 密码提示文案，如 "示例文章密码123456"
+	// 鏂囩珷瀵嗙爜淇濇姢閰嶇疆
+	postPassword?: string; // 褰撴枃绔犵殑 password 瀛楁璁剧疆涓?true 鏃朵娇鐢ㄧ殑榛樿瀵嗙爜
+	postPasswordHint?: string; // 瀵嗙爜鎻愮ず鏂囨锛屽 "绀轰緥鏂囩珷瀵嗙爜123456"
 
-	// 全站变灰配置
+	// 鍏ㄧ珯鍙樼伆閰嶇疆
 	grayscale?: {
-		enable: boolean; // 是否启用全站变灰效果
+		enable: boolean; // 鏄惁鍚敤鍏ㄧ珯鍙樼伆鏁堟灉
 	};
 };
 
@@ -151,8 +150,8 @@ export type NavBarLink = {
 	name: string;
 	url: string;
 	external?: boolean;
-	icon?: string; // 菜单项图标
-	children?: (NavBarLink | LinkPreset)[]; // 支持子菜单，可以是NavBarLink或LinkPreset
+	icon?: string; // 鑿滃崟椤瑰浘鏍?
+	children?: (NavBarLink | LinkPreset)[]; // 鏀寔瀛愯彍鍗曪紝鍙互鏄疦avBarLink鎴朙inkPreset
 };
 
 export type NavBarConfig = {
@@ -166,49 +165,49 @@ export type ProfileLinkItem = {
 	showName?: boolean;
 };
 
-/** 资料卡次要标签（如「优秀作者」），样式接近掘金侧边栏芯片 */
+/** 璧勬枡鍗℃瑕佹爣绛撅紙濡傘€屼紭绉€浣滆€呫€嶏級锛屾牱寮忔帴杩戞帢閲戜晶杈规爮鑺墖 */
 export type ProfileBadgeItem = {
 	text: string;
-	/** 站内路径或外链；不写则为纯文本 */
+	/** 绔欏唴璺緞鎴栧閾撅紱涓嶅啓鍒欎负绾枃鏈?*/
 	href?: string;
 	icon?: string;
 };
 
-/** 资料卡单列统计的来源 */
+/** 璧勬枡鍗″崟鍒楃粺璁＄殑鏉ユ簮 */
 export type ProfileStatValueMode =
 	| "literal"
 	| "postCount"
 	| "randomReads"
 	| "randomFollowers";
 
-/** 资料卡底部数据列（大字 + 灰色说明） */
+/** 璧勬枡鍗″簳閮ㄦ暟鎹垪锛堝ぇ瀛?+ 鐏拌壊璇存槑锛?*/
 export type ProfileStatItem = {
 	label: string;
-	/** valueMode 为 literal（默认）时使用；可省略则用「—」 */
+	/** valueMode 涓?literal锛堥粯璁わ級鏃朵娇鐢紱鍙渷鐣ュ垯鐢ㄣ€屸€斻€?*/
 	value?: string;
 	href?: string;
-	/** 默认 literal；postCount / random* 时不使用 value */
+	/** 榛樿 literal锛沺ostCount / random* 鏃朵笉浣跨敤 value */
 	valueMode?: ProfileStatValueMode;
-	/** randomReads / randomFollowers 时在闭区间内随机（整数），不写则用内置默认区间 */
+	/** randomReads / randomFollowers 鏃跺湪闂尯闂村唴闅忔満锛堟暣鏁帮級锛屼笉鍐欏垯鐢ㄥ唴缃粯璁ゅ尯闂?*/
 	randomMin?: number;
 	randomMax?: number;
 };
 
 export type ProfileConfig = {
 	avatar?: string;
-	/** 资料卡顶部封面图（侧栏头图） */
+	/** 璧勬枡鍗￠《閮ㄥ皝闈㈠浘锛堜晶鏍忓ご鍥撅級 */
 	cover?: string;
-	/** 头像右下角认证角标 */
+	/** 澶村儚鍙充笅瑙掕璇佽鏍?*/
 	verified?: boolean;
-	/** 封面右上「⋯」跳转，默认 /about/ */
+	/** 灏侀潰鍙充笂銆屸嫰銆嶈烦杞紝榛樿 /about/ */
 	menuHref?: string;
 	name: string;
 	bio?: string;
-	/** 昵称右侧等级文案，如 "LV.5"；留空则不显示 */
+	/** 鏄电О鍙充晶绛夌骇鏂囨锛屽 "LV.5"锛涚暀绌哄垯涓嶆樉绀?*/
 	level?: string;
-	/** 简介下方标签行 */
+	/** 绠€浠嬩笅鏂规爣绛捐 */
 	badges?: ProfileBadgeItem[];
-	/** 底栏数据（文章 / 阅读 / 粉丝等），留空则整块不渲染 */
+	/** 搴曟爮鏁版嵁锛堟枃绔?/ 闃呰 / 绮変笣绛夛級锛岀暀绌哄垯鏁村潡涓嶆覆鏌?*/
 	stats?: ProfileStatItem[];
 	links: ProfileLinkItem[];
 };
@@ -218,11 +217,11 @@ export type LicenseConfig = {
 	name: string;
 	url: string;
 };
-// 评论配置
+// 璇勮閰嶇疆
 
 export type CommentConfig = {
 	/**
-	 * 当前启用的评论系统类型
+	 * 褰撳墠鍚敤鐨勮瘎璁虹郴缁熺被鍨?
 	 * "none" | "twikoo" | "waline" | "giscus" | "disqus" | 'artalk'
 	 */
 	type: "none" | "twikoo" | "waline" | "giscus" | "disqus" | "artalk";
@@ -236,23 +235,23 @@ export type CommentConfig = {
 		serverURL: string;
 		lang?: string;
 		login?: "enable" | "force" | "disable";
-		visitorCount?: boolean; // 是否统计访问量，true 启用访问量，false 关闭
+		visitorCount?: boolean; // 鏄惁缁熻璁块棶閲忥紝true 鍚敤璁块棶閲忥紝false 鍏抽棴
 	};
 	artalk?: {
-		// 后端程序 API 地址
+		// 鍚庣绋嬪簭 API 鍦板潃
 		server: string;
 		/**
-		 * 语言，支持语言如下：
+		 * 璇█锛屾敮鎸佽瑷€濡備笅锛?
 		 * - "en" (English)
-		 * - "zh-CN" (简体中文)
-		 * - "zh-TW" (繁体中文)
-		 * - "ja" (日本語)
-		 * - "ko" (한국어)
-		 * - "fr" (Français)
-		 * - "ru" (Русский)
+		 * - "zh-CN" (绠€浣撲腑鏂?
+		 * - "zh-TW" (绻佷綋涓枃)
+		 * - "ja" (鏃ユ湰瑾?
+		 * - "ko" (頃滉淡鞏?
+		 * - "fr" (Fran莽ais)
+		 * - "ru" (袪褍褋褋泻懈泄)
 		 * */
 		locale: string | "auto";
-		// 是否统计访问量，true 启用访问量，false 关闭
+		// 鏄惁缁熻璁块棶閲忥紝true 鍚敤璁块棶閲忥紝false 鍏抽棴
 		visitorCount?: boolean;
 	};
 	giscus?: {
@@ -275,8 +274,7 @@ export type CommentConfig = {
 
 export type LIGHT_DARK_MODE =
 	| typeof LIGHT_MODE
-	| typeof DARK_MODE
-	| typeof SYSTEM_MODE;
+	| typeof DARK_MODE;
 
 export type WALLPAPER_MODE =
 	| typeof WALLPAPER_BANNER
@@ -300,45 +298,45 @@ export type BlogPostData = {
 };
 
 export type ExpressiveCodeConfig = {
-	/** @deprecated 使用 darkTheme 和 lightTheme 代替 */
+	/** @deprecated 浣跨敤 darkTheme 鍜?lightTheme 浠ｆ浛 */
 	theme?: string;
-	/** 暗色主题名称（用于暗色模式） */
+	/** 鏆楄壊涓婚鍚嶇О锛堢敤浜庢殫鑹叉ā寮忥級 */
 	darkTheme: string;
-	/** 亮色主题名称（用于亮色模式） */
+	/** 浜壊涓婚鍚嶇О锛堢敤浜庝寒鑹叉ā寮忥級 */
 	lightTheme: string;
-	/** 代码块折叠插件配置 */
+	/** 浠ｇ爜鍧楁姌鍙犳彃浠堕厤缃?*/
 	pluginCollapsible?: PluginCollapsibleConfig;
-	/** 语言徽章插件配置 */
+	/** 璇█寰界珷鎻掍欢閰嶇疆 */
 	pluginLanguageBadge?: PluginLanguageBadgeConfig;
 };
 
 export type PluginLanguageBadgeConfig = {
-	enable: boolean; // 是否启用语言徽章
+	enable: boolean; // 鏄惁鍚敤璇█寰界珷
 };
 
 export type PluginCollapsibleConfig = {
-	enable: boolean; // 是否启用代码块折叠功能
-	lineThreshold: number; // 触发折叠的行数阈值
-	previewLines: number; // 折叠时显示的预览行数
-	defaultCollapsed: boolean; // 默认是否折叠
+	enable: boolean; // 鏄惁鍚敤浠ｇ爜鍧楁姌鍙犲姛鑳?
+	lineThreshold: number; // 瑙﹀彂鎶樺彔鐨勮鏁伴槇鍊?
+	previewLines: number; // 鎶樺彔鏃舵樉绀虹殑棰勮琛屾暟
+	defaultCollapsed: boolean; // 榛樿鏄惁鎶樺彔
 };
 
 export type AnnouncementConfig = {
-	// enable属性已移除，现在通过sidebarLayoutConfig统一控制
-	title?: string; // 公告栏标题
-	content: string; // 公告栏内容
-	icon?: string; // 公告栏图标
-	type?: "info" | "warning" | "success" | "error"; // 公告类型
-	closable?: boolean; // 是否可关闭
+	// enable灞炴€у凡绉婚櫎锛岀幇鍦ㄩ€氳繃sidebarLayoutConfig缁熶竴鎺у埗
+	title?: string; // 鍏憡鏍忔爣棰?
+	content: string; // 鍏憡鏍忓唴瀹?
+	icon?: string; // 鍏憡鏍忓浘鏍?
+	type?: "info" | "warning" | "success" | "error"; // 鍏憡绫诲瀷
+	closable?: boolean; // 鏄惁鍙叧闂?
 	link?: {
-		enable: boolean; // 是否启用链接
-		text: string; // 链接文字
-		url: string; // 链接地址
-		external?: boolean; // 是否外部链接
+		enable: boolean; // 鏄惁鍚敤閾炬帴
+		text: string; // 閾炬帴鏂囧瓧
+		url: string; // 閾炬帴鍦板潃
+		external?: boolean; // 鏄惁澶栭儴閾炬帴
 	};
 };
 
-/** 首页顶部通知的视觉类型（决定配色与默认图标） */
+/** 棣栭〉椤堕儴閫氱煡鐨勮瑙夌被鍨嬶紙鍐冲畾閰嶈壊涓庨粯璁ゅ浘鏍囷級 */
 export type HomeTopNoticeTone =
 	| "info"
 	| "warning"
@@ -348,10 +346,10 @@ export type HomeTopNoticeTone =
 	| "tip"
 	| "urgent";
 
-/** 单条首页顶部通知；正文 content 可含安全 HTML（仓库内配置），如 <a href="/x">说明</a> */
+/** 鍗曟潯棣栭〉椤堕儴閫氱煡锛涙鏂?content 鍙惈瀹夊叏 HTML锛堜粨搴撳唴閰嶇疆锛夛紝濡?<a href="/x">璇存槑</a> */
 export type HomeTopNoticeItem = {
 	title?: string;
-	/** 可与纯文本混排的 HTML 字符串，常用 <a href>、<strong> 等 */
+	/** 鍙笌绾枃鏈贩鎺掔殑 HTML 瀛楃涓诧紝甯哥敤 <a href>銆?strong> 绛?*/
 	content: string;
 	icon?: string;
 	type?: HomeTopNoticeTone;
@@ -363,43 +361,43 @@ export type HomeTopNoticeItem = {
 	};
 };
 
-/** 首页顶部重要通知（主栏顶部），与侧边栏公告独立配置
- *  - 多条通知统一通过 items 数组配置，自上而下排列。 */
+/** 棣栭〉椤堕儴閲嶈閫氱煡锛堜富鏍忛《閮級锛屼笌渚ц竟鏍忓叕鍛婄嫭绔嬮厤缃?
+ *  - 澶氭潯閫氱煡缁熶竴閫氳繃 items 鏁扮粍閰嶇疆锛岃嚜涓婅€屼笅鎺掑垪銆?*/
 export type HomeTopNoticeConfig = {
 	enable: boolean;
 	items: HomeTopNoticeItem[];
 };
 
-// 单个字体配置
+// 鍗曚釜瀛椾綋閰嶇疆
 export type FontItem = {
-	id: string; // 字体唯一标识符
-	name: string; // 字体显示名称
-	src: string; // 字体文件路径或URL链接
-	family: string; // CSS font-family 名称
-	weight?: string | number; // 字体粗细，如 "normal", "bold", 400, 700 等
-	style?: "normal" | "italic" | "oblique"; // 字体样式
-	display?: "auto" | "block" | "swap" | "fallback" | "optional"; // font-display 属性
-	unicodeRange?: string; // Unicode 范围，用于字体子集化
+	id: string; // 瀛椾綋鍞竴鏍囪瘑绗?
+	name: string; // 瀛椾綋鏄剧ず鍚嶇О
+	src: string; // 瀛椾綋鏂囦欢璺緞鎴朥RL閾炬帴
+	family: string; // CSS font-family 鍚嶇О
+	weight?: string | number; // 瀛椾綋绮楃粏锛屽 "normal", "bold", 400, 700 绛?
+	style?: "normal" | "italic" | "oblique"; // 瀛椾綋鏍峰紡
+	display?: "auto" | "block" | "swap" | "fallback" | "optional"; // font-display 灞炴€?
+	unicodeRange?: string; // Unicode 鑼冨洿锛岀敤浜庡瓧浣撳瓙闆嗗寲
 	format?:
 		| "woff"
 		| "woff2"
 		| "truetype"
 		| "opentype"
 		| "embedded-opentype"
-		| "svg"; // 字体格式，仅当 src 为本地文件时需要
+		| "svg"; // 瀛椾綋鏍煎紡锛屼粎褰?src 涓烘湰鍦版枃浠舵椂闇€瑕?
 };
 
-// 字体配置
+// 瀛椾綋閰嶇疆
 export type FontConfig = {
-	enable: boolean; // 是否启用自定义字体功能
-	selected: string | string[]; // 当前选择的字体ID，支持单个或多个字体组合
-	fonts: Record<string, FontItem>; // 字体库，以ID为键的对象
-	fallback?: string[]; // 全局字体回退列表
-	monoFallback?: string[]; // 代码字体回退列表
-	preload?: boolean; // 是否预加载字体文件以提高性能
+	enable: boolean; // 鏄惁鍚敤鑷畾涔夊瓧浣撳姛鑳?
+	selected: string | string[]; // 褰撳墠閫夋嫨鐨勫瓧浣揑D锛屾敮鎸佸崟涓垨澶氫釜瀛椾綋缁勫悎
+	fonts: Record<string, FontItem>; // 瀛椾綋搴擄紝浠D涓洪敭鐨勫璞?
+	fallback?: string[]; // 鍏ㄥ眬瀛椾綋鍥為€€鍒楄〃
+	monoFallback?: string[]; // 浠ｇ爜瀛椾綋鍥為€€鍒楄〃
+	preload?: boolean; // 鏄惁棰勫姞杞藉瓧浣撴枃浠朵互鎻愰珮鎬ц兘
 	og?: {
-		family: string; // OpenGraph 使用的字体族
-		cssUrl: string; // OpenGraph 获取字体的 CSS 地址
+		family: string; // OpenGraph 浣跨敤鐨勫瓧浣撴棌
+		cssUrl: string; // OpenGraph 鑾峰彇瀛椾綋鐨?CSS 鍦板潃
 		weights: {
 			regular: number;
 			bold: number;
@@ -409,41 +407,41 @@ export type FontConfig = {
 };
 
 export type FooterConfig = {
-	enable: boolean; // 是否启用Footer HTML注入功能
-	customHtml?: string; // 自定义HTML内容，用于添加备案号等信息
+	enable: boolean; // 鏄惁鍚敤Footer HTML娉ㄥ叆鍔熻兘
+	customHtml?: string; // 鑷畾涔塇TML鍐呭锛岀敤浜庢坊鍔犲妗堝彿绛変俊鎭?
 };
 
 export type CoverImageConfig = {
-	enableInPost: boolean; // 是否在文章详情页显示封面图
+	enableInPost: boolean; // 鏄惁鍦ㄦ枃绔犺鎯呴〉鏄剧ず灏侀潰鍥?
 	randomCoverImage: {
-		enable: boolean; // 是否启用随机图功能
-		apis: string[]; // 随机图API列表，支持 {seed} 占位符，会替换为文章slug或时间戳
-		fallback?: string; // 当API请求失败时的备用图片路径
-		// 加载指示器配置
+		enable: boolean; // 鏄惁鍚敤闅忔満鍥惧姛鑳?
+		apis: string[]; // 闅忔満鍥続PI鍒楄〃锛屾敮鎸?{seed} 鍗犱綅绗︼紝浼氭浛鎹负鏂囩珷slug鎴栨椂闂存埑
+		fallback?: string; // 褰揂PI璇锋眰澶辫触鏃剁殑澶囩敤鍥剧墖璺緞
+		// 鍔犺浇鎸囩ず鍣ㄩ厤缃?
 		loading?: {
-			// 加载指示器开关
+			// 鍔犺浇鎸囩ず鍣ㄥ紑鍏?
 			enable: boolean;
-			image?: string; // 自定义加载图片路径（相对于public目录），默认 "/assets/images/loading.gif"
-			backgroundColor?: string; // 加载指示器背景颜色，默认与loading.gif背景色一致 (#fefefe)
+			image?: string; // 鑷畾涔夊姞杞藉浘鐗囪矾寰勶紙鐩稿浜巔ublic鐩綍锛夛紝榛樿 "/assets/images/loading.gif"
+			backgroundColor?: string; // 鍔犺浇鎸囩ず鍣ㄨ儗鏅鑹诧紝榛樿涓巐oading.gif鑳屾櫙鑹蹭竴鑷?(#fefefe)
 		};
 		watermark?: {
-			enable: boolean; // 是否显示水印
-			text?: string; // 水印文本，默认为"随机图"
+			enable: boolean; // 鏄惁鏄剧ず姘村嵃
+			text?: string; // 姘村嵃鏂囨湰锛岄粯璁や负"闅忔満鍥?
 			position?:
 				| "top-left"
 				| "top-right"
 				| "bottom-left"
 				| "bottom-right"
-				| "center"; // 水印位置
-			opacity?: number; // 水印透明度 0-1，默认0.6
-			fontSize?: string; // 字体大小，默认"0.75rem"
-			color?: string; // 文字颜色，默认为白色
-			backgroundColor?: string; // 背景颜色，默认为半透明黑色
+				| "center"; // 姘村嵃浣嶇疆
+			opacity?: number; // 姘村嵃閫忔槑搴?0-1锛岄粯璁?.6
+			fontSize?: string; // 瀛椾綋澶у皬锛岄粯璁?0.75rem"
+			color?: string; // 鏂囧瓧棰滆壊锛岄粯璁や负鐧借壊
+			backgroundColor?: string; // 鑳屾櫙棰滆壊锛岄粯璁や负鍗婇€忔槑榛戣壊
 		};
 	};
 };
 
-// 组件配置类型定义
+// 缁勪欢閰嶇疆绫诲瀷瀹氫箟
 export type WidgetComponentType =
 	| "profile"
 	| "announcement"
@@ -457,96 +455,96 @@ export type WidgetComponentType =
 	| "douyinHot";
 
 export type WidgetComponentConfig = {
-	type: WidgetComponentType; // 组件类型
-	enable: boolean; // 是否启用该组件
-	position: "top" | "sticky"; // 组件位置：top=固定在顶部，sticky=粘性定位（可滚动）
-	order?: number; // 组件显示顺序（数字越小越靠前）
-	class?: string; // CSS 类名，用于应用样式和动画
-	animationDelay?: number; // 动画延迟时间（毫秒），用于错开动画效果
-	style?: string; // 自定义内联样式
-	configId?: string; // 配置ID，用于广告组件指定使用哪个配置
-	showOnPostPage?: boolean; // 是否在文章详情页显示
-	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
+	type: WidgetComponentType; // 缁勪欢绫诲瀷
+	enable: boolean; // 鏄惁鍚敤璇ョ粍浠?
+	position: "top" | "sticky"; // 缁勪欢浣嶇疆锛歵op=鍥哄畾鍦ㄩ《閮紝sticky=绮樻€у畾浣嶏紙鍙粴鍔級
+	order?: number; // 缁勪欢鏄剧ず椤哄簭锛堟暟瀛楄秺灏忚秺闈犲墠锛?
+	class?: string; // CSS 绫诲悕锛岀敤浜庡簲鐢ㄦ牱寮忓拰鍔ㄧ敾
+	animationDelay?: number; // 鍔ㄧ敾寤惰繜鏃堕棿锛堟绉掞級锛岀敤浜庨敊寮€鍔ㄧ敾鏁堟灉
+	style?: string; // 鑷畾涔夊唴鑱旀牱寮?
+	configId?: string; // 閰嶇疆ID锛岀敤浜庡箍鍛婄粍浠舵寚瀹氫娇鐢ㄥ摢涓厤缃?
+	showOnPostPage?: boolean; // 鏄惁鍦ㄦ枃绔犺鎯呴〉鏄剧ず
+	showOnNonPostPage?: boolean; // 鏄惁鍦ㄩ潪鏂囩珷璇︽儏椤垫樉绀?
 	responsive?: {
-		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
-		collapseThreshold?: number; // 折叠阈值
+		hidden?: ("mobile" | "tablet" | "desktop")[]; // 鍦ㄦ寚瀹氳澶囦笂闅愯棌
+		collapseThreshold?: number; // 鎶樺彔闃堝€?
 	};
-	customProps?: Record<string, unknown>; // 自定义属性，用于扩展组件功能
+	customProps?: Record<string, unknown>; // 鑷畾涔夊睘鎬э紝鐢ㄤ簬鎵╁睍缁勪欢鍔熻兘
 };
 
 export type MobileBottomComponentConfig = {
-	type: WidgetComponentType; // 组件类型
-	enable: boolean; // 是否启用该组件
-	configId?: string; // 配置ID，用于广告组件指定使用哪个配置
-	showOnPostPage?: boolean; // 是否在文章详情页显示
-	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
+	type: WidgetComponentType; // 缁勪欢绫诲瀷
+	enable: boolean; // 鏄惁鍚敤璇ョ粍浠?
+	configId?: string; // 閰嶇疆ID锛岀敤浜庡箍鍛婄粍浠舵寚瀹氫娇鐢ㄥ摢涓厤缃?
+	showOnPostPage?: boolean; // 鏄惁鍦ㄦ枃绔犺鎯呴〉鏄剧ず
+	showOnNonPostPage?: boolean; // 鏄惁鍦ㄩ潪鏂囩珷璇︽儏椤垫樉绀?
 	responsive?: {
-		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
-		collapseThreshold?: number; // 折叠阈值
+		hidden?: ("mobile" | "tablet" | "desktop")[]; // 鍦ㄦ寚瀹氳澶囦笂闅愯棌
+		collapseThreshold?: number; // 鎶樺彔闃堝€?
 	};
-	customProps?: Record<string, unknown>; // 自定义属性，用于扩展组件功能
+	customProps?: Record<string, unknown>; // 鑷畾涔夊睘鎬э紝鐢ㄤ簬鎵╁睍缁勪欢鍔熻兘
 };
 
 export type SidebarLayoutConfig = {
-	enable: boolean; // 是否启用侧边栏
-	position: "left" | "both"; // 侧边栏位置：左侧或双侧
-	showRightSidebarOnPostPage?: boolean; // 当position为left时，是否在文章详情页显示右侧边栏
-	leftComponents: WidgetComponentConfig[]; // 左侧边栏组件配置列表
-	rightComponents: WidgetComponentConfig[]; // 右侧边栏组件配置列表
-	mobileBottomComponents?: MobileBottomComponentConfig[]; // 移动端底部组件配置列表（<768px显示）
+	enable: boolean; // 鏄惁鍚敤渚ц竟鏍?
+	position: "left" | "both"; // 渚ц竟鏍忎綅缃細宸︿晶鎴栧弻渚?
+	showRightSidebarOnPostPage?: boolean; // 褰損osition涓簂eft鏃讹紝鏄惁鍦ㄦ枃绔犺鎯呴〉鏄剧ず鍙充晶杈规爮
+	leftComponents: WidgetComponentConfig[]; // 宸︿晶杈规爮缁勪欢閰嶇疆鍒楄〃
+	rightComponents: WidgetComponentConfig[]; // 鍙充晶杈规爮缁勪欢閰嶇疆鍒楄〃
+	mobileBottomComponents?: MobileBottomComponentConfig[]; // 绉诲姩绔簳閮ㄧ粍浠堕厤缃垪琛紙<768px鏄剧ず锛?
 	defaultAnimation?: {
-		enable: boolean; // 是否启用默认动画
-		baseDelay: number; // 基础延迟时间（毫秒）
-		increment: number; // 递增延迟时间（毫秒），每个组件依次增加的延迟
+		enable: boolean; // 鏄惁鍚敤榛樿鍔ㄧ敾
+		baseDelay: number; // 鍩虹寤惰繜鏃堕棿锛堟绉掞級
+		increment: number; // 閫掑寤惰繜鏃堕棿锛堟绉掞級锛屾瘡涓粍浠朵緷娆″鍔犵殑寤惰繜
 	};
 	responsive?: {
 		layout: {
-			mobile: "hidden" | "drawer" | "sidebar"; // 移动端布局模式：hidden=不显示侧边栏，drawer=抽屉模式，sidebar=显示侧边栏
-			tablet: "hidden" | "drawer" | "sidebar"; // 平板端布局模式
-			desktop: "hidden" | "drawer" | "sidebar"; // 桌面端布局模式
+			mobile: "hidden" | "drawer" | "sidebar"; // 绉诲姩绔竷灞€妯″紡锛歨idden=涓嶆樉绀轰晶杈规爮锛宒rawer=鎶藉眽妯″紡锛宻idebar=鏄剧ず渚ц竟鏍?
+			tablet: "hidden" | "drawer" | "sidebar"; // 骞虫澘绔竷灞€妯″紡
+			desktop: "hidden" | "drawer" | "sidebar"; // 妗岄潰绔竷灞€妯″紡
 		};
 	};
 };
 
 export type SakuraConfig = {
-	enable: boolean; // 是否启用樱花特效
-	sakuraNum: number; // 樱花数量，默认21
-	limitTimes: number; // 樱花越界限制次数，-1为无限循环
+	enable: boolean; // 鏄惁鍚敤妯辫姳鐗规晥
+	sakuraNum: number; // 妯辫姳鏁伴噺锛岄粯璁?1
+	limitTimes: number; // 妯辫姳瓒婄晫闄愬埗娆℃暟锛?1涓烘棤闄愬惊鐜?
 	size: {
-		min: number; // 樱花最小尺寸倍数
-		max: number; // 樱花最大尺寸倍数
+		min: number; // 妯辫姳鏈€灏忓昂瀵稿€嶆暟
+		max: number; // 妯辫姳鏈€澶у昂瀵稿€嶆暟
 	};
 	opacity: {
-		min: number; // 樱花最小不透明度
-		max: number; // 樱花最大不透明度
+		min: number; // 妯辫姳鏈€灏忎笉閫忔槑搴?
+		max: number; // 妯辫姳鏈€澶т笉閫忔槑搴?
 	};
 	speed: {
 		horizontal: {
-			min: number; // 水平移动速度最小值
-			max: number; // 水平移动速度最大值
+			min: number; // 姘村钩绉诲姩閫熷害鏈€灏忓€?
+			max: number; // 姘村钩绉诲姩閫熷害鏈€澶у€?
 		};
 		vertical: {
-			min: number; // 垂直移动速度最小值
-			max: number; // 垂直移动速度最大值
+			min: number; // 鍨傜洿绉诲姩閫熷害鏈€灏忓€?
+			max: number; // 鍨傜洿绉诲姩閫熷害鏈€澶у€?
 		};
-		rotation: number; // 旋转速度
-		fadeSpeed: number; // 消失速度，不应大于最小不透明度
+		rotation: number; // 鏃嬭浆閫熷害
+		fadeSpeed: number; // 娑堝け閫熷害锛屼笉搴斿ぇ浜庢渶灏忎笉閫忔槑搴?
 	};
-	zIndex: number; // 层级，确保樱花在合适的层级显示
+	zIndex: number; // 灞傜骇锛岀‘淇濇ū鑺卞湪鍚堥€傜殑灞傜骇鏄剧ず
 };
 
 export type BackgroundWallpaperConfig = {
-	mode: "banner" | "overlay" | "none"; // 壁纸模式：banner横幅模式、overlay全屏透明覆盖模式或none纯色背景
-	switchable?: boolean; // 是否允许用户通过导航栏切换壁纸模式，默认true
+	mode: "banner" | "overlay" | "none"; // 澹佺焊妯″紡锛歜anner妯箙妯″紡銆乷verlay鍏ㄥ睆閫忔槑瑕嗙洊妯″紡鎴杗one绾壊鑳屾櫙
+	switchable?: boolean; // 鏄惁鍏佽鐢ㄦ埛閫氳繃瀵艰埅鏍忓垏鎹㈠绾告ā寮忥紝榛樿true
 	src:
 		| string
 		| string[]
 		| {
 				desktop?: string | string[];
 				mobile?: string | string[];
-		  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
+		  }; // 鏀寔鍗曚釜鍥剧墖銆佸浘鐗囨暟缁勬垨鍒嗗埆璁剧疆妗岄潰绔拰绉诲姩绔浘鐗?
 
-	// Banner模式特有配置
+	// Banner妯″紡鐗规湁閰嶇疆
 	banner?: {
 		position?:
 			| "top"
@@ -567,136 +565,137 @@ export type BackgroundWallpaperConfig = {
 			| "right top"
 			| "right center"
 			| "right bottom"
-			| string; // 壁纸位置，支持CSS object-position的所有值，包括百分比和像素值
+			| string; // 澹佺焊浣嶇疆锛屾敮鎸丆SS object-position鐨勬墍鏈夊€硷紝鍖呮嫭鐧惧垎姣斿拰鍍忕礌鍊?
 		homeText?: {
-			enable: boolean; // 是否在首页显示自定义文字（全局开关）
-			switchable?: boolean; // 是否允许用户通过控制面板切换横幅标题显示
-			title?: string; // 主标题
-			subtitle?: string | string[]; // 副标题，支持单个字符串或字符串数组
-			titleSize?: string; // 主标题字体大小，如 "3.5rem"
-			subtitleSize?: string; // 副标题字体大小，如 "1.5rem"
+			enable: boolean; // 鏄惁鍦ㄩ椤垫樉绀鸿嚜瀹氫箟鏂囧瓧锛堝叏灞€寮€鍏筹級
+			switchable?: boolean; // 鏄惁鍏佽鐢ㄦ埛閫氳繃鎺у埗闈㈡澘鍒囨崲妯箙鏍囬鏄剧ず
+			title?: string; // 涓绘爣棰?
+			subtitle?: string | string[]; // 鍓爣棰橈紝鏀寔鍗曚釜瀛楃涓叉垨瀛楃涓叉暟缁?
+			titleSize?: string; // 涓绘爣棰樺瓧浣撳ぇ灏忥紝濡?"3.5rem"
+			subtitleSize?: string; // 鍓爣棰樺瓧浣撳ぇ灏忥紝濡?"1.5rem"
 			typewriter?: {
-				enable: boolean; // 是否启用打字机效果
-				speed: number; // 打字速度（毫秒）
-				deleteSpeed: number; // 删除速度（毫秒）
-				pauseTime: number; // 完整显示后的暂停时间（毫秒）
+				enable: boolean; // 鏄惁鍚敤鎵撳瓧鏈烘晥鏋?
+				speed: number; // 鎵撳瓧閫熷害锛堟绉掞級
+				deleteSpeed: number; // 鍒犻櫎閫熷害锛堟绉掞級
+				pauseTime: number; // 瀹屾暣鏄剧ず鍚庣殑鏆傚仠鏃堕棿锛堟绉掞級
 			};
 		};
 		credit?: {
 			enable:
 				| boolean
 				| {
-						desktop: boolean; // 桌面端是否显示横幅图片来源文本
-						mobile: boolean; // 移动端是否显示横幅图片来源文本
-				  }; // 是否显示横幅图片来源文本，支持布尔值或分别设置桌面端和移动端
+						desktop: boolean; // 妗岄潰绔槸鍚︽樉绀烘í骞呭浘鐗囨潵婧愭枃鏈?
+						mobile: boolean; // 绉诲姩绔槸鍚︽樉绀烘í骞呭浘鐗囨潵婧愭枃鏈?
+				  }; // 鏄惁鏄剧ず妯箙鍥剧墖鏉ユ簮鏂囨湰锛屾敮鎸佸竷灏斿€兼垨鍒嗗埆璁剧疆妗岄潰绔拰绉诲姩绔?
 			text:
 				| string
 				| {
-						desktop: string; // 桌面端显示的来源文本
-						mobile: string; // 移动端显示的来源文本
-				  }; // 横幅图片来源文本，支持字符串或分别设置桌面端和移动端
+						desktop: string; // 妗岄潰绔樉绀虹殑鏉ユ簮鏂囨湰
+						mobile: string; // 绉诲姩绔樉绀虹殑鏉ユ簮鏂囨湰
+				  }; // 妯箙鍥剧墖鏉ユ簮鏂囨湰锛屾敮鎸佸瓧绗︿覆鎴栧垎鍒缃闈㈢鍜岀Щ鍔ㄧ
 			url?:
 				| string
 				| {
-						desktop: string; // 桌面端原始艺术品或艺术家页面的 URL 链接
-						mobile: string; // 移动端原始艺术品或艺术家页面的 URL 链接
-				  }; // 原始艺术品或艺术家页面的 URL 链接，支持字符串或分别设置桌面端和移动端
+						desktop: string; // 妗岄潰绔師濮嬭壓鏈搧鎴栬壓鏈椤甸潰鐨?URL 閾炬帴
+						mobile: string; // 绉诲姩绔師濮嬭壓鏈搧鎴栬壓鏈椤甸潰鐨?URL 閾炬帴
+				  }; // 鍘熷鑹烘湳鍝佹垨鑹烘湳瀹堕〉闈㈢殑 URL 閾炬帴锛屾敮鎸佸瓧绗︿覆鎴栧垎鍒缃闈㈢鍜岀Щ鍔ㄧ
 		};
 		navbar?: {
-			transparentMode?: "semi" | "full" | "semifull"; // 导航栏透明模式
-			enableBlur?: boolean; // 是否开启毛玻璃模糊效果
-			blur?: number; // 毛玻璃模糊度
+			transparentMode?: "semi" | "full" | "semifull"; // 瀵艰埅鏍忛€忔槑妯″紡
+			enableBlur?: boolean; // 鏄惁寮€鍚瘺鐜荤拑妯＄硦鏁堟灉
+			blur?: number; // 姣涚幓鐠冩ā绯婂害
 		};
 		waves?: {
 			enable:
 				| boolean
 				| {
-					desktop: boolean; // 桌面端是否启用水波纹动画效果
-					mobile: boolean; // 移动端是否启用水波纹动画效果
-			  }; // 是否启用水波纹动画效果，支持布尔值或分别设置桌面端和移动端
-		switchable?: boolean; // 是否允许用户通过控制面板切换水波纹动画
+					desktop: boolean; // 妗岄潰绔槸鍚﹀惎鐢ㄦ按娉㈢汗鍔ㄧ敾鏁堟灉
+					mobile: boolean; // 绉诲姩绔槸鍚﹀惎鐢ㄦ按娉㈢汗鍔ㄧ敾鏁堟灉
+			  }; // 鏄惁鍚敤姘存尝绾瑰姩鐢绘晥鏋滐紝鏀寔甯冨皵鍊兼垨鍒嗗埆璁剧疆妗岄潰绔拰绉诲姩绔?
+		switchable?: boolean; // 鏄惁鍏佽鐢ㄦ埛閫氳繃鎺у埗闈㈡澘鍒囨崲姘存尝绾瑰姩鐢?
 		};
 	};
-	// 全屏透明覆盖模式特有配置
+	// 鍏ㄥ睆閫忔槑瑕嗙洊妯″紡鐗规湁閰嶇疆
 	overlay?: {
-		zIndex?: number; // 层级，确保壁纸在合适的层级显示
-		opacity?: number; // 壁纸透明度，0-1之间
-		blur?: number; // 背景模糊程度，单位px
+		zIndex?: number; // 灞傜骇锛岀‘淇濆绾稿湪鍚堥€傜殑灞傜骇鏄剧ず
+		opacity?: number; // 澹佺焊閫忔槑搴︼紝0-1涔嬮棿
+		blur?: number; // 鑳屾櫙妯＄硦绋嬪害锛屽崟浣峱x
 	};
 };
 
-// 广告栏配置
+// 骞垮憡鏍忛厤缃?
 export type AdConfig = {
-	title?: string; // 广告栏标题
-	content?: string; // 广告栏文本内容
+	title?: string; // 骞垮憡鏍忔爣棰?
+	content?: string; // 骞垮憡鏍忔枃鏈唴瀹?
 	image?: {
-		src: string; // 图片地址
-		alt?: string; // 图片描述
-		link?: string; // 图片点击链接
-		external?: boolean; // 是否外部链接
+		src: string; // 鍥剧墖鍦板潃
+		alt?: string; // 鍥剧墖鎻忚堪
+		link?: string; // 鍥剧墖鐐瑰嚮閾炬帴
+		external?: boolean; // 鏄惁澶栭儴閾炬帴
 	};
 	link?: {
-		text: string; // 链接文本
-		url: string; // 链接地址
-		external?: boolean; // 是否外部链接
+		text: string; // 閾炬帴鏂囨湰
+		url: string; // 閾炬帴鍦板潃
+		external?: boolean; // 鏄惁澶栭儴閾炬帴
 	};
 	padding?: {
-		top?: string; // 上边距，如 "0", "1rem", "16px"
-		right?: string; // 右边距
-		bottom?: string; // 下边距
-		left?: string; // 左边距
-		all?: string; // 统一边距，会覆盖单独设置
+		top?: string; // 涓婅竟璺濓紝濡?"0", "1rem", "16px"
+		right?: string; // 鍙宠竟璺?
+		bottom?: string; // 涓嬭竟璺?
+		left?: string; // 宸﹁竟璺?
+		all?: string; // 缁熶竴杈硅窛锛屼細瑕嗙洊鍗曠嫭璁剧疆
 	};
-	closable?: boolean; // 是否可关闭
-	displayCount?: number; // 显示次数限制，-1为无限制
-	expireDate?: string; // 过期时间 (ISO 8601 格式)
+	closable?: boolean; // 鏄惁鍙叧闂?
+	displayCount?: number; // 鏄剧ず娆℃暟闄愬埗锛?1涓烘棤闄愬埗
+	expireDate?: string; // 杩囨湡鏃堕棿 (ISO 8601 鏍煎紡)
 };
 
-// 友链配置
+// 鍙嬮摼閰嶇疆
 export type FriendLink = {
-	title: string; // 友链标题
-	imgurl: string; // 头像图片URL
-	desc: string; // 友链描述
-	siteurl: string; // 友链地址
-	tags?: string[]; // 标签数组
-	weight: number; // 权重，数字越大排序越靠前
-	enabled: boolean; // 是否启用
+	title: string; // 鍙嬮摼鏍囬
+	imgurl: string; // 澶村儚鍥剧墖URL
+	desc: string; // 鍙嬮摼鎻忚堪
+	siteurl: string; // 鍙嬮摼鍦板潃
+	tags?: string[]; // 鏍囩鏁扮粍
+	weight: number; // 鏉冮噸锛屾暟瀛楄秺澶ф帓搴忚秺闈犲墠
+	enabled: boolean; // 鏄惁鍚敤
 };
 
 export type FriendsPageConfig = {
-	title?: string; // 页面标题，留空则使用 i18n 中的翻译
-	description?: string; // 页面描述，留空则使用 i18n 中的翻译
-	showCustomContent?: boolean; // 是否显示自定义内容（friends.mdx）
-	showComment?: boolean; // 是否显示评论区，默认 true
-	randomizeSort?: boolean; // 是否打乱排序，如果为 true，将忽略 weight，随机排序
+	title?: string; // 椤甸潰鏍囬锛岀暀绌哄垯浣跨敤 i18n 涓殑缈昏瘧
+	description?: string; // 椤甸潰鎻忚堪锛岀暀绌哄垯浣跨敤 i18n 涓殑缈昏瘧
+	showCustomContent?: boolean; // 鏄惁鏄剧ず鑷畾涔夊唴瀹癸紙friends.mdx锛?
+	showComment?: boolean; // 鏄惁鏄剧ず璇勮鍖猴紝榛樿 true
+	randomizeSort?: boolean; // 鏄惁鎵撲贡鎺掑簭锛屽鏋滀负 true锛屽皢蹇界暐 weight锛岄殢鏈烘帓搴?
 };
 
-// 赞助方式类型
+// 璧炲姪鏂瑰紡绫诲瀷
 export type SponsorMethod = {
-	name: string; // 赞助方式名称，如 "支付宝"、"微信"、"PayPal"
-	icon?: string; // 图标名称（Iconify 格式），如 "fa6-brands:alipay"
-	qrCode?: string; // 收款码图片路径（相对于 public 目录），可选
-	link?: string; // 赞助链接 URL，可选。如果提供，会显示跳转按钮
-	description?: string; // 描述文本
-	enabled: boolean; // 是否启用
+	name: string; // 璧炲姪鏂瑰紡鍚嶇О锛屽 "鏀粯瀹?銆?寰俊"銆?PayPal"
+	icon?: string; // 鍥炬爣鍚嶇О锛圛conify 鏍煎紡锛夛紝濡?"fa6-brands:alipay"
+	qrCode?: string; // 鏀舵鐮佸浘鐗囪矾寰勶紙鐩稿浜?public 鐩綍锛夛紝鍙€?
+	link?: string; // 璧炲姪閾炬帴 URL锛屽彲閫夈€傚鏋滄彁渚涳紝浼氭樉绀鸿烦杞寜閽?
+	description?: string; // 鎻忚堪鏂囨湰
+	enabled: boolean; // 鏄惁鍚敤
 };
 
-// 赞助者列表项
+// 璧炲姪鑰呭垪琛ㄩ」
 export type SponsorItem = {
-	name: string; // 赞助者名称，如果想显示匿名，可以直接设置为"匿名"或使用 i18n
-	amount?: string; // 赞助金额（可选）
-	date?: string; // 赞助日期（可选，ISO 格式）
-	message?: string; // 留言（可选）
+	name: string; // 璧炲姪鑰呭悕绉帮紝濡傛灉鎯虫樉绀哄尶鍚嶏紝鍙互鐩存帴璁剧疆涓?鍖垮悕"鎴栦娇鐢?i18n
+	amount?: string; // 璧炲姪閲戦锛堝彲閫夛級
+	date?: string; // 璧炲姪鏃ユ湡锛堝彲閫夛紝ISO 鏍煎紡锛?
+	message?: string; // 鐣欒█锛堝彲閫夛級
 };
 
-// 赞助配置
+// 璧炲姪閰嶇疆
 export type SponsorConfig = {
-	title?: string; // 页面标题，默认使用 i18n
-	description?: string; // 页面描述文本
-	usage?: string; // 赞助用途说明
-	methods: SponsorMethod[]; // 赞助方式列表
-	sponsors?: SponsorItem[]; // 赞助者列表（可选）
-	showSponsorsList?: boolean; // 是否显示赞助者列表，默认 true
-	showComment?: boolean; // 是否显示评论区，默认 false
-	showButtonInPost?: boolean; // 是否在文章详情页底部显示赞助按钮，默认 true
+	title?: string; // 椤甸潰鏍囬锛岄粯璁や娇鐢?i18n
+	description?: string; // 椤甸潰鎻忚堪鏂囨湰
+	usage?: string; // 璧炲姪鐢ㄩ€旇鏄?
+	methods: SponsorMethod[]; // 璧炲姪鏂瑰紡鍒楄〃
+	sponsors?: SponsorItem[]; // 璧炲姪鑰呭垪琛紙鍙€夛級
+	showSponsorsList?: boolean; // 鏄惁鏄剧ず璧炲姪鑰呭垪琛紝榛樿 true
+	showComment?: boolean; // 鏄惁鏄剧ず璇勮鍖猴紝榛樿 false
+	showButtonInPost?: boolean; // 鏄惁鍦ㄦ枃绔犺鎯呴〉搴曢儴鏄剧ず璧炲姪鎸夐挳锛岄粯璁?true
 };
+

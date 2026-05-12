@@ -1,8 +1,7 @@
-import {
+﻿import {
 	DARK_MODE,
 	DEFAULT_THEME,
 	LIGHT_MODE,
-	SYSTEM_MODE,
 	WALLPAPER_BANNER,
 	WALLPAPER_NONE,
 	WALLPAPER_OVERLAY,
@@ -25,7 +24,7 @@ declare global {
 
 export function getDefaultHue(): number {
 	const fallback = "250";
-	// 检查是否在浏览器环境中
+	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (typeof document === "undefined") {
 		return Number.parseInt(fallback, 10);
 	}
@@ -34,31 +33,17 @@ export function getDefaultHue(): number {
 }
 
 export function getDefaultTheme(): LIGHT_DARK_MODE {
-	// 如果配置文件中设置了 defaultMode，使用配置的值
-	// 否则使用 DEFAULT_THEME（向后兼容）
+	// 濡傛灉閰嶇疆鏂囦欢涓缃簡 defaultMode锛屼娇鐢ㄩ厤缃殑鍊?
+	// 鍚﹀垯浣跨敤 DEFAULT_THEME锛堝悜鍚庡吋瀹癸級
 	return siteConfig.themeColor.defaultMode ?? DEFAULT_THEME;
 }
 
-// 获取系统主题
-export function getSystemTheme(): LIGHT_DARK_MODE {
-	if (typeof window === "undefined") {
-		return LIGHT_MODE;
-	}
-	return window.matchMedia("(prefers-color-scheme: dark)").matches
-		? DARK_MODE
-		: LIGHT_MODE;
-}
-
-// 解析主题（如果是system模式，则获取系统主题）
 export function resolveTheme(theme: LIGHT_DARK_MODE): LIGHT_DARK_MODE {
-	if (theme === SYSTEM_MODE) {
-		return getSystemTheme();
-	}
-	return theme;
+	return theme === DARK_MODE ? DARK_MODE : LIGHT_MODE;
 }
 
 export function getHue(): number {
-	// 先检查全局对象
+	// 鍏堟鏌ュ叏灞€瀵硅薄
 	if (typeof window === "undefined" || !window.localStorage) {
 		return getDefaultHue();
 	}
@@ -67,7 +52,7 @@ export function getHue(): number {
 }
 
 export function setHue(hue: number): void {
-	// 先检查是否在浏览器环境
+	// 鍏堟鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧?
 	if (
 		typeof window === "undefined" ||
 		!window.localStorage ||
@@ -84,20 +69,20 @@ export function setHue(hue: number): void {
 }
 
 export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
-	// 检查是否在浏览器环境中
+	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (typeof document === "undefined") {
 		return;
 	}
 
-	// 解析主题
+	// 瑙ｆ瀽涓婚
 	const resolvedTheme = resolveTheme(theme);
 
-	// 获取当前主题状态的完整信息
+	// 鑾峰彇褰撳墠涓婚鐘舵€佺殑瀹屾暣淇℃伅
 	const currentIsDark = document.documentElement.classList.contains("dark");
 	const currentTheme = document.documentElement.getAttribute("data-theme");
 
-	// 计算目标主题状态
-	let targetIsDark = false; // 初始化默认值
+	// 璁＄畻鐩爣涓婚鐘舵€?
+	let targetIsDark = false; // 鍒濆鍖栭粯璁ゅ€?
 	switch (resolvedTheme) {
 		case LIGHT_MODE:
 			targetIsDark = false;
@@ -106,31 +91,31 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 			targetIsDark = true;
 			break;
 		default:
-			// 处理默认情况，使用当前主题状态
+			// 澶勭悊榛樿鎯呭喌锛屼娇鐢ㄥ綋鍓嶄富棰樼姸鎬?
 			targetIsDark = currentIsDark;
 			break;
 	}
 
-	// 检测是否真的需要主题切换：
-	// 1. dark类状态是否改变
-	// 2. expressiveCode主题是否需要更新
+	// 妫€娴嬫槸鍚︾湡鐨勯渶瑕佷富棰樺垏鎹細
+	// 1. dark绫荤姸鎬佹槸鍚︽敼鍙?
+	// 2. expressiveCode涓婚鏄惁闇€瑕佹洿鏂?
 	const needsThemeChange = currentIsDark !== targetIsDark;
 	const expectedTheme = targetIsDark
 		? expressiveCodeConfig.darkTheme
 		: expressiveCodeConfig.lightTheme;
 	const needsCodeThemeUpdate = currentTheme !== expectedTheme;
 
-	// 如果既不需要主题切换也不需要代码主题更新，直接返回
+	// 濡傛灉鏃笉闇€瑕佷富棰樺垏鎹篃涓嶉渶瑕佷唬鐮佷富棰樻洿鏂帮紝鐩存帴杩斿洖
 	if (!needsThemeChange && !needsCodeThemeUpdate) {
 		return;
 	}
 
-	// 批量 DOM 操作，减少重绘
+	// 鎵归噺 DOM 鎿嶄綔锛屽噺灏戦噸缁?
 	if (needsThemeChange) {
-		// 添加过渡保护类（但会导致大量重绘，所以使用更轻量的方式）
+		// 娣诲姞杩囨浮淇濇姢绫伙紙浣嗕細瀵艰嚧澶ч噺閲嶇粯锛屾墍浠ヤ娇鐢ㄦ洿杞婚噺鐨勬柟寮忥級
 		// document.documentElement.classList.add("is-theme-transitioning");
 
-		// 直接切换主题，利用 CSS 变量的特性让浏览器优化过渡
+		// 鐩存帴鍒囨崲涓婚锛屽埄鐢?CSS 鍙橀噺鐨勭壒鎬ц娴忚鍣ㄤ紭鍖栬繃娓?
 		if (targetIsDark) {
 			document.documentElement.classList.add("dark");
 		} else {
@@ -144,13 +129,9 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 	}
 }
 
-// 系统主题监听器引用
-let systemThemeListener:
-	| ((e: MediaQueryListEvent | MediaQueryList) => void)
-	| null = null;
-
+// 绯荤粺涓婚鐩戝惉鍣ㄥ紩鐢?
 export function setTheme(theme: LIGHT_DARK_MODE): void {
-	// 检查是否在浏览器环境中
+	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (
 		typeof localStorage === "undefined" ||
 		typeof localStorage.setItem !== "function"
@@ -158,150 +139,59 @@ export function setTheme(theme: LIGHT_DARK_MODE): void {
 		return;
 	}
 
-	// 先应用主题
+	// 鍏堝簲鐢ㄤ富棰?
 	applyThemeToDocument(theme);
 
-	// 保存到localStorage
-	localStorage.setItem("theme", theme);
-
-	// 如果切换到 system 模式，需要监听系统主题变化
-	if (theme === SYSTEM_MODE) {
-		setupSystemThemeListener();
-	} else {
-		// 如果切换其他模式，移除系统主题监听
-		cleanupSystemThemeListener();
-	}
-}
-
-// 设置系统主题监听器
-export function setupSystemThemeListener() {
-	// 先清理之前的监听器
-	cleanupSystemThemeListener();
-
-	if (typeof window === "undefined") {
-		return;
-	}
-
-	const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-	// 处理系统主题变化的回调
-	const handleSystemThemeChange = (e: MediaQueryListEvent | MediaQueryList) => {
-		const isDark = e.matches;
-		const currentIsDark = document.documentElement.classList.contains("dark");
-
-		// 如果主题状态没有变化，直接返回
-		if (currentIsDark === isDark) {
-			return;
-		}
-
-		// 直接应用系统主题，不使用过渡保护类以避免大量重绘
-		if (isDark) {
-			document.documentElement.classList.add("dark");
-		} else {
-			document.documentElement.classList.remove("dark");
-		}
-
-		// Set the theme for Expressive Code
-		const expressiveTheme = isDark
-			? expressiveCodeConfig.darkTheme
-			: expressiveCodeConfig.lightTheme;
-		document.documentElement.setAttribute("data-theme", expressiveTheme);
-
-		// 触发自定义事件通知其他组件（仅在真正切换时触发）
-		window.dispatchEvent(new CustomEvent("theme-change"));
-	};
-
-	// 立即调用一次以设置初始状态
-	handleSystemThemeChange(mediaQuery);
-
-	// 监听系统主题变化（现代浏览器）
-	if (mediaQuery.addEventListener) {
-		mediaQuery.addEventListener("change", handleSystemThemeChange);
-	} else {
-		// 兼容旧浏览器
-		mediaQuery.addListener(handleSystemThemeChange);
-	}
-
-	systemThemeListener = handleSystemThemeChange;
-}
-
-// 清理系统主题监听器
-function cleanupSystemThemeListener() {
-	if (typeof window === "undefined" || !systemThemeListener) {
-		return;
-	}
-
-	const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-	if (mediaQuery.removeEventListener) {
-		mediaQuery.removeEventListener("change", systemThemeListener);
-	} else {
-		// 兼容旧浏览器
-		mediaQuery.removeListener(systemThemeListener);
-	}
-
-	systemThemeListener = null;
+	// 淇濆瓨鍒發ocalStorage
+	localStorage.setItem("theme", theme === DARK_MODE ? DARK_MODE : LIGHT_MODE);
 }
 
 export function getStoredTheme(): LIGHT_DARK_MODE {
-	// 检查是否在浏览器环境中
+	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (
 		typeof localStorage === "undefined" ||
 		typeof localStorage.getItem !== "function"
 	) {
 		return getDefaultTheme();
 	}
-	return (
-		(localStorage.getItem("theme") as LIGHT_DARK_MODE) || getDefaultTheme()
-	);
+	const theme = (localStorage.getItem("theme") as LIGHT_DARK_MODE) || getDefaultTheme();
+	return theme === DARK_MODE ? DARK_MODE : LIGHT_MODE;
 }
 
-// 初始化主题监听器（用于页面加载后）
+// 鍒濆鍖栦富棰樼洃鍚櫒锛堢敤浜庨〉闈㈠姞杞藉悗锛?
 export function initThemeListener() {
-	if (
-		typeof localStorage === "undefined" ||
-		typeof localStorage.getItem !== "function"
-	) {
-		return;
-	}
-
-	const theme = getStoredTheme();
-
-	// 如果主题是 system 模式，需要监听系统主题变化
-	if (theme === SYSTEM_MODE) {
-		setupSystemThemeListener();
-	}
+	applyThemeToDocument(getStoredTheme());
 }
 
 // Wallpaper mode functions
 export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
-	// 检查是否允许切换壁纸模式
+	// 妫€鏌ユ槸鍚﹀厑璁稿垏鎹㈠绾告ā寮?
 	const isSwitchable = backgroundWallpaper.switchable ?? true;
 	if (!isSwitchable) {
-		// 如果不允许切换，直接返回，不执行任何操作
+		// 濡傛灉涓嶅厑璁稿垏鎹紝鐩存帴杩斿洖锛屼笉鎵ц浠讳綍鎿嶄綔
 		return;
 	}
 
-	// 获取当前的壁纸模式
+	// 鑾峰彇褰撳墠鐨勫绾告ā寮?
 	const currentMode =
 		(document.documentElement.getAttribute(
 			"data-wallpaper-mode",
 		) as WALLPAPER_MODE) || backgroundWallpaper.mode;
 
-	// 如果模式没有变化，直接返回
+	// 濡傛灉妯″紡娌℃湁鍙樺寲锛岀洿鎺ヨ繑鍥?
 	if (currentMode === mode) {
-		// 即使是相同模式，也要确保UI状态正确
+		// 鍗充娇鏄浉鍚屾ā寮忥紝涔熻纭繚UI鐘舵€佹纭?
 		ensureWallpaperState(mode);
 		return;
 	}
 
-	// 添加过渡保护类
+	// 娣诲姞杩囨浮淇濇姢绫?
 	document.documentElement.classList.add("is-wallpaper-transitioning");
 
-	// 更新数据属性
+	// 鏇存柊鏁版嵁灞炴€?
 	document.documentElement.setAttribute("data-wallpaper-mode", mode);
 
-	// 使用 requestAnimationFrame 确保在下一帧执行，避免闪屏
+	// 浣跨敤 requestAnimationFrame 纭繚鍦ㄤ笅涓€甯ф墽琛岋紝閬垮厤闂睆
 	requestAnimationFrame(() => {
 		const body = document.body;
 		const isPostPage = body?.dataset?.pageType === "post";
@@ -309,15 +199,15 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 		const effectiveMode: WALLPAPER_MODE =
 			isMobile && isPostPage ? WALLPAPER_NONE : isPostPage ? WALLPAPER_BANNER : mode;
 
-		// 移除所有壁纸相关的CSS类
+		// 绉婚櫎鎵€鏈夊绾哥浉鍏崇殑CSS绫?
 		body.classList.remove("enable-banner", "wallpaper-transparent");
-		// 文章页和首页允许 banner 模式
+		// 鏂囩珷椤靛拰棣栭〉鍏佽 banner 妯″紡
 		if (isPostPage && !(isMobile && isPostPage)) {
 			body.classList.add("enable-banner");
 			body.classList.remove("wallpaper-transparent");
 		}
 
-		// 根据模式添加相应的CSS类
+		// 鏍规嵁妯″紡娣诲姞鐩稿簲鐨凜SS绫?
 		switch (effectiveMode) {
 			case WALLPAPER_BANNER:
 				body.classList.add("enable-banner");
@@ -335,17 +225,17 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 				break;
 		}
 
-		// 更新导航栏透明模式
+		// 鏇存柊瀵艰埅鏍忛€忔槑妯″紡
 		updateNavbarTransparency(effectiveMode);
 
-		// 在下一帧移除过渡保护类
+		// 鍦ㄤ笅涓€甯хЩ闄よ繃娓′繚鎶ょ被
 		requestAnimationFrame(() => {
 			document.documentElement.classList.remove("is-wallpaper-transitioning");
 		});
 	});
 }
 
-// 确保壁纸状态正确
+// 纭繚澹佺焊鐘舵€佹纭?
 function ensureWallpaperState(mode: WALLPAPER_MODE) {
 	const body = document.body;
 	const isPostPage = body?.dataset?.pageType === "post";
@@ -353,14 +243,14 @@ function ensureWallpaperState(mode: WALLPAPER_MODE) {
 	const effectiveMode: WALLPAPER_MODE =
 		isMobile && isPostPage ? WALLPAPER_NONE : isPostPage ? WALLPAPER_BANNER : mode;
 
-	// 移除所有壁纸相关的CSS类
+	// 绉婚櫎鎵€鏈夊绾哥浉鍏崇殑CSS绫?
 	body.classList.remove("enable-banner", "wallpaper-transparent");
 	if (isPostPage && !(isMobile && isPostPage)) {
 		body.classList.add("enable-banner");
 		body.classList.remove("wallpaper-transparent");
 	}
 
-	// 根据模式添加相应的CSS类
+	// 鏍规嵁妯″紡娣诲姞鐩稿簲鐨凜SS绫?
 	switch (effectiveMode) {
 		case WALLPAPER_BANNER:
 			body.classList.add("enable-banner");
@@ -375,12 +265,12 @@ function ensureWallpaperState(mode: WALLPAPER_MODE) {
 			break;
 	}
 
-	// 更新导航栏透明模式
+	// 鏇存柊瀵艰埅鏍忛€忔槑妯″紡
 	updateNavbarTransparency(effectiveMode);
 }
 
 function showBannerMode() {
-	// 隐藏全屏壁纸（通过CSS类和display控制）
+	// 闅愯棌鍏ㄥ睆澹佺焊锛堥€氳繃CSS绫诲拰display鎺у埗锛?
 	const overlayContainer = document.querySelector(
 		"[data-overlay-wallpaper]",
 	) as HTMLElement;
@@ -391,19 +281,19 @@ function showBannerMode() {
 		overlayContainer.classList.remove("opacity-100");
 	}
 
-	// 显示banner壁纸（通过CSS类和display控制）
+	// 鏄剧ずbanner澹佺焊锛堥€氳繃CSS绫诲拰display鎺у埗锛?
 	const bannerWrapper = document.getElementById("banner-wrapper");
 	if (bannerWrapper) {
-		// 检查当前是否为首页
+		// 妫€鏌ュ綋鍓嶆槸鍚︿负棣栭〉
 		const isHomePage = checkIsHomePage(window.location.pathname);
 		const isPostPage =
 			(document.body?.dataset?.pageType === "post") ||
 			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 
-		// 移动端文章详情页：统一不显示壁纸/banner
-		// 移动端非首页时，不显示banner；但“页面标题横幅”页面例外要显示
-		// 桌面端始终显示
+		// 绉诲姩绔枃绔犺鎯呴〉锛氱粺涓€涓嶆樉绀哄绾?banner
+		// 绉诲姩绔潪棣栭〉鏃讹紝涓嶆樉绀篵anner锛涗絾鈥滈〉闈㈡爣棰樻í骞呪€濋〉闈緥澶栬鏄剧ず
+		// 妗岄潰绔缁堟樉绀?
 		if (isMobile && isPostPage) {
 			bannerWrapper.style.display = "none";
 			bannerWrapper.classList.add("mobile-hide-banner");
@@ -411,7 +301,7 @@ function showBannerMode() {
 			bannerWrapper.style.display = "none";
 			bannerWrapper.classList.add("mobile-hide-banner");
 		} else {
-			// 首页或桌面端：先设置display，然后使用requestAnimationFrame确保渲染
+			// 棣栭〉鎴栨闈㈢锛氬厛璁剧疆display锛岀劧鍚庝娇鐢╮equestAnimationFrame纭繚娓叉煋
 			bannerWrapper.style.display = "block";
 			bannerWrapper.style.setProperty("display", "block", "important");
 			requestAnimationFrame(() => {
@@ -423,13 +313,13 @@ function showBannerMode() {
 		}
 	}
 
-	// 显示横幅图片来源文本
+	// 鏄剧ず妯箙鍥剧墖鏉ユ簮鏂囨湰
 	const creditDesktop = document.getElementById("banner-credit-desktop");
 	const creditMobile = document.getElementById("banner-credit-mobile");
 	if (creditDesktop) creditDesktop.style.display = "";
 	if (creditMobile) creditMobile.style.display = "";
 
-	// 显示横幅文字（首页/文章页分流）
+	// 鏄剧ず妯箙鏂囧瓧锛堥椤?鏂囩珷椤靛垎娴侊級
 	const isHomePage = checkIsHomePage(window.location.pathname);
 	const isPostPage =
 		(document.body?.dataset?.pageType === "post") ||
@@ -447,10 +337,10 @@ function showBannerMode() {
 		}
 	});
 
-	// 调整主内容位置
+	// 璋冩暣涓诲唴瀹逛綅缃?
 	adjustMainContentPosition("banner");
 
-	// 处理移动端非首页主内容区域位置
+	// 澶勭悊绉诲姩绔潪棣栭〉涓诲唴瀹瑰尯鍩熶綅缃?
 	const mainContentWrapper = document.querySelector(".absolute.w-full.z-30");
 	if (mainContentWrapper) {
 		const isHomePage = checkIsHomePage(window.location.pathname);
@@ -458,7 +348,7 @@ function showBannerMode() {
 			(document.body?.dataset?.pageType === "post") ||
 			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
-		// 只在移动端非首页时调整主内容位置
+		// 鍙湪绉诲姩绔潪棣栭〉鏃惰皟鏁翠富鍐呭浣嶇疆
 		if (isMobile && !isHomePage && !isPostPage) {
 			mainContentWrapper.classList.add("mobile-main-no-banner");
 		} else {
@@ -466,18 +356,18 @@ function showBannerMode() {
 		}
 	}
 
-	// 移除透明效果（横幅模式不使用半透明）
+	// 绉婚櫎閫忔槑鏁堟灉锛堟í骞呮ā寮忎笉浣跨敤鍗婇€忔槑锛?
 	adjustMainContentTransparency(false);
 
-	// 调整导航栏透明度
+	// 璋冩暣瀵艰埅鏍忛€忔槑搴?
 	const navbar = document.getElementById("navbar");
 	if (navbar) {
-		// 获取导航栏透明模式配置（banner模式）
+		// 鑾峰彇瀵艰埅鏍忛€忔槑妯″紡閰嶇疆锛坆anner妯″紡锛?
 		const transparentMode =
 			backgroundWallpaper.banner?.navbar?.transparentMode || "semi";
 		navbar.setAttribute("data-transparent-mode", transparentMode);
 
-		// 重新初始化半透明模式滚动检测（如果需要）
+		// 閲嶆柊鍒濆鍖栧崐閫忔槑妯″紡婊氬姩妫€娴嬶紙濡傛灉闇€瑕侊級
 		if (
 			transparentMode === "semifull" &&
 			typeof window.initSemifullScrollDetection === "function"
@@ -488,12 +378,12 @@ function showBannerMode() {
 }
 
 function showOverlayMode() {
-	// 显示全屏壁纸（通过CSS类和display控制）
+	// 鏄剧ず鍏ㄥ睆澹佺焊锛堥€氳繃CSS绫诲拰display鎺у埗锛?
 	const overlayContainer = document.querySelector(
 		"[data-overlay-wallpaper]",
 	) as HTMLElement;
 	if (overlayContainer) {
-		// 先设置display，然后使用requestAnimationFrame确保渲染
+		// 鍏堣缃甦isplay锛岀劧鍚庝娇鐢╮equestAnimationFrame纭繚娓叉煋
 		overlayContainer.style.display = "block";
 		overlayContainer.style.setProperty("display", "block", "important");
 		requestAnimationFrame(() => {
@@ -503,7 +393,7 @@ function showOverlayMode() {
 		});
 	}
 
-	// 隐藏banner壁纸（通过CSS类和display控制）
+	// 闅愯棌banner澹佺焊锛堥€氳繃CSS绫诲拰display鎺у埗锛?
 	const bannerWrapper = document.getElementById("banner-wrapper");
 	if (bannerWrapper) {
 		bannerWrapper.style.display = "none";
@@ -512,27 +402,27 @@ function showOverlayMode() {
 		bannerWrapper.classList.remove("opacity-100");
 	}
 
-	// 隐藏横幅图片来源文本
+	// 闅愯棌妯箙鍥剧墖鏉ユ簮鏂囨湰
 	const creditDesktop = document.getElementById("banner-credit-desktop");
 	const creditMobile = document.getElementById("banner-credit-mobile");
 	if (creditDesktop) creditDesktop.style.display = "none";
 	if (creditMobile) creditMobile.style.display = "none";
 
-	// 隐藏横幅首页文本
+	// 闅愯棌妯箙棣栭〉鏂囨湰
 	const bannerTextOverlays = document.querySelectorAll(
 		"[data-banner-text-overlay]",
 	);
 	bannerTextOverlays.forEach((el) => el.classList.add("hidden"));
 
-	// 调整主内容透明度
+	// 璋冩暣涓诲唴瀹归€忔槑搴?
 	adjustMainContentTransparency(true);
 
-	// 调整布局为紧凑模式
+	// 璋冩暣甯冨眬涓虹揣鍑戞ā寮?
 	adjustMainContentPosition("overlay");
 }
 
 function hideAllWallpapers() {
-	// 隐藏所有壁纸（通过CSS类和display控制）
+	// 闅愯棌鎵€鏈夊绾革紙閫氳繃CSS绫诲拰display鎺у埗锛?
 	const bannerWrapper = document.getElementById("banner-wrapper");
 	const overlayContainer = document.querySelector(
 		"[data-overlay-wallpaper]",
@@ -551,19 +441,19 @@ function hideAllWallpapers() {
 		overlayContainer.classList.remove("opacity-100");
 	}
 
-	// 隐藏横幅图片来源文本
+	// 闅愯棌妯箙鍥剧墖鏉ユ簮鏂囨湰
 	const creditDesktop = document.getElementById("banner-credit-desktop");
 	const creditMobile = document.getElementById("banner-credit-mobile");
 	if (creditDesktop) creditDesktop.style.display = "none";
 	if (creditMobile) creditMobile.style.display = "none";
 
-	// 隐藏横幅首页文本
+	// 闅愯棌妯箙棣栭〉鏂囨湰
 	const bannerTextOverlays = document.querySelectorAll(
 		"[data-banner-text-overlay]",
 	);
 	bannerTextOverlays.forEach((el) => el.classList.add("hidden"));
 
-	// 调整主内容位置和透明度
+	// 璋冩暣涓诲唴瀹逛綅缃拰閫忔槑搴?
 	adjustMainContentPosition("none");
 	adjustMainContentTransparency(false);
 }
@@ -575,46 +465,46 @@ function updateNavbarTransparency(mode: WALLPAPER_MODE) {
 	let transparentMode: string;
 	let enableBlur: boolean;
 
-	// 根据当前壁纸模式设置导航栏透明模式和模糊效果
+	// 鏍规嵁褰撳墠澹佺焊妯″紡璁剧疆瀵艰埅鏍忛€忔槑妯″紡鍜屾ā绯婃晥鏋?
 	if (mode === WALLPAPER_OVERLAY) {
-		// 全屏壁纸模式
+		// 鍏ㄥ睆澹佺焊妯″紡
 		transparentMode = "none";
 		enableBlur = false;
 	} else if (mode === WALLPAPER_NONE) {
-		// 纯色背景模式
+		// 绾壊鑳屾櫙妯″紡
 		transparentMode = "none";
 		enableBlur = false;
 	} else {
-		// Banner模式：使用配置的透明模式和模糊效果
+		// Banner妯″紡锛氫娇鐢ㄩ厤缃殑閫忔槑妯″紡鍜屾ā绯婃晥鏋?
 		transparentMode =
 			backgroundWallpaper.banner?.navbar?.transparentMode || "semi";
 		enableBlur = backgroundWallpaper.banner?.navbar?.enableBlur ?? true;
 	}
 
-	// 更新导航栏的透明模式属性
+	// 鏇存柊瀵艰埅鏍忕殑閫忔槑妯″紡灞炴€?
 	navbar.setAttribute("data-transparent-mode", transparentMode);
 	navbar.setAttribute("data-enable-blur", String(enableBlur));
 
-	// 移除现有的透明模式类
+	// 绉婚櫎鐜版湁鐨勯€忔槑妯″紡绫?
 	navbar.classList.remove(
 		"navbar-transparent-semi",
 		"navbar-transparent-full",
 		"navbar-transparent-semifull",
 	);
 
-	// 移除scrolled类
+	// 绉婚櫎scrolled绫?
 	navbar.classList.remove("scrolled");
 
-	// 滚动检测功能
+	// 婊氬姩妫€娴嬪姛鑳?
 	if (
 		transparentMode === "semifull" &&
 		mode === WALLPAPER_BANNER &&
 		typeof window.initSemifullScrollDetection === "function"
 	) {
-		// 仅在Banner模式的semifull下启用滚动检测
+		// 浠呭湪Banner妯″紡鐨剆emifull涓嬪惎鐢ㄦ粴鍔ㄦ娴?
 		window.initSemifullScrollDetection();
 	} else if (window.semifullScrollHandler) {
-		// 移除滚动监听器
+		// 绉婚櫎婊氬姩鐩戝惉鍣?
 		window.removeEventListener("scroll", window.semifullScrollHandler);
 		delete window.semifullScrollHandler;
 	}
@@ -628,21 +518,21 @@ function adjustMainContentPosition(
 	) as HTMLElement;
 	if (!mainContent) return;
 
-	// 移除现有的位置类
+	// 绉婚櫎鐜版湁鐨勪綅缃被
 	mainContent.classList.remove("mobile-main-no-banner", "no-banner-layout");
 
 	switch (mode) {
 		case "banner":
-			// Banner模式：主内容在banner下方
+			// Banner妯″紡锛氫富鍐呭鍦╞anner涓嬫柟
 			mainContent.style.top = "calc(var(--banner-height) - 3rem)";
 			break;
 		case "overlay":
-			// Overlay模式：使用紧凑布局，主内容从导航栏下方开始
+			// Overlay妯″紡锛氫娇鐢ㄧ揣鍑戝竷灞€锛屼富鍐呭浠庡鑸爮涓嬫柟寮€濮?
 			mainContent.classList.add("no-banner-layout");
 			mainContent.style.top = "5.5rem";
 			break;
 		case "none":
-			// 无壁纸模式：主内容从导航栏下方开始
+			// 鏃犲绾告ā寮忥細涓诲唴瀹逛粠瀵艰埅鏍忎笅鏂瑰紑濮?
 			mainContent.classList.add("no-banner-layout");
 			mainContent.style.top = "5.5rem";
 			break;
@@ -668,7 +558,7 @@ function adjustMainContentTransparency(enable: boolean) {
 }
 
 export function setWallpaperMode(mode: WALLPAPER_MODE): void {
-	// 检查是否在浏览器环境中
+	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (
 		typeof localStorage === "undefined" ||
 		typeof localStorage.setItem !== "function"
@@ -685,7 +575,7 @@ export function initWallpaperMode(): void {
 }
 
 export function getStoredWallpaperMode(): WALLPAPER_MODE {
-	// 配置为 overlay/none 时强制使用配置，不读 localStorage，避免刷新仍显示其他壁纸
+	// 閰嶇疆涓?overlay/none 鏃跺己鍒朵娇鐢ㄩ厤缃紝涓嶈 localStorage锛岄伩鍏嶅埛鏂颁粛鏄剧ず鍏朵粬澹佺焊
 	if (backgroundWallpaper.mode === WALLPAPER_OVERLAY) {
 		return WALLPAPER_OVERLAY;
 	}
@@ -707,7 +597,7 @@ export function getStoredWallpaperMode(): WALLPAPER_MODE {
 export function getDefaultWavesEnabled(): boolean {
 	const wavesConfig = backgroundWallpaper.banner?.waves?.enable;
 	if (typeof wavesConfig === "object") {
-		// 如果是分设备配置，检查当前设备
+		// 濡傛灉鏄垎璁惧閰嶇疆锛屾鏌ュ綋鍓嶈澶?
 		const isMobile =
 			typeof window !== "undefined" ? window.innerWidth < 768 : false;
 		return isMobile ? (wavesConfig.mobile ?? false) : (wavesConfig.desktop ?? false);
@@ -744,9 +634,9 @@ export function applyWavesEnabledToDocument(enabled: boolean): void {
 	if (typeof document === "undefined") {
 		return;
 	}
-	// 更新 html 属性，CSS 会立即生效
+	// 鏇存柊 html 灞炴€э紝CSS 浼氱珛鍗崇敓鏁?
 	document.documentElement.setAttribute("data-waves-enabled", String(enabled));
-	// 同时更新元素样式（兼容性）
+	// 鍚屾椂鏇存柊鍏冪礌鏍峰紡锛堝吋瀹规€э級
 	const wavesElement = document.getElementById("header-waves");
 	if (wavesElement) {
 		if (enabled) {
@@ -793,9 +683,9 @@ export function applyBannerTitleEnabledToDocument(enabled: boolean): void {
 	if (typeof document === "undefined") {
 		return;
 	}
-	// 更新 html 属性，CSS 会立即生效
+	// 鏇存柊 html 灞炴€э紝CSS 浼氱珛鍗崇敓鏁?
 	document.documentElement.setAttribute("data-banner-title-enabled", String(enabled));
-	// 同时更新元素样式（兼容性）
+	// 鍚屾椂鏇存柊鍏冪礌鏍峰紡锛堝吋瀹规€э級
 	const homeBannerTextOverlays = document.querySelectorAll(
 		'.banner-text-overlay[data-banner-text-overlay="home"]',
 	) as NodeListOf<HTMLElement>;
