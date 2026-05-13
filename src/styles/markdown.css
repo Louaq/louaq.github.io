@@ -127,6 +127,21 @@
     tr:nth-child(even) td {
       @apply bg-[var(--btn-plain-bg-active)];
     }
+
+    @media (max-width: 767px) {
+      table {
+        display: table;
+        width: 100%;
+        max-width: 100%;
+        table-layout: fixed;
+        overflow: hidden;
+      }
+
+      th,
+      td {
+        min-width: 0;
+      }
+    }
   }
 
 /* PDF 内嵌：覆盖 prose/typography 对 iframe 的 aspect-ratio，避免高度被算成 0 而整块消失 */
