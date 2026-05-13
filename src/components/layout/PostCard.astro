@@ -83,7 +83,6 @@ const { remarkPluginFrontmatter } = await render(entry);
     <a
       href={url}
       class="post-card-title transition group w-full flex items-center gap-1 font-bold mb-3 text-[18px] text-90
-        hover:text-(--primary) dark:hover:text-(--primary)
         active:text-(--title-active) dark:active:text-(--title-active)
         before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
         before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block"
@@ -191,6 +190,8 @@ const { remarkPluginFrontmatter } = await render(entry);
 </div>
 
 <script>
+  import { navigateToPage } from "@/utils/navigation-utils";
+
   function initPostCardClick() {
     const cards = document.querySelectorAll<HTMLElement>(
       ".post-card-wrapper[data-url]"
@@ -234,7 +235,7 @@ const { remarkPluginFrontmatter } = await render(entry);
           return;
         }
 
-        window.location.href = url;
+        navigateToPage(url);
       });
 
       // 键盘可访问性：Enter / Space 触发跳转
@@ -245,7 +246,7 @@ const { remarkPluginFrontmatter } = await render(entry);
             return;
           }
           e.preventDefault();
-          window.location.href = url;
+          navigateToPage(url);
         }
       });
     });
@@ -270,17 +271,6 @@ const { remarkPluginFrontmatter } = await render(entry);
     margin-top: auto !important;
   }
 
-  /* 鼠标悬浮在文章标题时，强制使用主题色（覆盖 typography / 默认 a 等可能的颜色） */
-  .post-card-title:hover,
-  .post-card-title:hover :global(*) {
-    color: var(--primary) !important;
-  }
-
-  /* 整个卡片可点击，悬浮时让标题也变成主题色，提供更好的视觉反馈 */
-  .post-card-wrapper:hover .post-card-title,
-  .post-card-wrapper:hover .post-card-title :global(*) {
-    color: var(--primary);
-  }
 
   /* 键盘聚焦时给卡片轮廓 */
   .post-card-wrapper:focus-visible {

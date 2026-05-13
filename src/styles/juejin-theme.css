@@ -339,7 +339,7 @@ body.wallpaper-transparent #navbar > div {
   }
 }
 
-/* 标题字号略减、字重保持，hover 蓝色 */
+/* 标题字号略减、字重保持 */
 #post-list-container.list-mode .post-card-title,
 #post-list-container .post-card-title,
 .post-card-title {
@@ -360,9 +360,14 @@ body.wallpaper-transparent #navbar > div {
   }
 }
 
+/* 悬浮时标题保持与普通状态同色，不改变为主题蓝 */
 .post-card-title:hover,
 .post-card-title:hover * {
-  color: var(--juejin-primary) !important;
+  color: var(--juejin-text-primary) !important;
+}
+:root.dark .post-card-title:hover,
+:root.dark .post-card-title:hover * {
+  color: rgba(255, 255, 255, 0.95) !important;
 }
 
 /* 标题左侧的竖线变细 */
@@ -871,14 +876,14 @@ widget-layout .widget-title::before {
     border-bottom: none !important;
   }
 
-  /* hover：浅蓝底，无放大 */
+  /* 列表行 hover：不叠加深色/主题色底，与默认一致（仅保留底部分割线） */
   #post-list-container.list-mode .post-card-wrapper:hover {
-    background: color-mix(in oklch, var(--primary) 2%, transparent) !important;
+    background: transparent !important;
     border-color: var(--juejin-border) !important;
     box-shadow: none !important;
   }
   :root.dark #post-list-container.list-mode .post-card-wrapper:hover {
-    background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
+    background: transparent !important;
     border-bottom-color: rgba(255, 255, 255, 0.06) !important;
   }
 
@@ -920,9 +925,14 @@ widget-layout .widget-title::before {
   :root.dark #post-list-container.list-mode .post-card-title {
     color: rgba(255, 255, 255, 0.92) !important;
   }
+  /* 列表模式下标题悬浮仍保持正文色 */
   #post-list-container.list-mode .post-card-title:hover,
   #post-list-container.list-mode .post-card-title:hover * {
-    color: var(--juejin-primary) !important;
+    color: var(--juejin-text-primary) !important;
+  }
+  :root.dark #post-list-container.list-mode .post-card-title:hover,
+  :root.dark #post-list-container.list-mode .post-card-title:hover * {
+    color: rgba(255, 255, 255, 0.92) !important;
   }
 
   /* ====== 描述：1 行省略，14px 灰色 ====== */

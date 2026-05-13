@@ -55,10 +55,9 @@ const isHomePageCheck = isHomePage(Astro.url.pathname);
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
 const configHue = siteConfig.themeColor.hue;
 
-// 鑾峰彇瀵艰埅鏍忛€忔槑妯″紡閰嶇疆
+
 const navbarTransparentMode =
 	backgroundWallpaper.banner?.navbar?.transparentMode || "semi";
-// 鍒ゆ柇鏄惁搴旇鏄剧ず椤堕儴楂樺厜鏁堟灉锛堝彧鍦╢ull鍜宻emifull妯″紡涓嬫樉绀猴級
 const shouldShowTopHighlight =
 	navbarTransparentMode === "full" || navbarTransparentMode === "semifull";
 
@@ -94,10 +93,9 @@ if (!lang) {
 }
 const siteLang = lang.replace("_", "-");
 
-// 浣跨敤鍥哄畾鐨刡anner鍋忕Щ閲忥紝position閰嶇疆鐢ㄤ簬鍥剧墖瀹氫綅
+
 const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
 
-// 妫€鏌ユ槸鍚﹀簲璇ュ惎鐢ㄥ叏绔欏彉鐏?
 const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
 ---
 
@@ -172,17 +170,14 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         baseUrl: import.meta.env.BASE_URL,
       }}
     >
-      // 涓婚鍒濆鍖?- 涓巗etting-utils.ts淇濇寔涓€鑷?
       const LIGHT_MODE = "light";
       const DARK_MODE = "dark";
 
-      // 鑾峰彇瀛樺偍鐨勪富棰橈紝濡傛灉娌℃湁鍒欎娇鐢ㄩ粯璁ゅ€?
       const storedTheme = localStorage.getItem("theme") || defaultMode;
       const theme = storedTheme === DARK_MODE ? DARK_MODE : LIGHT_MODE;
       document.documentElement.setAttribute("data-theme-mode", theme);
       const isDark = theme === DARK_MODE;
 
-      // 搴旂敤涓婚
       if (isDark) {
         document.documentElement.classList.add("dark");
       } else {
@@ -194,7 +189,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         "data-theme",
         isDark ? darkTheme : lightTheme
       );
-      // 鏆撮湶缁欏悗缁函鑴氭湰鎸夐挳浣跨敤锛堥伩鍏嶇粍浠?妯″潡鍔犺浇瀵艰嚧鎸夐挳鐭殏涓嶄竴鑷达級
+
       document.documentElement.dataset.expressiveDarkTheme = darkTheme;
       document.documentElement.dataset.expressiveLightTheme = lightTheme;
 
@@ -203,7 +198,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       document.documentElement.style.setProperty("--hue", hue);
 
       // calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
-      // 浣跨敤鏇村噯纭殑绐楀彛楂樺害璁＄畻
+
       function calculateBannerHeightExtend() {
         let offset = Math.floor(
           window.innerHeight * (BANNER_HEIGHT_EXTEND / 100)
@@ -215,10 +210,8 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         );
       }
 
-      // 绔嬪嵆璁剧疆鍒濆鍊?
       calculateBannerHeightExtend();
 
-      // 鍦ㄤ笅涓€甯ч噸鏂拌绠楃簿纭€硷紙浠呭湪鍊煎彉鍖栨椂鏇存柊锛岄伩鍏嶉棯鐑侊級
       requestAnimationFrame(() => {
         const oldValue = parseInt(
           document.documentElement.style.getPropertyValue(
@@ -231,18 +224,15 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             "--banner-height-extend"
           )
         );
-        // 濡傛灉鍊煎彉鍖栦簡锛屽啀鏇存柊涓€娆＄‘淇濆噯纭?
         if (Math.abs(oldValue - newValue) > 4) {
-          // 濡傛灉鏈夋槑鏄惧彉鍖栵紝寤惰繜涓€甯у啀鏇存柊锛岄伩鍏嶉棯鐑?
           requestAnimationFrame(calculateBannerHeightExtend);
         }
       });
 
-      // 鍒濆鍖栧绾告ā寮?- 鍦ㄩ〉闈㈡覆鏌撳墠搴旂敤
       const WALLPAPER_BANNER = "banner";
       const WALLPAPER_OVERLAY = "overlay";
       const WALLPAPER_NONE = "none";
-      // 閰嶇疆涓?overlay/none 鏃跺己鍒朵娇鐢ㄩ厤缃紝涓嶈 localStorage锛岄伩鍏嶅埛鏂颁粛鏄剧ず鍏朵粬澹佺焊
+      
       const stored = isWallpaperSwitchable ? localStorage.getItem("wallpaperMode") : null;
       const wallpaperMode =
         defaultWallpaperMode === WALLPAPER_OVERLAY
@@ -251,13 +241,11 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             ? WALLPAPER_NONE
             : (stored || defaultWallpaperMode);
 
-      // 璁剧疆data-wallpaper-mode灞炴€?
       document.documentElement.setAttribute(
         "data-wallpaper-mode",
         wallpaperMode
       );
 
-      // 鍏堝悓姝ヨ缃?body 绫伙紝閬垮厤棣栧睆闂?banner
       if (wallpaperMode === WALLPAPER_NONE || wallpaperMode === WALLPAPER_OVERLAY) {
         if (document.body) {
           document.body.classList.remove("enable-banner");
@@ -271,16 +259,13 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
       }
 
-      // DOM 灏辩华鍚庡啀澶勭悊 banner/overlay 鍏冪礌锛堟鏃?#banner-wrapper 宸插瓨鍦級
       function runWallpaperVisibility() {
-        // 浣跨敤 requestAnimationFrame 纭繚鍦ㄤ笅涓€甯т箣鍓嶆墽琛?
+
         requestAnimationFrame(function () {
-          // 鏍规嵁妯″紡闅愯棌鏄剧ず瀵瑰簲鍏冪礌
           if (
             wallpaperMode === WALLPAPER_NONE ||
             wallpaperMode === WALLPAPER_OVERLAY
           ) {
-            // 闅愯棌妯箙
             if (document.body) {
               document.body.classList.remove("enable-banner");
               document.body.classList.add("no-banner-layout");
@@ -292,7 +277,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             }
           }
 
-          // 鍏ㄥ睆澹佺焊妯″紡
           if (wallpaperMode === WALLPAPER_OVERLAY) {
             if (document.body) {
               document.body.classList.add("wallpaper-transparent");
@@ -303,7 +287,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             }
           }
 
-          // 澶勭悊banner鍜宱verlay wallpaper鐨勬樉绀?
           const bannerWrapper = document.getElementById("banner-wrapper");
           const overlayWallpaper = document.querySelector(
             "[data-overlay-wallpaper]"
@@ -343,24 +326,20 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           const isMobile = window.innerWidth < 1024;
           const mobilePostNoWallpaper = isMobile && isPostPage;
 
-          // 澹佺焊妯″紡浼樺厛绾ф渶楂橈細
-          // - 鐢ㄦ埛璁剧疆涓?overlay/none 鏃讹紝鍏ㄧ珯閬靛惊璇ユā寮忥紝涓嶅啀寮哄埗鏄剧ず妯箙
-          // - 鏂囩珷璇︽儏椤靛湪绉诲姩绔粺涓€涓嶆樉绀哄绾革紙淇濇寔鍘熸湁浣撻獙锛?
           const effectiveWallpaperMode = mobilePostNoWallpaper
             ? WALLPAPER_NONE
             : wallpaperMode;
 
           if (document.body) {
             if (mobilePostNoWallpaper) {
-              // 绉诲姩绔枃绔犺鎯呴〉锛氬己鍒剁函鑹茶儗鏅紙鏃?banner / 鏃?overlay锛?
               document.body.classList.remove("enable-banner", "wallpaper-transparent");
               document.body.classList.add("no-banner-layout");
             }
-            // 鍏朵粬鎯呭喌缁熶竴浜ょ敱鍓嶉潰鐨勫绾告ā寮忛€昏緫澶勭悊锛岀‘淇濆绾告ā寮忓叿鏈夋渶楂樹紭鍏堢骇
+            
           }
 
           if (effectiveWallpaperMode === WALLPAPER_OVERLAY) {
-            // 鍏ㄥ睆澹佺焊閫忔槑妯″紡锛氭樉绀哄叏灞忓绾革紝闅愯棌banner
+            
             if (bannerWrapper) {
               bannerWrapper.style.display = "none";
             }
@@ -370,7 +349,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               overlayWallpaper.classList.add("opacity-100");
             }
           } else if (effectiveWallpaperMode === WALLPAPER_NONE) {
-            // 绾壊鑳屾櫙锛氶殣钘忔墍鏈夊绾?
             if (bannerWrapper) {
               bannerWrapper.style.display = "none";
             }
@@ -379,10 +357,7 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
               overlayWallpaper.classList.add("hidden", "opacity-0");
             }
           } else {
-            // banner妯″紡锛氭樉绀篵anner锛岄殣钘忓叏灞忓绾?
             if (bannerWrapper) {
-              // 绉诲姩绔潪棣栭〉鏃堕殣钘廱anner锛堝垵濮嬬姸鎬佺洿鎺ラ殣钘忥紝涓嶉渶瑕佸姩鐢伙級
-              // 妗岄潰绔缁堟樉绀篵anner
               if (isMobile && !isHomePage) {
                 bannerWrapper.style.display = "none";
                 bannerWrapper.classList.add("mobile-hide-banner");
@@ -397,12 +372,10 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             }
           }
 
-          // 澶勭悊涓诲唴瀹瑰尯鍩熶綅缃?
           const mainContentWrapper = document.querySelector(
             ".absolute.w-full.z-30"
           );
           if (mainContentWrapper) {
-            // 鍙湪绉诲姩绔潪棣栭〉鏃惰皟鏁翠富鍐呭浣嶇疆
             if (isMobile && !isHomePage) {
               mainContentWrapper.classList.add("mobile-main-no-banner");
             } else {
@@ -410,7 +383,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
             }
           }
 
-          // 澶勭悊credit鍏冪礌
           const creditDesktop = document.getElementById(
             "banner-credit-desktop"
           );
@@ -427,14 +399,11 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
           }
 
 
-          // 澶勭悊banner鏂囧瓧鍏冪礌鏄剧ず/闅愯棌
-          // 鎵€鏈?overlay 鐜板湪閮介€氳繃鏉′欢娓叉煋锛屼絾闇€瑕佺敤 JS 鎺у埗 hidden 绫?
           const bannerTextOverlays = document.querySelectorAll(
             "[data-banner-text-overlay]"
           );
           bannerTextOverlays.forEach((el) => {
             const overlayType = el.getAttribute("data-banner-text-overlay");
-            // 浠呭湪 banner 妯″紡涓嬶紝棣栭〉鏄剧ず涓婚〉妯箙鏂囧瓧
             const shouldShow =
               effectiveWallpaperMode === WALLPAPER_BANNER &&
               overlayType === "home" &&
@@ -453,7 +422,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
       } else {
         runWallpaperVisibility();
       }
-      // 鍒濆鍖栨按娉㈢汗鍔ㄧ敾鐘舵€?- 鍦?html 鍏冪礌涓婅缃睘鎬э紝CSS 浼氱珛鍗崇敓鏁?
       (function applyWavesEnabled() {
         const wavesEnabled = localStorage.getItem("wavesEnabled");
         if (wavesEnabled !== null) {
@@ -461,7 +429,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         }
       })();
 
-      // 鍒濆鍖栨í骞呮爣棰樻樉绀虹姸鎬?- 鍦?html 鍏冪礌涓婅缃睘鎬э紝CSS 浼氱珛鍗崇敓鏁?
       (function applyBannerTitleEnabled() {
         const stored = localStorage.getItem("bannerTitleEnabled");
         const enabled = stored !== null ? stored : String(defaultBannerTitleEnabled);
@@ -508,7 +475,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     ]}
     data-page-type={pageType}
   >
-    <!-- 澹佺焊妯″紡锛歜ody 瀛樺湪鍚庣珛鍗宠缃被锛岄伩鍏嶆枃绔犺鎯呴〉鍒锋柊鏃?banner 鍖哄煙闂櫧 -->
     <script
       is:inline
       define:vars={{
@@ -539,11 +505,10 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         }
       })();
     </script>
-    <!-- 鍥哄寲 astro-icon 鐨?symbol sprite锛岄伩鍏?Swup 灞€閮ㄦ浛鎹㈠悗 <use> 鎵句笉鍒?<symbol> 瀵艰嚧鍥炬爣绌虹櫧 -->
+    
     <GlobalIconSprite />
     <PdfEmbedRuntime />
 
-    <!-- 椤甸潰椤堕儴娓愬彉楂樺厜鏁堟灉 - 鍙湪full鍜宻emifull妯″紡涓嬫樉绀?-->
     {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
     <ConfigCarrier />
     <slot />
@@ -554,7 +519,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     <!-- Sakura Effect -->
     <SakuraEffect />
 
-    <!-- medium-zoom锛氱偣鍑诲浘鐗囨斁澶э紝鍐嶇偣鍑诲叧闂?-->
     <ImageLightboxManager />
     
     <!-- KaTeX Manager -->
@@ -571,8 +535,6 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
     "banner-height": `${BANNER_HEIGHT}vh`,
   }}
 >
-  /* 榛樿 overlay/none 鏃堕灞忓嵆闅愯棌妯箙锛岄伩鍏嶅埛鏂伴棯鍑?*/
-  /* 鍚屾椂鏀寔 data-wallpaper-mode锛堢敤鎴烽€氳繃 localStorage 鍒囨崲鍚庣殑杩愯鏃跺€硷級 */
   html[data-default-wallpaper="overlay"] #banner-wrapper,
   html[data-default-wallpaper="none"] #banner-wrapper,
   html[data-wallpaper-mode="overlay"] #banner-wrapper,
@@ -586,11 +548,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
   }
   @tailwind components;
   @layer components {
-    /* 棣栭〉锛氱敤 data-page-type 鍒ゆ柇锛岄伩鍏嶇被鍚嶄笉鍖归厤 */
     body.enable-banner[data-page-type="home"] #banner-wrapper {
       @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
     }
-    /* 鏂囩珷椤碉紝澹佺焊鏄剧ず楂樺害涓庨椤典竴鑷?*/
     body.enable-banner[data-page-type="post"] #banner-wrapper {
       @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
     }
@@ -720,7 +680,6 @@ function disableAnimation() {
   ]);
 
   function initCustomScrollbar() {
-    // 鍙鐞唊atex鍏冪礌鐨勬粴鍔ㄦ潯锛屼娇鐢ㄦ祻瑙堝櫒鍘熺敓婊氬姩鏉?
     const katexElements = document.querySelectorAll(
       ".katex-display:not([data-scrollbar-initialized])"
     ) as NodeListOf<HTMLElement>;
@@ -732,7 +691,6 @@ function disableAnimation() {
       element.parentNode.insertBefore(container, element);
       container.appendChild(element);
 
-      // 浣跨敤娴忚鍣ㄥ師鐢熸粴鍔ㄦ潯锛屾棤鑷畾涔夋牱寮?
       container.style.cssText = `
 			overflow-x: auto;
 		`;
@@ -745,7 +703,6 @@ function disableAnimation() {
     const isBannerMode = backgroundWallpaper.mode === "banner";
     if (!isBannerMode) return;
 
-    // 浣跨敤requestAnimationFrame浼樺寲DOM鎿嶄綔
     requestAnimationFrame(() => {
       // Handle single image banner (desktop)
       const banner = document.getElementById("banner");
@@ -753,12 +710,10 @@ function disableAnimation() {
         banner.classList.remove("opacity-0", "scale-105");
       }
 
-      // Handle mobile single image banner - 浣跨敤涓庣數鑴戠鐩稿悓鐨勯€昏緫
       const mobileBanner = document.querySelector(
         '.block.lg\\:hidden[alt="Mobile banner image of the blog"]'
       );
       if (mobileBanner) {
-        // 绉诲姩绔娇鐢ㄤ笌鐢佃剳绔浉鍚岀殑鍒濆鍖栭€昏緫
         mobileBanner.classList.remove("opacity-0", "scale-105");
         mobileBanner.classList.add("opacity-100");
       }
@@ -782,7 +737,6 @@ function disableAnimation() {
       // Remove the delay for the first time page load
       document.documentElement.style.setProperty("--content-delay", "0ms");
 
-      // 鍚岄〉閾炬帴鐐瑰嚮涓嶉渶瑕佽繃娓′繚鎶?
       const targetHref = el?.getAttribute("href") || "";
       const targetPathname = (() => {
         try {
@@ -793,18 +747,13 @@ function disableAnimation() {
       })();
       const isSamePage = pathsEqual(targetPathname, window.location.pathname);
       if (!isSamePage) {
-        // 娣诲姞椤甸潰鍒囨崲淇濇姢锛岄槻姝㈠鑸爮闂儊
         document.documentElement.classList.add("is-page-transitioning");
       }
 
-      // 璇存槑锛氭鍓嶈繖閲屼細鍦ㄦ粴鍔ㄥ埌 banner 涓嬫柟鏃堕殣钘忓鑸爮锛坣avbar-hidden锛夈€?
-      // 鐢ㄦ埛闇€姹備负鈥滃鑸爮鍥哄畾涓斾笉闅忔粴鍔ㄦ秷澶扁€濓紝鍥犳涓嶅啀鍦ㄦ粴鍔?鐐瑰嚮鏃惰嚜鍔ㄩ殣钘忓鑸爮銆?
+     
     });
     window.swup.hooks.on("content:replace", () => {
-      // 瑙ｉ櫎鍥為€€鏃剁殑婊氬姩閿佸畾锛坈ontent 宸叉浛鎹紝page:view 浼氭仮澶嶇洰鏍囬〉婊氬姩锛?
       (window as any).__swupScrollLockY = null;
-
-      // 鏇存柊涓荤綉鏍煎竷灞€绫诲悕
       const gridClassCarrier = document.getElementById("grid-class-carrier");
       if (gridClassCarrier) {
         const gridClass = gridClassCarrier.getAttribute("data-grid-class");
@@ -814,13 +763,12 @@ function disableAnimation() {
           const currentClasses = mainGrid.className.split(" ");
           const newClasses = currentClasses.filter(c => !c.startsWith("lg:grid-cols-") && !c.startsWith("md:grid-cols-") && !c.startsWith("grid-cols-"));
           
-          // 娣诲姞鏂扮殑缃戞牸绫?
           const gridClasses = gridClass.split(" ");
           mainGrid.className = [...newClasses, ...gridClasses].join(" ");
         }
       }
 
-      // 澶勭悊 banner overlay 鐨勬樉绀猴紙Swup 鏇挎崲鍚庨渶瑕佹牴鎹绾告ā寮忛噸鏂拌缃級
+      
       const pageType = document.body?.dataset?.pageType;
       const isHomePage = pageType === "home";
       const isPostPage = pageType === "post";
@@ -851,19 +799,14 @@ function disableAnimation() {
         }
       });
 
-      // 鍙鐞唊atex鍏冪礌鐨勫鍣紝浣跨敤娴忚鍣ㄥ師鐢熸粴鍔ㄦ潯
       initCustomScrollbar();
       
-      // 閲嶆柊鍒濆鍖栧浘鏍囧姞杞藉櫒
       import("@/utils/icon-loader").then(({ initIconLoader }) => {
         initIconLoader();
       });
 
-      // 妫€鏌ュ綋鍓嶉〉闈㈡槸鍚︿负鏂囩珷椤甸潰锛堟湁TOC鍏冪礌锛?
       const tocWrapper = document.getElementById("toc-wrapper");
       const isArticlePage = tocWrapper !== null;
-
-      // 鍙湪鏂囩珷椤甸潰閲嶆柊鍒濆鍖栨闈㈢ TOC 缁勪欢
       if (isArticlePage) {
         const tocElement = document.querySelector("table-of-contents");
         if (tocElement && typeof (tocElement as any).init === "function") {
@@ -873,13 +816,11 @@ function disableAnimation() {
         }
       }
 
-      // 閲嶆柊鍒濆鍖杝emifull妯″紡鐨勬粴鍔ㄦ娴?
       const navbar = document.getElementById("navbar");
       if (navbar) {
         const transparentMode = navbar.getAttribute("data-transparent-mode");
 
         if (transparentMode === "semifull") {
-          // 閲嶆柊璋冪敤鍒濆鍖栧嚱鏁版潵閲嶆柊缁戝畾婊氬姩浜嬩欢
           if (
             typeof (window as any).initSemifullScrollDetection === "function"
           ) {
@@ -895,8 +836,6 @@ function disableAnimation() {
       history?: { popstate?: boolean; direction?: string };
       scroll?: { reset?: boolean };
     }) => {
-      // 绂诲紑椤甸潰鍓嶄繚瀛樻粴鍔ㄤ綅缃紙鐢ㄤ簬鍥為€€鏃舵仮澶嶏級
-      // 蹇呴』浣跨敤 visit.from 浣滀负 key锛氬洖閫€鏃?window.location 鍙兘宸插彉涓虹洰鏍囬〉锛岀敤閿?key 浼氳鐩栧垪琛ㄩ〉鐨勬纭粴鍔ㄥ€?
       const fromPath = visit.from?.url ?? (window.location.pathname + window.location.search);
       const fromHash = visit.from?.hash ?? window.location.hash;
       const currentKey = "swup-scroll:" + fromPath + (fromHash || "");
@@ -904,10 +843,8 @@ function disableAnimation() {
         sessionStorage.setItem(currentKey, String(window.scrollY || document.documentElement.scrollTop));
       } catch (_e) { /* ignore */ }
 
-      // 鍥為€€/鍓嶈繘鏃讹細绂佹 Swup 閲嶇疆婊氬姩锛屼氦鐢变笅鏂?page:view 鎭㈠
       if (visit.history?.popstate) {
         if (visit.scroll) visit.scroll.reset = false;
-        // 閿佸畾褰撳墠婊氬姩浣嶇疆锛岄伩鍏嶈繃娓℃湡闂村嚭鐜扳€滄枃绔犲洖婊氬埌椤堕儴鈥濈殑闂儊
         const scrollY = window.scrollY || document.documentElement.scrollTop;
         if (scrollY > 0) {
           (window as any).__swupScrollLockY = scrollY;
@@ -938,18 +875,15 @@ function disableAnimation() {
         const isMobile = window.innerWidth < 1024;
 
         if (isMobile && isPostPage) {
-          // 绉诲姩绔枃绔犺鎯呴〉锛氬己鍒剁函鑹茶儗鏅紙鎻愬墠璁剧疆锛岄伩鍏嶈烦杞棯涓€涓嬶級
           bodyElement.classList.remove("enable-banner", "wallpaper-transparent");
           bodyElement.classList.add("no-banner-layout");
         } else if ((isHomePage || isPostPage) && wallpaperMode === "banner") {
-          // 澹佺焊妯″紡锛氶椤靛拰鏂囩珷椤靛惎鐢?banner 甯冨眬
           bodyElement.classList.add("enable-banner");
           bodyElement.classList.remove(
             "no-banner-layout",
             "wallpaper-transparent"
           );
         } else {
-          // 鍏朵粬椤甸潰锛堝綊妗ｃ€佸弸閾剧瓑锛夛細鏃犳í骞呭竷灞€
           bodyElement.classList.remove("enable-banner", "wallpaper-transparent");
           bodyElement.classList.add("no-banner-layout");
         }
@@ -961,18 +895,13 @@ function disableAnimation() {
         bodyElement!.classList.remove("lg:is-home");
       }
 
-      // Banner-wrapper 宸茬粡琚?Swup 鏇挎崲锛宱verlay 浼氭牴鎹柊椤甸潰鑷姩鏇存柊
-      // 杩欓噷涓嶉渶瑕佹墜鍔ㄥ鐞?page overlay锛屽畠宸茬粡閫氳繃鏉′欢娓叉煋姝ｇ‘鏄剧ず
-
       // Control navbar transparency based on page
       const navbar = document.getElementById("navbar");
       if (navbar) {
         navbar.setAttribute("data-is-home", isHomePage.toString());
 
-        // 閲嶆柊鍒濆鍖杝emifull妯″紡鐨勬粴鍔ㄦ娴?
         const transparentMode = navbar.getAttribute("data-transparent-mode");
         if (transparentMode === "semifull") {
-          // 閲嶆柊璋冪敤鍒濆鍖栧嚱鏁版潵閲嶆柊缁戝畾婊氬姩浜嬩欢
           if (
             typeof (window as any).initSemifullScrollDetection === "function"
           ) {
@@ -982,10 +911,8 @@ function disableAnimation() {
       }
 
       // Control mobile banner visibility based on page with improved staging animation
-      // 鍙湪绉诲姩绔紙1024px浠ヤ笅锛夊鐞哹anner闅愯棌
       const isMobile = window.innerWidth < 1024;
       
-      // 鍦ㄧЩ鍔ㄧ绂佺敤鏂囩珷鍒楄〃瀹瑰櫒鐨勮繃娓″姩鐢伙紝闃叉涓庝富鍐呭鍖轰綅缃彉鍖栧啿绐?
       if (isMobile) {
         const postListContainer = document.getElementById("post-list-container");
         if (postListContainer) {
@@ -999,38 +926,31 @@ function disableAnimation() {
       ) as HTMLElement | null;
 
       if (isMobile && bannerWrapper && mainContentWrapper) {
-        // 绉诲姩绔枃绔犺鎯呴〉锛氱粺涓€涓嶆樉绀哄绾?banner
         if (isPostPage) {
           bannerWrapper.classList.add("mobile-hide-banner");
           setTimeout(() => {
             mainContentWrapper.classList.add("mobile-main-no-banner");
           }, 0);
         } else if (isHomePage) {
-          // 棣栭〉锛氱鐢ㄤ富鍐呭鍖哄煙鐨勮繃娓″姩鐢伙紝闃叉鏂囩珷鍒楄〃涓嬬Щ
           mainContentWrapper.style.transition = "none";
           
-          // 鍏堟樉绀篵anner锛岀劧鍚庣Щ闄ら殣钘忕被璁╁叾浼橀泤鍑虹幇
           bannerWrapper.style.display = "";
           setTimeout(() => {
             bannerWrapper.classList.remove("mobile-hide-banner");
           }, 100);
           setTimeout(() => {
             mainContentWrapper.classList.remove("mobile-main-no-banner");
-            // 鍦ㄧЩ闄ょ被涔嬪悗绔嬪嵆鎭㈠杩囨浮鍔ㄧ敾锛堜笅娆″鑸椂浣跨敤锛?
             setTimeout(() => {
               mainContentWrapper.style.transition = "";
             }, 50);
           }, 150);
         } else {
-          // 闈為椤碉細鍒嗛樁娈甸殣钘忥紝鍏堥殣钘廱anner锛屽啀绉诲姩鍐呭
           bannerWrapper.classList.add("mobile-hide-banner");
-          // 寤惰繜绉诲姩鍐呭锛岃banner鍏堝畬鍏ㄦ秷澶?
           setTimeout(() => {
             mainContentWrapper.classList.add("mobile-main-no-banner");
           }, 100);
         }
       } else if (!isMobile && bannerWrapper) {
-        // 妗岄潰绔細鍦ㄦí骞呮ā寮忎笅棣栭〉鍜屾枃绔犻〉鏄剧ず banner
         const docEl = document.documentElement;
         const wallpaperMode =
           docEl.getAttribute("data-wallpaper-mode") || "banner";
@@ -1065,8 +985,6 @@ function disableAnimation() {
       if (heightExtend) {
         heightExtend.classList.remove("hidden");
       }
-
-      // 鍥為€€/鍓嶈繘锛氭仮澶嶄箣鍓嶄繚瀛樼殑婊氬姩浣嶇疆锛涙柊椤甸潰锛氭粴鍔ㄥ埌椤堕儴
       const isHistoryNav = visit?.history?.popstate === true;
       const restoreKey = "swup-scroll:" + (window.location.pathname + window.location.search + window.location.hash);
 
@@ -1082,7 +1000,6 @@ function disableAnimation() {
 
         if (savedY != null && !isNaN(savedY) && savedY > 0) {
           const maxY = Math.max(0, document.documentElement.scrollHeight - window.innerHeight);
-          // 涓嬩竴甯ф仮澶嶏紝纭繚 DOM 宸插竷灞€
           requestAnimationFrame(() => {
             window.scrollTo(0, Math.min(savedY!, maxY));
           });
@@ -1091,7 +1008,6 @@ function disableAnimation() {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
 
-      // 鍦ㄧЩ鍔ㄧ鎭㈠鏂囩珷鍒楄〃瀹瑰櫒鐨勮繃娓″姩鐢伙紙鍦ㄤ富鍐呭鍖轰綅缃姩鐢诲畬鎴愬悗锛?
       const isMobile = window.innerWidth < 1024;
       if (isMobile) {
         setTimeout(() => {
@@ -1099,10 +1015,10 @@ function disableAnimation() {
           if (postListContainer) {
             postListContainer.style.transition = "";
           }
-        }, 600); // 绛夊緟涓诲唴瀹瑰尯鍔ㄧ敾瀹屾垚锛?.4s + 0.1s delay + 100ms buffer锛?
+        }, 600);
       }
 
-      // 鍚屾涓婚鐘舵€?- 瑙ｅ喅浠庨椤佃繘鍏ユ枃绔犻〉闈㈡椂浠ｇ爜鍧楁覆鏌撻棶棰?
+
       const storedTheme = localStorage.getItem("theme") || siteConfig.themeColor.defaultMode || "light";
       const isDark = storedTheme === "dark";
       const expectedTheme = isDark
@@ -1110,15 +1026,12 @@ function disableAnimation() {
         : expressiveCodeConfig.lightTheme;
       const currentTheme = document.documentElement.getAttribute("data-theme");
 
-      // 濡傛灉涓婚涓嶅尮閰嶏紝闈欓粯鏇存柊锛堜笉瑙﹀彂浜嬩欢锛岄伩鍏嶉噸鏂板姞杞芥晥鏋滐級
       if (currentTheme !== expectedTheme) {
         document.documentElement.setAttribute("data-theme", expectedTheme);
       }
 
-      // 妫€鏌ュ綋鍓嶉〉闈㈡槸鍚︿负鏂囩珷椤甸潰锛屽鏋滄槸鍒欒Е鍙戣嚜瀹氫箟浜嬩欢鐢ㄤ簬鍒濆鍖栬瘎璁虹郴缁?
       setTimeout(() => {
         if (document.getElementById("tcomment")) {
-          // 瑙﹀彂鑷畾涔変簨浠讹紝閫氱煡璇勮绯荤粺椤甸潰宸插畬鍏ㄥ姞杞?
           const pageLoadedEvent = new CustomEvent("firefly:page:loaded", {
             detail: {
               path: window.location.pathname,
@@ -1130,7 +1043,6 @@ function disableAnimation() {
       }, 300);
     });
     window.swup.hooks.on("visit:end", (_visit: { to: { url: string } }) => {
-      // 鍏滃簳瑙ｉ櫎婊氬姩閿佸畾锛坴isit 缁撴潫锛屾棤璁烘垚鍔熸垨澶辫触锛?
       (window as any).__swupScrollLockY = null;
 
       setTimeout(() => {
@@ -1145,7 +1057,6 @@ function disableAnimation() {
           toc.classList.remove("toc-not-ready");
         }
 
-        // 绉婚櫎椤甸潰鍒囨崲淇濇姢锛屾仮澶嶈繃娓″姩鐢?
         document.documentElement.classList.remove("is-page-transitioning");
       }, 200);
     });
@@ -1160,12 +1071,10 @@ function disableAnimation() {
 
   let toc = document.getElementById("toc-wrapper");
 
-  // 浼樺寲鐨勬粴鍔ㄥ鐞嗗嚱鏁?
   function scrollFunction() {
     const scrollTop = document.documentElement.scrollTop;
     const bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
 
-    // 浣跨敤鎵归噺DOM鎿嶄綔浼樺寲鎬ц兘
     const operations: (() => void)[] = [];
 
     if (bannerEnabled && toc) {
@@ -1178,9 +1087,7 @@ function disableAnimation() {
       });
     }
 
-    // 瀵艰埅鏍忎笉鍐嶉殢婊氬姩闅愯棌锛堜繚鎸佸缁堝彲瑙侊級
 
-    // 鎵归噺鎵цDOM鎿嶄綔
     if (operations.length > 0) {
       requestAnimationFrame(() => {
         operations.forEach((op) => op());
@@ -1188,7 +1095,6 @@ function disableAnimation() {
     }
   }
 
-  // 浣跨敤浼樺寲鐨勬粴鍔ㄦ€ц兘澶勭悊
   let scrollTimeout: number;
   window.addEventListener(
     "scroll",
@@ -1211,7 +1117,6 @@ function disableAnimation() {
     );
   };
 
-  // 椤甸潰鍔犺浇瀹屾垚鍚庡垵濮嬪寲banner鍜宬atex瀹瑰櫒
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
       showBanner();
