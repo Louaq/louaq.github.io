@@ -1,4 +1,5 @@
 ---
+import { Icon } from "astro-icon/components";
 import type { HomeTopNoticeItem } from "@/types/config";
 
 interface Props {
@@ -22,11 +23,28 @@ const { items } = Astro.props;
 				>
 					<div class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[15px] md:text-[16px] leading-relaxed">
 						<div class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left">
-							<div class="min-w-0">
-								{item.title && (
-									<span class="font-bold mr-1.5 tracking-tight text-[1.05em]">{item.title}</span>
+							<div class="notice-title-body inline-flex max-w-full min-w-0 flex-wrap items-center justify-center gap-x-1.5 sm:justify-start">
+								{item.icon && (
+									<span
+										class="inline-flex shrink-0 items-center text-[1.05em] leading-none"
+										aria-hidden="true"
+									>
+										<Icon
+											name={item.icon}
+											class="size-[1em] text-current [&_svg]:block"
+											aria-hidden="true"
+										/>
+									</span>
 								)}
-								<span class="notice-content-inline" set:html={item.content} />
+								{item.title && (
+									<span class="shrink-0 font-bold tracking-tight text-[1.05em] whitespace-nowrap">
+										{item.title}
+									</span>
+								)}
+								<span
+									class="notice-content-inline min-w-0 text-left [font-size:inherit] [line-height:inherit]"
+									set:html={item.content}
+								/>
 							</div>
 						</div>
 						{item.link?.enable && item.link.url?.trim() && (

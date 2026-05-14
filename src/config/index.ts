@@ -6,7 +6,6 @@ export type {
 	AnnouncementConfig,
 	HomeTopNoticeConfig,
 	HomeTopNoticeItem,
-	HomeTopNoticeTone,
 	BackgroundWallpaperConfig,
 	CommentConfig,
 	CoverImageConfig,

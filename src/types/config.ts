@@ -336,23 +336,12 @@ export type AnnouncementConfig = {
 	};
 };
 
-/** 棣栭〉椤堕儴閫氱煡鐨勮瑙夌被鍨嬶紙鍐冲畾閰嶈壊涓庨粯璁ゅ浘鏍囷級 */
-export type HomeTopNoticeTone =
-	| "info"
-	| "warning"
-	| "success"
-	| "error"
-	| "neutral"
-	| "tip"
-	| "urgent";
-
 /** 鍗曟潯棣栭〉椤堕儴閫氱煡锛涙鏂?content 鍙惈瀹夊叏 HTML锛堜粨搴撳唴閰嶇疆锛夛紝濡?<a href="/x">璇存槑</a> */
 export type HomeTopNoticeItem = {
 	title?: string;
 	/** 鍙笌绾枃鏈贩鎺掔殑 HTML 瀛楃涓诧紝甯哥敤 <a href>銆?strong> 绛?*/
 	content: string;
 	icon?: string;
-	type?: HomeTopNoticeTone;
 	link?: {
 		enable: boolean;
 		text: string;

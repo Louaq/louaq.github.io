@@ -17,6 +17,7 @@ import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
+import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
@@ -200,29 +201,10 @@ const jsonLd = {
 
       <!-- 过期/过时提醒：置于正文前（非加密文章直接显示；加密文章移至解锁后显示） -->
       {!entry.data.password && shouldShowOutdatedNotice && (
-        <div class="mb-6 onload-animation">
-          <div
-            class:list={[
-              "home-top-notice home-top-notice--theme post-outdated-notice rounded-md overflow-hidden",
-            ]}
-            role="note"
-          >
-            <div
-              class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
-            >
-              <div
-                class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left"
-              >
-                <div class="min-w-0">
-                  <span class="font-bold mr-1.5 tracking-tight text-[1.05em]">
-                    {i18n(I18nKey.lastModifiedNoticeTitle)}
-                  </span>
-                  <span>{staleNoticeBody}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <PostStaleNoticeBanner
+          title={i18n(I18nKey.lastModifiedNoticeTitle)}
+          body={staleNoticeBody}
+        />
       )}
 
       <!-- always show cover as long as it has one -->
@@ -254,29 +236,10 @@ const jsonLd = {
           <div id="protected-content" style="display: none;">
             {/* 加密文章：过期提示仅解锁后显示 */}
             {shouldShowOutdatedNotice && (
-              <div class="mb-6 onload-animation">
-                <div
-                  class:list={[
-                    "home-top-notice home-top-notice--theme post-outdated-notice rounded-md overflow-hidden",
-                  ]}
-                  role="note"
-                >
-                  <div
-                    class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
-                  >
-                    <div
-                      class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left"
-                    >
-                      <div class="min-w-0">
-                        <span class="font-bold mr-1.5 tracking-tight text-[1.05em]">
-                          {i18n(I18nKey.lastModifiedNoticeTitle)}
-                        </span>
-                        <span>{staleNoticeBody}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              <PostStaleNoticeBanner
+                title={i18n(I18nKey.lastModifiedNoticeTitle)}
+                body={staleNoticeBody}
+              />
             )}
             <Markdown class="mb-6 markdown-content onload-animation">
               <Content />

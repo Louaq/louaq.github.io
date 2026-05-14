@@ -1,0 +1,50 @@
+---
+import { Icon } from "astro-icon/components";
+
+interface Props {
+	title: string;
+	body: string;
+}
+
+const { title, body } = Astro.props;
+---
+
+<div class="mb-6 onload-animation">
+	<div
+		class:list={[
+			"home-top-notice home-top-notice--theme post-outdated-notice rounded-md overflow-hidden",
+		]}
+		role="note"
+	>
+		<div
+			class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
+		>
+			<div
+				class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left"
+			>
+				<div
+					class="notice-title-body inline-flex max-w-full min-w-0 flex-wrap items-center justify-center gap-x-1.5 sm:justify-start"
+				>
+					<span
+						class="inline-flex shrink-0 items-center text-[1.05em] leading-none"
+						aria-hidden="true"
+					>
+						<Icon
+							name="fa6-solid:user-shield"
+							class="size-[1em] text-current [&_svg]:block"
+							aria-hidden="true"
+						/>
+					</span>
+					<span class="shrink-0 font-bold tracking-tight text-[1.05em] whitespace-nowrap">
+						{title}
+					</span>
+					<span
+						class="min-w-0 text-left [font-size:inherit] [line-height:inherit]"
+					>
+						{body}
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

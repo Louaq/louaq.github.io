@@ -10,8 +10,7 @@ import type {
  *  - title    : 通知标题（可选）
  *  - content  : 通知正文（必填，空字符串会被忽略）；可按 HTML 书写，例如
  *               '维护说明见<a href="/posts/foo/">此文</a>。' 外链请自行加 target="_blank" rel="noopener noreferrer"
- *  - type     : 配色，info / warning / success / error / neutral / tip / urgent
- *  - icon     : 预留字段（当前组件不展示图标）
+ *  - icon     : Iconify 图标名，展示在标题前；例如 fa6-solid:user-shield（与 Font Awesome user-shield 对应）
  *  - link     : 末尾的跳转按钮，可选
  *
  * 如需临时关闭整块通知区域，将 enable 设为 false 即可。
@@ -22,8 +21,7 @@ export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 		{
 			title: "重要通知",
 			content: "今晚23:00-24:00 进行维护，期间可能无法访问",
-			type: "info",
-			icon: "fa6-solid:triangle-exclamation",
+			icon: "fa6-solid:user-shield",
 			link: {
 				enable: false,
 				text: "",
@@ -35,12 +33,10 @@ export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 		// {
 		// 	title: "紧急",
 		// 	content: "某服务短暂异常，正在处理。",
-		// 	type: "urgent",
 		// },
 		// {
 		// 	title: "提示",
 		// 	content: "新文章 RSS 已更新。",
-		// 	type: "info",
 		// 	link: {
 		// 		enable: true,
 		// 		text: "查看",
