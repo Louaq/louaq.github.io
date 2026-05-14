@@ -1,7 +1,6 @@
 ---
 import { getEntry, render } from "astro:content";
 import Comment from "@components/comment/index.astro";
-import Icon from "@components/common/Icon.astro";
 import Markdown from "@components/common/Markdown.astro";
 import { Icon as AstroIcon } from "astro-icon/components";
 import {
@@ -70,7 +69,10 @@ const description =
       {items.length > 0 && (
         <div class="friend-search-wrapper mb-4">
           <div class="friend-search-input-wrap">
-            <Icon icon="material-symbols:search" class="friend-search-icon" />
+            <AstroIcon
+              name="material-symbols:search"
+              class="friend-search-icon inline-block shrink-0 align-middle"
+            />
             <input
               type="text"
               class="friend-search-input"
