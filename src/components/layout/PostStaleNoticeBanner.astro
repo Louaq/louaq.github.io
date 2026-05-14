@@ -20,10 +20,10 @@ const { title, body } = Astro.props;
 			class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
 		>
 			<div
-				class="flex flex-1 min-w-0 items-center justify-center sm:justify-start text-center sm:text-left"
+				class="flex flex-1 min-w-0 w-full items-center justify-start text-left"
 			>
 				<div
-					class="notice-title-body inline-flex max-w-full min-w-0 flex-wrap items-center justify-center gap-x-1.5 sm:justify-start"
+					class="notice-title-body flex w-full min-w-0 max-w-full items-center gap-x-1.5 [overflow-wrap:anywhere]"
 				>
 					<span
 						class="inline-flex shrink-0 items-center text-[1.05em] leading-none"
@@ -35,14 +35,13 @@ const { title, body } = Astro.props;
 							aria-hidden="true"
 						/>
 					</span>
-					<span class="shrink-0 font-bold tracking-tight text-[1.05em] whitespace-nowrap">
-						{title}
-					</span>
-					<span
-						class="min-w-0 text-left [font-size:inherit] [line-height:inherit]"
+					<div
+						class="post-stale-notice-text-flow min-w-0 flex-1 text-left [font-size:inherit] [line-height:inherit]"
 					>
-						{body}
-					</span>
+						<span class="font-bold tracking-tight text-[1.05em]">{title}</span>
+						{' '}
+						<span>{body}</span>
+					</div>
 				</div>
 			</div>
 		</div>
