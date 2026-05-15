@@ -720,6 +720,19 @@ function disableAnimation() {
     });
   }
 
+  /** 全局 `html { scroll-behavior: smooth }` 会让 `scrollTo(0,0)` 也变成动画，此处强制瞬时置顶 */
+  function scrollWindowTopInstant() {
+    const root = document.documentElement;
+    const prev = root.style.scrollBehavior;
+    root.style.scrollBehavior = "auto";
+    window.scrollTo(0, 0);
+    root.scrollTop = 0;
+    document.body.scrollTop = 0;
+    requestAnimationFrame(() => {
+      root.style.scrollBehavior = prev;
+    });
+  }
+
   const setup = () => {
     // TODO: temp solution to change the height of the banner
     /*
@@ -1005,7 +1018,7 @@ function disableAnimation() {
           });
         }
       } else {
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        scrollWindowTopInstant();
       }
 
       const isMobile = window.innerWidth < 1024;
