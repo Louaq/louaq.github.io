@@ -854,7 +854,6 @@ onDestroy(() => {
 				</svg>
 					</a>
 				{:else}
-					<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchProvidedBy)}</span>
 					<a
 						class="docsearch-modal-footer-logo-link"
 						href="https://www.meilisearch.com/"
