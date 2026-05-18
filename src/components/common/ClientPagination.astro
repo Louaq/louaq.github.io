@@ -13,92 +13,164 @@ interface Props {
 const { totalItems, itemsPerPage, currentPage, sectionId } = Astro.props;
 const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-const compactTemplate = i18n(I18nKey.paginationCompact);
-const compactLabel = compactTemplate
-	.replace("{current}", String(currentPage))
-	.replace("{total}", String(totalPages));
+type PageItem = { kind: "page"; num: number } | { kind: "ellipsis" };
 
-const btnClass =
-	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11 sm:min-h-12 sm:px-2 sm:py-2.5 sm:text-base disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:opacity-100";
+function buildPageItems(cur: number, last: number): PageItem[] {
+	if (last <= 1) return [];
+	if (last <= 9) {
+		return Array.from({ length: last }, (_, i) => ({
+			kind: "page" as const,
+			num: i + 1,
+		}));
+	}
+	const items: PageItem[] = [];
+	const delta = 1;
+	const left = Math.max(2, cur - delta);
+	const right = Math.min(last - 1, cur + delta);
+	items.push({ kind: "page", num: 1 });
+	if (left > 2) items.push({ kind: "ellipsis" });
+	for (let i = left; i <= right; i++) {
+		items.push({ kind: "page", num: i });
+	}
+	if (right < last - 1) items.push({ kind: "ellipsis" });
+	items.push({ kind: "page", num: last });
+	return items;
+}
+
+const pageItems = buildPageItems(currentPage, totalPages);
+
+const navArrowClass =
+	"inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] text-[var(--juejin-text-secondary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)] disabled:cursor-not-allowed disabled:opacity-50";
+const pageNumBase =
+	"inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums transition-colors";
+const pageNumIdle = `${pageNumBase} border-[var(--juejin-border)] bg-[var(--card-bg)] text-[var(--juejin-text-primary)] hover:bg-[var(--btn-plain-bg-hover)]`;
+const pageNumActive = `${pageNumBase} border-[var(--primary)] bg-[var(--primary)] text-white shadow-sm`;
+const ellipsisClass =
+	"flex h-9 items-center px-1 text-sm text-[var(--juejin-text-tertiary)] select-none";
+const jumpShellClass =
+	"inline-flex h-9 overflow-hidden rounded-lg border-2 border-[var(--primary)] bg-[var(--card-bg)]";
+const jumpInputClass =
+	"w-11 border-0 bg-transparent px-1 text-center text-sm text-[var(--juejin-text-primary)] tabular-nums outline-none focus:ring-0 sm:w-12";
+const jumpSubmitClass =
+	"inline-flex h-9 shrink-0 items-center justify-center border-l border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] px-2 text-[var(--primary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)] disabled:cursor-not-allowed disabled:opacity-50";
+
+const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
+const jumpInputAria = [
+	i18n(I18nKey.paginationJumpTo),
+	i18n(I18nKey.paginationJumpPageUnit),
+]
+	.filter(Boolean)
+	.join("");
 ---
 
 {
 	totalPages > 1 && (
 		<div
-			class="responsive-pagination mt-6 flex w-full max-w-full flex-col items-center"
+			class="responsive-pagination mt-6 flex w-full max-w-full flex-col gap-1"
 			data-pagination-section={sectionId}
 		>
 			<nav
-				class="flex w-full max-w-full flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2 px-1 sm:gap-x-3"
+				class="pagination-reflow flex w-full max-w-full flex-row items-center gap-2 sm:gap-3"
 				aria-label="Pagination"
 			>
-				<button
-					type="button"
-					class={btnClass}
-					data-page="first"
-					data-section={sectionId}
-					disabled={currentPage === 1}
-					aria-label={i18n(I18nKey.paginationFirst)}
-				>
-					<Icon
-						name="material-symbols:first-page-rounded"
-						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-					/>
-					{i18n(I18nKey.paginationFirst)}
-				</button>
+				<div class="flex w-9 shrink-0 justify-start sm:w-10">
+					<button
+						type="button"
+						class={navArrowClass}
+						data-page="prev"
+						data-section={sectionId}
+						disabled={currentPage === 1}
+						aria-label={i18n(I18nKey.paginationPrev)}
+					>
+						<Icon
+							name="material-symbols:chevron-left"
+							class="text-[1.25rem] leading-none sm:text-[1.35rem]"
+						/>
+					</button>
+				</div>
 
-				<button
-					type="button"
-					class={btnClass}
-					data-page="prev"
-					data-section={sectionId}
-					disabled={currentPage === 1}
-					aria-label={i18n(I18nKey.bangumiPrevPage)}
+				<div
+					class="flex min-w-0 flex-1 flex-wrap items-center justify-center gap-1.5"
+					data-page-numbers
 				>
-					<Icon
-						name="material-symbols:chevron-left-rounded"
-						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-					/>
-					{i18n(I18nKey.paginationPrev)}
-				</button>
+					{pageItems.map((item) =>
+						item.kind === "ellipsis" ? (
+							<span class={ellipsisClass} aria-hidden="true">
+								…
+							</span>
+						) : item.num === currentPage ? (
+							<span
+								class={pageNumActive}
+								aria-current="page"
+								aria-label={`${i18n(I18nKey.paginationPage)} ${item.num}`}
+							>
+								{item.num}
+							</span>
+						) : (
+							<button
+								type="button"
+								class:list={[pageNumIdle, "pagination-page-btn"]}
+								data-page-num={item.num}
+								aria-label={`${i18n(I18nKey.paginationPage)} ${item.num}`}
+							>
+								{item.num}
+							</button>
+						),
+					)}
 
-				<span
-					data-compact-label
-					class="shrink text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center sm:text-base"
-				>
-					{compactLabel}
-				</span>
+					<div
+						class={`${jumpShellClass} ml-0.5`}
+						data-pagination-jump-shell
+					>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[0-9]*"
+							autocomplete="off"
+							enterkeyhint="go"
+							maxlength={Math.max(1, String(totalPages).length)}
+							class={jumpInputClass}
+							data-pagination-jump-input
+							aria-label={jumpInputAria || i18n(I18nKey.paginationJumpTo)}
+						/>
+						<button
+							type="button"
+							class={jumpSubmitClass}
+							data-pagination-jump-go
+							disabled={totalPages <= 1}
+							aria-label={i18n(I18nKey.paginationGo)}
+						>
+							<Icon
+								name="material-symbols:keyboard-double-arrow-right-rounded"
+								class="text-[1.125rem] sm:text-[1.25rem]"
+							/>
+						</button>
+					</div>
+				</div>
 
-				<button
-					type="button"
-					class={btnClass}
-					data-page="next"
-					data-section={sectionId}
-					disabled={currentPage === totalPages}
-					aria-label={i18n(I18nKey.bangumiNextPage)}
-				>
-					{i18n(I18nKey.paginationNext)}
-					<Icon
-						name="material-symbols:chevron-right-rounded"
-						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-					/>
-				</button>
-
-				<button
-					type="button"
-					class={btnClass}
-					data-page="last"
-					data-section={sectionId}
-					disabled={currentPage === totalPages}
-					aria-label={i18n(I18nKey.paginationLast)}
-				>
-					{i18n(I18nKey.paginationLast)}
-					<Icon
-						name="material-symbols:last-page-rounded"
-						class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-					/>
-				</button>
+				<div class="flex w-9 shrink-0 justify-end sm:w-10">
+					<button
+						type="button"
+						class={navArrowClass}
+						data-page="next"
+						data-section={sectionId}
+						disabled={currentPage === totalPages}
+						aria-label={i18n(I18nKey.paginationNext)}
+					>
+						<Icon
+							name="material-symbols:chevron-right"
+							class="text-[1.25rem] leading-none sm:text-[1.35rem]"
+						/>
+					</button>
+				</div>
 			</nav>
+
+			<p
+				data-pagination-jump-error
+				class="hidden w-full px-2 text-center text-sm text-red-600 dark:text-red-400"
+				role="alert"
+				aria-live="polite"
+			/>
 		</div>
 	)
 }
@@ -109,9 +181,36 @@ const btnClass =
 		itemsPerPage,
 		sectionId,
 		initialPage: currentPage,
-		compactTemplate,
+		jumpInvalidMsg,
+		pageNumIdle,
+		pageNumActive,
+		ellipsisClass,
+		paginationPagePrefix: i18n(I18nKey.paginationPage),
 	}}
 >
+	function buildPageItemsClient(current, last) {
+		if (last <= 1) return [];
+		if (last <= 9) {
+			const out = [];
+			for (let i = 1; i <= last; i++) {
+				out.push({ kind: "page", num: i });
+			}
+			return out;
+		}
+		const items = [];
+		const delta = 1;
+		const left = Math.max(2, current - delta);
+		const right = Math.min(last - 1, current + delta);
+		items.push({ kind: "page", num: 1 });
+		if (left > 2) items.push({ kind: "ellipsis" });
+		for (let i = left; i <= right; i++) {
+			items.push({ kind: "page", num: i });
+		}
+		if (right < last - 1) items.push({ kind: "ellipsis" });
+		items.push({ kind: "page", num: last });
+		return items;
+	}
+
 	function initPagination() {
 		let currentPage = initialPage;
 		let isInitialLoad = true;
@@ -121,49 +220,157 @@ const btnClass =
 		);
 		if (!pagination) return;
 
-		function setCompactLabel(totalPages) {
-			const el = pagination.querySelector("[data-compact-label]");
-			if (el) {
-				el.textContent = compactTemplate
-					.replace("{current}", String(currentPage))
-					.replace("{total}", String(totalPages));
+		const pageHost = pagination.querySelector("[data-page-numbers]");
+		if (!pageHost) return;
+
+		const jumpShell = pageHost.querySelector("[data-pagination-jump-shell]");
+		if (!(jumpShell instanceof HTMLElement)) return;
+
+		function rebuildPageNumberControls(totalPages) {
+			const tp = Math.max(1, totalPages);
+			const list = buildPageItemsClient(currentPage, tp);
+			const frag = document.createDocumentFragment();
+			for (const it of list) {
+				if (it.kind === "ellipsis") {
+					const span = document.createElement("span");
+					span.className = ellipsisClass;
+					span.setAttribute("aria-hidden", "true");
+					span.textContent = "…";
+					frag.appendChild(span);
+				} else if (it.num === currentPage) {
+					const span = document.createElement("span");
+					span.className = pageNumActive;
+					span.setAttribute("aria-current", "page");
+					span.setAttribute(
+						"aria-label",
+						`${paginationPagePrefix} ${it.num}`,
+					);
+					span.textContent = String(it.num);
+					frag.appendChild(span);
+				} else {
+					const button = document.createElement("button");
+					button.type = "button";
+					button.className = `${pageNumIdle} pagination-page-btn`;
+					button.dataset.pageNum = String(it.num);
+					button.setAttribute(
+						"aria-label",
+						`${paginationPagePrefix} ${it.num}`,
+					);
+					button.textContent = String(it.num);
+					frag.appendChild(button);
+				}
+			}
+			while (pageHost.firstChild && pageHost.firstChild !== jumpShell) {
+				pageHost.removeChild(pageHost.firstChild);
+			}
+			pageHost.insertBefore(frag, jumpShell);
+		}
+
+		function hideJumpError() {
+			const errEl = pagination.querySelector("[data-pagination-jump-error]");
+			const el = pagination.querySelector("[data-pagination-jump-input]");
+			if (errEl instanceof HTMLElement) {
+				errEl.textContent = "";
+				errEl.classList.add("hidden");
+			}
+			if (el instanceof HTMLInputElement) {
+				el.removeAttribute("aria-invalid");
+			}
+		}
+
+		function showJumpError() {
+			const errEl = pagination.querySelector("[data-pagination-jump-error]");
+			const el = pagination.querySelector("[data-pagination-jump-input]");
+			if (errEl instanceof HTMLElement && jumpInvalidMsg) {
+				errEl.textContent = jumpInvalidMsg;
+				errEl.classList.remove("hidden");
+			}
+			if (el instanceof HTMLInputElement) {
+				el.setAttribute("aria-invalid", "true");
 			}
 		}
 
 		function setNavDisabled(totalPages) {
-			pagination.querySelectorAll('[data-page="first"]').forEach((btn) => {
-				btn.disabled = currentPage === 1;
-			});
+			const tp = Math.max(1, totalPages);
 			pagination.querySelectorAll('[data-page="prev"]').forEach((btn) => {
 				btn.disabled = currentPage === 1;
 			});
 			pagination.querySelectorAll('[data-page="next"]').forEach((btn) => {
-				btn.disabled = currentPage === totalPages;
+				btn.disabled = currentPage === tp;
 			});
-			pagination.querySelectorAll('[data-page="last"]').forEach((btn) => {
-				btn.disabled = currentPage === totalPages;
-			});
+			const jumpGo = pagination.querySelector("[data-pagination-jump-go]");
+			if (jumpGo instanceof HTMLButtonElement) {
+				jumpGo.disabled = tp <= 1;
+			}
+			const jumpInput = pagination.querySelector(
+				"[data-pagination-jump-input]",
+			);
+			if (jumpInput instanceof HTMLInputElement) {
+				jumpInput.maxLength = Math.max(1, String(tp).length);
+			}
 		}
+
+		function applyJump() {
+			const jumpInput = pagination.querySelector(
+				"[data-pagination-jump-input]",
+			);
+			if (!(jumpInput instanceof HTMLInputElement)) return;
+			hideJumpError();
+			const v = String(jumpInput.value).trim();
+			if (v === "" || !/^\d+$/.test(v)) {
+				showJumpError();
+				return;
+			}
+			const items = document.querySelectorAll(
+				`[data-item-section="${sectionId}"]:not(.hidden)`,
+			);
+			const tp = Math.max(1, Math.ceil(items.length / itemsPerPage));
+			const n = parseInt(v, 10);
+			if (!Number.isFinite(n)) {
+				showJumpError();
+				return;
+			}
+			currentPage = Math.min(tp, Math.max(1, n));
+			jumpInput.value = "";
+			updatePage();
+		}
+
+		pageHost.addEventListener("click", function (e) {
+			const target = e.target;
+			if (!(target instanceof Element)) return;
+			const btn = target.closest("[data-page-num]");
+			if (!(btn instanceof HTMLButtonElement)) return;
+			const num = parseInt(btn.dataset.pageNum || "", 10);
+			if (!Number.isFinite(num)) return;
+			currentPage = num;
+			updatePage();
+		});
+
+		const jumpGoBtn = pagination.querySelector("[data-pagination-jump-go]");
+		const jumpInputEl = pagination.querySelector("[data-pagination-jump-input]");
+		jumpGoBtn?.addEventListener("click", applyJump);
+		jumpInputEl?.addEventListener("keydown", function (e) {
+			if (e.key === "Enter") {
+				e.preventDefault();
+				applyJump();
+			}
+		});
+		jumpInputEl?.addEventListener("input", hideJumpError);
 
 		pagination.querySelectorAll("[data-page]").forEach((button) => {
 			button.addEventListener("click", function () {
 				const page = this.dataset.page;
-				if (page === "first") {
-					currentPage = 1;
-				} else if (page === "prev") {
+				if (page === "prev") {
 					currentPage = Math.max(1, currentPage - 1);
 				} else if (page === "next") {
 					const items = document.querySelectorAll(
 						`[data-item-section="${sectionId}"]:not(.hidden)`,
 					);
 					const totalPages = Math.ceil(items.length / itemsPerPage);
-					currentPage = Math.min(totalPages, currentPage + 1);
-				} else if (page === "last") {
-					const items = document.querySelectorAll(
-						`[data-item-section="${sectionId}"]:not(.hidden)`,
+					currentPage = Math.min(
+						Math.max(1, totalPages),
+						currentPage + 1,
 					);
-					const totalPages = Math.ceil(items.length / itemsPerPage);
-					currentPage = Math.max(1, totalPages);
 				}
 				updatePage();
 			});
@@ -195,7 +402,7 @@ const btnClass =
 					items[i].style.display = "block";
 					items[i].style.opacity = "1";
 				}
-				setCompactLabel(totalPages);
+				rebuildPageNumberControls(Math.max(1, totalPages));
 				setNavDisabled(totalPages);
 			};
 
@@ -229,5 +436,14 @@ const btnClass =
 		max-width: 100%;
 		overflow-x: auto;
 		-webkit-overflow-scrolling: touch;
+	}
+	.pagination-reflow {
+		flex-wrap: wrap;
+		row-gap: 0.5rem;
+	}
+	@media (min-width: 480px) {
+		.pagination-reflow {
+			flex-wrap: nowrap;
+		}
 	}
 </style>

@@ -149,6 +149,8 @@ enum I18nKey {
 	paginationJumpPageUnit = "paginationJumpPageUnit",
 	/** 跳转提交按钮 */
 	paginationGo = "paginationGo",
+	/** 跳转页码非数字或无效输入时的提示 */
+	paginationJumpInvalid = "paginationJumpInvalid",
 
 	// 404页面
 	notFound = "notFound",

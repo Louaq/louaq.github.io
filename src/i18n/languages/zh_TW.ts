@@ -149,6 +149,7 @@ export const zh_TW: Translation = {
 	[Key.paginationJumpTo]: "跳轉到",
 	[Key.paginationJumpPageUnit]: "頁",
 	[Key.paginationGo]: "前往",
+	[Key.paginationJumpInvalid]: "請輸入數字頁碼",
 
 	// 404頁面
 	[Key.notFound]: "404",

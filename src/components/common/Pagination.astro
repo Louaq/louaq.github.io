@@ -9,7 +9,6 @@ interface Props {
 	page: Page;
 	class?: string;
 	style?: string;
-	/** 分页根路径（不含末尾页码），如 "archive" 对应 /archive/、/archive/2/。缺省为首页 /、/2/ */
 	pageUrlRoot?: string;
 }
 
@@ -27,107 +26,277 @@ const getPageUrl = (p: number) => {
 	return url(`/${root}/${p}/`);
 };
 
-const firstPageHref = getPageUrl(1);
-const lastPageHref = getPageUrl(page.lastPage);
-const isFirst = page.currentPage === 1;
-const isLast = page.currentPage === page.lastPage;
+type PageItem = { kind: "page"; num: number } | { kind: "ellipsis" };
 
-const compactLabel = i18n(I18nKey.paginationCompact)
-	.replace("{current}", String(page.currentPage))
-	.replace("{total}", String(page.lastPage));
+function buildPageItems(current: number, last: number): PageItem[] {
+	if (last <= 1) return [];
+	if (last <= 9) {
+		return Array.from({ length: last }, (_, i) => ({
+			kind: "page" as const,
+			num: i + 1,
+		}));
+	}
+	const items: PageItem[] = [];
+	const delta = 1;
+	const left = Math.max(2, current - delta);
+	const right = Math.min(last - 1, current + delta);
+	items.push({ kind: "page", num: 1 });
+	if (left > 2) items.push({ kind: "ellipsis" });
+	for (let i = left; i <= right; i++) {
+		items.push({ kind: "page", num: i });
+	}
+	if (right < last - 1) items.push({ kind: "ellipsis" });
+	items.push({ kind: "page", num: last });
+	return items;
+}
 
-const btnClass =
-	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] hover:opacity-80 transition-opacity shrink-0 min-h-11 sm:min-h-12 sm:px-2 sm:py-2.5 sm:text-base";
-const btnDisabledClass =
-	"inline-flex items-center gap-1 px-1.5 py-2 -mx-0.5 text-sm text-[var(--primary)] opacity-40 pointer-events-none cursor-not-allowed shrink-0 min-h-11 sm:min-h-12 sm:px-2 sm:py-2.5 sm:text-base";
+const pageItems = buildPageItems(page.currentPage, page.lastPage);
+const baseUrl = import.meta.env.BASE_URL;
+
+const navArrowClass =
+	"inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] text-[var(--juejin-text-secondary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)]";
+const navArrowDisabledClass =
+	"inline-flex h-9 w-9 shrink-0 cursor-not-allowed items-center justify-center rounded-lg border border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] text-[var(--juejin-text-tertiary)] opacity-70";
+const pageNumBase =
+	"inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums transition-colors";
+const pageNumIdle = `${pageNumBase} border-[var(--juejin-border)] bg-[var(--card-bg)] text-[var(--juejin-text-primary)] hover:bg-[var(--btn-plain-bg-hover)]`;
+const pageNumActive = `${pageNumBase} border-[var(--primary)] bg-[var(--primary)] text-white shadow-sm`;
+const ellipsisClass =
+	"flex h-9 items-center px-1 text-sm text-[var(--juejin-text-tertiary)] select-none";
+const jumpShellClass =
+	"inline-flex h-9 overflow-hidden rounded-lg border-2 border-[var(--primary)] bg-[var(--card-bg)]";
+const jumpInputClass =
+	"w-11 border-0 bg-transparent px-1 text-center text-sm text-[var(--juejin-text-primary)] tabular-nums outline-none focus:ring-0 sm:w-12";
+const jumpSubmitClass =
+	"inline-flex h-9 shrink-0 items-center justify-center border-l border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] px-2 text-[var(--primary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)]";
+
+const jumpInputAria = [
+	i18n(I18nKey.paginationJumpTo),
+	i18n(I18nKey.paginationJumpPageUnit),
+]
+	.filter(Boolean)
+	.join("");
 ---
 
 {
 	page.lastPage > 1 && (
 		<div
-			class:list={[className, "flex w-full max-w-full flex-col items-center"]}
+			class:list={[className, "flex w-full max-w-full flex-col gap-1"]}
 			style={style}
+			data-static-pagination
+			data-pagination-root={root}
+			data-pagination-last-page={page.lastPage}
+			data-pagination-current-page={page.currentPage}
+			data-pagination-base-url={baseUrl}
+			data-pagination-jump-invalid-msg={i18n(I18nKey.paginationJumpInvalid)}
 		>
 			<nav
-				class="flex w-full max-w-full flex-row flex-wrap items-center justify-center gap-x-2 gap-y-2 px-1 sm:gap-x-3"
+				class="pagination-reflow flex w-full max-w-full flex-row items-center gap-2 sm:gap-3"
 				aria-label="Pagination"
 			>
-				{!isFirst ? (
-					<a href={firstPageHref} class={btnClass}>
-						<Icon
-							name="material-symbols:first-page-rounded"
-							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-						/>
-						{i18n(I18nKey.paginationFirst)}
-					</a>
-				) : (
-					<span class={btnDisabledClass} aria-disabled="true">
-						<Icon
-							name="material-symbols:first-page-rounded"
-							class="text-[1.125rem] sm:text-[1.25rem]"
-						/>
-						{i18n(I18nKey.paginationFirst)}
-					</span>
-				)}
+				<div class="flex w-9 shrink-0 justify-start sm:w-10">
+					{page.url.prev ? (
+						<a
+							href={page.url.prev}
+							class={navArrowClass}
+							aria-label={i18n(I18nKey.paginationPrev)}
+						>
+							<Icon
+								name="material-symbols:chevron-left"
+								class="text-[1.25rem] leading-none sm:text-[1.35rem]"
+							/>
+						</a>
+					) : (
+						<span
+							class={navArrowDisabledClass}
+							aria-disabled="true"
+							aria-label={i18n(I18nKey.paginationPrev)}
+						>
+							<Icon
+								name="material-symbols:chevron-left"
+								class="text-[1.25rem] leading-none sm:text-[1.35rem]"
+							/>
+						</span>
+					)}
+				</div>
 
-				{page.url.prev ? (
-					<a href={page.url.prev} class={btnClass}>
-						<Icon
-							name="material-symbols:chevron-left-rounded"
-							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-						/>
-						{i18n(I18nKey.paginationPrev)}
-					</a>
-				) : (
-					<span class={btnDisabledClass} aria-disabled="true">
-						<Icon
-							name="material-symbols:chevron-left-rounded"
-							class="text-[1.125rem] sm:text-[1.25rem]"
-						/>
-						{i18n(I18nKey.paginationPrev)}
-					</span>
-				)}
+				<div class="flex min-w-0 flex-1 flex-wrap items-center justify-center gap-1.5">
+					{pageItems.map((item) =>
+						item.kind === "ellipsis" ? (
+							<span class={ellipsisClass} aria-hidden="true">
+								…
+							</span>
+						) : item.num === page.currentPage ? (
+							<span
+								class={pageNumActive}
+								aria-current="page"
+								aria-label={`${i18n(I18nKey.paginationPage)} ${item.num}`}
+							>
+								{item.num}
+							</span>
+						) : (
+							<a
+								href={getPageUrl(item.num)}
+								class={pageNumIdle}
+								aria-label={`${i18n(I18nKey.paginationPage)} ${item.num}`}
+							>
+								{item.num}
+							</a>
+						),
+					)}
 
-				<span class="shrink text-sm font-medium text-neutral-800 dark:text-neutral-200 tabular-nums px-1 min-w-0 text-center sm:text-base">
-					{compactLabel}
-				</span>
+					<div class={`${jumpShellClass} ml-0.5`}>
+						<input
+							type="text"
+							inputmode="numeric"
+							pattern="[0-9]*"
+							autocomplete="off"
+							enterkeyhint="go"
+							maxlength={Math.max(1, String(page.lastPage).length)}
+							class={jumpInputClass}
+							data-pagination-jump-input
+							aria-label={jumpInputAria || i18n(I18nKey.paginationJumpTo)}
+						/>
+						<button
+							type="button"
+							class={jumpSubmitClass}
+							data-pagination-jump-go
+							aria-label={i18n(I18nKey.paginationGo)}
+						>
+							<Icon
+								name="material-symbols:keyboard-double-arrow-right-rounded"
+								class="text-[1.125rem] sm:text-[1.25rem]"
+							/>
+						</button>
+					</div>
+				</div>
 
-				{page.url.next ? (
-					<a href={page.url.next} class={btnClass}>
-						{i18n(I18nKey.paginationNext)}
-						<Icon
-							name="material-symbols:chevron-right-rounded"
-							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-						/>
-					</a>
-				) : (
-					<span class={btnDisabledClass} aria-disabled="true">
-						{i18n(I18nKey.paginationNext)}
-						<Icon
-							name="material-symbols:chevron-right-rounded"
-							class="text-[1.125rem] sm:text-[1.25rem]"
-						/>
-					</span>
-				)}
-
-				{!isLast ? (
-					<a href={lastPageHref} class={btnClass}>
-						{i18n(I18nKey.paginationLast)}
-						<Icon
-							name="material-symbols:last-page-rounded"
-							class="text-[1.125rem] opacity-90 sm:text-[1.25rem]"
-						/>
-					</a>
-				) : (
-					<span class={btnDisabledClass} aria-disabled="true">
-						{i18n(I18nKey.paginationLast)}
-						<Icon
-							name="material-symbols:last-page-rounded"
-							class="text-[1.125rem] sm:text-[1.25rem]"
-						/>
-					</span>
-				)}
+				<div class="flex w-9 shrink-0 justify-end sm:w-10">
+					{page.url.next ? (
+						<a
+							href={page.url.next}
+							class={navArrowClass}
+							aria-label={i18n(I18nKey.paginationNext)}
+						>
+							<Icon
+								name="material-symbols:chevron-right"
+								class="text-[1.25rem] leading-none sm:text-[1.35rem]"
+							/>
+						</a>
+					) : (
+						<span
+							class={navArrowDisabledClass}
+							aria-disabled="true"
+							aria-label={i18n(I18nKey.paginationNext)}
+						>
+							<Icon
+								name="material-symbols:chevron-right"
+								class="text-[1.25rem] leading-none sm:text-[1.35rem]"
+							/>
+						</span>
+					)}
+				</div>
 			</nav>
+
+			<p
+				data-pagination-jump-error
+				class="hidden w-full px-2 text-center text-sm text-red-600 dark:text-red-400"
+				role="alert"
+				aria-live="polite"
+			/>
 		</div>
 	)
 }
+
+<script is:inline>
+	(function () {
+		function joinUrlParts(...parts) {
+			return parts.join("/").replace(/\/+/g, "/");
+		}
+		function buildPageUrl(root, pageNum, baseUrl) {
+			const path = !root
+				? pageNum === 1
+					? "/"
+					: `/${pageNum}/`
+				: pageNum === 1
+					? `/${root}/`
+					: `/${root}/${pageNum}/`;
+			return joinUrlParts("", baseUrl || "/", path);
+		}
+		function bindJump(wrap) {
+			const input = wrap.querySelector("[data-pagination-jump-input]");
+			const btn = wrap.querySelector("[data-pagination-jump-go]");
+			const errEl = wrap.querySelector("[data-pagination-jump-error]");
+			if (!(input instanceof HTMLInputElement) || !btn) return;
+			const invalidMsg = wrap.dataset.paginationJumpInvalidMsg || "";
+			const root = wrap.dataset.paginationRoot || "";
+			const lastPage = Math.max(
+				1,
+				parseInt(String(wrap.dataset.paginationLastPage || "1"), 10) || 1,
+			);
+			const currentPage = Math.max(
+				1,
+				parseInt(String(wrap.dataset.paginationCurrentPage || "1"), 10) || 1,
+			);
+			const baseUrl = wrap.dataset.paginationBaseUrl || "/";
+			function hideError() {
+				if (errEl instanceof HTMLElement) {
+					errEl.textContent = "";
+					errEl.classList.add("hidden");
+				}
+				input.removeAttribute("aria-invalid");
+			}
+			function showError() {
+				if (errEl instanceof HTMLElement && invalidMsg) {
+					errEl.textContent = invalidMsg;
+					errEl.classList.remove("hidden");
+				}
+				input.setAttribute("aria-invalid", "true");
+			}
+			function go() {
+				hideError();
+				const v = String(input.value).trim();
+				if (v === "" || !/^\d+$/.test(v)) {
+					showError();
+					return;
+				}
+				const n = parseInt(v, 10);
+				if (!Number.isFinite(n)) {
+					showError();
+					return;
+				}
+				const p = Math.min(lastPage, Math.max(1, n));
+				if (p === currentPage) return;
+				window.location.href = buildPageUrl(root, p, baseUrl);
+			}
+			btn.addEventListener("click", go);
+			input.addEventListener("input", hideError);
+			input.addEventListener("keydown", function (e) {
+				if (e.key === "Enter") {
+					e.preventDefault();
+					go();
+				}
+			});
+		}
+		function init() {
+			document.querySelectorAll("[data-static-pagination]").forEach(bindJump);
+		}
+		if (document.readyState === "loading") {
+			document.addEventListener("DOMContentLoaded", init);
+		} else {
+			init();
+		}
+	})();
+</script>
+
+<style>
+	.pagination-reflow {
+		flex-wrap: wrap;
+		row-gap: 0.5rem;
+	}
+	@media (min-width: 480px) {
+		.pagination-reflow {
+			flex-wrap: nowrap;
+		}
+	}
+</style>

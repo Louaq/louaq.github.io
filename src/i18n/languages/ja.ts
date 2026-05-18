@@ -157,6 +157,7 @@ export const ja: Translation = {
 	[Key.paginationJumpTo]: "ページ移動",
 	[Key.paginationJumpPageUnit]: "ページ",
 	[Key.paginationGo]: "移動",
+	[Key.paginationJumpInvalid]: "ページ番号は数字で入力してください",
 
 	// 404ページ
 	[Key.notFound]: "404",

@@ -151,6 +151,7 @@ export const en: Translation = {
 	[Key.paginationJumpTo]: "Go to page",
 	[Key.paginationJumpPageUnit]: "",
 	[Key.paginationGo]: "Go",
+	[Key.paginationJumpInvalid]: "Enter a numeric page number",
 
 	// 404 Page
 	[Key.notFound]: "404",

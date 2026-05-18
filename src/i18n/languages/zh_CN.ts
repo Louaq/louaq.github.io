@@ -147,6 +147,7 @@ export const zh_CN: Translation = {
 	[Key.paginationJumpTo]: "跳转到",
 	[Key.paginationJumpPageUnit]: "页",
 	[Key.paginationGo]: "前往",
+	[Key.paginationJumpInvalid]: "请输入数字页码",
 
 	// 404页面
 	[Key.notFound]: "404",

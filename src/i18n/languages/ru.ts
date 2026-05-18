@@ -151,6 +151,7 @@ export const ru: Translation = {
 	[Key.paginationJumpTo]: "Перейти к стр.",
 	[Key.paginationJumpPageUnit]: "",
 	[Key.paginationGo]: "Перейти",
+	[Key.paginationJumpInvalid]: "Введите номер страницы (только цифры)",
 
 	// 404 Страница
 	[Key.notFound]: "404",
