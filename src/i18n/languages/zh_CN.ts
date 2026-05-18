@@ -16,6 +16,7 @@ export const zh_CN: Translation = {
 	[Key.searchSummary]: "摘要",
 	[Key.searchContent]: "内容",
 	[Key.searchViewMore]: "查看更多结果 ({count} 个更多)",
+	[Key.searchProcessingTime]: "耗时 {ms} ms",
 	[Key.other]: "其他",
 	[Key.all]: "全部",
 
