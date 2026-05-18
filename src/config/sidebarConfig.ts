@@ -17,8 +17,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	// 适用在只想用左侧单侧栏，但在文章详情页想用右侧栏的目录等组件的场景
 	showRightSidebarOnPostPage: false,
 
-
-
 	// 左侧边栏组件配置列表
 	// 组件位置position：top=顶部，sticky=粘性定位(会跟随页面滚动)
 	leftComponents: [
@@ -36,29 +34,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 动画延迟时间（毫秒），用于错开动画效果
 			animationDelay: 0,
 		},
-		// {
-		// 	// 组件类型：倒计时组件
-		// 	type: "countdown",
-		// 	// 是否启用该组件
-		// 	enable: true,
-		// 	// 组件显示顺序
-		// 	order: 2,
-		// 	// 组件位置
-		// 	position: "sticky",
-		// 	// 是否在文章详情页显示
-		// 	showOnPostPage: true,
-		// 	// CSS 类名
-		// 	class: "onload-animation",
-		// 	// 动画延迟时间
-		// 	animationDelay: 0,
-		// 	// 自定义属性：配置倒计时目标日期时间和标题
-		// 	// targetDate 支持格式: "YYYY-MM-DD HH:MM:SS" 或 "YYYY-MM-DD"
-		// 	customProps: {
-		// 		targetDate: "2026-05-08 00:00:00",
-		// 		title: "汇报倒计时",
-		// 		description: "距离汇报还有",
-		// 	},
-		// },
 		{
 			// 组件类型：公告组件
 			type: "announcement",

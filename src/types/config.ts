@@ -440,7 +440,6 @@ export type WidgetComponentType =
 	| "advertisement"
 	| "stats"
 	| "calendar"
-	| "countdown"
 	| "douyinHot";
 
 export type WidgetComponentConfig = {

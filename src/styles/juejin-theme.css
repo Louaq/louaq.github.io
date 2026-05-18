@@ -566,17 +566,13 @@ a {
 }
 
 /* =============================================================
- * 倒计时 / Countdown widget：掘金风格数字
+ * 公告 / Announcement
  * ============================================================= */
 .widget [class*="text-"] {
   letter-spacing: 0;
 }
 
-/* =============================================================
- * 公告 / Announcement
- * ============================================================= */
-.widget .announcement,
-.widget .countdown {
+.widget .announcement {
   font-size: 0.875rem;
 }
 
@@ -675,21 +671,6 @@ widget-layout .widget-title::before {
   width: 3px !important;
   height: 16px !important;
   border-radius: 2px !important;
-}
-
-/* =============================================================
- * 倒计时 Widget：方块样式适配掘金
- * ============================================================= */
-.countdown-item {
-  border-radius: 4px !important;
-  background: var(--juejin-tag-bg) !important;
-}
-:root.dark .countdown-item {
-  background: rgba(255, 255, 255, 0.06) !important;
-}
-.countdown-value {
-  color: var(--juejin-primary) !important;
-  font-weight: 700 !important;
 }
 
 /* =============================================================

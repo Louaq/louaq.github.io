@@ -151,7 +151,7 @@ export const siteConfig: SiteConfig = {
 	// 分页配置
 	pagination: {
 		// 首页每页文章数
-		postsPerPage: 16,
+		postsPerPage: 10,
 	},
 
 	// 字体配置

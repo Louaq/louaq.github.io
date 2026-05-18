@@ -14,7 +14,6 @@ export type {
 	LicenseConfig,
 	NavBarConfig,
 	ProfileConfig,
-	SakuraConfig,
 	SidebarLayoutConfig,
 	SiteConfig,
 	SponsorConfig,
@@ -44,7 +43,6 @@ export {
 // 组件配置
 export { navBarConfig } from "./navBarConfig"; // 导航栏配置
 export { profileConfig } from "./profileConfig"; // 用户资料配置
-export { sakuraConfig } from "./sakuraConfig"; // 樱花特效配置
 // 布局配置
 export { sidebarLayoutConfig } from "./sidebarConfig"; // 侧边栏布局配置
 // 核心配置
