@@ -13,8 +13,6 @@ enum I18nKey {
 	searchSummary = "searchSummary",
 	searchContent = "searchContent",
 	searchViewMore = "searchViewMore",
-	/** 搜索耗时占位 {ms}，如「耗时 3 ms」 */
-	searchProcessingTime = "searchProcessingTime",
 	other = "other",
 
 	tags = "tags",

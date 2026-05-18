@@ -44,8 +44,6 @@ let nbHits = $state(0);
 let nbPages = $state(0);
 let hasMore = $state(false);
 let isLoadingMore = $state(false);
-/** 最近一次搜索端到端耗时（performance.now，含网络）；用于展示，避免 Meilisearch processingTimeMs 常为 0 */
-let searchLatencyMs = $state<number | null>(null);
 let requestSeq = 0;
 let listEl: HTMLDivElement | null = $state(null);
 let lastScrolledIndex = -1;
@@ -98,13 +96,6 @@ function unlockScroll() {
 	html.style.overflow = prevScrollLock.htmlOverflow;
 	html.style.paddingRight = prevScrollLock.htmlPaddingRight;
 	prevScrollLock = null;
-}
-
-function formatSearchLatencyLabel(elapsedMs: number): string {
-	const e = Math.max(0, elapsedMs);
-	if (e >= 100) return String(Math.round(e));
-	const s = e.toFixed(1);
-	return s.endsWith(".0") ? String(Math.round(e)) : s;
 }
 
 const typeLabel = (t: string | undefined): string => {
@@ -165,7 +156,6 @@ const closeModal = () => {
 	nbPages = 0;
 	hasMore = false;
 	isLoadingMore = false;
-	searchLatencyMs = null;
 	// 恢复背景滚动
 	try {
 		unlockScroll();
@@ -208,7 +198,6 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 		nbPages = 0;
 		hasMore = false;
 		isLoadingMore = false;
-		searchLatencyMs = null;
 		return;
 	}
 
@@ -220,13 +209,11 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 		nbPages = 0;
 		hasMore = false;
 		isLoadingMore = false;
-		searchLatencyMs = null;
 	}
 
 	isSearching = true;
 	const currentReq = ++requestSeq;
 	try {
-		const perfStart = typeof performance !== "undefined" ? performance.now() : 0;
 		if (searchEngine === "algolia") {
 			const response = await searchClient.search({
 				requests: [
@@ -268,8 +255,6 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 				category: hit.category || "",
 			}));
 			activeIndex = results.length > 0 ? 0 : -1;
-			searchLatencyMs =
-				typeof performance !== "undefined" ? Math.max(0, performance.now() - perfStart) : null;
 		} else {
 			// Meilisearch(=milisearch) 搜索（search.louaq.com）
 			const offset = page * hitsPerPage;
@@ -325,8 +310,6 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 				};
 			});
 			activeIndex = results.length > 0 ? 0 : -1;
-			searchLatencyMs =
-				typeof performance !== "undefined" ? Math.max(0, performance.now() - perfStart) : null;
 		}
 	} catch (error) {
 		// 保持静默失败，避免刷屏；必要时可打开 console
@@ -337,7 +320,6 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 		nbHits = 0;
 		nbPages = 0;
 		hasMore = false;
-		searchLatencyMs = null;
 	} finally {
 		if (currentReq === requestSeq) isSearching = false;
 	}
@@ -354,7 +336,6 @@ const loadMore = async () => {
 	const nextPage = page + 1;
 	const currentReq = ++requestSeq;
 	try {
-		const perfStart = typeof performance !== "undefined" ? performance.now() : 0;
 		let newHits: any[] = [];
 
 		if (searchEngine === "algolia") {
@@ -396,8 +377,6 @@ const loadMore = async () => {
 			nbHits = res0?.nbHits ?? nbHits;
 			nbPages = res0?.nbPages ?? nbPages;
 			hasMore = page < nbPages - 1;
-			if (typeof performance !== "undefined")
-				searchLatencyMs = Math.max(0, performance.now() - perfStart);
 		} else {
 			// Meilisearch(=milisearch) 搜索（search.louaq.com）
 			const offset = nextPage * hitsPerPage;
@@ -452,8 +431,6 @@ const loadMore = async () => {
 			nbHits = data?.estimatedTotalHits ?? nbHits;
 			nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
 			hasMore = offset + hitsPerPage < nbHits;
-			if (typeof performance !== "undefined")
-				searchLatencyMs = Math.max(0, performance.now() - perfStart);
 		}
 
 		// 追加并去重（按 url）
@@ -804,16 +781,6 @@ onDestroy(() => {
 					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.announcementClose)}</span>
 				</li>
 			</ul>
-			<div class="docsearch-modal-footer-center">
-				{#if searchLatencyMs != null && query.trim()}
-					<span class="docsearch-modal-footer-timing" role="status">
-						{i18n(I18nKey.searchProcessingTime).replace(
-							"{ms}",
-							formatSearchLatencyLabel(searchLatencyMs),
-						)}
-					</span>
-				{/if}
-			</div>
 			<span class="docsearch-modal-footer-logo" aria-label={searchEngine === "milisearch" ? "Meilisearch" : "Algolia"}>
 				{#if searchEngine === "algolia"}
 					<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchBy)}</span>
@@ -1288,20 +1255,6 @@ onDestroy(() => {
 	}
 	:global(html.dark) .docsearch-modal-footer-commands-label {
 		color: #9ca3af;
-	}
-
-	.docsearch-modal-footer-center {
-		flex: 1;
-		min-width: 0;
-		text-align: center;
-	}
-	.docsearch-modal-footer-timing {
-		font-size: 0.75rem;
-		color: #6b7280;
-		white-space: nowrap;
-	}
-	:global(html.dark) .docsearch-modal-footer-timing {
-		color: #94a3b8;
 	}
 
 	.docsearch-modal-footer-logo {

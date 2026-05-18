@@ -16,7 +16,6 @@ export const ja: Translation = {
 	[Key.searchSummary]: "摘要",
 	[Key.searchContent]: "内容",
 	[Key.searchViewMore]: "さらに結果を表示 ({count} 件)",
-	[Key.searchProcessingTime]: "{ms} ms",
 	[Key.other]: "その他",
 	[Key.all]: "すべて",
 
