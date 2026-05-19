@@ -63,10 +63,14 @@ const pageNumIdle = `${pageNumBase} border-[var(--juejin-border)] bg-[var(--card
 const pageNumActive = `${pageNumBase} border-[var(--primary)] bg-[var(--primary)] text-white shadow-sm`;
 const ellipsisClass =
 	"flex h-9 items-center px-1 text-sm text-[var(--juejin-text-tertiary)] select-none";
+const jumpGroupClass =
+	"group/pjump pagination-jump-group ml-0.5 inline-flex max-w-full";
 const jumpShellClass =
-	"inline-flex h-9 overflow-hidden rounded-lg border-2 border-[var(--primary)] bg-[var(--card-bg)]";
+	"inline-flex h-9 overflow-hidden rounded-lg border border-[var(--juejin-border)] bg-[var(--card-bg)]";
+const jumpInputSlotClass =
+	"jump-input-slot max-w-0 overflow-hidden opacity-0 transition-[max-width,opacity] duration-300 ease-out motion-reduce:transition-none group-hover/pjump:max-w-12 group-hover/pjump:opacity-100 group-focus-within/pjump:max-w-12 group-focus-within/pjump:opacity-100";
 const jumpInputClass =
-	"w-11 border-0 bg-transparent px-1 text-center text-sm text-[var(--juejin-text-primary)] tabular-nums outline-none focus:ring-0 sm:w-12";
+	"box-border h-9 w-12 min-w-12 shrink-0 border-0 bg-transparent px-1 text-center text-sm text-[var(--juejin-text-primary)] tabular-nums outline-none focus:ring-0";
 const jumpSubmitClass =
 	"inline-flex h-9 shrink-0 items-center justify-center border-l border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] px-2 text-[var(--primary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)]";
 
@@ -145,29 +149,33 @@ const jumpInputAria = [
 						),
 					)}
 
-					<div class={`${jumpShellClass} ml-0.5`}>
-						<input
-							type="text"
-							inputmode="numeric"
-							pattern="[0-9]*"
-							autocomplete="off"
-							enterkeyhint="go"
-							maxlength={Math.max(1, String(page.lastPage).length)}
-							class={jumpInputClass}
-							data-pagination-jump-input
-							aria-label={jumpInputAria || i18n(I18nKey.paginationJumpTo)}
-						/>
-						<button
-							type="button"
-							class={jumpSubmitClass}
-							data-pagination-jump-go
-							aria-label={i18n(I18nKey.paginationGo)}
-						>
-							<Icon
-								name="material-symbols:keyboard-double-arrow-right-rounded"
-								class="text-[1.125rem] sm:text-[1.25rem]"
-							/>
-						</button>
+					<div class={jumpGroupClass} data-pagination-jump-shell>
+						<div class={jumpShellClass}>
+							<div class={jumpInputSlotClass}>
+								<input
+									type="text"
+									inputmode="numeric"
+									pattern="[0-9]*"
+									autocomplete="off"
+									enterkeyhint="go"
+									maxlength={Math.max(1, String(page.lastPage).length)}
+									class={jumpInputClass}
+									data-pagination-jump-input
+									aria-label={jumpInputAria || i18n(I18nKey.paginationJumpTo)}
+								/>
+							</div>
+							<button
+								type="button"
+								class={jumpSubmitClass}
+								data-pagination-jump-go
+								aria-label={i18n(I18nKey.paginationGo)}
+							>
+								<Icon
+									name="material-symbols:keyboard-double-arrow-right-rounded"
+									class="text-[1.125rem] sm:text-[1.25rem]"
+								/>
+							</button>
+						</div>
 					</div>
 				</div>
 
@@ -210,6 +218,25 @@ const jumpInputAria = [
 
 <script is:inline>
 	(function () {
+		function isCoarsePointer() {
+			return window.matchMedia("(hover: none), (pointer: coarse)").matches;
+		}
+		function ensureJumpTouchOutsideClose() {
+			if (window.__fireflyJumpTouchOutside) return;
+			window.__fireflyJumpTouchOutside = true;
+			document.addEventListener("click", function (e) {
+				if (!isCoarsePointer()) return;
+				const t = e.target;
+				if (!(t instanceof Node)) return;
+				document
+					.querySelectorAll(".pagination-jump-group.jump-touch-expanded")
+					.forEach((g) => {
+						if (g instanceof HTMLElement && !g.contains(t)) {
+							g.classList.remove("jump-touch-expanded");
+						}
+					});
+			});
+		}
 		function joinUrlParts(...parts) {
 			return parts.join("/").replace(/\/+/g, "/");
 		}
@@ -239,6 +266,18 @@ const jumpInputAria = [
 				parseInt(String(wrap.dataset.paginationCurrentPage || "1"), 10) || 1,
 			);
 			const baseUrl = wrap.dataset.paginationBaseUrl || "/";
+			const jumpGroup = wrap.querySelector("[data-pagination-jump-shell]");
+			ensureJumpTouchOutsideClose();
+			if (jumpGroup instanceof HTMLElement) {
+				jumpGroup.addEventListener("click", function (e) {
+					if (!isCoarsePointer()) return;
+					if (jumpGroup.classList.contains("jump-touch-expanded")) return;
+					const t = e.target;
+					if (t instanceof Node && (btn.contains(t) || t === btn)) return;
+					jumpGroup.classList.add("jump-touch-expanded");
+					input.focus();
+				});
+			}
 			function hideError() {
 				if (errEl instanceof HTMLElement) {
 					errEl.textContent = "";
@@ -269,7 +308,18 @@ const jumpInputAria = [
 				if (p === currentPage) return;
 				window.location.href = buildPageUrl(root, p, baseUrl);
 			}
-			btn.addEventListener("click", go);
+			btn.addEventListener("click", function () {
+				if (
+					jumpGroup instanceof HTMLElement &&
+					isCoarsePointer() &&
+					!jumpGroup.classList.contains("jump-touch-expanded")
+				) {
+					jumpGroup.classList.add("jump-touch-expanded");
+					input.focus();
+					return;
+				}
+				go();
+			});
 			input.addEventListener("input", hideError);
 			input.addEventListener("keydown", function (e) {
 				if (e.key === "Enter") {
@@ -298,5 +348,10 @@ const jumpInputAria = [
 		.pagination-reflow {
 			flex-wrap: nowrap;
 		}
+	}
+	/* 触摸设备：由脚本添加 jump-touch-expanded，点按后展开 */
+	.pagination-jump-group.jump-touch-expanded .jump-input-slot {
+		max-width: 3rem;
+		opacity: 1;
 	}
 </style>
