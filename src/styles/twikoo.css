@@ -275,6 +275,28 @@
   border-color: var(--tk-accent);
 }
 
+/*
+ * 人机验证：Twikoo 内置样式将 Turnstile / 极验 容器绝对定位到按钮下方（bottom: -75px），
+ * 体验上像在「发送」之后单独飘一块。改为参与文档流：独占一行并与按钮同一侧（右对齐），
+ * 出现在预览/发送按钮的上方，最后再点发送。
+ */
+.twikoo .tk-row.actions {
+  flex-wrap: wrap;
+}
+
+.twikoo .tk-turnstile-container,
+.twikoo .tk-geetest-container {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  z-index: auto;
+  flex-basis: 100%;
+  order: -1;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 0.75rem;
+}
+
 /* 其他语义按钮：success/warning/danger/info 统一主题化 */
 .twikoo .el-button--success,
 .twikoo .el-button--warning,

@@ -1,7 +1,7 @@
 import type { CommentConfig } from "../types/config";
 
 export const commentConfig: CommentConfig = {
-  type: 'twikoo', // 当前启用的评论系统类型: none, twikoo, waline, giscus, disqus，默认为none，即不启用评论系统。
+  type: 'none', // 当前启用的评论系统类型: none, twikoo, waline, giscus, disqus，默认为none，即不启用评论系统。
   //twikoo评论系统配置
   twikoo: {
     envId: "https://twikoo.louaq.com",
