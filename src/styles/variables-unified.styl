@@ -129,6 +129,16 @@
   --juejin-primary-hover: oklch(0.76 0.13 var(--hue));
   --juejin-primary-active: oklch(0.62 0.17 var(--hue));
 
+  /* 亮色 :root 的掘金字色未随暗色覆盖，会与 --card-bg 冲突（如分页数字几乎不可见） */
+  --juejin-text-primary: rgba(255, 255, 255, 0.92);
+  --juejin-text-secondary: rgba(255, 255, 255, 0.72);
+  --juejin-text-tertiary: rgba(255, 255, 255, 0.5);
+  --juejin-bg-page: #17171a;
+  --juejin-bg-card: #22222a;
+  --juejin-border: rgba(255, 255, 255, 0.12);
+  --juejin-border-hover: rgba(255, 255, 255, 0.22);
+  --juejin-tag-bg: #2d2d35;
+
   --primary: var(--juejin-primary);
   --page-bg: #17171a;
   --card-bg: #22222a;
