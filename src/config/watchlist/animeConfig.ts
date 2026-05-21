@@ -437,5 +437,21 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
 	},
+	{
+		title: "逆天邪神 年番",
+		cover: "https://pic1.imgdb.cn/item/6a0ef08b2cb0eba86fb3549f.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 4,
+			total: 52,
+		},
+		startDate: "2026-04-16",
+		comment: "节奏太慢了",
+		link: "https://movie.douban.com/subject/36838657/",
+		tags: ["动作", "动画", "奇幻", "古装"],
+		enabled: true,
+	},
 ];
 
