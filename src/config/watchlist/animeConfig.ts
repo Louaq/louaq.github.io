@@ -453,5 +453,21 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻", "古装"],
 		enabled: true,
 	},
+	{
+		title: "将夜",
+		cover: "https://pic1.imgdb.cn/item/6a0fc4b7aea0248f527eb739.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 4,
+			total: 19,
+		},
+		startDate: "2026-04-23",
+		comment: "比真人版好。",
+		link: "https://movie.douban.com/subject/36589693/",
+		tags: ["动作", "动画", "奇幻", "武侠"],
+		enabled: true,
+	},
 ];
 
