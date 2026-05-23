@@ -34,7 +34,7 @@ export const homeCarouselConfig: HomeCarouselConfig = {
 		// 示例：
 		{
 			title: "",
-			image: "https://pic1.imgdb.cn/item/6a0befe2a0971b8b02a1bea3.webp",
+			image: "https://cdn.x8xx.cn/banner/api.php",
 			href: "",
 			date: "",
 			category: "",
