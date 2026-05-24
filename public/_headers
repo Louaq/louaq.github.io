@@ -1,0 +1,24 @@
+# Astro 构建产物：内容寻址，安全长缓存
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# 字体文件：长缓存（含 _astro 之外的 woff2/woff）
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+# public/assets 下的图片/JS：30 天
+/assets/*
+  Cache-Control: public, max-age=2592000
+
+# HTML：始终重新校验，确保更新可见
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# 全站安全头（对齐 vercel.json）
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin

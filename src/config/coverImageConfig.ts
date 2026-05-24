@@ -35,13 +35,13 @@ export const coverImageConfig: CoverImageConfig = {
 		/**
 		 * 加载指示器配置
 		 * - 自定义加载图片和背景色，用于在图片加载过程中显示
-		 * - 如果不配置，将使用默认的 loading.gif 和 #fefefe 背景色
+		 * - 如果不配置，将使用默认的占位图和 #fefefe 背景色
 		 */
 		loading: {
 			// 加载指示器开关
 			enable: false,
 			// 自定义加载图片路径（相对于 public 目录）
-			image: "/assets/images/loading.gif",
+			image: "/assets/images/cover.webp",
 			// 加载指示器背景颜色，应与加载图片的背景色一致，避免在暗色模式下显得突兀
 			backgroundColor: "#fefefe",
 		},
