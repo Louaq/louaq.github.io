@@ -42,10 +42,10 @@ export default function algolia(): AstroIntegration {
 
           logger.info(`Found ${records.length} records to upload`);
 
-          // 上传数据到 Algolia
-          await client.saveObjects({ 
-            indexName: ALGOLIA_INDEX_NAME, 
-            objects: records 
+          // 全量替换索引，确保已移除的内容（如观影页）不会残留在搜索结果中
+          await client.replaceAllObjects({
+            indexName: ALGOLIA_INDEX_NAME,
+            objects: records,
           });
 
           // 尽量保证“全站搜索”体验：设置可搜索字段与摘要

@@ -191,6 +191,7 @@ export default function meilisearch(): AstroIntegration {
 					// displayedAttributes 用于确保前端能拿到 content/title 等字段（避免默认不返回）
 					const searchableAttributes = ["title", "description", "content", "tags", "category", "type"];
 					const displayedAttributes = ["type", "title", "description", "content", "url", "tags", "category"];
+					const filterableAttributes = ["type", "objectID"];
 
 					try {
 						const settingsRes = await meiliRequest({
@@ -200,6 +201,7 @@ export default function meilisearch(): AstroIntegration {
 							body: {
 								searchableAttributes,
 								displayedAttributes,
+								filterableAttributes,
 							},
 						});
 						const json = await settingsRes.json().catch(() => ({}));
@@ -220,6 +222,36 @@ export default function meilisearch(): AstroIntegration {
 					} catch (e) {
 						uploadSucceeded = false;
 						logger.warn(`Meilisearch setSettings failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
+					}
+
+					// 2.6) 清理已下线的观影索引（避免旧数据继续出现在搜索结果中）
+					try {
+						const deleteRes = await meiliRequest({
+							url: `${host}/indexes/${MEILISEARCH_INDEX_NAME}/documents/delete`,
+							method: "POST",
+							adminKey: MEILISEARCH_ADMIN_KEY,
+							body: {
+								filter: 'type = "watchlist" OR objectID = "page:watchlist"',
+							},
+						});
+						const deleteJson = await deleteRes.json().catch(() => ({}));
+						if (deleteRes.ok && deleteJson?.taskUid) {
+							logger.info(`Waiting Meilisearch delete-watchlist task: ${deleteJson.taskUid}`);
+							await waitForTask({
+								host,
+								adminKey: MEILISEARCH_ADMIN_KEY,
+								taskUid: deleteJson.taskUid,
+								timeoutMs: 30_000,
+							}).catch((e) => {
+								logger.warn(
+									`Meilisearch delete-watchlist task failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+								);
+							});
+						}
+					} catch (e) {
+						logger.warn(
+							`Meilisearch delete-watchlist failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+						);
 					}
 
 					// 3) 上传文档（按块，避免单次请求过大）

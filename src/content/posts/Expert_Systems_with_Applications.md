@@ -1,5 +1,5 @@
 ---
-title: Expert Systems with Applications
+title: Expert Systems With Applications
 published: 2026-04-03 20:58:00
 expires: 2026-08-21 23:59:59
 description: "Expert Systems with Applications期刊"

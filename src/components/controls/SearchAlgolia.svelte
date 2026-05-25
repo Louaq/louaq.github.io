@@ -106,8 +106,6 @@ const typeLabel = (t: string | undefined): string => {
 			return "页面";
 		case "friend":
 			return "友链";
-		case "watchlist":
-			return "观影";
 		default:
 			return "内容";
 	}
