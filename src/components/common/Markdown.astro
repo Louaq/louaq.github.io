@@ -10,3 +10,20 @@ const className = Astro.props.class;
 <div class={`prose dark:prose-invert prose-base !max-w-none custom-md ${className}`}>
     <slot/>
 </div>
+
+<script>
+  const wrapMarkdownTables = () => {
+    document.querySelectorAll(".custom-md table").forEach((table) => {
+      if (table.parentElement?.classList.contains("md-table-scroll")) return;
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "md-table-scroll";
+      table.parentNode?.insertBefore(wrapper, table);
+      wrapper.appendChild(table);
+    });
+  };
+
+  wrapMarkdownTables();
+  document.addEventListener("astro:page-load", wrapMarkdownTables);
+  document.addEventListener("astro:after-swap", wrapMarkdownTables);
+</script>

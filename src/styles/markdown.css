@@ -100,12 +100,24 @@
   }
   
   .custom-md {
+    .md-table-scroll {
+      width: 100%;
+      max-width: 100%;
+      margin: 1rem 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-radius: var(--radius-large);
+      -webkit-overflow-scrolling: touch;
+    }
+
     table {
-      @apply w-full my-4;
+      display: table;
+      width: max-content !important;
+      min-width: 100% !important;
       border-collapse: separate;
       border-spacing: 0;
-      border-radius: var(--radius-large);
       overflow: hidden;
+      table-layout: auto !important;
     }
   
     th,
@@ -113,7 +125,8 @@
       @apply px-3 py-2 text-left;
       min-width: 120px;
       border: none;
-      word-break: break-word;
+      white-space: nowrap !important;
+      word-break: normal !important;
     }
   
     th {
@@ -130,16 +143,15 @@
 
     @media (max-width: 767px) {
       table {
-        display: table;
-        width: 100%;
-        max-width: 100%;
-        table-layout: fixed;
-        overflow: hidden;
+        width: max-content !important;
+        min-width: 100% !important;
+        table-layout: auto !important;
       }
 
       th,
       td {
-        min-width: 0;
+        min-width: 120px !important;
+        max-width: none !important;
       }
     }
   }
