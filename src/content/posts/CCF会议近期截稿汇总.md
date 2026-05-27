@@ -4,6 +4,9 @@ published: 2026-05-26 17:57:00
 description: "整理 CCFDDL 中人工智能、计算机图形学与多媒体、交叉/综合/新兴三个类别近期即将截稿的 CCF 会议。"
 category: 学术会议
 tags: [CCF]
+homeCarousel: true
+homeCarouselOrder: 2
+homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 ---
 
 > 数据参考 [CCFDDL](https://ccfddl.com/) 及其开源数据仓库 [ccfddl/ccf-deadlines](https://github.com/ccfddl/ccf-deadlines)，感谢开源社区的贡献🤗🤗
