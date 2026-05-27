@@ -31,12 +31,14 @@ export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 		},
 		// 你可以继续在下面添加更多条通知，例如：
 		// {
-		// 	title: "紧急",
+		// 	title: "重要通知",
 		// 	content: "某服务短暂异常，正在处理。",
+		// 	icon: "fa6-solid:user-shield",
 		// },
 		// {
-		// 	title: "提示",
+		// 	title: "重要通知",
 		// 	content: "新文章 RSS 已更新。",
+		// 	icon: "fa6-solid:user-shield",
 		// 	link: {
 		// 		enable: true,
 		// 		text: "查看",
