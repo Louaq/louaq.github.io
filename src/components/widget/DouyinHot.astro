@@ -1,8 +1,6 @@
 ---
-import I18nKey from "@/i18n/i18nKey";
-import { i18n } from "@/i18n/translation";
+import WidgetLayout from "@/components/common/WidgetLayout.astro";
 import { widgetManager } from "@/utils/widget-manager";
-import WidgetLayout from "./WidgetLayout.astro";
 
 const COLLAPSED_HEIGHT = "12rem";
 
@@ -258,20 +256,6 @@ const style = Astro.props.style;
 </style>
 
 <script>
-	// API返回的原始数据格式
-	interface DouyinAPIItem {
-		id: string;                // 热搜ID
-		title: string;             // 热搜标题
-		url: string;               // 热搜链接
-	}
-
-	interface DouyinAPIResponse {
-		status: string;            // 状态
-		id: string;                // 源ID
-		updatedTime: number;       // 更新时间戳
-		items: DouyinAPIItem[];    // 数据列表
-	}
-
 	const CACHE_KEY = "douyin-hot-cache";
 	const CACHE_TTL = 10 * 60 * 1000; // 10 分钟
 	// 源 API（与 src/pages/api/douyin.json.ts 一致）
@@ -337,18 +321,6 @@ const style = Astro.props.style;
 				if (refreshing) refreshIcon.classList.add("is-spinning");
 				else refreshIcon.classList.remove("is-spinning");
 			}
-		}
-
-		// 格式化数字
-		function formatNumber(num: string | number): string {
-			const n = typeof num === "string" ? parseInt(num) : num;
-			if (n >= 100000000) {
-				return (n / 100000000).toFixed(1) + "亿";
-			}
-			if (n >= 10000) {
-				return (n / 10000).toFixed(1) + "万";
-			}
-			return String(n);
 		}
 
 		// HTML转义
@@ -525,7 +497,7 @@ const style = Astro.props.style;
 
 		// 每10分钟自动从接口获取更新（与本地缓存 TTL 一致）
 		anyContainer._douyinHotInterval = setInterval(
-			() => fetchDouyinHot({ silent: true, skipCache: true }),
+			() => fetchDouyinHot({ silent: true, force: true }),
 			10 * 60 * 1000,
 		);
 

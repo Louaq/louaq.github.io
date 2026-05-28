@@ -31,23 +31,19 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `FloatingControls.astro` - 右下角悬浮控件容器
 
 **交互组件**
-- `LightDarkSwitch.svelte` - 主题切换组件
-- `LayoutSwitchButton.svelte` - 布局切换按钮
 - `Search.svelte` - 搜索功能组件
 - `ArchivePanel.svelte` - 归档面板组件
-- `DisplaySettings.svelte` - 显示设置组件
-- `WallpaperSwitch.svelte` - 壁纸模式切换组件
+- `DisplaySettingsIntegrated.svelte` - 显示设置、壁纸模式、横幅设置和文章列表布局切换
 
 ### 🔧 common/ - 公共可复用组件
 
 通用的 UI 组件和工具组件，支持跨项目复用。
 
 **基础 UI 组件**
-- `DropdownPanel.astro`/`.svelte` - 下拉面板容器
-- `DropdownItem.astro`/`.svelte` - 下拉选项
+- `DropdownPanel.astro` - 下拉面板容器
+- `DropdownItem.astro` - 下拉选项
 - `FloatingButton.astro` - 悬浮按钮基础组件
 - `Icon.astro` - 图标组件（带加载状态和错误处理）
-- `ButtonLink.astro` - 链接按钮
 - `ButtonTag.astro` - 标签按钮
 - `WidgetLayout.astro` - 小部件布局容器
 
@@ -69,6 +65,7 @@ Firefly 项目中所有可复用组件的集中管理。组件按照功能和职
 - `Announcement.astro` - 公告组件
 - `Calendar.astro` - 日历组件
 - `Categories.astro` - 分类组件
+- `DouyinHot.astro` - 抖音热搜组件
 - `SidebarTOC.astro` - 侧边栏目录组件
 - `SiteStats.astro` - 站点统计组件
 - `Tags.astro` - 标签组件

@@ -15,7 +15,6 @@ export function initIconLoader() {
 		const iconElement = container.querySelector(
 			"[data-icon-element]",
 		) as HTMLElement;
-		const iconName = iconElement?.getAttribute("icon");
 
 		if (!loadingIndicator || !iconElement) return;
 
