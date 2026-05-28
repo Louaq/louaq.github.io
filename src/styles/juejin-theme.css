@@ -153,21 +153,25 @@ body.wallpaper-transparent #navbar > div {
 
 #navbar .btn-plain:hover {
   color: #000000b3 !important;
-  background-color: #eeeff0 !important;
+  background-color: transparent !important;
 }
 :root.dark #navbar .btn-plain:hover {
   color: rgba(255, 255, 255, 0.85) !important;
-  /* 与亮色 #eeeff0 同级：中性略提亮，非主题色晕染 */
-  background-color: #2d2d35 !important;
+  background-color: transparent !important;
 }
 
 #navbar .btn-plain:active {
   color: #000000b3 !important;
-  background-color: #eeeff0 !important;
+  background-color: transparent !important;
 }
 :root.dark #navbar .btn-plain:active {
   color: rgba(255, 255, 255, 0.85) !important;
-  background-color: #2d2d35 !important;
+  background-color: transparent !important;
+}
+#navbar .btn-plain:hover::before,
+#navbar .btn-plain:active::before {
+  background: none !important;
+  background-color: transparent !important;
 }
 
 /* Logo / 站点标题：无悬浮背景与字色变化（非跟随主题时字色与默认栏一致） */
@@ -254,21 +258,21 @@ body.wallpaper-transparent #navbar > div {
   background-color: transparent !important;
 }
 
-/* 选中态菜单：悬浮时有背景；点击保持与悬浮一致，不再加深 */
+/* 选中态菜单：悬浮/点击时不改变背景 */
 #navbar .navbar-link-active:hover {
   color: var(--juejin-primary) !important;
-  background-color: #eeeff0 !important;
+  background-color: transparent !important;
 }
 :root.dark #navbar .navbar-link-active:hover {
   color: var(--juejin-primary) !important;
-  background-color: #2d2d35 !important;
+  background-color: transparent !important;
 }
 #navbar .navbar-link-active:active {
   color: var(--juejin-primary) !important;
-  background-color: #eeeff0 !important;
+  background-color: transparent !important;
 }
 :root.dark #navbar .navbar-link-active:active {
-  background-color: #2d2d35 !important;
+  background-color: transparent !important;
 }
 
 /* 下拉菜单：掘金风格小圆角 */
@@ -287,20 +291,20 @@ body.wallpaper-transparent #navbar > div {
   margin: 0 4px;
 }
 .dropdown-item:hover {
-  background-color: #eeeff0 !important;
+  background-color: transparent !important;
   color: #000000b3 !important;
 }
 :root.dark .dropdown-item:hover {
-  background-color: #2d2d35 !important;
+  background-color: transparent !important;
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
 .dropdown-item:active {
-  background-color: #eeeff0 !important;
+  background-color: transparent !important;
   color: #000000b3 !important;
 }
 :root.dark .dropdown-item:active {
-  background-color: #2d2d35 !important;
+  background-color: transparent !important;
   color: rgba(255, 255, 255, 0.85) !important;
 }
 

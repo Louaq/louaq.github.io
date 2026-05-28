@@ -47,7 +47,7 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                 <div class="mobile-dropdown" data-mobile-dropdown>
                     <button 
                         class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8 w-full text-left
-                            hover:bg-[#eeeff0] dark:hover:bg-[#2d2d35] transition"
+                            transition"
                         data-mobile-dropdown-trigger
                         aria-expanded="false"
                     >
@@ -68,7 +68,7 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                             return (
                                 <a href={child.external ? child.url : url(child.url)} 
                                    class="group flex justify-between items-center py-2 pl-6 pr-1 rounded-lg gap-8
-                                       hover:bg-[#eeeff0] dark:hover:bg-[#2d2d35] transition"
+                                       transition"
                                    target={child.external ? "_blank" : null}
                                 >
                                     <div class="flex items-center transition text-black/60 dark:text-white/60 font-medium">
@@ -86,7 +86,7 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
             ) : (
                 <!-- 普通链接项目 -->
                 <a href={link.external ? link.url : url(link.url)} class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
-                    hover:bg-[#eeeff0] dark:hover:bg-[#2d2d35] transition
+                    transition
                 "
                    target={link.external ? "_blank" : null}
                 >
@@ -122,6 +122,18 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
     
     .mobile-dropdown[data-expanded="true"] .mobile-dropdown-arrow {
         @apply rotate-180;
+    }
+
+    .mobile-menu-item a,
+    .mobile-menu-item button {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .mobile-menu-item a:hover,
+    .mobile-menu-item a:active,
+    .mobile-menu-item button:hover,
+    .mobile-menu-item button:active {
+        background-color: transparent;
     }
 </style>
 
