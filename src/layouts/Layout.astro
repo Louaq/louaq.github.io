@@ -94,6 +94,14 @@ const siteLang = lang.replace("_", "-");
 const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
 
 const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
+
+// 折叠代码块预览高度：在首屏绘制时即应用与 previewLines 匹配的 max-height，
+// 避免插件 CSS 默认 280px 与 JS 在 DOMContentLoaded 后重新计算之间出现的高度跳变。
+// 计算口径需要与 expressive-code 的 codeLineHeight (1.5rem) 与 pre padding (上下各 1rem) 一致。
+const collapsibleEnabled =
+	expressiveCodeConfig.pluginCollapsible?.enable === true;
+const collapsiblePreviewLines =
+	expressiveCodeConfig.pluginCollapsible?.previewLines ?? 8;
 ---
 
 <!doctype html>
@@ -438,6 +446,9 @@ const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
         "page-width": `${PAGE_WIDTH}rem`,
       }}
     ></style>
+    {collapsibleEnabled && (
+      <style is:global set:html={`.ec-collapse{--ec-collapse-preview-height:calc(${collapsiblePreviewLines} * 1.5rem + 2rem);}`} />
+    )}
     <!-- defines global css variables. This will be applied to <html> <body> and some other elements idk why -->
 
     <slot name="head" />

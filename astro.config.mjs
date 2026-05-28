@@ -37,6 +37,24 @@ import algolia from "./src/utils/algolia.ts";
 import meilisearch from "./src/utils/meilisearch.ts";
 
 const isDev = process.env.NODE_ENV === "development";
+const collapsibleConfig = expressiveCodeConfig.pluginCollapsible;
+const collapsibleOptions =
+	collapsibleConfig?.enable === true
+		? {
+				lineThreshold: collapsibleConfig.lineThreshold ?? 15,
+				previewLines: collapsibleConfig.previewLines ?? 8,
+				defaultCollapsed: collapsibleConfig.defaultCollapsed ?? true,
+				expandButtonText: i18n(I18nKey.codeCollapsibleShowMore),
+				collapseButtonText: i18n(I18nKey.codeCollapsibleShowLess),
+				expandedAnnouncement: i18n(I18nKey.codeCollapsibleExpanded),
+				collapsedAnnouncement: i18n(I18nKey.codeCollapsibleCollapsed),
+			}
+		: null;
+const collapsiblePlugin =
+	collapsibleOptions &&
+	Object.assign(pluginCollapsible(collapsibleOptions), {
+		configDigest: collapsibleOptions,
+	});
 
 // https://astro.build/config
 export default defineConfig({
@@ -101,24 +119,13 @@ export default defineConfig({
 			useDarkModeMediaQuery: false,
 			themeCssSelector: (theme) => `[data-theme='${theme.name}']`,
 			plugins: [
-				// pluginLanguageBadge 始终加载，开关通过 data-language-badge-enabled + CSS 控制
-				pluginLanguageBadge(),
+				...(expressiveCodeConfig.pluginLanguageBadge?.enable !== false
+					? [pluginLanguageBadge()]
+					: []),
 				pluginCollapsibleSections(),
 				pluginLineNumbers(),
 				// pluginCollapsible 配置 - 从expressiveCodeConfig读取设置，使用i18n文本
-				...(expressiveCodeConfig.pluginCollapsible?.enable === true
-					? [
-							pluginCollapsible({
-								lineThreshold: expressiveCodeConfig.pluginCollapsible.lineThreshold || 15,
-								previewLines: expressiveCodeConfig.pluginCollapsible.previewLines || 8,
-								defaultCollapsed: expressiveCodeConfig.pluginCollapsible.defaultCollapsed ?? true,
-								expandButtonText: i18n(I18nKey.codeCollapsibleShowMore),
-								collapseButtonText: i18n(I18nKey.codeCollapsibleShowLess),
-								expandedAnnouncement: i18n(I18nKey.codeCollapsibleExpanded),
-								collapsedAnnouncement: i18n(I18nKey.codeCollapsibleCollapsed),
-							}),
-						]
-					: []),
+				...(collapsiblePlugin ? [collapsiblePlugin] : []),
 			],
 			defaultProps: {
 				wrap: false,
