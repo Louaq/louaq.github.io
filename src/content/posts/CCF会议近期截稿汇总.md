@@ -15,9 +15,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 北京时间截稿 | 会议 | CCF | 年份 | 地点 | 官网 |
 |---|---|---|---|---|---|
-| 2026-05-26 19:59 | EMNLP | B | 2026 | Budapest, Hungary | [link](https://2026.emnlp.org/) |
-| 2026-05-26 23:59 | NLPCC | C | 2026 | Macau, China | [link](http://tcci.ccf.org.cn/conference/2026/) |
-| 2026-05-28 19:59 | AFT | C | 2026 | London, UK | [link](https://aft.ifca.ai/aft26/index.html) |
 | 2026-05-30 07:59 | BMVC | C | 2026 | Lancaster, UK | [link](https://bmvc2026.bmva.org/) |
 | 2026-05-30 14:59 | SIGSPATIAL | C | 2026 | Riverside, CA, USA | [link](https://sigspatial2026.sigspatial.org/) |
 | 2026-05-31 19:59 | PRCV | C | 2026 | Harbin, China | [link](https://www.prcv.cn/web/#/home) |
@@ -42,8 +39,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-05-26 19:59 | EMNLP 2026 | B | Budapest, Hungary |
-| 2026-05-26 23:59 | NLPCC 2026 | C | Macau, China |
 | 2026-05-30 07:59 | BMVC 2026 | C | Lancaster, UK |
 | 2026-06-01 19:59 | ICONIP 2026 | C | Melbourne, Australia |
 | 2026-06-07 14:59 | ACML 2026 | C | Melbourne, Australia |
@@ -67,7 +62,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-05-28 19:59 | AFT 2026 | C | London, UK |
 | 2026-05-30 14:59 | SIGSPATIAL 2026 | C | Riverside, CA, USA |
 | 2026-06-16 07:59 | APBC 2026 | C | Hsinchu, Taiwan, China |
 | 2026-07-06 06:00 | BIBM 2026 | B | Dallas, USA |
