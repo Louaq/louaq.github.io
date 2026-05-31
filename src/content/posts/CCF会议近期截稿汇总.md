@@ -15,8 +15,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 北京时间截稿 | 会议 | CCF | 年份 | 地点 | 官网 |
 |---|---|---|---|---|---|
-| 2026-05-30 07:59 | BMVC | C | 2026 | Lancaster, UK | [link](https://bmvc2026.bmva.org/) |
-| 2026-05-30 14:59 | SIGSPATIAL | C | 2026 | Riverside, CA, USA | [link](https://sigspatial2026.sigspatial.org/) |
 | 2026-05-31 19:59 | PRCV | C | 2026 | Harbin, China | [link](https://www.prcv.cn/web/#/home) |
 | 2026-06-01 19:59 | ICONIP | C | 2026 | Melbourne, Australia | [link](https://www.iconip2026.org/) |
 | 2026-06-02 19:59 | SCA | B | 2026 | Barcelona, Spain | [link](https://computeranimation.org/) |
@@ -39,7 +37,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-05-30 07:59 | BMVC 2026 | C | Lancaster, UK |
 | 2026-06-01 19:59 | ICONIP 2026 | C | Melbourne, Australia |
 | 2026-06-07 14:59 | ACML 2026 | C | Melbourne, Australia |
 | 2026-06-14 19:59 | PRICAI 2026 | C | Guangzhou, China |
@@ -62,7 +59,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-05-30 14:59 | SIGSPATIAL 2026 | C | Riverside, CA, USA |
 | 2026-06-16 07:59 | APBC 2026 | C | Hsinchu, Taiwan, China |
 | 2026-07-06 06:00 | BIBM 2026 | B | Dallas, USA |
 | 2026-08-22 19:59 | BigData 2026 | C | Phoenix, Arizona, USA |
