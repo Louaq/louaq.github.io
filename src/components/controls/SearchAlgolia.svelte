@@ -908,11 +908,11 @@ onDestroy(() => {
 
 	.algolia-modal {
 		position: fixed;
-		top: 12vh;
+		top: clamp(1rem, 8vh, 4rem);
 		left: 50%;
 		transform: translateX(-50%);
 		width: min(560px, calc(100vw - 2rem));
-		max-height: min(380px, 46vh);
+		max-height: min(640px, calc(100vh - 2rem));
 		display: flex;
 		flex-direction: column;
 		border-radius: 5px;
