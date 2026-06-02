@@ -32,13 +32,13 @@ export const homeCarouselConfig: HomeCarouselConfig = {
 	// 手动轮播项列表（顺序即展示顺序，且整体排在文章项之前）
 	manualItems: [
 		// 示例：
-		{
-			title: "",
-			image: "https://cdn.x8xx.cn/banner/api.php",
-			href: "",
-			date: "",
-			category: "",
-			tags: [],
-		},
+		// {
+		// 	title: "",
+		// 	image: "https://cdn.x8xx.cn/banner/api.php",
+		// 	href: "",
+		// 	date: "",
+		// 	category: "",
+		// 	tags: [],
+		// },
 	],
 };
