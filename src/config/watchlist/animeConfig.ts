@@ -411,20 +411,5 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻", "武侠"],
 		enabled: true,
 	},
-
-	{
-		title: "星辰变 ",
-		cover: "https://pic1.imgdb.cn/item/6a12ae60fe89374d2091c270.webp",
-		type: "anime",
-		status: "watching",
-		rating: 0.0,
-		episodes: {
-			current: 8,
-			total: 12,
-		},
-		startDate: "2026-05-07",
-		tags: ["动作", "动画", "奇幻"],
-		enabled: true,
-	},
 ];
 
