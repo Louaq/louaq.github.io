@@ -15,9 +15,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 北京时间截稿 | 会议 | CCF | 年份 | 地点 | 官网 |
 |---|---|---|---|---|---|
-| 2026-05-31 19:59 | PRCV | C | 2026 | Harbin, China | [link](https://www.prcv.cn/web/#/home) |
-| 2026-06-01 19:59 | ICONIP | C | 2026 | Melbourne, Australia | [link](https://www.iconip2026.org/) |
-| 2026-06-02 19:59 | SCA | B | 2026 | Barcelona, Spain | [link](https://computeranimation.org/) |
 | 2026-06-07 14:59 | ACML | C | 2026 | Melbourne, Australia | [link](https://www.acml-conf.org/2026/) |
 | 2026-06-09 19:59 | PG | B | 2026 | Singapore | [link](https://pacificgraphics2026.github.io/) |
 | 2026-06-14 19:59 | PRICAI | C | 2026 | Guangzhou, China | [link](https://2026.pricai.org/) |
@@ -37,7 +34,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-06-01 19:59 | ICONIP 2026 | C | Melbourne, Australia |
 | 2026-06-07 14:59 | ACML 2026 | C | Melbourne, Australia |
 | 2026-06-14 19:59 | PRICAI 2026 | C | Guangzhou, China |
 | 2026-07-01 19:59 | ICTAI 2026 | C | Boca Raton, FL, USA |
@@ -48,8 +44,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-05-31 19:59 | PRCV 2026 | C | Harbin, China |
-| 2026-06-02 19:59 | SCA 2026 | B | Barcelona, Spain |
 | 2026-06-09 19:59 | PG 2026 | B | Singapore |
 | 2026-06-18 19:59 | SLT 2026 | C | Palermo, Sicily, Italy |
 | 2026-07-05 23:59 | NCMMSC 2026 | C | Hengqin, China |
