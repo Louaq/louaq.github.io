@@ -33,7 +33,7 @@ export const profileConfig: ProfileConfig = {
       url: "/rss.xml",
     },
     {
-			name: "开往",
+			name: "虫洞",
 			url: "https://foreverblog.cn/go.html",
 			icon: "material-symbols:subway-rounded",
 		}

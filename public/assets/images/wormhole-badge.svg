@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="102" height="28" viewBox="0 0 102 28" role="img" aria-label="WORMHOLE">
+  <rect width="102" height="28" rx="6" fill="#fff"/>
+  <circle cx="14" cy="14" r="8" fill="none" stroke="#111" stroke-width="1.7"/>
+  <text x="31" y="18.5" fill="#111" font-family="Inter, Arial, Helvetica, sans-serif" font-size="14" font-weight="800" letter-spacing=".2">WORMHOLE</text>
+</svg>
