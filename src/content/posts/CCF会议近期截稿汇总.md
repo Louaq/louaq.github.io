@@ -15,7 +15,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 北京时间截稿 | 会议 | CCF | 年份 | 地点 | 官网 |
 |---|---|---|---|---|---|
-| 2026-06-07 14:59 | ACML | C | 2026 | Melbourne, Australia | [link](https://www.acml-conf.org/2026/) |
 | 2026-06-09 19:59 | PG | B | 2026 | Singapore | [link](https://pacificgraphics2026.github.io/) |
 | 2026-06-14 19:59 | PRICAI | C | 2026 | Guangzhou, China | [link](https://2026.pricai.org/) |
 | 2026-06-16 07:59 | APBC | C | 2026 | Hsinchu, Taiwan, China | [link](https://www.apbc2026.com/home) |
@@ -34,7 +33,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-06-07 14:59 | ACML 2026 | C | Melbourne, Australia |
 | 2026-06-14 19:59 | PRICAI 2026 | C | Guangzhou, China |
 | 2026-07-01 19:59 | ICTAI 2026 | C | Boca Raton, FL, USA |
 | 2026-07-06 19:59 | ACCV 2026 | C | Osaka, Japan |
