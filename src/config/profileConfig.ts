@@ -34,7 +34,7 @@ export const profileConfig: ProfileConfig = {
     },
     {
 			name: "开往",
-			url: "https://www.travellings.cn/go.html",
+			url: "https://foreverblog.cn/go.html",
 			icon: "material-symbols:subway-rounded",
 		}
   ],
