@@ -4,7 +4,7 @@ export const profileConfig: ProfileConfig = {
   avatar: "https://pic1.imgdb.cn/item/6a28b506edae85a628525712.webp",
   /** 侧栏 Profile 头图，可改成本地 / 任意图床 */
   cover:
-    "https://pic1.imgdb.cn/item/69ed731cde2d74e282b73f88.webp",
+    "https://pic1.imgdb.cn/item/6a291954eae595505fc16265.webp",
   verified: true,
   menuHref: "/about/",
   name: "Louaq",
