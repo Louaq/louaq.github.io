@@ -77,7 +77,7 @@ export const siteConfig: SiteConfig = {
 
 	// 搜索引擎配置：algolia / milisearch
 	search: {
-		engine: "milisearch",
+		engine: "algolia",
 	},
   // 站点开始日期，用于统计运行天数
   siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
