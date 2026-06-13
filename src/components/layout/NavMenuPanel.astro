@@ -2,7 +2,7 @@
 import Icon from "@/components/common/Icon.astro";
 import { LinkPresets } from "@/constants/link-presets";
 import { LinkPreset, type NavBarLink } from "@/types/config";
-import { url } from "@/utils/url-utils";
+import { isNavPathActive, url } from "@/utils/url-utils";
 
 interface Props {
 	links: NavBarLink[];
@@ -38,9 +38,15 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
 			(child): child is NavBarLink => child !== null && child !== undefined,
 		),
 }));
+const currentPath = Astro.url.pathname;
 ---
 <div id="nav-menu-panel" class:list={["float-panel float-panel-closed fixed right-4 max-w-[calc(100vw-2rem)] px-2 py-2 overflow-y-auto transition-all"]}>
-    {processedLinks.map((link) => (
+    {processedLinks.map((link) => {
+        const isCurrentLink = !link.external && isNavPathActive(currentPath, link.url);
+        const hasActiveChild =
+            link.children?.some((child) => !child.external && isNavPathActive(currentPath, child.url)) ?? false;
+
+        return (
         <div class="mobile-menu-item">
             {link.children && link.children.length > 0 ? (
                 <!-- 有子菜单的项目 -->
@@ -51,7 +57,10 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                         data-mobile-dropdown-trigger
                         aria-expanded="false"
                     >
-                        <div class="flex items-center transition text-[#000000B3] dark:text-white/75">
+                        <div class:list={[
+                            "flex items-center transition text-[#000000B3] dark:text-white/75",
+                            hasActiveChild && "navbar-link-active",
+                        ]}>
                             {link.icon && <Icon icon={link.icon} class="text-[1.1rem] mr-2" />}
                             {link.name}
                         </div>
@@ -65,13 +74,19 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                             if (!child || !child.url) {
                                 return null;
                             }
+                            const isChildCurrent =
+                                !child.external && isNavPathActive(currentPath, child.url);
                             return (
                                 <a href={child.external ? child.url : url(child.url)} 
                                    class="group flex justify-between items-center py-2 pl-6 pr-1 rounded-lg gap-8
                                        transition"
                                    target={child.external ? "_blank" : null}
+                                   data-nav-path={!child.external ? child.url : undefined}
                                 >
-                                    <div class="flex items-center transition text-black/60 dark:text-white/60 font-medium">
+                                    <div class:list={[
+                                        "flex items-center transition text-black/60 dark:text-white/60 font-medium",
+                                        isChildCurrent && "navbar-link-active",
+                                    ]} data-nav-active-target>
                                         {child.icon && <Icon icon={child.icon} class="text-[1.1rem] mr-2" />}
                                         {child.name}
                                     </div>
@@ -89,8 +104,12 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                     transition
                 "
                    target={link.external ? "_blank" : null}
+                   data-nav-path={!link.external ? link.url : undefined}
                 >
-                    <div class="flex items-center transition text-[#000000B3] dark:text-white/75">
+                    <div class:list={[
+                        "flex items-center transition text-[#000000B3] dark:text-white/75",
+                        isCurrentLink && "navbar-link-active",
+                    ]} data-nav-active-target>
                         {link.icon && <Icon icon={link.icon} class="text-[1.1rem] mr-2" />}
                         {link.name}
                     </div>
@@ -103,7 +122,8 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
                 </a>
             )}
         </div>
-    ))}
+        );
+    })}
 </div>
 
 <style>
@@ -134,6 +154,14 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
     .mobile-menu-item button:hover,
     .mobile-menu-item button:active {
         background-color: transparent;
+    }
+
+    .mobile-menu-item .navbar-link-active {
+        color: var(--primary) !important;
+    }
+
+    .mobile-menu-item [data-nav-path].navbar-link-active [data-nav-active-target] {
+        color: var(--primary) !important;
     }
 </style>
 

@@ -123,6 +123,92 @@ let links: NavBarLink[] = navBarConfig.links.map(
 </div>
 
 <script>
+const NAVBAR_ACTIVE_CLASS = "navbar-link-active";
+
+function normalizeNavPath(path: string) {
+    const pathname = (() => {
+        try {
+            return new URL(path, window.location.origin).pathname;
+        } catch {
+            return path;
+        }
+    })();
+
+    return pathname.replace(/^\/|\/$/g, "").toLowerCase();
+}
+
+function applyNavbarActivePath(path: string) {
+    const navbar = document.getElementById("navbar");
+    if (!navbar) return;
+
+    const currentPath = normalizeNavPath(path);
+    const navLinks = navbar.querySelectorAll<HTMLElement>("[data-nav-path]");
+
+    navLinks.forEach((link) => {
+        const targetPath = normalizeNavPath(
+            link instanceof HTMLAnchorElement
+                ? link.href
+                : link.dataset.navPath || "",
+        );
+        const isActive =
+            targetPath === ""
+                ? currentPath === ""
+                : currentPath === targetPath || currentPath.startsWith(`${targetPath}/`);
+
+        link.classList.toggle(NAVBAR_ACTIVE_CLASS, isActive);
+
+        const activeTarget = link.querySelector<HTMLElement>("[data-nav-active-target]");
+        activeTarget?.classList.toggle(NAVBAR_ACTIVE_CLASS, isActive);
+    });
+
+    navbar.querySelectorAll<HTMLElement>("[data-dropdown]").forEach((dropdown) => {
+        const trigger = dropdown.querySelector<HTMLElement>("[data-dropdown-trigger]");
+        if (!trigger) return;
+
+        const hasActiveChild = !!dropdown.querySelector(
+            `.dropdown-menu [data-nav-path].${NAVBAR_ACTIVE_CLASS}`,
+        );
+        trigger.classList.toggle(NAVBAR_ACTIVE_CLASS, hasActiveChild);
+    });
+}
+
+function updateNavbarActiveLinks() {
+    applyNavbarActivePath(window.location.pathname);
+}
+
+function setupNavbarActiveSync() {
+    updateNavbarActiveLinks();
+
+    document.getElementById("navbar")?.addEventListener("click", (event) => {
+        const link = (event.target as Element | null)?.closest<HTMLAnchorElement>("[data-nav-path]");
+        if (!link) return;
+        applyNavbarActivePath(link.href);
+    });
+
+    document.addEventListener("swup:contentReplaced", updateNavbarActiveLinks);
+    document.addEventListener("swup:content:replace", updateNavbarActiveLinks);
+    document.addEventListener("astro:page-load", updateNavbarActiveLinks);
+    window.addEventListener("popstate", updateNavbarActiveLinks);
+
+    if (window.swup?.hooks) {
+        window.swup.hooks.on("visit:start", (visit: { to?: { url?: string } }) => {
+            if (visit.to?.url) applyNavbarActivePath(visit.to.url);
+        });
+        window.swup.hooks.on("page:view", updateNavbarActiveLinks);
+        window.swup.hooks.on("visit:end", updateNavbarActiveLinks);
+    } else {
+        document.addEventListener("swup:enable", () => {
+            if (!window.swup?.hooks) return;
+            window.swup.hooks.on("visit:start", (visit: { to?: { url?: string } }) => {
+                if (visit.to?.url) applyNavbarActivePath(visit.to.url);
+            });
+            window.swup.hooks.on("page:view", updateNavbarActiveLinks);
+            window.swup.hooks.on("visit:end", updateNavbarActiveLinks);
+            updateNavbarActiveLinks();
+        }, { once: true });
+    }
+}
+
 function loadButtonScript() {
     let settingBtn = document.getElementById("display-settings-switch");
     if (settingBtn) {
@@ -201,6 +287,7 @@ function loadButtonScript() {
     }
 }
 
+setupNavbarActiveSync();
 loadButtonScript();
 
 // 为semifull模式添加滚动检测逻辑

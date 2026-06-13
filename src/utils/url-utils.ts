@@ -57,6 +57,20 @@ export function pathsEqual(path1: string, path2: string) {
 	return normalizedPath1 === normalizedPath2;
 }
 
+export function isNavPathActive(currentPath: string, linkPath: string) {
+	const normalize = (path: string) =>
+		path
+			.split(/[?#]/)[0]
+			.replace(/^\/|\/$/g, "")
+			.toLowerCase();
+
+	const current = normalize(currentPath);
+	const target = normalize(url(linkPath));
+
+	if (!target) return !current;
+	return current === target || current.startsWith(`${target}/`);
+}
+
 function joinUrl(...parts: string[]): string {
 	const joined = parts.join("/");
 	return joined.replace(/\/+/g, "/");

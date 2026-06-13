@@ -4,7 +4,7 @@ import DropdownItem from "@/components/common/DropdownItem.astro";
 import DropdownPanel from "@/components/common/DropdownPanel.astro";
 import { LinkPresets } from "@/constants/link-presets";
 import { LinkPreset, type NavBarLink } from "@/types/config";
-import { url } from "@/utils/url-utils";
+import { isNavPathActive, url } from "@/utils/url-utils";
 
 interface Props {
 	link: NavBarLink;
@@ -48,12 +48,22 @@ const processedLink = {
 };
 
 const hasChildren = processedLink.children && processedLink.children.length > 0;
+const currentPath = Astro.url.pathname;
+const isCurrentLink =
+	!processedLink.external && isNavPathActive(currentPath, processedLink.url);
+const hasActiveChild =
+	processedLink.children?.some(
+		(child) => !child.external && isNavPathActive(currentPath, child.url),
+	) ?? false;
 ---
 
 <div class:list={["dropdown-container", className]} data-dropdown>
 	{hasChildren ? (
 		<button 
-			class="btn-plain scale-animation rounded-lg h-11 px-5 active:scale-95 dropdown-trigger"
+			class:list={[
+				"btn-plain scale-animation rounded-lg h-11 px-5 active:scale-95 dropdown-trigger",
+				hasActiveChild && "navbar-link-active",
+			]}
 			aria-expanded="false"
 			aria-haspopup="true"
 			data-dropdown-trigger
@@ -71,12 +81,15 @@ const hasChildren = processedLink.children && processedLink.children.length > 0;
 					if (!child || !child.url) {
 						return null;
 					}
+					const isChildCurrent =
+						!child.external && isNavPathActive(currentPath, child.url);
 					return (
 						<DropdownItem
 							href={child.external ? child.url : url(child.url)}
 							target={child.external ? "_blank" : undefined}
 							isLast={index === (processedLink.children?.length || 0) - 1}
-							class="dropdown-item"
+							class={`dropdown-item ${isChildCurrent ? "navbar-link-active" : ""}`.trim()}
+							dataNavPath={!child.external ? child.url : undefined}
 						>
 							{child.icon && <Icon name={child.icon} class="text-[1.25rem] mr-3 navbar-icon" />}
 							<span>{child.name}</span>
@@ -93,7 +106,11 @@ const hasChildren = processedLink.children && processedLink.children.length > 0;
 			aria-label={processedLink.name} 
 			href={processedLink.external ? processedLink.url : url(processedLink.url)} 
 			target={processedLink.external ? "_blank" : null}
-			class="btn-plain scale-animation rounded-lg h-11 px-5 active:scale-95"
+			data-nav-path={!processedLink.external ? processedLink.url : undefined}
+			class:list={[
+				"btn-plain scale-animation rounded-lg h-11 px-5 active:scale-95",
+				isCurrentLink && "navbar-link-active",
+			]}
 		>
 			<div class="flex items-center">
 				{processedLink.icon && <Icon name={processedLink.icon} class="text-[1.1rem] mr-2 navbar-icon" />}
