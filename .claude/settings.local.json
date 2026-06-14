@@ -4,7 +4,21 @@
       "Bash(npm run:*)",
       "Bash(node *)",
       "Bash(xargs wc *)",
-      "Bash(npx astro *)"
+      "Bash(npx astro *)",
+      "Bash(grep -rn 'id=\"toc-wrapper\"\\\\|id=\\\\\\\\\"toc-wrapper' src/)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(xargs grep -l \"pdf-embed-canvas-wrap\")",
+      "Bash(cd /d/Download/louaq.github.io)",
+      "Bash(grep -nE \"site:|base:\" astro.config.*)",
+      "Bash(ls public/)",
+      "Bash(ls public/files/)",
+      "Bash(git checkout *)",
+      "Bash(ps -W)",
+      "Bash(netstat -ano)",
+      "Bash(curl -s \"http://localhost:4321/posts/4878f2fc0d8b/\")",
+      "PowerShell(Remove-Item *)"
     ]
   }
 }

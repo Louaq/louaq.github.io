@@ -13,12 +13,13 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg
 ---
 
 <!-- 预览PDF -->
-<!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/CCF_2026_03.pdf" title="CCF 2026 推荐目录" height="660px"} -->
+::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_blank_template.pdf" title="CCF 2026 推荐目录" height="660px"}
 
 
 ## 2026年组会内容
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
+| 20260614 | Response Template | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_blank_template.pdf" target="_blank">Response Template</a> |
 | 20260421 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_20260421.pdf" target="_blank">汇报_0421</a> |
 | 20260121 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0122.pdf" target="_blank">汇报_0121</a> |
 | 20260115 | 半监督图像分割 | <a href="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/%E6%B1%87%E6%8A%A5_0115.pdf" target="_blank">汇报_0115</a> |

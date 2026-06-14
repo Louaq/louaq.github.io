@@ -1,21 +1,27 @@
 ---
 /**
- * Swup 替换主内容后，部分浏览器中 iframe 内 PDF 不会自动加载，需重置 src。
+ * 为内嵌的 pdf.js viewer iframe 赋值 src（自托管 /pdfjs/web/viewer.html）。
+ * 兼容 Swup：内容替换后重新扫描尚未加载的 viewer。
  */
 ---
 <script is:inline>
 (function () {
-	function reloadPdfIframes() {
-		document.querySelectorAll("iframe.pdf-embed-iframe[data-pdf-src]").forEach(function (el) {
-			var u = el.getAttribute("data-pdf-src");
-			if (!u) return;
-			try {
-				el.src = "";
-				el.src = u;
-			} catch (e) {}
-		});
+	function loadPdfViewers(root) {
+		(root || document)
+			.querySelectorAll("iframe.pdf-embed-viewer[data-pdf-viewer-src]")
+			.forEach(function (el) {
+				var viewerSrc = el.getAttribute("data-pdf-viewer-src");
+				if (!viewerSrc || el.getAttribute("src") === viewerSrc) return;
+				el.setAttribute("src", viewerSrc);
+			});
 	}
-	document.addEventListener("swup:contentReplaced", reloadPdfIframes);
-	document.addEventListener("astro:page-load", reloadPdfIframes);
+
+	document.addEventListener("swup:contentReplaced", function () {
+		loadPdfViewers(document);
+	});
+	document.addEventListener("astro:page-load", function () {
+		loadPdfViewers(document);
+	});
+	loadPdfViewers(document);
 })();
 </script>
