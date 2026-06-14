@@ -43,12 +43,7 @@ const config = {
 
         const dynamicConfig = createTwikooConfig();
 
-        twikoo
-          .init(dynamicConfig)
-          .then(() => {
-          })
-          .catch((error) => {
-          });
+        void twikoo.init(dynamicConfig).catch(() => {});
       }
     } else {
       // 如果 Twikoo 未加载，稍后重试

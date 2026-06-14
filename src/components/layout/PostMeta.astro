@@ -45,6 +45,9 @@ const {
 
 const slugForPath = postPathSlug ?? (id ? removeFileExtension(id) : "");
 const path = customPath || (slugForPath ? getPostUrlBySlug(slugForPath) : "");
+const wordLabel = words === 1 ? i18n(I18nKey.wordCount) : i18n(I18nKey.wordsCount);
+const minuteLabel =
+	minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount);
 ---
 
 <div
@@ -130,6 +133,25 @@ const path = customPath || (slugForPath ? getPostUrlBySlug(slugForPath) : "");
        </div>
      )
    }
+
+  <!-- word count / reading time (post cards) -->
+  {
+    showWordCount && (
+      <div class="flex items-center">
+        <div class="meta-icon">
+          <Icon name="material-symbols:article-outline-rounded" class="text-xl" />
+        </div>
+        <span class="text-50 text-sm font-medium whitespace-nowrap">
+          {words ?? 0} {wordLabel}
+        </span>
+        {minutes != null && (
+          <span class="with-divider text-50 text-sm font-medium whitespace-nowrap">
+            {minutes} {minuteLabel}
+          </span>
+        )}
+      </div>
+    )
+  }
 
   <!-- Twikoo访问量统计（首页不显示，且文章访问量统计启用时显示） -->
   {

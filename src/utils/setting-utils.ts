@@ -321,9 +321,6 @@ function showBannerMode() {
 
 	// 鏄剧ず妯箙鏂囧瓧锛堥椤?鏂囩珷椤靛垎娴侊級
 	const isHomePage = checkIsHomePage(window.location.pathname);
-	const isPostPage =
-		(document.body?.dataset?.pageType === "post") ||
-		/\/posts\/.+/.test(window.location.pathname);
 	const bannerTextOverlays = document.querySelectorAll(
 		"[data-banner-text-overlay]",
 	);

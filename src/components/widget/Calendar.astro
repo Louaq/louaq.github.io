@@ -121,8 +121,6 @@ const postUrlPrefix = url("/posts/");
       const raw = sessionStorage.getItem(STORAGE_KEY);
       if (!raw) return false;
       const state = JSON.parse(raw);
-      const now = new Date();
-      const todayKey = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}`;
       if (state.displayYear != null && state.displayMonth >= 0 && state.displayMonth <= 11) {
         displayYear = state.displayYear;
         displayMonth = state.displayMonth;
@@ -319,7 +317,7 @@ const postUrlPrefix = url("/posts/");
     saveState();
     
     // 添加点击事件监听
-    setupClickHandlers(currentMonthPosts);
+    setupClickHandlers();
   }
 
   function renderMonthView() {
@@ -398,7 +396,7 @@ const postUrlPrefix = url("/posts/");
     
     if (postsList) {
       postsList.innerHTML = currentMonthPosts.map(post => {
-        const [year, month, day] = post.published.split('-').map(Number);
+        const [, month, day] = post.published.split('-').map(Number);
         const dateStr = `${month}-${day}`;
         return `
         <a href="${postUrlPrefix}${post.pathSlug}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
@@ -422,7 +420,7 @@ const postUrlPrefix = url("/posts/");
     if (postsList) {
       if (posts.length > 0) {
         postsList.innerHTML = posts.map(post => {
-          const [year, month, day] = post.published.split('-').map(Number);
+          const [, month, day] = post.published.split('-').map(Number);
           const dateStr = `${month}-${day}`;
           return `
           <a href="${postUrlPrefix}${post.pathSlug}/" class="flex justify-between items-center text-sm text-neutral-700 dark:text-neutral-300 hover:text-[var(--primary)] dark:hover:text-[var(--primary)] transition-colors px-2 py-1 rounded hover:bg-[var(--btn-plain-bg-hover)]">
@@ -448,11 +446,8 @@ const postUrlPrefix = url("/posts/");
   }
   
   // 设置日历格子点击事件
-  function setupClickHandlers(currentMonthPosts) {
+  function setupClickHandlers() {
     const calendarDays = document.querySelectorAll('.calendar-day[data-date]');
-    const now = new Date();
-    const isCurrentMonth = displayYear === now.getFullYear() && displayMonth === now.getMonth();
-    const todayDateKey = isCurrentMonth ? `${displayYear}-${String(displayMonth + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')}` : null;
     
     calendarDays.forEach(dayElement => {
       dayElement.addEventListener('click', () => {

@@ -237,7 +237,7 @@ const statusColor = {
 															</div>
 															<div class="w-full bg-white/20 rounded-full h-1.5">
 																<div
-																	class="bg-[var(--primary)] h-1.5 rounded-full transition-all duration-300"
+																	class="bg-[var(--primary)] h-1.5 rounded-full"
 																	style={{
 																		width: `${((item.episodes.current || 0) / item.episodes.total) * 100}%`,
 																	}}
@@ -310,29 +310,9 @@ const statusColor = {
 		overflow: hidden;
 	}
 
-	.category-section {
-		animation: fadeIn 0.3s ease-in-out;
-	}
-
-	@keyframes fadeIn {
-		from {
-			opacity: 0;
-			transform: translateY(10px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
 	/* 固定分页容器高度，防止切换页面时高度变化 */
 	.pagination-container {
 		/* 移除固定高度，让容器根据内容自适应 */
-	}
-
-	/* 为卡片添加淡入淡出过渡效果 */
-	.pagination-container [data-item-section] {
-		transition: opacity 0.2s ease-in-out;
 	}
 
 	/* 确保悬浮层正确显示 */
@@ -341,12 +321,10 @@ const statusColor = {
 		overflow: hidden;
 	}
 
-	/* 观影卡片平滑过渡（覆盖上方 transition，合并 opacity） */
+	/* Remove per-card transitions on the watchlist grid. */
 	.pagination-container .watchlist-card {
-		will-change: transform;
-		transition: transform 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-			box-shadow 280ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
-			opacity 0.2s ease-in-out;
+		transition: none;
+		will-change: auto;
 	}
 
 	.pagination-container .watchlist-card-overlay {

@@ -149,7 +149,7 @@ const monoFallbackFontFamilyCss = (fontConfig.monoFallback || []).join(", ");
         // 触发自定义事件，通知字体加载完成
         document.dispatchEvent(new CustomEvent("fontsLoaded"));
       })
-      .catch((error: Error) => {
+      .catch(() => {
         // 静默处理字体加载错误
       });
   }
@@ -166,7 +166,7 @@ const monoFallbackFontFamilyCss = (fontConfig.monoFallback || []).join(", ");
 
     try {
       observer.observe({ entryTypes: ["resource"] });
-    } catch (e) {
+    } catch {
       // 浏览器不支持时静默失败
     }
   }

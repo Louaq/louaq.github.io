@@ -348,7 +348,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		episodes: {
-			current: 0,
+			current: 2,
 			total: 52,
 		},
 		startDate: "2026-06-13",

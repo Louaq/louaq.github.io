@@ -312,15 +312,6 @@ const collapsiblePreviewLines =
             return pathname.startsWith(postsPrefix);
           }
 
-          function normalizePathname(pathname) {
-            const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "";
-            if (baseNoSlash && pathname.startsWith(baseNoSlash)) {
-              const rest = pathname.slice(baseNoSlash.length);
-              return rest === "" ? "/" : rest;
-            }
-            return pathname;
-          }
-
           const pathname = window.location.pathname;
           const isHomePage = isHomePath(pathname);
           const isPostPage =
@@ -798,7 +789,6 @@ function disableAnimation() {
         docEl.getAttribute("data-wallpaper-mode") || "banner";
       const WALLPAPER_BANNER = "banner";
       const WALLPAPER_NONE = "none";
-      const WALLPAPER_OVERLAY = "overlay";
       const isMobile = window.innerWidth < 1024;
       const mobilePostNoWallpaper = isMobile && isPostPage;
       const effectiveWallpaperMode = mobilePostNoWallpaper

@@ -1,3 +1,5 @@
+import type { TOCManager } from "@/utils/tocUtils";
+
 declare global {
 	interface HTMLElementTagNameMap {
 		"table-of-contents": HTMLElement & {
@@ -9,6 +11,11 @@ declare global {
 		// biome-ignore lint/suspicious/noExplicitAny: External library
 		swup: any;
 		floatingTOCListenersInitialized?: boolean;
+		fireflyCachedSubtitle?: string;
+		PostPageTOC?: {
+			manager: TOCManager | null;
+		};
+		tocInternalNavigation?: boolean;
 	}
 
 	interface MediaQueryList {

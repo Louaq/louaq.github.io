@@ -6,10 +6,8 @@ import "@/styles/image-zoom.css";
 <script>
   import mediumZoom from "medium-zoom";
 
-  /** @type {import("medium-zoom").Zoom | null} */
-  let zoom = null;
-  /** @type {AbortController | null} */
-  let anchorGuard = null;
+  let zoom: import("medium-zoom").Zoom | null = null;
+  let anchorGuard: AbortController | null = null;
 
   function destroy() {
     anchorGuard?.abort();
@@ -22,7 +20,7 @@ import "@/styles/image-zoom.css";
 
   /** 将 a[data-fancybox] 上的大图地址同步到内部 img 的 data-zoom-src */
   function syncZoomSrcFromAnchors() {
-    for (const a of document.querySelectorAll(".moment-images a[data-fancybox]")) {
+    for (const a of document.querySelectorAll<HTMLAnchorElement>(".moment-images a[data-fancybox]")) {
       const img = a.querySelector("img");
       if (!img) continue;
       const hi = a.dataset.src || a.getAttribute("href");
@@ -33,8 +31,8 @@ import "@/styles/image-zoom.css";
   }
 
   /** 避免点击图片时触发外层 a[href] 跳转（相册等） */
-  function attachAnchorImageGuards(signal) {
-    const handler = (e) => {
+  function attachAnchorImageGuards(signal: AbortSignal) {
+    const handler = (e: MouseEvent) => {
       const t = e.target;
       if (t instanceof HTMLImageElement && t.closest("a")) {
         e.preventDefault();
@@ -60,7 +58,8 @@ import "@/styles/image-zoom.css";
     if (nodes.length === 0) return;
 
     anchorGuard = new AbortController();
-    attachAnchorImageGuards(anchorGuard.signal);
+    const signal = anchorGuard.signal;
+    attachAnchorImageGuards(signal);
 
     zoom = mediumZoom(nodes, {
       margin: 24,

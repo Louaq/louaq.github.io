@@ -44,29 +44,25 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 <script>
 	import { TOCManager } from "@/utils/tocUtils";
 
-	if (typeof window.PostPageTOC === "undefined") {
-		window.PostPageTOC = {
-			manager: null,
-		};
-	}
+	const postPageTOC = (window.PostPageTOC ??= { manager: null });
 
 	function initPostPageTOC() {
 		const tocContent = document.getElementById("post-page-toc-content");
 		if (!tocContent) return;
 
 		try {
-			if (window.PostPageTOC.manager) {
-				window.PostPageTOC.manager.cleanup();
+			if (postPageTOC.manager) {
+				postPageTOC.manager.cleanup();
 			}
 
-			window.PostPageTOC.manager = new TOCManager({
+			postPageTOC.manager = new TOCManager({
 				contentId: "post-page-toc-content",
 				indicatorId: "post-page-toc-indicator",
 				maxLevel: 3,
 				scrollOffset: 80,
 			});
 
-			window.PostPageTOC.manager.init();
+			postPageTOC.manager.init();
 		} catch (error) {
 			console.error("Failed to load TOCManager for PostPageTOC:", error);
 		}

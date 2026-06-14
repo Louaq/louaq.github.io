@@ -1,8 +1,8 @@
 ---
-import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
 import { getArchivePostsList } from "@/utils/content-utils";
 import { getPostUrlBySlug } from "@/utils/url-utils";
 
@@ -16,7 +16,10 @@ interface Group {
 const grouped: Record<number, typeof posts> = {};
 for (const post of posts) {
 	const year = post.published.getUTCFullYear();
-	(grouped[year] ??= []).push(post);
+	if (!grouped[year]) {
+		grouped[year] = [];
+	}
+	grouped[year].push(post);
 }
 const groups: Group[] = Object.keys(grouped)
 	.map(Number)
@@ -39,19 +42,25 @@ const labelPlural = i18n(I18nKey.postsCount);
 <MainGridLayout title={i18n(I18nKey.archive)}>
 	<div class="card-base px-8 py-6" id="archive-list"
 		data-label-singular={labelSingular} data-label-plural={labelPlural}>
-		{groups.map((group) => (
-			<div class="archive-year-group" data-year={group.year}>
-				<div class="flex flex-row w-full items-center h-[3.75rem]">
+		{groups.map((group, index) => (
+			<details class="archive-year-group" data-year={group.year} open={index === 0}>
+				<summary class="archive-year-summary flex flex-row w-full items-center h-[3.75rem] -mx-2 px-2 rounded-lg cursor-pointer select-none transition-colors duration-150 hover:bg-[var(--btn-plain-bg-hover)] active:bg-[var(--btn-plain-bg-active)]">
 					<div class="w-[15%] md:w-[10%] transition text-2xl font-bold text-right text-75">
 						{group.year}
 					</div>
 					<div class="w-[15%] md:w-[10%]">
 						<div class="h-3 w-3 bg-none rounded-full outline outline-[var(--primary)] mx-auto -outline-offset-[2px] z-50 outline-3"></div>
 					</div>
-					<div class="w-[70%] md:w-[80%] transition text-left text-50 archive-year-count">
-						{group.posts.length} {group.posts.length === 1 ? labelSingular : labelPlural}
+					<div class="w-[70%] md:w-[80%] transition text-left text-50 flex items-center gap-1">
+						<span class="archive-year-count">
+							{group.posts.length} {group.posts.length === 1 ? labelSingular : labelPlural}
+						</span>
+						<Icon name="material-symbols:keyboard-arrow-right"
+							class="archive-year-chevron text-xl transition-transform duration-200"
+							aria-hidden="true" />
 					</div>
-				</div>
+				</summary>
+				<div class="archive-year-posts">
 				{group.posts.map((post) => (
 					<a
 						href={getPostUrlBySlug(post.pathSlug)}
@@ -92,10 +101,24 @@ const labelPlural = i18n(I18nKey.postsCount);
 						</div>
 					</a>
 				))}
-			</div>
+				</div>
+			</details>
 		))}
 	</div>
 </MainGridLayout>
+<style>
+	.archive-year-summary::marker {
+		content: "";
+	}
+
+	.archive-year-summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.archive-year-group[open] .archive-year-chevron {
+		transform: rotate(90deg);
+	}
+</style>
 <script>
 	document.addEventListener("DOMContentLoaded", () => {
 		const params = new URLSearchParams(window.location.search);
@@ -121,13 +144,14 @@ const labelPlural = i18n(I18nKey.postsCount);
 			if (hide) row.style.display = "none";
 		}
 
-		for (const group of document.querySelectorAll<HTMLElement>(".archive-year-group")) {
+		for (const group of document.querySelectorAll<HTMLDetailsElement>(".archive-year-group")) {
 			const visible = group.querySelectorAll(".archive-row-link:not([style*='display: none'])");
 			const countEl = group.querySelector(".archive-year-count");
 			if (!visible.length) {
 				group.style.display = "none";
 			} else if (countEl) {
 				countEl.textContent = `${visible.length} ${visible.length === 1 ? labelS : labelP}`;
+				group.open = true;
 			}
 		}
 	});

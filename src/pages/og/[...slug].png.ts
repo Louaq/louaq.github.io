@@ -22,6 +22,8 @@ interface FontOptions {
 }
 export const prerender = true;
 
+const toSatoriWeight = (weight: number): Weight => weight as Weight;
+
 export const getStaticPaths: GetStaticPaths = async () => {
 	if (!siteConfig.generateOgImages) {
 		return [];
@@ -321,20 +323,20 @@ export async function GET({
 
 	const fonts: FontOptions[] = [];
 	if (fontRegular) {
-		fonts.push({
-			name: fontConfig.og.family,
-			data: fontRegular,
-			weight: fontConfig.og.weights.regular,
-			style: "normal",
-		});
+			fonts.push({
+				name: fontConfig.og.family,
+				data: fontRegular,
+				weight: toSatoriWeight(fontConfig.og.weights.regular),
+				style: "normal",
+			});
 	}
 	if (fontBold) {
-		fonts.push({
-			name: fontConfig.og.family,
-			data: fontBold,
-			weight: fontConfig.og.weights.bold,
-			style: "normal",
-		});
+			fonts.push({
+				name: fontConfig.og.family,
+				data: fontBold,
+				weight: toSatoriWeight(fontConfig.og.weights.bold),
+				style: "normal",
+			});
 	}
 
 	const svg = await satori(template, {
