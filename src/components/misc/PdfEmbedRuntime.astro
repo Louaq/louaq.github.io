@@ -16,12 +16,21 @@
 			});
 	}
 
-	document.addEventListener("swup:contentReplaced", function () {
+	function scan() {
 		loadPdfViewers(document);
-	});
-	document.addEventListener("astro:page-load", function () {
-		loadPdfViewers(document);
-	});
-	loadPdfViewers(document);
+	}
+
+	// Swup / Astro 导航后重新扫描（这些事件不会在首次硬加载时触发）
+	document.addEventListener("swup:contentReplaced", scan);
+	document.addEventListener("astro:page-load", scan);
+	document.addEventListener("astro:after-swap", scan);
+
+	// 首次加载：此内联脚本位于 <slot/> 之前，iframe 尚未解析，
+	// 需等待 DOMContentLoaded 后再扫描，否则刷新后 PDF 不加载。
+	if (document.readyState === "loading") {
+		document.addEventListener("DOMContentLoaded", scan);
+	} else {
+		scan();
+	}
 })();
 </script>
