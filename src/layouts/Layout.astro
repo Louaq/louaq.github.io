@@ -1081,52 +1081,40 @@ function disableAnimation() {
   }
 
   let toc = document.getElementById("toc-wrapper");
-  let bannerHeight = 0;
   let isTocVisible = false;
 
-  // 使用Intersection Observer替代scroll事件来优化性能
-  function initTocObserver() {
+  // 滚动到 banner 底部以下时显示 TOC。
+  // 使用 window 级监听（跨 swup 导航持续有效），每次重算 bannerHeight 以自适应窗口尺寸，
+  // 仅在状态变化时写入 class 避免无谓重排，写操作放入 rAF。
+  function scrollFunction() {
     if (!bannerEnabled || !toc) return;
 
-    bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
+    const scrollTop = document.documentElement.scrollTop;
+    const bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
+    const shouldShow = scrollTop > bannerHeight;
 
-    // 创建一个监视点在banner底部
-    const sentinelEl = document.createElement('div');
-    sentinelEl.id = 'banner-sentinel';
-    sentinelEl.style.cssText = `position: absolute; top: ${bannerHeight}px; left: 0; width: 1px; height: 1px; pointer-events: none;`;
-    document.body.appendChild(sentinelEl);
+    if (shouldShow !== isTocVisible) {
+      isTocVisible = shouldShow;
+      requestAnimationFrame(() => {
+        toc!.classList.toggle("toc-hide", !isTocVisible);
+      });
+    }
+  }
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const shouldShow = !entry.isIntersecting && entry.boundingClientRect.top < 0;
-          if (shouldShow !== isTocVisible) {
-            isTocVisible = shouldShow;
-            requestAnimationFrame(() => {
-              toc!.classList.toggle("toc-hide", !isTocVisible);
-            });
-          }
-        });
-      },
-      {
-        rootMargin: '0px',
-        threshold: 0
+  let scrollTimeout: number;
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (scrollTimeout) {
+        cancelAnimationFrame(scrollTimeout);
       }
-    );
+      scrollTimeout = requestAnimationFrame(scrollFunction);
+    },
+    { passive: true }
+  );
 
-    observer.observe(sentinelEl);
-
-    // 清理函数
-    window.addEventListener('swup:willReplaceContent', () => {
-      observer.disconnect();
-      sentinelEl.remove();
-    }, { once: true });
-  }
-
-  // 初始化TOC observer
-  if (bannerEnabled && toc) {
-    initTocObserver();
-  }
+  // 初始同步一次状态
+  scrollFunction();
 
   // 使用防抖优化resize性能
   let resizeTimeout: number;

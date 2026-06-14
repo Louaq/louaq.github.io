@@ -210,22 +210,24 @@ function setupNavbarActiveSync() {
 }
 
 function loadButtonScript() {
-    // 缓存DOM查询结果，避免重复查询
     const settingBtn = document.getElementById("display-settings-switch");
-    const settingPanel = document.getElementById("display-setting");
     const menuBtn = document.getElementById("nav-menu-switch");
-    const menuPanel = document.getElementById("nav-menu-panel");
     const themeSwitchBtn = document.getElementById("scheme-switch");
 
-    if (settingBtn && settingPanel) {
+    // 面板在点击时再查询：避免按钮已存在但面板尚未挂载（或被 swup 替换）时绑定失效。
+    if (settingBtn) {
         settingBtn.onclick = function () {
-            settingPanel.classList.toggle("float-panel-closed");
+            document
+                .getElementById("display-setting")
+                ?.classList.toggle("float-panel-closed");
         };
     }
 
-    if (menuBtn && menuPanel) {
+    if (menuBtn) {
         menuBtn.onclick = function () {
-            menuPanel.classList.toggle("float-panel-closed");
+            document
+                .getElementById("nav-menu-panel")
+                ?.classList.toggle("float-panel-closed");
         };
     }
 

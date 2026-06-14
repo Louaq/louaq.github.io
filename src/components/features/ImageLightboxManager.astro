@@ -38,15 +38,11 @@ import "@/styles/image-zoom.css";
         e.preventDefault();
       }
     };
-    // 缓存DOM查询结果
-    const photoContainer = document.querySelector("#photo-container");
-    const momentImages = document.querySelector(".moment-images");
-
-    if (photoContainer) {
-      photoContainer.addEventListener("click", handler, { capture: true, signal });
-    }
-    if (momentImages) {
-      momentImages.addEventListener("click", handler, { capture: true, signal });
+    for (const root of [
+      document.querySelector("#photo-container"),
+      document.querySelector(".moment-images"),
+    ]) {
+      root?.addEventListener("click", handler, { capture: true, signal });
     }
   }
 

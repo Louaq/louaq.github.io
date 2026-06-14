@@ -49,11 +49,7 @@ const hasCover =
 const coverWidth = "clamp(220px, 32%, 320px)";
 const coverWidthTablet = "clamp(160px, 24%, 220px)";
 
-// 优化：只在需要时才调用render，避免不必要的渲染开销
-// remarkPluginFrontmatter应该在构建时已经处理好，直接从entry.data中获取
-const remarkPluginFrontmatter = entry.data.remarkPluginFrontmatter ||
-  (entry as any).remarkPluginFrontmatter ||
-  await render(entry).then(r => r.remarkPluginFrontmatter);
+const { remarkPluginFrontmatter } = await render(entry);
 ---
 
 <div
