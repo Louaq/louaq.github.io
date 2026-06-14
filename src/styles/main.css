@@ -158,11 +158,17 @@ html[data-theme-mode="dark"] #scheme-switch .theme-icon-dark {
         animation: none !important;
     }
     
-    /* 强制使用 contain 隔离渲染上下文 - 仅在非 View Transitions 模式下 */
-    .is-theme-transitioning:not(.use-view-transition) .post-card,
-    .is-theme-transitioning:not(.use-view-transition) .widget,
-    .is-theme-transitioning:not(.use-view-transition) .float-panel {
-        contain: layout style paint !important;
+    /* 强制使用 contain 隔离渲染上下文 - 提升性能 */
+    .post-card,
+    .widget,
+    .float-panel {
+        contain: layout style;
+    }
+
+    /* 为频繁变化的元素使用content-visibility优化 */
+    .post-card-wrapper {
+        content-visibility: auto;
+        contain-intrinsic-size: auto 400px;
     }
     
     /* 波浪效果精确同步处理 - 仅在非 View Transitions 模式下 */
@@ -200,23 +206,21 @@ html[data-theme-mode="dark"] #scheme-switch .theme-icon-dark {
         backdrop-filter: none !important;
     }
     
-    /* 波浪容器的颜色传递 */
-    .is-theme-transitioning #header-waves {
+    /* 波浪容器的颜色传递 - 优化性能 */
+    #header-waves {
         /* 设置当前颜色为页面背景色，供SVG继承 */
         color: var(--page-bg);
-        /* 确保与页面在同一合成层 */
-        isolation: isolate;
-        /* 优化渲染性能 */
+        /* 使用contain优化渲染 */
         contain: layout style paint;
-        /* GPU层合成 */
+        /* GPU加速 */
         transform: translateZ(0);
         /* 确保没有背景色 */
         background: transparent;
     }
-    
+
     .is-theme-transitioning #header-waves use {
-        /* 保持动画连续性 */
-        will-change: transform;
+        /* 减少will-change的使用，仅在需要时应用 */
+        animation: none;
         /* GPU优化 */
         transform: translateZ(0);
     }

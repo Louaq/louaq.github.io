@@ -25,19 +25,24 @@
     background: var(--card-bg);
     border: 1px solid transparent;
     border-radius: 0 0 0.75rem 0.75rem;
-    /* 勿用 transition:all，否则会过渡布局相关属性，首屏/水合时易产生水平漂移感 */
-    transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius;
+    /* 优化：仅过渡必要的属性，避免过渡layout属性导致重排 */
+    transition-property: background-color, border-color, box-shadow, backdrop-filter;
     transition-duration: var(--theme-transition-duration);
     transition-timing-function: var(--ease-standard);
+    /* 使用contain优化渲染性能 */
+    contain: layout style;
+    /* 使用transform替代top/left等属性，利用GPU加速 */
+    will-change: transform;
 }
 
 /*
- * 移动端：border none ↔ 全边距 1px（Swup 回首页 / Banner 规则切换）时，
- * 过渡 border-color 在 WebKit 上易插值出黑色描边，故不做过渡。
+ * 移动端：优化过渡性能，减少过渡的属性
  */
 @media (max-width: 1023px) {
     #navbar>div {
-        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius;
+        transition-property: background-color, box-shadow, backdrop-filter;
+        /* 移动端使用更短的过渡时间 */
+        transition-duration: 150ms;
     }
 }
 

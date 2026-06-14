@@ -170,9 +170,9 @@ const watermarkStyles = showWatermark
   
   <!-- 本地图片：使用 Astro Image 组件 -->
   {isLocal && img && (
-    <Image 
-      src={img} 
-      alt={alt || ""} 
+    <Image
+      src={img}
+      alt={alt || ""}
       class:list={[
         imageClass,
         preview ? 'random-cover-preview-image' : 'random-cover-full-image'
@@ -181,10 +181,12 @@ const watermarkStyles = showWatermark
       width={preview ? 400 : 1200}
       height={preview ? 300 : 800}
       loading={loading}
+      fetchpriority={preview ? "low" : "high"}
       format="webp"
-      quality={preview ? 80 : 90}
-      widths={preview ? [200, 400, 600] : [800, 1200, 1600, 2000]}
+      quality={preview ? 75 : 85}
+      widths={preview ? [200, 400, 600] : [800, 1200, 1600]}
       sizes={preview ? "(max-width: 768px) 100vw, 28vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"}
+      decoding={preview ? "async" : "auto"}
       onloadstart={`(function(img){
         const container = img.parentElement;
         if (container) {
@@ -219,9 +221,9 @@ const watermarkStyles = showWatermark
   
   <!-- 远程图片（包括随机图API和普通远程图片） -->
   {!isLocal && (
-    <img 
-      src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc} 
-      alt={alt || ""} 
+    <img
+      src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc}
+      alt={alt || ""}
       class:list={[
         imageClass,
         preview ? 'random-cover-preview-image' : 'random-cover-full-image'
@@ -229,6 +231,7 @@ const watermarkStyles = showWatermark
       style={imageStyle}
       loading={loading}
       decoding="async"
+      fetchpriority={preview ? "low" : "auto"}
       data-lazy-src={shouldDeferRemoteSrc ? remoteSrc : ""}
       data-preview={preview ? "true" : "false"}
       data-seed={seed || ""}

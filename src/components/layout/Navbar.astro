@@ -210,27 +210,25 @@ function setupNavbarActiveSync() {
 }
 
 function loadButtonScript() {
-    let settingBtn = document.getElementById("display-settings-switch");
-    if (settingBtn) {
+    // 缓存DOM查询结果，避免重复查询
+    const settingBtn = document.getElementById("display-settings-switch");
+    const settingPanel = document.getElementById("display-setting");
+    const menuBtn = document.getElementById("nav-menu-switch");
+    const menuPanel = document.getElementById("nav-menu-panel");
+    const themeSwitchBtn = document.getElementById("scheme-switch");
+
+    if (settingBtn && settingPanel) {
         settingBtn.onclick = function () {
-            let settingPanel = document.getElementById("display-setting");
-            if (settingPanel) {
-                settingPanel.classList.toggle("float-panel-closed");
-            }
+            settingPanel.classList.toggle("float-panel-closed");
         };
     }
 
-    let menuBtn = document.getElementById("nav-menu-switch");
-    if (menuBtn) {
+    if (menuBtn && menuPanel) {
         menuBtn.onclick = function () {
-            let menuPanel = document.getElementById("nav-menu-panel");
-            if (menuPanel) {
-                menuPanel.classList.toggle("float-panel-closed");
-            }
+            menuPanel.classList.toggle("float-panel-closed");
         };
     }
 
-    let themeSwitchBtn = document.getElementById("scheme-switch");
     if (themeSwitchBtn) {
         themeSwitchBtn.onclick = function () {
             const html = document.documentElement;
@@ -316,24 +314,24 @@ function initSemifullScrollDetection() {
     navbar.classList.remove('scrolled');
 
     let ticking = false;
+    let isScrolled = false;
+    const threshold = 50;
 
     function updateNavbarState() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        const threshold = 50; // 滚动阈值，可以根据需要调整
-        // 使用批量DOM操作优化性能
-        if (scrollTop > threshold) {
-            navbar!.classList.add('scrolled');
-        } else {
-            navbar!.classList.remove('scrolled');
+        // 只在状态变化时更新DOM，避免不必要的重排
+        const shouldBeScrolled = scrollTop > threshold;
+        if (shouldBeScrolled !== isScrolled) {
+            isScrolled = shouldBeScrolled;
+            navbar!.classList.toggle('scrolled', isScrolled);
         }
-
         ticking = false;
     }
 
     function requestTick() {
         if (!ticking) {
-            requestAnimationFrame(updateNavbarState);
             ticking = true;
+            requestAnimationFrame(updateNavbarState);
         }
     }
 

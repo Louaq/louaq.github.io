@@ -49,7 +49,11 @@ const hasCover =
 const coverWidth = "clamp(220px, 32%, 320px)";
 const coverWidthTablet = "clamp(160px, 24%, 220px)";
 
-const { remarkPluginFrontmatter } = await render(entry);
+// 优化：只在需要时才调用render，避免不必要的渲染开销
+// remarkPluginFrontmatter应该在构建时已经处理好，直接从entry.data中获取
+const remarkPluginFrontmatter = entry.data.remarkPluginFrontmatter ||
+  (entry as any).remarkPluginFrontmatter ||
+  await render(entry).then(r => r.remarkPluginFrontmatter);
 ---
 
 <div
@@ -192,69 +196,83 @@ const { remarkPluginFrontmatter } = await render(entry);
 <script>
   import { navigateToPage } from "@/utils/navigation-utils";
 
-  function initPostCardClick() {
-    const cards = document.querySelectorAll<HTMLElement>(
-      ".post-card-wrapper[data-url]"
-    );
-    cards.forEach((card) => {
-      if (card.dataset.cardClickBound === "1") return;
-      card.dataset.cardClickBound = "1";
+  // 使用事件委托优化性能，而不是为每个卡片绑定事件
+  let mouseDownData: { x: number; y: number; target: HTMLElement | null } = { x: 0, y: 0, target: null };
 
-      const url = card.getAttribute("data-url");
-      if (!url) return;
-
-      let startX = 0;
-      let startY = 0;
-
-      card.addEventListener("mousedown", (e) => {
-        startX = e.clientX;
-        startY = e.clientY;
-      });
-
-      card.addEventListener("click", (e) => {
-        const target = e.target as HTMLElement | null;
-        if (!target) return;
-
-        // 点击的是链接、按钮等交互元素时，由元素自己处理
-        if (target.closest("a, button, input, textarea, select, label, [role='button']")) {
-          return;
-        }
-
-        // 拖动选择文字时不跳转
-        const dx = Math.abs(e.clientX - startX);
-        const dy = Math.abs(e.clientY - startY);
-        if (dx > 5 || dy > 5) return;
-
-        // 如果用户选中了文字，不跳转
-        const selection = window.getSelection();
-        if (selection && selection.toString().length > 0) return;
-
-        // 中键 / Ctrl+Click / Cmd+Click 等组合在新窗口打开
-        if (e.ctrlKey || e.metaKey || e.shiftKey || (e as MouseEvent).button === 1) {
-          window.open(url, "_blank", "noopener");
-          return;
-        }
-
-        navigateToPage(url);
-      });
-
-      // 键盘可访问性：Enter / Space 触发跳转
-      card.addEventListener("keydown", (e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          const target = e.target as HTMLElement | null;
-          if (target && target !== card && target.closest("a, button, input, textarea, select")) {
-            return;
-          }
-          e.preventDefault();
-          navigateToPage(url);
-        }
-      });
-    });
+  function handlePostCardMouseDown(e: MouseEvent) {
+    const card = (e.target as HTMLElement)?.closest<HTMLElement>(".post-card-wrapper[data-url]");
+    if (card) {
+      mouseDownData = { x: e.clientX, y: e.clientY, target: card };
+    }
   }
 
-  initPostCardClick();
-  document.addEventListener("astro:page-load", initPostCardClick);
-  document.addEventListener("astro:after-swap", initPostCardClick);
+  function handlePostCardClick(e: MouseEvent) {
+    const card = (e.target as HTMLElement)?.closest<HTMLElement>(".post-card-wrapper[data-url]");
+    if (!card) return;
+
+    const url = card.getAttribute("data-url");
+    if (!url) return;
+
+    const target = e.target as HTMLElement;
+
+    // 点击的是链接、按钮等交互元素时，由元素自己处理
+    if (target.closest("a, button, input, textarea, select, label, [role='button']")) {
+      return;
+    }
+
+    // 拖动选择文字时不跳转
+    if (mouseDownData.target === card) {
+      const dx = Math.abs(e.clientX - mouseDownData.x);
+      const dy = Math.abs(e.clientY - mouseDownData.y);
+      if (dx > 5 || dy > 5) return;
+    }
+
+    // 如果用户选中了文字，不跳转
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) return;
+
+    // 中键 / Ctrl+Click / Cmd+Click 等组合在新窗口打开
+    if (e.ctrlKey || e.metaKey || e.shiftKey || (e as MouseEvent).button === 1) {
+      window.open(url, "_blank", "noopener");
+      return;
+    }
+
+    navigateToPage(url);
+  }
+
+  function handlePostCardKeydown(e: KeyboardEvent) {
+    if (e.key !== "Enter" && e.key !== " ") return;
+
+    const card = (e.target as HTMLElement)?.closest<HTMLElement>(".post-card-wrapper[data-url]");
+    if (!card) return;
+
+    const target = e.target as HTMLElement;
+    if (target !== card && target.closest("a, button, input, textarea, select")) {
+      return;
+    }
+
+    const url = card.getAttribute("data-url");
+    if (url) {
+      e.preventDefault();
+      navigateToPage(url);
+    }
+  }
+
+  function initPostCardDelegation() {
+    // 移除旧的委托监听器（如果存在）
+    document.removeEventListener("mousedown", handlePostCardMouseDown);
+    document.removeEventListener("click", handlePostCardClick);
+    document.removeEventListener("keydown", handlePostCardKeydown);
+
+    // 使用事件委托在document级别监听，减少事件监听器数量
+    document.addEventListener("mousedown", handlePostCardMouseDown, { passive: true });
+    document.addEventListener("click", handlePostCardClick);
+    document.addEventListener("keydown", handlePostCardKeydown);
+  }
+
+  initPostCardDelegation();
+  document.addEventListener("astro:page-load", initPostCardDelegation);
+  document.addEventListener("astro:after-swap", initPostCardDelegation);
 </script>
 
 <style define:vars={{ coverWidth, coverWidthTablet }}>

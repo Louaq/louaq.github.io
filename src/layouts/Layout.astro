@@ -1081,52 +1081,69 @@ function disableAnimation() {
   }
 
   let toc = document.getElementById("toc-wrapper");
+  let bannerHeight = 0;
+  let isTocVisible = false;
 
-  function scrollFunction() {
-    const scrollTop = document.documentElement.scrollTop;
-    const bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
+  // 使用Intersection Observer替代scroll事件来优化性能
+  function initTocObserver() {
+    if (!bannerEnabled || !toc) return;
 
-    const operations: (() => void)[] = [];
+    bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
 
-    if (bannerEnabled && toc) {
-      operations.push(() => {
-        if (scrollTop > bannerHeight) {
-          toc.classList.remove("toc-hide");
-        } else {
-          toc.classList.add("toc-hide");
-        }
-      });
-    }
+    // 创建一个监视点在banner底部
+    const sentinelEl = document.createElement('div');
+    sentinelEl.id = 'banner-sentinel';
+    sentinelEl.style.cssText = `position: absolute; top: ${bannerHeight}px; left: 0; width: 1px; height: 1px; pointer-events: none;`;
+    document.body.appendChild(sentinelEl);
 
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const shouldShow = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+          if (shouldShow !== isTocVisible) {
+            isTocVisible = shouldShow;
+            requestAnimationFrame(() => {
+              toc!.classList.toggle("toc-hide", !isTocVisible);
+            });
+          }
+        });
+      },
+      {
+        rootMargin: '0px',
+        threshold: 0
+      }
+    );
 
-    if (operations.length > 0) {
-      requestAnimationFrame(() => {
-        operations.forEach((op) => op());
-      });
-    }
+    observer.observe(sentinelEl);
+
+    // 清理函数
+    window.addEventListener('swup:willReplaceContent', () => {
+      observer.disconnect();
+      sentinelEl.remove();
+    }, { once: true });
   }
 
-  let scrollTimeout: number;
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (scrollTimeout) {
-        cancelAnimationFrame(scrollTimeout);
-      }
-      scrollTimeout = requestAnimationFrame(scrollFunction);
-    },
-    { passive: true }
-  );
+  // 初始化TOC observer
+  if (bannerEnabled && toc) {
+    initTocObserver();
+  }
 
-  window.onresize = () => {
-    // calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
-    let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
-    offset = offset - (offset % 4);
-    document.documentElement.style.setProperty(
-      "--banner-height-extend",
-      `${offset}px`
-    );
-  };
+  // 使用防抖优化resize性能
+  let resizeTimeout: number;
+  window.addEventListener('resize', () => {
+    if (resizeTimeout) {
+      clearTimeout(resizeTimeout);
+    }
+    resizeTimeout = window.setTimeout(() => {
+      // calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
+      let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
+      offset = offset - (offset % 4);
+      document.documentElement.style.setProperty(
+        "--banner-height-extend",
+        `${offset}px`
+      );
+    }, 150);
+  }, { passive: true });
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {
