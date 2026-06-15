@@ -1,6 +1,6 @@
 ---
 title: 组会汇报
-published: 2026-04-25 14:10:00
+published: 2026-06-15 14:10:00
 expires: 2026-01-31 23:59:59
 mathjax: true
 category: 汇报
@@ -13,7 +13,7 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg
 ---
 
 <!-- 预览PDF -->
-::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_blank_template.pdf" title="CCF 2026 推荐目录" height="660px"}
+<!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_blank_template.pdf" title="CCF 2026 推荐目录" height="660px"} -->
 
 
 ## 2026年组会内容
