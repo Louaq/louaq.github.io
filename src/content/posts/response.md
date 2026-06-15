@@ -5,7 +5,7 @@ expires: 2026-08-31 23:59:59
 mathjax: true
 category: 模板
 tags: [Response Template]
-description: Response Template
+description: 回复审稿人模板
 pinned: true
 ---
 
