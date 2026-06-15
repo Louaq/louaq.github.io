@@ -1,6 +1,8 @@
 ---
 import { commentConfig } from "@/config/commentConfig";
 import { url } from "@/utils/url-utils";
+// 仅在渲染 Twikoo 评论的页面加载其样式覆盖，避免全站无谓下载
+import "@/styles/twikoo.css";
 
 interface Props {
 	path: string;
@@ -15,7 +17,7 @@ const config = {
 
 <div id="tcomment"></div>
 <!-- 使用自编译的 Twikoo 文件，避免点赞等按钮导致页面触发滚动回顶部 https://github.com/twikoojs/twikoo/issues/721 -->
-<script is:inline src={url("/assets/js/twikoo-1.7.4.all.min.js")}></script>
+<script is:inline defer src={url("/assets/js/twikoo-1.7.4.all.min.js")}></script>
 <script is:inline define:vars={{ config }}>
   // 获取当前页面路径
   function getCurrentPath() {
