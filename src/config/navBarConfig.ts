@@ -39,6 +39,27 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
    links.push(LinkPreset.About);
 
+	// 监控（服务状态监控 + 探针监控）
+	links.push({
+		name: "监控",
+		url: "https://status.louaq.com",
+		icon: "material-symbols:monitor-heart-rounded",
+		children: [
+			{
+				name: "探针监控",
+				url: "https://status.louaq.com",
+				external: true,
+				icon: "material-symbols:cloud-done-rounded",
+			},
+			{
+				name: "服务监控",
+				url: "https://status.louaq.io/status/monitor",
+				external: true,
+				icon: "material-symbols:radar",
+			},
+		],
+	});
+
     // 支持自定义导航栏链接,并且支持多级菜单
 	// links.push({
 	// 	name: "状态",
