@@ -2,7 +2,7 @@
 import type { CollectionEntry } from "astro:content";
 import { getPostUrlForEntry } from "@utils/url-utils";
 import PostCard from "@/components/layout/PostCard.astro";
-import { sidebarLayoutConfig, siteConfig } from "@/config";
+import { siteConfig } from "@/config";
 
 const { page } = Astro.props;
 
@@ -12,17 +12,13 @@ const interval = 20;
 // 类型别名避免Fragment语法问题
 type PostEntry = CollectionEntry<"posts">;
 
-// 检查是否启用双侧边栏
-const isBothSidebars = sidebarLayoutConfig.position === "both";
 const masonryEnabled = siteConfig.postListLayout.grid.masonry;
 const gridColumns = siteConfig.postListLayout.grid.columns || 2;
 
 // 根据配置设置初始布局模式，避免闪烁
 const defaultLayout = siteConfig.postListLayout.defaultMode || "list";
 const gridCols =
-	!isBothSidebars && gridColumns === 3
-		? "md:grid-cols-2 lg:grid-cols-3"
-		: "md:grid-cols-2";
+	gridColumns === 3 ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-2";
 const initialLayoutClass =
 	defaultLayout === "grid"
 		? `grid grid-cols-1 ${gridCols} gap-4 grid-mode`
@@ -33,7 +29,6 @@ const initialLayoutClass =
   id="post-list-container"
   class={`transition-all duration-500 ease-in-out mb-4 ${initialLayoutClass}`}
   data-default-layout={defaultLayout}
-  data-both-sidebars={isBothSidebars}
   data-masonry-enabled={masonryEnabled}
   data-grid-columns={gridColumns}
 >
@@ -59,7 +54,7 @@ const initialLayoutClass =
 </div>
 
 <!-- 立即执行脚本：防止刷新时的布局闪烁 -->
-<script is:inline define:vars={{ defaultLayout, isBothSidebars, gridColumns }}>
+<script is:inline define:vars={{ defaultLayout, gridColumns }}>
   (function() {
     const savedLayout = localStorage.getItem('postListLayout');
 
@@ -76,7 +71,7 @@ const initialLayoutClass =
 
         if (savedLayout === 'grid') {
           container.classList.add('grid-mode', 'grid', 'grid-cols-1', 'md:grid-cols-2', 'gap-4');
-          if (!isBothSidebars && gridColumns === 3) {
+          if (gridColumns === 3) {
             container.classList.add('lg:grid-cols-3');
           }
         } else {
@@ -126,7 +121,6 @@ const initialLayoutClass =
     const currentLayout = isCurrentGrid ? "grid" : (isCurrentList ? "list" : null);
 
     // Common logic vars
-    const isBothSidebars = postListContainer.getAttribute("data-both-sidebars") === "true";
     const masonryEnabled = postListContainer.getAttribute("data-masonry-enabled") === "true";
     const gridColumns = parseInt(postListContainer.getAttribute("data-grid-columns") || "2");
 
@@ -141,7 +135,7 @@ const initialLayoutClass =
                 applyMasonryLayout();
             } else {
                 postListContainer.classList.add("grid", "grid-cols-1", "md:grid-cols-2", "gap-4");
-                if (!isBothSidebars && gridColumns === 3) {
+                if (gridColumns === 3) {
                     postListContainer.classList.add("lg:grid-cols-3");
                 }
                 resetMasonryLayout();
@@ -219,10 +213,9 @@ const initialLayoutClass =
 
     // 瀑布流配置
     const gap = 16; // 1rem = 16px
-    const isBothSidebars = container.getAttribute("data-both-sidebars") === "true";
     const gridColumns = parseInt(container.getAttribute("data-grid-columns") || "2");
     let colCount = 2;
-    if (!isBothSidebars && gridColumns === 3 && window.innerWidth >= 1024) {
+    if (gridColumns === 3 && window.innerWidth >= 1024) {
         colCount = 3;
     }
     

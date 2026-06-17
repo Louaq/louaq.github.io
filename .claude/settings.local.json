@@ -18,7 +18,9 @@
       "Bash(ps -W)",
       "Bash(netstat -ano)",
       "Bash(curl -s \"http://localhost:4321/posts/4878f2fc0d8b/\")",
-      "PowerShell(Remove-Item *)"
+      "PowerShell(Remove-Item *)",
+      "Bash(python -c ' *)",
+      "Bash(python *)"
     ]
   }
 }

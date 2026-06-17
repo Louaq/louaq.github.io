@@ -169,7 +169,7 @@ const finalMainPanelTop =
 	isBannerMode && isBackgroundEnabled ? mainPanelTop : "5.5rem";
 
 // 获取响应式侧边栏配置（仅用于读取一些通用 flag，例如是否显示侧栏）
-const sidebarConfig = getResponsiveSidebarConfig(postSlug !== undefined);
+const sidebarConfig = getResponsiveSidebarConfig();
 
 // 单侧栏布局：左侧 17rem 原 widget（profile/倒计时/公告） + 主内容区
 // 移动端 (<768px) 单栏，由 grid-cols-1 控制

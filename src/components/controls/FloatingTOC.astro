@@ -18,13 +18,10 @@ const sidebarTocComponent = sidebarLayoutConfig.rightComponents?.find(
 	(c) => c.type === "sidebarToc",
 );
 const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
-const sidebarPosition = sidebarLayoutConfig.position;
-const showRightSidebarOnPostPage =
-	sidebarLayoutConfig.showRightSidebarOnPostPage;
 ---
 
 <!-- 悬浮TOC按钮 -->
-<div id="floating-toc-wrapper" class="floating-toc-wrapper" data-is-sidebar-toc-enabled={String(isSidebarTocEnabled)} data-sidebar-position={sidebarPosition} data-show-right-sidebar-on-post-page={String(showRightSidebarOnPostPage)}>
+<div id="floating-toc-wrapper" class="floating-toc-wrapper" data-is-sidebar-toc-enabled={String(isSidebarTocEnabled)}>
   <FloatingButton
     id="floating-toc-btn"
     icon="material-symbols:format-list-bulleted"
@@ -129,10 +126,6 @@ const showRightSidebarOnPostPage =
 <script>
   import { TOCManager, isPostPage } from "@/utils/tocUtils";
 
-  // 从 data 属性读取配置
-  const wrapper = document.querySelector('.floating-toc-wrapper');
-  const isSidebarTocEnabled = wrapper?.getAttribute('data-is-sidebar-toc-enabled') === 'true';
-
   if (typeof window.FloatingTOC === "undefined") {
     window.FloatingTOC = {
       btn: null,
@@ -234,26 +227,8 @@ const showRightSidebarOnPostPage =
       return false;
     }
 
-    // 获取侧边栏位置配置
-    const wrapper = document.querySelector('.floating-toc-wrapper');
-    let sidebarPosition = wrapper?.getAttribute('data-sidebar-position') || 'left';
-    const showRightSidebarOnPostPage = wrapper?.getAttribute('data-show-right-sidebar-on-post-page') === 'true';
-
-    // 如果配置了在文章详情页显示右侧边栏，且当前是文章详情页，则视为双侧边栏模式
-    if (sidebarPosition === 'left' && showRightSidebarOnPostPage) {
-        sidebarPosition = 'both';
-    }
-
-    // 如果是单侧边栏模式（左侧），中小屏幕始终显示悬浮目录按钮
-    if (sidebarPosition === 'left') {
-        return true;
-    }
-
-    // 双侧边栏模式：检查屏幕宽度
-    const isSmallScreen = window.innerWidth < 1200;
-
-    // 显示条件：小屏幕 OR 侧边栏目录未启用
-    return isSmallScreen || !isSidebarTocEnabled;
+    // 左侧单侧边栏模式：中小屏幕始终显示悬浮目录按钮
+    return true;
   }
 
   // 更新悬浮目录的显示状态

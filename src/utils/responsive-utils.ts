@@ -1,25 +1,13 @@
 import { sidebarLayoutConfig } from "../config";
 import { widgetManager } from "./widget-manager";
 
-// 响应式侧边栏配置
-export const getResponsiveSidebarConfig = (isPostPage = false) => {
+// 响应式侧边栏配置（仅支持左侧单侧栏）
+export const getResponsiveSidebarConfig = () => {
 	const globalSidebarEnabled = sidebarLayoutConfig.enable;
-	let sidebarPosition = sidebarLayoutConfig.position || "left";
-
-	// 如果配置了在文章详情页显示右侧边栏，且当前是文章详情页，则强制使用双侧边栏模式
-	if (
-		sidebarPosition === "left" &&
-		isPostPage &&
-		sidebarLayoutConfig.showRightSidebarOnPostPage
-	) {
-		sidebarPosition = "both";
-	}
-
-	const isBothSidebars = sidebarPosition === "both";
+	const isBothSidebars = false;
 
 	return {
 		globalSidebarEnabled,
-		sidebarPosition,
 		isBothSidebars,
 		mobileShowSidebar:
 			globalSidebarEnabled && widgetManager.shouldShowSidebar("mobile"),
