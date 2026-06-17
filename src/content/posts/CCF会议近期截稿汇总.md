@@ -15,7 +15,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 北京时间截稿 | 会议 | CCF | 年份 | 地点 | 官网 |
 |---|---|---|---|---|---|
-| 2026-06-16 07:59 | APBC | C | 2026 | Hsinchu, Taiwan, China | [link](https://www.apbc2026.com/home) |
 | 2026-06-18 19:59 | SLT | C | 2026 | Palermo, Sicily, Italy | [link](https://attend.ieee.org/slt-2026/) |
 | 2026-07-01 19:59 | ICTAI | C | 2026 | Boca Raton, FL, USA | [link](https://ictai.computer.org/2026/) |
 | 2026-07-05 23:59 | NCMMSC | C | 2026 | Hengqin, China | [link](https://www.ncmmsc.org.cn/) |
@@ -47,7 +46,6 @@ homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 
 | 截稿 | 会议 | CCF | 地点 |
 |---|---|---|---|
-| 2026-06-16 07:59 | APBC 2026 | C | Hsinchu, Taiwan, China |
 | 2026-07-06 06:00 | BIBM 2026 | B | Dallas, USA |
 | 2026-08-22 19:59 | BigData 2026 | C | Phoenix, Arizona, USA |
 
