@@ -12,10 +12,6 @@ homeCarouselOrder: 1
 homeCarouselImage: https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg
 ---
 
-<!-- 预览PDF -->
-<!-- ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_blank_template.pdf" title="CCF 2026 推荐目录" height="660px"} -->
-
-
 ## 2026年组会内容
 | 时间 | 内容 | PDF |
 |-------|-------|-------|
