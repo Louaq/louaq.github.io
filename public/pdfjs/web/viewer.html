@@ -33,6 +33,26 @@ See https://github.com/adobe-type-tools/cmap-resources
 
     <link rel="stylesheet" href="viewer.css">
 
+    <!-- 自定义：禁用注释/打印/保存等功能，防止 PDF 被复制或下载 -->
+    <style>
+      /* 隐藏工具栏中的批注（高亮/文本/绘图/图片）、打印、保存按钮 */
+      #editorModeButtons,
+      #editorModeSeparator,
+      #printButton,
+      #downloadButton,
+      #secondaryPrint,
+      #secondaryDownload,
+      #secondaryOpenFile,
+      #openFile {
+        display: none !important;
+      }
+      /* 禁止选中正文文本，阻止复制 */
+      .textLayer {
+        user-select: none !important;
+        -webkit-user-select: none !important;
+      }
+    </style>
+
   <script src="viewer.mjs" type="module"></script>
   </head>
 
