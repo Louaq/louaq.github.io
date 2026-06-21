@@ -9,5 +9,5 @@ export const announcementConfig: AnnouncementConfig = {
     text: "",
     url: "",
     external: false,
-  },
+  }, 
 };

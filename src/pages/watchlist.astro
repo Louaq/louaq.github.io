@@ -16,8 +16,11 @@ if (!siteConfig.pages.watchlist) {
 // 获取启用的观影项目
 const enabledItems = watchlistConfig.items.filter((item) => item.enabled);
 
-// 按播出时间排序的函数
+// 按播出时间排序的函数（置顶项优先，其次按时间降序）
 const sortByDate = (a: WatchlistItem, b: WatchlistItem) => {
+	if (!!a.pinned !== !!b.pinned) {
+		return a.pinned ? -1 : 1; // 置顶项排在最前
+	}
 	const dateA = a.startDate || a.endDate || "";
 	const dateB = b.startDate || b.endDate || "";
 	return dateB.localeCompare(dateA); // 降序，最新的在前
@@ -224,8 +227,10 @@ const statusColor = {
 													{item.title}
 												</h3>
 
-												{/* 观看进度 */}
+												{/* 观看进度（动漫、电视剧不显示） */}
 												{watchlistConfig.display.showProgress &&
+													item.type !== "anime" &&
+													item.type !== "tv" &&
 													item.episodes &&
 													item.episodes.total && (
 														<div class="mb-2">

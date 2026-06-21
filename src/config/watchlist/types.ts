@@ -12,9 +12,8 @@ export type WatchlistItem = {
 	};
 	startDate?: string; // 开始观看日期 YYYY-MM-DD
 	endDate?: string; // 完成观看日期 YYYY-MM-DD
-	comment?: string; // 简短评价
-	link?: string; // 相关链接（如豆瓣、Bangumi等）
 	tags?: string[]; // 标签
+	pinned?: boolean; // 是否置顶（置顶项排在分类最前）
 	enabled: boolean; // 是否启用
 };
 

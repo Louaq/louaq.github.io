@@ -348,12 +348,13 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		episodes: {
-			current: 2,
+			current: 3,
 			total: 52,
 		},
 		startDate: "2026-06-13",
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
+		pinned: true,
 	},
 	{
 		title: "逆天邪神 年番",
