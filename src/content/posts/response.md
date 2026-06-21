@@ -9,5 +9,6 @@ description: 回复审稿人模板
 pinned: true
 ---
 
+
 <!-- 预览PDF -->
 ::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_blank_template.pdf" title="CCF 2026 推荐目录" height="660px"}
