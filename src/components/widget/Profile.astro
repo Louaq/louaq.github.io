@@ -179,10 +179,10 @@ const categoryCount = categories.length;
               const skipSwup = !isExt && isNonHtmlInternalPath(item.url);
               return (
                 <a
-                  rel="me"
                   aria-label={item.name}
                   href={internalHref}
-                  target={isExt ? "_blank" : undefined}
+                  target={isExt || skipSwup ? "_blank" : undefined}
+                  rel={isExt || skipSwup ? "me noopener noreferrer" : "me"}
                   class="profile-link-btn shrink-0"
                   title={item.name}
                   {...(skipSwup ? { "data-no-swup": "" } : {})}
