@@ -1,6 +1,5 @@
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
-import tailwind from "@astrojs/tailwind";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
@@ -63,9 +62,6 @@ export default defineConfig({
 	base: "/",
 	trailingSlash: "always",
 	integrations: [
-		tailwind({
-			nesting: true,
-		}),
 		swup({
 			theme: false,
 			animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
@@ -280,7 +276,9 @@ export default defineConfig({
 			},
 			// CSS 优化
 			cssCodeSplit: true,
-			cssMinify: true,
+			// Astro 7 / Vite 8 默认用 lightningcss 压缩 CSS，会对原生 `&` 嵌套等语法报错；
+			// 显式指定 esbuild 以保持旧的宽松行为
+			cssMinify: "esbuild",
 			// 资源大小限制 - 减少内联资源
 			assetsInlineLimit: 4096,
 			// 减少源映射大小（可选，生产环境改为false）
