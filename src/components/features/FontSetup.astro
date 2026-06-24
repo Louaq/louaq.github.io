@@ -1,0 +1,78 @@
+---
+import { Font } from "astro:assets";
+import { siteConfig } from "@/config";
+
+const { font: fontConfig } = siteConfig;
+
+// 正文字体（HarmonyOS，保留 CDN 托管，以 @font-face 形式加载）
+const body = fontConfig.body;
+
+// font-family 字符串
+const bodyFamilyCss = `"${body.family}"`;
+const fallbackCss = (fontConfig.fallback || []).join(", ");
+// 代码字体回退：Font API 注入的变量优先，禁用字体时退回此列表
+const monoFallbackCss = (fontConfig.code.fallbacks || ["monospace"]).join(", ");
+
+// cssVariable 在配置中为 string，<Font /> 需要 astro 由 `fonts` 配置生成的字面量联合类型
+const codeCssVariable =
+	fontConfig.code.cssVariable as import("astro:assets").CssVariable;
+---
+
+{
+	/*
+	 * 代码字体：交由 Astro Font API（fontsource provider）自托管 + 子集化，
+	 * 注入 --font-jetbrains-mono 变量及对应 @font-face。preload 让代码块字体尽早就绪。
+	 */
+}
+{fontConfig.enable && <Font cssVariable={codeCssVariable} preload />}
+
+{
+	/* 正文字体：CDN woff2，手动 @font-face + 预加载 */
+}
+{
+	fontConfig.enable && body.src && (
+		<style
+			set:html={`
+				@font-face {
+					font-family: "${body.family}";
+					src: url("${body.src}") format("${body.format ?? "woff2"}");
+					font-display: ${body.display ?? "swap"};
+				}
+			`}
+		/>
+	)
+}
+{
+	fontConfig.enable && fontConfig.preload && body.src && (
+		<link
+			rel="preload"
+			href={body.src}
+			as="font"
+			type={`font/${body.format ?? "woff2"}`}
+			crossorigin
+		/>
+	)
+}
+
+{
+	/*
+	 * 全局字体变量，保持与旧 FontManager 一致的名称，供 juejin-theme.css /
+	 * markdown.css 等沿用：
+	 * - --font-family-custom / --font-family-fallback：正文
+	 * - --font-family-mono-fallback：代码（指向 Font API 注入的代码字体变量）
+	 */
+}
+<style
+	set:html={`
+	:root {
+		--font-family-custom: ${bodyFamilyCss};
+		--font-family-fallback: ${fallbackCss};
+		--font-family-mono-fallback: var(${fontConfig.code.cssVariable}, ${monoFallbackCss});
+	}
+	${
+		fontConfig.enable
+			? `body { font-family: ${bodyFamilyCss}, ${fallbackCss}; }`
+			: ""
+	}
+`}
+/>

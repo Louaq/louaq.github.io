@@ -1,107 +1,50 @@
 // 字体配置
+//
+// 架构（务实迁移 + 保留 CDN）：
+// - 正文字体（body）：HarmonyOS Regular，体积大的中文字体，继续走 B 站 CDN
+//   托管，由 FontSetup.astro 以 @font-face 形式加载。
+// - 代码字体（code）：JetBrains Mono，通过 Astro Font API（fontsource provider）
+//   自托管 + 子集化，由 astro.config.mjs 的 `fonts` 与 <Font /> 组件统一管理。
+// - og：OpenGraph 图片由 satori 服务端渲染，需要原始字体 buffer，独立于浏览器
+//   字体加载，保持原样。
 export const fontConfig = {
 	// 是否启用自定义字体功能
 	enable: true,
-	// 是否预加载字体文件
+	// 是否预加载正文字体文件
 	preload: true,
-	// 当前选择的字体，支持多个字体组合
-	// "jetbrains-mono-nl", "noto-serif-sc", "harmonyos-sans-sc"
-	selected: ["harmonyos-regular"],
 
-	// 字体列表
-	fonts: {
+	// 正文字体（CJK，体积大，保留 CDN 托管，不走 Astro Font API 自托管）
+	body: {
+		name: "HarmonyOS Regular",
+		family: "HarmonyOS_Regular",
 		// 华为鸿蒙字体 - HarmonyOS_Regular（B站 CDN 直接 woff2）
-		"harmonyos-regular": {
-			id: "harmonyos-regular",
-			name: "HarmonyOS Regular",
-			src: "https://s1.hdslb.com/bfs/static/jinkela/long/font/HarmonyOS_Regular.ao.woff2",
-			family: "HarmonyOS_Regular",
-			format: "woff2" as const,
-			display: "swap" as const,
-		},
+		src: "https://s1.hdslb.com/bfs/static/jinkela/long/font/HarmonyOS_Regular.ao.woff2",
+		format: "woff2" as const,
+		display: "swap" as const,
+	},
 
-		// 华为鸿蒙字体 - HarmonyOS Sans SC（国内 elemecdn 同步 npm，等价 unpkg 路径；备用：cdn.jsdelivr.net/npm/...）
-		"harmonyos-sans-sc": {
-			id: "harmonyos-sans-sc",
-			name: "HarmonyOS Sans SC",
-			src: "https://npm.elemecdn.com/harmonyos-sans-sc-webfont-splitted@1.1.0/dist/Regular.css",
-			family: "HarmonyOS Sans SC",
-			display: "swap" as const,
-		},
-
-		// 系统字体
-		system: {
-			id: "system",
-			name: "系统字体",
-			src: "", // 系统字体无需 src
-			family:
-				"system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, sans-serif",
-		},
-
-		// LXGW WenKai Screen R（霞鹜文楷屏幕版）
-		"lxgw-wenkai-screen-r": {
-			id: "lxgw-wenkai-screen-r",
-			name: "LXGW WenKai Screen R",
-			src: "https://cdn.bootcdn.net/ajax/libs/lxgw-wenkai-screen-webfont/1.7.0/lxgwwenkaiscreenr.min.css",
-			family: "LXGW WenKai Screen R",
-			display: "swap" as const,
-		},
-
-		// Google Fonts - JetBrains Mono（页面中显示为 JetBrains Mono NL，与 Google 提供的 family 名一致）
-		"jetbrains-mono-nl": {
-			id: "jetbrains-mono-nl",
-			name: "JetBrains Mono NL",
-			src: "https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap",
-			family: "JetBrains Mono",
-			display: "swap" as const,
-		},
-
-		// Google Fonts - Noto Serif SC
-		"noto-serif-sc": {
-			id: "noto-serif-sc",
-			name: "Noto Serif SC",
-			src: "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@200..900&display=swap",
-			family: "Noto Serif SC",
-			display: "swap" as const,
-		},
-
-		// Google Fonts - Zen Maru Gothic
-		"zen-maru-gothic": {
-			id: "zen-maru-gothic",
-			name: "Zen Maru Gothic",
-			src: "https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@300;400;500;700;900&display=swap",
-			family: "Zen Maru Gothic",
-			display: "swap" as const,
-		},
-
-		// Google Fonts - Inter
-		inter: {
-			id: "inter",
-			name: "Inter",
-			src: "https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap",
-			family: "Inter",
-			display: "swap" as const,
-		},
-
-		// 小米字体 - MiSans Normal
-		"misans-normal": {
-			id: "misans-normal",
-			name: "MiSans Normal",
-			src: "https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Normal.min.css",
-			family: "MiSans",
-			weight: 400,
-			display: "swap" as const,
-		},
-
-		// 小米字体 - MiSans Semibold
-		"misans-semibold": {
-			id: "misans-semibold",
-			name: "MiSans Semibold",
-			src: "https://unpkg.com/misans@4.1.0/lib/Normal/MiSans-Semibold.min.css",
-			family: "MiSans",
-			weight: 600,
-			display: "swap" as const,
-		},
+	// 代码字体（通过 Astro Font API 自托管 + 子集化）
+	// astro.config.mjs 据此构建 `fonts` 条目，组件通过 cssVariable 引用。
+	code: {
+		// astro:assets <Font /> 注入的 CSS 变量名
+		cssVariable: "--font-jetbrains-mono",
+		// 与 fontsource 家族名一致（fontsource provider 据此匹配）
+		family: "JetBrains Mono",
+		// 变量字体的字重范围（仅 normal，保持与原 fontsource 导入一致）
+		weights: ["100 800"] as [string, ...string[]],
+		styles: ["normal"] as ["normal"],
+		subsets: ["latin"] as [string, ...string[]],
+		// 注入到 --font-jetbrains-mono 的回退序列（不含 JetBrains Mono 本身）
+		fallbacks: [
+			"ui-monospace",
+			"SFMono-Regular",
+			"Menlo",
+			"Monaco",
+			"Consolas",
+			"Liberation Mono",
+			"Courier New",
+			"monospace",
+		],
 	},
 
 	// 全局字体回退（与 font-family 中顺序一致，含空格的名称需带引号）
@@ -120,19 +63,6 @@ export const fontConfig = {
 		'"Apple Color Emoji"',
 		'"Segoe UI Emoji"',
 		'"Segoe UI Symbol"',
-	],
-
-	// 代码字体回退（inline code / 代码块标题等）
-	monoFallback: [
-		'"JetBrains Mono Variable"',
-		"ui-monospace",
-		"SFMono-Regular",
-		"Menlo",
-		"Monaco",
-		"Consolas",
-		'"Liberation Mono"',
-		'"Courier New"',
-		"monospace",
 	],
 
 	// OpenGraph 图片字体配置

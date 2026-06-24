@@ -1,6 +1,6 @@
 ﻿---
 import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
-import FontManager from "@components/features/FontManager.astro";
+import FontSetup from "@components/features/FontSetup.astro";
 import KatexManager from "@components/features/KatexManager.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
@@ -450,8 +450,8 @@ const collapsiblePreviewLines =
       href={`${Astro.site}rss.xml`}
     />
 
-    <!-- Font Manager -->
-    <FontManager />
+    <!-- Font Setup（Astro Font API + 正文 CDN 字体） -->
+    <FontSetup />
 
   </head>
   <body
@@ -464,12 +464,6 @@ const collapsiblePreviewLines =
         "enable-card-border": siteConfig.card?.border,
         "grayscale-mode": isGrayscaleEnabled,
       },
-      ...(siteConfig.font.enable && siteConfig.font.selected
-        ? (Array.isArray(siteConfig.font.selected)
-            ? siteConfig.font.selected
-            : [siteConfig.font.selected]
-          ).map((fontId) => `font-${fontId}-enabled`)
-        : []),
     ]}
     data-page-type={pageType}
   >

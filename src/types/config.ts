@@ -325,33 +325,32 @@ export type HomeTopNoticeConfig = {
 	items: HomeTopNoticeItem[];
 };
 
-// 单个字体配置
-export type FontItem = {
-	id: string; // 字体唯一标识符
+// 正文字体（CDN 托管，手动 @font-face 加载）
+export type BodyFont = {
 	name: string; // 字体显示名称
-	src: string; // 字体文件路径或URL链接
 	family: string; // CSS font-family 名称
-	weight?: string | number; // 字体粗细，如 "normal", "bold", 400, 700 等
-	style?: "normal" | "italic" | "oblique"; // 字体样式
+	src: string; // 字体文件路径或 CDN URL
+	format?: "woff" | "woff2" | "truetype" | "opentype"; // 字体格式
 	display?: "auto" | "block" | "swap" | "fallback" | "optional"; // font-display 属性
-	unicodeRange?: string; // Unicode 范围，用于字体子集化
-	format?:
-		| "woff"
-		| "woff2"
-		| "truetype"
-		| "opentype"
-		| "embedded-opentype"
-		| "svg"; // 字体格式，仅当 src 为本地文件时需要
+};
+
+// 代码字体（通过 Astro Font API / fontsource provider 自托管 + 子集化）
+export type CodeFont = {
+	cssVariable: string; // astro:assets <Font /> 注入的 CSS 变量名
+	family: string; // fontsource 家族名
+	weights: [string, ...string[]]; // 字重，变量字体可用范围字符串如 "100 800"
+	styles: [string, ...string[]]; // 字体样式，如 ["normal"]
+	subsets: [string, ...string[]]; // 子集，如 ["latin"]
+	fallbacks: string[]; // 注入到 cssVariable 的回退序列（不含字体本身）
 };
 
 // 字体配置
 export type FontConfig = {
 	enable: boolean; // 是否启用自定义字体功能
-	selected: string | string[]; // 当前选择的字体ID，支持单个或多个字体组合
-	fonts: Record<string, FontItem>; // 字体库，以 ID 为键的对象
+	preload?: boolean; // 是否预加载正文字体文件以提高性能
+	body: BodyFont; // 正文字体（CDN 托管）
+	code: CodeFont; // 代码字体（Astro Font API 自托管 + 子集化）
 	fallback?: string[]; // 全局字体回退列表
-	monoFallback?: string[]; // 代码字体回退列表
-	preload?: boolean; // 是否预加载字体文件以提高性能
 	og?: {
 		family: string; // OpenGraph 使用的字体族
 		cssUrl: string; // OpenGraph 获取字体的 CSS 地址

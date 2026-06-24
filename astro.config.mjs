@@ -3,7 +3,7 @@ import svelte from "@astrojs/svelte";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
@@ -16,7 +16,7 @@ import remarkDirective from "remark-directive"; /* Handle directives */
 import remarkMath from "remark-math";
 import rehypeCallouts from "rehype-callouts";
 import remarkSectionize from "remark-sectionize";
-import { expressiveCodeConfig, siteConfig } from "./src/config";
+import { expressiveCodeConfig, fontConfig, siteConfig } from "./src/config";
 import { i18n } from "./src/i18n/translation";
 import I18nKey from "./src/i18n/i18nKey";
 import { pluginLanguageBadge } from "expressive-code-language-badge"; /* Language Badge */
@@ -61,6 +61,20 @@ export default defineConfig({
 
 	base: "/",
 	trailingSlash: "always",
+	// 代码字体通过 Astro Font API 自托管 + 子集化；正文字体（CJK）保留 CDN，见 FontSetup.astro
+	fonts: fontConfig.enable
+		? [
+				{
+					name: fontConfig.code.family,
+					cssVariable: fontConfig.code.cssVariable,
+					provider: fontProviders.fontsource(),
+					weights: fontConfig.code.weights,
+					styles: fontConfig.code.styles,
+					subsets: fontConfig.code.subsets,
+					fallbacks: fontConfig.code.fallbacks,
+				},
+			]
+		: [],
 	integrations: [
 		swup({
 			theme: false,
@@ -132,9 +146,9 @@ export default defineConfig({
 			},
 			styleOverrides: {
 				borderRadius: "0.75rem",
-				codeFontSize: "0.875rem",
-				codeFontFamily:
-					"'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
+				codeFontSize: "13px",
+				// 由 Astro Font API 提供（fontsource，自托管 + 子集化），变量已含回退
+				codeFontFamily: `var(${fontConfig.code.cssVariable})`,
 				codeLineHeight: "1.5rem",
 				frames: {},
 				textMarkers: {
