@@ -34,7 +34,7 @@ function pastelChipClass(tagName: string): string {
 ---
 
 <MainGridLayout title={i18n(I18nKey.tags)} description={i18n(I18nKey.tags)}>
-	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+	<div class="flex w-full rounded-(--radius-large) overflow-hidden relative">
 		<div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
 			{tags.length === 0 ? (
 				<p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
@@ -47,8 +47,8 @@ function pastelChipClass(tagName: string): string {
 								<a
 									href={getTagUrl(tag.name)}
 									class:list={[
-										"tags-page-chip group inline-flex items-center gap-1.5 rounded px-3 py-1 text-sm no-underline",
-										"transition-[filter,background-color] duration-150 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]",
+										"tags-page-chip group inline-flex items-center gap-1.5 rounded-sm px-3 py-1 text-sm no-underline",
+										"transition-[filter,background-color] duration-150 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--primary)",
 										pastelChipClass(name),
 									]}
 								>

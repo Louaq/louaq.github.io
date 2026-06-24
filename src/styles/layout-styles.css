@@ -1,3 +1,6 @@
+/* Tailwind v4：本文件被 Vite 拆分为独立样式表时会丢失 @import 的 layer() 修饰；
+   在源文件内显式包入 @layer base，确保始终位于 base 层（低于 utilities、低于无层级的 juejin-theme）。 */
+@layer base {
 /* Layout specific styles */
 
 /* User controlled visibility - 通过 html 属性控制，在渲染前就生效 */
@@ -714,4 +717,6 @@ html[data-wallpaper-mode="none"] .absolute.w-full.z-30 {
         height: 10vh !important;
         min-height: 50px !important;
     }
+}
+
 }

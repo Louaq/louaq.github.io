@@ -125,7 +125,7 @@ const statusColor = {
 	description={i18n(I18nKey.watchlistSubtitle)}
 >
 	<div
-		class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative min-h-32"
+		class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32"
 	>
 		<div class="card-base z-10 px-9 pt-6 pb-1 relative w-full">
 			<!-- 页面标题 -->
@@ -187,11 +187,11 @@ const statusColor = {
 									<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 										{category.items.map((item: WatchlistItem) => (
 										<div 
-											class="watchlist-card group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-sm hover:shadow-2xl border border-neutral-200 dark:border-neutral-700 block cursor-default"
+											class="watchlist-card group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-xs hover:shadow-2xl border border-neutral-200 dark:border-neutral-700 block cursor-default"
 											id={makeWatchAnchorId(item)}
 											data-item-section={category.key}>
 											{/* 封面图 */}
-											<div class="relative aspect-[3/4] overflow-hidden bg-neutral-100 dark:bg-neutral-900">
+											<div class="relative aspect-3/4 overflow-hidden bg-neutral-100 dark:bg-neutral-900">
 												<img
 													src={item.cover}
 													alt={item.title}
@@ -201,7 +201,7 @@ const statusColor = {
 												{/* 评分 */}
 												{watchlistConfig.display.showRating && item.rating && item.rating > 0 && (
 													<div class="absolute top-2 right-2">
-														<div class="flex items-center gap-1 px-2 py-1 rounded-md bg-black/60 text-white backdrop-blur-sm">
+														<div class="flex items-center gap-1 px-2 py-1 rounded-md bg-black/60 text-white backdrop-blur-xs">
 															<Icon
 																icon="material-symbols:star"
 																class="text-yellow-400 text-sm"
@@ -221,7 +221,7 @@ const statusColor = {
 											</div>
 
 											{/* 悬浮时显示的信息覆盖层 */}
-											<div class="watchlist-card-overlay absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent text-white p-4 pt-8">
+											<div class="watchlist-card-overlay absolute inset-x-0 bottom-0 bg-linear-to-t from-black/90 via-black/60 to-transparent text-white p-4 pt-8">
 												{/* 标题 */}
 												<h3 class="text-base font-bold mb-2 line-clamp-2">
 													{item.title}
@@ -242,7 +242,7 @@ const statusColor = {
 															</div>
 															<div class="w-full bg-white/20 rounded-full h-1.5">
 																<div
-																	class="bg-[var(--primary)] h-1.5 rounded-full"
+																	class="bg-(--primary) h-1.5 rounded-full"
 																	style={{
 																		width: `${((item.episodes.current || 0) / item.episodes.total) * 100}%`,
 																	}}
@@ -286,10 +286,10 @@ const statusColor = {
 					</>
 				) : (
 					<div class="text-center py-16">
-						<div class="inline-flex items-center justify-center w-16 h-16 bg-[var(--btn-regular-bg)] rounded-full mb-6 border border-[var(--line-divider)]">
+						<div class="inline-flex items-center justify-center w-16 h-16 bg-(--btn-regular-bg) rounded-full mb-6 border border-(--line-divider)">
 							<Icon
 								icon="material-symbols:video-library"
-								class="text-[2rem] text-[var(--btn-content)]"
+								class="text-[2rem] text-(--btn-content)"
 							/>
 						</div>
 						<h2 class="text-xl font-semibold text-black/80 dark:text-white/80 mb-3">

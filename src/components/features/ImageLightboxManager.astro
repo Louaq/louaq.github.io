@@ -32,7 +32,7 @@ import "@/styles/image-zoom.css";
 
   /** 避免点击图片时触发外层 a[href] 跳转（相册等） */
   function attachAnchorImageGuards(signal: AbortSignal) {
-    const handler = (e: MouseEvent) => {
+    const handler = (e: Event) => {
       const t = e.target;
       if (t instanceof HTMLImageElement && t.closest("a")) {
         e.preventDefault();

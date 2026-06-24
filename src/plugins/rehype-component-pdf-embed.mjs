@@ -40,7 +40,7 @@ export function PdfEmbedComponent(properties, children) {
 		"div",
 		{
 			class:
-				"pdf-embed not-prose my-6 w-full max-w-full rounded-[var(--radius-large)] border border-black/10 dark:border-white/10 bg-[var(--btn-regular-bg)]/30 dark:bg-white/[0.06]",
+				"pdf-embed not-prose my-6 w-full max-w-full rounded-(--radius-large) border border-black/10 dark:border-white/10 bg-(--btn-regular-bg)/30 dark:bg-white/6",
 			style: `--pdf-embed-h: ${height};`,
 			"data-pdf-src": rawSrc,
 			"data-pdf-title": title,

@@ -1,3 +1,6 @@
+/* Tailwind v4：本文件被 Vite 拆分为独立样式表时会丢失 @import 的 layer() 修饰；
+   在源文件内显式包入 @layer base，确保始终位于 base 层（低于 utilities、低于无层级的 juejin-theme）。 */
+@layer base {
 /**
  * 统一变量定义 - 合并所有重复的CSS变量和常量
  * Unified Variables - Merged all duplicate CSS variables and constants
@@ -40,8 +43,8 @@
   --btn-regular-bg-active: #dcdee0;
   --waves-toggle-bg: #e9eaec;
   
-  --btn-plain-bg-hover: unquote('color-mix(in oklch, var(--primary) 10%, transparent)');
-  --btn-plain-bg-active: unquote('color-mix(in oklch, var(--primary) 16%, transparent)');
+  --btn-plain-bg-hover: color-mix(in oklch, var(--primary) 10%, transparent);
+  --btn-plain-bg-active: color-mix(in oklch, var(--primary) 16%, transparent);
   
   --btn-card-bg-hover: #f7f8fa;
   --btn-card-bg-active: #ebedf0;
@@ -85,9 +88,9 @@
   --scrollbar-bg-active: var(--scrollbar-bg-active-light);
 
   /* 首页通告条 / 文章过期提示：底色与字色随 --primary 变化 */
-  --notice-themed-bg: unquote('color-mix(in oklch, var(--primary) 11%, var(--card-bg))');
-  --notice-themed-fg: unquote('color-mix(in oklch, var(--primary) 34%, var(--deep-text))');
-  --notice-themed-shadow: unquote('0 1px 3px -1px color-mix(in oklch, var(--primary) 22%, transparent)');
+  --notice-themed-bg: color-mix(in oklch, var(--primary) 11%, var(--card-bg));
+  --notice-themed-fg: color-mix(in oklch, var(--primary) 34%, var(--deep-text));
+  --notice-themed-shadow: 0 1px 3px -1px color-mix(in oklch, var(--primary) 22%, transparent);
 
   --display-light-icon: 1;
   --display-dark-icon: 0;
@@ -150,8 +153,8 @@
   --btn-regular-bg-active: #43434d;
   --waves-toggle-bg: #383841;
   
-  --btn-plain-bg-hover: unquote('color-mix(in oklch, var(--primary) 14%, transparent)');
-  --btn-plain-bg-active: unquote('color-mix(in oklch, var(--primary) 20%, transparent)');
+  --btn-plain-bg-hover: color-mix(in oklch, var(--primary) 14%, transparent);
+  --btn-plain-bg-active: color-mix(in oklch, var(--primary) 20%, transparent);
   
   --btn-card-bg-hover: #2d2d35;
   --btn-card-bg-active: #383841;
@@ -177,9 +180,9 @@
   --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
   --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
 
-  --notice-themed-bg: unquote('color-mix(in oklch, var(--primary) 17%, var(--card-bg))');
-  --notice-themed-fg: unquote('color-mix(in oklch, var(--primary) 9%, rgba(255, 255, 255, 0.92))');
-  --notice-themed-shadow: unquote('0 1px 3px -1px color-mix(in oklch, var(--primary) 26%, transparent)');
+  --notice-themed-bg: color-mix(in oklch, var(--primary) 17%, var(--card-bg));
+  --notice-themed-fg: color-mix(in oklch, var(--primary) 9%, rgba(255, 255, 255, 0.92));
+  --notice-themed-shadow: 0 1px 3px -1px color-mix(in oklch, var(--primary) 26%, transparent);
 
   --display-light-icon: 0;
   --display-dark-icon: 1;
@@ -421,4 +424,5 @@
   :root {
     --theme-transition-duration: 1ms;
   }
+}
 }

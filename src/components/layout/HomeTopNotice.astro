@@ -21,9 +21,9 @@ const { items } = Astro.props;
 					role="region"
 					aria-label={item.title || "站点通知"}
 				>
-					<div class="max-w-[var(--page-width)] mx-auto px-4 md:px-5 py-3 md:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[15px] md:text-[16px] leading-relaxed">
+					<div class="max-w-(--page-width) mx-auto px-4 md:px-5 py-3 md:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[15px] md:text-[16px] leading-relaxed">
 						<div class="flex flex-1 min-w-0 w-full items-center justify-start text-left">
-							<div class="notice-title-body flex w-full min-w-0 max-w-full items-center gap-x-1.5 [overflow-wrap:anywhere]">
+							<div class="notice-title-body flex w-full min-w-0 max-w-full items-center gap-x-1.5 wrap-anywhere">
 								{item.icon && (
 									<span
 										class="inline-flex shrink-0 items-center text-[1.05em] leading-none"
@@ -37,7 +37,7 @@ const { items } = Astro.props;
 									</span>
 								)}
 								<div
-									class="notice-text-flow min-w-0 flex-1 text-left [font-size:inherit] [line-height:inherit]"
+									class="notice-text-flow min-w-0 flex-1 text-left [font-size:inherit] leading-[inherit]"
 								>
 									{item.title && (
 										<span class="font-bold tracking-tight text-[1.05em]">{item.title}</span>

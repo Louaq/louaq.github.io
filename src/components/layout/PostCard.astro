@@ -57,7 +57,7 @@ const { remarkPluginFrontmatter } = await render(entry);
     "post-card-wrapper",
     hasCover ? "has-cover" : "no-cover",
     pinned ? "pinned" : "",
-    "card-base flex flex-col md:flex-row w-full rounded-[var(--radius-large)] overflow-hidden relative cursor-pointer",
+    "card-base flex flex-col md:flex-row w-full rounded-(--radius-large) overflow-hidden relative cursor-pointer",
     className,
   ]}
   style={style}
@@ -72,7 +72,7 @@ const { remarkPluginFrontmatter } = await render(entry);
       "post-card-content",
       "pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 md:pb-7 relative flex flex-col h-full",
       {
-        "order-2 md:order-none": hasCover,
+        "order-2 md:order-0": hasCover,
         "w-full md:w-[calc(100%-52px-12px)]": !hasCover,
         "w-full md:w-[calc(100%-var(--coverWidthTablet)-1.5rem)] lg:w-[calc(100%-var(--coverWidth)-1.5rem)]": hasCover,
       },
@@ -91,12 +91,12 @@ const { remarkPluginFrontmatter } = await render(entry);
       {entry.data.password && (
         <Icon
           name="material-symbols:lock-outline"
-          class="inline text-2xl align-middle -translate-y-px text-inherit flex-shrink-0"
+          class="inline text-2xl align-middle -translate-y-px text-inherit shrink-0"
           aria-label="加密"
         />
       )}
       <Icon
-        class="text-[2rem] text-(--primary) md:hidden flex-shrink-0 -translate-y-[2px]"
+        class="text-[2rem] text-(--primary) md:hidden shrink-0 translate-y-[-2px]"
         name="material-symbols:chevron-right-rounded"
       />
     </a>
@@ -161,11 +161,11 @@ const { remarkPluginFrontmatter } = await render(entry);
         class:list={[
           "post-card-image",
           "group",
-          "order-1 md:order-none",
-          "w-full md:w-[var(--coverWidthTablet)] lg:w-[var(--coverWidth)]",
+          "order-1 md:order-0",
+          "w-full md:w-(--coverWidthTablet) lg:w-(--coverWidth)",
           "aspect-2/1 md:aspect-auto",
           "relative md:my-4 md:mr-4 md:self-stretch",
-          "rounded-t-[var(--radius-large)] md:rounded-xl overflow-hidden active:scale-95",
+          "rounded-t-(--radius-large) md:rounded-xl overflow-hidden active:scale-95",
         ]}
       >
         <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition" />

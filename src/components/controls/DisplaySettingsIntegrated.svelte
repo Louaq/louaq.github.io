@@ -164,29 +164,29 @@ onMount(() => {
 });
 </script>
 
-<div id="display-setting" class="float-panel float-panel-closed absolute left-auto top-full right-0 z-[60] mt-1.5 w-80 max-w-[calc(100vw-2rem)] translate-x-0 px-4 py-4 transition-all">
+<div id="display-setting" class="float-panel float-panel-closed absolute left-auto top-full right-0 z-60 mt-1.5 w-80 max-w-[calc(100vw-2rem)] translate-x-0 px-4 py-4 transition-all">
     <!-- Theme Color Section -->
     <div class="flex flex-row gap-2 mb-2 items-center justify-between">
         <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
-            before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+            before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
             before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
         >
             {i18n(I18nKey.themeColor)}
             <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} onclick={resetHue}>
-                <span class="text-[var(--btn-content)]">
+                <span class="text-(--btn-content)">
                     <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                 </span>
             </button>
         </div>
         <div class="flex gap-1">
-            <div id="hueValue" class="transition bg-[var(--btn-regular-bg)] w-10 h-7 rounded-md flex justify-center
-            font-bold text-sm items-center text-[var(--btn-content)]">
+            <div id="hueValue" class="transition bg-(--btn-regular-bg) w-10 h-7 rounded-md flex justify-center
+            font-bold text-sm items-center text-(--btn-content)">
                 {hue}
             </div>
         </div>
     </div>
-    <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded select-none">
+    <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded-sm select-none">
         <input aria-label={i18n(I18nKey.themeColor)} type="range" min="0" max="360" bind:value={hue}
                class="slider" id="colorSlider" step="5" style="width: 100%"
                oninput={() => setHue(hue)}>
@@ -196,13 +196,13 @@ onMount(() => {
     {#if isWallpaperSwitchable}
         <div class="mt-2">
             <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
-                before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+                before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
                 {i18n(I18nKey.wallpaperMode)}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                         class:opacity-0={wallpaperMode === defaultWallpaperMode} class:pointer-events-none={wallpaperMode === defaultWallpaperMode} onclick={resetWallpaperMode}>
-                    <span class="text-[var(--btn-content)]">
+                    <span class="text-(--btn-content)">
                         <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                     </span>
                 </button>
@@ -215,10 +215,10 @@ onMount(() => {
                     class:opacity-60={wallpaperMode !== WALLPAPER_BANNER}
                     onclick={() => switchWallpaperMode(WALLPAPER_BANNER)}
                 >
-                    <Icon icon="material-symbols:image-outline" class="text-[1.25rem] flex-shrink-0"></Icon>
+                    <Icon icon="material-symbols:image-outline" class="text-[1.25rem] shrink-0"></Icon>
                     <span class="text-sm flex-1">{i18n(I18nKey.wallpaperBannerMode)}</span>
                     {#if wallpaperMode === WALLPAPER_BANNER}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] flex-shrink-0 text-[var(--primary)]"></Icon>
+                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
                 </button>
                 <button
@@ -228,10 +228,10 @@ onMount(() => {
                     class:opacity-60={wallpaperMode !== WALLPAPER_OVERLAY}
                     onclick={() => switchWallpaperMode(WALLPAPER_OVERLAY)}
                 >
-                    <Icon icon="material-symbols:wallpaper" class="text-[1.25rem] flex-shrink-0"></Icon>
+                    <Icon icon="material-symbols:wallpaper" class="text-[1.25rem] shrink-0"></Icon>
                     <span class="text-sm flex-1">{i18n(I18nKey.wallpaperOverlayMode)}</span>
                     {#if wallpaperMode === WALLPAPER_OVERLAY}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] flex-shrink-0 text-[var(--primary)]"></Icon>
+                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
                 </button>
                 <button
@@ -241,10 +241,10 @@ onMount(() => {
                     class:opacity-60={wallpaperMode !== WALLPAPER_NONE}
                     onclick={() => switchWallpaperMode(WALLPAPER_NONE)}
                 >
-                    <Icon icon="material-symbols:hide-image-outline" class="text-[1.25rem] flex-shrink-0"></Icon>
+                    <Icon icon="material-symbols:hide-image-outline" class="text-[1.25rem] shrink-0"></Icon>
                     <span class="text-sm flex-1">{i18n(I18nKey.wallpaperNoneMode)}</span>
                     {#if wallpaperMode === WALLPAPER_NONE}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] flex-shrink-0 text-[var(--primary)]"></Icon>
+                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
                 </button>
             </div>
@@ -255,7 +255,7 @@ onMount(() => {
     {#if wallpaperMode === WALLPAPER_BANNER && hasBannerSettings}
         <div class="mt-2 mb-2">
             <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
-                before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+                before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
                 {i18n(I18nKey.bannerSettings)}
@@ -274,7 +274,7 @@ onMount(() => {
                     <span class="text-sm flex-1">{i18n(I18nKey.bannerTitle)}</span>
                     <span class="waves-toggle-track inline-block w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:waves-toggle-track-on={bannerTitleEnabled}>
-                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
+                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-200"
                              class:left-0.5={!bannerTitleEnabled}
                              class:left-5={bannerTitleEnabled}></span>
                     </span>
@@ -293,7 +293,7 @@ onMount(() => {
                     <span class="text-sm flex-1">{i18n(I18nKey.wavesAnimation)}</span>
                     <span class="waves-toggle-track inline-block w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:waves-toggle-track-on={wavesEnabled}>
-                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow transition-all duration-200"
+                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-200"
                              class:left-0.5={!wavesEnabled}
                              class:left-5={wavesEnabled}></span>
                     </span>
@@ -307,13 +307,13 @@ onMount(() => {
     {#if allowLayoutSwitch && !isSmallScreen}
         <div class="px-1 mt-2">
             <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
-                before:w-1 before:h-4 before:rounded-md before:bg-[var(--primary)]
+                before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
                 {i18n(I18nKey.postListLayout)}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                         class:opacity-0={currentLayout === defaultLayout} class:pointer-events-none={currentLayout === defaultLayout} onclick={resetLayout}>
-                    <span class="text-[var(--btn-content)]">
+                    <span class="text-(--btn-content)">
                         <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                     </span>
                 </button>
@@ -334,7 +334,7 @@ onMount(() => {
                     </svg>
                     <span class="text-xs font-medium">{i18n(I18nKey.postListLayoutList)}</span>
                     {#if currentLayout === 'list'}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] flex-shrink-0 text-[var(--primary)]"></Icon>
+                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
                 </button>
                 <button
@@ -352,7 +352,7 @@ onMount(() => {
                     </svg>
                     <span class="text-xs font-medium">{i18n(I18nKey.postListLayoutGrid)}</span>
                     {#if currentLayout === 'grid'}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] flex-shrink-0 text-[var(--primary)]"></Icon>
+                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
                 </button>
             </div>

@@ -104,7 +104,7 @@ const collapsiblePreviewLines =
 ---
 
 <!doctype html>
-<html lang={siteLang} class="bg-[var(--page-bg)] text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode} data-language-badge-enabled={String(expressiveCodeConfig.pluginLanguageBadge?.enable !== false)}>
+<html lang={siteLang} class="bg-(--page-bg) text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode} data-language-badge-enabled={String(expressiveCodeConfig.pluginLanguageBadge?.enable !== false)}>
   <head>
     <title>{pageTitle}</title>
 
@@ -527,6 +527,8 @@ const collapsiblePreviewLines =
     "banner-height": `${BANNER_HEIGHT}vh`,
   }}
 >
+  /* Tailwind v4：组件级 <style> 独立编译，@apply 需通过 @reference 取得 utilities/主题上下文 */
+  @reference "tailwindcss";
   html[data-default-wallpaper="overlay"] #banner-wrapper,
   html[data-default-wallpaper="none"] #banner-wrapper,
   html[data-wallpaper-mode="overlay"] #banner-wrapper,
@@ -538,26 +540,25 @@ const collapsiblePreviewLines =
     overflow: hidden !important;
     pointer-events: none !important;
   }
-  @tailwind components;
   @layer components {
     body.enable-banner[data-page-type="home"] #banner-wrapper {
-      @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
+      @apply h-(--banner-height-home) translate-y-[var(--banner-height-extend)];
     }
     body.enable-banner[data-page-type="post"] #banner-wrapper {
-      @apply h-[var(--banner-height-home)] translate-y-[var(--banner-height-extend)];
+      @apply h-(--banner-height-home) translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #banner-wrapper {
       @apply h-[var(--banner-height-home)];
     }
 
     body.enable-banner[data-page-type="home"] #banner {
-      @apply h-[var(--banner-height-home)] translate-y-0;
+      @apply h-(--banner-height-home) translate-y-0;
     }
     body.enable-banner[data-page-type="post"] #banner {
-      @apply h-[var(--banner-height-home)] translate-y-0;
+      @apply h-(--banner-height-home) translate-y-0;
     }
     .enable-banner #banner {
-      @apply h-[var(--banner-height-home)] translate-y-[var(--bannerOffset)];
+      @apply h-(--banner-height-home) translate-y-[var(--bannerOffset)];
     }
     body.enable-banner[data-page-type="home"] #main-grid {
       @apply translate-y-[var(--banner-height-extend)];
@@ -566,7 +567,7 @@ const collapsiblePreviewLines =
       @apply translate-y-[var(--banner-height-extend)];
     }
     .enable-banner #top-row {
-      @apply h-[4.5rem] transition-[height,transform,opacity] duration-300;
+      @apply h-18 transition-[height,transform,opacity] duration-300;
     }
     body.enable-banner[data-page-type="home"] #sidebar-sticky,
     body.enable-banner[data-page-type="home"] #left-sidebar-sticky,

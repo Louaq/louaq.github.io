@@ -40,23 +40,23 @@ function buildPageItems(cur: number, last: number): PageItem[] {
 const pageItems = buildPageItems(currentPage, totalPages);
 
 const navArrowClass =
-	"inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] text-[var(--juejin-text-secondary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)] disabled:cursor-not-allowed disabled:opacity-50";
+	"inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-(--juejin-border) bg-(--juejin-tag-bg) text-(--juejin-text-secondary) transition-colors hover:bg-(--btn-plain-bg-hover) disabled:cursor-not-allowed disabled:opacity-50";
 const pageNumBase =
 	"inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums transition-colors";
-const pageNumIdle = `${pageNumBase} border-[var(--juejin-border)] bg-[var(--card-bg)] text-[var(--juejin-text-primary)] hover:bg-[var(--btn-plain-bg-hover)]`;
-const pageNumActive = `${pageNumBase} border-[var(--primary)] bg-[var(--primary)] text-white shadow-sm`;
+const pageNumIdle = `${pageNumBase} border-(--juejin-border) bg-(--card-bg) text-(--juejin-text-primary) hover:bg-(--btn-plain-bg-hover)`;
+const pageNumActive = `${pageNumBase} border-(--primary) bg-(--primary) text-white shadow-xs`;
 const ellipsisClass =
-	"flex h-9 items-center px-1 text-sm text-[var(--juejin-text-tertiary)] select-none";
+	"flex h-9 items-center px-1 text-sm text-(--juejin-text-tertiary) select-none";
 const jumpGroupClass =
 	"group/pjump pagination-jump-group ml-0.5 inline-flex max-w-full";
 const jumpShellClass =
-	"inline-flex h-9 overflow-hidden rounded-lg border border-[var(--juejin-border)] bg-[var(--card-bg)]";
+	"inline-flex h-9 overflow-hidden rounded-lg border border-(--juejin-border) bg-(--card-bg)";
 const jumpInputSlotClass =
 	"jump-input-slot max-w-0 overflow-hidden opacity-0 transition-[max-width,opacity] duration-300 ease-out motion-reduce:transition-none group-hover/pjump:max-w-12 group-hover/pjump:opacity-100 group-focus-within/pjump:max-w-12 group-focus-within/pjump:opacity-100";
 const jumpInputClass =
-	"box-border h-9 w-12 min-w-12 shrink-0 border-0 bg-transparent px-1 text-center text-sm text-[var(--juejin-text-primary)] tabular-nums outline-none focus:ring-0";
+	"box-border h-9 w-12 min-w-12 shrink-0 border-0 bg-transparent px-1 text-center text-sm text-(--juejin-text-primary) tabular-nums outline-hidden focus:ring-0";
 const jumpSubmitClass =
-	"inline-flex h-9 shrink-0 items-center justify-center border-l border-[var(--juejin-border)] bg-[var(--juejin-tag-bg)] px-2 text-[var(--primary)] transition-colors hover:bg-[var(--btn-plain-bg-hover)] disabled:cursor-not-allowed disabled:opacity-50";
+	"inline-flex h-9 shrink-0 items-center justify-center border-l border-(--juejin-border) bg-(--juejin-tag-bg) px-2 text-(--primary) transition-colors hover:bg-(--btn-plain-bg-hover) disabled:cursor-not-allowed disabled:opacity-50";
 
 const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 const jumpInputAria = [

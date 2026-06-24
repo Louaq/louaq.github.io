@@ -38,9 +38,9 @@ const tagCount = tags.length;
 const categoryCount = categories.length;
 ---
 
-<div class="card-base profile-card-hero overflow-hidden p-0 rounded-2xl shadow-sm border border-black/[0.06] dark:border-white/10">
+<div class="card-base profile-card-hero overflow-hidden p-0 rounded-2xl shadow-xs border border-black/6 dark:border-white/10">
   <!-- 头图区 -->
-  <div class="profile-cover-wrap relative h-[6.5rem]">
+  <div class="profile-cover-wrap relative h-26">
     {
       coverSrc ? (
         <img
@@ -53,11 +53,11 @@ const categoryCount = categories.length;
           decoding="async"
         />
       ) : (
-        <div class="absolute inset-0 bg-gradient-to-br from-slate-500 via-slate-600 to-slate-800" />
+        <div class="absolute inset-0 bg-linear-to-br from-slate-500 via-slate-600 to-slate-800" />
       )
     }
     <div
-      class="absolute inset-0 bg-gradient-to-t from-black/65 via-black/25 to-transparent"
+      class="absolute inset-0 bg-linear-to-t from-black/65 via-black/25 to-transparent"
       aria-hidden="true"
     />
 
@@ -74,7 +74,7 @@ const categoryCount = categories.length;
       {
         verified && (
           <span
-            class="pointer-events-none absolute bottom-0 right-0 z-30 flex h-5 w-5 translate-x-0.5 translate-y-0.5 items-center justify-center rounded-full border-2 border-white bg-[var(--juejin-primary,#1e80ff)] text-[10px] font-extrabold leading-none text-white shadow-sm dark:border-neutral-900"
+            class="pointer-events-none absolute bottom-0 right-0 z-30 flex h-5 w-5 translate-x-0.5 translate-y-0.5 items-center justify-center rounded-full border-2 border-white bg-(--juejin-primary,#1e80ff) text-[10px] font-extrabold leading-none text-white shadow-xs dark:border-neutral-900"
             aria-label="verified"
           >
             V
@@ -83,17 +83,17 @@ const categoryCount = categories.length;
       }
     </div>
 
-    <div class="absolute bottom-2.5 left-0 right-3 z-10 min-w-0 pl-[5.25rem] text-white">
+    <div class="absolute bottom-2.5 left-0 right-3 z-10 min-w-0 pl-21 text-white">
       <div class="flex flex-wrap items-center gap-2">
         <span
-          class="profile-hero-name truncate text-lg font-bold leading-snug text-white drop-shadow-sm"
+          class="profile-hero-name truncate text-lg font-bold leading-snug text-white drop-shadow-xs"
         >
           {profileConfig.name}
         </span>
         {
           level && (
             <span
-              class="inline-flex shrink-0 items-center rounded px-1.5 py-0 text-[11px] font-semibold leading-5 text-white/95 ring-1 ring-white/35 bg-white/15"
+              class="inline-flex shrink-0 items-center rounded-sm px-1.5 py-0 text-[11px] font-semibold leading-5 text-white/95 ring-1 ring-white/35 bg-white/15"
               aria-label={`等级 ${level}`}
             >
               {level}

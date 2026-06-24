@@ -570,13 +570,13 @@ onDestroy(() => {
 	type="button"
 	aria-label="Open search"
 	class="hidden shrink-0 lg:flex items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
-      bg-black/[0.06] hover:bg-black/[0.08] active:bg-black/[0.10]
-      dark:bg-white/[0.08] dark:hover:bg-white/[0.12] dark:active:bg-white/[0.14]
+      bg-black/6 hover:bg-black/8 active:bg-black/10
+      dark:bg-white/8 dark:hover:bg-white/12 dark:active:bg-white/[0.14]
       text-black/55 dark:text-white/55 text-sm
-      border border-transparent hover:border-[var(--primary)]
-      outline-none focus:outline-none focus-visible:outline-none
-      focus-visible:border-[var(--primary)]
-      focus-visible:ring-2 focus-visible:ring-[var(--primary)]/25"
+      border border-transparent hover:border-(--primary)
+      outline-hidden focus:outline-hidden focus-visible:outline-hidden
+      focus-visible:border-(--primary)
+      focus-visible:ring-2 focus-visible:ring-(--primary)/25"
 	onclick={openModal}
 >
 	<svg
@@ -604,7 +604,7 @@ onDestroy(() => {
 	type="button"
 	onclick={openModal}
 	aria-label="Open search"
-	class="btn-plain scale-animation lg:!hidden rounded-lg w-11 h-11 active:scale-90"
+	class="btn-plain scale-animation lg:hidden! rounded-lg w-11 h-11 active:scale-90"
 >
 	<svg
 		width="20"

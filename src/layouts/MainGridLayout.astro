@@ -413,25 +413,25 @@ const transparentClass = shouldEnableTransparency
                     xlink:href="#gentle-wave"
                     x="48"
                     y="0"
-                    class="opacity-25 fill-[var(--page-bg)]"
+                    class="opacity-25 fill-(--page-bg)"
                 ></use>
                 <use
                     xlink:href="#gentle-wave"
                     x="48"
                     y="3"
-                    class="opacity-50 fill-[var(--page-bg)]"
+                    class="opacity-50 fill-(--page-bg)"
                 ></use>
                 <use
                     xlink:href="#gentle-wave"
                     x="48"
                     y="5"
-                    class="opacity-65 fill-[var(--page-bg)]"
+                    class="opacity-65 fill-(--page-bg)"
                 ></use>
                 <use
                     xlink:href="#gentle-wave"
                     x="48"
                     y="7"
-                    class=" opacity-75 fill-[var(--page-bg)]"
+                    class=" opacity-75 fill-(--page-bg)"
                 ></use>
             </g>
         </svg>
@@ -455,7 +455,7 @@ const transparentClass = shouldEnableTransparency
 <!-- Main content -->
 <div class={`absolute w-full z-30 pointer-events-none ${mobileNonHomeBannerClass ? 'mobile-main-no-banner' : ''} ${!(isBannerMode && isBackgroundEnabled) ? 'no-banner-layout' : ''} ${transparentClass}`} style={`top: ${finalMainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
-    <div class="relative max-w-[var(--page-width)] mx-auto pointer-events-auto">
+    <div class="relative max-w-(--page-width) mx-auto pointer-events-auto">
         <div id="main-grid" class={`transition duration-700 w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
         >
             <!-- Background image credit - Desktop -->
@@ -467,7 +467,7 @@ const transparentClass = shouldEnableTransparency
                 aria-label="Visit image source"
                 class:list={[
                     "group onload-animation transition-all absolute justify-center items-center rounded-full " +
-                    "px-3 right-4 -top-[3.25rem] bg-black/60 hover:bg-black/70 h-9 hidden md:flex", 
+                    "px-3 right-4 -top-13 bg-black/60 hover:bg-black/70 h-9 hidden md:flex", 
                     {"hover:pr-9 active:bg-black/80": creditUrlDesktop}
                 ]}
             >
@@ -487,7 +487,7 @@ const transparentClass = shouldEnableTransparency
                 aria-label="Visit image source"
                 class:list={[
                     "group onload-animation transition-all absolute justify-center items-center rounded-full " +
-                    "px-3 right-4 -top-[3.25rem] bg-black/60 hover:bg-black/70 h-9 flex md:hidden", 
+                    "px-3 right-4 -top-13 bg-black/60 hover:bg-black/70 h-9 flex md:hidden", 
                     {"hover:pr-9 active:bg-black/80": creditUrlMobile}
                 ]}
             >
@@ -546,9 +546,9 @@ const transparentClass = shouldEnableTransparency
     style={`top: ${finalMainPanelTop}`}
 >
     {isPostPageCheck && (
-        <div class="relative max-w-[var(--page-width)] mx-auto">
-            <div class="post-toc-wrapper absolute top-0 -right-[var(--toc-width)] w-[var(--toc-width)]">
-                <div class="post-toc-inner-wrapper fixed top-[5.5rem] w-[var(--toc-width)] max-h-[calc(100vh-7rem)] pointer-events-auto pr-2 pb-4 overflow-y-auto overflow-x-hidden hide-scrollbar">
+        <div class="relative max-w-(--page-width) mx-auto">
+            <div class="post-toc-wrapper absolute top-0 -right-(--toc-width) w-(--toc-width)">
+                <div class="post-toc-inner-wrapper fixed top-22 w-(--toc-width) max-h-[calc(100vh-7rem)] pointer-events-auto pr-2 pb-4 overflow-y-auto overflow-x-hidden hide-scrollbar">
                     <PostPageTOC headings={headings} />
                 </div>
             </div>

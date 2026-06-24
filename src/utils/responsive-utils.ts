@@ -137,8 +137,8 @@ export const generateSidebarClasses = (
 		return `
 			mb-4 row-start-2 row-end-3 col-span-2 onload-animation
 			${mobileShowSidebar ? "block" : "hidden"}
-			${tabletShowSidebar ? "md:block md:row-start-1 md:row-end-2 md:max-w-[17.5rem] md:col-start-1 md:col-end-2" : "md:hidden"}
-			${desktopShowSidebar ? "lg:block lg:row-start-1 lg:row-end-2 lg:max-w-[17.5rem] lg:col-start-1 lg:col-end-2" : "lg:hidden"}
+			${tabletShowSidebar ? "md:block md:row-start-1 md:row-end-2 md:max-w-70 md:col-start-1 md:col-end-2" : "md:hidden"}
+			${desktopShowSidebar ? "lg:block lg:row-start-1 lg:row-end-2 lg:max-w-70 lg:col-start-1 lg:col-end-2" : "lg:hidden"}
 		`
 			.trim()
 			.replace(/\s+/g, " ");
@@ -148,8 +148,8 @@ export const generateSidebarClasses = (
 	return `
 		mb-4 row-start-2 row-end-3 col-span-2 onload-animation
 		${mobileShowSidebar ? "block" : "hidden"}
-		${tabletShowSidebar ? "md:block md:row-start-1 md:row-end-2 md:max-w-[17.5rem] md:col-start-1 md:col-end-2" : "md:hidden"}
-		${desktopShowSidebar ? "lg:block lg:row-start-1 lg:row-end-2 lg:max-w-[17.5rem] lg:col-start-1 lg:col-end-2" : "lg:hidden"}
+		${tabletShowSidebar ? "md:block md:row-start-1 md:row-end-2 md:max-w-70 md:col-start-1 md:col-end-2" : "md:hidden"}
+		${desktopShowSidebar ? "lg:block lg:row-start-1 lg:row-end-2 lg:max-w-70 lg:col-start-1 lg:col-end-2" : "lg:hidden"}
 	`
 		.trim()
 		.replace(/\s+/g, " ");
@@ -183,11 +183,11 @@ export const generateRightSidebarClasses = (
 		mobileShowSidebar && hasRightComponentsMobile ? "block" : "hidden";
 	const tabletDisplay =
 		tabletShowSidebar && hasRightComponentsTablet
-			? `md:block md:row-start-1 md:row-end-2 md:max-w-[17.5rem] ${tabletCol}`
+			? `md:block md:row-start-1 md:row-end-2 md:max-w-70 ${tabletCol}`
 			: "md:hidden";
 	const desktopDisplay =
 		desktopShowSidebar && hasRightComponentsDesktop
-			? `lg:block lg:row-start-1 lg:row-end-2 lg:max-w-[17.5rem] ${desktopCol}`
+			? `lg:block lg:row-start-1 lg:row-end-2 lg:max-w-70 ${desktopCol}`
 			: "lg:hidden";
 
 	return `

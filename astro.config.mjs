@@ -1,5 +1,6 @@
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
+import tailwindcss from "@tailwindcss/vite";
 import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
@@ -247,6 +248,8 @@ export default defineConfig({
 		],
 	},
 	vite: {
+		// Tailwind CSS v4 通过官方 Vite 插件接入
+		plugins: [tailwindcss()],
 		// 开发时预打包 Swup 子入口，减少 504 Outdated Optimize Dep（依赖变更后仍建议重启 dev）
 		optimizeDeps: {
 			include: [

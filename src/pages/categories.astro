@@ -9,7 +9,7 @@ const categories = await getCategoryList();
 ---
 
 <MainGridLayout title={i18n(I18nKey.categories)} description={i18n(I18nKey.categories)}>
-	<div class="flex w-full rounded-[var(--radius-large)] overflow-hidden relative">
+	<div class="flex w-full rounded-(--radius-large) overflow-hidden relative">
 		<div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
 			{
 				categories.length === 0 ? (
@@ -22,7 +22,7 @@ const categories = await getCategoryList();
 							<li class="m-0 p-0">
 								<a
 									href={cat.url}
-									class="categories-page-chip group inline-flex items-center gap-1.5 py-0.5 rounded-md text-neutral-900 dark:text-neutral-100 transition-colors duration-150 hover:text-[var(--primary)]"
+									class="categories-page-chip group inline-flex items-center gap-1.5 py-0.5 rounded-md text-neutral-900 dark:text-neutral-100 transition-colors duration-150 hover:text-(--primary)"
 								>
 									<Icon
 										name="material-symbols:folder-rounded"
