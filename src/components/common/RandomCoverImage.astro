@@ -443,7 +443,10 @@ const watermarkStyles = showWatermark
   }
 </style>
 
-<script is:inline>
+<script>
+  // 该脚本为文档级单例逻辑（基于 document.querySelectorAll 操作全站封面图），
+  // 不依赖任何服务端注入变量。改为打包脚本后 Astro 会全页去重，
+  // 即使本组件在列表页渲染多次也只输出一份，避免内联脚本被重复打包。
   (function() {
     function isPageRefresh() {
       try {

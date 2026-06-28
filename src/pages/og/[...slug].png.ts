@@ -117,7 +117,10 @@ export async function GET({
 		const avatarPath = profileConfig.avatar?.startsWith("/")
 			? `./public${profileConfig.avatar}`
 			: `./src/${profileConfig.avatar}`;
-		const avatarBuffer = fs.readFileSync(avatarPath);
+		// satori 仅可靠支持 png/jpeg；本地头像可能是 webp，统一用 sharp 转 png
+		const avatarBuffer = await sharp(fs.readFileSync(avatarPath))
+			.png()
+			.toBuffer();
 		avatarBase64 = `data:image/png;base64,${avatarBuffer.toString("base64")}`;
 	}
 

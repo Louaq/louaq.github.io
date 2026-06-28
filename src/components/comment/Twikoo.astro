@@ -1,8 +1,8 @@
 ---
 import { commentConfig } from "@/config/commentConfig";
 import { url } from "@/utils/url-utils";
-// 仅在渲染 Twikoo 评论的页面加载其样式覆盖，避免全站无谓下载
-import "@/styles/twikoo.css";
+// 样式覆盖自托管到 public/assets/css，随评论脚本一起懒加载，
+// 避免被 Astro 打包成全站渲染阻塞的 <link>（评论区在首屏外）。
 
 interface Props {
 	path: string;
@@ -13,12 +13,16 @@ const config = {
 	el: "#tcomment",
 	path: Astro.props.path,
 };
+
+// Twikoo 脚本体积较大（~640KB），评论区位于首屏外。改为按需懒加载：
+// 仅当 #tcomment 接近视口时再注入脚本，避免每个文章页无条件下载。
+const twikooScriptUrl = url("/assets/js/twikoo-1.7.4.all.min.js");
+const twikooCssUrl = url("/assets/css/twikoo.css");
 ---
 
 <div id="tcomment"></div>
 <!-- 使用自编译的 Twikoo 文件，避免点赞等按钮导致页面触发滚动回顶部 https://github.com/twikoojs/twikoo/issues/721 -->
-<script is:inline defer src={url("/assets/js/twikoo-1.7.4.all.min.js")}></script>
-<script is:inline define:vars={{ config }}>
+<script is:inline define:vars={{ config, twikooScriptUrl, twikooCssUrl }}>
   // 获取当前页面路径
   function getCurrentPath() {
     const pathname = window.location.pathname;
@@ -36,36 +40,111 @@ const config = {
     };
   }
 
-  // 初始化 Twikoo
-  function initTwikoo() {
-    if (typeof twikoo !== "undefined") {
-      const commentEl = document.getElementById("tcomment");
-      if (commentEl) {
-        commentEl.innerHTML = "";
-
-        const dynamicConfig = createTwikooConfig();
-
-        void twikoo.init(dynamicConfig).catch(() => {});
-      }
-    } else {
-      // 如果 Twikoo 未加载，稍后重试
-      setTimeout(initTwikoo, 500);
+  // 懒加载样式覆盖（仅注入一次）
+  function loadTwikooCss() {
+    if (!document.getElementById("twikoo-css")) {
+      const link = document.createElement("link");
+      link.id = "twikoo-css";
+      link.rel = "stylesheet";
+      link.href = twikooCssUrl;
+      document.head.appendChild(link);
     }
   }
 
-  // 页面加载时初始化
-  document.addEventListener("DOMContentLoaded", initTwikoo);
+  // 懒加载 Twikoo 脚本（仅注入一次，跨 swup 导航复用全局实例）
+  let twikooScriptPromise = null;
+  function loadTwikooScript() {
+    loadTwikooCss();
+    if (typeof twikoo !== "undefined") {
+      return Promise.resolve();
+    }
+    if (twikooScriptPromise) {
+      return twikooScriptPromise;
+    }
+    twikooScriptPromise = new Promise(function (resolve, reject) {
+      const existing = document.getElementById("twikoo-script");
+      if (existing) {
+        existing.addEventListener("load", resolve, { once: true });
+        existing.addEventListener("error", reject, { once: true });
+        return;
+      }
+      const script = document.createElement("script");
+      script.id = "twikoo-script";
+      script.defer = true;
+      script.src = twikooScriptUrl;
+      script.addEventListener("load", resolve, { once: true });
+      script.addEventListener("error", function (e) {
+        twikooScriptPromise = null; // 允许后续重试
+        reject(e);
+      }, { once: true });
+      document.head.appendChild(script);
+    });
+    return twikooScriptPromise;
+  }
 
-  // Swup 页面切换后重新初始化
+  // 初始化 Twikoo（确保脚本已加载）
+  function initTwikoo() {
+    const commentEl = document.getElementById("tcomment");
+    if (!commentEl) {
+      return;
+    }
+    loadTwikooScript()
+      .then(function () {
+        if (typeof twikoo === "undefined") {
+          setTimeout(initTwikoo, 500);
+          return;
+        }
+        commentEl.innerHTML = "";
+        void twikoo.init(createTwikooConfig()).catch(() => {});
+      })
+      .catch(() => {});
+  }
+
+  // 当评论区接近视口时才加载脚本并初始化
+  function observeAndInit() {
+    const commentEl = document.getElementById("tcomment");
+    if (!commentEl) {
+      return;
+    }
+    // 脚本已就绪（如 swup 二次导航）则直接初始化
+    if (typeof twikoo !== "undefined") {
+      initTwikoo();
+      return;
+    }
+    if (!("IntersectionObserver" in window)) {
+      initTwikoo();
+      return;
+    }
+    const observer = new IntersectionObserver(
+      function (entries, obs) {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          obs.disconnect();
+          initTwikoo();
+        }
+      },
+      // 提前 800px 预加载，让用户滚动到评论区时已基本就绪
+      { rootMargin: "800px 0px" },
+    );
+    observer.observe(commentEl);
+  }
+
+  // 页面加载时设置观察
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", observeAndInit);
+  } else {
+    observeAndInit();
+  }
+
+  // Swup 页面切换后重新观察
   if (window.swup && window.swup.hooks) {
     window.swup.hooks.on("content:replace", function () {
-      setTimeout(initTwikoo, 200);
+      setTimeout(observeAndInit, 200);
     });
   } else {
     document.addEventListener("swup:enable", function () {
       if (window.swup && window.swup.hooks) {
         window.swup.hooks.on("content:replace", function () {
-          setTimeout(initTwikoo, 200);
+          setTimeout(observeAndInit, 200);
         });
       }
     });
@@ -73,9 +152,6 @@ const config = {
 
   // 自定义事件监听
   document.addEventListener("firefly:page:loaded", function () {
-    const commentEl = document.getElementById("tcomment");
-    if (commentEl) {
-      initTwikoo();
-    }
+    observeAndInit();
   });
 </script>

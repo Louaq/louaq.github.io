@@ -1,10 +1,19 @@
 ---
+import { url } from "@/utils/url-utils";
+
+// KaTeX 样式自托管到 public/katex（构建期不再 import，避免 Astro 把其 CSS
+// 提升为全站渲染阻塞的 <link>）。仅在含公式的页面运行时注入一次。
+const katexCssHref = url("/katex/katex.min.css");
 ---
-<script>
-    // KaTeX 样式按需加载
+<script is:inline define:vars={{ katexCssHref }}>
+    // KaTeX 样式按需加载：仅当页面存在公式时才注入一次 <link>
     function loadKatex() {
-        if (document.querySelector('.katex')) {
-            import('katex/dist/katex.css');
+        if (document.querySelector('.katex') && !document.getElementById('katex-css')) {
+            const link = document.createElement('link');
+            link.id = 'katex-css';
+            link.rel = 'stylesheet';
+            link.href = katexCssHref;
+            document.head.appendChild(link);
         }
     }
 
