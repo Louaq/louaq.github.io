@@ -110,7 +110,7 @@ export const siteConfig: SiteConfig = {
 	showLastModified: true,
 
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
-	outdatedThreshold: 5,
+	outdatedThreshold: 90,
 
 	// 文章页"上一篇/下一篇"导航开关
 	showPostPrevNext: false,
