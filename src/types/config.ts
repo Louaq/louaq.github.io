@@ -557,15 +557,6 @@ export type BackgroundWallpaperConfig = {
 			enableBlur?: boolean; // 是否开启毛玻璃模糊效果
 			blur?: number; // 毛玻璃模糊度
 		};
-		waves?: {
-			enable:
-				| boolean
-				| {
-					desktop: boolean; // 桌面端是否启用水波纹动画效果
-					mobile: boolean; // 移动端是否启用水波纹动画效果
-			  }; // 是否启用水波纹动画效果，支持布尔值或分别设置桌面端和移动端
-		switchable?: boolean; // 是否允许用户通过控制面板切换水波纹动画
-		};
 	};
 	// 全屏透明覆盖模式特有配置
 	overlay?: {

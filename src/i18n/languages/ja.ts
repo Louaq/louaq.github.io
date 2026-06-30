@@ -141,7 +141,6 @@ export const ja: Translation = {
 	// バナー設定
 	[Key.bannerSettings]: "バナー設定",
 	[Key.bannerTitle]: "バナータイトル",
-	[Key.wavesAnimation]: "波アニメーション",
 
 	// ページネーション
 	[Key.paginationFirst]: "最初",

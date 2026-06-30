@@ -27,7 +27,6 @@ import { shouldApplyGrayscale } from "@/utils/festival-manager";
 
 import "@/styles/grayscale.css";
 import "@/styles/main.css";
-import "@/styles/juejin-theme.css";
 import "@rehype-callouts-theme";
 
 interface Props {
@@ -417,13 +416,6 @@ const collapsiblePreviewLines =
       } else {
         runWallpaperVisibility();
       }
-      (function applyWavesEnabled() {
-        const wavesEnabled = localStorage.getItem("wavesEnabled");
-        if (wavesEnabled !== null) {
-          document.documentElement.setAttribute("data-waves-enabled", wavesEnabled);
-        }
-      })();
-
       (function applyBannerTitleEnabled() {
         const stored = localStorage.getItem("bannerTitleEnabled");
         const enabled = stored !== null ? stored : String(defaultBannerTitleEnabled);

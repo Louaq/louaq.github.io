@@ -202,7 +202,6 @@ export const en: Translation = {
 	// Banner Settings
 	[Key.bannerSettings]: "Banner Settings",
 	[Key.bannerTitle]: "Banner Title",
-	[Key.wavesAnimation]: "Waves Animation",
 
 	// Post List Layout
 	[Key.postListLayout]: "Post List Layout",

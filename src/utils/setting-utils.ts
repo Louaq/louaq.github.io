@@ -590,62 +590,6 @@ export function getStoredWallpaperMode(): WALLPAPER_MODE {
 		backgroundWallpaper.mode
 	);
 }
-// Waves animation functions
-export function getDefaultWavesEnabled(): boolean {
-	const wavesConfig = backgroundWallpaper.banner?.waves?.enable;
-	if (typeof wavesConfig === "object") {
-		// 濡傛灉鏄垎璁惧閰嶇疆锛屾鏌ュ綋鍓嶈澶?
-		const isMobile =
-			typeof window !== "undefined" ? window.innerWidth < 768 : false;
-		return isMobile ? (wavesConfig.mobile ?? false) : (wavesConfig.desktop ?? false);
-	}
-	return wavesConfig ?? false;
-}
-
-export function getStoredWavesEnabled(): boolean {
-	if (
-		typeof localStorage === "undefined" ||
-		typeof localStorage.getItem !== "function"
-	) {
-		return getDefaultWavesEnabled();
-	}
-	const stored = localStorage.getItem("wavesEnabled");
-	if (stored === null) {
-		return getDefaultWavesEnabled();
-	}
-	return stored === "true";
-}
-
-export function setWavesEnabled(enabled: boolean): void {
-	if (
-		typeof localStorage === "undefined" ||
-		typeof localStorage.setItem !== "function"
-	) {
-		return;
-	}
-	localStorage.setItem("wavesEnabled", String(enabled));
-	applyWavesEnabledToDocument(enabled);
-}
-
-export function applyWavesEnabledToDocument(enabled: boolean): void {
-	if (typeof document === "undefined") {
-		return;
-	}
-	// 鏇存柊 html 灞炴€э紝CSS 浼氱珛鍗崇敓鏁?
-	document.documentElement.setAttribute("data-waves-enabled", String(enabled));
-	// 鍚屾椂鏇存柊鍏冪礌鏍峰紡锛堝吋瀹规€э級
-	const wavesElement = document.getElementById("header-waves");
-	if (wavesElement) {
-		if (enabled) {
-			wavesElement.style.display = "";
-			wavesElement.classList.remove("waves-disabled");
-		} else {
-			wavesElement.style.display = "none";
-			wavesElement.classList.add("waves-disabled");
-		}
-	}
-}
-
 // Banner title functions
 export function getDefaultBannerTitleEnabled(): boolean {
 	return backgroundWallpaper.banner?.homeText?.enable ?? true;

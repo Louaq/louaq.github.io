@@ -83,17 +83,6 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 毛玻璃模糊度
 			blur: 3,
 		},
-		// 波浪动画效果配置，开启可能会影响页面性能，请根据自己的喜好开启
-		waves: {
-			enable: {
-				// 桌面端是否启用波浪动画效果
-				desktop: false,
-				// 移动端是否启用波浪动画效果
-				mobile: false,
-			},
-			// 是否允许用户通过控制面板切换水波纹动画
-			switchable: true,
-		},
 	},
 	// 全屏透明覆盖模式特有配置
 	overlay: {

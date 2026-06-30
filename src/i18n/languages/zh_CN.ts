@@ -208,7 +208,6 @@ export const zh_CN: Translation = {
 	// 横幅设置
 	[Key.bannerSettings]: "横幅设置",
 	[Key.bannerTitle]: "横幅标题",
-	[Key.wavesAnimation]: "水波纹动画",
 
 	// 赞助页面
 	[Key.sponsor]: "赞助",

@@ -218,7 +218,6 @@ export const ru: Translation = {
 	// Настройки баннера
 	[Key.bannerSettings]: "Настройки баннера",
 	[Key.bannerTitle]: "Заголовок баннера",
-	[Key.wavesAnimation]: "Анимация волн",
 
 	// Страница спонсоров
 	[Key.sponsor]: "Спонсор",

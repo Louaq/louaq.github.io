@@ -6,10 +6,6 @@
 	cursor: zoom-in;
 }
 
-/*
- * 遮罩与放大后的克隆图必须同时参与同一套 z-index，且克隆图高于遮罩。
- * 若只给 .medium-zoom-overlay 设 z-index，克隆图仍为 auto(0)，会整片被挡在遮罩下面（只见黑层不见图）。
- */
 .medium-zoom-overlay {
 	z-index: 99998;
 }
