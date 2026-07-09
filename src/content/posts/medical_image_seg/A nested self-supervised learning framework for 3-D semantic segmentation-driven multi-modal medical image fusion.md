@@ -5,7 +5,7 @@ expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "3D多模态医学图像的成功融合依赖于每种成像模式独特的具体特征以及所有模式之间一致的空间语义特征"
 categories: 多模态医学图像分割
-tags: [Medical Image Segmentation, Dual Attention Encoder]
+tags: [Medical Image Segmentation, Dual Attention Encoder, Unsupervised-Domain-Adaptation]
 top: true
 swiper: true
 ---
