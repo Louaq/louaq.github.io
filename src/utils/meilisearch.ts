@@ -113,6 +113,36 @@ async function addDocumentsWithFallback(options: {
 	return { res, json, used: "wrapped" as const };
 }
 
+async function listRemoteIds(options: {
+	host: string;
+	indexUid: string;
+	adminKey: string;
+}): Promise<string[]> {
+	const { host, indexUid, adminKey } = options;
+	const pageSize = 1000;
+	const ids: string[] = [];
+	let offset = 0;
+
+	while (true) {
+		const res = await meiliRequest({
+			url: `${host}/indexes/${indexUid}/documents?limit=${pageSize}&offset=${offset}&fields=id`,
+			method: "GET",
+			adminKey,
+		});
+		if (!res.ok) throw new Error(`List documents failed: status=${res.status}`);
+
+		const json = await res.json();
+		for (const doc of json?.results ?? []) {
+			if (typeof doc?.id === "string") ids.push(doc.id);
+		}
+
+		offset += pageSize;
+		if (offset >= (json?.total ?? 0)) break;
+	}
+
+	return ids;
+}
+
 /**
  * Meilisearch(=milisearch) 集成
  * 在构建完成后自动将索引数据上传到 Meilisearch（search.louaq.com）
@@ -175,15 +205,14 @@ export default function meilisearch(): AstroIntegration {
 									adminKey: MEILISEARCH_ADMIN_KEY,
 									taskUid: json.taskUid,
 								}).catch((e) => {
-									uploadSucceeded = false;
-									logger.warn(
-										`Meilisearch create-index task failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+									// 索引已存在是常态；且 addDocuments 会自动建索引，这里失败不影响上传结果
+									logger.info(
+										`Meilisearch create-index task not applied (ignored): ${e instanceof Error ? e.message : String(e)}`,
 									);
 								});
 							}
 						}
 					} catch (e) {
-						uploadSucceeded = false;
 						logger.warn(`Meilisearch create-index failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
 					}
 
@@ -309,6 +338,57 @@ export default function meilisearch(): AstroIntegration {
 								).slice(0, 500)}`,
 							);
 						}
+					}
+
+					// 4) 清理残留：本地已不存在的文档（文章改名/移动目录会生成新 id，旧文档会留在索引里指向死链）
+					// 只在全部批次都成功时执行，避免因部分上传失败而误删仍然有效的文档
+					const allBatchesSucceeded =
+						uploadSucceeded && uploadedBatchCount > 0 && taskSucceededBatchCount === uploadedBatchCount;
+
+					if (allBatchesSucceeded) {
+						try {
+							const localIds = new Set(
+								records.map((r: any) => r?.id).filter((id: unknown): id is string => typeof id === "string"),
+							);
+							const remoteIds = await listRemoteIds({
+								host,
+								indexUid: MEILISEARCH_INDEX_NAME,
+								adminKey: MEILISEARCH_ADMIN_KEY,
+							});
+							const staleIds = remoteIds.filter((id) => !localIds.has(id));
+
+							if (staleIds.length === 0) {
+								logger.info("Meilisearch index has no stale documents.");
+							} else {
+								logger.info(`Deleting ${staleIds.length} stale Meilisearch document(s) ...`);
+								const delRes = await meiliRequest({
+									url: `${host}/indexes/${MEILISEARCH_INDEX_NAME}/documents/delete-batch`,
+									method: "POST",
+									adminKey: MEILISEARCH_ADMIN_KEY,
+									body: staleIds,
+								});
+								const delJson = await delRes.json().catch(() => ({}));
+								if (delRes.ok && delJson?.taskUid) {
+									await waitForTask({
+										host,
+										adminKey: MEILISEARCH_ADMIN_KEY,
+										taskUid: delJson.taskUid,
+										timeoutMs: 60_000,
+									});
+									logger.info(`✓ Deleted ${staleIds.length} stale Meilisearch document(s).`);
+								} else {
+									logger.warn(
+										`Meilisearch delete-stale failed: status=${delRes.status} body=${JSON.stringify(delJson).slice(0, 500)}`,
+									);
+								}
+							}
+						} catch (e) {
+							logger.warn(
+								`Meilisearch delete-stale failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+							);
+						}
+					} else {
+						logger.warn("Skipping stale-document cleanup because some uploads failed.");
 					}
 
 					if (uploadSucceeded && taskSucceededBatchCount > 0) {
