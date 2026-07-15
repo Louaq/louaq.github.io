@@ -120,7 +120,40 @@ const labelPlural = i18n(I18nKey.postsCount);
 	}
 </style>
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
+	/**
+	 * 年份分组的展开状态必须跨导航保留：swup 返回归档页时会用缓存的 HTML 重建 DOM，
+	 * 若展开的年份重新折叠，页面高度会缩短到装不下原来的滚动位置，浏览器便把滚动
+	 * 位置钳制回顶部，用户就回不到刚才浏览的文章处了。
+	 */
+	const groupsOf = () =>
+		document.querySelectorAll<HTMLDetailsElement>(".archive-year-group");
+
+	// 按查询串分键，使筛选视图与完整视图各自保留独立的展开状态
+	const stateKey = () => `archive:open-years:${window.location.search}`;
+
+	function saveOpenYears() {
+		const open = Array.from(groupsOf())
+			.filter((g) => g.open)
+			.map((g) => g.dataset.year || "");
+		try {
+			sessionStorage.setItem(stateKey(), JSON.stringify(open));
+		} catch (_e) { /* ignore */ }
+	}
+
+	function restoreOpenYears() {
+		let open: string[] | null = null;
+		try {
+			const raw = sessionStorage.getItem(stateKey());
+			if (raw) open = JSON.parse(raw);
+		} catch (_e) { /* ignore */ }
+		if (!Array.isArray(open)) return;
+
+		for (const group of groupsOf()) {
+			group.open = open.includes(group.dataset.year || "");
+		}
+	}
+
+	function applyFilters() {
 		const params = new URLSearchParams(window.location.search);
 		const tags = params.getAll("tag").map((t) => t.trim()).filter(Boolean);
 		const categories = params.getAll("category").map((c) => c.trim()).filter(Boolean);
@@ -144,7 +177,7 @@ const labelPlural = i18n(I18nKey.postsCount);
 			if (hide) row.style.display = "none";
 		}
 
-		for (const group of document.querySelectorAll<HTMLDetailsElement>(".archive-year-group")) {
+		for (const group of groupsOf()) {
 			const visible = group.querySelectorAll(".archive-row-link:not([style*='display: none'])");
 			const countEl = group.querySelector(".archive-year-count");
 			if (!visible.length) {
@@ -154,5 +187,20 @@ const labelPlural = i18n(I18nKey.postsCount);
 				group.open = true;
 			}
 		}
-	});
+	}
+
+	function initArchive() {
+		if (!document.getElementById("archive-list")) return;
+
+		restoreOpenYears();
+		applyFilters();
+
+		for (const group of groupsOf()) {
+			group.addEventListener("toggle", saveOpenYears);
+		}
+	}
+
+	initArchive();
+	// swup 导航不会重新执行本模块，需在内容替换后再跑一次（早于 Layout 在 page:view 里的滚动恢复）
+	document.addEventListener("swup:content:replace", initArchive);
 </script>
