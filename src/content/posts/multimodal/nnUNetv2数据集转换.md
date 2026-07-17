@@ -1,179 +1,18 @@
 ---
-title: nnUNetv2在自己数据集上训练
+title: nnUNetv2数据集转换
 published: 2025-08-18 14:30:00
 expires: 2025-08-21 23:59:59
 mathjax: true
-excerpt: "nnUNetv2在自己数据集上训练"
+excerpt: "nnUNetv2数据集转换"
 category: nnUNet
 tags: [nnUNet]
 ---
 
-本文只讲述nnunetv1的在2D图像的上复现步骤，对于实现细节可以阅读原文和代码！
+本文nnunetv2实验中BraTS数据集转换成MSD数据集格式的代码, nnunetv1的dataset.json与nnunetv2略有不同
 
-> paper: https://www.nature.com/articles/s41592-020-01008-z
+# BraTS数据集转换成MSD数据集
 
-> github: https://github.com/MIC-DKFZ/nnUNet
-
-## 复现步骤：
-
-### 1.下载数据集并安装依赖环境：
-
-```txt
-git clone https://github.com/MIC-DKFZ/nnUNet.git  # 下载代码
-cd nnUNet  # 切换目录
-conda create -n myenv python=3.9  # 注意nnUNetv2需要python>=3.9
-conda activate myenv
-pip install nnunet
-pip install -e .  #最后这个点也不能忽略
-```
-
-### 2\. 在nnUNet目录下创建[文件夹](https://so.csdn.net/so/search?q=%E6%96%87%E4%BB%B6%E5%A4%B9&spm=1001.2101.3001.7020)**nnUNetFrame**，文件夹结构如下：
-
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/22b2141daeb64176b9822d64d160329d.png)
-
-### 3\. 创建文件
-
-切换到nnUNetFrame文件夹中创建**DATASET**文件夹，并在**DATASET**文件夹下创建nnUNet\_preprocessed，nnUNet\_raw， nnUNet\_trained\_models文件夹，在文件夹nnUNet\_raw，创建nnUNet\_cropped\_data文件夹和nnUNet\_raw\_data文件夹，文件夹结构如下：  
-
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/acb51b0c6bbe4ed2bc060066443a7652.png)
-
-
-
-### 4\. 以linux系统为例，找到.bashrc文件，在末尾添加nnUNet\_preprocessed，nnUNet\_raw， nnUNet\_trained\_models的路径，格式如下：
-
-```txt
-注意：'../'需要替换为本地路径！！！
-export nnUNet_raw_data_base="../nnUNet/nnUNetFrame/DATASET/nnUNet_raw"
-export nnUNet_preprocessed="../nnUNet/nnUNetFrame/DATASET/nnUNet_preprocessed"
-export RESULTS_FOLDER="../nnUNet/nnUNetFrame/DATASET/nnUNet_trained_models"
-```
-
-然后关闭.bashrc文件，并在.bashrc文件所在文件目录下运行：
-
-```txt
-source .bashrc
-```
-
-### 5\. 将数据转为nii.gz格式，并生成对应的dataset.json文件：
-
-（1）将原始数据按照如下格式设置：  
-
-
-
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/96254a94ead54743b7ea8074a917fff3.png)  
-training为训练集，，testing为[测试集](https://so.csdn.net/so/search?q=%E6%B5%8B%E8%AF%95%E9%9B%86&spm=1001.2101.3001.7020)。input放置图片，output放置标签。  
-（2)在nnUNet\_raw\_data文件夹下创建新的文件夹命名为：Task01\_XXX. 01可以修改为任意数字，XXX是任务名，根据自己的任务命名即可；
-
-
-
-### 6\. 执行数据转换：
-
-```txt
-nnUNet_convert_decathlon_task -i Task01_XXX的绝对路径
-```
-
-执行完之后会在Task01\_XXX同级目录下生成一个文件夹命名为Task001\_XXX，示例如下图所示：  
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/24430f67734045689f75e7b97ec504da.png)  
-注：如果不清楚原始的文件格式，可以在转换完之后附转为png检查一下是否正确。防止出现了不正确文件导致后续运行报错！
-
-### 7\. 数据预处理
-
-```txt
-nnUNet_plan_and_preprocess -t 1 --verify_dataset_integrity
-“1 表示任务代号，即Task001”
-AI写代码python运行12
-```
-
-运行该命令之后会在nnUNet\_cropped\_data文件中生成命名为Task001\_XXX的文件，目录结构如图：  
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/af30b1a72c23404e8a291efa8a09903d.png)
-
-### 8.训练命令,按顺序运行
-
-```txt
-CUDA_VISIBLE_DEVICES=1 nnUNet_train 2d nnUNetTrainerV2 Task001_XXX 0  --npz
-CUDA_VISIBLE_DEVICES=1 nnUNet_train 2d nnUNetTrainerV2 Task001_XXX 1  --npz
-CUDA_VISIBLE_DEVICES=1 nnUNet_train 2d nnUNetTrainerV2 Task001_XXX 2  --npz
-CUDA_VISIBLE_DEVICES=1 nnUNet_train 2d nnUNetTrainerV2 Task001_XXX 3  --npz
-CUDA_VISIBLE_DEVICES=1 nnUNet_train 2d nnUNetTrainerV2 Task001_XXX 4  --npz
-```
-
-‘CUDA\_VISIBLE\_DEVICES=1’ 表示指定GPU训练  
-‘2d’ 是选用2D Unet模型  
-‘Task001\_XXX’ 表示任务编码，Task001\_XXX  
-‘0,1,2,3,4’ 代表五折交叉验证
-
-### 9.测试模型：
-
-运行完成五折交叉验证之后可以确定最佳的模型，使用下面的命令进行测试：
-
-```txt
-nnUNet_find_best_configuration -m 2d -t 001 –strict
-# 001是任务编号
-```
-
-然后会在 nnUNet\_trained\_models/nnUNet/ensembles/Task001\_XXX下生成如下如所示文件：  
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/d15276ad157d4bde82701357b4ff4364.png) 
-txt文件中有预测的命令：
-
-```txt
-nnUNet_predict -i FOLDER_WITH_TEST_CASES -o OUTPUT_FOLDER_MODEL1 -tr nnUNetTrainerV2 -ctr nnUNetTrainerV2CascadeFullRes -m 2d -p nnUNetPlansv2.1 -t Task001_XXX
-# FOLDER_WITH_TEST_CASES 输入文件路径
-# OUTPUT_FOLDER_MODEL1  输出文件路径
-# Task001_XXX  预测任务名
-```
-
-
-
-将上述参数修改为自己的任务，然后运行即可
-
-### 10\. 在输出的路径下会保存预测结果文件
-
-格式为nii.gz格式，需要将其转为png格式，代码如下：
-
-```txt
-import os
-import nibabel as nib
-import numpy as np
-from PIL import Image
-
-def convert_nii_to_png(input_folder, output_folder):
-    # 确保输出文件夹存在
-    os.makedirs(output_folder, exist_ok=True)
-
-    # 遍历输入文件夹中的所有文件
-    for filename in os.listdir(input_folder):
-        if filename.endswith('.nii.gz'):
-            # 构建完整的文件路径
-            file_path = os.path.join(input_folder, filename)
-            # 读取 NIfTI 文件
-            nii_image = nib.load(file_path)
-            image_data = nii_image.get_fdata()
-
-            # 选择中间的切片
-            slice_idx = image_data.shape[2] // 2
-            slice_data = image_data[:, :, slice_idx]
-
-            # 转换为8位图像格式
-            slice_normalized = (slice_data - np.min(slice_data)) / (np.max(slice_data) - np.min(slice_data))
-            image_8bit = (slice_normalized * 255).astype(np.uint8)
-            image = Image.fromarray(image_8bit)
-
-            # 保存图像
-            output_filename = filename.replace('.nii.gz', '.png')
-            image.save(os.path.join(output_folder, output_filename))
-            print(f"Converted {filename} to {output_filename}")
-input_folder = ''  # nii.gz文件路径
-output_folder = ''  # png文件路径
-convert_nii_to_png(input_folder, output_folder)
-```
-
-11\. 完成！
-
-
-
-## BraTS数据集转换成MSD数据集
-
-### BraTS2019:
+## BraTS2019:
 
 ```python
 import os
@@ -402,7 +241,7 @@ if __name__ == "__main__":
 
 
 
-### BraTS2023
+## BraTS2023
 
 ```python
 import os
@@ -740,7 +579,7 @@ if __name__ == "__main__":
 ```
 
 
-### BraTS2024
+## BraTS2024
 
 ```python
 import os
@@ -1080,7 +919,6 @@ if __name__ == "__main__":
         print(f"错误已记录到: {error_file_path}")
 ```
 
-部分内容转载于CSDN博客：https://blog.csdn.net/chen_niansan/article/details/141527340
 
 
 
