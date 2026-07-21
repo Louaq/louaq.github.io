@@ -580,6 +580,7 @@ const collapsiblePreviewLines =
     // MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
   } from "@/constants/constants";
   import { backgroundWallpaper, expressiveCodeConfig, siteConfig } from "@/config";
+  import { initArchivePage } from "@/utils/archive-init";
 
   /* Preload fonts */
   // (async function() {
@@ -752,6 +753,13 @@ function disableAnimation() {
     });
     window.swup.hooks.on("content:replace", () => {
       (window as any).__swupScrollLockY = null;
+
+      // 归档页自身的 <script> 换入后不会自动执行（DOMParser + cloneNode 的浏览器限制），
+      // 必须由这里持续存在的钩子代为触发；此调用内部会检查 #archive-list 是否存在，
+      // 非归档页时立即返回，可安全地在每次导航后都调用。必须早于下面 page:view 的
+      // 滚动恢复，二者都注册在 swup 钩子系统上，顺序天然保证。
+      initArchivePage();
+
       const gridClassCarrier = document.getElementById("grid-class-carrier");
       if (gridClassCarrier) {
         const gridClass = gridClassCarrier.getAttribute("data-grid-class");

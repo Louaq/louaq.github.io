@@ -124,85 +124,13 @@ const labelPlural = i18n(I18nKey.postsCount);
 	 * 年份分组的展开状态必须跨导航保留：swup 返回归档页时会用缓存的 HTML 重建 DOM，
 	 * 若展开的年份重新折叠，页面高度会缩短到装不下原来的滚动位置，浏览器便把滚动
 	 * 位置钳制回顶部，用户就回不到刚才浏览的文章处了。
+	 *
+	 * 这段脚本本身渲染在 swup 的 #swup-container 内，swup 用 DOMParser 解析目标页
+	 * 再 cloneNode 换入 DOM，换入的 <script> 永远不会自动执行——所以这里的调用只覆盖
+	 * “整页直接加载 /archive/”这一种情况；swup 单页导航后的重新初始化由
+	 * Layout.astro 里持续存在的 content:replace 钩子调用同一个函数完成，
+	 * 详见 src/utils/archive-init.ts 顶部注释。
 	 */
-	const groupsOf = () =>
-		document.querySelectorAll<HTMLDetailsElement>(".archive-year-group");
-
-	// 按查询串分键，使筛选视图与完整视图各自保留独立的展开状态
-	const stateKey = () => `archive:open-years:${window.location.search}`;
-
-	function saveOpenYears() {
-		const open = Array.from(groupsOf())
-			.filter((g) => g.open)
-			.map((g) => g.dataset.year || "");
-		try {
-			sessionStorage.setItem(stateKey(), JSON.stringify(open));
-		} catch (_e) { /* ignore */ }
-	}
-
-	function restoreOpenYears() {
-		let open: string[] | null = null;
-		try {
-			const raw = sessionStorage.getItem(stateKey());
-			if (raw) open = JSON.parse(raw);
-		} catch (_e) { /* ignore */ }
-		if (!Array.isArray(open)) return;
-
-		for (const group of groupsOf()) {
-			group.open = open.includes(group.dataset.year || "");
-		}
-	}
-
-	function applyFilters() {
-		const params = new URLSearchParams(window.location.search);
-		const tags = params.getAll("tag").map((t) => t.trim()).filter(Boolean);
-		const categories = params.getAll("category").map((c) => c.trim()).filter(Boolean);
-		const uncategorized = params.get("uncategorized");
-
-		if (!tags.length && !categories.length && !uncategorized) return;
-
-		const list = document.getElementById("archive-list");
-		const labelS = list?.dataset.labelSingular || "";
-		const labelP = list?.dataset.labelPlural || "";
-
-		for (const row of document.querySelectorAll<HTMLElement>(".archive-row-link")) {
-			const postTags = (row.dataset.tags || "").split(",").filter(Boolean);
-			const postCat = row.dataset.category || "";
-			let hide = false;
-
-			if (tags.length && !postTags.some((t) => tags.includes(t))) hide = true;
-			if (categories.length && !categories.includes(postCat)) hide = true;
-			if (uncategorized && postCat) hide = true;
-
-			if (hide) row.style.display = "none";
-		}
-
-		for (const group of groupsOf()) {
-			const visible = group.querySelectorAll(".archive-row-link:not([style*='display: none'])");
-			const countEl = group.querySelector(".archive-year-count");
-			if (!visible.length) {
-				group.style.display = "none";
-			} else if (countEl) {
-				countEl.textContent = `${visible.length} ${visible.length === 1 ? labelS : labelP}`;
-				group.open = true;
-			}
-		}
-	}
-
-	function initArchive() {
-		if (!document.getElementById("archive-list")) return;
-
-		restoreOpenYears();
-		applyFilters();
-
-		for (const group of groupsOf()) {
-			group.addEventListener("toggle", saveOpenYears);
-		}
-	}
-
-	initArchive();
-	// swup 导航不会重新执行本模块，需在内容替换后再跑一次（早于 Layout 在 page:view 里的滚动恢复）。
-	// @swup/astro 只派发 astro:* 生命周期事件，不存在 swup:content:replace；
-	// astro:after-swap 对应 content:replace 阶段，早于 page:view 的滚动恢复，正好满足需求。
-	document.addEventListener("astro:after-swap", initArchive);
+	import { initArchivePage } from "@/utils/archive-init";
+	initArchivePage();
 </script>
