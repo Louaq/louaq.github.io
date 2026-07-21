@@ -201,6 +201,8 @@ const labelPlural = i18n(I18nKey.postsCount);
 	}
 
 	initArchive();
-	// swup 导航不会重新执行本模块，需在内容替换后再跑一次（早于 Layout 在 page:view 里的滚动恢复）
-	document.addEventListener("swup:content:replace", initArchive);
+	// swup 导航不会重新执行本模块，需在内容替换后再跑一次（早于 Layout 在 page:view 里的滚动恢复）。
+	// @swup/astro 只派发 astro:* 生命周期事件，不存在 swup:content:replace；
+	// astro:after-swap 对应 content:replace 阶段，早于 page:view 的滚动恢复，正好满足需求。
+	document.addEventListener("astro:after-swap", initArchive);
 </script>
