@@ -384,5 +384,19 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻", "武侠"],
 		enabled: true,
 	},
+	{
+		title: "一念永恒 完结季",
+		cover: "https://pic1.imgdb.cn/i/033uQ1ItqvRBRrWnoRW9vL.webp",
+		type: "anime",
+		status: "watching",
+		rating: 8.0,
+		episodes: {
+			current: 3,
+			total: 52,
+		},
+		startDate: "2026-07-22",
+		tags: ["剧情", "戏剧", "动画", "奇幻"],
+		enabled: true,
+	},
 ];
 
