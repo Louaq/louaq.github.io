@@ -245,327 +245,320 @@ if __name__ == "__main__":
 ## BraTS2023
 
 ```python
-// BraTS2023.py
+// brats2023.py
 import os
-import shutil
 import json
-import nibabel as nib
-import numpy as np
+import shutil
+import argparse
+import threading
 from collections import OrderedDict
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from datetime import datetime
 
-def convert_brats2023_to_nnunet(brats_root, nnunet_raw_data_base):
-    """
-    将BraTS2023数据集转换为nnUNet格式，保持原始标签不变
-    
-    Args:
-        brats_root: BraTS2023原始数据根目录路径
-        nnunet_raw_data_base: nnUNet原始数据基础目录路径
-    """
-    
-    # 错误记录列表
-    errors = []
-    
-    # 设置路径
-    task_name = "Dataset001_BraTS2023"
-    task_folder = os.path.join(nnunet_raw_data_base, "nnUNet_raw_data", task_name)
-    
-    # 创建必要的目录
-    imagesTr_folder = os.path.join(task_folder, "imagesTr")
-    imagesTs_folder = os.path.join(task_folder, "imagesTs")
-    labelsTr_folder = os.path.join(task_folder, "labelsTr")
-    labelsTs_folder = os.path.join(task_folder, "labelsTs")
-    
-    for folder in [imagesTr_folder, imagesTs_folder, labelsTr_folder, labelsTs_folder]:
-        os.makedirs(folder, exist_ok=True)
-    
-    # 收集所有病例文件夹
-    all_cases = []
-    for item in os.listdir(brats_root):
-        case_path = os.path.join(brats_root, item)
-        if os.path.isdir(case_path) and item.startswith('BraTS-GLI-'):
-            all_cases.append(item)
-    
-    all_cases.sort()  # 确保顺序一致
-    print(f"找到 {len(all_cases)} 个病例")
-    
-    # 模态映射 - BraTS2023使用t1c而不是t1ce
-    modality_mapping = {
-        't1n': '0000',  # T1 native (非增强T1)
-        't1c': '0001',  # T1 contrast enhanced (增强T1)
-        't2f': '0002',  # T2 FLAIR
-        't2w': '0003'   # T2 weighted
-    }
-    
-    def safe_copy_image(src_path, dst_path, case_name, modality):
-        """
-        安全地复制图像文件，处理可能的错误
-        """
-        try:
-            if not src_path.endswith('.gz'):
-                img = nib.load(src_path)
-                nib.save(img, dst_path)
-            else:
-                shutil.copy2(src_path, dst_path)
-            return True
-        except Exception as e:
-            error_msg = f"复制图像失败 - 病例: {case_name}, 模态: {modality}, 文件: {src_path}, 错误: {str(e)}"
-            print(f"错误: {error_msg}")
-            errors.append(error_msg)
-            return False
-    
-    def safe_copy_label(src_path, dst_path, case_name):
-        """
-        安全地复制标签文件，处理可能的错误
-        """
-        try:
-            # 加载标签数据以检查标签值
-            label_nii = nib.load(src_path)
-            label_data = label_nii.get_fdata().astype(np.uint8)
-            
-            # 检查原始标签值
-            unique_labels = np.unique(label_data)
-            print(f"处理 {os.path.basename(src_path)}，标签值: {unique_labels}")
-            
-            # 直接保存，不进行任何修改
-            if not src_path.endswith('.gz'):
-                # 如果源文件不是.gz格式，保存为.gz格式
-                nib.save(label_nii, dst_path)
-            else:
-                # 如果已经是.gz格式，直接复制
-                shutil.copy2(src_path, dst_path)
-            return True
-        except Exception as e:
-            error_msg = f"复制标签失败 - 病例: {case_name}, 文件: {src_path}, 错误: {str(e)}"
-            print(f"错误: {error_msg}")
-            errors.append(error_msg)
-            return False
-    
-    def check_file_validity(file_path):
-        """
-        检查文件是否有效（非空且可读取）
-        """
-        try:
-            if not os.path.exists(file_path):
-                return False, "文件不存在"
-            
-            if os.path.getsize(file_path) == 0:
-                return False, "文件为空"
-            
-            # 尝试加载文件头信息
-            nib.load(file_path)
-            return True, "文件有效"
-        except Exception as e:
-            return False, f"文件无效: {str(e)}"
-    
-    training_cases = []
-    test_cases = []
-    skipped_cases = []
-    
-    for i, case_name in enumerate(all_cases):
-        case_folder = os.path.join(brats_root, case_name)
-        
-        if not os.path.exists(case_folder):
-            error_msg = f"病例文件夹不存在: {case_folder}"
-            print(f"警告: {error_msg}")
-            errors.append(error_msg)
-            skipped_cases.append(case_name)
-            continue
-        
-        # 构建文件名模式 - 根据BraTS2023的命名规范
-        base_name = case_name  # BraTS-GLI-00000-000
-        
-        required_files = {
-            't1n': f"{base_name}-t1n.nii",
-            't1c': f"{base_name}-t1c.nii", 
-            't2f': f"{base_name}-t2f.nii",
-            't2w': f"{base_name}-t2w.nii",
-            'seg': f"{base_name}-seg.nii"
-        }
-        
-        # 检查文件存在性，支持.nii和.nii.gz格式
-        files_exist = True
-        invalid_files = []
-        
-        for key, filename in required_files.items():
-            file_path = os.path.join(case_folder, filename)
-            gz_file_path = file_path + ".gz"
-            
-            if os.path.exists(file_path):
-                # 检查文件有效性
-                is_valid, msg = check_file_validity(file_path)
-                if not is_valid:
-                    invalid_files.append(f"{filename}: {msg}")
-                    files_exist = False
-            elif os.path.exists(gz_file_path):
-                required_files[key] = filename + ".gz"
-                # 检查文件有效性
-                is_valid, msg = check_file_validity(gz_file_path)
-                if not is_valid:
-                    invalid_files.append(f"{filename}.gz: {msg}")
-                    files_exist = False
-            else:
-                error_msg = f"文件缺失 - 病例: {case_name}, 文件: {filename} 或 {filename}.gz"
-                print(f"警告: {error_msg}")
-                errors.append(error_msg)
-                files_exist = False
-        
-        if invalid_files:
-            for invalid_file in invalid_files:
-                error_msg = f"文件无效 - 病例: {case_name}, {invalid_file}"
-                print(f"警告: {error_msg}")
-                errors.append(error_msg)
-        
-        if not files_exist:
-            skipped_cases.append(case_name)
-            continue
-        
-        # 决定这个病例是用于训练还是测试（前80%用于训练）
-        case_success = True
-        
-        if i < len(all_cases) * 0.8:
-            # 训练数据
-            print(f"处理训练病例: {case_name}")
-            
-            # 复制图像文件
-            for modality, suffix in modality_mapping.items():
-                src_file = os.path.join(case_folder, required_files[modality])
-                dst_file = os.path.join(imagesTr_folder, f"{case_name}_{suffix}.nii.gz")
-                
-                if not safe_copy_image(src_file, dst_file, case_name, modality):
-                    case_success = False
-            
-            # 复制分割标签
-            src_seg = os.path.join(case_folder, required_files['seg'])
-            dst_seg = os.path.join(labelsTr_folder, f"{case_name}.nii.gz")
-            if not safe_copy_label(src_seg, dst_seg, case_name):
-                case_success = False
-            
-            if case_success:
-                training_cases.append(case_name)
-                print(f"训练病例 {case_name} 处理成功")
-            else:
-                skipped_cases.append(case_name)
-                print(f"训练病例 {case_name} 处理失败，已跳过")
-                
+import numpy as np
+import nibabel as nib
+
+try:
+    from tqdm import tqdm
+except ImportError:  # 没装 tqdm 也能跑
+    tqdm = None
+
+
+# BraTS2023 模态命名 -> nnU-Net 通道号
+MODALITY_MAPPING = OrderedDict([
+    ('t1n', '0000'),   # T1 native
+    ('t1c', '0001'),   # T1 contrast enhanced
+    ('t2f', '0002'),   # T2 FLAIR
+    ('t2w', '0003'),   # T2 weighted
+])
+
+_print_lock = threading.Lock()
+
+
+def log(msg):
+    """线程安全打印。"""
+    with _print_lock:
+        print(msg, flush=True)
+
+
+def check_file_validity(file_path):
+    """检查文件是否存在、非空且 NIfTI 头可读（只读头，很快）。"""
+    try:
+        if not os.path.exists(file_path):
+            return False, "文件不存在"
+        if os.path.getsize(file_path) == 0:
+            return False, "文件为空"
+        nib.load(file_path)          # 只解析 header，不读数据
+        return True, "文件有效"
+    except Exception as e:
+        return False, f"文件无效: {str(e)}"
+
+
+def resolve_required_files(case_folder, base_name):
+    """定位一个病例的 5 个文件（4 模态 + seg），同时支持 .nii / .nii.gz。"""
+    files, errors = {}, []
+    for key in list(MODALITY_MAPPING.keys()) + ['seg']:
+        fname = f"{base_name}-{key}.nii"
+        plain = os.path.join(case_folder, fname)
+        gz = plain + ".gz"
+
+        if os.path.exists(gz):
+            chosen = gz
+        elif os.path.exists(plain):
+            chosen = plain
         else:
-            # 测试数据
-            print(f"处理测试病例: {case_name}")
-            
-            # 复制图像文件
-            for modality, suffix in modality_mapping.items():
-                src_file = os.path.join(case_folder, required_files[modality])
-                dst_file = os.path.join(imagesTs_folder, f"{case_name}_{suffix}.nii.gz")
-                
-                if not safe_copy_image(src_file, dst_file, case_name, modality):
-                    case_success = False
-            
-            # 复制测试数据的标签
-            src_seg = os.path.join(case_folder, required_files['seg'])
-            dst_seg = os.path.join(labelsTs_folder, f"{case_name}.nii.gz")
-            if not safe_copy_label(src_seg, dst_seg, case_name):
-                case_success = False
-            
-            if case_success:
-                test_cases.append(case_name)
-                print(f"测试病例 {case_name} 处理成功")
-            else:
-                skipped_cases.append(case_name)
-                print(f"测试病例 {case_name} 处理失败，已跳过")
-    
-    print(f"处理完成: {len(training_cases)} 个训练病例, {len(test_cases)} 个测试病例")
-    print(f"跳过的病例数量: {len(skipped_cases)}")
-    
-    # 写入错误日志
-    error_file_path = os.path.join(os.path.dirname(__file__), "error.txt")
+            errors.append(f"文件缺失 - 病例: {base_name}, 文件: {fname} 或 {fname}.gz")
+            continue
+
+        ok, msg = check_file_validity(chosen)
+        if not ok:
+            errors.append(f"文件无效 - 病例: {base_name}, {os.path.basename(chosen)}: {msg}")
+            continue
+        files[key] = chosen
+    return files, errors
+
+
+def copy_to_gz(src, dst, overwrite=False):
+    """把源文件落到目标 .nii.gz；非 .gz 源用 nibabel 重存为 .gz。写临时文件再原子改名。"""
+    if not overwrite and os.path.exists(dst) and os.path.getsize(dst) > 0:
+        return False  # 已存在，跳过（断点续跑）
+
+    tmp = dst + ".tmp.nii.gz"
+    try:
+        if src.endswith(".gz"):
+            shutil.copy2(src, tmp)
+        else:
+            nib.save(nib.load(src), tmp)
+        os.replace(tmp, dst)
+    finally:
+        if os.path.exists(tmp):
+            try:
+                os.remove(tmp)
+            except OSError:
+                pass
+    return True
+
+
+def process_case(case_name, brats_root, img_dir, lbl_dir, split,
+                 verify_labels=False, overwrite=False):
+    """单个病例的完整处理，纯函数式：所有错误/日志放进返回值，不碰全局状态。"""
+    result = {
+        "case": case_name,
+        "split": split,
+        "ok": False,
+        "errors": [],
+        "label_values": None,
+    }
+
+    case_folder = os.path.join(brats_root, case_name)
+    if not os.path.isdir(case_folder):
+        result["errors"].append(f"病例文件夹不存在: {case_folder}")
+        return result
+
+    files, errors = resolve_required_files(case_folder, case_name)
+    if errors:
+        result["errors"].extend(errors)
+        return result
+
+    try:
+        for modality, suffix in MODALITY_MAPPING.items():
+            copy_to_gz(files[modality],
+                       os.path.join(img_dir, f"{case_name}_{suffix}.nii.gz"),
+                       overwrite)
+
+        dst_seg = os.path.join(lbl_dir, f"{case_name}.nii.gz")
+        copy_to_gz(files['seg'], dst_seg, overwrite)
+
+        if verify_labels:
+            data = np.asanyarray(nib.load(dst_seg).dataobj)
+            result["label_values"] = sorted(int(v) for v in np.unique(data))
+
+        result["ok"] = True
+    except Exception as e:
+        result["errors"].append(f"处理失败 - 病例: {case_name}, 错误: {str(e)}")
+
+    return result
+
+
+def convert_brats2023_to_nnunet(brats_root, nnunet_raw_data_base,
+                                task_name="Dataset001_BraTS2023",
+                                workers=8, train_ratio=0.8,
+                                verify_labels=False, overwrite=False):
+    task_folder = os.path.join(nnunet_raw_data_base, task_name)
+    imagesTr = os.path.join(task_folder, "imagesTr")
+    imagesTs = os.path.join(task_folder, "imagesTs")
+    labelsTr = os.path.join(task_folder, "labelsTr")
+    labelsTs = os.path.join(task_folder, "labelsTs")
+    for folder in (imagesTr, imagesTs, labelsTr, labelsTs):
+        os.makedirs(folder, exist_ok=True)
+
+    # 收集病例并排序，保证划分可复现
+    all_cases = sorted(
+        item for item in os.listdir(brats_root)
+        if item.startswith('BraTS-GLI-') and os.path.isdir(os.path.join(brats_root, item))
+    )
+    print(f"找到 {len(all_cases)} 个病例，使用 {workers} 个线程处理")
+    if not all_cases:
+        print("警告: 没有找到任何病例")
+        return None
+
+    # ---- 先确定划分，再并行 ----
+    n_train = int(len(all_cases) * train_ratio)
+    jobs = []
+    for i, case_name in enumerate(all_cases):
+        if i < n_train:
+            jobs.append((case_name, "train", imagesTr, labelsTr))
+        else:
+            jobs.append((case_name, "test", imagesTs, labelsTs))
+
+    results = []
+    t0 = datetime.now()
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        futures = {
+            executor.submit(process_case, case_name, brats_root, img_dir, lbl_dir,
+                            split, verify_labels, overwrite): case_name
+            for case_name, split, img_dir, lbl_dir in jobs
+        }
+
+        iterator = as_completed(futures)
+        if tqdm is not None:
+            iterator = tqdm(iterator, total=len(futures), desc="转换中", ncols=80)
+
+        done = 0
+        for future in iterator:
+            case_name = futures[future]
+            try:
+                res = future.result()
+            except Exception as e:  # 兜底，理论上 process_case 已经吞掉异常
+                res = {"case": case_name, "split": "unknown", "ok": False,
+                       "errors": [f"线程异常 - 病例: {case_name}, 错误: {str(e)}"],
+                       "label_values": None}
+            results.append(res)
+
+            done += 1
+            if tqdm is None and done % 50 == 0:
+                log(f"进度: {done}/{len(futures)}")
+            if not res["ok"]:
+                log(f"[跳过] {case_name}: {res['errors'][0] if res['errors'] else '未知原因'}")
+
+    elapsed = (datetime.now() - t0).total_seconds()
+
+    # ---- 主线程统一汇总 ----
+    results.sort(key=lambda r: r["case"])
+    training_cases = [r["case"] for r in results if r["ok"] and r["split"] == "train"]
+    test_cases = [r["case"] for r in results if r["ok"] and r["split"] == "test"]
+    skipped_cases = [r["case"] for r in results if not r["ok"]]
+    errors = [e for r in results for e in r["errors"]]
+
+    if verify_labels:
+        seen = sorted({v for r in results if r["label_values"] for v in r["label_values"]})
+        print(f"数据集中出现的标签值: {seen}")
+
+    print(f"\n处理完成: {len(training_cases)} 个训练病例, {len(test_cases)} 个测试病例")
+    print(f"跳过的病例数量: {len(skipped_cases)}，耗时 {elapsed:.1f} 秒")
+
+    # ---- 错误日志 ----
+    error_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "error.txt")
     with open(error_file_path, 'w', encoding='utf-8') as f:
-        f.write(f"BraTS2023数据转换错误报告\n")
-        f.write(f"生成时间: {str(os.path.getctime(error_file_path)) if os.path.exists(error_file_path) else 'N/A'}\n")
-        f.write(f"="*80 + "\n\n")
+        f.write("BraTS2023数据转换错误报告\n")
+        f.write(f"生成时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("=" * 80 + "\n\n")
         f.write(f"总计处理: {len(all_cases)} 个病例\n")
         f.write(f"成功处理: {len(training_cases) + len(test_cases)} 个病例\n")
         f.write(f"跳过病例: {len(skipped_cases)} 个病例\n")
-        f.write(f"错误数量: {len(errors)} 个错误\n\n")
-        
+        f.write(f"错误数量: {len(errors)} 个错误\n")
+        f.write(f"总耗时: {elapsed:.1f} 秒 (线程数 {workers})\n\n")
+
         if skipped_cases:
             f.write("跳过的病例列表:\n")
             for case in skipped_cases:
                 f.write(f"  - {case}\n")
             f.write("\n")
-        
+
         if errors:
             f.write("详细错误信息:\n")
             for i, error in enumerate(errors, 1):
                 f.write(f"{i}. {error}\n")
         else:
             f.write("没有发现错误。\n")
-    
     print(f"错误日志已保存到: {error_file_path}")
-    
-    # 只有成功处理的病例数量大于0时才创建dataset.json
-    if len(training_cases) + len(test_cases) > 0:
-        # 创建dataset.json文件
-        dataset_json = OrderedDict()
-        dataset_json['name'] = "BraTS2023"
-        dataset_json['description'] = "Brain Tumor Segmentation Challenge 2023"
-        dataset_json['tensorImageSize'] = "4D"
-        dataset_json['reference'] = "https://www.synapse.org/#!Synapse:syn51156910"
-        dataset_json['licence'] = "see BraTS2023 website"
-        dataset_json['release'] = "1.0"
-        
-        # 模态信息 - 更新为BraTS2023的模态
-        dataset_json['channel_names'] = {
-            "0": "T1n",    # T1 native
-            "1": "T1c",    # T1 contrast enhanced
-            "2": "T2f",    # T2 FLAIR  
-            "3": "T2w"     # T2 weighted
-        }
-        
-        # 标签信息 - 保持BraTS原始标签值
-        dataset_json['labels'] = {
-            "background": 0,
-            "necrotic/non-enhancing tumor": 1, 
-            "edema": 2,
-            "enhancing tumor": 3  # 保持原始标签值3
-        }
-        dataset_json["file_ending"] = ".nii.gz"
-        # 训练和测试数据列表
-        dataset_json['numTraining'] = len(training_cases)
-        dataset_json['numTest'] = len(test_cases)
-        
-        dataset_json['training'] = []
-        for case in training_cases:
-            case_dict = {
-                "image": f"./imagesTr/{case}.nii.gz",
-                "label": f"./labelsTr/{case}.nii.gz"
-            }
-            dataset_json['training'].append(case_dict)
-        
-        dataset_json['test'] = []
-        for case in test_cases:
-            dataset_json['test'].append(f"./imagesTs/{case}.nii.gz")
-        
-        # 保存dataset.json
-        json_file_path = os.path.join(task_folder, "dataset.json")
-        with open(json_file_path, 'w') as f:
-            json.dump(dataset_json, f, indent=4)
-        
-        print(f"dataset.json 已保存到: {json_file_path}")
-        print("BraTS2023数据转换完成！标签保持原始值不变：0(背景), 1(坏死), 2(水肿), 4(增强肿瘤)")
-        
-        return task_folder
-    else:
+
+    if not (training_cases or test_cases):
         print("警告: 没有成功处理任何病例，未生成dataset.json文件")
         return None
 
-# 使用示例
+    # ---- dataset.json ----
+    dataset_json = OrderedDict()
+    dataset_json['name'] = "BraTS2023"
+    dataset_json['description'] = "Brain Tumor Segmentation Challenge 2023"
+    dataset_json['tensorImageSize'] = "4D"
+    dataset_json['reference'] = "https://www.synapse.org/#!Synapse:syn51156910"
+    dataset_json['licence'] = "see BraTS2023 website"
+    dataset_json['release'] = "1.0"
+    dataset_json['channel_names'] = {
+        "0": "T1n",
+        "1": "T1c",
+        "2": "T2f",
+        "3": "T2w",
+    }
+    dataset_json['labels'] = {
+        "background": 0,
+        "necrotic/non-enhancing tumor": 1,
+        "edema": 2,
+        "enhancing tumor": 3,
+    }
+    dataset_json["file_ending"] = ".nii.gz"
+    dataset_json['numTraining'] = len(training_cases)
+    dataset_json['numTest'] = len(test_cases)
+
+    dataset_json['training'] = [
+        {
+            "image": [f"./imagesTr/{case}_{suffix}.nii.gz" for suffix in MODALITY_MAPPING.values()],
+            "label": f"./labelsTr/{case}.nii.gz",
+        }
+        for case in training_cases
+    ]
+    dataset_json['test'] = [
+        [f"./imagesTs/{case}_{suffix}.nii.gz" for suffix in MODALITY_MAPPING.values()]
+        for case in test_cases
+    ]
+
+    json_file_path = os.path.join(task_folder, "dataset.json")
+    with open(json_file_path, 'w', encoding='utf-8') as f:
+        json.dump(dataset_json, f, indent=4, ensure_ascii=False)
+
+    print(f"dataset.json 已保存到: {json_file_path}")
+    print("BraTS2023数据转换完成！标签保持原始值: 0(背景), 1(坏死/非增强), 2(水肿), 3(增强肿瘤)")
+    return task_folder
+
+
+def parse_args():
+    parser = argparse.ArgumentParser(description="BraTS2023 -> nnU-Net 转换（多线程）")
+    parser.add_argument("--brats-root", default="/root/autodl-tmp/BraTS2023")
+    parser.add_argument("--nnunet-raw", default="/root/autodl-tmp/data/nnUNet_raw")
+    parser.add_argument("--task-name", default="Dataset001_BraTS2023")
+    parser.add_argument("--workers", type=int, default=8,
+                        help="线程数；机械盘建议 4，NVMe 建议 8~16")
+    parser.add_argument("--train-ratio", type=float, default=0.8)
+    parser.add_argument("--verify-labels", action="store_true",
+                        help="读取每个 seg 的体素值并统计唯一标签（较慢）")
+    parser.add_argument("--overwrite", action="store_true",
+                        help="覆盖已存在的目标文件（默认跳过，可断点续跑）")
+    return parser.parse_args()
+
+
 if __name__ == "__main__":
-    # 设置路径
-    brats_root = "/root/autodl-tmp/nnUNet_raw_data_base/BraTS2023"  # 您的BraTS2023数据根目录
-    nnunet_raw_data_base = "/root/autodl-tmp/nnUNet_raw_data_base"  # nnUNet原始数据基础目录
-    
-    # 执行转换
+    args = parse_args()
     try:
-        result = convert_brats2023_to_nnunet(brats_root, nnunet_raw_data_base)
+        result = convert_brats2023_to_nnunet(
+            brats_root=args.brats_root,
+            nnunet_raw_data_base=args.nnunet_raw,
+            task_name=args.task_name,
+            workers=args.workers,
+            train_ratio=args.train_ratio,
+            verify_labels=args.verify_labels,
+            overwrite=args.overwrite,
+        )
         if result:
             print(f"\n转换成功完成！输出目录: {result}")
             print("可以继续进行nnUNet的预处理和训练步骤。")
@@ -573,13 +566,12 @@ if __name__ == "__main__":
             print("\n转换失败，请查看错误日志了解详细信息。")
     except Exception as e:
         print(f"程序执行失败: {str(e)}")
-        # 即使主程序失败，也要记录错误
-        error_file_path = os.path.join(os.path.dirname(__file__), "error.txt")
+        error_file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "error.txt")
         with open(error_file_path, 'w', encoding='utf-8') as f:
             f.write(f"程序执行失败: {str(e)}\n")
         print(f"错误已记录到: {error_file_path}")
-```
 
+```
 
 ## BraTS2024
 
