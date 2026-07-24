@@ -5,6 +5,7 @@ expires: 2026-08-21 23:59:59
 description: "Expert Systems with Applications期刊"
 category: 期刊
 tags: [期刊]
+pinned: true
 ---
 
 ![IMG_20260722_182325.jpg](https://pic1.imgdb.cn/i/033tqXbjaQ82pbJXz25zHg.jpg)
