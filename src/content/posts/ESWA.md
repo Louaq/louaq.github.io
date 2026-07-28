@@ -16,6 +16,9 @@ pinned: true
 ![5](https://pic1.imgdb.cn/i/033tqXbuP5sAr6AjdP6039.jpg)
 ![6](https://pic1.imgdb.cn/i/033tqXcO8PtpRU5k11R8G0.jpg)
 
+网友分享投稿流程
+![7](https://pic1.imgdb.cn/i/033x9IFLEDru4ux90zjw0u.jpg)
+
 
 
 
