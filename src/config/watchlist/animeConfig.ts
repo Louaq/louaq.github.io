@@ -426,5 +426,19 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
 	},
+		{
+		title: "一斩苍穹",
+		cover: "https://pic1.imgdb.cn/i/033yuGhjGowtjpRArKZp62.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0.0,
+		episodes: {
+			current: 2,
+			total: 26,
+		},
+		startDate: "2026-07-28",
+		tags: ["戏剧","动作", "动画", "奇幻"],
+		enabled: true,
+	},
 ];
 
