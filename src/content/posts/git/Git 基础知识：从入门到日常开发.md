@@ -1,5 +1,5 @@
 ---
-title: Git 基础知识：从入门到日常开发 
+title: Git 基础知 
 published: 2026-07-21 19:16:00
 expires: 2026-09-21 23:59:59
 mathjax: true

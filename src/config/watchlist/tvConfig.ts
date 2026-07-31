@@ -10,10 +10,6 @@ export const tvItems: WatchlistItem[] = [
 		type: "tv",
 		status: "completed",
 		rating: 8.5,
-		episodes: {
-			current: 30,
-			total: 30,
-		},
 		startDate: "2024-12-10",
 		tags: ["科幻", "悬疑"],
 		pinned: true,
@@ -25,10 +21,6 @@ export const tvItems: WatchlistItem[] = [
 		type: "tv",
 		status: "completed",
 		rating: 8.0,
-		episodes: {
-			current: 40,
-			total: 40,
-		},
 		startDate: "2025-10-12",
 		tags: [" 动作", "悬疑", "犯罪"],
 		enabled: true,
@@ -39,10 +31,6 @@ export const tvItems: WatchlistItem[] = [
 		type: "tv",
 		status: "completed",
 		rating: 8.2,
-		episodes: {
-			current: 40,
-			total: 40,
-		},
 		startDate: "2025-01-12",
 		tags: ["喜剧", "剧情", "武侠"],
 		enabled: true,
@@ -53,10 +41,6 @@ export const tvItems: WatchlistItem[] = [
 		type: "tv",
 		status: "completed",
 		rating: 8.4,
-		episodes: {
-			current: 1,
-			total: 13,
-		},
 		startDate: "2025-08-06",
 		tags: ["剧情", "奇幻"],
 		enabled: true,
