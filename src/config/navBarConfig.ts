@@ -42,7 +42,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 监控（服务状态监控 + 探针监控）
 	links.push({
 		name: "状态",
-		url: "https://status.louaq.io/status/monitor",
+		url: "https://status.louaq.io",
 		external: true,
 		icon: "material-symbols:cloud-done-rounded",
 	});
