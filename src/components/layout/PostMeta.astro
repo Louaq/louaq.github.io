@@ -59,16 +59,16 @@ const minuteLabel =
   <!-- pinned -->
   {
     pinned && (
-      <div class="pinned-btn flex items-center gap-1 bg-(--btn-regular-bg) text-(--btn-content) rounded-md px-2 py-1.5 font-bold">
-        <Icon name="material-symbols:pinboard" class="text-xl" />
-        <span class="text-sm">{i18n(I18nKey.pinned)}</span>
+      <div class="pinned-btn flex items-center gap-1 rounded-md px-2 py-1.5 font-bold bg-gradient-to-r from-orange-500 to-red-500 shadow-sm shadow-orange-500/30">
+        <Icon name="material-symbols:pinboard" class="text-xl text-white" />
+        <span class="text-sm text-[#000000]">{i18n(I18nKey.pinned)}</span>
       </div>
     )
   }
 
   <!-- publish date -->
   <div class="flex items-center">
-    <div class="meta-icon">
+    <div class="meta-icon meta-icon--date">
       <Icon
         name="material-symbols:calendar-today-outline-rounded"
         class="text-xl"
@@ -98,7 +98,7 @@ const minuteLabel =
 
   <!-- categories -->
   <div class="flex items-center">
-    <div class="meta-icon">
+    <div class="meta-icon meta-icon--category">
       <Icon name="material-symbols:book-2-outline-rounded" class="text-xl" />
     </div>
     <div class="flex flex-row flex-nowrap items-center">
@@ -138,7 +138,7 @@ const minuteLabel =
   {
     showWordCount && (
       <div class="flex items-center">
-        <div class="meta-icon">
+        <div class="meta-icon meta-icon--words">
           <Icon name="material-symbols:article-outline-rounded" class="text-xl" />
         </div>
         <span class="text-50 text-sm font-medium whitespace-nowrap">

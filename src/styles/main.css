@@ -1580,6 +1580,26 @@ body.wallpaper-transparent #navbar > div {
   color: var(--primary) !important;
 }
 
+/* 文章卡片元信息：日期/分类/字数图标改为彩色区分 */
+.post-meta .meta-icon.meta-icon--date {
+  color: #3b82f6 !important;
+}
+.post-meta .meta-icon.meta-icon--category {
+  color: #22c55e !important;
+}
+.post-meta .meta-icon.meta-icon--words {
+  color: #f59e0b !important;
+}
+:root.dark .post-meta .meta-icon.meta-icon--date {
+  color: #60a5fa !important;
+}
+:root.dark .post-meta .meta-icon.meta-icon--category {
+  color: #4ade80 !important;
+}
+:root.dark .post-meta .meta-icon.meta-icon--words {
+  color: #fbbf24 !important;
+}
+
 /* =============================================================
  * 按钮：常规按钮风格（btn-regular）
  * ============================================================= */
@@ -2196,6 +2216,24 @@ widget-layout .widget-title::before {
   :root.dark #post-list-container.list-mode .post-meta .meta-icon {
     color: var(--primary) !important;
   }
+  #post-list-container.list-mode .post-meta .meta-icon.meta-icon--date {
+    color: #3b82f6 !important;
+  }
+  #post-list-container.list-mode .post-meta .meta-icon.meta-icon--category {
+    color: #22c55e !important;
+  }
+  #post-list-container.list-mode .post-meta .meta-icon.meta-icon--words {
+    color: #f59e0b !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta .meta-icon.meta-icon--date {
+    color: #60a5fa !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta .meta-icon.meta-icon--category {
+    color: #4ade80 !important;
+  }
+  :root.dark #post-list-container.list-mode .post-meta .meta-icon.meta-icon--words {
+    color: #fbbf24 !important;
+  }
   #post-list-container.list-mode .post-meta .meta-icon svg {
     width: 0.95rem !important;
     height: 0.95rem !important;
@@ -2211,16 +2249,16 @@ widget-layout .widget-title::before {
   :root.dark #post-list-container.list-mode .post-meta .text-sm {
     color: rgba(255, 255, 255, 0.45) !important;
   }
-  /* 置顶徽标缩小 */
+  /* 置顶徽标文字：不随通用 meta 文字变灰，保持黑色强调 */
+  #post-list-container.list-mode .post-meta .pinned-btn .text-sm,
+  :root.dark #post-list-container.list-mode .post-meta .pinned-btn .text-sm {
+    color: #ffffff !important;
+  }
+  /* 置顶徽标缩小（保留强调色渐变背景，仅收紧尺寸） */
   #post-list-container.list-mode .post-meta .pinned-btn {
     padding: 1px 6px !important;
     font-size: 0.6875rem !important;
     border-radius: 2px !important;
-    background: color-mix(in oklch, var(--primary) 8%, transparent) !important;
-    color: var(--juejin-primary) !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta .pinned-btn {
-    background: color-mix(in oklch, var(--primary) 15%, transparent) !important;
   }
   #post-list-container.list-mode .post-meta .pinned-btn .text-xl {
     font-size: 0.875rem !important;

@@ -17,7 +17,7 @@ export const profileConfig: ProfileConfig = {
     {
       name: "Email",
       icon: "/assets/images/gmail.svg",
-      url: "mailto:astroal@qq.com",
+      url: "mailto:louaqo@gmail.com",
     },
     {
       name: "GitHub",
