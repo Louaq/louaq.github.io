@@ -14,6 +14,11 @@ permissions:
   pages: write
   id-token: write
 
+# 同一时间只允许一个部署在跑，避免新的部署卡在 deployment_queued
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
