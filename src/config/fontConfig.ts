@@ -1,8 +1,8 @@
 // 字体配置
 //
 // 架构（务实迁移 + 保留 CDN）：
-// - 正文字体（body）：HarmonyOS Regular，体积大的中文字体，继续走 B 站 CDN
-//   托管，由 FontSetup.astro 以 @font-face 形式加载。
+// - 正文字体（body）：霞鹜文楷 LXGW WenKai Regular，本地字体文件
+//   （public/font/），由 FontSetup.astro 以 @font-face 形式加载。
 // - 代码字体（code）：JetBrains Mono，通过 Astro Font API（fontsource provider）
 //   自托管 + 子集化，由 astro.config.mjs 的 `fonts` 与 <Font /> 组件统一管理。
 // - og：OpenGraph 图片由 satori 服务端渲染，需要原始字体 buffer，独立于浏览器
@@ -13,13 +13,13 @@ export const fontConfig = {
 	// 是否预加载正文字体文件
 	preload: true,
 
-	// 正文字体（CJK，体积大，保留 CDN 托管，不走 Astro Font API 自托管）
+	// 正文字体（CJK，体积大，本地文件托管，不走 Astro Font API 自托管）
 	body: {
-		name: "HarmonyOS Regular",
-		family: "HarmonyOS_Regular",
-		// 华为鸿蒙字体 - HarmonyOS_Regular（B站 CDN 直接 woff2）
-		src: "https://s1.hdslb.com/bfs/static/jinkela/long/font/HarmonyOS_Regular.ao.woff2",
-		format: "woff2" as const,
+		name: "LXGW WenKai Regular",
+		family: "LXGWWenKai_Regular",
+		// 霞鹜文楷 - LXGWWenKai_Regular（本地字体，public/font/ 下）
+		src: "/font/LXGWWenKai_Regular-s.p.436t2zdbdsegx.ttf",
+		format: "truetype" as const,
 		display: "swap" as const,
 	},
 

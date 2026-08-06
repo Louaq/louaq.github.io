@@ -6,6 +6,7 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 
 const config = announcementConfig;
+const hasLink = Boolean(config.link && config.link.enable !== false);
 
 interface Props {
 	class?: string;
@@ -16,13 +17,39 @@ const style = Astro.props.style;
 ---
 
 <!-- 组件显示现在由sidebarLayoutConfig统一控制，无需检查config.enable -->
-<WidgetLayout
-  name={config.title || i18n(I18nKey.announcement)}
-  id="announcement"
-  class={className}
-  style={style}
->
+<WidgetLayout id="announcement" class={className} style={style}>
+  <div class="-mx-4 -mt-4 mb-3 h-36 overflow-hidden">
+    <img
+      src="/assets/images/announcement-girls.png"
+      alt=""
+      class="h-full w-full object-cover object-top select-none pointer-events-none"
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+
   <div>
+    <!-- 标题行：图标 + 标题 + 可选箭头 -->
+    <div class="flex items-center gap-1.5 mb-2 text-lg">
+      <Icon
+        name="announcement"
+        class="icon-shake shrink-0 size-[1.05em]"
+        aria-hidden="true"
+      />
+      <span class="flex-1 min-w-0 font-bold text-neutral-900 dark:text-neutral-100 truncate">
+        {config.title || i18n(I18nKey.announcement)}
+      </span>
+      {
+        hasLink && (
+          <Icon
+            name="fa6-solid:chevron-right"
+            class="shrink-0 text-xs text-neutral-300 dark:text-neutral-600"
+            aria-hidden="true"
+          />
+        )
+      }
+    </div>
+
     <!-- 公告栏内容 -->
     <div class="text-neutral-600 dark:text-neutral-300 leading-relaxed mb-3">
       {config.content}

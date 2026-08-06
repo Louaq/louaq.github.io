@@ -9,63 +9,70 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<div class="home-top-notice-stack mt-3 mb-3 flex flex-col gap-2">
-	{
-		items.map((item, i) => {
-			return (
-				<div
-					class:list={[
-						"home-top-notice home-top-notice--theme rounded-(--radius-large) overflow-hidden",
-					]}
-					id={`home-top-notice-${i}`}
-					role="region"
-					aria-label={item.title || "站点通知"}
-				>
-					<div class="max-w-(--page-width) mx-auto px-4 md:px-5 py-3 md:py-3.5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4 text-[15px] md:text-[16px] leading-relaxed">
-						<div class="flex flex-1 min-w-0 w-full items-center justify-start text-left">
-							<div class="notice-title-body flex w-full min-w-0 max-w-full items-center gap-x-1.5 wrap-anywhere">
-								{item.icon && (
-									<span
-										class="inline-flex shrink-0 items-center text-[1.05em] leading-none"
-										aria-hidden="true"
-									>
-										<Icon
-											name={item.icon}
-											class="size-[1em] text-current [&_svg]:block"
-											aria-hidden="true"
-										/>
-									</span>
-								)}
-								<div
-									class="notice-text-flow min-w-0 flex-1 text-left [font-size:inherit] leading-[inherit]"
-								>
-									{item.title && (
-										<span class="font-bold tracking-tight text-[1.05em]">{item.title}</span>
-									)}
-									{item.title && ' '}
-									<span class="notice-content-inline" set:html={item.content} />
-								</div>
-							</div>
-						</div>
-						{item.link?.enable && item.link.url?.trim() && (
-							<div class="flex shrink-0 items-center justify-start sm:justify-end gap-2">
-								<a
-									href={item.link.url}
-									target={item.link.external ? "_blank" : "_self"}
-									rel={
-										item.link.external ? "noopener noreferrer" : undefined
-									}
-									class="btn-regular rounded-md px-3 py-1.5 text-sm font-medium whitespace-nowrap active:scale-95 transition-transform"
-								>
-									{item.link.text}
-								</a>
-							</div>
+<div class="home-top-notice-stack mt-3 mb-3">
+	<div
+		class="home-top-notice home-top-notice--pill relative grid w-full items-stretch overflow-hidden rounded-lg bg-(--card-bg) border border-black/[0.06] dark:border-white/10 shadow-sm px-3.5 py-2 sm:px-4 sm:py-2.5 transition-all duration-300 has-[a.home-top-notice-row:hover]:shadow-md"
+		data-home-top-notice
+	>
+		{
+			items.map((item, i) => {
+				const hasLink = Boolean(item.link?.enable && item.link?.url?.trim());
+				const rowClass = [
+					"home-top-notice-row group flex w-full items-center gap-2.5",
+					i === 0 && "is-active",
+				];
+				const inner = (
+					<Fragment>
+						{item.title && (
+							<span class="notice-label shrink-0 font-bold text-(--primary) text-[14.5px] sm:text-[15px]">
+								{item.title}
+							</span>
 						)}
+						{item.title && (
+							<span
+								class="notice-divider shrink-0 text-neutral-300 dark:text-neutral-600"
+								aria-hidden="true"
+							>
+								|
+							</span>
+						)}
+						<span
+							class="notice-content-inline min-w-0 flex-1 truncate dark:text-neutral-400 text-[14px] sm:text-[14.5px]"
+							set:html={item.content}
+						/>
+						<Icon
+							name="fa6-solid:chevron-right"
+							class="notice-chevron shrink-0 size-3 text-neutral-300 dark:text-neutral-600 transition-transform duration-300 group-hover:translate-x-0.5"
+							aria-hidden="true"
+						/>
+					</Fragment>
+				);
+				return hasLink ? (
+					<a
+						href={item.link!.url}
+						target={item.link!.external ? "_blank" : "_self"}
+						rel={item.link!.external ? "noopener noreferrer" : undefined}
+						class:list={rowClass}
+						data-notice-row={i}
+						aria-hidden={i === 0 ? undefined : "true"}
+						tabindex={i === 0 ? undefined : -1}
+					>
+						{inner}
+					</a>
+				) : (
+					<div
+						role="region"
+						aria-label={item.title || "站点通知"}
+						class:list={rowClass}
+						data-notice-row={i}
+						aria-hidden={i === 0 ? undefined : "true"}
+					>
+						{inner}
 					</div>
-				</div>
-			);
-		})
-	}
+				);
+			})
+		}
+	</div>
 </div>
 
 <script>
@@ -83,9 +90,53 @@ const { items } = Astro.props;
 		}
 	}
 
+	const noticeCycleTimers = new WeakMap<HTMLElement, number>();
+
+	function initHomeTopNoticeCycle() {
+		const containers = document.querySelectorAll<HTMLElement>(
+			"[data-home-top-notice]"
+		);
+
+		for (const container of containers) {
+			const prevTimer = noticeCycleTimers.get(container);
+			if (prevTimer) window.clearInterval(prevTimer);
+
+			const rows = Array.from(
+				container.querySelectorAll<HTMLElement>("[data-notice-row]")
+			);
+			if (rows.length <= 1) continue;
+
+			let activeIndex = Math.max(
+				rows.findIndex((row) => row.classList.contains("is-active")),
+				0
+			);
+
+			const timer = window.setInterval(() => {
+				const nextIndex = (activeIndex + 1) % rows.length;
+				const current = rows[activeIndex];
+				const next = rows[nextIndex];
+
+				current.classList.remove("is-active");
+				current.setAttribute("aria-hidden", "true");
+				if (current.tagName === "A") current.setAttribute("tabindex", "-1");
+
+				next.classList.add("is-active");
+				next.removeAttribute("aria-hidden");
+				next.removeAttribute("tabindex");
+
+				activeIndex = nextIndex;
+			}, 4000);
+
+			noticeCycleTimers.set(container, timer);
+		}
+	}
+
 	pruneLegacyDismissKeys();
+	initHomeTopNoticeCycle();
 	document.addEventListener("DOMContentLoaded", pruneLegacyDismissKeys);
+	document.addEventListener("DOMContentLoaded", initHomeTopNoticeCycle);
 	document.addEventListener("swup:contentReplaced", pruneLegacyDismissKeys);
+	document.addEventListener("swup:contentReplaced", initHomeTopNoticeCycle);
 </script>
 
 <style is:global>
@@ -101,5 +152,26 @@ const { items } = Astro.props;
 		outline: 2px solid currentColor;
 		outline-offset: 2px;
 		border-radius: 2px;
+	}
+
+	/* 多条通知堆叠于同一格并循环淡入淡出切换 */
+	.home-top-notice-row {
+		grid-area: 1 / 1;
+		opacity: 0;
+		transform: translateY(6px);
+		pointer-events: none;
+		transition:
+			opacity 0.5s ease,
+			transform 0.5s ease;
+	}
+	.home-top-notice-row.is-active {
+		opacity: 1;
+		transform: translateY(0);
+		pointer-events: auto;
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.home-top-notice-row {
+			transition: none;
+		}
 	}
 </style>

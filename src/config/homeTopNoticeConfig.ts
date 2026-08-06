@@ -21,7 +21,6 @@ export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 		{
 			title: "重要通知",
 			content: "今晚23:00-24:00 进行维护，期间可能无法访问",
-			icon: "fa6-solid:user-shield",
 			link: {
 				enable: false,
 				text: "",
@@ -29,20 +28,13 @@ export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 				external: false,
 			},
 		},
-		// 你可以继续在下面添加更多条通知，例如：
 		// {
-		// 	title: "重要通知",
-		// 	content: "某服务短暂异常，正在处理。",
-		// 	icon: "fa6-solid:user-shield",
-		// },
-		// {
-		// 	title: "重要通知",
-		// 	content: "新文章 RSS 已更新。",
-		// 	icon: "fa6-solid:user-shield",
+		// 	title: "更新通知",
+		// 	content: "test",
 		// 	link: {
-		// 		enable: true,
-		// 		text: "查看",
-		// 		url: "/rss/",
+		// 		enable: false,
+		// 		text: "",
+		// 		url: "",
 		// 		external: false,
 		// 	},
 		// },

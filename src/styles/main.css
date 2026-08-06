@@ -747,6 +747,46 @@
     background-color: var(--primary);
   }
 
+  /* 侧边栏标题图标摇晃动画（喇叭抖动效果） */
+  .icon-shake {
+    transform-origin: center;
+    animation: icon-shake 0.3s infinite;
+  }
+  @keyframes icon-shake {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-10deg);
+    }
+    50% {
+      transform: rotate(0deg);
+    }
+    75% {
+      transform: rotate(10deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
+
+  /* 侧边栏标题图标缩放动画 */
+  .icon-scale {
+    transform-origin: center;
+    animation: icon-scale 1s infinite;
+  }
+  @keyframes icon-scale {
+    0% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   /* 首页通告条、文章过期提示：随主题色 --primary 变化 */
   .home-top-notice.home-top-notice--theme {
     background: var(--notice-themed-bg);
@@ -1793,12 +1833,9 @@ widget-layout .widget-title::before {
 }
 
 /* =============================================================
- * HomeTopNotice 顶部通知条：仅统一圆角，配色由组件 Tailwind tone 承担
- * （勿再覆盖 background/border，否则会冲淡 warning/urgent 对比度）
+ * HomeTopNotice 顶部通知条：胶囊（pill）样式，圆角完全由组件 Tailwind
+ * rounded-full 承担，这里不再强制覆盖 border-radius
  * ============================================================= */
-.home-top-notice-stack .home-top-notice {
-  border-radius: 4px;
-}
 /* =============================================================
  * 文章详情页：标题层次感 + 卡片样式
  * ============================================================= */
