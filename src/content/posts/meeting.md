@@ -8,6 +8,7 @@ tags: [组会]
 description: 汇报
 pinned: true
 password: true
+image: https://pic1.imgdb.cn/i/033r1XwvuAzjABPhHjDnze.jpg
 homeCarousel: true
 homeCarouselOrder: 1
 homeCarouselImage: https://pic1.imgdb.cn/item/6919c4353203f7be000aeaea.jpg

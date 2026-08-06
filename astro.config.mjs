@@ -27,6 +27,7 @@ import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs"
 import { rehypeMermaid } from "./src/plugins/rehype-mermaid.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
+import { remarkFirstImage } from "./src/plugins/remark-first-image.js";
 import { remarkMermaid } from "./src/plugins/remark-mermaid.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import mdx from "@astrojs/mdx";
@@ -205,6 +206,7 @@ export default defineConfig({
 				remarkMath,
 				remarkReadingTime,
 				remarkExcerpt,
+				remarkFirstImage,
 				remarkDirective,
 				remarkSectionize,
 				parseDirectiveNode,

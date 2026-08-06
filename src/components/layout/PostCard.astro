@@ -3,11 +3,11 @@ import type { CollectionEntry } from "astro:content";
 import { render } from "astro:content";
 import { Icon } from "astro-icon/components";
 import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
-import PostMetadata from "@/components/layout/PostMeta.astro";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
+import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 import { processCoverImageSync } from "@/utils/image-utils";
-import { getFileDirFromPath, getTagUrl } from "@/utils/url-utils";
+import { getCategoryUrl, getFileDirFromPath } from "@/utils/url-utils";
 
 interface Props {
 	class?: string;
@@ -23,41 +23,70 @@ interface Props {
 	draft: boolean;
 	pinned?: boolean;
 	style: string;
+	index?: number;
 }
 const {
 	entry,
 	title,
 	url,
 	published,
-	updated,
-	tags,
 	category,
 	image,
 	description,
 	pinned,
 	style,
+	index = 0,
 } = Astro.props;
 const className = Astro.props.class;
-
-// 处理随机图：如果image为"api"，则从配置的API获取随机图
-const processedImage = processCoverImageSync(image, entry.id);
-const hasCover =
-	processedImage !== undefined &&
-	processedImage !== null &&
-	processedImage !== "";
-
-const coverWidth = "clamp(220px, 32%, 320px)";
-const coverWidthTablet = "clamp(160px, 24%, 220px)";
+const isEven = index % 2 === 0;
 
 const { remarkPluginFrontmatter } = await render(entry);
+const minutes = remarkPluginFrontmatter.minutes as number | undefined;
+
+// 兜底封面图池：既无显式封面、正文中也没有图片时，从中稳定随机选取一张
+const FALLBACK_COVERS = [
+	"https://pic1.imgdb.cn/i/033r1XwvuAzjABPhHjDnze.jpg",
+	"https://pic1.imgdb.cn/i/033r1XwmpoE3Gbv4LfKsCv.jpg",
+	"https://pic1.imgdb.cn/i/033r1XwNUbgTLe4lO7cO1o.jpg",
+	"https://pic1.imgdb.cn/i/2Riv5i8fXRZVINulFUEqkR.png",
+	"https://pic1.imgdb.cn/i/5RaDE9mZuMWiv3tH6Mj9cp.png",
+	"https://pic1.imgdb.cn/i/5v95fu9MVuN6nl6pngnRE1.jpg",
+	"https://pic1.imgdb.cn/i/3Z5Ax9qRU1TNBaFt5dYTXA.jpg",
+	"https://pic1.imgdb.cn/i/0KFg5V1ZUIzzTxmTm2ssTR.jpg",
+	"https://pic1.imgdb.cn/i/2lf9SGVlXPUAc9GS3CFeLN.jpg",
+	"https://pic1.imgdb.cn/i/2UJ5ftrzjwQmNVmpKb10B0.png",
+	"https://pic1.imgdb.cn/i/5BBgnRCAzYGPUK7MHaFfWo.png",
+	"https://pic1.imgdb.cn/i/3BlTSrEFzCyQ1ORyXoOMRX.png",
+];
+
+// 基于文章 id 的稳定哈希，确保同一篇文章每次都选到同一张兜底图
+function pickFallbackCover(seed: string): string {
+	let hash = 0;
+	for (let i = 0; i < seed.length; i++) {
+		hash = (hash << 5) - hash + seed.charCodeAt(i);
+		hash |= 0;
+	}
+	return FALLBACK_COVERS[Math.abs(hash) % FALLBACK_COVERS.length];
+}
+
+// 处理随机图：如果image为"api"，则从配置的API获取随机图
+// 未显式设置封面时，依次回退到正文中第一张图片、再到随机兜底封面图
+const firstImage = (remarkPluginFrontmatter.firstImage as string | undefined) ?? "";
+const processedImage =
+	processCoverImageSync(image, entry.id) ||
+	firstImage ||
+	pickFallbackCover(entry.id);
+const basePath = getFileDirFromPath(entry.filePath || "");
+const minuteLabel =
+	minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount);
 ---
 
 <div
   class:list={[
-    "post-card-wrapper",
-    hasCover ? "has-cover" : "no-cover",
+    "post-card-wrapper hero-card has-cover",
+    isEven ? "hero-card--even" : "hero-card--odd",
     pinned ? "pinned" : "",
-    "card-base flex flex-col md:flex-row w-full rounded-(--radius-large) overflow-hidden relative cursor-pointer",
+    "card-base flex w-full overflow-hidden rounded-(--radius-large) cursor-pointer",
     className,
   ]}
   style={style}
@@ -66,127 +95,120 @@ const { remarkPluginFrontmatter } = await render(entry);
   tabindex="0"
   aria-label={title}
 >
-  <!-- pinned icon -->
-  <div
-    class:list={[
-      "post-card-content",
-      "pl-6 md:pl-9 pr-6 md:pr-2 pt-6 md:pt-7 pb-6 md:pb-7 relative flex flex-col h-full",
-      {
-        "order-2 md:order-0": hasCover,
-        "w-full md:w-[calc(100%-52px-12px)]": !hasCover,
-        "w-full md:w-[calc(100%-var(--coverWidthTablet)-1.5rem)] lg:w-[calc(100%-var(--coverWidth)-1.5rem)]": hasCover,
-      },
-    ]}
-  >
-
-
-    <a
-      href={url}
-      class="post-card-title transition group w-full flex items-center gap-1 font-bold mb-3 text-[18px] text-90
-        active:text-(--title-active) dark:active:text-(--title-active)
-        before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
-        before:absolute before:top-[35px] before:left-[18px] before:hidden md:before:block"
-    >
-      <span class="min-w-0 flex-1 truncate">{title}</span>
-      {entry.data.password && (
-        <Icon
-          name="material-symbols:lock-outline"
-          class="inline text-2xl align-middle -translate-y-px text-inherit shrink-0"
-          aria-label="加密"
-        />
-      )}
-      <Icon
-        class="text-[2rem] text-(--primary) md:hidden shrink-0 translate-y-[-2px]"
-        name="material-symbols:chevron-right-rounded"
-      />
-    </a>
-
-    <!-- metadata -->
-    <PostMetadata
-      published={published}
-      updated={updated}
-      tags={tags}
-      category={category || undefined}
-      hideTagsForMobile={true}
-      hideUpdateDate={true}
-      words={remarkPluginFrontmatter.words}
-      minutes={remarkPluginFrontmatter.minutes}
-      showWordCount={true}
-      pinned={pinned}
-      className="mb-4 post-meta"
-    />
-
-    <!-- description -->
-    <div
-      class:list={[
-        "transition text-75 mb-3.5 md:pr-4 description grow",
-        { "line-clamp-2 md:line-clamp-1": !description },
-      ]}
-    >
-      {description || remarkPluginFrontmatter.excerpt}
-    </div>
-
-    <!-- tags -->
-    <div
-      class="text-sm text-black/30 dark:text-white/30 flex flex-wrap gap-2 transition stats mt-auto"
-    >
-      {
-        tags &&
-          tags.length > 0 &&
-          tags.map((tag, _i) => (
-            <a
-              href={getTagUrl(tag)}
-              aria-label={`View all posts with the ${tag.trim()} tag`}
-              class="btn-regular h-6 text-xs px-2 py-1 rounded-md"
-            >
-              #{tag.trim()}
-            </a>
-          ))
-      }
-      {
-        !(tags && tags.length > 0) && (
-          <span class="text-(--content-meta) text-xs">
-            #{i18n(I18nKey.noTags)}
-          </span>
-        )
-      }
-    </div>
-  </div>
-
+  <!-- 左侧封面图（偶数项） -->
   {
-    hasCover && (
-      <a
-        href={url}
-        aria-label={title}
-        class:list={[
-          "post-card-image",
-          "group",
-          "order-1 md:order-0",
-          "w-full md:w-(--coverWidthTablet) lg:w-(--coverWidth)",
-          "aspect-2/1 md:aspect-auto",
-          "relative md:my-4 md:mr-4 md:self-stretch",
-          "rounded-t-(--radius-large) md:rounded-xl overflow-hidden active:scale-95",
-        ]}
-      >
-        <div class="absolute pointer-events-none z-10 w-full h-full group-hover:bg-black/30 group-active:bg-black/50 transition" />
-        <div class="absolute pointer-events-none z-20 w-full h-full flex items-center justify-center ">
-          <Icon
-            name="material-symbols:chevron-right-rounded"
-            class="transition opacity-0 group-hover:opacity-100 scale-50 group-hover:scale-100 text-white text-5xl"
-          />
-        </div>
+    isEven && (
+      <div class="hero-card-side hidden sm:block relative min-w-[45%] overflow-hidden z-10">
         <RandomCoverImage
           src={processedImage}
-          basePath={getFileDirFromPath(entry.filePath || '')}
-          alt="Cover Image of the Post"
-          class="w-full h-full"
+          basePath={basePath}
+          alt=""
+          class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
         />
-      </a>
+      </div>
     )
   }
 
+  <!-- content -->
+  <div class="hero-card-content relative z-20 w-full sm:w-[65%] flex flex-col justify-between h-full pt-9 pb-5 px-5 sm:px-8">
+    <a
+      href={url}
+      class="hero-card-title my-1 font-bold text-white text-lg md:text-xl line-clamp-1 text-center sm:text-left transition text-shadow-hero"
+    >
+      {title}
+    </a>
+
+    <div class="hero-card-desc text-sm text-white/80 line-clamp-2 xl:line-clamp-3 text-center sm:text-left">
+      {description || remarkPluginFrontmatter.excerpt}
+    </div>
+
+    <div
+      class:list={[
+        "hero-card-meta inline-flex flex-wrap items-center justify-center",
+        isEven ? "sm:justify-end" : "sm:justify-start",
+      ]}
+    >
+      <span class="hero-card-meta-item inline-flex items-center gap-1.5 text-xs text-white/90">
+        <Icon name="fa6-regular:calendar" class="size-3.5 shrink-0 text-white/55" />
+        <span class="whitespace-nowrap">{formatDateToYYYYMMDD(published)}</span>
+      </span>
+      {minutes != null && (
+        <Fragment>
+          <span class="hero-card-meta-divider mx-2 h-3 w-px shrink-0 bg-white/25" aria-hidden="true" />
+          <span class="hero-card-meta-item inline-flex items-center gap-1.5 text-xs text-white/90">
+            <Icon name="material-symbols:schedule-outline-rounded" class="size-3.5 shrink-0 text-white/55" />
+            <span class="whitespace-nowrap">{minutes} {minuteLabel}</span>
+          </span>
+        </Fragment>
+      )}
+      {category && (
+        <Fragment>
+          <span class="hero-card-meta-divider mx-2 h-3 w-px shrink-0 bg-white/25" aria-hidden="true" />
+          <a
+            href={getCategoryUrl(category)}
+            aria-label={`View all posts in the ${category} category`}
+            class="hero-card-meta-item inline-flex items-center text-xs text-white/90 whitespace-nowrap transition hover:text-white"
+          >
+            {category}
+          </a>
+        </Fragment>
+      )}
+    </div>
+  </div>
+
+  <!-- 环境模糊底图，铺满全卡填补两侧空隙 -->
+  <div class="hero-card-media absolute inset-0 z-0 overflow-hidden">
+    <div class="hero-card-media-inner absolute -inset-8">
+      <RandomCoverImage
+        src={processedImage}
+        basePath={basePath}
+        alt=""
+        class="hero-card-img h-full w-full"
+        seed={entry.id}
+        preview={true}
+      />
+    </div>
+  </div>
+
+  <!-- 右侧封面图（奇数项） -->
+  {
+    !isEven && (
+      <div class="hero-card-side hidden sm:block relative min-w-[45%] overflow-hidden z-10">
+        <RandomCoverImage
+          src={processedImage}
+          basePath={basePath}
+          alt=""
+          class="hero-card-side-img h-full w-full"
+          seed={entry.id}
+          preview={true}
+        />
+      </div>
+    )
+  }
+
+  <!-- pinned ribbon -->
+  {
+    pinned && (
+      <div class="hero-card-pin absolute top-2 left-2 z-30 flex items-center gap-1 rounded-md px-2 py-0.5 font-bold bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-sm shadow-orange-500/30">
+        <Icon name="material-symbols:pinboard" class="text-base" />
+        <span class="text-xs">{i18n(I18nKey.pinned)}</span>
+      </div>
+    )
+  }
+
+  <!-- password lock -->
+  {
+    entry.data.password && (
+      <div
+        class="hero-card-lock absolute top-2 right-2 z-30 flex items-center justify-center size-6 rounded-full bg-black/40 backdrop-blur-sm text-white"
+        aria-label="加密"
+      >
+        <Icon name="material-symbols:lock-outline" class="text-base" />
+      </div>
+    )
+  }
 </div>
 
 <script>
@@ -271,25 +293,121 @@ const { remarkPluginFrontmatter } = await render(entry);
   document.addEventListener("astro:after-swap", initPostCardDelegation);
 </script>
 
-<style define:vars={{ coverWidth, coverWidthTablet }}>
-  /* Grid Mode Styles */
-  :global(.grid-mode) .post-card-wrapper {
-    height: 100% !important;
+<style is:global>
+  /* =============================================================
+   * Hero 文章卡片（参考 ThriveX-Blog ArticleLayout/Classics）：
+   * 封面图左右交替出现（斜切裁边）+ 环境模糊底图铺满 + 文字叠加
+   * ============================================================= */
+  .post-card-wrapper.hero-card {
+    height: 190px;
+    background: oklch(0.2 0.02 var(--hue));
+    position: relative;
   }
 
-  :global(.grid-mode) .description {
-    flex-grow: 0 !important;
+  @media (min-width: 768px) {
+    .post-card-wrapper.hero-card {
+      height: 15rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .post-card-wrapper.hero-card {
+      height: 13rem;
+    }
+  }
+  @media (min-width: 1280px) {
+    .post-card-wrapper.hero-card {
+      height: 15rem;
+    }
   }
 
-  :global(.grid-mode) .stats {
-    margin-top: auto !important;
+  .hero-card-media,
+  .hero-card-media-inner,
+  .hero-card-img,
+  .hero-card-img img,
+  .hero-card-side-img,
+  .hero-card-side-img img {
+    display: block;
   }
 
-
-  /* 键盘聚焦时给卡片轮廓 */
-  .post-card-wrapper:focus-visible {
-    outline: 2px solid var(--primary);
-    outline-offset: 2px;
+  .hero-card-media-inner {
+    filter: blur(2.5rem) brightness(0.6);
   }
 
+  .hero-card-img img,
+  .hero-card-side-img img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .hero-card-side {
+    transition: transform 0.3s ease-out;
+  }
+  .hero-card-side:hover {
+    transform: scale(1.15);
+  }
+  .hero-card--even .hero-card-side {
+    clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  }
+  .hero-card--odd .hero-card-side {
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .text-shadow-hero {
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
+  }
+
+  .hero-card-title:hover {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  /* grid-mode 下：覆盖旧规则强加的 1:1 方形、column-reverse 与固定行方向（固定高度已保证等高） */
+  #post-list-container.grid-mode .post-card-wrapper.hero-card,
+  #post-list-container.grid-mode .post-card-wrapper.hero-card.has-cover {
+    aspect-ratio: auto !important;
+    flex-direction: row !important;
+    height: 190px !important;
+  }
+  @media (min-width: 768px) {
+    #post-list-container.grid-mode .post-card-wrapper.hero-card,
+    #post-list-container.grid-mode .post-card-wrapper.hero-card.has-cover {
+      height: 15rem !important;
+    }
+  }
+
+  /* 覆盖旧 list-mode 规则：不再降级为紧凑白色行 */
+  @media (min-width: 768px) {
+    #post-list-container.list-mode .post-card-wrapper.hero-card {
+      background: oklch(0.2 0.02 var(--hue)) !important;
+      border: none !important;
+      border-bottom: none !important;
+      border-radius: var(--radius-large) !important;
+      box-shadow: none !important;
+      flex-direction: row !important;
+      height: 15rem !important;
+    }
+    :root.dark #post-list-container.list-mode .post-card-wrapper.hero-card {
+      border-bottom: none !important;
+    }
+    #post-list-container.list-mode .post-card-wrapper.hero-card:hover {
+      box-shadow: none !important;
+    }
+    #post-list-container.list-mode .post-card-wrapper.hero-card:last-child {
+      border-bottom: none !important;
+    }
+  }
+
+  /* 覆盖旧"单一大白卡+紧贴行"外壳：hero 卡片之间恢复正常间距 */
+  #post-list-container.list-mode:has(.hero-card) {
+    gap: 1rem !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  @media (min-width: 768px) {
+    #post-list-container.list-mode:has(.hero-card) {
+      gap: 1rem !important;
+    }
+  }
 </style>
