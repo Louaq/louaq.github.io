@@ -761,8 +761,87 @@
     scrollbar-gutter: stable;
   }
 
-  /* 明暗/系统模式按钮：纯 CSS 控制图标显示，避免刷新时“重新加载/闪一下” */
-  #scheme-switch .theme-icon {
+  /* 明暗模式切换：日/夜天空胶囊开关，纯 CSS 控制显示，避免刷新时”重新加载/闪一下” */
+  #scheme-switch.theme-switch {
+    width: 52px;
+    height: 28px;
+    padding: 0;
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+    transition: box-shadow var(--theme-transition-duration)
+      var(--theme-transition-easing);
+  }
+  :root.dark #scheme-switch.theme-switch {
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* 背景：日间天空 / 夜间星空，透明度交叉淡入淡出 */
+  #scheme-switch .switch-face {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity var(--theme-transition-duration)
+      var(--theme-transition-easing);
+  }
+  #scheme-switch .switch-face-light {
+    background: linear-gradient(135deg, #6fb3e0 0%, #bfe3f7 55%, #fdf6e3 100%);
+  }
+  #scheme-switch .switch-face-dark {
+    background: linear-gradient(135deg, #0d1128 0%, #1c1a45 55%, #2f2264 100%);
+  }
+  html[data-theme-mode='light'] #scheme-switch .switch-face-light {
+    opacity: 1;
+  }
+  html[data-theme-mode='dark'] #scheme-switch .switch-face-dark {
+    opacity: 1;
+  }
+
+  /* 星星：仅暗色模式可见 */
+  #scheme-switch .switch-star {
+    position: absolute;
+    display: block;
+    width: 2px;
+    height: 2px;
+    border-radius: 50%;
+    background: #fff;
+    opacity: 0;
+    transition: opacity var(--theme-transition-duration)
+      var(--theme-transition-easing);
+  }
+  html[data-theme-mode='dark'] #scheme-switch .switch-star {
+    opacity: 0.9;
+  }
+  #scheme-switch .switch-star.s1 { top: 6px; left: 9px; }
+  #scheme-switch .switch-star.s2 { top: 15px; left: 16px; width: 3px; height: 3px; }
+  #scheme-switch .switch-star.s3 { top: 8px; left: 22px; }
+  #scheme-switch .switch-star.s4 { top: 18px; left: 7px; }
+
+  /* 滑块：圆形，随主题左右滑动，内含太阳/月亮图标交叉淡入淡出 */
+  #scheme-switch .switch-thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: #fff9ec;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: transform var(--theme-transition-duration)
+        var(--theme-transition-easing),
+      background-color var(--theme-transition-duration)
+        var(--theme-transition-easing);
+  }
+  html[data-theme-mode='dark'] #scheme-switch .switch-thumb {
+    transform: translateX(24px);
+    background: #241f42;
+  }
+
+  #scheme-switch .switch-thumb .theme-icon {
     position: absolute;
     inset: 0;
     display: flex;
@@ -772,11 +851,14 @@
     transition: opacity var(--theme-transition-duration)
       var(--theme-transition-easing);
   }
-  html[data-theme-mode='light'] #scheme-switch .theme-icon-light {
+  html[data-theme-mode='light'] #scheme-switch .switch-thumb .theme-icon-light {
     opacity: 1;
   }
-  html[data-theme-mode='dark'] #scheme-switch .theme-icon-dark {
+  html[data-theme-mode='dark'] #scheme-switch .switch-thumb .theme-icon-dark {
     opacity: 1;
+  }
+  #scheme-switch .switch-icon {
+    font-size: 14px;
   }
 
   /* 页面顶部渐变高光效果 */
@@ -1051,14 +1133,14 @@ body {
 }
 
 /* =============================================================
- * 卡片：白底 + 极小圆角 + 细边框 + 微阴影
+ * 卡片：白底 + 柔和圆角 + 无边框浮起（深色模式改用极浅描边，阴影在深色背景上不可读）
  * ============================================================= */
 .card-base,
 .card-base-transparent {
   border-radius: var(--radius-large) !important;
   background-color: var(--card-bg) !important;
-  border: 1px solid var(--juejin-border);
-  box-shadow: none !important;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px -6px rgba(0, 0, 0, 0.08) !important;
   transition-property: background-color, border-color, box-shadow, color;
   transition-duration: var(--theme-transition-duration);
   transition-timing-function: var(--theme-transition-easing);
@@ -1067,6 +1149,7 @@ body {
 :root.dark .card-base,
 :root.dark .card-base-transparent {
   border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: none !important;
 }
 
 .enable-card-border .card-base,
@@ -1081,16 +1164,16 @@ body {
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* 卡片 hover：边框变蓝 + 微阴影 */
+/* 卡片 hover：阴影加深轻微“浮起”，深色模式用描边提亮代替 */
 .card-base:hover,
 .enable-card-border .card-base:hover {
-  border-color: var(--juejin-border) !important;
-  box-shadow: none !important;
+  border-color: transparent !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 12px 28px -8px rgba(0, 0, 0, 0.12) !important;
 }
 
 :root.dark .card-base:hover,
 :root.dark .enable-card-border .card-base:hover {
-  border-color: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(255, 255, 255, 0.16) !important;
   box-shadow: none !important;
 }
 
@@ -1164,7 +1247,7 @@ body.wallpaper-transparent #navbar > div {
 /* 导航栏菜单项：字号 16px（搜索触发器单独用组件类，不受此条影响） */
 #navbar .btn-plain {
   border-radius: 6px !important;
-  color: #000000b3 !important;
+  color: #000000 !important;
   font-size: 16px !important;
   font-weight: 400 !important;
   transition-duration: 80ms !important;
@@ -1174,7 +1257,7 @@ body.wallpaper-transparent #navbar > div {
 }
 
 #navbar .btn-plain:hover {
-  color: #000000b3 !important;
+  color: #000000 !important;
   background-color: transparent !important;
 }
 :root.dark #navbar .btn-plain:hover {
@@ -1183,7 +1266,7 @@ body.wallpaper-transparent #navbar > div {
 }
 
 #navbar .btn-plain:active {
-  color: #000000b3 !important;
+  color: #000000 !important;
   background-color: transparent !important;
 }
 :root.dark #navbar .btn-plain:active {
@@ -1203,7 +1286,7 @@ body.wallpaper-transparent #navbar > div {
 }
 #navbar a.navbar-brand-link:not(.navbar-brand-link--follow-theme):hover,
 #navbar a.navbar-brand-link:not(.navbar-brand-link--follow-theme):active {
-  color: #000000b3 !important;
+  color: #000000 !important;
 }
 :root.dark
   #navbar
@@ -1238,12 +1321,12 @@ body.wallpaper-transparent #navbar > div {
 #navbar button.navbar-util-no-hover:hover,
 #navbar button.navbar-util-no-hover:active {
   background-color: transparent !important;
-  color: #000000b3 !important;
+  color: #000000 !important;
 }
 #navbar button.navbar-util-no-hover.btn-plain:hover,
 #navbar button.navbar-util-no-hover.btn-plain:active {
   background-color: transparent !important;
-  color: #000000b3 !important;
+  color: #000000 !important;
 }
 :root.dark #navbar button.navbar-util-no-hover:hover,
 :root.dark #navbar button.navbar-util-no-hover:active {
@@ -1265,7 +1348,7 @@ body.wallpaper-transparent #navbar > div {
 #navbar #nav-menu-switch:focus,
 #navbar #nav-menu-switch:focus-visible {
   background-color: transparent !important;
-  color: #000000b3 !important;
+  color: #000000 !important;
 }
 :root.dark #navbar #nav-menu-switch:hover,
 :root.dark #navbar #nav-menu-switch:active,
@@ -1315,7 +1398,7 @@ body.wallpaper-transparent #navbar > div {
 }
 .dropdown-item:hover {
   background-color: transparent !important;
-  color: #000000b3 !important;
+  color: #000000 !important;
 }
 :root.dark .dropdown-item:hover {
   background-color: transparent !important;
@@ -1324,7 +1407,7 @@ body.wallpaper-transparent #navbar > div {
 
 .dropdown-item:active {
   background-color: transparent !important;
-  color: #000000b3 !important;
+  color: #000000 !important;
 }
 :root.dark .dropdown-item:active {
   background-color: transparent !important;
@@ -1416,17 +1499,17 @@ body.wallpaper-transparent #navbar > div {
 
 /* 文章封面图圆角 */
 .post-card-image {
-  border-radius: 4px !important;
+  border-radius: 6px !important;
   overflow: hidden;
 }
 
-/* 标签：主题色浅底 + 主题色文字 */
+/* 标签：主题色浅底 + 主题色文字，胶囊形状更柔和 */
 .post-card-wrapper .stats .btn-regular {
   background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
   color: var(--primary) !important;
-  border-radius: 2px !important;
+  border-radius: 999px !important;
   font-weight: normal !important;
-  padding: 2px 8px !important;
+  padding: 3px 10px !important;
   height: auto !important;
   font-size: 0.75rem !important;
   border: none !important;
@@ -1461,7 +1544,7 @@ body.wallpaper-transparent #navbar > div {
  * 按钮：常规按钮风格（btn-regular）
  * ============================================================= */
 .btn-regular {
-  border-radius: 4px !important;
+  border-radius: 8px !important;
   font-weight: 500;
 }
 
@@ -1525,7 +1608,7 @@ a {
  * ============================================================= */
 .pagination button,
 .pagination a {
-  border-radius: 4px !important;
+  border-radius: 8px !important;
 }
 
 /* =============================================================
@@ -1938,16 +2021,18 @@ widget-layout .widget-title::before {
  *  - 右侧小封面图（130x80）
  * ============================================================= */
 @media (min-width: 768px) {
-  /* 列表外壳：单一白卡 */
+  /* 列表外壳：单一白卡，无边框改用柔和阴影 */
   #post-list-container.list-mode {
     background: var(--card-bg) !important;
-    border: 1px solid var(--juejin-border) !important;
+    border: 1px solid transparent;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px -6px rgba(0, 0, 0, 0.08) !important;
     border-radius: var(--radius-large) !important;
     padding: 0 !important;
     gap: 0 !important;
   }
   :root.dark #post-list-container.list-mode {
     border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
   }
 
   /* 每条卡片：去边框 + 行分割线 */
@@ -1967,14 +2052,14 @@ widget-layout .widget-title::before {
     border-bottom: none !important;
   }
 
-  /* 列表行 hover：不叠加深色/主题色底，与默认一致（仅保留底部分割线） */
+  /* 列表行 hover：主题色浅底提供反馈，替代此前完全无反馈的纯分割线 */
   #post-list-container.list-mode .post-card-wrapper:hover {
-    background: transparent !important;
+    background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
     border-color: var(--juejin-border) !important;
     box-shadow: none !important;
   }
   :root.dark #post-list-container.list-mode .post-card-wrapper:hover {
-    background: transparent !important;
+    background: color-mix(in oklch, var(--primary) 7%, transparent) !important;
     border-bottom-color: rgba(255, 255, 255, 0.06) !important;
   }
 
@@ -1985,7 +2070,7 @@ widget-layout .widget-title::before {
 
   /* ====== 内容区：紧凑 flex 布局 ====== */
   #post-list-container.list-mode .post-card-content {
-    padding: 18px 20px !important;
+    padding: 20px 24px !important;
     display: flex !important;
     flex-direction: column !important;
     gap: 6px !important;

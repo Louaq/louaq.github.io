@@ -40,7 +40,11 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
 }));
 const currentPath = Astro.url.pathname;
 ---
-<div id="nav-menu-panel" class:list={["float-panel float-panel-closed fixed right-4 max-w-[calc(100vw-2rem)] px-2 py-2 overflow-y-auto transition-all"]}>
+<div id="nav-menu-panel" class:list={["nav-menu-drawer float-panel-closed fixed inset-y-0 left-0 z-50 flex w-[42%] min-w-[150px] max-w-[190px] flex-col"]}>
+    <div class="nav-menu-drawer-header flex shrink-0 items-center px-5 py-4">
+        <span class="text-lg font-bold">导航</span>
+    </div>
+    <div class="nav-menu-drawer-list flex flex-1 flex-col gap-1 overflow-y-auto px-3 pb-6">
     {processedLinks.map((link) => {
         const isCurrentLink = !link.external && isNavPathActive(currentPath, link.url);
         const hasActiveChild =
@@ -50,17 +54,17 @@ const currentPath = Astro.url.pathname;
         <div class="mobile-menu-item">
             {link.children && link.children.length > 0 ? (
                 <div class="mobile-dropdown" data-mobile-dropdown>
-                    <button 
-                        class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8 w-full text-left
-                            transition"
+                    <button
+                        class="group flex justify-between items-center py-3 px-3 rounded-xl gap-4 w-full text-left
+                            transition nav-menu-row"
                         data-mobile-dropdown-trigger
                         aria-expanded="false"
                     >
                         <div class:list={[
-                            "flex items-center transition text-[#000000B3] dark:text-white/75",
+                            "flex items-center transition text-base font-medium text-[#000000B3] dark:text-white/75",
                             hasActiveChild && "navbar-link-active",
                         ]}>
-                            {link.icon && <Icon icon={link.icon} class="text-[1.1rem] mr-2" />}
+                            {link.icon && <Icon icon={link.icon} class="text-[1.35rem] mr-3" />}
                             {link.name}
                         </div>
                         <Icon icon="material-symbols:keyboard-arrow-down-rounded"
@@ -76,9 +80,9 @@ const currentPath = Astro.url.pathname;
                             const isChildCurrent =
                                 !child.external && isNavPathActive(currentPath, child.url);
                             return (
-                                <a href={child.external ? child.url : url(child.url)} 
-                                   class="group flex justify-between items-center py-2 pl-6 pr-1 rounded-lg gap-8
-                                       transition"
+                                <a href={child.external ? child.url : url(child.url)}
+                                   class="group flex justify-between items-center py-2.5 pl-9 pr-3 rounded-xl gap-4
+                                       transition nav-menu-row"
                                    target={child.external ? "_blank" : null}
                                    data-nav-path={!child.external ? child.url : undefined}
                                 >
@@ -86,7 +90,7 @@ const currentPath = Astro.url.pathname;
                                         "flex items-center transition text-black/60 dark:text-white/60 font-medium",
                                         isChildCurrent && "navbar-link-active",
                                     ]} data-nav-active-target>
-                                        {child.icon && <Icon icon={child.icon} class="text-[1.1rem] mr-2" />}
+                                        {child.icon && <Icon icon={child.icon} class="text-[1.2rem] mr-3" />}
                                         {child.name}
                                     </div>
                                     {child.external && <Icon icon="fa6-solid:arrow-up-right-from-square"
@@ -98,22 +102,19 @@ const currentPath = Astro.url.pathname;
                     </div>
                 </div>
             ) : (
-                <a href={link.external ? link.url : url(link.url)} class="group flex justify-between items-center py-2 pl-3 pr-1 rounded-lg gap-8
-                    transition
+                <a href={link.external ? link.url : url(link.url)} class="group flex justify-between items-center py-3 px-3 rounded-xl gap-4
+                    transition nav-menu-row
                 "
                    target={link.external ? "_blank" : null}
                    data-nav-path={!link.external ? link.url : undefined}
                 >
                     <div class:list={[
-                        "flex items-center transition text-[#000000B3] dark:text-white/75",
+                        "flex items-center transition text-base font-medium text-[#000000B3] dark:text-white/75",
                         isCurrentLink && "navbar-link-active",
                     ]} data-nav-active-target>
-                        {link.icon && <Icon icon={link.icon} class="text-[1.1rem] mr-2" />}
+                        {link.icon && <Icon icon={link.icon} class="text-[1.35rem] mr-3" />}
                         {link.name}
                     </div>
-                    {!link.external && <Icon icon="material-symbols:chevron-right-rounded"
-                          class="transition text-[1.25rem] text-(--primary)"
-                    />}
                     {link.external && <Icon icon="fa6-solid:arrow-up-right-from-square"
                           class="transition text-[0.75rem] text-black/25 dark:text-white/25 -translate-x-1"
                     />}
@@ -122,14 +123,53 @@ const currentPath = Astro.url.pathname;
         </div>
         );
     })}
+    </div>
 </div>
+<div id="nav-menu-backdrop" class="nav-menu-backdrop fixed inset-0 z-40" aria-hidden="true"></div>
 
 <style>
     /* Tailwind v4：组件级 <style> 内使用 @apply 需先 @reference 取得 utilities 上下文 */
     @reference "tailwindcss";
-    #nav-menu-panel {
-        top: calc(4.5rem + 0.875rem);
-        max-height: calc(100vh - 5.75rem);
+
+    /* 全屏高度左侧抽屉：不复用 .float-panel（那是给下拉小面板用的 top-4/圆角/阴影），
+       这里自行定义背景、投影与开合过渡；.float-panel-closed 只作状态类沿用既有的
+       显示/点击穿透/外部点击关闭逻辑（Layout.astro 的 setClickOutsideToClose） */
+    #nav-menu-panel.nav-menu-drawer {
+        top: 0;
+        height: 100dvh;
+        background: var(--card-bg);
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.12);
+        transform: translateX(0);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+    }
+    :root.dark #nav-menu-panel.nav-menu-drawer {
+        box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+    }
+    /* 覆盖 .float-panel-closed 工具类默认的 -translate-y-1（那是给下拉面板用的），
+       抽屉改为整体滑出到视口左侧外 */
+    #nav-menu-panel.nav-menu-drawer.float-panel-closed {
+        transform: translateX(-100%);
+    }
+
+    .nav-menu-row:hover,
+    .nav-menu-row:active {
+        background-color: color-mix(in oklch, var(--primary) 6%, transparent);
+    }
+
+    /* 背景遮罩：与抽屉同级的兄弟节点，跟随抽屉的开合状态淡入淡出；
+       遮罩点击会被 Layout.astro 的“外部点击关闭”逻辑识别为面板外点击，从而自动关闭抽屉。
+       top 从导航栏高度开始，避免遮罩盖住导航栏本身（原先 inset-0 会把导航栏右侧未被
+       抽屉覆盖的部分一起蒙黑，看起来像导航栏变黑的 bug） */
+    #nav-menu-backdrop {
+        top: var(--navbar-height, 4.5rem);
+        background: rgba(0, 0, 0, 0.45);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+    }
+    #nav-menu-panel.nav-menu-drawer:not(.float-panel-closed) ~ #nav-menu-backdrop {
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .mobile-submenu {
@@ -147,13 +187,6 @@ const currentPath = Astro.url.pathname;
     .mobile-menu-item a,
     .mobile-menu-item button {
         -webkit-tap-highlight-color: transparent;
-    }
-
-    .mobile-menu-item a:hover,
-    .mobile-menu-item a:active,
-    .mobile-menu-item button:hover,
-    .mobile-menu-item button:active {
-        background-color: transparent;
     }
 
     .mobile-menu-item .navbar-link-active {
@@ -195,6 +228,18 @@ const currentPath = Astro.url.pathname;
                 dropdown.setAttribute('data-expanded', newState.toString());
                 trigger.setAttribute('aria-expanded', newState.toString());
             });
+        });
+
+        // 点击具体导航项跳转后，抽屉需要自然收起，而不是一直保持展开
+        // （导航栏是常驻布局，不会随 Swup 切换内容而重建，抽屉状态不会自动重置）
+        const panel = document.getElementById('nav-menu-panel');
+        panel?.addEventListener('click', function(e) {
+            const target = e.target;
+            if (!(target instanceof Element)) return;
+            const link = target.closest('a[href]');
+            if (link) {
+                panel.classList.add('float-panel-closed');
+            }
         });
     });
 </script>

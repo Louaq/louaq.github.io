@@ -565,38 +565,27 @@ onDestroy(() => {
 });
 </script>
 
-<!-- 触发器：桌面端显示一个“搜索框样式”的按钮，点击后弹窗内搜索 -->
+{#snippet searchIcon(size: number)}
+	<svg viewBox="0 0 1024 1024" width={size} height={size} aria-hidden="true" class="search-trigger-icon">
+		<path d="M908.488 821.348L783.7 696.56a401.635 401.635 0 0 1-41.665 48.894 403.103 403.103 0 0 1-35.653 31.68l123.159 123.159c10.855 10.854 25.117 16.282 39.376 16.283 14.262 0.002 28.518-5.427 39.376-16.283l0.188-0.188c10.524-10.524 16.316-24.508 16.316-39.382s-5.792-28.858-16.309-39.375z" fill="#2FBC3C" />
+		<path d="M932.967 796.868L803.1 667.001a399.223 399.223 0 0 0 24.478-48.428c20.821-49.225 31.377-101.505 31.377-155.386S848.398 357.024 827.578 307.8c-20.106-47.537-48.887-90.226-85.542-126.881s-79.344-65.435-126.88-85.542C565.931 74.557 513.651 64 459.769 64S353.607 74.557 304.382 95.377c-47.537 20.107-90.226 48.887-126.881 85.542S112.066 260.263 91.96 307.8c-20.82 49.225-31.377 101.504-31.377 155.386S71.139 569.348 91.96 618.573c20.106 47.537 48.887 90.226 85.542 126.881s79.344 65.435 126.881 85.542c49.225 20.82 101.504 31.377 155.386 31.377s106.162-10.557 155.386-31.377a398.173 398.173 0 0 0 62.736-33.395l127.172 127.172c17.605 17.605 40.727 26.407 63.852 26.406 23.126-0.001 46.256-8.805 63.864-26.413l0.188-0.188c17.057-17.056 26.45-39.734 26.45-63.855 0-24.121-9.393-46.799-26.45-63.855z m-24.674 103.425c-10.857 10.857-25.114 16.285-39.376 16.283-14.258-0.001-28.521-5.429-39.376-16.283L706.383 777.134a403.405 403.405 0 0 0 35.653-31.68 401.649 401.649 0 0 0 41.665-48.894l124.787 124.788c10.518 10.518 16.31 24.501 16.31 39.375s-5.792 28.858-16.316 39.382l-0.189 0.188zM459.769 98.619c101.891 0 194.152 42.018 260.37 109.635-9.882-11.269-20.787-22.236-32.792-32.835 185.143 163.447 180.59 397.176 31.458 546.309-64.921 64.921-146.438 99.985-230.202 104.893a367.842 367.842 0 0 1-28.834 1.133c-201.023 0-364.567-163.544-364.567-364.567S258.746 98.619 459.769 98.619z" fill="currentColor" />
+		<path d="M224.978 245.35c-98.897 103.804-146.487 307.567-35.566 454.728 147.889 153.727 380.29 106.897 493.595-1.051 103.641-98.742 174.303-311.826 51.99-472.601-163.445-166.451-403.394-92.991-510.019 18.924z m96.27 358.446c-36.341-36.341-56.355-84.659-56.355-136.054 0-51.394 20.014-99.713 56.355-136.054 36.341-36.342 84.659-56.356 136.054-56.356s99.713 20.014 136.054 56.356c36.341 36.341 56.355 84.659 56.355 136.054 0 51.395-20.014 99.713-56.355 136.054s-84.659 56.355-136.054 56.355-99.713-20.014-136.054-56.355z" fill="#8BF268" />
+		<path d="M459.769 827.754c9.704 0 19.319-0.385 28.834-1.133-105.408 6.176-214.373-35.409-298.313-125.378 11.822 15.535 25.415 30.434 40.917 44.508-169.676-150.365-178.062-387.067-28.93-536.199C347.102 64.727 571.707 56.258 734.25 225.45a338.221 338.221 0 0 0-14.111-17.196C653.921 140.637 561.66 98.619 459.769 98.619c-201.023 0-364.567 163.544-364.567 364.567s163.544 364.568 364.567 364.568z" fill="#8BF268" />
+		<path d="M649.711 467.742c0-51.394-20.014-99.713-56.355-136.054-36.341-36.342-84.659-56.356-136.054-56.356s-99.713 20.014-136.054 56.356c-36.341 36.341-56.355 84.659-56.355 136.054 0 51.395 20.014 99.713 56.355 136.054s84.659 56.355 136.054 56.355 99.713-20.014 136.054-56.355 56.355-84.66 56.355-136.054z m-192.409 157.79c-87.006 0-157.791-70.784-157.791-157.791S370.295 309.95 457.302 309.95s157.791 70.784 157.791 157.791-70.785 157.791-157.791 157.791z" fill="currentColor" />
+		<path d="M189.412 700.078C78.491 552.917 126.081 349.154 224.978 245.35c106.625-111.915 346.574-185.374 510.019-18.924-0.248-0.326-0.498-0.651-0.747-0.976C571.707 56.258 347.102 64.727 202.277 209.552 53.145 358.684 61.531 595.386 231.207 745.75c-15.502-14.074-29.095-28.973-40.917-44.508a439.694 439.694 0 0 1-7.684-8.445 344.242 344.242 0 0 0 6.806 7.281z" fill="#FFFFFF" />
+		<path d="M734.997 226.426c122.313 160.775 51.651 373.859-51.99 472.601-113.305 107.948-345.706 154.778-493.595 1.051a343.975 343.975 0 0 1-6.805-7.28 445.765 445.765 0 0 0 7.684 8.445c83.939 89.97 192.905 131.554 298.313 125.378 83.764-4.908 165.281-39.972 230.202-104.893 149.132-149.132 153.685-382.862-31.458-546.309 12.005 10.598 22.91 21.566 32.792 32.835a337.686 337.686 0 0 1 14.111 17.196l0.746 0.976z" fill="#2FBC3C" />
+	</svg>
+{/snippet}
+
+<!-- 触发器：参考 Ruyu-Blog 的搜索按钮实现——纯 SVG 图标 + 悬浮缩放，不再套用输入框外壳 -->
 <button
 	type="button"
 	aria-label="Open search"
-	class="hidden shrink-0 lg:flex items-center h-11 mr-2 rounded-full px-4 w-44 xl:w-52
-      bg-black/6 hover:bg-black/8 active:bg-black/10
-      dark:bg-white/8 dark:hover:bg-white/12 dark:active:bg-white/[0.14]
-      text-black/55 dark:text-white/55 text-sm
-      border border-transparent hover:border-(--primary)
-      outline-hidden focus:outline-hidden focus-visible:outline-hidden
-      focus-visible:border-(--primary)
-      focus-visible:ring-2 focus-visible:ring-(--primary)/25"
+	title={`${i18n(I18nKey.search)} · Ctrl K`}
+	class="search-trigger hidden shrink-0 lg:flex"
 	onclick={openModal}
 >
-	<svg
-		width="20"
-		height="20"
-		viewBox="0 0 20 20"
-		aria-hidden="true"
-		class="DocSearch-Search-Icon trigger-search-icon"
-	>
-		<path
-			d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
-			stroke="currentColor"
-			fill="none"
-			fill-rule="evenodd"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		/>
-	</svg>
-	<span class="flex-1 text-left">{i18n(I18nKey.search)}</span>
-	<span class="text-xs text-black/35 dark:text-white/35">Ctrl K</span>
+	{@render searchIcon(24)}
 </button>
 
 <!-- 触发器：移动端保留搜索按钮 -->
@@ -604,24 +593,9 @@ onDestroy(() => {
 	type="button"
 	onclick={openModal}
 	aria-label="Open search"
-	class="btn-plain scale-animation lg:hidden! rounded-lg w-11 h-11 active:scale-90"
+	class="search-trigger flex lg:hidden!"
 >
-	<svg
-		width="20"
-		height="20"
-		viewBox="0 0 20 20"
-		aria-hidden="true"
-		class="DocSearch-Search-Icon mobile-search-icon"
-	>
-		<path
-			d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
-			stroke="currentColor"
-			fill="none"
-			fill-rule="evenodd"
-			stroke-linecap="round"
-			stroke-linejoin="round"
-		/>
-	</svg>
+	{@render searchIcon(22)}
 </button>
 
 {#if isOpen}
@@ -645,22 +619,9 @@ onDestroy(() => {
 		>
 		<div class="algolia-header">
 			<div class="algolia-input-wrap">
-				<svg
-					width="20"
-					height="20"
-					viewBox="0 0 20 20"
-					aria-hidden="true"
-					class="DocSearch-Search-Icon algolia-search-icon"
-				>
-					<path
-						d="M14.386 14.386l4.0877 4.0877-4.0877-4.0877c-2.9418 2.9419-7.7115 2.9419-10.6533 0-2.9419-2.9418-2.9419-7.7115 0-10.6533 2.9418-2.9419 7.7115-2.9419 10.6533 0 2.9419 2.9418 2.9419 7.7115 0 10.6533z"
-						stroke="currentColor"
-						fill="none"
-						fill-rule="evenodd"
-						stroke-linecap="round"
-						stroke-linejoin="round"
-					/>
-				</svg>
+				<span class="algolia-search-icon" aria-hidden="true">
+					{@render searchIcon(20)}
+				</span>
 				<input
 					bind:this={modalInputEl}
 					bind:value={query}
@@ -1001,17 +962,34 @@ onDestroy(() => {
 		display: block;
 	}
 
-	.trigger-search-icon {
-		margin-right: 0.5rem;
-		color: rgba(17, 24, 39, 0.3);
+	/* 搜索触发按钮：仅图标 + 悬浮放大，参考 Ruyu-Blog 的搜索入口实现
+	   注意：display 由 Tailwind 的 hidden/flex/lg:* 工具类控制，此处不设 display，
+	   避免 Svelte 作用域样式的属性选择器特异性高于单类 .hidden 而覆盖响应式显隐 */
+	.search-trigger {
+		align-items: center;
+		justify-content: center;
+		width: 2.25rem;
+		height: 2.25rem;
+		margin-right: 0.25rem;
+		border: none;
+		border-radius: 9999px;
+		background: none;
+		cursor: pointer;
+		transition: transform 0.3s linear;
 	}
-	:global(html.dark) .trigger-search-icon {
-		color: rgba(255, 255, 255, 0.35);
+	.search-trigger:hover {
+		transform: scale(1.12);
+	}
+	.search-trigger:active {
+		transform: scale(0.94);
 	}
 
-	.mobile-search-icon {
-		margin: 0 auto;
-		color: currentColor;
+	.search-trigger-icon {
+		display: block;
+		color: rgba(17, 24, 39, 0.55);
+	}
+	:global(html.dark) .search-trigger-icon {
+		color: rgba(255, 255, 255, 0.7);
 	}
 
 	.algolia-input {

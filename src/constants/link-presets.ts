@@ -6,51 +6,51 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 	[LinkPreset.Home]: {
 		name: i18n(I18nKey.home),
 		url: "/",
-		icon: "material-symbols:home",
+		icon: "fluent-emoji-flat:house",
 	},
 	[LinkPreset.About]: {
 		name: i18n(I18nKey.about),
 		url: "/about/",
-		icon: "material-symbols:person",
+		icon: "fluent-emoji-flat:bust-in-silhouette",
 	},
 	[LinkPreset.Archive]: {
 		name: i18n(I18nKey.archive),
 		url: "/archive/",
-		icon: "material-symbols:archive",
+		icon: "fluent-emoji-flat:file-folder",
 	},
 	[LinkPreset.Friends]: {
 		name: i18n(I18nKey.friends),
 		url: "/friends/",
-		icon: "material-symbols:group",
+		icon: "fluent-emoji-flat:handshake",
 	},
 	[LinkPreset.Sponsor]: {
 		name: i18n(I18nKey.sponsor),
 		url: "/sponsor/",
-		icon: "material-symbols:favorite",
+		icon: "fluent-emoji-flat:red-heart",
 	},
 	[LinkPreset.Guestbook]: {
 		name: i18n(I18nKey.guestbook),
 		url: "/guestbook/",
-		icon: "material-symbols:chat",
+		icon: "fluent-emoji-flat:speech-balloon",
 	},
 	[LinkPreset.Bangumi]: {
 		name: i18n(I18nKey.bangumi),
 		url: "/bangumi/",
-		icon: "material-symbols:movie",
+		icon: "fluent-emoji-flat:television",
 	},
 	[LinkPreset.Watchlist]: {
 		name: i18n(I18nKey.watchlist),
 		url: "/watchlist/",
-		icon: "material-symbols:video-library",
+		icon: "fluent-emoji-flat:clapper-board",
 	},
 	[LinkPreset.Categories]: {
 		name: i18n(I18nKey.categories),
 		url: "/categories/",
-		icon: "material-symbols:category",
+		icon: "fluent-emoji-flat:open-file-folder",
 	},
 	[LinkPreset.Tags]: {
 		name: i18n(I18nKey.tags),
 		url: "/tags/",
-		icon: "material-symbols:tag",
+		icon: "fluent-emoji-flat:label",
 	},
 };

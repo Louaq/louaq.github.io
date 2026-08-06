@@ -28,6 +28,11 @@ function isGithubLink(item: { url: string; icon?: string }): boolean {
 	return /github\.com/i.test(item.url) || (item.icon ?? "").toLowerCase().includes("github");
 }
 
+/** icon 以 "/" 开头视为 public/ 下的本地 SVG 文件路径，否则视为 Iconify "prefix:name" */
+function isLocalIconPath(icon: string): boolean {
+	return icon.startsWith("/");
+}
+
 const level = profileConfig.level?.trim();
 const coverSrc = profileConfig.cover?.trim();
 const verified = profileConfig.verified === true;
@@ -127,8 +132,8 @@ const categoryCount = categories.length;
 
     {
       profileConfig.links.length > 0 && (
-        <div class="profile-actions-row mt-4 w-full min-h-10 overflow-x-auto pb-0.5">
-          <div class="profile-actions-track mx-auto flex w-max flex-nowrap items-center gap-2">
+        <div class="profile-actions-row mt-4 w-full min-h-10">
+          <div class="profile-actions-track flex flex-wrap items-center gap-0.5">
             {profileConfig.links.map((item) => {
               if (item.url.startsWith("mailto:")) {
                 const encodedEmail = Buffer.from(
@@ -156,7 +161,11 @@ const categoryCount = categories.length;
                     class="profile-link-btn shrink-0"
                     title={item.name}
                   >
-                    <Icon name={item.icon} class="text-xl" aria-hidden="true" />
+                    {isLocalIconPath(item.icon) ? (
+                      <img src={url(item.icon)} alt="" class="h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Icon name={item.icon} class="text-2xl" aria-hidden="true" />
+                    )}
                   </a>
                 );
               }
@@ -170,7 +179,11 @@ const categoryCount = categories.length;
                     aria-label={item.name}
                     title={item.name}
                   >
-                    <Icon name={item.icon} class="text-xl" aria-hidden="true" />
+                    {isLocalIconPath(item.icon) ? (
+                      <img src={url(item.icon)} alt="" class="h-6 w-6" aria-hidden="true" />
+                    ) : (
+                      <Icon name={item.icon} class="text-2xl" aria-hidden="true" />
+                    )}
                   </a>
                 );
               }
@@ -187,7 +200,11 @@ const categoryCount = categories.length;
                   title={item.name}
                   {...(skipSwup ? { "data-no-swup": "" } : {})}
                 >
-                  <Icon name={item.icon} class="text-xl" />
+                  {isLocalIconPath(item.icon) ? (
+                    <img src={url(item.icon)} alt="" class="h-6 w-6" />
+                  ) : (
+                    <Icon name={item.icon} class="text-2xl" />
+                  )}
                 </a>
               );
             })}
@@ -199,31 +216,15 @@ const categoryCount = categories.length;
 </div>
 
 <style is:global>
-  /* 社交行：浅灰圆角底 + 图标色随 --primary / 色相滑块 */
+  /* 社交行：仅图标本身，无底色、无悬浮动画 */
   .profile-card-hero .profile-link-btn {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     box-sizing: border-box;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.5em;
-    background: rgba(0, 0, 0, 0.055);
-    color: var(--primary);
+    background: none;
     border: none;
-    transition: background 0.15s ease, color 0.15s ease;
-  }
-
-  :root.dark .profile-card-hero .profile-link-btn {
-    background: rgba(255, 255, 255, 0.07);
-  }
-
-  .profile-card-hero .profile-link-btn:hover {
-    background: rgba(0, 0, 0, 0.09);
-    color: var(--juejin-primary-hover);
-  }
-
-  :root.dark .profile-card-hero .profile-link-btn:hover {
-    background: rgba(255, 255, 255, 0.11);
   }
 </style>

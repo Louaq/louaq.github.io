@@ -189,6 +189,9 @@ importers:
       '@biomejs/biome':
         specifier: 2.3.12
         version: 2.3.12
+      '@iconify-json/fluent-emoji-flat':
+        specifier: ^1.2.5
+        version: 1.2.5
       '@iconify-json/mdi':
         specifier: ^1.2.3
         version: 1.2.3
@@ -1355,6 +1358,9 @@ packages:
 
   '@iconify-json/fa6-solid@1.2.4':
     resolution: {integrity: sha512-LmDNNdJVyvF5mPm1yxWvL8KjCc/E8LzoqnF1LNTVpyY2ZJRUlGOWuPIThdbuFBF2IovgttkIyumhyqfmlHdwKg==}
+
+  '@iconify-json/fluent-emoji-flat@1.2.5':
+    resolution: {integrity: sha512-5ShoOHJ0ezYEIMfp2zvbRiZpL1Af8Prg5v9pElaIQhfqwbyD57pzrp70g/rK2EjigajBq9/cPrJXh224HaP3TQ==}
 
   '@iconify-json/lucide@1.2.121':
     resolution: {integrity: sha512-zSoQQSmsyFaeTpSwURHJ9PIrsDcGFpDNhGlpiTrs+Ua4uFeH5UsE26L4OEBLrgLWoSK0UO+JhsO8yehSw0403g==}
@@ -7153,6 +7159,10 @@ snapshots:
       '@iconify/types': 2.0.0
 
   '@iconify-json/fa6-solid@1.2.4':
+    dependencies:
+      '@iconify/types': 2.0.0
+
+  '@iconify-json/fluent-emoji-flat@1.2.5':
     dependencies:
       '@iconify/types': 2.0.0
 

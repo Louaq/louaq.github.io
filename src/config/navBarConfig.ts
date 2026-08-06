@@ -44,7 +44,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		name: "状态",
 		url: "https://status.louaq.io",
 		external: true,
-		icon: "material-symbols:cloud-done-rounded",
+		icon: "fluent-emoji-flat:satellite-antenna",
 	});
 
     // 支持自定义导航栏链接,并且支持多级菜单

@@ -355,7 +355,9 @@ body #top-row #navbar > div {
     border-radius: 0 !important;
 }
 
-/* 搜索岛：SSR(client:load) + 桌面固定槽宽；岛用 contents 避免多包一层产生宽度差 */
+/* 搜索岛：SSR(client:load) + 桌面固定槽宽；岛用 contents 避免多包一层产生宽度差
+   槽宽与 .search-trigger 图标按钮实际尺寸（2.25rem + 0.25rem 右边距）对齐，
+   避免沿用旧版搜索框（pill 输入框）的宽槽导致图标与右侧按钮间距过大 */
 .navbar-search-slot {
     display: contents;
 }
@@ -364,19 +366,13 @@ body #top-row #navbar > div {
         display: flex;
         align-items: center;
         flex-shrink: 0;
-        width: calc(11rem + 0.5rem);
-        min-width: calc(11rem + 0.5rem);
+        width: 3.5rem;
+        min-width: 3.5rem;
         min-height: 2.75rem;
         box-sizing: border-box;
     }
     .navbar-search-slot > astro-island {
         display: contents;
-    }
-}
-@media (min-width: 1280px) {
-    .navbar-search-slot {
-        width: calc(13rem + 0.5rem);
-        min-width: calc(13rem + 0.5rem);
     }
 }
 
