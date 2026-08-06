@@ -34,7 +34,7 @@ The successful fusion of **3-D multi-modal medical images** depends on both spec
 
 ## 提出的模型
 
-![Snipaste_2025-07-02_14-50-41](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_14-50-41.png)
+![Snipaste_2025-07-02_14-50-41](/assets/images/covers/a-nested-self-supervised-learning-framework-for-3-d-semantic.webp)
 
 NSLF框架由四个关键组件构成，分别为对比U型网络（Contrastive U-Net，CU-Net）、融合卷积解码器（Fusion Convolutional Decoder，FCD）、几何匹配网络（Geometric Matching Network，GMN）和特征分割解码器（Feature Segmentation Decoder，FSD）。
 

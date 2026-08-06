@@ -43,7 +43,7 @@ erence. The code to reproduce our experiments and the trained model weights are 
 
 ## 提出的模型
 
-![Snipaste_2025-05-28_15-58-11](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-28_15-58-11.png)
+![Snipaste_2025-05-28_15-58-11](/assets/images/covers/a-simple-and-robust-framework-for-cross-modality-medical-ima.webp)
 
 
 

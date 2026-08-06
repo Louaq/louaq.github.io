@@ -24,7 +24,7 @@ Semi-supervised learning has gained increasing attention in medical image segmen
 
 ## 研究背景
 
-![Snipaste_2026-01-27_19-33-48](https://pic1.imgdb.cn/item/6978a2cb9ca240b15f5c133f.png)
+![Snipaste_2026-01-27_19-33-48](/assets/images/covers/enhancing-semi-supervised-medical-image-segmentation-via-sem.webp)
 
 在医学影像分割领域，全自动分割为临床诊断提供关键支持，但3D医学影像的体素级标注高度依赖专家，耗时费力。半监督学习（SSL）通过少量标注数据引导大量未标注数据学习，有效缓解标注依赖。现有SSL方法多依赖通用一致性约束或伪标签策略，但缺乏标注与未标注数据间显式语义交互机制，在模糊区域或低置信度预测中性能受限。
 

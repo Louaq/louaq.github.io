@@ -48,7 +48,7 @@ ious deformations (i.e. view, color). In C-CTI, by infusing the class tokens fro
 
 
 
-![Snipaste_2025-03-29_21-01-48](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-29_21-01-48.png)
+![Snipaste_2025-03-29_21-01-48](/assets/images/covers/class-tokens-infusion-for-weakly-supervised-semantic-segment.webp)
 
 ## 实验（Compared with SOTA）
 

@@ -42,7 +42,7 @@ Efficient **semantic segmentation** is essential for a wide array of computer vi
 
 ## 提出的模型
 
-![Snipaste_2025-03-31_10-44-32](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-31_10-44-32.png)
+![Snipaste_2025-03-31_10-44-32](/assets/images/covers/lgad-local-and-global-attention-distillation-for-efficient-s.webp)
 
 本文提出了用于高效**语义分割的局部和全局注意力蒸馏（Local and Global Attention Distillation，LGAD）**框架。
 

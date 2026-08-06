@@ -251,10 +251,14 @@
   --duration-slow: 250ms
   --duration-slower: 300ms
   
-  /* 深浅色切换：表面色统一过渡（与 View Transition root ~180ms 对齐） */
+  /* 深浅色切换：表面色统一过渡（不支持 View Transitions API 时的逐元素过渡兜底） */
   --theme-transition-duration: 180ms
   --theme-transition-easing: var(--ease-standard)
-  
+
+  /* 深浅色切换：View Transitions API 下从按钮位置圆形展开揭示新主题的时长
+     单独成变量，避免和上面逐元素过渡共用同一个时长导致悬浮态跟着变慢 */
+  --theme-reveal-duration: 550ms
+
   /* 动画延迟 */
   --delay-none: 0ms;
   --delay-short: 30ms
@@ -423,6 +427,7 @@
 @media (prefers-reduced-motion: reduce) {
   :root {
     --theme-transition-duration: 1ms;
+    --theme-reveal-duration: 1ms;
   }
 }
 }

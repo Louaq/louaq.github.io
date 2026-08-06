@@ -57,7 +57,7 @@ tags: [Ultra High-resolution Images]
 
 
 
-![Snipaste_2025-03-02_14-24-58](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-02_14-24-58.png)
+![Snipaste_2025-03-02_14-24-58](/assets/images/covers/high-quality-segmentation-for-ultra-high-resolution-images.webp)
 
 
 

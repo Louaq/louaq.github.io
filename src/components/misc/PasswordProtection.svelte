@@ -177,10 +177,6 @@
 {#if !isUnlocked}
 <div class="password-protection-container">
   <div class="password-protection-card" class:shake={isShaking}>
-    <div class="shield-lock-icon">
-      <iconify-icon icon="material-symbols:shield-lock" width="48" height="48"></iconify-icon>
-    </div>
-    
     <h2 class="password-title">密码保护</h2>
     <p class="password-description">这篇文章已被密码保护,请输入密码查看内容。</p>
     {#if hint}
@@ -249,15 +245,6 @@
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
     20%, 40%, 60%, 80% { transform: translateX(5px); }
-  }
-  
-  .shield-lock-icon {
-    color: var(--primary);
-    margin-bottom: 1rem;
-    display: inline-flex;
-    padding: 0.625rem;
-    background: var(--primary-bg, rgba(var(--primary-rgb, 74, 222, 128), 0.12));
-    border-radius: 50%;
   }
   
   .password-title {

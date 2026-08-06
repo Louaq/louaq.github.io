@@ -38,7 +38,7 @@ tags: [Multimodal Medical Image Fusion]
 
 ## 提出的模型
 
-![Snipaste_2025-07-07_19-47-08](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-47-08.png)
+![Snipaste_2025-07-07_19-47-08](/assets/images/covers/mactfusion-lightweight-cross-transformer-for-adaptive-multim.webp)
 
 ![Snipaste_2025-07-07_19-49-14](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-07_19-49-14.png)
 

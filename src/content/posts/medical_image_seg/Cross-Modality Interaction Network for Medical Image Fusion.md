@@ -32,7 +32,7 @@ tags: [Medical Image Segmentation, Dual Attention Encoder]
 
 ## 提出的模型
 
-![Snipaste_2025-07-24_10-59-34](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-24_10-59-34.png)
+![Snipaste_2025-07-24_10-59-34](/assets/images/covers/cross-modality-interaction-network-for-medical-image-fusion.webp)
 
 给定两个源图像 $I_a \in R^{C_a×H×W}$ 和 $I_b \in R^{C_b×H×W}$（$H$、$W$ 和 $C$ 分别代表图像的高度、宽度和通道数），CMINet的处理流程如下：
 

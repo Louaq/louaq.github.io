@@ -23,7 +23,7 @@ Despite the promising performance achieved by current semi-supervised models in 
 
 ## 研究背景
 
-![Snipaste_2026-01-23_16-02-12](https://pic1.imgdb.cn/item/69732b0b370d83a1e2879403.png)
+![Snipaste_2026-01-23_16-02-12](/assets/images/covers/balancing-multi-target-semi-supervised-medical-image-segment.webp)
 
 前半监督医学图像分割模型在单目标分割中表现出良好性能，但在多目标同时分割时性能显著下降。关键原因在于不同目标间的尺度不平衡：多目标分割中，大目标主导损失函数，导致小目标被误分类为大目标。
 

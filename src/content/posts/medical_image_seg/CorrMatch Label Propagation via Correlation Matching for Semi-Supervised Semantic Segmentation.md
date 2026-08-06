@@ -36,7 +36,7 @@ This paper presents a simple but performant semi-supervised semantic segmentatio
 
 ## 提出的模型
 
-![Snipaste_2025-03-22_15-03-57](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-22_15-03-57.png)
+![Snipaste_2025-03-22_15-03-57](/assets/images/covers/corrmatch-label-propagation-via-correlation-matching-for-sem.webp)
 
 
 

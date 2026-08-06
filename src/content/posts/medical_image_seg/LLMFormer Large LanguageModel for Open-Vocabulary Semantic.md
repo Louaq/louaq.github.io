@@ -27,7 +27,7 @@ recent breakthroughs in LLMs that provide a richer knowledge base compared to tr
 
 基于先验的语义分割方法可以识别固定集的目标种类，但不能够很好的处理真实世界中各种新的目标，由此引出开放词汇语义分割。开放词汇语义分割分为两种：一阶段和两阶段，尽管取得了不错的效果，但是大多数还是利用预训练的视觉语言模型提取embeding，这种方式仅提供有限的语义信息。随着大语言模型的发展，由于其提供了对场景的综合理解能力，本文作者尝试采用LLM的知识解决开放词汇语义分割中的挑战，即利用大语言模型描述中的目标名字、目标属性和目标关系。
 
-![Snipaste_2025-03-24_15-58-54](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-24_15-58-54.png)
+![Snipaste_2025-03-24_15-58-54](/assets/images/covers/llmformer-large-languagemodel-for-open-vocabulary-semantic.webp)
 
 
 

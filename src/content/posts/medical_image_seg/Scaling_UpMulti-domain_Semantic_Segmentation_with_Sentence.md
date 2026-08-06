@@ -54,7 +54,7 @@ The **state-of-the-art semantic segmentation methods** have achieved impressive 
 
 
 
-![Snipaste_2025-03-18_09-38-37](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_09-38-37.png)
+![Snipaste_2025-03-18_09-38-37](/assets/images/covers/scaling-upmulti-domain-semantic-segmentation-with-sentence.webp)
 
 
 

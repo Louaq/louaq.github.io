@@ -31,7 +31,7 @@ Semantic segmentation is a fundamental task in computer vision and it is a build
 
 ## 提出的模型
 
-![Snipaste_2025-03-14_21-00-59](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-14_21-00-59.png)
+![Snipaste_2025-03-14_21-00-59](/assets/images/covers/self-supervised-vision-transformers-for-semantic-segmentatio.webp)
 
 
 

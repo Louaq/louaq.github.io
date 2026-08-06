@@ -54,7 +54,7 @@ an alignment-induced cross-modal prompter is introduced to aggregate class-aware
 
 ## **提出的模型：**
 
-![Snipaste_2025-03-06_14-56-04](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-06_14-56-04.png)
+![Snipaste_2025-03-06_14-56-04](/assets/images/covers/prompting-multi-modal-image-segmentation-with-semantic-group.webp)
 
 
 

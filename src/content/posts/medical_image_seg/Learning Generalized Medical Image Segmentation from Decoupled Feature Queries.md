@@ -37,7 +37,7 @@ generalized representation. Besides, a relaxed deep whitening transformation is 
 
 ## 提出的模型
 
-![Snipaste_2025-03-17_16-06-07](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-17_16-06-07.png)
+![Snipaste_2025-03-17_16-06-07](/assets/images/covers/learning-generalized-medical-image-segmentation-from-decoupl.webp)
 
 
 

@@ -45,18 +45,18 @@ const minutes = remarkPluginFrontmatter.minutes as number | undefined;
 
 // 兜底封面图池：既无显式封面、正文中也没有图片时，从中稳定随机选取一张
 const FALLBACK_COVERS = [
-	"https://pic1.imgdb.cn/i/033r1XwvuAzjABPhHjDnze.jpg",
-	"https://pic1.imgdb.cn/i/033r1XwmpoE3Gbv4LfKsCv.jpg",
-	"https://pic1.imgdb.cn/i/033r1XwNUbgTLe4lO7cO1o.jpg",
-	"https://pic1.imgdb.cn/i/2Riv5i8fXRZVINulFUEqkR.png",
-	"https://pic1.imgdb.cn/i/5RaDE9mZuMWiv3tH6Mj9cp.png",
-	"https://pic1.imgdb.cn/i/5v95fu9MVuN6nl6pngnRE1.jpg",
-	"https://pic1.imgdb.cn/i/3Z5Ax9qRU1TNBaFt5dYTXA.jpg",
-	"https://pic1.imgdb.cn/i/0KFg5V1ZUIzzTxmTm2ssTR.jpg",
-	"https://pic1.imgdb.cn/i/2lf9SGVlXPUAc9GS3CFeLN.jpg",
-	"https://pic1.imgdb.cn/i/2UJ5ftrzjwQmNVmpKb10B0.png",
-	"https://pic1.imgdb.cn/i/5BBgnRCAzYGPUK7MHaFfWo.png",
-	"https://pic1.imgdb.cn/i/3BlTSrEFzCyQ1ORyXoOMRX.png",
+	"/assets/images/covers/meeting.webp",
+	"/assets/images/covers/fallback-array-4.webp",
+	"/assets/images/covers/response.webp",
+	"/assets/images/covers/fallback-array.webp",
+	"/assets/images/covers/fallback-array-2.webp",
+	"/assets/images/covers/fallback-array-3.webp",
+	"/assets/images/covers/fallback-array-5.webp",
+	"/assets/images/covers/fallback-array-6.webp",
+	"/assets/images/covers/fallback-array-7.webp",
+	"/assets/images/covers/fallback-array-8.webp",
+	"/assets/images/covers/fallback-array-9.webp",
+	"/assets/images/covers/fallback-array-10.webp",
 ];
 
 // 基于文章 id 的稳定哈希，确保同一篇文章每次都选到同一张兜底图
@@ -79,8 +79,6 @@ const processedImage =
 const basePath = getFileDirFromPath(entry.filePath || "");
 const minuteLabel =
 	minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount);
-// 只让首屏第一张卡片立即加载封面图，其余卡片懒加载（与 HomeCarousel 的处理方式一致）
-const coverLoading = index === 0 ? "eager" : "lazy";
 ---
 
 <div
@@ -108,7 +106,7 @@ const coverLoading = index === 0 ? "eager" : "lazy";
           class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
-          loading={coverLoading}
+          loading="eager"
         />
       </div>
     )
@@ -171,7 +169,7 @@ const coverLoading = index === 0 ? "eager" : "lazy";
         class="hero-card-img h-full w-full"
         seed={entry.id}
         preview={true}
-        loading={coverLoading}
+        loading="eager"
       />
     </div>
   </div>
@@ -187,7 +185,7 @@ const coverLoading = index === 0 ? "eager" : "lazy";
           class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
-          loading={coverLoading}
+          loading="eager"
         />
       </div>
     )

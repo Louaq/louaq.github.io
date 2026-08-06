@@ -67,7 +67,7 @@ Popular semi-supervised medical image segmentation networksoften suffer fromerro
 
 ## 提出的模型
 
-![Snipaste_2025-12-17_19-24-48](https://pic1.imgdb.cn/item/694292e0cf0d90563b3b0acf.png)
+![Snipaste_2025-12-17_19-24-48](/assets/images/covers/semi-supervised-medical-image-segmentation-using-adversarial.webp)
 
 
 

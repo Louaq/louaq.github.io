@@ -39,7 +39,7 @@ ProMRI and DSC of87.54% on ACDC, which outperforms state-of-the-art WSSS methods
 
 ## 提出的模型
 
-![Snipaste_2025-04-16_13-28-49](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-16_13-28-49.png)
+![Snipaste_2025-04-16_13-28-49](/assets/images/covers/c-cam-causal-cam-for-weakly-supervised-semantic-segmentation.webp)
 
 - **全局采样模块（Global Sampling Module）**：将训练图像输入纯CAM（P - CAM）模型生成粗分割掩码，该模块最终输出包含类别和解剖信息的全局上下文图$M_{GC}$。
 

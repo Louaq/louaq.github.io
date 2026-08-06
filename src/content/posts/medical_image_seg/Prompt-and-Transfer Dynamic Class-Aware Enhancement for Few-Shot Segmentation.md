@@ -39,7 +39,7 @@ tags: [Prompt-and-Transfer]
 >2. **现有FSS方法的问题**：为了更有效地泛化到未见类别，大多数FSS方法直接使用预训练编码器，仅微调解码器。然而，这种固定参数的特征编码器往往对类别不敏感，会激活与目标类别无关的对象，增加后续解码器分割新类别的负担，且这一问题未得到实质性解决。 
 >3. **人类视觉感知的启示**：人类能够以独特的视觉感知模式选择性地关注视线中的关键对象。受此启发，作者认为理想的FSS特征编码器应具有类别感知能力，能够针对不同任务激活相应的类别对象。因此，本文提出了一种基于提示学习的“Prompt and Transfer”（PAT）方法，以动态驱动编码器关注特定对象，实现类别感知增强。 
 
-![Snipaste_2025-03-05_19-30-17](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-05_19-30-17.png)
+![Snipaste_2025-03-05_19-30-17](/assets/images/covers/prompt-and-transfer-dynamic-class-aware-enhancement-for-few.webp)
 
 
 

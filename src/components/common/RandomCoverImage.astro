@@ -151,9 +151,9 @@ const watermarkStyles = showWatermark
 
 <div id={id} class:list={[
   className,
-  'overflow-hidden relative',
+  'random-cover-shell overflow-hidden relative',
   preview ? 'min-h-[150px] md:min-h-0' : 'min-h-[300px]'
-]}> 
+]}>
   <!-- 加载指示器：对所有文章封面图片显示 -->
   {randomCoverImage.enable && randomCoverImage.loading?.enable !== false && (
     <div 
@@ -175,13 +175,14 @@ const watermarkStyles = showWatermark
       alt={alt || ""}
       class:list={[
         imageClass,
-        preview ? 'random-cover-preview-image' : 'random-cover-full-image'
+        preview ? 'random-cover-preview-image' : 'random-cover-full-image',
+        loading === 'lazy' && 'random-cover-fade-in'
       ]}
       style={imageStyle}
       width={preview ? 400 : 1200}
       height={preview ? 300 : 800}
       loading={loading}
-      fetchpriority={preview ? "low" : "high"}
+      fetchpriority={loading === "eager" ? "high" : "low"}
       format="webp"
       quality={preview ? 75 : 85}
       widths={preview ? [200, 400, 600] : [800, 1200, 1600]}
@@ -199,6 +200,7 @@ const watermarkStyles = showWatermark
         }
       })(this);`}
       onload={`(function(img){
+        img.classList.add('is-loaded');
         if (img.naturalWidth > 0 && img.naturalHeight > 0) {
           setTimeout(function() {
             const container = img.parentElement;
@@ -226,12 +228,13 @@ const watermarkStyles = showWatermark
       alt={alt || ""}
       class:list={[
         imageClass,
-        preview ? 'random-cover-preview-image' : 'random-cover-full-image'
+        preview ? 'random-cover-preview-image' : 'random-cover-full-image',
+        loading === 'lazy' && 'random-cover-fade-in'
       ]}
       style={imageStyle}
       loading={loading}
       decoding="async"
-      fetchpriority={preview ? "low" : "auto"}
+      fetchpriority={loading === "eager" ? "high" : "auto"}
       data-lazy-src={shouldDeferRemoteSrc ? remoteSrc : ""}
       data-preview={preview ? "true" : "false"}
       data-seed={seed || ""}
@@ -252,6 +255,7 @@ const watermarkStyles = showWatermark
       }
     })(this);`}
     onload={`(function(img){
+      img.classList.add('is-loaded');
       if (img.naturalWidth > 0 && img.naturalHeight > 0) {
         setTimeout(function() {
           const container = img.parentElement;
@@ -440,6 +444,51 @@ const watermarkStyles = showWatermark
     object-fit: cover !important;
     width: 100%;
     height: 100%;
+  }
+
+  /*
+   * 懒加载封面图淡入：避免图片加载完成前卡片露出纯色背景板，
+   * 加载完成瞬间又"啪"地一下弹出。仅对懒加载图片生效（loading="lazy"），
+   * 首屏 eager 图片不加这层，避免拖慢 LCP 的可见时间。
+   */
+  img.random-cover-fade-in {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  img.random-cover-fade-in.is-loaded {
+    opacity: 1;
+  }
+
+  /*
+   * 加载骨架：懒加载图片就绪前，容器显示一个缓慢流动的浅色光带，
+   * 而不是纯色卡片背景板发呆（外链图床较慢时尤其明显）。
+   * 图片 onload 打上 is-loaded 后 :has() 不再命中，光带自动消失。
+   * 不支持 :has() 的浏览器直接回退为原来的纯色背景，不影响可用性。
+   */
+  .random-cover-shell:has(img.random-cover-fade-in:not(.is-loaded)) {
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0.03) 30%,
+      rgba(255, 255, 255, 0.09) 50%,
+      rgba(255, 255, 255, 0.03) 70%
+    );
+    background-size: 250% 100%;
+    animation: random-cover-shimmer 1.6s ease-in-out infinite;
+  }
+
+  @keyframes random-cover-shimmer {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: -50% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .random-cover-shell:has(img.random-cover-fade-in:not(.is-loaded)) {
+      animation: none;
+    }
   }
 </style>
 

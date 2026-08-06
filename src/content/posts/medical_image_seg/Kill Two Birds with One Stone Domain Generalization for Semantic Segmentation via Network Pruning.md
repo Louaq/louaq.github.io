@@ -62,7 +62,7 @@ tags: [Domain Generalization]
 
 
 
-‍![Snipaste_2025-04-02_14-31-14](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-02_14-31-14.png)
+‍![Snipaste_2025-04-02_14-31-14](/assets/images/covers/kill-two-birds-with-one-stone-domain-generalization-for-sema.webp)
 
 ‍
 

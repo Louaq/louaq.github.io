@@ -92,7 +92,7 @@ vocabulary segmentation methods.
 
 
 
-![Snipaste_2025-03-26_14-31-25](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-26_14-31-25.png)
+![Snipaste_2025-03-26_14-31-25](/assets/images/covers/use-universal-segment-embeddings-for-open-vocabulary-image-s.webp)
 
 
 

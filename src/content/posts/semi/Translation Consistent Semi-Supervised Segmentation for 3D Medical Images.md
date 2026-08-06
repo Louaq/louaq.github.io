@@ -39,7 +39,7 @@ tags: [TMI]
 
 ## 提出的模型
 
-![Snipaste_2026-01-08_19-30-56](https://pic1.imgdb.cn/item/695f952f3379dd73693924a0.png)
+![Snipaste_2026-01-08_19-30-56](/assets/images/covers/translation-consistent-semi-supervised-segmentation-for-3d-m.webp)
 
 ### **1. 平移一致性协同训练框架（TraCoCo核心机制）**
 

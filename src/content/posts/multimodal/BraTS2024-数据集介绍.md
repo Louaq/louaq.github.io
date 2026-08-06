@@ -19,7 +19,7 @@ tags: [BraTs2024数据集]
 
 
 
-![图片描述](https://pic2.zhimg.com/v2-3cdaabd26c5dea4a928777dae57a19a1_r.jpg)
+![图片描述](/assets/images/covers/brats2024-数据集介绍.webp)
 
 
 

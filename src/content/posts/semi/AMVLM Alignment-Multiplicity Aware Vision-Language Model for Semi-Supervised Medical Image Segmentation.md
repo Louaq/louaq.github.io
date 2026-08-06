@@ -27,7 +27,7 @@ Low-quality pseudo labels pose a significant obstacle in semi-supervised medical
 
 半监督医学图像分割（SSMIS）中，伪标签质量低下严重阻碍无标记数据的一致性学习。现有方法通过一致性正则化和交叉监督生成伪标签，但常因伪标签质量差导致模型学习错误特征。视觉语言模型（VLM）虽能利用文本提示描述分割区域以改善伪标签质量，但面临跨模态对齐不确定性问题——多图/文本可能对应同一文本/图像。现有VLM通过分布建模处理该问题，却因语义退化削弱跨模态语义关联。为此，本文提出对齐多样性感知视觉语言模型（AMVLM），通过新的相似度度量策略解决上述挑战，同时构建文本引导的SSMIS网络以补偿伪标签质量缺陷。
 
-![Snipaste_2025-12-19_19-46-36](https://pic1.imgdb.cn/item/69453b0a2ce92a4f93124c8d.png)
+![Snipaste_2025-12-19_19-46-36](/assets/images/covers/amvlm-alignment-multiplicity-aware-vision-language-model-for.webp)
 
 ## 研究现状
 

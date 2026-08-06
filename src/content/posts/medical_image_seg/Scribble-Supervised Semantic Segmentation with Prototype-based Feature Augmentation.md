@@ -52,7 +52,7 @@ https://github.com/TranquilChan/PFA.
 
 ## **提出的模型**
 
-![Snipaste_2025-03-11_19-29-04](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_19-29-04.png)
+![Snipaste_2025-03-11_19-29-04](/assets/images/covers/scribble-supervised-semantic-segmentation-with-prototype-bas.webp)
 
 
 

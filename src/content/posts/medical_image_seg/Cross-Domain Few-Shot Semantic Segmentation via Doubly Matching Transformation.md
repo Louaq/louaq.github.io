@@ -48,7 +48,7 @@ Nanjing University of Aeronautics and Astronautics 、State Key Laboratory of In
 
 ## **提出的模型**
 
-![Snipaste_2025-03-10_10-05-44](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-10_10-05-44.png)
+![Snipaste_2025-03-10_10-05-44](/assets/images/covers/cross-domain-few-shot-semantic-segmentation-via-doubly-match.webp)
 
 
 

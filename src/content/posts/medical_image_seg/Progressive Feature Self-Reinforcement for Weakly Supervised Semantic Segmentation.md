@@ -37,7 +37,7 @@ foreground and background) and uncertain regions (e.g., object boundaries and mi
 
 ## 提出的模型
 
-![Snipaste_2025-03-13_10-23-43](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-13_10-23-43.png)
+![Snipaste_2025-03-13_10-23-43](/assets/images/covers/progressive-feature-self-reinforcement-for-weakly-supervised.webp)
 
 
 

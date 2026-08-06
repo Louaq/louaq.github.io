@@ -37,7 +37,7 @@ performance. Code is available at: https://github.com/Jiawei0o0/mutual-learning-
 
 医学图像分割是计算机辅助诊断系统的关键组成部分，但深度卷积神经网络（CNN）的优异性能依赖于大量像素级标注数据。医学图像的密集标注成本高、耗时长，半监督学习通过结合少量标注数据和大量未标注数据缓解这一问题，成为研究热点。现有半监督分割方法主要集成一致性正则化与伪标签技术，但伪标签质量对模型性能至关重要。不可靠的伪标签会引入噪声，导致模型收敛到次优解。传统方法通过固定阈值筛选高置信度伪标签，但阈值选择困难：低阈值可能保留噪声，高阈值会限制未标注数据利用并偏向多数类。因此，本文针对两个核心问题展开研究：如何识别可靠伪标签，以及如何量化其可靠性，旨在通过可靠伪标签的互学习减少噪声影响，提升半监督医学图像分割性能。
 
-![Snipaste_2025-11-28_09-38-33](https://pic1.imgdb.cn/item/6928fd4b3203f7be0039a421.png)
+![Snipaste_2025-11-28_09-38-33](/assets/images/covers/mutual-learning-with-reliable-pseudo-label-for-semi-supervis.webp)
 
 ## 研究现状
 

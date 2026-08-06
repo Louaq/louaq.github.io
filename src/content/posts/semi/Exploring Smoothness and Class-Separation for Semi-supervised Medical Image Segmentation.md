@@ -28,7 +28,7 @@ Semi-supervised segmentation remains challenging in medical imaging since the am
 
 ## 研究背景
 
-![Snipaste_2026-01-14_19-04-52](https://pic1.imgdb.cn/item/6967781799f37a647f58dee2.png)
+![Snipaste_2026-01-14_19-04-52](/assets/images/covers/exploring-smoothness-and-class-separation-for-semi-supervise.webp)
 
 半监督分割在医学影像领域仍面临两大核心挑战：**一是标注数据稀缺**，获取像素级标注成本高昂且耗力；**二是医学图像中存在大量模糊像素**（如粘连边缘或低对比度区域），导致现有模型性能受限。现有方法虽基于平滑性和低熵假设，但在标注数据极少且目标边界模糊时，常出现特征流形交叠、决策边界不清晰的问题（如图1中γ值增大导致的类间混淆）。
 

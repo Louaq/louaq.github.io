@@ -23,7 +23,7 @@ category: 深度学习
 
 **新版本anaconda的下载：**  
 如果想要安装最新的Anaconda，首先登录Anaconda的官网：[https://www.anaconda.com/distribution/](https://www.anaconda.com/distribution/)。直接下载对应安装包就可以。  
-![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/ccda457f3e2c14fa490e5dee510e15ff.png)  
+![在这里插入图片描述](/assets/images/covers/windows下的torch-1-2-0环境配置.webp)  
 ![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/79729ea1f6363089a7b848e2bbb41119.png)  
 一般是下载64位的，下载完成后打开。
 

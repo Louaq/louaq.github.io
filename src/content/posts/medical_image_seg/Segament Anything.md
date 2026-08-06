@@ -23,7 +23,7 @@ https://segment-anything.com
 
 
 
-![Snipaste_2025-02-25_20-28-44](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-25_20-28-44.png)
+![Snipaste_2025-02-25_20-28-44](/assets/images/covers/segament-anything.webp)
 
 
 

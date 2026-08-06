@@ -22,7 +22,7 @@ tags: [BraTs2023数据集]
 
 ## 可视化
 
-![图片描述](https://pic2.zhimg.com/v2-94086c2af9de4a1a4a3246aa225a8e2f_r.jpg)
+![图片描述](/assets/images/covers/brats2023-men-数据集介绍.webp)
 
 ## 文件结构
 

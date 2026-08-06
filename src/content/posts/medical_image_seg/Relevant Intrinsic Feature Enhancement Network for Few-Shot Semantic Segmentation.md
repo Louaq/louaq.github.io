@@ -77,7 +77,7 @@ For few-shot semantic segmentation, the primary task is to extract class-specifi
 
 数据集：PASCAL-5${^i}$ 、COCO
 
-![Snipaste_2025-03-11_09-38-26](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-11_09-38-26.png)
+![Snipaste_2025-03-11_09-38-26](/assets/images/covers/relevant-intrinsic-feature-enhancement-network-for-few-shot.webp)
 
 
 

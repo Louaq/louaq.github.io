@@ -46,7 +46,7 @@ Semi-supervised learning for medical image segmentation presents a unique challe
 
 rossMatch是一种用于半监督医学图像分割的创新框架，核心思想是通过**双重扰动策略**（图像级和特征级）与**自知识蒸馏**（Self-Knowledge Distillation）结合，充分利用有限标注数据和大量无标注数据，提升模型的鲁棒性和分割精度。
 
-![Snipaste_2026-01-22_09-11-08](https://pic1.imgdb.cn/item/697179351404c8e205f1798c.png)
+![Snipaste_2026-01-22_09-11-08](/assets/images/covers/crossmatch-enhance-semi-supervised-medical-image-segmentatio.webp)
 
 ![Snipaste_2026-01-22_09-11-34](https://pic1.imgdb.cn/item/697179531404c8e205f1798d.png)
 

@@ -20,7 +20,7 @@ Existing semi-supervised learning methods typically mitigate the impact of unrel
 
 ## 研究背景
 
-![Snipaste_2026-01-19_20-45-14](https://pic1.imgdb.cn/item/696e276017fcb1e4ff50b635.png)
+![Snipaste_2026-01-19_20-45-14](/assets/images/covers/adaptive-learning-of-high-value-regions-for-semi-supervised.webp)
 
 ![Snipaste_2026-01-19_20-49-22](https://pic1.imgdb.cn/item/696e285f17fcb1e4ff50b895.png)
 

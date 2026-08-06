@@ -21,7 +21,7 @@ https://github.com/w1oves/Rein.git
 
 
 
-![Snipaste_2025-02-26_21-13-37](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-26_21-13-37.png)
+![Snipaste_2025-02-26_21-13-37](/assets/images/covers/stronger-fewer-superior-harnessing-vision-foundation-models.webp)
 
 
 

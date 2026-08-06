@@ -43,7 +43,7 @@ to recover the overlooked category semantic information in the refinement stage.
 
 
 
-![Snipaste_2025-04-13_19-21-22](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-13_19-21-22.png)
+![Snipaste_2025-04-13_19-21-22](/assets/images/covers/pixel-wise-reclassification-with-prototypes-for-enhancing-we.webp)
 
 
 

@@ -38,7 +38,7 @@ Transformers have recently gained considerable popularity for capturing long-ran
 
 ## 提出的模型
 
-![Snipaste_2025-05-26_11-18-01](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-05-26_11-18-01.png)
+![Snipaste_2025-05-26_11-18-01](/assets/images/covers/dual-attention-encoder-with-joint-preservation-for-medical-i.webp)
 
 
 

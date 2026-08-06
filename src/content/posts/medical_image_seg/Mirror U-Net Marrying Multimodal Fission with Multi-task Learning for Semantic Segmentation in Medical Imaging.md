@@ -29,7 +29,7 @@ PET和CT扫描常联合用于癌症诊断和治疗，能提供肿瘤大小、位
 
 ## 提出的模型
 
-![Snipaste_2025-07-02_11-15-15](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-02_11-15-15.png)
+![Snipaste_2025-07-02_11-15-15](/assets/images/covers/mirror-u-net-marrying-multimodal-fission-with-multi-task-lea.webp)
 
 文章提出的模型是**Mirror U-Net**，这是一个将多模态分解（multimodal fission）和多任务学习（multi-task learning）相结合的统一框架，用于医学图像的语义分割。以下是该模型的详细信息： 
 1. **架构设计**：Mirror U-Net利用两个共享瓶颈权重的3D U-Net模型，类似两个被水平镜子分隔的U-Net。一个模型处理CT数据，另一个处理PET数据。跳跃连接（skip connection）强化特定模态特征，共享层学习多模态特征。 

@@ -37,7 +37,7 @@ Though **adversarial erasing** has prevailed in **weakly supervised semantic seg
 
 ### 网络结构图
 
-![Snipaste_2025-04-11_09-25-53](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-11_09-25-53.png)
+![Snipaste_2025-04-11_09-25-53](/assets/images/covers/knowledge-transfer-with-simulated-inter-image-erasing-for-we.webp)
 
 
 

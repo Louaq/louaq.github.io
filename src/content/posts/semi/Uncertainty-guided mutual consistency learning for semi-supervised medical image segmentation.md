@@ -49,7 +49,7 @@ Medical image segmentation is a fundamental and critical step in many clinical a
 
 ## 提出的模型
 
-![Snipaste_2026-01-04_19-08-58](https://pic1.imgdb.cn/item/695a4a0da6ed793b783a9d3d.png)
+![Snipaste_2026-01-04_19-08-58](/assets/images/covers/uncertainty-guided-mutual-consistency-learning-for-semi-supe.webp)
 
 
 

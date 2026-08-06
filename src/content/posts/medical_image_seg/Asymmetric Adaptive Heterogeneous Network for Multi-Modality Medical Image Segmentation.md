@@ -23,7 +23,7 @@ Existing studies of **multi-modality medical image segmentation** tend to aggreg
 
 ## 研究背景
 
-![Snipaste_2025-07-05_16-28-08](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-05_16-28-08.png)
+![Snipaste_2025-07-05_16-28-08](/assets/images/covers/asymmetric-adaptive-heterogeneous-network-for-multi-modality.webp)
 
 
 

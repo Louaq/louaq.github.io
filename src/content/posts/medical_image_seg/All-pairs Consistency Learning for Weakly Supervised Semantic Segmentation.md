@@ -55,7 +55,7 @@ method that leverages the gradients ofthe class token. Our method can be seamles
 
 ## 提出的模型
 
-![Snipaste_2025-04-07_13-44-09](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-04-07_13-44-09.png)
+![Snipaste_2025-04-07_13-44-09](/assets/images/covers/all-pairs-consistency-learning-for-weakly-supervised-semanti.webp)
 
 
 

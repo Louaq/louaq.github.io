@@ -62,7 +62,7 @@ tags: [SED]
 
 
 
-![Snipaste_2025-02-28_08-53-28](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-02-28_08-53-28.png)
+![Snipaste_2025-02-28_08-53-28](/assets/images/covers/sed-a-simple-encoder-decoder-for-open-vocabulary-semantic-se.webp)
 
 
 

@@ -32,7 +32,7 @@ The precise segmentation of different **brain regions and tissues** is usually a
 
 ## 提出的模型
 
-![Snipaste_2025-07-10_20-51-30](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-30.png)
+![Snipaste_2025-07-10_20-51-30](/assets/images/covers/automatic-brain-segmentation-for-petmr-dual-modal-images-thr.webp)
 
 ![Snipaste_2025-07-10_20-51-36](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-10_20-51-36.png)
 

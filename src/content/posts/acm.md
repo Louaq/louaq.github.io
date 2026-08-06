@@ -8,7 +8,7 @@ tags: [ACM]
 ---
 
 删除图中的1，2处信息：
-![](https://pic1.imgdb.cn/item/69c3bae236bbc571055c8665.webp)
+![](/assets/images/covers/acm.webp)
 
 ```tex
 % Removes citation information below abstract

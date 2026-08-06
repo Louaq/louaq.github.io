@@ -936,49 +936,33 @@
 }
 
 @layer components {
-    /* View Transitions API 主题切换动画 */
-    /* 为整个文档根元素设置视图过渡 */
-    ::view-transition-old(root),
-    ::view-transition-new(root) {
-        animation-duration: 0.18s;
-        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-        /* 使用混合模式使颜色过渡更平滑 */
+    /*
+     * View Transitions API 主题切换动画：
+     * 旧视图（老主题）保持静止不动作为底层，新视图（新主题）从点击按钮的位置
+     * 以圆形逐渐展开覆盖旧视图，形成"涟漪揭示"效果。
+     * --vt-x / --vt-y / --vt-r 由 Navbar.astro 在触发切换前写入 document.documentElement，
+     * 未设置时（如非按钮触发）回退到视口中心 + 铺满半径。
+     */
+    ::view-transition-group(root) {
+        animation-duration: var(--theme-reveal-duration);
+    }
+
+    ::view-transition-old(root) {
+        animation: none;
         mix-blend-mode: normal;
     }
-    
-    /* 视图过渡组 - 使用交叉淡化效果 */
-    ::view-transition-group(root) {
-        animation-duration: 0.18s;
-        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    
-    /* 淡出旧视图 - 使用更平滑的曲线 */
-    ::view-transition-old(root) {
-        animation-name: theme-fade-out;
-        /* 确保背景色同步切换 */
-        z-index: 2;
-    }
-    
-    /* 淡入新视图 - 使用更平滑的曲线 */
+
     ::view-transition-new(root) {
-        animation-name: theme-fade-in;
-        /* 确保新视图在上层 */
-        z-index: 1;
+        animation: theme-reveal-circle var(--theme-reveal-duration) cubic-bezier(0.4, 0, 0.2, 1);
+        mix-blend-mode: normal;
     }
-    @keyframes theme-fade-out {
-        0% {
-            opacity: 1;
+
+    @keyframes theme-reveal-circle {
+        from {
+            clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
         }
-        100% {
-            opacity: 0;
-        }
-    }
-    @keyframes theme-fade-in {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
+        to {
+            clip-path: circle(var(--vt-r, 150%) at var(--vt-x, 50%) var(--vt-y, 50%));
         }
     }
 }

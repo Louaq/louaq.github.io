@@ -28,7 +28,7 @@ U-Net是一种广泛应用于医学图像分割的模型，以其强大的特征
 
 ## 提出的模型
 
-![Snipaste_2025-06-23_10-43-43](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-06-23_10-43-43.png)
+![Snipaste_2025-06-23_10-43-43](/assets/images/covers/rethinking-u-net-task-adaptive-mixture-of-skip-connections-f.webp)
 
 - TA - MoSC模块：受混合专家（Mixture of Experts，MoE）框架启发，将跳跃连接重新定义为任务分配问题。该模块由路由银行（Router Bank）、跳跃连接（Skip - Connection，SC）银行和四个对接器（Dockers）组成。其工作流程如下：
 

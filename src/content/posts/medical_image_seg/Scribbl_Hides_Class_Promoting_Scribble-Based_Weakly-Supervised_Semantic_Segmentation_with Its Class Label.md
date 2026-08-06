@@ -38,7 +38,7 @@ of our method. The code is available at https://github.com/Zxl19990529/Class-dri
 
 ## 提出的模型
 
-![Snipaste_2025-03-18_14-48-25](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-18_14-48-25.png)
+![Snipaste_2025-03-18_14-48-25](/assets/images/covers/scribbl-hides-class-promoting-scribble-based-weakly-supervis.webp)
 
 
 

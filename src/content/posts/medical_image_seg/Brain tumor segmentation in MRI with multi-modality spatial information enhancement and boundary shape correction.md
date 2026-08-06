@@ -44,7 +44,7 @@ tags: [multi-modality spatial information, boundary shape correction]
 
 ## 提出的模型
 
-![Snipaste_2025-07-17_15-50-07](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-17_15-50-07.png)
+![Snipaste_2025-07-17_15-50-07](/assets/images/covers/brain-tumor-segmentation-in-mri-with-multi-modality-spatial.webp)
 
 ![Snipaste_2025-07-17_15-52-09](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-07-17_15-52-09.png)
 

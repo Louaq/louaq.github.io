@@ -65,7 +65,7 @@ flectance component without being impeded by lighting, allowing the network to c
 3. 引入光照感知解析器（IAParser），利用光照组件作为线索，实现更精准预测。 
 4. 细化NightCity数据集，提出NightCity-fine，为夜间分割提供更可靠基准。 
 
-![Snipaste_2025-03-03_15-54-06](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-03-03_15-54-06.png)
+![Snipaste_2025-03-03_15-54-06](/assets/images/covers/disentangle-then-parse-night-time-semantic-segmentation-with.webp)
 
 
 
