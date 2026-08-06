@@ -6,7 +6,7 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
 <div id="back-to-top-wrapper" class="back-to-top-wrapper hide">
   <FloatingButton
     id="back-to-top-btn"
-    icon="material-symbols:keyboard-arrow-up-rounded"
+    icon="back_to_top"
     ariaLabel="Back to Top"
     onclick="backToTop()"
     class=""
@@ -104,6 +104,10 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
   #back-to-top-wrapper #back-to-top-btn {
     width: 100%;
     height: 100%;
+    background-color: transparent;
+    border-color: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
   }
 
   /* 响应式调整 - 与 FloatingButton 保持一致 */
