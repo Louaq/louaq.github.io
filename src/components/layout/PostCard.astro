@@ -79,6 +79,8 @@ const processedImage =
 const basePath = getFileDirFromPath(entry.filePath || "");
 const minuteLabel =
 	minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount);
+// 只让首屏第一张卡片立即加载封面图，其余卡片懒加载（与 HomeCarousel 的处理方式一致）
+const coverLoading = index === 0 ? "eager" : "lazy";
 ---
 
 <div
@@ -106,6 +108,7 @@ const minuteLabel =
           class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
+          loading={coverLoading}
         />
       </div>
     )
@@ -168,6 +171,7 @@ const minuteLabel =
         class="hero-card-img h-full w-full"
         seed={entry.id}
         preview={true}
+        loading={coverLoading}
       />
     </div>
   </div>
@@ -183,6 +187,7 @@ const minuteLabel =
           class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
+          loading={coverLoading}
         />
       </div>
     )

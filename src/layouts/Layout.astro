@@ -23,9 +23,7 @@ import { defaultFavicons } from "@/constants/icon";
 import type { Favicon } from "@/types/config";
 import { getDefaultBackground, isHomePage } from "@/utils/layout-utils";
 import { url } from "@/utils/url-utils";
-import { shouldApplyGrayscale } from "@/utils/festival-manager";
 
-import "@/styles/grayscale.css";
 import "@/styles/main.css";
 import "@rehype-callouts-theme";
 
@@ -91,8 +89,6 @@ const siteLang = lang.replace("_", "-");
 
 const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
 
-const isGrayscaleEnabled = shouldApplyGrayscale(siteConfig.grayscale);
-
 // 折叠代码块预览高度：在首屏绘制时即应用与 previewLines 匹配的 max-height，
 // 避免插件 CSS 默认 280px 与 JS 在 DOMContentLoaded 后重新计算之间出现的高度跳变。
 // 计算口径需要与 expressive-code 的 codeLineHeight (1.5rem) 与 pre padding (上下各 1rem) 一致。
@@ -108,6 +104,20 @@ const collapsiblePreviewLines =
     <title>{pageTitle}</title>
 
     <meta charset="UTF-8" />
+
+    <!-- 图片外链 CDN 预连接：提前完成 DNS/TCP/TLS 握手，减少首次图片请求延迟 -->
+    <link rel="preconnect" href="https://pic1.imgdb.cn" crossorigin />
+    <link rel="dns-prefetch" href="https://pic1.imgdb.cn" />
+    <link
+      rel="preconnect"
+      href="https://yangyang666.oss-cn-chengdu.aliyuncs.com"
+      crossorigin
+    />
+    <link
+      rel="dns-prefetch"
+      href="https://yangyang666.oss-cn-chengdu.aliyuncs.com"
+    />
+
     <meta
       name="description"
       content={description || siteConfig.description || pageTitle}
@@ -454,7 +464,6 @@ const collapsiblePreviewLines =
         "enable-banner": enableBanner,
         "no-banner-layout": !enableBanner,
         "enable-card-border": siteConfig.card?.border,
-        "grayscale-mode": isGrayscaleEnabled,
       },
     ]}
     data-page-type={pageType}

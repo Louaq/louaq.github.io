@@ -13,13 +13,16 @@ export const fontConfig = {
 	// 是否预加载正文字体文件
 	preload: true,
 
-	// 正文字体（CJK，体积大，本地文件托管，不走 Astro Font API 自托管）
+	// 正文字体（CJK，本地文件托管，不走 Astro Font API 自托管）
+	// 原始 TTF 19.3MB 未分包；已用 scripts/subset-font.js 按全站实际用字
+	// （src/content + src/config + src/i18n + src/components 等）子集化为 woff2，
+	// 体积降至数百 KB。新增文章若用到子集里没有的生僻字，会优雅回退到
+	// fallback 列表中的系统字体（不会破版），重新运行 `pnpm subset-font` 即可补齐。
 	body: {
 		name: "LXGW WenKai Regular",
 		family: "LXGWWenKai_Regular",
-		// 霞鹜文楷 - LXGWWenKai_Regular（本地字体，public/font/ 下）
-		src: "/font/LXGWWenKai_Regular-s.p.436t2zdbdsegx.ttf",
-		format: "truetype" as const,
+		src: "/font/LXGWWenKai_Regular-subset.woff2",
+		format: "woff2" as const,
 		display: "swap" as const,
 	},
 

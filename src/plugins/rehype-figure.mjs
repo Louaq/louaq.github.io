@@ -16,6 +16,14 @@ export default function rehypeFigure() {
 				return;
 			}
 
+			// 正文图片默认懒加载：封面图/首屏图由各自组件显式控制 eager，
+			// 这里覆盖的是 markdown 正文内嵌图片，不影响首屏 LCP
+			node.properties = {
+				...node.properties,
+				loading: node.properties?.loading ?? "lazy",
+				decoding: node.properties?.decoding ?? "async",
+			};
+
 			// 获取 alt 属性
 			const alt = node.properties?.alt;
 

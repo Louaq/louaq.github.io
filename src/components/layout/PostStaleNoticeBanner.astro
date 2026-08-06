@@ -11,39 +11,27 @@ const { title, body } = Astro.props;
 
 <div class="mb-6 onload-animation">
 	<div
-		class:list={[
-			"home-top-notice home-top-notice--theme post-outdated-notice rounded-md overflow-hidden",
-		]}
+		class="home-top-notice home-top-notice--pill post-outdated-notice relative grid w-full items-stretch overflow-hidden rounded-lg bg-(--card-bg) border border-black/[0.06] dark:border-white/10 shadow-sm px-3.5 py-2 sm:px-4 sm:py-2.5"
 		role="note"
 	>
-		<div
-			class="max-w-(--page-width) mx-auto px-4 md:px-5 py-3 md:py-3.5 text-[15px] md:text-[16px] leading-relaxed"
-		>
-			<div
-				class="flex flex-1 min-w-0 w-full items-center justify-start text-left"
+		<div class="home-top-notice-row is-active flex w-full items-center gap-2.5">
+			<span class="notice-label shrink-0 font-bold text-(--primary) text-[14.5px] sm:text-[15px]">
+				{title}
+			</span>
+			<span
+				class="notice-divider shrink-0 text-neutral-300 dark:text-neutral-600"
+				aria-hidden="true"
 			>
-				<div
-					class="notice-title-body flex w-full min-w-0 max-w-full items-center gap-x-1.5 wrap-anywhere"
-				>
-					<span
-						class="inline-flex shrink-0 items-center text-[1.05em] leading-none"
-						aria-hidden="true"
-					>
-						<Icon
-							name="fa6-solid:user-shield"
-							class="size-[1em] text-current [&_svg]:block"
-							aria-hidden="true"
-						/>
-					</span>
-					<div
-						class="post-stale-notice-text-flow min-w-0 flex-1 text-left [font-size:inherit] leading-[inherit]"
-					>
-						<span class="font-bold tracking-tight text-[1.05em]">{title}</span>
-						{' '}
-						<span>{body}</span>
-					</div>
-				</div>
-			</div>
+				|
+			</span>
+			<span class="notice-content-inline min-w-0 flex-1 dark:text-neutral-400 text-[14px] sm:text-[14.5px]">
+				{body}
+			</span>
+			<Icon
+				name="fa6-solid:chevron-right"
+				class="notice-chevron shrink-0 size-3 text-neutral-300 dark:text-neutral-600"
+				aria-hidden="true"
+			/>
 		</div>
 	</div>
 </div>

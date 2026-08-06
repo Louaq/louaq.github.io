@@ -110,7 +110,7 @@ export const siteConfig: SiteConfig = {
 	showLastModified: true,
 
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
-	outdatedThreshold: 90,
+	outdatedThreshold: 10,
 
 	// 文章页"上一篇/下一篇"导航开关
 	showPostPrevNext: false,
@@ -162,16 +162,9 @@ export const siteConfig: SiteConfig = {
 
 	// 文章密码保护配置
 	// 当文章的password字段设置为true时，将使用此密码
-	postPassword: "123456",
+	postPassword: "12345678yy",
 	// 密码提示文案，留空则不显示提示
 	postPasswordHint: "",
-
-	// 全站变灰配置
-	// 手动控制：true = 启用变灰，false = 关闭变灰
-	// 适用于特殊纪念日（如清明节、国家公祭日等）
-	grayscale: {
-		enable: false, // 设置为 true 启用全站变灰，false 关闭
-	},
 
     // 站点语言，在本配置文件顶部SITE_LANG定义
 	lang: SITE_LANG,
