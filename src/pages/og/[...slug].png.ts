@@ -5,10 +5,9 @@ import type { APIContext, GetStaticPaths } from "astro";
 import satori from "satori";
 import sharp from "sharp";
 import { getResolvedPostPath } from "@/utils/url-utils";
-
+import { fontConfig } from "../../config/fontConfig";
 import { profileConfig } from "../../config/profileConfig";
 import { siteConfig } from "../../config/siteConfig";
-import { fontConfig } from "../../config/fontConfig";
 
 type Weight = 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
 
@@ -46,9 +45,7 @@ let fontCache: { regular: Buffer | null; bold: Buffer | null } | null = null;
 async function fetchNotoSansSCFonts() {
 	if (fontCache) return fontCache;
 	try {
-		const cssResp = await fetch(
-			fontConfig.og.cssUrl,
-		);
+		const cssResp = await fetch(fontConfig.og.cssUrl);
 		if (!cssResp.ok) throw new Error("Failed to fetch Google Fonts CSS");
 		const cssText = await cssResp.text();
 
@@ -155,8 +152,7 @@ export async function GET({
 				display: "flex",
 				flexDirection: "column",
 				backgroundColor: backgroundColor,
-				fontFamily:
-					`"${fontConfig.og.family}", ${fontConfig.og.fallback.join(", ")}`,
+				fontFamily: `"${fontConfig.og.family}", ${fontConfig.og.fallback.join(", ")}`,
 				padding: "60px",
 			},
 			children: [
@@ -326,20 +322,20 @@ export async function GET({
 
 	const fonts: FontOptions[] = [];
 	if (fontRegular) {
-			fonts.push({
-				name: fontConfig.og.family,
-				data: fontRegular,
-				weight: toSatoriWeight(fontConfig.og.weights.regular),
-				style: "normal",
-			});
+		fonts.push({
+			name: fontConfig.og.family,
+			data: fontRegular,
+			weight: toSatoriWeight(fontConfig.og.weights.regular),
+			style: "normal",
+		});
 	}
 	if (fontBold) {
-			fonts.push({
-				name: fontConfig.og.family,
-				data: fontBold,
-				weight: toSatoriWeight(fontConfig.og.weights.bold),
-				style: "normal",
-			});
+		fonts.push({
+			name: fontConfig.og.family,
+			data: fontBold,
+			weight: toSatoriWeight(fontConfig.og.weights.bold),
+			style: "normal",
+		});
 	}
 
 	const svg = await satori(template, {

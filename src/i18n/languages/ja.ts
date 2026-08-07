@@ -7,22 +7,15 @@ export const ja: Translation = {
 	[Key.archive]: "アーカイブ",
 	[Key.search]: "検索",
 	[Key.searchBy]: "Search by",
-	[Key.searchProvidedBy]: "提供",
 	[Key.searchKbdSelect]: "選択",
 	[Key.searchKbdSwitch]: "移動",
 	[Key.searchNoResults]: "結果が見つかりません。",
 	[Key.searchTypeSomething]: "検索キーワードを入力してください。",
 	[Key.searchLoading]: "検索中...",
-	[Key.searchSummary]: "摘要",
-	[Key.searchContent]: "内容",
-	[Key.searchViewMore]: "さらに結果を表示 ({count} 件)",
-	[Key.other]: "その他",
 	[Key.all]: "すべて",
 
 	[Key.tags]: "タグ",
 	[Key.categories]: "カテゴリ",
-	[Key.recentPosts]: "最近の投稿",
-	[Key.postList]: "投稿リスト",
 	[Key.tableOfContents]: "目次",
 	[Key.tocEmpty]: "このページには目次がありません",
 
@@ -30,7 +23,6 @@ export const ja: Translation = {
 	[Key.announcement]: "お知らせ",
 	[Key.announcementClose]: "閉じる",
 
-	[Key.comments]: "コメント",
 	[Key.commentSection]: "コメント欄",
 	[Key.commentSubtitle]: "あなたの考えを共有し、みんなと議論しましょう",
 	[Key.commentNotConfigured]: "コメントシステムが設定されていません",
@@ -42,7 +34,6 @@ export const ja: Translation = {
 	[Key.guestbook]: "ゲストブック",
 	[Key.guestbookDescription]:
 		"ここに足跡を残して、あなたの考えや提案を共有してください",
-	[Key.untitled]: "無題",
 	[Key.uncategorized]: "未分類",
 	[Key.noTags]: "タグなし",
 
@@ -55,10 +46,6 @@ export const ja: Translation = {
 
 	[Key.themeColor]: "テーマカラー",
 
-	[Key.lightMode]: "ライト",
-	[Key.darkMode]: "ダーク",
-	[Key.systemMode]: "システム",
-
 	[Key.more]: "もっと",
 
 	[Key.author]: "著者",
@@ -69,7 +56,8 @@ export const ja: Translation = {
 	[Key.watchlistTitle]: "視聴リスト",
 	[Key.watchlistSubtitle]: "最近視聴したアニメとテレビ番組を記録する",
 	[Key.watchlistEmpty]: "視聴記録なし",
-	[Key.watchlistEmptyReason]: "視聴記録がまだ追加されていません。設定ファイルに追加してください",
+	[Key.watchlistEmptyReason]:
+		"視聴記録がまだ追加されていません。設定ファイルに追加してください",
 	[Key.watchlistLastUpdated]: "最終更新日",
 	[Key.watchlistCategoryAnime]: "アニメ",
 	[Key.watchlistCategoryMovie]: "映画",
@@ -78,7 +66,6 @@ export const ja: Translation = {
 	[Key.watchlistCategoryOther]: "その他",
 
 	// バングミフィルターと状態文本
-	[Key.bangumiTitle]: "私のバングミ",
 	[Key.bangumiSubtitle]: "私の二次元の旅を記録する",
 	[Key.bangumiFilterAll]: "すべて",
 	[Key.bangumiFilterWatched]: "見た",
@@ -115,15 +102,6 @@ export const ja: Translation = {
 	[Key.bangumiEmpty]: "データなし",
 	[Key.bangumiEmptyReason]:
 		"考えられる理由：ユーザー名が存在しない、ネットワーク接続の問題、またはAPI制限",
-	[Key.bangumiUsername]: "ユーザー名",
-	[Key.bangumiApi]: "API",
-	[Key.bangumiConfigTip]:
-		"ヒント：ページ設定で正しいBangumiユーザー名を設定してください",
-	[Key.bangumiPrevPage]: "前へ",
-	[Key.bangumiNextPage]: "次へ",
-	[Key.bangumiCurrentPage]: "ページ",
-	[Key.bangumiTotalPages]: "の",
-	[Key.bangumiPage]: "ページ",
 
 	// バングミカテゴリ
 	[Key.bangumiCategoryBook]: "本",
@@ -134,24 +112,15 @@ export const ja: Translation = {
 
 	// バングミデータ更新
 	[Key.bangumiLastUpdated]: "データ更新",
-	[Key.bangumiUpdatedAt]: "ビルド時間",
-	[Key.bangumiDataStatic]: "静的データ",
-
 
 	// バナー設定
 	[Key.bannerSettings]: "バナー設定",
 	[Key.bannerTitle]: "バナータイトル",
 
 	// ページネーション
-	[Key.paginationFirst]: "最初",
 	[Key.paginationPrev]: "前へ",
 	[Key.paginationNext]: "次へ",
-	[Key.paginationLast]: "最後",
 	[Key.paginationPage]: "",
-	[Key.paginationOf]: "ページ、全",
-	[Key.paginationTotal]: "ページ、合計",
-	[Key.paginationRecords]: "件",
-	[Key.paginationCompact]: "{current} / {total} ページ",
 	[Key.paginationJumpTo]: "ページ移動",
 	[Key.paginationJumpPageUnit]: "ページ",
 	[Key.paginationGo]: "移動",
@@ -192,16 +161,10 @@ export const ja: Translation = {
 	[Key.lastModifiedNoticeTitle]: "お知らせ",
 	[Key.lastModifiedNoticeJoiner]: "。",
 	[Key.year]: "年",
-	[Key.month]: "月",
-	[Key.day]: "日",
-	[Key.hour]: "時",
-	[Key.minute]: "分",
-	[Key.second]: "秒",
 
 	// ページビュー統計
 	[Key.pageViews]: "閲覧数",
 	[Key.pageViewsLoading]: "読み込み中...",
-	[Key.pageViewsError]: "統計利用不可",
 
 	// 投稿リストレイアウト
 	[Key.postListLayout]: "投稿リストレイアウト",
@@ -222,13 +185,8 @@ export const ja: Translation = {
 	[Key.sponsorTitle]: "サポート",
 	[Key.sponsorDescription]:
 		"私のコンテンツがあなたの役に立ったなら、以下の方法で私をスポンサーしてください。あなたのサポートは私の継続的な創作の原動力です！",
-	[Key.sponsorMethods]: "支払い方法",
 	[Key.sponsorList]: "スポンサーリスト",
 	[Key.sponsorEmpty]: "スポンサー記録なし",
-	[Key.sponsorAmount]: "金額",
-	[Key.sponsorDate]: "日付",
-	[Key.sponsorMessage]: "メッセージ",
-	[Key.sponsorAnonymous]: "匿名",
 	[Key.scanToSponsor]: "スキャンしてスポンサー",
 	[Key.sponsorGoTo]: "スポンサーへ",
 	[Key.sponsorButton]: "サポートと共有",
@@ -269,12 +227,4 @@ export const ja: Translation = {
 	[Key.calendarDecember]: "12月",
 
 	// コードブロック折りたたみ設定
-	[Key.codeCollapsibleShowMore]: "もっと表示",
-	[Key.codeCollapsibleShowLess]: "少なく表示",
-	[Key.codeCollapsibleExpanded]: "コードブロックが展開されました",
-	[Key.codeCollapsibleCollapsed]: "コードブロックが折りたたまれました",
-
-	[Key.moments]: "モーメンツ",
-	[Key.momentsDescription]: "つぶやきと日常（WeChat風の見た目）",
-	[Key.momentsEmpty]: "投稿はまだありません",
 };

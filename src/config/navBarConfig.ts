@@ -22,7 +22,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		//LinkPreset.Tags,
 	];
 
-		// 根据配置决定是否添加友链，在siteConfig关闭pages.friends时导航栏不显示友链
+	// 根据配置决定是否添加友链，在siteConfig关闭pages.friends时导航栏不显示友链
 	if (siteConfig.pages.friends) {
 		links.push(LinkPreset.Friends);
 	}
@@ -37,7 +37,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		links.push(LinkPreset.Watchlist);
 	}
 
-   links.push(LinkPreset.About);
+	links.push(LinkPreset.About);
 
 	// 监控（服务状态监控 + 探针监控）
 	links.push({
@@ -47,7 +47,7 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		icon: "fluent-emoji-flat:satellite-antenna",
 	});
 
-    // 支持自定义导航栏链接,并且支持多级菜单
+	// 支持自定义导航栏链接,并且支持多级菜单
 	// links.push({
 	// 	name: "状态",
 	// 	url: "https:/xxxxxxxxxx.com",
@@ -55,11 +55,11 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 	icon: "material-symbols:cloud-done-rounded",
 	//   });
 
-  // 构建子菜单，确保所有项都是有效的
+	// 构建子菜单，确保所有项都是有效的
 	// const aboutChildren: (NavBarLink | LinkPreset)[] = [
 	// 	LinkPreset.About,
 	// ];
-	
+
 	// 根据配置添加子菜单项
 	// if (siteConfig.pages.watchlist) {
 	// 	aboutChildren.push(LinkPreset.Watchlist);
@@ -77,8 +77,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 	icon: "material-symbols:info",
 	// 	children: aboutChildren,
 	// });
-  // 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出
-  return { links } as NavBarConfig;
+	// 仅返回链接，其它导航搜索相关配置在模块顶层常量中独立导出
+	return { links } as NavBarConfig;
 };
 
 export const navBarConfig: NavBarConfig = getDynamicNavBarConfig();

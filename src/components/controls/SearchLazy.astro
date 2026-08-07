@@ -1,0 +1,8 @@
+---
+import Search from "./Search.svelte";
+---
+
+<!-- client:only：避免 Search 注水失败（多根节点 / portal / chunk 与 SSR 不一致）；首屏搜索槽可能短暂为空直至 JS 就绪 -->
+<div class="navbar-search-slot">
+	<Search client:only="svelte" />
+</div>

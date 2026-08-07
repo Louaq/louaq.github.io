@@ -4,21 +4,14 @@ enum I18nKey {
 	archive = "archive",
 	search = "search",
 	searchBy = "searchBy",
-	searchProvidedBy = "searchProvidedBy",
 	searchKbdSelect = "searchKbdSelect",
 	searchKbdSwitch = "searchKbdSwitch",
 	searchNoResults = "searchNoResults",
 	searchTypeSomething = "searchTypeSomething",
 	searchLoading = "searchLoading",
-	searchSummary = "searchSummary",
-	searchContent = "searchContent",
-	searchViewMore = "searchViewMore",
-	other = "other",
 
 	tags = "tags",
 	categories = "categories",
-	recentPosts = "recentPosts",
-	postList = "postList",
 	tableOfContents = "tableOfContents",
 	tocEmpty = "tocEmpty",
 
@@ -26,13 +19,11 @@ enum I18nKey {
 	announcement = "announcement",
 	announcementClose = "announcementClose",
 
-	comments = "comments",
 	commentSection = "commentSection",
 	commentSubtitle = "commentSubtitle",
 	commentNotConfigured = "commentNotConfigured",
 	guestbookCommentHint = "guestbookCommentHint",
 
-	untitled = "untitled",
 	uncategorized = "uncategorized",
 	noTags = "noTags",
 
@@ -44,10 +35,6 @@ enum I18nKey {
 	postsCount = "postsCount",
 
 	themeColor = "themeColor",
-
-	lightMode = "lightMode",
-	darkMode = "darkMode",
-	systemMode = "systemMode",
 
 	more = "more",
 	all = "all",
@@ -73,7 +60,6 @@ enum I18nKey {
 	watchlistCategoryOther = "watchlistCategoryOther",
 
 	// 番组计划筛选和状态文本
-	bangumiTitle = "bangumiTitle",
 	bangumiSubtitle = "bangumiSubtitle",
 	bangumiFilterAll = "bangumiFilterAll",
 	bangumiFilterWatched = "bangumiFilterWatched",
@@ -109,14 +95,6 @@ enum I18nKey {
 	bangumiNoDataDescription = "bangumiNoDataDescription",
 	bangumiEmpty = "bangumiEmpty",
 	bangumiEmptyReason = "bangumiEmptyReason",
-	bangumiUsername = "bangumiUsername",
-	bangumiApi = "bangumiApi",
-	bangumiConfigTip = "bangumiConfigTip",
-	bangumiPrevPage = "bangumiPrevPage",
-	bangumiNextPage = "bangumiNextPage",
-	bangumiCurrentPage = "bangumiCurrentPage",
-	bangumiTotalPages = "bangumiTotalPages",
-	bangumiPage = "bangumiPage",
 
 	// 番组分类
 	bangumiCategoryBook = "bangumiCategoryBook",
@@ -127,20 +105,12 @@ enum I18nKey {
 
 	// 番组数据更新
 	bangumiLastUpdated = "bangumiLastUpdated",
-	bangumiUpdatedAt = "bangumiUpdatedAt",
-	bangumiDataStatic = "bangumiDataStatic",
 
 	// 分页
-	paginationFirst = "paginationFirst",
 	paginationPrev = "paginationPrev",
 	paginationNext = "paginationNext",
-	paginationLast = "paginationLast",
 	paginationPage = "paginationPage",
-	paginationOf = "paginationOf",
-	paginationTotal = "paginationTotal",
-	paginationRecords = "paginationRecords",
 	/** 中间页码文案，含 {current}、{total}，如：第 {current} / 共 {total} */
-	paginationCompact = "paginationCompact",
 	/** 跳转行：前缀，如「跳转到」 */
 	paginationJumpTo = "paginationJumpTo",
 	/** 跳转行：页码后单位，如「页」；部分语言可置空 */
@@ -183,16 +153,10 @@ enum I18nKey {
 	/** 连接「更新日期」与「过时说明」的标点（如中文。「」，英文 ". "） */
 	lastModifiedNoticeJoiner = "lastModifiedNoticeJoiner",
 	year = "year",
-	month = "month",
-	day = "day",
-	hour = "hour",
-	minute = "minute",
-	second = "second",
 
 	// 访问量统计
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
-	pageViewsError = "pageViewsError",
 
 	// 横幅设置
 	bannerSettings = "bannerSettings",
@@ -216,13 +180,8 @@ enum I18nKey {
 	sponsor = "sponsor",
 	sponsorTitle = "sponsorTitle",
 	sponsorDescription = "sponsorDescription",
-	sponsorMethods = "sponsorMethods",
 	sponsorList = "sponsorList",
 	sponsorEmpty = "sponsorEmpty",
-	sponsorAmount = "sponsorAmount",
-	sponsorDate = "sponsorDate",
-	sponsorMessage = "sponsorMessage",
-	sponsorAnonymous = "sponsorAnonymous",
 	scanToSponsor = "scanToSponsor",
 	sponsorGoTo = "sponsorGoTo",
 	sponsorButton = "sponsorButton",
@@ -260,15 +219,8 @@ enum I18nKey {
 	calendarOctober = "calendarOctober",
 	calendarNovember = "calendarNovember",
 	calendarDecember = "calendarDecember",
-	codeCollapsibleShowMore = "codeCollapsibleShowMore",
-	codeCollapsibleShowLess = "codeCollapsibleShowLess",
-	codeCollapsibleExpanded = "codeCollapsibleExpanded",
-	codeCollapsibleCollapsed = "codeCollapsibleCollapsed",
 
 	// 朋友圈
-	moments = "moments",
-	momentsDescription = "momentsDescription",
-	momentsEmpty = "momentsEmpty",
 }
 
 export default I18nKey;

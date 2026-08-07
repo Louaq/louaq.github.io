@@ -1,7 +1,7 @@
 ---
 import Icon from "@/components/common/Icon.astro";
+import TabNav from "@/components/common/TabNav.astro";
 import BangumiSection from "@/components/pages/bangumi/BangumiSection.astro";
-import TabNav from "@/components/pages/bangumi/TabNav.astro";
 import { siteConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
@@ -211,7 +211,7 @@ const activeTab = tabs[0]?.id || "anime";
       <!-- Tab 导航和内容 -->
       {tabs.length > 0 ? (
         <>
-          <TabNav tabs={tabs} activeTab={activeTab} />
+          <TabNav tabs={tabs} activeTab={activeTab} class="mb-3" />
 
           <!-- 内容区域 -->
           {tabs.map((tab) => (

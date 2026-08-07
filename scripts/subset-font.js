@@ -2,6 +2,10 @@
  * to `pyftsubset` (Python fonttools) to cut the body CJK font down to that set
  * and re-encode it as woff2. Re-run this after adding posts with new characters:
  *   pnpm subset-font
+ *
+ * NOTE: SRC_FONT (the full ~19MB LXGWWenKai TTF) is intentionally NOT committed —
+ * only the generated subset woff2 is. Download the TTF into public/font/ before
+ * running this script, otherwise it exits with "source font not found".
  */
 
 import fs from "fs"

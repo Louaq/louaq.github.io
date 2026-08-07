@@ -23,5 +23,3 @@ declare global {
 		removeListener(listener: (e: MediaQueryListEvent) => void): void;
 	}
 }
-
-export {};

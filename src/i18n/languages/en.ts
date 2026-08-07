@@ -7,22 +7,15 @@ export const en: Translation = {
 	[Key.archive]: "Archive",
 	[Key.search]: "Search",
 	[Key.searchBy]: "Search by",
-	[Key.searchProvidedBy]: "Provided by",
 	[Key.searchKbdSelect]: "Select",
 	[Key.searchKbdSwitch]: "Navigate",
 	[Key.searchNoResults]: "No results found.",
 	[Key.searchTypeSomething]: "Type something to search...",
 	[Key.searchLoading]: "Searching...",
-	[Key.searchSummary]: "Summary",
-	[Key.searchContent]: "Content",
-	[Key.searchViewMore]: "View more results ({count} more)",
-	[Key.other]: "Other",
 	[Key.all]: "All",
 
 	[Key.tags]: "Tags",
 	[Key.categories]: "Categories",
-	[Key.recentPosts]: "Recent Posts",
-	[Key.postList]: "Post List",
 	[Key.tableOfContents]: "Table of Contents",
 	[Key.tocEmpty]: "No table of contents on this page",
 
@@ -30,7 +23,6 @@ export const en: Translation = {
 	[Key.announcement]: "Announcement",
 	[Key.announcementClose]: "Close",
 
-	[Key.comments]: "Comments",
 	[Key.commentSection]: "Comments",
 	[Key.commentSubtitle]: "Share your thoughts and discuss with everyone",
 	[Key.commentNotConfigured]: "Comment system not configured",
@@ -42,7 +34,6 @@ export const en: Translation = {
 	[Key.guestbook]: "Guestbook",
 	[Key.guestbookDescription]:
 		"Welcome to leave your mark here, share your thoughts and suggestions",
-	[Key.untitled]: "Untitled",
 	[Key.uncategorized]: "Uncategorized",
 	[Key.noTags]: "No Tags",
 
@@ -55,10 +46,6 @@ export const en: Translation = {
 
 	[Key.themeColor]: "Theme Color",
 
-	[Key.lightMode]: "Light",
-	[Key.darkMode]: "Dark",
-	[Key.systemMode]: "System",
-
 	[Key.more]: "More",
 
 	[Key.author]: "Author",
@@ -69,7 +56,8 @@ export const en: Translation = {
 	[Key.watchlistTitle]: "Watchlist",
 	[Key.watchlistSubtitle]: "Record recently watched anime and TV shows",
 	[Key.watchlistEmpty]: "No watch records",
-	[Key.watchlistEmptyReason]: "No watch records have been added yet, go to the config file to add some",
+	[Key.watchlistEmptyReason]:
+		"No watch records have been added yet, go to the config file to add some",
 	[Key.watchlistLastUpdated]: "Last updated",
 	[Key.watchlistCategoryAnime]: "Anime",
 	[Key.watchlistCategoryMovie]: "Movies",
@@ -78,7 +66,6 @@ export const en: Translation = {
 	[Key.watchlistCategoryOther]: "Other",
 
 	// Bangumi Filter and Status Text
-	[Key.bangumiTitle]: "My Bangumi",
 	[Key.bangumiSubtitle]: "Record my ACG journey",
 	[Key.bangumiFilterAll]: "All",
 	[Key.bangumiFilterWatched]: "Watched",
@@ -115,15 +102,6 @@ export const en: Translation = {
 	[Key.bangumiEmpty]: "No Data",
 	[Key.bangumiEmptyReason]:
 		"Possible reasons: username does not exist, network connection issue, or API limit",
-	[Key.bangumiUsername]: "Username",
-	[Key.bangumiApi]: "API",
-	[Key.bangumiConfigTip]:
-		"Tip: Please set the correct Bangumi username in the page configuration",
-	[Key.bangumiPrevPage]: "Previous",
-	[Key.bangumiNextPage]: "Next",
-	[Key.bangumiCurrentPage]: "Page",
-	[Key.bangumiTotalPages]: "of",
-	[Key.bangumiPage]: "page",
 
 	// Bangumi Categories
 	[Key.bangumiCategoryBook]: "Book",
@@ -134,19 +112,11 @@ export const en: Translation = {
 
 	// Bangumi Data Update
 	[Key.bangumiLastUpdated]: "Data updated at",
-	[Key.bangumiUpdatedAt]: "Build time",
-	[Key.bangumiDataStatic]: "Static data",
 
 	// Pagination
-	[Key.paginationFirst]: "First",
 	[Key.paginationPrev]: "Previous",
 	[Key.paginationNext]: "Next",
-	[Key.paginationLast]: "Last",
 	[Key.paginationPage]: "Page",
-	[Key.paginationOf]: "of",
-	[Key.paginationTotal]: ", Total",
-	[Key.paginationRecords]: " records",
-	[Key.paginationCompact]: "Page {current} of {total}",
 	[Key.paginationJumpTo]: "Go to page",
 	[Key.paginationJumpPageUnit]: "",
 	[Key.paginationGo]: "Go",
@@ -188,16 +158,10 @@ export const en: Translation = {
 	[Key.lastModifiedNoticeTitle]: "Note",
 	[Key.lastModifiedNoticeJoiner]: ". ",
 	[Key.year]: "year",
-	[Key.month]: "month",
-	[Key.day]: "day",
-	[Key.hour]: "hour",
-	[Key.minute]: "minute",
-	[Key.second]: "second",
 
 	// Page Views Statistics
 	[Key.pageViews]: "Views",
 	[Key.pageViewsLoading]: "Loading...",
-	[Key.pageViewsError]: "Stats unavailable",
 
 	// Banner Settings
 	[Key.bannerSettings]: "Banner Settings",
@@ -222,13 +186,8 @@ export const en: Translation = {
 	[Key.sponsorTitle]: "Support Me",
 	[Key.sponsorDescription]:
 		"If my content has been helpful to you, welcome to sponsor me through the following methods. Your support is the driving force for my continued creation!",
-	[Key.sponsorMethods]: "Payment Methods",
 	[Key.sponsorList]: "Sponsors",
 	[Key.sponsorEmpty]: "No sponsors yet",
-	[Key.sponsorAmount]: "Amount",
-	[Key.sponsorDate]: "Date",
-	[Key.sponsorMessage]: "Message",
-	[Key.sponsorAnonymous]: "Anonymous",
 	[Key.scanToSponsor]: "Scan to Sponsor",
 	[Key.sponsorGoTo]: "Go to Sponsor",
 	[Key.sponsorButton]: "Support & Share",
@@ -269,12 +228,4 @@ export const en: Translation = {
 	[Key.calendarDecember]: "Dec",
 
 	// Code Block Collapsible Configuration
-	[Key.codeCollapsibleShowMore]: "Show more",
-	[Key.codeCollapsibleShowLess]: "Show less",
-	[Key.codeCollapsibleExpanded]: "Code block expanded",
-	[Key.codeCollapsibleCollapsed]: "Code block collapsed",
-
-	[Key.moments]: "Moments",
-	[Key.momentsDescription]: "Notes and daily bits, styled like WeChat Moments",
-	[Key.momentsEmpty]: "No posts yet",
 };

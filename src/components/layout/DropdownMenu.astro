@@ -32,7 +32,7 @@ const processedLink = {
 				if (child in LinkPresets) {
 					const preset = LinkPresets[child as LinkPreset];
 					// 确保 preset 有效
-					if (preset && preset.url) {
+					if (preset?.url) {
 						return preset;
 					}
 				}
@@ -44,7 +44,9 @@ const processedLink = {
 			}
 			return null;
 		})
-		.filter((child): child is NavBarLink => child !== null && child !== undefined),
+		.filter(
+			(child): child is NavBarLink => child !== null && child !== undefined,
+		),
 };
 
 const hasChildren = processedLink.children && processedLink.children.length > 0;

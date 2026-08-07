@@ -28,4 +28,3 @@ export type WatchlistConfig = {
 		showProgress: boolean; // 是否显示观看进度
 	};
 };
-

@@ -1,43 +1,47 @@
 <script lang="ts">
-import { onDestroy, onMount, tick } from "svelte";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import { navigateToPage } from "@utils/navigation-utils";
+import { onDestroy, onMount, tick } from "svelte";
 
 interface Props {
-	engine?: "algolia" | "milisearch";
 	/** 首次挂载时是否直接打开搜索弹窗（用于懒加载入口） */
 	initialOpen?: boolean;
 }
 
-let { engine, initialOpen = false } : Props = $props();
+let { initialOpen = false }: Props = $props();
 
-const ALGOLIA_APP_ID = import.meta.env.PUBLIC_ALGOLIA_APP_ID;
-const ALGOLIA_SEARCH_KEY = import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY;
-const ALGOLIA_INDEX_NAME = import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME || "blog";
-
-const MEILISEARCH_HOST = import.meta.env.PUBLIC_MEILISEARCH_HOST || "https://search.louaq.com";
+const MEILISEARCH_HOST =
+	import.meta.env.PUBLIC_MEILISEARCH_HOST || "https://search.louaq.com";
 const MEILISEARCH_SEARCH_KEY = import.meta.env.PUBLIC_MEILISEARCH_SEARCH_KEY;
-const MEILISEARCH_INDEX_NAME = import.meta.env.PUBLIC_MEILISEARCH_INDEX_NAME || "blog";
+const MEILISEARCH_INDEX_NAME =
+	import.meta.env.PUBLIC_MEILISEARCH_INDEX_NAME || "blog";
+
+/** 检索结果条目（doSearch / loadMore 共用的归一化结构） */
+interface SearchHit {
+	url: string;
+	type?: string;
+	title: string;
+	description: string;
+	excerpt: string;
+	tags: string[];
+	category: string;
+}
 
 let initialized = $state(false);
-let searchClient: any = $state(null);
-let searchEngine: "algolia" | "milisearch" = $state("algolia");
 
 let isOpen = $state(false);
 let query = $state("");
-let results: any[] = $state([]);
+let results: SearchHit[] = $state([]);
 let isSearching = $state(false);
 let debounceTimer: NodeJS.Timeout;
 let activeIndex = $state(-1);
-let prevScrollLock:
-	| {
-			bodyOverflow: string;
-			bodyPaddingRight: string;
-			htmlOverflow: string;
-			htmlPaddingRight: string;
-	  }
-	| null = null;
+let prevScrollLock: {
+	bodyOverflow: string;
+	bodyPaddingRight: string;
+	htmlOverflow: string;
+	htmlPaddingRight: string;
+} | null = null;
 const hitsPerPage = 20;
 let page = $state(0);
 let nbHits = $state(0);
@@ -182,9 +186,62 @@ const highlightText = (text: string, q: string): string => {
 	return text.replace(regex, "<mark>$1</mark>");
 };
 
+/** 向 Meilisearch 请求一页结果，并归一化为 SearchHit[] */
+const queryMeilisearch = async (
+	keyword: string,
+	pageIndex: number,
+): Promise<{ hits: SearchHit[]; total: number }> => {
+	const headers: Record<string, string> = {
+		"Content-Type": "application/json",
+	};
+	if (MEILISEARCH_SEARCH_KEY) {
+		headers.Authorization = `Bearer ${MEILISEARCH_SEARCH_KEY}`;
+	}
+
+	const response = await fetch(
+		`${MEILISEARCH_HOST.replace(/\/$/, "")}/indexes/${MEILISEARCH_INDEX_NAME}/search`,
+		{
+			method: "POST",
+			headers,
+			body: JSON.stringify({
+				q: keyword,
+				limit: hitsPerPage,
+				offset: pageIndex * hitsPerPage,
+				attributesToRetrieve: [
+					"type",
+					"title",
+					"description",
+					"content",
+					"url",
+					"tags",
+					"category",
+				],
+			}),
+		},
+	);
+
+	const data = await response.json();
+	const hits = (data?.hits || []).map((hit: Record<string, unknown>) => {
+		const content = typeof hit?.content === "string" ? hit.content : "";
+		const excerptRaw = content.replace(/\s+/g, " ").trim().slice(0, 180);
+		return {
+			url: hit.url as string,
+			type: hit.type as string | undefined,
+			title: highlightText((hit.title as string) ?? "", keyword),
+			description: hit.description
+				? highlightText(hit.description as string, keyword)
+				: "",
+			excerpt: excerptRaw ? highlightText(excerptRaw, keyword) : "",
+			tags: (hit.tags as string[]) || [],
+			category: (hit.category as string) || "",
+		} satisfies SearchHit;
+	});
+
+	return { hits, total: data?.estimatedTotalHits ?? 0 };
+};
+
 const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 	if (!initialized) return;
-	if (searchEngine === "algolia" && !searchClient) return;
 
 	const trimmed = keyword.trim();
 	if (!trimmed) {
@@ -212,103 +269,17 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 	isSearching = true;
 	const currentReq = ++requestSeq;
 	try {
-		if (searchEngine === "algolia") {
-			const response = await searchClient.search({
-				requests: [
-					{
-						indexName: ALGOLIA_INDEX_NAME,
-						query: trimmed,
-						page: 0,
-						hitsPerPage,
-						attributesToRetrieve: [
-							"type",
-							"title",
-							"description",
-							"content",
-							"url",
-							"tags",
-							"category",
-						],
-						attributesToSnippet: ["content:30"],
-					},
-				],
-			});
+		const { hits, total } = await queryMeilisearch(trimmed, page);
 
-			// 如果期间发起了新的请求，丢弃旧结果
-			if (currentReq !== requestSeq) return;
+		// 如果期间发起了新的请求，丢弃旧结果
+		if (currentReq !== requestSeq) return;
 
-			const res0 = response?.results?.[0];
-			page = res0?.page ?? 0;
-			nbHits = res0?.nbHits ?? 0;
-			nbPages = res0?.nbPages ?? 0;
-			hasMore = page < nbPages - 1;
+		nbHits = total;
+		nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
+		hasMore = (page + 1) * hitsPerPage < nbHits;
 
-			results = (res0?.hits || []).map((hit: any) => ({
-				url: hit.url,
-				type: hit.type,
-				title: highlightText(hit.title, trimmed),
-				description: hit.description ? highlightText(hit.description, trimmed) : "",
-				excerpt: hit._snippetResult?.content?.value || "",
-				tags: hit.tags || [],
-				category: hit.category || "",
-			}));
-			activeIndex = results.length > 0 ? 0 : -1;
-		} else {
-			// Meilisearch(=milisearch) 搜索（search.louaq.com）
-			const offset = page * hitsPerPage;
-			const headers: Record<string, string> = {
-				"Content-Type": "application/json",
-			};
-			if (MEILISEARCH_SEARCH_KEY) {
-				headers.Authorization = `Bearer ${MEILISEARCH_SEARCH_KEY}`;
-			}
-
-			const response = await fetch(
-				`${MEILISEARCH_HOST.replace(/\/$/, "")}/indexes/${MEILISEARCH_INDEX_NAME}/search`,
-				{
-					method: "POST",
-					headers,
-					body: JSON.stringify({
-						q: trimmed,
-						limit: hitsPerPage,
-						offset,
-						attributesToRetrieve: [
-							"type",
-							"title",
-							"description",
-							"content",
-							"url",
-							"tags",
-							"category",
-						],
-					}),
-				},
-			);
-
-			const data = await response.json();
-			if (currentReq !== requestSeq) return;
-
-			const hits = data?.hits || [];
-			nbHits = data?.estimatedTotalHits ?? 0;
-			nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
-			hasMore = offset + hitsPerPage < nbHits;
-			page = Math.floor(offset / hitsPerPage);
-
-			results = hits.map((hit: any) => {
-				const content = typeof hit?.content === "string" ? hit.content : "";
-				const excerptRaw = content.replace(/\s+/g, " ").trim().slice(0, 180);
-				return {
-					url: hit.url,
-					type: hit.type,
-					title: highlightText(hit.title ?? "", trimmed),
-					description: hit.description ? highlightText(hit.description, trimmed) : "",
-					excerpt: excerptRaw ? highlightText(excerptRaw, trimmed) : "",
-					tags: hit.tags || [],
-					category: hit.category || "",
-				};
-			});
-			activeIndex = results.length > 0 ? 0 : -1;
-		}
+		results = hits;
+		activeIndex = results.length > 0 ? 0 : -1;
 	} catch (error) {
 		// 保持静默失败，避免刷屏；必要时可打开 console
 		console.error("Search error:", error);
@@ -325,7 +296,6 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 
 const loadMore = async () => {
 	if (!initialized) return;
-	if (searchEngine === "algolia" && !searchClient) return;
 	const trimmed = query.trim();
 	if (!trimmed) return;
 	if (!hasMore || isLoadingMore) return;
@@ -334,102 +304,13 @@ const loadMore = async () => {
 	const nextPage = page + 1;
 	const currentReq = ++requestSeq;
 	try {
-		let newHits: any[] = [];
+		const { hits: newHits, total } = await queryMeilisearch(trimmed, nextPage);
+		if (currentReq !== requestSeq) return;
 
-		if (searchEngine === "algolia") {
-			const response = await searchClient.search({
-				requests: [
-					{
-						indexName: ALGOLIA_INDEX_NAME,
-						query: trimmed,
-						page: nextPage,
-						hitsPerPage,
-						attributesToRetrieve: [
-							"type",
-							"title",
-							"description",
-							"content",
-							"url",
-							"tags",
-							"category",
-						],
-						attributesToSnippet: ["content:30"],
-					},
-				],
-			});
-
-			if (currentReq !== requestSeq) return;
-
-			const res0 = response?.results?.[0];
-			newHits = (res0?.hits || []).map((hit: any) => ({
-				url: hit.url,
-				type: hit.type,
-				title: highlightText(hit.title, trimmed),
-				description: hit.description ? highlightText(hit.description, trimmed) : "",
-				excerpt: hit._snippetResult?.content?.value || "",
-				tags: hit.tags || [],
-				category: hit.category || "",
-			}));
-
-			page = res0?.page ?? nextPage;
-			nbHits = res0?.nbHits ?? nbHits;
-			nbPages = res0?.nbPages ?? nbPages;
-			hasMore = page < nbPages - 1;
-		} else {
-			// Meilisearch(=milisearch) 搜索（search.louaq.com）
-			const offset = nextPage * hitsPerPage;
-			const headers: Record<string, string> = {
-				"Content-Type": "application/json",
-			};
-			if (MEILISEARCH_SEARCH_KEY) {
-				headers.Authorization = `Bearer ${MEILISEARCH_SEARCH_KEY}`;
-			}
-
-			const response = await fetch(
-				`${MEILISEARCH_HOST.replace(/\/$/, "")}/indexes/${MEILISEARCH_INDEX_NAME}/search`,
-				{
-					method: "POST",
-					headers,
-					body: JSON.stringify({
-						q: trimmed,
-						limit: hitsPerPage,
-						offset,
-						attributesToRetrieve: [
-							"type",
-							"title",
-							"description",
-							"content",
-							"url",
-							"tags",
-							"category",
-						],
-					}),
-				},
-			);
-
-			const data = await response.json();
-			if (currentReq !== requestSeq) return;
-
-			const hits = data?.hits || [];
-			newHits = hits.map((hit: any) => {
-				const content = typeof hit?.content === "string" ? hit.content : "";
-				const excerptRaw = content.replace(/\s+/g, " ").trim().slice(0, 180);
-				return {
-					url: hit.url,
-					type: hit.type,
-					title: highlightText(hit.title ?? "", trimmed),
-					description: hit.description ? highlightText(hit.description, trimmed) : "",
-					excerpt: excerptRaw ? highlightText(excerptRaw, trimmed) : "",
-					tags: hit.tags || [],
-					category: hit.category || "",
-				};
-			});
-
-			page = nextPage;
-			nbHits = data?.estimatedTotalHits ?? nbHits;
-			nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
-			hasMore = offset + hitsPerPage < nbHits;
-		}
+		page = nextPage;
+		nbHits = total || nbHits;
+		nbPages = Math.ceil(nbHits / hitsPerPage) || 0;
+		hasMore = (nextPage + 1) * hitsPerPage < nbHits;
 
 		// 追加并去重（按 url）
 		const existing = new Set(results.map((r) => r.url));
@@ -494,11 +375,18 @@ $effect(() => {
 
 // 键盘上下选择时，让高亮项随之滚动到可视区域
 $effect(() => {
-	if (isOpen && listEl && activeIndex >= 0 && activeIndex !== lastScrolledIndex) {
+	if (
+		isOpen &&
+		listEl &&
+		activeIndex >= 0 &&
+		activeIndex !== lastScrolledIndex
+	) {
 		lastScrolledIndex = activeIndex;
 		// 等 DOM 更新后再滚动
 		tick().then(() => {
-			const active = listEl?.querySelector<HTMLAnchorElement>("a.algolia-item.is-active");
+			const active = listEl?.querySelector<HTMLAnchorElement>(
+				"a.search-item.is-active",
+			);
 			active?.scrollIntoView({ block: "nearest" });
 		});
 	}
@@ -510,27 +398,7 @@ onMount(() => {
 	let keydownHandler: ((e: KeyboardEvent) => void) | undefined;
 
 	void (async () => {
-		const selectedEngine: "algolia" | "milisearch" =
-			engine ?? (ALGOLIA_APP_ID && ALGOLIA_SEARCH_KEY ? "algolia" : "milisearch");
-		searchEngine = selectedEngine;
-
-		if (selectedEngine === "algolia") {
-			if (!ALGOLIA_APP_ID || !ALGOLIA_SEARCH_KEY) {
-				initialized = false;
-				return;
-			}
-			try {
-				const { liteClient } = await import("algoliasearch/lite");
-				if (disposed) return;
-				searchClient = liteClient(ALGOLIA_APP_ID, ALGOLIA_SEARCH_KEY);
-				initialized = true;
-			} catch {
-				initialized = false;
-			}
-		} else {
-			initialized = !!MEILISEARCH_HOST && !!MEILISEARCH_INDEX_NAME;
-			searchClient = null;
-		}
+		initialized = !!MEILISEARCH_HOST && !!MEILISEARCH_INDEX_NAME;
 
 		if (disposed) return;
 
@@ -599,11 +467,11 @@ onDestroy(() => {
 </button>
 
 {#if isOpen}
-	<div class="algolia-portal-root" use:portal>
+	<div class="search-portal-root" use:portal>
 		<!-- 遮罩层（portal 到 body，避免被滚动/transform 影响） -->
 		<!-- svelte-ignore a11y_no_static_element_interactions -->
 		<div
-			class="algolia-backdrop"
+			class="search-backdrop"
 			role="presentation"
 			onclick={(e) => { e.stopPropagation(); e.preventDefault(); closeModal(); }}
 			onmousedown={(e) => { e.stopPropagation(); e.preventDefault(); closeModal(); }}
@@ -611,55 +479,55 @@ onDestroy(() => {
 
 		<!-- 弹窗（portal 到 body，始终在视口顶层） -->
 		<div
-			class="algolia-modal"
+			class="search-modal"
 			role="dialog"
 			aria-modal="true"
 			aria-label="Search"
 			tabindex="-1"
 		>
-		<div class="algolia-header">
-			<div class="algolia-input-wrap">
-				<span class="algolia-search-icon" aria-hidden="true">
+		<div class="search-header">
+			<div class="search-input-wrap">
+				<span class="search-search-icon" aria-hidden="true">
 					{@render searchIcon(20)}
 				</span>
 				<input
 					bind:this={modalInputEl}
 					bind:value={query}
 					placeholder={i18n(I18nKey.search)}
-					class="algolia-input"
+					class="search-input"
 					onkeydown={handleInputKeydown}
 				/>
 			</div>
 		</div>
 
-		<div class="algolia-body">
+		<div class="search-body">
 			{#if !initialized}
-				<div class="algolia-empty">搜索服务未配置</div>
+				<div class="search-empty">搜索服务未配置</div>
 			{:else if isSearching}
-				<div class="algolia-empty">{i18n(I18nKey.searchLoading)}</div>
+				<div class="search-empty">{i18n(I18nKey.searchLoading)}</div>
 			{:else if !query.trim()}
-				<div class="algolia-empty algolia-empty-centered"></div>
+				<div class="search-empty search-empty-centered"></div>
 			{:else if results.length === 0}
-				<div class="algolia-empty">{i18n(I18nKey.searchNoResults)}</div>
+				<div class="search-empty">{i18n(I18nKey.searchNoResults)}</div>
 			{:else}
-				<div class="algolia-list" role="list" bind:this={listEl}>
+				<div class="search-list" role="list" bind:this={listEl}>
 					{#each results as item, idx}
 						<a
 							href={item.url}
-							class="algolia-item {idx === activeIndex ? 'is-active' : ''}"
+							class="search-item {idx === activeIndex ? 'is-active' : ''}"
 							onclick={(e) => handleResultClick(e, item.url)}
 							onmouseenter={() => (activeIndex = idx)}
 						>
-							<div class="algolia-title-row">
-								<div class="algolia-title">
+							<div class="search-title-row">
+								<div class="search-title">
 									{@html item.title}
 								</div>
 								{#if item.type}
-									<span class="algolia-badge">{typeLabel(item.type)}</span>
+									<span class="search-badge">{typeLabel(item.type)}</span>
 								{/if}
 							</div>
 							{#if item.excerpt || item.description}
-								<div class="algolia-excerpt">
+								<div class="search-excerpt">
 									{@html item.excerpt || item.description}
 								</div>
 							{/if}
@@ -667,14 +535,14 @@ onDestroy(() => {
 					{/each}
 				</div>
 
-				<div class="algolia-more">
-					<div class="algolia-more-meta">
+				<div class="search-more">
+					<div class="search-more-meta">
 						已显示 {results.length}{nbHits ? ` / ${nbHits}` : ""}{nbHits ? " 条" : ""}
 					</div>
 					{#if hasMore}
 						<button
 							type="button"
-							class="algolia-more-btn"
+							class="search-more-btn"
 							onclick={loadMore}
 							disabled={isLoadingMore}
 						>
@@ -740,102 +608,30 @@ onDestroy(() => {
 					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.announcementClose)}</span>
 				</li>
 			</ul>
-			<span class="docsearch-modal-footer-logo" aria-label={searchEngine === "milisearch" ? "Meilisearch" : "Algolia"}>
-				{#if searchEngine === "algolia"}
-					<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchBy)}</span>
-					<a
-						class="docsearch-modal-footer-logo-link"
-						href="https://www.algolia.com/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-				<svg
-					width="77"
-					height="19"
-					aria-label="Algolia"
-					role="img"
-					xmlns="http://www.w3.org/2000/svg"
-					viewBox="0 0 2196.2 500"
-					class="docsearch-modal-footer-logo-icon docsearch-modal-footer-algolia-mark"
+			<span class="docsearch-modal-footer-logo" aria-label="Meilisearch">
+				<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchBy)}</span>
+				<a
+					class="docsearch-modal-footer-logo-link"
+					href="https://www.meilisearch.com/"
+					target="_blank"
+					rel="noopener noreferrer"
 				>
-					<defs>
-						<style>
-							.cls-1,
-							.cls-2 {
-								fill: #003dff;
-							}
-							.cls-2 {
-								fill-rule: evenodd;
-							}
-						</style>
-					</defs>
-					<path
-						d="M1070.38,275.3V5.91c0-3.63-3.24-6.39-6.82-5.83l-50.46,7.94c-2.87,.45-4.99,2.93-4.99,5.84l.17,273.22c0,12.92,0,92.7,95.97,95.49,3.33,.1,6.09-2.58,6.09-5.91v-40.78c0-2.96-2.19-5.51-5.12-5.84-34.85-4.01-34.85-47.57-34.85-54.72Z"
-						class="cls-2"
-					></path>
-					<rect
-						x="1845.88"
-						y="104.73"
-						width="62.58"
-						height="277.9"
-						rx="5.9"
-						ry="5.9"
-						class="cls-1"
-					></rect>
-					<path
-						d="M1851.78,71.38h50.77c3.26,0,5.9-2.64,5.9-5.9V5.9c0-3.62-3.24-6.39-6.82-5.83l-50.77,7.95c-2.87,.45-4.99,2.92-4.99,5.83v51.62c0,3.26,2.64,5.9,5.9,5.9Z"
-						class="cls-2"
-					></path>
-					<path
-						d="M1764.03,275.3V5.91c0-3.63-3.24-6.39-6.82-5.83l-50.46,7.94c-2.87,.45-4.99,2.93-4.99,5.84l.17,273.22c0,12.92,0,92.7,95.97,95.49,3.33,.1,6.09-2.58,6.09-5.91v-40.78c0-2.96-2.19-5.51-5.12-5.84-34.85-4.01-34.85-47.57-34.85-54.72Z"
-						class="cls-2"
-					></path>
-					<path
-						d="M1631.95,142.72c-11.14-12.25-24.83-21.65-40.78-28.31-15.92-6.53-33.26-9.85-52.07-9.85-18.78,0-36.15,3.17-51.92,9.85-15.59,6.66-29.29,16.05-40.76,28.31-11.47,12.23-20.38,26.87-26.76,44.03-6.38,17.17-9.24,37.37-9.24,58.36,0,20.99,3.19,36.87,9.55,54.21,6.38,17.32,15.14,32.11,26.45,44.36,11.29,12.23,24.83,21.62,40.6,28.46,15.77,6.83,40.12,10.33,52.4,10.48,12.25,0,36.78-3.82,52.7-10.48,15.92-6.68,29.46-16.23,40.78-28.46,11.29-12.25,20.05-27.04,26.25-44.36,6.22-17.34,9.24-33.22,9.24-54.21,0-20.99-3.34-41.19-10.03-58.36-6.38-17.17-15.14-31.8-26.43-44.03Zm-44.43,163.75c-11.47,15.75-27.56,23.7-48.09,23.7-20.55,0-36.63-7.8-48.1-23.7-11.47-15.75-17.21-34.01-17.21-61.2,0-26.89,5.59-49.14,17.06-64.87,11.45-15.75,27.54-23.52,48.07-23.52,20.55,0,36.63,7.78,48.09,23.52,11.47,15.57,17.36,37.98,17.36,64.87,0,27.19-5.72,45.3-17.19,61.2Z"
-						class="cls-2"
-					></path>
-					<path
-						d="M894.42,104.73h-49.33c-48.36,0-90.91,25.48-115.75,64.1-14.52,22.58-22.99,49.63-22.99,78.73,0,44.89,20.13,84.92,51.59,111.1,2.93,2.6,6.05,4.98,9.31,7.14,12.86,8.49,28.11,13.47,44.52,13.47,1.23,0,2.46-.03,3.68-.09,.36-.02,.71-.05,1.07-.07,.87-.05,1.75-.11,2.62-.2,.34-.03,.68-.08,1.02-.12,.91-.1,1.82-.21,2.73-.34,.21-.03,.42-.07,.63-.1,32.89-5.07,61.56-30.82,70.9-62.81v57.83c0,3.26,2.64,5.9,5.9,5.9h50.42c3.26,0,5.9-2.64,5.9-5.9V110.63c0-3.26-2.64-5.9-5.9-5.9h-56.32Zm0,206.92c-12.2,10.16-27.97,13.98-44.84,15.12-.16,.01-.33,.03-.49,.04-1.12,.07-2.24,.1-3.36,.1-42.24,0-77.12-35.89-77.12-79.37,0-10.25,1.96-20.01,5.42-28.98,11.22-29.12,38.77-49.74,71.06-49.74h49.33v142.83Z"
-						class="cls-2"
-					></path>
-					<path
-						d="M2133.97,104.73h-49.33c-48.36,0-90.91,25.48-115.75,64.1-14.52,22.58-22.99,49.63-22.99,78.73,0,44.89,20.13,84.92,51.59,111.1,2.93,2.6,6.05,4.98,9.31,7.14,12.86,8.49,28.11,13.47,44.52,13.47,1.23,0,2.46-.03,3.68-.09,.36-.02,.71-.05,1.07-.07,.87-.05,1.75-.11,2.62-.2,.34-.03,.68-.08,1.02-.12,.91-.1,1.82-.21,2.73-.34,.21-.03,.42-.07,.63-.1,32.89-5.07,61.56-30.82,70.9-62.81v57.83c0,3.26,2.64,5.9,5.9,5.9h50.42c3.26,0,5.9-2.64,5.9-5.9V110.63c0-3.26-2.64-5.9-5.9-5.9h-56.32Zm0,206.92c-12.2,10.16-27.97,13.98-44.84,15.12-.16,.01-.33,.03-.49,.04-1.12,.07-2.24,.1-3.36,.1-42.24,0-77.12-35.89-77.12-79.37,0-10.25,1.96-20.01,5.42-28.98,11.22-29.12,38.77-49.74,71.06-49.74h49.33v142.83Z"
-						class="cls-2"
-					></path>
-					<path
-						d="M1314.05,104.73h-49.33c-48.36,0-90.91,25.48-115.75,64.1-11.79,18.34-19.6,39.64-22.11,62.59-.58,5.3-.88,10.68-.88,16.14s.31,11.15,.93,16.59c4.28,38.09,23.14,71.61,50.66,94.52,2.93,2.6,6.05,4.98,9.31,7.14,12.86,8.49,28.11,13.47,44.52,13.47h0c17.99,0,34.61-5.93,48.16-15.97,16.29-11.58,28.88-28.54,34.48-47.75v50.26h-.11v11.08c0,21.84-5.71,38.27-17.34,49.36-11.61,11.08-31.04,16.63-58.25,16.63-11.12,0-28.79-.59-46.6-2.41-2.83-.29-5.46,1.5-6.27,4.22l-12.78,43.11c-1.02,3.46,1.27,7.02,4.83,7.53,21.52,3.08,42.52,4.68,54.65,4.68,48.91,0,85.16-10.75,108.89-32.21,21.48-19.41,33.15-48.89,35.2-88.52V110.63c0-3.26-2.64-5.9-5.9-5.9h-56.32Zm0,64.1s.65,139.13,0,143.36c-12.08,9.77-27.11,13.59-43.49,14.7-.16,.01-.33,.03-.49,.04-1.12,.07-2.24,.1-3.36,.1-1.32,0-2.63-.03-3.94-.1-40.41-2.11-74.52-37.26-74.52-79.38,0-10.25,1.96-20.01,5.42-28.98,11.22-29.12,38.77-49.74,71.06-49.74h49.33Z"
-						class="cls-2"
-					></path>
-					<path
-						d="M249.83,0C113.3,0,2,110.09,.03,246.16c-2,138.19,110.12,252.7,248.33,253.5,42.68,.25,83.79-10.19,120.3-30.03,3.56-1.93,4.11-6.83,1.08-9.51l-23.38-20.72c-4.75-4.21-11.51-5.4-17.36-2.92-25.48,10.84-53.17,16.38-81.71,16.03-111.68-1.37-201.91-94.29-200.13-205.96,1.76-110.26,92-199.41,202.67-199.41h202.69V407.41l-115-102.18c-3.72-3.31-9.42-2.66-12.42,1.31-18.46,24.44-48.53,39.64-81.93,37.34-46.33-3.2-83.87-40.5-87.34-86.81-4.15-55.24,39.63-101.52,94-101.52,49.18,0,89.68,37.85,93.91,85.95,.38,4.28,2.31,8.27,5.52,11.12l29.95,26.55c3.4,3.01,8.79,1.17,9.63-3.3,2.16-11.55,2.92-23.58,2.07-35.92-4.82-70.34-61.8-126.93-132.17-131.26-80.68-4.97-148.13,58.14-150.27,137.25-2.09,77.1,61.08,143.56,138.19,145.26,32.19,.71,62.03-9.41,86.14-26.95l150.26,133.2c6.44,5.71,16.61,1.14,16.61-7.47V9.48C499.66,4.25,495.42,0,490.18,0H249.83Z"
-						class="cls-1"
-					></path>
-				</svg>
-					</a>
-				{:else}
-					<a
-						class="docsearch-modal-footer-logo-link"
-						href="https://www.meilisearch.com/"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<img
-							src="/assets/images/meilisearch-logo-light.svg"
-							alt="Meilisearch"
-							width="110"
-							height="16"
-							class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-light"
-						/>
-						<img
-							src="/assets/images/meilisearch-logo-dark.svg"
-							alt=""
-							width="110"
-							height="16"
-							class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-dark"
-							aria-hidden="true"
-						/>
-					</a>
-				{/if}
+					<img
+						src="/assets/images/meilisearch-logo-light.svg"
+						alt="Meilisearch"
+						width="110"
+						height="16"
+						class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-light"
+					/>
+					<img
+						src="/assets/images/meilisearch-logo-dark.svg"
+						alt=""
+						width="110"
+						height="16"
+						class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-dark"
+						aria-hidden="true"
+					/>
+				</a>
 			</span>
 		</footer>
 	</div>
@@ -851,23 +647,23 @@ onDestroy(() => {
 		font-weight: 600;
 	}
 
-	.algolia-backdrop {
+	.search-backdrop {
 		position: fixed;
 		inset: 0;
 		background: rgba(0, 0, 0, 0.22);
 		z-index: 2147483646;
 	}
-	:global(html.dark) .algolia-backdrop {
+	:global(html.dark) .search-backdrop {
 		background: rgba(0, 0, 0, 0.55);
 	}
 
-	.algolia-portal-root {
+	.search-portal-root {
 		position: fixed;
 		inset: 0;
 		z-index: 2147483647;
 	}
 
-	.algolia-modal {
+	.search-modal {
 		position: fixed;
 		top: clamp(1rem, 8vh, 4rem);
 		left: 50%;
@@ -888,25 +684,25 @@ onDestroy(() => {
 	}
 
 	/* 无搜索词时的空闲态：总高约 160–180px，接近 DocSearch 紧凑面板（图一） */
-	.algolia-modal:has(.algolia-empty-centered) {
+	.search-modal:has(.search-empty-centered) {
 		max-height: none;
 		height: auto;
 	}
-	.algolia-modal:has(.algolia-empty-centered) .algolia-header {
+	.search-modal:has(.search-empty-centered) .search-header {
 		padding: 0.625rem 0.75rem 0.5rem;
 	}
-	.algolia-modal:has(.algolia-empty-centered) .algolia-body {
+	.search-modal:has(.search-empty-centered) .search-body {
 		flex: 0 0 auto;
 		min-height: 0;
 		overflow: visible;
 		padding: 0.2rem 0.5rem 0.35rem;
 	}
-	.algolia-modal:has(.algolia-empty-centered) .algolia-empty-centered {
+	.search-modal:has(.search-empty-centered) .search-empty-centered {
 		min-height: 2.25rem;
 		padding: 0.25rem 0.75rem;
 	}
 
-	:global(html.dark) .algolia-modal {
+	:global(html.dark) .search-modal {
 		background: #1e293b;
 		color: #e2e8f0;
 		border: 1px solid rgba(148, 163, 184, 0.22);
@@ -915,14 +711,14 @@ onDestroy(() => {
 			0 0 0 1px rgba(15, 23, 42, 0.5);
 	}
 
-	.algolia-header {
+	.search-header {
 		display: flex;
 		gap: 0.5rem;
 		align-items: center;
 		padding: 0.75rem 0.75rem 0.6rem 0.75rem;
 	}
 
-	.algolia-input-wrap {
+	.search-input-wrap {
 		position: relative;
 		flex: 1;
 		display: flex;
@@ -932,21 +728,21 @@ onDestroy(() => {
 		border: 1px solid rgba(17, 24, 39, 0.12);
 		box-shadow: 0 1px 0 rgba(17, 24, 39, 0.04);
 	}
-	:global(html.dark) .algolia-input-wrap {
+	:global(html.dark) .search-input-wrap {
 		background: #0f172a;
 		border: 1px solid rgba(148, 163, 184, 0.28);
 		box-shadow: none;
 	}
-	.algolia-input-wrap:focus-within {
+	.search-input-wrap:focus-within {
 		border-color: var(--primary);
 		box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 28%, transparent);
 	}
-	:global(html.dark) .algolia-input-wrap:focus-within {
+	:global(html.dark) .search-input-wrap:focus-within {
 		border-color: var(--primary);
 		box-shadow: 0 0 0 2px color-mix(in oklch, var(--primary) 32%, transparent);
 	}
 
-	.algolia-search-icon {
+	.search-search-icon {
 		position: absolute;
 		left: 0.75rem;
 		top: 50%;
@@ -954,7 +750,7 @@ onDestroy(() => {
 		color: rgba(17, 24, 39, 0.35);
 		pointer-events: none;
 	}
-	:global(html.dark) .algolia-search-icon {
+	:global(html.dark) .search-search-icon {
 		color: #60a5fa;
 	}
 
@@ -992,7 +788,7 @@ onDestroy(() => {
 		color: rgba(255, 255, 255, 0.7);
 	}
 
-	.algolia-input {
+	.search-input {
 		width: 100%;
 		height: 46px;
 		padding: 0 0.75rem 0 2.85rem;
@@ -1002,30 +798,30 @@ onDestroy(() => {
 		color: inherit;
 		font-size: 1rem;
 	}
-	.algolia-input::placeholder {
+	.search-input::placeholder {
 		color: #64748b;
 	}
-	:global(html.dark) .algolia-input::placeholder {
+	:global(html.dark) .search-input::placeholder {
 		color: #94a3b8;
 	}
 
-	.algolia-body {
+	.search-body {
 		padding: 0.35rem 0.5rem 0.5rem 0.5rem;
 		overflow: auto;
 		flex: 1 1 auto;
 		min-height: 0;
 	}
 
-	.algolia-empty {
+	.search-empty {
 		padding: 0.75rem;
 		opacity: 0.8;
 		color: #4b5563;
 	}
-	:global(html.dark) .algolia-empty {
+	:global(html.dark) .search-empty {
 		color: #cbd5e1;
 		opacity: 0.95;
 	}
-	.algolia-empty-centered {
+	.search-empty-centered {
 		min-height: 3.5rem;
 		padding: 0.5rem 0.75rem 0.65rem 0.75rem;
 		display: flex;
@@ -1033,17 +829,17 @@ onDestroy(() => {
 		justify-content: center;
 		color: rgba(107, 114, 128, 1);
 	}
-	:global(html.dark) .algolia-empty-centered {
+	:global(html.dark) .search-empty-centered {
 		color: #cbd5e1;
 	}
 
-	.algolia-list {
+	.search-list {
 		display: flex;
 		flex-direction: column;
 		gap: 0.25rem;
 	}
 
-	.algolia-more {
+	.search-more {
 		margin-top: 0.5rem;
 		padding: 0.25rem 0.25rem 0;
 		display: flex;
@@ -1052,15 +848,15 @@ onDestroy(() => {
 		gap: 0.75rem;
 	}
 
-	.algolia-more-meta {
+	.search-more-meta {
 		font-size: 0.8rem;
 		color: rgba(107, 114, 128, 1);
 	}
-	:global(html.dark) .algolia-more-meta {
+	:global(html.dark) .search-more-meta {
 		color: rgba(156, 163, 175, 1);
 	}
 
-	.algolia-more-btn {
+	.search-more-btn {
 		border: 1px solid rgba(17, 24, 39, 0.14);
 		background: rgba(255, 255, 255, 1);
 		border-radius: 8px;
@@ -1069,23 +865,23 @@ onDestroy(() => {
 		color: rgba(55, 65, 81, 1);
 		cursor: pointer;
 	}
-	.algolia-more-btn:hover {
+	.search-more-btn:hover {
 		background: rgba(17, 24, 39, 0.04);
 	}
-	.algolia-more-btn:disabled {
+	.search-more-btn:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
 	}
-	:global(html.dark) .algolia-more-btn {
+	:global(html.dark) .search-more-btn {
 		border: 1px solid rgba(255, 255, 255, 0.14);
 		background: rgba(31, 41, 55, 1);
 		color: rgba(229, 231, 235, 1);
 	}
-	:global(html.dark) .algolia-more-btn:hover {
+	:global(html.dark) .search-more-btn:hover {
 		background: rgba(255, 255, 255, 0.06);
 	}
 
-	.algolia-item {
+	.search-item {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -1098,32 +894,32 @@ onDestroy(() => {
 		border: 1px solid rgba(17, 24, 39, 0.08);
 		overflow: hidden;
 	}
-	.algolia-item:hover {
+	.search-item:hover {
 		background: rgba(17, 24, 39, 0.04);
 		border-color: rgba(17, 24, 39, 0.14);
 	}
-	:global(html.dark) .algolia-item:hover {
+	:global(html.dark) .search-item:hover {
 		background: rgba(255, 255, 255, 0.06);
 		border-color: rgba(255, 255, 255, 0.16);
 	}
-	:global(html.dark) .algolia-item {
+	:global(html.dark) .search-item {
 		border-color: rgba(255, 255, 255, 0.1);
 	}
 
-	.algolia-item.is-active {
+	.search-item.is-active {
 		background: transparent;
 		border-color: var(--primary);
 	}
-	:global(html.dark) .algolia-item.is-active {
+	:global(html.dark) .search-item.is-active {
 		background: transparent;
 		border-color: var(--primary);
 	}
-	.algolia-item.is-active :global(mark) {
+	.search-item.is-active :global(mark) {
 		background-color: color-mix(in oklch, var(--primary) 25%, transparent);
 		color: inherit;
 	}
 
-	.algolia-title {
+	.search-title {
 		font-weight: 700;
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
@@ -1132,14 +928,14 @@ onDestroy(() => {
 		line-height: 1.2;
 	}
 
-	.algolia-title-row {
+	.search-title-row {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.6rem;
 	}
 
-	.algolia-badge {
+	.search-badge {
 		flex: none;
 		font-size: 0.7rem;
 		line-height: 1;
@@ -1149,13 +945,13 @@ onDestroy(() => {
 		color: rgba(55, 65, 81, 0.85);
 		background: rgba(17, 24, 39, 0.03);
 	}
-	:global(html.dark) .algolia-badge {
+	:global(html.dark) .search-badge {
 		border: 1px solid rgba(255, 255, 255, 0.14);
 		color: rgba(229, 231, 235, 0.9);
 		background: rgba(255, 255, 255, 0.06);
 	}
 
-	.algolia-excerpt {
+	.search-excerpt {
 		margin-top: 0.25rem;
 		font-size: 0.9rem;
 		opacity: 0.75;
@@ -1265,7 +1061,7 @@ onDestroy(() => {
 		object-fit: contain;
 		object-position: left center;
 	}
-	.docsearch-modal-footer-algolia-mark {
+	.docsearch-modal-footer-search-mark {
 		height: 1rem;
 		max-width: 5rem;
 	}

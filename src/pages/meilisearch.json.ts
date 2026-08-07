@@ -1,15 +1,15 @@
 import { getCollection } from "astro:content";
-import { getPostUrlForEntry } from "@/utils/url-utils";
-import type { APIRoute } from "astro";
 import { createHash } from "node:crypto";
+import type { APIRoute } from "astro";
+import { getPostUrlForEntry } from "@/utils/url-utils";
 import { getEnabledFriends } from "../config/friendsConfig";
-import { sponsorConfig } from "../config/sponsorConfig";
 import { siteConfig } from "../config/siteConfig";
+import { sponsorConfig } from "../config/sponsorConfig";
 
 // 截断文本到指定字节大小，避免单条记录过大导致 Meilisearch 入库失败
 function truncateToBytes(str: string, maxBytes: number): string {
 	const encoder = new TextEncoder();
-	let bytes = encoder.encode(str);
+	const bytes = encoder.encode(str);
 
 	if (bytes.length <= maxBytes) {
 		return str;
@@ -21,7 +21,7 @@ function truncateToBytes(str: string, maxBytes: number): string {
 		truncated = truncated.slice(0, Math.floor(truncated.length * 0.9));
 	}
 
-	return truncated + "...";
+	return `${truncated}...`;
 }
 
 // 估算对象的字节大小
@@ -32,7 +32,7 @@ function estimateObjectSize(obj: any): number {
 type MeilisearchRecord = {
 	// Meilisearch 默认 primary key 为 id（我们这里显式保证所有记录都有 id）
 	id: string;
-	// 保留 objectID 字段，便于和旧 Algolia 记录互相对照
+	// objectID 作为 Meilisearch 的主键（primaryKey）
 	objectID: string;
 	type: "post" | "page" | "friend";
 	title: string;
@@ -45,10 +45,13 @@ type MeilisearchRecord = {
 	published?: string;
 };
 
-function shrinkRecordToFit(record: MeilisearchRecord, maxBytes = 9500): MeilisearchRecord {
+function shrinkRecordToFit(
+	record: MeilisearchRecord,
+	maxBytes = 9500,
+): MeilisearchRecord {
 	// Meilisearch 每条文档最大 10KB（不同版本可能略有差异）
 	// 留 500 bytes 缓冲
-	let safe: MeilisearchRecord = { ...record };
+	const safe: MeilisearchRecord = { ...record };
 	let size = estimateObjectSize(safe);
 	while (size > maxBytes) {
 		const nextLen = Math.max(80, Math.floor((safe.content?.length ?? 0) * 0.8));
@@ -121,7 +124,10 @@ export const GET: APIRoute = async () => {
 	}
 
 	// 2) 固定页面（src/content/spec/*.md）
-	const specMeta: Record<string, { title: string; url: string; description?: string }> = {
+	const specMeta: Record<
+		string,
+		{ title: string; url: string; description?: string }
+	> = {
 		about: { title: "关于", url: "/about/" },
 		friends: { title: "友链", url: "/friends/" },
 		guestbook: { title: "留言板", url: "/guestbook/" },
@@ -202,8 +208,12 @@ export const GET: APIRoute = async () => {
 				description: sponsorConfig.description || sponsorConfig.usage || "",
 				content: [
 					sponsorConfig.usage,
-					...enabledMethods.map((m) => `${m.name}\n${m.description ?? ""}\n${m.link ?? ""}`),
-					...(sponsorConfig.sponsors ?? []).map((s) => `${s.name}\n${s.amount ?? ""}\n${s.message ?? ""}`),
+					...enabledMethods.map(
+						(m) => `${m.name}\n${m.description ?? ""}\n${m.link ?? ""}`,
+					),
+					...(sponsorConfig.sponsors ?? []).map(
+						(s) => `${s.name}\n${s.amount ?? ""}\n${s.message ?? ""}`,
+					),
 				]
 					.filter(Boolean)
 					.join("\n\n"),
@@ -217,4 +227,3 @@ export const GET: APIRoute = async () => {
 		headers: { "Content-Type": "application/json" },
 	});
 };
-

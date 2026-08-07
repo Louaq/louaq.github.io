@@ -4,7 +4,6 @@ import type { FriendLink, FriendsPageConfig } from "../types/config";
 
 // 友链页面配置
 export const friendsPageConfig: FriendsPageConfig = {
-	
 	// 页面标题，如果留空则使用 i18n 中的翻译
 	title: "",
 
@@ -17,43 +16,40 @@ export const friendsPageConfig: FriendsPageConfig = {
 	// 是否显示评论区，需要先在commentConfig.ts启用评论系统
 	showComment: true,
 
-  // 是否开启随机排序配置，如果开启，就会忽略权重，构建时进行一次随机排序
+	// 是否开启随机排序配置，如果开启，就会忽略权重，构建时进行一次随机排序
 	randomizeSort: false,
 };
 
 // 友链配置
 export const friendsConfig: FriendLink[] = [
-  {
-    title: "夏叶",
-    imgurl:
-      "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
-    desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
-    siteurl: "https://blog.cuteleaf.cn",
-    tags: ["Blog"],
-    weight: 10, // 权重，数字越大排序越靠前
-    enabled: true, // 是否启用
-  },
-  {
-    title: "聚合图床",
-    imgurl:
-      "https://www.superbed.cn/favicon.ico",
-    desc: "免费图片上传",
-    siteurl: "https://www.superbed.cn/",
-    tags: ["image"],
-    weight: 9, // 权重，数字越大排序越靠前
-    enabled: true, // 是否启用
-  },
-  {
-    title: "最美博客",
-    imgurl:
-      "https://s1.ax1x.com/2022/11/10/z9E7X4.jpg",
-    desc: "这是一个 Vue2 Vue3 与 SpringBoot 结合的产物",
-    siteurl: "https://poetize.cn/",
-    tags: ["zuimei"],
-    weight: 8, // 权重，数字越大排序越靠前
-    enabled: true, // 是否启用
-  },
-  {
+	{
+		title: "夏叶",
+		imgurl: "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
+		desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
+		siteurl: "https://blog.cuteleaf.cn",
+		tags: ["Blog"],
+		weight: 10, // 权重，数字越大排序越靠前
+		enabled: true, // 是否启用
+	},
+	{
+		title: "聚合图床",
+		imgurl: "https://www.superbed.cn/favicon.ico",
+		desc: "免费图片上传",
+		siteurl: "https://www.superbed.cn/",
+		tags: ["image"],
+		weight: 9, // 权重，数字越大排序越靠前
+		enabled: true, // 是否启用
+	},
+	{
+		title: "最美博客",
+		imgurl: "https://s1.ax1x.com/2022/11/10/z9E7X4.jpg",
+		desc: "这是一个 Vue2 Vue3 与 SpringBoot 结合的产物",
+		siteurl: "https://poetize.cn/",
+		tags: ["zuimei"],
+		weight: 8, // 权重，数字越大排序越靠前
+		enabled: true, // 是否启用
+	},
+	{
 		title: "Astro",
 		imgurl: "https://avatars.githubusercontent.com/u/44914786?v=4&s=640",
 		desc: "The web framework for content-driven websites. ⭐️ Star to support our work!",
@@ -66,7 +62,6 @@ export const friendsConfig: FriendLink[] = [
 
 // 获取启用的友链并按权重排序
 export const getEnabledFriends = (): FriendLink[] => {
-	
 	const friends = friendsConfig.filter((friend) => friend.enabled);
 
 	if (friendsPageConfig.randomizeSort) {

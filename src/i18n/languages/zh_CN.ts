@@ -7,22 +7,15 @@ export const zh_CN: Translation = {
 	[Key.archive]: "归档",
 	[Key.search]: "搜索",
 	[Key.searchBy]: "Search by",
-	[Key.searchProvidedBy]: "提供者",
 	[Key.searchKbdSelect]: "选择",
 	[Key.searchKbdSwitch]: "切换",
 	[Key.searchNoResults]: "找不到相关结果。",
 	[Key.searchTypeSomething]: "请输入搜索关键词。",
 	[Key.searchLoading]: "正在搜索...",
-	[Key.searchSummary]: "摘要",
-	[Key.searchContent]: "内容",
-	[Key.searchViewMore]: "查看更多结果 ({count} 个更多)",
-	[Key.other]: "其他",
 	[Key.all]: "全部",
 
 	[Key.tags]: "标签",
 	[Key.categories]: "分类",
-	[Key.recentPosts]: "最新文章",
-	[Key.postList]: "文章列表",
 	[Key.tableOfContents]: "目录",
 	[Key.tocEmpty]: "当前页面没有目录",
 
@@ -30,7 +23,6 @@ export const zh_CN: Translation = {
 	[Key.announcement]: "公告",
 	[Key.announcementClose]: "关闭",
 
-	[Key.comments]: "评论",
 	[Key.commentSection]: "评论区",
 	[Key.commentSubtitle]: "分享你的想法，与大家交流讨论",
 	[Key.commentNotConfigured]: "评论系统暂未配置",
@@ -40,7 +32,6 @@ export const zh_CN: Translation = {
 	[Key.friendsDescription]: "这里是我的朋友们，欢迎互相访问交流",
 	[Key.guestbook]: "留言",
 	[Key.guestbookDescription]: "欢迎在这里留下你的足迹，分享你的想法和建议",
-	[Key.untitled]: "无标题",
 	[Key.uncategorized]: "未分类",
 	[Key.noTags]: "无标签",
 
@@ -52,10 +43,6 @@ export const zh_CN: Translation = {
 	[Key.postsCount]: "篇文章",
 
 	[Key.themeColor]: "主题色相",
-
-	[Key.lightMode]: "亮色",
-	[Key.darkMode]: "暗色",
-	[Key.systemMode]: "跟随系统",
 
 	[Key.more]: "更多",
 
@@ -76,7 +63,6 @@ export const zh_CN: Translation = {
 	[Key.watchlistCategoryOther]: "其他",
 
 	// 番组计划筛选和状态文本
-	[Key.bangumiTitle]: "我的番组计划",
 	[Key.bangumiSubtitle]: "记录我的二次元之旅",
 	[Key.bangumiFilterAll]: "全部",
 	[Key.bangumiFilterWatched]: "看过",
@@ -112,14 +98,6 @@ export const zh_CN: Translation = {
 	[Key.bangumiNoDataDescription]: "该分类下还没有任何条目",
 	[Key.bangumiEmpty]: "暂无数据",
 	[Key.bangumiEmptyReason]: "可能的原因：用户名不存在、网络连接问题或API限制",
-	[Key.bangumiUsername]: "用户名",
-	[Key.bangumiApi]: "API",
-	[Key.bangumiConfigTip]: "提示：请在页面配置中设置正确的Bangumi用户名",
-	[Key.bangumiPrevPage]: "上一页",
-	[Key.bangumiNextPage]: "下一页",
-	[Key.bangumiCurrentPage]: "第",
-	[Key.bangumiTotalPages]: "页，共",
-	[Key.bangumiPage]: "页",
 
 	// 番组分类
 	[Key.bangumiCategoryBook]: "书籍",
@@ -130,19 +108,11 @@ export const zh_CN: Translation = {
 
 	// 番组数据更新
 	[Key.bangumiLastUpdated]: "数据更新于",
-	[Key.bangumiUpdatedAt]: "构建时间",
-	[Key.bangumiDataStatic]: "静态数据",
 
 	// 分页
-	[Key.paginationFirst]: "首页",
 	[Key.paginationPrev]: "上一页",
 	[Key.paginationNext]: "下一页",
-	[Key.paginationLast]: "末页",
 	[Key.paginationPage]: "第",
-	[Key.paginationOf]: "页，共",
-	[Key.paginationTotal]: "页，总计",
-	[Key.paginationRecords]: "条记录",
-	[Key.paginationCompact]: "第 {current} / 共 {total}",
 	[Key.paginationJumpTo]: "跳转到",
 	[Key.paginationJumpPageUnit]: "页",
 	[Key.paginationGo]: "前往",
@@ -180,16 +150,10 @@ export const zh_CN: Translation = {
 	[Key.lastModifiedNoticeTitle]: "温馨提示",
 	[Key.lastModifiedNoticeJoiner]: "。",
 	[Key.year]: "年",
-	[Key.month]: "月",
-	[Key.day]: "日",
-	[Key.hour]: "时",
-	[Key.minute]: "分",
-	[Key.second]: "秒",
 
 	// 访问量统计
 	[Key.pageViews]: "浏览量",
 	[Key.pageViewsLoading]: "加载中...",
-	[Key.pageViewsError]: "统计不可用",
 
 	// 文章布局
 	[Key.postListLayout]: "文章布局",
@@ -214,13 +178,8 @@ export const zh_CN: Translation = {
 	[Key.sponsorTitle]: "赞助支持",
 	[Key.sponsorDescription]:
 		"如果我的内容对你有帮助，欢迎通过以下方式赞助我，你的支持是我持续创作的动力！",
-	[Key.sponsorMethods]: "赞助方式",
 	[Key.sponsorList]: "赞助列表",
 	[Key.sponsorEmpty]: "暂无赞助记录",
-	[Key.sponsorAmount]: "金额",
-	[Key.sponsorDate]: "日期",
-	[Key.sponsorMessage]: "留言",
-	[Key.sponsorAnonymous]: "匿名",
 	[Key.scanToSponsor]: "扫码赞助",
 	[Key.sponsorGoTo]: "前往赞助",
 	[Key.sponsorButton]: "支持与分享",
@@ -260,14 +219,5 @@ export const zh_CN: Translation = {
 	[Key.calendarNovember]: "11月",
 	[Key.calendarDecember]: "12月",
 
-
 	// 代码块折叠配置
-	[Key.codeCollapsibleShowMore]: "显示更多",
-	[Key.codeCollapsibleShowLess]: "显示更少",
-	[Key.codeCollapsibleExpanded]: "代码块已展开",
-	[Key.codeCollapsibleCollapsed]: "代码块已折叠",
-
-	[Key.moments]: "朋友圈",
-	[Key.momentsDescription]: "随想与日常，样式参考微信朋友圈",
-	[Key.momentsEmpty]: "暂无动态",
 };

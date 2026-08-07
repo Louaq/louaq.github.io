@@ -1,5 +1,5 @@
-import type { AstroIntegration } from "astro";
 import { readFile } from "node:fs/promises";
+import type { AstroIntegration } from "astro";
 
 function normalizeHost(host: string) {
 	return host.replace(/\/$/, "");
@@ -157,11 +157,14 @@ export default function meilisearch(): AstroIntegration {
 					process.env.PUBLIC_MEILISEARCH_HOST ||
 					"https://search.louaq.com";
 				const MEILISEARCH_ADMIN_KEY = process.env.MEILISEARCH_ADMIN_KEY;
-				const MEILISEARCH_INDEX_NAME = process.env.MEILISEARCH_INDEX_NAME || "blog";
+				const MEILISEARCH_INDEX_NAME =
+					process.env.MEILISEARCH_INDEX_NAME || "blog";
 
 				// 没有 admin key 就跳过上传（只要 Meilisearch 端已有索引即可）
 				if (!MEILISEARCH_ADMIN_KEY) {
-					logger.warn("Meilisearch admin key not configured. Skipping index upload.");
+					logger.warn(
+						"Meilisearch admin key not configured. Skipping index upload.",
+					);
 					return;
 				}
 
@@ -175,9 +178,12 @@ export default function meilisearch(): AstroIntegration {
 					if (!data) throw new Error("No data found in meilisearch.json");
 
 					const records = JSON.parse(data);
-					if (!Array.isArray(records)) throw new Error("Invalid data format: expected an array");
+					if (!Array.isArray(records))
+						throw new Error("Invalid data format: expected an array");
 
-					logger.info(`Found ${records.length} records to upload to Meilisearch index: ${MEILISEARCH_INDEX_NAME}`);
+					logger.info(
+						`Found ${records.length} records to upload to Meilisearch index: ${MEILISEARCH_INDEX_NAME}`,
+					);
 
 					let uploadSucceeded = true;
 
@@ -195,11 +201,15 @@ export default function meilisearch(): AstroIntegration {
 
 						// 已存在索引时一般会返回 4xx，这里不致命
 						if (!createRes.ok) {
-							logger.info(`Meilisearch index may already exist: ${MEILISEARCH_INDEX_NAME}`);
+							logger.info(
+								`Meilisearch index may already exist: ${MEILISEARCH_INDEX_NAME}`,
+							);
 						} else {
 							const json = await createRes.json().catch(() => ({}));
 							if (json?.taskUid) {
-								logger.info(`Waiting Meilisearch create-index task: ${json.taskUid}`);
+								logger.info(
+									`Waiting Meilisearch create-index task: ${json.taskUid}`,
+								);
 								await waitForTask({
 									host,
 									adminKey: MEILISEARCH_ADMIN_KEY,
@@ -213,13 +223,30 @@ export default function meilisearch(): AstroIntegration {
 							}
 						}
 					} catch (e) {
-						logger.warn(`Meilisearch create-index failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
+						logger.warn(
+							`Meilisearch create-index failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+						);
 					}
 
 					// 2) 更新索引设置
 					// displayedAttributes 用于确保前端能拿到 content/title 等字段（避免默认不返回）
-					const searchableAttributes = ["title", "description", "content", "tags", "category", "type"];
-					const displayedAttributes = ["type", "title", "description", "content", "url", "tags", "category"];
+					const searchableAttributes = [
+						"title",
+						"description",
+						"content",
+						"tags",
+						"category",
+						"type",
+					];
+					const displayedAttributes = [
+						"type",
+						"title",
+						"description",
+						"content",
+						"url",
+						"tags",
+						"category",
+					];
 					const filterableAttributes = ["type", "objectID"];
 
 					try {
@@ -250,7 +277,9 @@ export default function meilisearch(): AstroIntegration {
 						}
 					} catch (e) {
 						uploadSucceeded = false;
-						logger.warn(`Meilisearch setSettings failed (ignored): ${e instanceof Error ? e.message : String(e)}`);
+						logger.warn(
+							`Meilisearch setSettings failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+						);
 					}
 
 					// 2.6) 清理已下线的观影索引（避免旧数据继续出现在搜索结果中）
@@ -265,7 +294,9 @@ export default function meilisearch(): AstroIntegration {
 						});
 						const deleteJson = await deleteRes.json().catch(() => ({}));
 						if (deleteRes.ok && deleteJson?.taskUid) {
-							logger.info(`Waiting Meilisearch delete-watchlist task: ${deleteJson.taskUid}`);
+							logger.info(
+								`Waiting Meilisearch delete-watchlist task: ${deleteJson.taskUid}`,
+							);
 							await waitForTask({
 								host,
 								adminKey: MEILISEARCH_ADMIN_KEY,
@@ -284,21 +315,30 @@ export default function meilisearch(): AstroIntegration {
 					}
 
 					// 3) 上传文档（按块，避免单次请求过大）
-					const chunkSize = Number(process.env.MEILISEARCH_UPLOAD_CHUNK_SIZE || 100);
+					const chunkSize = Number(
+						process.env.MEILISEARCH_UPLOAD_CHUNK_SIZE || 100,
+					);
 					let uploadedBatchCount = 0;
 					let taskSucceededBatchCount = 0;
 					for (let i = 0; i < records.length; i += chunkSize) {
 						const batch = records.slice(i, i + chunkSize);
 						uploadedBatchCount += 1;
-						logger.info(`Uploading batch ${i / chunkSize + 1} / ${Math.ceil(records.length / chunkSize)} ...`);
+						logger.info(
+							`Uploading batch ${i / chunkSize + 1} / ${Math.ceil(records.length / chunkSize)} ...`,
+						);
 
-						const { res: addRes, json: addJson } = await addDocumentsWithFallback({
-							host,
-							indexUid: MEILISEARCH_INDEX_NAME,
-							adminKey: MEILISEARCH_ADMIN_KEY,
-							documents: batch,
-							logger: { info: logger.info.bind(logger), warn: logger.warn.bind(logger), error: logger.error.bind(logger) },
-						});
+						const { res: addRes, json: addJson } =
+							await addDocumentsWithFallback({
+								host,
+								indexUid: MEILISEARCH_INDEX_NAME,
+								adminKey: MEILISEARCH_ADMIN_KEY,
+								documents: batch,
+								logger: {
+									info: logger.info.bind(logger),
+									warn: logger.warn.bind(logger),
+									error: logger.error.bind(logger),
+								},
+							});
 
 						if (!addRes.ok) {
 							logger.warn(
@@ -343,12 +383,18 @@ export default function meilisearch(): AstroIntegration {
 					// 4) 清理残留：本地已不存在的文档（文章改名/移动目录会生成新 id，旧文档会留在索引里指向死链）
 					// 只在全部批次都成功时执行，避免因部分上传失败而误删仍然有效的文档
 					const allBatchesSucceeded =
-						uploadSucceeded && uploadedBatchCount > 0 && taskSucceededBatchCount === uploadedBatchCount;
+						uploadSucceeded &&
+						uploadedBatchCount > 0 &&
+						taskSucceededBatchCount === uploadedBatchCount;
 
 					if (allBatchesSucceeded) {
 						try {
 							const localIds = new Set(
-								records.map((r: any) => r?.id).filter((id: unknown): id is string => typeof id === "string"),
+								records
+									.map((r: any) => r?.id)
+									.filter(
+										(id: unknown): id is string => typeof id === "string",
+									),
 							);
 							const remoteIds = await listRemoteIds({
 								host,
@@ -360,7 +406,9 @@ export default function meilisearch(): AstroIntegration {
 							if (staleIds.length === 0) {
 								logger.info("Meilisearch index has no stale documents.");
 							} else {
-								logger.info(`Deleting ${staleIds.length} stale Meilisearch document(s) ...`);
+								logger.info(
+									`Deleting ${staleIds.length} stale Meilisearch document(s) ...`,
+								);
 								const delRes = await meiliRequest({
 									url: `${host}/indexes/${MEILISEARCH_INDEX_NAME}/documents/delete-batch`,
 									method: "POST",
@@ -375,7 +423,9 @@ export default function meilisearch(): AstroIntegration {
 										taskUid: delJson.taskUid,
 										timeoutMs: 60_000,
 									});
-									logger.info(`✓ Deleted ${staleIds.length} stale Meilisearch document(s).`);
+									logger.info(
+										`✓ Deleted ${staleIds.length} stale Meilisearch document(s).`,
+									);
 								} else {
 									logger.warn(
 										`Meilisearch delete-stale failed: status=${delRes.status} body=${JSON.stringify(delJson).slice(0, 500)}`,
@@ -388,7 +438,9 @@ export default function meilisearch(): AstroIntegration {
 							);
 						}
 					} else {
-						logger.warn("Skipping stale-document cleanup because some uploads failed.");
+						logger.warn(
+							"Skipping stale-document cleanup because some uploads failed.",
+						);
 					}
 
 					if (uploadSucceeded && taskSucceededBatchCount > 0) {
@@ -401,11 +453,12 @@ export default function meilisearch(): AstroIntegration {
 						);
 					}
 				} catch (error) {
-					logger.error(`✗ Meilisearch upload error: ${error instanceof Error ? error.message : String(error)}`);
+					logger.error(
+						`✗ Meilisearch upload error: ${error instanceof Error ? error.message : String(error)}`,
+					);
 					// 不要让构建失败
 				}
 			},
 		},
 	};
 }
-

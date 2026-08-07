@@ -1,6 +1,6 @@
-import { siteConfig } from "@/config/siteConfig";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
+import { siteConfig } from "@/config/siteConfig";
 
 /**
  * 移除文件扩展名（.md, .mdx, .markdown）
@@ -41,9 +41,7 @@ export function getStablePostPathId(contentId: string): string {
 export function getResolvedPostPath(id: string, data: PostPathSource): string {
 	const custom = data.slug?.trim();
 	if (custom) {
-		return custom
-			.replace(/^[\\/]+|[\\/]+$/g, "")
-			.replace(/\\/g, "/");
+		return custom.replace(/^[\\/]+|[\\/]+$/g, "").replace(/\\/g, "/");
 	}
 	if (siteConfig.postPathMode === "legacy") {
 		return removeFileExtension(id);
@@ -104,16 +102,6 @@ export function getCategoryUrl(category: string | null): string {
 		return url(`/categories/${encodeURIComponent(uncategorizedLabel)}/`);
 	}
 	return url(`/categories/${encodeURIComponent(category.trim())}/`);
-}
-
-export function getDir(path: string): string {
-	// 移除文件扩展名
-	const pathWithoutExt = removeFileExtension(path);
-	const lastSlashIndex = pathWithoutExt.lastIndexOf("/");
-	if (lastSlashIndex < 0) {
-		return "/";
-	}
-	return pathWithoutExt.substring(0, lastSlashIndex + 1);
 }
 
 export function getFileDirFromPath(filePath: string): string {

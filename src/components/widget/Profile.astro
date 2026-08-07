@@ -25,7 +25,10 @@ function isNonHtmlInternalPath(profileUrl?: string): boolean {
 }
 
 function isGithubLink(item: { url: string; icon?: string }): boolean {
-	return /github\.com/i.test(item.url) || (item.icon ?? "").toLowerCase().includes("github");
+	return (
+		/github\.com/i.test(item.url) ||
+		(item.icon ?? "").toLowerCase().includes("github")
+	);
 }
 
 /** icon 以 "/" 开头视为 public/ 下的本地 SVG 文件路径，否则视为 Iconify "prefix:name" */

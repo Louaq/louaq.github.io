@@ -1,8 +1,8 @@
 ---
-import { Icon } from "astro-icon/components";
 import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
+import { Icon } from "astro-icon/components";
 import { getTagList } from "@/utils/content-utils";
 import { getTagUrl } from "@/utils/url-utils";
 
@@ -27,7 +27,8 @@ const PASTEL_CHIP = [
 /** 与标签名绑定，颜色不随排序变化 */
 function pastelChipClass(tagName: string): string {
 	let h = 0;
-	for (let i = 0; i < tagName.length; i++) h = (h * 31 + tagName.charCodeAt(i)) | 0;
+	for (let i = 0; i < tagName.length; i++)
+		h = (h * 31 + tagName.charCodeAt(i)) | 0;
 	const idx = Math.abs(h) % PASTEL_CHIP.length;
 	return PASTEL_CHIP[idx];
 }

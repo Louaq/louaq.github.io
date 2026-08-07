@@ -2,29 +2,13 @@ import { sidebarLayoutConfig } from "../config";
 import type {
 	SidebarLayoutConfig,
 	WidgetComponentConfig,
-	WidgetComponentType,
 } from "../types/config";
-
-/**
- * 组件映射表 - 将组件类型映射到实际的组件路径
- */
-export const WIDGET_COMPONENT_MAP = {
-	profile: "../components/widget/Profile.astro",
-	announcement: "../components/widget/Announcement.astro",
-	categories: "../components/widget/Categories.astro",
-	tags: "../components/widget/Tags.astro",
-	sidebarToc: "../components/widget/SidebarTOC.astro",
-	advertisement: "../components/widget/Advertisement.astro",
-	stats: "../components/widget/SiteStats.astro",
-	calendar: "../components/widget/Calendar.astro",
-	custom: null, // 自定义组件需要在配置中指定路径
-} as const;
 
 /**
  * 组件管理器类
  * 负责管理侧边栏组件的动态加载、排序和渲染
  */
-export class WidgetManager {
+class WidgetManager {
 	private config: SidebarLayoutConfig;
 
 	constructor(config: SidebarLayoutConfig = sidebarLayoutConfig) {
@@ -147,10 +131,7 @@ export class WidgetManager {
 
 		const defaultAnim = this.config.defaultAnimation;
 		if (defaultAnim?.enable) {
-			return (
-				defaultAnim.baseDelay +
-				index * defaultAnim.increment
-			);
+			return defaultAnim.baseDelay + index * defaultAnim.increment;
 		}
 
 		return 0;
@@ -218,14 +199,6 @@ export class WidgetManager {
 	}
 
 	/**
-	 * 获取组件的路径
-	 * @param componentType 组件类型
-	 */
-	getComponentPath(componentType: WidgetComponentType): string | null {
-		return WIDGET_COMPONENT_MAP[componentType];
-	}
-
-	/**
 	 * 检查当前设备是否应该显示侧边栏
 	 * @param deviceType 设备类型
 	 */
@@ -234,101 +207,9 @@ export class WidgetManager {
 			return false;
 		}
 
-		const layoutMode = this.config.responsive?.layout?.[deviceType] ?? "sidebar";
+		const layoutMode =
+			this.config.responsive?.layout?.[deviceType] ?? "sidebar";
 		return layoutMode === "sidebar";
-	}
-
-	/**
-	 * 更新组件配置
-	 * @param newConfig 新的配置
-	 */
-	updateConfig(newConfig: Partial<SidebarLayoutConfig>): void {
-		this.config = { ...this.config, ...newConfig };
-	}
-
-	/**
-	 * 添加新组件
-	 * @param component 组件配置
-	 * @param sidebar 侧边栏位置
-	 */
-	addComponent(
-		component: WidgetComponentConfig,
-		sidebar: "left" | "right" = "left",
-	): void {
-		if (sidebar === "left") {
-			this.config.leftComponents.push(component);
-		} else {
-			this.config.rightComponents.push(component);
-		}
-	}
-
-	/**
-	 * 移除组件
-	 * @param componentType 组件类型
-	 * @param sidebar 侧边栏位置（可选，如果不指定则从两侧都移除）
-	 */
-	removeComponent(
-		componentType: WidgetComponentType,
-		sidebar?: "left" | "right",
-	): void {
-		if (!sidebar || sidebar === "left") {
-			this.config.leftComponents = this.config.leftComponents.filter(
-				(component) => component.type !== componentType,
-			);
-		}
-		if (!sidebar || sidebar === "right") {
-			this.config.rightComponents = this.config.rightComponents.filter(
-				(component) => component.type !== componentType,
-			);
-		}
-	}
-
-	/**
-	 * 启用/禁用组件
-	 * @param componentType 组件类型
-	 * @param enable 是否启用
-	 * @param sidebar 侧边栏位置（可选）
-	 */
-	toggleComponent(
-		componentType: WidgetComponentType,
-		enable: boolean,
-		_sidebar?: "left" | "right",
-	): void {
-		const allComponents = [
-			...this.config.leftComponents,
-			...this.config.rightComponents,
-		];
-
-		const component = allComponents.find((c) => c.type === componentType);
-		if (component) {
-			component.enable = enable;
-		}
-	}
-
-	/**
-	 * 重新排序组件
-	 * @param componentType 组件类型
-	 * @param newOrder 新的排序值
-	 */
-	reorderComponent(componentType: WidgetComponentType, newOrder: number): void {
-		const allComponents = [
-			...this.config.leftComponents,
-			...this.config.rightComponents,
-		];
-
-		const component = allComponents.find((c) => c.type === componentType);
-		if (component) {
-			component.order = newOrder;
-		}
-	}
-
-	/**
-	 * 检查组件是否应该在侧边栏中渲染
-	 * @param componentType 组件类型
-	 */
-	isSidebarComponent(_componentType: WidgetComponentType): boolean {
-		// 过滤组件
-		return true;
 	}
 }
 
@@ -336,45 +217,3 @@ export class WidgetManager {
  * 默认组件管理器实例
  */
 export const widgetManager = new WidgetManager();
-
-/**
- * 工具函数：根据组件类型获取组件配置
- * @param componentType 组件类型
- * @param sidebar 侧边栏位置（可选）
- */
-export function getComponentConfig(
-	componentType: WidgetComponentType,
-	sidebar?: "left" | "right",
-): WidgetComponentConfig | undefined {
-	const config = widgetManager.getConfig();
-	const allComponents = [...config.leftComponents, ...config.rightComponents];
-
-	if (sidebar) {
-		const components =
-			sidebar === "left" ? config.leftComponents : config.rightComponents;
-		return components.find((c) => c.type === componentType);
-	}
-
-	return allComponents.find((c) => c.type === componentType);
-}
-
-/**
- * 工具函数：检查组件是否启用
- * @param componentType 组件类型
- */
-export function isComponentEnabled(
-	componentType: WidgetComponentType,
-): boolean {
-	const config = getComponentConfig(componentType);
-	return config?.enable ?? false;
-}
-
-/**
- * 工具函数：获取所有启用的组件类型
- */
-export function getEnabledComponentTypes(): WidgetComponentType[] {
-	const enabledComponents = widgetManager
-		.getComponentsByPosition("top")
-		.concat(widgetManager.getComponentsByPosition("sticky"));
-	return enabledComponents.map((c) => c.type);
-}

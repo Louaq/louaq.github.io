@@ -7,22 +7,15 @@ export const ru: Translation = {
 	[Key.archive]: "Архив",
 	[Key.search]: "Поиск",
 	[Key.searchBy]: "Search by",
-	[Key.searchProvidedBy]: "Предоставлено",
 	[Key.searchKbdSelect]: "Выбрать",
 	[Key.searchKbdSwitch]: "Переключить",
 	[Key.searchNoResults]: "Результаты не найдены.",
 	[Key.searchTypeSomething]: "Введите ключевое слово для поиска...",
 	[Key.searchLoading]: "Поиск...",
-	[Key.searchSummary]: "Резюме",
-	[Key.searchContent]: "Содержание",
-	[Key.searchViewMore]: "Показать еще ({count} шт)",
-	[Key.other]: "Прочее",
 	[Key.all]: "Все",
 
 	[Key.tags]: "Теги",
 	[Key.categories]: "Категории",
-	[Key.recentPosts]: "Последние посты",
-	[Key.postList]: "Список постов",
 	[Key.tableOfContents]: "Содержание",
 	[Key.tocEmpty]: "На этой странице нет оглавления",
 
@@ -30,7 +23,6 @@ export const ru: Translation = {
 	[Key.announcement]: "Объявление",
 	[Key.announcementClose]: "Закрыть",
 
-	[Key.comments]: "Комментарии",
 	[Key.commentSection]: "Комментарии",
 	[Key.commentSubtitle]: "Поделитесь своими мыслями и обсудите с остальными",
 	[Key.commentNotConfigured]: "Система комментариев не настроена",
@@ -42,7 +34,6 @@ export const ru: Translation = {
 	[Key.guestbook]: "Гостевая книга",
 	[Key.guestbookDescription]:
 		"Добро пожаловать, оставьте свой след здесь, поделитесь своими мыслями и предложениями",
-	[Key.untitled]: "Без названия",
 	[Key.uncategorized]: "Без категории",
 	[Key.noTags]: "Нет тегов",
 
@@ -55,10 +46,6 @@ export const ru: Translation = {
 
 	[Key.themeColor]: "Цвет темы",
 
-	[Key.lightMode]: "Светлая",
-	[Key.darkMode]: "Тёмная",
-	[Key.systemMode]: "Система",
-
 	[Key.more]: "Ещё",
 
 	[Key.author]: "Автор",
@@ -67,9 +54,11 @@ export const ru: Translation = {
 	[Key.bangumi]: "Бангуми",
 	[Key.watchlist]: "Просмотр",
 	[Key.watchlistTitle]: "Список просмотра",
-	[Key.watchlistSubtitle]: "Запись последних просмотренных аниме и телесериалов",
+	[Key.watchlistSubtitle]:
+		"Запись последних просмотренных аниме и телесериалов",
 	[Key.watchlistEmpty]: "Нет данных",
-	[Key.watchlistEmptyReason]: "Нет данных были добавлены, перейдите в файл конфигурации для добавления",
+	[Key.watchlistEmptyReason]:
+		"Нет данных были добавлены, перейдите в файл конфигурации для добавления",
 	[Key.watchlistLastUpdated]: "Последнее обновление",
 	[Key.watchlistCategoryAnime]: "Аниме",
 	[Key.watchlistCategoryMovie]: "Фильмы",
@@ -78,7 +67,6 @@ export const ru: Translation = {
 	[Key.watchlistCategoryOther]: "Другое",
 
 	// Фильтр и статус Бангуми текст
-	[Key.bangumiTitle]: "Мой план группы",
 	[Key.bangumiSubtitle]: "Запись моего аниме путешествия",
 	[Key.bangumiFilterAll]: "Все",
 	[Key.bangumiFilterWatched]: "Просмотрено",
@@ -115,15 +103,6 @@ export const ru: Translation = {
 	[Key.bangumiEmpty]: "Нет данных",
 	[Key.bangumiEmptyReason]:
 		"Возможные причины: имя пользователя не существует, проблема с подключением к сети или ограничение API",
-	[Key.bangumiUsername]: "Имя пользователя",
-	[Key.bangumiApi]: "API",
-	[Key.bangumiConfigTip]:
-		"Подсказка: установите правильное имя пользователя Bangumi в конфигурации страницы",
-	[Key.bangumiPrevPage]: "Предыдущая",
-	[Key.bangumiNextPage]: "Следующая",
-	[Key.bangumiCurrentPage]: "Страница",
-	[Key.bangumiTotalPages]: "из",
-	[Key.bangumiPage]: "страница",
 
 	// Категории Бангуми
 	[Key.bangumiCategoryBook]: "Книга",
@@ -134,19 +113,11 @@ export const ru: Translation = {
 
 	// Обновление данных Бангуми
 	[Key.bangumiLastUpdated]: "Данные обновлены",
-	[Key.bangumiUpdatedAt]: "Время сборки",
-	[Key.bangumiDataStatic]: "Статические данные",
 
 	// Пагинация
-	[Key.paginationFirst]: "Первая",
 	[Key.paginationPrev]: "Предыдущая",
 	[Key.paginationNext]: "Следующая",
-	[Key.paginationLast]: "Последняя",
 	[Key.paginationPage]: "Страница",
-	[Key.paginationOf]: "из",
-	[Key.paginationTotal]: ", всего",
-	[Key.paginationRecords]: " записей",
-	[Key.paginationCompact]: "Страница {current} из {total}",
 	[Key.paginationJumpTo]: "Перейти к стр.",
 	[Key.paginationJumpPageUnit]: "",
 	[Key.paginationGo]: "Перейти",
@@ -189,22 +160,15 @@ export const ru: Translation = {
 	[Key.lastModifiedNoticeTitle]: "Внимание",
 	[Key.lastModifiedNoticeJoiner]: ". ",
 	[Key.year]: "год",
-	[Key.month]: "месяц",
-	[Key.day]: "день",
-	[Key.hour]: "час",
-	[Key.minute]: "минута",
-	[Key.second]: "секунда",
 
 	// Статистика просмотров
 	[Key.pageViews]: "Просмотры",
 	[Key.pageViewsLoading]: "Загрузка...",
-	[Key.pageViewsError]: "Статистика недоступна",
 
 	// Макет списка сообщений
 	[Key.postListLayout]: "Макет списка сообщений",
 	[Key.postListLayoutList]: "Список",
 	[Key.postListLayoutGrid]: "Сетка",
-
 
 	// Закреплено
 	[Key.pinned]: "Закреплено",
@@ -224,13 +188,8 @@ export const ru: Translation = {
 	[Key.sponsorTitle]: "Поддержать меня",
 	[Key.sponsorDescription]:
 		"Если мой контент был полезен для вас, добро пожаловать поддержать меня следующими способами. Ваша поддержка - это движущая сила моего постоянного творчества!",
-	[Key.sponsorMethods]: "Способы оплаты",
 	[Key.sponsorList]: "Спонсоры",
 	[Key.sponsorEmpty]: "Пока нет спонсоров",
-	[Key.sponsorAmount]: "Сумма",
-	[Key.sponsorDate]: "Дата",
-	[Key.sponsorMessage]: "Сообщение",
-	[Key.sponsorAnonymous]: "Анонимно",
 	[Key.scanToSponsor]: "Сканировать для поддержки",
 	[Key.sponsorGoTo]: "Перейти к спонсору",
 	[Key.sponsorButton]: "Поддержка и Поделиться",
@@ -271,12 +230,4 @@ export const ru: Translation = {
 	[Key.calendarDecember]: "Дек",
 
 	// Конфигурация блоков коллапсируемого кода
-	[Key.codeCollapsibleShowMore]: "Показать больше",
-	[Key.codeCollapsibleShowLess]: "Показать меньше",
-	[Key.codeCollapsibleExpanded]: "Блок кода развернут",
-	[Key.codeCollapsibleCollapsed]: "Блок кода свернут",
-
-	[Key.moments]: "Моменты",
-	[Key.momentsDescription]: "Заметки и будни в стиле WeChat",
-	[Key.momentsEmpty]: "Пока нет записей",
 };

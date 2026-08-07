@@ -70,15 +70,9 @@ export type SiteConfig = {
 		followTheme?: boolean; // 导航栏图标和标题是否跟随主题色
 	};
 
-	// 搜索引擎配置
-	search?: {
-		engine: "algolia" | "milisearch"; // 搜索引擎：Algolia / Milisearch(Meilisearch)
-	};
-
 	showLastModified: boolean; // 控制文章页元信息中的更新日期与正文前过期提醒卡片
 	outdatedThreshold?: number; // 过期提醒卡片：距上次编辑超过该天数才显示（元信息更新日期不受此限制）
 	showPostPrevNext?: boolean; // 文章页是否显示上一篇/下一篇导航
-
 
 	postPathMode?: "hash" | "legacy";
 
@@ -154,13 +148,11 @@ export type ProfileLinkItem = {
 	showName?: boolean;
 };
 
-
 export type ProfileBadgeItem = {
 	text: string;
 	href?: string;
 	icon?: string;
 };
-
 
 export type ProfileStatValueMode =
 	| "literal"
@@ -174,7 +166,7 @@ export type ProfileStatItem = {
 	href?: string;
 
 	valueMode?: ProfileStatValueMode;
-	
+
 	randomMin?: number;
 	randomMax?: number;
 };
@@ -241,33 +233,14 @@ export type CommentConfig = {
 	};
 };
 
-export type LIGHT_DARK_MODE =
-	| typeof LIGHT_MODE
-	| typeof DARK_MODE;
+export type LIGHT_DARK_MODE = typeof LIGHT_MODE | typeof DARK_MODE;
 
 export type WALLPAPER_MODE =
 	| typeof WALLPAPER_BANNER
 	| typeof WALLPAPER_OVERLAY
 	| typeof WALLPAPER_NONE;
 
-export type BlogPostData = {
-	body: string;
-	title: string;
-	published: Date;
-	description: string;
-	tags: string[];
-	draft?: boolean;
-	image?: string;
-	category?: string;
-	pinned?: boolean;
-	prevTitle?: string;
-	prevSlug?: string;
-	nextTitle?: string;
-	nextSlug?: string;
-};
-
 export type ExpressiveCodeConfig = {
-
 	theme?: string;
 	darkTheme: string;
 	lightTheme: string;
@@ -301,10 +274,9 @@ export type AnnouncementConfig = {
 	};
 };
 
-
 export type HomeTopNoticeItem = {
 	title?: string;
-	
+
 	content: string;
 	icon?: string;
 	link?: {
@@ -636,4 +608,3 @@ export type SponsorConfig = {
 	showComment?: boolean; // 是否显示评论区，默认 false
 	showButtonInPost?: boolean; // 是否在文章详情页底部显示赞助按钮，默认 true
 };
-

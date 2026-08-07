@@ -10,10 +10,7 @@ import ImageWrapper from "@/components/common/ImageWrapper.astro";
 import FloatingControls from "@/components/controls/FloatingControls.astro";
 import TypewriterText from "@/components/features/TypewriterText.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
-import {
-	backgroundWallpaper,
-	siteConfig,
-} from "@/config";
+import { backgroundWallpaper, siteConfig } from "@/config";
 import {
 	BANNER_HEIGHT,
 	BANNER_HEIGHT_EXTEND,
@@ -105,9 +102,11 @@ const randomSubtitle = getRandomSubtitle();
 
 // 主页横幅文本只在首页且全局开关为 true 时显示，不区分设备
 const homeTextEnable = backgroundWallpaper.banner?.homeText?.enable ?? false;
-const homeTextSwitchable = backgroundWallpaper.banner?.homeText?.switchable ?? false;
+const homeTextSwitchable =
+	backgroundWallpaper.banner?.homeText?.switchable ?? false;
 const shouldRenderHomeTextOverlay = homeTextEnable || homeTextSwitchable;
-const showHomeText = isBannerMode && shouldRenderHomeTextOverlay && isHomePageCheck;
+const showHomeText =
+	isBannerMode && shouldRenderHomeTextOverlay && isHomePageCheck;
 // 手机端非首页不显示banner的CSS类
 const mobileNonHomeBannerClass =
 	!isHomePageCheck && !isPostPageCheck ? "mobile-hide-banner" : "";
@@ -119,7 +118,9 @@ const resolvedBannerBasePath = bannerBasePath || "/";
 
 const toSrcList = (src: unknown): string[] => {
 	if (Array.isArray(src)) {
-		return src.filter((s): s is string => typeof s === "string" && s.trim() !== "");
+		return src.filter(
+			(s): s is string => typeof s === "string" && s.trim() !== "",
+		);
 	}
 	if (typeof src === "string" && src.trim() !== "") {
 		return [src.trim()];
@@ -144,7 +145,8 @@ const bannerMobileList = hasCustomBanner
 const overlayDesktopSrc = bannerDesktopList[0] || "";
 const overlayMobileSrc = bannerMobileList[0] || "";
 const shouldUseTemplateForBannerImages =
-	!hasCustomBanner && (bannerMobileList.length > 1 || bannerDesktopList.length > 1);
+	!hasCustomBanner &&
+	(bannerMobileList.length > 1 || bannerDesktopList.length > 1);
 
 // 计算主内容区域位置，考虑手机端非首页时banner被隐藏
 const mainPanelTop =
@@ -171,7 +173,6 @@ const shouldEnableTransparency = isOverlayMode && isBackgroundEnabled;
 const transparentClass = shouldEnableTransparency
 	? "wallpaper-transparent"
 	: "";
-
 ---
 
 <Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>

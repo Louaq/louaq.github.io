@@ -22,7 +22,7 @@ const processedLinks = Astro.props.links.map((link: NavBarLink) => ({
 				if (child in LinkPresets) {
 					const preset = LinkPresets[child as LinkPreset];
 					// 确保 preset 有效
-					if (preset && preset.url) {
+					if (preset?.url) {
 						return preset;
 					}
 				}

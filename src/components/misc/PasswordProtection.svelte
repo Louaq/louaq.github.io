@@ -1,177 +1,184 @@
 <script lang="ts">
-  import { onMount, onDestroy } from "svelte";
-  
-  export let postId: string;
-  export let password: string;
-  export let hint: string = ""; // 可选密码提示，如 "示例文章密码123456"
-  
-  let inputPassword = "";
-  let errorMessage = "";
-  let isUnlocked = false;
-  let isShaking = false;
-  let isFrozen = false;
-  let remainingTime = 0;
-  let countdownInterval: number | null = null;
-  
-  const MAX_ATTEMPTS = 3; // 最大尝试次数
-  const BASE_FREEZE_TIME = 5 * 60 * 1000; // 基础冻结时间：5分钟（毫秒）
-  const STORAGE_KEY = `password_freeze_${postId}`;
-  
-  // 获取冻结状态
-  function getFreezeState() {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        return JSON.parse(stored);
-      }
-    } catch (e) {
-      // 忽略解析错误
-    }
-    return { attempts: 0, freezeCount: 0, freezeUntil: 0 };
-  }
-  
-  // 保存冻结状态
-  function saveFreezeState(state: { attempts: number; freezeCount: number; freezeUntil: number }) {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-    } catch (e) {
-      // 忽略存储错误
-    }
-  }
-  
-  // 检查是否处于冻结状态
-  function checkFrozen() {
-    const state = getFreezeState();
-    const now = Date.now();
-    
-    if (state.freezeUntil > now) {
-      isFrozen = true;
-      remainingTime = Math.ceil((state.freezeUntil - now) / 1000);
-      startCountdown();
-      return true;
-    } else if (state.freezeUntil > 0) {
-      // 冻结时间已过，重置尝试次数，但保留冻结计数
-      state.attempts = 0;
-      state.freezeUntil = 0;
-      saveFreezeState(state);
-    }
-    
-    isFrozen = false;
-    return false;
-  }
-  
-  // 开始倒计时
-  function startCountdown() {
-    if (countdownInterval) {
-      clearInterval(countdownInterval);
-    }
-    
-    countdownInterval = window.setInterval(() => {
-      if (remainingTime > 0) {
-        remainingTime--;
-        updateErrorMessage();
-      } else {
-        isFrozen = false;
-        errorMessage = "";
-        if (countdownInterval) {
-          clearInterval(countdownInterval);
-          countdownInterval = null;
-        }
-      }
-    }, 1000);
-  }
-  
-  // 更新错误消息
-  function updateErrorMessage() {
-    if (isFrozen && remainingTime > 0) {
-      const minutes = Math.floor(remainingTime / 60);
-      const seconds = remainingTime % 60;
-      errorMessage = `输入错误次数过多，请等待 ${minutes}分${seconds}秒 后重试`;
-    }
-  }
-  
-  // 格式化时间显示
-  function formatTime(seconds: number): string {
-    const minutes = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${minutes}分${secs}秒`;
-  }
-  
-  // 验证密码
-  function verifyPassword() {
-    // 检查是否处于冻结状态
-    if (checkFrozen()) {
-      updateErrorMessage();
-      isShaking = true;
-      setTimeout(() => {
-        isShaking = false;
-      }, 500);
-      return;
-    }
-    
-    if (inputPassword === password) {
-      // 密码正确，清除冻结状态
-      localStorage.removeItem(STORAGE_KEY);
-      errorMessage = "";
-      isUnlocked = true;
-      
-      // 发送自定义事件通知父组件
-      window.dispatchEvent(new CustomEvent("password-unlocked", { detail: { postId } }));
-    } else {
-      // 密码错误
-      const state = getFreezeState();
-      state.attempts++;
-      
-      if (state.attempts >= MAX_ATTEMPTS) {
-        // 达到最大尝试次数，进入冻结
-        state.freezeCount++;
-        const freezeDuration = BASE_FREEZE_TIME * state.freezeCount;
-        state.freezeUntil = Date.now() + freezeDuration;
-        state.attempts = 0; // 重置尝试次数
-        
-        saveFreezeState(state);
-        
-        isFrozen = true;
-        remainingTime = Math.ceil(freezeDuration / 1000);
-        updateErrorMessage();
-        startCountdown();
-      } else {
-        // 显示剩余尝试次数
-        const remainingAttempts = MAX_ATTEMPTS - state.attempts;
-        errorMessage = `密码错误，还剩 ${remainingAttempts} 次尝试机会`;
-        saveFreezeState(state);
-      }
-      
-      isShaking = true;
-      
-      // 清空输入框
-      inputPassword = "";
-      
-      // 移除抖动效果
-      setTimeout(() => {
-        isShaking = false;
-      }, 500);
-    }
-  }
-  
-  // 处理键盘事件
-  function handleKeyPress(event: KeyboardEvent) {
-    if (event.key === "Enter" && !isFrozen) {
-      verifyPassword();
-    }
-  }
-  
-  // 组件挂载时检查冻结状态
-  onMount(() => {
-    checkFrozen();
-  });
-  
-  // 组件销毁时清理定时器
-  onDestroy(() => {
-    if (countdownInterval) {
-      clearInterval(countdownInterval);
-    }
-  });
+import { onDestroy, onMount } from "svelte";
+
+export let postId: string;
+export let password: string;
+export let hint = ""; // 可选密码提示，如 "示例文章密码123456"
+
+let inputPassword = "";
+let errorMessage = "";
+let isUnlocked = false;
+let isShaking = false;
+let isFrozen = false;
+let remainingTime = 0;
+let countdownInterval: number | null = null;
+
+const MAX_ATTEMPTS = 3; // 最大尝试次数
+const BASE_FREEZE_TIME = 5 * 60 * 1000; // 基础冻结时间：5分钟（毫秒）
+const STORAGE_KEY = `password_freeze_${postId}`;
+
+// 获取冻结状态
+function getFreezeState() {
+	try {
+		const stored = localStorage.getItem(STORAGE_KEY);
+		if (stored) {
+			return JSON.parse(stored);
+		}
+	} catch (e) {
+		// 忽略解析错误
+	}
+	return { attempts: 0, freezeCount: 0, freezeUntil: 0 };
+}
+
+// 保存冻结状态
+function saveFreezeState(state: {
+	attempts: number;
+	freezeCount: number;
+	freezeUntil: number;
+}) {
+	try {
+		localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+	} catch (e) {
+		// 忽略存储错误
+	}
+}
+
+// 检查是否处于冻结状态
+function checkFrozen() {
+	const state = getFreezeState();
+	const now = Date.now();
+
+	if (state.freezeUntil > now) {
+		isFrozen = true;
+		remainingTime = Math.ceil((state.freezeUntil - now) / 1000);
+		startCountdown();
+		return true;
+	}
+	if (state.freezeUntil > 0) {
+		// 冻结时间已过，重置尝试次数，但保留冻结计数
+		state.attempts = 0;
+		state.freezeUntil = 0;
+		saveFreezeState(state);
+	}
+
+	isFrozen = false;
+	return false;
+}
+
+// 开始倒计时
+function startCountdown() {
+	if (countdownInterval) {
+		clearInterval(countdownInterval);
+	}
+
+	countdownInterval = window.setInterval(() => {
+		if (remainingTime > 0) {
+			remainingTime--;
+			updateErrorMessage();
+		} else {
+			isFrozen = false;
+			errorMessage = "";
+			if (countdownInterval) {
+				clearInterval(countdownInterval);
+				countdownInterval = null;
+			}
+		}
+	}, 1000);
+}
+
+// 更新错误消息
+function updateErrorMessage() {
+	if (isFrozen && remainingTime > 0) {
+		const minutes = Math.floor(remainingTime / 60);
+		const seconds = remainingTime % 60;
+		errorMessage = `输入错误次数过多，请等待 ${minutes}分${seconds}秒 后重试`;
+	}
+}
+
+// 格式化时间显示
+function formatTime(seconds: number): string {
+	const minutes = Math.floor(seconds / 60);
+	const secs = seconds % 60;
+	return `${minutes}分${secs}秒`;
+}
+
+// 验证密码
+function verifyPassword() {
+	// 检查是否处于冻结状态
+	if (checkFrozen()) {
+		updateErrorMessage();
+		isShaking = true;
+		setTimeout(() => {
+			isShaking = false;
+		}, 500);
+		return;
+	}
+
+	if (inputPassword === password) {
+		// 密码正确，清除冻结状态
+		localStorage.removeItem(STORAGE_KEY);
+		errorMessage = "";
+		isUnlocked = true;
+
+		// 发送自定义事件通知父组件
+		window.dispatchEvent(
+			new CustomEvent("password-unlocked", { detail: { postId } }),
+		);
+	} else {
+		// 密码错误
+		const state = getFreezeState();
+		state.attempts++;
+
+		if (state.attempts >= MAX_ATTEMPTS) {
+			// 达到最大尝试次数，进入冻结
+			state.freezeCount++;
+			const freezeDuration = BASE_FREEZE_TIME * state.freezeCount;
+			state.freezeUntil = Date.now() + freezeDuration;
+			state.attempts = 0; // 重置尝试次数
+
+			saveFreezeState(state);
+
+			isFrozen = true;
+			remainingTime = Math.ceil(freezeDuration / 1000);
+			updateErrorMessage();
+			startCountdown();
+		} else {
+			// 显示剩余尝试次数
+			const remainingAttempts = MAX_ATTEMPTS - state.attempts;
+			errorMessage = `密码错误，还剩 ${remainingAttempts} 次尝试机会`;
+			saveFreezeState(state);
+		}
+
+		isShaking = true;
+
+		// 清空输入框
+		inputPassword = "";
+
+		// 移除抖动效果
+		setTimeout(() => {
+			isShaking = false;
+		}, 500);
+	}
+}
+
+// 处理键盘事件
+function handleKeyPress(event: KeyboardEvent) {
+	if (event.key === "Enter" && !isFrozen) {
+		verifyPassword();
+	}
+}
+
+// 组件挂载时检查冻结状态
+onMount(() => {
+	checkFrozen();
+});
+
+// 组件销毁时清理定时器
+onDestroy(() => {
+	if (countdownInterval) {
+		clearInterval(countdownInterval);
+	}
+});
 </script>
 
 {#if !isUnlocked}

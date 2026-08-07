@@ -14,8 +14,8 @@ const fallbackCss = (fontConfig.fallback || []).join(", ");
 const monoFallbackCss = (fontConfig.code.fallbacks || ["monospace"]).join(", ");
 
 // cssVariable 在配置中为 string，<Font /> 需要 astro 由 `fonts` 配置生成的字面量联合类型
-const codeCssVariable =
-	fontConfig.code.cssVariable as import("astro:assets").CssVariable;
+const codeCssVariable = fontConfig.code
+	.cssVariable as import("astro:assets").CssVariable;
 ---
 
 {

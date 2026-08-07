@@ -4,7 +4,12 @@ import { commentConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
-import { getCategoryUrl, getPostUrlBySlug, getTagUrl, removeFileExtension } from "@/utils/url-utils";
+import {
+	getCategoryUrl,
+	getPostUrlBySlug,
+	getTagUrl,
+	removeFileExtension,
+} from "@/utils/url-utils";
 
 export interface Props {
 	published: Date;
@@ -45,7 +50,8 @@ const {
 
 const slugForPath = postPathSlug ?? (id ? removeFileExtension(id) : "");
 const path = customPath || (slugForPath ? getPostUrlBySlug(slugForPath) : "");
-const wordLabel = words === 1 ? i18n(I18nKey.wordCount) : i18n(I18nKey.wordsCount);
+const wordLabel =
+	words === 1 ? i18n(I18nKey.wordCount) : i18n(I18nKey.wordsCount);
 const minuteLabel =
 	minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount);
 ---

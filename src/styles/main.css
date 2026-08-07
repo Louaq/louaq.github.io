@@ -382,29 +382,11 @@
   }
 }
 
-@utility card-base-transparent {
-  @apply rounded-(--radius-large) overflow-hidden bg-(--card-bg-transparent) backdrop-blur-xs;
-  .enable-card-border & {
-    @apply border border-(--line-divider) shadow-xs;
-    transition-property:
-      background-color, border-color, box-shadow, color, backdrop-filter;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--theme-transition-easing);
-  }
-}
-
 @utility enable-card-border {
   /* 开启边框和阴影效果时的样式 */
   & .card-base {
     @apply border border-(--line-divider) shadow-xs;
     transition-property: background-color, border-color, box-shadow, color;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--theme-transition-easing);
-  }
-  & .card-base-transparent {
-    @apply border border-(--line-divider) shadow-xs;
-    transition-property:
-      background-color, border-color, box-shadow, color, backdrop-filter;
     transition-duration: var(--theme-transition-duration);
     transition-timing-function: var(--theme-transition-easing);
   }
@@ -1012,31 +994,6 @@
   --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
 }
 
-/* 文章列表布局切换样式 */
-.post-list-layout-switch {
-  @apply flex items-center gap-2 mb-6 p-3 bg-(--card-bg) rounded-lg border border-(--line-divider);
-}
-
-.post-list-layout-switch span {
-  @apply text-sm text-(--text-secondary);
-}
-
-.post-list-layout-switch .layout-buttons {
-  @apply flex gap-1;
-}
-
-.post-list-layout-switch button {
-  @apply px-3 py-1.5 text-sm rounded-md transition-colors;
-}
-
-.post-list-layout-switch button.active {
-  @apply bg-(--primary) text-white;
-}
-
-.post-list-layout-switch button:not(.active) {
-  @apply bg-(--bg-secondary) text-(--text-secondary) hover:bg-(--bg-hover);
-}
-
 /* 网格模式下的文章卡片样式调整 */
 .post-list-container.grid-mode .post-card-item {
   @apply w-full;
@@ -1084,24 +1041,6 @@
 /* 网格模式下的统计信息调整 */
 .post-list-container.grid-mode .post-card-item .stats {
   @apply text-xs;
-}
-
-/* 响应式分页样式 */
-.device-mobile .pagination-info {
-  @apply text-xs;
-}
-
-.device-tablet .pagination-info {
-  @apply text-sm;
-}
-
-.device-desktop .pagination-info {
-  @apply text-base;
-}
-
-/* 分页信息样式 */
-.pagination-info {
-    @apply text-sm text-(--text-secondary) text-center mb-2;
 }
 
 /*
@@ -1160,8 +1099,7 @@ body {
 /* =============================================================
  * 卡片：白底 + 柔和圆角 + 无边框浮起（深色模式改用极浅描边，阴影在深色背景上不可读）
  * ============================================================= */
-.card-base,
-.card-base-transparent {
+.card-base {
   border-radius: var(--radius-large) !important;
   background-color: var(--card-bg) !important;
   border: 1px solid transparent;
@@ -1171,21 +1109,18 @@ body {
   transition-timing-function: var(--theme-transition-easing);
 }
 
-:root.dark .card-base,
-:root.dark .card-base-transparent {
+:root.dark .card-base {
   border-color: rgba(255, 255, 255, 0.08);
   box-shadow: none !important;
 }
 
-.enable-card-border .card-base,
-.enable-card-border .card-base-transparent {
+.enable-card-border .card-base {
   border-radius: var(--radius-large) !important;
   border: 1px solid var(--juejin-border) !important;
   box-shadow: none !important;
 }
 
-:root.dark .enable-card-border .card-base,
-:root.dark .enable-card-border .card-base-transparent {
+:root.dark .enable-card-border .card-base {
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
@@ -1826,15 +1761,6 @@ widget-layout .widget-title::before {
   width: 3px !important;
   height: 16px !important;
   border-radius: 2px !important;
-}
-
-/* =============================================================
- * 首页轮播 HomeCarousel：圆角更小
- * ============================================================= */
-.swiper,
-.swiper-slide {
-  border-radius: var(--radius-large) !important;
-  overflow: hidden;
 }
 
 /* =============================================================

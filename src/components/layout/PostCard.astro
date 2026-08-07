@@ -6,6 +6,7 @@ import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
+import { stableIndex } from "@/utils/hash";
 import { processCoverImageSync } from "@/utils/image-utils";
 import { getCategoryUrl, getFileDirFromPath } from "@/utils/url-utils";
 
@@ -60,18 +61,13 @@ const FALLBACK_COVERS = [
 ];
 
 // 基于文章 id 的稳定哈希，确保同一篇文章每次都选到同一张兜底图
-function pickFallbackCover(seed: string): string {
-	let hash = 0;
-	for (let i = 0; i < seed.length; i++) {
-		hash = (hash << 5) - hash + seed.charCodeAt(i);
-		hash |= 0;
-	}
-	return FALLBACK_COVERS[Math.abs(hash) % FALLBACK_COVERS.length];
-}
+const pickFallbackCover = (seed: string) =>
+	FALLBACK_COVERS[stableIndex(seed, FALLBACK_COVERS.length)];
 
 // 处理随机图：如果image为"api"，则从配置的API获取随机图
 // 未显式设置封面时，依次回退到正文中第一张图片、再到随机兜底封面图
-const firstImage = (remarkPluginFrontmatter.firstImage as string | undefined) ?? "";
+const firstImage =
+	(remarkPluginFrontmatter.firstImage as string | undefined) ?? "";
 const processedImage =
 	processCoverImageSync(image, entry.id) ||
 	firstImage ||

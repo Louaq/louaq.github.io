@@ -1,0 +1,167 @@
+---
+/**
+ * 通用 Tab 导航条。
+ *
+ * 内容区不由本组件渲染：页面自行输出带 `data-section="<tab.id>"` 的容器，
+ * 本组件只负责切换它们的 `hidden` 类。
+ *
+ * - `syncHash`：切换时把当前 tab 写进 URL hash，并响应 hashchange / 首次进入时
+ *   按 hash 还原（观影清单需要，追番页不需要）。
+ * - `restoreAttr`：首屏防闪烁属性名。页面可在渲染前于 <html> 上打这个属性、用纯
+ *   CSS 先把目标 tab 显示出来，本组件初始化完成后再移除它。
+ */
+interface Tab {
+	id: string;
+	name: string;
+	count?: number;
+}
+
+interface Props {
+	tabs: Tab[];
+	activeTab: string;
+	/** 是否与 URL hash 双向同步，默认关闭 */
+	syncHash?: boolean;
+	/** 初始化后需要从 <html> 上移除的防闪烁属性 */
+	restoreAttr?: string;
+	class?: string;
+}
+
+const {
+	tabs,
+	activeTab,
+	syncHash = false,
+	restoreAttr,
+	class: className = "mb-6",
+} = Astro.props;
+
+const INACTIVE_CLASSES =
+	"border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300";
+const ACTIVE_CLASSES = "border-(--primary) text-(--primary)";
+---
+
+<div
+  class:list={["border-b border-gray-200 dark:border-gray-700", className]}
+  data-tabnav
+  data-sync-hash={syncHash ? "true" : undefined}
+  data-restore-attr={restoreAttr}
+>
+  <nav class="flex space-x-8" aria-label="Tabs">
+    {tabs.map((tab) => (
+      <button
+        class:list={[
+          "whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm transition-colors duration-200",
+          {
+            [ACTIVE_CLASSES]: tab.id === activeTab,
+            [INACTIVE_CLASSES]: tab.id !== activeTab
+          }
+        ]}
+        data-tab={tab.id}
+        type="button"
+      >
+        {tab.name}
+        {tab.count !== undefined && (
+          <span class="ml-2 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 py-0.5 px-2 rounded-full text-xs">
+            {tab.count}
+          </span>
+        )}
+      </button>
+    ))}
+  </nav>
+</div>
+
+<script>
+  const ACTIVE = ["border-(--primary)", "text-(--primary)"];
+  const INACTIVE = [
+    "border-transparent",
+    "text-gray-500",
+    "hover:text-gray-700",
+    "hover:border-gray-300",
+    "dark:text-gray-400",
+    "dark:hover:text-gray-300",
+  ];
+
+  // swup / View Transitions 会重复触发初始化，用 AbortController 丢弃上一批监听器
+  let tabNavAbort: AbortController | null = null;
+
+  function readHashTab(): string {
+    return location.hash.slice(1).replace(/^\/+|\/+$/g, "");
+  }
+
+  function applyTab(tabId: string | undefined, syncHash: boolean) {
+    const buttons = Array.from(
+      document.querySelectorAll<HTMLButtonElement>("[data-tab]"),
+    );
+    const validIds = buttons
+      .map((el) => el.dataset.tab)
+      .filter((id): id is string => Boolean(id));
+    if (validIds.length === 0) return;
+
+    const resolved = tabId && validIds.includes(tabId) ? tabId : validIds[0];
+    if (!resolved) return;
+
+    for (const btn of buttons) {
+      const isActive = btn.dataset.tab === resolved;
+      btn.classList.remove(...(isActive ? INACTIVE : ACTIVE));
+      btn.classList.add(...(isActive ? ACTIVE : INACTIVE));
+    }
+
+    for (const section of document.querySelectorAll<HTMLElement>(
+      "[data-section]",
+    )) {
+      section.classList.toggle(
+        "hidden",
+        section.dataset.section !== resolved,
+      );
+    }
+
+    if (syncHash && location.hash !== `#${resolved}`) {
+      history.replaceState(null, "", `#${resolved}`);
+    }
+  }
+
+  function initTabNavigation() {
+    const root = document.querySelector<HTMLElement>("[data-tabnav]");
+    if (!root) return;
+
+    const syncHash = root.dataset.syncHash === "true";
+    const restoreAttr = root.dataset.restoreAttr;
+
+    tabNavAbort?.abort();
+    tabNavAbort = new AbortController();
+    const { signal } = tabNavAbort;
+
+    // hash 同步模式下按 hash 还原；否则保留 SSR 已渲染好的激活态
+    if (syncHash) applyTab(readHashTab() || undefined, false);
+    if (restoreAttr) document.documentElement.removeAttribute(restoreAttr);
+
+    for (const button of document.querySelectorAll<HTMLButtonElement>(
+      "[data-tab]",
+    )) {
+      button.addEventListener(
+        "click",
+        (event) => {
+          const targetTab = (event.currentTarget as HTMLButtonElement).dataset
+            .tab;
+          if (targetTab) applyTab(targetTab, syncHash);
+        },
+        { signal },
+      );
+    }
+
+    if (syncHash) {
+      window.addEventListener(
+        "hashchange",
+        () => applyTab(readHashTab() || undefined, false),
+        { signal },
+      );
+    }
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initTabNavigation);
+  } else {
+    initTabNavigation();
+  }
+
+  document.addEventListener("astro:page-load", initTabNavigation);
+</script>

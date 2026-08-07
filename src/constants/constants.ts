@@ -1,6 +1,4 @@
-﻿export const PAGE_SIZE = 8;
-
-export const LIGHT_MODE = "light",
+﻿export const LIGHT_MODE = "light",
 	DARK_MODE = "dark";
 export const DEFAULT_THEME = LIGHT_MODE; // 浠呬綔涓哄悜鍚庡吋瀹圭殑榛樿鍊硷紝瀹為檯浣跨敤 siteConfig.themeColor.defaultMode
 
@@ -19,8 +17,3 @@ export const MAIN_PANEL_OVERLAPS_BANNER_HEIGHT = 3.5;
 
 // Page width: rem
 export const PAGE_WIDTH = 75;
-
-// Category constants
-export const UNCATEGORIZED = "uncategorized";
-
-

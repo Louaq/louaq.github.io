@@ -7,22 +7,15 @@ export const zh_TW: Translation = {
 	[Key.archive]: "歸檔",
 	[Key.search]: "搜尋",
 	[Key.searchBy]: "Search by",
-	[Key.searchProvidedBy]: "提供者",
 	[Key.searchKbdSelect]: "選擇",
 	[Key.searchKbdSwitch]: "切換",
 	[Key.searchNoResults]: "找不到相關結果。",
 	[Key.searchTypeSomething]: "請輸入搜尋關鍵字。",
 	[Key.searchLoading]: "搜尋中...",
-	[Key.searchSummary]: "摘要",
-	[Key.searchContent]: "內容",
-	[Key.searchViewMore]: "查看更多結果 ({count} 個更多)",
-	[Key.other]: "其他",
 	[Key.all]: "全部",
 
 	[Key.tags]: "標籤",
 	[Key.categories]: "分類",
-	[Key.recentPosts]: "最新文章",
-	[Key.postList]: "文章列表",
 	[Key.tableOfContents]: "目錄",
 	[Key.tocEmpty]: "目前頁面沒有目錄",
 
@@ -30,7 +23,6 @@ export const zh_TW: Translation = {
 	[Key.announcement]: "公告",
 	[Key.announcementClose]: "關閉",
 
-	[Key.comments]: "評論",
 	[Key.commentSection]: "評論區",
 	[Key.commentSubtitle]: "分享你的想法，與大家交流討論",
 	[Key.commentNotConfigured]: "評論系統暫未配置",
@@ -40,7 +32,6 @@ export const zh_TW: Translation = {
 	[Key.friendsDescription]: "這裡是我的朋友們，歡迎互相訪問交流",
 	[Key.guestbook]: "留言",
 	[Key.guestbookDescription]: "歡迎在這裡留下你的足跡，分享你的想法和建議",
-	[Key.untitled]: "無標題",
 	[Key.uncategorized]: "未分類",
 	[Key.noTags]: "無標籤",
 
@@ -52,10 +43,6 @@ export const zh_TW: Translation = {
 	[Key.postsCount]: "篇文章",
 
 	[Key.themeColor]: "主題色相",
-
-	[Key.lightMode]: "亮色",
-	[Key.darkMode]: "暗色",
-	[Key.systemMode]: "跟隨系統",
 
 	[Key.more]: "更多",
 
@@ -76,7 +63,6 @@ export const zh_TW: Translation = {
 	[Key.watchlistCategoryOther]: "其他",
 
 	// 番組計劃
-	[Key.bangumiTitle]: "我的番組計劃",
 	[Key.bangumiSubtitle]: "記錄我的二次元之旅",
 
 	// 番組計劃篩選和狀態文本
@@ -114,14 +100,6 @@ export const zh_TW: Translation = {
 	[Key.bangumiNoDataDescription]: "該分類下還沒有任何條目",
 	[Key.bangumiEmpty]: "暫無數據",
 	[Key.bangumiEmptyReason]: "可能的原因：用戶名不存在、網絡連接問題或API限制",
-	[Key.bangumiUsername]: "用戶名",
-	[Key.bangumiApi]: "API",
-	[Key.bangumiConfigTip]: "提示：請在頁面配置中設置正確的Bangumi用戶名",
-	[Key.bangumiPrevPage]: "上一頁",
-	[Key.bangumiNextPage]: "下一頁",
-	[Key.bangumiCurrentPage]: "第",
-	[Key.bangumiTotalPages]: "頁，共",
-	[Key.bangumiPage]: "頁",
 
 	// 番組分類
 	[Key.bangumiCategoryBook]: "書籍",
@@ -132,19 +110,11 @@ export const zh_TW: Translation = {
 
 	// 番組數據更新
 	[Key.bangumiLastUpdated]: "數據更新於",
-	[Key.bangumiUpdatedAt]: "構建時間",
-	[Key.bangumiDataStatic]: "靜態數據",
 
 	// 分頁
-	[Key.paginationFirst]: "首頁",
 	[Key.paginationPrev]: "上一頁",
 	[Key.paginationNext]: "下一頁",
-	[Key.paginationLast]: "末頁",
 	[Key.paginationPage]: "第",
-	[Key.paginationOf]: "頁，共",
-	[Key.paginationTotal]: "頁，總計",
-	[Key.paginationRecords]: "條記錄",
-	[Key.paginationCompact]: "第 {current} / 共 {total}",
 	[Key.paginationJumpTo]: "跳轉到",
 	[Key.paginationJumpPageUnit]: "頁",
 	[Key.paginationGo]: "前往",
@@ -182,22 +152,15 @@ export const zh_TW: Translation = {
 	[Key.lastModifiedNoticeTitle]: "溫馨提示",
 	[Key.lastModifiedNoticeJoiner]: "。",
 	[Key.year]: "年",
-	[Key.month]: "月",
-	[Key.day]: "日",
-	[Key.hour]: "時",
-	[Key.minute]: "分",
-	[Key.second]: "秒",
 
 	// 訪問量統計
 	[Key.pageViews]: "瀏覽量",
 	[Key.pageViewsLoading]: "載入中...",
-	[Key.pageViewsError]: "統計不可用",
 
 	// 文章佈局
 	[Key.postListLayout]: "文章佈局",
 	[Key.postListLayoutList]: "清單",
 	[Key.postListLayoutGrid]: "網格",
-
 
 	// 置頂
 	[Key.pinned]: "置頂",
@@ -217,13 +180,8 @@ export const zh_TW: Translation = {
 	[Key.sponsorTitle]: "贊助支持",
 	[Key.sponsorDescription]:
 		"如果我的內容對你有幫助，歡迎通過以下方式贊助我，你的支持是我持續創作的動力！",
-	[Key.sponsorMethods]: "贊助方式",
 	[Key.sponsorList]: "贊助列表",
 	[Key.sponsorEmpty]: "暫無贊助記錄",
-	[Key.sponsorAmount]: "金額",
-	[Key.sponsorDate]: "日期",
-	[Key.sponsorMessage]: "留言",
-	[Key.sponsorAnonymous]: "匿名",
 	[Key.scanToSponsor]: "掃碼贊助",
 	[Key.sponsorGoTo]: "前往贊助",
 	[Key.sponsorButton]: "支持與分享",
@@ -263,14 +221,5 @@ export const zh_TW: Translation = {
 	[Key.calendarNovember]: "11月",
 	[Key.calendarDecember]: "12月",
 
-
 	// 代碼區塊折疊配置
-	[Key.codeCollapsibleShowMore]: "顯示更多",
-	[Key.codeCollapsibleShowLess]: "顯示更少",
-	[Key.codeCollapsibleExpanded]: "代碼區塊已展開",
-	[Key.codeCollapsibleCollapsed]: "代碼區塊已折疊",
-
-	[Key.moments]: "朋友圈",
-	[Key.momentsDescription]: "隨想與日常，樣式參考微信朋友圈",
-	[Key.momentsEmpty]: "暫無動態",
 };

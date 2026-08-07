@@ -35,7 +35,6 @@ import { unified } from "@astrojs/markdown-remark";
 import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
-import algolia from "./src/utils/algolia.ts";
 import meilisearch from "./src/utils/meilisearch.ts";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -195,7 +194,6 @@ export default defineConfig({
 			},
 		}),
 		mdx(),
-		algolia(),
 		meilisearch(),
 	],
 	markdown: {

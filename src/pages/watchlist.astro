@@ -1,9 +1,9 @@
 ---
-import Icon from "@/components/common/Icon.astro";
 import ClientPagination from "@/components/common/ClientPagination.astro";
-import TabNav from "@/components/pages/watchlist/TabNav.astro";
+import Icon from "@/components/common/Icon.astro";
+import TabNav from "@/components/common/TabNav.astro";
 import { siteConfig } from "@/config";
-import { watchlistConfig, type WatchlistItem } from "@/config/watchlistConfig";
+import { type WatchlistItem, watchlistConfig } from "@/config/watchlistConfig";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
@@ -28,24 +28,51 @@ const sortByDate = (a: WatchlistItem, b: WatchlistItem) => {
 
 // 按类型分类并排序
 const categorizedItems = {
-	anime: enabledItems.filter(item => item.type === "anime").sort(sortByDate),
-	movie: enabledItems.filter(item => item.type === "movie").sort(sortByDate),
-	tv: enabledItems.filter(item => item.type === "tv").sort(sortByDate),
-	documentary: enabledItems.filter(item => item.type === "documentary").sort(sortByDate),
-	other: enabledItems.filter(item => item.type === "other").sort(sortByDate),
+	anime: enabledItems.filter((item) => item.type === "anime").sort(sortByDate),
+	movie: enabledItems.filter((item) => item.type === "movie").sort(sortByDate),
+	tv: enabledItems.filter((item) => item.type === "tv").sort(sortByDate),
+	documentary: enabledItems
+		.filter((item) => item.type === "documentary")
+		.sort(sortByDate),
+	other: enabledItems.filter((item) => item.type === "other").sort(sortByDate),
 };
 
 // 分类配置（按照指定顺序）
 const categories = [
-	{ key: "anime", name: i18n(I18nKey.watchlistCategoryAnime), icon: "material-symbols:movie", items: categorizedItems.anime },
-	{ key: "movie", name: i18n(I18nKey.watchlistCategoryMovie), icon: "material-symbols:theaters", items: categorizedItems.movie },
-	{ key: "tv", name: i18n(I18nKey.watchlistCategoryTV), icon: "material-symbols:tv", items: categorizedItems.tv },
-	{ key: "documentary", name: i18n(I18nKey.watchlistCategoryDocumentary), icon: "material-symbols:documentary", items: categorizedItems.documentary },
-	{ key: "other", name: i18n(I18nKey.watchlistCategoryOther), icon: "material-symbols:category", items: categorizedItems.other },
-].filter(category => category.items.length > 0); // 只显示有内容的分类
+	{
+		key: "anime",
+		name: i18n(I18nKey.watchlistCategoryAnime),
+		icon: "material-symbols:movie",
+		items: categorizedItems.anime,
+	},
+	{
+		key: "movie",
+		name: i18n(I18nKey.watchlistCategoryMovie),
+		icon: "material-symbols:theaters",
+		items: categorizedItems.movie,
+	},
+	{
+		key: "tv",
+		name: i18n(I18nKey.watchlistCategoryTV),
+		icon: "material-symbols:tv",
+		items: categorizedItems.tv,
+	},
+	{
+		key: "documentary",
+		name: i18n(I18nKey.watchlistCategoryDocumentary),
+		icon: "material-symbols:documentary",
+		items: categorizedItems.documentary,
+	},
+	{
+		key: "other",
+		name: i18n(I18nKey.watchlistCategoryOther),
+		icon: "material-symbols:category",
+		items: categorizedItems.other,
+	},
+].filter((category) => category.items.length > 0); // 只显示有内容的分类
 
 // 准备标签页数据
-const tabs = categories.map(category => ({
+const tabs = categories.map((category) => ({
 	id: category.key,
 	name: category.name,
 	count: category.items.length,
@@ -173,7 +200,12 @@ const statusColor = {
 							})();
 						</script>
 						<div class="watchlist-tabs-root">
-						<TabNav tabs={tabs} activeTab={activeTab} />
+						<TabNav
+							tabs={tabs}
+							activeTab={activeTab}
+							syncHash
+							restoreAttr="data-watchlist-restore"
+						/>
 
 						<!-- 内容区域 -->
 						{categories.map((category) => (

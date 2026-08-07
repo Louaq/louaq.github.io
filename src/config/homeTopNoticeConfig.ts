@@ -1,7 +1,4 @@
-import type {
-	HomeTopNoticeConfig,
-	HomeTopNoticeItem,
-} from "../types/config";
+import type { HomeTopNoticeConfig, HomeTopNoticeItem } from "../types/config";
 
 /**
  * 首页顶部重要通知（主栏顶部，列表/卡片上方）

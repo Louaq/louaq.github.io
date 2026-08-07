@@ -52,8 +52,14 @@ export function initArchivePage(): void {
 
 	function applyFilters() {
 		const params = new URLSearchParams(window.location.search);
-		const tags = params.getAll("tag").map((t) => t.trim()).filter(Boolean);
-		const categories = params.getAll("category").map((c) => c.trim()).filter(Boolean);
+		const tags = params
+			.getAll("tag")
+			.map((t) => t.trim())
+			.filter(Boolean);
+		const categories = params
+			.getAll("category")
+			.map((c) => c.trim())
+			.filter(Boolean);
 		const uncategorized = params.get("uncategorized");
 
 		if (!tags.length && !categories.length && !uncategorized) return;
@@ -61,7 +67,9 @@ export function initArchivePage(): void {
 		const labelS = list?.dataset.labelSingular || "";
 		const labelP = list?.dataset.labelPlural || "";
 
-		for (const row of document.querySelectorAll<HTMLElement>(".archive-row-link")) {
+		for (const row of document.querySelectorAll<HTMLElement>(
+			".archive-row-link",
+		)) {
 			const postTags = (row.dataset.tags || "").split(",").filter(Boolean);
 			const postCat = row.dataset.category || "";
 			let hide = false;
@@ -74,7 +82,9 @@ export function initArchivePage(): void {
 		}
 
 		for (const group of groupsOf()) {
-			const visible = group.querySelectorAll(".archive-row-link:not([style*='display: none'])");
+			const visible = group.querySelectorAll(
+				".archive-row-link:not([style*='display: none'])",
+			);
 			const countEl = group.querySelector(".archive-year-count");
 			if (!visible.length) {
 				group.style.display = "none";

@@ -192,7 +192,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		startDate: "2025-12-28",
-		tags: ["动作", "动画", "奇幻","古装","武侠"],
+		tags: ["动作", "动画", "奇幻", "古装", "武侠"],
 		enabled: true,
 	},
 	{
@@ -232,7 +232,7 @@ export const animeItems: WatchlistItem[] = [
 		status: "watching",
 		rating: 0.0,
 		startDate: "2026-04-03",
-		tags: ["动作", "动画", "奇幻","古装"],
+		tags: ["动作", "动画", "奇幻", "古装"],
 		enabled: true,
 	},
 	{
@@ -286,7 +286,7 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["剧情", "戏剧", "动画", "奇幻"],
 		enabled: true,
 	},
-		{
+	{
 		title: "镖人 第二季",
 		cover: "https://pic1.imgdb.cn/i/033vXQvDrCb2YNJsdOgsA8.webp",
 		type: "anime",
@@ -306,15 +306,14 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
 	},
-		{
+	{
 		title: "一斩苍穹",
 		cover: "https://pic1.imgdb.cn/i/033yuGhjGowtjpRArKZp62.webp",
 		type: "anime",
 		status: "watching",
 		rating: 0.0,
 		startDate: "2026-07-28",
-		tags: ["戏剧","动作", "动画", "奇幻"],
+		tags: ["戏剧", "动作", "动画", "奇幻"],
 		enabled: true,
 	},
 ];
-

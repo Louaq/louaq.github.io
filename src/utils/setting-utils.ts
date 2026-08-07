@@ -129,23 +129,6 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 	}
 }
 
-// 绯荤粺涓婚鐩戝惉鍣ㄥ紩鐢?
-export function setTheme(theme: LIGHT_DARK_MODE): void {
-	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
-	if (
-		typeof localStorage === "undefined" ||
-		typeof localStorage.setItem !== "function"
-	) {
-		return;
-	}
-
-	// 鍏堝簲鐢ㄤ富棰?
-	applyThemeToDocument(theme);
-
-	// 淇濆瓨鍒發ocalStorage
-	localStorage.setItem("theme", theme === DARK_MODE ? DARK_MODE : LIGHT_MODE);
-}
-
 export function getStoredTheme(): LIGHT_DARK_MODE {
 	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (
@@ -154,7 +137,8 @@ export function getStoredTheme(): LIGHT_DARK_MODE {
 	) {
 		return getDefaultTheme();
 	}
-	const theme = (localStorage.getItem("theme") as LIGHT_DARK_MODE) || getDefaultTheme();
+	const theme =
+		(localStorage.getItem("theme") as LIGHT_DARK_MODE) || getDefaultTheme();
 	return theme === DARK_MODE ? DARK_MODE : LIGHT_MODE;
 }
 
@@ -197,7 +181,11 @@ export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 		const isPostPage = body?.dataset?.pageType === "post";
 		const isMobile = window.innerWidth < 1024;
 		const effectiveMode: WALLPAPER_MODE =
-			isMobile && isPostPage ? WALLPAPER_NONE : isPostPage ? WALLPAPER_BANNER : mode;
+			isMobile && isPostPage
+				? WALLPAPER_NONE
+				: isPostPage
+					? WALLPAPER_BANNER
+					: mode;
 
 		// 绉婚櫎鎵€鏈夊绾哥浉鍏崇殑CSS绫?
 		body.classList.remove("enable-banner", "wallpaper-transparent");
@@ -241,7 +229,11 @@ function ensureWallpaperState(mode: WALLPAPER_MODE) {
 	const isPostPage = body?.dataset?.pageType === "post";
 	const isMobile = window.innerWidth < 1024;
 	const effectiveMode: WALLPAPER_MODE =
-		isMobile && isPostPage ? WALLPAPER_NONE : isPostPage ? WALLPAPER_BANNER : mode;
+		isMobile && isPostPage
+			? WALLPAPER_NONE
+			: isPostPage
+				? WALLPAPER_BANNER
+				: mode;
 
 	// 绉婚櫎鎵€鏈夊绾哥浉鍏崇殑CSS绫?
 	body.classList.remove("enable-banner", "wallpaper-transparent");
@@ -287,7 +279,7 @@ function showBannerMode() {
 		// 妫€鏌ュ綋鍓嶆槸鍚︿负棣栭〉
 		const isHomePage = checkIsHomePage(window.location.pathname);
 		const isPostPage =
-			(document.body?.dataset?.pageType === "post") ||
+			document.body?.dataset?.pageType === "post" ||
 			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 
@@ -342,7 +334,7 @@ function showBannerMode() {
 	if (mainContentWrapper) {
 		const isHomePage = checkIsHomePage(window.location.pathname);
 		const isPostPage =
-			(document.body?.dataset?.pageType === "post") ||
+			document.body?.dataset?.pageType === "post" ||
 			/\/posts\/.+/.test(window.location.pathname);
 		const isMobile = window.innerWidth < 1024;
 		// 鍙湪绉诲姩绔潪棣栭〉鏃惰皟鏁翠富鍐呭浣嶇疆
@@ -625,7 +617,10 @@ export function applyBannerTitleEnabledToDocument(enabled: boolean): void {
 		return;
 	}
 	// 鏇存柊 html 灞炴€э紝CSS 浼氱珛鍗崇敓鏁?
-	document.documentElement.setAttribute("data-banner-title-enabled", String(enabled));
+	document.documentElement.setAttribute(
+		"data-banner-title-enabled",
+		String(enabled),
+	);
 	// 鍚屾椂鏇存柊鍏冪礌鏍峰紡锛堝吋瀹规€э級
 	const homeBannerTextOverlays = document.querySelectorAll(
 		'.banner-text-overlay[data-banner-text-overlay="home"]',
