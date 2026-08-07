@@ -184,33 +184,36 @@ onDestroy(() => {
 {#if !isUnlocked}
 <div class="password-protection-container">
   <div class="password-protection-card" class:shake={isShaking}>
-    <h2 class="password-title">密码保护</h2>
-    <p class="password-description">这篇文章已被密码保护,请输入密码查看内容。</p>
-    {#if hint}
-      <p class="password-hint">提示:{hint}</p>
-    {/if}
-    
+    <div class="password-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+      </svg>
+    </div>
+
+    <h2 class="password-title">请输入密码查看内容</h2>
+
     <div class="password-input-group">
-      <input 
-        type="password" 
+      <input
+        type="password"
         bind:value={inputPassword}
         on:keypress={handleKeyPress}
-        placeholder="请输入密码"
+        placeholder="文章密码"
         class="password-input"
         class:disabled={isFrozen}
         autocomplete="off"
         disabled={isFrozen}
       />
-      <button 
-        class="password-button" 
+      <button
+        class="password-button"
         class:disabled={isFrozen}
         on:click={verifyPassword}
         disabled={isFrozen}
       >
-        {isFrozen ? '已冻结' : '解锁'}
+        {isFrozen ? '已冻结' : '确定'}
       </button>
     </div>
-    
+
     {#if errorMessage}
       <div class="error-message">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -220,6 +223,10 @@ onDestroy(() => {
         </svg>
         <span>{errorMessage}</span>
       </div>
+    {/if}
+
+    {#if hint}
+      <p class="password-hint">{hint}</p>
     {/if}
   </div>
 </div>
@@ -237,119 +244,120 @@ onDestroy(() => {
   .password-protection-card {
     background: var(--card-bg);
     border-radius: var(--radius-large);
-    padding: 2rem 1.5rem;
-    max-width: 400px;
+    padding: 2.5rem 1.5rem;
+    max-width: 360px;
     width: 100%;
     text-align: center;
     transition: all 0.3s ease;
   }
-  
+
   .password-protection-card.shake {
     animation: shake 0.5s;
   }
-  
+
   @keyframes shake {
     0%, 100% { transform: translateX(0); }
     10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
     20%, 40%, 60%, 80% { transform: translateX(5px); }
   }
-  
-  .password-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    margin-bottom: 0.375rem;
+
+  .password-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 1.25rem;
+    border-radius: 50%;
+    border: 1.5px solid var(--line-divider, #e5e5e5);
     color: var(--text-primary, #1a1a1a);
   }
-  
+
+  :global(.dark) .password-icon {
+    border-color: var(--line-divider, #404040);
+    color: var(--text-primary, #f5f5f5);
+  }
+
+  .password-title {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    color: var(--text-primary, #1a1a1a);
+  }
+
   :global(.dark) .password-title {
     color: var(--text-primary, #f5f5f5);
   }
-  
-  .password-description {
-    font-size: 0.875rem;
-    color: var(--text-secondary, #666);
-    margin-bottom: 0.375rem;
-  }
-  
-  :global(.dark) .password-description {
-    color: var(--text-secondary, #aaa);
-  }
-  
+
   .password-hint {
     font-size: 0.8125rem;
-    color: var(--text-tertiary, #999);
-    margin-bottom: 1rem;
+    color: #ec4899;
+    margin-top: 1rem;
+    margin-bottom: 0;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    cursor: pointer;
   }
-  
-  :global(.dark) .password-hint {
-    color: var(--text-tertiary, #888);
-  }
-  
+
   .password-input-group {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    gap: 1.5rem;
     margin-bottom: 0.75rem;
   }
-  
+
   .password-input {
     width: 100%;
-    padding: 0.5rem 0.75rem;
-    border: 2px solid var(--line-divider, #e5e5e5);
-    border-radius: var(--radius-medium, 0.5rem);
+    padding: 0.5rem 0.25rem;
+    border: none;
+    border-bottom: 1.5px solid var(--line-divider, #e5e5e5);
+    border-radius: 0;
     font-size: 0.875rem;
-    background: var(--input-bg, #fff);
+    text-align: center;
+    background: transparent;
     color: var(--text-primary, #1a1a1a);
     transition: all 0.3s ease;
     outline: none;
   }
-  
+
   .password-input:focus {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(var(--primary-rgb, 74, 222, 128), 0.1);
   }
-  
+
   .password-input:disabled,
   .password-input.disabled {
     opacity: 0.5;
     cursor: not-allowed;
-    background: var(--input-bg-disabled, #f5f5f5);
   }
-  
+
   :global(.dark) .password-input {
-    background: var(--input-bg, #2a2a2a);
     color: var(--text-primary, #f5f5f5);
     border-color: var(--line-divider, #404040);
   }
-  
-  :global(.dark) .password-input:disabled,
-  :global(.dark) .password-input.disabled {
-    background: var(--input-bg-disabled, #1a1a1a);
-  }
-  
+
   .password-button {
     width: 100%;
-    padding: 0.5rem 1.25rem;
-    background: var(--primary);
-    color: white;
+    padding: 0.625rem 1.25rem;
+    background: #1a1a1a;
+    color: #fff;
     border: none;
-    border-radius: var(--radius-medium, 0.5rem);
+    border-radius: 9999px;
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
   }
-  
+
   .password-button:hover {
-    opacity: 0.9;
+    opacity: 0.85;
     transform: translateY(-1px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
-  
+
   .password-button:active {
     transform: translateY(0);
   }
-  
+
   .password-button:disabled,
   .password-button.disabled {
     opacity: 0.5;
@@ -357,18 +365,19 @@ onDestroy(() => {
     transform: none;
     box-shadow: none;
   }
-  
+
   .password-button:disabled:hover,
   .password-button.disabled:hover {
     opacity: 0.5;
     transform: none;
     box-shadow: none;
   }
-  
+
   :global(.dark) .password-button {
-    color: var(--dark-button-text, #1a1a1a);
+    background: #f5f5f5;
+    color: #1a1a1a;
   }
-  
+
   .error-message {
     display: flex;
     align-items: center;
