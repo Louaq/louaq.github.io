@@ -290,6 +290,8 @@ export type HomeTopNoticeItem = {
 export type HomeTopNoticeConfig = {
 	enable: boolean;
 	items: HomeTopNoticeItem[];
+	/** 多条通知的轮播间隔（毫秒），仅在通知条数 > 1 时生效；缺省 8000 */
+	switchInterval?: number;
 };
 
 // 正文字体（CDN 托管，手动 @font-face 加载）
@@ -373,7 +375,8 @@ export type WidgetComponentType =
 	| "sidebarToc"
 	| "advertisement"
 	| "stats"
-	| "calendar";
+	| "calendar"
+	| "runtime";
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型

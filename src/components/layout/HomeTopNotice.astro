@@ -1,5 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
+import { homeTopNoticeConfig } from "@/config/homeTopNoticeConfig";
 import type { HomeTopNoticeItem } from "@/types/config";
 
 interface Props {
@@ -7,12 +8,21 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+// 轮播间隔（毫秒）：配置缺省或非法时回退到 8 秒，并且不低于一次淡入淡出的时长
+const DEFAULT_SWITCH_INTERVAL = 8000;
+const configuredInterval = homeTopNoticeConfig.switchInterval;
+const switchInterval =
+	typeof configuredInterval === "number" && configuredInterval >= 1000
+		? configuredInterval
+		: DEFAULT_SWITCH_INTERVAL;
 ---
 
 <div class="home-top-notice-stack mt-3 mb-3">
 	<div
 		class="home-top-notice home-top-notice--pill relative grid w-full items-stretch overflow-hidden rounded-lg bg-(--card-bg) border border-black/[0.06] dark:border-white/10 shadow-sm px-3.5 py-2 sm:px-4 sm:py-2.5 transition-all duration-300 has-[a.home-top-notice-row:hover]:shadow-md"
 		data-home-top-notice
+		data-switch-interval={switchInterval}
 	>
 		{
 			items.map((item, i) => {
@@ -111,6 +121,12 @@ const { items } = Astro.props;
 				0
 			);
 
+			const parsedInterval = Number(container.dataset.switchInterval);
+			const interval =
+				Number.isFinite(parsedInterval) && parsedInterval >= 1000
+					? parsedInterval
+					: 8000;
+
 			const timer = window.setInterval(() => {
 				const nextIndex = (activeIndex + 1) % rows.length;
 				const current = rows[activeIndex];
@@ -125,7 +141,7 @@ const { items } = Astro.props;
 				next.removeAttribute("tabindex");
 
 				activeIndex = nextIndex;
-			}, 4000);
+			}, interval);
 
 			noticeCycleTimers.set(container, timer);
 		}

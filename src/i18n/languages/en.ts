@@ -206,6 +206,12 @@ export const en: Translation = {
 	[Key.siteStatsDays]: "{days} days",
 	[Key.today]: "Today",
 
+	// Site runtime
+	[Key.siteRuntime]: "Site Runtime",
+	[Key.siteRuntimeUnitDay]: "d",
+	[Key.siteRuntimeUnitYear]: "y",
+	[Key.siteRuntimeUnitMonth]: "m",
+
 	// Calendar Component
 	[Key.calendarSunday]: "Sun",
 	[Key.calendarMonday]: "Mon",

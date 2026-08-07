@@ -200,6 +200,12 @@ export const zh_TW: Translation = {
 	[Key.siteStatsDays]: "{days} 天",
 	[Key.today]: "今天",
 
+	// 站點運行時間
+	[Key.siteRuntime]: "站點運行時間",
+	[Key.siteRuntimeUnitDay]: "天",
+	[Key.siteRuntimeUnitYear]: "年",
+	[Key.siteRuntimeUnitMonth]: "月",
+
 	// 日曆組件
 	[Key.calendarSunday]: "日",
 	[Key.calendarMonday]: "一",

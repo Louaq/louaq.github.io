@@ -208,6 +208,12 @@ export const ru: Translation = {
 	[Key.siteStatsDays]: "{days} дней",
 	[Key.today]: "Сегодня",
 
+	// Время работы сайта
+	[Key.siteRuntime]: "Время работы сайта",
+	[Key.siteRuntimeUnitDay]: "д",
+	[Key.siteRuntimeUnitYear]: "г",
+	[Key.siteRuntimeUnitMonth]: "мес",
+
 	// Компонент календаря
 	[Key.calendarSunday]: "Вс",
 	[Key.calendarMonday]: "Пн",

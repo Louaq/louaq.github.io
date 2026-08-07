@@ -199,6 +199,12 @@ enum I18nKey {
 	siteStatsDays = "siteStatsDays",
 	today = "today",
 
+	// 站点运行时间
+	siteRuntime = "siteRuntime",
+	siteRuntimeUnitDay = "siteRuntimeUnitDay",
+	siteRuntimeUnitYear = "siteRuntimeUnitYear",
+	siteRuntimeUnitMonth = "siteRuntimeUnitMonth",
+
 	// 日历组件
 	calendarSunday = "calendarSunday",
 	calendarMonday = "calendarMonday",

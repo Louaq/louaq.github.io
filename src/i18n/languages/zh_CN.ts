@@ -198,6 +198,12 @@ export const zh_CN: Translation = {
 	[Key.siteStatsDays]: "{days} 天",
 	[Key.today]: "今天",
 
+	// 站点运行时间
+	[Key.siteRuntime]: "站点运行时间",
+	[Key.siteRuntimeUnitDay]: "天",
+	[Key.siteRuntimeUnitYear]: "年",
+	[Key.siteRuntimeUnitMonth]: "月",
+
 	// 日历组件
 	[Key.calendarSunday]: "日",
 	[Key.calendarMonday]: "一",

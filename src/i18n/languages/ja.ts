@@ -205,6 +205,12 @@ export const ja: Translation = {
 	[Key.siteStatsDays]: "{days} 日",
 	[Key.today]: "今日",
 
+	// サイト稼働時間
+	[Key.siteRuntime]: "サイト稼働時間",
+	[Key.siteRuntimeUnitDay]: "日",
+	[Key.siteRuntimeUnitYear]: "年",
+	[Key.siteRuntimeUnitMonth]: "ヶ月",
+
 	// カレンダーコンポーネント
 	[Key.calendarSunday]: "日",
 	[Key.calendarMonday]: "月",

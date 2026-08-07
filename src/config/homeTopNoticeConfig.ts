@@ -11,13 +11,16 @@ import type { HomeTopNoticeConfig, HomeTopNoticeItem } from "../types/config";
  *  - link     : 末尾的跳转按钮，可选
  *
  * 如需临时关闭整块通知区域，将 enable 设为 false 即可。
+ * 多条通知会自动轮播，切换间隔由 switchInterval（毫秒）控制。
  */
 export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 	enable: true,
+	// 轮播间隔（毫秒），只有多条通知时才有效
+	switchInterval: 10000,
 	items: [
 		{
-			title: "重要通知",
-			content: "今晚23:00-24:00 进行维护，期间可能无法访问",
+			title: "最新动态",
+			content: "每晚23:00-24:00 进行维护，期间可能无法访问",
 			link: {
 				enable: false,
 				text: "",
@@ -25,16 +28,16 @@ export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 				external: false,
 			},
 		},
-		// {
-		// 	title: "更新通知",
-		// 	content: "test",
-		// 	link: {
-		// 		enable: false,
-		// 		text: "",
-		// 		url: "",
-		// 		external: false,
-		// 	},
-		// },
+		{
+			title: "每日一言",
+			content: "鱼跃此时海，花开彼岸天",
+			link: {
+				enable: false,
+				text: "",
+				url: "",
+				external: false,
+			},
+		},
 	],
 };
 

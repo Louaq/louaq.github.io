@@ -12,7 +12,7 @@ export const profileConfig: ProfileConfig = {
 	menuHref: "/about/",
 	name: "Louaq",
 	bio: "晚来天欲雪,能饮一杯无",
-	level: "LV.5",
+	level: "化神期",
 	links: [
 		{
 			name: "Email",

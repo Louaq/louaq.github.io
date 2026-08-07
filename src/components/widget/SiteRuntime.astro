@@ -1,0 +1,392 @@
+---
+import WidgetLayout from "@/components/common/WidgetLayout.astro";
+import { siteConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+
+const { class: className, style } = Astro.props;
+
+// 站点开始日期，来自 siteConfig
+const siteStartDate = siteConfig.siteStartDate || "2025-01-01";
+
+/**
+ * 计算站点运行时长：既给出总天数，也给出「x 年 x 月 x 天」的分解
+ */
+function calcRuntime(start: Date, now: Date) {
+	let years = now.getFullYear() - start.getFullYear();
+	let months = now.getMonth() - start.getMonth();
+	let days = now.getDate() - start.getDate();
+
+	if (days < 0) {
+		// 借上个月的天数
+		const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+		days += lastMonth.getDate();
+		months--;
+	}
+	if (months < 0) {
+		months += 12;
+		years--;
+	}
+
+	const totalDays = Math.max(
+		0,
+		Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24)),
+	);
+
+	return {
+		years: Math.max(0, years),
+		months: Math.max(0, months),
+		days: Math.max(0, days),
+		totalDays,
+	};
+}
+
+// 构建时先渲染一份初始值，避免无 JS 或首屏闪烁
+const initial = calcRuntime(new Date(siteStartDate), new Date());
+
+const unitDay = i18n(I18nKey.siteRuntimeUnitDay);
+const unitYear = i18n(I18nKey.siteRuntimeUnitYear);
+const unitMonth = i18n(I18nKey.siteRuntimeUnitMonth);
+
+const segments = [
+	{ key: "years", value: initial.years, label: unitYear },
+	{ key: "months", value: initial.months, label: unitMonth },
+	{ key: "days", value: initial.days, label: unitDay },
+];
+
+// 表盘刻度
+const ticks = Array.from({ length: 12 }, (_, i) => {
+	const angle = (i * 30 - 90) * (Math.PI / 180);
+	return {
+		x1: 46 + Math.cos(angle) * 26,
+		y1: 58 + Math.sin(angle) * 26,
+		x2: 46 + Math.cos(angle) * 29,
+		y2: 58 + Math.sin(angle) * 29,
+		major: i % 3 === 0,
+	};
+});
+---
+
+<WidgetLayout
+  name={i18n(I18nKey.siteRuntime)}
+  icon="fluent-emoji-flat:hourglass-not-done"
+  iconShake
+  id="site-runtime"
+  class={className}
+  style={style}
+>
+  <div class="site-runtime flex flex-col gap-2.5" data-start-date={siteStartDate}>
+    <!-- 闹钟 + 总运行天数 -->
+    <div class="flex items-center justify-center gap-3">
+      <div class="relative flex shrink-0 justify-center items-center">
+        <div class="absolute inset-0 flex justify-center items-center" aria-hidden="true">
+          <div class="w-16 h-16 rounded-full blur-xl opacity-10 bg-(--primary)"></div>
+        </div>
+
+        <svg
+          class="runtime-clock relative z-10"
+          width="72"
+          height="78"
+          viewBox="0 0 92 100"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          role="img"
+          aria-label={i18n(I18nKey.siteRuntime)}
+        >
+          <!-- 闹钟底座 -->
+          <path
+            d="M28 88 L36 78 L56 78 L64 88 Z"
+            class="fill-neutral-300 dark:fill-neutral-600"
+          />
+          <path
+            d="M32 78 L60 78 L58 74 L34 74 Z"
+            class="fill-neutral-400 dark:fill-neutral-500"
+          />
+
+          <!-- 铃铛 + 锤头（周期性摇摆） -->
+          <g class="runtime-clock__bells">
+            <ellipse cx="28" cy="22" rx="10" ry="7" style="fill: var(--primary)" opacity="0.8" />
+            <ellipse cx="64" cy="22" rx="10" ry="7" style="fill: var(--primary)" opacity="0.8" />
+            <rect x="44" y="14" width="4" height="10" rx="2" style="fill: var(--primary)" />
+            <circle cx="46" cy="30" r="3" class="fill-amber-400 dark:fill-amber-300" />
+          </g>
+
+          <!-- 表盘 -->
+          <circle
+            cx="46"
+            cy="58"
+            r="34"
+            class="fill-white dark:fill-neutral-800"
+            style="stroke: var(--primary)"
+            stroke-opacity="0.3"
+            stroke-width="2"
+          />
+          <circle
+            cx="46"
+            cy="58"
+            r="30"
+            class="fill-neutral-50 dark:fill-neutral-900 stroke-neutral-200 dark:stroke-neutral-700"
+            stroke-width="1"
+          />
+
+          <!-- 刻度 -->
+          {
+            ticks.map((tick) => (
+              <line
+                x1={tick.x1}
+                y1={tick.y1}
+                x2={tick.x2}
+                y2={tick.y2}
+                class="stroke-neutral-300 dark:stroke-neutral-600"
+                stroke-width={tick.major ? 2 : 1}
+                stroke-linecap="round"
+              />
+            ))
+          }
+
+          <!-- 时针 / 分针 / 秒针（由脚本按当前时间旋转） -->
+          <line
+            data-hand="hour"
+            x1="46" y1="58" x2="46" y2="42"
+            class="stroke-neutral-700 dark:stroke-neutral-200"
+            stroke-width="2.5"
+            stroke-linecap="round"
+          />
+          <line
+            data-hand="minute"
+            x1="46" y1="58" x2="46" y2="34"
+            class="stroke-neutral-600 dark:stroke-neutral-300"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+          <line
+            data-hand="second"
+            x1="46" y1="62" x2="46" y2="32"
+            class="runtime-clock__second"
+            style="stroke: var(--primary)"
+            stroke-width="1"
+            stroke-linecap="round"
+          />
+
+          <!-- 中心点 -->
+          <circle cx="46" cy="58" r="3" style="fill: var(--primary)" />
+          <circle cx="46" cy="58" r="1.5" class="fill-white dark:fill-neutral-800" />
+        </svg>
+      </div>
+
+      <div class="flex items-baseline gap-1">
+        <span
+          class="text-2xl font-semibold text-(--primary) tabular-nums"
+          data-runtime="totalDays"
+          data-value={initial.totalDays}>{initial.totalDays}</span
+        >
+        <span class="text-sm font-medium text-neutral-500 dark:text-neutral-400"
+          >{unitDay}</span
+        >
+      </div>
+    </div>
+
+    <!-- 年 / 月 / 天 分解 -->
+    <div class="flex items-center justify-center gap-1.5">
+      {
+        segments.map((segment, index) => (
+          <>
+            {index > 0 && (
+              <span class="text-neutral-200 dark:text-neutral-600">|</span>
+            )}
+            <div class="flex items-baseline gap-0.5 px-2 py-1 rounded-lg bg-neutral-100 dark:bg-neutral-700/50">
+              <span
+                class="text-sm font-semibold text-neutral-700 dark:text-neutral-200 tabular-nums"
+                data-runtime={segment.key}
+                data-value={segment.value}
+              >
+                {segment.value}
+              </span>
+              <span class="text-xs text-neutral-400 dark:text-neutral-400">
+                {segment.label}
+              </span>
+            </div>
+          </>
+        ))
+      }
+    </div>
+  </div>
+</WidgetLayout>
+
+<style>
+  /* 铃铛每隔 6 秒摇一次 */
+  .runtime-clock__bells {
+    transform-origin: 46px 22px;
+    animation: runtime-bell-shake 6.5s ease-in-out infinite;
+  }
+
+  /* 秒针呼吸 */
+  .runtime-clock__second {
+    animation: runtime-second-pulse 1s ease-in-out infinite;
+  }
+
+  @keyframes runtime-bell-shake {
+    0%,
+    92%,
+    100% {
+      transform: rotate(0deg);
+    }
+    93.5% {
+      transform: rotate(-10deg);
+    }
+    95% {
+      transform: rotate(10deg);
+    }
+    96.5% {
+      transform: rotate(-6deg);
+    }
+    98% {
+      transform: rotate(6deg);
+    }
+  }
+
+  @keyframes runtime-second-pulse {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .runtime-clock__bells,
+    .runtime-clock__second {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  const CLOCK_TICK = 1000;
+  const RUNTIME_TICK = 60_000;
+  const COUNT_UP_DURATION = 1800;
+
+  let clockTimer: number | undefined;
+  let runtimeTimer: number | undefined;
+
+  function calcRuntime(start: Date, now: Date) {
+    let years = now.getFullYear() - start.getFullYear();
+    let months = now.getMonth() - start.getMonth();
+    let days = now.getDate() - start.getDate();
+
+    if (days < 0) {
+      const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+      days += lastMonth.getDate();
+      months--;
+    }
+    if (months < 0) {
+      months += 12;
+      years--;
+    }
+
+    const totalDays = Math.max(
+      0,
+      Math.floor((now.getTime() - start.getTime()) / (1000 * 60 * 60 * 24))
+    );
+
+    return {
+      years: Math.max(0, years),
+      months: Math.max(0, months),
+      days: Math.max(0, days),
+      totalDays,
+    };
+  }
+
+  /** 数字滚动动画（easeOut），reduce-motion 下直接落值 */
+  function countUp(el: HTMLElement, to: number) {
+    const from = Number(el.dataset.value ?? 0);
+    el.dataset.value = String(to);
+
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    if (reduceMotion || from === to) {
+      el.textContent = String(to);
+      return;
+    }
+
+    const startTime = performance.now();
+    const step = (now: number) => {
+      const progress = Math.min((now - startTime) / COUNT_UP_DURATION, 1);
+      const eased = 1 - (1 - progress) ** 3;
+      el.textContent = String(Math.round(from + (to - from) * eased));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }
+
+  function updateRuntime(root: HTMLElement, animate: boolean) {
+    const startDate = new Date(root.dataset.startDate || "");
+    if (Number.isNaN(startDate.getTime())) return;
+
+    const result = calcRuntime(startDate, new Date());
+
+    for (const key of ["totalDays", "years", "months", "days"] as const) {
+      const el = root.querySelector<HTMLElement>(`[data-runtime="${key}"]`);
+      if (!el) continue;
+      if (animate) {
+        // 从 0 开始滚动到目标值
+        el.dataset.value = "0";
+        countUp(el, result[key]);
+      } else if (Number(el.dataset.value) !== result[key]) {
+        el.dataset.value = String(result[key]);
+        el.textContent = String(result[key]);
+      }
+    }
+  }
+
+  function updateClock(root: HTMLElement) {
+    const now = new Date();
+    const seconds = now.getSeconds();
+    const minutes = now.getMinutes();
+    const hours = now.getHours() % 12;
+
+    const angles = {
+      hour: hours * 30 + minutes * 0.5,
+      minute: minutes * 6 + seconds * 0.1,
+      second: seconds * 6,
+    };
+
+    for (const [hand, angle] of Object.entries(angles)) {
+      const el = root.querySelector(`[data-hand="${hand}"]`);
+      el?.setAttribute("transform", `rotate(${angle}, 46, 58)`);
+    }
+  }
+
+  function initSiteRuntime() {
+    window.clearInterval(clockTimer);
+    window.clearInterval(runtimeTimer);
+
+    const root = document.querySelector<HTMLElement>(".site-runtime");
+    if (!root) return;
+
+    updateClock(root);
+    updateRuntime(root, true);
+
+    clockTimer = window.setInterval(() => {
+      const current = document.querySelector<HTMLElement>(".site-runtime");
+      if (current) updateClock(current);
+    }, CLOCK_TICK);
+
+    runtimeTimer = window.setInterval(() => {
+      const current = document.querySelector<HTMLElement>(".site-runtime");
+      if (current) updateRuntime(current, false);
+    }, RUNTIME_TICK);
+  }
+
+  initSiteRuntime();
+  document.addEventListener("swup:contentReplaced", initSiteRuntime);
+</script>
