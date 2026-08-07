@@ -278,9 +278,10 @@
 }
 
 @utility post-card-wrapper {
-  /* 为频繁变化的元素使用content-visibility优化 */
-  content-visibility: auto;
-  contain-intrinsic-size: auto 400px;
+  /* 此前这里是 content-visibility:auto + contain-intrinsic-size:auto 400px。
+     它让视口外的卡片跳过渲染，封面图要等滚动到才解码，刷新时逐张“弹出”；
+     且占位高 400px 与卡片实际高度（190px / 13~15rem）不符，会额外引起布局跳动。
+     卡片高度本就是固定的，分页后每页仅十余张，收益极小，故移除。 */
   & .stats .btn-regular {
     @apply text-(--primary) bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
   }

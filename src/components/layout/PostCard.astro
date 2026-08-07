@@ -116,12 +116,12 @@ const minuteLabel =
   <div class="hero-card-content relative z-20 w-full sm:w-[65%] flex flex-col justify-between h-full pt-9 pb-5 px-5 sm:px-8">
     <a
       href={url}
-      class="hero-card-title my-1 font-bold text-white text-lg md:text-xl line-clamp-1 text-center sm:text-left transition text-shadow-hero"
+      class="hero-card-title my-1 font-bold text-lg md:text-xl line-clamp-1 text-center sm:text-left transition"
     >
       {title}
     </a>
 
-    <div class="hero-card-desc text-sm text-white/80 line-clamp-2 xl:line-clamp-3 text-center sm:text-left">
+    <div class="hero-card-desc text-sm line-clamp-2 xl:line-clamp-3 text-center sm:text-left">
       {description || remarkPluginFrontmatter.excerpt}
     </div>
 
@@ -131,46 +131,31 @@ const minuteLabel =
         isEven ? "sm:justify-end" : "sm:justify-start",
       ]}
     >
-      <span class="hero-card-meta-item inline-flex items-center gap-1.5 text-xs text-white/90">
-        <Icon name="fa6-regular:calendar" class="size-3.5 shrink-0 text-white/55" />
+      <span class="hero-card-meta-item inline-flex items-center gap-1.5 text-xs">
+        <Icon name="fa6-regular:calendar" class="hero-card-meta-icon size-3.5 shrink-0" />
         <span class="whitespace-nowrap">{formatDateToYYYYMMDD(published)}</span>
       </span>
       {minutes != null && (
         <Fragment>
-          <span class="hero-card-meta-divider mx-2 h-3 w-px shrink-0 bg-white/25" aria-hidden="true" />
-          <span class="hero-card-meta-item inline-flex items-center gap-1.5 text-xs text-white/90">
-            <Icon name="material-symbols:schedule-outline-rounded" class="size-3.5 shrink-0 text-white/55" />
+          <span class="hero-card-meta-divider mx-2 h-3 w-px shrink-0" aria-hidden="true" />
+          <span class="hero-card-meta-item inline-flex items-center gap-1.5 text-xs">
+            <Icon name="material-symbols:schedule-outline-rounded" class="hero-card-meta-icon size-3.5 shrink-0" />
             <span class="whitespace-nowrap">{minutes} {minuteLabel}</span>
           </span>
         </Fragment>
       )}
       {category && (
         <Fragment>
-          <span class="hero-card-meta-divider mx-2 h-3 w-px shrink-0 bg-white/25" aria-hidden="true" />
+          <span class="hero-card-meta-divider mx-2 h-3 w-px shrink-0" aria-hidden="true" />
           <a
             href={getCategoryUrl(category)}
             aria-label={`View all posts in the ${category} category`}
-            class="hero-card-meta-item inline-flex items-center text-xs text-white/90 whitespace-nowrap transition hover:text-white"
+            class="hero-card-meta-item inline-flex items-center text-xs whitespace-nowrap transition"
           >
             {category}
           </a>
         </Fragment>
       )}
-    </div>
-  </div>
-
-  <!-- 环境模糊底图，铺满全卡填补两侧空隙 -->
-  <div class="hero-card-media absolute inset-0 z-0 overflow-hidden">
-    <div class="hero-card-media-inner absolute -inset-8">
-      <RandomCoverImage
-        src={processedImage}
-        basePath={basePath}
-        alt=""
-        class="hero-card-img h-full w-full"
-        seed={entry.id}
-        preview={true}
-        loading="eager"
-      />
     </div>
   </div>
 
@@ -299,12 +284,44 @@ const minuteLabel =
 <style is:global>
   /* =============================================================
    * Hero 文章卡片（参考 ThriveX-Blog ArticleLayout/Classics）：
-   * 封面图左右交替出现（斜切裁边）+ 环境模糊底图铺满 + 文字叠加
+   * 封面图左右交替出现（斜切裁边）+ 文字区落在半透明卡片底色上
    * ============================================================= */
   .post-card-wrapper.hero-card {
     height: 190px;
-    background: oklch(0.2 0.02 var(--hue));
+    background: var(--card-bg-transparent);
     position: relative;
+  }
+
+  /* hero 卡片悬浮时不做任何外观变化：
+     需盖过 main.css 的 `.card-base:hover`(阴影) 与
+     `#post-list-container.list-mode .post-card-wrapper:hover`(底色/描边，特异性 1,3,0)，
+     因此这里用 (1,4,0) 的选择器。 */
+  .post-card-wrapper.hero-card.card-base,
+  .post-card-wrapper.hero-card.card-base:hover,
+  #post-list-container .post-card-wrapper.hero-card.card-base:hover {
+    background: var(--card-bg-transparent) !important;
+    border-color: transparent !important;
+    box-shadow: none !important;
+  }
+
+  /* 底色由深色实心改为半透明卡片色后，原先硬编码的白字会看不见，
+     这里统一改用随主题走的字色变量。 */
+  .hero-card-title {
+    color: var(--juejin-text-primary);
+  }
+  .hero-card-desc,
+  .hero-card-meta-item {
+    color: var(--juejin-text-secondary);
+  }
+  .hero-card-meta-icon {
+    color: var(--juejin-text-secondary);
+    opacity: 0.75;
+  }
+  .hero-card-meta-divider {
+    background: var(--line-divider);
+  }
+  a.hero-card-meta-item:hover {
+    color: var(--primary);
   }
 
   @media (min-width: 768px) {
@@ -323,32 +340,17 @@ const minuteLabel =
     }
   }
 
-  .hero-card-media,
-  .hero-card-media-inner,
-  .hero-card-img,
-  .hero-card-img img,
   .hero-card-side-img,
   .hero-card-side-img img {
     display: block;
   }
 
-  .hero-card-media-inner {
-    filter: blur(2.5rem) brightness(0.6);
-  }
-
-  .hero-card-img img,
   .hero-card-side-img img {
     height: 100%;
     width: 100%;
     object-fit: cover;
   }
 
-  .hero-card-side {
-    transition: transform 0.3s ease-out;
-  }
-  .hero-card-side:hover {
-    transform: scale(1.15);
-  }
   .hero-card--even .hero-card-side {
     clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
   }
@@ -356,12 +358,8 @@ const minuteLabel =
     clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
   }
 
-  .text-shadow-hero {
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.55);
-  }
-
   .hero-card-title:hover {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: var(--primary) !important;
   }
 
   /* grid-mode 下：覆盖旧规则强加的 1:1 方形、column-reverse 与固定行方向（固定高度已保证等高） */
@@ -381,7 +379,7 @@ const minuteLabel =
   /* 覆盖旧 list-mode 规则：不再降级为紧凑白色行 */
   @media (min-width: 768px) {
     #post-list-container.list-mode .post-card-wrapper.hero-card {
-      background: oklch(0.2 0.02 var(--hue)) !important;
+      background: var(--card-bg-transparent) !important;
       border: none !important;
       border-bottom: none !important;
       border-radius: var(--radius-large) !important;
