@@ -273,8 +273,16 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
   const RUNTIME_TICK = 60_000;
   const COUNT_UP_DURATION = 1800;
 
-  let clockTimer: number | undefined;
-  let runtimeTimer: number | undefined;
+  // swup 只替换 DOM，不会清空 <script> 的旧作用域；每次局部刷新都会
+  // 重新执行这段脚本，因此定时器 ID 和「是否已绑定监听器」都必须挂在
+  // window 上跨脚本执行持久化，否则旧定时器清不掉、监听器会重复注册。
+  interface SiteRuntimeState {
+    clockTimer?: number;
+    runtimeTimer?: number;
+    listenerAdded?: boolean;
+    started?: boolean;
+  }
+  const state: SiteRuntimeState = ((window as any).__siteRuntimeState ??= {});
 
   function calcRuntime(start: Date, now: Date) {
     let years = now.getFullYear() - start.getFullYear();
@@ -367,26 +375,35 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
   }
 
   function initSiteRuntime() {
-    window.clearInterval(clockTimer);
-    window.clearInterval(runtimeTimer);
+    window.clearInterval(state.clockTimer);
+    window.clearInterval(state.runtimeTimer);
 
     const root = document.querySelector<HTMLElement>(".site-runtime");
     if (!root) return;
 
-    updateClock(root);
-    updateRuntime(root, true);
+    // 只有整站真正首次加载才做 0 -> 目标值的滚动动画；
+    // swup 局部刷新（切页/进出文章）时静默更新，避免数字反复归零重建。
+    const isFirstRun = !state.started;
+    state.started = true;
 
-    clockTimer = window.setInterval(() => {
+    updateClock(root);
+    updateRuntime(root, isFirstRun);
+
+    state.clockTimer = window.setInterval(() => {
       const current = document.querySelector<HTMLElement>(".site-runtime");
       if (current) updateClock(current);
     }, CLOCK_TICK);
 
-    runtimeTimer = window.setInterval(() => {
+    state.runtimeTimer = window.setInterval(() => {
       const current = document.querySelector<HTMLElement>(".site-runtime");
       if (current) updateRuntime(current, false);
     }, RUNTIME_TICK);
   }
 
   initSiteRuntime();
-  document.addEventListener("swup:contentReplaced", initSiteRuntime);
+
+  if (!state.listenerAdded) {
+    state.listenerAdded = true;
+    document.addEventListener("swup:contentReplaced", initSiteRuntime);
+  }
 </script>
