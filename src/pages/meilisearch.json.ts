@@ -100,10 +100,17 @@ export const GET: APIRoute = async () => {
 
 	// 1) 文章
 	for (const post of publishedPosts) {
+		// 加密文章：标题/描述/标签仍可被搜到（方便用户找到入口去解锁），
+		// 但正文明文绝不能进索引——否则会绕过页面端的密码/加密保护，
+		// 被公开 search key 直接查到完整内容
+		const isProtected = Boolean(post.data.password);
+
 		// 预留一部分给其他字段，正文最多约 8KB
 		const maxContentBytes = 8000;
 		const body = post.body ?? "";
-		const truncatedContent = truncateToBytes(body, maxContentBytes);
+		const truncatedContent = isProtected
+			? ""
+			: truncateToBytes(body, maxContentBytes);
 
 		const objectID = post.id;
 		const rec: MeilisearchRecord = {
