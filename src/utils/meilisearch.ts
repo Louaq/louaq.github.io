@@ -55,12 +55,22 @@ async function waitForTask(options: {
 	throw new Error(`Timed out waiting Meilisearch task: ${taskUid}`);
 }
 
+const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+/**
+ * search.louaq.com 前面挂着一层反向代理（openresty）的 CC 防护：短时间内连续请求
+ * 会被拦截并返回 403 + 一个 HTML 拦截页（注意不是 Meilisearch 自己返回的 JSON 错误）。
+ * 这里对 403 做指数退避重试，避免整批文档静默丢失。
+ */
 async function meiliRequest(options: {
 	url: string;
 	method: "GET" | "POST" | "PATCH";
 	adminKey: string;
 	body?: unknown;
-}) {
+	/** 403（WAF 拦截）时的最大重试次数 */
+	maxRetries?: number;
+	logger?: { warn: (msg: string) => void };
+}): Promise<Response> {
 	const headers: Record<string, string> = {
 		Authorization: `Bearer ${options.adminKey}`,
 	};
@@ -69,19 +79,41 @@ async function meiliRequest(options: {
 		headers["Content-Type"] = "application/json";
 	}
 
-	return fetch(options.url, {
-		method: options.method,
-		headers,
-		body: options.body !== undefined ? JSON.stringify(options.body) : undefined,
-	});
+	const serialized =
+		options.body !== undefined ? JSON.stringify(options.body) : undefined;
+	const maxRetries = options.maxRetries ?? 5;
+
+	let res!: Response;
+	for (let attempt = 1; attempt <= maxRetries + 1; attempt++) {
+		res = await fetch(options.url, {
+			method: options.method,
+			headers,
+			body: serialized,
+		});
+
+		if (res.status !== 403 || attempt > maxRetries) return res;
+
+		const wait = 3000 * attempt;
+		options.logger?.warn(
+			`Meilisearch request blocked by upstream WAF (403). Backing off ${wait / 1000}s and retrying (${attempt}/${maxRetries}) ...`,
+		);
+		await sleep(wait);
+	}
+	return res;
 }
+
+type MeiliLogger = {
+	info: (msg: string) => void;
+	warn: (msg: string) => void;
+	error: (msg: string) => void;
+};
 
 async function addDocumentsWithFallback(options: {
 	host: string;
 	indexUid: string;
 	adminKey: string;
 	documents: unknown[];
-	logger: { info: Function; warn: Function; error: Function };
+	logger: MeiliLogger;
 }) {
 	const { host, indexUid, adminKey, documents, logger } = options;
 
@@ -96,6 +128,7 @@ async function addDocumentsWithFallback(options: {
 			method: "POST",
 			adminKey,
 			body,
+			logger,
 		});
 		const json = await res.json().catch(() => ({}));
 		return { res, json };
@@ -138,6 +171,7 @@ async function listRemoteIds(options: {
 
 		offset += pageSize;
 		if (offset >= (json?.total ?? 0)) break;
+		await sleep(500);
 	}
 
 	return ids;
@@ -315,14 +349,19 @@ export default function meilisearch(): AstroIntegration {
 					}
 
 					// 3) 上传文档（按块，避免单次请求过大）
+					// 块之间留出间隔：上游反代的 CC 防护会把连续请求判定为攻击并返回 403
 					const chunkSize = Number(
-						process.env.MEILISEARCH_UPLOAD_CHUNK_SIZE || 100,
+						process.env.MEILISEARCH_UPLOAD_CHUNK_SIZE || 40,
+					);
+					const pauseMs = Number(
+						process.env.MEILISEARCH_UPLOAD_PAUSE_MS || 1500,
 					);
 					let uploadedBatchCount = 0;
 					let taskSucceededBatchCount = 0;
 					for (let i = 0; i < records.length; i += chunkSize) {
 						const batch = records.slice(i, i + chunkSize);
 						uploadedBatchCount += 1;
+						if (i > 0) await sleep(pauseMs);
 						logger.info(
 							`Uploading batch ${i / chunkSize + 1} / ${Math.ceil(records.length / chunkSize)} ...`,
 						);
@@ -341,6 +380,7 @@ export default function meilisearch(): AstroIntegration {
 							});
 
 						if (!addRes.ok) {
+							uploadSucceeded = false;
 							logger.warn(
 								`Meilisearch addDocuments failed: status=${addRes.status} body=${JSON.stringify(addJson).slice(0, 500)}`,
 							);
@@ -348,6 +388,7 @@ export default function meilisearch(): AstroIntegration {
 						}
 
 						if (!addJson?.taskUid) {
+							uploadSucceeded = false;
 							logger.warn(
 								`Meilisearch addDocuments returned no taskUid (status=${addRes.status}). body=${JSON.stringify(addJson).slice(0, 500)}`,
 							);
