@@ -2,7 +2,6 @@
 import { onDestroy, onMount } from "svelte";
 
 export let postId: string;
-export let password: string;
 export let hint = ""; // 可选密码提示，如 "示例文章密码123456"
 
 let inputPassword = "";
@@ -102,8 +101,70 @@ function formatTime(seconds: number): string {
 	return `${minutes}分${secs}秒`;
 }
 
+// base64 -> Uint8Array
+function base64ToBytes(base64: string): Uint8Array {
+	const binary = atob(base64);
+	const bytes = new Uint8Array(binary.length);
+	for (let i = 0; i < binary.length; i++) {
+		bytes[i] = binary.charCodeAt(i);
+	}
+	return bytes;
+}
+
+// 用输入的密码尝试解密正文；密码错误时 AES-GCM 认证标签校验会失败并抛出异常
+async function decryptProtectedContent(
+	candidatePassword: string,
+): Promise<string | null> {
+	const el = document.getElementById("protected-content");
+	if (!el) return null;
+
+	const { cipher, iv, salt, iterations } = el.dataset;
+	if (!cipher || !iv || !salt || !iterations) return null;
+
+	const keyMaterial = await crypto.subtle.importKey(
+		"raw",
+		new TextEncoder().encode(candidatePassword),
+		"PBKDF2",
+		false,
+		["deriveKey"],
+	);
+	const key = await crypto.subtle.deriveKey(
+		{
+			name: "PBKDF2",
+			salt: base64ToBytes(salt),
+			iterations: Number(iterations),
+			hash: "SHA-256",
+		},
+		keyMaterial,
+		{ name: "AES-GCM", length: 256 },
+		false,
+		["decrypt"],
+	);
+
+	const plainBuffer = await crypto.subtle.decrypt(
+		{ name: "AES-GCM", iv: base64ToBytes(iv) },
+		key,
+		base64ToBytes(cipher),
+	);
+
+	return new TextDecoder().decode(plainBuffer);
+}
+
+// 通过 innerHTML 注入的 <script> 不会自动执行（浏览器安全限制），
+// 需要手动替换为新节点才能让正文里的脚本（表格滚动包裹、Mermaid 等）生效
+function reviveScripts(container: HTMLElement) {
+	for (const oldScript of Array.from(container.querySelectorAll("script"))) {
+		const newScript = document.createElement("script");
+		for (const attr of Array.from(oldScript.attributes)) {
+			newScript.setAttribute(attr.name, attr.value);
+		}
+		newScript.textContent = oldScript.textContent;
+		oldScript.replaceWith(newScript);
+	}
+}
+
 // 验证密码
-function verifyPassword() {
+async function verifyPassword() {
 	// 检查是否处于冻结状态
 	if (checkFrozen()) {
 		updateErrorMessage();
@@ -114,11 +175,24 @@ function verifyPassword() {
 		return;
 	}
 
-	if (inputPassword === password) {
+	let decryptedHtml: string | null = null;
+	try {
+		decryptedHtml = await decryptProtectedContent(inputPassword);
+	} catch (e) {
+		decryptedHtml = null;
+	}
+
+	if (decryptedHtml !== null) {
 		// 密码正确，清除冻结状态
 		localStorage.removeItem(STORAGE_KEY);
 		errorMessage = "";
 		isUnlocked = true;
+
+		const el = document.getElementById("protected-content");
+		if (el) {
+			el.innerHTML = decryptedHtml;
+			reviveScripts(el);
+		}
 
 		// 发送自定义事件通知父组件
 		window.dispatchEvent(

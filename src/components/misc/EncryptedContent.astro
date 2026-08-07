@@ -1,0 +1,22 @@
+---
+// 将默认插槽渲染为 HTML 字符串后立即加密，页面产物中不再包含正文明文，
+// 只有 data-cipher/iv/salt（公开密文），需要正确密码在浏览器端派生密钥解密。
+import { encryptContentHtml } from "@/utils/content-crypto";
+
+interface Props {
+	password: string;
+}
+
+const { password } = Astro.props;
+const html = await Astro.slots.render("default");
+const { cipher, iv, salt, iterations } = encryptContentHtml(html, password);
+---
+
+<div
+  id="protected-content"
+  style="display: none;"
+  data-cipher={cipher}
+  data-iv={iv}
+  data-salt={salt}
+  data-iterations={iterations}
+></div>

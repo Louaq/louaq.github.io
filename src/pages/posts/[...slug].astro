@@ -18,6 +18,7 @@ import utc from "dayjs/plugin/utc";
 import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
 import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
+import EncryptedContent from "@/components/misc/EncryptedContent.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
@@ -224,16 +225,17 @@ const jsonLd = {
         )
       }
 
-      {/* 密码保护 */}
+      {/* 密码保护：正文在构建期加密，页面源码中不含明文密码与明文正文 */}
       {entry.data.password ? (
         <div id="password-protection-wrapper">
-          <PasswordProtection 
+          <PasswordProtection
             client:idle
             postId={entry.id}
-            password={typeof entry.data.password === 'boolean' ? (siteConfig.postPassword ?? "") : entry.data.password}
             hint={siteConfig.postPasswordHint ?? ""}
           />
-          <div id="protected-content" style="display: none;">
+          <EncryptedContent
+            password={typeof entry.data.password === 'boolean' ? (siteConfig.postPassword ?? "") : entry.data.password}
+          >
             {/* 加密文章：过期提示仅解锁后显示 */}
             {shouldShowOutdatedNotice && (
               <PostStaleNoticeBanner
@@ -244,7 +246,7 @@ const jsonLd = {
             <Markdown class="mb-6 markdown-content onload-animation">
               <Content />
             </Markdown>
-          </div>
+          </EncryptedContent>
         </div>
       ) : (
         <Markdown class="mb-6 markdown-content onload-animation">
@@ -265,6 +267,9 @@ const jsonLd = {
               passwordCard.style.display = 'none';
             }
             protectedContent.style.display = 'block';
+            // 正文是解锁后才注入 DOM 的，需要重新触发依赖 astro:page-load 的
+            // 初始化逻辑（表格滚动包裹、Mermaid、TOC、代码块复制按钮等）
+            document.dispatchEvent(new Event('astro:page-load'));
           }
         });
       </script>
