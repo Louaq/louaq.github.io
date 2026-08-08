@@ -1,0 +1,276 @@
+---
+import { Icon as AstroIcon } from "astro-icon/components";
+import { applyEmailTemplate, applyNotes, applySteps } from "./applyDialogData";
+
+// 「申请友链」弹窗。文案见同目录的 applyDialogData.ts。
+// 触发按钮由页面自行放置，只需用 <friend-apply-trigger> 包裹一个 <button>，
+// 本组件注册的自定义元素会接管点击并打开弹窗。
+// 邮件模板的复制按钮复用页面上的 <friend-copy-field> 自定义元素。
+---
+
+<friend-apply-dialog>
+  <dialog id="friend-apply-dialog" class="friend-apply-dialog">
+    <div class="friend-apply-dialog-panel">
+      <div class="friend-apply-dialog-header">
+        <span class="friend-apply-dialog-icon">
+          <AstroIcon name="material-symbols:link-rounded" class="w-5 h-5" />
+        </span>
+        <div class="min-w-0 flex-1">
+          <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+            申请友链
+          </h3>
+          <p class="text-[0.8rem] text-neutral-500 dark:text-neutral-400 mt-1">
+            按照以下步骤将本站加入你的友链，即可申请互换
+          </p>
+        </div>
+        <button type="button" class="friend-apply-dialog-close" aria-label="关闭">
+          <AstroIcon name="material-symbols:close-rounded" class="w-5 h-5" />
+        </button>
+      </div>
+
+      <div class="friend-apply-dialog-body">
+        <!-- 申请流程 -->
+        <div class="space-y-0">
+          {applySteps.map((step, index) => (
+            <div class="flex gap-3.5">
+              <div class="flex flex-col items-center shrink-0">
+                <div
+                  class="rounded-full flex items-center justify-center shrink-0 font-bold text-white text-xs"
+                  style="width: 1.75rem; height: 1.75rem; min-width: 1.75rem; min-height: 1.75rem; background-color: var(--primary);"
+                >
+                  {index + 1}
+                </div>
+                {index < applySteps.length - 1 && (
+                  <div
+                    class="flex-1 min-h-2 my-1.5 shrink-0"
+                    style="width: 2px; background-color: var(--line-divider, #e5e7eb);"
+                  />
+                )}
+              </div>
+              <div class="pb-5">
+                <p class="font-semibold text-[0.95rem] mb-1">{step.title}</p>
+                <p class="text-[0.8rem] text-neutral-500 dark:text-neutral-400 leading-relaxed">
+                  {step.desc}
+                </p>
+                {index === 1 && (
+                  <div class="friend-apply-template relative rounded-xl p-4 pr-10 mt-2.5 text-[0.78rem] leading-relaxed overflow-x-auto whitespace-pre">
+                    <friend-copy-field
+                      class="friend-copy-field friend-copy-field-inline absolute top-2 right-2"
+                      data-copy-value={applyEmailTemplate}
+                    >
+                      <button
+                        type="button"
+                        class="friend-copy-btn w-7 h-7 flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 text-(--btn-content) hover:opacity-80 transition-opacity cursor-pointer"
+                        aria-label="复制"
+                      >
+                        <AstroIcon
+                          name="material-symbols:content-copy-outline-rounded"
+                          class="friend-copy-icon-default w-3.5 h-3.5"
+                        />
+                        <AstroIcon
+                          name="material-symbols:check-rounded"
+                          class="friend-copy-icon-success w-3.5 h-3.5 text-green-500"
+                        />
+                      </button>
+                    </friend-copy-field>
+                    {applyEmailTemplate}
+                  </div>
+                )}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- 注意事项 -->
+        <div class="mt-5 pt-5 border-t border-(--line-divider)">
+          <h4 class="text-[0.95rem] font-bold mb-3 flex items-center gap-2 text-neutral-900 dark:text-neutral-100">
+            <AstroIcon
+              name="material-symbols:info-outline-rounded"
+              class="shrink-0 w-[1.05rem] h-[1.05rem] text-(--primary)"
+            />
+            注意事项
+          </h4>
+          <ul class="list-disc list-outside space-y-2 text-[0.85rem] leading-relaxed text-neutral-600 dark:text-neutral-400 pl-5">
+            {applyNotes.map((item) => (
+              <li class="pl-1">
+                <strong class="text-neutral-800 dark:text-neutral-200">{item.title}</strong>：{item.content}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </dialog>
+</friend-apply-dialog>
+
+<script is:inline>
+  // 一律使用事件委托（监听元素自身），这样自定义元素在子节点解析完成前
+  // 触发 connectedCallback 也不会漏绑事件
+  if (!customElements.get("friend-apply-trigger")) {
+    class FriendApplyTrigger extends HTMLElement {
+      constructor() {
+        super();
+        this.handleClick = this.handleClick.bind(this);
+      }
+
+      connectedCallback() {
+        this.addEventListener("click", this.handleClick);
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener("click", this.handleClick);
+      }
+
+      handleClick(e) {
+        if (!e.target.closest("button")) return;
+        document.getElementById("friend-apply-dialog")?.showModal();
+      }
+    }
+    customElements.define("friend-apply-trigger", FriendApplyTrigger);
+  }
+
+  if (!customElements.get("friend-apply-dialog")) {
+    class FriendApplyDialog extends HTMLElement {
+      constructor() {
+        super();
+        this.handleClick = this.handleClick.bind(this);
+      }
+
+      connectedCallback() {
+        this.addEventListener("click", this.handleClick);
+      }
+
+      disconnectedCallback() {
+        this.removeEventListener("click", this.handleClick);
+      }
+
+      handleClick(e) {
+        const dialog = this.querySelector("dialog");
+        if (!dialog) return;
+
+        // 关闭按钮，或点击 dialog 自身（即遮罩区域，面板会拦截自己的点击）
+        if (e.target.closest(".friend-apply-dialog-close") || e.target === dialog) {
+          dialog.close();
+        }
+      }
+    }
+    customElements.define("friend-apply-dialog", FriendApplyDialog);
+  }
+</script>
+
+<style is:global>
+  .friend-apply-dialog {
+    position: fixed;
+    inset: 0;
+    margin: auto;
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: min(560px, 92vw);
+    max-height: 86vh;
+    overflow: visible;
+  }
+  .friend-apply-dialog::backdrop {
+    background: rgba(0, 0, 0, 0.32);
+    backdrop-filter: blur(6px);
+  }
+  .friend-apply-dialog[open] .friend-apply-dialog-panel {
+    animation: friend-apply-pop 0.22s cubic-bezier(0.34, 1.3, 0.64, 1);
+  }
+  @keyframes friend-apply-pop {
+    from {
+      opacity: 0;
+      transform: scale(0.94) translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .friend-apply-dialog[open] .friend-apply-dialog-panel {
+      animation: none;
+    }
+  }
+
+  /* 磨砂玻璃面板（不使用 card-base，避免其不透明背景覆盖） */
+  .friend-apply-dialog-panel {
+    display: flex;
+    flex-direction: column;
+    max-height: 86vh;
+    border-radius: 1.5rem;
+    background: rgba(255, 255, 255, 0.82);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.3);
+  }
+  :root.dark .friend-apply-dialog-panel {
+    background: rgba(28, 28, 32, 0.82);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.6);
+  }
+  /* 不支持 backdrop-filter 时退回不透明背景，保证可读性 */
+  @supports not (backdrop-filter: blur(1px)) {
+    .friend-apply-dialog-panel {
+      background: var(--card-bg);
+    }
+    :root.dark .friend-apply-dialog-panel {
+      background: var(--card-bg);
+    }
+  }
+
+  .friend-apply-dialog-header {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding: 1.5rem 1.5rem 1.125rem;
+    flex-shrink: 0;
+  }
+  .friend-apply-dialog-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 9999px;
+    flex-shrink: 0;
+    background-color: color-mix(in oklch, var(--primary) 14%, transparent);
+    color: var(--primary);
+  }
+  .friend-apply-dialog-body {
+    padding: 0 1.5rem 1.5rem;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .friend-apply-dialog-close {
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background: transparent;
+    color: var(--content-meta, #9ca3af);
+    cursor: pointer;
+    flex-shrink: 0;
+    align-self: flex-start;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+  .friend-apply-dialog-close:hover {
+    background: var(--btn-regular-bg);
+    color: var(--btn-content);
+  }
+
+  .friend-apply-template {
+    background: rgba(0, 0, 0, 0.04);
+  }
+  :root.dark .friend-apply-template {
+    background: rgba(255, 255, 255, 0.06);
+  }
+  .friend-copy-field-inline {
+    display: inline-flex;
+  }
+</style>

@@ -11,21 +11,29 @@ import Twikoo from "./Twikoo.astro";
 import Waline from "./Waline.astro";
 
 interface Props {
-	post: CollectionEntry<"posts"> | CollectionEntry<"spec">;
+	// 内容集合驱动的页面（文章 / spec 页面）传 post；不依赖内容集合的页面
+	// （如友链页）可以省略 post，改为直接传 slug/title
+	post?: CollectionEntry<"posts"> | CollectionEntry<"spec">;
 	customPath?: string;
+	slug?: string;
+	title?: string;
 }
 
-const { post, customPath } = Astro.props;
-const { id } = post;
+const { post, customPath, slug: slugProp, title: titleProp } = Astro.props;
 
 // 根据页面类型确定路径
 const slug =
-	post.collection === "posts"
-		? getResolvedPostPath(id, post.data)
-		: removeFileExtension(id);
+	slugProp ??
+	(post
+		? post.collection === "posts"
+			? getResolvedPostPath(post.id, post.data)
+			: removeFileExtension(post.id)
+		: "");
 const path =
-	customPath || (post.collection === "posts" ? `/posts/${slug}` : `/${slug}`);
+	customPath || (post?.collection === "posts" ? `/posts/${slug}` : `/${slug}`);
 const url = `${Astro.site?.href}${path}`;
+const disqusTitle =
+	titleProp ?? (post && "title" in post.data ? post.data.title : slug);
 
 // 强制commentService类型为string，避免类型不兼容警告
 let commentService: string = commentConfig?.type || "none";
@@ -55,7 +63,7 @@ let commentService: string = commentConfig?.type || "none";
         {commentService === "twikoo" && <Twikoo path={path} />}
         {commentService === "waline" && <Waline path={path} />}
         {commentService === "giscus" && <Giscus />}
-        {commentService === "disqus" && <Disqus identifier={slug} url={url} title={'title' in post.data ? post.data.title : slug} />}
+        {commentService === "disqus" && <Disqus identifier={slug} url={url} title={disqusTitle} />}
           {commentService === "artalk" && <Artalk path={path} />}
         {commentService === "none" && (
           <div class="text-center py-8 text-(--content-meta)">

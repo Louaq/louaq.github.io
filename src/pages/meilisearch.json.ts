@@ -2,7 +2,12 @@ import { getCollection } from "astro:content";
 import { createHash } from "node:crypto";
 import type { APIRoute } from "astro";
 import { getPostUrlForEntry } from "@/utils/url-utils";
-import { getEnabledFriends } from "../config/friendsConfig";
+import { applyNotes } from "../components/pages/friends/applyDialogData";
+import {
+	friendSiteInfo,
+	friendsPageConfig,
+	getEnabledFriends,
+} from "../config/friendsConfig";
 import { siteConfig } from "../config/siteConfig";
 import { sponsorConfig } from "../config/sponsorConfig";
 
@@ -136,7 +141,6 @@ export const GET: APIRoute = async () => {
 		{ title: string; url: string; description?: string }
 	> = {
 		about: { title: "关于", url: "/about/" },
-		friends: { title: "友链", url: "/friends/" },
 		guestbook: { title: "留言板", url: "/guestbook/" },
 	};
 	for (const page of spec) {
@@ -185,6 +189,20 @@ export const GET: APIRoute = async () => {
 		);
 	}
 
+	if (siteConfig.pages.friends) {
+		records.push(
+			shrinkRecordToFit({
+				objectID: "page:friends",
+				id: makeMeiliId("page:friends"),
+				type: "page",
+				title: friendsPageConfig.title || "友链",
+				description: friendsPageConfig.description || friendSiteInfo.desc,
+				content: applyNotes.map((n) => `${n.title}：${n.content}`).join("\n"),
+				url: "/friends/",
+			}),
+		);
+	}
+
 	// 3) 友链（外部链接也纳入搜索）
 	const friends = getEnabledFriends();
 	for (const f of friends) {
@@ -195,9 +213,8 @@ export const GET: APIRoute = async () => {
 			type: "friend",
 			title: f.title,
 			description: f.desc ?? "",
-			content: [f.title, f.desc, ...(f.tags ?? [])].filter(Boolean).join("\n"),
+			content: [f.title, f.desc].filter(Boolean).join("\n"),
 			url: f.siteurl,
-			tags: f.tags ?? [],
 			category: "friends",
 		};
 		records.push(shrinkRecordToFit(rec));

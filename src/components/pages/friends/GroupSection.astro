@@ -1,0 +1,151 @@
+---
+import { Icon as AstroIcon } from "astro-icon/components";
+import { friendSiteInfo } from "@/config";
+import type { FriendGroup } from "@/types/config";
+
+interface Props {
+	group: FriendGroup;
+	// 是否在本分组标题右侧显示「申请友链」按钮（通常只在第一个分组显示）
+	showApplyButton?: boolean;
+	// 是否与上一个分组之间显示分隔线
+	withDivider?: boolean;
+}
+
+const { group, showApplyButton = false, withDivider = false } = Astro.props;
+
+const isCompact = group.layout === "compact";
+---
+
+<div class:list={["relative mt-8", withDivider && "pt-6 border-t border-(--line-divider)"]}>
+  <div class="flex items-center justify-between gap-3 mb-4">
+    <div class="min-w-0">
+      <h3 class="text-base font-bold text-neutral-900 dark:text-neutral-100">
+        {group.name}
+      </h3>
+      {group.description && (
+        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-1">
+          {group.description}
+        </p>
+      )}
+    </div>
+    {showApplyButton && (
+      <friend-apply-trigger>
+        <button
+          type="button"
+          class="shrink-0 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-medium text-white bg-(--primary) hover:opacity-90 transition-opacity cursor-pointer"
+        >
+          申请友链
+        </button>
+      </friend-apply-trigger>
+    )}
+  </div>
+
+  <div
+    class:list={[
+      isCompact
+        ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3"
+        : "friends-grid",
+    ]}
+  >
+    {/* 本站卡片 */}
+    {group.includeSelf && (
+      <a
+        href={friendSiteInfo.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="friend-card friend-card-badged group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
+      >
+        <span class="friend-badge">
+          <AstroIcon name="material-symbols:workspace-premium-rounded" class="text-[0.8rem]" />
+          OWNER
+        </span>
+        <div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
+          <img
+            src={friendSiteInfo.avatar}
+            alt={friendSiteInfo.name}
+            class="w-full h-full object-cover"
+            loading="eager"
+          />
+        </div>
+        <div class="grow min-w-0 flex flex-col justify-center gap-0.5">
+          <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate pr-4">
+            {friendSiteInfo.name}
+          </div>
+          <div class="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1" title={friendSiteInfo.desc}>
+            {friendSiteInfo.desc}
+          </div>
+        </div>
+      </a>
+    )}
+
+    {group.friends.map((item) =>
+      isCompact ? (
+        <a
+          href={item.siteurl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class:list={[
+            "friend-card-compact group flex items-center gap-3 p-3 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 relative overflow-hidden",
+            item.badge && "friend-card-badged",
+          ]}
+        >
+          {item.badge && (
+            <span class="friend-badge">
+              {item.badgeIcon && <AstroIcon name={item.badgeIcon} class="text-[0.8rem]" />}
+              {item.badge}
+            </span>
+          )}
+          <div class="w-11 h-11 shrink-0 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
+            <img
+              src={item.imgurl}
+              alt={item.title}
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <div class="min-w-0">
+            <div class="font-bold text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate">
+              {item.title}
+            </div>
+            <div class="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1" title={item.desc}>
+              {item.desc}
+            </div>
+          </div>
+        </a>
+      ) : (
+        <a
+          href={item.siteurl}
+          target="_blank"
+          rel="noopener noreferrer"
+          class:list={[
+            "friend-card group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden",
+            item.badge && "friend-card-badged",
+          ]}
+        >
+          {item.badge && (
+            <span class="friend-badge">
+              {item.badgeIcon && <AstroIcon name={item.badgeIcon} class="text-[0.8rem]" />}
+              {item.badge}
+            </span>
+          )}
+          <div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
+            <img
+              src={item.imgurl}
+              alt={item.title}
+              class="w-full h-full object-cover"
+              loading="eager"
+            />
+          </div>
+          <div class="grow min-w-0 flex flex-col justify-center gap-0.5">
+            <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate pr-4">
+              {item.title}
+            </div>
+            <div class="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1" title={item.desc}>
+              {item.desc}
+            </div>
+          </div>
+        </a>
+      ),
+    )}
+  </div>
+</div>

@@ -1,6 +1,20 @@
-import type { FriendLink, FriendsPageConfig } from "../types/config";
+import type {
+	FriendGroup,
+	FriendLink,
+	FriendsPageConfig,
+} from "../types/config";
+import { profileConfig } from "./profileConfig";
+import { siteConfig } from "./siteConfig";
 
-// 可以在src/content/spec/friends.md中编写友链页面下方的自定义内容
+// 友链页面顶部"本站信息"卡片展示的数据，方便其他站长复制添加本站为友链
+export const friendSiteInfo = {
+	name: profileConfig.name,
+	desc: "致力于探索如何利用计算机视觉和深度学习技术",
+	url: siteConfig.site_url,
+	avatar: `${siteConfig.site_url}${profileConfig.avatar}`,
+	rss: `${siteConfig.site_url}/rss.xml`,
+	email: "louaqo@gmail.com",
+};
 
 // 友链页面配置
 export const friendsPageConfig: FriendsPageConfig = {
@@ -10,7 +24,7 @@ export const friendsPageConfig: FriendsPageConfig = {
 	// 页面描述文本，如果留空则使用 i18n 中的翻译
 	description: "",
 
-	// 是否显示底部自定义内容（friends.mdx 中的内容）
+	// 是否显示底部自定义内容（申请友链流程 + 注意事项）
 	showCustomContent: true,
 
 	// 是否显示评论区，需要先在commentConfig.ts启用评论系统
@@ -20,53 +34,96 @@ export const friendsPageConfig: FriendsPageConfig = {
 	randomizeSort: false,
 };
 
-// 友链配置
-export const friendsConfig: FriendLink[] = [
+// ============================================================================
+// 友链分组配置
+//
+// 页面按「分组 -> 友链」的结构渲染，分组可自由增删改名，不限于下面这两个。
+// 新增一个分组，只需往数组里加一项：
+//   {
+//     name: "赞助商",          // 分组标题
+//     layout: "compact",      // 卡片布局：default 大卡片 / compact 小卡片
+//     friends: [ ...  ],      // 该分组下的友链
+//   }
+// 分组之间按 weight 从大到小排列；每个分组内的友链同样按各自的 weight 排列。
+// ============================================================================
+export const friendGroups: FriendGroup[] = [
 	{
-		title: "夏叶",
-		imgurl: "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
-		desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
-		siteurl: "https://blog.cuteleaf.cn",
-		tags: ["Blog"],
-		weight: 10, // 权重，数字越大排序越靠前
-		enabled: true, // 是否启用
-	},
-	{
-		title: "聚合图床",
-		imgurl: "https://www.superbed.cn/favicon.ico",
-		desc: "免费图片上传",
-		siteurl: "https://www.superbed.cn/",
-		tags: ["image"],
-		weight: 9, // 权重，数字越大排序越靠前
-		enabled: true, // 是否启用
-	},
-	{
-		title: "最美博客",
-		imgurl: "https://s1.ax1x.com/2022/11/10/z9E7X4.jpg",
-		desc: "这是一个 Vue2 Vue3 与 SpringBoot 结合的产物",
-		siteurl: "https://poetize.cn/",
-		tags: ["zuimei"],
-		weight: 8, // 权重，数字越大排序越靠前
-		enabled: true, // 是否启用
-	},
-	{
-		title: "Astro",
-		imgurl: "https://avatars.githubusercontent.com/u/44914786?v=4&s=640",
-		desc: "The web framework for content-driven websites. ⭐️ Star to support our work!",
-		siteurl: "https://github.com/withastro/astro",
-		tags: ["Framework"],
-		weight: 7,
+		name: "全站置顶",
+		layout: "default",
+		// 在本分组开头插入本站自己的卡片（带 OWNER 徽标）
+		includeSelf: true,
+		weight: 100,
 		enabled: true,
+		friends: [
+			// 想置顶某个友链，把它放到这个分组里即可，例如：
+			// {
+			// 	title: "某位朋友",
+			// 	imgurl: "https://example.com/avatar.png",
+			// 	desc: "站点描述",
+			// 	siteurl: "https://example.com",
+			// 	weight: 10,
+			// 	enabled: true,
+			// 	badge: "PINNED",
+			// 	badgeIcon: "material-symbols:keep-rounded",
+			// },
+		],
+	},
+	{
+		name: "大佬",
+		layout: "compact",
+		weight: 90,
+		enabled: true,
+		friends: [
+			{
+				title: "夏叶",
+				imgurl: "https://q1.qlogo.cn/g?b=qq&nk=7618557&s=640",
+				desc: "飞萤之火自无梦的长夜亮起，绽放在终竟的明天。",
+				siteurl: "https://blog.cuteleaf.cn",
+				weight: 10, // 权重，数字越大排序越靠前
+				enabled: true, // 是否启用
+			},
+			{
+				title: "最美博客",
+				imgurl: "https://s1.ax1x.com/2022/11/10/z9E7X4.jpg",
+				desc: "这是一个 Vue2 Vue3 与 SpringBoot 结合的产物",
+				siteurl: "https://poetize.cn/",
+				weight: 8,
+				enabled: true,
+			},
+			{
+				title: "宇阳",
+				imgurl: "https://q1.qlogo.cn/g?b=qq&nk=3311118881&s=640",
+				desc: "记录所学知识，缩短和大神的差距！",
+				siteurl: "https://liuyuyang.net",
+				weight: 7,
+				enabled: true,
+			},
+		],
 	},
 ];
 
-// 获取启用的友链并按权重排序
-export const getEnabledFriends = (): FriendLink[] => {
-	const friends = friendsConfig.filter((friend) => friend.enabled);
+// 按配置对友链排序：开启随机排序时忽略权重
+const sortFriends = (friends: FriendLink[]): FriendLink[] => {
+	const list = friends.filter((friend) => friend.enabled);
 
 	if (friendsPageConfig.randomizeSort) {
-		return friends.sort(() => Math.random() - 0.5);
+		return list.sort(() => Math.random() - 0.5);
 	}
 
-	return friends.sort((a, b) => b.weight - a.weight);
+	return list.sort((a, b) => b.weight - a.weight);
+};
+
+// 获取启用的分组（分组内友链已过滤并排序），供友链页面渲染
+// 仅当分组内有友链、或分组配置了展示本站卡片时才会返回
+export const getEnabledFriendGroups = (): FriendGroup[] => {
+	return friendGroups
+		.filter((group) => group.enabled !== false)
+		.sort((a, b) => (b.weight ?? 0) - (a.weight ?? 0))
+		.map((group) => ({ ...group, friends: sortFriends(group.friends) }))
+		.filter((group) => group.friends.length > 0 || group.includeSelf);
+};
+
+// 获取所有启用的友链（打平所有分组），供搜索索引等场景使用
+export const getEnabledFriends = (): FriendLink[] => {
+	return getEnabledFriendGroups().flatMap((group) => group.friends);
 };

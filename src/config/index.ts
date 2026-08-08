@@ -36,7 +36,12 @@ export { coverImageConfig } from "./coverImageConfig"; // 封面图配置
 export { expressiveCodeConfig } from "./expressiveCodeConfig"; // 代码高亮配置
 export { fontConfig } from "./fontConfig"; // 字体配置
 export { footerConfig } from "./footerConfig"; // 页脚配置
-export { friendsPageConfig, getEnabledFriends } from "./friendsConfig"; // 友链配置
+export {
+	friendSiteInfo,
+	friendsPageConfig,
+	getEnabledFriendGroups,
+	getEnabledFriends,
+} from "./friendsConfig"; // 友链配置
 export { homeCarouselConfig } from "./homeCarouselConfig"; // 首页轮播配置
 export {
 	getNormalizedHomeTopNoticeItems,

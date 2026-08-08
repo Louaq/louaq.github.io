@@ -1,12 +1,13 @@
 ---
-import { getEntry, render } from "astro:content";
 import Comment from "@components/comment/index.astro";
-import Markdown from "@components/common/Markdown.astro";
+import ApplyDialog from "@components/pages/friends/ApplyDialog.astro";
+import GroupSection from "@components/pages/friends/GroupSection.astro";
 import { Icon as AstroIcon } from "astro-icon/components";
 import {
 	commentConfig,
+	friendSiteInfo,
 	friendsPageConfig,
-	getEnabledFriends,
+	getEnabledFriendGroups,
 	siteConfig,
 } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
@@ -18,305 +19,270 @@ if (!siteConfig.pages.friends) {
 	return Astro.redirect("/404/");
 }
 
-const friendsPost = await getEntry("spec", "friends");
-
-if (!friendsPost) {
-	throw new Error("friends page content not found");
-}
-
-const { Content } = await render(friendsPost);
-
 // 检查评论系统是否启用
 const isCommentEnabled =
 	commentConfig?.type &&
 	commentConfig.type !== "none" &&
 	friendsPageConfig.showComment !== false;
 
-// 使用配置文件中的友链数据，按权重排序
-const items = getEnabledFriends();
-const allTags = [...new Set(items.flatMap((item) => item.tags || []))].sort();
+// 使用配置文件中的友链分组数据（分组名、分组内友链均在 friendsConfig.ts 中配置）
+const friendGroupList = getEnabledFriendGroups();
 
 // 页面标题和描述
 const title = friendsPageConfig.title || i18n(I18nKey.friends);
 const description =
 	friendsPageConfig.description || i18n(I18nKey.friendsDescription);
+
+// 顶部"本站信息"卡片中可复制的字段
+const copyFields = [
+	{
+		label: "SITE TITLE",
+		value: friendSiteInfo.name,
+		icon: "material-symbols:text-fields-rounded",
+	},
+	{
+		label: "SITE DESC",
+		value: friendSiteInfo.desc,
+		icon: "material-symbols:notes-rounded",
+	},
+	{
+		label: "URL ADDRESS",
+		value: friendSiteInfo.url,
+		icon: "material-symbols:link-rounded",
+	},
+	{
+		label: "AVATAR SOURCE",
+		value: friendSiteInfo.avatar,
+		icon: "material-symbols:image-outline-rounded",
+	},
+	{
+		label: "RSS FEED",
+		value: friendSiteInfo.rss,
+		icon: "material-symbols:rss-feed-rounded",
+	},
+];
 ---
 
 <MainGridLayout title={title} description={description}>
-  <div
-    class="flex w-full rounded-(--radius-large) overflow-hidden relative min-h-32"
-  >
-    <div class="card-base z-10 px-9 py-6 relative w-full">
-      <!-- 页面标题和描述（与留言页标题结构一致） -->
-      <div class="mb-4">
-        <div class="flex items-center gap-3 mb-3">
-          <h1 class="text-3xl font-bold text-neutral-900 dark:text-neutral-100">
-            {title}
-          </h1>
-        </div>
-        {
-          description && (
-            <p class="text-base text-neutral-600 dark:text-neutral-400 leading-relaxed mb-4">
-              {description}
-            </p>
-          )
-        }
-      </div>
+  <!-- 本站信息 + 全站置顶 -->
+  <div class="card-base z-10 relative w-full overflow-hidden mb-4">
+    <div class="friend-hero relative px-6 py-8 sm:px-10 sm:py-10">
+      <div class="friend-hero-blob friend-hero-blob-a" aria-hidden="true"></div>
+      <div class="friend-hero-blob friend-hero-blob-b" aria-hidden="true"></div>
+      <div class="friend-hero-dots" aria-hidden="true"></div>
 
-      <!-- 搜索框 -->
-      {items.length > 0 && (
-        <div class="friend-search-wrapper mb-4">
-          <div class="friend-search-input-wrap">
-            <AstroIcon
-              name="material-symbols:search"
-              class="friend-search-icon inline-block shrink-0 align-middle"
-            />
-            <input
-              type="text"
-              class="friend-search-input"
-              placeholder={i18n(I18nKey.searchTypeSomething)}
-              aria-label={i18n(I18nKey.search)}
-            />
+      <div class="relative flex flex-col lg:flex-row items-center lg:items-stretch gap-8">
+        <!-- 头像 + 站点标识 -->
+        <div class="flex flex-col items-center text-center lg:w-60 shrink-0 justify-center">
+          <div class="relative mb-4">
+            <div class="friend-hero-avatar-glow" aria-hidden="true"></div>
+            <div class="relative w-28 h-28 rounded-full overflow-hidden ring-4 ring-(--card-bg) shadow-lg">
+              <img
+                src={friendSiteInfo.avatar}
+                alt={friendSiteInfo.name}
+                class="w-full h-full object-cover"
+              />
+            </div>
           </div>
+          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
+            {friendSiteInfo.name}
+          </h2>
+          <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1.5 flex items-center gap-2 justify-center">
+            <span class="w-1 h-1 rounded-full bg-(--primary) shrink-0"></span>
+            <span>{friendSiteInfo.desc}</span>
+            <span class="w-1 h-1 rounded-full bg-(--primary) shrink-0"></span>
+          </p>
         </div>
-      )}
 
-      <!-- 标签筛选 -->
-      {
-        items.length > 0 && (
-          <friend-filter class="flex flex-wrap gap-2 mb-6">
-            <button
-              data-tag="all"
-              class="friend-tag-btn friend-tag-btn-active px-3 py-1.5 rounded-lg text-white transition-colors duration-200 text-sm font-medium"
+        <!-- 可复制字段 -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1 content-center">
+          {copyFields.map((field) => (
+            <friend-copy-field
+              class="friend-copy-field flex items-center gap-3 rounded-xl px-4 py-3 bg-(--card-bg) border border-(--line-divider)"
+              data-copy-value={field.value}
             >
-              {i18n(I18nKey.all)}
-            </button>
-            {allTags.map((tag) => (
+              <span class="friend-copy-icon shrink-0 w-8 h-8 rounded-lg flex items-center justify-center">
+                <AstroIcon name={field.icon} class="text-base" />
+              </span>
+              <div class="min-w-0 flex-1">
+                <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-400 dark:text-neutral-500">
+                  {field.label}
+                </p>
+                <p class="text-sm font-medium truncate" title={field.value}>
+                  {field.value}
+                </p>
+              </div>
               <button
-                data-tag={tag}
-                class="friend-tag-btn px-3 py-1.5 rounded-lg transition-colors duration-200 text-sm font-medium"
+                type="button"
+                class="friend-copy-btn shrink-0 w-7 h-7 flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 text-(--btn-content) hover:opacity-80 transition-opacity cursor-pointer"
+                aria-label="复制"
               >
-                {tag}
-              </button>
-            ))}
-          </friend-filter>
-        )
-      }
-
-      <div class="friends-grid my-4">
-        {
-          items.map((item) => (
-            <a
-              href={item.siteurl}
-              target="_blank"
-              rel="noopener noreferrer"
-              data-tags={item.tags?.join(",")}
-              data-title={item.title}
-              data-desc={item.desc}
-              class="friend-card group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
-            >
-              {/* 背景装饰 - 仅悬停显示 */}
-              <div class="absolute inset-0 bg-(--primary) opacity-0 group-hover:opacity-5 transition-opacity duration-300 pointer-events-none" />
-
-              {/* 头像 */}
-              <div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
-                <img
-                  src={item.imgurl}
-                  alt={item.title}
-                  class="w-full h-full object-cover"
-                  loading="eager"
+                <AstroIcon
+                  name="material-symbols:content-copy-outline-rounded"
+                  class="friend-copy-icon-default w-3.5 h-3.5"
                 />
-              </div>
-
-              {/* 内容 */}
-              <div class="grow min-w-0 flex flex-col justify-center gap-0.5">
-                <div class="flex items-center justify-between">
-                  <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate pr-4">
-                    {item.title}
-                  </div>
-                  {/* 外部链接图标 */}
-                  <AstroIcon
-                    name="material-symbols:arrow-outward-rounded"
-                    class="text-(--primary) text-lg opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                  />
-                </div>
-
-                <div
-                  class="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1"
-                  title={item.desc}
-                >
-                  {item.desc}
-                </div>
-
-                {/* 标签 */}
-                <div class="flex flex-wrap gap-1 mt-1">
-                  {item.tags && item.tags.length > 0
-                    ? item.tags
-                        .slice(0, 3)
-                        .map((tag) => (
-                          <span class="text-[0.65rem] px-1.5 py-0.5 rounded-sm bg-neutral-100 dark:bg-neutral-800 text-neutral-500 dark:text-neutral-400 transition-colors duration-300">
-                            {tag}
-                          </span>
-                        ))
-                    : null}
-                </div>
-              </div>
-            </a>
-          ))
-        }
+                <AstroIcon
+                  name="material-symbols:check-rounded"
+                  class="friend-copy-icon-success w-3.5 h-3.5 text-green-500"
+                />
+              </button>
+            </friend-copy-field>
+          ))}
+        </div>
       </div>
+
+      <!-- 友链分组（分组名与分组内容在 friendsConfig.ts 中配置） -->
+      {friendGroupList.map((group, index) => (
+        <GroupSection
+          group={group}
+          showApplyButton={index === 0 && friendsPageConfig.showCustomContent !== false}
+          withDivider={index === 0}
+        />
+      ))}
     </div>
   </div>
 
-  {friendsPageConfig.showCustomContent !== false && (
-    <div class="mt-4 card-base z-10 px-9 py-6 relative w-full">
-      <Markdown class="">
-        <Content />
-      </Markdown>
-    </div>
-  )}
+  {friendsPageConfig.showCustomContent !== false && <ApplyDialog />}
 
   <!-- 评论区 -->
   {isCommentEnabled && (
     <div class="mt-4">
-      <Comment post={friendsPost} customPath="/friends/" />
+      <Comment customPath="/friends/" slug="friends" title={title} />
     </div>
   )}
 
   <script slot="head" is:inline>
-    if (!customElements.get("friend-filter")) {
-      class FriendFilter extends HTMLElement {
+    // 注意：本脚本在 <head> 中执行，自定义元素的 connectedCallback 会在其子节点
+    // 解析完成前触发，因此一律用事件委托（监听元素自身）而不是 querySelector 子节点
+    if (!customElements.get("friend-copy-field")) {
+      class FriendCopyField extends HTMLElement {
         constructor() {
           super();
-          this.applyFilters = this.applyFilters.bind(this);
+          this.handleClick = this.handleClick.bind(this);
         }
 
         connectedCallback() {
           this.addEventListener("click", this.handleClick);
-          const container = this.closest(".card-base");
-          if (container) {
-            const searchInput = container.querySelector(".friend-search-input");
-            if (searchInput) {
-              searchInput.addEventListener("input", this.applyFilters);
-              searchInput.addEventListener("keyup", this.applyFilters);
-            }
-          }
         }
 
         disconnectedCallback() {
           this.removeEventListener("click", this.handleClick);
-          const container = this.closest(".card-base");
-          if (container) {
-            const searchInput = container.querySelector(".friend-search-input");
-            if (searchInput) {
-              searchInput.removeEventListener("input", this.applyFilters);
-              searchInput.removeEventListener("keyup", this.applyFilters);
-            }
+          clearTimeout(this._resetTimer);
+        }
+
+        async handleClick(e) {
+          if (!e.target.closest(".friend-copy-btn")) return;
+
+          const value = this.dataset.copyValue || "";
+          try {
+            await navigator.clipboard.writeText(value);
+          } catch {
+            return;
           }
-        }
-
-        handleClick(e) {
-          const target = e.target;
-          const button = target.closest("button");
-          if (!button) return;
-
-          const filters = this.querySelectorAll("button");
-          filters.forEach((f) => {
-            f.classList.remove("friend-tag-btn-active");
-            if (f === button) f.classList.add("friend-tag-btn-active");
-          });
-          this.applyFilters();
-        }
-
-        applyFilters() {
-          const container = this.closest(".card-base");
-          if (!container) return;
-
-          const searchInput = container.querySelector(".friend-search-input");
-          const activeBtn = this.querySelector(".friend-tag-btn-active");
-          const selectedTag = activeBtn?.dataset.tag || "all";
-          const query = (searchInput?.value || "").trim().toLowerCase();
-
-          const cards = container.querySelectorAll(".friend-card");
-          cards.forEach((cardEl) => {
-            const tags = (cardEl.dataset.tags || "").split(",").filter(Boolean);
-            const title = (cardEl.dataset.title || "").toLowerCase();
-            const desc = (cardEl.dataset.desc || "").toLowerCase();
-
-            const tagMatch = selectedTag === "all" || tags.includes(selectedTag);
-            const searchMatch =
-              !query ||
-              title.includes(query) ||
-              desc.includes(query) ||
-              tags.some((t) => t.toLowerCase().includes(query));
-
-            if (tagMatch && searchMatch) {
-              cardEl.style.display = "";
-              cardEl.classList.add("animate-fade-in-up");
-            } else {
-              cardEl.style.display = "none";
-              cardEl.classList.remove("animate-fade-in-up");
-            }
-          });
+          this.classList.add("friend-copy-field-done");
+          clearTimeout(this._resetTimer);
+          this._resetTimer = setTimeout(() => {
+            this.classList.remove("friend-copy-field-done");
+          }, 1500);
         }
       }
-      customElements.define("friend-filter", FriendFilter);
+      customElements.define("friend-copy-field", FriendCopyField);
     }
   </script>
 
   <style is:global>
-    .friend-search-input-wrap {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.5rem 0.75rem;
-      border: 1px solid var(--line-divider);
-      border-radius: var(--radius-large, 0.75rem);
-      background: var(--card-bg);
-      transition: border-color 0.2s;
-    }
-    .friend-search-input-wrap:focus-within {
-      border-color: var(--primary);
-      outline: none;
-    }
-    .friend-search-icon {
-      color: var(--text-tertiary, #9ca3af);
-      font-size: 1.25rem;
-      flex-shrink: 0;
-    }
-    .friend-search-input {
-      flex: 1;
-      min-width: 0;
-      border: none;
-      background: transparent;
-      font-size: 0.9375rem;
-      color: var(--text-primary);
-    }
-    .friend-search-input::placeholder {
-      color: var(--text-tertiary, #9ca3af);
-    }
-    .friend-search-input:focus {
-      outline: none;
-    }
     .friends-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 0.75rem;
     }
-    .friend-tag-btn {
-      background-color: var(--btn-regular-bg);
-      color: var(--btn-content);
+
+    /* 本站信息 Hero */
+    .friend-hero {
+      overflow: hidden;
     }
-    .friend-tag-btn:hover {
-      background-color: var(--btn-regular-bg-hover);
+    .friend-hero-blob {
+      position: absolute;
+      border-radius: 9999px;
+      background: var(--primary);
+      filter: blur(48px);
+      pointer-events: none;
     }
-    .friend-tag-btn-active {
-      background-color: var(--primary) !important;
-      color: white !important;
+    .friend-hero-blob-a {
+      top: -4rem;
+      right: -4rem;
+      width: 14rem;
+      height: 14rem;
+      opacity: 0.15;
     }
-    .friend-tag-btn-active:hover {
-      background-color: var(--primary) !important;
-      opacity: 0.9;
+    .friend-hero-blob-b {
+      bottom: -5rem;
+      left: -2.5rem;
+      width: 14rem;
+      height: 14rem;
+      opacity: 0.08;
+    }
+    .friend-hero-dots {
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      background-image: radial-gradient(circle, var(--primary) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    :root.dark .friend-hero-dots {
+      opacity: 0.08;
+    }
+    .friend-hero-avatar-glow {
+      position: absolute;
+      inset: 0;
+      border-radius: 9999px;
+      background: var(--primary);
+      opacity: 0.25;
+      filter: blur(20px);
+    }
+
+    /* 可复制字段 */
+    .friend-copy-field {
+      transition: border-color 0.2s;
+    }
+    .friend-copy-field:hover {
+      border-color: var(--primary);
+    }
+    .friend-copy-icon {
+      background-color: color-mix(in oklch, var(--primary) 15%, transparent);
+      color: var(--primary);
+    }
+    .friend-copy-icon-success {
+      display: none;
+    }
+    .friend-copy-field-done .friend-copy-icon-default {
+      display: none;
+    }
+    .friend-copy-field-done .friend-copy-icon-success {
+      display: inline-block;
+    }
+
+    /* 置顶徽标 */
+    .friend-card-badged {
+      padding-top: 1.25rem;
+    }
+    .friend-badge {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      color: white;
+      background-color: var(--primary);
+      box-shadow: 0 1px 4px color-mix(in oklch, var(--primary) 40%, transparent);
+      z-index: 1;
     }
   </style>
 </MainGridLayout>

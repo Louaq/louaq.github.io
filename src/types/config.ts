@@ -569,9 +569,25 @@ export type FriendLink = {
 	imgurl: string; // 头像图片URL
 	desc: string; // 友链描述
 	siteurl: string; // 友链地址
-	tags?: string[]; // 标签数组
 	weight: number; // 权重，数字越大排序越靠前
 	enabled: boolean; // 是否启用
+	badge?: string; // 卡片右上角徽标文字，如 "PINNED"、"赞助商"，留空则不显示
+	badgeIcon?: string; // 徽标图标（Iconify 名称），如 "material-symbols:keep-rounded"
+};
+
+// 友链分组的卡片布局
+// default = 大卡片（方形头像 + 描述），compact = 小卡片（圆形头像，一行多个）
+export type FriendGroupLayout = "default" | "compact";
+
+// 友链分组，如"全站置顶"、"大佬"，可自由增删
+export type FriendGroup = {
+	name: string; // 分组名，显示为小标题
+	description?: string; // 分组说明，显示在小标题下方，可留空
+	layout?: FriendGroupLayout; // 卡片布局，默认 "default"
+	includeSelf?: boolean; // 是否在该分组开头插入本站卡片（带 OWNER 徽标）
+	enabled?: boolean; // 是否启用该分组，默认 true
+	weight?: number; // 分组排序权重，数字越大越靠前，默认 0
+	friends: FriendLink[]; // 该分组下的友链
 };
 
 export type FriendsPageConfig = {
