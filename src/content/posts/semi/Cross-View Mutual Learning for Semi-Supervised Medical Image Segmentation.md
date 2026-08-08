@@ -30,7 +30,7 @@ Semi-supervised medical image segmentation has gained increasing attention due t
 
 具体而言，Mean Teacher类方法依赖指数移动平均（EMA）更新教师网络，限制其独立推理能力；协同训练框架虽允许子网从不同视角学习，但缺乏显式约束来维持预测互补性，导致子网在交叉监督下逐渐趋同。作者通过实验观察到：EMA机制使教师网络性能受限于学生网络，浪费学习能力；传统协同训练方法在交叉监督下会丧失视角差异性。因此，如何促使双子网保持视角多样性并实现互补预测，成为提升半监督分割性能的关键问题。
 
-![Snipaste_2026-01-14_13-59-55](/assets/images/covers/cross-view-mutual-learning-for-semi-supervised-medical-image.webp)
+![Snipaste_2026-01-14_13-59-55](https://pic1.imgdb.cn/i/0343OUec96cB8wBrZQbBZk.webp)
 
 ![Snipaste_2026-01-14_14-00-27](https://pic1.imgdb.cn/item/696730b599f37a647f57509f.png)
 

@@ -50,7 +50,7 @@ quality assessment from 30 clinical doctors, the fusion results of the proposed 
 
 
 
-![Snipaste_2025-07-15_16-34-04](/assets/images/covers/msgfusion-medical-semantic-guided-two-branch-network-for-mul.webp)
+![Snipaste_2025-07-15_16-34-04](https://pic1.imgdb.cn/i/0343OVSRsOSVKEQUenoAKf.webp)
 
 ## 实验（Compared with SOTA）
 

@@ -60,7 +60,7 @@ In semi-supervised medical image segmentation, there exist empirical mismatch pr
 
 - **Dice系数**（重叠率，↑）、**Jaccard指数**（交并比，↑）、**95% Hausdorff距离**（边界距离，↓）、**平均表面距离**（ASD，↓）。
 
-![Snipaste_2026-01-06_20-27-07](/assets/images/covers/bidirectional-copy-paste-for-semi-supervised-medical-image-s.webp)
+![Snipaste_2026-01-06_20-27-07](https://pic1.imgdb.cn/i/0343OUKSXteA9FQ5jmMPwY.webp)
 
 ![Snipaste_2026-01-06_20-27-27](https://pic1.imgdb.cn/item/695cff73a9c8408628b7819e.png)
 

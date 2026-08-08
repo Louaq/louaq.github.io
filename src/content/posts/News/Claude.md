@@ -10,7 +10,7 @@ tags: [Claude]
 
 Claude崩了
 
-![](/assets/images/covers/claude.webp)
+![](https://pic1.imgdb.cn/i/0343OUZs2n6gXGLG6si88Z.webp)
 
 ![](https://pic1.imgdb.cn/item/69a6e3716f7a54338adc8e0b.jpg)
 

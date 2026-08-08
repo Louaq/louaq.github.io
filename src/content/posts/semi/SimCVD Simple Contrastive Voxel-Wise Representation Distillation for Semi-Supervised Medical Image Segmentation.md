@@ -42,7 +42,7 @@ Automated segmentation in medical image analysis is a challenging task that requ
 
 ## 提出的模型
 
-![Snipaste_2025-12-29_17-28-59](/assets/images/covers/simcvd-simple-contrastive-voxel-wise-representation-distilla.webp)
+![Snipaste_2025-12-29_17-28-59](https://pic1.imgdb.cn/i/0343OW3SGEBvbv6XWW4ciA.webp)
 
 
 

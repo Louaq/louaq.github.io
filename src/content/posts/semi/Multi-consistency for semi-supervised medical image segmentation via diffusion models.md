@@ -45,7 +45,7 @@ Medical image segmentation presents a formidable challenge, compounded by the sc
 - **扰动空间有限**：多数方法仅在图像层面施加扰动（如裁剪、颜色变换），未探索特征级或跨层级的扰动组合。
 - **扩散模型利用不足**：对扩散模型的特征挖掘多停留在单一层级或时间步，未整合多尺度、多时间步的语义信息。
 
-![Snipaste_2025-12-23_20-30-47](/assets/images/covers/multi-consistency-for-semi-supervised-medical-image-segmenta.webp)
+![Snipaste_2025-12-23_20-30-47](https://pic1.imgdb.cn/i/0343OVTi9LsTe6so4x3eMm.webp)
 
 ![Snipaste_2025-12-23_20-30-52](https://pic1.imgdb.cn/item/694a8b5eb65a54c49ff24643.png)
 

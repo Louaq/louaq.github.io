@@ -46,18 +46,18 @@ const minutes = remarkPluginFrontmatter.minutes as number | undefined;
 
 // 兜底封面图池：既无显式封面、正文中也没有图片时，从中稳定随机选取一张
 const FALLBACK_COVERS = [
-	"/assets/images/covers/meeting.webp",
-	"/assets/images/covers/fallback-array-4.webp",
-	"/assets/images/covers/response.webp",
-	"/assets/images/covers/fallback-array.webp",
-	"/assets/images/covers/fallback-array-2.webp",
-	"/assets/images/covers/fallback-array-3.webp",
-	"/assets/images/covers/fallback-array-5.webp",
-	"/assets/images/covers/fallback-array-6.webp",
-	"/assets/images/covers/fallback-array-7.webp",
-	"/assets/images/covers/fallback-array-8.webp",
-	"/assets/images/covers/fallback-array-9.webp",
-	"/assets/images/covers/fallback-array-10.webp",
+	"https://pic1.imgdb.cn/i/0343OVOk1840RU3QCw2YqY.webp",
+	"https://pic1.imgdb.cn/i/0343OUzfJ5kPLCCisc71md.webp",
+	"https://pic1.imgdb.cn/i/0343OVoaybimn5t3S6sN1R.webp",
+	"https://pic1.imgdb.cn/i/0343OV7iV4TrC16ULozyAu.webp",
+	"https://pic1.imgdb.cn/i/0343OUwmutCQr7iUB84vHI.webp",
+	"https://pic1.imgdb.cn/i/0343OUy8SYeqwZ2NDQOTP1.webp",
+	"https://pic1.imgdb.cn/i/0343OV0tF8SlTyf2uOvbEL.webp",
+	"https://pic1.imgdb.cn/i/0343OV2Rwaw5mP6Ve5VeUA.webp",
+	"https://pic1.imgdb.cn/i/0343OV3oSaEtBNrFHu7RSg.webp",
+	"https://pic1.imgdb.cn/i/0343OV5LazhA2ZQlFgJgUl.webp",
+	"https://pic1.imgdb.cn/i/0343OV6Tad7dev2XGQJCTa.webp",
+	"https://pic1.imgdb.cn/i/0343OUvYUW5GD2L413uo4Z.webp",
 ];
 
 // 基于文章 id 的稳定哈希，确保同一篇文章每次都选到同一张兜底图

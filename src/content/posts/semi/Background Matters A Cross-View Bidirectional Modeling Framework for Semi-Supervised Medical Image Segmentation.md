@@ -5,9 +5,6 @@ expires: 2026-01-31 23:59:59
 description: "半监督医学图像分割(SSMIS)利用"
 category: 半监督医学图像分割
 tags: [TIP]
-homeCarousel: true
-homeCarouselOrder: 5
-homeCarouselImage: https://pic1.imgdb.cn/item/6919c4373203f7be000aeaf8.jpg
 ---
 
 :::note
@@ -29,7 +26,7 @@ Semi-supervised medical image segmentation (SSMIS) leverages unlabeled data to r
 
 ## 研究背景
 
-![Snipaste_2026-01-26_19-48-09](/assets/images/covers/background-matters-a-cross-view-bidirectional-modeling-frame.webp)
+![Snipaste_2026-01-26_19-48-09](https://pic1.imgdb.cn/i/0343OUI2idWqOgHwBwheSU.webp)
 
 半监督医学图像分割（SSMIS）旨在利用有限标注数据和大量无标注数据降低标注成本，但现有方法存在显著局限：主流模型过度聚焦**前景区域建模**，普遍忽视**背景区域**的潜在价值，甚至将背景视为干扰因素。研究发现，在某些区域（如前景与背景边界），背景建模预测置信度反而高于前景建模，这种高确定性背景预测可有效提升对应前景区域的分割置信度。传统方法因仅依赖前景建模，常导致边界区域预测不确定性高，伪标签可靠性降低。针对这一问题，本文提出通过显式建模背景区域，构建前景与背景的双向一致性约束，以增强前景分割性能，为解决SSMIS中低标注数据下的分割精度问题提供新思路。
 

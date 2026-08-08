@@ -19,7 +19,7 @@ Consistency learning is a central strategy to tackle unlabeled data in semi-supe
 
 ## 研究背景
 
-![Snipaste_2026-01-09_18-58-39](/assets/images/covers/adaptive-bidirectional-displacement-for-semi-supervised-medi.webp)
+![Snipaste_2026-01-09_18-58-39](https://pic1.imgdb.cn/i/0343OU9eGzkXTrQytvUJxj.webp)
 
 
 

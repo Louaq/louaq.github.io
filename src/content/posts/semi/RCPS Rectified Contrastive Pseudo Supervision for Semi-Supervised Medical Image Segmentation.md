@@ -6,7 +6,7 @@ mathjax: true
 category: 半监督医学图像分割
 tags: [JBHI,伪监督]
 description: Medical image segmentation methods
-image: /assets/images/covers/rcps-rectified-contrastive-pseudo-supervision-for-semi-super.webp
+image: https://pic1.imgdb.cn/i/0343OVlmOIXrAa1wf9GC1h.webp
 
 ---
 

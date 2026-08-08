@@ -4,7 +4,7 @@ published: 2025-03-06 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 多模态图像分割
 tags: [Semantic Grouping]
 ---
@@ -54,7 +54,7 @@ an alignment-induced cross-modal prompter is introduced to aggregate class-aware
 
 ## **提出的模型：**
 
-![Snipaste_2025-03-06_14-56-04](/assets/images/covers/prompting-multi-modal-image-segmentation-with-semantic-group.webp)
+![Snipaste_2025-03-06_14-56-04](https://pic1.imgdb.cn/i/0343OVkShe2Sa2dHVjhxhw.webp)
 
 
 

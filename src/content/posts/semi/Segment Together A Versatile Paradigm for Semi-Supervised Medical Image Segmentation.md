@@ -23,7 +23,7 @@ The scarcity of annotations has become a significant obstacle in training powerf
 
 ## 研究背景
 
-![Snipaste_2026-01-16_20-01-17](/assets/images/covers/segment-together-a-versatile-paradigm-for-semi-supervised-me.webp)
+![Snipaste_2026-01-16_20-01-17](https://pic1.imgdb.cn/i/0343OVyZ6IEWSLftm4F8cE.webp)
 
 
 

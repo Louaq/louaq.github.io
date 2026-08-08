@@ -25,7 +25,7 @@ Semi-supervised learning in medical image segmentation leverages unlabeled data 
 
 ## 研究背景
 
-![Snipaste_2026-01-12_19-02-02](/assets/images/covers/dycon-dynamic-uncertainty-aware-consistency-and-contrastive.webp)
+![Snipaste_2026-01-12_19-02-02](https://pic1.imgdb.cn/i/0343OUooV50W0OPZRFq1Y5.webp)
 
 在医学图像分割领域，半监督学习（SSL）通过利用未标记数据减轻标注负担，已成为重要研究方向。然而，现有方法在处理3D医学图像时面临两大核心挑战：一是**病理变化导致的高度不确定性**，二是**类别不平衡问题**（如病变体素远少于背景体素），这导致分割结果不准确、边界定义模糊。
 

@@ -7,7 +7,6 @@ tags: [CCF]
 pinned: true
 homeCarousel: true
 homeCarouselOrder: 2
-homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb11.jpg
 ---
 
 > 数据参考 [CCFDDL](https://ccfddl.com/) 及其开源数据仓库 [ccfddl/ccf-deadlines](https://github.com/ccfddl/ccf-deadlines)，感谢开源社区的贡献🤗🤗

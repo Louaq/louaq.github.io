@@ -7,7 +7,7 @@ category: 投稿
 tags: [TMI]
 homeCarousel: true
 homeCarouselOrder: 3
-homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb10.jpg
+#homeCarouselImage: https://pic1.imgdb.cn/item/6919c43d3203f7be000aeb10.jpg
 ---
 
 ## 催稿信模板-主题：

@@ -4,7 +4,7 @@ published: 2025-04-01 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 领域泛化语义分割
 tags: [Vision Foundation Models]
 ---
@@ -21,7 +21,7 @@ https://github.com/w1oves/Rein.git
 
 
 
-![Snipaste_2025-02-26_21-13-37](/assets/images/covers/stronger-fewer-superior-harnessing-vision-foundation-models.webp)
+![Snipaste_2025-02-26_21-13-37](https://pic1.imgdb.cn/i/0343OW5m2k6pOIIIy95TZs.webp)
 
 
 

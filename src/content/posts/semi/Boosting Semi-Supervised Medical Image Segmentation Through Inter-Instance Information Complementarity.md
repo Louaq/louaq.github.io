@@ -27,7 +27,7 @@ The acquisition of expert-annotated data remains a critical bottleneck for medic
 
 医学图像分割在精准医疗中至关重要，但高质量标注数据的稀缺严重限制了深度学习模型的临床应用。尽管标注数据有限，人类解剖结构在群体中的内在同质性为利用实例间解剖互补性提升模型泛化能力和训练效率提供了基础。现有半监督分割方法（如伪标签和均值教师框架）虽有进展，但存在不足：一是现有复制粘贴策略局限于有标签-无标签数据交互，未充分利用实例间互补信息；二是缺乏对区域级不确定性的考量，影响半监督分割的语义一致性。因此，如何充分挖掘实例间信息互补性以提升半监督医学图像分割性能，成为本文研究的核心问题。
 
-![Snipaste_2026-01-29_14-26-51](/assets/images/covers/boosting-semi-supervised-medical-image-segmentation-through.webp)
+![Snipaste_2026-01-29_14-26-51](https://pic1.imgdb.cn/i/0343OULe99KiBm67pqdRQn.webp)
 
 ## 研究现状
 

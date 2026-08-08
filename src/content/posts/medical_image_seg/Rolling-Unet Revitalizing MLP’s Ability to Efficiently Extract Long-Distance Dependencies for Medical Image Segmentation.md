@@ -33,7 +33,7 @@ the-art methods.
 
 ## 提出的模型
 
-![Snipaste_2025-04-22_20-04-47](/assets/images/covers/rolling-unet-revitalizing-mlp-s-ability-to-efficiently-extra.webp)
+![Snipaste_2025-04-22_20-04-47](https://pic1.imgdb.cn/i/0343OVrDNis1rhDuoACNOk.webp)
 
 
 

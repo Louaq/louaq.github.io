@@ -7,11 +7,11 @@ category: 博客
 tags: [元旦]
 homeCarousel: true
 homeCarouselOrder: 4
-homeCarouselImage: https://pic1.imgdb.cn/item/6919c43a3203f7be000aeb08.jpg
+# homeCarouselImage: https://pic1.imgdb.cn/item/6919c43a3203f7be000aeb08.jpg
 ---
 
 桃花影落飞神剑，碧海潮生按玉箫
-![](/assets/images/covers/new-year.webp)
+![](https://pic1.imgdb.cn/i/0343OVakrcA3bWKPFNGImP.webp)
 
 
 

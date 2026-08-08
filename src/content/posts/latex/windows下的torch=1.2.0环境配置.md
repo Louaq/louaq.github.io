@@ -4,7 +4,7 @@ published: 2025-02-06 16:27:00
 expires: 2025-03-01 23:59:59
 mathjax: true
 excerpt: "CUDA环境安装"
-cover: "https://vip.123pan.cn/1816472581/yk6baz03t0m000d6xujocxe9zhglhvdaDIYPAqF0DqJ1DGxwDIiw.png"
+cover: "https://pic1.imgdb.cn/i/0343OWEIOFiGWX2DHExx8y.webp"
 tags: [python, Deep Learning, CUDA, cudnn]
 category: 深度学习
 ---
@@ -23,7 +23,7 @@ category: 深度学习
 
 **新版本anaconda的下载：**  
 如果想要安装最新的Anaconda，首先登录Anaconda的官网：[https://www.anaconda.com/distribution/](https://www.anaconda.com/distribution/)。直接下载对应安装包就可以。  
-![在这里插入图片描述](/assets/images/covers/windows下的torch-1-2-0环境配置.webp)  
+![在这里插入图片描述](https://pic1.imgdb.cn/i/0343OWEIOFiGWX2DHExx8y.webp)  
 ![在这里插入图片描述](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/79729ea1f6363089a7b848e2bbb41119.png)  
 一般是下载64位的，下载完成后打开。
 

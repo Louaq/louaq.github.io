@@ -4,7 +4,7 @@ published: 2025-03-11 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 涂鸦监督语义分割
 tags: [Feature Augmentation, Semantic Segmentation]
 ---
@@ -52,7 +52,7 @@ https://github.com/TranquilChan/PFA.
 
 ## **提出的模型**
 
-![Snipaste_2025-03-11_19-29-04](/assets/images/covers/scribble-supervised-semantic-segmentation-with-prototype-bas.webp)
+![Snipaste_2025-03-11_19-29-04](https://pic1.imgdb.cn/i/0343OVuqwvH9DLqwLL1duo.webp)
 
 
 

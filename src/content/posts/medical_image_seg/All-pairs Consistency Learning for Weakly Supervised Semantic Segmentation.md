@@ -4,7 +4,7 @@ published: 2025-04-07 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 弱监督语义分割
 tags: [Weakly Supervised Semantic Segmentation]
 ---
@@ -55,7 +55,7 @@ method that leverages the gradients ofthe class token. Our method can be seamles
 
 ## 提出的模型
 
-![Snipaste_2025-04-07_13-44-09](/assets/images/covers/all-pairs-consistency-learning-for-weakly-supervised-semanti.webp)
+![Snipaste_2025-04-07_13-44-09](https://pic1.imgdb.cn/i/0343OUDFtK8tmpmApOE6Yx.webp)
 
 
 

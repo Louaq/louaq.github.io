@@ -34,7 +34,7 @@ Segment Anything Model（SAM）的微调在全监督模式下在医学图像分�
 
 为此，本文提出SFR框架，通过切片拼接（Stitching）、基础模型微调（Fine-tuning）和半监督重训练（Re-training）三阶段，在减少标注成本的同时保持高性能，解决上述有效性、效率与兼容性问题。
 
-![Snipaste_2025-12-16_14-54-19](/assets/images/covers/stitching-fine-tuning-and-re-training-a-sam-enabled-framewor.webp)
+![Snipaste_2025-12-16_14-54-19](https://pic1.imgdb.cn/i/0343OW4aXkgiyTlqdwVUaL.webp)
 
 ## 研究现状
 

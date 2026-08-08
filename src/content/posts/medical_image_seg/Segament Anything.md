@@ -23,7 +23,7 @@ https://segment-anything.com
 
 
 
-![Snipaste_2025-02-25_20-28-44](/assets/images/covers/segament-anything.webp)
+![Snipaste_2025-02-25_20-28-44](https://pic1.imgdb.cn/i/0343OVxMElgP04NfNSRbRz.webp)
 
 
 

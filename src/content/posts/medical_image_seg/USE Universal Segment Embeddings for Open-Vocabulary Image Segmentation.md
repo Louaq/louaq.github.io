@@ -4,7 +4,7 @@ published: 2025-03-26 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 开放词汇图像分割
 tags: [Universal Segment Embeddings]
 ---
@@ -92,7 +92,7 @@ vocabulary segmentation methods.
 
 
 
-![Snipaste_2025-03-26_14-31-25](/assets/images/covers/use-universal-segment-embeddings-for-open-vocabulary-image-s.webp)
+![Snipaste_2025-03-26_14-31-25](https://pic1.imgdb.cn/i/0343OWAcZmGMCsaXJAZqA2.webp)
 
 
 

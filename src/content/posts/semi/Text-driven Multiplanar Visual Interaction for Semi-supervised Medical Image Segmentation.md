@@ -31,7 +31,7 @@ Semi-supervised medical image segmentation plays a critical method in mitigating
 
 ## 提出的模型
 
-![Snipaste_2025-12-15_15-38-05](/assets/images/covers/text-driven-multiplanar-visual-interaction-for-semi-supervis.webp)
+![Snipaste_2025-12-15_15-38-05](https://pic1.imgdb.cn/i/0343OW71jmJzlPMzdx2VDV.webp)
 
 
 

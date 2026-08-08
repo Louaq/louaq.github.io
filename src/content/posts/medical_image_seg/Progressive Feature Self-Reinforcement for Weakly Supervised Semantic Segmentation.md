@@ -4,7 +4,7 @@ published: 2025-03-13 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 弱监督语义分割
 tags: [Feature Self-Reinforcement, Weakly Supervised Semantic Segmentation]
 ---
@@ -37,7 +37,7 @@ foreground and background) and uncertain regions (e.g., object boundaries and mi
 
 ## 提出的模型
 
-![Snipaste_2025-03-13_10-23-43](/assets/images/covers/progressive-feature-self-reinforcement-for-weakly-supervised.webp)
+![Snipaste_2025-03-13_10-23-43](https://pic1.imgdb.cn/i/0343OVhnNQMfbTcYGQLMUz.webp)
 
 
 

@@ -511,7 +511,7 @@ if __name__ == "__main__":
 
 ## 训练截图
 
-![Snipaste_2025-08-01_17-34-30](/assets/images/covers/代码复现记录-bsafusion.webp)
+![Snipaste_2025-08-01_17-34-30](https://pic1.imgdb.cn/i/0343OWGhjCefZaPHZQPp6l.webp)
 
 ![Snipaste_2025-08-01_18-43-52](https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Snipaste_2025-08-01_18-43-52.png)
 

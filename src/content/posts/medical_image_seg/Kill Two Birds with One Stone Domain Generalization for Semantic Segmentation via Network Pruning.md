@@ -4,7 +4,7 @@ published: 2025-04-02 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 领域泛化语义分割
 tags: [Domain Generalization]
 ---
@@ -62,7 +62,7 @@ tags: [Domain Generalization]
 
 
 
-‍![Snipaste_2025-04-02_14-31-14](/assets/images/covers/kill-two-birds-with-one-stone-domain-generalization-for-sema.webp)
+‍![Snipaste_2025-04-02_14-31-14](https://pic1.imgdb.cn/i/0343OVFFEgjsItyOJk1mRf.webp)
 
 ‍
 

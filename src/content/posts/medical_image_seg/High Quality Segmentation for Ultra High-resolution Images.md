@@ -4,7 +4,7 @@ published: 2025-03-02 12:00:00
 expires: 2025-08-21 23:59:59
 mathjax: true
 excerpt: "云想衣裳花想容，春风拂槛露华浓"
-cover: "https://yangyang666.oss-cn-chengdu.aliyuncs.com/images/Fragment_7_4k_a51f7.jpg"
+cover: "https://pic1.imgdb.cn/i/0343Oc1IVcaZZAx9vnALV9.jpg"
 categories: 超高分辨率图像语义分割
 tags: [Ultra High-resolution Images]
 ---
@@ -57,7 +57,7 @@ tags: [Ultra High-resolution Images]
 
 
 
-![Snipaste_2025-03-02_14-24-58](/assets/images/covers/high-quality-segmentation-for-ultra-high-resolution-images.webp)
+![Snipaste_2025-03-02_14-24-58](https://pic1.imgdb.cn/i/0343OVBO7JQgCWQsi0palU.webp)
 
 
 

@@ -7,7 +7,7 @@ category: 模板
 tags: [Response Template]
 description: 回复审稿人模板
 pinned: true
-image: /assets/images/covers/response.webp
+image: https://pic1.imgdb.cn/i/0343OVoaybimn5t3S6sN1R.webp
 ---
 
 

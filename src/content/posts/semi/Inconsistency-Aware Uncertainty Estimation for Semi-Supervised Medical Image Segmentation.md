@@ -6,7 +6,7 @@ mathjax: true
 category: 半监督医学图像分割
 tags: [半监督医学图像分割]
 description: In semi-supervised medical image segmentation
-image: /assets/images/covers/inconsistency-aware-uncertainty-estimation-for-semi-supervis.webp
+image: https://pic1.imgdb.cn/i/0343OVE0uPCC3ioslLKIev.webp
 ---
 
 
