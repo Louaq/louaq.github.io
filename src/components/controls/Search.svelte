@@ -34,7 +34,6 @@ const MEILISEARCH_INDEX_NAME =
 /** 检索结果条目（doSearch / loadMore 共用的归一化结构） */
 interface SearchHit {
 	url: string;
-	type?: string;
 	title: string;
 	description: string;
 	excerpt: string;
@@ -115,19 +114,6 @@ function unlockScroll() {
 	html.style.paddingRight = prevScrollLock.htmlPaddingRight;
 	prevScrollLock = null;
 }
-
-const typeLabel = (t: string | undefined): string => {
-	switch (t) {
-		case "post":
-			return "文章";
-		case "page":
-			return "页面";
-		case "friend":
-			return "友链";
-		default:
-			return "内容";
-	}
-};
 
 // 简易 Portal：将节点移动到 document.body，避免被页面滚动/transform 影响
 function portal(node: HTMLElement) {
@@ -222,7 +208,6 @@ const queryMeilisearch = async (
 				limit: hitsPerPage,
 				offset: pageIndex * hitsPerPage,
 				attributesToRetrieve: [
-					"type",
 					"title",
 					"description",
 					"content",
@@ -240,7 +225,6 @@ const queryMeilisearch = async (
 		const excerptRaw = content.replace(/\s+/g, " ").trim().slice(0, 180);
 		return {
 			url: hit.url as string,
-			type: hit.type as string | undefined,
 			title: highlightText((hit.title as string) ?? "", keyword),
 			description: hit.description
 				? highlightText(hit.description as string, keyword)
@@ -532,13 +516,8 @@ onDestroy(() => {
 							onclick={(e) => handleResultClick(e, item.url)}
 							onmouseenter={() => (activeIndex = idx)}
 						>
-							<div class="search-title-row">
-								<div class="search-title">
-									{@html item.title}
-								</div>
-								{#if item.type}
-									<span class="search-badge">{typeLabel(item.type)}</span>
-								{/if}
+							<div class="search-title">
+								{@html item.title}
 							</div>
 							{#if item.excerpt || item.description}
 								<div class="search-excerpt">
@@ -940,29 +919,6 @@ onDestroy(() => {
 		-webkit-line-clamp: 1;
 		overflow: hidden;
 		line-height: 1.2;
-	}
-
-	.search-title-row {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 0.6rem;
-	}
-
-	.search-badge {
-		flex: none;
-		font-size: 0.7rem;
-		line-height: 1;
-		padding: 0.3rem 0.45rem;
-		border-radius: 999px;
-		border: 1px solid rgba(17, 24, 39, 0.12);
-		color: rgba(55, 65, 81, 0.85);
-		background: rgba(17, 24, 39, 0.03);
-	}
-	:global(html.dark) .search-badge {
-		border: 1px solid rgba(255, 255, 255, 0.14);
-		color: rgba(229, 231, 235, 0.9);
-		background: rgba(255, 255, 255, 0.06);
 	}
 
 	.search-excerpt {
