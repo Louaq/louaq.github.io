@@ -34,6 +34,7 @@ import mdx from "@astrojs/mdx";
 import { unified } from "@astrojs/markdown-remark";
 import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
+import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
 import meilisearch from "./src/utils/meilisearch.ts";
 
@@ -215,6 +216,8 @@ export default defineConfig({
 				[rehypeCallouts, { theme: siteConfig.rehypeCallouts.theme }],
 				rehypeSlug,
 				rehypeMermaid,
+				// 必须在 rehypeFigure 之前：figure 会复制 img 的 properties
+				rehypeOssImage,
 				rehypeFigure,
 				[rehypeExternalLinks, { siteUrl: siteConfig.site_url }],
 				[rehypeEmailProtection, { method: "base64" }], // 邮箱保护插件，支持 'base64' 或 'rot13'

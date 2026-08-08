@@ -3,8 +3,17 @@
  * 用于 SidebarTOC 和 FloatingTOC 的共享逻辑
  */
 
-import I18nKey from "@/i18n/i18nKey";
-import { i18n } from "@/i18n/translation";
+/**
+ * TOC 空状态文案。
+ *
+ * 刻意不 import `@i18n/translation`：本模块只跑在客户端，而那个模块静态引用了
+ * 全部 5 种语言（打包后 ~44KB），为一个字符串把它拖进每个页面的首屏 JS 不划算。
+ * 文案由 ConfigCarrier.astro 在服务端写进 `#config-carrier[data-toc-empty]`。
+ */
+function getTocEmptyLabel(): string {
+	const carrier = document.getElementById("config-carrier");
+	return carrier?.dataset.tocEmpty || "No headings found";
+}
 
 export interface TOCConfig {
 	contentId: string;
@@ -116,7 +125,7 @@ export class TOCManager {
 	 * 空状态文案
 	 */
 	private getEmptyStateHTML(): string {
-		return `<div class="text-center py-8 text-gray-500 dark:text-gray-400"><p>${i18n(I18nKey.tocEmpty)}</p></div>`;
+		return `<div class="text-center py-8 text-gray-500 dark:text-gray-400"><p>${getTocEmptyLabel()}</p></div>`;
 	}
 
 	/**

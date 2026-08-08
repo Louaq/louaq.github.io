@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, rm } from "node:fs/promises";
 import type { AstroIntegration } from "astro";
 
 function normalizeHost(host: string) {
@@ -186,6 +186,21 @@ export default function meilisearch(): AstroIntegration {
 		name: "meilisearch",
 		hooks: {
 			"astro:build:done": async ({ logger, dir }) => {
+				const indexFile = new URL("./meilisearch.json", dir);
+
+				// 索引文件只是构建期的中间产物：浏览器搜索走远端 Meilisearch 实例，
+				// 没有任何前端代码 fetch 它。留在 dist 里等于白白部署 ~800KB 公开数据。
+				const dropIndexFile = async () => {
+					try {
+						await rm(indexFile, { force: true });
+						logger.info("Removed meilisearch.json from build output.");
+					} catch (e) {
+						logger.warn(
+							`Failed to remove meilisearch.json: ${e instanceof Error ? e.message : String(e)}`,
+						);
+					}
+				};
+
 				const MEILISEARCH_HOST =
 					process.env.MEILISEARCH_HOST ||
 					process.env.PUBLIC_MEILISEARCH_HOST ||
@@ -199,16 +214,16 @@ export default function meilisearch(): AstroIntegration {
 					logger.warn(
 						"Meilisearch admin key not configured. Skipping index upload.",
 					);
+					await dropIndexFile();
 					return;
 				}
 
 				const host = normalizeHost(MEILISEARCH_HOST);
 
 				try {
-					const path = new URL("./meilisearch.json", dir);
-					logger.info(`Reading data from: ${path.pathname}`);
+					logger.info(`Reading data from: ${indexFile.pathname}`);
 
-					const data = await readFile(path, "utf-8");
+					const data = await readFile(indexFile, "utf-8");
 					if (!data) throw new Error("No data found in meilisearch.json");
 
 					const records = JSON.parse(data);
@@ -498,6 +513,8 @@ export default function meilisearch(): AstroIntegration {
 						`✗ Meilisearch upload error: ${error instanceof Error ? error.message : String(error)}`,
 					);
 					// 不要让构建失败
+				} finally {
+					await dropIndexFile();
 				}
 			},
 		},

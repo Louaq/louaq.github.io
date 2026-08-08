@@ -1,15 +1,29 @@
 <script lang="ts">
-import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
 import { navigateToPage } from "@utils/navigation-utils";
 import { onDestroy, onMount, tick } from "svelte";
+
+/**
+ * 文案由 SearchLazy.astro 在服务端解析好后传进来，而不是在组件里 import
+ * `@i18n/translation`：那个模块静态引用了全部 5 种语言（打包后 ~44KB），
+ * 而本组件是 client:only，等于让每个页面都白背这 44KB。
+ */
+export interface SearchLabels {
+	search: string;
+	searchLoading: string;
+	searchNoResults: string;
+	searchKbdSelect: string;
+	searchKbdSwitch: string;
+	announcementClose: string;
+	searchBy: string;
+}
 
 interface Props {
 	/** 首次挂载时是否直接打开搜索弹窗（用于懒加载入口） */
 	initialOpen?: boolean;
+	labels: SearchLabels;
 }
 
-let { initialOpen = false }: Props = $props();
+let { initialOpen = false, labels }: Props = $props();
 
 const MEILISEARCH_HOST =
 	import.meta.env.PUBLIC_MEILISEARCH_HOST || "https://search.louaq.com";
@@ -449,7 +463,7 @@ onDestroy(() => {
 <button
 	type="button"
 	aria-label="Open search"
-	title={`${i18n(I18nKey.search)} · Ctrl K`}
+	title={`${labels.search} · Ctrl K`}
 	class="search-trigger hidden shrink-0 lg:flex"
 	onclick={openModal}
 >
@@ -493,7 +507,7 @@ onDestroy(() => {
 				<input
 					bind:this={modalInputEl}
 					bind:value={query}
-					placeholder={i18n(I18nKey.search)}
+					placeholder={labels.search}
 					class="search-input"
 					onkeydown={handleInputKeydown}
 				/>
@@ -504,11 +518,11 @@ onDestroy(() => {
 			{#if !initialized}
 				<div class="search-empty">搜索服务未配置</div>
 			{:else if isSearching}
-				<div class="search-empty">{i18n(I18nKey.searchLoading)}</div>
+				<div class="search-empty">{labels.searchLoading}</div>
 			{:else if !query.trim()}
 				<div class="search-empty search-empty-centered"></div>
 			{:else if results.length === 0}
-				<div class="search-empty">{i18n(I18nKey.searchNoResults)}</div>
+				<div class="search-empty">{labels.searchNoResults}</div>
 			{:else}
 				<div class="search-list" role="list" bind:this={listEl}>
 					{#each results as item, idx}
@@ -568,7 +582,7 @@ onDestroy(() => {
 							</g>
 						</svg>
 					</kbd>
-					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.searchKbdSelect)}</span>
+					<span class="docsearch-modal-footer-commands-label">{labels.searchKbdSelect}</span>
 				</li>
 				<li>
 					<kbd class="docsearch-modal-footer-commands-key">
@@ -587,7 +601,7 @@ onDestroy(() => {
 							></path>
 						</svg>
 					</kbd>
-					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.searchKbdSwitch)}</span>
+					<span class="docsearch-modal-footer-commands-label">{labels.searchKbdSwitch}</span>
 				</li>
 				<li>
 					<kbd class="docsearch-modal-footer-commands-key">
@@ -605,11 +619,11 @@ onDestroy(() => {
 							</g>
 						</svg>
 					</kbd>
-					<span class="docsearch-modal-footer-commands-label">{i18n(I18nKey.announcementClose)}</span>
+					<span class="docsearch-modal-footer-commands-label">{labels.announcementClose}</span>
 				</li>
 			</ul>
 			<span class="docsearch-modal-footer-logo" aria-label="Meilisearch">
-				<span class="docsearch-modal-footer-logo-label">{i18n(I18nKey.searchBy)}</span>
+				<span class="docsearch-modal-footer-logo-label">{labels.searchBy}</span>
 				<a
 					class="docsearch-modal-footer-logo-link"
 					href="https://www.meilisearch.com/"

@@ -1,8 +1,22 @@
 ---
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
 import Search from "./Search.svelte";
+
+// 在服务端把文案解析成字面量传给岛：Search 是 client:only，如果它自己 import
+// `@i18n/translation`，那份含 5 种语言的 ~44KB chunk 会进入每个页面的首屏 JS。
+const labels = {
+	search: i18n(I18nKey.search),
+	searchLoading: i18n(I18nKey.searchLoading),
+	searchNoResults: i18n(I18nKey.searchNoResults),
+	searchKbdSelect: i18n(I18nKey.searchKbdSelect),
+	searchKbdSwitch: i18n(I18nKey.searchKbdSwitch),
+	announcementClose: i18n(I18nKey.announcementClose),
+	searchBy: i18n(I18nKey.searchBy),
+};
 ---
 
 <!-- client:only：避免 Search 注水失败（多根节点 / portal / chunk 与 SSR 不一致）；首屏搜索槽可能短暂为空直至 JS 就绪 -->
 <div class="navbar-search-slot">
-	<Search client:only="svelte" />
+	<Search client:only="svelte" labels={labels} />
 </div>

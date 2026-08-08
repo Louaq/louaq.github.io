@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import * as path from "node:path";
 import type { ImageMetadata } from "astro";
+import { withOssImageProcess } from "@/utils/oss-image";
 import { url } from "@/utils/url-utils";
 
 interface Props {
@@ -43,9 +44,13 @@ if (isLocal) {
 
 const imageClass = "w-full h-full object-cover";
 const imageStyle = `object-position: ${position}`;
+// 这里的远程图主要是 banner/头图，按全宽 2x 取 1920；非 OSS 的 URL 原样返回
+const remoteSrc = isPublic
+	? url(src)
+	: withOssImageProcess(src, { width: 1920 });
 ---
 <div id={id} class:list={[className, 'overflow-hidden relative']}>
     <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
     {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle} loading="eager"/>}
-    {!isLocal && <img src={isPublic ? url(src) : src} alt={alt || ""} class={imageClass} style={imageStyle} loading="eager"/>}
+    {!isLocal && <img src={remoteSrc} alt={alt || ""} class={imageClass} style={imageStyle} loading="eager"/>}
 </div>

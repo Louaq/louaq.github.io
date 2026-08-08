@@ -1,5 +1,3 @@
-import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
 import { siteConfig } from "@/config/siteConfig";
 
 /**
@@ -90,18 +88,6 @@ export function getPostUrlForEntry(entry: {
 export function getTagUrl(tag: string): string {
 	if (!tag) return url("/tags/");
 	return url(`/tags/${encodeURIComponent(tag.trim())}/`);
-}
-
-export function getCategoryUrl(category: string | null): string {
-	const uncategorizedLabel = i18n(I18nKey.uncategorized);
-	if (
-		!category ||
-		category.trim() === "" ||
-		category.trim().toLowerCase() === uncategorizedLabel.toLowerCase()
-	) {
-		return url(`/categories/${encodeURIComponent(uncategorizedLabel)}/`);
-	}
-	return url(`/categories/${encodeURIComponent(category.trim())}/`);
 }
 
 export function getFileDirFromPath(filePath: string): string {

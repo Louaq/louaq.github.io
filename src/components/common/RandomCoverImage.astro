@@ -3,6 +3,7 @@ import { Image } from "astro:assets";
 import * as path from "node:path";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { generateApiUrls } from "@/utils/image-utils";
+import { withOssImageProcess } from "@/utils/oss-image";
 import { url } from "@/utils/url-utils";
 
 const { randomCoverImage } = coverImageConfig;
@@ -104,7 +105,11 @@ const imageStyle = `object-position: ${position || "center"}; image-rendering: -
 const shouldDeferRemoteSrc = deferSrc && !isLocal;
 const transparentPlaceholder =
 	"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E";
-const remoteSrc = isPublic ? url(src) : src;
+// 封面图：列表页预览卡最宽约 400px，详情页 banner 约 1200px；按 2x DPR 取值。
+// 只有阿里云 OSS 的图会被改写，其余（imgdb / 随机图 API / 本地）原样返回。
+const remoteSrc = isPublic
+	? url(src)
+	: withOssImageProcess(src, { width: preview ? 800 : 1600 }) || src;
 
 // 水印配置
 const watermark = randomCoverImage.watermark;

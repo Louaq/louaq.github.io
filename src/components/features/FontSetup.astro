@@ -27,32 +27,16 @@ const codeCssVariable = fontConfig.code
 {fontConfig.enable && <Font cssVariable={codeCssVariable} preload />}
 
 {
-	/* 正文字体：CDN woff2，手动 @font-face + 预加载 */
+	/*
+	 * 正文字体：加载 cn-font-split 生成的分片样式表（含全部 @font-face 与
+	 * unicode-range）。浏览器据此只请求本页真正用到的那几个分片，而不是整包。
+	 *
+	 * 这里刻意**不**做 preload：分片有 40+ 个，preload 哪一个都是猜；而且
+	 * 猜错就是纯粹的浪费带宽。@font-face 里已带 font-display: swap，
+	 * 文字先用 fallback 渲染，分片到位后替换。
+	 */
 }
-{
-	fontConfig.enable && body.src && (
-		<style
-			set:html={`
-				@font-face {
-					font-family: "${body.family}";
-					src: url("${body.src}") format("${body.format ?? "woff2"}");
-					font-display: ${body.display ?? "swap"};
-				}
-			`}
-		/>
-	)
-}
-{
-	fontConfig.enable && fontConfig.preload && body.src && (
-		<link
-			rel="preload"
-			href={body.src}
-			as="font"
-			type={`font/${body.format ?? "woff2"}`}
-			crossorigin
-		/>
-	)
-}
+{fontConfig.enable && body.css && <link rel="stylesheet" href={body.css} />}
 
 {
 	/*

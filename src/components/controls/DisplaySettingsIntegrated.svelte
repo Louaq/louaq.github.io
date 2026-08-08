@@ -4,8 +4,6 @@ import {
 	WALLPAPER_NONE,
 	WALLPAPER_OVERLAY,
 } from "@constants/constants";
-import I18nKey from "@i18n/i18nKey";
-import { i18n } from "@i18n/translation";
 import Icon from "@iconify/svelte";
 import {
 	getDefaultBannerTitleEnabled,
@@ -20,6 +18,30 @@ import {
 import { onMount } from "svelte";
 import { backgroundWallpaper, siteConfig } from "@/config";
 import type { WALLPAPER_MODE } from "@/types/config";
+
+/**
+ * 文案由 Navbar.astro 在服务端解析好后传进来，而不是在组件里 import
+ * `@i18n/translation`：那个模块静态引用了全部 5 种语言（打包后 ~44KB），
+ * 而本组件是 client:only，等于让每个页面都白背这 44KB。
+ */
+export interface DisplaySettingsLabels {
+	themeColor: string;
+	wallpaperMode: string;
+	wallpaperBannerMode: string;
+	wallpaperOverlayMode: string;
+	wallpaperNoneMode: string;
+	bannerSettings: string;
+	bannerTitle: string;
+	postListLayout: string;
+	postListLayoutList: string;
+	postListLayoutGrid: string;
+}
+
+interface Props {
+	labels: DisplaySettingsLabels;
+}
+
+let { labels }: Props = $props();
 
 // 重要：避免在客户端初始化阶段读取 localStorage/window 导致 SSR/CSR DOM 不一致，影响 hydrate
 let hue = $state(getDefaultHue());
@@ -150,7 +172,7 @@ onMount(() => {
             before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
             before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
         >
-            {i18n(I18nKey.themeColor)}
+            {labels.themeColor}
             <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                     class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} onclick={resetHue}>
                 <span class="text-(--btn-content)">
@@ -166,7 +188,7 @@ onMount(() => {
         </div>
     </div>
     <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded-sm select-none">
-        <input aria-label={i18n(I18nKey.themeColor)} type="range" min="0" max="360" bind:value={hue}
+        <input aria-label={labels.themeColor} type="range" min="0" max="360" bind:value={hue}
                class="slider" id="colorSlider" step="5" style="width: 100%"
                oninput={() => setHue(hue)}>
     </div>
@@ -178,7 +200,7 @@ onMount(() => {
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
-                {i18n(I18nKey.wallpaperMode)}
+                {labels.wallpaperMode}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                         class:opacity-0={wallpaperMode === defaultWallpaperMode} class:pointer-events-none={wallpaperMode === defaultWallpaperMode} onclick={resetWallpaperMode}>
                     <span class="text-(--btn-content)">
@@ -195,7 +217,7 @@ onMount(() => {
                     onclick={() => switchWallpaperMode(WALLPAPER_BANNER)}
                 >
                     <Icon icon="material-symbols:image-outline" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{i18n(I18nKey.wallpaperBannerMode)}</span>
+                    <span class="text-sm flex-1">{labels.wallpaperBannerMode}</span>
                     {#if wallpaperMode === WALLPAPER_BANNER}
                         <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
@@ -208,7 +230,7 @@ onMount(() => {
                     onclick={() => switchWallpaperMode(WALLPAPER_OVERLAY)}
                 >
                     <Icon icon="material-symbols:wallpaper" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{i18n(I18nKey.wallpaperOverlayMode)}</span>
+                    <span class="text-sm flex-1">{labels.wallpaperOverlayMode}</span>
                     {#if wallpaperMode === WALLPAPER_OVERLAY}
                         <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
@@ -221,7 +243,7 @@ onMount(() => {
                     onclick={() => switchWallpaperMode(WALLPAPER_NONE)}
                 >
                     <Icon icon="material-symbols:hide-image-outline" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{i18n(I18nKey.wallpaperNoneMode)}</span>
+                    <span class="text-sm flex-1">{labels.wallpaperNoneMode}</span>
                     {#if wallpaperMode === WALLPAPER_NONE}
                         <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
@@ -237,7 +259,7 @@ onMount(() => {
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
-                {i18n(I18nKey.bannerSettings)}
+                {labels.bannerSettings}
             </div>
             <div class="space-y-1 px-1">
                 <!-- Banner Title Switch -->
@@ -250,7 +272,7 @@ onMount(() => {
                     onclick={toggleBannerTitleEnabled}
                 >
                     <Icon icon="material-symbols:titlecase-rounded" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{i18n(I18nKey.bannerTitle)}</span>
+                    <span class="text-sm flex-1">{labels.bannerTitle}</span>
                     <span class="waves-toggle-track inline-block w-10 h-5 rounded-full transition-all duration-200 relative"
                          class:waves-toggle-track-on={bannerTitleEnabled}>
                         <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-200"
@@ -270,7 +292,7 @@ onMount(() => {
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
-                {i18n(I18nKey.postListLayout)}
+                {labels.postListLayout}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
                         class:opacity-0={currentLayout === defaultLayout} class:pointer-events-none={currentLayout === defaultLayout} onclick={resetLayout}>
                     <span class="text-(--btn-content)">
@@ -280,37 +302,37 @@ onMount(() => {
             </div>
             <div class="flex gap-2">
                 <button
-                    aria-label={i18n(I18nKey.postListLayoutList)}
+                    aria-label={labels.postListLayoutList}
                     class="flex-1 btn-regular rounded-md py-2 px-3 flex items-center justify-center gap-2 active:scale-95 transition-all relative overflow-hidden"
                     class:ring-1={currentLayout === 'list'}
                     class:ring-[var(--primary)]={currentLayout === 'list'}
                     class:opacity-60={currentLayout !== 'list'}
                     disabled={isSwitching}
                     onclick={switchLayout}
-                    title={i18n(I18nKey.postListLayoutList)}
+                    title={labels.postListLayoutList}
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/>
                     </svg>
-                    <span class="text-xs font-medium">{i18n(I18nKey.postListLayoutList)}</span>
+                    <span class="text-xs font-medium">{labels.postListLayoutList}</span>
                     {#if currentLayout === 'list'}
                         <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
                 </button>
                 <button
-                    aria-label={i18n(I18nKey.postListLayoutGrid)}
+                    aria-label={labels.postListLayoutGrid}
                     class="flex-1 btn-regular rounded-md py-2 px-3 flex items-center justify-center gap-2 active:scale-95 transition-all relative overflow-hidden"
                     class:ring-1={currentLayout === 'grid'}
                     class:ring-[var(--primary)]={currentLayout === 'grid'}
                     class:opacity-60={currentLayout !== 'grid'}
                     disabled={isSwitching}
                     onclick={switchLayout}
-                    title={i18n(I18nKey.postListLayoutGrid)}
+                    title={labels.postListLayoutGrid}
                 >
                     <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M3 3h7v7H3V3zm0 11h7v7H3v-7zm11-11h7v7h-7V3zm0 11h7v7h-7v-7z"/>
                     </svg>
-                    <span class="text-xs font-medium">{i18n(I18nKey.postListLayoutGrid)}</span>
+                    <span class="text-xs font-medium">{labels.postListLayoutGrid}</span>
                     {#if currentLayout === 'grid'}
                         <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
                     {/if}
