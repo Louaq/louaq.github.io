@@ -53,7 +53,7 @@ const isCompact = group.layout === "compact";
         href={friendSiteInfo.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="friend-card friend-card-badged group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
+        class="friend-card friend-card-badged group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
       >
         <span class="friend-badge">
           <AstroIcon name="material-symbols:workspace-premium-rounded" class="text-[0.8rem]" />
@@ -88,7 +88,7 @@ const isCompact = group.layout === "compact";
           target="_blank"
           rel="noopener noreferrer"
           class:list={[
-            "friend-card-compact group flex items-center gap-3 p-3 rounded-xl border border-(--line-divider) hover:border-(--primary) hover:bg-(--card-bg) transition-all duration-300 relative overflow-hidden",
+            "friend-card-compact group flex items-center gap-3 p-3 rounded-xl border border-(--line-divider) hover:bg-(--card-bg) transition-all duration-300 relative overflow-hidden",
             item.badge && "friend-card-badged",
           ]}
         >

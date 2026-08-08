@@ -2,14 +2,6 @@ import { getCollection } from "astro:content";
 import { createHash } from "node:crypto";
 import type { APIRoute } from "astro";
 import { getPostUrlForEntry } from "@/utils/url-utils";
-import { applyNotes } from "../components/pages/friends/applyDialogData";
-import {
-	friendSiteInfo,
-	friendsPageConfig,
-	getEnabledFriends,
-} from "../config/friendsConfig";
-import { siteConfig } from "../config/siteConfig";
-import { sponsorConfig } from "../config/sponsorConfig";
 
 // 截断文本到指定字节大小，避免单条记录过大导致 Meilisearch 入库失败
 function truncateToBytes(str: string, maxBytes: number): string {
@@ -39,7 +31,8 @@ type MeilisearchRecord = {
 	id: string;
 	// objectID 作为 Meilisearch 的主键（primaryKey）
 	objectID: string;
-	type: "post" | "page" | "friend";
+	// 索引只收录文章，不收录页面 / 友链 / 赞助等站点内容
+	type: "post";
 	title: string;
 	description?: string;
 	content: string;
@@ -96,14 +89,14 @@ function makeMeiliId(objectID: string): string {
 
 export const GET: APIRoute = async () => {
 	const posts = await getCollection("posts");
-	const spec = await getCollection("spec");
 
-	// 过滤掉草稿文章（spec 默认都视为发布）
+	// 过滤掉草稿文章
 	const publishedPosts = posts.filter((post) => !post.data.draft);
 
 	const records: MeilisearchRecord[] = [];
 
-	// 1) 文章
+	// 索引只收录文章。页面（关于/留言板/归档/友链/赞助等）与友链条目一律不入库，
+	// 从 payload 里消失的旧记录会被 utils/meilisearch.ts 的陈旧文档清理自动删除。
 	for (const post of publishedPosts) {
 		// 加密文章：标题/描述/标签仍可被搜到（方便用户找到入口去解锁），
 		// 但正文明文绝不能进索引——否则会绕过页面端的密码/加密保护，
@@ -133,117 +126,6 @@ export const GET: APIRoute = async () => {
 			url: getPostUrlForEntry(post),
 		};
 		records.push(shrinkRecordToFit(rec));
-	}
-
-	// 2) 固定页面（src/content/spec/*.md）
-	const specMeta: Record<
-		string,
-		{ title: string; url: string; description?: string }
-	> = {
-		about: { title: "关于", url: "/about/" },
-		guestbook: { title: "留言板", url: "/guestbook/" },
-	};
-	for (const page of spec) {
-		const meta = specMeta[page.id] ?? { title: page.id, url: `/${page.id}/` };
-		const maxContentBytes = 8000;
-		const body = page.body ?? "";
-		const truncatedContent = truncateToBytes(body, maxContentBytes);
-
-		const objectID = `page:${page.id}`;
-		const rec: MeilisearchRecord = {
-			id: makeMeiliId(objectID),
-			objectID,
-			type: "page",
-			title: meta.title,
-			description: meta.description ?? "",
-			content: truncatedContent,
-			url: meta.url,
-		};
-		records.push(shrinkRecordToFit(rec));
-	}
-
-	// 2.5) 站点栏目入口页（不依赖 markdown 内容）
-	records.push(
-		shrinkRecordToFit({
-			objectID: "page:archive",
-			id: makeMeiliId("page:archive"),
-			type: "page",
-			title: "归档",
-			description: "按时间浏览全部文章",
-			content: publishedPosts.map((p) => p.data.title).join("\n"),
-			url: "/archive/",
-		}),
-	);
-
-	if (siteConfig.pages.bangumi) {
-		records.push(
-			shrinkRecordToFit({
-				objectID: "page:bangumi",
-				id: makeMeiliId("page:bangumi"),
-				type: "page",
-				title: "Bangumi",
-				description: "追番与游戏",
-				content: "Bangumi 追番与游戏",
-				url: "/bangumi/",
-			}),
-		);
-	}
-
-	if (siteConfig.pages.friends) {
-		records.push(
-			shrinkRecordToFit({
-				objectID: "page:friends",
-				id: makeMeiliId("page:friends"),
-				type: "page",
-				title: friendsPageConfig.title || "友链",
-				description: friendsPageConfig.description || friendSiteInfo.desc,
-				content: applyNotes.map((n) => `${n.title}：${n.content}`).join("\n"),
-				url: "/friends/",
-			}),
-		);
-	}
-
-	// 3) 友链（外部链接也纳入搜索）
-	const friends = getEnabledFriends();
-	for (const f of friends) {
-		const objectID = `friend:${f.siteurl}`;
-		const rec: MeilisearchRecord = {
-			id: makeMeiliId(objectID),
-			objectID,
-			type: "friend",
-			title: f.title,
-			description: f.desc ?? "",
-			content: [f.title, f.desc].filter(Boolean).join("\n"),
-			url: f.siteurl,
-			category: "friends",
-		};
-		records.push(shrinkRecordToFit(rec));
-	}
-
-	// 4) 赞助页（如果页面开启）
-	if (siteConfig.pages.sponsor) {
-		const enabledMethods = sponsorConfig.methods.filter((m) => m.enabled);
-		records.push(
-			shrinkRecordToFit({
-				objectID: "page:sponsor",
-				id: makeMeiliId("page:sponsor"),
-				type: "page",
-				title: sponsorConfig.title || "赞助",
-				description: sponsorConfig.description || sponsorConfig.usage || "",
-				content: [
-					sponsorConfig.usage,
-					...enabledMethods.map(
-						(m) => `${m.name}\n${m.description ?? ""}\n${m.link ?? ""}`,
-					),
-					...(sponsorConfig.sponsors ?? []).map(
-						(s) => `${s.name}\n${s.amount ?? ""}\n${s.message ?? ""}`,
-					),
-				]
-					.filter(Boolean)
-					.join("\n\n"),
-				url: "/sponsor/",
-			}),
-		);
 	}
 
 	return new Response(JSON.stringify(records, null, 2), {
