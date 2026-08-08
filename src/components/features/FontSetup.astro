@@ -4,7 +4,7 @@ import { siteConfig } from "@/config";
 
 const { font: fontConfig } = siteConfig;
 
-// 正文字体（HarmonyOS，保留 CDN 托管，以 @font-face 形式加载）
+// 正文字体（本地托管，分层切片，见 scripts/split-font.js）
 const body = fontConfig.body;
 
 // font-family 字符串
@@ -21,19 +21,23 @@ const codeCssVariable = fontConfig.code
 {
 	/*
 	 * 代码字体：交由 Astro Font API（fontsource provider）自托管 + 子集化，
-	 * 注入 --font-jetbrains-mono 变量及对应 @font-face。preload 让代码块字体尽早就绪。
+	 * 注入 --font-jetbrains-mono 变量及对应 @font-face。
+	 * fontConfig.preload 只管这一个字体：它是单文件（~39KB），预加载有意义。
 	 */
 }
-{fontConfig.enable && <Font cssVariable={codeCssVariable} preload />}
+{fontConfig.enable && (
+	<Font cssVariable={codeCssVariable} preload={fontConfig.preload ?? true} />
+)}
 
 {
 	/*
-	 * 正文字体：加载 cn-font-split 生成的分片样式表（含全部 @font-face 与
-	 * unicode-range）。浏览器据此只请求本页真正用到的那几个分片，而不是整包。
+	 * 正文字体：加载 scripts/split-font.js 生成的分层样式表。里面是两条带精确
+	 * unicode-range 的 @font-face —— tier-a（非文章页也会用到的字）与 tier-b
+	 * （只在正文出现的字），浏览器据此按页决定要不要取 tier-b。
 	 *
-	 * 这里刻意**不**做 preload：分片有 40+ 个，preload 哪一个都是猜；而且
-	 * 猜错就是纯粹的浪费带宽。@font-face 里已带 font-display: swap，
-	 * 文字先用 fallback 渲染，分片到位后替换。
+	 * 这里刻意**不**做 preload：列表页只需要 tier-a，文章页两层都要，
+	 * 统一 preload 会让列表页白下 tier-b。@font-face 里已带 font-display: swap，
+	 * 文字先用 fallback 渲染，字体到位后替换。
 	 */
 }
 {fontConfig.enable && body.css && <link rel="stylesheet" href={body.css} />}

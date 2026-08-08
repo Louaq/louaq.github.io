@@ -1,31 +1,9 @@
 // 字体配置
-//
-// 架构（务实迁移 + 保留 CDN）：
-// - 正文字体（body）：霞鹜文楷 LXGW WenKai Regular，本地字体文件
-//   （public/font/），由 FontSetup.astro 以 @font-face 形式加载。
-// - 代码字体（code）：JetBrains Mono，通过 Astro Font API（fontsource provider）
-//   自托管 + 子集化，由 astro.config.mjs 的 `fonts` 与 <Font /> 组件统一管理。
-// - og：OpenGraph 图片由 satori 服务端渲染，需要原始字体 buffer，独立于浏览器
-//   字体加载，保持原样。
 export const fontConfig = {
 	// 是否启用自定义字体功能
 	enable: true,
 	// 是否预加载代码字体（正文字体已切片，整包预加载无意义，见 body）
 	preload: true,
-
-	// 正文字体（CJK，本地文件托管，不走 Astro Font API 自托管）
-	//
-	// 两级处理，缺一不可：
-	// 1. `pnpm subset-font`：19.3MB 原始 TTF → 按全站实际用字子集化 → ~454KB woff2
-	// 2. `pnpm split-font`：再把这 454KB 按 unicode-range 切成 40+ 个分片
-	//
-	// 只做第 1 步的话每个访客首屏都要下完整的 454KB（woff2 已压缩，gzip/brotli
-	// 再压不动）；切片后浏览器只取当前页面命中的那十几片。
-	//
-	// 页面引用的是切片产物的 CSS（`css` 字段），单文件 woff2 只作为 split-font
-	// 的输入保留在仓库里，不再被任何页面加载。
-	// 新增文章若用到子集里没有的生僻字，会优雅回退到 fallback 里的系统字体
-	// （不会破版），依次重跑上面两个命令即可补齐。
 	body: {
 		name: "LXGW WenKai Regular",
 		family: "LXGWWenKai_Regular",

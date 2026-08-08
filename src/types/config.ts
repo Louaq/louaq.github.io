@@ -294,13 +294,16 @@ export type HomeTopNoticeConfig = {
 	switchInterval?: number;
 };
 
-// 正文字体（CDN 托管，手动 @font-face 加载）
+// 正文字体（本地托管，由 scripts/split-font.js 分层切片后以样式表形式加载）
 export type BodyFont = {
 	name: string; // 字体显示名称
 	family: string; // CSS font-family 名称
-	src: string; // 字体文件路径或 CDN URL
-	format?: "woff" | "woff2" | "truetype" | "opentype"; // 字体格式
-	display?: "auto" | "block" | "swap" | "fallback" | "optional"; // font-display 属性
+	/**
+	 * 分层切片产物的样式表路径（含各层 @font-face 与 unicode-range）。
+	 * 由 `pnpm split-font` 生成，不再是单个字体文件——所以这里是 css 而非 src，
+	 * font-display / format 等也都写在生成的样式表里，无需在配置中重复。
+	 */
+	css: string;
 };
 
 // 代码字体（通过 Astro Font API / fontsource provider 自托管 + 子集化）
@@ -316,8 +319,8 @@ export type CodeFont = {
 // 字体配置
 export type FontConfig = {
 	enable: boolean; // 是否启用自定义字体功能
-	preload?: boolean; // 是否预加载正文字体文件以提高性能
-	body: BodyFont; // 正文字体（CDN 托管）
+	preload?: boolean; // 是否预加载代码字体（正文字体已分层，见 BodyFont）
+	body: BodyFont; // 正文字体（本地托管 + 分层切片）
 	code: CodeFont; // 代码字体（Astro Font API 自托管 + 子集化）
 	fallback?: string[]; // 全局字体回退列表
 	og?: {

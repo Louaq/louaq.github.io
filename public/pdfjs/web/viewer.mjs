@@ -678,7 +678,7 @@ const defaultOptions = {
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   enableScripting: {
-    value: true,
+    value: false,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE
   },
   enableUpdatedAddImage: {
