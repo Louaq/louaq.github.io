@@ -98,6 +98,14 @@ export const friendGroups: FriendGroup[] = [
 				weight: 7,
 				enabled: true,
 			},
+			{
+				title: "Ruyu-blog",
+				imgurl: "https://www.chichu.chat/blog-icon.svg",
+				desc: "一名造价筑基期的折腾散修",
+				siteurl: "https://www.chichu.chat/",
+				weight: 6,
+				enabled: true,
+			},
 		],
 	},
 ];
