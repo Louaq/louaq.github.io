@@ -212,6 +212,10 @@ export const en: Translation = {
 	[Key.siteRuntimeUnitYear]: "y",
 	[Key.siteRuntimeUnitMonth]: "m",
 
+	// Footer visitor count
+	[Key.visitorSitePv]: "Total Views",
+	[Key.visitorSiteUv]: "Total Visitors",
+
 	// Calendar Component
 	[Key.calendarSunday]: "Sun",
 	[Key.calendarMonday]: "Mon",

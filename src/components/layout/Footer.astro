@@ -1,10 +1,21 @@
 ---
 import fs from "node:fs";
 import path from "node:path";
+import { Icon } from "astro-icon/components";
 import { footerConfig, profileConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
 import { url } from "@/utils/url-utils";
 
 const currentYear = new Date().getFullYear();
+
+// 访客计数（Vercount）：默认关闭，由 footerConfig.visitorCount 开启
+const visitorCount = footerConfig.visitorCount;
+const showSitePv = Boolean(visitorCount?.enable && visitorCount.showSitePv);
+const showSiteUv = Boolean(visitorCount?.enable && visitorCount.showSiteUv);
+const showVisitorCount = showSitePv || showSiteUv;
+const visitorApiUrl =
+	visitorCount?.apiUrl || "https://events.vercount.one/api/v2/log";
 
 // 读取FooterConfig.html文件内容
 let customFooterHtml = "";
@@ -119,11 +130,156 @@ if (footerConfig.enable) {
           fetchpriority="low"
         />
       </a>
-    </span>
-    <!-- 
+    </span> 
+    {
+      showVisitorCount && (
+        <span
+          class="mt-1 hidden flex-wrap items-center justify-center gap-x-3 gap-y-1"
+          data-visitor-count
+          data-api-url={visitorApiUrl}
+        >
+          {showSitePv && (
+            <span class="inline-flex items-center gap-1">
+              <Icon
+                name="material-symbols:visibility-outline-rounded"
+                class="text-base text-(--primary)"
+              />
+              <span class="text-50">{i18n(I18nKey.visitorSitePv)}</span>
+              <span
+                class="font-medium text-(--primary) tabular-nums"
+                data-visitor-value="site_pv"
+              />
+            </span>
+          )}
+          {showSiteUv && (
+            <span class="inline-flex items-center gap-1">
+              <Icon
+                name="material-symbols:person-outline-rounded"
+                class="text-base text-(--primary)"
+              />
+              <span class="text-50">{i18n(I18nKey.visitorSiteUv)}</span>
+              <span
+                class="font-medium text-(--primary) tabular-nums"
+                data-visitor-value="site_uv"
+              />
+            </span>
+          )}
+        </span>
+      )
+    }
+    <!--
       注意：请勿随意修改或删除 "Powered by Astro & Firefly" 部分，这是对开源项目的尊重和支持。
       如果您需要在底部增加内容，请在src/config/footerConfig.ts中修改enable属性为true，然后编辑src/config/FooterConfig.html文件。
       您可以随意在src/config/FooterConfig.html中随意添加自定义内容，不需要修改Footer.astro文件。
     -->
   </div>
 </div>
+
+<script>
+  // Vercount 访客计数。没有直接引用官方 https://events.vercount.one/js 的原因：
+  // 1. 官方脚本用 getElementById 取元素，而 Footer 在 MainGridLayout 中渲染了两份
+  //    （桌面端在 #swup-container 内、移动端在外），第二份永远不会被填充；
+  // 2. 官方脚本只在 DOMContentLoaded 跑一次且缓存了元素引用，Swup 局部替换容器后
+  //    引用会失效，站内跳转也不再计数。
+  // 请求体 / 响应体 / cookie / localStorage 均与官方脚本保持一致，数据可以互通。
+  const API_FALLBACK = "https://events.vercount.one/api/v2/log";
+  const STORAGE_KEY = "visitorCountData";
+  const UV_COOKIE_PREFIX = "vercount_uv_";
+  const REQUEST_TIMEOUT = 5000;
+
+  type Counts = { site_pv: number; page_pv: number; site_uv: number };
+
+  const uvCookieName = () => {
+    const host = window.location.host || "unknown-host";
+    return `${UV_COOKIE_PREFIX}${host.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
+  };
+
+  const hasUvCookie = () =>
+    document.cookie
+      .split("; ")
+      .some((entry) => entry === `${uvCookieName()}=1`);
+
+  const setUvCookie = () => {
+    document.cookie = `${uvCookieName()}=1; path=/; max-age=31536000; samesite=lax`;
+  };
+
+  // 接口成功时数据在 data 字段下，失败/旧版本则直接平铺在顶层
+  const normalize = (payload: any): Counts => {
+    const data = payload?.data ?? payload ?? {};
+    return {
+      site_pv: Number(data.site_pv ?? 0),
+      page_pv: Number(data.page_pv ?? 0),
+      site_uv: Number(data.site_uv ?? 0),
+    };
+  };
+
+  const readCache = (): Counts | null => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? normalize(JSON.parse(raw)) : null;
+    } catch {
+      return null;
+    }
+  };
+
+  const writeCache = (counts: Counts) => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(counts));
+    } catch {
+      // localStorage 不可用（隐私模式等）时忽略，下次访问重新拉取
+    }
+  };
+
+  // querySelectorAll 而非 getElementById：页面上同时存在桌面端与移动端两份页脚
+  const render = (counts: Counts) => {
+    for (const el of document.querySelectorAll<HTMLElement>(
+      "[data-visitor-value]",
+    )) {
+      const value = counts[el.dataset.visitorValue as keyof Counts];
+      if (typeof value === "number") el.textContent = value.toLocaleString();
+    }
+    for (const el of document.querySelectorAll("[data-visitor-count]")) {
+      el.classList.remove("hidden");
+      el.classList.add("inline-flex");
+    }
+  };
+
+  let inFlight = false;
+
+  const refresh = async () => {
+    const root = document.querySelector<HTMLElement>("[data-visitor-count]");
+    if (!root || inFlight) return;
+    inFlight = true;
+
+    const cached = readCache();
+    if (cached) render(cached);
+
+    // 首次访问才计入 UV，与官方脚本共用同一个 cookie
+    const isNewUv = !hasUvCookie();
+    if (isNewUv) setUvCookie();
+
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT);
+    try {
+      const response = await fetch(root.dataset.apiUrl || API_FALLBACK, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: window.location.href, isNewUv }),
+        signal: controller.signal,
+      });
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const counts = normalize(await response.json());
+      render(counts);
+      writeCache(counts);
+    } catch (error) {
+      // 接口不可用时保持隐藏（或沿用缓存值），不影响页脚其余内容
+      console.warn("访客计数接口请求失败:", error);
+    } finally {
+      clearTimeout(timer);
+      inFlight = false;
+    }
+  };
+
+  refresh();
+  document.addEventListener("swup:contentReplaced", refresh);
+</script>

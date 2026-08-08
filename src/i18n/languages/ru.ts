@@ -214,6 +214,10 @@ export const ru: Translation = {
 	[Key.siteRuntimeUnitYear]: "г",
 	[Key.siteRuntimeUnitMonth]: "мес",
 
+	// Счётчик посетителей в подвале
+	[Key.visitorSitePv]: "Всего просмотров",
+	[Key.visitorSiteUv]: "Всего посетителей",
+
 	// Компонент календаря
 	[Key.calendarSunday]: "Вс",
 	[Key.calendarMonday]: "Пн",

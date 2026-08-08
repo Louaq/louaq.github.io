@@ -205,6 +205,10 @@ enum I18nKey {
 	siteRuntimeUnitYear = "siteRuntimeUnitYear",
 	siteRuntimeUnitMonth = "siteRuntimeUnitMonth",
 
+	// 页脚访客计数
+	visitorSitePv = "visitorSitePv",
+	visitorSiteUv = "visitorSiteUv",
+
 	// 日历组件
 	calendarSunday = "calendarSunday",
 	calendarMonday = "calendarMonday",

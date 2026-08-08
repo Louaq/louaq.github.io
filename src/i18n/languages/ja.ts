@@ -211,6 +211,10 @@ export const ja: Translation = {
 	[Key.siteRuntimeUnitYear]: "年",
 	[Key.siteRuntimeUnitMonth]: "ヶ月",
 
+	// フッター訪問者カウント
+	[Key.visitorSitePv]: "総閲覧数",
+	[Key.visitorSiteUv]: "総訪問者数",
+
 	// カレンダーコンポーネント
 	[Key.calendarSunday]: "日",
 	[Key.calendarMonday]: "月",

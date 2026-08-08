@@ -206,6 +206,10 @@ export const zh_TW: Translation = {
 	[Key.siteRuntimeUnitYear]: "年",
 	[Key.siteRuntimeUnitMonth]: "月",
 
+	// 頁腳訪客計數
+	[Key.visitorSitePv]: "總訪問量",
+	[Key.visitorSiteUv]: "總訪客數",
+
 	// 日曆組件
 	[Key.calendarSunday]: "日",
 	[Key.calendarMonday]: "一",

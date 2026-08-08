@@ -337,6 +337,12 @@ export type FontConfig = {
 export type FooterConfig = {
 	enable: boolean; // 是否启用Footer HTML注入功能
 	customHtml?: string; // 自定义 HTML 内容，用于添加备案号等信息
+	visitorCount?: {
+		enable: boolean; // 是否在页脚显示访客计数
+		apiUrl?: string; // 统计接口地址（Vercount，接口与不蒜子兼容）
+		showSitePv?: boolean; // 显示全站访问量（PV）
+		showSiteUv?: boolean; // 显示全站访客数（UV）
+	};
 };
 
 export type CoverImageConfig = {
