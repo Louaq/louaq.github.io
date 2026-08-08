@@ -4,8 +4,12 @@
  *   pnpm subset-font
  *
  * NOTE: SRC_FONT (the full ~19MB LXGWWenKai TTF) is intentionally NOT committed —
- * only the generated subset woff2 is. Download the TTF into public/font/ before
+ * only the generated subset woff2 is. Download the TTF into font-src/ before
  * running this script, otherwise it exits with "source font not found".
+ *
+ * Both live in font-src/, NOT public/ — this subset is only an intermediate fed
+ * to `pnpm split-font`; the browser never fetches it. Anything under public/ is
+ * copied verbatim into dist/, so keeping it there shipped a dead 465KB.
  */
 
 import fs from "fs"
@@ -18,9 +22,9 @@ const root = path.resolve(__dirname, "..")
 
 const SRC_FONT = path.join(
   root,
-  "public/font/LXGWWenKai_Regular-s.p.436t2zdbdsegx.ttf",
+  "font-src/LXGWWenKai_Regular-s.p.436t2zdbdsegx.ttf",
 )
-const OUT_FONT = path.join(root, "public/font/LXGWWenKai_Regular-subset.woff2")
+const OUT_FONT = path.join(root, "font-src/LXGWWenKai_Regular-subset.woff2")
 
 // Directories/extensions to scan for characters that must render in the body font.
 const SCAN_DIRS = ["src/content", "src/config", "src/i18n", "src/components", "src/layouts", "src/pages"]

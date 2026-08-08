@@ -38,7 +38,7 @@ import { fileURLToPath } from "node:url";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
-const SRC = path.join(root, "public/font/LXGWWenKai_Regular-subset.woff2");
+const SRC = path.join(root, "font-src/LXGWWenKai_Regular-subset.woff2");
 const OUT_DIR = path.join(root, "public/font/lxgw");
 const CSS_FILE = path.join(OUT_DIR, "result.css");
 

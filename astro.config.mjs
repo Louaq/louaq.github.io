@@ -24,11 +24,9 @@ import { pluginLanguageBadge } from "expressive-code-language-badge"; /* Languag
 import { pluginCollapsible } from "expressive-code-collapsible"; /* Collapsible */
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs";
-import { rehypeMermaid } from "./src/plugins/rehype-mermaid.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkFirstImage } from "./src/plugins/remark-first-image.js";
-import { remarkMermaid } from "./src/plugins/remark-mermaid.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import mdx from "@astrojs/mdx";
 import { unified } from "@astrojs/markdown-remark";
@@ -122,7 +120,6 @@ export default defineConfig({
 				"fa6-brands": ["*"],
 				"fa6-regular": ["*"],
 				"fa6-solid": ["*"],
-				mdi: ["*"],
 			},
 		}),
 		expressiveCode({
@@ -210,14 +207,12 @@ export default defineConfig({
 				remarkDirective,
 				remarkSectionize,
 				parseDirectiveNode,
-				remarkMermaid,
 			],
 			rehypePlugins: [
 				[rehypeLongCodeBlocks, { maxLines: 200, maxCharacters: 16_000 }],
 				[rehypeKatex, { katex }],
 				[rehypeCallouts, { theme: siteConfig.rehypeCallouts.theme }],
 				rehypeSlug,
-				rehypeMermaid,
 				// 必须在 rehypeFigure 之前：figure 会复制 img 的 properties
 				rehypeOssImage,
 				rehypeFigure,

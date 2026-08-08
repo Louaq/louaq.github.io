@@ -151,7 +151,7 @@ async function decryptProtectedContent(
 }
 
 // 通过 innerHTML 注入的 <script> 不会自动执行（浏览器安全限制），
-// 需要手动替换为新节点才能让正文里的脚本（表格滚动包裹、Mermaid 等）生效
+// 需要手动替换为新节点才能让正文里的脚本（表格滚动包裹等）生效
 function reviveScripts(container: HTMLElement) {
 	for (const oldScript of Array.from(container.querySelectorAll("script"))) {
 		const newScript = document.createElement("script");

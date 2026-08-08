@@ -268,7 +268,7 @@ const jsonLd = {
             }
             protectedContent.style.display = 'block';
             // 正文是解锁后才注入 DOM 的，需要重新触发依赖 astro:page-load 的
-            // 初始化逻辑（表格滚动包裹、Mermaid、TOC、代码块复制按钮等）
+            // 初始化逻辑（表格滚动包裹、TOC、代码块复制按钮等）
             document.dispatchEvent(new Event('astro:page-load'));
           }
         });
