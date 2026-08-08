@@ -1,17 +1,26 @@
 ---
 import type { MarkdownHeading } from "astro";
 import BackToTop from "./BackToTop.astro";
-import FloatingTOC from "./FloatingTOC.astro";
 
 interface Props {
 	headings?: MarkdownHeading[];
+	showToc?: boolean;
 }
 
-const { headings } = Astro.props;
+const { headings, showToc = false } = Astro.props;
+const FloatingTOC = showToc
+	? (await import("./FloatingTOC.astro")).default
+	: null;
 ---
 
 <div class="floating-controls-container">
-  <FloatingTOC headings={headings ?? []} />
+  {
+    FloatingTOC ? (
+      <FloatingTOC headings={headings ?? []} />
+    ) : (
+      <div id="floating-toc-wrapper" hidden aria-hidden="true"></div>
+    )
+  }
   <BackToTop />
 </div>
 

@@ -110,6 +110,28 @@ const transparentPlaceholder =
 const remoteSrc = isPublic
 	? url(src)
 	: withOssImageProcess(src, { width: preview ? 800 : 1600 }) || src;
+const responsiveWidths = preview ? [400, 800] : [800, 1200, 1600];
+const responsiveCandidates = isPublic
+	? []
+	: responsiveWidths.map((width) => ({
+			width,
+			src: withOssImageProcess(src, { width }),
+		}));
+const hasResponsiveRemoteSource = responsiveCandidates.some(
+	(candidate) => candidate.src !== src,
+);
+const remoteSrcset = hasResponsiveRemoteSource
+	? responsiveCandidates
+			.filter(
+				(candidate, index, candidates) =>
+					candidates.findIndex((item) => item.src === candidate.src) === index,
+			)
+			.map((candidate) => `${candidate.src} ${candidate.width}w`)
+			.join(", ")
+	: undefined;
+const remoteSizes = preview
+	? "(max-width: 639px) 1px, (max-width: 1199px) 45vw, 34vw"
+	: "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px";
 
 // 水印配置
 const watermark = randomCoverImage.watermark;
@@ -230,6 +252,10 @@ const watermarkStyles = showWatermark
   {!isLocal && (
     <img
       src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc}
+      srcset={shouldDeferRemoteSrc ? undefined : remoteSrcset}
+      sizes={remoteSizes}
+      width={preview ? 400 : 1200}
+      height={preview ? 300 : 800}
       alt={alt || ""}
       class:list={[
         imageClass,
@@ -239,7 +265,7 @@ const watermarkStyles = showWatermark
       style={imageStyle}
       loading={loading}
       decoding="async"
-      fetchpriority={loading === "eager" ? "high" : "auto"}
+      fetchpriority={loading === "eager" ? "high" : "low"}
       data-lazy-src={shouldDeferRemoteSrc ? remoteSrc : ""}
       data-preview={preview ? "true" : "false"}
       data-seed={seed || ""}

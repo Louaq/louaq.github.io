@@ -36,6 +36,7 @@ import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
+import { rehypeLongCodeBlocks } from "./src/plugins/rehype-long-code-blocks.mjs";
 import meilisearch from "./src/utils/meilisearch.ts";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -212,6 +213,7 @@ export default defineConfig({
 				remarkMermaid,
 			],
 			rehypePlugins: [
+				[rehypeLongCodeBlocks, { maxLines: 200, maxCharacters: 16_000 }],
 				[rehypeKatex, { katex }],
 				[rehypeCallouts, { theme: siteConfig.rehypeCallouts.theme }],
 				rehypeSlug,

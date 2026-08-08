@@ -1,5 +1,4 @@
 ﻿---
-import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
 import FontSetup from "@components/features/FontSetup.astro";
 import KatexManager from "@components/features/KatexManager.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
@@ -62,6 +61,9 @@ const enableBanner =
 	backgroundWallpaper.mode === "banner" &&
 	(isHomePageCheck || !!postSlug);
 const pageType = isHomePageCheck ? "home" : postSlug ? "post" : "page";
+const ImageLightboxManager = postSlug
+	? (await import("@components/features/ImageLightboxManager.astro")).default
+	: null;
 
 let pageTitle: string;
 if (title) {
@@ -511,7 +513,7 @@ const collapsiblePreviewLines =
     <!-- Sakura Effect -->
     <SakuraEffect />
 
-    <ImageLightboxManager />
+    {ImageLightboxManager && <ImageLightboxManager />}
     
     <!-- KaTeX Manager -->
     <KatexManager />

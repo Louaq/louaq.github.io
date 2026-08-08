@@ -63,8 +63,11 @@ const isCompact = group.layout === "compact";
           <img
             src={friendSiteInfo.avatar}
             alt={friendSiteInfo.name}
+            width="64"
+            height="64"
             class="w-full h-full object-cover"
-            loading="eager"
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <div class="grow min-w-0 flex flex-col justify-center gap-0.5">
@@ -99,8 +102,11 @@ const isCompact = group.layout === "compact";
             <img
               src={item.imgurl}
               alt={item.title}
+              width="44"
+              height="44"
               class="w-full h-full object-cover"
-              loading="eager"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div class="min-w-0">
@@ -132,8 +138,11 @@ const isCompact = group.layout === "compact";
             <img
               src={item.imgurl}
               alt={item.title}
+              width="64"
+              height="64"
               class="w-full h-full object-cover"
-              loading="eager"
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div class="grow min-w-0 flex flex-col justify-center gap-0.5">

@@ -3,7 +3,6 @@ import OverlayWallpaper from "@components/features/OverlayWallpaper.astro";
 import Footer from "@components/layout/Footer.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
-import PostPageTOC from "@components/layout/PostPageTOC.astro";
 import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
 import ImageWrapper from "@/components/common/ImageWrapper.astro";
@@ -88,6 +87,9 @@ const creditUrlMobile =
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 const isPostPageCheck = postSlug !== undefined;
+const PostPageTOC = isPostPageCheck
+	? (await import("@components/layout/PostPageTOC.astro")).default
+	: null;
 
 // 随机选择副标题（当打字机关闭且为数组时）
 const getRandomSubtitle = () => {
@@ -486,14 +488,14 @@ const transparentClass = shouldEnableTransparency
         <div class="relative max-w-(--page-width) mx-auto">
             <div class="post-toc-wrapper absolute top-0 -right-(--toc-width) w-(--toc-width)">
                 <div class="post-toc-inner-wrapper fixed top-22 w-(--toc-width) max-h-[calc(100vh-7rem)] pointer-events-auto pr-2 pb-4 overflow-y-auto overflow-x-hidden hide-scrollbar">
-                    <PostPageTOC headings={headings} />
+                    {PostPageTOC && <PostPageTOC headings={headings} />}
                 </div>
             </div>
         </div>
     )}
 </div>
 
-<FloatingControls headings={headings} />
+<FloatingControls headings={headings} showToc={isPostPageCheck} />
 
 
 </Layout>

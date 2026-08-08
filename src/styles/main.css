@@ -1647,6 +1647,52 @@ a {
   padding-bottom: 2px;
 }
 
+/* Very large fenced blocks intentionally bypass Expressive Code. Keeping the
+ * source in one text node prevents thousands of token and line wrappers. */
+.custom-md pre.long-code-block {
+  position: relative;
+  display: block;
+  max-width: 100%;
+  max-height: min(70vh, 44rem);
+  margin: 1rem 0;
+  padding: 2.25rem 1rem 1rem;
+  overflow: auto;
+  color: var(--deep-text);
+  background: var(--codeblock-bg, var(--btn-regular-bg));
+  border: 1px solid var(--line-divider);
+  border-radius: 0.75rem;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 36rem;
+  -webkit-overflow-scrolling: touch;
+}
+
+.custom-md pre.long-code-block::before {
+  position: absolute;
+  top: 0.55rem;
+  left: 1rem;
+  color: var(--content-meta);
+  font: 600 0.72rem/1 var(--font-family-fallback);
+  content: "Large code block \00b7  " attr(data-line-count) " lines";
+}
+
+.custom-md pre.long-code-block > code {
+  display: block;
+  min-width: max-content;
+  padding: 0;
+  overflow: visible;
+  color: inherit;
+  background: transparent;
+  border-radius: 0;
+  white-space: pre;
+  font-family: var(--font-family-mono-fallback);
+  font-size: 0.8125rem;
+  line-height: 1.5rem;
+}
+
+.custom-md .long-code-plain-text {
+  display: contents;
+}
+
 /* =============================================================
  * 文章页：内容卡片紧凑化
  * ============================================================= */

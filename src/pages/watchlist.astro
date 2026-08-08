@@ -217,7 +217,7 @@ const statusColor = {
 								{/* 分类内容网格容器 */}
 								<div class="pagination-container" data-container-section={category.key}>
 									<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-										{category.items.map((item: WatchlistItem) => (
+										{category.items.map((item: WatchlistItem, itemIndex: number) => (
 										<div 
 											class="watchlist-card group relative bg-white dark:bg-neutral-800 rounded-xl overflow-hidden shadow-xs hover:shadow-2xl border border-neutral-200 dark:border-neutral-700 block cursor-default"
 											id={makeWatchAnchorId(item)}
@@ -227,8 +227,12 @@ const statusColor = {
 												<img
 													src={item.cover}
 													alt={item.title}
+													width="300"
+													height="400"
 													class="w-full h-full object-cover pointer-events-none"
-													loading="eager"
+													loading={category.key === activeTab && itemIndex === 0 ? "eager" : "lazy"}
+													fetchpriority={category.key === activeTab && itemIndex === 0 ? "high" : "low"}
+													decoding="async"
 												/>
 												{/* 评分 */}
 												{watchlistConfig.display.showRating && item.rating && item.rating > 0 && (

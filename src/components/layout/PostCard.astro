@@ -41,6 +41,7 @@ const {
 } = Astro.props;
 const className = Astro.props.class;
 const isEven = index % 2 === 0;
+const coverLoading = index === 0 ? "eager" : "lazy";
 
 const { remarkPluginFrontmatter } = await render(entry);
 const minutes = remarkPluginFrontmatter.minutes as number | undefined;
@@ -103,7 +104,7 @@ const minuteLabel =
           class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
-          loading="eager"
+          loading={coverLoading}
         />
       </div>
     )
@@ -167,7 +168,7 @@ const minuteLabel =
           class="hero-card-side-img h-full w-full"
           seed={entry.id}
           preview={true}
-          loading="eager"
+          loading={coverLoading}
         />
       </div>
     )

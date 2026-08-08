@@ -12,9 +12,21 @@ interface Props {
 	alt?: string;
 	position?: string;
 	basePath?: string;
+	width?: number;
+	height?: number;
+	loading?: "eager" | "lazy";
 }
 
-const { id, src, alt, position = "center", basePath = "/" } = Astro.props;
+const {
+	id,
+	src,
+	alt,
+	position = "center",
+	basePath = "/",
+	width,
+	height,
+	loading = "eager",
+} = Astro.props;
 const className = Astro.props.class;
 
 const isLocal = !(
@@ -51,6 +63,20 @@ const remoteSrc = isPublic
 ---
 <div id={id} class:list={[className, 'overflow-hidden relative']}>
     <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
-    {isLocal && img && <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle} loading="eager"/>}
-    {!isLocal && <img src={remoteSrc} alt={alt || ""} class={imageClass} style={imageStyle} loading="eager"/>}
+    {isLocal && img && (
+        <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle} loading={loading} />
+    )}
+    {!isLocal && (
+        <img
+            src={remoteSrc}
+            alt={alt || ""}
+            class={imageClass}
+            style={imageStyle}
+            width={width}
+            height={height}
+            loading={loading}
+            decoding="async"
+            fetchpriority={loading === "eager" ? "high" : "low"}
+        />
+    )}
 </div>
