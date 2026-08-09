@@ -4,6 +4,7 @@
 @import './navbar.css' layer(base);
 @import './transition.css' layer(base);
 @import './markdown.css' layer(base);
+@import './image-zoom.css' layer(base);
 
 @plugin '@tailwindcss/typography';
 

@@ -1,16 +1,53 @@
-/* medium-zoom：可点击放大的图片指针 */
+/* 图片点击放大（medium-zoom）
+ *
+ * medium-zoom 自带的 dist/style.css 直接抄进来，不再由 JS 动态 import：
+ * 动态 import 的 CSS 是运行时注入到 <head> 的 <style>，而 swup 的 head-plugin
+ * 会在每次导航时把「新页面 head 里没有的标签」删掉，注入的样式活不过一次导航，
+ * 结果就是 swup 换页后遮罩层没有样式（看起来像遮罩消失了）。
+ * 放进随 main.css 一起下发的静态样式表里，每个页面 head 都有且完全一致，
+ * swup 比对后会原样保留。
+ */
+
+.medium-zoom-overlay {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	opacity: 0;
+	transition: opacity 0.3s;
+	will-change: opacity;
+	z-index: 99998;
+}
+
+.medium-zoom--opened .medium-zoom-overlay {
+	cursor: pointer;
+	cursor: zoom-out;
+	opacity: 1;
+}
+
+.medium-zoom-image {
+	cursor: pointer;
+	cursor: zoom-in;
+	transition: transform 0.3s cubic-bezier(0.2, 0, 0.2, 1) !important;
+}
+
+.medium-zoom-image--hidden {
+	visibility: hidden;
+}
+
+.medium-zoom-image--opened {
+	position: relative;
+	cursor: pointer;
+	cursor: zoom-out;
+	will-change: transform;
+	z-index: 99999;
+}
+
+/* 可点击放大的图片指针 */
 .custom-md img,
 #post-cover img,
 .moment-images img,
 #photo-container img {
 	cursor: zoom-in;
-}
-
-.medium-zoom-overlay {
-	z-index: 99998;
-}
-
-.medium-zoom-image--opened {
-	z-index: 99999;
-	position: relative;
 }

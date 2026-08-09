@@ -1,6 +1,7 @@
 ﻿---
 import AuroraBot from "@components/features/AuroraBot.astro";
 import FontSetup from "@components/features/FontSetup.astro";
+import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
 import KatexManager from "@components/features/KatexManager.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
@@ -62,9 +63,6 @@ const enableBanner =
 	backgroundWallpaper.mode === "banner" &&
 	(isHomePageCheck || !!postSlug);
 const pageType = isHomePageCheck ? "home" : postSlug ? "post" : "page";
-const ImageLightboxManager = postSlug
-	? (await import("@components/features/ImageLightboxManager.astro")).default
-	: null;
 
 let pageTitle: string;
 if (title) {
@@ -517,7 +515,7 @@ const collapsiblePreviewLines =
     <!-- 左下角机器人 -->
     <AuroraBot />
 
-    {ImageLightboxManager && <ImageLightboxManager />}
+    <ImageLightboxManager />
     
     <!-- KaTeX Manager -->
     <KatexManager />

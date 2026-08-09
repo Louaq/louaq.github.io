@@ -1,13 +1,27 @@
 ---
-import "medium-zoom/dist/style.css";
-import "@/styles/image-zoom.css";
+// 图片点击放大。必须在所有页面渲染：本组件的 <script> 会落在 swup 容器之外，
+// swup 导航时不会被替换也不会重新执行，只在文章页渲染的话，从列表点进文章就永远加载不到。
+// medium-zoom 的 JS 按需动态导入；样式则必须走静态表（见 src/styles/image-zoom.css 顶部说明），
+// 运行时注入的 <style> 会被 swup 的 head-plugin 在下次导航时删掉。
 ---
 
 <script>
-  import mediumZoom from "medium-zoom";
+  const SELECTOR =
+    ".custom-md img, #post-cover img, .moment-images img, #photo-container img";
 
   let zoom: import("medium-zoom").Zoom | null = null;
   let anchorGuard: AbortController | null = null;
+  let libPromise: Promise<typeof import("medium-zoom").default> | null = null;
+  // 动态导入期间可能又发生了一次导航，用它作废过期的 setup
+  let runToken = 0;
+
+  /** 首次真正需要时才拉取 medium-zoom */
+  function loadLib() {
+    if (!libPromise) {
+      libPromise = import("medium-zoom").then((mod) => mod.default);
+    }
+    return libPromise;
+  }
 
   function destroy() {
     anchorGuard?.abort();
@@ -46,18 +60,20 @@ import "@/styles/image-zoom.css";
     }
   }
 
-  function setup() {
+  async function setup() {
+    const token = ++runToken;
     destroy();
     syncZoomSrcFromAnchors();
 
-    const nodes = document.querySelectorAll(
-      ".custom-md img, #post-cover img, .moment-images img, #photo-container img",
-    );
+    const nodes = document.querySelectorAll(SELECTOR);
     if (nodes.length === 0) return;
 
+    const mediumZoom = await loadLib();
+    // 等待期间又导航走了，丢弃这次结果
+    if (token !== runToken) return;
+
     anchorGuard = new AbortController();
-    const signal = anchorGuard.signal;
-    attachAnchorImageGuards(signal);
+    attachAnchorImageGuards(anchorGuard.signal);
 
     zoom = mediumZoom(nodes, {
       margin: 24,
@@ -69,7 +85,7 @@ import "@/styles/image-zoom.css";
     void zoom?.close().catch(() => {});
   }
 
-  setup();
-  document.addEventListener("swup:content:replace", setup);
+  void setup();
+  document.addEventListener("swup:content:replace", () => void setup());
   document.addEventListener("swup:visit:start", onVisitStart);
 </script>
