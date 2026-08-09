@@ -634,3 +634,24 @@ export type SponsorConfig = {
 	showComment?: boolean; // 是否显示评论区，默认 false
 	showButtonInPost?: boolean; // 是否在文章详情页底部显示赞助按钮，默认 true
 };
+
+// 左下角机器人（Aurora Dia 风格）配置
+export type AuroraBotConfig = {
+	enable: boolean; // 是否启用
+	name?: string; // 机器人名字，用于无障碍标签
+	zIndex?: number; // 层级，默认 1000
+	minWidth?: number; // 低于该视口宽度（px）时隐藏，默认 1024
+	idleInterval?: number; // 闲置多久（毫秒）冒一句话，0 表示关闭，默认 25000
+	duration?: number; // 一条消息默认停留时长（毫秒），默认 6000
+	eyeTracking?: boolean; // 眼睛是否跟随鼠标，默认 true
+	messages?: {
+		welcome?: Record<string, string[]>; // 按时段问候：dawn/morning/noon/afternoon/evening/night
+		referrer?: Record<string, string[]>; // 按来源站点问候，键为域名关键字
+		paths?: Record<string, string[]>; // 按路径前缀的提示，键为路径前缀（"/" 为首页精确匹配）
+		hover?: string[]; // 鼠标划过机器人
+		click?: string[]; // 点击机器人
+		idle?: string[]; // 闲置随机语
+		copy?: string[]; // 复制页面文字时
+		back?: string[]; // 从其他标签页切回时
+	};
+};

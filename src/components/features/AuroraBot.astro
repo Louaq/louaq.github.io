@@ -1,0 +1,541 @@
+---
+// 左下角机器人（灵感来自 hexo-theme-aurora 的 Dia）
+// 一个会呼吸、会眨眼、眼睛跟随鼠标的发光小家伙，用气泡说话。
+// 文案与开关都在 src/config/auroraBotConfig.ts 里配置。
+import { auroraBotConfig } from "@/config/auroraBotConfig";
+
+const cfg = auroraBotConfig;
+const enabled = cfg.enable !== false;
+
+// 传给内联脚本的运行时参数
+const runtime = {
+	name: cfg.name ?? "小助手",
+	idleInterval: cfg.idleInterval ?? 25000,
+	duration: cfg.duration ?? 6000,
+	eyeTracking: cfg.eyeTracking !== false,
+	messages: cfg.messages ?? {},
+};
+
+const zIndex = cfg.zIndex ?? 1000;
+const minWidth = cfg.minWidth ?? 1024;
+---
+
+{enabled && (
+  <Fragment>
+  <aurora-bot class="aurora-bot" data-hidden style={`z-index:${zIndex}`}>
+    <div class="aurora-bot__tips" aria-live="polite">
+      <div class="aurora-bot__tips-inner"><span class="aurora-bot__text"></span></div>
+    </div>
+
+    <div class="aurora-bot__droid" role="button" tabindex="0" aria-label={`和${runtime.name}打个招呼`}>
+      <div class="aurora-bot__eyes">
+        <span class="aurora-bot__eye left"></span>
+        <span class="aurora-bot__eye right"></span>
+      </div>
+    </div>
+
+    <div class="aurora-bot__platform" aria-hidden="true"></div>
+  </aurora-bot>
+
+  {/* 断点由配置驱动，媒体查询里用不了 CSS 变量，只能单独内联一段 */}
+  <style is:inline set:html={`@media (max-width:${minWidth}px){.aurora-bot{display:none!important}}`}></style>
+  </Fragment>
+)}
+
+<style>
+    .aurora-bot {
+      position: fixed;
+      left: 1.25rem;
+      bottom: 0.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: 70px;
+      height: 62px;
+      pointer-events: none;
+
+      /* 机器人配色跟随主题色相 */
+      --bot-c1: oklch(0.74 0.18 calc(var(--hue) - 45));
+      --bot-c2: oklch(0.64 0.22 var(--hue));
+      --bot-c3: oklch(0.68 0.21 calc(var(--hue) + 60));
+      --bot-gradient: linear-gradient(160deg, var(--bot-c1), var(--bot-c2) 55%, var(--bot-c3));
+      --bot-gradient-hover: linear-gradient(160deg, var(--bot-c3), var(--bot-c2) 55%, var(--bot-c1));
+      /* 光台在亮色背景下满不透明会太抢眼，统一调淡一档 */
+      --bot-glow: color-mix(in oklch, var(--bot-c3) 55%, transparent);
+
+      opacity: 1;
+      transform: translateY(0);
+      transition:
+        opacity 0.5s ease,
+        transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    /* 初始隐藏，脚本就绪后弹出 */
+    .aurora-bot[data-hidden] {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+
+    /* ---------- 本体 ---------- */
+    .aurora-bot__droid {
+      position: absolute;
+      bottom: 30px;
+      width: 60px;
+      height: 48px;
+      border-radius: 45%;
+      background: var(--bot-gradient);
+      border: 3px solid var(--card-bg);
+      box-shadow: 0 0 12px color-mix(in oklch, var(--bot-c3) 45%, transparent);
+      cursor: pointer;
+      pointer-events: auto;
+      z-index: 1;
+      animation: aurora-bot-breathe 3s linear infinite;
+      transition:
+        background 0.3s linear,
+        box-shadow 0.3s linear;
+    }
+    /* 鼠标靠近 = 吓一跳：先猛地弹起，然后一直哆嗦 */
+    .aurora-bot__droid:hover,
+    .aurora-bot__droid:focus-visible {
+      background: var(--bot-gradient-hover);
+      box-shadow: 0 0 18px color-mix(in oklch, var(--bot-c3) 70%, transparent);
+      outline: none;
+      height: 56px;
+      animation:
+        aurora-bot-scared 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+        aurora-bot-tremble 0.22s linear 0.45s infinite;
+    }
+    /* 被戳一下时抖两下 */
+    .aurora-bot.is-poked .aurora-bot__droid {
+      animation:
+        aurora-bot-shake 0.5s linear,
+        aurora-bot-breathe 3s linear 0.5s infinite;
+    }
+
+    /* ---------- 眼睛 ---------- */
+    .aurora-bot__eye {
+      position: absolute;
+      top: 10px;
+      width: 8px;
+      height: 15px;
+      border-radius: 15px;
+      background-color: #fff;
+      box-shadow: 0 0 7px rgba(255, 255, 255, 0.6);
+      animation: aurora-bot-blink 5s linear infinite;
+      transition: transform 0.15s ease-out;
+    }
+    .aurora-bot__eye.left {
+      left: 24%;
+    }
+    .aurora-bot__eye.right {
+      right: 24%;
+    }
+    /* 跟随鼠标时暂停眨眼，否则 transform 会打架 */
+    .aurora-bot__eyes.is-moving .aurora-bot__eye {
+      animation: none;
+      transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));
+    }
+    /* 惊吓表情：眼睛瞪成圆的、瞪大、不眨眼，但仍然跟着鼠标转 */
+    .aurora-bot__droid:hover .aurora-bot__eye,
+    .aurora-bot__droid:focus-visible .aurora-bot__eye {
+      animation: none;
+      top: 12px;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.9);
+      transform: translate(var(--eye-x, 0px), var(--eye-y, 0px));
+    }
+    .aurora-bot__droid:hover .aurora-bot__eye.left,
+    .aurora-bot__droid:focus-visible .aurora-bot__eye.left {
+      left: 18%;
+    }
+    .aurora-bot__droid:hover .aurora-bot__eye.right,
+    .aurora-bot__droid:focus-visible .aurora-bot__eye.right {
+      right: 18%;
+    }
+
+    /* ---------- 悬浮光台 ---------- */
+    .aurora-bot__platform {
+      position: relative;
+      top: 0;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      transform: rotateX(70deg);
+      box-shadow:
+        0 0 40px var(--bot-glow),
+        0 0 15px var(--bot-glow) inset;
+      animation: aurora-bot-pulse 3s linear infinite;
+    }
+
+    /* ---------- 气泡 ---------- */
+    .aurora-bot__tips {
+      position: absolute;
+      left: 8px;
+      bottom: 74px;
+      width: 15rem;
+      padding: 2px;
+      border-radius: 10px;
+      background: var(--bot-gradient);
+      box-shadow: 0 6px 20px -8px color-mix(in oklch, var(--bot-c3) 60%, transparent);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px) scale(0.96);
+      transform-origin: bottom left;
+      transition:
+        opacity 0.3s ease,
+        transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+        visibility 0.3s;
+    }
+    .aurora-bot.is-talking .aurora-bot__tips {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+      animation: aurora-bot-tips-float 3s ease-in-out infinite;
+    }
+    .aurora-bot__tips-inner {
+      min-height: 3rem;
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.7rem;
+      border-radius: 8px;
+      background: var(--card-bg);
+      color: var(--deep-text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    /* ---------- 动画 ---------- */
+    @keyframes aurora-bot-breathe {
+      0%,
+      40%,
+      80%,
+      100% {
+        height: 50px;
+        transform: translateY(0);
+      }
+      20%,
+      60%,
+      70%,
+      90% {
+        height: 56px;
+        transform: translateY(-5px);
+      }
+      85% {
+        height: 42px;
+        transform: translateY(-18px);
+      }
+    }
+    @keyframes aurora-bot-blink {
+      0%,
+      100% {
+        transform: scale(1, 0.05);
+      }
+      5%,
+      95% {
+        transform: scale(1, 1);
+      }
+    }
+    @keyframes aurora-bot-pulse {
+      0%,
+      40%,
+      80%,
+      100% {
+        box-shadow:
+          0 0 30px var(--bot-glow),
+          0 0 45px var(--bot-glow) inset;
+      }
+      20%,
+      60%,
+      70%,
+      90% {
+        box-shadow:
+          0 0 60px var(--bot-glow),
+          0 0 25px var(--bot-glow) inset;
+      }
+      85% {
+        box-shadow:
+          0 0 90px var(--bot-glow),
+          0 0 15px var(--bot-glow) inset;
+      }
+    }
+    /* 吓一跳：缩窄拉高地弹起，再落回稍高的位置 */
+    @keyframes aurora-bot-scared {
+      0% {
+        transform: translateY(0) scale(1, 1);
+      }
+      30% {
+        transform: translateY(-13px) scale(0.86, 1.2);
+      }
+      60% {
+        transform: translateY(-2px) scale(1.12, 0.88);
+      }
+      100% {
+        transform: translateY(-6px) scale(1, 1);
+      }
+    }
+    /* 持续哆嗦 */
+    @keyframes aurora-bot-tremble {
+      0%,
+      100% {
+        transform: translateY(-6px) rotate(-2.5deg);
+      }
+      50% {
+        transform: translateY(-6px) rotate(2.5deg);
+      }
+    }
+    @keyframes aurora-bot-shake {
+      0%,
+      20%,
+      40%,
+      60%,
+      80%,
+      100% {
+        transform: rotate(0) translateY(-8px);
+      }
+      10%,
+      25%,
+      35%,
+      50%,
+      65% {
+        transform: rotate(7deg) translateY(-8px);
+      }
+      15%,
+      30%,
+      45%,
+      55%,
+      70% {
+        transform: rotate(-7deg) translateY(-8px);
+      }
+    }
+    @keyframes aurora-bot-tips-float {
+      0%,
+      100% {
+        translate: 0 0;
+      }
+      50% {
+        translate: 0 -5px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .aurora-bot__droid,
+      .aurora-bot__droid:hover,
+      .aurora-bot__droid:focus-visible,
+      .aurora-bot__eye,
+      .aurora-bot__platform,
+      .aurora-bot.is-poked .aurora-bot__droid,
+      .aurora-bot.is-talking .aurora-bot__tips {
+        animation: none;
+      }
+    }
+</style>
+
+{enabled && (
+  <script is:inline define:vars={{ botRuntime: runtime, botMinWidth: minWidth }}>
+    if (!customElements.get("aurora-bot")) {
+      const CFG = botRuntime;
+      const MSG = CFG.messages || {};
+      const MIN_WIDTH = botMinWidth;
+
+      // 优先级：数字越大越不容易被打断
+      const PRIORITY = { idle: 0, path: 1, hover: 2, welcome: 3, click: 4, event: 4 };
+
+      const pick = (list) =>
+        Array.isArray(list) && list.length
+          ? list[Math.floor(Math.random() * list.length)]
+          : null;
+
+      class AuroraBot extends HTMLElement {
+        connectedCallback() {
+          if (this._inited) return;
+          this._inited = true;
+          // 自定义元素升级时子节点可能还没解析完，推迟一帧再取
+          requestAnimationFrame(() => this.init());
+        }
+
+        init() {
+          this.droid = this.querySelector(".aurora-bot__droid");
+          this.eyes = this.querySelector(".aurora-bot__eyes");
+          this.textEl = this.querySelector(".aurora-bot__text");
+          if (!this.droid || !this.textEl) return;
+
+          this.priority = -1;
+          this.lastHover = 0;
+
+          this.bindEvents();
+
+          // 入场 + 打招呼
+          setTimeout(() => {
+            this.removeAttribute("data-hidden");
+            this.say(this.welcomeMessage(), "welcome");
+            this.scheduleIdle();
+          }, 800);
+        }
+
+        // ---------- 说话 ----------
+        say(text, kind = "idle", duration) {
+          if (!text) return;
+          const level = PRIORITY[kind] ?? 0;
+          // 正在说更要紧的话时不打断
+          if (this.classList.contains("is-talking") && level < this.priority) return;
+
+          this.priority = level;
+          this.textEl.textContent = text;
+          this.classList.add("is-talking");
+
+          clearTimeout(this._hideTimer);
+          this._hideTimer = setTimeout(() => {
+            this.classList.remove("is-talking");
+            this.priority = -1;
+          }, duration || CFG.duration);
+
+          this.scheduleIdle();
+        }
+
+        scheduleIdle() {
+          clearTimeout(this._idleTimer);
+          if (!CFG.idleInterval) return;
+          this._idleTimer = setTimeout(() => {
+            this.say(pick(MSG.idle), "idle");
+          }, CFG.idleInterval);
+        }
+
+        // ---------- 文案挑选 ----------
+        welcomeMessage() {
+          const fromRef = this.referrerMessage();
+          if (fromRef) return fromRef;
+
+          const h = new Date().getHours();
+          let slot = "night";
+          if (h < 5) slot = "dawn";
+          else if (h < 11) slot = "morning";
+          else if (h < 14) slot = "noon";
+          else if (h < 18) slot = "afternoon";
+          else if (h < 23) slot = "evening";
+          return pick((MSG.welcome || {})[slot]) || pick(MSG.idle);
+        }
+
+        referrerMessage() {
+          const ref = document.referrer;
+          if (!ref) return null;
+          let host = "";
+          try {
+            host = new URL(ref).hostname;
+          } catch {
+            return null;
+          }
+          // 站内跳转不算「来源」
+          if (host === location.hostname) return null;
+          for (const [key, list] of Object.entries(MSG.referrer || {})) {
+            if (host.includes(key)) return pick(list);
+          }
+          return null;
+        }
+
+        pathMessage(pathname) {
+          const paths = MSG.paths || {};
+          if (pathname === "/" || pathname === "") return pick(paths["/"]);
+          // 最长前缀优先
+          const hit = Object.keys(paths)
+            .filter((p) => p !== "/" && pathname.startsWith(p))
+            .sort((a, b) => b.length - a.length)[0];
+          return hit ? pick(paths[hit]) : null;
+        }
+
+        // ---------- 事件 ----------
+        bindEvents() {
+          this.droid.addEventListener("mouseenter", () => {
+            // 划过太频繁会很吵，限流一下
+            const now = Date.now();
+            if (now - this.lastHover < 4000) return;
+            this.lastHover = now;
+            this.say(pick(MSG.hover), "hover");
+          });
+
+          const poke = () => {
+            this.classList.add("is-poked");
+            setTimeout(() => this.classList.remove("is-poked"), 500);
+            this.say(pick(MSG.click), "click");
+          };
+          this.droid.addEventListener("click", poke);
+          this.droid.addEventListener("keydown", (e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              poke();
+            }
+          });
+
+          document.addEventListener("copy", () => {
+            this.say(pick(MSG.copy), "event");
+          });
+
+          document.addEventListener("visibilitychange", () => {
+            if (!document.hidden) this.say(pick(MSG.back), "event");
+          });
+
+          // swup 换页后按新路径说一句。DOM 事件和 swup hook 双保险，
+          // 两者都触发时靠 _lastPath 去重。
+          const onNavigate = () => {
+            if (location.pathname === this._lastPath) return;
+            this._lastPath = location.pathname;
+            this.say(this.pathMessage(location.pathname), "path");
+          };
+          this._lastPath = location.pathname;
+          document.addEventListener("swup:content:replace", onNavigate);
+          document.addEventListener("astro:page-load", onNavigate);
+          if (window.swup?.hooks) {
+            window.swup.hooks.on("page:view", onNavigate);
+          } else {
+            document.addEventListener(
+              "swup:enable",
+              () => window.swup?.hooks?.on("page:view", onNavigate),
+              { once: true },
+            );
+          }
+
+          if (CFG.eyeTracking) this.enableEyeTracking();
+        }
+
+        enableEyeTracking() {
+          const onMove = (e) => {
+            if (window.innerWidth <= MIN_WIDTH) return;
+            this._pointer = { x: e.clientX, y: e.clientY };
+            if (this._frame) return;
+            this._frame = requestAnimationFrame(() => {
+              this._frame = 0;
+              this.moveEyes();
+            });
+          };
+          document.addEventListener("mousemove", onMove, { passive: true });
+        }
+
+        moveEyes() {
+          const rect = this.droid.getBoundingClientRect();
+          if (!rect.width) return;
+          const cx = rect.left + rect.width / 2;
+          const cy = rect.top + rect.height / 2;
+          const dx = this._pointer.x - cx;
+          const dy = this._pointer.y - cy;
+          const dist = Math.hypot(dx, dy) || 1;
+          // 眼珠最多偏移 4px
+          const max = 4;
+          this.eyes.classList.add("is-moving");
+          this.eyes.style.setProperty("--eye-x", ((dx / dist) * max).toFixed(2) + "px");
+          this.eyes.style.setProperty("--eye-y", ((dy / dist) * max).toFixed(2) + "px");
+
+          // 鼠标停下两秒后恢复眨眼
+          clearTimeout(this._eyeTimer);
+          this._eyeTimer = setTimeout(() => {
+            this.eyes.classList.remove("is-moving");
+          }, 2000);
+        }
+      }
+
+      customElements.define("aurora-bot", AuroraBot);
+    }
+  </script>
+)}
