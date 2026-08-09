@@ -592,6 +592,18 @@ const collapsiblePreviewLines =
   } from "@/constants/constants";
   import { backgroundWallpaper, expressiveCodeConfig, siteConfig } from "@/config";
   import { initArchivePage } from "@/utils/archive-init";
+  // 以下三处逻辑原本内联在只于部分页面渲染的组件里，它们的 <script> 也就只出现在那些页面。
+  // swup 导航不会执行新页面的脚本，导致「从别的页面点进来」时这些功能整块失效
+  // （必须手动刷新才好）。统一挪到这个每页都在的常驻脚本里调用。
+  import { initCoverImages } from "@/utils/cover-image-init";
+  import { initPostCardDelegation } from "@/utils/post-card-init";
+  import { initPostPageTOC } from "@/utils/post-page-toc-init";
+
+  // 均为文档级单例：卡片点击走 document 委托、封面图靠 MutationObserver 跟进新 DOM，
+  // 各自内部幂等，首次加载调用一次即可。
+  initPostCardDelegation();
+  initCoverImages();
+  initPostPageTOC();
 
   const bannerEnabled = !!document.getElementById("banner-wrapper");
 
@@ -726,6 +738,9 @@ const collapsiblePreviewLines =
       // 非归档页时立即返回，可安全地在每次导航后都调用。必须早于下面 page:view 的
       // 滚动恢复，二者都注册在 swup 钩子系统上，顺序天然保证。
       initArchivePage();
+
+      // 目录内容要按新文章的标题重建；容器不存在时内部直接返回，非文章页调用无副作用
+      initPostPageTOC();
 
       const gridClassCarrier = document.getElementById("grid-class-carrier");
       if (gridClassCarrier) {
