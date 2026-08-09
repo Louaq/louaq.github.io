@@ -19,7 +19,6 @@ import remarkSectionize from "remark-sectionize";
 import { expressiveCodeConfig, fontConfig, siteConfig } from "./src/config";
 import { i18n } from "./src/i18n/translation";
 import I18nKey from "./src/i18n/i18nKey";
-import { pluginLanguageBadge } from "expressive-code-language-badge"; /* Language Badge */
 import { pluginCollapsible } from "expressive-code-collapsible"; /* Collapsible */
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs";
@@ -128,9 +127,11 @@ export default defineConfig({
 			useDarkModeMediaQuery: false,
 			themeCssSelector: (theme) => `[data-theme='${theme.name}']`,
 			plugins: [
-				...(expressiveCodeConfig.pluginLanguageBadge?.enable !== false
-					? [pluginLanguageBadge()]
-					: []),
+				// 语言徽章不用第三方插件：EC 原生就在 <pre> 上输出 data-language，
+				// 徽标由 main.css 的 [data-language]::before 绘制，开关见 Layout 的
+				// data-language-badge-enabled（源头仍是 expressiveCodeConfig.pluginLanguageBadge.enable）。
+				// expressive-code-language-badge@1.1.0 的 peer 为 core ^0.41.3，
+				// 在本项目的 core 0.43.1 下 baseStyles 不会被采纳，徽标画不出来。
 				pluginLineNumbers(),
 				// pluginCollapsible 配置 - 从expressiveCodeConfig读取设置，使用i18n文本
 				...(collapsiblePlugin ? [collapsiblePlugin] : []),
@@ -153,14 +154,6 @@ export default defineConfig({
 					delHue: 0,
 					insHue: 180,
 					markHue: 250,
-				},
-				languageBadge: {
-					fontSize: "0.75rem",
-					fontWeight: "bold",
-					borderRadius: "0.25rem",
-					opacity: "1",
-					borderWidth: "0px",
-					borderColor: "transparent",
 				},
 			},
 			frames: {
