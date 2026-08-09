@@ -1,7 +1,6 @@
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
 import tailwindcss from "@tailwindcss/vite";
-import { pluginCollapsibleSections } from "@expressive-code/plugin-collapsible-sections";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
 import { defineConfig, fontProviders } from "astro/config";
@@ -35,7 +34,6 @@ import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 import rehypeImageDimensions from "./src/plugins/rehype-image-dimensions.mjs";
 import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
-import { rehypeLongCodeBlocks } from "./src/plugins/rehype-long-code-blocks.mjs";
 import meilisearch from "./src/utils/meilisearch.ts";
 
 const isDev = process.env.NODE_ENV === "development";
@@ -133,7 +131,6 @@ export default defineConfig({
 				...(expressiveCodeConfig.pluginLanguageBadge?.enable !== false
 					? [pluginLanguageBadge()]
 					: []),
-				pluginCollapsibleSections(),
 				pluginLineNumbers(),
 				// pluginCollapsible 配置 - 从expressiveCodeConfig读取设置，使用i18n文本
 				...(collapsiblePlugin ? [collapsiblePlugin] : []),
@@ -152,7 +149,6 @@ export default defineConfig({
 				// 由 Astro Font API 提供（fontsource，自托管 + 子集化），变量已含回退
 				codeFontFamily: `var(${fontConfig.code.cssVariable})`,
 				codeLineHeight: "1.5rem",
-				frames: {},
 				textMarkers: {
 					delHue: 0,
 					insHue: 180,
@@ -210,7 +206,6 @@ export default defineConfig({
 				parseDirectiveNode,
 			],
 			rehypePlugins: [
-				[rehypeLongCodeBlocks, { maxLines: 200, maxCharacters: 16_000 }],
 				[rehypeKatex, { katex }],
 				[rehypeCallouts, { theme: siteConfig.rehypeCallouts.theme }],
 				rehypeSlug,

@@ -236,4 +236,8 @@ export const en: Translation = {
 	[Key.calendarDecember]: "Dec",
 
 	// Code Block Collapsible Configuration
+	[Key.codeCollapsibleShowMore]: "Show more",
+	[Key.codeCollapsibleShowLess]: "Show less",
+	[Key.codeCollapsibleExpanded]: "Code block expanded",
+	[Key.codeCollapsibleCollapsed]: "Code block collapsed",
 };

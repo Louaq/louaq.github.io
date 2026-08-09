@@ -230,4 +230,8 @@ export const zh_TW: Translation = {
 	[Key.calendarDecember]: "12月",
 
 	// 代碼區塊折疊配置
+	[Key.codeCollapsibleShowMore]: "展開更多",
+	[Key.codeCollapsibleShowLess]: "收起程式碼",
+	[Key.codeCollapsibleExpanded]: "程式碼區塊已展開",
+	[Key.codeCollapsibleCollapsed]: "程式碼區塊已收起",
 };

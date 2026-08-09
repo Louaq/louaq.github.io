@@ -7,7 +7,7 @@ category: 半监督医学图像分割
 tags: [LA数据集]
 ---
 
-> BraTS2019 dataset
+## BraTS2019 dataset
 
 ```python
 // brats.py
@@ -253,7 +253,7 @@ def grouper(iterable, n):
 
 
 
-> 计算模型参数量和FLOPs
+## 计算模型参数量和FLOPs
 
 
 ```python

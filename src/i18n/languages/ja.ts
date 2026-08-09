@@ -235,4 +235,8 @@ export const ja: Translation = {
 	[Key.calendarDecember]: "12月",
 
 	// コードブロック折りたたみ設定
+	[Key.codeCollapsibleShowMore]: "もっと見る",
+	[Key.codeCollapsibleShowLess]: "折りたたむ",
+	[Key.codeCollapsibleExpanded]: "コードブロックを展開しました",
+	[Key.codeCollapsibleCollapsed]: "コードブロックを折りたたみました",
 };

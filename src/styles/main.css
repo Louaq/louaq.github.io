@@ -202,22 +202,6 @@
   }
 }
 
-@utility expressive-code {
-  /* 在主题切换时禁用代码块的复杂效果以提升性能 */
-  /* 使用 View Transitions 时也需要禁用代码块动画，因为它们太多了 */
-  .is-theme-transitioning & {
-    transition: none !important;
-    animation: none !important;
-    will-change: auto !important;
-  }
-
-  .is-theme-transitioning & * {
-    transition: none !important;
-    animation: none !important;
-    will-change: auto !important;
-  }
-}
-
 @utility float-panel {
   /* 禁用复杂选择器元素的过渡 - 仅在非 View Transitions 模式下 */
   .is-theme-transitioning:not(.use-view-transition) & {
@@ -1604,61 +1588,6 @@ a {
   min-width: 0 !important;
   overflow-x: auto !important;
   max-width: 100%;
-}
-
-/* 非 EC 的 fenced pre（若存在）仍在 pre 上滚动 */
-.custom-md pre[class*="language-"] {
-  overflow-x: auto;
-  overflow-y: hidden;
-  max-width: 100%;
-  min-width: 0;
-  padding-bottom: 2px;
-}
-
-/* Very large fenced blocks intentionally bypass Expressive Code. Keeping the
- * source in one text node prevents thousands of token and line wrappers. */
-.custom-md pre.long-code-block {
-  position: relative;
-  display: block;
-  max-width: 100%;
-  max-height: min(70vh, 44rem);
-  margin: 1rem 0;
-  padding: 2.25rem 1rem 1rem;
-  overflow: auto;
-  color: var(--deep-text);
-  background: var(--codeblock-bg, var(--btn-regular-bg));
-  border: 1px solid var(--line-divider);
-  border-radius: 0.75rem;
-  content-visibility: auto;
-  contain-intrinsic-size: auto 36rem;
-  -webkit-overflow-scrolling: touch;
-}
-
-.custom-md pre.long-code-block::before {
-  position: absolute;
-  top: 0.55rem;
-  left: 1rem;
-  color: var(--content-meta);
-  font: 600 0.72rem/1 var(--font-family-fallback);
-  content: "Large code block \00b7  " attr(data-line-count) " lines";
-}
-
-.custom-md pre.long-code-block > code {
-  display: block;
-  min-width: max-content;
-  padding: 0;
-  overflow: visible;
-  color: inherit;
-  background: transparent;
-  border-radius: 0;
-  white-space: pre;
-  font-family: var(--font-family-mono-fallback);
-  font-size: 0.8125rem;
-  line-height: 1.5rem;
-}
-
-.custom-md .long-code-plain-text {
-  display: contents;
 }
 
 /* =============================================================

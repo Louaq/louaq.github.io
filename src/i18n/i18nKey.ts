@@ -228,6 +228,12 @@ enum I18nKey {
 	calendarNovember = "calendarNovember",
 	calendarDecember = "calendarDecember",
 
+	// 代码块折叠
+	codeCollapsibleShowMore = "codeCollapsibleShowMore",
+	codeCollapsibleShowLess = "codeCollapsibleShowLess",
+	codeCollapsibleExpanded = "codeCollapsibleExpanded",
+	codeCollapsibleCollapsed = "codeCollapsibleCollapsed",
+
 	// 朋友圈
 }
 

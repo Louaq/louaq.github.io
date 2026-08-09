@@ -238,4 +238,8 @@ export const ru: Translation = {
 	[Key.calendarDecember]: "Дек",
 
 	// Конфигурация блоков коллапсируемого кода
+	[Key.codeCollapsibleShowMore]: "Показать больше",
+	[Key.codeCollapsibleShowLess]: "Свернуть",
+	[Key.codeCollapsibleExpanded]: "Блок кода развёрнут",
+	[Key.codeCollapsibleCollapsed]: "Блок кода свёрнут",
 };
