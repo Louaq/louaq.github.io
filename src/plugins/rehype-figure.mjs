@@ -23,15 +23,15 @@ export default function rehypeFigure() {
 			// 往下长——点击靠后的目录永远滚不到正确位置，手动滚动也一直在跳（CLS）。
 			// 改成渲染即开始下载，页面布局在用户动手之前就稳定了。
 			//
-			// fetchpriority="low" 是对 ThriveX 做法的补充：正文图一起抢带宽会拖慢首屏，
-			// 降优先级后它们只在浏览器空闲时下载，不与封面图/LCP 竞争。
+			// 刻意不加 fetchpriority="low"：降优先级确实能让正文图不与封面图/LCP 抢带宽，
+			// 但它把下载推迟到浏览器空闲时，也就把「图片撑开高度」这一波布局抖动推迟到了
+			// 用户已经开始点目录的时间窗里，落点照样是偏的。宁可首屏稍慢也要让布局早点定死。
 			// markdown-img 类给运行时的"加载完成前模糊占位"用（见 markdown-image-init.ts）。
 			const existingClass = node.properties?.className;
 			node.properties = {
 				...node.properties,
 				loading: node.properties?.loading ?? "eager",
 				decoding: node.properties?.decoding ?? "async",
-				fetchpriority: node.properties?.fetchpriority ?? "low",
 				className: existingClass
 					? [].concat(existingClass, "markdown-img")
 					: ["markdown-img"],
