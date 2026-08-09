@@ -10,9 +10,7 @@ export const ru: Translation = {
 	[Key.searchKbdSelect]: "Выбрать",
 	[Key.searchKbdSwitch]: "Переключить",
 	[Key.searchNoResults]: "Результаты не найдены.",
-	[Key.searchTypeSomething]: "Введите ключевое слово для поиска...",
 	[Key.searchLoading]: "Поиск...",
-	[Key.all]: "Все",
 
 	[Key.tags]: "Теги",
 	[Key.categories]: "Категории",

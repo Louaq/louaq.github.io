@@ -33,7 +33,6 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		// 掘金蓝 #1e80ff 对应 hue ≈ 250
 		hue: 250,
 		// 是否对访问者隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
 		fixed: true,

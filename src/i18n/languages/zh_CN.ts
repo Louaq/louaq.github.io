@@ -10,9 +10,7 @@ export const zh_CN: Translation = {
 	[Key.searchKbdSelect]: "选择",
 	[Key.searchKbdSwitch]: "切换",
 	[Key.searchNoResults]: "找不到相关结果。",
-	[Key.searchTypeSomething]: "请输入搜索关键词。",
 	[Key.searchLoading]: "正在搜索...",
-	[Key.all]: "全部",
 
 	[Key.tags]: "标签",
 	[Key.categories]: "分类",

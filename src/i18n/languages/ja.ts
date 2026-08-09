@@ -10,9 +10,7 @@ export const ja: Translation = {
 	[Key.searchKbdSelect]: "選択",
 	[Key.searchKbdSwitch]: "移動",
 	[Key.searchNoResults]: "結果が見つかりません。",
-	[Key.searchTypeSomething]: "検索キーワードを入力してください。",
 	[Key.searchLoading]: "検索中...",
-	[Key.all]: "すべて",
 
 	[Key.tags]: "タグ",
 	[Key.categories]: "カテゴリ",

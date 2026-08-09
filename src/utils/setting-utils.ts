@@ -32,13 +32,13 @@ export function getDefaultHue(): number {
 	return Number.parseInt(configCarrier?.dataset.hue || fallback, 10);
 }
 
-export function getDefaultTheme(): LIGHT_DARK_MODE {
+function getDefaultTheme(): LIGHT_DARK_MODE {
 	// 濡傛灉閰嶇疆鏂囦欢涓缃簡 defaultMode锛屼娇鐢ㄩ厤缃殑鍊?
 	// 鍚﹀垯浣跨敤 DEFAULT_THEME锛堝悜鍚庡吋瀹癸級
 	return siteConfig.themeColor.defaultMode ?? DEFAULT_THEME;
 }
 
-export function resolveTheme(theme: LIGHT_DARK_MODE): LIGHT_DARK_MODE {
+function resolveTheme(theme: LIGHT_DARK_MODE): LIGHT_DARK_MODE {
 	return theme === DARK_MODE ? DARK_MODE : LIGHT_MODE;
 }
 
@@ -68,7 +68,7 @@ export function setHue(hue: number): void {
 	r.style.setProperty("--hue", String(hue));
 }
 
-export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
+function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (typeof document === "undefined") {
 		return;
@@ -129,7 +129,7 @@ export function applyThemeToDocument(theme: LIGHT_DARK_MODE) {
 	}
 }
 
-export function getStoredTheme(): LIGHT_DARK_MODE {
+function getStoredTheme(): LIGHT_DARK_MODE {
 	// 妫€鏌ユ槸鍚﹀湪娴忚鍣ㄧ幆澧冧腑
 	if (
 		typeof localStorage === "undefined" ||
@@ -148,7 +148,7 @@ export function initThemeListener() {
 }
 
 // Wallpaper mode functions
-export function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
+function applyWallpaperModeToDocument(mode: WALLPAPER_MODE) {
 	// 妫€鏌ユ槸鍚﹀厑璁稿垏鎹㈠绾告ā寮?
 	const isSwitchable = backgroundWallpaper.switchable ?? true;
 	if (!isSwitchable) {
@@ -612,7 +612,7 @@ export function setBannerTitleEnabled(enabled: boolean): void {
 	applyBannerTitleEnabledToDocument(enabled);
 }
 
-export function applyBannerTitleEnabledToDocument(enabled: boolean): void {
+function applyBannerTitleEnabledToDocument(enabled: boolean): void {
 	if (typeof document === "undefined") {
 		return;
 	}

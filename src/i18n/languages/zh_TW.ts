@@ -10,9 +10,7 @@ export const zh_TW: Translation = {
 	[Key.searchKbdSelect]: "選擇",
 	[Key.searchKbdSwitch]: "切換",
 	[Key.searchNoResults]: "找不到相關結果。",
-	[Key.searchTypeSomething]: "請輸入搜尋關鍵字。",
 	[Key.searchLoading]: "搜尋中...",
-	[Key.all]: "全部",
 
 	[Key.tags]: "標籤",
 	[Key.categories]: "分類",

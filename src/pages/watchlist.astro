@@ -16,25 +16,50 @@ if (!siteConfig.pages.watchlist) {
 // 获取启用的观影项目
 const enabledItems = watchlistConfig.items.filter((item) => item.enabled);
 
-// 按播出时间排序的函数（置顶项优先，其次按时间降序）
-const sortByDate = (a: WatchlistItem, b: WatchlistItem) => {
-	if (!!a.pinned !== !!b.pinned) {
-		return a.pinned ? -1 : 1; // 置顶项排在最前
+// 分页与排序均取自 watchlistConfig.display，改配置即生效
+const { itemsPerPage, sortBy, sortOrder } = watchlistConfig.display;
+
+// 取出参与比较的字段：date 用开始时间（缺失则退回完成时间）
+const sortKey = (item: WatchlistItem): string | number => {
+	switch (sortBy) {
+		case "rating":
+			return item.rating ?? 0;
+		case "title":
+			return item.title;
+		default:
+			return item.startDate || item.endDate || "";
 	}
-	const dateA = a.startDate || a.endDate || "";
-	const dateB = b.startDate || b.endDate || "";
-	return dateB.localeCompare(dateA); // 降序，最新的在前
+};
+
+// 置顶项恒在最前，不受 sortBy / sortOrder 影响
+const compareItems = (a: WatchlistItem, b: WatchlistItem) => {
+	if (!!a.pinned !== !!b.pinned) {
+		return a.pinned ? -1 : 1;
+	}
+	const keyA = sortKey(a);
+	const keyB = sortKey(b);
+	const diff =
+		typeof keyA === "number" && typeof keyB === "number"
+			? keyA - keyB
+			: String(keyA).localeCompare(String(keyB));
+	return sortOrder === "asc" ? diff : -diff;
 };
 
 // 按类型分类并排序
 const categorizedItems = {
-	anime: enabledItems.filter((item) => item.type === "anime").sort(sortByDate),
-	movie: enabledItems.filter((item) => item.type === "movie").sort(sortByDate),
-	tv: enabledItems.filter((item) => item.type === "tv").sort(sortByDate),
+	anime: enabledItems
+		.filter((item) => item.type === "anime")
+		.sort(compareItems),
+	movie: enabledItems
+		.filter((item) => item.type === "movie")
+		.sort(compareItems),
+	tv: enabledItems.filter((item) => item.type === "tv").sort(compareItems),
 	documentary: enabledItems
 		.filter((item) => item.type === "documentary")
-		.sort(sortByDate),
-	other: enabledItems.filter((item) => item.type === "other").sort(sortByDate),
+		.sort(compareItems),
+	other: enabledItems
+		.filter((item) => item.type === "other")
+		.sort(compareItems),
 };
 
 // 分类配置（按照指定顺序）
@@ -109,9 +134,6 @@ html.dark[data-watchlist-restore="${id}"] .watchlist-tabs-root nav button[data-t
 				)
 				.join("\n")
 		: "";
-
-// 每页显示的数量
-const itemsPerPage = 9;
 
 // 获取构建时间
 const buildTime = new Date().toLocaleString("zh-CN", {

@@ -38,7 +38,6 @@ function isLocalIconPath(icon: string): boolean {
 
 const level = profileConfig.level?.trim();
 const coverSrc = profileConfig.cover?.trim();
-const verified = profileConfig.verified === true;
 
 const tags = await getTagList();
 const categories = await getCategoryList();

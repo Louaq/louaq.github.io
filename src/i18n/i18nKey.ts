@@ -7,7 +7,6 @@ enum I18nKey {
 	searchKbdSelect = "searchKbdSelect",
 	searchKbdSwitch = "searchKbdSwitch",
 	searchNoResults = "searchNoResults",
-	searchTypeSomething = "searchTypeSomething",
 	searchLoading = "searchLoading",
 
 	tags = "tags",
@@ -37,7 +36,6 @@ enum I18nKey {
 	themeColor = "themeColor",
 
 	more = "more",
-	all = "all",
 
 	author = "author",
 	publishedAt = "publishedAt",

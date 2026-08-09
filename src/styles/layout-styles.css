@@ -314,19 +314,6 @@ html[data-banner-title-enabled="false"] .banner-text-overlay[data-banner-text-ov
         -webkit-backface-visibility: hidden;
     }
 
-    .carousel-item {
-        /* 硬件加速 */
-        transform: translateZ(0);
-        -webkit-transform: translateZ(0);
-        will-change: transform, opacity;
-        
-        /* 优化触摸响应 */
-        touch-action: pan-y;
-        -webkit-touch-callout: none;
-        -webkit-user-select: none;
-        user-select: none;
-    }
-
     .banner-text-overlay {
         /* 文字渲染优化 */
         -webkit-font-smoothing: antialiased;

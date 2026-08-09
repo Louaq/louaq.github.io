@@ -10,9 +10,7 @@ export const en: Translation = {
 	[Key.searchKbdSelect]: "Select",
 	[Key.searchKbdSwitch]: "Navigate",
 	[Key.searchNoResults]: "No results found.",
-	[Key.searchTypeSomething]: "Type something to search...",
 	[Key.searchLoading]: "Searching...",
-	[Key.all]: "All",
 
 	[Key.tags]: "Tags",
 	[Key.categories]: "Categories",

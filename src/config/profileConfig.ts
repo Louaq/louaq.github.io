@@ -8,8 +8,6 @@ export const profileConfig: ProfileConfig = {
 	// 本地优化版（640px webp, 22KB，原图床 163KB，显示约 320×104）。
 	// 原始外链备份：https://pic1.imgdb.cn/item/6a291954eae595505fc16265.webp
 	cover: "/assets/images/profile-cover.webp",
-	verified: true,
-	menuHref: "/about/",
 	name: "Louaq",
 	bio: "晚来天欲雪,能饮一杯无",
 	level: "化神期",

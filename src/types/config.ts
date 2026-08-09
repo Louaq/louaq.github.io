@@ -174,8 +174,6 @@ export type ProfileStatItem = {
 export type ProfileConfig = {
 	avatar?: string;
 	cover?: string;
-	verified?: boolean;
-	menuHref?: string;
 	name: string;
 	bio?: string;
 	level?: string;

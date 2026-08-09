@@ -13,7 +13,8 @@ export type { WatchlistConfig, WatchlistItem } from "./types";
 export const watchlistConfig: WatchlistConfig = {
 	items: [...animeItems, ...movieItems, ...tvItems],
 	display: {
-		itemsPerPage: 12,
+		// 以下三项由 pages/watchlist.astro 读取，改这里即生效
+		itemsPerPage: 9,
 		sortBy: "date",
 		sortOrder: "desc",
 		showRating: true,

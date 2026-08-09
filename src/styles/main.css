@@ -704,21 +704,6 @@
         before:font-medium first-of-type:before:hidden before:transition-colors before:duration-150;
 }
 
-@utility btn-regular-dark {
-  @apply flex items-center justify-center
-        bg-[oklch(0.45_0.01_var(--hue))] hover:bg-[oklch(0.50_0.01_var(--hue))] active:bg-[oklch(0.55_0.01_var(--hue))]
-        dark:bg-[oklch(0.30_0.02_var(--hue))] dark:hover:bg-[oklch(0.35_0.03_var(--hue))] dark:active:bg-[oklch(0.40_0.03_var(--hue))];
-  &.success {
-    @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))];
-  }
-}
-
-@utility success {
-  &.btn-regular-dark {
-    @apply bg-[oklch(0.75_0.14_var(--hue))] dark:bg-[oklch(0.75_0.14_var(--hue))];
-  }
-}
-
 @layer utilities {
   /* 其他组件样式 */
 
@@ -768,13 +753,6 @@
     100% {
       transform: scale(1);
     }
-  }
-
-  /* 首页通告条、文章过期提示：随主题色 --primary 变化 */
-  .home-top-notice.home-top-notice--theme {
-    background: var(--notice-themed-bg);
-    color: var(--notice-themed-fg);
-    box-shadow: var(--notice-themed-shadow);
   }
 
   /* 确保平滑滚动 */
@@ -1526,17 +1504,6 @@ body.wallpaper-transparent #navbar > div {
 .btn-regular {
   border-radius: 8px !important;
   font-weight: 500;
-}
-
-/* 主题色按钮 */
-.btn-regular.success,
-.btn-regular-dark.success {
-  background-color: var(--juejin-primary) !important;
-  color: #fff !important;
-}
-.btn-regular.success:hover,
-.btn-regular-dark.success:hover {
-  background-color: var(--juejin-primary-hover) !important;
 }
 
 /* =============================================================
