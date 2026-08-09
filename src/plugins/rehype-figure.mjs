@@ -16,16 +16,9 @@ export default function rehypeFigure() {
 				return;
 			}
 
-			// 正文图片不懒加载（参考 ThriveX-Blog 的做法）。
-			//
-			// 之前是 loading="lazy"，而这些远程图既没有 width/height 也没有 CSS 占位，
-			// 加载前高度接近 0、加载后撑到几百像素。滚动经过时才开始加载，正文就会不断
-			// 往下长——点击靠后的目录永远滚不到正确位置，手动滚动也一直在跳（CLS）。
-			// 改成渲染即开始下载，页面布局在用户动手之前就稳定了。
-			//
-			// 刻意不加 fetchpriority="low"：降优先级确实能让正文图不与封面图/LCP 抢带宽，
-			// 但它把下载推迟到浏览器空闲时，也就把「图片撑开高度」这一波布局抖动推迟到了
-			// 用户已经开始点目录的时间窗里，落点照样是偏的。宁可首屏稍慢也要让布局早点定死。
+			// 正文图片不懒加载（参考 ThriveX-Blog 的做法），渲染即开始下载。
+			// 布局稳定性不靠加载时机保证：rehype-image-dimensions（排在本插件之前）
+			// 已在构建期写入真实 width/height，图片空间在 HTML 解析时就预留好了。
 			// markdown-img 类给运行时的"加载完成前模糊占位"用（见 markdown-image-init.ts）。
 			const existingClass = node.properties?.className;
 			node.properties = {

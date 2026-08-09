@@ -31,7 +31,6 @@ export class TOCManager {
 	private contentId: string;
 	private indicatorId: string;
 	private scrollOffset: number;
-	private scrollCorrectionCancel: (() => void) | null = null;
 
 	constructor(config: TOCConfig) {
 		this.contentId = config.contentId;
@@ -384,94 +383,18 @@ export class TOCManager {
 		const targetElement = document.getElementById(id);
 
 		if (targetElement) {
-			this.scrollToHeading(targetElement);
+			// 正文图片在构建期已写入 width/height（见 rehype-image-dimensions），
+			// 页面布局在 HTML 解析时即定型，点击瞬间算一次坐标即可准确落点
+			const targetTop =
+				targetElement.getBoundingClientRect().top +
+				window.pageYOffset -
+				this.scrollOffset;
+
+			window.scrollTo({
+				top: targetTop,
+				behavior: "smooth",
+			});
 		}
-	}
-
-	/**
-	 * 目标标题此刻应该滚到的位置（并夹在可滚动范围内，避免文末标题算出滚不到的值）
-	 */
-	private desiredScrollTop(targetElement: HTMLElement): number {
-		const top =
-			targetElement.getBoundingClientRect().top +
-			window.pageYOffset -
-			this.scrollOffset;
-		const maxTop =
-			document.documentElement.scrollHeight - window.innerHeight;
-		return Math.max(0, Math.min(top, maxTop));
-	}
-
-	/**
-	 * 滚动到目标标题，并在其后一小段时间内持续校正落点。
-	 *
-	 * 只算一次目标位置是不够的：生产环境冷缓存下，正文图片（无 width/height）、
-	 * tier-b 中文字体 swap、KaTeX 样式都会在点击之后才陆续就位，每次都把目标
-	 * 标题往下推——平滑滚动按点击瞬间的坐标落地，自然停在错的地方（本地全走
-	 * 磁盘缓存，首次布局即最终布局，所以复现不了）。
-	 *
-	 * 做法：滚动发出后用 rAF 监视 3 秒；页面停稳（不在动画中）而目标位置又对
-	 * 不上时，瞬时纠正一次。用户一动滚轮/触屏/键盘就立即放弃接管。
-	 */
-	private scrollToHeading(targetElement: HTMLElement): void {
-		this.scrollCorrectionCancel?.();
-
-		window.scrollTo({
-			top: this.desiredScrollTop(targetElement),
-			behavior: "smooth",
-		});
-
-		let cancelled = false;
-		let rafId = 0;
-		let lastY = window.pageYOffset;
-		let stableFrames = 0;
-		const deadline = performance.now() + 3000;
-
-		const cancel = () => {
-			if (cancelled) return;
-			cancelled = true;
-			cancelAnimationFrame(rafId);
-			window.removeEventListener("wheel", cancel);
-			window.removeEventListener("touchstart", cancel);
-			window.removeEventListener("keydown", cancel);
-			if (this.scrollCorrectionCancel === cancel) {
-				this.scrollCorrectionCancel = null;
-			}
-		};
-
-		window.addEventListener("wheel", cancel, { passive: true });
-		window.addEventListener("touchstart", cancel, { passive: true });
-		window.addEventListener("keydown", cancel);
-		this.scrollCorrectionCancel = cancel;
-
-		const tick = () => {
-			if (cancelled) return;
-			if (performance.now() > deadline) {
-				cancel();
-				return;
-			}
-
-			const y = window.pageYOffset;
-			const moved = Math.abs(y - lastY) > 1;
-			lastY = y;
-			// 平滑滚动发出后要过一两帧才真正开始位移，只看单帧静止会在动画
-			// 启动前就误判“已停稳”而瞬移过去，把过渡动画整个掐掉。
-			// 要求连续 ~8 帧（约 130ms）静止才认定滚动结束、开始校正。
-			stableFrames = moved ? 0 : stableFrames + 1;
-
-			if (stableFrames >= 8) {
-				const want = this.desiredScrollTop(targetElement);
-				if (Math.abs(want - y) > 2) {
-					// 用 instant 而不是默认 auto：html 上有 scroll-behavior: smooth，
-					// auto 会继承成平滑动画，校正就变成一次肉眼可见的二段滚动
-					window.scrollTo({ top: want, behavior: "instant" });
-					lastY = want;
-					stableFrames = 0;
-				}
-			}
-
-			rafId = requestAnimationFrame(tick);
-		};
-		rafId = requestAnimationFrame(tick);
 	}
 
 	/**
@@ -522,7 +445,6 @@ export class TOCManager {
 			clearTimeout(this.scrollTimeout);
 			this.scrollTimeout = null;
 		}
-		this.scrollCorrectionCancel?.();
 	}
 
 	/**

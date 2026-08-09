@@ -162,6 +162,9 @@ importers:
       '@types/sanitize-html':
         specifier: ^2.16.1
         version: 2.16.1
+      image-size:
+        specifier: ^2.0.2
+        version: 2.0.2
       typescript:
         specifier: ^6.0.3
         version: 6.0.3
@@ -3122,6 +3125,11 @@ packages:
     engines: {node: ^10 || ^12 || >= 14}
     peerDependencies:
       postcss: ^8.1.0
+
+  image-size@2.0.2:
+    resolution: {integrity: sha512-IRqXKlaXwgSMAMtpNzZa1ZAe8m+Sa1770Dhk8VkSsP9LS+iHD62Zd8FQKs8fbPiagBE7BzoFX23cxFnwshpV6w==}
+    engines: {node: '>=16.x'}
+    hasBin: true
 
   import-cwd@3.0.0:
     resolution: {integrity: sha512-4pnzH16plW+hgvRECbDWpQl3cqtvSofHWh44met7ESfZ8UZOWWddm8hEyDTqREJ9RbYHY8gi8DqmaelApoOGMg==}
@@ -9027,6 +9035,8 @@ snapshots:
   icss-utils@5.1.0(postcss@8.5.25):
     dependencies:
       postcss: 8.5.25
+
+  image-size@2.0.2: {}
 
   import-cwd@3.0.0:
     dependencies:
