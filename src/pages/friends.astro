@@ -66,70 +66,86 @@ const copyFields = [
 <MainGridLayout title={title} description={description}>
   <!-- 本站信息 + 全站置顶 -->
   <div class="card-base z-10 relative w-full overflow-hidden mb-4">
-    <div class="friend-hero relative px-6 py-8 sm:px-10 sm:py-10">
-      <div class="friend-hero-blob friend-hero-blob-a" aria-hidden="true"></div>
-      <div class="friend-hero-blob friend-hero-blob-b" aria-hidden="true"></div>
+    <div class="friend-hero relative px-5 py-7 sm:px-8 sm:py-9">
       <div class="friend-hero-dots" aria-hidden="true"></div>
 
-      <div class="relative flex flex-col lg:flex-row items-center lg:items-stretch gap-8">
-        <!-- 头像 + 站点标识 -->
-        <div class="flex flex-col items-center text-center lg:w-60 shrink-0 justify-center">
-          <div class="relative mb-4">
-            <div class="friend-hero-avatar-glow" aria-hidden="true"></div>
-            <div class="relative w-28 h-28 rounded-full overflow-hidden ring-4 ring-(--card-bg) shadow-lg">
-              <img
-                src={friendSiteInfo.avatar}
-                alt={friendSiteInfo.name}
-                class="w-full h-full object-cover"
-              />
-            </div>
-          </div>
-          <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">
-            {friendSiteInfo.name}
-          </h2>
-          <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1.5 flex items-center gap-2 justify-center">
-            <span class="w-1 h-1 rounded-full bg-(--primary) shrink-0"></span>
-            <span>{friendSiteInfo.desc}</span>
-            <span class="w-1 h-1 rounded-full bg-(--primary) shrink-0"></span>
-          </p>
-        </div>
+      <!-- 站长介绍：浮动卡片（鼠标悬浮时跟随光标做 3D 倾斜） -->
+      <friend-hero-tilt class="friend-hero-stage">
+      <div class="friend-hero-card relative">
+        <div class="friend-hero-blob friend-hero-blob-a" aria-hidden="true"></div>
+        <div class="friend-hero-blob friend-hero-blob-b" aria-hidden="true"></div>
+        <span class="friend-hero-spark friend-hero-spark-a" aria-hidden="true"></span>
+        <span class="friend-hero-spark friend-hero-spark-b" aria-hidden="true"></span>
+        <span class="friend-hero-spark friend-hero-spark-c" aria-hidden="true"></span>
 
-        <!-- 可复制字段 -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1 content-center">
-          {copyFields.map((field) => (
-            <friend-copy-field
-              class="friend-copy-field flex items-center gap-3 rounded-xl px-4 py-3 bg-(--card-bg) border border-(--line-divider)"
-              data-copy-value={field.value}
-            >
-              <span class="friend-copy-icon shrink-0 w-8 h-8 rounded-lg flex items-center justify-center">
-                <AstroIcon name={field.icon} class="text-base" />
-              </span>
-              <div class="min-w-0 flex-1">
-                <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-400 dark:text-neutral-500">
-                  {field.label}
-                </p>
-                <p class="text-sm font-medium truncate" title={field.value}>
-                  {field.value}
-                </p>
+        <div class="relative flex flex-col lg:flex-row items-center lg:items-stretch gap-6 lg:gap-8 px-5 py-7 sm:px-8 sm:py-9">
+          <!-- 头像 + 站点标识 -->
+          <div class="flex flex-col items-center text-center lg:w-60 shrink-0 justify-center">
+            <div class="relative mb-4">
+              <div class="friend-hero-avatar-glow" aria-hidden="true"></div>
+              <div class="friend-hero-avatar-ring" aria-hidden="true"></div>
+              <div class="relative w-28 h-28 rounded-full overflow-hidden ring-4 ring-(--card-bg) shadow-lg">
+                <img
+                  src={friendSiteInfo.avatar}
+                  alt={friendSiteInfo.name}
+                  class="w-full h-full object-cover"
+                />
               </div>
-              <button
-                type="button"
-                class="friend-copy-btn shrink-0 w-7 h-7 flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 text-(--btn-content) hover:opacity-80 transition-opacity cursor-pointer"
-                aria-label="复制"
+            </div>
+            <h2 class="text-xl font-bold text-(--primary)">
+              {friendSiteInfo.name}
+            </h2>
+            <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1.5 flex items-center gap-2 justify-center">
+              <span class="w-1 h-1 rounded-full bg-(--primary) shrink-0"></span>
+              <span>{friendSiteInfo.desc}</span>
+              <span class="w-1 h-1 rounded-full bg-(--primary) shrink-0"></span>
+            </p>
+          </div>
+
+          <!-- 竖向分隔线 -->
+          <div class="friend-hero-divider hidden lg:block shrink-0" aria-hidden="true"></div>
+
+          <!-- 可复制字段 -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 flex-1 content-center w-full">
+            {copyFields.map((field, index) => (
+              <friend-copy-field
+                class:list={[
+                  "friend-copy-field flex items-center gap-3 rounded-xl px-4 py-3 bg-(--card-bg) border border-(--line-divider)",
+                  index >= 2 && "sm:col-span-2",
+                ]}
+                data-copy-value={field.value}
               >
-                <AstroIcon
-                  name="material-symbols:content-copy-outline-rounded"
-                  class="friend-copy-icon-default w-3.5 h-3.5"
-                />
-                <AstroIcon
-                  name="material-symbols:check-rounded"
-                  class="friend-copy-icon-success w-3.5 h-3.5 text-green-500"
-                />
-              </button>
-            </friend-copy-field>
-          ))}
+                <span class="friend-copy-icon shrink-0 w-8 h-8 rounded-lg flex items-center justify-center">
+                  <AstroIcon name={field.icon} class="text-base" />
+                </span>
+                <div class="min-w-0 flex-1">
+                  <p class="text-[0.65rem] font-semibold uppercase tracking-wide text-neutral-400 dark:text-neutral-500">
+                    {field.label}
+                  </p>
+                  <p class="text-sm font-medium truncate" title={field.value}>
+                    {field.value}
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  class="friend-copy-btn shrink-0 w-7 h-7 flex items-center justify-center rounded-md bg-black/10 dark:bg-white/10 text-(--btn-content) hover:opacity-80 transition-opacity cursor-pointer"
+                  aria-label="复制"
+                >
+                  <AstroIcon
+                    name="material-symbols:content-copy-outline-rounded"
+                    class="friend-copy-icon-default w-3.5 h-3.5"
+                  />
+                  <AstroIcon
+                    name="material-symbols:check-rounded"
+                    class="friend-copy-icon-success w-3.5 h-3.5 text-green-500"
+                  />
+                </button>
+              </friend-copy-field>
+            ))}
+          </div>
         </div>
       </div>
+      </friend-hero-tilt>
 
       <!-- 友链分组（分组名与分组内容在 friendsConfig.ts 中配置） -->
       {friendGroupList.map((group, index) => (
@@ -188,6 +204,84 @@ const copyFields = [
       }
       customElements.define("friend-copy-field", FriendCopyField);
     }
+
+    // 站长卡片：鼠标悬浮时跟随光标做 3D 倾斜 + 高光
+    if (!customElements.get("friend-hero-tilt")) {
+      const MAX_TILT = 8; // 最大倾斜角度（度）
+      const HOVER_SCALE = 1.015;
+
+      class FriendHeroTilt extends HTMLElement {
+        constructor() {
+          super();
+          this.handleMove = this.handleMove.bind(this);
+          this.handleLeave = this.handleLeave.bind(this);
+          this.applyFrame = this.applyFrame.bind(this);
+        }
+
+        connectedCallback() {
+          // 触屏 / 无精确指针 / 用户要求减少动效时不启用
+          if (
+            !window.matchMedia("(hover: hover) and (pointer: fine)").matches ||
+            window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ) {
+            return;
+          }
+          this.addEventListener("pointermove", this.handleMove);
+          this.addEventListener("pointerleave", this.handleLeave);
+        }
+
+        disconnectedCallback() {
+          this.removeEventListener("pointermove", this.handleMove);
+          this.removeEventListener("pointerleave", this.handleLeave);
+          if (this._frame) cancelAnimationFrame(this._frame);
+        }
+
+        get card() {
+          // connectedCallback 早于子节点解析，所以延迟到首次交互时再取
+          if (!this._card) this._card = this.querySelector(".friend-hero-card");
+          return this._card;
+        }
+
+        handleMove(e) {
+          this._pointer = { x: e.clientX, y: e.clientY };
+          if (this._frame) return;
+          this._frame = requestAnimationFrame(this.applyFrame);
+        }
+
+        applyFrame() {
+          this._frame = 0;
+          const card = this.card;
+          if (!card || !this._pointer) return;
+
+          const rect = card.getBoundingClientRect();
+          if (!rect.width || !rect.height) return;
+
+          // 归一化到 [-0.5, 0.5]
+          const px = (this._pointer.x - rect.left) / rect.width - 0.5;
+          const py = (this._pointer.y - rect.top) / rect.height - 0.5;
+
+          card.classList.add("is-tilting");
+          card.style.setProperty("--tilt-y", (px * 2 * MAX_TILT).toFixed(2) + "deg");
+          card.style.setProperty("--tilt-x", (-py * 2 * MAX_TILT).toFixed(2) + "deg");
+          card.style.setProperty("--tilt-scale", String(HOVER_SCALE));
+        }
+
+        handleLeave() {
+          if (this._frame) {
+            cancelAnimationFrame(this._frame);
+            this._frame = 0;
+          }
+          this._pointer = null;
+          const card = this.card;
+          if (!card) return;
+          card.classList.remove("is-tilting");
+          card.style.setProperty("--tilt-x", "0deg");
+          card.style.setProperty("--tilt-y", "0deg");
+          card.style.setProperty("--tilt-scale", "1");
+        }
+      }
+      customElements.define("friend-hero-tilt", FriendHeroTilt);
+    }
   </script>
 
   <style is:global>
@@ -201,6 +295,64 @@ const copyFields = [
     .friend-hero {
       overflow: hidden;
     }
+    .friend-hero-dots {
+      position: absolute;
+      inset: 0;
+      opacity: 0.05;
+      pointer-events: none;
+      background-image: radial-gradient(circle, var(--primary) 1px, transparent 1px);
+      background-size: 22px 22px;
+    }
+    :root.dark .friend-hero-dots {
+      opacity: 0.08;
+    }
+
+    /* 站长介绍浮动卡片 */
+    .friend-hero-stage {
+      display: block;
+      position: relative;
+      /* 3D 舞台：透视越小倾斜越夸张 */
+      perspective: 1100px;
+    }
+    .friend-hero-card {
+      border-radius: 1.5rem;
+      overflow: hidden;
+      transform-style: preserve-3d;
+      transform: rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg))
+        scale3d(var(--tilt-scale, 1), var(--tilt-scale, 1), 1);
+      background:
+        linear-gradient(
+          135deg,
+          color-mix(in oklch, var(--primary) 7%, var(--card-bg)) 0%,
+          var(--card-bg) 55%,
+          color-mix(in oklch, var(--primary) 5%, var(--card-bg)) 100%
+        );
+      border: 1px solid color-mix(in oklch, var(--primary) 12%, transparent);
+      box-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.04),
+        0 12px 28px -12px rgba(100, 100, 110, 0.28),
+        0 24px 48px -24px rgba(60, 60, 70, 0.22);
+      /* 松开鼠标后缓慢回正；跟随光标时由 .is-tilting 换成短时长 */
+      transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+      will-change: transform;
+    }
+    .friend-hero-card.is-tilting {
+      transition: transform 0.15s ease-out;
+    }
+
+    :root.dark .friend-hero-card {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.07) 0%,
+        rgba(255, 255, 255, 0.02) 55%,
+        color-mix(in oklch, var(--primary) 10%, transparent) 100%
+      );
+      border-color: rgba(255, 255, 255, 0.08);
+      box-shadow:
+        0 12px 28px -12px rgba(0, 0, 0, 0.5),
+        0 24px 48px -24px rgba(0, 0, 0, 0.6);
+    }
+
     .friend-hero-blob {
       position: absolute;
       border-radius: 9999px;
@@ -222,17 +374,33 @@ const copyFields = [
       height: 14rem;
       opacity: 0.08;
     }
-    .friend-hero-dots {
+
+    /* 卡片内的装饰小圆点 */
+    .friend-hero-spark {
       position: absolute;
-      inset: 0;
-      opacity: 0.05;
+      width: 0.375rem;
+      height: 0.375rem;
+      border-radius: 9999px;
+      background: var(--primary);
+      opacity: 0.45;
       pointer-events: none;
-      background-image: radial-gradient(circle, var(--primary) 1px, transparent 1px);
-      background-size: 22px 22px;
     }
-    :root.dark .friend-hero-dots {
-      opacity: 0.08;
+    .friend-hero-spark-a {
+      top: 1.25rem;
+      right: 2.25rem;
     }
+    .friend-hero-spark-b {
+      top: 45%;
+      right: 0.9rem;
+      opacity: 0.28;
+    }
+    .friend-hero-spark-c {
+      bottom: 1.5rem;
+      left: 2rem;
+      opacity: 0.3;
+    }
+
+    /* 头像 */
     .friend-hero-avatar-glow {
       position: absolute;
       inset: 0;
@@ -241,10 +409,62 @@ const copyFields = [
       opacity: 0.25;
       filter: blur(20px);
     }
+    .friend-hero-avatar-ring {
+      position: absolute;
+      inset: -0.6rem;
+      border-radius: 9999px;
+      border: 2px dashed color-mix(in oklch, var(--primary) 45%, transparent);
+      animation: friend-hero-ring-spin 24s linear infinite;
+      pointer-events: none;
+    }
+    @keyframes friend-hero-ring-spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* 竖向分隔线（中间带一个高亮圆点） */
+    .friend-hero-divider {
+      position: relative;
+      width: 1px;
+      align-self: stretch;
+      background: linear-gradient(
+        to bottom,
+        transparent,
+        var(--line-divider) 20%,
+        var(--line-divider) 80%,
+        transparent
+      );
+    }
+    .friend-hero-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0.4rem;
+      height: 0.4rem;
+      border-radius: 9999px;
+      background: var(--primary);
+      transform: translate(-50%, -50%);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .friend-hero-avatar-ring {
+        animation: none;
+      }
+      .friend-hero-card {
+        transform: none;
+        transition: none;
+      }
+    }
 
     /* 可复制字段 */
     .friend-copy-field {
-      transition: border-color 0.2s;
+      transition:
+        border-color 0.2s,
+        transform 0.2s,
+        box-shadow 0.2s;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
     }
     .friend-copy-icon {
       background-color: color-mix(in oklch, var(--primary) 15%, transparent);
