@@ -423,6 +423,7 @@ export class TOCManager {
 		let cancelled = false;
 		let rafId = 0;
 		let lastY = window.pageYOffset;
+		let stableFrames = 0;
 		const deadline = performance.now() + 3000;
 
 		const cancel = () => {
@@ -450,16 +451,21 @@ export class TOCManager {
 			}
 
 			const y = window.pageYOffset;
-			const isAnimating = Math.abs(y - lastY) > 1;
+			const moved = Math.abs(y - lastY) > 1;
 			lastY = y;
+			// 平滑滚动发出后要过一两帧才真正开始位移，只看单帧静止会在动画
+			// 启动前就误判“已停稳”而瞬移过去，把过渡动画整个掐掉。
+			// 要求连续 ~8 帧（约 130ms）静止才认定滚动结束、开始校正。
+			stableFrames = moved ? 0 : stableFrames + 1;
 
-			if (!isAnimating) {
+			if (stableFrames >= 8) {
 				const want = this.desiredScrollTop(targetElement);
 				if (Math.abs(want - y) > 2) {
 					// 用 instant 而不是默认 auto：html 上有 scroll-behavior: smooth，
 					// auto 会继承成平滑动画，校正就变成一次肉眼可见的二段滚动
 					window.scrollTo({ top: want, behavior: "instant" });
 					lastY = want;
+					stableFrames = 0;
 				}
 			}
 
