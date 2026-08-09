@@ -300,11 +300,15 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
   if (typeof window !== "undefined" && !window.floatingTOCListenersInitialized) {
     window.floatingTOCListenersInitialized = true;
 
-    // Swup 路由切换
+    // Swup 路由切换。swup 4 的事件名是 swup:content:replace，
+    // swup:contentReplaced 是 3.x 的旧名，保留仅为兼容。
+    document.addEventListener("swup:content:replace", () => {
+      setTimeout(initFloatingTOC, 100);
+    });
     document.addEventListener("swup:contentReplaced", () => {
       setTimeout(initFloatingTOC, 100);
     });
-    
+
     // Astro 页面切换事件
     document.addEventListener("astro:page-load", () => {
       setTimeout(initFloatingTOC, 100);
