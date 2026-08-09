@@ -597,6 +597,7 @@ const collapsiblePreviewLines =
   // （必须手动刷新才好）。统一挪到这个每页都在的常驻脚本里调用。
   import { initCoverImages } from "@/utils/cover-image-init";
   import { initPostCardDelegation } from "@/utils/post-card-init";
+  import { initMarkdownImages } from "@/utils/markdown-image-init";
   import { initPostPageTOC } from "@/utils/post-page-toc-init";
 
   // 均为文档级单例：卡片点击走 document 委托、封面图靠 MutationObserver 跟进新 DOM，
@@ -604,6 +605,7 @@ const collapsiblePreviewLines =
   initPostCardDelegation();
   initCoverImages();
   initPostPageTOC();
+  initMarkdownImages();
 
   const bannerEnabled = !!document.getElementById("banner-wrapper");
 
@@ -741,6 +743,8 @@ const collapsiblePreviewLines =
 
       // 目录内容要按新文章的标题重建；容器不存在时内部直接返回，非文章页调用无副作用
       initPostPageTOC();
+      // 换页后是一批新的正文图，重新挂一次模糊占位
+      initMarkdownImages();
 
       const gridClassCarrier = document.getElementById("grid-class-carrier");
       if (gridClassCarrier) {

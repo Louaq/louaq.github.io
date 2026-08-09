@@ -28,8 +28,6 @@ export class TOCManager {
 	private minDepth = 10;
 	private maxLevel: number;
 	private scrollTimeout: number | null = null;
-	private scrollCorrectionFrame: number | null = null;
-	private scrollCorrectionCleanup: (() => void) | null = null;
 	private contentId: string;
 	private indicatorId: string;
 	private scrollOffset: number;
@@ -385,103 +383,16 @@ export class TOCManager {
 		const targetElement = document.getElementById(id);
 
 		if (targetElement) {
-			this.scrollToHeading(targetElement);
+			const targetTop =
+				targetElement.getBoundingClientRect().top +
+				window.pageYOffset -
+				this.scrollOffset;
+
+			window.scrollTo({
+				top: targetTop,
+				behavior: "smooth",
+			});
 		}
-	}
-
-	/**
-	 * 滚动到指定标题：自己用 rAF 逐帧驱动，每帧重新测量目标位置。
-	 *
-	 * 为什么不能直接用原生 `scrollTo({ behavior: "smooth" })`：正文图片是 loading="lazy"
-	 * 且没有固定宽高，滚动经过时才开始加载，加载完又把后面的内容往下推，点击瞬间算好的
-	 * 坐标滚到一半就过期了，标题越靠后偏得越多。而"滚完再补一次平滑滚动"的做法，用户会
-	 * 看到一段一段地挪过去。
-	 *
-	 * 这里改成自己控制每一帧的位置：插值的终点每帧重新取，布局抖动被均摊进正在进行的这
-	 * 一次动画里，看到的始终是一段连续的运动，且动画结束时刚好落在最新的正确位置。
-	 * 动画结束后再盯一小段时间，此时若仍有图片加载完成，就瞬时补偿——因为人眼盯着的是
-	 * 目标标题，瞬时补偿反而让标题稳稳钉在原处。
-	 */
-	private scrollToHeading(el: HTMLElement): void {
-		// 上一次还没结束就又点了，先取消，避免两段动画互相打架
-		this.cancelScrollCorrection();
-
-		const DURATION_MS = 460;
-		// 动画结束后继续盯这么久，把迟到的图片造成的位移吃掉
-		const SETTLE_MS = 900;
-		const TOLERANCE_PX = 1;
-
-		const root = document.documentElement;
-		// 全局 html{scroll-behavior:smooth} 会把我们逐帧的 scrollTo 也变成动画，必须临时关掉
-		const prevBehavior = root.style.scrollBehavior;
-		root.style.scrollBehavior = "auto";
-
-		const desiredTop = () => {
-			const wanted =
-				el.getBoundingClientRect().top + window.scrollY - this.scrollOffset;
-			const maxScroll = Math.max(0, root.scrollHeight - window.innerHeight);
-			// 末尾的标题可能压根滚不到指定偏移，钳到底部即可，否则会一直判定"没到位"
-			return Math.min(Math.max(wanted, 0), maxScroll);
-		};
-
-		const stop = () => this.cancelScrollCorrection();
-
-		// 用户中途自己滚动/翻页，立刻让路
-		const userInterrupts = ["wheel", "touchstart", "keydown"] as const;
-		for (const type of userInterrupts) {
-			window.addEventListener(type, stop, { passive: true, once: true });
-		}
-		this.scrollCorrectionCleanup = () => {
-			for (const type of userInterrupts) {
-				window.removeEventListener(type, stop);
-			}
-			root.style.scrollBehavior = prevBehavior;
-		};
-
-		const reduceMotion = window.matchMedia(
-			"(prefers-reduced-motion: reduce)",
-		).matches;
-
-		const startY = window.scrollY;
-		const startTime = performance.now();
-		// easeInOutCubic
-		const ease = (t: number) =>
-			t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2;
-
-		const step = (now: number) => {
-			const elapsed = now - startTime;
-			const target = desiredTop();
-
-			if (reduceMotion || elapsed >= DURATION_MS) {
-				// 动画阶段结束：进入盯梢，位置有偏差就瞬时补上
-				if (Math.abs(target - window.scrollY) > TOLERANCE_PX) {
-					window.scrollTo(0, target);
-				}
-				if (elapsed >= DURATION_MS + SETTLE_MS) {
-					stop();
-					return;
-				}
-			} else {
-				const t = ease(elapsed / DURATION_MS);
-				// 终点每帧重取：目标被推走多少，本帧就按当前进度吃掉多少，
-				// t→1 时完全吸收，动画自然收在最新的正确位置上
-				window.scrollTo(0, startY + (target - startY) * t);
-			}
-
-			this.scrollCorrectionFrame = requestAnimationFrame(step);
-		};
-
-		this.scrollCorrectionFrame = requestAnimationFrame(step);
-	}
-
-	/** 停止正在进行的落点校正 */
-	private cancelScrollCorrection(): void {
-		if (this.scrollCorrectionFrame !== null) {
-			cancelAnimationFrame(this.scrollCorrectionFrame);
-			this.scrollCorrectionFrame = null;
-		}
-		this.scrollCorrectionCleanup?.();
-		this.scrollCorrectionCleanup = null;
 	}
 
 	/**
@@ -532,7 +443,6 @@ export class TOCManager {
 			clearTimeout(this.scrollTimeout);
 			this.scrollTimeout = null;
 		}
-		this.cancelScrollCorrection();
 	}
 
 	/**

@@ -16,12 +16,25 @@ export default function rehypeFigure() {
 				return;
 			}
 
-			// 正文图片默认懒加载：封面图/首屏图由各自组件显式控制 eager，
-			// 这里覆盖的是 markdown 正文内嵌图片，不影响首屏 LCP
+			// 正文图片不懒加载（参考 ThriveX-Blog 的做法）。
+			//
+			// 之前是 loading="lazy"，而这些远程图既没有 width/height 也没有 CSS 占位，
+			// 加载前高度接近 0、加载后撑到几百像素。滚动经过时才开始加载，正文就会不断
+			// 往下长——点击靠后的目录永远滚不到正确位置，手动滚动也一直在跳（CLS）。
+			// 改成渲染即开始下载，页面布局在用户动手之前就稳定了。
+			//
+			// fetchpriority="low" 是对 ThriveX 做法的补充：正文图一起抢带宽会拖慢首屏，
+			// 降优先级后它们只在浏览器空闲时下载，不与封面图/LCP 竞争。
+			// markdown-img 类给运行时的"加载完成前模糊占位"用（见 markdown-image-init.ts）。
+			const existingClass = node.properties?.className;
 			node.properties = {
 				...node.properties,
-				loading: node.properties?.loading ?? "lazy",
+				loading: node.properties?.loading ?? "eager",
 				decoding: node.properties?.decoding ?? "async",
+				fetchpriority: node.properties?.fetchpriority ?? "low",
+				className: existingClass
+					? [].concat(existingClass, "markdown-img")
+					: ["markdown-img"],
 			};
 
 			// 获取 alt 属性

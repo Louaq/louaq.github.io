@@ -44,6 +44,15 @@
 	z-index: 99999;
 }
 
+/* 正文图加载完成前的模糊占位（参考 ThriveX-Blog）。
+ * 类由 markdown-image-init.ts 在运行时添加，加载完成/失败即移除。 */
+.custom-md img.markdown-img--loading {
+	filter: blur(20px);
+}
+.custom-md img.markdown-img {
+	transition: filter 0.3s ease-out;
+}
+
 /* 可点击放大的图片指针 */
 .custom-md img,
 #post-cover img,
