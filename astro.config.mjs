@@ -20,6 +20,7 @@ import { expressiveCodeConfig, fontConfig, siteConfig } from "./src/config";
 import { i18n } from "./src/i18n/translation";
 import I18nKey from "./src/i18n/i18nKey";
 import { pluginCollapsible } from "expressive-code-collapsible"; /* Collapsible */
+import { pluginHeaderToolbar } from "./src/plugins/expressive-code-header-toolbar.mjs"; /* mac 风格标题栏：把复制/折叠按钮挪进 header */
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
@@ -135,6 +136,8 @@ export default defineConfig({
 				pluginLineNumbers(),
 				// pluginCollapsible 配置 - 从expressiveCodeConfig读取设置，使用i18n文本
 				...(collapsiblePlugin ? [collapsiblePlugin] : []),
+				// 必须排在 collapsiblePlugin 之后：把复制/折叠按钮挪进标题栏
+				pluginHeaderToolbar(),
 			],
 			defaultProps: {
 				wrap: false,

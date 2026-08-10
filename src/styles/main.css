@@ -1577,18 +1577,109 @@ a {
   max-width: 100%;
 }
 
+.custom-md .expressive-code .frame {
+  position: relative;
+  --ec-header-h: 2.5rem;
+}
+
+.custom-md .expressive-code .frame .header {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  gap: 0.35rem;
+  position: relative;
+  height: var(--ec-header-h) !important;
+  padding-inline: 1rem !important;
+  color: var(--deep-text);
+  background: color-mix(in srgb, var(--deep-text) 14%, var(--card-bg)) !important;
+  border: 1px solid var(--line-color);
+  border-bottom: 1px solid color-mix(in srgb, var(--deep-text) 18%, transparent);
+  border-radius: var(--header-border-radius, 0.75rem) var(--header-border-radius, 0.75rem) 0 0;
+}
+
+/* 折叠状态下悬浮在代码底部的展开/收起按钮已挪进标题栏，这里不再重复展示 */
+.custom-md .expressive-code .ec-collapse__toggle {
+  display: none !important;
+}
+
+.custom-md .expressive-code .frame .header .title {
+  display: none;
+}
+
+.custom-md .expressive-code .frame .header::before {
+  content: "";
+  position: absolute !important;
+  inset: auto !important;
+  left: 1rem !important;
+  top: 50% !important;
+  width: 0.62rem !important;
+  height: 0.62rem !important;
+  border: none !important;
+  border-radius: 50% !important;
+  background: #ff5f57 !important;
+  box-shadow:
+    1.05rem 0 0 #febc2e,
+    2.1rem 0 0 #28c840 !important;
+  transform: translateY(-50%) !important;
+  opacity: 1 !important;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  pointer-events: none !important;
+}
+
+.custom-md .expressive-code .frame .header .copy,
+.custom-md .expressive-code .frame .header .ec-collapse__header-toggle {
+  position: static;
+  inset-block-start: auto;
+  inset-inline-end: auto;
+  margin: 0;
+}
+
+/* 复制按钮常驻显示（不再依赖鼠标悬浮），图标比 EC 默认的更小一些 */
+.custom-md .expressive-code .frame .header .copy button {
+  width: 1.75rem !important;
+  height: 1.75rem !important;
+  opacity: 0.7 !important;
+  background: transparent !important;
+}
+
+/* 去掉 EC 默认按钮的边框（由 ::before 画出）和悬浮时的背景色块（由内部 div 画出） */
+.custom-md .expressive-code .frame .header .copy button::before {
+  border: none !important;
+}
+
+.custom-md .expressive-code .frame .header .copy button div {
+  opacity: 0 !important;
+}
+
+.custom-md .expressive-code .frame .header .copy button::after {
+  margin: 0.5rem !important;
+}
+
+/* 复制成功后 3 秒内把图标换成对勾（ec-copy-done 由 code-copy-feedback-init.ts 打上/摘掉） */
+.custom-md .expressive-code .frame .header .copy button.ec-copy-done::after {
+  background-color: #22c55e !important;
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpolyline%20points%3D%2220%206%209%2017%204%2012%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")
+    !important;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpolyline%20points%3D%2220%206%209%2017%204%2012%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")
+    !important;
+}
+
+/* 标题栏已固定展示，代码区顶部不再需要圆角 */
+.custom-md .expressive-code .frame pre,
+.custom-md .expressive-code .frame code {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 /* =============================================================
  * 语言徽章
  * data-language 由 Expressive Code 原生输出在 <pre> 上，徽标直接用伪元素绘制，
  * 不依赖第三方插件（expressive-code-language-badge 的 peer 停留在 core 0.41，
  * 在本项目的 0.43 下 baseStyles 不生效）。
  * 开关来自 <html data-language-badge-enabled>，源头是 expressiveCodeConfig。
- * 徽标与复制按钮同处右上角，故 hover 时淡出让位。
+ * 视觉上居中显示在标题栏中央（用 top 对齐到 --ec-header-h 的一半）。
  * ============================================================= */
-html[data-language-badge-enabled="true"] .custom-md .expressive-code .frame {
-  position: relative;
-}
-
 html[data-language-badge-enabled="true"]
   .custom-md
   .expressive-code
@@ -1596,9 +1687,9 @@ html[data-language-badge-enabled="true"]
   /* 未在下方枚举的语言回退为语言标识本身 */
   content: attr(data-language);
   position: absolute;
-  top: 0.5rem;
-  right: 0.5rem;
-  z-index: 2;
+  top: calc(var(--ec-header-h) / 2);
+  left: 50%;
+  z-index: 1;
   display: flex;
   align-items: center;
   /* 左侧留出图标位；未枚举的语言没有 background-image，留白也不突兀 */
@@ -1612,23 +1703,9 @@ html[data-language-badge-enabled="true"]
   font-weight: 600;
   line-height: 1.4;
   text-transform: capitalize;
+  white-space: nowrap;
   pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.2s ease;
-}
-
-/* 有标题栏 / 终端样式的代码块，标题栏占据了顶部，徽标需要下移 */
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  .frame.has-title
-  pre[data-language]::before,
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  .frame.is-terminal
-  pre[data-language]::before {
-  top: 2.5rem;
+  transform: translate(-50%, -50%);
 }
 
 /* 各语言的显示名与图标（图标取自已安装的 simple-icons / lucide，内联为 data URI）。
@@ -1705,35 +1782,6 @@ html[data-language-badge-enabled="true"]
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238A919F%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%2F%3E%3Cpath%20d%3D%22M14%202v5a1%201%200%200%200%201%201h5M10%209H8m8%204H8m8%204H8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 }
 
-
-@media (hover: hover) {
-  html[data-language-badge-enabled="true"]
-    .custom-md
-    .expressive-code
-    .frame:hover
-    pre[data-language]::before {
-    opacity: 0;
-  }
-}
-
-/* 触屏没有 hover，EC 的复制按钮常驻可见，徽标左移避免与其重叠 */
-@media (hover: none) {
-  html[data-language-badge-enabled="true"]
-    .custom-md
-    .expressive-code
-    pre[data-language]::before {
-    right: 3rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html[data-language-badge-enabled="true"]
-    .custom-md
-    .expressive-code
-    pre[data-language]::before {
-    transition: none;
-  }
-}
 
 /* =============================================================
  * 文章页：内容卡片紧凑化

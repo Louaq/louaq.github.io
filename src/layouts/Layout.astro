@@ -604,6 +604,7 @@ const collapsiblePreviewLines =
   import { initPostCardDelegation } from "@/utils/post-card-init";
   import { initMarkdownImages } from "@/utils/markdown-image-init";
   import { initPostPageTOC } from "@/utils/post-page-toc-init";
+  import { initCodeCopyFeedback } from "@/utils/code-copy-feedback-init";
 
   // 均为文档级单例：卡片点击走 document 委托、封面图靠 MutationObserver 跟进新 DOM，
   // 各自内部幂等，首次加载调用一次即可。
@@ -611,6 +612,7 @@ const collapsiblePreviewLines =
   initCoverImages();
   initPostPageTOC();
   initMarkdownImages();
+  initCodeCopyFeedback();
 
   const bannerEnabled = !!document.getElementById("banner-wrapper");
 
