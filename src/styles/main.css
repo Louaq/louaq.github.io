@@ -2,9 +2,11 @@
 @import './variables-unified.css' layer(base);
 @import './layout-styles.css' layer(base);
 @import './navbar.css' layer(base);
-@import './transition.css' layer(base);
-@import './markdown.css' layer(base);
-@import './image-zoom.css' layer(base);
+/* transition.css / markdown.css / image-zoom.css 不要在这里 @import：
+ * Tailwind 插件会把它们内联进 main 的编译产物，而 Vite 同时又会把它们
+ * 作为独立样式模块再输出一份（chunk 或页面内联 <style>），全站双份下发。
+ * 它们改由 Layout.astro 直接 import（与 toc.css 同模式），只编译一次。
+ * 上面三个文件虽同样被拆成独立 chunk，但不会被内联进 main，没有双份问题。 */
 
 @plugin '@tailwindcss/typography';
 
@@ -296,26 +298,11 @@
 }
 
 @utility wallpaper-transparent {
-  .is-theme-transitioning:not(.use-view-transition) &body #navbar > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-
-  .is-theme-transitioning:not(.use-view-transition)
-    &body
-    #navbar[data-transparent-mode]
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-
-  .is-theme-transitioning:not(.use-view-transition)
-    &body
-    #navbar[data-transparent-mode].scrolled
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
+  /* 主题切换时禁用导航栏过渡的规则不要写在这里：此前的 `&body` 写法会编译成
+   * `:is(.wallpaper-transparent)body`（类型选择器不能跟在其它选择器后面），
+   * 整条规则被浏览器丢弃，构建时也会报 "Unexpected token Ident(body)" 警告。
+   * 等效规则已由 @utility is-theme-transitioning 里的
+   * `&:not(.use-view-transition) body.wallpaper-transparent #navbar > div` 系列覆盖。 */
 
   /* 全屏壁纸模式下的半透明效果 */
   & .card-base {

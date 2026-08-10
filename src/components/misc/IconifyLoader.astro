@@ -92,9 +92,10 @@ const { preloadIcons = [], timeout = 10000, retryCount = 3 } = Astro.props;
           }
 
           const script = document.createElement('script');
-          script.src = 'https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js';
+          // 自托管（原 https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js），
+          // 与 twikoo 同目录同模式；升级版本时换文件名以配合 /assets/* 的 30 天缓存
+          script.src = '/assets/js/iconify-icon-1.0.7.min.js';
           script.async = true;
-          script.crossOrigin = 'anonymous';
 
           const timeoutId = setTimeout(() => {
             script.remove();

@@ -1,4 +1,5 @@
 ---
+import fs from "node:fs";
 import { Font } from "astro:assets";
 import { siteConfig } from "@/config";
 
@@ -6,6 +7,24 @@ const { font: fontConfig } = siteConfig;
 
 // 正文字体（本地托管，分层切片，见 scripts/split-font.js）
 const body = fontConfig.body;
+
+// split-font.js 产出的 tier → 哈希文件名映射。tier-a 是所有页面（含列表页）
+// 都必然命中的分层，值得 preload；tier-b 只有文章页用，交给浏览器按
+// unicode-range 决定。manifest 缺失时静默跳过 preload，不影响字体本身加载。
+let tierAHref: string | null = null;
+try {
+	const manifest = JSON.parse(
+		fs.readFileSync(
+			new URL("../../../public/font/lxgw/manifest.json", import.meta.url),
+			"utf-8",
+		),
+	);
+	if (typeof manifest["tier-a"] === "string") {
+		tierAHref = `/font/lxgw/${manifest["tier-a"]}`;
+	}
+} catch {
+	// public/font/lxgw 未生成（例如尚未跑 pnpm split-font）时不阻塞构建
+}
 
 // font-family 字符串
 const bodyFamilyCss = `"${body.family}"`;
@@ -35,11 +54,21 @@ const codeCssVariable = fontConfig.code
 	 * unicode-range 的 @font-face —— tier-a（非文章页也会用到的字）与 tier-b
 	 * （只在正文出现的字），浏览器据此按页决定要不要取 tier-b。
 	 *
-	 * 这里刻意**不**做 preload：列表页只需要 tier-a，文章页两层都要，
-	 * 统一 preload 会让列表页白下 tier-b。@font-face 里已带 font-display: swap，
-	 * 文字先用 fallback 渲染，字体到位后替换。
+	 * preload 只给 tier-a：任何页面都必然用到它，提前于 result.css 的
+	 * 下载-解析链路开始取字体；tier-b 不预加载，否则列表页会白下它。
+	 * @font-face 里已带 font-display: swap，文字先用 fallback 渲染，
+	 * 字体到位后替换。
 	 */
 }
+{fontConfig.enable && body.css && tierAHref && (
+	<link
+		rel="preload"
+		as="font"
+		type="font/woff2"
+		crossorigin
+		href={tierAHref}
+	/>
+)}
 {fontConfig.enable && body.css && <link rel="stylesheet" href={body.css} />}
 
 {
