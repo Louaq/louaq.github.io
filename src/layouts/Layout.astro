@@ -605,6 +605,7 @@ const collapsiblePreviewLines =
   import { initMarkdownImages } from "@/utils/markdown-image-init";
   import { initPostPageTOC } from "@/utils/post-page-toc-init";
   import { initCodeCopyFeedback } from "@/utils/code-copy-feedback-init";
+  import { warmUpDeferredBlocks } from "@/utils/deferred-block-warmup";
 
   // 均为文档级单例：卡片点击走 document 委托、封面图靠 MutationObserver 跟进新 DOM，
   // 各自内部幂等，首次加载调用一次即可。
@@ -613,6 +614,9 @@ const collapsiblePreviewLines =
   initPostPageTOC();
   initMarkdownImages();
   initCodeCopyFeedback();
+  // 空闲期让 content-visibility: auto 的重型块各渲染一次，记住真实尺寸，
+  // 消除目录点击/hash 跳转的落点估值误差（见模块头注释）
+  warmUpDeferredBlocks();
 
   const bannerEnabled = !!document.getElementById("banner-wrapper");
 
@@ -752,6 +756,8 @@ const collapsiblePreviewLines =
       initPostPageTOC();
       // 换页后是一批新的正文图，重新挂一次模糊占位
       initMarkdownImages();
+      // 新文章的重型块要重新预热一遍真实尺寸（无匹配块时空转）
+      warmUpDeferredBlocks();
 
       const gridClassCarrier = document.getElementById("grid-class-carrier");
       if (gridClassCarrier) {

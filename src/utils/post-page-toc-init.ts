@@ -29,7 +29,6 @@ export function initPostPageTOC(): void {
 			contentId: "post-page-toc-content",
 			indicatorId: "post-page-toc-indicator",
 			maxLevel: 3,
-			scrollOffset: 80,
 		});
 
 		store.manager.init();

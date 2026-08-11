@@ -19,7 +19,6 @@ export interface TOCConfig {
 	contentId: string;
 	indicatorId: string;
 	maxLevel?: number;
-	scrollOffset?: number;
 }
 
 export class TOCManager {
@@ -30,13 +29,11 @@ export class TOCManager {
 	private scrollTimeout: number | null = null;
 	private contentId: string;
 	private indicatorId: string;
-	private scrollOffset: number;
 
 	constructor(config: TOCConfig) {
 		this.contentId = config.contentId;
 		this.indicatorId = config.indicatorId;
 		this.maxLevel = config.maxLevel || 3;
-		this.scrollOffset = config.scrollOffset || 80;
 	}
 
 	/**
@@ -383,16 +380,15 @@ export class TOCManager {
 		const targetElement = document.getElementById(id);
 
 		if (targetElement) {
-			// 正文图片在构建期已写入 width/height（见 rehype-image-dimensions），
-			// 页面布局在 HTML 解析时即定型，点击瞬间算一次坐标即可准确落点
-			const targetTop =
-				targetElement.getBoundingClientRect().top +
-				window.pageYOffset -
-				this.scrollOffset;
-
-			window.scrollTo({
-				top: targetTop,
+			// 落点准确性依赖两件事：
+			// 1. deferred-block-warmup 在空闲期已让 content-visibility: auto 的重型块
+			//    （超长代码块/公式）各渲染一次并记住真实尺寸，全文布局坐标是精确的；
+			// 2. scrollIntoView 把目标自身的 c-v 祖先链强制渲染后再计算落点。
+			// 顶栏偏移交给 CSS 的 scroll-margin-top（markdown.css 中标题已设置），
+			// 不要退回手写 getBoundingClientRect + scrollTo 减偏移的方案。
+			targetElement.scrollIntoView({
 				behavior: "smooth",
+				block: "start",
 			});
 		}
 	}
