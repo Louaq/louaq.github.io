@@ -20,16 +20,14 @@ export const profileConfig: ProfileConfig = {
 		{
 			name: "GitHub",
 			icon: "/assets/images/GitHub.0_p4tn41l679b.svg",
-			url: "https://github.com/Louaq",
+			url: "#",
 		},
 		{
-			// TODO: 暂未设置具体链接
 			name: "CSDN",
 			icon: "/assets/images/CSDN.24mmyqv-nyyoc.svg",
 			url: "#",
 		},
 		{
-			// TODO: 暂未设置具体链接
 			name: "Gitee",
 			icon: "/assets/images/Gitee.0jouzwjw2-b4e.svg",
 			url: "#",
