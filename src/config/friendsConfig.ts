@@ -108,6 +108,46 @@ export const friendGroups: FriendGroup[] = [
 			},
 		],
 	},
+	{
+		name: "论坛",
+		layout: "compact",
+		weight: 80,
+		enabled: true,
+		friends: [
+			{
+				title: "V2EX",
+				imgurl: "https://www.v2ex.com/static/img/v2ex@2x.png",
+				desc: "V2EX 是一个关于分享和探索的地方",
+				siteurl: "https://www.v2ex.com/",
+				weight: 10,
+				enabled: true,
+			},
+			{
+				title: "NodeSeek",
+				imgurl: "https://www.nodeseek.com/static/image/favicon/android-chrome-192x192.png",
+				desc: "NodeSeek",
+				siteurl: "https://linux.sb/",
+				weight: 9,
+				enabled: true,
+			},
+			{
+				title: "linux DO",
+				imgurl: "https://cdn3.ldstatic.com/optimized/4X/6/a/6/6a6affc7b1ce8140279e959d32671304db06d5ab_2_512x512.png",
+				desc: "Where possible begins",
+				siteurl: "https://linux.do/",
+				weight: 8, // 权重，数字越大排序越靠前
+				enabled: true, // 是否启用
+			},
+			{
+				title: "Linux SB",
+				imgurl: "https://linux.sb/app/assets/index.svg",
+				desc: "LINUX SB - 更新的理想型社区",
+				siteurl: "https://linux.sb/",
+				weight: 7,
+				enabled: true,
+			},
+		],
+	},
 ];
 
 // 按配置对友链排序：开启随机排序时忽略权重
