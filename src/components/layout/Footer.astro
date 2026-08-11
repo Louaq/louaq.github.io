@@ -40,13 +40,13 @@ if (footerConfig.enable) {
 ---
 
 <div
-  class="transition border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"
+  class="border-t border-black/10 dark:border-white/15 my-10 border-dashed mx-32"
 >
 </div>
 <div
-  class="transition border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"
+  class="border-dashed border-[oklch(85%_0.01_var(--hue))] dark:border-white/15 rounded-2xl mb-12 flex flex-col items-center justify-center px-6"
 >
-  <div class="transition text-50 text-sm text-center">
+  <div class="text-50 text-sm text-center">
     {
       customFooterHtml && (
         <div
@@ -57,24 +57,24 @@ if (footerConfig.enable) {
     }
     &copy; <span id="copyright-year">{currentYear}</span> {profileConfig.name}. All Rights Reserved. /
     <a
-      class="transition link text-(--primary) font-medium"
+      class="link text-(--primary) font-medium"
       target="_blank"
       href={url("/rss/")}
       > RSS</a
     > /
     <a
-      class="transition link text-(--primary) font-medium"
+      class="link text-(--primary) font-medium"
       target="_blank"
       href={url("sitemap-index.xml")}> Sitemap</a
     ><br />
     Powered by
     <a
-      class="transition link text-(--primary) font-medium"
+      class="link text-(--primary) font-medium"
       target="_blank"
       href="https://astro.build"> Astro</a
     > &
     <a
-      class="transition link text-(--primary) font-medium"
+      class="link text-(--primary) font-medium"
       target="_blank"
       href="https://github.com/CuteLeaf/Firefly"> Firefly</a
     ><br />
@@ -83,7 +83,7 @@ if (footerConfig.enable) {
     >
       <span class="text-50">Supported by</span>
       <a
-        class="transition link inline-flex items-center gap-1 text-(--primary) font-medium"
+        class="link inline-flex items-center gap-1 text-(--primary) font-medium"
         target="_blank"
         rel="noopener noreferrer"
         href="https://github.com/"
@@ -113,7 +113,7 @@ if (footerConfig.enable) {
       </a>
       <span class="text-50">and</span>
       <a
-        class="transition link inline-flex items-center gap-1 text-(--primary) font-medium"
+        class="link inline-flex items-center gap-1 text-(--primary) font-medium"
         target="_blank"
         rel="noopener noreferrer"
         href="https://www.netlify.com/"

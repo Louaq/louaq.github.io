@@ -322,7 +322,6 @@ onDestroy(() => {
     max-width: 360px;
     width: 100%;
     text-align: center;
-    transition: all 0.3s ease;
   }
 
   .password-protection-card.shake {
@@ -390,7 +389,6 @@ onDestroy(() => {
     text-align: center;
     background: transparent;
     color: var(--text-primary, #1a1a1a);
-    transition: all 0.3s ease;
     outline: none;
   }
 
@@ -419,7 +417,8 @@ onDestroy(() => {
     font-size: 0.875rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.3s ease;
+    /* 只过渡交互反馈属性，颜色属性随主题即时翻转 */
+    transition: opacity 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
   }
 
   .password-button:hover {

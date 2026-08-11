@@ -58,8 +58,15 @@
       }
     }
   
+    /* 正文重型叶子块统一按视口渲染：视口外整块跳过样式重算/布局/绘制，
+       让首屏、滚动、深浅色切换的渲染开销只与可见区域成正比、与文章长度无关
+       （超长代码块动辄数万个带内联 CSS 变量的 span，全量重算是切换卡顿的根源）。
+       contain-intrinsic-size 的 auto 关键字记住首次渲染后的真实尺寸，
+       长度值仅是渲染前的占位估值。 */
     .expressive-code {
       @apply my-4;
+      content-visibility: auto;
+      contain-intrinsic-size: auto 20rem;
     }
   
     ul,
@@ -84,6 +91,8 @@
       max-width: 100%;
       overflow-x: auto;
       margin: 1em 0;
+      content-visibility: auto;
+      contain-intrinsic-size: auto 4rem;
     }
   }
   

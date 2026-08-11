@@ -229,27 +229,22 @@
   --ease-accelerate: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
   
-  /* 动画时长 */
-  --duration-fast: 100ms
-  --duration-normal: 150ms
-  --duration-medium: 200ms
-  --duration-slow: 250ms
-  --duration-slower: 300ms
-  
-  /* 深浅色切换：表面色统一过渡（不支持 View Transitions API 时的逐元素过渡兜底） */
-  --theme-transition-duration: 180ms
-  --theme-transition-easing: var(--ease-standard)
-
-  /* 深浅色切换：View Transitions API 下从按钮位置圆形展开揭示新主题的时长
-     单独成变量，避免和上面逐元素过渡共用同一个时长导致悬浮态跟着变慢 */
-  --theme-reveal-duration: 550ms
+  /* 动画时长
+     注意：自定义属性漏写分号不会报错，而是把后续行整个吞进前一个变量的值里，
+     引用方 var() 全部解析失败。深浅色切换不做任何过渡动画（新主题即时到位），
+     相关的 --theme-transition-* / --theme-reveal-duration 已随机制一并移除。 */
+  --duration-fast: 100ms;
+  --duration-normal: 150ms;
+  --duration-medium: 200ms;
+  --duration-slow: 250ms;
+  --duration-slower: 300ms;
 
   /* 动画延迟 */
   --delay-none: 0ms;
-  --delay-short: 30ms
-  --delay-medium: 60ms
-  --delay-long: 90ms
-  --delay-longer: 120ms
+  --delay-short: 30ms;
+  --delay-medium: 60ms;
+  --delay-long: 90ms;
+  --delay-longer: 120ms;
 }
 
 /* ===== 间距变量 ===== */
@@ -409,10 +404,4 @@
   }
 }
 
-@media (prefers-reduced-motion: reduce) {
-  :root {
-    --theme-transition-duration: 1ms;
-    --theme-reveal-duration: 1ms;
-  }
-}
 }

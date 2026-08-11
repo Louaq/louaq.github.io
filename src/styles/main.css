@@ -30,232 +30,16 @@
   }
 }
 
-@utility is-theme-transitioning {
-  /* 定义淡出动画 - 使用更平滑的缓动函数 */
-
-  /* 定义淡入动画 - 从下层淡入 */
-
-  /* 已移除对 [class*="transition"] / [class*="border"] 的全局过渡：
-     * Tailwind 中大量类名含 "transition" / "border"，会导致主题切换时海量节点同时插值，明显卡顿。 */
-
-  /* 主题过渡保护类 - 仅在非 View Transitions 模式下使用 */
-  /* 当使用 View Transitions API 时，浏览器会自动处理过渡，不需要禁用 transition */
-  &:not(.use-view-transition) * {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) *::before {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) *::after {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  &.use-view-transition * {
-    transition: none !important;
-  }
-
-  &.use-view-transition *::before {
-    transition: none !important;
-  }
-
-  &.use-view-transition *::after {
-    transition: none !important;
-  }
-
-  /* 在主题切换时禁用代码块的复杂效果以提升性能 */
-  /* 使用 View Transitions 时也需要禁用代码块动画，因为它们太多了 */
-  & .expressive-code {
-    transition: none !important;
-    animation: none !important;
-    will-change: auto !important;
-  }
-  & .expressive-code * {
-    transition: none !important;
-    animation: none !important;
-    will-change: auto !important;
-  }
-
-  /* 禁用复杂选择器元素的过渡 - 仅在非 View Transitions 模式下 */
-  &:not(.use-view-transition) .float-panel {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) .float-panel * {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) .widget {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) .widget * {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) .dropdown-content {
-    transition: none !important;
-    animation: none !important;
-  }
-  &:not(.use-view-transition) .dropdown-content * {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  /* 导航栏主题切换保护 - 仅在非 View Transitions 模式下禁用过渡 */
-  &:not(.use-view-transition) #navbar > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition) #navbar[data-transparent-mode] > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition) #navbar[data-transparent-mode].scrolled > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition) body.wallpaper-transparent #navbar > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition)
-    body.wallpaper-transparent
-    #navbar[data-transparent-mode]
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition)
-    body.wallpaper-transparent
-    #navbar[data-transparent-mode].scrolled
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition) #banner-wrapper ~ * #navbar > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition)
-    #banner-wrapper
-    ~ *
-    #navbar[data-transparent-mode]
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition) body:has(#banner-wrapper) #navbar > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  &:not(.use-view-transition)
-    body:has(#banner-wrapper)
-    #navbar[data-transparent-mode]
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-
-  /* 导航栏相关浮动面板的过渡禁用 */
-  & .dropdown-content {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  & .float-panel {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  & #display-setting {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  & #nav-menu-panel {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  & #translate-panel {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  & #mobile-toc-panel {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-  & #search-panel {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-}
-
-@utility use-view-transition {
-  &.is-theme-transitioning * {
-    transition: none !important;
-  }
-
-  & .is-theme-transitioning *::before {
-    transition: none !important;
-  }
-
-  & .is-theme-transitioning *::after {
-    transition: none !important;
-  }
-}
-
 @utility float-panel {
-  /* 禁用复杂选择器元素的过渡 - 仅在非 View Transitions 模式下 */
-  .is-theme-transitioning:not(.use-view-transition) & {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .is-theme-transitioning:not(.use-view-transition) & * {
-    transition: none !important;
-    animation: none !important;
-  }
   contain: layout style;
-
-  .is-theme-transitioning & {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
   @apply top-4 rounded-(--radius-large) overflow-hidden bg-(--card-bg) shadow-xl border border-black/5 dark:border-white/10;
-  transition-property: background-color, border-color, color;
-  transition-duration: var(--theme-transition-duration);
-  transition-timing-function: var(--theme-transition-easing);
 }
 
 @utility widget {
-  .is-theme-transitioning:not(.use-view-transition) & {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .is-theme-transitioning:not(.use-view-transition) & * {
-    transition: none !important;
-    animation: none !important;
-  }
   contain: layout style;
 }
 
 @utility dropdown-content {
-  .is-theme-transitioning:not(.use-view-transition) & {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .is-theme-transitioning:not(.use-view-transition) & * {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  /* 导航栏相关浮动面板的过渡禁用 */
-  .is-theme-transitioning & {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
   @apply bg-(--card-bg) rounded-(--radius-large) shadow-xl border border-black/5 dark:border-white/10 py-2 min-w-48;
 }
 
@@ -280,30 +64,7 @@
   }
 }
 
-@utility scrolled {
-  .is-theme-transitioning:not(.use-view-transition)
-    &#navbar[data-transparent-mode]
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-
-  .is-theme-transitioning:not(.use-view-transition)
-    body.wallpaper-transparent
-    &#navbar[data-transparent-mode]
-    > div {
-    transition: none !important;
-    backdrop-filter: none !important;
-  }
-}
-
 @utility wallpaper-transparent {
-  /* 主题切换时禁用导航栏过渡的规则不要写在这里：此前的 `&body` 写法会编译成
-   * `:is(.wallpaper-transparent)body`（类型选择器不能跟在其它选择器后面），
-   * 整条规则被浏览器丢弃，构建时也会报 "Unexpected token Ident(body)" 警告。
-   * 等效规则已由 @utility is-theme-transitioning 里的
-   * `&:not(.use-view-transition) body.wallpaper-transparent #navbar > div` 系列覆盖。 */
-
   /* 全屏壁纸模式下的半透明效果 */
   & .card-base {
     @apply bg-(--card-bg-transparent);
@@ -335,15 +96,11 @@
 }
 
 @utility card-base {
-  /* 卡片表面过渡由 juejin-theme.css 与下方 enable-card-border 规则统一为 --theme-transition-* */
   @apply rounded-(--radius-large) overflow-hidden bg-(--card-bg);
 
   /* 开启边框和阴影效果时的样式 */
   .enable-card-border & {
     @apply border border-(--line-divider) shadow-xs;
-    transition-property: background-color, border-color, box-shadow, color;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--theme-transition-easing);
   }
 
   /* 全屏壁纸模式下的半透明效果 */
@@ -358,19 +115,12 @@
   /* 开启边框和阴影效果时的样式 */
   & .card-base {
     @apply border border-(--line-divider) shadow-xs;
-    transition-property: background-color, border-color, box-shadow, color;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--theme-transition-easing);
   }
 
   /* 导航栏样式适配 */
   & #navbar > div:not(.absolute) {
     @apply border shadow-xs;
     border-color: var(--line-divider) !important;
-    transition-property:
-      background-color, border-color, box-shadow, backdrop-filter, color;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--theme-transition-easing);
   }
 }
 
@@ -384,17 +134,13 @@
   }
   @apply flex items-center justify-center bg-(--card-bg) hover:bg-(--btn-card-bg-hover)
         active:bg-(--btn-card-bg-active);
-  transition-property: background-color, border-color, color;
-  transition-duration: var(--theme-transition-duration);
-  transition-timing-function: var(--theme-transition-easing);
   &.disabled {
     @apply pointer-events-none text-black/10 dark:text-white/10;
   }
 }
 
 @utility card-shadow {
-  /* 不在全局标题/正文上统一 transition-colors：节点过多时易造成重绘压力。
-     * 深浅色切换时由 body、--theme-transition-* 与各卡片/面板规则统一表面过渡节奏。 */
+  /* 不在全局标题/正文上统一 transition-colors：节点过多时易造成重绘压力 */
   @apply drop-shadow-[0_2px_4px_rgba(0,0,0,0.005)];
 }
 
@@ -404,7 +150,8 @@
 }
 
 @utility link {
-  @apply transition-colors duration-150 rounded-md p-1 -m-1 expand-animation;
+  /* 只过渡自身 hover 背景（静止时透明，不受主题影响）；文字颜色随主题即时翻转 */
+  @apply transition-[background-color] duration-150 rounded-md p-1 -m-1 expand-animation;
   /* 多行链接时 hover 背景需完整覆盖每行，用元素自身背景替代 ::before */
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
@@ -424,7 +171,7 @@
 }
 
 @utility link-lg {
-  @apply transition-colors duration-150 rounded-md p-1.5 -m-1.5 expand-animation;
+  @apply rounded-md p-1.5 -m-1.5 expand-animation;
 }
 
 @utility float-panel-closed {
@@ -449,9 +196,6 @@
 @utility btn-plain {
   @apply relative flex items-center justify-center bg-none
         text-black/75 hover:text-(--primary) dark:text-white/75 dark:hover:text-(--primary);
-  transition-property: color, background-color;
-  transition-duration: var(--theme-transition-duration);
-  transition-timing-function: var(--theme-transition-easing);
   &:not(.scale-animation) {
     @apply hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active);
   }
@@ -480,9 +224,6 @@
 @utility btn-regular {
   @apply flex items-center justify-center bg-(--btn-regular-bg) hover:bg-(--btn-regular-bg-hover) active:bg-(--btn-regular-bg-active)
         text-(--btn-content) dark:text-white/75;
-  transition-property: color, background-color, border-color;
-  transition-duration: var(--theme-transition-duration);
-  transition-timing-function: var(--theme-transition-easing);
   .post-card-wrapper .stats & {
     @apply text-(--primary) bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
   }
@@ -496,7 +237,7 @@
 }
 
 @utility link-underline {
-  @apply transition-colors duration-150 underline decoration-2 decoration-dashed decoration-(--link-underline)
+  @apply underline decoration-2 decoration-dashed decoration-(--link-underline)
         hover:decoration-(--link-hover) active:decoration-(--link-active) underline-offset-[0.25rem];
 }
 
@@ -571,7 +312,7 @@
 }
 
 @utility dropdown-menu {
-  @apply absolute top-full left-0 pt-2 opacity-0 invisible pointer-events-none transition-all duration-200 ease-out transform translate-y-[-8px] z-50;
+  @apply absolute top-full left-0 pt-2 opacity-0 invisible pointer-events-none transition-[opacity,transform,visibility] duration-200 ease-out transform translate-y-[-8px] z-50;
 
   .dropdown-container:hover & {
     @apply opacity-100 visible pointer-events-auto translate-y-0;
@@ -600,7 +341,7 @@
 }
 
 @utility dropdown-item {
-  @apply flex items-center justify-between px-4 py-2.5 text-black/75 dark:text-white/75 hover:text-(--primary) transition-colors duration-150 font-medium;
+  @apply flex items-center justify-between px-4 py-2.5 text-black/75 dark:text-white/75 hover:text-(--primary) font-medium;
 
   &:first-child {
     @apply rounded-t-[calc(var(--radius-large)-0.5rem)];
@@ -617,7 +358,7 @@
 
 @utility mobile-submenu {
   /* 移动端菜单样式 */
-  @apply max-h-0 overflow-hidden transition-all duration-300 ease-in-out;
+  @apply max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out;
 
   .mobile-dropdown[data-expanded='true'] & {
     @apply max-h-96;
@@ -645,7 +386,8 @@
 }
 
 @utility meta-icon {
-  @apply w-8 h-8 transition-colors duration-150 rounded-md flex items-center justify-center bg-(--btn-regular-bg)
+  /* 无 hover 态，不加 transition-colors：颜色过渡只会在主题翻转时拖出不同步的尾巴 */
+  @apply w-8 h-8 rounded-md flex items-center justify-center bg-(--btn-regular-bg)
         text-(--btn-content) mr-2;
   .post-meta & {
     @apply text-(--primary);
@@ -673,7 +415,7 @@
 
 @utility with-divider {
   @apply before:content-['/'] before:ml-1.5 before:mr-1.5 before:text-(--meta-divider) before:text-sm
-        before:font-medium first-of-type:before:hidden before:transition-colors before:duration-150;
+        before:font-medium first-of-type:before:hidden;
 }
 
 @layer utilities {
@@ -742,8 +484,6 @@
     border-radius: 999px;
     overflow: hidden;
     box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
-    transition: box-shadow var(--theme-transition-duration)
-      var(--theme-transition-easing);
   }
   :root.dark #scheme-switch.theme-switch {
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
@@ -754,8 +494,6 @@
     position: absolute;
     inset: 0;
     opacity: 0;
-    transition: opacity var(--theme-transition-duration)
-      var(--theme-transition-easing);
   }
   #scheme-switch .switch-face-light {
     background: linear-gradient(135deg, #6fb3e0 0%, #bfe3f7 55%, #fdf6e3 100%);
@@ -779,8 +517,6 @@
     border-radius: 50%;
     background: #fff;
     opacity: 0;
-    transition: opacity var(--theme-transition-duration)
-      var(--theme-transition-easing);
   }
   html[data-theme-mode='dark'] #scheme-switch .switch-star {
     opacity: 0.9;
@@ -804,10 +540,6 @@
     align-items: center;
     justify-content: center;
     z-index: 2;
-    transition: transform var(--theme-transition-duration)
-        var(--theme-transition-easing),
-      background-color var(--theme-transition-duration)
-        var(--theme-transition-easing);
   }
   html[data-theme-mode='dark'] #scheme-switch .switch-thumb {
     transform: translateX(24px);
@@ -821,8 +553,6 @@
     align-items: center;
     justify-content: center;
     opacity: 0;
-    transition: opacity var(--theme-transition-duration)
-      var(--theme-transition-easing);
   }
   html[data-theme-mode='light'] #scheme-switch .switch-thumb .theme-icon-light {
     opacity: 1;
@@ -851,8 +581,6 @@
     );
     pointer-events: none;
     z-index: 20;
-    transition: background var(--theme-transition-duration)
-      var(--theme-transition-easing);
   }
 
   /* 暗色主题下的渐变高光效果 */
@@ -866,38 +594,6 @@
       transparent 100%
     );
   }
-}
-
-@layer components {
-    /*
-     * View Transitions API 主题切换动画：
-     * 旧视图（老主题）保持静止不动作为底层，新视图（新主题）从点击按钮的位置
-     * 以圆形逐渐展开覆盖旧视图，形成"涟漪揭示"效果。
-     * --vt-x / --vt-y / --vt-r 由 Navbar.astro 在触发切换前写入 document.documentElement，
-     * 未设置时（如非按钮触发）回退到视口中心 + 铺满半径。
-     */
-    ::view-transition-group(root) {
-        animation-duration: var(--theme-reveal-duration);
-    }
-
-    ::view-transition-old(root) {
-        animation: none;
-        mix-blend-mode: normal;
-    }
-
-    ::view-transition-new(root) {
-        animation: theme-reveal-circle var(--theme-reveal-duration) cubic-bezier(0.4, 0, 0.2, 1);
-        mix-blend-mode: normal;
-    }
-
-    @keyframes theme-reveal-circle {
-        from {
-            clip-path: circle(0px at var(--vt-x, 50%) var(--vt-y, 50%));
-        }
-        to {
-            clip-path: circle(var(--vt-r, 150%) at var(--vt-x, 50%) var(--vt-y, 50%));
-        }
-    }
 }
 
 .custom-md img, #post-cover img {
@@ -920,7 +616,6 @@
     left: calc(50% - 1px);
     border-left: 2px dashed var(--line-color);
     pointer-events: none;
-    transition: all 0.3s;
     transform: translateY(-50%);
 }
 
@@ -1027,9 +722,6 @@ body {
 body {
   background-color: var(--page-bg) !important;
   color: var(--juejin-text-primary);
-  transition-property: background-color, color;
-  transition-duration: var(--theme-transition-duration);
-  transition-timing-function: var(--theme-transition-easing);
 }
 
 :root.dark body {
@@ -1054,9 +746,6 @@ body {
   background-color: var(--card-bg) !important;
   border: 1px solid transparent;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px -6px rgba(0, 0, 0, 0.08) !important;
-  transition-property: background-color, border-color, box-shadow, color;
-  transition-duration: var(--theme-transition-duration);
-  transition-timing-function: var(--theme-transition-easing);
 }
 
 :root.dark .card-base {
@@ -1160,7 +849,8 @@ body.wallpaper-transparent #navbar > div {
   color: #000000 !important;
   font-size: 16px !important;
   font-weight: 400 !important;
-  transition-duration: 80ms !important;
+  /* 别在这里写 transition-duration：transition-property 初始值是 all，
+     单独给 duration 会凭空造出一个全属性过渡，主题翻转时图标/文字拖尾 */
 }
 :root.dark #navbar .btn-plain {
   color: rgba(255, 255, 255, 0.85) !important;
@@ -1856,7 +1546,6 @@ input[type="search"] {
 .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);
   text-decoration: none;
-  transition: border-color 0.15s ease, color 0.15s ease;
 }
 :root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);

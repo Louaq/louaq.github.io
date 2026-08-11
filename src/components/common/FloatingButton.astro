@@ -19,7 +19,7 @@ const { id, icon, ariaLabel, onclick, class: className = "" } = Astro.props;
 
 <div
   id={id}
-  class:list={["floating-btn", className, "flex items-center rounded-2xl overflow-hidden transition"]}
+  class:list={["floating-btn", className, "flex items-center rounded-2xl overflow-hidden"]}
   onclick={onclick}
 >
   <button
@@ -41,8 +41,8 @@ const { id, icon, ariaLabel, onclick, class: className = "" } = Astro.props;
     opacity: 1
     cursor: pointer
     pointer-events: auto
-    /* 默认状态（显示）：各属性平滑过渡 */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1)
+    /* 只过渡显示/隐藏涉及的布局与变换属性；背景/文字颜色随主题即时翻转 */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1)
     border-radius: 1rem
     backdrop-filter: blur(12px)
     background-color: var(--card-bg)

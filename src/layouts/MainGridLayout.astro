@@ -214,7 +214,7 @@ const transparentClass = shouldEnableTransparency
 
 <!-- Banner - 如果允许切换则始终渲染，否则只渲染当前模式 -->
 {(isWallpaperSwitchable || isBannerMode) && (
-<div id="banner-wrapper" class={`absolute z-10 w-full transition duration-700 overflow-hidden ${mobileNonHomeBannerClass}`} style={(isWallpaperSwitchable || isOverlayMode) ? `top: -${BANNER_HEIGHT_EXTEND}vh; display: none;` : `top: -${BANNER_HEIGHT_EXTEND}vh`}>
+<div id="banner-wrapper" class={`absolute z-10 w-full transition-opacity duration-700 overflow-hidden ${mobileNonHomeBannerClass}`} style={(isWallpaperSwitchable || isOverlayMode) ? `top: -${BANNER_HEIGHT_EXTEND}vh; display: none;` : `top: -${BANNER_HEIGHT_EXTEND}vh`}>
     <!-- 背景图片显示 -->
     <div
       class="relative h-full w-full"
@@ -227,7 +227,7 @@ const transparentClass = shouldEnableTransparency
         <div class="banner-image-slot-mobile absolute inset-0 block lg:hidden">
           <ImageWrapper
             alt="Mobile background image of the blog"
-            class:list={["h-full w-full transition duration-700 opacity-100"]}
+            class:list={["h-full w-full transition-opacity duration-700 opacity-100"]}
             src={bannerMobileList[0]}
             position={backgroundWallpaper.banner?.position}
             basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
@@ -238,7 +238,7 @@ const transparentClass = shouldEnableTransparency
         <template class="banner-tpl-mobile">
           <ImageWrapper
             alt="Mobile background image of the blog"
-            class:list={["h-full w-full transition duration-700 opacity-100"]}
+            class:list={["h-full w-full transition-opacity duration-700 opacity-100"]}
             src={src}
             position={backgroundWallpaper.banner?.position}
             basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
@@ -252,7 +252,7 @@ const transparentClass = shouldEnableTransparency
           <ImageWrapper
             id="banner"
             alt="Desktop background image of the blog"
-            class:list={["h-full transition duration-700 opacity-100"]}
+            class:list={["h-full transition-opacity duration-700 opacity-100"]}
             src={bannerDesktopList[0]}
             position={backgroundWallpaper.banner?.position}
             basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
@@ -264,7 +264,7 @@ const transparentClass = shouldEnableTransparency
           <ImageWrapper
             id="banner"
             alt="Desktop background image of the blog"
-            class:list={["h-full transition duration-700 opacity-100"]}
+            class:list={["h-full transition-opacity duration-700 opacity-100"]}
             src={src}
             position={backgroundWallpaper.banner?.position}
             basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
@@ -395,7 +395,7 @@ const transparentClass = shouldEnableTransparency
 <div class={`absolute w-full z-30 pointer-events-none ${mobileNonHomeBannerClass ? 'mobile-main-no-banner' : ''} ${!(isBannerMode && isBackgroundEnabled) ? 'no-banner-layout' : ''} ${transparentClass}`} style={`top: ${finalMainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-(--page-width) mx-auto pointer-events-auto">
-        <div id="main-grid" class={`transition duration-700 w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
+        <div id="main-grid" class={`w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
         >
             <!-- Background image credit - Desktop -->
             {hasBannerCredit && creditEnabledOnDesktop && <a 
@@ -412,7 +412,7 @@ const transparentClass = shouldEnableTransparency
             >
                 <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
                 <div class="text-white/75 text-xs">{creditTextDesktop}</div>
-                {creditUrlDesktop && <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"]}
+                {creditUrlDesktop && <Icon class:list={["transition-opacity absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"]}
                       name="fa6-solid:arrow-up-right-from-square">
                 </Icon>}
             </a>}
@@ -432,7 +432,7 @@ const transparentClass = shouldEnableTransparency
             >
                 <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
                 <div class="text-white/75 text-xs">{creditTextMobile}</div>
-                {creditUrlMobile && <Icon class:list={["transition absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"]}
+                {creditUrlMobile && <Icon class:list={["transition-opacity absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"]}
                       name="fa6-solid:arrow-up-right-from-square">
                 </Icon>}
             </a>}

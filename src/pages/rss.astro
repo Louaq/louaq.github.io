@@ -44,7 +44,7 @@ const recentPosts = posts.slice(0, 6);
                     </code>
                     <button 
                         id="copy-rss-btn"
-                        class="px-4 py-2 bg-(--primary) text-white rounded-lg hover:opacity-80 transition-all duration-200 font-medium text-sm whitespace-nowrap"
+                        class="px-4 py-2 bg-(--primary) text-white rounded-lg hover:opacity-80 transition-opacity duration-200 font-medium text-sm whitespace-nowrap"
                         data-url={`${Astro.site}rss.xml`}
                         data-copied-text={i18n(I18nKey.rssCopied)}
                         data-failed-text={i18n(I18nKey.rssCopyFailed)}
@@ -63,8 +63,8 @@ const recentPosts = posts.slice(0, 6);
             </h2>
             <div class="space-y-4">
                 {recentPosts.map((post) => (
-                    <article class="bg-(--card-bg) rounded-xl p-4 border border-(--line-divider) hover:border-(--primary) transition-all duration-300">
-                        <h3 class="text-lg font-semibold text-90 mb-2 hover:text-(--primary) transition-colors">
+                    <article class="bg-(--card-bg) rounded-xl p-4 border border-(--line-divider) hover:border-(--primary)">
+                        <h3 class="text-lg font-semibold text-90 mb-2 hover:text-(--primary)">
                             <a href={getPostUrlForEntry(post)} class="hover:underline">
                                 {post.data.title}
                             </a>

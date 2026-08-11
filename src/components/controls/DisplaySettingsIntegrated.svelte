@@ -165,10 +165,10 @@ onMount(() => {
 });
 </script>
 
-<div id="display-setting" class="float-panel float-panel-closed absolute left-auto top-full right-0 z-60 mt-1.5 w-80 max-w-[calc(100vw-2rem)] translate-x-0 px-4 py-4 transition-all">
+<div id="display-setting" class="float-panel float-panel-closed absolute left-auto top-full right-0 z-60 mt-1.5 w-80 max-w-[calc(100vw-2rem)] translate-x-0 px-4 py-4 transition-[opacity,transform]">
     <!-- Theme Color Section -->
     <div class="flex flex-row gap-2 mb-2 items-center justify-between">
-        <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3
+        <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3
             before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
             before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
         >
@@ -181,7 +181,7 @@ onMount(() => {
             </button>
         </div>
         <div class="flex gap-1">
-            <div id="hueValue" class="transition bg-(--btn-regular-bg) w-10 h-7 rounded-md flex justify-center
+            <div id="hueValue" class="bg-(--btn-regular-bg) w-10 h-7 rounded-md flex justify-center
             font-bold text-sm items-center text-(--btn-content)">
                 {hue}
             </div>
@@ -196,7 +196,7 @@ onMount(() => {
     <!-- Wallpaper Mode Section -->
     {#if isWallpaperSwitchable}
         <div class="mt-2">
-            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
+            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3 mb-2
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
@@ -210,7 +210,7 @@ onMount(() => {
             </div>
             <div class="space-y-1 px-1">
                 <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
+                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
                     class:ring-1={wallpaperMode === WALLPAPER_BANNER}
                     class:ring-[var(--primary)]={wallpaperMode === WALLPAPER_BANNER}
                     class:opacity-60={wallpaperMode !== WALLPAPER_BANNER}
@@ -223,7 +223,7 @@ onMount(() => {
                     {/if}
                 </button>
                 <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
+                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
                     class:ring-1={wallpaperMode === WALLPAPER_OVERLAY}
                     class:ring-[var(--primary)]={wallpaperMode === WALLPAPER_OVERLAY}
                     class:opacity-60={wallpaperMode !== WALLPAPER_OVERLAY}
@@ -236,7 +236,7 @@ onMount(() => {
                     {/if}
                 </button>
                 <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
+                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
                     class:ring-1={wallpaperMode === WALLPAPER_NONE}
                     class:ring-[var(--primary)]={wallpaperMode === WALLPAPER_NONE}
                     class:opacity-60={wallpaperMode !== WALLPAPER_NONE}
@@ -255,7 +255,7 @@ onMount(() => {
     <!-- Banner Settings Section -->
     {#if wallpaperMode === WALLPAPER_BANNER && hasBannerSettings}
         <div class="mt-2 mb-2">
-            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
+            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3 mb-2
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
@@ -265,7 +265,7 @@ onMount(() => {
                 <!-- Banner Title Switch -->
                 {#if isBannerTitleSwitchable}
                 <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-all relative overflow-hidden"
+                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
                     class:ring-1={bannerTitleEnabled}
                     class:ring-[var(--primary)]={bannerTitleEnabled}
                     class:opacity-60={!bannerTitleEnabled}
@@ -288,7 +288,7 @@ onMount(() => {
     <!-- Layout Switch Section -->
     {#if allowLayoutSwitch && !isSmallScreen}
         <div class="px-1 mt-2">
-            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 transition relative ml-3 mb-2
+            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3 mb-2
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
@@ -303,7 +303,7 @@ onMount(() => {
             <div class="flex gap-2">
                 <button
                     aria-label={labels.postListLayoutList}
-                    class="flex-1 btn-regular rounded-md py-2 px-3 flex items-center justify-center gap-2 active:scale-95 transition-all relative overflow-hidden"
+                    class="flex-1 btn-regular rounded-md py-2 px-3 flex items-center justify-center gap-2 active:scale-95 transition-transform relative overflow-hidden"
                     class:ring-1={currentLayout === 'list'}
                     class:ring-[var(--primary)]={currentLayout === 'list'}
                     class:opacity-60={currentLayout !== 'list'}
@@ -321,7 +321,7 @@ onMount(() => {
                 </button>
                 <button
                     aria-label={labels.postListLayoutGrid}
-                    class="flex-1 btn-regular rounded-md py-2 px-3 flex items-center justify-center gap-2 active:scale-95 transition-all relative overflow-hidden"
+                    class="flex-1 btn-regular rounded-md py-2 px-3 flex items-center justify-center gap-2 active:scale-95 transition-transform relative overflow-hidden"
                     class:ring-1={currentLayout === 'grid'}
                     class:ring-[var(--primary)]={currentLayout === 'grid'}
                     class:opacity-60={currentLayout !== 'grid'}

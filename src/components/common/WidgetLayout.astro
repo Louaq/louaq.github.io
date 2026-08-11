@@ -29,7 +29,7 @@ const className = Astro.props.class;
 <widget-layout data-id={id} data-is-collapsed={String(isCollapsed)} class={"pb-4 card-base " + className} style={style}>
     {name && (
         <div class:list={[
-            "widget-title font-bold transition text-lg text-neutral-900 dark:text-neutral-100 relative mt-4 mb-2 flex items-center justify-between",
+            "widget-title font-bold text-lg text-neutral-900 dark:text-neutral-100 relative mt-4 mb-2 flex items-center justify-between",
             icon
                 ? "ml-4"
                 : "ml-8 before:w-1 before:h-4 before:rounded-md before:bg-(--primary) before:absolute before:left-[-16px] before:top-[5.5px]",

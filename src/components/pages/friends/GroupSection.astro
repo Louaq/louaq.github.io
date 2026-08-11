@@ -53,7 +53,7 @@ const isCompact = group.layout === "compact";
         href={friendSiteInfo.url}
         target="_blank"
         rel="noopener noreferrer"
-        class="friend-card friend-card-badged group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:bg-(--card-bg) transition-all duration-300 hover:shadow-lg relative overflow-hidden"
+        class="friend-card friend-card-badged group flex items-center gap-3 p-2.5 rounded-xl border border-(--line-divider) hover:bg-(--card-bg) transition-[transform,box-shadow,background-color] duration-300 hover:shadow-lg relative overflow-hidden"
       >
         <span class="friend-badge">
           <AstroIcon name="material-symbols:workspace-premium-rounded" class="text-[0.8rem]" />
@@ -71,7 +71,7 @@ const isCompact = group.layout === "compact";
           />
         </div>
         <div class="grow min-w-0 flex flex-col justify-center gap-0.5">
-          <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate pr-4">
+          <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) truncate pr-4">
             {friendSiteInfo.name}
           </div>
           <div class="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1" title={friendSiteInfo.desc}>
@@ -110,7 +110,7 @@ const isCompact = group.layout === "compact";
             />
           </div>
           <div class="min-w-0">
-            <div class="font-bold text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate">
+            <div class="font-bold text-sm text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) truncate">
               {item.title}
             </div>
             <div class="text-xs text-neutral-500 dark:text-neutral-400 line-clamp-1" title={item.desc}>
@@ -146,7 +146,7 @@ const isCompact = group.layout === "compact";
             />
           </div>
           <div class="grow min-w-0 flex flex-col justify-center gap-0.5">
-            <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) transition-colors truncate pr-4">
+            <div class="font-bold text-base text-neutral-900 dark:text-neutral-100 group-hover:text-(--primary) truncate pr-4">
               {item.title}
             </div>
             <div class="text-sm text-neutral-500 dark:text-neutral-400 line-clamp-1" title={item.desc}>

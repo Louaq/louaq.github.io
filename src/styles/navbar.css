@@ -28,25 +28,10 @@
     background: var(--card-bg);
     border: 1px solid transparent;
     border-radius: 0 0 0.75rem 0.75rem;
-    /* 优化：仅过渡必要的属性，避免过渡layout属性导致重排 */
-    transition-property: background-color, border-color, box-shadow, backdrop-filter;
-    transition-duration: var(--theme-transition-duration);
-    transition-timing-function: var(--ease-standard);
     /* 使用contain优化渲染性能 */
     contain: layout style;
     /* 使用transform替代top/left等属性，利用GPU加速 */
     will-change: transform;
-}
-
-/*
- * 移动端：优化过渡性能，减少过渡的属性
- */
-@media (max-width: 1023px) {
-    #navbar>div {
-        transition-property: background-color, box-shadow, backdrop-filter;
-        /* 移动端使用更短的过渡时间 */
-        transition-duration: 150ms;
-    }
 }
 
 /* ============================================
@@ -64,9 +49,6 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "full" */
@@ -77,9 +59,6 @@
         border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (static) */
@@ -90,9 +69,6 @@
         border: 1px solid transparent !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (scrolled) */
@@ -103,9 +79,6 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition-property: background, background-color, border-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 }
 
@@ -122,9 +95,6 @@
         background: rgba(255, 255, 255, var(--opacity-55)) !important;
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "full" */
@@ -135,9 +105,6 @@
         border: none !important;
         border-radius: 0 !important;
         box-shadow: none !important;
-        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (static) */
@@ -148,9 +115,6 @@
         border: 1px solid transparent !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: none !important;
-        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     /* "semifull" (scrolled) */
@@ -161,9 +125,6 @@
         border: 1px solid rgba(255, 255, 255, var(--opacity-55)) !important;
         border-radius: 0 0 0.75rem 0.75rem !important;
         box-shadow: var(--shadow-navbar) !important;
-        transition-property: background, background-color, box-shadow, backdrop-filter, border-radius !important;
-        transition-duration: var(--theme-transition-duration) !important;
-        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 }
 

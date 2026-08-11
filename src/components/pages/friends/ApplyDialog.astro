@@ -273,9 +273,8 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
     background: transparent;
     color: var(--content-meta);
     cursor: pointer;
-    transition:
-      background-color 0.2s,
-      color 0.2s;
+    /* hover 背景静止时透明，可过渡；文字颜色随主题即时翻转 */
+    transition: background-color 0.2s;
   }
 
   /* ---------- 三步流程（横排） ---------- */
@@ -298,7 +297,6 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
     border: 1px solid var(--line-divider);
     /* 半透明而非 --card-bg，让面板的磨砂背景透出来 */
     background: rgba(255, 255, 255, 0.5);
-    transition: border-color 0.2s;
   }
   :root.dark .friend-apply-step {
     background: rgba(255, 255, 255, 0.035);

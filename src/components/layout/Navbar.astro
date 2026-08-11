@@ -261,7 +261,7 @@ function loadButtonScript() {
     }
 
     if (themeSwitchBtn) {
-        themeSwitchBtn.onclick = function (event: MouseEvent) {
+        themeSwitchBtn.onclick = function () {
             const html = document.documentElement;
             const LIGHT_MODE = "light";
             const DARK_MODE = "dark";
@@ -285,45 +285,12 @@ function loadButtonScript() {
                 }
             };
 
-            // 圆形揭示动画的起点：优先取真实指针点击坐标；键盘触发的 click 事件
-            // detail 恒为 0 且 clientX/Y 为 0，这种情况退回按钮中心
-            const isPointerClick = !!event && event.detail !== 0;
-            const btnRect = themeSwitchBtn.getBoundingClientRect();
-            const originX = isPointerClick ? event.clientX : btnRect.left + btnRect.width / 2;
-            const originY = isPointerClick ? event.clientY : btnRect.top + btnRect.height / 2;
-            const maxRadius = Math.hypot(
-                Math.max(originX, window.innerWidth - originX),
-                Math.max(originY, window.innerHeight - originY),
-            );
-
+            // 深浅色切换不做过渡动画：直接翻转主题类/属性，新主题即时到位
             const setMode = (mode: string) => {
-                const applyMode = () => {
-                    html.setAttribute("data-theme-mode", mode);
-                    localStorage.setItem("theme", mode);
-                    applyResolvedTheme(mode === DARK_MODE);
-                    window.dispatchEvent(new CustomEvent("theme-change"));
-                };
-
-                if ((document as any).startViewTransition) {
-                    html.style.setProperty("--vt-x", `${originX}px`);
-                    html.style.setProperty("--vt-y", `${originY}px`);
-                    html.style.setProperty("--vt-r", `${maxRadius}px`);
-                    html.classList.add("is-theme-transitioning", "use-view-transition");
-                    const transition = (document as any).startViewTransition(applyMode);
-                    transition.finished.finally(() => {
-                        html.classList.remove("is-theme-transitioning", "use-view-transition");
-                        html.style.removeProperty("--vt-x");
-                        html.style.removeProperty("--vt-y");
-                        html.style.removeProperty("--vt-r");
-                    });
-                    return;
-                }
-
-                html.classList.add("is-theme-transitioning");
-                applyMode();
-                window.setTimeout(() => {
-                    html.classList.remove("is-theme-transitioning");
-                }, 180);
+                html.setAttribute("data-theme-mode", mode);
+                localStorage.setItem("theme", mode);
+                applyResolvedTheme(mode === DARK_MODE);
+                window.dispatchEvent(new CustomEvent("theme-change"));
             };
 
             const current = getStoredMode();

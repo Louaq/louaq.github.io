@@ -62,7 +62,7 @@ const remoteSrc = isPublic
 	: withOssImageProcess(src, { width: 1920 });
 ---
 <div id={id} class:list={[className, 'overflow-hidden relative']}>
-    <div class="transition absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
+    <div class="absolute inset-0 dark:bg-black/10 bg-opacity-50 pointer-events-none"></div>
     {isLocal && img && (
         <Image src={img} alt={alt || ""} class={imageClass} style={imageStyle} loading={loading} />
     )}

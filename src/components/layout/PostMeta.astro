@@ -111,7 +111,7 @@ const minuteLabel =
       <a
         href={getCategoryUrl(category || "")}
         aria-label={`View all posts in the ${category} category`}
-        class="link-lg transition text-50 text-sm font-medium
+        class="link-lg text-50 text-sm font-medium
                             hover:text-(--primary) dark:hover:text-(--primary) whitespace-nowrap"
       >
         {category || i18n(I18nKey.uncategorized)}
@@ -129,12 +129,12 @@ const minuteLabel =
            {(tags && tags.length > 0) && tags.map((tag, i) => (
              <div class:list={[{"hidden": i == 0}, "mx-1.5 text-(--meta-divider) text-sm"]}>/</div>
              <a href={getTagUrl(tag)} aria-label={`View all posts with the ${tag.trim()} tag`}
-                class="link-lg transition text-50 text-sm font-medium
+                class="link-lg text-50 text-sm font-medium
                              hover:text-(--primary) dark:hover:text-(--primary) whitespace-nowrap">
                {tag.trim()}
              </a>
            ))}
-           {!(tags && tags.length > 0) && <div class="transition text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
+           {!(tags && tags.length > 0) && <div class="text-50 text-sm font-medium">{i18n(I18nKey.noTags)}</div>}
          </div>
        </div>
      )

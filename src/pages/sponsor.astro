@@ -54,11 +54,11 @@ const showSponsorsList = sponsorConfig.showSponsorsList !== false;
       <div class="mb-8">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {enabledMethods.map((method) => (
-                      <div class="flex flex-col items-center p-6 rounded-lg bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 hover:border-(--primary) transition-colors">
+                      <div class="flex flex-col items-center p-6 rounded-lg bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 hover:border-(--primary)">
                         <!-- 图标和名称 -->
                         <div class="flex items-center gap-3 mb-4">
                           {method.icon && (
-                            <Icon icon={method.icon} size="2xl" class="text-neutral-900 dark:text-neutral-100 transition-colors" />
+                            <Icon icon={method.icon} size="2xl" class="text-neutral-900 dark:text-neutral-100" />
                           )}
                           <h3 class="text-xl font-semibold text-neutral-900 dark:text-neutral-100">
                             {method.name}
@@ -89,7 +89,7 @@ const showSponsorsList = sponsorConfig.showSponsorsList !== false;
                             href={method.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            class="inline-flex items-center gap-2 px-4 py-2 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/90 active:scale-95 transition-all"
+                            class="inline-flex items-center gap-2 px-4 py-2 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/90 active:scale-95 transition-transform"
                           >
                             <span>{i18n(I18nKey.sponsorGoTo)}</span>
                             <Icon icon="fa6-solid:arrow-up-right-from-square" class="text-sm" />
@@ -113,7 +113,7 @@ const showSponsorsList = sponsorConfig.showSponsorsList !== false;
           {sponsors.length > 0 ? (
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {sponsors.map((sponsor) => (
-                <div class="relative p-5 rounded-lg bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 hover:border-(--primary) transition-all duration-200 hover:shadow-md">
+                <div class="relative p-5 rounded-lg bg-neutral-50 dark:bg-neutral-900/50 border border-neutral-200 dark:border-neutral-800 hover:border-(--primary) transition-shadow duration-200 hover:shadow-md">
                   <!-- 内容 -->
                   <div class="flex flex-col h-full">
                     <!-- 头部：姓名和金额 -->

@@ -101,7 +101,7 @@ const paddingClass = getPaddingStyle();
     <!-- 标题 -->
     {
       currentAdConfig.title && (
-        <h3 class="text-lg font-bold mb-3 text-center text-neutral-900 dark:text-neutral-50 transition">
+        <h3 class="text-lg font-bold mb-3 text-center text-neutral-900 dark:text-neutral-50">
           {currentAdConfig.title}
         </h3>
       )
@@ -156,7 +156,7 @@ const paddingClass = getPaddingStyle();
     <!-- 文本内容 -->
     {
       currentAdConfig.content && (
-        <p class="text-sm text-center mb-3 leading-relaxed text-neutral-600 dark:text-neutral-300 transition">
+        <p class="text-sm text-center mb-3 leading-relaxed text-neutral-600 dark:text-neutral-300">
           {currentAdConfig.content}
         </p>
       )
@@ -253,7 +253,8 @@ const paddingClass = getPaddingStyle();
     border-radius: var(--radius-large);
     color: var(--primary-text-color);
     /* padding由配置控制，不在CSS中设置 */
-    transition: all 0.3s ease;
+    /* 只过渡 hover 反馈属性；背景/边框色随主题即时翻转 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     /* 阴影效果跟随主题 */
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -293,7 +294,7 @@ const paddingClass = getPaddingStyle();
 
   .close-ad-btn {
     opacity: 0;
-    transition: all 0.2s ease;
+    transition: opacity 0.2s ease;
     backdrop-filter: blur(8px);
   }
 
@@ -304,7 +305,8 @@ const paddingClass = getPaddingStyle();
   /* 主题色按钮效果 */
   .advertisement-widget a[class*="bg-[oklch"] {
     background: oklch(0.75 0.14 var(--hue));
-    transition: all 0.2s ease;
+    /* 按钮为固定 oklch 色，不随明暗变化；hover 只动背景与阴影 */
+    transition: background 0.2s ease, box-shadow 0.2s ease;
   }
 
   .advertisement-widget a[class*="bg-[oklch"]:hover {
@@ -315,7 +317,7 @@ const paddingClass = getPaddingStyle();
 
   /* 图片悬停效果 */
   .advertisement-widget img {
-    transition: all 0.3s ease;
+    transition: filter 0.3s ease;
   }
 
   .advertisement-widget:hover img {

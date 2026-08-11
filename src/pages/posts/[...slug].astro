@@ -127,11 +127,11 @@ const jsonLd = {
     >
       <!-- word count and reading time -->
       <div
-        class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 transition onload-animation"
+        class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 onload-animation"
       >
         <div class="flex flex-row items-center">
           <div
-            class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
+            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
           >
             <Icon name="material-symbols:notes-rounded" />
           </div>
@@ -142,7 +142,7 @@ const jsonLd = {
         </div>
         <div class="flex flex-row items-center">
           <div
-            class="transition h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
+            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
           >
             <Icon name="material-symbols:schedule-outline-rounded" />
           </div>
@@ -163,7 +163,7 @@ const jsonLd = {
       <!-- title -->
       <div class="relative onload-animation">
         <h1
-          class="transition w-full flex items-center gap-2 flex-wrap font-bold mb-3
+          class="w-full flex items-center gap-2 flex-wrap font-bold mb-3
                     text-3xl md:text-[2.25rem]/[2.75rem]
                     wrap-break-word
                     text-black/90 dark:text-white/90
@@ -295,7 +295,7 @@ const jsonLd = {
                 </div>
                 <a
                   href={url("/sponsor/")}
-                  class="inline-flex items-center gap-2 px-6 py-3 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/80 hover:scale-105 active:scale-95 transition-all whitespace-nowrap"
+                  class="inline-flex items-center gap-2 px-6 py-3 bg-(--primary) text-white dark:text-black/70 rounded-lg font-medium hover:bg-(--primary)/80 hover:scale-105 active:scale-95 transition-transform whitespace-nowrap"
                 >
                   <span>{i18n(I18nKey.sponsor)}</span>
                   <Icon name="fa6-solid:arrow-right" class="text-sm" />
@@ -341,7 +341,7 @@ const jsonLd = {
                     name="material-symbols:chevron-left-rounded"
                     class="text-[2rem] text-(--primary)"
                   />
-                  <div class="overflow-hidden transition text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
+                  <div class="overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
                     {entry.data.nextTitle}
                   </div>
                 </div>
@@ -359,7 +359,7 @@ const jsonLd = {
             {
               entry.data.prevSlug && (
                 <div class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-end! gap-4">
-                  <div class="overflow-hidden transition text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
+                  <div class="overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
                     {entry.data.prevTitle}
                   </div>
                   <Icon

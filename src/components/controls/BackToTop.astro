@@ -87,7 +87,8 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
     flex-shrink: 0;
     opacity: 1;
     pointer-events: auto;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* 只过渡显示/隐藏涉及的布局与变换属性；颜色随主题即时翻转 */
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1), height 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   #back-to-top-wrapper.hide {
