@@ -106,19 +106,6 @@ export class TOCManager {
 	}
 
 	/**
-	 * 生成徽章内容
-	 */
-	private generateBadgeContent(depth: number, heading1Count: number): string {
-		if (depth === this.minDepth) {
-			return heading1Count.toString();
-		}
-		if (depth === this.minDepth + 1) {
-			return '<span class="toc-badge-dot"></span>';
-		}
-		return '<span class="toc-badge-dot toc-badge-dot-sm"></span>';
-	}
-
-	/**
 	 * 空状态文案
 	 */
 	private getEmptyStateHTML(): string {
@@ -143,7 +130,6 @@ export class TOCManager {
 		}
 
 		let tocHTML = "";
-		let heading1Count = 1;
 
 		filteredHeadings.forEach((heading) => {
 			const depth = Number.parseInt(heading.tagName.charAt(1), 10);
@@ -152,11 +138,6 @@ export class TOCManager {
 
 			if (!heading.id) {
 				return;
-			}
-
-			const badgeContent = this.generateBadgeContent(depth, heading1Count);
-			if (depth === this.minDepth) {
-				heading1Count++;
 			}
 
 			let headingText = this.getCleanTextContent(heading)
@@ -186,16 +167,13 @@ export class TOCManager {
 			const escapedHeadingText = this.escapeHtmlAttr(headingText);
 
 			tocHTML += `
-        <a 
-          href="#${heading.id}" 
+        <a
+          href="#${heading.id}"
 			  class="toc-item toc-level-${depthLevel}"
           data-heading-id="${heading.id}"
 		  aria-label="${escapedHeadingText}"
 		  title="${escapedHeadingText}"
         >
-			  <div class="toc-badge ${depth === this.minDepth ? "toc-badge-index" : ""}">
-            ${badgeContent}
-          </div>
 			  <div class="toc-label ${depth <= this.minDepth + 1 ? "toc-label-primary" : "toc-label-secondary"}">${headingText}</div>
         </a>
       `;

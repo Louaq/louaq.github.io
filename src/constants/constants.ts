@@ -1,6 +1,6 @@
 ﻿export const LIGHT_MODE = "light",
 	DARK_MODE = "dark";
-export const DEFAULT_THEME = LIGHT_MODE; // 浠呬綔涓哄悜鍚庡吋瀹圭殑榛樿鍊硷紝瀹為檯浣跨敤 siteConfig.themeColor.defaultMode
+export const DEFAULT_THEME = LIGHT_MODE;
 
 // Wallpaper modes
 export const WALLPAPER_BANNER = "banner",

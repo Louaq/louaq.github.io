@@ -166,7 +166,8 @@ const sidebarConfig = getResponsiveSidebarConfig();
 
 // 单侧栏布局：左侧 17rem 原 widget（profile/倒计时/公告） + 主内容区
 // 移动端 (<768px) 单栏，由 grid-cols-1 控制
-const gridCols = "grid-cols-1 md:grid-cols-[17rem_1fr]";
+// 文章详情页不使用左右分栏，正文整体单栏居中显示（目录改为右侧悬浮面板）
+const gridCols = isPostPageCheck ? "grid-cols-1" : "grid-cols-1 md:grid-cols-[17rem_1fr]";
 
 // 检查是否应该启用半透明效果
 const shouldEnableTransparency = isOverlayMode && isBackgroundEnabled;
@@ -438,15 +439,24 @@ const transparentClass = shouldEnableTransparency
             </a>}
 
 
-            {/* 左侧栏：原有 widget（profile / 倒计时 / 公告） */}
+            {/* 左侧栏：原有 widget（profile / 倒计时 / 公告），仅非文章页渲染；
+               容器本身始终保留（swup container 占位），文章页渲染为空 */}
             <div id="left-sidebar-wrapper" class="contents">
-                <div class="hidden md:block md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-2 onload-animation md:h-full">
-                    <LeftSideBar headings={headings} class="md:h-full" />
-                </div>
+                {!isPostPageCheck && (
+                    <div class="hidden md:block md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-2 onload-animation md:h-full">
+                        <LeftSideBar headings={headings} class="md:h-full" />
+                    </div>
+                )}
             </div>
 
-            {/* 主内容区 - 始终渲染，确保 Swup 容器存在 */}
-            <main id="swup-container" class="transition-swup-fade overflow-hidden w-full md:col-start-2 md:col-end-3 transition-main">
+            {/* 主内容区 - 始终渲染，确保 Swup 容器存在
+               文章页单栏居中，宽度与原「1fr 内容列」保持一致（page-width 减去 17rem 侧栏与 1rem 间距） */}
+            <main id="swup-container" class:list={[
+                "transition-swup-fade overflow-hidden w-full transition-main",
+                isPostPageCheck
+                    ? "max-w-[calc(var(--page-width)-18rem)] mx-auto"
+                    : "md:col-start-2 md:col-end-3",
+            ]}>
                 {/* 携带网格布局类名，用于JS更新父容器 */}
                 <div id="grid-class-carrier" data-grid-class={gridCols} class="hidden"></div>
                 {/* 备用 h1 标题 - 当主页横幅文本未启用时，提供隐藏的主标题 */}
@@ -485,8 +495,11 @@ const transparentClass = shouldEnableTransparency
     style={`top: ${finalMainPanelTop}`}
 >
     {isPostPageCheck && (
-        <div class="relative max-w-(--page-width) mx-auto">
-            <div class="post-toc-wrapper absolute top-0 -right-(--toc-width) w-(--toc-width)">
+        // 参照容器宽度必须与正文 <main> 的 max-w-[calc(var(--page-width)-18rem)] 一致，
+        // 否则目录会贴着 page-width 整个容器的右边，而不是贴着实际变窄居中后的正文右边，
+        // 二者之间就会空出一大截（正文左右各让出的 9rem）。
+        <div class="relative max-w-[calc(var(--page-width)-18rem)] mx-auto">
+            <div class="post-toc-wrapper absolute top-0 -right-[calc(var(--toc-width)+1.5rem)] w-(--toc-width)">
                 <div class="post-toc-inner-wrapper fixed top-22 w-(--toc-width) max-h-[calc(100vh-7rem)] pointer-events-auto pr-2 pb-4 overflow-y-auto overflow-x-hidden hide-scrollbar">
                     {PostPageTOC && <PostPageTOC headings={headings} />}
                 </div>
@@ -501,15 +514,25 @@ const transparentClass = shouldEnableTransparency
 </Layout>
 
 <style is:global>
-  /* 主网格使用单侧栏布局（左 17rem + 主区 1fr） */
+  /* 主网格使用单侧栏布局（左 17rem + 主区 1fr）；文章详情页改为单栏居中，不套用此规则 */
   @media (min-width: 768px) {
-    #main-grid {
+    body:not([data-page-type="post"]) #main-grid {
       grid-template-columns: 17rem 1fr !important;
     }
   }
-  
 
-  
+  /* 文章详情页背景改为纯白（仅浅色模式，深色模式维持原配色）。
+     <html> 自身带 bg-(--page-bg)，按 CSS 规范它才是画布/可滚动区域背景的来源；
+     <body> 只有 min-h-screen 一屏高（banner、主内容区都是 absolute 脱离文档流），
+     只改 body 背景只会让第一屏变白，往下滚动会露出 html 的灰色画布——
+     所以要用 :has() 让 body 上的 data-page-type 反向控制 html 的背景。 */
+  :root:not(.dark):has(body[data-page-type="post"]) {
+    background-color: #ffffff !important;
+  }
+  :root:not(.dark) body[data-page-type="post"] {
+    background-color: #ffffff !important;
+  }
+
   /* 右侧栏平滑过渡 */
   #right-sidebar {
     transition: opacity 0.35s ease-in-out, 

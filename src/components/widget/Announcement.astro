@@ -99,15 +99,17 @@ const style = Astro.props.style;
     }
   }
 
-  // 页面加载时检查是否已关闭
-  document.addEventListener("DOMContentLoaded", function () {
+  // 检查是否已关闭。该组件所在容器现在会被 swup 局部刷新替换，
+  // 脚本每次替换都会重新执行，因此不能只依赖只触发一次的 DOMContentLoaded。
+  function applyClosedState() {
     const widgetLayout = document.querySelector(
       'widget-layout[data-id="announcement"]'
     ) as HTMLElement | null;
     if (widgetLayout && localStorage.getItem("announcementClosed") === "true") {
       widgetLayout.style.display = "none";
     }
-  });
+  }
+  applyClosedState();
 
   // 使公告栏函数全局可用
   window.closeAnnouncement = closeAnnouncement;
