@@ -4,7 +4,6 @@
 // 类型导出
 export type {
 	AnnouncementConfig,
-	AuroraBotConfig,
 	BackgroundWallpaperConfig,
 	CommentConfig,
 	CoverImageConfig,
@@ -25,7 +24,6 @@ export type {
 } from "../types/config";
 export { adConfig1, adConfig2 } from "./adConfig"; // 广告配置
 export { announcementConfig } from "./announcementConfig"; // 公告配置
-export { auroraBotConfig } from "./auroraBotConfig"; // 左下角机器人配置
 // 样式配置
 export { backgroundWallpaper } from "./backgroundWallpaper"; // 背景壁纸配置
 // 功能配置
