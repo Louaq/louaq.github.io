@@ -126,7 +126,7 @@ export const friendGroups: FriendGroup[] = [
 				title: "NodeSeek",
 				imgurl: "https://www.nodeseek.com/static/image/favicon/android-chrome-192x192.png",
 				desc: "NodeSeek",
-				siteurl: "https://linux.sb/",
+				siteurl: "https://www.nodeseek.com/",
 				weight: 9,
 				enabled: true,
 			},
