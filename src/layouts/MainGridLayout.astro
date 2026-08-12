@@ -438,12 +438,12 @@ const transparentClass = shouldEnableTransparency
                 </Icon>}
             </a>}
 
-
-            {/* 左侧栏：原有 widget（profile / 倒计时 / 公告），仅非文章页渲染；
-               容器本身始终保留（swup container 占位），文章页渲染为空 */}
             <div id="left-sidebar-wrapper" class="contents">
                 {!isPostPageCheck && (
-                    <div class="hidden md:block md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-2 onload-animation md:h-full">
+                    <div class="hidden md:block md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-2 md:h-full transition-main">
+                        {/* 此处不能挂 onload-animation：它的 animation ... forwards 填充会把
+                           opacity 永久钉在 1，且动画声明在级联中压过一切普通规则，
+                           transition-main 的 is-animating 淡出会被它完全屏蔽 */}
                         <LeftSideBar headings={headings} class="md:h-full" />
                     </div>
                 )}
@@ -514,12 +514,13 @@ const transparentClass = shouldEnableTransparency
 </Layout>
 
 <style is:global>
-  /* 主网格使用单侧栏布局（左 17rem + 主区 1fr）；文章详情页改为单栏居中，不套用此规则 */
-  @media (min-width: 768px) {
-    body:not([data-page-type="post"]) #main-grid {
-      grid-template-columns: 17rem 1fr !important;
-    }
-  }
+  /* 主网格的列数完全由 #main-grid 自身的 Tailwind 类控制（SSR 时按 gridCols 生成，
+     swup 换页时由下方 content:replace 钩子中的 #grid-class-carrier 逻辑同步更新）。
+     此前这里还有一条 `body[data-page-type] #main-grid { grid-template-columns: ... !important }`
+     的规则，而 data-page-type 在 visit:start（即点击链接的瞬间）就会先行切换，
+     早于 content:replace 时机——旧侧栏 widget 与旧正文还在淡出动画中时，
+     网格就被强制切成了文章页的单栏，导致侧栏与正文在切换过程中错位重叠。
+     grid 列数只应与实际替换进 DOM 的内容同步变化，因此改为完全交给 JS 同步，不再用 CSS 抢跑。 */
 
   /* 文章详情页背景改为纯白（仅浅色模式，深色模式维持原配色）。
      <html> 自身带 bg-(--page-bg)，按 CSS 规范它才是画布/可滚动区域背景的来源；
