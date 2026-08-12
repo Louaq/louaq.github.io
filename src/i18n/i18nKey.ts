@@ -150,7 +150,6 @@ enum I18nKey {
 	lastModifiedNoticeTitle = "lastModifiedNoticeTitle",
 	/** 连接「更新日期」与「过时说明」的标点（如中文。「」，英文 ". "） */
 	lastModifiedNoticeJoiner = "lastModifiedNoticeJoiner",
-	year = "year",
 
 	// 访问量统计
 	pageViews = "pageViews",
@@ -206,27 +205,6 @@ enum I18nKey {
 	// 页脚访客计数
 	visitorSitePv = "visitorSitePv",
 	visitorSiteUv = "visitorSiteUv",
-
-	// 日历组件
-	calendarSunday = "calendarSunday",
-	calendarMonday = "calendarMonday",
-	calendarTuesday = "calendarTuesday",
-	calendarWednesday = "calendarWednesday",
-	calendarThursday = "calendarThursday",
-	calendarFriday = "calendarFriday",
-	calendarSaturday = "calendarSaturday",
-	calendarJanuary = "calendarJanuary",
-	calendarFebruary = "calendarFebruary",
-	calendarMarch = "calendarMarch",
-	calendarApril = "calendarApril",
-	calendarMay = "calendarMay",
-	calendarJune = "calendarJune",
-	calendarJuly = "calendarJuly",
-	calendarAugust = "calendarAugust",
-	calendarSeptember = "calendarSeptember",
-	calendarOctober = "calendarOctober",
-	calendarNovember = "calendarNovember",
-	calendarDecember = "calendarDecember",
 
 	// 代码块折叠
 	codeCollapsibleShowMore = "codeCollapsibleShowMore",

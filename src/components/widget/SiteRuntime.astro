@@ -281,6 +281,8 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     runtimeTimer?: number;
     listenerAdded?: boolean;
     started?: boolean;
+    observer?: IntersectionObserver;
+    isVisible?: boolean;
   }
   const state: SiteRuntimeState = ((window as any).__siteRuntimeState ??= {});
 
@@ -374,20 +376,17 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     }
   }
 
-  function initSiteRuntime() {
+  function stopSiteRuntimeTimers() {
     window.clearInterval(state.clockTimer);
     window.clearInterval(state.runtimeTimer);
+    state.clockTimer = undefined;
+    state.runtimeTimer = undefined;
+  }
 
-    const root = document.querySelector<HTMLElement>(".site-runtime");
-    if (!root) return;
-
-    // 只有整站真正首次加载才做 0 -> 目标值的滚动动画；
-    // swup 局部刷新（切页/进出文章）时静默更新，避免数字反复归零重建。
-    const isFirstRun = !state.started;
-    state.started = true;
-
+  function startSiteRuntimeTimers(root: HTMLElement) {
+    stopSiteRuntimeTimers();
     updateClock(root);
-    updateRuntime(root, isFirstRun);
+    updateRuntime(root, false);
 
     state.clockTimer = window.setInterval(() => {
       const current = document.querySelector<HTMLElement>(".site-runtime");
@@ -400,10 +399,48 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     }, RUNTIME_TICK);
   }
 
+  function syncSiteRuntimeActivity() {
+    const root = document.querySelector<HTMLElement>(".site-runtime");
+    if (!root || document.hidden || state.isVisible === false) {
+      stopSiteRuntimeTimers();
+      return;
+    }
+    startSiteRuntimeTimers(root);
+  }
+
+  function initSiteRuntime() {
+    stopSiteRuntimeTimers();
+    state.observer?.disconnect();
+
+    const root = document.querySelector<HTMLElement>(".site-runtime");
+    if (!root) return;
+
+    // 只有整站真正首次加载才做 0 -> 目标值的滚动动画；
+    // swup 局部刷新（切页/进出文章）时静默更新，避免数字反复归零重建。
+    const isFirstRun = !state.started;
+    state.started = true;
+
+    updateClock(root);
+    updateRuntime(root, isFirstRun);
+
+    if ("IntersectionObserver" in window) {
+      state.isVisible = false;
+      state.observer = new IntersectionObserver((entries) => {
+        state.isVisible = entries.some((entry) => entry.isIntersecting);
+        syncSiteRuntimeActivity();
+      });
+      state.observer.observe(root);
+    } else {
+      state.isVisible = true;
+      syncSiteRuntimeActivity();
+    }
+  }
+
   initSiteRuntime();
 
   if (!state.listenerAdded) {
     state.listenerAdded = true;
-    document.addEventListener("swup:contentReplaced", initSiteRuntime);
+    document.addEventListener("astro:page-load", initSiteRuntime);
+    document.addEventListener("visibilitychange", syncSiteRuntimeActivity);
   }
 </script>

@@ -13,11 +13,11 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
   />
 </div>
 
-<script is:raw is:inline>
-  function backToTop() {
+<script>
+  window.backToTop = function () {
     // 直接使用原生滚动，避免OverlayScrollbars冲突
     window.scroll({ top: 0, behavior: "smooth" });
-  }
+  };
 
   // 响应式返回顶部按钮管理器
   if (typeof window.BackToTopManager === "undefined") {
@@ -35,21 +35,35 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
       }
 
       setupScrollListener() {
+        let visible = false;
+        let frame = 0;
         const updateVisibility = () => {
           const scrollTop =
             window.pageYOffset || document.documentElement.scrollTop;
 
           // 当滚动超过200px时显示按钮
-          if (scrollTop > 200) {
+          const nextVisible = scrollTop > 200;
+          if (nextVisible === visible) return;
+          visible = nextVisible;
+
+          if (visible) {
             this.wrapper.classList.remove("hide");
           } else {
             this.wrapper.classList.add("hide");
           }
         };
 
-        window.addEventListener("scroll", updateVisibility, { passive: true });
-        window.addEventListener("load", updateVisibility);
-        window.addEventListener("pageshow", updateVisibility);
+        const scheduleUpdate = () => {
+          if (frame) return;
+          frame = requestAnimationFrame(() => {
+            frame = 0;
+            updateVisibility();
+          });
+        };
+
+        window.addEventListener("scroll", scheduleUpdate, { passive: true });
+        window.addEventListener("load", scheduleUpdate);
+        window.addEventListener("pageshow", scheduleUpdate);
         updateVisibility();
         // 浏览器恢复滚动位置常在首帧布局之后，双 rAF 对齐 scroll restoration 时机
         requestAnimationFrame(() => {

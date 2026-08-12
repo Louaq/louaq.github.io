@@ -1,42 +1,56 @@
 import sitemap from "@astrojs/sitemap";
 import svelte from "@astrojs/svelte";
-import tailwindcss from "@tailwindcss/vite";
 import { pluginLineNumbers } from "@expressive-code/plugin-line-numbers";
 import swup from "@swup/astro";
+import tailwindcss from "@tailwindcss/vite";
 import { defineConfig, fontProviders } from "astro/config";
 import expressiveCode from "astro-expressive-code";
 import icon from "astro-icon";
+import katex from "katex";
 import rehypeAutolinkHeadings from "rehype-autolink-headings";
 import rehypeComponents from "rehype-components"; /* Render the custom directive content */
 import rehypeKatex from "rehype-katex";
-import katex from "katex";
 import "katex/dist/contrib/mhchem.mjs"; // 加载 mhchem 扩展
+import { unified } from "@astrojs/markdown-remark";
+import mdx from "@astrojs/mdx";
+import { pluginCollapsible } from "expressive-code-collapsible"; /* Collapsible */
+import rehypeCallouts from "rehype-callouts";
 import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
 import remarkMath from "remark-math";
-import rehypeCallouts from "rehype-callouts";
 import remarkSectionize from "remark-sectionize";
-import { expressiveCodeConfig, fontConfig, siteConfig } from "./src/config";
-import { i18n } from "./src/i18n/translation";
+import {
+	backgroundWallpaper,
+	expressiveCodeConfig,
+	fontConfig,
+	siteConfig,
+} from "./src/config";
 import I18nKey from "./src/i18n/i18nKey";
-import { pluginCollapsible } from "expressive-code-collapsible"; /* Collapsible */
+import { i18n } from "./src/i18n/translation";
 import { pluginHeaderToolbar } from "./src/plugins/expressive-code-header-toolbar.mjs"; /* mac 风格标题栏：把复制/折叠按钮挪进 header */
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs";
+import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
+import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
+import rehypeFigure from "./src/plugins/rehype-figure.mjs";
+import rehypeImageDimensions from "./src/plugins/rehype-image-dimensions.mjs";
+import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkFirstImage } from "./src/plugins/remark-first-image.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
-import mdx from "@astrojs/mdx";
-import { unified } from "@astrojs/markdown-remark";
-import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
-import rehypeFigure from "./src/plugins/rehype-figure.mjs";
-import rehypeImageDimensions from "./src/plugins/rehype-image-dimensions.mjs";
-import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
-import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
 import meilisearch from "./src/utils/meilisearch.ts";
 
 const isDev = process.env.NODE_ENV === "development";
+const swupContainers = [
+	"#swup-container",
+	"#floating-toc-wrapper",
+	"#post-toc-floating-layer",
+	"#left-sidebar-wrapper",
+];
+if (backgroundWallpaper.switchable || backgroundWallpaper.mode === "banner") {
+	swupContainers.unshift("#banner-wrapper");
+}
 const collapsibleConfig = expressiveCodeConfig.pluginCollapsible;
 const collapsibleOptions =
 	collapsibleConfig?.enable === true
@@ -82,18 +96,12 @@ export default defineConfig({
 			animationClass: "transition-swup-", // see https://swup.js.org/options/#animationselector
 			// the default value `transition-` cause transition delay
 			// when the Tailwind class `transition-all` is used
-			containers: [
-				"#banner-wrapper",
-				"#swup-container",
-				"#right-sidebar-dynamic",
-				"#floating-toc-wrapper",
-				"#post-toc-floating-layer",
-				"#left-sidebar-wrapper",
-			],
+			containers: swupContainers,
 			smoothScrolling: false,
 			// 开发模式下 Vite 依赖重优化会导致 swup 预加载/缓存命中旧的 deps，出现 504 (Outdated Optimize Dep)
 			cache: !isDev,
-			preload: isDev ? false : { hover: true, visible: false },
+			// 本站 HTML 体积较大，hover 预取容易在用户仅经过链接时浪费整页下载。
+			preload: false,
 			accessibility: true,
 			updateHead: true,
 			updateBodyClass: false,
@@ -117,9 +125,17 @@ export default defineConfig({
 		}),
 		icon({
 			include: {
-				"fa6-brands": ["*"],
-				"fa6-regular": ["*"],
-				"fa6-solid": ["*"],
+				"fa6-brands": ["alipay", "creative-commons", "weixin"],
+				"fa6-regular": ["calendar"],
+				"fa6-solid": [
+					"arrow-right",
+					"arrow-rotate-left",
+					"arrow-up-right-from-square",
+					"chevron-left",
+					"chevron-right",
+					"user-shield",
+					"xmark",
+				],
 			},
 		}),
 		expressiveCode({

@@ -75,6 +75,28 @@ function scheduleWarmup(): void {
 }
 
 /**
+ * 立即（同步）强制渲染目标元素之前的所有重型块，用于目录点击等程序化跳转。
+ *
+ * 空闲期预热覆盖不了一种竞态：页面刚加载、空闲回调还没跑完用户就点了目录。
+ * 跳转路径上尚未预热的块仍用占位估值参与布局，scrollIntoView 只按点击那一刻
+ * 的布局算一次落点就开始动画；动画途中这些块从占位值变为真实值（通常占位值
+ * 偏大，块一收缩，目标标题连同其后内容一起上移），落点还停在旧的、偏大的
+ * 坐标上，于是越过标题、落进紧跟其后的块内容里，须再点一次才准。
+ *
+ * 这里在跳转前把目标之前的块同步渲染一次，把坐标钉死，不再依赖空闲回调是否
+ * 已经跑完。
+ */
+export function warmBlocksBeforeElement(target: Element): void {
+	const blocks = collectDeferredBlocks().filter(
+		(block) =>
+			target.compareDocumentPosition(block) &
+			Node.DOCUMENT_POSITION_PRECEDING,
+	);
+	if (blocks.length === 0) return;
+	renderOnceToRememberSizes(blocks);
+}
+
+/**
  * 每次进入新页面（首载与 swup content:replace）调用。
  * 非文章页无匹配块，内部空转，无副作用。
  */

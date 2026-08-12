@@ -159,7 +159,9 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
     }
   }
 
-  // 设置自动关闭功能
+  // 设置自动关闭功能。全部是 window/document/history 级别的一次性全局挂载，
+  // 只能执行一次：重复执行会累积匿名监听器，并把 history.pushState/replaceState
+  // 反复套层包装形成无上界的闭包链。
   function setupAutoClose() {
     // 监听页面卸载和隐藏
     window.addEventListener("beforeunload", closeTOC);
@@ -284,9 +286,6 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
           }
         }, { capture: true });
       }
-
-      // 设置自动关闭
-      setupAutoClose();
     } catch (error) {
       console.error("Failed to load TOCManager:", error);
     }
@@ -299,23 +298,12 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
   if (typeof window !== "undefined" && !window.floatingTOCListenersInitialized) {
     window.floatingTOCListenersInitialized = true;
 
-    // Swup 路由切换。swup 4 的事件名是 swup:content:replace，
-    // swup:contentReplaced 是 3.x 的旧名，保留仅为兼容。
-    document.addEventListener("swup:content:replace", () => {
-      setTimeout(initFloatingTOC, 100);
-    });
-    document.addEventListener("swup:contentReplaced", () => {
-      setTimeout(initFloatingTOC, 100);
-    });
+    setupAutoClose();
 
-    // Astro 页面切换事件
+    // @swup/astro 不派发 swup:* DOM 事件，每次导航（含它接管的前进/后退）
+    // 只在 page:view 钩子上派发 astro:page-load，监听这一个即可。
     document.addEventListener("astro:page-load", () => {
       setTimeout(initFloatingTOC, 100);
-    });
-    
-    // 浏览器导航事件
-    window.addEventListener("popstate", () => {
-      setTimeout(initFloatingTOC, 200);
     });
 
     // 监听布局模式切换（通过自定义事件）

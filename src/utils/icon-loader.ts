@@ -3,6 +3,8 @@
  * 负责处理图标的加载状态显示
  */
 
+let bodyObserver: MutationObserver | null = null;
+
 export function initIconLoader() {
 	// 初始化单个图标容器
 	function initContainer(container: Element) {
@@ -91,8 +93,8 @@ export function initIconLoader() {
 	document.querySelectorAll("[data-icon-container]").forEach(initContainer);
 
 	// 监听新添加的图标
-	if (window.MutationObserver) {
-		const observer = new MutationObserver((mutations) => {
+	if (window.MutationObserver && !bodyObserver) {
+		bodyObserver = new MutationObserver((mutations) => {
 			mutations.forEach((mutation) => {
 				mutation.addedNodes.forEach((node) => {
 					if (node.nodeType === Node.ELEMENT_NODE) {
@@ -109,7 +111,7 @@ export function initIconLoader() {
 			});
 		});
 
-		observer.observe(document.body, {
+		bodyObserver.observe(document.body, {
 			childList: true,
 			subtree: true,
 		});

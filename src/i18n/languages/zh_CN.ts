@@ -147,7 +147,6 @@ export const zh_CN: Translation = {
 	[Key.lastModifiedDaysAgo]: "距今已过 {days} 天",
 	[Key.lastModifiedNoticeTitle]: "温馨提示",
 	[Key.lastModifiedNoticeJoiner]: "。",
-	[Key.year]: "年",
 
 	// 访问量统计
 	[Key.pageViews]: "浏览量",
@@ -205,27 +204,6 @@ export const zh_CN: Translation = {
 	// 页脚访客计数
 	[Key.visitorSitePv]: "总访问量",
 	[Key.visitorSiteUv]: "总访客数",
-
-	// 日历组件
-	[Key.calendarSunday]: "日",
-	[Key.calendarMonday]: "一",
-	[Key.calendarTuesday]: "二",
-	[Key.calendarWednesday]: "三",
-	[Key.calendarThursday]: "四",
-	[Key.calendarFriday]: "五",
-	[Key.calendarSaturday]: "六",
-	[Key.calendarJanuary]: "1月",
-	[Key.calendarFebruary]: "2月",
-	[Key.calendarMarch]: "3月",
-	[Key.calendarApril]: "4月",
-	[Key.calendarMay]: "5月",
-	[Key.calendarJune]: "6月",
-	[Key.calendarJuly]: "7月",
-	[Key.calendarAugust]: "8月",
-	[Key.calendarSeptember]: "9月",
-	[Key.calendarOctober]: "10月",
-	[Key.calendarNovember]: "11月",
-	[Key.calendarDecember]: "12月",
 
 	// 代码块折叠配置
 	[Key.codeCollapsibleShowMore]: "展开更多",

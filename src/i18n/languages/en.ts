@@ -155,7 +155,6 @@ export const en: Translation = {
 	[Key.lastModifiedDaysAgo]: "{days} days ago",
 	[Key.lastModifiedNoticeTitle]: "Note",
 	[Key.lastModifiedNoticeJoiner]: ". ",
-	[Key.year]: "year",
 
 	// Page Views Statistics
 	[Key.pageViews]: "Views",
@@ -213,27 +212,6 @@ export const en: Translation = {
 	// Footer visitor count
 	[Key.visitorSitePv]: "Total Views",
 	[Key.visitorSiteUv]: "Total Visitors",
-
-	// Calendar Component
-	[Key.calendarSunday]: "Sun",
-	[Key.calendarMonday]: "Mon",
-	[Key.calendarTuesday]: "Tue",
-	[Key.calendarWednesday]: "Wed",
-	[Key.calendarThursday]: "Thu",
-	[Key.calendarFriday]: "Fri",
-	[Key.calendarSaturday]: "Sat",
-	[Key.calendarJanuary]: "Jan",
-	[Key.calendarFebruary]: "Feb",
-	[Key.calendarMarch]: "Mar",
-	[Key.calendarApril]: "Apr",
-	[Key.calendarMay]: "May",
-	[Key.calendarJune]: "Jun",
-	[Key.calendarJuly]: "Jul",
-	[Key.calendarAugust]: "Aug",
-	[Key.calendarSeptember]: "Sep",
-	[Key.calendarOctober]: "Oct",
-	[Key.calendarNovember]: "Nov",
-	[Key.calendarDecember]: "Dec",
 
 	// Code Block Collapsible Configuration
 	[Key.codeCollapsibleShowMore]: "Show more",

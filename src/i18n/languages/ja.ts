@@ -158,7 +158,6 @@ export const ja: Translation = {
 	[Key.lastModifiedDaysAgo]: "{days}日前",
 	[Key.lastModifiedNoticeTitle]: "お知らせ",
 	[Key.lastModifiedNoticeJoiner]: "。",
-	[Key.year]: "年",
 
 	// ページビュー統計
 	[Key.pageViews]: "閲覧数",
@@ -212,27 +211,6 @@ export const ja: Translation = {
 	// フッター訪問者カウント
 	[Key.visitorSitePv]: "総閲覧数",
 	[Key.visitorSiteUv]: "総訪問者数",
-
-	// カレンダーコンポーネント
-	[Key.calendarSunday]: "日",
-	[Key.calendarMonday]: "月",
-	[Key.calendarTuesday]: "火",
-	[Key.calendarWednesday]: "水",
-	[Key.calendarThursday]: "木",
-	[Key.calendarFriday]: "金",
-	[Key.calendarSaturday]: "土",
-	[Key.calendarJanuary]: "1月",
-	[Key.calendarFebruary]: "2月",
-	[Key.calendarMarch]: "3月",
-	[Key.calendarApril]: "4月",
-	[Key.calendarMay]: "5月",
-	[Key.calendarJune]: "6月",
-	[Key.calendarJuly]: "7月",
-	[Key.calendarAugust]: "8月",
-	[Key.calendarSeptember]: "9月",
-	[Key.calendarOctober]: "10月",
-	[Key.calendarNovember]: "11月",
-	[Key.calendarDecember]: "12月",
 
 	// コードブロック折りたたみ設定
 	[Key.codeCollapsibleShowMore]: "もっと見る",

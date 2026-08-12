@@ -4,7 +4,6 @@ import ImageLightboxManager from "@components/features/ImageLightboxManager.astr
 import KatexManager from "@components/features/KatexManager.astro";
 import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
-import GlobalIconSprite from "@/components/misc/GlobalIconSprite.astro";
 import PdfEmbedRuntime from "@/components/misc/PdfEmbedRuntime.astro";
 
 import {
@@ -510,7 +509,6 @@ const collapsiblePreviewLines =
       })();
     </script>
     
-    <GlobalIconSprite />
     <PdfEmbedRuntime />
 
     {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
@@ -598,12 +596,16 @@ const collapsiblePreviewLines =
     BANNER_HEIGHT,
     BANNER_HEIGHT_EXTEND,
   } from "@/constants/constants";
-  import { backgroundWallpaper, expressiveCodeConfig, siteConfig } from "@/config";
+  import {
+    backgroundWallpaper,
+    coverImageConfig,
+    expressiveCodeConfig,
+    siteConfig,
+  } from "@/config";
   import { initArchivePage } from "@/utils/archive-init";
   // 以下三处逻辑原本内联在只于部分页面渲染的组件里，它们的 <script> 也就只出现在那些页面。
   // swup 导航不会执行新页面的脚本，导致「从别的页面点进来」时这些功能整块失效
   // （必须手动刷新才好）。统一挪到这个每页都在的常驻脚本里调用。
-  import { initCoverImages } from "@/utils/cover-image-init";
   import { initPostCardDelegation } from "@/utils/post-card-init";
   import { initMarkdownImages } from "@/utils/markdown-image-init";
   import { initPostPageTOC } from "@/utils/post-page-toc-init";
@@ -613,7 +615,11 @@ const collapsiblePreviewLines =
   // 均为文档级单例：卡片点击走 document 委托、封面图靠 MutationObserver 跟进新 DOM，
   // 各自内部幂等，首次加载调用一次即可。
   initPostCardDelegation();
-  initCoverImages();
+  if (coverImageConfig.randomCoverImage.enable) {
+    void import("@/utils/cover-image-init").then(({ initCoverImages }) => {
+      initCoverImages();
+    });
+  }
   initPostPageTOC();
   initMarkdownImages();
   initCodeCopyFeedback();
@@ -715,6 +721,14 @@ const collapsiblePreviewLines =
   }
 
   const setup = () => {
+    const MAX_SWUP_CACHE_PAGES = 6;
+    window.swup.hooks.on("cache:set", () => {
+      const cachedUrls = Array.from(window.swup.cache.all.keys()) as string[];
+      while (cachedUrls.length > MAX_SWUP_CACHE_PAGES) {
+        const oldest = cachedUrls.shift();
+        if (oldest) window.swup.cache.delete(oldest);
+      }
+    });
     // TODO: temp solution to change the height of the banner
     /*
 	window.swup.hooks.on('animation:out:start', () => {
@@ -1140,17 +1154,18 @@ const collapsiblePreviewLines =
   }
 
   // Initialize wallpaper mode
-  import { initWallpaperMode, initThemeListener } from "@/utils/setting-utils";
   import { initIconLoader } from "@/utils/icon-loader";
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      initWallpaperMode();
-      initThemeListener();
-      initIconLoader();
-    });
-  } else {
-    initWallpaperMode();
-    initThemeListener();
+  const initOptionalRuntime = () => {
+    if (backgroundWallpaper.switchable) {
+      void import("@/utils/setting-utils").then(({ initWallpaperMode }) => {
+        initWallpaperMode();
+      });
+    }
     initIconLoader();
+  };
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initOptionalRuntime, { once: true });
+  } else {
+    initOptionalRuntime();
   }
 </script>

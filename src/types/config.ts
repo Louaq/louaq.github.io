@@ -382,7 +382,6 @@ export type WidgetComponentType =
 	| "sidebarToc"
 	| "advertisement"
 	| "stats"
-	| "calendar"
 	| "runtime";
 
 export type WidgetComponentConfig = {

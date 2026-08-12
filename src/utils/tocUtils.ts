@@ -3,6 +3,8 @@
  * 用于 SidebarTOC 和 FloatingTOC 的共享逻辑
  */
 
+import { warmBlocksBeforeElement } from "@/utils/deferred-block-warmup";
+
 /**
  * TOC 空状态文案。
  *
@@ -358,12 +360,15 @@ export class TOCManager {
 		const targetElement = document.getElementById(id);
 
 		if (targetElement) {
-			// 落点准确性依赖两件事：
-			// 1. deferred-block-warmup 在空闲期已让 content-visibility: auto 的重型块
-			//    （超长代码块/公式）各渲染一次并记住真实尺寸，全文布局坐标是精确的；
-			// 2. scrollIntoView 把目标自身的 c-v 祖先链强制渲染后再计算落点。
+			// 落点准确性依赖三件事：
+			// 1. warmBlocksBeforeElement 在这里同步强制渲染目标之前的重型块，不依赖
+			//    空闲期预热是否已经跑完，跳转前把目标之前的坐标钉死；
+			// 2. deferred-block-warmup 在空闲期也让全文 content-visibility: auto 的
+			//    重型块各渲染一次并记住真实尺寸，覆盖鼠标滚轮/URL hash 等非点击路径；
+			// 3. scrollIntoView 把目标自身的 c-v 祖先链强制渲染后再计算落点。
 			// 顶栏偏移交给 CSS 的 scroll-margin-top（markdown.css 中标题已设置），
 			// 不要退回手写 getBoundingClientRect + scrollTo 减偏移的方案。
+			warmBlocksBeforeElement(targetElement);
 			targetElement.scrollIntoView({
 				behavior: "smooth",
 				block: "start",

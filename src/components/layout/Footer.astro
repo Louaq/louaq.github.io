@@ -142,6 +142,7 @@ if (footerConfig.enable) {
             <span class="inline-flex items-center gap-1">
               <Icon
                 name="material-symbols:visibility-outline-rounded"
+                is:inline
                 class="text-base text-(--primary)"
               />
               <span class="text-50">{i18n(I18nKey.visitorSitePv)}</span>
@@ -155,6 +156,7 @@ if (footerConfig.enable) {
             <span class="inline-flex items-center gap-1">
               <Icon
                 name="material-symbols:person-outline-rounded"
+                is:inline
                 class="text-base text-(--primary)"
               />
               <span class="text-50">{i18n(I18nKey.visitorSiteUv)}</span>
@@ -245,6 +247,9 @@ if (footerConfig.enable) {
   };
 
   let inFlight = false;
+  let lastRequestKey = "";
+  let lastRequestAt = 0;
+  const SAME_PAGE_REQUEST_TTL = 60_000;
 
   const refresh = async () => {
     const root = document.querySelector<HTMLElement>("[data-visitor-count]");
@@ -253,6 +258,19 @@ if (footerConfig.enable) {
 
     const cached = readCache();
     if (cached) render(cached);
+
+    const requestKey = `${window.location.pathname}${window.location.search}`;
+    const now = Date.now();
+    if (
+      cached &&
+      requestKey === lastRequestKey &&
+      now - lastRequestAt < SAME_PAGE_REQUEST_TTL
+    ) {
+      inFlight = false;
+      return;
+    }
+    lastRequestKey = requestKey;
+    lastRequestAt = now;
 
     // 首次访问才计入 UV，与官方脚本共用同一个 cookie
     const isNewUv = !hasUvCookie();
@@ -281,5 +299,5 @@ if (footerConfig.enable) {
   };
 
   refresh();
-  document.addEventListener("swup:contentReplaced", refresh);
+  document.addEventListener("astro:page-load", refresh);
 </script>

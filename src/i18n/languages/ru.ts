@@ -157,7 +157,6 @@ export const ru: Translation = {
 	[Key.lastModifiedDaysAgo]: "{days} дней назад",
 	[Key.lastModifiedNoticeTitle]: "Внимание",
 	[Key.lastModifiedNoticeJoiner]: ". ",
-	[Key.year]: "год",
 
 	// Статистика просмотров
 	[Key.pageViews]: "Просмотры",
@@ -215,27 +214,6 @@ export const ru: Translation = {
 	// Счётчик посетителей в подвале
 	[Key.visitorSitePv]: "Всего просмотров",
 	[Key.visitorSiteUv]: "Всего посетителей",
-
-	// Компонент календаря
-	[Key.calendarSunday]: "Вс",
-	[Key.calendarMonday]: "Пн",
-	[Key.calendarTuesday]: "Вт",
-	[Key.calendarWednesday]: "Ср",
-	[Key.calendarThursday]: "Чт",
-	[Key.calendarFriday]: "Пт",
-	[Key.calendarSaturday]: "Сб",
-	[Key.calendarJanuary]: "Янв",
-	[Key.calendarFebruary]: "Фев",
-	[Key.calendarMarch]: "Мар",
-	[Key.calendarApril]: "Апр",
-	[Key.calendarMay]: "Май",
-	[Key.calendarJune]: "Июн",
-	[Key.calendarJuly]: "Июл",
-	[Key.calendarAugust]: "Авг",
-	[Key.calendarSeptember]: "Сен",
-	[Key.calendarOctober]: "Окт",
-	[Key.calendarNovember]: "Ноя",
-	[Key.calendarDecember]: "Дек",
 
 	// Конфигурация блоков коллапсируемого кода
 	[Key.codeCollapsibleShowMore]: "Показать больше",
