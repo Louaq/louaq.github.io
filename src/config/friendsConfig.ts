@@ -56,16 +56,16 @@ export const friendGroups: FriendGroup[] = [
 		enabled: true,
 		friends: [
 			// 想置顶某个友链，把它放到这个分组里即可，例如：
-			// {
-			// 	title: "某位朋友",
-			// 	imgurl: "https://example.com/avatar.png",
-			// 	desc: "站点描述",
-			// 	siteurl: "https://example.com",
-			// 	weight: 10,
-			// 	enabled: true,
-			// 	badge: "PINNED",
-			// 	badgeIcon: "material-symbols:keep-rounded",
-			// },
+			{
+				title: "统计",
+				imgurl: "https://umami.louaq.com/favicon.ico",
+				desc: "站点分析",
+				siteurl: "https://umami.louaq.com/dashboard",
+				weight: 10,
+				enabled: true,
+				badge: "PINNED",
+				badgeIcon: "material-symbols:keep-rounded",
+			},
 		],
 	},
 	{
