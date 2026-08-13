@@ -776,6 +776,23 @@ body {
   box-shadow: none !important;
 }
 
+/* 归档 / 友链 / 观影 / 关于等单栏居中页面的主体卡片：去掉描边、阴影与卡片底色，
+   完全融入页面背景。背景用 transparent 而非写死颜色，才能同时适配浅色（#ffffff）、
+   深色（--card-bg #22222a 比页面 #17171a 亮，不透明时会浮出一块）以及壁纸模式。
+   hover 态一并覆盖，否则会被上面 .card-base:hover 的 !important 阴影重新画出边界。 */
+.card-base.card-plain,
+.card-base.card-plain:hover,
+.enable-card-border .card-base.card-plain,
+.enable-card-border .card-base.card-plain:hover,
+:root.dark .card-base.card-plain,
+:root.dark .card-base.card-plain:hover,
+:root.dark .enable-card-border .card-base.card-plain,
+:root.dark .enable-card-border .card-base.card-plain:hover {
+  background-color: transparent !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
 /* =============================================================
  * 导航栏：白底 + 细边框 + 紧凑 + 蓝色 hover
  * ============================================================= */

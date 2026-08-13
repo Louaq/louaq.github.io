@@ -28,6 +28,8 @@ interface Props {
 	setOGTypeArticle?: boolean;
 	postSlug?: string;
 	headings?: MarkdownHeading[];
+	/** 隐藏左侧栏，主内容区单栏居中显示（效果与文章详情页一致，但不触发文章页专属逻辑，如 OG 图、纯白背景等） */
+	hideSidebar?: boolean;
 }
 
 const backgroundImages = getBackgroundImages();
@@ -41,6 +43,7 @@ const {
 	setOGTypeArticle,
 	postSlug,
 	headings = [],
+	hideSidebar = false,
 } = Astro.props;
 
 // 检查背景壁纸模式和是否允许切换
@@ -87,6 +90,9 @@ const creditUrlMobile =
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 const isPostPageCheck = postSlug !== undefined;
+// 隐藏侧栏的页面（归档/友链/观影/关于等）与文章详情页共用「单栏居中」的网格与内容宽度，
+// 但不复用 isPostPageCheck，避免连带触发 OG 图生成、纯白背景、悬浮目录等文章页专属逻辑
+const isSingleColumnLayout = isPostPageCheck || hideSidebar;
 const PostPageTOC = isPostPageCheck
 	? (await import("@components/layout/PostPageTOC.astro")).default
 	: null;
@@ -167,7 +173,7 @@ const sidebarConfig = getResponsiveSidebarConfig();
 // 单侧栏布局：左侧 17rem 原 widget（profile/倒计时/公告） + 主内容区
 // 移动端 (<768px) 单栏，由 grid-cols-1 控制
 // 文章详情页不使用左右分栏，正文整体单栏居中显示（目录改为右侧悬浮面板）
-const gridCols = isPostPageCheck ? "grid-cols-1" : "grid-cols-1 md:grid-cols-[17rem_1fr]";
+const gridCols = isSingleColumnLayout ? "grid-cols-1" : "grid-cols-1 md:grid-cols-[17rem_1fr]";
 
 // 检查是否应该启用半透明效果
 const shouldEnableTransparency = isOverlayMode && isBackgroundEnabled;
@@ -178,7 +184,7 @@ const transparentClass = shouldEnableTransparency
 	: "";
 ---
 
-<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug}>
+<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug} whiteBackground={hideSidebar}>
 
 
 <!-- 全屏透明覆盖壁纸 - 如果允许切换则始终渲染，否则只渲染当前模式 -->
@@ -439,7 +445,7 @@ const transparentClass = shouldEnableTransparency
             </a>}
 
             <div id="left-sidebar-wrapper" class="contents">
-                {!isPostPageCheck && (
+                {!isSingleColumnLayout && (
                     <div class="hidden md:block md:row-start-1 md:row-end-2 md:col-start-1 md:col-end-2 md:h-full transition-main">
                         {/* 此处不能挂 onload-animation：它的 animation ... forwards 填充会把
                            opacity 永久钉在 1，且动画声明在级联中压过一切普通规则，
@@ -453,12 +459,12 @@ const transparentClass = shouldEnableTransparency
                文章页单栏居中，宽度与原「1fr 内容列」保持一致（page-width 减去 17rem 侧栏与 1rem 间距） */}
             <main id="swup-container" class:list={[
                 "transition-swup-fade overflow-hidden w-full transition-main",
-                isPostPageCheck
+                isSingleColumnLayout
                     ? "max-w-[calc(var(--page-width)-18rem)] mx-auto"
                     : "md:col-start-2 md:col-end-3",
             ]}>
                 {/* 携带网格布局类名，用于JS更新父容器 */}
-                <div id="grid-class-carrier" data-grid-class={gridCols} class="hidden"></div>
+                <div id="grid-class-carrier" data-grid-class={gridCols} data-white-bg={String(hideSidebar)} class="hidden"></div>
                 {/* 备用 h1 标题 - 当主页横幅文本未启用时，提供隐藏的主标题 */}
                 {isHomePageCheck && !showHomeText && (
                         <h1 class="sr-only">{siteConfig.title}</h1>
@@ -532,6 +538,39 @@ const transparentClass = shouldEnableTransparency
   }
   :root:not(.dark) body[data-page-type="post"] {
     background-color: #ffffff !important;
+  }
+
+  /* 归档 / 友链 / 观影 / 关于：页面背景改为细网格（参考 ThriveX-Blog 的做法，
+     一层 fixed 满视口的网格，线色 rgba(148,163,184,.06) / 64px 网格，明暗两色通用）。
+     与 ThriveX 不同的是这里额外用 mask 把四边虚化掉，避免网格在视口边缘被生硬切断。
+
+     画成 body::before 而不是 <html> 的 background-image，是因为 mask 只能作用于元素整体：
+     若把网格放在 <html> 背景上再加 mask，会把页面所有内容一起蒙掉。
+     z-index:-1 让它落在根堆叠上下文的负层——绘制在画布底色之上、body 背景与正文之下；
+     body 无任何创建堆叠上下文的属性，所以该负层不会被困在 body 内部。 */
+  body[data-white-bg="true"]::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    background-image:
+      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
+    background-size: 64px 64px;
+    /* 中心实、四周渐隐；单层 radial 遮罩即可，无需 mask-composite，兼容性更稳 */
+    -webkit-mask-image: radial-gradient(ellipse 88% 78% at 50% 45%, #000 45%, transparent 100%);
+    mask-image: radial-gradient(ellipse 88% 78% at 50% 45%, #000 45%, transparent 100%);
+  }
+
+  /* 浅色模式下页面底色用纯白；深色模式沿用 <html> 自带的 --page-bg。
+     body 必须透明，否则 main.css 里那条不透明的
+     `body { background-color: var(--page-bg) !important }` 会盖住上面的网格层。 */
+  :root:not(.dark):has(body[data-white-bg="true"]) {
+    background-color: #ffffff !important;
+  }
+  body[data-white-bg="true"] {
+    background-color: transparent !important;
   }
 
   /* 右侧栏平滑过渡 */

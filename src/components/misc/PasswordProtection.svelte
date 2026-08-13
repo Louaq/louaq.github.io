@@ -316,7 +316,7 @@ onDestroy(() => {
   }
   
   .password-protection-card {
-    background: var(--card-bg);
+    background: transparent;
     border-radius: var(--radius-large);
     padding: 2.5rem 1.5rem;
     max-width: 360px;
