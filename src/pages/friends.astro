@@ -3,6 +3,7 @@ import Comment from "@components/comment/index.astro";
 import ApplyDialog from "@components/pages/friends/ApplyDialog.astro";
 import GroupSection from "@components/pages/friends/GroupSection.astro";
 import { Icon as AstroIcon } from "astro-icon/components";
+import PageHero from "@/components/common/PageHero.astro";
 import {
 	commentConfig,
 	friendSiteInfo,
@@ -63,9 +64,11 @@ const copyFields = [
 ];
 ---
 
-<MainGridLayout title={title} description={description}>
+<MainGridLayout title={title} description={description} hideSidebar>
+  <PageHero title={title} subtitle={description} />
+
   <!-- 本站信息 + 全站置顶 -->
-  <div class="card-base z-10 relative w-full overflow-hidden mb-4">
+  <div class="card-base card-plain z-10 relative w-full overflow-hidden mb-4">
     <div class="friend-hero relative px-5 py-7 sm:px-8 sm:py-9">
       <div class="friend-hero-dots" aria-hidden="true"></div>
 

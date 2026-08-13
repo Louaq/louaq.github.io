@@ -42,10 +42,6 @@
 	text-decoration: none;
 	color: inherit;
 	border-radius: 0.5rem;
-	transition:
-		background-color 0.14s ease,
-		transform 0.14s ease,
-		color 0.14s ease;
 	width: 100%;
 	min-width: 0;
 	flex-shrink: 0;
@@ -56,14 +52,6 @@
 	z-index: 1;
 	padding: 0.48rem 0.62rem;
 	min-height: 2.2rem;
-}
-
-.toc-item:hover {
-	background: color-mix(in oklab, var(--toc-btn-hover) 84%, transparent);
-}
-
-.toc-item:active {
-	background: color-mix(in oklab, var(--toc-btn-active) 88%, transparent);
 }
 
 .toc-item.toc-level-1 {
@@ -98,6 +86,14 @@
 .toc-item.visible .toc-label {
 	color: color-mix(in oklab, var(--content-meta) 58%, var(--primary));
 	opacity: 1;
+}
+
+.toc-item:hover .toc-label {
+	color: var(--primary);
+}
+
+.toc-item:active .toc-label {
+	color: var(--juejin-primary-active);
 }
 
 /* 活动指示器：已按需求关闭圆角高亮背景块效果 */

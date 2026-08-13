@@ -94,9 +94,9 @@
   --admonitions-color-caution: oklch(0.6 0.2 25);
   
   /* TOC相关变量 */
-  --toc-btn-hover: oklch(0.92 0.015 var(--hue));
-  --toc-btn-active: oklch(0.90 0.015 var(--hue));
-  --toc-width: calc((100vw - var(--page-width)) / 2 - 1rem);
+  /* 目录宽度取「正文右侧空槽」与 14rem 的较小值：窗口再宽也不会继续变宽，
+     只是让目录离正文更近、把多出来的空间留在最右侧 */
+  --toc-width: min(calc((100vw - var(--page-width)) / 2 - 1rem), 14rem);
   --toc-item-active: oklch(0.70 0.13 var(--hue));
   
   /* 主题色选择条渐变 */
@@ -178,8 +178,6 @@
   --admonitions-color-caution: oklch(0.65 0.2 25);
   
   /* TOC相关变量 - 暗色主题 */
-  --toc-btn-hover: oklch(0.28 0.04 var(--hue));
-  --toc-btn-active: oklch(0.32 0.05 var(--hue));
   --toc-item-active: oklch(0.35 0.07 var(--hue));
   
   /* 主题色选择条渐变 - 暗色主题 */

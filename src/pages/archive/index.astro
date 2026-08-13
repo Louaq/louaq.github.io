@@ -3,6 +3,7 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
+import PageHero from "@/components/common/PageHero.astro";
 import { getArchivePostsList } from "@/utils/content-utils";
 import { getPostUrlBySlug } from "@/utils/url-utils";
 
@@ -39,12 +40,13 @@ function formatTags(tagList: string[]) {
 const labelSingular = i18n(I18nKey.postCount);
 const labelPlural = i18n(I18nKey.postsCount);
 ---
-<MainGridLayout title={i18n(I18nKey.archive)}>
-	<div class="card-base px-8 py-6" id="archive-list"
+<MainGridLayout title={i18n(I18nKey.archive)} hideSidebar>
+	<PageHero title={i18n(I18nKey.archive)} subtitle={i18n(I18nKey.archiveDescription)} />
+	<div class="card-base card-plain px-8 py-6" id="archive-list"
 		data-label-singular={labelSingular} data-label-plural={labelPlural}>
 		{groups.map((group, index) => (
 			<details class="archive-year-group" data-year={group.year} open={index === 0}>
-				<summary class="archive-year-summary flex flex-row w-full items-center h-15 -mx-2 px-2 rounded-lg cursor-pointer select-none transition-[background-color] duration-150 hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active)">
+				<summary class="archive-year-summary flex flex-row w-full items-center h-15 -mx-2 px-2 rounded-lg cursor-pointer select-none transition-[background-color] duration-150">
 					<div class="w-[15%] md:w-[10%] text-2xl font-bold text-right text-75">
 						{group.year}
 					</div>
@@ -69,7 +71,6 @@ const labelPlural = i18n(I18nKey.postsCount);
 						data-category={post.category}
 						class="group archive-row-link !block h-10 w-full rounded-lg text-black/75 dark:text-white/75
 							transition-[background-color] duration-150
-							hover:bg-(--btn-plain-bg-hover) active:bg-(--btn-plain-bg-active)
 							hover:text-[initial]"
 					>
 						<div class="flex flex-row justify-start items-center h-full">
