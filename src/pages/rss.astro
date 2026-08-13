@@ -109,14 +109,14 @@ const recentPosts = posts.slice(0, 6);
 
     <script>
         function initRssCopy() {
-            const copyBtn = document.getElementById('copy-rss-btn');
-            if (!copyBtn) return;
-            
-            // 移除旧的事件监听器（通过克隆节点的方式）
-            const newBtn = copyBtn.cloneNode(true) as HTMLElement;
-            copyBtn.parentNode?.replaceChild(newBtn, copyBtn);
+            const newBtn = document.getElementById('copy-rss-btn');
+            if (!newBtn) return;
 
-            // 绑定新的事件监听器
+            // swup 换页会整个替换按钮元素，重复绑定只可能发生在同一元素上，
+            // 打个标记即可，不必再靠"克隆节点替换自己"来甩掉旧监听器
+            if (newBtn.dataset.rssCopyBound === 'true') return;
+            newBtn.dataset.rssCopyBound = 'true';
+
             newBtn.addEventListener('click', async () => {
                 const url = newBtn.getAttribute('data-url');
                 if (!url) return;
@@ -141,20 +141,11 @@ const recentPosts = posts.slice(0, 6);
             });
         }
         
-        // 立即初始化（支持直接访问页面和刷新）
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initRssCopy);
-        } else {
-            // DOM 已加载，直接初始化
-            setTimeout(initRssCopy, 0);
-        }
-        
-        // 支持 Swup 客户端路由（如果存在）
-        if (typeof window !== 'undefined' && (window as any).swup) {
-            (window as any).swup.hooks.on('content:replace', () => {
-                // 延迟执行以确保 DOM 已更新
-                setTimeout(initRssCopy, 100);
-            });
-        }
+        // 本脚本被 Astro 打包为 type="module"（defer），执行时 DOM 已解析完毕。
+        initRssCopy();
+
+        // swup 导航后重新绑定。原先是先判断 window.swup 再挂 content:replace 钩子，
+        // 但 swup 以 loadOnIdle 方式初始化，晚于本脚本执行，那个分支基本进不去。
+        document.addEventListener('astro:page-load', initRssCopy);
     </script>
 </MainGridLayout>

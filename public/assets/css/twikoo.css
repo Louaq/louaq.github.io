@@ -321,29 +321,5 @@
   background-color: color-mix(in oklch, var(--tk-bg) 84%, var(--tk-accent) 16%);
 }
 
-/* 全屏透明模式变量：背景、边框和文字在透明壁纸下重新平衡 */
-body.wallpaper-transparent .twikoo {
-  --tk-bg: var(--card-bg-transparent);
-  --tk-border: color-mix(in oklch, var(--line-divider) 70%, transparent 30%);
-  --tk-text: color-mix(in oklch, var(--card-bg) 8%, #000 92%);
-  --tk-muted: color-mix(in oklch, var(--card-bg) 28%, #666 72%);
-}
-
-/* 全屏透明模式（暗色）：进一步提高文字对比度 */
-:root.dark body.wallpaper-transparent .twikoo {
-  --tk-text: color-mix(in oklch, var(--card-bg) 8%, #fff 92%);
-  --tk-muted: color-mix(in oklch, var(--card-bg) 40%, #c0c4cc 60%);
-}
-
-/* 全屏透明模式面板：开启毛玻璃效果 */
-body.wallpaper-transparent .twikoo .el-input__inner,
-body.wallpaper-transparent .twikoo .el-textarea__inner,
-body.wallpaper-transparent .twikoo .el-input-group__append,
-body.wallpaper-transparent .twikoo .el-input-group__prepend,
-body.wallpaper-transparent .twikoo .tk-sort-select,
-body.wallpaper-transparent .twikoo .tk-preview-container,
-body.wallpaper-transparent .twikoo .OwO .OwO-body {
-  background-color: var(--tk-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
+/* 此处原有三组 body.wallpaper-transparent 规则，为全屏透明壁纸模式下的评论区
+   重新平衡背景/边框/文字并开启毛玻璃。背景壁纸功能已整体移除，该类不再出现。 */

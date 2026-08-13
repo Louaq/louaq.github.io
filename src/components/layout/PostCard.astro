@@ -1,13 +1,12 @@
 ---
 import type { CollectionEntry } from "astro:content";
 import { Icon } from "astro-icon/components";
-import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
+import CoverImage from "@/components/common/CoverImage.astro";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { getCategoryUrl } from "@/utils/category-utils";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 import { stableIndex } from "@/utils/hash";
-import { processCoverImageSync } from "@/utils/image-utils";
 import { getPostRenderMetadata } from "@/utils/post-render-metadata";
 import { getFileDirFromPath } from "@/utils/url-utils";
 
@@ -66,14 +65,10 @@ const FALLBACK_COVERS = [
 const pickFallbackCover = (seed: string) =>
 	FALLBACK_COVERS[stableIndex(seed, FALLBACK_COVERS.length)];
 
-// 处理随机图：如果image为"api"，则从配置的API获取随机图
-// 未显式设置封面时，依次回退到正文中第一张图片、再到随机兜底封面图
+// 封面来源：frontmatter 显式指定 → 正文中第一张图片 → 稳定选取的兜底封面图
 const firstImage =
 	(remarkPluginFrontmatter.firstImage as string | undefined) ?? "";
-const processedImage =
-	processCoverImageSync(image, entry.id) ||
-	firstImage ||
-	pickFallbackCover(entry.id);
+const processedImage = image || firstImage || pickFallbackCover(entry.id);
 const basePath = getFileDirFromPath(entry.filePath || "");
 const minuteLabel =
 	minutes === 1 ? i18n(I18nKey.minuteCount) : i18n(I18nKey.minutesCount);
@@ -97,12 +92,11 @@ const minuteLabel =
   {
     isEven && (
       <div class="hero-card-side hidden sm:block relative min-w-[45%] overflow-hidden z-10">
-        <RandomCoverImage
+        <CoverImage
           src={processedImage}
           basePath={basePath}
           alt=""
           class="hero-card-side-img h-full w-full"
-          seed={entry.id}
           preview={true}
           loading={coverLoading}
         />
@@ -161,12 +155,11 @@ const minuteLabel =
   {
     !isEven && (
       <div class="hero-card-side hidden sm:block relative min-w-[45%] overflow-hidden z-10">
-        <RandomCoverImage
+        <CoverImage
           src={processedImage}
           basePath={basePath}
           alt=""
           class="hero-card-side-img h-full w-full"
-          seed={entry.id}
           preview={true}
           loading={coverLoading}
         />

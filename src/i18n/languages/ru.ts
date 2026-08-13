@@ -173,14 +173,8 @@ export const ru: Translation = {
 	[Key.pinned]: "Закреплено",
 
 	// Режим обоев
-	[Key.wallpaperMode]: "Режим обоев",
-	[Key.wallpaperBannerMode]: "Баннер обои",
-	[Key.wallpaperOverlayMode]: "Прозрачный",
-	[Key.wallpaperNoneMode]: "Однотонный фон",
 
 	// Настройки баннера
-	[Key.bannerSettings]: "Настройки баннера",
-	[Key.bannerTitle]: "Заголовок баннера",
 
 	// Страница спонсоров
 	[Key.sponsor]: "Спонсор",

@@ -163,8 +163,6 @@ export const en: Translation = {
 	[Key.pageViewsLoading]: "Loading...",
 
 	// Banner Settings
-	[Key.bannerSettings]: "Banner Settings",
-	[Key.bannerTitle]: "Banner Title",
 
 	// Post List Layout
 	[Key.postListLayout]: "Post List Layout",
@@ -175,10 +173,6 @@ export const en: Translation = {
 	[Key.pinned]: "Pinned",
 
 	// Wallpaper Mode
-	[Key.wallpaperMode]: "Wallpaper Mode",
-	[Key.wallpaperBannerMode]: "Banner Wallpaper",
-	[Key.wallpaperOverlayMode]: "Overlay Wallpaper",
-	[Key.wallpaperNoneMode]: "None Wallpaper",
 
 	// Sponsor Page
 	[Key.sponsor]: "Sponsor",

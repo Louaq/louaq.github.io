@@ -199,19 +199,17 @@ const statusColor = {
 						) : null}
 						<script is:inline define:vars={{ watchlistTabIdsJson }}>
 							(function () {
-								try {
-									var ids = JSON.parse(watchlistTabIdsJson);
-									var h =
-										typeof location !== "undefined" && location.hash
-											? location.hash.slice(1).replace(/^\/+|\/+$/g, "")
-											: "";
-									if (h && ids.indexOf(h) !== -1) {
-										document.documentElement.setAttribute(
-											"data-watchlist-restore",
-											h,
-										);
-									}
-								} catch (e) {}
+								// watchlistTabIdsJson 由构建期序列化，必然是合法 JSON
+								var ids = JSON.parse(watchlistTabIdsJson);
+								var h = location.hash
+									? location.hash.slice(1).replace(/^\/+|\/+$/g, "")
+									: "";
+								if (h && ids.indexOf(h) !== -1) {
+									document.documentElement.setAttribute(
+										"data-watchlist-restore",
+										h,
+									);
+								}
 							})();
 						</script>
 						<div class="watchlist-tabs-root">

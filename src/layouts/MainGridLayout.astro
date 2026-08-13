@@ -1,28 +1,17 @@
 ---
-import OverlayWallpaper from "@components/features/OverlayWallpaper.astro";
 import Footer from "@components/layout/Footer.astro";
 import LeftSideBar from "@components/layout/LeftSideBar.astro";
 import Navbar from "@components/layout/Navbar.astro";
 import type { MarkdownHeading } from "astro";
-import { Icon } from "astro-icon/components";
-import ImageWrapper from "@/components/common/ImageWrapper.astro";
 import FloatingControls from "@/components/controls/FloatingControls.astro";
-import TypewriterText from "@/components/features/TypewriterText.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
-import { backgroundWallpaper, siteConfig } from "@/config";
-import {
-	BANNER_HEIGHT,
-	BANNER_HEIGHT_EXTEND,
-	MAIN_PANEL_OVERLAPS_BANNER_HEIGHT,
-} from "@/constants/constants";
-import { getBackgroundImages, isHomePage } from "@/utils/layout-utils";
+import { siteConfig } from "@/config";
+import { isHomePage } from "@/utils/layout-utils";
 import { getResponsiveSidebarConfig } from "@/utils/responsive-utils";
 import Layout from "./Layout.astro";
 
 interface Props {
 	title?: string;
-	banner?: string;
-	bannerBasePath?: string;
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
@@ -32,12 +21,8 @@ interface Props {
 	hideSidebar?: boolean;
 }
 
-const backgroundImages = getBackgroundImages();
-
 const {
 	title,
-	banner,
-	bannerBasePath,
 	description,
 	lang,
 	setOGTypeArticle,
@@ -46,126 +31,15 @@ const {
 	hideSidebar = false,
 } = Astro.props;
 
-// 检查背景壁纸模式和是否允许切换
-const isBannerMode = backgroundWallpaper.mode === "banner";
-const isOverlayMode = backgroundWallpaper.mode === "overlay";
-const isBackgroundEnabled = backgroundWallpaper.mode !== "none";
-const isWallpaperSwitchable = backgroundWallpaper.switchable ?? true;
-
-// 处理分设备控制的横幅信贷显示
-const creditEnableConfig = backgroundWallpaper.banner?.credit?.enable;
-const creditEnabledOnDesktop =
-	typeof creditEnableConfig === "object"
-		? creditEnableConfig.desktop
-		: creditEnableConfig;
-const creditEnabledOnMobile =
-	typeof creditEnableConfig === "object"
-		? creditEnableConfig.mobile
-		: creditEnableConfig;
-
-const hasBannerCredit =
-	isBannerMode && isBackgroundEnabled && creditEnableConfig;
-
-// 处理分设备控制的横幅信贷文本和链接
-const creditTextConfig = backgroundWallpaper.banner?.credit?.text;
-const creditTextDesktop =
-	typeof creditTextConfig === "object"
-		? creditTextConfig.desktop
-		: creditTextConfig;
-const creditTextMobile =
-	typeof creditTextConfig === "object"
-		? creditTextConfig.mobile
-		: creditTextConfig;
-
-const creditUrlConfig = backgroundWallpaper.banner?.credit?.url;
-const creditUrlDesktop =
-	typeof creditUrlConfig === "object"
-		? creditUrlConfig.desktop
-		: creditUrlConfig;
-const creditUrlMobile =
-	typeof creditUrlConfig === "object"
-		? creditUrlConfig.mobile
-		: creditUrlConfig;
-
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 const isPostPageCheck = postSlug !== undefined;
-// 隐藏侧栏的页面（归档/友链/观影/关于等）与文章详情页共用「单栏居中」的网格与内容宽度，
+// 隐藏左侧栏的页面（归档/友链/观影/关于等）与文章详情页共用「单栏居中」的网格与内容宽度，
 // 但不复用 isPostPageCheck，避免连带触发 OG 图生成、纯白背景、悬浮目录等文章页专属逻辑
 const isSingleColumnLayout = isPostPageCheck || hideSidebar;
 const PostPageTOC = isPostPageCheck
 	? (await import("@components/layout/PostPageTOC.astro")).default
 	: null;
-
-// 随机选择副标题（当打字机关闭且为数组时）
-const getRandomSubtitle = () => {
-	const subtitle = backgroundWallpaper.banner?.homeText?.subtitle;
-	if (Array.isArray(subtitle)) {
-		const randomIndex = Math.floor(Math.random() * subtitle.length);
-		return subtitle[randomIndex];
-	}
-	return subtitle;
-};
-const randomSubtitle = getRandomSubtitle();
-
-// 主页横幅文本只在首页且全局开关为 true 时显示，不区分设备
-const homeTextEnable = backgroundWallpaper.banner?.homeText?.enable ?? false;
-const homeTextSwitchable =
-	backgroundWallpaper.banner?.homeText?.switchable ?? false;
-const shouldRenderHomeTextOverlay = homeTextEnable || homeTextSwitchable;
-const showHomeText =
-	isBannerMode && shouldRenderHomeTextOverlay && isHomePageCheck;
-// 手机端非首页不显示banner的CSS类
-const mobileNonHomeBannerClass =
-	!isHomePageCheck && !isPostPageCheck ? "mobile-hide-banner" : "";
-
-const bannerSrc =
-	typeof banner === "string" && banner.trim() !== "" ? banner.trim() : "";
-const hasCustomBanner = bannerSrc !== "";
-const resolvedBannerBasePath = bannerBasePath || "/";
-
-const toSrcList = (src: unknown): string[] => {
-	if (Array.isArray(src)) {
-		return src.filter(
-			(s): s is string => typeof s === "string" && s.trim() !== "",
-		);
-	}
-	if (typeof src === "string" && src.trim() !== "") {
-		return [src.trim()];
-	}
-	return [];
-};
-
-const wallpaperDesktopList = toSrcList(backgroundImages.desktop);
-const wallpaperMobileList = toSrcList(backgroundImages.mobile);
-
-const bannerDesktopList = hasCustomBanner
-	? [bannerSrc]
-	: wallpaperDesktopList.length > 0
-		? wallpaperDesktopList
-		: wallpaperMobileList;
-const bannerMobileList = hasCustomBanner
-	? [bannerSrc]
-	: wallpaperMobileList.length > 0
-		? wallpaperMobileList
-		: wallpaperDesktopList;
-
-const overlayDesktopSrc = bannerDesktopList[0] || "";
-const overlayMobileSrc = bannerMobileList[0] || "";
-const shouldUseTemplateForBannerImages =
-	!hasCustomBanner &&
-	(bannerMobileList.length > 1 || bannerDesktopList.length > 1);
-
-// 计算主内容区域位置，考虑手机端非首页时banner被隐藏
-const mainPanelTop =
-	isBannerMode && isBackgroundEnabled
-		? `calc(${BANNER_HEIGHT}vh - ${MAIN_PANEL_OVERLAPS_BANNER_HEIGHT}rem)`
-		: "5.5rem";
-
-// 当banner模式被禁用时，主内容区域应该始终从顶栏下面开始
-// 非首页在小于1024px时会通过 mobile-main-no-banner CSS类覆盖top值为5.5rem
-const finalMainPanelTop =
-	isBannerMode && isBackgroundEnabled ? mainPanelTop : "5.5rem";
 
 // 获取响应式侧边栏配置（仅用于读取一些通用 flag，例如是否显示侧栏）
 const sidebarConfig = getResponsiveSidebarConfig();
@@ -175,41 +49,16 @@ const sidebarConfig = getResponsiveSidebarConfig();
 // 文章详情页不使用左右分栏，正文整体单栏居中显示（目录改为右侧悬浮面板）
 const gridCols = isSingleColumnLayout ? "grid-cols-1" : "grid-cols-1 md:grid-cols-[17rem_1fr]";
 
-// 检查是否应该启用半透明效果
-const shouldEnableTransparency = isOverlayMode && isBackgroundEnabled;
-
-// 为组件添加半透明效果的CSS类
-const transparentClass = shouldEnableTransparency
-	? "wallpaper-transparent"
-	: "";
+// 站点已无背景壁纸 / 横幅，主内容区固定从导航栏下方开始
+const mainPanelTop = "5.5rem";
 ---
 
-<Layout title={title} banner={banner} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug} whiteBackground={hideSidebar}>
+<Layout title={title} description={description} lang={lang} setOGTypeArticle={setOGTypeArticle} postSlug={postSlug} whiteBackground={hideSidebar}>
 
-
-<!-- 全屏透明覆盖壁纸 - 如果允许切换则始终渲染，否则只渲染当前模式 -->
-{(isWallpaperSwitchable || isOverlayMode) && (
-	<OverlayWallpaper config={{
-		src: {
-			desktop: overlayDesktopSrc,
-			mobile: overlayMobileSrc
-		},
-		zIndex: backgroundWallpaper.overlay?.zIndex,
-		opacity: backgroundWallpaper.overlay?.opacity,
-		blur: backgroundWallpaper.overlay?.blur,
-	}} 
-	className={isWallpaperSwitchable && !isOverlayMode ? "hidden opacity-0" : undefined} />
-)}
 
 <!-- 全局图标加载器 -->
 <IconifyLoader />
 
-<!-- 为全屏壁纸模式添加body类 -->
-{shouldEnableTransparency && (
-	<script>
-		document.body.classList.add('wallpaper-transparent');
-	</script>
-)}
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>
@@ -219,230 +68,13 @@ const transparentClass = shouldEnableTransparency
     </div>
 </div>
 
-<!-- Banner - 如果允许切换则始终渲染，否则只渲染当前模式 -->
-{(isWallpaperSwitchable || isBannerMode) && (
-<div id="banner-wrapper" class={`absolute z-10 w-full transition-opacity duration-700 overflow-hidden ${mobileNonHomeBannerClass}`} style={(isWallpaperSwitchable || isOverlayMode) ? `top: -${BANNER_HEIGHT_EXTEND}vh; display: none;` : `top: -${BANNER_HEIGHT_EXTEND}vh`}>
-    <!-- 背景图片显示 -->
-    <div
-      class="relative h-full w-full"
-      id="banner-images-container"
-      data-mobile-count={bannerMobileList.length}
-      data-desktop-count={bannerDesktopList.length}
-    >
-      <!-- Mobile: 默认渲染第一张，其余放入 template 避免浏览器预加载 -->
-      {bannerMobileList.length > 0 && (
-        <div class="banner-image-slot-mobile absolute inset-0 block lg:hidden">
-          <ImageWrapper
-            alt="Mobile background image of the blog"
-            class:list={["h-full w-full transition-opacity duration-700 opacity-100"]}
-            src={bannerMobileList[0]}
-            position={backgroundWallpaper.banner?.position}
-            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
-          />
-        </div>
-      )}
-      {bannerMobileList.slice(1).map((src) => (
-        <template class="banner-tpl-mobile">
-          <ImageWrapper
-            alt="Mobile background image of the blog"
-            class:list={["h-full w-full transition-opacity duration-700 opacity-100"]}
-            src={src}
-            position={backgroundWallpaper.banner?.position}
-            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
-          />
-        </template>
-      ))}
-
-      <!-- Desktop: 默认渲染第一张，其余放入 template -->
-      {bannerDesktopList.length > 0 && (
-        <div class="banner-image-slot-desktop absolute inset-0 hidden lg:block">
-          <ImageWrapper
-            id="banner"
-            alt="Desktop background image of the blog"
-            class:list={["h-full transition-opacity duration-700 opacity-100"]}
-            src={bannerDesktopList[0]}
-            position={backgroundWallpaper.banner?.position}
-            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
-          />
-        </div>
-      )}
-      {bannerDesktopList.slice(1).map((src) => (
-        <template class="banner-tpl-desktop">
-          <ImageWrapper
-            id="banner"
-            alt="Desktop background image of the blog"
-            class:list={["h-full transition-opacity duration-700 opacity-100"]}
-            src={src}
-            position={backgroundWallpaper.banner?.position}
-            basePath={hasCustomBanner ? resolvedBannerBasePath : undefined}
-          />
-        </template>
-      ))}
-    </div>
-
-    <!-- 客户端随机选择背景图（仅多图时启用；使用 template 避免预加载） -->
-    {shouldUseTemplateForBannerImages && (
-      <script is:inline>
-        (function randomizeBannerImage() {
-          var container = document.getElementById("banner-images-container");
-          if (!container) return;
-
-          var mobileCount = parseInt(container.dataset.mobileCount || "0", 10);
-          var desktopCount = parseInt(container.dataset.desktopCount || "0", 10);
-          if (mobileCount <= 1 && desktopCount <= 1) return;
-
-          // F5 刷新重置，Swup 切换保留
-          if (typeof window.__bannerRandomIndex === "undefined") {
-            window.__bannerRandomIndex = {
-              mobile: mobileCount > 1 ? Math.floor(Math.random() * mobileCount) : 0,
-              desktop:
-                desktopCount > 1 ? Math.floor(Math.random() * desktopCount) : 0,
-            };
-          }
-
-          // 从 template 替换默认图片（index 0 = 已渲染的默认图，>0 = template）
-          function applyRandom(slotClass, tplClass, randomIndex) {
-            if (randomIndex === 0) return;
-            var slot = container.querySelector("." + slotClass);
-            var templates = container.querySelectorAll("." + tplClass);
-            if (!slot || !templates.length) return;
-            var tpl = templates[randomIndex - 1];
-            if (!tpl) return;
-            slot.innerHTML = "";
-            slot.appendChild(tpl.content.cloneNode(true));
-          }
-
-          applyRandom(
-            "banner-image-slot-mobile",
-            "banner-tpl-mobile",
-            window.__bannerRandomIndex.mobile
-          );
-          applyRandom(
-            "banner-image-slot-desktop",
-            "banner-tpl-desktop",
-            window.__bannerRandomIndex.desktop
-          );
-        })();
-      </script>
-    )}
-    
-    <!-- Home page text overlay - 所有页面都渲染，由JS控制显示 -->
-    {(isWallpaperSwitchable || shouldRenderHomeTextOverlay) && (
-        <div data-banner-text-overlay="home" class="banner-text-overlay absolute inset-0 z-20 flex items-center justify-center hidden">
-            <div class="w-4/5 lg:w-3/4 text-center mb-0">
-                <div class="flex flex-col">
-                    {backgroundWallpaper.banner?.homeText?.title && (
-                        <h1 class="banner-title font-bold text-white mb-2 lg:mb-4 leading-tight" style={{ fontSize: backgroundWallpaper.banner.homeText.titleSize || "3rem" }}>
-                            {backgroundWallpaper.banner.homeText.title}
-                        </h1>
-                    )}
-                    {backgroundWallpaper.banner?.homeText?.subtitle && (
-                        <h2 id="banner-subtitle" class="banner-subtitle text-white/90 leading-snug" style={{ fontSize: backgroundWallpaper.banner.homeText.subtitleSize || "1.5rem" }} data-subtitles={JSON.stringify(backgroundWallpaper.banner.homeText.subtitle)}>
-                            {backgroundWallpaper.banner.homeText.typewriter?.enable ? (
-                                <TypewriterText 
-                                    text={backgroundWallpaper.banner.homeText.subtitle}
-                                    speed={backgroundWallpaper.banner.homeText.typewriter.speed}
-                                    deleteSpeed={backgroundWallpaper.banner.homeText.typewriter?.deleteSpeed}
-                                    pauseTime={backgroundWallpaper.banner.homeText.typewriter?.pauseTime}
-                                />
-                            ) : (
-                                randomSubtitle
-                            )}
-                        </h2>
-                    )}
-                </div>
-            </div>
-        </div>
-    )}
-
-    <script is:inline>
-        function setRandomSubtitle() {
-            const subtitleElement = document.getElementById('banner-subtitle');
-            if (!subtitleElement) return;
-            
-            const subtitlesData = subtitleElement.dataset.subtitles;
-            if (!subtitlesData) return;
-            
-            try {
-                const subtitles = JSON.parse(subtitlesData);
-                // Only randomize if it's an array and typewriter is NOT enabled (check for typewriter class)
-                if (Array.isArray(subtitles) && subtitles.length > 0 && !subtitleElement.querySelector('.typewriter')) {
-                    // Use a global variable to persist the subtitle across Swup navigations
-                    // This variable will be reset on full page reload (F5), meeting the requirement
-                    if (!window.fireflyCachedSubtitle) {
-                        const randomIndex = Math.floor(Math.random() * subtitles.length);
-                        window.fireflyCachedSubtitle = subtitles[randomIndex];
-                    }
-                    subtitleElement.textContent = window.fireflyCachedSubtitle;
-                }
-            } catch (e) {
-                console.error("Failed to parse subtitles", e);
-            }
-        }
-
-        // Run on initial load
-        setRandomSubtitle();
-    </script>
-</div>
-)}
-
-{/* 当 banner 未渲染时，添加空的 #banner-wrapper 占位，确保 Swup 能找到容器，避免回退为整页加载（侧边栏等会随之重新加载） */}
-{!(isWallpaperSwitchable || isBannerMode) && (
-    <div id="banner-wrapper" class="hidden" aria-hidden="true"></div>
-)}
-{/* 当壁纸未渲染时，添加其他空占位容器 */}
-{!(isWallpaperSwitchable || isBannerMode || isOverlayMode) && (
-<>
-    <div id="banner-overlay-container" class="hidden"></div>
-    <div id="banner-dim-container" class="hidden"></div>
-</>
-)}
 
 <!-- Main content -->
-<div class={`absolute w-full z-30 pointer-events-none ${mobileNonHomeBannerClass ? 'mobile-main-no-banner' : ''} ${!(isBannerMode && isBackgroundEnabled) ? 'no-banner-layout' : ''} ${transparentClass}`} style={`top: ${finalMainPanelTop}`}>
+<div class="absolute w-full z-30 pointer-events-none no-banner-layout" style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-(--page-width) mx-auto pointer-events-auto">
         <div id="main-grid" class={`w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
         >
-            <!-- Background image credit - Desktop -->
-            {hasBannerCredit && creditEnabledOnDesktop && <a 
-                href={creditUrlDesktop || "#"} 
-                id="banner-credit-desktop" 
-                target={creditUrlDesktop ? "_blank" : "_self"}
-                rel={creditUrlDesktop ? "noopener" : ""}
-                aria-label="Visit image source"
-                class:list={[
-                    "group onload-animation transition-all absolute justify-center items-center rounded-full " +
-                    "px-3 right-4 -top-13 bg-black/60 hover:bg-black/70 h-9 hidden md:flex", 
-                    {"hover:pr-9 active:bg-black/80": creditUrlDesktop}
-                ]}
-            >
-                <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
-                <div class="text-white/75 text-xs">{creditTextDesktop}</div>
-                {creditUrlDesktop && <Icon class:list={["transition-opacity absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"]}
-                      name="fa6-solid:arrow-up-right-from-square">
-                </Icon>}
-            </a>}
-
-            <!-- Background image credit - Mobile -->
-            {hasBannerCredit && creditEnabledOnMobile && <a 
-                href={creditUrlMobile || "#"} 
-                id="banner-credit-mobile" 
-                target={creditUrlMobile ? "_blank" : "_self"}
-                rel={creditUrlMobile ? "noopener" : ""}
-                aria-label="Visit image source"
-                class:list={[
-                    "group onload-animation transition-all absolute justify-center items-center rounded-full " +
-                    "px-3 right-4 -top-13 bg-black/60 hover:bg-black/70 h-9 flex md:hidden", 
-                    {"hover:pr-9 active:bg-black/80": creditUrlMobile}
-                ]}
-            >
-                <Icon class="text-white/75 text-[1.25rem] mr-1" name="material-symbols:copyright-outline-rounded" ></Icon>
-                <div class="text-white/75 text-xs">{creditTextMobile}</div>
-                {creditUrlMobile && <Icon class:list={["transition-opacity absolute text-[oklch(0.75_0.14_var(--hue))] right-4 text-[0.75rem] opacity-0 group-hover:opacity-100"]}
-                      name="fa6-solid:arrow-up-right-from-square">
-                </Icon>}
-            </a>}
 
             <div id="left-sidebar-wrapper" class="contents">
                 {!isSingleColumnLayout && (
@@ -466,7 +98,7 @@ const transparentClass = shouldEnableTransparency
                 {/* 携带网格布局类名，用于JS更新父容器 */}
                 <div id="grid-class-carrier" data-grid-class={gridCols} data-white-bg={String(hideSidebar)} class="hidden"></div>
                 {/* 备用 h1 标题 - 当主页横幅文本未启用时，提供隐藏的主标题 */}
-                {isHomePageCheck && !showHomeText && (
+                {isHomePageCheck && (
                         <h1 class="sr-only">{siteConfig.title}</h1>
                 )}
                 <div id="content-wrapper" class="onload-animation transition-leaving">
@@ -498,7 +130,7 @@ const transparentClass = shouldEnableTransparency
         "absolute w-full z-30 pointer-events-none post-toc-floating-layer",
         { "is-post-page": isPostPageCheck },
     ]}
-    style={`top: ${finalMainPanelTop}`}
+    style={`top: ${mainPanelTop}`}
 >
     {isPostPageCheck && (
         // 参照容器宽度必须与正文 <main> 的 max-w-[calc(var(--page-width)-18rem)] 一致，
@@ -530,7 +162,7 @@ const transparentClass = shouldEnableTransparency
 
   /* 文章详情页背景改为纯白（仅浅色模式，深色模式维持原配色）。
      <html> 自身带 bg-(--page-bg)，按 CSS 规范它才是画布/可滚动区域背景的来源；
-     <body> 只有 min-h-screen 一屏高（banner、主内容区都是 absolute 脱离文档流），
+     <body> 只有 min-h-screen 一屏高（主内容区是 absolute 脱离文档流），
      只改 body 背景只会让第一屏变白，往下滚动会露出 html 的灰色画布——
      所以要用 :has() 让 body 上的 data-page-type 反向控制 html 的背景。 */
   :root:not(.dark):has(body[data-page-type="post"]) {
@@ -577,15 +209,6 @@ const transparentClass = shouldEnableTransparency
   #right-sidebar {
     transition: opacity 0.35s ease-in-out, 
                 transform 0.35s ease-in-out;
-  }
-
-  /* 横幅文字阴影 - 更柔和的扩散效果 */
-  .banner-title {
-    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.6);
-  }
-  
-  .banner-subtitle {
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.6);
   }
 
   /* fuwari 风格悬浮目录：默认隐藏，仅在文章页 + 屏幕足够宽时显示

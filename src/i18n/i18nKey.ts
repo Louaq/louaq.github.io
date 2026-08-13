@@ -157,9 +157,6 @@ enum I18nKey {
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
 
-	// 横幅设置
-	bannerSettings = "bannerSettings",
-	bannerTitle = "bannerTitle",
 
 	// 文章布局
 	postListLayout = "postListLayout",
@@ -169,11 +166,6 @@ enum I18nKey {
 	// 置顶
 	pinned = "pinned",
 
-	// 壁纸模式
-	wallpaperMode = "wallpaperMode",
-	wallpaperBannerMode = "wallpaperBannerMode",
-	wallpaperOverlayMode = "wallpaperOverlayMode",
-	wallpaperNoneMode = "wallpaperNoneMode",
 
 	// 赞助页面
 	sponsor = "sponsor",

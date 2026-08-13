@@ -1,23 +1,8 @@
 <script lang="ts">
-import {
-	WALLPAPER_BANNER,
-	WALLPAPER_NONE,
-	WALLPAPER_OVERLAY,
-} from "@constants/constants";
 import Icon from "@iconify/svelte";
-import {
-	getDefaultBannerTitleEnabled,
-	getDefaultHue,
-	getHue,
-	getStoredBannerTitleEnabled,
-	getStoredWallpaperMode,
-	setBannerTitleEnabled,
-	setHue,
-	setWallpaperMode,
-} from "@utils/setting-utils";
+import { getDefaultHue, getHue, setHue } from "@utils/setting-utils";
 import { onMount } from "svelte";
-import { backgroundWallpaper, siteConfig } from "@/config";
-import type { WALLPAPER_MODE } from "@/types/config";
+import { siteConfig } from "@/config";
 
 /**
  * 文案由 Navbar.astro 在服务端解析好后传进来，而不是在组件里 import
@@ -26,12 +11,6 @@ import type { WALLPAPER_MODE } from "@/types/config";
  */
 export interface DisplaySettingsLabels {
 	themeColor: string;
-	wallpaperMode: string;
-	wallpaperBannerMode: string;
-	wallpaperOverlayMode: string;
-	wallpaperNoneMode: string;
-	bannerSettings: string;
-	bannerTitle: string;
 	postListLayout: string;
 	postListLayoutList: string;
 	postListLayoutGrid: string;
@@ -46,40 +25,19 @@ let { labels }: Props = $props();
 // 重要：避免在客户端初始化阶段读取 localStorage/window 导致 SSR/CSR DOM 不一致，影响 hydrate
 let hue = $state(getDefaultHue());
 const defaultHue = getDefaultHue();
-let wallpaperMode: WALLPAPER_MODE = $state(backgroundWallpaper.mode);
-const defaultWallpaperMode = backgroundWallpaper.mode;
 let currentLayout: "list" | "grid" = $state("list");
 const defaultLayout = siteConfig.postListLayout.defaultMode;
 let mounted = $state(false);
 let isSmallScreen = $state(false);
 let isSwitching = $state(false);
 
-let bannerTitleEnabled = $state(true);
-const defaultBannerTitleEnabled = getDefaultBannerTitleEnabled();
-const isWallpaperSwitchable = backgroundWallpaper.switchable ?? true;
 const allowLayoutSwitch = siteConfig.postListLayout.allowSwitch;
-
-// 是否允许用户切换首页横幅标题（只看 switchable 配置；用于“即使默认不启用，也能在面板中打开”）
-const isBannerTitleSwitchable =
-	backgroundWallpaper.banner?.homeText?.switchable ?? false;
-// 是否有任何横幅设置可显示（后续添加新设置时在此处添加条件）
-const hasBannerSettings = isBannerTitleSwitchable;
 // 是否显示主题色设置（与 siteConfig.themeColor.fixed 相反）
 const showThemeColor = !siteConfig.themeColor.fixed;
-const hasAnyContent =
-	showThemeColor ||
-	isWallpaperSwitchable ||
-	allowLayoutSwitch ||
-	hasBannerSettings;
 
 function resetHue() {
 	hue = getDefaultHue();
 	setHue(hue);
-}
-
-function resetWallpaperMode() {
-	wallpaperMode = defaultWallpaperMode;
-	setWallpaperMode(defaultWallpaperMode);
 }
 
 function resetLayout() {
@@ -91,15 +49,6 @@ function resetLayout() {
 		detail: { layout: defaultLayout },
 	});
 	window.dispatchEvent(event);
-}
-
-function toggleBannerTitleEnabled() {
-	bannerTitleEnabled = !bannerTitleEnabled;
-	setBannerTitleEnabled(bannerTitleEnabled);
-}
-function switchWallpaperMode(newMode: WALLPAPER_MODE) {
-	wallpaperMode = newMode;
-	setWallpaperMode(newMode);
 }
 
 function checkScreenSize() {
@@ -136,12 +85,6 @@ onMount(() => {
 	hue = getHue();
 	setHue(hue);
 
-	// 从localStorage读取保存的壁纸模式
-	wallpaperMode = getStoredWallpaperMode();
-
-	// 从localStorage读取横幅标题状态
-	bannerTitleEnabled = getStoredBannerTitleEnabled();
-
 	// 从localStorage读取用户偏好布局
 	const savedLayout = localStorage.getItem("postListLayout");
 	if (savedLayout && (savedLayout === "list" || savedLayout === "grid")) {
@@ -167,121 +110,31 @@ onMount(() => {
 
 <div id="display-setting" class="float-panel float-panel-closed absolute left-auto top-full right-0 z-60 mt-1.5 w-80 max-w-[calc(100vw-2rem)] translate-x-0 px-4 py-4 transition-[opacity,transform]">
     <!-- Theme Color Section -->
-    <div class="flex flex-row gap-2 mb-2 items-center justify-between">
-        <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3
-            before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
-            before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
-        >
-            {labels.themeColor}
-            <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
-                    class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} onclick={resetHue}>
-                <span class="text-(--btn-content)">
-                    <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
-                </span>
-            </button>
-        </div>
-        <div class="flex gap-1">
-            <div id="hueValue" class="bg-(--btn-regular-bg) w-10 h-7 rounded-md flex justify-center
-            font-bold text-sm items-center text-(--btn-content)">
-                {hue}
-            </div>
-        </div>
-    </div>
-    <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded-sm select-none">
-        <input aria-label={labels.themeColor} type="range" min="0" max="360" bind:value={hue}
-               class="slider" id="colorSlider" step="5" style="width: 100%"
-               oninput={() => setHue(hue)}>
-    </div>
-
-    <!-- Wallpaper Mode Section -->
-    {#if isWallpaperSwitchable}
-        <div class="mt-2">
-            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3 mb-2
+    {#if showThemeColor}
+        <div class="flex flex-row gap-2 mb-2 items-center justify-between">
+            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3
                 before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
                 before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
             >
-                {labels.wallpaperMode}
+                {labels.themeColor}
                 <button aria-label="Reset to Default" class="btn-regular w-7 h-7 rounded-md  active:scale-90"
-                        class:opacity-0={wallpaperMode === defaultWallpaperMode} class:pointer-events-none={wallpaperMode === defaultWallpaperMode} onclick={resetWallpaperMode}>
+                        class:opacity-0={hue === defaultHue} class:pointer-events-none={hue === defaultHue} onclick={resetHue}>
                     <span class="text-(--btn-content)">
                         <Icon icon="fa6-solid:arrow-rotate-left" class="text-[0.875rem]"></Icon>
                     </span>
                 </button>
             </div>
-            <div class="space-y-1 px-1">
-                <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
-                    class:ring-1={wallpaperMode === WALLPAPER_BANNER}
-                    class:ring-[var(--primary)]={wallpaperMode === WALLPAPER_BANNER}
-                    class:opacity-60={wallpaperMode !== WALLPAPER_BANNER}
-                    onclick={() => switchWallpaperMode(WALLPAPER_BANNER)}
-                >
-                    <Icon icon="material-symbols:image-outline" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{labels.wallpaperBannerMode}</span>
-                    {#if wallpaperMode === WALLPAPER_BANNER}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
-                    {/if}
-                </button>
-                <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
-                    class:ring-1={wallpaperMode === WALLPAPER_OVERLAY}
-                    class:ring-[var(--primary)]={wallpaperMode === WALLPAPER_OVERLAY}
-                    class:opacity-60={wallpaperMode !== WALLPAPER_OVERLAY}
-                    onclick={() => switchWallpaperMode(WALLPAPER_OVERLAY)}
-                >
-                    <Icon icon="material-symbols:wallpaper" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{labels.wallpaperOverlayMode}</span>
-                    {#if wallpaperMode === WALLPAPER_OVERLAY}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
-                    {/if}
-                </button>
-                <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
-                    class:ring-1={wallpaperMode === WALLPAPER_NONE}
-                    class:ring-[var(--primary)]={wallpaperMode === WALLPAPER_NONE}
-                    class:opacity-60={wallpaperMode !== WALLPAPER_NONE}
-                    onclick={() => switchWallpaperMode(WALLPAPER_NONE)}
-                >
-                    <Icon icon="material-symbols:hide-image-outline" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{labels.wallpaperNoneMode}</span>
-                    {#if wallpaperMode === WALLPAPER_NONE}
-                        <Icon icon="material-symbols:check-circle" class="text-[1rem] shrink-0 text-(--primary)"></Icon>
-                    {/if}
-                </button>
+            <div class="flex gap-1">
+                <div id="hueValue" class="bg-(--btn-regular-bg) w-10 h-7 rounded-md flex justify-center
+                font-bold text-sm items-center text-(--btn-content)">
+                    {hue}
+                </div>
             </div>
         </div>
-    {/if}
-    
-    <!-- Banner Settings Section -->
-    {#if wallpaperMode === WALLPAPER_BANNER && hasBannerSettings}
-        <div class="mt-2 mb-2">
-            <div class="flex gap-2 font-bold text-lg text-neutral-900 dark:text-neutral-100 relative ml-3 mb-2
-                before:w-1 before:h-4 before:rounded-md before:bg-(--primary)
-                before:absolute before:-left-3 before:top-1/2 before:-translate-y-1/2"
-            >
-                {labels.bannerSettings}
-            </div>
-            <div class="space-y-1 px-1">
-                <!-- Banner Title Switch -->
-                {#if isBannerTitleSwitchable}
-                <button
-                    class="w-full btn-regular rounded-md py-2 px-3 flex items-center gap-3 text-left active:scale-95 transition-transform relative overflow-hidden"
-                    class:ring-1={bannerTitleEnabled}
-                    class:ring-[var(--primary)]={bannerTitleEnabled}
-                    class:opacity-60={!bannerTitleEnabled}
-                    onclick={toggleBannerTitleEnabled}
-                >
-                    <Icon icon="material-symbols:titlecase-rounded" class="text-[1.25rem] shrink-0"></Icon>
-                    <span class="text-sm flex-1">{labels.bannerTitle}</span>
-                    <span class="waves-toggle-track inline-block w-10 h-5 rounded-full transition-all duration-200 relative"
-                         class:waves-toggle-track-on={bannerTitleEnabled}>
-                        <span class="absolute top-0.5 w-4 h-4 bg-white rounded-full shadow-sm transition-all duration-200"
-                             class:left-0.5={!bannerTitleEnabled}
-                             class:left-5={bannerTitleEnabled}></span>
-                    </span>
-                </button>
-                {/if}
-            </div>
+        <div class="w-full h-6 px-1 bg-[oklch(0.80_0.10_0)] dark:bg-[oklch(0.70_0.10_0)] rounded-sm select-none">
+            <input aria-label={labels.themeColor} type="range" min="0" max="360" bind:value={hue}
+                   class="slider" id="colorSlider" step="5" style="width: 100%"
+                   oninput={() => setHue(hue)}>
         </div>
     {/if}
 

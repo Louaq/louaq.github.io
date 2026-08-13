@@ -173,8 +173,7 @@ const stats = [
   // 每小时更新一次（可选，因为天数变化较慢）
   setInterval(updateDynamicStats, 60 * 60 * 1000);
 
-  // 页面切换时重新更新
-  document.addEventListener("swup:contentReplaced", () => {
-    setTimeout(updateDynamicStats, 100);
-  });
+  // 页面切换时重新更新。原先监听的 swup:contentReplaced 是 swup 3 的事件名，
+  // 本项目是 swup 4（hook 名为 content:replace），该监听从不触发，导航后统计不刷新。
+  document.addEventListener("astro:page-load", updateDynamicStats);
 </script>

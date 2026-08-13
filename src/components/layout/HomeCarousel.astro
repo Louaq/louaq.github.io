@@ -1,13 +1,12 @@
 ---
 import { Icon } from "astro-icon/components";
-import RandomCoverImage from "@/components/common/RandomCoverImage.astro";
+import CoverImage from "@/components/common/CoverImage.astro";
 
 export interface CarouselSlide {
 	href: string;
 	title: string;
 	image: string;
 	basePath?: string;
-	seed?: string;
 	openInNewTab?: boolean;
 	meta?: { icon: string; text: string }[];
 }
@@ -50,12 +49,11 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 										{
 											hasImage ? (
 												<div class="carousel-media absolute inset-0">
-													<RandomCoverImage
+													<CoverImage
 														src={finalImage}
 														basePath={slide.basePath || "/"}
 														alt={slide.title}
 														class="h-full w-full object-cover"
-														seed={slide.seed}
 														preview={true}
 														loading={index === 0 ? "eager" : "lazy"}
 														deferSrc={index > 0}

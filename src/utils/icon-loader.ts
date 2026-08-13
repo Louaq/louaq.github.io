@@ -1,6 +1,6 @@
 /**
  * 图标加载管理器
- * 负责处理图标的加载状态显示
+ * 图标未就绪时露出 Icon.astro 的文本 fallback，就绪后换成真正的 iconify-icon。
  */
 
 let bodyObserver: MutationObserver | null = null;
@@ -20,18 +20,6 @@ export function initIconLoader() {
 
 		if (!loadingIndicator || !iconElement) return;
 
-		// 检查图标是否已经加载
-		function checkIconLoaded() {
-			const hasContent =
-				iconElement.shadowRoot && iconElement.shadowRoot.children.length > 0;
-
-			if (hasContent) {
-				showIcon();
-				return true;
-			}
-			return false;
-		}
-
 		// 显示图标，隐藏加载指示器
 		function showIcon() {
 			loadingIndicator.style.display = "none";
@@ -39,54 +27,17 @@ export function initIconLoader() {
 			iconElement.classList.add("opacity-100");
 		}
 
-		// 显示加载指示器，隐藏图标
-		function showLoading() {
-			loadingIndicator.style.display = "inline-flex";
-			iconElement.classList.remove("opacity-100");
-			iconElement.classList.add("opacity-0");
-		}
-
-		// 初始状态
-		showLoading();
-
-		// 监听图标加载事件
-		iconElement.addEventListener("load", () => {
+		// 图标数据命中缓存时，绑定之前 shadow DOM 就已经渲染好了，收不到 load 事件
+		if (iconElement.shadowRoot?.children.length) {
 			showIcon();
-		});
-
-		// 监听图标加载错误
-		iconElement.addEventListener("error", () => {
-			// 保持显示fallback
-		});
-
-		// 使用MutationObserver监听shadow DOM变化
-		if (window.MutationObserver) {
-			const observer = new MutationObserver(() => {
-				if (checkIconLoaded()) {
-					observer.disconnect();
-				}
-			});
-
-			// 监听iconify-icon元素的变化
-			observer.observe(iconElement, {
-				childList: true,
-				subtree: true,
-				attributes: true,
-			});
-
-			// 设置超时，避免无限等待
-			setTimeout(() => {
-				observer.disconnect();
-				if (!checkIconLoaded()) {
-					// console.warn(`Icon load timeout: ${iconName}`);
-				}
-			}, 5000);
+			return;
 		}
 
-		// 立即检查一次（可能已经加载完成）
-		setTimeout(() => {
-			checkIconLoaded();
-		}, 100);
+		// 未就绪：先露出文本 fallback，等 iconify-icon 自己派发 load
+		loadingIndicator.style.display = "inline-flex";
+		iconElement.classList.remove("opacity-100");
+		iconElement.classList.add("opacity-0");
+		iconElement.addEventListener("load", showIcon, { once: true });
 	}
 
 	// 初始化页面上现有的图标

@@ -197,9 +197,6 @@ const paddingClass = getPaddingStyle();
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    // 清理旧的localStorage关闭状态，确保广告可以重新显示
-    localStorage.removeItem("ad-closed");
-
     const adWidgets = document.querySelectorAll(
       ".advertisement-widget"
     ) as NodeListOf<HTMLElement>;

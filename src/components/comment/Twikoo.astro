@@ -91,14 +91,12 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
     }
     loadTwikooScript()
       .then(function () {
-        if (typeof twikoo === "undefined") {
-          setTimeout(initTwikoo, 500);
-          return;
-        }
         commentEl.innerHTML = "";
-        void twikoo.init(createTwikooConfig()).catch(() => {});
+        return twikoo.init(createTwikooConfig());
       })
-      .catch(() => {});
+      .catch(function (error) {
+        console.warn("Twikoo 评论区加载失败:", error);
+      });
   }
 
   // 当评论区接近视口时才加载脚本并初始化
@@ -136,23 +134,8 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
     observeAndInit();
   }
 
-  // Swup 页面切换后重新观察
-  if (window.swup && window.swup.hooks) {
-    window.swup.hooks.on("content:replace", function () {
-      setTimeout(observeAndInit, 200);
-    });
-  } else {
-    document.addEventListener("swup:enable", function () {
-      if (window.swup && window.swup.hooks) {
-        window.swup.hooks.on("content:replace", function () {
-          setTimeout(observeAndInit, 200);
-        });
-      }
-    });
-  }
-
-  // 自定义事件监听
-  document.addEventListener("firefly:page:loaded", function () {
-    observeAndInit();
-  });
+  // swup 导航后重新观察。Layout 的 page:view 钩子只在页面确实有 #tcomment 时才
+  // 派发 firefly:page:loaded，监听这一个就够，不必再自己去挂 swup 钩子：本内联
+  // 脚本先于 swup 初始化执行，拿不到 window.swup，得绕道 swup:enable 才能补注册。
+  document.addEventListener("firefly:page:loaded", observeAndInit);
 </script>

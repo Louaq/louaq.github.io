@@ -255,28 +255,19 @@ const initialLayoutClass =
     container.style.height = `${Math.max(...colHeights)}px`;
   }
 
-  // 页面加载时初始化布局
-  document.addEventListener("DOMContentLoaded", function () {
-    // 延迟一点确保DOM完全加载
-    setTimeout(initLayout, 50);
-    
-    // 监听图片加载以重新计算布局
+  // 初始化布局，并让尚未加载完的图片在 load 后重算瀑布流（图片高度决定列高）
+  function setupLayout() {
+    initLayout();
+
     const imgs = document.querySelectorAll('#post-list-container img');
     imgs.forEach(img => {
         // @ts-ignore
         if(img.complete) return;
         img.addEventListener('load', () => {
             applyMasonryLayout();
-        });
+        }, { once: true });
     });
-  });
-
-  // 页面显示时也初始化布局（处理页面切换）
-  document.addEventListener("visibilitychange", function () {
-    if (!document.hidden) {
-      setTimeout(initLayout, 100);
-    }
-  });
+  }
 
   // 监听布局变化事件
   window.addEventListener("layoutChange", function (event) {
@@ -305,27 +296,14 @@ const initialLayoutClass =
     }, 250);
   });
 
-  // 监听页面导航事件（Astro的客户端路由）
-  document.addEventListener("astro:page-load", function () {
-    setTimeout(initLayout, 50);
-    
-    // 监听图片加载
-    const imgs = document.querySelectorAll('#post-list-container img');
-    imgs.forEach(img => {
-        // @ts-ignore
-        if(img.complete) return;
-        img.addEventListener('load', () => {
-            applyMasonryLayout();
-        });
-    });
-  });
-  
-  document.addEventListener("astro:after-swap", function () {
-    setTimeout(initLayout, 50);
-  });
+  // swup 导航后重新初始化。@swup/astro 每次导航会派发两个 Astro 生命周期事件：
+  // astro:after-swap（content:replace 时）与 astro:page-load（page:view 时）。
+  // 两个都听等于每次导航重算两遍布局，取更晚、DOM 已完全就位的 page-load 即可。
+  document.addEventListener("astro:page-load", setupLayout);
 
-  // 立即执行一次（处理页面刷新）
-  setTimeout(initLayout, 0);
+  // 本脚本被 Astro 打包为 type="module"（defer），执行时 DOM 已解析完毕，
+  // 首屏直接调用即可，无需再挂 DOMContentLoaded 或延时。
+  setupLayout();
 </script>
 
 <style>

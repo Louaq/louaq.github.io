@@ -64,50 +64,12 @@
   }
 }
 
-@utility wallpaper-transparent {
-  /* 全屏壁纸模式下的半透明效果 */
-  & .card-base {
-    @apply bg-(--card-bg-transparent);
-    /* 移除高斯模糊以提升性能，大量重叠的 backdrop-filter 会导致 GPU 占用过高 */
-    /* @apply backdrop-blur-sm; */
-  }
-
-  /* 全屏壁纸模式导航栏透明 - 支持 body.wallpaper-transparent 与 html 属性，避免刷新首屏闪白 */
-  & #navbar > div {
-    @apply bg-(--card-bg-transparent) backdrop-blur-xs;
-    border-radius: 0 0 var(--radius-large) var(--radius-large) !important;
-  }
-
-  /* 移动端：backdrop-filter 易失效，半透明底会导致正文与图标叠在一起 */
-  @media (max-width: 1023px) {
-    & #navbar > div {
-      background-color: var(--card-bg) !important;
-      background-image: none !important;
-      backdrop-filter: none !important;
-      -webkit-backdrop-filter: none !important;
-    }
-  }
-
-  & .btn-card {
-    @apply bg-(--card-bg-transparent);
-    /* 移除高斯模糊以提升性能 */
-    /* @apply backdrop-blur-sm; */
-  }
-}
-
 @utility card-base {
   @apply rounded-(--radius-large) overflow-hidden bg-(--card-bg);
 
   /* 开启边框和阴影效果时的样式 */
   .enable-card-border & {
     @apply border border-(--line-divider) shadow-xs;
-  }
-
-  /* 全屏壁纸模式下的半透明效果 */
-  .wallpaper-transparent & {
-    @apply bg-(--card-bg-transparent);
-    /* 移除高斯模糊以提升性能，大量重叠的 backdrop-filter 会导致 GPU 占用过高 */
-    /* @apply backdrop-blur-sm; */
   }
 }
 
@@ -125,13 +87,6 @@
 }
 
 @utility btn-card {
-  /* 移动端：backdrop-filter 易失效，半透明底会导致正文与图标叠在一起 */
-
-  .wallpaper-transparent & {
-    @apply bg-(--card-bg-transparent);
-    /* 移除高斯模糊以提升性能 */
-    /* @apply backdrop-blur-sm; */
-  }
   @apply flex items-center justify-center bg-(--card-bg) hover:bg-(--btn-card-bg-hover)
         active:bg-(--btn-card-bg-active);
   &.disabled {
@@ -619,7 +574,6 @@
     transform: translateY(-50%);
 }
 
-
 /*剧透效果*/
 .custom-md spoiler {
   --_spoiler-mask: var(--primary);
@@ -687,24 +641,6 @@
 .post-list-container.grid-mode .post-card-item .stats {
   @apply text-xs;
 }
-
-/*
- * 移动端导航栏：Banner 半透明规则（navbar.css）在深色 :root.dark 下特异性更高，
- * 会盖过仅含 body #top-row 的实心规则，导致首页仍为 rgba/透明。此处补齐 :root.dark /
- * html.dark，并统一用 background 简写覆盖 navbar 中的半透底。
- */
-@media (max-width: 1023px) {
-    :root.dark body #top-row #navbar[data-transparent-mode][data-is-home] > div,
-    html.dark body #top-row #navbar[data-transparent-mode][data-is-home] > div,
-    body #top-row #navbar[data-transparent-mode][data-is-home] > div {
-        background: var(--card-bg) !important;
-        background-color: var(--card-bg) !important;
-        background-image: none !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-    }
-}
-
 
 /* =============================================================
  * 掘金主题（juejin-theme）：原 juejin-theme.css 内容内联于此。
@@ -801,63 +737,6 @@ body {
   border-radius: 0 !important;
   border: none !important;
   backdrop-filter: none !important;
-}
-
-
-/* 让导航栏所有透明模式都使用同样的实色 */
-#navbar[data-transparent-mode] > div,
-#navbar[data-transparent-mode].scrolled > div,
-body:has(#banner-wrapper) #navbar[data-transparent-mode] > div,
-body:has(#banner-wrapper) #navbar[data-transparent-mode].scrolled > div,
-#banner-wrapper ~ * #navbar[data-transparent-mode] > div,
-#banner-wrapper ~ * #navbar[data-transparent-mode].scrolled > div,
-body.wallpaper-transparent #navbar > div {
-  background: var(--card-bg) !important;
-  border: none !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-}
-
-:root.dark #navbar[data-transparent-mode] > div,
-:root.dark #navbar[data-transparent-mode].scrolled > div,
-:root.dark body:has(#banner-wrapper) #navbar[data-transparent-mode] > div,
-:root.dark
-  body:has(#banner-wrapper)
-  #navbar[data-transparent-mode].scrolled
-  > div,
-:root.dark #banner-wrapper ~ * #navbar[data-transparent-mode] > div,
-:root.dark
-  #banner-wrapper
-  ~ *
-  #navbar[data-transparent-mode].scrolled
-  > div,
-
-/*
- * 移动端：navbar.css 中 Banner 首页 semi/semifull 规则特异性更高，
- * 会用 0.75rem 底部圆角覆盖上面的 flat 样式，此处再强制拉平。
- */
-@media (max-width: 1023px) {
-  #banner-wrapper ~ * #navbar[data-transparent-mode="semi"][data-is-home="true"]
-    > div,
-  body:has(#banner-wrapper)
-    #navbar[data-transparent-mode="semi"][data-is-home="true"]
-    > div,
-  #banner-wrapper
-    ~ *
-    #navbar[data-transparent-mode="semifull"][data-is-home="true"]
-    > div,
-  body:has(#banner-wrapper)
-    #navbar[data-transparent-mode="semifull"][data-is-home="true"]
-    > div,
-  #banner-wrapper
-    ~ *
-    #navbar[data-transparent-mode="semifull"][data-is-home="true"].scrolled
-    > div,
-  body:has(#banner-wrapper)
-    #navbar[data-transparent-mode="semifull"][data-is-home="true"].scrolled
-    > div {
-    border-radius: 0 !important;
-  }
 }
 
 /* 导航栏菜单项：字号 16px（搜索触发器单独用组件类，不受此条影响） */
@@ -1489,7 +1368,6 @@ html[data-language-badge-enabled="true"]
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238A919F%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%2F%3E%3Cpath%20d%3D%22M14%202v5a1%201%200%200%200%201%201h5M10%209H8m8%204H8m8%204H8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 }
 
-
 /* =============================================================
  * 文章页：内容卡片紧凑化
  * ============================================================= */
@@ -1507,13 +1385,6 @@ html[data-language-badge-enabled="true"]
 
 .widget .announcement {
   font-size: 0.875rem;
-}
-
-/* =============================================================
- * 顶部 Banner（如有）：与卡片融合，去除强阴影
- * ============================================================= */
-#banner-wrapper {
-  background-color: var(--page-bg);
 }
 
 /* =============================================================
@@ -1698,7 +1569,7 @@ widget-layout .widget-title::before {
 }
 
 /* =============================================================
- * 文章 banner（如有）：掘金风格圆角
+ * 文章封面图：掘金风格圆角
  * ============================================================= */
 #post-cover {
   border-radius: var(--radius-large) !important;
@@ -2129,7 +2000,6 @@ widget-layout .widget-title::before {
 #post-list-container {
   margin-bottom: 1rem !important;
 }
-
 
 /* =============================================================
  * 列表模式下：标签条更紧凑（限制最多 3 个标签视觉上的清爽）

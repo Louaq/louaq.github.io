@@ -114,8 +114,6 @@ export const ja: Translation = {
 	[Key.bangumiLastUpdated]: "データ更新",
 
 	// バナー設定
-	[Key.bannerSettings]: "バナー設定",
-	[Key.bannerTitle]: "バナータイトル",
 
 	// ページネーション
 	[Key.paginationPrev]: "前へ",
@@ -174,10 +172,6 @@ export const ja: Translation = {
 	[Key.pinned]: "ピン留め",
 
 	// 壁紙モード
-	[Key.wallpaperMode]: "壁紙モード",
-	[Key.wallpaperBannerMode]: "バナー壁紙",
-	[Key.wallpaperOverlayMode]: "透明",
-	[Key.wallpaperNoneMode]: "単色背景",
 
 	// スポンサーページ
 	[Key.sponsor]: "スポンサー",

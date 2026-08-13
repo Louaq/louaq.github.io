@@ -1,0 +1,223 @@
+---
+import { Image } from "astro:assets";
+import * as path from "node:path";
+import { withOssImageProcess } from "@/utils/oss-image";
+import { url } from "@/utils/url-utils";
+
+interface Props {
+	id?: string;
+	src: string;
+	class?: string;
+	alt?: string;
+	position?: string;
+	basePath?: string;
+	preview?: boolean; // 预览模式（文章列表页，小尺寸）；false 为详情页（大尺寸）
+	loading?: "eager" | "lazy";
+	deferSrc?: boolean;
+}
+
+const {
+	id,
+	src,
+	alt,
+	position = "center",
+	basePath = "/",
+	preview = false,
+	loading = "eager",
+	deferSrc = false,
+} = Astro.props;
+const className = Astro.props.class;
+
+const isLocal = !(
+	src.startsWith("/") ||
+	src.startsWith("http") ||
+	src.startsWith("https") ||
+	src.startsWith("data:")
+);
+const isPublic = src.startsWith("/");
+
+// TODO temporary workaround for images dynamic import
+// https://github.com/withastro/astro/issues/3373
+let img: ImageMetadata | null = null;
+if (isLocal) {
+	const files = import.meta.glob<ImageMetadata>("../../**", {
+		import: "default",
+	});
+	let normalizedPath = path
+		.normalize(path.join("../../", basePath, src))
+		.replace(/\\/g, "/");
+	const file = files[normalizedPath];
+	if (!file) {
+		img = null; // 设置为 null 而不是继续调用
+	} else {
+		img = await file();
+	}
+}
+
+// 图片样式
+const imageClass = "w-full h-full object-cover";
+const imageStyle = `object-position: ${position || "center"}; image-rendering: -webkit-optimize-contrast;`;
+const shouldDeferRemoteSrc = deferSrc && !isLocal;
+const transparentPlaceholder =
+	"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E";
+// 封面图：列表页预览卡最宽约 400px，详情页 banner 约 1200px；按 2x DPR 取值。
+// 只有阿里云 OSS 的图会被改写，其余（imgdb / 本地）原样返回。
+const remoteSrc = isPublic
+	? url(src)
+	: withOssImageProcess(src, { width: preview ? 800 : 1600 }) || src;
+const responsiveWidths = preview ? [400, 800] : [800, 1200, 1600];
+const responsiveCandidates = isPublic
+	? []
+	: responsiveWidths.map((width) => ({
+			width,
+			src: withOssImageProcess(src, { width }),
+		}));
+const hasResponsiveRemoteSource = responsiveCandidates.some(
+	(candidate) => candidate.src !== src,
+);
+const remoteSrcset = hasResponsiveRemoteSource
+	? responsiveCandidates
+			.filter(
+				(candidate, index, candidates) =>
+					candidates.findIndex((item) => item.src === candidate.src) === index,
+			)
+			.map((candidate) => `${candidate.src} ${candidate.width}w`)
+			.join(", ")
+	: undefined;
+const remoteSizes = preview
+	? "(max-width: 639px) 1px, (max-width: 1199px) 45vw, 34vw"
+	: "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px";
+---
+
+<div id={id} class:list={[
+  className,
+  'cover-image-shell overflow-hidden relative',
+  preview ? 'min-h-[150px] md:min-h-0' : 'min-h-[300px]'
+]}>
+  <!-- 本地图片：使用 Astro Image 组件 -->
+  {isLocal && img && (
+    <Image
+      src={img}
+      alt={alt || ""}
+      class:list={[
+        imageClass,
+        preview ? 'cover-image-preview' : 'cover-image-full',
+        loading === 'lazy' && 'cover-image-fade-in'
+      ]}
+      style={imageStyle}
+      width={preview ? 400 : 1200}
+      height={preview ? 300 : 800}
+      loading={loading}
+      fetchpriority={loading === "eager" ? "high" : "low"}
+      format="webp"
+      quality={preview ? 75 : 85}
+      widths={preview ? [200, 400, 600] : [800, 1200, 1600]}
+      sizes={preview ? "(max-width: 768px) 100vw, 28vw" : "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px"}
+      decoding={preview ? "async" : "auto"}
+      onload="this.classList.add('is-loaded')"
+    />
+  )}
+
+  <!-- 远程图片 -->
+  {!isLocal && (
+    <img
+      src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc}
+      srcset={shouldDeferRemoteSrc ? undefined : remoteSrcset}
+      sizes={remoteSizes}
+      width={preview ? 400 : 1200}
+      height={preview ? 300 : 800}
+      alt={alt || ""}
+      class:list={[
+        imageClass,
+        preview ? 'cover-image-preview' : 'cover-image-full',
+        loading === 'lazy' && 'cover-image-fade-in'
+      ]}
+      style={imageStyle}
+      loading={loading}
+      decoding="async"
+      fetchpriority={loading === "eager" ? "high" : "low"}
+      data-lazy-src={shouldDeferRemoteSrc ? remoteSrc : ""}
+      data-preview={preview ? "true" : "false"}
+      onload="this.classList.add('is-loaded')"
+    />
+  )}
+</div>
+
+<style>
+  img.cover-image-preview,
+  img[data-preview="true"] {
+    min-height: 150px;
+    @media (min-width: 768px) {
+      min-height: 0;
+    }
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: auto !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -ms-interpolation-mode: bicubic;
+    object-fit: cover !important;
+    max-width: 100%;
+    max-height: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  img.cover-image-full {
+    min-height: 300px;
+    image-rendering: -webkit-optimize-contrast !important;
+    image-rendering: auto !important;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    object-fit: cover !important;
+    width: 100%;
+    height: 100%;
+  }
+
+  /*
+   * 懒加载封面图淡入：避免图片加载完成前卡片露出纯色背景板，
+   * 加载完成瞬间又"啪"地一下弹出。仅对懒加载图片生效（loading="lazy"），
+   * 首屏 eager 图片不加这层，避免拖慢 LCP 的可见时间。
+   */
+  img.cover-image-fade-in {
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  img.cover-image-fade-in.is-loaded {
+    opacity: 1;
+  }
+
+  /*
+   * 加载骨架：懒加载图片就绪前，容器显示一个缓慢流动的浅色光带，
+   * 而不是纯色卡片背景板发呆（外链图床较慢时尤其明显）。
+   * 图片 onload 打上 is-loaded 后 :has() 不再命中，光带自动消失。
+   * 不支持 :has() 的浏览器直接回退为原来的纯色背景，不影响可用性。
+   */
+  .cover-image-shell:has(img.cover-image-fade-in:not(.is-loaded)) {
+    background: linear-gradient(
+      100deg,
+      rgba(255, 255, 255, 0.03) 30%,
+      rgba(255, 255, 255, 0.09) 50%,
+      rgba(255, 255, 255, 0.03) 70%
+    );
+    background-size: 250% 100%;
+    animation: cover-image-shimmer 1.6s ease-in-out infinite;
+  }
+
+  @keyframes cover-image-shimmer {
+    0% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: -50% 50%;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cover-image-shell:has(img.cover-image-fade-in:not(.is-loaded)) {
+      animation: none;
+    }
+  }
+</style>

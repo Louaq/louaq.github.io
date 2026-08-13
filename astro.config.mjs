@@ -19,12 +19,7 @@ import rehypeSlug from "rehype-slug";
 import remarkDirective from "remark-directive"; /* Handle directives */
 import remarkMath from "remark-math";
 import remarkSectionize from "remark-sectionize";
-import {
-	backgroundWallpaper,
-	expressiveCodeConfig,
-	fontConfig,
-	siteConfig,
-} from "./src/config";
+import { expressiveCodeConfig, fontConfig, siteConfig } from "./src/config";
 import I18nKey from "./src/i18n/i18nKey";
 import { i18n } from "./src/i18n/translation";
 import { pluginHeaderToolbar } from "./src/plugins/expressive-code-header-toolbar.mjs"; /* mac 风格标题栏：把复制/折叠按钮挪进 header */
@@ -48,9 +43,6 @@ const swupContainers = [
 	"#post-toc-floating-layer",
 	"#left-sidebar-wrapper",
 ];
-if (backgroundWallpaper.switchable || backgroundWallpaper.mode === "banner") {
-	swupContainers.unshift("#banner-wrapper");
-}
 const collapsibleConfig = expressiveCodeConfig.pluginCollapsible;
 const collapsibleOptions =
 	collapsibleConfig?.enable === true

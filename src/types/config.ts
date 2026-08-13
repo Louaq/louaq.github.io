@@ -1,10 +1,4 @@
-﻿import type {
-	DARK_MODE,
-	LIGHT_MODE,
-	WALLPAPER_BANNER,
-	WALLPAPER_NONE,
-	WALLPAPER_OVERLAY,
-} from "../constants/constants";
+﻿import type { DARK_MODE, LIGHT_MODE } from "../constants/constants";
 
 export type SiteConfig = {
 	title: string;
@@ -233,10 +227,6 @@ export type CommentConfig = {
 
 export type LIGHT_DARK_MODE = typeof LIGHT_MODE | typeof DARK_MODE;
 
-export type WALLPAPER_MODE =
-	| typeof WALLPAPER_BANNER
-	| typeof WALLPAPER_OVERLAY
-	| typeof WALLPAPER_NONE;
 
 export type ExpressiveCodeConfig = {
 	theme?: string;
@@ -345,32 +335,6 @@ export type FooterConfig = {
 
 export type CoverImageConfig = {
 	enableInPost: boolean; // 是否在文章详情页显示封面图
-	randomCoverImage: {
-		enable: boolean; // 是否启用随机图功能
-		apis: string[]; // 随机图 API 列表，支持 {seed} 占位符，会替换为文章 slug 或时间戳
-		fallback?: string; // 当API请求失败时的备用图片路径
-		// 加载指示器配置
-		loading?: {
-			// 加载指示器开关
-			enable: boolean;
-			image?: string; // 自定义加载图片路径（相对于public目录），默认 "/assets/images/loading.gif"
-			backgroundColor?: string; // 加载指示器背景颜色，默认与 loading.gif 背景色一致 (#fefefe)
-		};
-		watermark?: {
-			enable: boolean; // 是否显示水印
-			text?: string; // 水印文本，默认为"随机图"
-			position?:
-				| "top-left"
-				| "top-right"
-				| "bottom-left"
-				| "bottom-right"
-				| "center"; // 水印位置
-			opacity?: number; // 水印透明度 0-1，默认 0.6
-			fontSize?: string; // 字体大小，默认 "0.75rem"
-			color?: string; // 文字颜色，默认为白色
-			backgroundColor?: string; // 背景颜色，默认为半透明黑色
-		};
-	};
 };
 
 // 组件配置类型定义
@@ -434,113 +398,6 @@ export type SidebarLayoutConfig = {
 	};
 };
 
-export type SakuraConfig = {
-	enable: boolean; // 是否启用樱花特效
-	sakuraNum: number; // 樱花数量，默认 11
-	limitTimes: number; // 樱花越界限制次数，-1 为无限循环
-	size: {
-		min: number; // 樱花最小尺寸倍数
-		max: number; // 樱花最大尺寸倍数
-	};
-	opacity: {
-		min: number; // 樱花最小不透明度
-		max: number; // 樱花最大不透明度
-	};
-	speed: {
-		horizontal: {
-			min: number; // 水平移动速度最小值
-			max: number; // 水平移动速度最大值
-		};
-		vertical: {
-			min: number; // 垂直移动速度最小值
-			max: number; // 垂直移动速度最大值
-		};
-		rotation: number; // 旋转速度
-		fadeSpeed: number; // 消失速度，不应大于最小不透明度
-	};
-	zIndex: number; // 层级，确保樱花在合适的层级显示
-};
-
-export type BackgroundWallpaperConfig = {
-	mode: "banner" | "overlay" | "none"; // 壁纸模式：banner横幅模式、overlay全屏透明覆盖模式或none纯色背景
-	switchable?: boolean; // 是否允许用户通过导航栏切换壁纸模式，默认true
-	src:
-		| string
-		| string[]
-		| {
-				desktop?: string | string[];
-				mobile?: string | string[];
-		  }; // 支持单个图片、图片数组或分别设置桌面端和移动端图片
-
-	// Banner模式特有配置
-	banner?: {
-		position?:
-			| "top"
-			| "center"
-			| "bottom"
-			| "top left"
-			| "top center"
-			| "top right"
-			| "center left"
-			| "center center"
-			| "center right"
-			| "bottom left"
-			| "bottom center"
-			| "bottom right"
-			| "left top"
-			| "left center"
-			| "left bottom"
-			| "right top"
-			| "right center"
-			| "right bottom"
-			| string; // 壁纸位置，支持 CSS object-position 的所有值，包括百分比和像素值
-		homeText?: {
-			enable: boolean; // 是否在首页显示自定义文字（全屏开关）
-			switchable?: boolean; // 是否允许用户通过控制面板切换横幅标题显示
-			title?: string; // 主标题
-			subtitle?: string | string[]; // 副标题，支持单个字符串或字符串数组
-			titleSize?: string; // 主标题字体大小，如 "3.5rem"
-			subtitleSize?: string; // 副标题字体大小，如 "1.5rem"
-			typewriter?: {
-				enable: boolean; // 是否启用打字机效果
-				speed: number; // 打字速度（毫秒）
-				deleteSpeed: number; // 删除速度（毫秒）
-				pauseTime: number; // 完整显示后的暂停时间（毫秒）
-			};
-		};
-		credit?: {
-			enable:
-				| boolean
-				| {
-						desktop: boolean; // 桌面端是否显示横幅图片来源文本
-						mobile: boolean; // 移动端是否显示横幅图片来源文本
-				  }; // 是否显示横幅图片来源文本，支持布尔值或分别设置桌面端和移动端
-			text:
-				| string
-				| {
-						desktop: string; // 桌面端显示的来源文本
-						mobile: string; // 移动端显示的来源文本
-				  }; // 横幅图片来源文本，支持字符串或分别设置桌面端和移动端
-			url?:
-				| string
-				| {
-						desktop: string; // 桌面端原始艺术品或艺术家页面的 URL 链接
-						mobile: string; // 移动端原始艺术品或艺术家页面的 URL 链接
-				  }; // 原始艺术品或艺术家页面的 URL 链接，支持字符串或分别设置桌面端和移动端
-		};
-		navbar?: {
-			transparentMode?: "semi" | "full" | "semifull"; // 导航栏透明模式
-			enableBlur?: boolean; // 是否开启毛玻璃模糊效果
-			blur?: number; // 毛玻璃模糊度
-		};
-	};
-	// 全屏透明覆盖模式特有配置
-	overlay?: {
-		zIndex?: number; // 层级，确保壁纸在合适的层级显示
-		opacity?: number; // 壁纸透明度，0-1之间
-		blur?: number; // 背景模糊程度，单位px
-	};
-};
 
 // 广告栏配置
 export type AdConfig = {

@@ -172,14 +172,4 @@ const showSponsorsList = sponsorConfig.showSponsorsList !== false;
   </div>
 </MainGridLayout>
 
-<style>
-  /* 透明模式下使用半透明背景 */
-  :global(body.wallpaper-transparent .usage-info-box) {
-    background-color: rgba(var(--primary-rgb, 70, 130, 180), 0.15) !important;
-  }
-  
-  :global(:root.dark body.wallpaper-transparent .usage-info-box) {
-    background-color: oklch(from var(--primary) l c h / 0.15) !important;
-  }
-</style>
 

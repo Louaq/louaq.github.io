@@ -2,25 +2,18 @@
 import FontSetup from "@components/features/FontSetup.astro";
 import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
 import KatexManager from "@components/features/KatexManager.astro";
-import SakuraEffect from "@components/features/SakuraEffect.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 import PdfEmbedRuntime from "@/components/misc/PdfEmbedRuntime.astro";
 
 import {
-	backgroundWallpaper,
 	expressiveCodeConfig,
 	profileConfig,
 	siteConfig,
 } from "@/config";
-import {
-	BANNER_HEIGHT,
-	BANNER_HEIGHT_EXTEND,
-	BANNER_HEIGHT_HOME,
-	PAGE_WIDTH,
-} from "@/constants/constants";
+import { PAGE_WIDTH } from "@/constants/constants";
 import { defaultFavicons } from "@/constants/icon";
 import type { Favicon } from "@/types/config";
-import { getDefaultBackground, isHomePage } from "@/utils/layout-utils";
+import { isHomePage } from "@/utils/layout-utils";
 import { url } from "@/utils/url-utils";
 
 import "@/styles/main.css";
@@ -33,7 +26,6 @@ import "@rehype-callouts-theme";
 
 interface Props {
 	title?: string;
-	banner?: string;
 	description?: string;
 	lang?: string;
 	setOGTypeArticle?: boolean;
@@ -42,11 +34,9 @@ interface Props {
 	whiteBackground?: boolean;
 }
 
-let { title, banner, description, lang, setOGTypeArticle, postSlug, whiteBackground } =
+let { title, description, lang, setOGTypeArticle, postSlug, whiteBackground } =
 	Astro.props;
 
-// apply a class to the body element to decide the height of the banner, only used for initial page load
-// Swup can update the body for each page visit, but it's after the page transition, causing a delay for banner height change
 // so use Swup hooks instead to change the height immediately when a link is clicked
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 
@@ -55,18 +45,6 @@ const isHomePageCheck = isHomePage(Astro.url.pathname);
 const configHue = siteConfig.themeColor.hue;
 
 
-const navbarTransparentMode =
-	backgroundWallpaper.banner?.navbar?.transparentMode || "semi";
-const shouldShowTopHighlight =
-	navbarTransparentMode === "full" || navbarTransparentMode === "semifull";
-
-if (!banner || typeof banner !== "string" || banner.trim() === "") {
-	banner = getDefaultBackground();
-}
-
-const enableBanner =
-	backgroundWallpaper.mode === "banner" &&
-	(isHomePageCheck || !!postSlug);
 const pageType = isHomePageCheck ? "home" : postSlug ? "post" : "page";
 
 let pageTitle: string;
@@ -92,7 +70,6 @@ if (!lang) {
 const siteLang = lang.replace("_", "-");
 
 
-const bannerOffset = `${BANNER_HEIGHT_EXTEND / 2}vh`;
 
 // 折叠代码块预览高度：在首屏绘制时即应用与 previewLines 匹配的 max-height，
 // 避免插件 CSS 默认 280px 与 JS 在 DOMContentLoaded 后重新计算之间出现的高度跳变。
@@ -104,7 +81,7 @@ const collapsiblePreviewLines =
 ---
 
 <!doctype html>
-<html lang={siteLang} class="bg-(--page-bg) text-[14px] md:text-[16px]" data-default-wallpaper={backgroundWallpaper.mode} data-language-badge-enabled={String(expressiveCodeConfig.pluginLanguageBadge?.enable !== false)}>
+<html lang={siteLang} class="bg-(--page-bg) text-[14px] md:text-[16px]" data-language-badge-enabled={String(expressiveCodeConfig.pluginLanguageBadge?.enable !== false)}>
   <head>
     <title>{pageTitle}</title>
 
@@ -182,14 +159,9 @@ const collapsiblePreviewLines =
     <script
       is:inline
       define:vars={{
-        BANNER_HEIGHT_EXTEND,
         PAGE_WIDTH,
         configHue,
         defaultMode: siteConfig.themeColor.defaultMode ?? "light",
-        defaultWallpaperMode: backgroundWallpaper.mode,
-        defaultBannerTitleEnabled: backgroundWallpaper.banner?.homeText?.enable ?? false,
-        isWallpaperSwitchable:
-          backgroundWallpaper.switchable ?? true,
         darkTheme: expressiveCodeConfig.darkTheme,
         lightTheme: expressiveCodeConfig.lightTheme,
         baseUrl: import.meta.env.BASE_URL,
@@ -222,227 +194,6 @@ const collapsiblePreviewLines =
       const hue = localStorage.getItem("hue") || configHue;
       document.documentElement.style.setProperty("--hue", hue);
 
-      // calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
-
-      function calculateBannerHeightExtend() {
-        let offset = Math.floor(
-          window.innerHeight * (BANNER_HEIGHT_EXTEND / 100)
-        );
-        offset = offset - (offset % 4);
-        document.documentElement.style.setProperty(
-          "--banner-height-extend",
-          `${offset}px`
-        );
-      }
-
-      calculateBannerHeightExtend();
-
-      requestAnimationFrame(() => {
-        const oldValue = parseInt(
-          document.documentElement.style.getPropertyValue(
-            "--banner-height-extend"
-          )
-        );
-        calculateBannerHeightExtend();
-        const newValue = parseInt(
-          document.documentElement.style.getPropertyValue(
-            "--banner-height-extend"
-          )
-        );
-        if (Math.abs(oldValue - newValue) > 4) {
-          requestAnimationFrame(calculateBannerHeightExtend);
-        }
-      });
-
-      const WALLPAPER_BANNER = "banner";
-      const WALLPAPER_OVERLAY = "overlay";
-      const WALLPAPER_NONE = "none";
-      
-      const stored = isWallpaperSwitchable ? localStorage.getItem("wallpaperMode") : null;
-      const wallpaperMode =
-        defaultWallpaperMode === WALLPAPER_OVERLAY
-          ? WALLPAPER_OVERLAY
-          : defaultWallpaperMode === WALLPAPER_NONE
-            ? WALLPAPER_NONE
-            : (stored || defaultWallpaperMode);
-
-      document.documentElement.setAttribute(
-        "data-wallpaper-mode",
-        wallpaperMode
-      );
-
-      if (wallpaperMode === WALLPAPER_NONE || wallpaperMode === WALLPAPER_OVERLAY) {
-        if (document.body) {
-          document.body.classList.remove("enable-banner");
-          document.body.classList.add("no-banner-layout");
-        }
-        if (wallpaperMode === WALLPAPER_OVERLAY && document.body) {
-          document.body.classList.add("wallpaper-transparent");
-        }
-      } else if (document.body) {
-        document.body.classList.add("enable-banner");
-        document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
-      }
-
-      function runWallpaperVisibility() {
-
-        requestAnimationFrame(function () {
-          if (
-            wallpaperMode === WALLPAPER_NONE ||
-            wallpaperMode === WALLPAPER_OVERLAY
-          ) {
-            if (document.body) {
-              document.body.classList.remove("enable-banner");
-              document.body.classList.add("no-banner-layout");
-            }
-          } else {
-            if (document.body) {
-              document.body.classList.add("enable-banner");
-              document.body.classList.remove("no-banner-layout");
-            }
-          }
-
-          if (wallpaperMode === WALLPAPER_OVERLAY) {
-            if (document.body) {
-              document.body.classList.add("wallpaper-transparent");
-            }
-          } else {
-            if (document.body) {
-              document.body.classList.remove("wallpaper-transparent");
-            }
-          }
-
-          const bannerWrapper = document.getElementById("banner-wrapper");
-          const overlayWallpaper = document.querySelector(
-            "[data-overlay-wallpaper]"
-          );
-
-          function isHomePath(pathname) {
-            const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "/";
-            return (
-              pathname === baseUrl ||
-              (baseUrl !== "/" && pathname === baseNoSlash) ||
-              pathname === "/"
-            );
-          }
-
-          function isPostPath(pathname) {
-            const baseNoSlash = baseUrl !== "/" ? baseUrl.replace(/\/$/, "") : "";
-            const postsPrefix = `${baseNoSlash}/posts/`;
-            return pathname.startsWith(postsPrefix);
-          }
-
-          const pathname = window.location.pathname;
-          const isHomePage = isHomePath(pathname);
-          const isPostPage =
-            (document.body &&
-              document.body.dataset &&
-              document.body.dataset.pageType === "post") ||
-            isPostPath(pathname);
-          const isMobile = window.innerWidth < 1024;
-          const mobilePostNoWallpaper = isMobile && isPostPage;
-
-          const effectiveWallpaperMode = mobilePostNoWallpaper
-            ? WALLPAPER_NONE
-            : wallpaperMode;
-
-          if (document.body) {
-            if (mobilePostNoWallpaper) {
-              document.body.classList.remove("enable-banner", "wallpaper-transparent");
-              document.body.classList.add("no-banner-layout");
-            }
-            
-          }
-
-          if (effectiveWallpaperMode === WALLPAPER_OVERLAY) {
-            
-            if (bannerWrapper) {
-              bannerWrapper.style.display = "none";
-            }
-            if (overlayWallpaper) {
-              overlayWallpaper.style.display = "block";
-              overlayWallpaper.classList.remove("hidden", "opacity-0");
-              overlayWallpaper.classList.add("opacity-100");
-            }
-          } else if (effectiveWallpaperMode === WALLPAPER_NONE) {
-            if (bannerWrapper) {
-              bannerWrapper.style.display = "none";
-            }
-            if (overlayWallpaper) {
-              overlayWallpaper.style.display = "none";
-              overlayWallpaper.classList.add("hidden", "opacity-0");
-            }
-          } else {
-            if (bannerWrapper) {
-              if (isMobile && !isHomePage) {
-                bannerWrapper.style.display = "none";
-                bannerWrapper.classList.add("mobile-hide-banner");
-              } else {
-                bannerWrapper.style.display = "block";
-                bannerWrapper.classList.remove("mobile-hide-banner");
-              }
-            }
-            if (overlayWallpaper) {
-              overlayWallpaper.style.display = "none";
-              overlayWallpaper.classList.add("hidden", "opacity-0");
-            }
-          }
-
-          const mainContentWrapper = document.querySelector(
-            ".absolute.w-full.z-30"
-          );
-          if (mainContentWrapper) {
-            if (isMobile && !isHomePage) {
-              mainContentWrapper.classList.add("mobile-main-no-banner");
-            } else {
-              mainContentWrapper.classList.remove("mobile-main-no-banner");
-            }
-          }
-
-          const creditDesktop = document.getElementById(
-            "banner-credit-desktop"
-          );
-          const creditMobile = document.getElementById("banner-credit-mobile");
-          if (
-            effectiveWallpaperMode === WALLPAPER_OVERLAY ||
-            effectiveWallpaperMode === WALLPAPER_NONE
-          ) {
-            if (creditDesktop) creditDesktop.style.display = "none";
-            if (creditMobile) creditMobile.style.display = "none";
-          } else {
-            if (creditDesktop) creditDesktop.style.display = "";
-            if (creditMobile) creditMobile.style.display = "";
-          }
-
-
-          const bannerTextOverlays = document.querySelectorAll(
-            "[data-banner-text-overlay]"
-          );
-          bannerTextOverlays.forEach((el) => {
-            const overlayType = el.getAttribute("data-banner-text-overlay");
-            const shouldShow =
-              effectiveWallpaperMode === WALLPAPER_BANNER &&
-              overlayType === "home" &&
-              isHomePage;
-            
-            if (shouldShow) {
-              el.classList.remove("hidden");
-            } else {
-              el.classList.add("hidden");
-            }
-          });
-        });
-      }
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", runWallpaperVisibility);
-      } else {
-        runWallpaperVisibility();
-      }
-      (function applyBannerTitleEnabled() {
-        const stored = localStorage.getItem("bannerTitleEnabled");
-        const enabled = stored !== null ? stored : String(defaultBannerTitleEnabled);
-        document.documentElement.setAttribute("data-banner-title-enabled", enabled);
-      })();
     </script>
     <style
       define:vars={{
@@ -473,56 +224,19 @@ const collapsiblePreviewLines =
     class:list={[
       {
         "lg:is-home": isHomePageCheck,
-        "enable-banner": enableBanner,
-        "no-banner-layout": !enableBanner,
         "enable-card-border": siteConfig.card?.border,
       },
     ]}
     data-page-type={pageType}
     data-white-bg={String(!!whiteBackground)}
   >
-    <script
-      is:inline
-      define:vars={{
-        defaultWallpaperMode: backgroundWallpaper.mode,
-        isWallpaperSwitchable: backgroundWallpaper.switchable ?? true,
-      }}
-    >
-      (function () {
-        const WALLPAPER_OVERLAY = "overlay";
-        const WALLPAPER_NONE = "none";
-        const stored = isWallpaperSwitchable && typeof localStorage !== "undefined"
-          ? localStorage.getItem("wallpaperMode")
-          : null;
-        const mode = defaultWallpaperMode === WALLPAPER_OVERLAY
-          ? WALLPAPER_OVERLAY
-          : defaultWallpaperMode === WALLPAPER_NONE
-            ? WALLPAPER_NONE
-            : (stored || defaultWallpaperMode);
-        if (mode === WALLPAPER_OVERLAY || mode === WALLPAPER_NONE) {
-          document.body.classList.remove("enable-banner");
-          document.body.classList.add("no-banner-layout");
-          if (mode === WALLPAPER_OVERLAY) {
-            document.body.classList.add("wallpaper-transparent");
-          }
-        } else {
-          document.body.classList.add("enable-banner");
-          document.body.classList.remove("no-banner-layout", "wallpaper-transparent");
-        }
-      })();
-    </script>
-    
     <PdfEmbedRuntime />
 
-    {shouldShowTopHighlight && <div class="top-gradient-highlight" />}
     <ConfigCarrier />
     <slot />
 
     <!-- increase the page height during page transition to prevent the scrolling animation from jumping -->
     <div id="page-height-extend" class="hidden h-[300vh]"></div>
-
-    <!-- Sakura Effect -->
-    <SakuraEffect />
 
     <ImageLightboxManager />
     
@@ -532,79 +246,10 @@ const collapsiblePreviewLines =
   </body>
 </html>
 
-<style
-  is:global
-  define:vars={{
-    bannerOffset,
-    "banner-height-home": `${BANNER_HEIGHT_HOME}vh`,
-    "banner-height": `${BANNER_HEIGHT}vh`,
-  }}
->
-  /* Tailwind v4：组件级 <style> 独立编译，@apply 需通过 @reference 取得 utilities/主题上下文 */
-  @reference "tailwindcss";
-  html[data-default-wallpaper="overlay"] #banner-wrapper,
-  html[data-default-wallpaper="none"] #banner-wrapper,
-  html[data-wallpaper-mode="overlay"] #banner-wrapper,
-  html[data-wallpaper-mode="none"] #banner-wrapper {
-    display: none !important;
-    visibility: hidden !important;
-    height: 0 !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-    pointer-events: none !important;
-  }
-  @layer components {
-    body.enable-banner[data-page-type="home"] #banner-wrapper {
-      @apply h-(--banner-height-home) translate-y-[var(--banner-height-extend)];
-    }
-    body.enable-banner[data-page-type="post"] #banner-wrapper {
-      @apply h-(--banner-height-home) translate-y-[var(--banner-height-extend)];
-    }
-    .enable-banner #banner-wrapper {
-      @apply h-[var(--banner-height-home)];
-    }
-
-    body.enable-banner[data-page-type="home"] #banner {
-      @apply h-(--banner-height-home) translate-y-0;
-    }
-    body.enable-banner[data-page-type="post"] #banner {
-      @apply h-(--banner-height-home) translate-y-0;
-    }
-    .enable-banner #banner {
-      @apply h-(--banner-height-home) translate-y-[var(--bannerOffset)];
-    }
-    body.enable-banner[data-page-type="home"] #main-grid {
-      @apply translate-y-[var(--banner-height-extend)];
-    }
-    body.enable-banner[data-page-type="post"] #main-grid {
-      @apply translate-y-[var(--banner-height-extend)];
-    }
-    .enable-banner #top-row {
-      @apply h-18 transition-[height,transform,opacity] duration-300;
-    }
-    body.enable-banner[data-page-type="home"] #sidebar-sticky,
-    body.enable-banner[data-page-type="home"] #left-sidebar-sticky,
-    body.enable-banner[data-page-type="home"] #right-sidebar-sticky,
-    body.enable-banner[data-page-type="post"] #sidebar-sticky,
-    body.enable-banner[data-page-type="post"] #left-sidebar-sticky,
-    body.enable-banner[data-page-type="post"] #right-sidebar-sticky {
-      top: 5.5rem;
-    }
-  }
-</style>
 
 <script>
   import { pathsEqual, url } from "@/utils/url-utils";
-  import {
-    BANNER_HEIGHT,
-    BANNER_HEIGHT_EXTEND,
-  } from "@/constants/constants";
-  import {
-    backgroundWallpaper,
-    coverImageConfig,
-    expressiveCodeConfig,
-    siteConfig,
-  } from "@/config";
+  import { expressiveCodeConfig, siteConfig } from "@/config";
   import { initArchivePage } from "@/utils/archive-init";
   // 以下三处逻辑原本内联在只于部分页面渲染的组件里，它们的 <script> 也就只出现在那些页面。
   // swup 导航不会执行新页面的脚本，导致「从别的页面点进来」时这些功能整块失效
@@ -615,22 +260,14 @@ const collapsiblePreviewLines =
   import { initCodeCopyFeedback } from "@/utils/code-copy-feedback-init";
   import { warmUpDeferredBlocks } from "@/utils/deferred-block-warmup";
 
-  // 均为文档级单例：卡片点击走 document 委托、封面图靠 MutationObserver 跟进新 DOM，
-  // 各自内部幂等，首次加载调用一次即可。
+  // 均为文档级单例：卡片点击走 document 委托，各自内部幂等，首次加载调用一次即可。
   initPostCardDelegation();
-  if (coverImageConfig.randomCoverImage.enable) {
-    void import("@/utils/cover-image-init").then(({ initCoverImages }) => {
-      initCoverImages();
-    });
-  }
   initPostPageTOC();
   initMarkdownImages();
   initCodeCopyFeedback();
   // 空闲期让 content-visibility: auto 的重型块各渲染一次，记住真实尺寸，
   // 消除目录点击/hash 跳转的落点估值误差（见模块头注释）
   warmUpDeferredBlocks();
-
-  const bannerEnabled = !!document.getElementById("banner-wrapper");
 
   function setClickOutsideToClose(panel: string, ignores: string[]) {
       document.addEventListener("click", (event) => {
@@ -660,10 +297,6 @@ const collapsiblePreviewLines =
     "search-bar",
     "search-switch",
   ]);
-  setClickOutsideToClose("wallpaper-mode-panel", [
-    "wallpaper-mode-panel",
-    "wallpaper-mode-switch",
-  ]);
   setClickOutsideToClose("theme-mode-panel", [
     "theme-mode-panel",
     "scheme-switch",
@@ -689,26 +322,6 @@ const collapsiblePreviewLines =
     });
   }
 
-  function showBanner() {
-    const isBannerMode = backgroundWallpaper.mode === "banner";
-    if (!isBannerMode) return;
-
-    requestAnimationFrame(() => {
-      // Handle single image banner (desktop)
-      const banner = document.getElementById("banner");
-      if (banner) {
-        banner.classList.remove("opacity-0", "scale-105");
-      }
-
-      const mobileBanner = document.querySelector(
-        '.block.lg\\:hidden[alt="Mobile banner image of the blog"]'
-      );
-      if (mobileBanner) {
-        mobileBanner.classList.remove("opacity-0", "scale-105");
-        mobileBanner.classList.add("opacity-100");
-      }
-    });
-  }
 
   /** 全局 `html { scroll-behavior: smooth }` 会让 `scrollTo(0,0)` 也变成动画，此处强制瞬时置顶 */
   function scrollWindowTopInstant() {
@@ -732,18 +345,6 @@ const collapsiblePreviewLines =
         if (oldest) window.swup.cache.delete(oldest);
       }
     });
-    // TODO: temp solution to change the height of the banner
-    /*
-	window.swup.hooks.on('animation:out:start', () => {
-		const path = window.location.pathname
-		const body = document.querySelector('body')
-		if (path[path.length - 1] === '/' && !body.classList.contains('is-home')) {
-			body.classList.add('is-home')
-		} else if (path[path.length - 1] !== '/' && body.classList.contains('is-home')) {
-			body.classList.remove('is-home')
-		}
-	})
-*/
     window.swup.hooks.on("link:click", (_visit: any, { el }: { el: HTMLAnchorElement }) => {
       // Remove the delay for the first time page load
       document.documentElement.style.setProperty("--content-delay", "0ms");
@@ -796,35 +397,6 @@ const collapsiblePreviewLines =
         document.body.dataset.whiteBg = gridClassCarrier.dataset.whiteBg;
       }
 
-      
-      const pageType = document.body?.dataset?.pageType;
-      const isHomePage = pageType === "home";
-      const isPostPage = pageType === "post";
-      const docEl = document.documentElement;
-      const wallpaperMode =
-        docEl.getAttribute("data-wallpaper-mode") || "banner";
-      const WALLPAPER_BANNER = "banner";
-      const WALLPAPER_NONE = "none";
-      const isMobile = window.innerWidth < 1024;
-      const mobilePostNoWallpaper = isMobile && isPostPage;
-      const effectiveWallpaperMode = mobilePostNoWallpaper
-        ? WALLPAPER_NONE
-        : wallpaperMode;
-      
-      const bannerTextOverlays = document.querySelectorAll("[data-banner-text-overlay]");
-      bannerTextOverlays.forEach((el) => {
-        const overlayType = el.getAttribute("data-banner-text-overlay");
-        const shouldShow =
-          effectiveWallpaperMode === WALLPAPER_BANNER &&
-          overlayType === "home" &&
-          isHomePage;
-        
-        if (shouldShow) {
-          el.classList.remove("hidden");
-        } else {
-          el.classList.add("hidden");
-        }
-      });
 
       initCustomScrollbar();
       
@@ -832,29 +404,7 @@ const collapsiblePreviewLines =
         initIconLoader();
       });
 
-      const tocWrapper = document.getElementById("toc-wrapper");
-      const isArticlePage = tocWrapper !== null;
-      if (isArticlePage) {
-        const tocElement = document.querySelector("table-of-contents");
-        if (tocElement && typeof (tocElement as any).init === "function") {
-          setTimeout(() => {
-            (tocElement as any).init();
-          }, 100);
-        }
-      }
 
-      const navbar = document.getElementById("navbar");
-      if (navbar) {
-        const transparentMode = navbar.getAttribute("data-transparent-mode");
-
-        if (transparentMode === "semifull") {
-          if (
-            typeof (window as any).initSemifullScrollDetection === "function"
-          ) {
-            (window as any).initSemifullScrollDetection();
-          }
-        }
-      }
 
     });
     window.swup.hooks.on("visit:start", (visit: {
@@ -887,7 +437,7 @@ const collapsiblePreviewLines =
         }
       }
 
-      // change banner height immediately when a link is clicked
+      // 立即同步 data-page-type，页面样式（如文章页纯白背景）无需等到内容替换
       const bodyElement = document.querySelector("body");
       const isHomePage = pathsEqual(visit.to.url, url("/"));
       const toPathname = new URL(visit.to.url, window.location.href).pathname;
@@ -895,25 +445,6 @@ const collapsiblePreviewLines =
       const nextPageType = isHomePage ? "home" : isPostPage ? "post" : "page";
       if (bodyElement) {
         bodyElement.dataset.pageType = nextPageType;
-
-        const docEl = document.documentElement;
-        const wallpaperMode =
-          docEl.getAttribute("data-wallpaper-mode") || "banner";
-        const isMobile = window.innerWidth < 1024;
-
-        if (isMobile && isPostPage) {
-          bodyElement.classList.remove("enable-banner", "wallpaper-transparent");
-          bodyElement.classList.add("no-banner-layout");
-        } else if ((isHomePage || isPostPage) && wallpaperMode === "banner") {
-          bodyElement.classList.add("enable-banner");
-          bodyElement.classList.remove(
-            "no-banner-layout",
-            "wallpaper-transparent"
-          );
-        } else {
-          bodyElement.classList.remove("enable-banner", "wallpaper-transparent");
-          bodyElement.classList.add("no-banner-layout");
-        }
       }
 
       if (isHomePage) {
@@ -922,73 +453,16 @@ const collapsiblePreviewLines =
         bodyElement!.classList.remove("lg:is-home");
       }
 
-      // Control navbar transparency based on page
-      const navbar = document.getElementById("navbar");
-      if (navbar) {
-        navbar.setAttribute("data-is-home", isHomePage.toString());
+      // 导航栏首页标记随导航同步（部分样式按是否首页区分）
+      document
+        .getElementById("navbar")
+        ?.setAttribute("data-is-home", isHomePage.toString());
 
-        const transparentMode = navbar.getAttribute("data-transparent-mode");
-        if (transparentMode === "semifull") {
-          if (
-            typeof (window as any).initSemifullScrollDetection === "function"
-          ) {
-            (window as any).initSemifullScrollDetection();
-          }
-        }
-      }
-
-      // Control mobile banner visibility based on page with improved staging animation
       const isMobile = window.innerWidth < 1024;
-      
       if (isMobile) {
         const postListContainer = document.getElementById("post-list-container");
         if (postListContainer) {
           postListContainer.style.transition = "none";
-        }
-      }
-
-      const bannerWrapper = document.getElementById("banner-wrapper");
-      const mainContentWrapper = document.querySelector(
-        ".absolute.w-full.z-30"
-      ) as HTMLElement | null;
-
-      if (isMobile && bannerWrapper && mainContentWrapper) {
-        if (isPostPage) {
-          bannerWrapper.classList.add("mobile-hide-banner");
-          setTimeout(() => {
-            mainContentWrapper.classList.add("mobile-main-no-banner");
-          }, 0);
-        } else if (isHomePage) {
-          mainContentWrapper.style.transition = "none";
-          
-          bannerWrapper.style.display = "";
-          setTimeout(() => {
-            bannerWrapper.classList.remove("mobile-hide-banner");
-          }, 100);
-          setTimeout(() => {
-            mainContentWrapper.classList.remove("mobile-main-no-banner");
-            setTimeout(() => {
-              mainContentWrapper.style.transition = "";
-            }, 50);
-          }, 150);
-        } else {
-          bannerWrapper.classList.add("mobile-hide-banner");
-          setTimeout(() => {
-            mainContentWrapper.classList.add("mobile-main-no-banner");
-          }, 100);
-        }
-      } else if (!isMobile && bannerWrapper) {
-        const docEl = document.documentElement;
-        const wallpaperMode =
-          docEl.getAttribute("data-wallpaper-mode") || "banner";
-        if ((isHomePage || isPostPage) && wallpaperMode === "banner") {
-          bannerWrapper.style.display = "block";
-        } else {
-          bannerWrapper.style.display = "";
-        }
-        bannerWrapper.classList.remove("mobile-hide-banner");
-        if (mainContentWrapper) {
-          mainContentWrapper.classList.remove("mobile-main-no-banner");
         }
       }
 
@@ -998,11 +472,6 @@ const collapsiblePreviewLines =
         heightExtend.classList.remove("hidden");
       }
 
-      // Hide the TOC while scrolling back to top
-      let toc = document.getElementById("toc-wrapper");
-      if (toc) {
-        toc.classList.add("toc-not-ready");
-      }
     });
     window.swup.hooks.on("page:view", (visit?: {
       history?: { popstate?: boolean };
@@ -1057,17 +526,17 @@ const collapsiblePreviewLines =
         document.documentElement.setAttribute("data-theme", expectedTheme);
       }
 
-      setTimeout(() => {
-        if (document.getElementById("tcomment")) {
-          const pageLoadedEvent = new CustomEvent("firefly:page:loaded", {
+      // page:view 时新页面内容已替换完毕，#tcomment 存在即可直接通知评论区重新初始化
+      if (document.getElementById("tcomment")) {
+        document.dispatchEvent(
+          new CustomEvent("firefly:page:loaded", {
             detail: {
               path: window.location.pathname,
               timestamp: Date.now(),
             },
-          });
-          document.dispatchEvent(pageLoadedEvent);
-        }
-      }, 300);
+          }),
+        );
+      }
     });
     window.swup.hooks.on("visit:end", (_visit: { to: { url: string } }) => {
       (window as any).__swupScrollLockY = null;
@@ -1078,11 +547,6 @@ const collapsiblePreviewLines =
           heightExtend.classList.add("hidden");
         }
 
-        // Just make the transition looks better
-        const toc = document.getElementById("toc-wrapper");
-        if (toc) {
-          toc.classList.remove("toc-not-ready");
-        }
 
         document.documentElement.classList.remove("is-page-transitioning");
       }, 200);
@@ -1096,77 +560,12 @@ const collapsiblePreviewLines =
     document.addEventListener("swup:enable", setup);
   }
 
-  let toc = document.getElementById("toc-wrapper");
-  let isTocVisible = false;
 
-  // 滚动到 banner 底部以下时显示 TOC。
-  // 使用 window 级监听（跨 swup 导航持续有效），每次重算 bannerHeight 以自适应窗口尺寸，
-  // 仅在状态变化时写入 class 避免无谓重排，写操作放入 rAF。
-  function scrollFunction() {
-    if (!bannerEnabled || !toc) return;
 
-    const scrollTop = document.documentElement.scrollTop;
-    const bannerHeight = window.innerHeight * (BANNER_HEIGHT / 100);
-    const shouldShow = scrollTop > bannerHeight;
+  initCustomScrollbar();
 
-    if (shouldShow !== isTocVisible) {
-      isTocVisible = shouldShow;
-      requestAnimationFrame(() => {
-        toc!.classList.toggle("toc-hide", !isTocVisible);
-      });
-    }
-  }
-
-  let scrollTimeout: number;
-  window.addEventListener(
-    "scroll",
-    () => {
-      if (scrollTimeout) {
-        cancelAnimationFrame(scrollTimeout);
-      }
-      scrollTimeout = requestAnimationFrame(scrollFunction);
-    },
-    { passive: true }
-  );
-
-  // 初始同步一次状态
-  scrollFunction();
-
-  // 使用防抖优化resize性能
-  let resizeTimeout: number;
-  window.addEventListener('resize', () => {
-    if (resizeTimeout) {
-      clearTimeout(resizeTimeout);
-    }
-    resizeTimeout = window.setTimeout(() => {
-      // calculate the --banner-height-extend, which needs to be a multiple of 4 to avoid blurry text
-      let offset = Math.floor(window.innerHeight * (BANNER_HEIGHT_EXTEND / 100));
-      offset = offset - (offset % 4);
-      document.documentElement.style.setProperty(
-        "--banner-height-extend",
-        `${offset}px`
-      );
-    }, 150);
-  }, { passive: true });
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", () => {
-      showBanner();
-      initCustomScrollbar();
-    });
-  } else {
-    showBanner();
-    initCustomScrollbar();
-  }
-
-  // Initialize wallpaper mode
   import { initIconLoader } from "@/utils/icon-loader";
   const initOptionalRuntime = () => {
-    if (backgroundWallpaper.switchable) {
-      void import("@/utils/setting-utils").then(({ initWallpaperMode }) => {
-        initWallpaperMode();
-      });
-    }
     initIconLoader();
   };
   if (document.readyState === "loading") {

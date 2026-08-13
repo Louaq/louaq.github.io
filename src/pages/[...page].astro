@@ -13,7 +13,6 @@ import {
 } from "@/config";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@/utils/content-utils";
-import { processCoverImageSync } from "@/utils/image-utils";
 import { getFileDirFromPath, getPostUrlForEntry } from "@/utils/url-utils";
 export const getStaticPaths = (async ({ paginate }) => {
 	const allBlogPosts = await getSortedPosts();
@@ -64,9 +63,7 @@ const postSlides: CarouselSlide[] = allPosts
 		return b.data.published.getTime() - a.data.published.getTime();
 	})
 	.map((post) => {
-		const carouselImage = post.data.homeCarouselImage?.trim() || "";
-		const coverImage = processCoverImageSync(post.data.image, post.id);
-		const finalImage = carouselImage || coverImage;
+		const finalImage = post.data.homeCarouselImage?.trim() || post.data.image;
 		const publishedText = post.data.published.toLocaleDateString("zh-CN", {
 			year: "numeric",
 			month: "2-digit",
@@ -86,7 +83,6 @@ const postSlides: CarouselSlide[] = allPosts
 			title: post.data.title,
 			image: finalImage,
 			basePath: getFileDirFromPath(post.filePath || ""),
-			seed: post.id,
 			meta,
 		};
 	});
