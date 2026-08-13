@@ -3,7 +3,6 @@ import I18nKey from "@i18n/i18nKey";
 import { i18n } from "@i18n/translation";
 import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { Icon } from "astro-icon/components";
-import PageHero from "@/components/common/PageHero.astro";
 import { getArchivePostsList } from "@/utils/content-utils";
 import { getPostUrlBySlug } from "@/utils/url-utils";
 
@@ -40,8 +39,7 @@ function formatTags(tagList: string[]) {
 const labelSingular = i18n(I18nKey.postCount);
 const labelPlural = i18n(I18nKey.postsCount);
 ---
-<MainGridLayout title={i18n(I18nKey.archive)} hideSidebar>
-	<PageHero title={i18n(I18nKey.archive)} subtitle={i18n(I18nKey.archiveDescription)} />
+<MainGridLayout title={i18n(I18nKey.archive)} hideSidebar wideContent>
 	<div class="card-base card-plain px-8 py-6" id="archive-list"
 		data-label-singular={labelSingular} data-label-plural={labelPlural}>
 		{groups.map((group, index) => (
