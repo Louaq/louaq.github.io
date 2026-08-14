@@ -57,12 +57,7 @@
         content: none;
       }
     }
-  
-    /* 正文重型叶子块统一按视口渲染：视口外整块跳过样式重算/布局/绘制，
-       让首屏、滚动、深浅色切换的渲染开销只与可见区域成正比、与文章长度无关
-       （超长代码块动辄数万个带内联 CSS 变量的 span，全量重算是切换卡顿的根源）。
-       contain-intrinsic-size 的 auto 关键字记住首次渲染后的真实尺寸，
-       长度值仅是渲染前的占位估值。 */
+
     .expressive-code {
       @apply my-4;
       content-visibility: auto;
@@ -116,28 +111,32 @@
       overflow: hidden;
       table-layout: auto !important;
     }
-  
     th,
     td {
-      @apply px-3 py-2 text-left;
+      @apply text-left;
       min-width: 120px;
-      border: none;
       white-space: nowrap !important;
       word-break: normal !important;
     }
-  
+
     th {
       @apply bg-(--btn-regular-bg) font-semibold text-(--btn-content) border-b border-(--line-color);
     }
-  
+
     td {
       @apply bg-(--card-bg);
     }
-  
+
     tr:nth-child(even) td {
       @apply bg-(--btn-plain-bg-active);
     }
 
+    /* 注意：本块与 main.css 同断点的 `.custom-md table { width: 100% !important;
+       table-layout: fixed !important }` 直接冲突，且**本块才是生效的那一套**。
+       原因是级联层对 !important 的排序是反向的：normal 声明里无层级(layerless)优先级最高，
+       但 !important 声明里无层级优先级最低，因此 @layer base 内的 !important
+       反而压过 main.css 那条 layerless 的 !important。
+       不要以为「main.css 在后面所以它赢」而删掉这里。 */
     @media (max-width: 767px) {
       table {
         width: max-content !important;

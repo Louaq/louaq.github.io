@@ -1,22 +1,13 @@
-/* Tailwind v4：本文件被 Vite 拆分为独立样式表时会丢失 @import 的 layer() 修饰；
-   在源文件内显式包入 @layer base，确保始终位于 base 层（低于 utilities、低于无层级的 juejin-theme）。 */
 @layer base {
-/**
- * 统一变量定义 - 合并所有重复的CSS变量和常量
- * Unified Variables - Merged all duplicate CSS variables and constants
- */
-
-/* ===== 基础变量定义 ===== */
 :root {
-  /* 与 Layout 内联脚本、主题色滑块一致；可由 JS 覆盖 */
   --hue: 250;
 
-  /* 现代简约风格：柔和圆角，但不过分夸张 */
   --radius-large: 8px;
-  /* 首屏列表卡片错峰出现；过大会拖慢可感知加载 */
+
   --content-delay: 30ms;
 
-  /* 掘金主色：由色相滑块 --hue 驱动（oklch 第三维） */
+  --radius-lg: 0.5rem;
+
   --juejin-primary: oklch(0.58 0.20 var(--hue));
   --juejin-primary-active: oklch(0.47 0.22 var(--hue));
   --juejin-text-primary: #1d2129;
@@ -35,84 +26,48 @@
   --page-bg: var(--juejin-bg-page);
   --card-bg: var(--juejin-bg-card);
   --card-bg-transparent: rgba(255, 255, 255, 0.8);
-  
+
   --btn-content: var(--juejin-primary);
   --btn-regular-bg: var(--juejin-tag-bg);
   --btn-regular-bg-hover: #e9eaec;
   --btn-regular-bg-active: #dcdee0;
-  --waves-toggle-bg: #e9eaec;
-  
+
   --btn-plain-bg-hover: color-mix(in oklch, var(--primary) 10%, transparent);
   --btn-plain-bg-active: color-mix(in oklch, var(--primary) 16%, transparent);
-  
+
   --btn-card-bg-hover: #f7f8fa;
   --btn-card-bg-active: #ebedf0;
-  
-  --enter-btn-bg: var(--btn-regular-bg);
-  --enter-btn-bg-hover: var(--btn-regular-bg-hover);
-  --enter-btn-bg-active: var(--btn-regular-bg-active);
-  
+
   --deep-text: var(--juejin-text-primary);
-  --title-active: var(--juejin-primary-active);
-  
+
   --line-divider: var(--juejin-border);
   --line-color: var(--juejin-border);
   --meta-divider: var(--juejin-border-hover);
   --content-meta: var(--juejin-text-secondary);
-  
+
   --inline-code-bg: var(--btn-regular-bg);
   --inline-code-color: var(--btn-content);
-  --selection-bg: oklch(0.90 0.05 var(--hue));
 
   --license-block-bg: rgba(0, 0, 0, 0.03);
-  
+
   --link-underline: oklch(0.93 0.04 var(--hue));
   --link-hover: oklch(0.95 0.025 var(--hue));
   --link-active: oklch(0.90 0.05 var(--hue));
-  
-  --float-panel-bg: white;
-  
-  --scrollbar-bg-light: rgba(0, 0, 0, 0.4);
-  --scrollbar-bg-hover-light: rgba(0, 0, 0, 0.5);
-  --scrollbar-bg-active-light: rgba(0, 0, 0, 0.6);
-  
-  --scrollbar-bg-dark: rgba(255, 255, 255, 0.4);
-  --scrollbar-bg-hover-dark: rgba(255, 255, 255, 0.5);
-  --scrollbar-bg-active-dark: rgba(255, 255, 255, 0.6);
-  
-  --scrollbar-bg: var(--scrollbar-bg-light);
-  --scrollbar-bg-hover: var(--scrollbar-bg-hover-light);
-  --scrollbar-bg-active: var(--scrollbar-bg-active-light);
 
-  --display-light-icon: 1;
-  --display-dark-icon: 0;
-  
-  --admonitions-color-tip: oklch(0.7 0.14 180);
-  --admonitions-color-note: oklch(0.7 0.14 250);
-  --admonitions-color-important: oklch(0.7 0.14 310);
-  --admonitions-color-warning: oklch(0.7 0.14 60);
-  --admonitions-color-caution: oklch(0.6 0.2 25);
-  
-  /* TOC相关变量 */
-  /* 目录宽度取「正文右侧空槽」与 14rem 的较小值：窗口再宽也不会继续变宽，
-     只是让目录离正文更近、把多出来的空间留在最右侧 */
-  --toc-width: min(calc((100vw - var(--page-width)) / 2 - 1rem), 14rem);
-  --toc-item-active: oklch(0.70 0.13 var(--hue));
-  
   /* 主题色选择条渐变 */
-  --color-selection-bar: linear-gradient(to right, 
-    oklch(0.80 0.10 0), 
-    oklch(0.80 0.10 30), 
-    oklch(0.80 0.10 60), 
-    oklch(0.80 0.10 90), 
-    oklch(0.80 0.10 120), 
-    oklch(0.80 0.10 150), 
-    oklch(0.80 0.10 180), 
-    oklch(0.80 0.10 210), 
-    oklch(0.80 0.10 240), 
-    oklch(0.80 0.10 270), 
-    oklch(0.80 0.10 300), 
-    oklch(0.80 0.10 330), 
+  --color-selection-bar: linear-gradient(to right,
+    oklch(0.80 0.10 0),
+    oklch(0.80 0.10 30),
+    oklch(0.80 0.10 60),
+    oklch(0.80 0.10 90),
+    oklch(0.80 0.10 120),
+    oklch(0.80 0.10 150),
+    oklch(0.80 0.10 180),
+    oklch(0.80 0.10 210),
+    oklch(0.80 0.10 240),
+    oklch(0.80 0.10 270),
+    oklch(0.80 0.10 300),
+    oklch(0.80 0.10 330),
     oklch(0.80 0.10 360)
   );
 }
@@ -136,267 +91,50 @@
   --page-bg: #17171a;
   --card-bg: #22222a;
   --card-bg-transparent: rgba(34, 34, 42, 0.8);
-  
+
   --btn-content: var(--juejin-primary);
   --btn-regular-bg: #2d2d35;
   --btn-regular-bg-hover: #383841;
   --btn-regular-bg-active: #43434d;
-  --waves-toggle-bg: #383841;
-  
+
   --btn-plain-bg-hover: color-mix(in oklch, var(--primary) 14%, transparent);
   --btn-plain-bg-active: color-mix(in oklch, var(--primary) 20%, transparent);
-  
+
   --btn-card-bg-hover: #2d2d35;
   --btn-card-bg-active: #383841;
-  
+
   --line-divider: rgba(255, 255, 255, 0.08);
   --line-color: rgba(255, 255, 255, 0.1);
   --meta-divider: rgba(255, 255, 255, 0.2);
   --content-meta: rgba(255, 255, 255, 0.65);
-  
-  --selection-bg: oklch(0.40 0.08 var(--hue));
 
   --license-block-bg: oklch(0.17 0.015 var(--hue));
-  
+
   --link-underline: oklch(0.40 0.08 var(--hue));
   --link-hover: oklch(0.40 0.08 var(--hue));
   --link-active: oklch(0.35 0.07 var(--hue));
-  
-  --float-panel-bg: oklch(0.19 0.015 var(--hue));
-  
-  --scrollbar-bg: var(--scrollbar-bg-dark);
-  --scrollbar-bg-hover: var(--scrollbar-bg-hover-dark);
-  --scrollbar-bg-active: var(--scrollbar-bg-active-dark);
 
-  --display-light-icon: 0;
-  --display-dark-icon: 1;
-  
-  --admonitions-color-tip: oklch(0.75 0.14 180);
-  --admonitions-color-note: oklch(0.75 0.14 250);
-  --admonitions-color-important: oklch(0.75 0.14 310);
-  --admonitions-color-warning: oklch(0.75 0.14 60);
-  --admonitions-color-caution: oklch(0.65 0.2 25);
-  
-  /* TOC相关变量 - 暗色主题 */
-  --toc-item-active: oklch(0.35 0.07 var(--hue));
-  
   /* 主题色选择条渐变 - 暗色主题 */
-  --color-selection-bar: linear-gradient(to right, 
-    oklch(0.70 0.10 0), 
-    oklch(0.70 0.10 30), 
-    oklch(0.70 0.10 60), 
-    oklch(0.70 0.10 90), 
-    oklch(0.70 0.10 120), 
-    oklch(0.70 0.10 150), 
-    oklch(0.70 0.10 180), 
-    oklch(0.70 0.10 210), 
-    oklch(0.70 0.10 240), 
-    oklch(0.70 0.10 270), 
-    oklch(0.70 0.10 300), 
-    oklch(0.70 0.10 330), 
+  --color-selection-bar: linear-gradient(to right,
+    oklch(0.70 0.10 0),
+    oklch(0.70 0.10 30),
+    oklch(0.70 0.10 60),
+    oklch(0.70 0.10 90),
+    oklch(0.70 0.10 120),
+    oklch(0.70 0.10 150),
+    oklch(0.70 0.10 180),
+    oklch(0.70 0.10 210),
+    oklch(0.70 0.10 240),
+    oklch(0.70 0.10 270),
+    oklch(0.70 0.10 300),
+    oklch(0.70 0.10 330),
     oklch(0.70 0.10 360)
   );
-}
-
-/* ===== 响应式断点变量 ===== */
-:root {
-  /* 断点定义 */
-  --breakpoint-xs: 320px;
-  --breakpoint-sm: 480px;
-  --breakpoint-md: 768px;
-  --breakpoint-lg: 1024px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
-  
-  /* 容器宽度 */
-  --container-xs: 100%;
-  --container-sm: 100%;
-  --container-md: 100%;
-  --container-lg: 1024px;
-  --container-xl: 1280px;
-  --container-2xl: 1536px;
-}
-
-/* ===== 动画变量 ===== */
-:root {
-  /* 缓动函数 */
-  --ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-decelerate: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --ease-accelerate: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  --ease-sharp: cubic-bezier(0.4, 0, 0.6, 1);
-  
-  /* 动画时长
-     注意：自定义属性漏写分号不会报错，而是把后续行整个吞进前一个变量的值里，
-     引用方 var() 全部解析失败。深浅色切换不做任何过渡动画（新主题即时到位），
-     相关的 --theme-transition-* / --theme-reveal-duration 已随机制一并移除。 */
-  --duration-fast: 100ms;
-  --duration-normal: 150ms;
-  --duration-medium: 200ms;
-  --duration-slow: 250ms;
-  --duration-slower: 300ms;
-
-  /* 动画延迟 */
-  --delay-none: 0ms;
-  --delay-short: 30ms;
-  --delay-medium: 60ms;
-  --delay-long: 90ms;
-  --delay-longer: 120ms;
-}
-
-/* ===== 间距变量 ===== */
-:root {
-  /* 基础间距 */
-  --spacing-xs: 0.25rem;    /* 4px */
-  --spacing-sm: 0.5rem;     /* 8px */
-  --spacing-md: 0.75rem;    /* 12px */
-  --spacing-lg: 1rem;       /* 16px */
-  --spacing-xl: 1.25rem;    /* 20px */
-  --spacing-2xl: 1.5rem;    /* 24px */
-  --spacing-3xl: 2rem;      /* 32px */
-  --spacing-4xl: 2.5rem;    /* 40px */
-  --spacing-5xl: 3rem;      /* 48px */
-  
-  /* 组件间距 */
-  --widget-gap-mobile: var(--spacing-md);
-  --widget-gap-tablet: var(--spacing-lg);
-  --widget-gap-desktop: var(--spacing-xl);
-  
-  /* 侧边栏宽度 */
-  --sidebar-width-mobile: 100%;
-  --sidebar-width-tablet: 280px;
-  --sidebar-width-desktop: 320px;
-}
-
-/* ===== 阴影变量 ===== */
-:root {
-  /* 基础阴影 */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
-  --shadow-2xl: 0 25px 50px rgba(0, 0, 0, 0.25);
-  
-  /* 特殊阴影 */
-  --shadow-navbar: 0 4px 16px rgba(0, 0, 0, 0.1);
-  --shadow-navbar-dark: 0 4px 16px rgba(0, 0, 0, 0.2);
-  --shadow-button: 0 4px 12px rgba(0, 0, 0, 0.15);
-  --shadow-button-dark: 0 4px 12px rgba(255, 255, 255, 0.1);
-}
-
-/* ===== 边框半径变量 ===== */
-:root {
-  --radius-sm: 0.25rem;     /* 4px */
-  --radius-md: 0.375rem;    /* 6px */
-  --radius-lg: 0.5rem;      /* 8px */
-  --radius-xl: 0.75rem;     /* 12px */
-  --radius-2xl: 1rem;       /* 16px */
-  --radius-3xl: 1.5rem;     /* 24px */
-  --radius-full: 9999px;
-}
-
-/* ===== 透明度变量 ===== */
-:root {
-  --opacity-0: 0;
-  --opacity-5: 0.05;
-  --opacity-10: 0.1;
-  --opacity-20: 0.2;
-  --opacity-25: 0.25;
-  --opacity-30: 0.3;
-  --opacity-40: 0.4;
-  --opacity-50: 0.5;
-  --opacity-55: 0.55;
-  --opacity-60: 0.6;
-  --opacity-70: 0.7;
-  --opacity-75: 0.75;
-  --opacity-80: 0.8;
-  --opacity-90: 0.9;
-  --opacity-95: 0.95;
-  --opacity-100: 1;
-}
-
-/* ===== 模糊效果变量 ===== */
-:root {
-  --blur-sm: 4px;
-  --blur-md: 8px;
-  --blur-lg: 12px;
-  --blur-xl: 16px;
-  --blur-2xl: 20px;
-  --blur-3xl: 24px;
-}
-
-/* ===== 变换变量 ===== */
-:root {
-  /* 平移 */
-  --translate-xs: 0.125rem;   /* 2px */
-  --translate-sm: 0.25rem;     /* 4px */
-  --translate-md: 0.5rem;      /* 8px */
-  --translate-lg: 0.75rem;     /* 12px */
-  --translate-xl: 1rem;        /* 16px */
-  --translate-2xl: 1.5rem;      /* 24px */
-  --translate-3xl: 2rem;       /* 32px */
-  
-  /* 缩放 */
-  --scale-95: 0.95;
-  --scale-98: 0.98;
-  --scale-100: 1;
-  --scale-105: 1.05;
-  --scale-110: 1.1;
 }
 
 /* ===== 布局变量 ===== */
 :root {
   --navbar-height: 4.5rem;  /* 导航栏高度，与 Navbar.astro 中 h-[4.5rem] 保持一致 */
-}
-
-/* ===== 层级变量 ===== */
-:root {
-  --z-dropdown: 1000;
-  --z-sticky: 1020;
-  --z-fixed: 1030;
-  --z-modal-backdrop: 1040;
-  --z-modal: 1050;
-  --z-popover: 1060;
-  --z-tooltip: 1070;
-  --z-toast: 1080;
-  --z-navbar: 20;
-  --z-content: 30;
-}
-
-/* ===== 性能优化变量 ===== */
-:root {
-  /* GPU加速 */
-  --gpu-transform: translateZ(0);
-  --gpu-backface: hidden;
-  
-  /* 动画性能 */
-  --animation-fill-mode: both;
-  --animation-timing: var(--ease-standard);
-  --animation-duration: var(--duration-medium);
-}
-
-/* ===== 响应式工具类 ===== */
-@media (max-width: 767px) {
-  :root {
-    --container-width: var(--container-sm);
-    --widget-gap: var(--widget-gap-mobile);
-    --sidebar-width: var(--sidebar-width-mobile);
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1279px) {
-  :root {
-    --container-width: var(--container-md);
-    --widget-gap: var(--widget-gap-tablet);
-    --sidebar-width: var(--sidebar-width-tablet);
-  }
-}
-
-@media (min-width: 1280px) {
-  :root {
-    --container-width: var(--container-lg);
-    --widget-gap: var(--widget-gap-desktop);
-    --sidebar-width: var(--sidebar-width-desktop);
-  }
 }
 
 }

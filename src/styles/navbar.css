@@ -1,69 +1,30 @@
-/* Tailwind v4：本文件被 Vite 拆分为独立样式表时会丢失 @import 的 layer() 修饰；
-   在源文件内显式包入 @layer base，确保始终位于 base 层（低于 utilities、低于无层级的 juejin-theme）。 */
 @layer base {
-/**
- * 统一导航栏样式
- *
- * 站点已无背景壁纸，导航栏只有一种形态（不透明卡片底色）。此处原先按
- * backgroundWallpaper 的 banner / overlay / none 三种模式，以及 banner.navbar
- * 的 transparentMode（semi / full / semifull）与 enableBlur 组合出十余套
- * 透明度与毛玻璃规则，已随壁纸功能一并删除。
- */
-
-/* ============================================
- * 基础导航栏样式
- * 适用: 所有模式，所有设备
- * ============================================ */
 #navbar>div {
-    background: var(--card-bg);
-    border: 1px solid transparent;
-    border-radius: 0 0 0.75rem 0.75rem;
     /* 使用contain优化渲染性能 */
     contain: layout style;
     /* 使用transform替代top/left等属性，利用GPU加速 */
     will-change: transform;
 }
 
-
-
 /* Swup 导航期间统一关掉导航栏过渡（含 border），避免回顶/回首页时黑边一闪 */
 .is-page-transitioning #navbar>div {
     transition: none !important;
 }
 
-
-
-/* ============================================
- * 顶栏背景：始终横向铺满视口（桌面端顶边无圆角）
- * ============================================ */
 @media (min-width: 1024px) {
-    #navbar-wrapper #navbar > div,
-    #navbar-wrapper #navbar.scrolled > div {
-        border-radius: 0 !important;
+    #navbar-wrapper #navbar > div {
         width: 100% !important;
         max-width: none !important;
         margin: 0 !important;
     }
 }
 
-/* ============================================
- * 小于1200px时隐藏导航栏菜单图标
- * ============================================ */
 @media (max-width: 1199px) {
     .navbar-icon {
         display: none !important;
     }
 }
 
-
-
-body #top-row #navbar > div {
-    border-radius: 0 !important;
-}
-
-/* 搜索岛：SSR(client:load) + 桌面固定槽宽；岛用 contents 避免多包一层产生宽度差
-   槽宽与 .search-trigger 图标按钮实际尺寸（2.25rem + 0.25rem 右边距）对齐，
-   避免沿用旧版搜索框（pill 输入框）的宽槽导致图标与右侧按钮间距过大 */
 .navbar-search-slot {
     display: contents;
 }
@@ -80,12 +41,6 @@ body #top-row #navbar > div {
     .navbar-search-slot > astro-island {
         display: contents;
     }
-}
-
-/* 导航栏 expand-animation：禁用 ::before 悬浮层，背景由 juejin-theme #navbar .btn-plain 控制 */
-#navbar .btn-plain:hover::before,
-#navbar .btn-plain:active::before {
-    background: none !important;
 }
 
 }

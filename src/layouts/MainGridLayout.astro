@@ -207,13 +207,7 @@ const mainPanelTop = "5.5rem";
     }
   }
 
-  /* 隐藏滚动条 */
-  .hide-scrollbar {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+  /* `.hide-scrollbar` 不在这里重复定义：main.css 已有 `@utility hide-scrollbar`
+     且声明完全相同，本文件上方的 .post-toc-inner-wrapper 直接用那个工具类即可。 */
 </style>
 
