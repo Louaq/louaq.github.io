@@ -2,24 +2,11 @@
 @import './variables-unified.css' layer(base);
 @import './layout-styles.css' layer(base);
 @import './navbar.css' layer(base);
-/* transition.css / markdown.css / image-zoom.css 不要在这里 @import：
- * Tailwind 插件会把它们内联进 main 的编译产物，而 Vite 同时又会把它们
- * 作为独立样式模块再输出一份（chunk 或页面内联 <style>），全站双份下发。
- * 它们改由 Layout.astro 直接 import（与 toc.css 同模式），只编译一次。
- * 上面三个文件虽同样被拆成独立 chunk，但不会被内联进 main，没有双份问题。 */
 
 @plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
 
-/*
-  The default border color has changed to `currentcolor` in Tailwind CSS v4,
-  so we've added these compatibility styles to make sure everything still
-  looks the same as it did with Tailwind CSS v3.
-
-  If we ever want to remove these styles, we need to add an explicit border
-  color utility to any element that depends on these defaults.
-*/
 @layer base {
   *,
   ::after,
@@ -48,14 +35,6 @@
   contain: layout style;
 }
 
-/* 曾有 `@utility post-card-wrapper`，内容是：
-   1) 一段说明「为什么不再用 content-visibility:auto + contain-intrinsic-size」的注释
-      （视口外卡片跳过渲染会让封面图逐张“弹出”，且 400px 占位与实际卡片高度不符）；
-   2) `.post-card-wrapper .stats .btn-regular` 的三态配色——这组声明当时在
-      @utility post-card-wrapper / @utility btn-regular / @utility stats 里各写了一遍，
-      同样 3 条声明重复 3 份，现统一只保留 @utility btn-regular 中的那一份。
-   去掉 2) 之后该 utility 只剩注释（Tailwind 不允许空 utility），故整体删除；
-   标记里的 .post-card-wrapper 类由下方 juejin-theme 段的普通选择器负责。 */
 
 @utility card-base {
   @apply rounded-(--radius-large) overflow-hidden bg-(--card-bg);
@@ -161,16 +140,6 @@
 @utility btn-regular {
   @apply flex items-center justify-center bg-(--btn-regular-bg) hover:bg-(--btn-regular-bg-hover) active:bg-(--btn-regular-bg-active)
         text-(--btn-content) dark:text-white/75;
-  .post-card-wrapper .stats & {
-    @apply text-(--primary) bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
-  }
-  .post-card-wrapper .stats &:hover {
-    @apply bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] text-(--primary) dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
-  }
-
-  .post-card-wrapper .stats &:active {
-    @apply bg-[color-mix(in_oklch,var(--primary)_10%,transparent)] text-(--primary) dark:bg-[color-mix(in_oklch,var(--primary)_14%,transparent)];
-  }
 }
 
 @utility hide-scrollbar {
@@ -200,11 +169,6 @@
   @apply text-black/30 dark:text-white/30;
 }
 
-/* 下拉菜单的「hover / focus-within 展开 + 箭头翻转」此前在
-   dropdown-container / dropdown-menu / dropdown-arrow 三个 utility 里互相重写，
-   其中 `.dropdown-container:focus-within .dropdown-menu` 一条出现了 4 次。
-   现按被作用的元素归位：展开态写在 dropdown-menu，箭头写在 dropdown-arrow，
-   dropdown-container 只留自身的定位与响应式隐藏。 */
 @utility dropdown-container {
   /* 下拉菜单样式 */
   @apply relative;
@@ -274,9 +238,7 @@
   /* 无 hover 态，不加 transition-colors：颜色过渡只会在主题翻转时拖出不同步的尾巴 */
   @apply w-8 h-8 rounded-md flex items-center justify-center bg-(--btn-regular-bg)
         text-(--btn-content) mr-2;
-  .post-meta & {
-    @apply text-(--primary);
-  }
+  /* 原有的 `.post-meta &` 嵌套规则已随 .post-meta 整体移除，见下方 juejin-theme 段说明 */
 }
 
 @utility with-divider {
@@ -334,7 +296,6 @@
     scrollbar-gutter: stable;
   }
 
-  /* 明暗模式切换：日/夜天空胶囊开关，纯 CSS 控制显示，避免刷新时”重新加载/闪一下” */
   #scheme-switch.theme-switch {
     width: 52px;
     height: 28px;
@@ -347,7 +308,6 @@
     box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   }
 
-  /* 背景：日间天空 / 夜间星空，透明度交叉淡入淡出 */
   #scheme-switch .switch-face {
     position: absolute;
     inset: 0;
@@ -457,14 +417,6 @@
   --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
 }
 
-
-/* =============================================================
- * 掘金主题（juejin-theme）：原 juejin-theme.css 内容内联于此。
- * 保持无 @layer（layerless）且位于 main.css 末尾，确保覆盖优先级与原独立引入时一致。
- * ============================================================= */
-/* =============================================================
- * 全局基础风格
- * ============================================================= */
 html,
 body {
   font-family: var(--font-family-custom), var(--font-family-fallback);
@@ -490,9 +442,6 @@ body {
   color: #fff;
 }
 
-/* =============================================================
- * 卡片：白底 + 柔和圆角 + 无边框浮起（深色模式改用极浅描边，阴影在深色背景上不可读）
- * ============================================================= */
 .card-base {
   border-radius: var(--radius-large) !important;
   background-color: var(--card-bg) !important;
@@ -726,19 +675,6 @@ body {
   border-radius: var(--radius-large) !important;
 }
 
-/* 缩短文章卡片的内边距，让其更紧凑（接近掘金的紧凑列表风格） */
-.post-card-wrapper .post-card-content {
-  padding-top: 1.125rem !important;
-  padding-bottom: 1.125rem !important;
-}
-
-@media (min-width: 768px) {
-  .post-card-wrapper .post-card-content {
-    padding-top: 1.25rem !important;
-    padding-bottom: 1.25rem !important;
-  }
-}
-
 /* 卡片之间的间距更紧凑 */
 #post-list-container.list-mode {
   gap: 0.5rem !important;
@@ -749,134 +685,16 @@ body {
     gap: 0.75rem !important;
   }
 }
-
-.post-card-title {
-  font-size: 1.125rem !important;
-  line-height: 1.5 !important;
-  color: var(--juejin-text-primary) !important;
-  font-weight: 600 !important;
-}
-:root.dark .post-card-title {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-@media (min-width: 768px) {
-  .post-card-title {
-    font-size: 18px !important;
-  }
-}
-
-/* 悬浮时标题保持与普通状态同色，不改变为主题蓝 */
-.post-card-title:hover,
-.post-card-title:hover * {
-  color: var(--juejin-text-primary) !important;
-}
-:root.dark .post-card-title:hover,
-:root.dark .post-card-title:hover * {
-  color: rgba(255, 255, 255, 0.95) !important;
-}
-
-/* 标题左侧的竖线变细 */
-.post-card-title::before {
-  width: 3px !important;
-  border-radius: 2px !important;
-  background-color: var(--juejin-primary) !important;
-}
-
-/* 描述文字偏灰 */
-.post-card-wrapper .description {
-  color: var(--juejin-text-secondary) !important;
-  font-size: 0.875rem !important;
-  line-height: 1.6 !important;
-}
-:root.dark .post-card-wrapper .description {
-  color: rgba(255, 255, 255, 0.6) !important;
-}
-
-/* 文章封面图圆角 */
-.post-card-image {
-  border-radius: 6px !important;
-  overflow: hidden;
-}
-
-/* 标签：主题色浅底 + 主题色文字，胶囊形状更柔和 */
-.post-card-wrapper .stats .btn-regular {
-  background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
-  color: var(--primary) !important;
-  border-radius: 999px !important;
-  font-weight: normal !important;
-  padding: 3px 10px !important;
-  height: auto !important;
-  font-size: 0.75rem !important;
-  border: none !important;
-}
-:root.dark .post-card-wrapper .stats .btn-regular {
-  background-color: color-mix(in oklch, var(--primary) 14%, transparent) !important;
-  color: var(--primary) !important;
-}
-
-/* =============================================================
- * 元信息（PostMeta）：紧凑 + 浅灰
- * ============================================================= */
-.post-meta {
-  font-size: 0.8125rem !important;
-  color: var(--juejin-text-tertiary) !important;
-}
-:root.dark .post-meta {
-  color: rgba(255, 255, 255, 0.5) !important;
-}
-.post-meta .meta-icon {
-  width: 1.25rem !important;
-  height: 1.25rem !important;
-  background-color: transparent !important;
-  margin-right: 0.25rem !important;
-  color: var(--primary) !important;
-}
-:root.dark .post-meta .meta-icon {
-  color: var(--primary) !important;
-}
-
-/* 文章卡片元信息：日期/分类/字数图标改为彩色区分 */
-.post-meta .meta-icon.meta-icon--date {
-  color: #3b82f6 !important;
-}
-.post-meta .meta-icon.meta-icon--category {
-  color: #22c55e !important;
-}
-.post-meta .meta-icon.meta-icon--words {
-  color: #f59e0b !important;
-}
-:root.dark .post-meta .meta-icon.meta-icon--date {
-  color: #60a5fa !important;
-}
-:root.dark .post-meta .meta-icon.meta-icon--category {
-  color: #4ade80 !important;
-}
-:root.dark .post-meta .meta-icon.meta-icon--words {
-  color: #fbbf24 !important;
-}
-
-/* =============================================================
- * 按钮：常规按钮风格（btn-regular）
- * ============================================================= */
 .btn-regular {
   border-radius: 8px !important;
   font-weight: 500;
 }
-
-/* =============================================================
- * 链接默认样式
- * ============================================================= */
 a {
   text-decoration: none;
 }
 .link {
   color: var(--juejin-primary) !important;
 }
-
-/* =============================================================
- * 侧边栏 widget：掘金风格白卡片 + 标题
- * ============================================================= */
 .widget {
   border-radius: var(--radius-large) !important;
 }
@@ -894,10 +712,6 @@ a {
 :root.dark .widget h4 {
   color: rgba(255, 255, 255, 0.92);
 }
-
-/* =============================================================
- * 个人资料卡：掘金风格头像 + 名字
- * ============================================================= */
 /* 头像区域：圆形 + 居中 */
 .card-base.p-3 > a:first-child {
   border-radius: var(--radius-large) !important;
@@ -907,18 +721,10 @@ a {
 .card-base .h-1.w-5 {
   background-color: var(--juejin-primary) !important;
 }
-
-/* =============================================================
- * 分页 / 翻页：掘金风格
- * ============================================================= */
 .pagination button,
 .pagination a {
   border-radius: 8px !important;
 }
-
-/* =============================================================
- * 滚动条：更细更浅
- * ============================================================= */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -974,7 +780,6 @@ a {
   border-radius: var(--header-border-radius, 0.75rem) var(--header-border-radius, 0.75rem) 0 0;
 }
 
-/* 折叠状态下悬浮在代码底部的展开/收起按钮已挪进标题栏，这里不再重复展示 */
 .custom-md .expressive-code .ec-collapse__toggle {
   display: none !important;
 }
@@ -1085,8 +890,6 @@ html[data-language-badge-enabled="true"]
   transform: translate(-50%, -50%);
 }
 
-/* 各语言的显示名与图标（图标取自已安装的 simple-icons / lucide，内联为 data URI）。
- * 语言集合对应 src/content 实际用到的 9 种；未枚举的语言回退为上面的 attr(data-language)。 */
 html[data-language-badge-enabled="true"]
   .custom-md
   .expressive-code
@@ -1159,17 +962,11 @@ html[data-language-badge-enabled="true"]
   background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238A919F%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%2F%3E%3Cpath%20d%3D%22M14%202v5a1%201%200%200%200%201%201h5M10%209H8m8%204H8m8%204H8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
 }
 
-/* =============================================================
- * 文章页：内容卡片紧凑化
- * ============================================================= */
 #post-cover,
 .custom-md img {
   border-radius: 4px !important;
 }
 
-/* =============================================================
- * 公告 / Announcement
- * ============================================================= */
 .widget [class*="text-"] {
   letter-spacing: 0;
 }
@@ -1178,16 +975,10 @@ html[data-language-badge-enabled="true"]
   font-size: 0.875rem;
 }
 
-/* =============================================================
- * Tag / 分类按钮（公共按钮链接）
- * ============================================================= */
 .btn-card {
   border-radius: 4px !important;
 }
 
-/* =============================================================
- * Footer 简化
- * ============================================================= */
 footer {
   color: var(--juejin-text-tertiary);
   font-size: 0.875rem;
@@ -1196,9 +987,6 @@ footer {
   color: rgba(255, 255, 255, 0.5);
 }
 
-/* =============================================================
- * Float Panel（搜索框、菜单等）
- * ============================================================= */
 .float-panel {
   border-radius: 6px !important;
   border-color: var(--juejin-border) !important;
@@ -1209,19 +997,11 @@ footer {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5) !important;
 }
 
-/* =============================================================
- * 输入框：搜索栏掘金风格
- * ============================================================= */
 input[type="text"],
 input[type="search"] {
   border-radius: 6px !important;
 }
 
-/* 移除 link-underline 的虚线下划线（掘金风格更简洁） */
-
-/* =============================================================
- * 文章详情页中的链接（保留可点击的视觉提示）
- * ============================================================= */
 .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
   color: var(--juejin-primary);
   text-decoration: none;
@@ -1230,9 +1010,6 @@ input[type="search"] {
   color: var(--juejin-primary);
 }
 
-/* =============================================================
- * 主内容区域整体留白与卡片间距
- * ============================================================= */
 @media (min-width: 1024px) {
   /* 主网格内卡片之间的垂直间距更紧凑 */
   #main-grid {
@@ -1240,9 +1017,6 @@ input[type="search"] {
   }
 }
 
-/* =============================================================
- * 「关于」/「文章」等页面的正文 h1/h2/h3
- * ============================================================= */
 .custom-md h1,
 .custom-md h2,
 .custom-md h3,
@@ -1256,9 +1030,6 @@ input[type="search"] {
   color: rgba(255, 255, 255, 0.95);
 }
 
-/* =============================================================
- * Widget 标题：左侧蓝色竖线（掘金子标题视觉）
- * ============================================================= */
 .widget-title::before,
 widget-layout .widget-title::before {
   background-color: var(--juejin-primary) !important;
@@ -1267,13 +1038,6 @@ widget-layout .widget-title::before {
   border-radius: 2px !important;
 }
 
-/* =============================================================
- * HomeTopNotice 顶部通知条：胶囊（pill）样式，圆角完全由组件 Tailwind
- * rounded-full 承担，这里不再强制覆盖 border-radius
- * ============================================================= */
-/* =============================================================
- * 文章详情页：标题层次感 + 卡片样式
- * ============================================================= */
 .custom-md h1 {
   font-size: 1.875rem !important;
   font-weight: 700 !important;
@@ -1359,16 +1123,10 @@ widget-layout .widget-title::before {
   color: #ff7b85 !important;
 }
 
-/* =============================================================
- * 文章封面图：掘金风格圆角
- * ============================================================= */
 #post-cover {
   border-radius: var(--radius-large) !important;
 }
 
-/* =============================================================
- * 表格样式：掘金风格
- * ============================================================= */
 .custom-md table {
   border-collapse: collapse;
   border: 1px solid var(--juejin-border);
@@ -1465,9 +1223,6 @@ widget-layout .widget-title::before {
   }
 }
 
-/* =============================================================
- * 友链卡片 / 一些通用按钮链接
- * ============================================================= */
 .btn-card {
   border: 1px solid var(--juejin-border) !important;
   background: var(--card-bg) !important;
@@ -1485,13 +1240,6 @@ widget-layout .widget-title::before {
   background: color-mix(in oklch, var(--primary) 6%, transparent) !important;
   box-shadow: none !important;
 }
-
-/* =============================================================
- * 文章列表"信息流"风格（掘金紧凑卡片）：
- *  - 一个外层大白卡 + 行间细分割线
- *  - 每条紧凑：标题(黑) → 描述(1 行) → 底部 meta + 标签
- *  - 右侧小封面图（130x80）
- * ============================================================= */
 @media (min-width: 768px) {
   /* 列表外壳：单一白卡，无边框改用柔和阴影 */
   #post-list-container.list-mode {
@@ -1534,204 +1282,12 @@ widget-layout .widget-title::before {
     background: color-mix(in oklch, var(--primary) 7%, transparent) !important;
     border-bottom-color: rgba(255, 255, 255, 0.06) !important;
   }
-
-  /* 隐藏标题左侧小竖线 */
-  #post-list-container.list-mode .post-card-title::before {
-    display: none !important;
-  }
-
-  /* ====== 内容区：紧凑 flex 布局 ======
-     position: relative 供下方标签的绝对定位用（原先单独写在同一 @media 内相隔百余行处）*/
-  #post-list-container.list-mode .post-card-content {
-    padding: 20px 24px !important;
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 6px !important;
-    width: 100% !important;
-    min-width: 0 !important;
-    position: relative !important;
-  }
-
-  /* 有封面时：内容区让位给封面图 */
-  #post-list-container.list-mode .has-cover .post-card-content {
-    width: calc(100% - 150px) !important;
-    flex: 1 1 auto !important;
-  }
-
-  /* ====== 标题：黑色粗体，hover 蓝色 ====== */
-  #post-list-container.list-mode .post-card-title {
-    font-size: 18px !important;
-    line-height: 1.5 !important;
-    font-weight: 600 !important;
-    color: var(--juejin-text-primary) !important;
-    margin: 0 0 2px 0 !important;
-    order: 1;
-    /* 单行省略 */
-    display: block !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-  }
-  :root.dark #post-list-container.list-mode .post-card-title {
-    color: rgba(255, 255, 255, 0.92) !important;
-  }
-  /* 列表模式下标题悬浮仍保持正文色 */
-  #post-list-container.list-mode .post-card-title:hover,
-  #post-list-container.list-mode .post-card-title:hover * {
-    color: var(--juejin-text-primary) !important;
-  }
-  :root.dark #post-list-container.list-mode .post-card-title:hover,
-  :root.dark #post-list-container.list-mode .post-card-title:hover * {
-    color: rgba(255, 255, 255, 0.92) !important;
-  }
-
-  /* ====== 描述：1 行省略，14px 灰色 ====== */
-  #post-list-container.list-mode .description {
-    font-size: 0.875rem !important;
-    line-height: 1.55 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    color: var(--juejin-text-secondary) !important;
-    order: 2;
-    flex-grow: 0 !important;
-    display: -webkit-box !important;
-    -webkit-line-clamp: 1 !important;
-    line-clamp: 1 !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-  }
-  :root.dark #post-list-container.list-mode .description {
-    color: rgba(255, 255, 255, 0.55) !important;
-  }
-
-  /* ====== 顶部 meta（日期/分类/字数）：缩小 + 简化 ====== */
-  #post-list-container.list-mode .post-meta {
-    order: 3;
-    margin: 6px 0 0 0 !important;
-    gap: 12px !important;
-    row-gap: 4px !important;
-    font-size: 0.8125rem !important;
-    color: var(--juejin-text-tertiary) !important;
-    align-items: center !important;
-    flex-wrap: nowrap !important;
-    overflow: hidden !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta {
-    color: rgba(255, 255, 255, 0.45) !important;
-  }
-
-  /* meta 内的图标框：去掉灰色背景，仅保留小图标 */
-  #post-list-container.list-mode .post-meta .meta-icon {
-    width: auto !important;
-    height: auto !important;
-    background: transparent !important;
-    color: var(--primary) !important;
-    margin-right: 4px !important;
-    padding: 0 !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta .meta-icon {
-    color: var(--primary) !important;
-  }
-  #post-list-container.list-mode .post-meta .meta-icon.meta-icon--date {
-    color: #3b82f6 !important;
-  }
-  #post-list-container.list-mode .post-meta .meta-icon.meta-icon--category {
-    color: #22c55e !important;
-  }
-  #post-list-container.list-mode .post-meta .meta-icon.meta-icon--words {
-    color: #f59e0b !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta .meta-icon.meta-icon--date {
-    color: #60a5fa !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta .meta-icon.meta-icon--category {
-    color: #4ade80 !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta .meta-icon.meta-icon--words {
-    color: #fbbf24 !important;
-  }
-  #post-list-container.list-mode .post-meta .meta-icon svg {
-    width: 0.95rem !important;
-    height: 0.95rem !important;
-  }
-  /* meta 文字 */
-  #post-list-container.list-mode .post-meta .text-50,
-  #post-list-container.list-mode .post-meta .text-sm {
-    font-size: 0.8125rem !important;
-    color: var(--juejin-text-tertiary) !important;
-    font-weight: 400 !important;
-  }
-  :root.dark #post-list-container.list-mode .post-meta .text-50,
-  :root.dark #post-list-container.list-mode .post-meta .text-sm {
-    color: rgba(255, 255, 255, 0.45) !important;
-  }
-  /* 置顶徽标文字：不随通用 meta 文字变灰，保持黑色强调 */
-  #post-list-container.list-mode .post-meta .pinned-btn .text-sm,
-  :root.dark #post-list-container.list-mode .post-meta .pinned-btn .text-sm {
-    color: #ffffff !important;
-  }
-  /* 置顶徽标缩小（保留强调色渐变背景，仅收紧尺寸） */
-  #post-list-container.list-mode .post-meta .pinned-btn {
-    padding: 1px 6px !important;
-    font-size: 0.6875rem !important;
-    border-radius: 2px !important;
-  }
-  #post-list-container.list-mode .post-meta .pinned-btn .text-xl {
-    font-size: 0.875rem !important;
-  }
-
-  /* ====== 底部标签：移到 meta 右侧（abs 定位；内容区的 position 见上方内容区规则） ====== */
-  #post-list-container.list-mode .stats {
-    order: 4;
-    margin: 0 !important;
-    margin-top: -1.625rem !important; /* 拉到 meta 同一行 */
-    margin-left: auto !important;
-    align-self: flex-end !important;
-    gap: 6px !important;
-    flex-wrap: nowrap !important;
-  }
-  /* 标签：主题色浅底 */
-  #post-list-container.list-mode .stats .btn-regular {
-    height: 22px !important;
-    line-height: 22px !important;
-    padding: 0 8px !important;
-    font-size: 0.6875rem !important;
-    border-radius: 2px !important;
-    background-color: color-mix(in oklch, var(--primary) 10%, transparent) !important;
-    color: var(--primary) !important;
-    font-weight: 400 !important;
-    border: none !important;
-  }
-  :root.dark #post-list-container.list-mode .stats .btn-regular {
-    background-color: color-mix(in oklch, var(--primary) 14%, transparent) !important;
-    color: var(--primary) !important;
-  }
-
-  /* ====== 右侧封面图：小尺寸 130x80（4:2.5） ====== */
-  #post-list-container.list-mode .post-card-image {
-    width: 130px !important;
-    max-width: 130px !important;
-    height: auto !important;
-    aspect-ratio: 16 / 10 !important;
-    border-radius: 4px !important;
-    margin: 18px 20px 18px 0 !important;
-    align-self: center !important;
-    flex-shrink: 0 !important;
-  }
 }
 
 /* 移动端：保留竖排但缩小行高，封面图更窄 */
 @media (max-width: 767px) {
   #post-list-container.list-mode .post-card-wrapper {
     border-radius: var(--radius-large) !important;
-  }
-  #post-list-container.list-mode .post-card-content {
-    padding: 14px 16px !important;
-  }
-  #post-list-container.list-mode .post-card-title {
-    font-size: 18px !important;
-    line-height: 1.45 !important;
   }
 }
 
@@ -1757,19 +1313,6 @@ widget-layout .widget-title::before {
 #post-list-container {
   margin-bottom: 1rem !important;
 }
-
-@media (min-width: 768px) {
-  #post-list-container.list-mode .post-card-wrapper .stats {
-    gap: 6px !important;
-  }
-  #post-list-container.list-mode .post-card-wrapper .stats .btn-regular {
-    height: 22px !important;
-    padding: 0 6px !important;
-    font-size: 0.6875rem !important;
-    line-height: 22px !important;
-  }
-}
-
 #navbar .btn-plain.h-11 {
   height: 2.5rem !important;
   padding: 0 0.75rem !important;

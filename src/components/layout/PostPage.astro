@@ -296,13 +296,9 @@ const initialLayoutClass =
     }, 250);
   });
 
-  // swup 导航后重新初始化。@swup/astro 每次导航会派发两个 Astro 生命周期事件：
-  // astro:after-swap（content:replace 时）与 astro:page-load（page:view 时）。
-  // 两个都听等于每次导航重算两遍布局，取更晚、DOM 已完全就位的 page-load 即可。
   document.addEventListener("astro:page-load", setupLayout);
 
-  // 本脚本被 Astro 打包为 type="module"（defer），执行时 DOM 已解析完毕，
-  // 首屏直接调用即可，无需再挂 DOMContentLoaded 或延时。
+
   setupLayout();
 </script>
 
@@ -341,26 +337,6 @@ const initialLayoutClass =
   }
   */
 
-  /* List Mode Customization */
-  #post-list-container.list-mode :global(.post-card-title) {
-    font-size: 18px !important;
-    line-height: 1.5 !important;
-  }
-
-  #post-list-container.list-mode :global(.post-card-title::before) {
-    top: 2.25rem !important;
-    height: 1rem !important;
-  }
-
-  /* 列表模式下，有封面的文章，摘要最多显示两行 */
-  #post-list-container.list-mode :global(.has-cover .description) {
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    -webkit-line-clamp: 2 !important;
-    line-clamp: 2 !important;
-  }
-
   /* Grid Mode Customization */
   #post-list-container.grid-mode :global(.post-card-wrapper) {
     flex-direction: column-reverse !important;
@@ -369,87 +345,6 @@ const initialLayoutClass =
   /* 仅对“有封面”的卡片固定整体高度与封面占比（无封面不受影响） */
   #post-list-container.grid-mode :global(.has-cover.post-card-wrapper) {
     aspect-ratio: 1 / 1 !important;
-  }
-
-  #post-list-container.grid-mode :global(.has-cover .post-card-image) {
-    width: 100% !important;
-    position: relative !important;
-    top: auto !important;
-    right: auto !important;
-    bottom: auto !important;
-    border-radius: var(--radius-large) var(--radius-large) 0 0 !important;
-    flex: 0 0 50% !important;
-    height: 50% !important;
-    aspect-ratio: auto !important;
-    margin: 0 !important;
-  }
-
-  #post-list-container.grid-mode :global(.has-cover .post-card-content) {
-    width: 100% !important;
-    padding: 1rem !important;
-    flex: 1 1 50% !important;
-    height: 50% !important;
-    min-height: 0 !important;
-    overflow: hidden !important;
-  }
-
-  #post-list-container.grid-mode :global(.no-cover .post-card-content) {
-    padding-right: 4.5rem !important;
-  }
-
-  #post-list-container.grid-mode :global(.post-card-title) {
-    font-size: 1.125rem !important;
-    line-height: 1.75rem !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  #post-list-container.grid-mode :global(.post-card-title::before) {
-    display: none !important;
-  }
-
-  #post-list-container.grid-mode :global(.description) {
-    font-size: 0.875rem !important;
-    margin-bottom: 0.75rem !important;
-    padding-right: 0 !important;
-  }
-  /* 网格模式下，有封面的文章，摘要最多显示两行 */
-  #post-list-container.grid-mode :global(.has-cover .description) {
-    display: -webkit-box !important;
-    -webkit-box-orient: vertical !important;
-    overflow: hidden !important;
-    -webkit-line-clamp: 3 !important;
-    line-clamp: 3 !important;
-  }
-
-  /* 仅限制有封面卡片的标签区，避免把卡片顶高 */
-  #post-list-container.grid-mode :global(.has-cover .stats) {
-    max-height: 2.25rem !important;
-    overflow: hidden !important;
-  }
-
-  #post-list-container.grid-mode :global(.post-meta) {
-    margin-bottom: 0.5rem !important;
-    gap: 0.5rem !important;
-  }
-
-  #post-list-container.grid-mode :global(.post-meta .text-xl) {
-    font-size: 1rem !important;
-    line-height: 1.25rem !important;
-  }
-
-  #post-list-container.grid-mode :global(.meta-icon) {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    margin-right: 0.25rem !important;
-  }
-
-  #post-list-container.grid-mode :global(.post-meta .text-sm) {
-    font-size: 0.75rem !important;
-    line-height: 1rem !important;
-  }
-
-  #post-list-container.grid-mode :global(.post-meta .pinned-btn) {
-    padding: 0.25rem 0.375rem !important;
   }
 
 </style>
