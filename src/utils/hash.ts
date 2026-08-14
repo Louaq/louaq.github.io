@@ -8,7 +8,7 @@
  * djb2-xor + FNV-1a 的组合，其输出直接构成文章 URL，改动会导致所有哈希模式的
  * 文章链接失效，因此不参与本函数的统一。
  */
-export function stableHash(seed: string): number {
+function stableHash(seed: string): number {
 	let hash = 0;
 	for (let i = 0; i < seed.length; i++) {
 		hash = ((hash << 5) - hash + seed.charCodeAt(i)) | 0;

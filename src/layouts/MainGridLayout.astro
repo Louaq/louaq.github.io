@@ -17,9 +17,7 @@ interface Props {
 	setOGTypeArticle?: boolean;
 	postSlug?: string;
 	headings?: MarkdownHeading[];
-	/** 隐藏左侧栏，主内容区单栏居中显示（效果与文章详情页一致，但不触发文章页专属逻辑，如 OG 图、纯白背景等） */
 	hideSidebar?: boolean;
-	/** 单栏页面是否使用与导航栏一致的站点页面宽度 */
 	wideContent?: boolean;
 }
 
@@ -37,24 +35,19 @@ const {
 // 检查是否为首页
 const isHomePageCheck = isHomePage(Astro.url.pathname);
 const isPostPageCheck = postSlug !== undefined;
-// 隐藏左侧栏的页面（归档/友链/观影/关于等）与文章详情页共用「单栏居中」的网格与内容宽度，
-// 但不复用 isPostPageCheck，避免连带触发 OG 图生成、纯白背景、悬浮目录等文章页专属逻辑
+
 const isSingleColumnLayout = isPostPageCheck || hideSidebar;
 const PostPageTOC = isPostPageCheck
 	? (await import("@components/layout/PostPageTOC.astro")).default
 	: null;
 
-// 获取响应式侧边栏配置（仅用于读取一些通用 flag，例如是否显示侧栏）
+
 const sidebarConfig = getResponsiveSidebarConfig();
 
-// 单侧栏布局：左侧 17rem 原 widget（profile/倒计时/公告） + 主内容区
-// 移动端 (<768px) 单栏，由 grid-cols-1 控制
-// 文章详情页不使用左右分栏，正文整体单栏居中显示（目录改为右侧悬浮面板）
 const gridCols = isSingleColumnLayout
 	? "grid-cols-1"
 	: "grid-cols-1 md:grid-cols-[17rem_1fr]";
 
-// 站点已无背景壁纸 / 横幅，主内容区固定从导航栏下方开始
 const mainPanelTop = "5.5rem";
 ---
 
@@ -157,34 +150,14 @@ const mainPanelTop = "5.5rem";
 </Layout>
 
 <style is:global>
-  /* 主网格的列数完全由 #main-grid 自身的 Tailwind 类控制（SSR 时按 gridCols 生成，
-     swup 换页时由下方 content:replace 钩子中的 #grid-class-carrier 逻辑同步更新）。
-     此前这里还有一条 `body[data-page-type] #main-grid { grid-template-columns: ... !important }`
-     的规则，而 data-page-type 在 visit:start（即点击链接的瞬间）就会先行切换，
-     早于 content:replace 时机——旧侧栏 widget 与旧正文还在淡出动画中时，
-     网格就被强制切成了文章页的单栏，导致侧栏与正文在切换过程中错位重叠。
-     grid 列数只应与实际替换进 DOM 的内容同步变化，因此改为完全交给 JS 同步，不再用 CSS 抢跑。 */
 
-  /* 文章详情页背景改为纯白（仅浅色模式，深色模式维持原配色）。
-     <html> 自身带 bg-(--page-bg)，按 CSS 规范它才是画布/可滚动区域背景的来源；
-     <body> 只有 min-h-screen 一屏高（主内容区是 absolute 脱离文档流），
-     只改 body 背景只会让第一屏变白，往下滚动会露出 html 的灰色画布——
-     所以要用 :has() 让 body 上的 data-page-type 反向控制 html 的背景。 */
   :root:not(.dark):has(body[data-page-type="post"]) {
-    background-color: #ffffff !important;
+    background-color: #f9f9f9 !important;
   }
   :root:not(.dark) body[data-page-type="post"] {
-    background-color: #ffffff !important;
+    background-color: #f9f9f9 !important;
   }
 
-  /* 归档 / 友链 / 观影 / 关于：页面背景改为细网格（参考 ThriveX-Blog 的做法，
-     一层 fixed 满视口的网格，线色 rgba(148,163,184,.06) / 64px 网格，明暗两色通用）。
-     与 ThriveX 不同的是这里额外用 mask 把四边虚化掉，避免网格在视口边缘被生硬切断。
-
-     画成 body::before 而不是 <html> 的 background-image，是因为 mask 只能作用于元素整体：
-     若把网格放在 <html> 背景上再加 mask，会把页面所有内容一起蒙掉。
-     z-index:-1 让它落在根堆叠上下文的负层——绘制在画布底色之上、body 背景与正文之下；
-     body 无任何创建堆叠上下文的属性，所以该负层不会被困在 body 内部。 */
   body[data-white-bg="true"]::before {
     content: "";
     position: fixed;
@@ -200,11 +173,8 @@ const mainPanelTop = "5.5rem";
     mask-image: radial-gradient(ellipse 88% 78% at 50% 45%, #000 45%, transparent 100%);
   }
 
-  /* 浅色模式下页面底色用纯白；深色模式沿用 <html> 自带的 --page-bg。
-     body 必须透明，否则 main.css 里那条不透明的
-     `body { background-color: var(--page-bg) !important }` 会盖住上面的网格层。 */
   :root:not(.dark):has(body[data-white-bg="true"]) {
-    background-color: #ffffff !important;
+    background-color: #f9f9f9 !important;
   }
   body[data-white-bg="true"] {
     background-color: transparent !important;
@@ -216,8 +186,6 @@ const mainPanelTop = "5.5rem";
                 transform 0.35s ease-in-out;
   }
 
-  /* fuwari 风格悬浮目录：默认隐藏，仅在文章页 + 屏幕足够宽时显示
-     非文章页（无 .is-post-page）始终隐藏，防止 swup 路由切换出现残留 */
   .post-toc-floating-layer {
     display: none;
   }

@@ -25,7 +25,6 @@ import { i18n } from "./src/i18n/translation";
 import { pluginHeaderToolbar } from "./src/plugins/expressive-code-header-toolbar.mjs"; /* mac 风格标题栏：把复制/折叠按钮挪进 header */
 import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.mjs";
 import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs";
-import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
@@ -217,7 +216,6 @@ export default defineConfig({
 				rehypeOssImage,
 				rehypeFigure,
 				[rehypeExternalLinks, { siteUrl: siteConfig.site_url }],
-				[rehypeEmailProtection, { method: "base64" }], // 邮箱保护插件，支持 'base64' 或 'rot13'
 				[
 					rehypeComponents,
 					{
