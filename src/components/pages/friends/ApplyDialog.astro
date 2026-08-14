@@ -1,17 +1,6 @@
 ---
 import { Icon as AstroIcon } from "astro-icon/components";
 import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
-
-// 「申请友链」弹窗。文案见同目录的 applyDialogData.ts。
-// 触发按钮由页面自行放置，只需用 <friend-apply-trigger> 包裹一个 <button>，
-// 本组件注册的自定义元素会接管点击并打开弹窗。
-// 可复制字段复用页面上的 <friend-copy-field> 自定义元素。
-//
-// 布局约定：
-// 1. 纯提示性弹窗，没有提交动作，所以不设底部操作栏，只保留右上角关闭。
-// 2. 目标是一屏放下不滚动，因此三步流程横排。
-// 3. 不使用任何布局用的包装元素（无 div 套 div）：一律用语义标签当网格容器，
-//    子元素靠 grid-area 定位，样式见下方 <style>。
 ---
 
 <friend-apply-dialog>
@@ -19,9 +8,6 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
     <article class="friend-apply-panel">
       <header class="friend-apply-header">
         <span class="friend-apply-header-glow" aria-hidden="true"></span>
-        <span class="friend-apply-header-icon">
-          <AstroIcon name="material-symbols:link-rounded" class="w-5 h-5" />
-        </span>
         <h3 class="friend-apply-title">申请友链</h3>
         <p class="friend-apply-subtitle">按照以下步骤将本站加入你的友链，即可申请互换</p>
         <button type="button" class="friend-apply-close" aria-label="关闭">
@@ -39,10 +25,7 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
         ))}
       </ol>
 
-      <h4 class="friend-apply-section">
-        <AstroIcon name="material-symbols:mail-outline-rounded" class="w-[1.05rem] h-[1.05rem]" />
-        申请模板
-      </h4>
+      <h4 class="friend-apply-section">申请模板</h4>
 
       <friend-copy-field
         class="friend-copy-field friend-apply-field"
@@ -214,7 +197,7 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
     top: 0;
     z-index: 1;
     display: grid;
-    grid-template-columns: 2.5rem 1fr 2rem;
+    grid-template-columns: 1fr 2rem;
     column-gap: 0.75rem;
     align-items: center;
     padding: 1rem 1.25rem;
@@ -238,32 +221,21 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
     filter: blur(46px);
     pointer-events: none;
   }
-  .friend-apply-header-icon {
-    grid-area: 1 / 1 / 3 / 2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 9999px;
-    background-color: color-mix(in oklch, var(--primary) 14%, transparent);
-    color: var(--primary);
-  }
   .friend-apply-title {
-    grid-area: 1 / 2 / 2 / 3;
+    grid-area: 1 / 1 / 2 / 2;
     font-size: 1.05rem;
     font-weight: 700;
     line-height: 1.4;
     color: var(--deep-text);
   }
   .friend-apply-subtitle {
-    grid-area: 2 / 2 / 3 / 3;
+    grid-area: 2 / 1 / 3 / 2;
     font-size: 0.75rem;
     line-height: 1.4;
     color: var(--content-meta);
   }
   .friend-apply-close {
-    grid-area: 1 / 3 / 3 / 4;
+    grid-area: 1 / 2 / 3 / 3;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -332,18 +304,11 @@ import { applyEmail, applyEmailTemplate, applySteps } from "./applyDialogData";
 
   /* ---------- 区块小标题 ---------- */
   .friend-apply-section {
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
     margin-top: 1.125rem;
     margin-bottom: 0.5rem;
     font-size: 0.85rem;
     font-weight: 700;
     color: var(--deep-text);
-  }
-  .friend-apply-section > svg {
-    flex-shrink: 0;
-    color: var(--primary);
   }
 
   /* ---------- 申请模板 ---------- */

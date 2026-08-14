@@ -82,4 +82,15 @@ export const movieItems: WatchlistItem[] = [
 		tags: ["动作", "武侠", "古装"],
 		enabled: true,
 	},
+	{
+		title: "放牛班的春天",
+		cover: "https://pic1.imgdb.cn/i/0346v80Vg1pUsPrjQCR93E.webp",
+		type: "movie",
+		status: "completed",
+		rating: 9.3,
+		startDate: "2022-12-02",
+		endDate: "2022-12-02",
+		tags: ["剧情", "音乐"],
+		enabled: true,
+	},
 ];
