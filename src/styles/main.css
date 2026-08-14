@@ -464,18 +464,6 @@ body {
   border-color: rgba(255, 255, 255, 0.08) !important;
 }
 
-/* 卡片 hover：阴影加深轻微“浮起”，深色模式用描边提亮代替 */
-.card-base:hover,
-.enable-card-border .card-base:hover {
-  border-color: transparent !important;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05), 0 12px 28px -8px rgba(0, 0, 0, 0.12) !important;
-}
-
-:root.dark .card-base:hover,
-:root.dark .enable-card-border .card-base:hover {
-  border-color: rgba(255, 255, 255, 0.16) !important;
-  box-shadow: none !important;
-}
 .card-base.card-plain,
 .card-base.card-plain:hover,
 .enable-card-border .card-base.card-plain,
@@ -1206,17 +1194,15 @@ widget-layout .widget-title::before {
   background: rgba(255, 255, 255, 0.06);
 }
 
-/* 移动端置顶卡：仅左侧强调条用主色，其余三边与普通卡片同色（避免 hover 整卡描边发蓝） */
+/* 移动端置顶卡：仅左侧强调条用主色，其余三边与普通卡片同色 */
 @media (max-width: 767px) {
-  #post-list-container .post-card-wrapper.pinned.card-base,
-  #post-list-container .post-card-wrapper.pinned.card-base:hover {
+  #post-list-container .post-card-wrapper.pinned.card-base {
     border-top-color: var(--juejin-border) !important;
     border-right-color: var(--juejin-border) !important;
     border-bottom-color: var(--juejin-border) !important;
     box-shadow: none !important;
   }
-  :root.dark #post-list-container .post-card-wrapper.pinned.card-base,
-  :root.dark #post-list-container .post-card-wrapper.pinned.card-base:hover {
+  :root.dark #post-list-container .post-card-wrapper.pinned.card-base {
     border-top-color: rgba(255, 255, 255, 0.08) !important;
     border-right-color: rgba(255, 255, 255, 0.08) !important;
     border-bottom-color: rgba(255, 255, 255, 0.08) !important;
@@ -1272,16 +1258,6 @@ widget-layout .widget-title::before {
     border-bottom: none !important;
   }
 
-  /* 列表行 hover：主题色浅底提供反馈，替代此前完全无反馈的纯分割线 */
-  #post-list-container.list-mode .post-card-wrapper:hover {
-    background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
-    border-color: var(--juejin-border) !important;
-    box-shadow: none !important;
-  }
-  :root.dark #post-list-container.list-mode .post-card-wrapper:hover {
-    background: color-mix(in oklch, var(--primary) 7%, transparent) !important;
-    border-bottom-color: rgba(255, 255, 255, 0.06) !important;
-  }
 }
 
 /* 移动端：保留竖排但缩小行高，封面图更窄 */

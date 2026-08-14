@@ -202,20 +202,14 @@ const minuteLabel =
     position: relative;
   }
 
-  /* hero 卡片悬浮时不做任何外观变化，阴影与全站 .card-base 静置投影一致：
-     需盖过 main.css 的 `.card-base:hover`(阴影加深) 与
-     `#post-list-container.list-mode .post-card-wrapper:hover`(底色/描边，特异性 1,3,0)，
-     因此 hover 用 (1,4,0) 的选择器。 */
-  .post-card-wrapper.hero-card.card-base,
-  .post-card-wrapper.hero-card.card-base:hover,
-  #post-list-container .post-card-wrapper.hero-card.card-base:hover {
+  /* hero 卡片阴影与全站 .card-base 静置投影一致 */
+  .post-card-wrapper.hero-card.card-base {
     background: var(--card-bg-transparent) !important;
     border-color: transparent !important;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px -6px rgba(0, 0, 0, 0.08) !important;
   }
   /* 深色模式沿用全站约定：深色背景上阴影不可读，保持无阴影 */
-  :root.dark .post-card-wrapper.hero-card.card-base,
-  :root.dark .post-card-wrapper.hero-card.card-base:hover {
+  :root.dark .post-card-wrapper.hero-card.card-base {
     box-shadow: none !important;
   }
 
