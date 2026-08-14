@@ -319,24 +319,25 @@ const jsonLd = {
   {
     (siteConfig.showPostPrevNext ?? true) &&
       (entry.data.nextSlug || entry.data.prevSlug) && (
-        <div class="flex flex-col md:flex-row justify-between mb-4 gap-4 overflow-hidden w-full">
+        <div class="post-nav flex flex-col md:flex-row justify-between mb-4 gap-4 w-full">
           <a
             href={entry.data.nextSlug ? getPostUrlBySlug(entry.data.nextSlug) : "#"}
             class:list={[
-              "w-full font-bold overflow-hidden active:scale-95",
+              "post-nav-item active:scale-95",
               { "pointer-events-none": !entry.data.nextSlug },
             ]}
           >
             {
               entry.data.nextSlug && (
-                <div class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-start! gap-4">
-                  <Icon
-                    name="material-symbols:chevron-left-rounded"
-                    class="text-[2rem] text-(--primary)"
-                  />
-                  <div class="overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
-                    {entry.data.nextTitle}
+                <div class="post-nav-card">
+                  <div class="post-nav-label">
+                    <Icon
+                      name="material-symbols:arrow-back-rounded"
+                      class="text-[1.05rem]"
+                    />
+                    <span>上一篇</span>
                   </div>
+                  <div class="post-nav-title">{entry.data.nextTitle}</div>
                 </div>
               )
             }
@@ -345,20 +346,21 @@ const jsonLd = {
           <a
             href={entry.data.prevSlug ? getPostUrlBySlug(entry.data.prevSlug) : "#"}
             class:list={[
-              "w-full font-bold overflow-hidden active:scale-95",
+              "post-nav-item active:scale-95",
               { "pointer-events-none": !entry.data.prevSlug },
             ]}
           >
             {
               entry.data.prevSlug && (
-                <div class="btn-card rounded-2xl w-full h-15 max-w-full px-4 flex items-center justify-end! gap-4">
-                  <div class="overflow-hidden text-ellipsis whitespace-nowrap max-w-[calc(100%-3rem)] text-black/75 dark:text-white/75">
-                    {entry.data.prevTitle}
+                <div class="post-nav-card post-nav-card--next">
+                  <div class="post-nav-label">
+                    <span>下一篇</span>
+                    <Icon
+                      name="material-symbols:arrow-forward-rounded"
+                      class="text-[1.05rem]"
+                    />
                   </div>
-                  <Icon
-                    name="material-symbols:chevron-right-rounded"
-                    class="text-[2rem] text-(--primary)"
-                  />
+                  <div class="post-nav-title">{entry.data.prevTitle}</div>
                 </div>
               )
             }
@@ -370,3 +372,55 @@ const jsonLd = {
   <!-- 评论 -->
   {entry.data.comment && <Comment post={entry} />}
 </MainGridLayout>
+
+<style>
+  /* 上一篇/下一篇：方向标签 + 标题的两行结构（参考 ThriveX-Blog 的文章导航）。
+     不复用 .btn-card：main.css 里它被强制 border-radius:4px，且是全站按钮样式。 */
+  .post-nav-item {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .post-nav-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 100%;
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-large);
+    background: var(--card-bg);
+    border: 1px solid var(--juejin-border);
+  }
+
+  :root.dark .post-nav-card {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  /* 下一篇卡片整体右对齐，形成左右呼应 */
+  .post-nav-card--next {
+    align-items: flex-end;
+  }
+
+  .post-nav-label {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 0.8125rem;
+    line-height: 1;
+    color: var(--juejin-text-tertiary);
+  }
+
+  .post-nav-title {
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .post-nav-card--next .post-nav-title {
+    text-align: right;
+  }
+</style>
