@@ -11,7 +11,6 @@ export type SiteConfig = {
 
 	themeColor: {
 		hue: number;
-		fixed: boolean; // 是否隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
 		showModeSwitch?: boolean; // 是否显示明暗/跟随系统模式切换按钮，默认 true
 		defaultMode?: LIGHT_DARK_MODE; // 默认模式：浅色、深色或跟随系统
 	};
@@ -82,9 +81,8 @@ export type SiteConfig = {
 	// 文章列表布局配置
 	postListLayout: {
 		defaultMode: "list" | "grid"; // 默认布局模式：list=列表模式，grid=网格模式
-		allowSwitch: boolean; // 是否允许用户切换布局
 		grid: {
-			// 网格布局配置，仅当 defaultMode 为 "grid" 或允许切换布局时生效
+			// 网格布局配置，仅当 defaultMode 为 "grid" 时生效
 			// 是否开启瀑布流布局
 			masonry: boolean;
 			// 网格模式列数，2 或 3，默认为 2。注意：3列模式仅在单侧边栏（或无侧边栏）且屏幕宽度足够时生效

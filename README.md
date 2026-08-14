@@ -2,7 +2,7 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/960d4c9f-098f-4174-a712-d0d6ee12d8bc/deploy-status)](https://app.netlify.com/projects/louaq/deploys)
 
 
-[预览 1](https://louaq.com) or [预览 2](https://louaq.io)
+[预览 1](https://louaq.com)
 
 基于 [Firefly](https://github.com/CuteLeaf/Firefly) 主题二次开发的个人博客，专注于多模态医学图像分析领域的论文阅读笔记与技术分享。使用 [Astro](https://astro.build) 构建，站点内容全部为静态生成。
 
@@ -11,7 +11,7 @@
 - 📝 Markdown / MDX 写作，支持数学公式（KaTeX）、Mermaid 图表、代码高亮（Expressive Code）、GitHub 卡片、PDF 内嵌等自定义指令
 - 🔍 站内搜索，可切换 Algolia / Meilisearch
 - 💬 Twikoo 评论系统
-- 🌗 明暗主题切换，主题色可调
+- 🌗 明暗主题切换
 - 🏷️ 分类、标签、归档、RSS 订阅、站点地图
 - 🔐 文章密码保护
 - 🎬 追番/观影清单、友链、赞助、留言板等可选页面

@@ -44,8 +44,6 @@ export const ja: Translation = {
 	[Key.postCount]: "投稿",
 	[Key.postsCount]: "投稿",
 
-	[Key.themeColor]: "テーマカラー",
-
 	[Key.more]: "もっと",
 
 	[Key.author]: "著者",
@@ -162,11 +160,6 @@ export const ja: Translation = {
 	// ページビュー統計
 	[Key.pageViews]: "閲覧数",
 	[Key.pageViewsLoading]: "読み込み中...",
-
-	// 投稿リストレイアウト
-	[Key.postListLayout]: "投稿リストレイアウト",
-	[Key.postListLayoutList]: "リスト",
-	[Key.postListLayoutGrid]: "グリッド",
 
 	// ピン留め
 	[Key.pinned]: "ピン留め",

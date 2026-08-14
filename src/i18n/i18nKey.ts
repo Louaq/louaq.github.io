@@ -35,8 +35,6 @@ enum I18nKey {
 	postCount = "postCount",
 	postsCount = "postsCount",
 
-	themeColor = "themeColor",
-
 	more = "more",
 
 	author = "author",
@@ -156,11 +154,6 @@ enum I18nKey {
 	// 访问量统计
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
-
-	// 文章布局
-	postListLayout = "postListLayout",
-	postListLayoutList = "postListLayoutList",
-	postListLayoutGrid = "postListLayoutGrid",
 
 	// 置顶
 	pinned = "pinned",

@@ -45,8 +45,6 @@ export const ru: Translation = {
 	[Key.postCount]: "пост",
 	[Key.postsCount]: "постов",
 
-	[Key.themeColor]: "Цвет темы",
-
 	[Key.more]: "Ещё",
 
 	[Key.author]: "Автор",
@@ -164,11 +162,6 @@ export const ru: Translation = {
 	// Статистика просмотров
 	[Key.pageViews]: "Просмотры",
 	[Key.pageViewsLoading]: "Загрузка...",
-
-	// Макет списка сообщений
-	[Key.postListLayout]: "Макет списка сообщений",
-	[Key.postListLayoutList]: "Список",
-	[Key.postListLayoutGrid]: "Сетка",
 
 	// Закреплено
 	[Key.pinned]: "Закреплено",

@@ -17,8 +17,6 @@ import { isHomePage } from "@/utils/layout-utils";
 import { url } from "@/utils/url-utils";
 
 import "@/styles/main.css";
-// 这三个样式表刻意不放进 main.css 的 @import 链（会被双份打包，见 main.css 顶部说明），
-// 以独立模块引入：编译后小于内联阈值的会以每页一致的 <style> 下发，swup 换页时原样保留
 import "@/styles/transition.css";
 import "@/styles/markdown.css";
 import "@/styles/image-zoom.css";
@@ -190,9 +188,8 @@ const collapsiblePreviewLines =
       document.documentElement.dataset.expressiveDarkTheme = darkTheme;
       document.documentElement.dataset.expressiveLightTheme = lightTheme;
 
-      // Load the hue from local storage
-      const hue = localStorage.getItem("hue") || configHue;
-      document.documentElement.style.setProperty("--hue", hue);
+      // 主题色相由 siteConfig.themeColor.hue 固定，不再有访客侧选择器
+      document.documentElement.style.setProperty("--hue", String(configHue));
 
     </script>
     <style
@@ -284,10 +281,6 @@ const collapsiblePreviewLines =
           panelDom.classList.add("float-panel-closed");
       });
   }
-  setClickOutsideToClose("display-setting", [
-    "display-setting",
-    "display-settings-switch",
-  ]);
   setClickOutsideToClose("nav-menu-panel", [
     "nav-menu-panel",
     "nav-menu-switch",

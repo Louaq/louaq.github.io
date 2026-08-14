@@ -42,8 +42,6 @@ export const zh_CN: Translation = {
 	[Key.postCount]: "篇文章",
 	[Key.postsCount]: "篇文章",
 
-	[Key.themeColor]: "主题色相",
-
 	[Key.more]: "更多",
 
 	[Key.author]: "作者",
@@ -153,11 +151,6 @@ export const zh_CN: Translation = {
 	// 访问量统计
 	[Key.pageViews]: "浏览量",
 	[Key.pageViewsLoading]: "加载中...",
-
-	// 文章布局
-	[Key.postListLayout]: "文章布局",
-	[Key.postListLayoutList]: "列表",
-	[Key.postListLayoutGrid]: "网格",
 
 	// 置顶
 	[Key.pinned]: "置顶",

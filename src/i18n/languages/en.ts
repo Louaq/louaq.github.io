@@ -46,8 +46,6 @@ export const en: Translation = {
 	[Key.postCount]: "post",
 	[Key.postsCount]: "posts",
 
-	[Key.themeColor]: "Theme Color",
-
 	[Key.more]: "More",
 
 	[Key.author]: "Author",
@@ -165,11 +163,6 @@ export const en: Translation = {
 	[Key.pageViewsLoading]: "Loading...",
 
 	// Banner Settings
-
-	// Post List Layout
-	[Key.postListLayout]: "Post List Layout",
-	[Key.postListLayoutList]: "List",
-	[Key.postListLayoutGrid]: "Grid",
 
 	// Pinned
 	[Key.pinned]: "Pinned",

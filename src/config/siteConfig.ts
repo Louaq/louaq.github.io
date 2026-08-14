@@ -32,11 +32,9 @@ export const siteConfig: SiteConfig = {
 
 	// 主题色
 	themeColor: {
-		// 主题色的默认色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 250,
-		// 是否对访问者隐藏主题色选择器（调色盘按钮及面板内主题色滑块）
-		fixed: true,
-		// 是否显示明暗/跟随系统模式切换按钮，与 fixed 独立配置
+		// 站点色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
+		hue: 170,
+		// 是否显示明暗/跟随系统模式切换按钮
 		showModeSwitch: true,
 		// 默认模式："light" 亮色，"dark" 暗色
 		defaultMode: "light",
@@ -128,9 +126,7 @@ export const siteConfig: SiteConfig = {
 	postListLayout: {
 		// 默认布局模式："list" 列表模式（单列布局），"grid" 网格模式（多列布局）
 		defaultMode: "list",
-		// 是否允许用户切换布局
-		allowSwitch: true,
-		// 网格布局配置，仅在 defaultMode 为 "grid" 或允许切换布局时生效
+		// 网格布局配置，仅在 defaultMode 为 "grid" 时生效
 		grid: {
 			// 是否开启瀑布流布局，同时有封面图和无封面图的混合文章推荐开启
 			masonry: false,
