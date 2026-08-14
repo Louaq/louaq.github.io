@@ -28,7 +28,6 @@ import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs"
 import rehypeEmailProtection from "./src/plugins/rehype-email-protection.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
-import rehypeImageDimensions from "./src/plugins/rehype-image-dimensions.mjs";
 import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
@@ -216,8 +215,6 @@ export default defineConfig({
 				rehypeSlug,
 				// 必须在 rehypeFigure 之前：figure 会复制 img 的 properties
 				rehypeOssImage,
-				// 必须在 rehypeOssImage 之后（探测 OSS 转码后的最终尺寸）、rehypeFigure 之前
-				rehypeImageDimensions,
 				rehypeFigure,
 				[rehypeExternalLinks, { siteUrl: siteConfig.site_url }],
 				[rehypeEmailProtection, { method: "base64" }], // 邮箱保护插件，支持 'base64' 或 'rot13'

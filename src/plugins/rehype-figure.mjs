@@ -17,8 +17,6 @@ export default function rehypeFigure() {
 			}
 
 			// 正文图片不懒加载（参考 ThriveX-Blog 的做法），渲染即开始下载。
-			// 布局稳定性不靠加载时机保证：rehype-image-dimensions（排在本插件之前）
-			// 已在构建期写入真实 width/height，图片空间在 HTML 解析时就预留好了。
 			// markdown-img 类给运行时的"加载完成前模糊占位"用（见 markdown-image-init.ts）。
 			const existingClass = node.properties?.className;
 			node.properties = {
