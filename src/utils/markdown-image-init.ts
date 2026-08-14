@@ -31,8 +31,9 @@ function track(img: HTMLImageElement): void {
 }
 
 export function initMarkdownImages(): void {
-	const imgs =
-		document.querySelectorAll<HTMLImageElement>(".custom-md img.markdown-img");
+	const imgs = document.querySelectorAll<HTMLImageElement>(
+		".custom-md img.markdown-img",
+	);
 	for (const img of imgs) {
 		track(img);
 	}

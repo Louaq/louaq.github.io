@@ -157,7 +157,6 @@ enum I18nKey {
 	pageViews = "pageViews",
 	pageViewsLoading = "pageViewsLoading",
 
-
 	// 文章布局
 	postListLayout = "postListLayout",
 	postListLayoutList = "postListLayoutList",
@@ -165,7 +164,6 @@ enum I18nKey {
 
 	// 置顶
 	pinned = "pinned",
-
 
 	// 赞助页面
 	sponsor = "sponsor",

@@ -6,7 +6,8 @@ export const ru: Translation = {
 	[Key.about]: "О нас",
 	[Key.aboutDescription]: "Обо мне и обо всём, что хранит этот блог",
 	[Key.archive]: "Архив",
-	[Key.archiveDescription]: "Вернитесь назад во времени и просмотрите все статьи",
+	[Key.archiveDescription]:
+		"Вернитесь назад во времени и просмотрите все статьи",
 	[Key.search]: "Поиск",
 	[Key.searchBy]: "Search by",
 	[Key.searchKbdSelect]: "Выбрать",

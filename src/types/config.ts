@@ -227,7 +227,6 @@ export type CommentConfig = {
 
 export type LIGHT_DARK_MODE = typeof LIGHT_MODE | typeof DARK_MODE;
 
-
 export type ExpressiveCodeConfig = {
 	theme?: string;
 	darkTheme: string;
@@ -397,7 +396,6 @@ export type SidebarLayoutConfig = {
 		};
 	};
 };
-
 
 // 广告栏配置
 export type AdConfig = {

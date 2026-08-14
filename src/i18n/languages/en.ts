@@ -4,9 +4,11 @@ import type { Translation } from "../translation";
 export const en: Translation = {
 	[Key.home]: "Home",
 	[Key.about]: "About",
-	[Key.aboutDescription]: "About me, and everything this blog keeps a record of",
+	[Key.aboutDescription]:
+		"About me, and everything this blog keeps a record of",
 	[Key.archive]: "Archive",
-	[Key.archiveDescription]: "Travel back through time and browse every post ever written",
+	[Key.archiveDescription]:
+		"Travel back through time and browse every post ever written",
 	[Key.search]: "Search",
 	[Key.searchBy]: "Search by",
 	[Key.searchKbdSelect]: "Select",

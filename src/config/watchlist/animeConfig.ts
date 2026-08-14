@@ -83,7 +83,7 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2025-11-18",
 		tags: ["动画", "奇幻"],
 		enabled: true,
-		pinned: true
+		pinned: true,
 	},
 	{
 		title: "牧神记",

@@ -89,8 +89,7 @@ function scheduleWarmup(): void {
 export function warmBlocksBeforeElement(target: Element): void {
 	const blocks = collectDeferredBlocks().filter(
 		(block) =>
-			target.compareDocumentPosition(block) &
-			Node.DOCUMENT_POSITION_PRECEDING,
+			target.compareDocumentPosition(block) & Node.DOCUMENT_POSITION_PRECEDING,
 	);
 	if (blocks.length === 0) return;
 	renderOnceToRememberSizes(blocks);
