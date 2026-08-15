@@ -154,6 +154,7 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2023-07-26",
 		tags: ["动作", "动画", "奇幻", "武侠"],
 		enabled: true,
+		pinned: true
 	},
 	{
 		title: "紫川 第二季",
@@ -336,5 +337,38 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2026-08-08",
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
+	},
+	{
+		title: "灵笼 第二季",
+		cover: "https://pic1.imgdb.cn/i/0347Y7KWU51cGQ8Z4mg96k.webp",
+		type: "anime",
+		status: "completed",
+		rating: 9.0,
+		startDate: "2025-05-23",
+		tags: ["动作", "动画", "奇幻"],
+		enabled: true,
+		pinned: true
+	},
+	{
+		title: "画江湖之不良人7",
+		cover: "https://pic1.imgdb.cn/i/0347YDHbY6GRprOEqM9w72.webp",
+		type: "anime",
+		status: "completed",
+		rating: 5.9,
+		startDate: "2025-03-27",
+		tags: ["动作", "动画", "武侠"],
+		enabled: true,
+		pinned: true
+	},
+	{
+		title: "画江湖之不良人6",
+		cover: "https://pic1.imgdb.cn/i/0347YAZ1jg5JJikpyLQIol.webp",
+		type: "anime",
+		status: "completed",
+		rating: 9.4,
+		startDate: "2023-03-02",
+		tags: ["动作", "动画", "武侠"],
+		enabled: true,
+		pinned: true
 	},
 ];
