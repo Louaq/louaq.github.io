@@ -1,10 +1,10 @@
-## Firefly修改版
+## Firefly 修改自用版, 原项目：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/960d4c9f-098f-4174-a712-d0d6ee12d8bc/deploy-status)](https://app.netlify.com/projects/louaq/deploys)
 
 
 <p align="center">
   <a href="https://louaq.com">
-    <img src="docs/preview/home-light.webp" alt="站点首页预览" width="880">
+    <img src="https://pic1.imgdb.cn/i/0349qHhT4zzSFKBScTUplb.png" alt="站点首页预览" width="880">
   </a>
 </p>
 
@@ -19,21 +19,21 @@
 <table>
   <tr>
     <td width="50%" align="center">
-      <img src="docs/preview/home-dark.webp" alt="首页 · 深色"><br>
+      <img src="https://pic1.imgdb.cn/i/0349qHhT4zzSFKBScTUplb.png" alt="首页"><br>
       <sub><b>首页 · 深色</b>｜一键明暗切换</sub>
     </td>
     <td width="50%" align="center">
-      <img src="docs/preview/post.webp" alt="文章页"><br>
+      <img src="https://pic1.imgdb.cn/i/0349qJEKFNIPN5WZBmEuT3.webp" alt="文章页"><br>
       <sub><b>文章页</b>｜右侧目录、字数与阅读时长</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
-      <img src="docs/preview/archive.webp" alt="归档页"><br>
+      <img src="https://pic1.imgdb.cn/i/0349qKLQauRSz9PK54K5uA.png" alt="归档页"><br>
       <sub><b>归档页</b>｜按年份时间线，支持标签 / 分类筛选</sub>
     </td>
     <td width="50%" align="center">
-      <img src="docs/preview/watchlist.webp" alt="追番 / 观影清单"><br>
+      <img src="https://pic1.imgdb.cn/i/0349qKoR6W8JK2l3rc1O1r.png" alt="追番 / 观影清单"><br>
       <sub><b>追番 / 观影清单</b>｜评分、观看状态与分类</sub>
     </td>
   </tr>
@@ -118,7 +118,6 @@ docs/preview/     # README 预览截图
 
 
 ## 感谢
-原项目：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)
 
 参考样式：[Ru-yu Blog](https://www.chichu.chat/)、[ThriveX Blog](https://liuyuyang.net/)
 
