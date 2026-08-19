@@ -2,9 +2,42 @@
 [![Netlify Status](https://api.netlify.com/api/v1/badges/960d4c9f-098f-4174-a712-d0d6ee12d8bc/deploy-status)](https://app.netlify.com/projects/louaq/deploys)
 
 
-[预览 1](https://louaq.com)
+<p align="center">
+  <a href="https://louaq.com">
+    <img src="docs/preview/home-light.webp" alt="站点首页预览" width="880">
+  </a>
+</p>
+
+<p align="center">
+  <a href="https://louaq.com"><b>在线预览 →</b></a>
+</p>
 
 基于 [Firefly](https://github.com/CuteLeaf/Firefly) 主题二次开发的个人博客，专注于多模态医学图像分析领域的论文阅读笔记与技术分享。使用 [Astro](https://astro.build) 构建，站点内容全部为静态生成。
+
+## 预览
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/preview/home-dark.webp" alt="首页 · 深色"><br>
+      <sub><b>首页 · 深色</b>｜一键明暗切换</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/preview/post.webp" alt="文章页"><br>
+      <sub><b>文章页</b>｜右侧目录、字数与阅读时长</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img src="docs/preview/archive.webp" alt="归档页"><br>
+      <sub><b>归档页</b>｜按年份时间线，支持标签 / 分类筛选</sub>
+    </td>
+    <td width="50%" align="center">
+      <img src="docs/preview/watchlist.webp" alt="追番 / 观影清单"><br>
+      <sub><b>追番 / 观影清单</b>｜评分、观看状态与分类</sub>
+    </td>
+  </tr>
+</table>
 
 ## 特性
 
@@ -74,6 +107,7 @@ src/
 └── styles/       # 全局样式
 scripts/          # 辅助脚本（新建文章、字体子集化等）
 public/           # 静态资源
+docs/preview/     # README 预览截图
 ```
 
 站点绝大多数外观与功能开关都集中在 `src/config/` 下，逐文件说明见 [src/config/README.md](src/config/README.md)。
@@ -82,15 +116,12 @@ public/           # 静态资源
 
 欢迎提交 Issue / PR，提交前请阅读 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
-## 许可证
-
-[MIT](LICENSE)
 
 ## 感谢
 原项目：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)
 
-参考样式：
+参考样式：[Ru-yu Blog](https://www.chichu.chat/)、[ThriveX Blog](https://liuyuyang.net/)
 
-[Ru-yu Blog](https://www.chichu.chat/)
+## 许可证
 
-[ThriveX Blog](https://liuyuyang.net/)
+[MIT](LICENSE)

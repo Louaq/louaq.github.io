@@ -103,7 +103,7 @@ export const siteConfig: SiteConfig = {
 	outdatedThreshold: 10,
 
 	// 文章页"上一篇/下一篇"导航开关
-	showPostPrevNext: false,
+	showPostPrevNext: true,
 
 	// 文章 URL：hash=自动生成稳定短 id；legacy=旧版「文件名去扩展名」长路径
 	postPathMode: "hash",
