@@ -5,11 +5,7 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { getCategoryUrl } from "@/utils/category-utils";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
-import {
-	getPostUrlBySlug,
-	getTagUrl,
-	removeFileExtension,
-} from "@/utils/url-utils";
+import { getTagUrl } from "@/utils/url-utils";
 
 export interface Props {
 	published: Date;
@@ -21,12 +17,9 @@ export interface Props {
 	isHome?: boolean;
 	className?: string;
 	id?: string;
-	/** 解析后的 /posts/ 路径段（hash、legacy 或自定义 slug）；未传时用 id 去扩展名 */
-	postPathSlug?: string;
 	words?: number;
 	minutes?: number;
 	showWordCount?: boolean; // 是否显示字数统计，默认false显示标签
-	customPath?: string;
 	pinned?: boolean;
 }
 
@@ -40,16 +33,12 @@ const {
 	isHome,
 	className = "",
 	id,
-	postPathSlug,
 	words,
 	minutes,
 	showWordCount = false,
-	customPath,
 	pinned,
 } = Astro.props;
 
-const slugForPath = postPathSlug ?? (id ? removeFileExtension(id) : "");
-const path = customPath || (slugForPath ? getPostUrlBySlug(slugForPath) : "");
 const wordLabel =
 	words === 1 ? i18n(I18nKey.wordCount) : i18n(I18nKey.wordsCount);
 const minuteLabel =
@@ -181,38 +170,4 @@ const minuteLabel =
         </div>
       )
   }
-  <!-- Waline访问量统计（首页不显示、仅type为waline时显示） -->
-  {
-    !isHome &&
-      commentConfig.type === 'waline' &&
-      commentConfig.waline?.visitorCount &&
-      id && (
-        <div class="flex items-center">
-          <div class="meta-icon">
-            <Icon name="material-symbols:visibility-outline-rounded" class="text-xl" />
-          </div>
-          <span class="text-50 text-sm font-medium mr-1">
-            {i18n(I18nKey.pageViews)}
-          </span>
-          <span class="text-50 text-sm font-medium waline-pageview-count" data-path={path}>{i18n(I18nKey.pageViewsLoading)}</span>
-        </div>
-      )
-  }
-    <!-- artalk访问量统计（首页不显示、仅type为artalk时显示） -->
-    {
-        !isHome &&
-        commentConfig.type === 'artalk' &&
-        commentConfig.artalk?.visitorCount &&
-        id && (
-                    <div class="flex items-center">
-                        <div class="meta-icon">
-                            <Icon name="material-symbols:visibility-outline-rounded" class="text-xl" />
-                        </div>
-                        <span class="text-50 text-sm font-medium mr-1">
-                            {i18n(I18nKey.pageViews)}
-                        </span>
-                        <span class="text-50 text-sm font-medium artalk-pv-count" data-path={path}>{i18n(I18nKey.pageViewsLoading)}</span>
-                    </div>
-        )
-    }
 </div>

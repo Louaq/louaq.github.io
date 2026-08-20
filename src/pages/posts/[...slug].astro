@@ -184,7 +184,6 @@ const jsonLd = {
           tags={entry.data.tags}
           category={entry.data.category || undefined}
           id={entry.id}
-          postPathSlug={getResolvedPostPath(entry.id, entry.data)}
           hideUpdateDate={!siteConfig.showLastModified}
         />
         {
