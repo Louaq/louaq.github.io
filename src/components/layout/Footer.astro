@@ -86,36 +86,6 @@ if (footerConfig.enable) {
         class="link inline-flex items-center gap-1 text-(--primary) font-medium"
         target="_blank"
         rel="noopener noreferrer"
-        href="https://github.com/"
-      >
-        <img
-          src={url("/assets/images/github.svg")}
-          alt=""
-          width={20}
-          height={20}
-          class="h-5 w-auto shrink-0 object-contain align-[-0.125em]"
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-        />
-        <img
-          src={url("/assets/images/github-text.svg")}
-          alt=""
-          width={52}
-          height={20}
-          class="h-5 w-auto max-h-5 shrink-0 object-contain object-left align-[-0.125em]"
-          aria-hidden="true"
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
-        />
-      </a>
-      <span class="text-50">and</span>
-      <a
-        class="link inline-flex items-center gap-1 text-(--primary) font-medium"
-        target="_blank"
-        rel="noopener noreferrer"
         href="https://www.netlify.com/"
       >
         <img
@@ -130,7 +100,7 @@ if (footerConfig.enable) {
           fetchpriority="low"
         />
       </a>
-    </span> 
+    </span>
     {
       showVisitorCount && (
         <span
@@ -178,12 +148,6 @@ if (footerConfig.enable) {
 </div>
 
 <script>
-  // Vercount 访客计数。没有直接引用官方 https://events.vercount.one/js 的原因：
-  // 1. 官方脚本用 getElementById 取元素，而 Footer 在 MainGridLayout 中渲染了两份
-  //    （桌面端在 #swup-container 内、移动端在外），第二份永远不会被填充；
-  // 2. 官方脚本只在 DOMContentLoaded 跑一次且缓存了元素引用，Swup 局部替换容器后
-  //    引用会失效，站内跳转也不再计数。
-  // 请求体 / 响应体 / cookie / localStorage 均与官方脚本保持一致，数据可以互通。
   const API_FALLBACK = "https://events.vercount.one/api/v2/log";
   const STORAGE_KEY = "visitorCountData";
   const UV_COOKIE_PREFIX = "vercount_uv_";

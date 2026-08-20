@@ -38,15 +38,9 @@ let links: NavBarLink[] = navBarConfig.links.map(
         <a
             href={url('/')}
             aria-label="Go to Home Page"
-            class:list={[
-                "navbar-brand-link btn-plain rounded-lg h-13 px-5 max-lg:hidden lg:order-1 lg:shrink-0",
-                siteConfig.navbar.followTheme && "navbar-brand-link--follow-theme",
-            ]}
+            class="navbar-brand-link btn-plain rounded-lg h-13 px-5 max-lg:hidden lg:order-1 lg:shrink-0"
         >
-            <div class:list={[
-                "flex min-w-0 flex-row items-center justify-center text-[16px]",
-                siteConfig.navbar.followTheme ? "text-(--primary)" : "dark:text-white",
-            ]}>
+            <div class="flex min-w-0 flex-row items-center justify-center text-[16px] dark:text-white">
                                 {siteConfig.navbar.logo?.type === "icon" ? (
                                     <Icon name={siteConfig.navbar.logo.value || "material-symbols:home-pin-outline"} class="shrink-0 text-[1.75rem]" />
                                 ) : siteConfig.navbar.logo?.type === "image" ? (

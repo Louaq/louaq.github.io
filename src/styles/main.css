@@ -517,21 +517,14 @@ body {
   background-color: transparent !important;
 }
 
-/* Logo / 站点标题：无悬浮背景与字色变化（非跟随主题时字色与默认栏一致） */
+/* Logo / 站点标题：无悬浮背景与字色变化（字色与默认栏一致） */
 #navbar a.navbar-brand-link:hover,
 #navbar a.navbar-brand-link:active {
   background-color: transparent !important;
-}
-#navbar a.navbar-brand-link:not(.navbar-brand-link--follow-theme):hover,
-#navbar a.navbar-brand-link:not(.navbar-brand-link--follow-theme):active {
   color: #000000 !important;
 }
-:root.dark
-  #navbar
-  a.navbar-brand-link:not(.navbar-brand-link--follow-theme):hover,
-:root.dark
-  #navbar
-  a.navbar-brand-link:not(.navbar-brand-link--follow-theme):active {
+:root.dark #navbar a.navbar-brand-link:hover,
+:root.dark #navbar a.navbar-brand-link:active {
   color: rgba(255, 255, 255, 0.85) !important;
 }
 
@@ -539,20 +532,7 @@ body {
 :root.dark #navbar a.navbar-brand-link.btn-plain:hover,
 :root.dark #navbar a.navbar-brand-link.btn-plain:active {
   background-color: transparent !important;
-}
-:root.dark
-  #navbar
-  a.navbar-brand-link:not(.navbar-brand-link--follow-theme).btn-plain:hover,
-:root.dark
-  #navbar
-  a.navbar-brand-link:not(.navbar-brand-link--follow-theme).btn-plain:active {
   color: rgba(255, 255, 255, 0.85) !important;
-}
-
-/* 深色 + 跟随主题色：悬浮时勿套用通用 .btn-plain 的灰白色字色 */
-:root.dark #navbar a.navbar-brand-link.navbar-brand-link--follow-theme.btn-plain:hover,
-:root.dark #navbar a.navbar-brand-link.navbar-brand-link--follow-theme.btn-plain:active {
-  color: var(--primary) !important;
 }
 
 /* 主题选择器、明暗模式切换：无悬浮背景与字色变化（必须含 .btn-plain，否则盖不过 #navbar .btn-plain:hover） */

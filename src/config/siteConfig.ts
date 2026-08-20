@@ -1,8 +1,6 @@
 import type { SiteConfig } from "@/types/config";
 import { fontConfig } from "./fontConfig";
 
-// 定义站点语言
-// 语言代码，例如：'zh_CN', 'zh_TW', 'en', 'ja', 'ru'。
 const SITE_LANG = "zh_CN";
 
 export const siteConfig: SiteConfig = {
@@ -34,23 +32,19 @@ export const siteConfig: SiteConfig = {
 	themeColor: {
 		// 站点色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
 		hue: 170,
-		// 是否显示明暗/跟随系统模式切换按钮
 		showModeSwitch: true,
-		// 默认模式："light" 亮色，"dark" 暗色
 		defaultMode: "light",
 	},
 
 	favicon: [
-		// 留空以使用默认 favicon
 		{
-			src: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png", // 图标文件路径
-			theme: "light", // 可选，指定主题 'light' | 'dark'
-			sizes: "32x32", // 可选，图标大小
+			src: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png", 
+			theme: "light",
+			sizes: "32x32",
 		},
 	],
-	// 网站Card样式配置
+
 	card: {
-		// 是否开启卡片边框和阴影，开启后让网站更有立体感
 		border: true,
 	},
 
@@ -65,10 +59,6 @@ export const siteConfig: SiteConfig = {
 			value: "/assets/images/favicon.png",
 			alt: "",
 		},
-		// 导航栏标题
-		title: "",
-		// 导航栏图标和标题是否跟随主题色
-		followTheme: false,
 	},
 
 	// 站点开始日期，用于统计运行天数
@@ -78,9 +68,7 @@ export const siteConfig: SiteConfig = {
 	bangumi: {
 		userId: "1163581", // 在此处设置你的Bangumi用户ID
 	},
-
-	// 站点时区（IANA 时区字符串），用于格式化bangumi、rss里的构建日期时间等等..
-	// 示例："Asia/Shanghai", "UTC", 如果为空，则按照构建服务器的时区进行时区转换
+	
 	timezone: "Asia/Shanghai",
 
 	// RSS 输出配置

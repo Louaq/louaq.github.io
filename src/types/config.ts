@@ -59,8 +59,6 @@ export type SiteConfig = {
 			value: string; // icon 名称、本地图片路径或网络图片 url
 			alt?: string; // 图片alt文本
 		};
-		title?: string; // 导航栏标题，如果不设置则使用 title
-		followTheme?: boolean; // 导航栏图标和标题是否跟随主题色
 	};
 
 	showLastModified: boolean; // 控制文章页元信息中的更新日期与正文前过期提醒卡片
