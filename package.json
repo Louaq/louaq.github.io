@@ -20,8 +20,8 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.10",
-    "@astrojs/markdown-remark": "7.2.0",
-    "@astrojs/mdx": "^7.0.5",
+    "@astrojs/markdown-remark": "7.2.4",
+    "@astrojs/mdx": "^7.0.7",
     "@astrojs/rss": "^4.0.19",
     "@astrojs/sitemap": "^3.7.3",
     "@astrojs/svelte": "^9.0.1",
@@ -37,7 +37,7 @@
     "@swup/astro": "^1.8.0",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
-    "astro": "7.0.3",
+    "astro": "7.2.4",
     "astro-expressive-code": "^0.43.1",
     "astro-icon": "^1.1.5",
     "dayjs": "^1.11.21",
@@ -64,7 +64,7 @@
     "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
-    "@astrojs/ts-plugin": "^1.10.10",
+    "@astrojs/ts-plugin": "^1.10.11",
     "@biomejs/biome": "2.3.12",
     "@iconify-json/fluent-emoji-flat": "^1.2.5",
     "@types/hast": "^3.0.5",
