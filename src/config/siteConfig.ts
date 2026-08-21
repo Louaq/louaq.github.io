@@ -31,7 +31,8 @@ export const siteConfig: SiteConfig = {
 	// 主题色
 	themeColor: {
 		// 站点色相，范围从 0 到 360。例如：红色：0，青色：200，蓝绿色：250，粉色：345
-		hue: 170,
+		// 39 = Claude 品牌橙 #D97757（oklch 0.672 0.131 38.8）
+		hue: 39,
 		showModeSwitch: true,
 		defaultMode: "light",
 	},
