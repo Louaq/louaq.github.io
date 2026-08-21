@@ -1,0 +1,15 @@
+---
+import PromoStrip from "@/components/misc/PromoStrip.astro";
+
+// 侧边栏组件都由 LeftSideBar 的 componentMap 统一渲染，只收到 class / style 两个 prop。
+// PromoStrip 的 placement 是必填的，这里固定成 "sidebar" 包一层，
+// 免得为了广告一个组件去放宽 componentMap 的类型。
+export interface Props {
+	class?: string;
+	style?: string;
+}
+
+const { class: className, style } = Astro.props as Props;
+---
+
+<PromoStrip placement="sidebar" class={className} style={style} />

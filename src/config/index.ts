@@ -3,6 +3,10 @@
 
 // 类型导出
 export type {
+	AdConfig,
+	AdItem,
+	AdPlacement,
+	AdPlacementName,
 	AnnouncementConfig,
 	CommentConfig,
 	CoverImageConfig,
@@ -21,7 +25,11 @@ export type {
 	WidgetComponentConfig,
 	WidgetComponentType,
 } from "../types/config";
-export { adConfig1, adConfig2 } from "./adConfig"; // 广告配置
+export {
+	adConfig,
+	getActiveAdItems,
+	getAdAspectRatio,
+} from "./adConfig"; // 广告配置
 export { announcementConfig } from "./announcementConfig"; // 公告配置
 // 功能配置
 export { commentConfig } from "./commentConfig"; // 评论系统配置

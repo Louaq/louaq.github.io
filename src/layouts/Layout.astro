@@ -256,12 +256,14 @@ const collapsiblePreviewLines =
   import { initPostPageTOC } from "@/utils/post-page-toc-init";
   import { initCodeCopyFeedback } from "@/utils/code-copy-feedback-init";
   import { warmUpDeferredBlocks } from "@/utils/deferred-block-warmup";
+  import { initPromoStrip } from "@/utils/promo-init";
 
   // 均为文档级单例：卡片点击走 document 委托，各自内部幂等，首次加载调用一次即可。
   initPostCardDelegation();
   initPostPageTOC();
   initMarkdownImages();
   initCodeCopyFeedback();
+  initPromoStrip();
   // 空闲期让 content-visibility: auto 的重型块各渲染一次，记住真实尺寸，
   // 消除目录点击/hash 跳转的落点估值误差（见模块头注释）
   warmUpDeferredBlocks();

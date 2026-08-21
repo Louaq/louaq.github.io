@@ -20,6 +20,7 @@ import PostMetadata from "@/components/layout/PostMeta.astro";
 import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
 import EncryptedContent from "@/components/misc/EncryptedContent.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
+import PromoStrip from "@/components/misc/PromoStrip.astro";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
 import { profileConfig } from "@/config/profileConfig";
@@ -119,6 +120,9 @@ const jsonLd = {
         {},
       ]}
     >
+      {/* 顶部推广位（由 config/adConfig.ts 控制，未启用时不渲染） */}
+      <PromoStrip placement="top" class="onload-animation" />
+
       <!-- word count and reading time -->
       <div
         class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 onload-animation"
@@ -312,6 +316,9 @@ const jsonLd = {
           />
         )
       }
+
+      {/* 底部推广位（由 config/adConfig.ts 控制，未启用时不渲染） */}
+      <PromoStrip placement="bottom" class="onload-animation" />
     </div>
   </div>
 

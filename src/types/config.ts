@@ -322,7 +322,6 @@ export type WidgetComponentConfig = {
 	class?: string; // CSS 类名，用于应用样式和动画
 	animationDelay?: number; // 动画延迟时间（毫秒），用于错开动画效果
 	style?: string; // 自定义内联样式
-	configId?: string; // 配置 ID，用于广告组件指定使用哪个配置
 	showOnPostPage?: boolean; // 是否在文章详情页显示
 	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
 	responsive?: {
@@ -335,7 +334,6 @@ export type WidgetComponentConfig = {
 export type MobileBottomComponentConfig = {
 	type: WidgetComponentType; // 组件类型
 	enable: boolean; // 是否启用该组件
-	configId?: string; // 配置 ID，用于广告组件指定使用哪个配置
 	showOnPostPage?: boolean; // 是否在文章详情页显示
 	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
 	responsive?: {
@@ -364,31 +362,50 @@ export type SidebarLayoutConfig = {
 	};
 };
 
-// 广告栏配置
+// 单条横幅广告
+export type AdItem = {
+	id: string; // 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+	enable: boolean; // 是否启用该条
+	image?: string; // 横幅图片地址（/ 开头为 public 下的站内资源，也可填外链）；留空显示占位块
+	alt?: string; // 图片描述
+	link?: string; // 点击跳转地址；留空则整块不可点击
+	placeholderText?: string; // 没有 image 时占位块上的文字，留空用「广告位」
+	external?: boolean; // 是否在新标签页打开
+	closable?: boolean; // 左上角是否显示「关闭」按钮
+	label?: string; // 右上角标记文案，留空则用「广告」
+	expireDate?: string; // 过期时间 (ISO 8601 格式)，过期后不再显示该条
+};
+
+// 广告位置：文章详情页的顶部 / 底部，以及全站侧边栏
+export type AdPlacementName = "top" | "bottom" | "sidebar";
+
+// 单个广告位的配置
+export type AdPlacement = {
+	enable: boolean; // 该位置是否启用
+	aspectRatio?: string; // 该位置的横幅宽高比，留空则用顶层的 aspectRatio
+	items: AdItem[]; // 广告条目，按顺序横向排列，一行最多三条
+};
+
+// 侧边栏广告位：除条目外还要描述在侧边栏里的位置，这些字段原本在 sidebarConfig.ts
+// 的组件列表里，现在统一收进 adConfig.ts，由 widgetManager 读取后注入左侧边栏
+export type AdSidebarPlacement = AdPlacement & {
+	position: "top" | "sticky"; // top=固定在顶部，sticky=粘性定位（跟随滚动）
+	order?: number; // 显示顺序，与 sidebarConfig.ts 里其他组件的 order 一起排序
+	class?: string; // CSS 类名，用于应用样式和动画
+	animationDelay?: number; // 动画延迟时间（毫秒）
+	style?: string; // 自定义内联样式
+	responsive?: {
+		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
+	};
+};
+
+// 广告栏配置：文章详情页顶部 / 底部的横幅广告条，以及全站侧边栏广告位
 export type AdConfig = {
-	title?: string; // 广告栏标题
-	content?: string; // 广告栏文本内容
-	image?: {
-		src: string; // 图片地址
-		alt?: string; // 图片描述
-		link?: string; // 图片点击链接
-		external?: boolean; // 是否外部链接
-	};
-	link?: {
-		text: string; // 链接文本
-		url: string; // 链接地址
-		external?: boolean; // 是否外部链接
-	};
-	padding?: {
-		top?: string; // 上边距，如 "0", "1rem", "16px"
-		right?: string; // 右边距
-		bottom?: string; // 下边距
-		left?: string; // 左边距
-		all?: string; // 统一边距，会覆盖单独设置
-	};
-	closable?: boolean; // 是否可关闭
-	displayCount?: number; // 显示次数限制，-1 为无限制
-	expireDate?: string; // 过期时间 (ISO 8601 格式)
+	enable: boolean; // 总开关，关闭后三个位置都不渲染
+	aspectRatio?: string; // 默认横幅宽高比，如 "350 / 60"
+	top: AdPlacement; // 文章正文上方
+	bottom: AdPlacement; // 文章正文下方（版权声明之后）
+	sidebar: AdSidebarPlacement; // 左侧边栏（全站，不限文章页）
 };
 
 // 友链配置

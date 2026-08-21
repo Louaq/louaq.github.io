@@ -1,9 +1,9 @@
 ---
 import type { MarkdownHeading } from "astro";
-import Advertisement from "@/components/widget/Advertisement.astro";
 import Announcement from "@/components/widget/Announcement.astro";
 import Categories from "@/components/widget/Categories.astro";
 import Profile from "@/components/widget/Profile.astro";
+import SidebarPromo from "@/components/widget/SidebarPromo.astro";
 import SiteRuntime from "@/components/widget/SiteRuntime.astro";
 import SiteStats from "@/components/widget/SiteStats.astro";
 import Tags from "@/components/widget/Tags.astro";
@@ -30,7 +30,7 @@ const componentMap = {
 	announcement: Announcement,
 	categories: Categories,
 	tags: Tags,
-	advertisement: Advertisement,
+	advertisement: SidebarPromo,
 	stats: SiteStats,
 	runtime: SiteRuntime,
 };
@@ -58,7 +58,6 @@ function renderComponent(
 			class: componentClass,
 			style: componentStyle,
 			headings: undefined,
-			configId: component.configId,
 			...component.customProps,
 		},
 	};

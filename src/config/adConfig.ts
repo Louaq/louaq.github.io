@@ -1,63 +1,222 @@
-import type { AdConfig } from "../types/config";
+import type { AdConfig, AdItem, AdPlacementName } from "../types/config";
 
-// 这里只是配置广告内容，如果要开关请在sidebarConfig.ts中控制侧边栏组件的的启用组件即可
+export const adConfig: AdConfig = {
+	// 总开关：关闭后三个位置都不渲染
+	enable: true,
 
-// 广告配置1 - 纯图片广告（无边距）
-export const adConfig1: AdConfig = {
-	image: {
-		src: "/assets/images/d1.webp",
-		alt: "广告横幅",
-		link: "#",
-		external: true,
+	// 默认横幅宽高比，按素材实际尺寸填写（宽 / 高）；各位置可单独覆盖
+	aspectRatio: "350 / 60",
+
+	// 文章正文上方
+	top: {
+		enable: true,
+		items: [
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "banner-1",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image: "https://cdn.ping0.cc/images/ex/8c0e97165f9193cadf2d90966867b771.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.onesproxy.com/?user_source=1&invite_code=HLY74977",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "banner-2",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/2a7f7aab058744841a8c466aa7ac3229.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://linkstatic.com/?kwd=lqd-pingo",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "banner-3",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/d9de6192346895b1eab7d4dd2f99d396.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.proxy-cheap.com/cn/?utm_source=ping0cc&utm_medium=banner&utm_campaign=display_ads",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+		],
 	},
 
-	// 是否允许关闭广告
-	closable: false,
+	// 文章正文下方（版权声明之后）
+	bottom: {
+		enable: true,
 
-	// 显示次数限制，-1为无限制
-	displayCount: -1,
+		// 该位置若用不同尺寸的素材，在这里单独写宽高比即可
+		// aspectRatio: "728 / 90",
+		items: [
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "bottom-1",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/ae2c0d87898528db4825dd7af4c86d81.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://bestproxy.com/?keyword=ihoa1wt1",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "bottom-2",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/189722caa53bcad8d2e7c2e0e1048d5f.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.vircs.com/promotion?code=4",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "bottom-3",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/3144865ef774d6b2e32914ec4420863f.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.nsocks.com/?keyword=0suirfse",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+		],
+	},
 
-	// 组件内边距配置，可通过取消注释生效
-	padding: {
-		// 零边距，图片占满整个组件
-		all: "0",
+	// 左侧边栏（全站生效，不只文章页）。侧边栏窄，这里固定单列堆叠。
+	// 注：项目只渲染左侧边栏，右栏没有对应组件，所以不提供左右选择。
+	sidebar: {
+		enable: true,
 
-		// 四边1rem边距
-		// all: "1rem",
+		// 侧边栏宽度约 300px，竖版或方形素材更合适；留空则用顶层的 aspectRatio
+		aspectRatio: "300 / 60",
 
-		// 顶部无边距
-		// top: "0",
+		// 在侧边栏里的位置：top=固定顶部，sticky=跟随滚动
+		position: "sticky",
 
-		// 右侧无边距
-		// right: "1rem",
+		// 显示顺序，与 sidebarConfig.ts 里 profile(1) / announcement(2) / runtime(3) 一起排
+		order: 6,
 
-		// 底部无边距
-		// bottom: "1rem",
+		// CSS 类名与入场动画延迟
+		class: "onload-animation",
+		animationDelay: 0,
 
-		// 左侧无边距
-		// left: "1rem",
+		items: [
+			{
+				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
+				id: "sidebar-1",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image: "https://cdn.ping0.cc/images/ex/727b9914f72e0a8b99f246608f71dc1d.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://proxy001.com/?ppf=jason_ping0",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
+				id: "sidebar-2",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image: "",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+		],
 	},
 };
 
-// 广告配置2 - 完整内容广告
-export const adConfig2: AdConfig = {
-	title: "支持博主",
-	content:
-		"如果您觉得本站内容对您有帮助，欢迎支持我们的创作！您的支持是我们持续更新的动力。",
-	// image: {
-	// 	src: "/assets/images/cover.webp",
-	// 	alt: "支持博主",
-	// 	link: "about/",
-	// 	external: false,
-	// },
-	link: {
-		text: "支持一下",
-		url: "about/",
-		external: false,
-	},
-	closable: true,
-	displayCount: -1,
-	padding: {
-		// all: "1rem",
-	},
-};
+/**
+ * 取指定位置当前应当展示的条目。
+ * 总开关或该位置关闭、条目未启用、已过期的都会被滤掉；
+ * 结果为空时调用方跳过整条广告栏。
+ */
+export function getActiveAdItems(placement: AdPlacementName): AdItem[] {
+	const group = adConfig[placement];
+	if (!adConfig.enable || !group.enable) {
+		return [];
+	}
+
+	const now = new Date();
+	return group.items.filter((item) => {
+		if (!item.enable) {
+			return false;
+		}
+		return !(item.expireDate && now > new Date(item.expireDate));
+	});
+}
+
+/** 取指定位置的横幅宽高比：位置上没写就回退到顶层配置，再没有用默认值 */
+export function getAdAspectRatio(placement: AdPlacementName): string {
+	return adConfig[placement].aspectRatio || adConfig.aspectRatio || "350 / 60";
+}

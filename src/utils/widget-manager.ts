@@ -1,8 +1,42 @@
 import { sidebarLayoutConfig } from "../config";
+import { adConfig } from "../config/adConfig";
 import type {
 	SidebarLayoutConfig,
 	WidgetComponentConfig,
 } from "../types/config";
+
+/**
+ * 侧边栏广告位的开关与放置全部写在 adConfig.ts，不在 sidebarConfig.ts 的组件列表里。
+ * 这里把它还原成一条普通的 WidgetComponentConfig 注入左侧边栏，之后的排序、动画、
+ * 响应式逻辑就与其他组件完全一致。
+ *
+ * 实际渲染的是 widget/SidebarPromo.astro（PromoStrip 的薄包装，placement 固定为
+ * "sidebar"），这样 LeftSideBar 的 componentMap 不必为广告放宽类型。
+ *
+ * 项目只渲染左侧边栏（没有 RightSideBar 组件），所以固定注入 leftComponents。
+ */
+function withAdWidget(config: SidebarLayoutConfig): SidebarLayoutConfig {
+	const ad = adConfig.sidebar;
+	if (!adConfig.enable || !ad.enable || ad.items.length === 0) {
+		return config;
+	}
+
+	const adComponent: WidgetComponentConfig = {
+		type: "advertisement",
+		enable: true,
+		position: ad.position,
+		order: ad.order,
+		class: ad.class,
+		animationDelay: ad.animationDelay,
+		style: ad.style,
+		responsive: ad.responsive,
+	};
+
+	return {
+		...config,
+		leftComponents: [...config.leftComponents, adComponent],
+	};
+}
 
 /**
  * 组件管理器类
@@ -12,7 +46,7 @@ class WidgetManager {
 	private config: SidebarLayoutConfig;
 
 	constructor(config: SidebarLayoutConfig = sidebarLayoutConfig) {
-		this.config = config;
+		this.config = withAdWidget(config);
 	}
 
 	/**
