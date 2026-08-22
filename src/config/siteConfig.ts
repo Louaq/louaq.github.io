@@ -89,7 +89,7 @@ export const siteConfig: SiteConfig = {
 	showLastModified: true,
 
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
-	outdatedThreshold: 12,
+	outdatedThreshold: 10,
 
 	// 文章页"上一篇/下一篇"导航开关
 	showPostPrevNext: true,
@@ -129,7 +129,7 @@ export const siteConfig: SiteConfig = {
 	// 分页配置
 	pagination: {
 		// 首页每页文章数
-		postsPerPage: 10,
+		postsPerPage: 12,
 	},
 
 	// 字体配置

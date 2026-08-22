@@ -14,131 +14,131 @@ export const adConfig: AdConfig = {
 
 	// 文章正文上方
 	top: {
-		enable: false,
+		enable: true,
 		items: [
-			// {
-			// 	// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "banner-1",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image: "https://cdn.ping0.cc/images/ex/8c0e97165f9193cadf2d90966867b771.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://www.onesproxy.com/?user_source=1&invite_code=HLY74977",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
-			// {
-			// 	// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "banner-2",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image:
-			// 		"https://cdn.ping0.cc/images/ex/2a7f7aab058744841a8c466aa7ac3229.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://linkstatic.com/?kwd=lqd-pingo",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
-			// {
-			// 	// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "banner-3",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image:
-			// 		"https://cdn.ping0.cc/images/ex/d9de6192346895b1eab7d4dd2f99d396.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://www.proxy-cheap.com/cn/?utm_source=ping0cc&utm_medium=banner&utm_campaign=display_ads",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "banner-1",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image: "https://cdn.ping0.cc/images/ex/8c0e97165f9193cadf2d90966867b771.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.onesproxy.com/?user_source=1&invite_code=HLY74977",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "banner-2",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/2a7f7aab058744841a8c466aa7ac3229.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://linkstatic.com/?kwd=lqd-pingo",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "banner-3",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/d9de6192346895b1eab7d4dd2f99d396.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.proxy-cheap.com/cn/?utm_source=ping0cc&utm_medium=banner&utm_campaign=display_ads",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
 		],
 	},
 
 	// 文章正文下方（版权声明之后）
 	bottom: {
-		enable: false,
+		enable: true,
 
 		// 该位置若用不同尺寸的素材，在这里单独写宽高比即可
 		// aspectRatio: "728 / 90",
 		items: [
-			// {
-			// 	// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "bottom-1",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image:
-			// 		"https://cdn.ping0.cc/images/ex/ae2c0d87898528db4825dd7af4c86d81.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://bestproxy.com/?keyword=ihoa1wt1",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
-			// {
-			// 	// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "bottom-2",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image:
-			// 		"https://cdn.ping0.cc/images/ex/189722caa53bcad8d2e7c2e0e1048d5f.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://www.vircs.com/promotion?code=4",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
-			// {
-			// 	// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "bottom-3",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image:
-			// 		"https://cdn.ping0.cc/images/ex/3144865ef774d6b2e32914ec4420863f.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://www.nsocks.com/?keyword=0suirfse",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "bottom-1",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/ae2c0d87898528db4825dd7af4c86d81.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://bestproxy.com/?keyword=ihoa1wt1",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "bottom-2",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/189722caa53bcad8d2e7c2e0e1048d5f.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.vircs.com/promotion?code=4",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
+			{
+				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
+				id: "bottom-3",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image:
+					"https://cdn.ping0.cc/images/ex/3144865ef774d6b2e32914ec4420863f.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://www.nsocks.com/?keyword=0suirfse",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
 		],
 	},
 
