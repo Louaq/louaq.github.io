@@ -1,4 +1,9 @@
-import type { AdConfig, AdItem, AdPlacementName } from "../types/config";
+import type {
+	AdConfig,
+	AdFeedItem,
+	AdItem,
+	AdPlacementName,
+} from "../types/config";
 
 export const adConfig: AdConfig = {
 	// 总开关：关闭后三个位置都不渲染
@@ -162,7 +167,8 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "https://cdn.ping0.cc/images/ex/727b9914f72e0a8b99f246608f71dc1d.gif",
+				image:
+					"https://cdn.ping0.cc/images/ex/727b9914f72e0a8b99f246608f71dc1d.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -194,6 +200,48 @@ export const adConfig: AdConfig = {
 			},
 		],
 	},
+
+	// 文章列表信息流（首页 / 分类页 / 标签页共用同一份配置）。
+	// 广告做成与文章卡同样式的原生卡片，靠右上角标区分，每隔 interval 篇插一条。
+	feed: {
+		enable: true,
+
+		// 每隔几篇文章插一条：5 表示第 5、10、15 篇之后各插一条。
+		// 广告不会成为列表的最后一项，所以每页 10 篇 + interval 5 实际是每页 1 条。
+		interval: 5,
+
+		// 单页最多插几条；0 或省略表示不限
+		maxPerPage: 2,
+
+		// 多条时按顺序轮着用，用完从头循环
+		items: [
+			{
+				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
+				id: "feed-1",
+				// 是否启用该条
+				enable: true,
+				// 卡片标题
+				title: "广告位",
+				// 卡片描述，窄屏两行、宽屏三行，超出截断
+				description:
+					"把 title / description / image / link 换成真实素材即可上线；留空 image 则只显示文字。",
+				// 卡片配图：/ 开头为 public 下的站内资源，也可直接填外链；留空则不显示图片区
+				image: "",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告配图",
+				// 点击跳转地址；留空则整卡不可点击
+				link: "",
+				// 是否在新标签页打开
+				external: true,
+				// 是否显示「关闭」按钮
+				closable: true,
+				// 角标文案，留空用「广告」
+				label: "广告",
+				// 卡片底部行动文案，留空用「了解更多」
+				cta: "了解更多",
+			},
+		],
+	},
 };
 
 /**
@@ -219,4 +267,58 @@ export function getActiveAdItems(placement: AdPlacementName): AdItem[] {
 /** 取指定位置的横幅宽高比：位置上没写就回退到顶层配置，再没有用默认值 */
 export function getAdAspectRatio(placement: AdPlacementName): string {
 	return adConfig[placement].aspectRatio || adConfig.aspectRatio || "350 / 60";
+}
+
+/**
+ * 取信息流广告里当前可用的条目，过滤规则与横幅位一致
+ * （总开关 / 位置开关 / 单条开关 / 过期时间）。
+ */
+export function getActiveFeedAdItems(): AdFeedItem[] {
+	const group = adConfig.feed;
+	if (!adConfig.enable || !group.enable) {
+		return [];
+	}
+
+	const now = new Date();
+	return group.items.filter((item) => {
+		if (!item.enable) {
+			return false;
+		}
+		return !(item.expireDate && now > new Date(item.expireDate));
+	});
+}
+
+/**
+ * 算出当前这一页的广告插槽：key 是「插在第几篇文章之后」（1 起数），
+ * value 是该位置要展示的条目。
+ *
+ * 每页独立计数，翻页后照样出现；条件不满足（没启用、没条目、文章太少）时
+ * 返回空 Map，调用方原样渲染文章列表。
+ * 刻意用 after < postCount：广告永远不会成为列表的最后一项。
+ */
+export function getFeedAdSlots(postCount: number): Map<number, AdFeedItem> {
+	const slots = new Map<number, AdFeedItem>();
+	const items = getActiveFeedAdItems();
+	if (items.length === 0 || postCount <= 1) {
+		return slots;
+	}
+
+	const interval = Math.max(1, Math.floor(adConfig.feed.interval || 5));
+	const configuredMax = adConfig.feed.maxPerPage;
+	const max =
+		configuredMax && configuredMax > 0
+			? configuredMax
+			: Number.POSITIVE_INFINITY;
+
+	let used = 0;
+	for (
+		let after = interval;
+		after < postCount && used < max;
+		after += interval
+	) {
+		slots.set(after, items[used % items.length]);
+		used += 1;
+	}
+
+	return slots;
 }

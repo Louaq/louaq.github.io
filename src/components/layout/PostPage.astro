@@ -2,12 +2,32 @@
 import type { CollectionEntry } from "astro:content";
 import { getPostUrlForEntry } from "@utils/url-utils";
 import PostCard from "@/components/layout/PostCard.astro";
+import FeedPromoCard from "@/components/misc/FeedPromoCard.astro";
 import { siteConfig } from "@/config";
+import { getFeedAdSlots } from "@/config/adConfig";
+import type { AdFeedItem } from "@/types/config";
 
 const { page } = Astro.props;
 
 // 类型别名避免Fragment语法问题
 type PostEntry = CollectionEntry<"posts">;
+
+// 信息流广告：按 adConfig.feed 的间隔把广告卡混进文章序列。每页独立计数，
+// 没启用 / 没条目时 slots 为空，下面的循环退化成原来的纯文章列表。
+type FeedRow =
+	| { kind: "post"; post: PostEntry }
+	| { kind: "promo"; item: AdFeedItem };
+
+const feedAdSlots = getFeedAdSlots(page.data.length);
+const feedRows: FeedRow[] = [];
+page.data.forEach((entry: PostEntry, i: number) => {
+	feedRows.push({ kind: "post", post: entry });
+	// key 是「插在第几篇之后」，1 起数
+	const promo = feedAdSlots.get(i + 1);
+	if (promo) {
+		feedRows.push({ kind: "promo", item: promo });
+	}
+});
 
 const masonryEnabled = siteConfig.postListLayout.grid.masonry;
 const gridColumns = siteConfig.postListLayout.grid.columns || 2;
@@ -30,24 +50,29 @@ const initialLayoutClass =
   data-grid-columns={gridColumns}
 >
   {
-    page.data.map((entry: PostEntry, index: number) => (
-      <PostCard
-        entry={entry}
-        title={entry.data.title}
-        tags={entry.data.tags}
-        category={entry.data.category}
-        published={entry.data.published}
-        updated={entry.data.updated}
-        url={getPostUrlForEntry(entry)}
-        image={entry.data.image}
-        description={entry.data.description}
-        draft={entry.data.draft}
-        pinned={entry.data.pinned}
-        index={index}
-        class:list="post-card-item"
-        style=""
-      />
-    ))
+    /* index 用的是混合后的整体序号：广告卡也参与封面左右交替，节奏不被打断 */
+    feedRows.map((row: FeedRow, index: number) =>
+      row.kind === "post" ? (
+        <PostCard
+          entry={row.post}
+          title={row.post.data.title}
+          tags={row.post.data.tags}
+          category={row.post.data.category}
+          published={row.post.data.published}
+          updated={row.post.data.updated}
+          url={getPostUrlForEntry(row.post)}
+          image={row.post.data.image}
+          description={row.post.data.description}
+          draft={row.post.data.draft}
+          pinned={row.post.data.pinned}
+          index={index}
+          class:list="post-card-item"
+          style=""
+        />
+      ) : (
+        <FeedPromoCard item={row.item} index={index} />
+      )
+    )
   }
 </div>
 
@@ -206,7 +231,8 @@ const initialLayoutClass =
     // 仅在 grid 模式下应用
     if (!container.classList.contains("grid-mode")) return;
 
-    const items = Array.from(container.querySelectorAll(".post-card-item"));
+    // 关闭掉的信息流广告卡带 [hidden]，不参与排布，否则会留下一块空位
+    const items = Array.from(container.querySelectorAll(".post-card-item:not([hidden])"));
     if (items.length === 0) return;
 
     // 瀑布流配置
@@ -268,6 +294,11 @@ const initialLayoutClass =
         }, { once: true });
     });
   }
+
+  // 信息流广告卡被关闭后重排瀑布流（内部会自行判断是否处于瀑布流模式）
+  window.addEventListener("promo:closed", function () {
+    applyMasonryLayout();
+  });
 
   // 监听布局变化事件
   window.addEventListener("layoutChange", function (event) {

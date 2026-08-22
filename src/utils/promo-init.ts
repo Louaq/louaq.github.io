@@ -1,5 +1,5 @@
 /**
- * 文章页推广位的关闭逻辑。
+ * 推广位的关闭逻辑：文章页的顶部 / 底部横幅、侧边栏，以及文章列表里的信息流卡片。
  *
  * 关闭只在当前页面有效：不写任何 storage，也不跨页记忆。读者刷新、点进另一篇
  * 文章、或用 swup 前进后退，广告都会重新出现。
@@ -45,6 +45,10 @@ function handlePromoClose(e: MouseEvent): void {
 	}
 
 	collapseEmptyStrips();
+
+	// 信息流里的广告卡是文章列表的一员，收起后瀑布流会在原位置留一个洞，
+	// 广播出去由列表页重排；其它布局靠 display:none 自动收拢，不受影响。
+	window.dispatchEvent(new CustomEvent("promo:closed"));
 }
 
 export function initPromoStrip(): void {
