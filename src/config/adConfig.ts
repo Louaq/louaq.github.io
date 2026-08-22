@@ -156,24 +156,24 @@ export const adConfig: AdConfig = {
 		animationDelay: 0,
 
 		items: [
-			// {
-			// 	// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
-			// 	id: "sidebar-1",
-			// 	// 是否启用该条
-			// 	enable: true,
-			// 	// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-			// 	image: "https://cdn.ping0.cc/images/ex/727b9914f72e0a8b99f246608f71dc1d.gif",
-			// 	// 图片描述（无障碍与图片加载失败时显示）
-			// 	alt: "广告横幅",
-			// 	// 点击跳转地址
-			// 	link: "https://proxy001.com/?ppf=jason_ping0",
-			// 	// 是否在新标签页打开
-			// 	external: true,
-			// 	// 左上角是否显示「关闭」按钮
-			// 	closable: true,
-			// 	// 右上角标记文案，留空用「广告」
-			// 	label: "广告",
-			// },
+			{
+				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
+				id: "sidebar-1",
+				// 是否启用该条
+				enable: true,
+				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
+				image: "https://cdn.ping0.cc/images/ex/727b9914f72e0a8b99f246608f71dc1d.gif",
+				// 图片描述（无障碍与图片加载失败时显示）
+				alt: "广告横幅",
+				// 点击跳转地址
+				link: "https://proxy001.com/?ppf=jason_ping0",
+				// 是否在新标签页打开
+				external: true,
+				// 左上角是否显示「关闭」按钮
+				closable: true,
+				// 右上角标记文案，留空用「广告」
+				label: "广告",
+			},
 			{
 				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
 				id: "sidebar-2",
