@@ -369,7 +369,7 @@ export type AdItem = {
 	image?: string; // 横幅图片地址（/ 开头为 public 下的站内资源，也可填外链）；留空显示占位块
 	alt?: string; // 图片描述
 	link?: string; // 点击跳转地址；留空则整块不可点击
-	placeholderText?: string; // 没有 image 时占位块上的文字，留空用「广告位」
+	placeholderText?: string; // 没有 image 时占位块上的文字，留空用「广告」
 	external?: boolean; // 是否在新标签页打开
 	closable?: boolean; // 左上角是否显示「关闭」按钮
 	label?: string; // 右上角标记文案，留空则用「广告」

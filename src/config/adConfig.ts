@@ -27,6 +27,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://www.onesproxy.com/?user_source=1&invite_code=HLY74977",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -46,6 +48,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://linkstatic.com/?kwd=lqd-pingo",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -65,6 +69,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://www.proxy-cheap.com/cn/?utm_source=ping0cc&utm_medium=banner&utm_campaign=display_ads",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -94,6 +100,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://bestproxy.com/?keyword=ihoa1wt1",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -113,6 +121,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://www.vircs.com/promotion?code=4",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -132,6 +142,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://www.nsocks.com/?keyword=0suirfse",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -173,6 +185,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "https://proxy001.com/?ppf=jason_ping0",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				// placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
@@ -191,6 +205,8 @@ export const adConfig: AdConfig = {
 				alt: "广告横幅",
 				// 点击跳转地址
 				link: "",
+				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
+				placeholderText: "广告位",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
