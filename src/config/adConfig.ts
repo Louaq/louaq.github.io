@@ -160,7 +160,7 @@ export const adConfig: AdConfig = {
 		enable: true,
 
 		// 侧边栏宽度约 300px，竖版或方形素材更合适；留空则用顶层的 aspectRatio
-		aspectRatio: "300 / 60",
+		aspectRatio: "300 / 80",
 
 		// 在侧边栏里的位置：top=固定顶部，sticky=跟随滚动
 		position: "sticky",
@@ -179,12 +179,11 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image:
-					"https://cdn.ping0.cc/images/ex/727b9914f72e0a8b99f246608f71dc1d.gif",
+				image: "https://pic1.imgdb.cn/i/034CfkC24mahBd96iDYYos.png",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://proxy001.com/?ppf=jason_ping0",
+				link: "https://www.dmit.io/aff.php?aff=26767",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
@@ -200,13 +199,13 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "",
+				image: "https://cdn.ping0.cc/images/ex/1894e6285bf6b324fc51887c0bd0b3ce.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "",
+				link: "https://ai9xx.com/",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
-				placeholderText: "广告位",
+				placeholderText: "广告出租",
 				// 是否在新标签页打开
 				external: true,
 				// 左上角是否显示「关闭」按钮
