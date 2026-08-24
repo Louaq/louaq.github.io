@@ -52,6 +52,26 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
     }
   }
 
+  // Twikoo / Element UI 的样式由脚本在运行时注入 <style>，而脚本全局只加载一次。
+  // swup 的 head diff 会把「新页面 head 里不存在」的标签当作孤儿移除，于是二次
+  // 导航进入评论页时这些样式就永久消失了（最明显的是加载指示器的 SVG 失去
+  // .circular 的 42px 约束，被撑满整个评论区）。这里给它们打标记，由
+  // astro.config.mjs 的 updateHead.persistTags 保住。
+  let styleBaseline = null;
+  function snapshotHeadStyles() {
+    styleBaseline = new Set(document.head.querySelectorAll("style"));
+  }
+  function markTwikooStyles() {
+    if (!styleBaseline) {
+      return;
+    }
+    for (const el of document.head.querySelectorAll("style")) {
+      if (!styleBaseline.has(el)) {
+        el.setAttribute("data-twikoo-style", "");
+      }
+    }
+  }
+
   // 懒加载 Twikoo 脚本（仅注入一次，跨 swup 导航复用全局实例）
   let twikooScriptPromise = null;
   function loadTwikooScript() {
@@ -62,6 +82,7 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
     if (twikooScriptPromise) {
       return twikooScriptPromise;
     }
+    snapshotHeadStyles();
     twikooScriptPromise = new Promise(function (resolve, reject) {
       const existing = document.getElementById("twikoo-script");
       if (existing) {
@@ -92,8 +113,12 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
     loadTwikooScript()
       .then(function () {
         commentEl.innerHTML = "";
-        return twikoo.init(createTwikooConfig());
+        const initialized = twikoo.init(createTwikooConfig());
+        // init 同步注入的样式先标记一次，异步补注入的在 resolve 后再标记
+        markTwikooStyles();
+        return initialized;
       })
+      .then(markTwikooStyles)
       .catch(function (error) {
         console.warn("Twikoo 评论区加载失败:", error);
       });
