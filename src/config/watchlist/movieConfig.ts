@@ -26,6 +26,7 @@ export const movieItems: WatchlistItem[] = [
 		endDate: "2018-11-15",
 		tags: ["剧情", "犯罪"],
 		enabled: true,
+		pinned: true,
 	},
 	{
 		title: "疯狂动物城",

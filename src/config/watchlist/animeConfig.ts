@@ -117,16 +117,6 @@ export const animeItems: WatchlistItem[] = [
 		enabled: true,
 	},
 	{
-		title: "一念永恒 第二季",
-		cover: "https://pic1.imgdb.cn/item/69509d85161224305eb311f6.webp",
-		type: "anime",
-		status: "completed",
-		rating: 8.0,
-		startDate: "2021-07-20",
-		tags: ["剧情", "动画", "古装"],
-		enabled: true,
-	},
-	{
 		title: "沧元图2",
 		cover: "https://pic1.imgdb.cn/item/69509e22161224305eb311fb.webp",
 		type: "anime",
