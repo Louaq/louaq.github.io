@@ -47,7 +47,6 @@ export const zh_TW: Translation = {
 	[Key.author]: "作者",
 	[Key.publishedAt]: "發布於",
 	[Key.license]: "許可協議",
-	[Key.bangumi]: "番組計劃",
 	[Key.watchlist]: "觀影",
 	[Key.watchlistTitle]: "觀影清單",
 	[Key.watchlistSubtitle]: "記錄最近觀看的動畫與影視作品",
@@ -59,55 +58,6 @@ export const zh_TW: Translation = {
 	[Key.watchlistCategoryTV]: "電視劇",
 	[Key.watchlistCategoryDocumentary]: "紀錄片",
 	[Key.watchlistCategoryOther]: "其他",
-
-	// 番組計劃
-	[Key.bangumiSubtitle]: "記錄我的二次元之旅",
-
-	// 番組計劃篩選和狀態文本
-	[Key.bangumiFilterAll]: "全部",
-	[Key.bangumiFilterWatched]: "看過",
-	[Key.bangumiFilterWatching]: "在看",
-	[Key.bangumiFilterWish]: "想看",
-	[Key.bangumiFilterOnHold]: "擱置",
-	[Key.bangumiFilterDropped]: "拋棄",
-	[Key.bangumiFilterGamePlayed]: "玩過",
-	[Key.bangumiFilterGamePlaying]: "在玩",
-	[Key.bangumiFilterGameWish]: "想玩",
-	[Key.bangumiFilterBookRead]: "讀過",
-	[Key.bangumiFilterBookReading]: "在讀",
-	[Key.bangumiFilterBookWish]: "想讀",
-	[Key.bangumiFilterMusicListened]: "聽過",
-	[Key.bangumiFilterMusicListening]: "在聽",
-	[Key.bangumiFilterMusicWish]: "想聽",
-	[Key.bangumiStatusWish]: "想看",
-	[Key.bangumiStatusWatched]: "看過",
-	[Key.bangumiStatusWatching]: "在看",
-	[Key.bangumiStatusOnHold]: "擱置",
-	[Key.bangumiStatusDropped]: "拋棄",
-	[Key.bangumiStatusGameWish]: "想玩",
-	[Key.bangumiStatusGamePlayed]: "玩過",
-	[Key.bangumiStatusGamePlaying]: "在玩",
-	[Key.bangumiStatusBookWish]: "想讀",
-	[Key.bangumiStatusBookRead]: "讀過",
-	[Key.bangumiStatusBookReading]: "在讀",
-	[Key.bangumiStatusMusicWish]: "想聽",
-	[Key.bangumiStatusMusicListened]: "聽過",
-	[Key.bangumiStatusMusicListening]: "在聽",
-	[Key.bangumiStatusUnknown]: "未知",
-	[Key.bangumiNoData]: "暫無數據",
-	[Key.bangumiNoDataDescription]: "該分類下還沒有任何條目",
-	[Key.bangumiEmpty]: "暫無數據",
-	[Key.bangumiEmptyReason]: "可能的原因：用戶名不存在、網絡連接問題或API限制",
-
-	// 番組分類
-	[Key.bangumiCategoryBook]: "書籍",
-	[Key.bangumiCategoryAnime]: "動畫",
-	[Key.bangumiCategoryMusic]: "音樂",
-	[Key.bangumiCategoryGame]: "遊戲",
-	[Key.bangumiCategoryReal]: "三次元",
-
-	// 番組數據更新
-	[Key.bangumiLastUpdated]: "數據更新於",
 
 	// 分頁
 	[Key.paginationPrev]: "上一頁",

@@ -50,7 +50,6 @@ export const ru: Translation = {
 	[Key.author]: "Автор",
 	[Key.publishedAt]: "Опубликовано",
 	[Key.license]: "Лицензия",
-	[Key.bangumi]: "Бангуми",
 	[Key.watchlist]: "Просмотр",
 	[Key.watchlistTitle]: "Список просмотра",
 	[Key.watchlistSubtitle]:
@@ -64,54 +63,6 @@ export const ru: Translation = {
 	[Key.watchlistCategoryTV]: "Телесериалы",
 	[Key.watchlistCategoryDocumentary]: "Документальные фильмы",
 	[Key.watchlistCategoryOther]: "Другое",
-
-	// Фильтр и статус Бангуми текст
-	[Key.bangumiSubtitle]: "Запись моего аниме путешествия",
-	[Key.bangumiFilterAll]: "Все",
-	[Key.bangumiFilterWatched]: "Просмотрено",
-	[Key.bangumiFilterWatching]: "Смотрю",
-	[Key.bangumiFilterWish]: "Хочу",
-	[Key.bangumiFilterOnHold]: "Отложено",
-	[Key.bangumiFilterDropped]: "Брошено",
-	[Key.bangumiFilterGamePlayed]: "Пройдено",
-	[Key.bangumiFilterGamePlaying]: "Играю",
-	[Key.bangumiFilterGameWish]: "Хочу сыграть",
-	[Key.bangumiFilterBookRead]: "Прочитано",
-	[Key.bangumiFilterBookReading]: "Читаю",
-	[Key.bangumiFilterBookWish]: "Хочу прочитать",
-	[Key.bangumiFilterMusicListened]: "Прослушано",
-	[Key.bangumiFilterMusicListening]: "Слушаю",
-	[Key.bangumiFilterMusicWish]: "Хочу послушать",
-	[Key.bangumiStatusWish]: "Хочу",
-	[Key.bangumiStatusWatched]: "Просмотрено",
-	[Key.bangumiStatusWatching]: "Смотрю",
-	[Key.bangumiStatusOnHold]: "Отложено",
-	[Key.bangumiStatusDropped]: "Брошено",
-	[Key.bangumiStatusGameWish]: "Хочу сыграть",
-	[Key.bangumiStatusGamePlayed]: "Пройдено",
-	[Key.bangumiStatusGamePlaying]: "Играю",
-	[Key.bangumiStatusBookWish]: "Хочу прочитать",
-	[Key.bangumiStatusBookRead]: "Прочитано",
-	[Key.bangumiStatusBookReading]: "Читаю",
-	[Key.bangumiStatusMusicWish]: "Хочу послушать",
-	[Key.bangumiStatusMusicListened]: "Прослушано",
-	[Key.bangumiStatusMusicListening]: "Слушаю",
-	[Key.bangumiStatusUnknown]: "Неизвестно",
-	[Key.bangumiNoData]: "Нет данных",
-	[Key.bangumiNoDataDescription]: "В этой категории нет элементов",
-	[Key.bangumiEmpty]: "Нет данных",
-	[Key.bangumiEmptyReason]:
-		"Возможные причины: имя пользователя не существует, проблема с подключением к сети или ограничение API",
-
-	// Категории Бангуми
-	[Key.bangumiCategoryBook]: "Книга",
-	[Key.bangumiCategoryAnime]: "Аниме",
-	[Key.bangumiCategoryMusic]: "Музыка",
-	[Key.bangumiCategoryGame]: "Игра",
-	[Key.bangumiCategoryReal]: "Реальный",
-
-	// Обновление данных Бангуми
-	[Key.bangumiLastUpdated]: "Данные обновлены",
 
 	// Пагинация
 	[Key.paginationPrev]: "Предыдущая",

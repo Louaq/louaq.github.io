@@ -41,12 +41,6 @@ export type SiteConfig = {
 		theme: "github" | "obsidian" | "vitepress";
 	};
 
-	// 添加bangumi配置
-	bangumi?: {
-		userId?: string; // Bangumi用户ID
-	};
-
-	generateOgImages: boolean;
 	favicon: Array<{
 		src: string;
 		theme?: "light" | "dark";
@@ -72,7 +66,6 @@ export type SiteConfig = {
 		friends: boolean; // 友链页面开关
 		sponsor: boolean; // 赞助页面开关
 		guestbook: boolean; // 留言板页面开关
-		bangumi: boolean; // 番组计划页面开关
 		watchlist: boolean; // 观影清单页面开关
 	};
 
@@ -113,7 +106,6 @@ export enum LinkPreset {
 	Friends = 3,
 	Sponsor = 4,
 	Guestbook = 5,
-	Bangumi = 6,
 	Watchlist = 7,
 	Categories = 8,
 	Tags = 9,

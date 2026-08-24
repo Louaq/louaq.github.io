@@ -49,7 +49,6 @@ export const ja: Translation = {
 	[Key.author]: "著者",
 	[Key.publishedAt]: "公開日",
 	[Key.license]: "ライセンス",
-	[Key.bangumi]: "バングミ",
 	[Key.watchlist]: "視聴",
 	[Key.watchlistTitle]: "視聴リスト",
 	[Key.watchlistSubtitle]: "最近視聴したアニメとテレビ番組を記録する",
@@ -62,54 +61,6 @@ export const ja: Translation = {
 	[Key.watchlistCategoryTV]: "テレビ番組",
 	[Key.watchlistCategoryDocumentary]: "ドキュメンタリー",
 	[Key.watchlistCategoryOther]: "その他",
-
-	// バングミフィルターと状態文本
-	[Key.bangumiSubtitle]: "私の二次元の旅を記録する",
-	[Key.bangumiFilterAll]: "すべて",
-	[Key.bangumiFilterWatched]: "見た",
-	[Key.bangumiFilterWatching]: "視聴中",
-	[Key.bangumiFilterWish]: "見たい",
-	[Key.bangumiFilterOnHold]: "保留",
-	[Key.bangumiFilterDropped]: "中断",
-	[Key.bangumiFilterGamePlayed]: "プレイ済み",
-	[Key.bangumiFilterGamePlaying]: "プレイ中",
-	[Key.bangumiFilterGameWish]: "プレイしたい",
-	[Key.bangumiFilterBookRead]: "読んだ",
-	[Key.bangumiFilterBookReading]: "読んでいる",
-	[Key.bangumiFilterBookWish]: "読みたい",
-	[Key.bangumiFilterMusicListened]: "聴いた",
-	[Key.bangumiFilterMusicListening]: "聴いている",
-	[Key.bangumiFilterMusicWish]: "聴きたい",
-	[Key.bangumiStatusWish]: "見たい",
-	[Key.bangumiStatusWatched]: "見た",
-	[Key.bangumiStatusWatching]: "視聴中",
-	[Key.bangumiStatusOnHold]: "保留",
-	[Key.bangumiStatusDropped]: "中断",
-	[Key.bangumiStatusGameWish]: "プレイしたい",
-	[Key.bangumiStatusGamePlayed]: "プレイ済み",
-	[Key.bangumiStatusGamePlaying]: "プレイ中",
-	[Key.bangumiStatusBookWish]: "読みたい",
-	[Key.bangumiStatusBookRead]: "読んだ",
-	[Key.bangumiStatusBookReading]: "読んでいる",
-	[Key.bangumiStatusMusicWish]: "聴きたい",
-	[Key.bangumiStatusMusicListened]: "聴いた",
-	[Key.bangumiStatusMusicListening]: "聴いている",
-	[Key.bangumiStatusUnknown]: "不明",
-	[Key.bangumiNoData]: "データなし",
-	[Key.bangumiNoDataDescription]: "このカテゴリに項目がありません",
-	[Key.bangumiEmpty]: "データなし",
-	[Key.bangumiEmptyReason]:
-		"考えられる理由：ユーザー名が存在しない、ネットワーク接続の問題、またはAPI制限",
-
-	// バングミカテゴリ
-	[Key.bangumiCategoryBook]: "本",
-	[Key.bangumiCategoryAnime]: "アニメ",
-	[Key.bangumiCategoryMusic]: "音楽",
-	[Key.bangumiCategoryGame]: "ゲーム",
-	[Key.bangumiCategoryReal]: "実写",
-
-	// バングミデータ更新
-	[Key.bangumiLastUpdated]: "データ更新",
 
 	// バナー設定
 

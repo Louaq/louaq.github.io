@@ -33,11 +33,6 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/guestbook/",
 		icon: "fluent-emoji-flat:speech-balloon",
 	},
-	[LinkPreset.Bangumi]: {
-		name: i18n(I18nKey.bangumi),
-		url: "/bangumi/",
-		icon: "fluent-emoji-flat:television",
-	},
 	[LinkPreset.Watchlist]: {
 		name: i18n(I18nKey.watchlist),
 		url: "/watchlist/",

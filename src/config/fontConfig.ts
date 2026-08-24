@@ -52,24 +52,4 @@ export const fontConfig = {
 		'"Segoe UI Emoji"',
 		'"Segoe UI Symbol"',
 	],
-
-	// OpenGraph 图片字体配置
-	og: {
-		family: "Noto Sans SC",
-		cssUrl:
-			"https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;700&display=swap",
-		weights: {
-			regular: 400,
-			bold: 700,
-		},
-		fallback: [
-			"-apple-system",
-			"BlinkMacSystemFont",
-			'"Segoe UI"',
-			"Roboto",
-			'"Helvetica Neue"',
-			"Arial",
-			"sans-serif",
-		],
-	},
 };

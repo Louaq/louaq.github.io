@@ -65,11 +65,6 @@ export const siteConfig: SiteConfig = {
 	// 站点开始日期，用于统计运行天数
 	siteStartDate: "2025-11-14", // 请修改为你的站点实际开始日期，格式：YYYY-MM-DD
 
-	// bangumi配置
-	bangumi: {
-		userId: "1163581", // 在此处设置你的Bangumi用户ID
-	},
-	
 	timezone: "Asia/Shanghai",
 
 	// RSS 输出配置
@@ -97,17 +92,12 @@ export const siteConfig: SiteConfig = {
 	// 文章 URL：hash=自动生成稳定短 id；legacy=旧版「文件名去扩展名」长路径
 	postPathMode: "hash",
 
-	// OpenGraph图片功能,注意开启后要渲染很长时间，不建议本地调试的时候开启
-	generateOgImages: false,
-
 	// 页面开关配置 - 控制特定页面的访问权限，设为false会返回404
-	// bangumi的数据为编译时获取的，所以不是实时数据，请配置bangumi.userId
 	pages: {
 		// 友链页面开关
 		friends: true,
 		sponsor: false, // 赞助页面开关
 		guestbook: false, // 留言板页面开关，需要配置评论系统
-		bangumi: false, // 番组计划页面开关，含追番和游戏，dev调试时只获取一页数据，build才会获取全部数据
 		watchlist: true, // 观影清单页面开关
 	},
 

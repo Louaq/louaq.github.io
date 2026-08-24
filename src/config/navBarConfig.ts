@@ -14,12 +14,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 
 		// 归档
 		LinkPreset.Archive,
-
-		// 分类
-		//LinkPreset.Categories,
-
-		// 标签
-		//LinkPreset.Tags,
 	];
 
 	// 根据配置决定是否添加友链，在siteConfig关闭pages.friends时导航栏不显示友链
@@ -35,6 +29,10 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 根据配置决定是否添加观影清单页面
 	if (siteConfig.pages.watchlist) {
 		links.push(LinkPreset.Watchlist);
+	}
+
+	if (siteConfig.pages.sponsor) {
+		links.push(LinkPreset.Sponsor);
 	}
 
 	links.push(LinkPreset.About);
@@ -63,12 +61,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 	// 根据配置添加子菜单项
 	// if (siteConfig.pages.watchlist) {
 	// 	aboutChildren.push(LinkPreset.Watchlist);
-	// }
-	// if (siteConfig.pages.sponsor) {
-	// 	aboutChildren.push(LinkPreset.Sponsor);
-	// }
-	// if (siteConfig.pages.bangumi) {
-	// 	aboutChildren.push(LinkPreset.Bangumi);
 	// }
 
 	// links.push({
