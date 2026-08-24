@@ -1,18 +1,5 @@
 import type { HomeTopNoticeConfig, HomeTopNoticeItem } from "../types/config";
 
-/**
- * 首页顶部重要通知（主栏顶部，列表/卡片上方）
- *
- * 用法：在 items 数组中添加任意条数的通知，每条可独立设置：
- *  - title    : 通知标题（可选）
- *  - content  : 通知正文（必填，空字符串会被忽略）；可按 HTML 书写，例如
- *               '维护说明见<a href="/posts/foo/">此文</a>。' 外链请自行加 target="_blank" rel="noopener noreferrer"
- *  - icon     : Iconify 图标名，展示在标题前；例如 fa6-solid:user-shield（与 Font Awesome user-shield 对应）
- *  - link     : 末尾的跳转按钮，可选
- *
- * 如需临时关闭整块通知区域，将 enable 设为 false 即可。
- * 多条通知会自动轮播，切换间隔由 switchInterval（毫秒）控制。
- */
 export const homeTopNoticeConfig: HomeTopNoticeConfig = {
 	enable: true,
 	// 轮播间隔（毫秒），只有多条通知时才有效

@@ -14,7 +14,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文上方
 	top: {
-		enable: true,
+		enable: false,
 		items: [
 			{
 				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
@@ -83,7 +83,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文下方（版权声明之后）
 	bottom: {
-		enable: true,
+		enable: false,
 
 		// 该位置若用不同尺寸的素材，在这里单独写宽高比即可
 		// aspectRatio: "728 / 90",
@@ -220,7 +220,7 @@ export const adConfig: AdConfig = {
 	// 文章列表信息流（首页 / 分类页 / 标签页共用同一份配置）。
 	// 广告做成与文章卡同样式的原生卡片，靠右上角标区分，每隔 interval 篇插一条。
 	feed: {
-		enable: true,
+		enable: false,
 
 		// 每隔几篇文章插一条：5 表示第 5、10、15 篇之后各插一条。
 		// 广告不会成为列表的最后一项，所以每页 10 篇 + interval 5 实际是每页 1 条。
