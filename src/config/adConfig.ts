@@ -14,7 +14,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文上方
 	top: {
-		enable: false,
+		enable: true,
 		items: [
 			{
 				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
@@ -83,7 +83,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文下方（版权声明之后）
 	bottom: {
-		enable: false,
+		enable: true,
 
 		// 该位置若用不同尺寸的素材，在这里单独写宽高比即可
 		// aspectRatio: "728 / 90",
@@ -163,7 +163,7 @@ export const adConfig: AdConfig = {
 		aspectRatio: "300 / 80",
 
 		// 在侧边栏里的位置：top=固定顶部，sticky=跟随滚动
-		position: "sticky",
+		position: "top",
 
 		// 显示顺序，与 sidebarConfig.ts 里 profile(1) / announcement(2) / runtime(3) 一起排
 		order: 6,

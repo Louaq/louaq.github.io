@@ -19,7 +19,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件显示顺序（数字越小越靠前）
 			order: 1,
 			// 组件位置
-			position: "sticky",
+			position: "top",
 			// CSS 类名，用于应用样式和动画
 			class: "onload-animation",
 			// 动画延迟时间（毫秒），用于错开动画效果
@@ -33,7 +33,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件显示顺序
 			order: 2,
 			// 组件位置
-			position: "sticky",
+			position: "top",
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
@@ -47,31 +47,31 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 组件显示顺序
 			order: 3,
 			// 组件位置
-			position: "sticky",
+			position: "top",
 			// CSS 类名
 			class: "onload-animation",
 			// 动画延迟时间
 			animationDelay: 0,
 		},
-		// {
-		// 	// 组件类型：分类组件
-		// 	type: "categories",
-		// 	// 是否启用该组件
-		// 	enable: true,
-		// 	// 组件显示顺序
-		// 	order: 3,
-		// 	// 组件位置
-		// 	position: "sticky",
-		// 	// CSS 类名
-		// 	class: "onload-animation",
-		// 	// 动画延迟时间
-		// 	animationDelay: 0,
-		// 	// 响应式配置
-		// 	responsive: {
-		// 		// 折叠阈值：当分类数量超过5个时自动折叠
-		// 		collapseThreshold: 20,
-		// 	},
-		// },
+		{
+			// 组件类型：分类组件
+			type: "categories",
+			// 是否启用该组件
+			enable: true,
+			// 组件显示顺序
+			order: 3,
+			// 组件位置
+			position: "top",
+			// CSS 类名
+			class: "onload-animation",
+			// 动画延迟时间
+			animationDelay: 0,
+			// 响应式配置
+			responsive: {
+				// 折叠阈值：当分类数量超过5个时自动折叠
+				collapseThreshold: 20,
+			},
+		},
 		// {
 		// 	//组件类型：标签组件
 		// 	type: "tags",
