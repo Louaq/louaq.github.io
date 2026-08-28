@@ -45,16 +45,6 @@ export const animeItems: WatchlistItem[] = [
 		enabled: true,
 	},
 	{
-		title: "一念永恒 第三季",
-		cover: "https://pic1.imgdb.cn/item/694fc5cf161224305eb3080f.webp",
-		type: "anime",
-		status: "completed",
-		rating: 8.0,
-		startDate: "2024-07-30",
-		tags: ["喜剧", "动作", "动画", "奇幻"],
-		enabled: true,
-	},
-	{
 		title: "完美世界",
 		cover: "https://pic1.imgdb.cn/item/694fc690161224305eb30816.webp",
 		type: "anime",
@@ -371,5 +361,15 @@ export const animeItems: WatchlistItem[] = [
 		tags: ["动作", "动画", "武侠"],
 		enabled: true,
 		pinned: true
+	},	
+	{
+		title: "诛仙 第四季",
+		cover: "https://pic1.imgdb.cn/i/034ErC04N3ihrKwL7QcLxS.webp",
+		type: "anime",
+		status: "watching",
+		rating: 0,
+		startDate: "2026-08-21",
+		tags: ["动作", "动画", "奇幻"],
+		enabled: true,
 	},
 ];
