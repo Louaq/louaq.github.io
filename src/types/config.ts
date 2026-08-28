@@ -391,30 +391,6 @@ export type AdSidebarPlacement = AdPlacement & {
 	};
 };
 
-// 文章列表信息流里的单条原生广告卡：外观与文章卡一致，靠角标区分
-export type AdFeedItem = {
-	id: string; // 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
-	enable: boolean; // 是否启用该条
-	title: string; // 卡片标题
-	description?: string; // 卡片描述，最多两三行，超出截断
-	image?: string; // 卡片配图（/ 开头为 public 下的站内资源，也可填外链）；留空则不显示图片区
-	alt?: string; // 图片描述
-	link?: string; // 点击跳转地址；留空则整卡不可点击
-	external?: boolean; // 是否在新标签页打开
-	closable?: boolean; // 是否显示「关闭」按钮
-	label?: string; // 角标文案，留空则用「广告」
-	cta?: string; // 卡片底部的行动文案，留空则用「了解更多」
-	expireDate?: string; // 过期时间 (ISO 8601 格式)，过期后不再显示该条
-};
-
-// 信息流广告位：首页 / 分类页 / 标签页的文章列表共用一套配置
-export type AdFeedPlacement = {
-	enable: boolean; // 该位置是否启用
-	interval: number; // 每隔几篇文章插一条（如 4 表示第 4、8、12 篇之后各插一条）
-	maxPerPage?: number; // 单页最多插几条；0 或省略表示不限
-	items: AdFeedItem[]; // 广告条目，按顺序轮着用，用完从头循环
-};
-
 // 广告栏配置：文章详情页顶部 / 底部的横幅广告条，以及全站侧边栏广告位
 export type AdConfig = {
 	enable: boolean; // 总开关，关闭后三个位置都不渲染
@@ -422,7 +398,6 @@ export type AdConfig = {
 	top: AdPlacement; // 文章正文上方
 	bottom: AdPlacement; // 文章正文下方（版权声明之后）
 	sidebar: AdSidebarPlacement; // 左侧边栏（全站，不限文章页）
-	feed: AdFeedPlacement; // 文章列表信息流（首页 / 分类页 / 标签页）
 };
 
 // 友链配置
