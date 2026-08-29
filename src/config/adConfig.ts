@@ -198,7 +198,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: false,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "https://cdn.ping0.cc/images/ex/1894e6285bf6b324fc51887c0bd0b3ce.gif",
+				image: "https://pic1.imgdb.cn/i/034FPyLQFT74KV4cMOwIQ2.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
