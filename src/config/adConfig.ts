@@ -13,7 +13,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文上方
 	top: {
-		enable: true,
+		enable: false,
 		items: [
 			{
 				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
@@ -82,7 +82,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文下方（版权声明之后）
 	bottom: {
-		enable: true,
+		enable: false,
 
 		// 该位置若用不同尺寸的素材，在这里单独写宽高比即可
 		// aspectRatio: "728 / 90",
@@ -196,7 +196,7 @@ export const adConfig: AdConfig = {
 				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
 				id: "sidebar-2",
 				// 是否启用该条
-				enable: true,
+				enable: false,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
 				image: "https://cdn.ping0.cc/images/ex/1894e6285bf6b324fc51887c0bd0b3ce.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
