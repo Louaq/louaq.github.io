@@ -13,7 +13,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文上方
 	top: {
-		enable: false,
+		enable: true,
 		items: [
 			{
 				// 唯一标识；顶部与底部配成同一个 id 时，关掉一处另一处也一起消失
@@ -21,7 +21,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "https://cdn.ping0.cc/images/ex/8c0e97165f9193cadf2d90966867b771.gif",
+				image: "https://pic1.imgdb.cn/i/034FQFr5RDbiAbVdF8hcW1.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -41,8 +41,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image:
-					"https://cdn.ping0.cc/images/ex/2a7f7aab058744841a8c466aa7ac3229.gif",
+				image: "https://pic1.imgdb.cn/i/034FQGE2wHXXEYRCq3SghB.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -62,8 +61,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image:
-					"https://cdn.ping0.cc/images/ex/d9de6192346895b1eab7d4dd2f99d396.gif",
+				image: "https://pic1.imgdb.cn/i/034FQGqal51eVmyA4QHaCS.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -82,7 +80,7 @@ export const adConfig: AdConfig = {
 
 	// 文章正文下方（版权声明之后）
 	bottom: {
-		enable: false,
+		enable: true,
 
 		// 该位置若用不同尺寸的素材，在这里单独写宽高比即可
 		// aspectRatio: "728 / 90",
@@ -93,8 +91,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image:
-					"https://cdn.ping0.cc/images/ex/ae2c0d87898528db4825dd7af4c86d81.gif",
+				image: "https://pic1.imgdb.cn/i/034FQIgm9akNXeWogg97gw.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -114,8 +111,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image:
-					"https://cdn.ping0.cc/images/ex/189722caa53bcad8d2e7c2e0e1048d5f.gif",
+				image: "https://pic1.imgdb.cn/i/034FQJE23MJ1xb0zwSF69y.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -135,8 +131,7 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image:
-					"https://cdn.ping0.cc/images/ex/3144865ef774d6b2e32914ec4420863f.gif",
+				image: "https://pic1.imgdb.cn/i/034FQJifkC3XyLdsWSsiZm.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
@@ -196,7 +191,7 @@ export const adConfig: AdConfig = {
 				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
 				id: "sidebar-2",
 				// 是否启用该条
-				enable: false,
+				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
 				image: "https://pic1.imgdb.cn/i/034FPyLQFT74KV4cMOwIQ2.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
