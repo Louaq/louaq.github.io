@@ -15,15 +15,15 @@ let tierAHref: string | null = null;
 try {
 	const manifest = JSON.parse(
 		fs.readFileSync(
-			new URL("../../../public/font/lxgw/manifest.json", import.meta.url),
+			new URL("../../../public/font/harmony/manifest.json", import.meta.url),
 			"utf-8",
 		),
 	);
 	if (typeof manifest["tier-a"] === "string") {
-		tierAHref = `/font/lxgw/${manifest["tier-a"]}`;
+		tierAHref = `/font/harmony/${manifest["tier-a"]}`;
 	}
 } catch {
-	// public/font/lxgw 未生成（例如尚未跑 pnpm split-font）时不阻塞构建
+	// public/font/harmony 未生成（例如尚未跑 pnpm split-font）时不阻塞构建
 }
 
 // font-family 字符串

@@ -12,7 +12,7 @@
 
 # 分片字体的样式表：文件名固定不带哈希，重新切片后内容会变（指向新的哈希分片），
 # 必须允许重新校验，否则客户端会一直指向已经不存在的旧分片
-/font/lxgw/result.css
+/font/harmony/result.css
   Cache-Control: public, max-age=3600, must-revalidate
 
 # public/assets 下的图片/JS：30 天

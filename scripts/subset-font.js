@@ -3,9 +3,10 @@
  * and re-encode it as woff2. Re-run this after adding posts with new characters:
  *   pnpm subset-font
  *
- * NOTE: SRC_FONT (the full ~19MB LXGWWenKai TTF) is intentionally NOT committed —
- * only the generated subset woff2 is. Download the TTF into font-src/ before
- * running this script, otherwise it exits with "source font not found".
+ * NOTE: SRC_FONT (the full ~8MB HarmonyOS Sans SC TTF) is intentionally NOT
+ * committed — only the generated subset woff2 is. Download the TTF into
+ * font-src/ before running this script, otherwise it exits with
+ * "source font not found".
  *
  * Both live in font-src/, NOT public/ — this subset is only an intermediate fed
  * to `pnpm split-font`; the browser never fetches it. Anything under public/ is
@@ -20,11 +21,8 @@ import { fileURLToPath } from "url"
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const root = path.resolve(__dirname, "..")
 
-const SRC_FONT = path.join(
-  root,
-  "font-src/LXGWWenKai_Regular-s.p.436t2zdbdsegx.ttf",
-)
-const OUT_FONT = path.join(root, "font-src/LXGWWenKai_Regular-subset.woff2")
+const SRC_FONT = path.join(root, "font-src/HarmonyOS_Sans_SC_Regular.ttf")
+const OUT_FONT = path.join(root, "font-src/HarmonyOS_Sans_SC-subset.woff2")
 
 // Directories/extensions to scan for characters that must render in the body font.
 const SCAN_DIRS = ["src/content", "src/config", "src/i18n", "src/components", "src/layouts", "src/pages"]
