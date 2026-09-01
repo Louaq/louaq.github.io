@@ -88,8 +88,6 @@ enum I18nKey {
 	rssBenefit3 = "rssBenefit3",
 	rssBenefit4 = "rssBenefit4",
 	rssHowToUse = "rssHowToUse",
-	rssCopied = "rssCopied",
-	rssCopyFailed = "rssCopyFailed",
 
 	//最后编辑时间卡片
 	lastModifiedPrefix = "lastModifiedPrefix",
@@ -139,6 +137,11 @@ enum I18nKey {
 	// 页脚访客计数
 	visitorSitePv = "visitorSitePv",
 	visitorSiteUv = "visitorSiteUv",
+
+	// 站点地图
+	sitemap = "sitemap",
+	sitemapDescription = "sitemapDescription",
+	sitemapPages = "sitemapPages",
 
 	// 代码块折叠
 	codeCollapsibleShowMore = "codeCollapsibleShowMore",

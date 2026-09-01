@@ -87,8 +87,6 @@ export const zh_CN: Translation = {
 	[Key.rssBenefit3]: "避免错过重要更新和文章",
 	[Key.rssBenefit4]: "享受无广告的纯净阅读体验",
 	[Key.rssHowToUse]: "推荐使用 Feedly、Inoreader 或其他 RSS 阅读器来订阅本站。",
-	[Key.rssCopied]: "RSS 链接已复制到剪贴板！",
-	[Key.rssCopyFailed]: "复制失败，请手动复制链接",
 
 	//最后编辑时间卡片
 	[Key.lastModifiedPrefix]: "最后更新于 ",
@@ -142,6 +140,11 @@ export const zh_CN: Translation = {
 	// 页脚访客计数
 	[Key.visitorSitePv]: "总访问量",
 	[Key.visitorSiteUv]: "总访客数",
+
+	// 站点地图
+	[Key.sitemap]: "站点地图",
+	[Key.sitemapDescription]: "全站页面、分类、标签与文章索引",
+	[Key.sitemapPages]: "页面",
 
 	// 代码块折叠配置
 	[Key.codeCollapsibleShowMore]: "展开更多",
