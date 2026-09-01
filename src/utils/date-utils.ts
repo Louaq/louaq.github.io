@@ -4,57 +4,17 @@ export function formatDateToYYYYMMDD(date: Date): string {
 	return date.toISOString().substring(0, 10);
 }
 
-// 国际化日期格式化函数
-function formatDateI18n(
-	dateInput: Date | string,
-	includeTime?: boolean,
-): string {
+/** 本地化的完整日期时间（含时分秒），目前用于 RSS 的 lastBuildDate */
+export function formatDateI18nWithTime(dateInput: Date | string): string {
 	const date = typeof dateInput === "string" ? new Date(dateInput) : dateInput;
-	const lang = siteConfig.lang || "en";
-
-	// 根据语言设置不同的日期格式
-	const options: Intl.DateTimeFormatOptions = {
+	// 配置里的 zh_CN 形式转成 BCP 47 的 zh-CN；timeZone 为 undefined 时 Intl 用系统时区
+	return date.toLocaleString(siteConfig.lang.replace("_", "-"), {
 		year: "numeric",
 		month: "long",
 		day: "numeric",
-	};
-
-	if (includeTime) {
-		options.hour = "2-digit";
-		options.minute = "2-digit";
-		options.second = "2-digit";
-	}
-
-	// 如果配置了时区，则将其用于格式化（IANA 时区字符串）
-	if (siteConfig.timezone) {
-		(options as Intl.DateTimeFormatOptions).timeZone = siteConfig.timezone;
-	}
-
-	// 语言代码映射
-	const localeMap: Record<string, string> = {
-		zh_CN: "zh-CN",
-		zh_TW: "zh-TW",
-		en: "en-US",
-		ja: "ja-JP",
-		ko: "ko-KR",
-		es: "es-ES",
-		th: "th-TH",
-		vi: "vi-VN",
-		tr: "tr-TR",
-		id: "id-ID",
-		fr: "fr-FR",
-		de: "de-DE",
-		ru: "ru-RU",
-		ar: "ar-SA",
-	};
-
-	const locale = localeMap[lang] || "en-US";
-	return includeTime
-		? date.toLocaleString(locale, options)
-		: date.toLocaleDateString(locale, options);
-}
-
-// 国际化日期时间格式化函数（带时分秒）
-export function formatDateI18nWithTime(dateInput: Date | string): string {
-	return formatDateI18n(dateInput, true);
+		hour: "2-digit",
+		minute: "2-digit",
+		second: "2-digit",
+		timeZone: siteConfig.timezone,
+	});
 }

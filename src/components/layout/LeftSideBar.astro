@@ -8,7 +8,10 @@ import SiteRuntime from "@/components/widget/SiteRuntime.astro";
 import SiteStats from "@/components/widget/SiteStats.astro";
 import Tags from "@/components/widget/Tags.astro";
 import type { WidgetComponentConfig } from "@/types/config";
-import { widgetManager } from "@/utils/widget-manager";
+import {
+	getComponentStyle,
+	getComponentsByPosition,
+} from "@/utils/widget-manager";
 
 interface Props {
 	class?: string;
@@ -17,12 +20,8 @@ interface Props {
 
 const { class: className, headings: _headings } = Astro.props;
 
-// 获取左侧边栏的组件列表
-const topComponents = widgetManager.getComponentsByPosition("top", "left");
-const stickyComponents = widgetManager.getComponentsByPosition(
-	"sticky",
-	"left",
-);
+const topComponents = getComponentsByPosition("top");
+const stickyComponents = getComponentsByPosition("sticky");
 
 // 组件映射表
 const componentMap = {
@@ -45,18 +44,11 @@ function renderComponent(
 		componentMap[component.type as keyof typeof componentMap];
 	if (!ComponentToRender) return null;
 
-	const componentClass = widgetManager.getComponentClass(
-		component,
-		"left",
-		index,
-	);
-	const componentStyle = widgetManager.getComponentStyle(component, index);
-
 	return {
 		Component: ComponentToRender,
 		props: {
-			class: componentClass,
-			style: componentStyle,
+			class: component.class ?? "",
+			style: getComponentStyle(component, index),
 			headings: undefined,
 			...component.customProps,
 		},

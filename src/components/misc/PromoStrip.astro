@@ -20,7 +20,7 @@ if (items.length === 0) {
 
 const aspectRatio = getAdAspectRatio(placement);
 
-// 侧边栏的入场动画延迟由 widgetManager 以内联 style 传进来，拼在宽高比变量后面
+// 侧边栏的入场动画延迟由 widget-manager 以内联 style 传进来，拼在宽高比变量后面
 const rootStyle = [`--promo-aspect: ${aspectRatio}`, style]
 	.filter(Boolean)
 	.join("; ");

@@ -16,16 +16,6 @@
  * 记住的尺寸依赖布局宽度，故视口宽度变化后需重新预热（窄→宽换行数不同）。
  */
 
-const idleSchedule: (cb: () => void) => number =
-	typeof requestIdleCallback === "function"
-		? (cb) => requestIdleCallback(cb)
-		: (cb) => window.setTimeout(cb, 200);
-
-const idleCancel: (handle: number) => void =
-	typeof cancelIdleCallback === "function"
-		? (handle) => cancelIdleCallback(handle)
-		: (handle) => clearTimeout(handle);
-
 let pendingIdle: number | null = null;
 let resizeListenerBound = false;
 let resizeTimeout: number | null = null;
@@ -59,9 +49,9 @@ function renderOnceToRememberSizes(blocks: HTMLElement[]): void {
 
 function scheduleWarmup(): void {
 	if (pendingIdle !== null) {
-		idleCancel(pendingIdle);
+		cancelIdleCallback(pendingIdle);
 	}
-	pendingIdle = idleSchedule(() => {
+	pendingIdle = requestIdleCallback(() => {
 		pendingIdle = null;
 		// 等 web 字体就绪后再量：字体换用会改变换行数与块高，
 		// 提前记住的尺寸会作废

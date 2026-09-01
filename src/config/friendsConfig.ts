@@ -34,7 +34,7 @@ export const friendsPageConfig: FriendsPageConfig = {
 	randomizeSort: false,
 };
 
-export const friendGroups: FriendGroup[] = [
+const friendGroups: FriendGroup[] = [
 	{
 		name: "全站置顶",
 		layout: "default",

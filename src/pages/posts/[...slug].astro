@@ -13,8 +13,6 @@ import {
 	getResolvedPostPath,
 } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
-import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
 import CoverImage from "@/components/common/CoverImage.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
 import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
@@ -56,23 +54,16 @@ const { Content, headings, remarkPluginFrontmatter } = await render(entry);
 
 const processedImage = entry.data.image;
 
-dayjs.extend(utc);
-
-const lastModified = dayjs(entry.data.updated || entry.data.published);
-const now = dayjs();
-const daysDiff = now.diff(lastModified, "day");
+const lastModified = new Date(entry.data.updated || entry.data.published);
+const daysDiff = Math.floor((Date.now() - lastModified.getTime()) / 86400000);
 const outdatedThreshold = siteConfig.outdatedThreshold ?? 1;
 const shouldShowOutdatedNotice =
 	siteConfig.showLastModified && daysDiff >= outdatedThreshold;
-const lastModifiedDateStr = lastModified.format("YYYY-MM-DD");
-const commaBeforeDays = siteConfig.lang.startsWith("zh")
-	? "，"
-	: siteConfig.lang === "ja"
-		? "、"
-		: ", ";
+// sv-SE 的本地化日期格式恰好就是 YYYY-MM-DD，且走构建机本地时区
+const lastModifiedDateStr = lastModified.toLocaleDateString("sv-SE");
 const lastModifiedMain = `${i18n(I18nKey.lastModifiedPrefix)}${lastModifiedDateStr}${
 	daysDiff >= 1
-		? `${commaBeforeDays}${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
+		? `，${i18n(I18nKey.lastModifiedDaysAgo).replace("{days}", daysDiff.toString())}`
 		: ""
 }`;
 const staleNoticeBody = `${lastModifiedMain}${i18n(I18nKey.lastModifiedNoticeJoiner)}${i18n(I18nKey.lastModifiedOutdated)}`;

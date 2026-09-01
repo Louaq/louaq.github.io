@@ -301,7 +301,6 @@ export type WidgetComponentType =
 	| "announcement"
 	| "categories"
 	| "tags"
-	| "sidebarToc"
 	| "advertisement"
 	| "stats"
 	| "runtime";
@@ -337,8 +336,7 @@ export type MobileBottomComponentConfig = {
 
 export type SidebarLayoutConfig = {
 	enable: boolean; // 是否启用侧边栏
-	leftComponents: WidgetComponentConfig[]; // 左侧边栏组件配置列表
-	rightComponents: WidgetComponentConfig[]; // 右侧边栏组件配置列表
+	components: WidgetComponentConfig[]; // 侧边栏组件配置列表
 	mobileBottomComponents?: MobileBottomComponentConfig[]; // 移动端底部组件配置列表（<768px 显示）
 	defaultAnimation?: {
 		enable: boolean; // 是否启用默认动画
@@ -379,7 +377,7 @@ export type AdPlacement = {
 };
 
 // 侧边栏广告位：除条目外还要描述在侧边栏里的位置，这些字段原本在 sidebarConfig.ts
-// 的组件列表里，现在统一收进 adConfig.ts，由 widgetManager 读取后注入左侧边栏
+// 的组件列表里，现在统一收进 adConfig.ts，由 widget-manager 读取后注入侧边栏
 export type AdSidebarPlacement = AdPlacement & {
 	position: "top" | "sticky"; // top=固定在顶部，sticky=粘性定位（跟随滚动）
 	order?: number; // 显示顺序，与 sidebarConfig.ts 里其他组件的 order 一起排序

@@ -22,22 +22,27 @@ const { headings: _headings = [], class: className, style } = Astro.props;
   </WidgetLayout>
 </div>
 
-<style lang="stylus">
+<style>
 /* 与右侧栏目录一致：视口宽度 <1200px 时改用悬浮目录 */
-.post-page-toc-wrap
-	display: none
-	@media (min-width: 1200px)
-		display: block
+.post-page-toc-wrap {
+	display: none;
+	@media (min-width: 1200px) {
+		display: block;
+	}
+}
 
 /* 去掉 WidgetLayout 默认的 px-4 / pt-4 / pb-4 内边距，让目录条目更贴近卡片边缘 */
-.post-page-toc-wrap :global(widget-layout)
-	display: block
-	padding-bottom: 0
-.post-page-toc-wrap :global(widget-layout > .collapse-wrapper)
-	padding: 0
-	border-radius: inherit
+.post-page-toc-wrap :global(widget-layout) {
+	display: block;
+	padding-bottom: 0;
+}
+.post-page-toc-wrap :global(widget-layout > .collapse-wrapper) {
+	padding: 0;
+	border-radius: inherit;
+}
 
-.post-page-toc-wrap .toc-scroll-container
-	max-height: calc(100vh - 20rem)
+.post-page-toc-wrap .toc-scroll-container {
+	max-height: calc(100vh - 20rem);
+}
 </style>
 

@@ -7,7 +7,7 @@ import FloatingControls from "@/components/controls/FloatingControls.astro";
 import IconifyLoader from "@/components/misc/IconifyLoader.astro";
 import { siteConfig } from "@/config";
 import { isHomePage } from "@/utils/layout-utils";
-import { getResponsiveSidebarConfig } from "@/utils/responsive-utils";
+import { showSidebarOnMobile } from "@/utils/widget-manager";
 import Layout from "./Layout.astro";
 
 interface Props {
@@ -41,9 +41,6 @@ const PostPageTOC = isPostPageCheck
 	? (await import("@components/layout/PostPageTOC.astro")).default
 	: null;
 
-
-const sidebarConfig = getResponsiveSidebarConfig();
-
 const gridCols = isSingleColumnLayout
 	? "grid-cols-1"
 	: "grid-cols-1 md:grid-cols-[17rem_1fr]";
@@ -71,7 +68,7 @@ const mainPanelTop = "5.5rem";
 <div class="absolute w-full z-30 pointer-events-none no-banner-layout" style={`top: ${mainPanelTop}`}>
     <!-- The pointer-events-none here prevent blocking the click event of the TOC -->
     <div class="relative max-w-(--page-width) mx-auto pointer-events-auto">
-        <div id="main-grid" class={`w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!sidebarConfig.mobileShowSidebar ? 'mobile-no-sidebar' : ''}`}
+        <div id="main-grid" class={`w-full left-0 right-0 grid ${gridCols} grid-rows-[auto_1fr_auto] lg:grid-rows-[auto] mx-auto gap-4 px-2 md:px-4 ${!showSidebarOnMobile ? 'mobile-no-sidebar' : ''}`}
         >
 
             <div id="left-sidebar-wrapper" class="contents">

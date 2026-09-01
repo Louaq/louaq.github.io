@@ -4,9 +4,7 @@ import type { Translation } from "../translation";
 export const zh_CN: Translation = {
 	[Key.home]: "主页",
 	[Key.about]: "关于",
-	[Key.aboutDescription]: "关于我，以及这个博客记录的一切",
 	[Key.archive]: "归档",
-	[Key.archiveDescription]: "按时间回溯，翻阅写下的每一篇文章",
 	[Key.search]: "搜索",
 	[Key.searchBy]: "Search by",
 	[Key.searchKbdSelect]: "选择",
@@ -52,7 +50,6 @@ export const zh_CN: Translation = {
 	[Key.watchlistSubtitle]: "记录最近观看的动漫与影视作品",
 	[Key.watchlistEmpty]: "暂无观影记录",
 	[Key.watchlistEmptyReason]: "还没有添加任何观影记录，快去配置文件中添加吧",
-	[Key.watchlistLastUpdated]: "最后更新于",
 	[Key.watchlistCategoryAnime]: "动漫",
 	[Key.watchlistCategoryMovie]: "电影",
 	[Key.watchlistCategoryTV]: "电视剧",

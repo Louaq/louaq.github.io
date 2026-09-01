@@ -2,7 +2,6 @@
 import type { MarkdownHeading } from "astro";
 import { Icon } from "astro-icon/components";
 import FloatingButton from "@/components/common/FloatingButton.astro";
-import { sidebarLayoutConfig } from "@/config/sidebarConfig";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import "@/styles/toc.css";
@@ -12,16 +11,10 @@ interface Props {
 }
 
 let { headings: _ = [] } = Astro.props;
-// ... (保留之前的逻辑)
-// 检查侧边栏目录组件是否启用
-const sidebarTocComponent = sidebarLayoutConfig.rightComponents?.find(
-	(c) => c.type === "sidebarToc",
-);
-const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
 ---
 
 <!-- 悬浮TOC按钮 -->
-<div id="floating-toc-wrapper" class="floating-toc-wrapper" data-is-sidebar-toc-enabled={String(isSidebarTocEnabled)}>
+<div id="floating-toc-wrapper" class="floating-toc-wrapper">
   <FloatingButton
     id="floating-toc-btn"
     icon="material-symbols:format-list-bulleted"
@@ -66,61 +59,67 @@ const isSidebarTocEnabled = sidebarTocComponent?.enable ?? false;
   </div>
 </div>
 
-<style lang="stylus">
-.floating-toc-wrapper
-	position: relative
-	z-index: 999
-	overflow: visible
+<style>
+.floating-toc-wrapper {
+	position: relative;
+	z-index: 999;
+	overflow: visible;
+}
 
-.floating-toc-panel
-	position: absolute
-	bottom: calc(100% + 1rem)
-	right: 0
-	transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease
-	transform: translateY(20px)
-	opacity: 0
-	pointer-events: none
-	overflow: hidden
-	box-sizing: border-box
-	z-index: 1001
-	background-color: var(--card-bg)
-	
-	&.show
-		transform: translateY(0)
-		opacity: 1
-		pointer-events: auto
-		
-	&.hide
-		transform: translateY(20px)
-		opacity: 0
-		pointer-events: none
-		visibility: hidden
-		
-.toc-scroll-container
-	max-height: calc(24rem - 5rem)
-	
-	@media (max-width: 768px)
-		max-height: calc(24rem - 5rem)
+.floating-toc-panel {
+	position: absolute;
+	bottom: calc(100% + 1rem);
+	right: 0;
+	transition: transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+	transform: translateY(20px);
+	opacity: 0;
+	pointer-events: none;
+	overflow: hidden;
+	box-sizing: border-box;
+	z-index: 1001;
+	background-color: var(--card-bg);
+
+	&.show {
+		transform: translateY(0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	&.hide {
+		transform: translateY(20px);
+		opacity: 0;
+		pointer-events: none;
+		visibility: hidden;
+	}
+}
+
+.toc-scroll-container {
+	max-height: calc(24rem - 5rem);
+}
 
 /* 移动端隐藏活动指示器 */
-@media (max-width: 768px)
-	#floating-active-indicator
-		display: none
+@media (max-width: 768px) {
+	#floating-active-indicator {
+		display: none;
+	}
+}
 
 /* 响应式调整 - 仅保留 Panel 尺寸调整 */
-@media (max-width: 1024px)
-	.floating-toc-panel
-		width: calc(100vw - 2rem)
-		max-width: 20rem
-		max-height: 20rem
+@media (max-width: 1024px) {
+	.floating-toc-panel {
+		width: calc(100vw - 2rem);
+		max-width: 20rem;
+		max-height: 20rem;
+	}
+}
 
-@media (max-width: 768px)
-	.floating-toc-panel
-		width: calc(100vw - 1.5rem)
-		max-width: 20rem
-		max-height: 28rem
-		bottom: calc(100% + 1rem)
-
+@media (max-width: 768px) {
+	.floating-toc-panel {
+		width: calc(100vw - 1.5rem);
+		max-width: 20rem;
+		max-height: 28rem;
+	}
+}
 </style>
 
 <script>

@@ -8,9 +8,9 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 	// 是否启用侧边栏功能
 	enable: true,
 
-	// 左侧边栏组件配置列表
+	// 侧边栏组件配置列表
 	// 组件位置position：top=顶部，sticky=粘性定位(会跟随页面滚动)
-	leftComponents: [
+	components: [
 		{
 			// 组件类型：用户资料组件
 			type: "profile",
@@ -92,9 +92,6 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 		// 	},
 		// },
 	],
-
-	// 右侧边栏组件配置列表（已禁用：使用单侧栏布局）
-	rightComponents: [],
 
 	// 默认动画配置
 	defaultAnimation: {
