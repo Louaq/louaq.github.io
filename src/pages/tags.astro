@@ -34,39 +34,37 @@ function pastelChipClass(tagName: string): string {
 }
 ---
 
-<MainGridLayout title={i18n(I18nKey.tags)} description={i18n(I18nKey.tags)}>
-	<div class="flex w-full rounded-(--radius-large) overflow-hidden relative">
-		<div class="card-base z-10 px-6 md:px-9 py-6 md:py-8 relative w-full">
-			{tags.length === 0 ? (
-				<p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
-			) : (
-				<ul class="tags-page-cloud flex flex-wrap gap-2.5 md:gap-3 list-none m-0 p-0">
-					{sortedTags.map((tag) => {
-						const name = tag.name.trim();
-						return (
-							<li class="m-0 p-0">
-								<a
-									href={getTagUrl(tag.name)}
-									class:list={[
-										"tags-page-chip group inline-flex items-center gap-1.5 rounded-sm px-3 py-1 text-sm no-underline",
-										"transition-[filter,background-color] duration-150 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--primary)",
-										pastelChipClass(name),
-									]}
-								>
-									<Icon
-										name="material-symbols:tag-rounded"
-										class="shrink-0 text-[1rem] text-current opacity-85"
-										aria-hidden="true"
-									/>
-									<span class="font-normal tabular-nums leading-none">
-										{name}({tag.count})
-									</span>
-								</a>
-							</li>
-						);
-					})}
-				</ul>
-			)}
-		</div>
+<MainGridLayout title={i18n(I18nKey.tags)} description={i18n(I18nKey.tags)} hideSidebar wideContent>
+	<div class="card-base card-plain px-8 py-6">
+		{tags.length === 0 ? (
+			<p class="text-black/50 dark:text-white/50">{i18n(I18nKey.noTags)}</p>
+		) : (
+			<ul class="tags-page-cloud flex flex-wrap gap-2.5 md:gap-3 list-none m-0 p-0">
+				{sortedTags.map((tag) => {
+					const name = tag.name.trim();
+					return (
+						<li class="m-0 p-0">
+							<a
+								href={getTagUrl(tag.name)}
+								class:list={[
+									"tags-page-chip group inline-flex items-center gap-1.5 rounded-sm px-3 py-1 text-sm no-underline",
+									"transition-[filter,background-color] duration-150 focus-visible:outline-solid focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--primary)",
+									pastelChipClass(name),
+								]}
+							>
+								<Icon
+									name="material-symbols:tag-rounded"
+									class="shrink-0 text-[1rem] text-current opacity-85"
+									aria-hidden="true"
+								/>
+								<span class="font-normal tabular-nums leading-none">
+									{name}({tag.count})
+								</span>
+							</a>
+						</li>
+					);
+				})}
+			</ul>
+		)}
 	</div>
 </MainGridLayout>

@@ -1,6 +1,7 @@
 ---
 title: CCF会议近期截稿汇总
 published: 2026-08-12 17:57:00
+updated: 2026-09-03 12:57:00
 description: "整理 CCFDDL 中人工智能、计算机图形学与多媒体、交叉/综合/新兴三个类别近期即将截稿的 CCF 会议。"
 category: 学术会议
 tags: [CCF]
