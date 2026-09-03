@@ -9,28 +9,10 @@ homeCarousel: true
 homeCarouselOrder: 2
 ---
 
-## 临近截稿提醒
-
-> [!warning] MMAsia 2026 —— 还有 3 天截止
-> 截稿：2026-08-15 19:59（北京时间）· CCF C · Regular Paper · VinUniversity, Hanoi, Vietnam · [官网](https://www.mmasia2026.org/)
-
-> [!warning] BigData 2026 —— 还有 10 天截止
-> 截稿：2026-08-22 19:59（北京时间）· CCF C · Phoenix, Arizona, USA · [官网](https://bigdataieee.org/BigData2026/)
-
-> [!warning] 3DV 2027 —— 还有 17 天截止
-> 截稿：2026-08-29 02:00（北京时间）· CCF C · Thessaloniki, Greece · [官网](https://3dvconf.github.io/2027/)
-
-> [!warning] IEEE VR 2027 —— 还有 20 天截止
-> 截稿：2026-09-01 19:59（北京时间）· CCF A · Melbourne, Australia · [官网](https://ieeevr.org/2027/)
-
 ## 按截稿时间排序
 
 | 北京时间截稿 | 会议 | CCF | 年份 | 地点 | 备注 | 官网 |
 | ---------------- | ------- | --- | ---- | ------- | ---- | ------------------------------------------------- |
-| 2026-08-15 19:59 | MMAsia | C | 2026 | VinUniversity, Hanoi, Vietnam | Regular Paper（Special Session 2026-08-22） | [link](https://www.mmasia2026.org/) |
-| 2026-08-22 19:59 | BigData | C | 2026 | Phoenix, Arizona, USA | | [link](https://bigdataieee.org/BigData2026/) |
-| 2026-08-29 02:00 | 3DV | C | 2027 | Thessaloniki, Greece | | [link](https://3dvconf.github.io/2027/) |
-| 2026-09-01 19:59 | IEEE VR | A | 2027 | Melbourne, Australia | 摘要截止 2026-08-25 19:59 | [link](https://ieeevr.org/2027/) |
 | 2026-09-16 14:59 | ICRA | B | 2027 | Seoul, Republic of Korea | | [link](https://2027.ieee-icra.org/) |
 | 2026-09-17 19:59 | ICASSP | B | 2027 | Toronto, Canada | | [link](https://2027.ieeeicassp.org/) |
 | 2026-09-26 19:59 | ICLR | A | 2027 | San Francisco, CA, USA | 摘要截止 2026-09-19 19:59 | [link](https://iclr.cc/Conferences/2027) |
@@ -61,10 +43,6 @@ homeCarouselOrder: 2
 
 | 截稿 | 会议 | CCF | 地点 |
 | --- | --- | --- | --- |
-| 2026-08-15 19:59 | MMAsia 2026 | C | VinUniversity, Hanoi, Vietnam |
-| 2026-08-17 19:59 | MMM 2027 | C | Siem Reap, Cambodia |
-| 2026-08-29 02:00 | 3DV 2027 | C | Thessaloniki, Greece |
-| 2026-09-01 19:59 | IEEE VR 2027 | A | Melbourne, Australia |
 | 2026-09-17 19:59 | ICASSP 2027 | B | Toronto, Canada |
 | 2026-10-02 07:59 | Eurographics 2027 | B | Lucca, Italy |
 | 2026-10-03 14:59 | DCC 2027 | B | Snowbird, Utah, USA |
@@ -73,7 +51,6 @@ homeCarouselOrder: 2
 
 | 截稿 | 会议 | CCF | 地点 |
 | --- | --- | --- | --- |
-| 2026-08-22 19:59 | BigData 2026 | C | Phoenix, Arizona, USA |
 | 2026-10-19 19:59 | WWW 2027 | A | Dublin, Ireland |
 
 ## 已过截稿（历史记录）
