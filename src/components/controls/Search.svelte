@@ -747,10 +747,6 @@ onDestroy(() => {
 		color: #60a5fa;
 	}
 
-	.DocSearch-Search-Icon {
-		display: block;
-	}
-
 	/* 搜索触发按钮：仅图标 + 悬浮放大，参考 Ruyu-Blog 的搜索入口实现
 	   注意：display 由 Tailwind 的 hidden/flex/lg:* 工具类控制，此处不设 display，
 	   避免 Svelte 作用域样式的属性选择器特异性高于单类 .hidden 而覆盖响应式显隐 */
@@ -1030,10 +1026,6 @@ onDestroy(() => {
 		max-width: 6.875rem;
 		object-fit: contain;
 		object-position: left center;
-	}
-	.docsearch-modal-footer-search-mark {
-		height: 1rem;
-		max-width: 5rem;
 	}
 	.docsearch-modal-footer-logo-dark {
 		display: none;
