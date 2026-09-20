@@ -177,6 +177,23 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
           <circle cx="46" cy="58" r="3" style="fill: var(--primary)" />
           <circle cx="46" cy="58" r="1.5" class="fill-white dark:fill-neutral-800" />
         </svg>
+
+        <!-- 同步定位指针：module 脚本是 defer 的，不抢在首次绘制前跑会看到 12 点跳到当前时刻 -->
+        <script is:inline>
+          (() => {
+            const svg = document.currentScript.previousElementSibling;
+            const now = new Date();
+            const s = now.getSeconds();
+            const m = now.getMinutes();
+            const h = now.getHours() % 12;
+            const angles = { hour: h * 30 + m * 0.5, minute: m * 6 + s * 0.1, second: s * 6 };
+            for (const hand in angles) {
+              svg
+                .querySelector(`[data-hand="${hand}"]`)
+                .setAttribute("transform", `rotate(${angles[hand]}, 46, 58)`);
+            }
+          })();
+        </script>
       </div>
 
       <div class="flex items-baseline gap-1">
@@ -271,7 +288,6 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
 <script>
   const CLOCK_TICK = 1000;
   const RUNTIME_TICK = 60_000;
-  const COUNT_UP_DURATION = 1800;
 
   // swup 只替换 DOM，不会清空 <script> 的旧作用域；每次局部刷新都会
   // 重新执行这段脚本，因此定时器 ID 和「是否已绑定监听器」都必须挂在
@@ -280,7 +296,6 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     clockTimer?: number;
     runtimeTimer?: number;
     listenerAdded?: boolean;
-    started?: boolean;
     observer?: IntersectionObserver;
     isVisible?: boolean;
   }
@@ -314,31 +329,7 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     };
   }
 
-  /** 数字滚动动画（easeOut），reduce-motion 下直接落值 */
-  function countUp(el: HTMLElement, to: number) {
-    const from = Number(el.dataset.value ?? 0);
-    el.dataset.value = String(to);
-
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    if (reduceMotion || from === to) {
-      el.textContent = String(to);
-      return;
-    }
-
-    const startTime = performance.now();
-    const step = (now: number) => {
-      const progress = Math.min((now - startTime) / COUNT_UP_DURATION, 1);
-      const eased = 1 - (1 - progress) ** 3;
-      el.textContent = String(Math.round(from + (to - from) * eased));
-      if (progress < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  }
-
-  function updateRuntime(root: HTMLElement, animate: boolean) {
+  function updateRuntime(root: HTMLElement) {
     const startDate = new Date(root.dataset.startDate || "");
     if (Number.isNaN(startDate.getTime())) return;
 
@@ -347,11 +338,7 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     for (const key of ["totalDays", "years", "months", "days"] as const) {
       const el = root.querySelector<HTMLElement>(`[data-runtime="${key}"]`);
       if (!el) continue;
-      if (animate) {
-        // 从 0 开始滚动到目标值
-        el.dataset.value = "0";
-        countUp(el, result[key]);
-      } else if (Number(el.dataset.value) !== result[key]) {
+      if (Number(el.dataset.value) !== result[key]) {
         el.dataset.value = String(result[key]);
         el.textContent = String(result[key]);
       }
@@ -386,7 +373,7 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
   function startSiteRuntimeTimers(root: HTMLElement) {
     stopSiteRuntimeTimers();
     updateClock(root);
-    updateRuntime(root, false);
+    updateRuntime(root);
 
     state.clockTimer = window.setInterval(() => {
       const current = document.querySelector<HTMLElement>(".site-runtime");
@@ -395,7 +382,7 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
 
     state.runtimeTimer = window.setInterval(() => {
       const current = document.querySelector<HTMLElement>(".site-runtime");
-      if (current) updateRuntime(current, false);
+      if (current) updateRuntime(current);
     }, RUNTIME_TICK);
   }
 
@@ -415,13 +402,8 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     const root = document.querySelector<HTMLElement>(".site-runtime");
     if (!root) return;
 
-    // 只有整站真正首次加载才做 0 -> 目标值的滚动动画；
-    // swup 局部刷新（切页/进出文章）时静默更新，避免数字反复归零重建。
-    const isFirstRun = !state.started;
-    state.started = true;
-
     updateClock(root);
-    updateRuntime(root, isFirstRun);
+    updateRuntime(root);
 
     if ("IntersectionObserver" in window) {
       state.isVisible = false;
