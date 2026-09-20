@@ -39,7 +39,7 @@ export const siteConfig: SiteConfig = {
 
 	favicon: [
 		{
-			src: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png", 
+			src: "https://pic1.imgdb.cn/item/691c65bb3203f7be0013b576.png",
 			theme: "light",
 			sizes: "32x32",
 		},

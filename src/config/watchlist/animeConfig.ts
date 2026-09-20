@@ -145,7 +145,7 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2023-07-26",
 		tags: ["动作", "动画", "奇幻", "武侠"],
 		enabled: true,
-		pinned: true
+		pinned: true,
 	},
 	{
 		title: "紫川 第二季",
@@ -338,7 +338,7 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2025-05-23",
 		tags: ["动作", "动画", "奇幻"],
 		enabled: true,
-		pinned: true
+		pinned: true,
 	},
 	{
 		title: "画江湖之不良人7",
@@ -349,7 +349,7 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2025-03-27",
 		tags: ["动作", "动画", "武侠"],
 		enabled: true,
-		pinned: true
+		pinned: true,
 	},
 	{
 		title: "画江湖之不良人6",
@@ -360,8 +360,8 @@ export const animeItems: WatchlistItem[] = [
 		startDate: "2023-03-02",
 		tags: ["动作", "动画", "武侠"],
 		enabled: true,
-		pinned: true
-	},	
+		pinned: true,
+	},
 	{
 		title: "诛仙 第四季",
 		cover: "https://pic1.imgdb.cn/i/034ErC04N3ihrKwL7QcLxS.webp",

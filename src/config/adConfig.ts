@@ -1,8 +1,4 @@
-import type {
-	AdConfig,
-	AdItem,
-	AdPlacementName,
-} from "../types/config";
+import type { AdConfig, AdItem, AdPlacementName } from "../types/config";
 
 export const adConfig: AdConfig = {
 	// 总开关：关闭后三个位置都不渲染
