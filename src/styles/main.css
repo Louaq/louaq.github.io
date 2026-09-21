@@ -1072,6 +1072,16 @@ widget-layout .widget-title::before {
   margin-top: 0.5rem !important;
 }
 
+/* 去掉 tailwind typography 给 blockquote 加的弯引号和斜体 */
+.custom-md blockquote p:first-of-type::before,
+.custom-md blockquote p:last-of-type::after {
+  content: none;
+}
+
+.custom-md blockquote p {
+  font-style: normal;
+}
+
 :root.dark .custom-md blockquote {
   background: color-mix(in oklch, var(--primary) 12%, #111827) !important;
   color: rgba(255, 255, 255, 0.75);
