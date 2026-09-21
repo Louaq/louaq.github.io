@@ -1,18 +1,21 @@
 ---
 title: 学术提示词
 published: 2026-09-21 14:04:00
-updated: 2026-10-01 23:59:00
 description: "整理部分学术prompt"
 category: prompt
 tags: [科研作图,润色]
 pinned: true
 ---
 
-> 润色相关的prompt来自[awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing),感谢[Leey21](https://github.com/Leey21)的贡献🤗🤗
+
+
+> 润色相关的prompt来自[awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing)，感谢[Leey21](https://github.com/Leey21)的贡献🤗🤗
 
 ## 画图
+> 建议使用codex的work模式（GPT-6 Astra）+[Sivia](https://github.com/exsinger-hub/Sivia)，Sivia是一个科学绘图插件，可以直接得出可编辑的PPT文件，一般先使用image-2生成对应的插图，再使用codex得到可编辑的PPT文件，示例图片如下：
 
-> 建议使用codex的work模式（GPT-6 Astra）+[Sivia](https://github.com/exsinger-hub/Sivia), Sivia是一个科学绘图插件，可以直接得出可编辑的PPT文件，一般先使用image-2生成对应的插图，再使用codex得到可编辑的PPT文件，示例图片如下：
+
+
 ![参考图片](https://pic1.imgdb.cn/i/034SW925FUigKYCKBmxpZ1.png)
 
 ```txt
