@@ -40,7 +40,7 @@ const isHomePageCheck = isHomePage(Astro.url.pathname);
 
 // defines global css variables
 // why doing this in Layout instead of GlobalStyles: https://github.com/withastro/astro/issues/6728#issuecomment-1502203757
-const configHue = siteConfig.themeColor.hue;
+const themeColor = siteConfig.themeColor.color;
 
 
 const pageType = isHomePageCheck ? "home" : postSlug ? "post" : "page";
@@ -137,7 +137,7 @@ const collapsiblePreviewLines =
       is:inline
       define:vars={{
         PAGE_WIDTH,
-        configHue,
+        themeColor,
         defaultMode: siteConfig.themeColor.defaultMode ?? "light",
         darkTheme: expressiveCodeConfig.darkTheme,
         lightTheme: expressiveCodeConfig.lightTheme,
@@ -167,13 +167,12 @@ const collapsiblePreviewLines =
       document.documentElement.dataset.expressiveDarkTheme = darkTheme;
       document.documentElement.dataset.expressiveLightTheme = lightTheme;
 
-      // 主题色相由 siteConfig.themeColor.hue 固定，不再有访客侧选择器
-      document.documentElement.style.setProperty("--hue", String(configHue));
+      // 主题色由 siteConfig.themeColor.color 固定，不再有访客侧选择器
+      document.documentElement.style.setProperty("--theme-color", themeColor);
 
     </script>
     <style
       define:vars={{
-        configHue,
         "page-width": `${PAGE_WIDTH}rem`,
       }}
     ></style>

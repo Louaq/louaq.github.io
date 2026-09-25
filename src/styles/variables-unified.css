@@ -1,15 +1,13 @@
 @layer base {
 :root {
-  --hue: 250;
-
   --radius-large: 8px;
 
   --content-delay: 30ms;
 
   --radius-lg: 0.5rem;
 
-  --juejin-primary: oklch(0.58 0.20 var(--hue));
-  --juejin-primary-active: oklch(0.47 0.22 var(--hue));
+  --juejin-primary: var(--theme-color);
+  --juejin-primary-active: color-mix(in oklch, var(--theme-color) 85%, black);
   --juejin-text-primary: #1d2129;
   --juejin-text-secondary: #4e5969;
   --juejin-text-tertiary: #8a919f;
@@ -50,15 +48,15 @@
 
   --license-block-bg: rgba(0, 0, 0, 0.03);
 
-  --link-underline: oklch(0.93 0.04 var(--hue));
-  --link-hover: oklch(0.95 0.025 var(--hue));
-  --link-active: oklch(0.90 0.05 var(--hue));
+  --link-underline: color-mix(in oklch, var(--primary) 20%, white);
+  --link-hover: color-mix(in oklch, var(--primary) 12%, white);
+  --link-active: color-mix(in oklch, var(--primary) 30%, white);
 }
 
 /* 暗色主题变量 - 稀土掘金暗色风格 */
 :root.dark {
-  --juejin-primary: oklch(0.70 0.155 var(--hue));
-  --juejin-primary-active: oklch(0.62 0.17 var(--hue));
+  --juejin-primary: var(--theme-color);
+  --juejin-primary-active: color-mix(in oklch, var(--theme-color) 85%, black);
 
   /* 亮色 :root 的掘金字色未随暗色覆盖，会与 --card-bg 冲突（如分页数字几乎不可见） */
   --juejin-text-primary: rgba(255, 255, 255, 0.92);
@@ -91,11 +89,11 @@
   --meta-divider: rgba(255, 255, 255, 0.2);
   --content-meta: rgba(255, 255, 255, 0.65);
 
-  --license-block-bg: oklch(0.17 0.015 var(--hue));
+  --license-block-bg: color-mix(in oklch, var(--primary) 8%, #121214);
 
-  --link-underline: oklch(0.40 0.08 var(--hue));
-  --link-hover: oklch(0.40 0.08 var(--hue));
-  --link-active: oklch(0.35 0.07 var(--hue));
+  --link-underline: color-mix(in oklch, var(--primary) 45%, black);
+  --link-hover: color-mix(in oklch, var(--primary) 45%, black);
+  --link-active: color-mix(in oklch, var(--primary) 38%, black);
 }
 
 :root {

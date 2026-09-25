@@ -59,13 +59,13 @@ const isCompact = group.layout === "compact";
           <AstroIcon name="material-symbols:workspace-premium-rounded" class="text-[0.8rem]" />
           OWNER
         </span>
-        <div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
+        <div class="relative w-16 h-16 shrink-0 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
           <img
             src={friendSiteInfo.avatar}
             alt={friendSiteInfo.name}
             width="64"
             height="64"
-            class="w-full h-full object-cover"
+            class="w-full h-full object-cover rounded-full"
             loading="lazy"
             decoding="async"
           />
@@ -134,13 +134,13 @@ const isCompact = group.layout === "compact";
               {item.badge}
             </span>
           )}
-          <div class="relative w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
+          <div class="relative w-16 h-16 shrink-0 rounded-full overflow-hidden bg-zinc-100 dark:bg-zinc-800 border border-black/5 dark:border-white/5 group-hover:scale-105 transition-transform duration-300">
             <img
               src={item.imgurl}
               alt={item.title}
               width="64"
               height="64"
-              class="w-full h-full object-cover"
+              class="w-full h-full object-cover rounded-full"
               loading="lazy"
               decoding="async"
             />

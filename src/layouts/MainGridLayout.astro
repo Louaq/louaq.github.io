@@ -155,21 +155,6 @@ const mainPanelTop = "5.5rem";
     background-color: #f9f9f9 !important;
   }
 
-  body[data-white-bg="true"]::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -1;
-    pointer-events: none;
-    background-image:
-      linear-gradient(rgba(148, 163, 184, 0.06) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(148, 163, 184, 0.06) 1px, transparent 1px);
-    background-size: 64px 64px;
-    /* 中心实、四周渐隐；单层 radial 遮罩即可，无需 mask-composite，兼容性更稳 */
-    -webkit-mask-image: radial-gradient(ellipse 88% 78% at 50% 45%, #000 45%, transparent 100%);
-    mask-image: radial-gradient(ellipse 88% 78% at 50% 45%, #000 45%, transparent 100%);
-  }
-
   :root:not(.dark):has(body[data-white-bg="true"]) {
     background-color: #f9f9f9 !important;
   }

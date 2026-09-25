@@ -10,7 +10,7 @@ export type SiteConfig = {
 	lang: "en" | "zh_CN" | "zh_TW" | "ja" | "ru";
 
 	themeColor: {
-		hue: number;
+		color: string; // 主题色，任意 CSS 颜色，如 "#43bc85" 或 "rgb(67, 188, 133)"
 		showModeSwitch?: boolean; // 是否显示明暗/跟随系统模式切换按钮，默认 true
 		defaultMode?: LIGHT_DARK_MODE; // 默认模式：浅色、深色或跟随系统
 	};

@@ -45,10 +45,10 @@ const friendGroups: FriendGroup[] = [
 		friends: [
 			// 想置顶某个友链，把它放到这个分组里即可，例如：
 			// {
-			// 	title: "统计",
-			// 	imgurl: "https://umami.louaq.com/favicon.ico",
+			// 	title: " ",
+			// 	imgurl: " ",
 			// 	desc: "站点分析",
-			// 	siteurl: "https://umami.louaq.com/dashboard",
+			// 	siteurl: " ",
 			// 	weight: 10,
 			// 	enabled: true,
 			// 	badge: "PINNED",
