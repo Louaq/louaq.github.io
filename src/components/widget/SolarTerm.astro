@@ -1,0 +1,75 @@
+---
+import WidgetLayout from "@/components/common/WidgetLayout.astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+
+const { class: className, style } = Astro.props;
+---
+
+<WidgetLayout
+  name={i18n(I18nKey.solarTerm)}
+  icon="fluent-emoji-flat:sheaf-of-rice"
+  id="solar-term"
+  class={className}
+  style={style}
+>
+  <a
+    class="solar-term block"
+    href="https://jieqi.dev/"
+    target="_blank"
+    rel="noopener"
+  >
+    <img class="w-full rounded-lg" alt="" hidden />
+  </a>
+</WidgetLayout>
+
+<script>
+  // 数据来自 jieqi.dev 公开日历接口：取北京时间今天及之前最近的一个节气
+  type TermEvent = {
+    name: string;
+    category: string;
+    start: string;
+    card: { image: string };
+  };
+
+  const state = ((window as any).__solarTermState ??= {}) as {
+    term?: Promise<TermEvent>;
+    listenerAdded?: boolean;
+  };
+
+  const calendar = (year: number): Promise<TermEvent[]> =>
+    fetch(`https://api.jieqi.dev/v1/calendar/${year}.json?style=character`)
+      .then((r) => r.json())
+      .then((j) => j.events.filter((e: TermEvent) => e.category === "solar-term"));
+
+  async function currentTerm() {
+    const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai" }).format(new Date());
+    const year = Number(today.slice(0, 4));
+    const passed = (await calendar(year)).filter((e) => e.start <= today);
+    // 1 月初小寒之前，当前节气是上一年的冬至
+    return passed.at(-1) ?? (await calendar(year - 1)).at(-1)!;
+  }
+
+  async function renderSolarTerm() {
+    const root = document.querySelector<HTMLElement>(".solar-term");
+    if (!root) return;
+    state.term ??= currentTerm();
+    const term = await state.term;
+    const img = root.querySelector("img")!;
+    img.src = term.card.image;
+    img.alt = term.name;
+    img.hidden = false;
+  }
+
+  renderSolarTerm();
+
+  if (!state.listenerAdded) {
+    state.listenerAdded = true;
+    document.addEventListener("astro:page-load", renderSolarTerm);
+  }
+</script>

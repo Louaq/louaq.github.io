@@ -134,6 +134,9 @@ enum I18nKey {
 	siteRuntimeUnitYear = "siteRuntimeUnitYear",
 	siteRuntimeUnitMonth = "siteRuntimeUnitMonth",
 
+	// 节气
+	solarTerm = "solarTerm",
+
 	// 页脚访客计数
 	visitorSitePv = "visitorSitePv",
 	visitorSiteUv = "visitorSiteUv",
