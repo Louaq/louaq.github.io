@@ -2,7 +2,7 @@ import type { AdConfig, AdItem, AdPlacementName } from "../types/config";
 
 export const adConfig: AdConfig = {
 	// 总开关：关闭后三个位置都不渲染
-	enable: false,
+	enable: true,
 
 	// 默认横幅宽高比，按素材实际尺寸填写（宽 / 高）；各位置可单独覆盖
 	aspectRatio: "350 / 60",
