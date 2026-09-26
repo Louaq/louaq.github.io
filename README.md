@@ -42,7 +42,7 @@
 ## 特性
 
 - 📝 Markdown / MDX 写作，支持数学公式（KaTeX）、Mermaid 图表、代码高亮（Expressive Code）、GitHub 卡片、PDF 内嵌等自定义指令
-- 🔍 站内搜索，可切换 Algolia / Meilisearch
+- 🔍 站内搜索，Meilisearch
 - 💬 Twikoo 评论系统
 - 🌗 明暗主题切换
 - 🏷️ 分类、标签、归档、RSS 订阅、站点地图
@@ -79,7 +79,6 @@ pnpm preview
 | --- | --- |
 | `pnpm dev` | 启动开发服务器 |
 | `pnpm build` | 构建生产环境静态站点 |
-| `pnpm build:algolia` | 构建并触发 Algolia 索引相关流程（CI 使用） |
 | `pnpm preview` | 本地预览构建产物 |
 | `pnpm check` | Astro 类型/内容检查 |
 | `pnpm type-check` | TypeScript 类型检查 |
@@ -90,7 +89,7 @@ pnpm preview
 
 ## 部署
 
-- **GitHub Pages**：`.github/workflows/deploy.yml` 在推送到 `master` 分支时自动构建并部署，如需启用 Algolia / Meilisearch 索引同步，需在仓库 Secrets 中配置相应变量。
+- **GitHub Pages**：`.github/workflows/deploy.yml` 在推送到 `master` 分支时自动构建并部署，如需启用 Meilisearch 索引同步，需在仓库 Secrets 中配置相应变量。
 - **Netlify / Vercel**：仓库已包含 `vercel.json`；Netlify 部署状态见文首徽章。两者均可直接托管构建产物 `dist/`。
 
 ## 目录结构（节选）
