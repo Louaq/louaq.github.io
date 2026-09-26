@@ -1,7 +1,7 @@
 import type { AdConfig, AdItem, AdPlacementName } from "../types/config";
 
 export const adConfig: AdConfig = {
-	// 总开关：关闭后三个位置都不渲染
+	// 总开关：关闭后两个位置都不渲染
 	enable: true,
 
 	// 默认横幅宽高比，按素材实际尺寸填写（宽 / 高）；各位置可单独覆盖
@@ -143,75 +143,8 @@ export const adConfig: AdConfig = {
 			},
 		],
 	},
-
-	// 左侧边栏（全站生效，不只文章页）。侧边栏窄，这里固定单列堆叠。
-	// 注：项目只渲染左侧边栏，右栏没有对应组件，所以不提供左右选择。
-	sidebar: {
-		enable: true,
-
-		// 侧边栏宽度约 300px，竖版或方形素材更合适；留空则用顶层的 aspectRatio
-		aspectRatio: "300 / 80",
-
-		// 在侧边栏里的位置：top=固定顶部，sticky=跟随滚动
-		position: "top",
-
-		// 显示顺序，与 sidebarConfig.ts 里 profile(1) / announcement(2) / runtime(3) 一起排
-		order: 6,
-
-		// CSS 类名与入场动画延迟
-		class: "onload-animation",
-		animationDelay: 0,
-
-		items: [
-			{
-				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
-				id: "sidebar-1",
-				// 是否启用该条
-				enable: true,
-				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "https://pic1.imgdb.cn/i/034CfkC24mahBd96iDYYos.png",
-				// 图片描述（无障碍与图片加载失败时显示）
-				alt: "广告横幅",
-				// 点击跳转地址
-				link: "https://www.dmit.io/aff.php?aff=26767",
-				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
-				// placeholderText: "广告位",
-				// 是否在新标签页打开
-				external: true,
-				// 左上角是否显示「关闭」按钮
-				closable: true,
-				// 右上角标记文案，留空用「广告」
-				label: "广告",
-			},
-			{
-				// 唯一标识；与其他位置配成同一个 id 时，关掉一处另一处也一起消失
-				id: "sidebar-2",
-				// 是否启用该条
-				enable: true,
-				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "https://pic1.imgdb.cn/i/034FPyLQFT74KV4cMOwIQ2.gif",
-				// 图片描述（无障碍与图片加载失败时显示）
-				alt: "广告横幅",
-				// 点击跳转地址
-				link: "https://ai9xx.com/",
-				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
-				placeholderText: "广告出租",
-				// 是否在新标签页打开
-				external: true,
-				// 左上角是否显示「关闭」按钮
-				closable: true,
-				// 右上角标记文案，留空用「广告」
-				label: "广告",
-			},
-		],
-	},
 };
 
-/**
- * 取指定位置当前应当展示的条目。
- * 总开关或该位置关闭、条目未启用、已过期的都会被滤掉；
- * 结果为空时调用方跳过整条广告栏。
- */
 export function getActiveAdItems(placement: AdPlacementName): AdItem[] {
 	const group = adConfig[placement];
 	if (!adConfig.enable || !group.enable) {
@@ -227,7 +160,6 @@ export function getActiveAdItems(placement: AdPlacementName): AdItem[] {
 	});
 }
 
-/** 取指定位置的横幅宽高比：位置上没写就回退到顶层配置，再没有用默认值 */
 export function getAdAspectRatio(placement: AdPlacementName): string {
 	return adConfig[placement].aspectRatio || adConfig.aspectRatio || "350 / 60";
 }

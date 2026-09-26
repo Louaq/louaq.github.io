@@ -301,7 +301,6 @@ export type WidgetComponentType =
 	| "announcement"
 	| "categories"
 	| "tags"
-	| "advertisement"
 	| "stats"
 	| "runtime";
 
@@ -366,8 +365,8 @@ export type AdItem = {
 	expireDate?: string; // 过期时间 (ISO 8601 格式)，过期后不再显示该条
 };
 
-// 广告位置：文章详情页的顶部 / 底部，以及全站侧边栏
-export type AdPlacementName = "top" | "bottom" | "sidebar";
+// 广告位置：文章详情页的顶部 / 底部
+export type AdPlacementName = "top" | "bottom";
 
 // 单个广告位的配置
 export type AdPlacement = {
@@ -376,26 +375,12 @@ export type AdPlacement = {
 	items: AdItem[]; // 广告条目，按顺序横向排列，一行最多三条
 };
 
-// 侧边栏广告位：除条目外还要描述在侧边栏里的位置，这些字段原本在 sidebarConfig.ts
-// 的组件列表里，现在统一收进 adConfig.ts，由 widget-manager 读取后注入侧边栏
-export type AdSidebarPlacement = AdPlacement & {
-	position: "top" | "sticky"; // top=固定在顶部，sticky=粘性定位（跟随滚动）
-	order?: number; // 显示顺序，与 sidebarConfig.ts 里其他组件的 order 一起排序
-	class?: string; // CSS 类名，用于应用样式和动画
-	animationDelay?: number; // 动画延迟时间（毫秒）
-	style?: string; // 自定义内联样式
-	responsive?: {
-		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
-	};
-};
-
-// 广告栏配置：文章详情页顶部 / 底部的横幅广告条，以及全站侧边栏广告位
+// 广告栏配置：文章详情页顶部 / 底部的横幅广告条
 export type AdConfig = {
-	enable: boolean; // 总开关，关闭后三个位置都不渲染
+	enable: boolean; // 总开关，关闭后两个位置都不渲染
 	aspectRatio?: string; // 默认横幅宽高比，如 "350 / 60"
 	top: AdPlacement; // 文章正文上方
 	bottom: AdPlacement; // 文章正文下方（版权声明之后）
-	sidebar: AdSidebarPlacement; // 左侧边栏（全站，不限文章页）
 };
 
 // 友链配置

@@ -192,11 +192,4 @@ const rootStyle = [`--promo-aspect: ${aspectRatio}`, style]
     color: var(--primary-text-color);
     opacity: 0.45;
   }
-
-  /* 侧边栏只有约 300px 宽，上面那两条按视口宽度分列的媒体查询在这里会把三张图
-     挤成一排。侧边栏固定单列堆叠，外间距也交给侧边栏自己的 gap 控制。 */
-  .promo-strip[data-promo-placement="sidebar"] {
-    grid-template-columns: 1fr;
-    margin-bottom: 0;
-  }
 </style>
