@@ -15,14 +15,13 @@ const config = {
 	path: Astro.props.path,
 };
 
-// Twikoo 脚本体积较大（~640KB），评论区位于首屏外。改为按需懒加载：
+// Twikoo 脚本体积较大（~810KB），评论区位于首屏外。改为按需懒加载：
 // 仅当 #tcomment 接近视口时再注入脚本，避免每个文章页无条件下载。
-const twikooScriptUrl = url("/assets/js/twikoo-1.7.4.all.min.js");
+const twikooScriptUrl = url("/assets/js/twikoo-2.0.9.all.min.js");
 const twikooCssUrl = url("/assets/css/twikoo.css");
 ---
 
 <div id="tcomment"></div>
-<!-- 使用自编译的 Twikoo 文件，避免点赞等按钮导致页面触发滚动回顶部 https://github.com/twikoojs/twikoo/issues/721 -->
 <script is:inline define:vars={{ config, twikooScriptUrl, twikooCssUrl }}>
   // 获取当前页面路径
   function getCurrentPath() {
@@ -52,7 +51,7 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
     }
   }
 
-  // Twikoo / Element UI 的样式由脚本在运行时注入 <style>，而脚本全局只加载一次。
+  // Twikoo 的样式由脚本在运行时注入 <style>，而脚本全局只加载一次。
   // swup 的 head diff 会把「新页面 head 里不存在」的标签当作孤儿移除，于是二次
   // 导航进入评论页时这些样式就永久消失了（最明显的是加载指示器的 SVG 失去
   // .circular 的 42px 约束，被撑满整个评论区）。这里给它们打标记，由

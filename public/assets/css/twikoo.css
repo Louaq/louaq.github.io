@@ -4,19 +4,6 @@
  * Firefly 主题专用：https://github.com/CuteLeaf/Firefly
  */
 
-/* Element Plus 全局主色注入：必须设在 #tcomment 上才能被 EP 内部变量系统读取 */
-#tcomment {
-  --el-color-primary: var(--primary);
-  --el-color-primary-light-3: color-mix(in oklch, var(--primary) 70%, white);
-  --el-color-primary-light-5: color-mix(in oklch, var(--primary) 50%, white);
-  --el-color-primary-light-7: color-mix(in oklch, var(--primary) 30%, white);
-  --el-color-primary-light-9: color-mix(in oklch, var(--primary) 10%, white);
-  --el-color-primary-dark-2:  color-mix(in oklch, var(--primary) 80%, black);
-  --el-input-focus-border-color: var(--primary);
-  --el-button-bg-color: var(--primary);
-  --el-button-border-color: var(--primary);
-}
-
 /* 主题变量：定义主色、背景、边框、正文和次要文字颜色 */
 .twikoo {
   --tk-accent: var(--primary);
@@ -35,15 +22,35 @@
 
 /* 强调色文本：评论标题、操作按钮、排序入口等统一使用主题主色 */
 .twikoo .tk-comments-title,
-.twikoo .tk-action-link,
-.twikoo .tk-action-icon,
-.twikoo .tk-icon.__comments,
 .twikoo .tk-sort-select,
 .twikoo .tk-nick-link:hover,
 .twikoo .tk-expand,
 .twikoo .tk-login-msg a,
 .twikoo .tk-panel-logout {
   color: var(--tk-accent);
+}
+
+/* 评论区搜索/刷新/设置图标：内置规则同权重且后注入，需加一层 .tk-comments-actions 才能覆盖 */
+.twikoo .tk-comments-actions .tk-icon.__comments {
+  color: var(--tk-accent);
+}
+
+/* 评论操作（删除/顶/踩/回复）：同理加一层 .tk-action 覆盖内置蓝色 */
+.twikoo .tk-action .tk-action-link,
+.twikoo .tk-action .tk-action-icon {
+  color: var(--tk-accent);
+}
+
+/* 管理员文字操作（隐藏/置顶/取消置顶等）：同理加一层 .tk-comment 覆盖内置蓝色 */
+.twikoo .tk-comment .tk-actions button {
+  color: var(--tk-accent);
+}
+
+/* 搜索展开时的激活态：主题色底 + 白色图标 */
+.twikoo .tk-comments-actions .tk-icon.__comments.__active {
+  color: #fff;
+  background: var(--tk-accent);
+  box-shadow: 0 0 0 0.2rem var(--tk-accent);
 }
 
 /* 全局边框：评论模块内部元素边框统一跟随主题分割线 */
@@ -60,9 +67,7 @@
 /* 高亮元素：标签、分页当前项、主按钮背景色改为主题主色 */
 .twikoo .tk-tag-blue,
 .twikoo .tk-pagination-pager.__current,
-.twikoo .el-button--primary,
-.twikoo .el-button--primary.is-plain:focus,
-.twikoo .el-button--primary.is-plain:hover {
+.twikoo .tk-button--primary {
   background-color: var(--tk-accent);
   border-color: var(--tk-accent);
 }
@@ -75,10 +80,9 @@
 
 /* 表单与面板基础色：输入框、预览区、管理面板、OwO 面板统一底色 */
 .twikoo .tk-sort-select,
-.twikoo .el-input__inner,
-.twikoo .el-textarea__inner,
-.twikoo .el-input-group__append,
-.twikoo .el-input-group__prepend,
+.twikoo .tk-input__inner,
+.twikoo .tk-input-group__append,
+.twikoo .tk-input-group__prepend,
 .twikoo .OwO .OwO-body,
 .twikoo .tk-preview-container {
   background-color: var(--tk-bg);
@@ -86,27 +90,17 @@
   color: var(--tk-text);
 }
 
-/* 输入类 hover 态：wrapper 边框过渡到主题色（Element Plus 2.x） */
-.twikoo .el-input__wrapper:hover,
-.twikoo .el-textarea__inner:hover,
+/* 输入类 hover 态：边框过渡到主题色（Twikoo 2.x） */
+.twikoo .tk-input__inner:hover,
 .twikoo .tk-sort-select:hover {
   border-color: color-mix(in oklch, var(--tk-accent) 55%, var(--tk-border) 45%) !important;
 }
 
-/* 输入类 focus 态：wrapper 边框 + 外发光跟随主题色（Element Plus 2.x） */
-.twikoo .el-input__wrapper.is-focus,
-.twikoo .el-textarea__inner:focus,
+/* 输入类 focus 态：边框 + 外发光跟随主题色（Twikoo 2.x） */
+.twikoo .tk-input__inner:focus,
 .twikoo .tk-sort-select:focus {
   border-color: var(--tk-accent) !important;
   box-shadow: 0 0 0 1px var(--tk-accent) inset !important;
-}
-
-/* 兼容旧版：同时保留 inner 上的 focus 选择器 */
-.twikoo .el-input__inner:focus,
-.twikoo .el-input-group__append:focus,
-.twikoo .el-input-group__prepend:focus {
-  border-color: var(--tk-accent) !important;
-  outline: none;
 }
 
 /* 新版排序样式：并排文字按钮，仅改文字颜色（默认/悬停/激活） */
@@ -126,65 +120,48 @@
   color: var(--tk-accent);
 }
 
-/* 次级按钮样式：非主按钮背景和边框使用主题浅色 */
-.twikoo .el-button:not(.el-button--primary):not(.el-button--text):not(.el-button--default) {
-  background-color: color-mix(in oklch, var(--tk-bg) 90%, var(--tk-accent) 10%);
-  border-color: var(--tk-border);
-  color: var(--tk-text);
-}
-
-/* 次级按钮交互态：悬停/聚焦时文字与边框切换到主题主色 */
-.twikoo .el-button:not(.el-button--primary):not(.el-button--text):not(.el-button--default):hover,
-.twikoo .el-button:not(.el-button--primary):not(.el-button--text):not(.el-button--default):focus {
-  border-color: var(--tk-accent);
-  color: var(--tk-accent);
-}
-
-/* 预览按钮（el-button--default）：边框 + 文字使用主题色 */
-.twikoo .el-button--default,
-.twikoo .el-button--small.el-button--default {
+/* 预览/取消按钮（无修饰 tk-button）：边框 + 文字使用主题色 */
+.twikoo .tk-button:not(.tk-button--primary):not(.tk-button--text):not(.tk-button--info) {
   color: var(--tk-accent) !important;
   border-color: var(--tk-accent) !important;
   background-color: transparent !important;
 }
 
-.twikoo .el-button--default:hover,
-.twikoo .el-button--default:focus {
+.twikoo .tk-button:not(.tk-button--primary):not(.tk-button--text):not(.tk-button--info):hover,
+.twikoo .tk-button:not(.tk-button--primary):not(.tk-button--text):not(.tk-button--info):focus {
   background-color: color-mix(in oklch, var(--tk-accent) 10%, transparent) !important;
 }
 
-/* 发送按钮（el-button--primary）：主题色背景 */
-.twikoo .el-button--primary {
+/* 发送按钮（tk-button--primary）：主题色背景 */
+.twikoo .tk-button--primary {
   background-color: var(--tk-accent) !important;
   border-color: var(--tk-accent) !important;
   color: #fff !important;
 }
 
-.twikoo .el-button--primary:hover,
-.twikoo .el-button--primary:focus {
+.twikoo .tk-button--primary:hover,
+.twikoo .tk-button--primary:focus {
   background-color: color-mix(in oklch, var(--tk-accent) 85%, white) !important;
   border-color: color-mix(in oklch, var(--tk-accent) 85%, white) !important;
 }
 
-.twikoo .el-button--primary:active {
+.twikoo .tk-button--primary:active {
   background-color: color-mix(in oklch, var(--tk-accent) 85%, black) !important;
   border-color: color-mix(in oklch, var(--tk-accent) 85%, black) !important;
 }
 
 /* 发送按钮禁用态：主题色半透明（不再显示默认蓝） */
-.twikoo .el-button--primary.is-disabled,
-.twikoo .el-button--primary.is-disabled:hover,
-.twikoo .el-button--primary.is-disabled:focus,
-.twikoo .el-button--primary.is-disabled:active,
-.twikoo .el-button--primary[disabled] {
+.twikoo .tk-button--primary.is-disabled,
+.twikoo .tk-button--primary.is-disabled:hover,
+.twikoo .tk-button--primary.is-disabled:focus,
+.twikoo .tk-button--primary.is-disabled:active {
   background-color: color-mix(in oklch, var(--tk-accent) 45%, white) !important;
   border-color: color-mix(in oklch, var(--tk-accent) 45%, white) !important;
   color: #fff !important;
   cursor: not-allowed;
 }
 
-:root.dark .twikoo .el-button--primary.is-disabled,
-:root.dark .twikoo .el-button--primary[disabled] {
+:root.dark .twikoo .tk-button--primary.is-disabled {
   background-color: color-mix(in oklch, var(--tk-accent) 35%, var(--card-bg)) !important;
   border-color: color-mix(in oklch, var(--tk-accent) 35%, var(--card-bg)) !important;
 }
@@ -198,10 +175,7 @@
 }
 
 /* 加载指示器颜色：加载图标和文字统一主题色 */
-.twikoo .tk-loading-spinner .path,
-.twikoo .el-loading-spinner .path,
-.twikoo .el-loading-spinner i,
-.twikoo .el-loading-spinner .el-loading-text {
+.twikoo .tk-loading-spinner .path {
   stroke: var(--tk-accent);
   color: var(--tk-accent);
 }
@@ -217,53 +191,40 @@
   fill: currentColor;
 }
 
-/* 加载遮罩居中：刷新评论时的 loading 指示器居中显示 */
-.twikoo .tk-comments-container {
-  position: relative;
+/* 头像去掉内置灰底：内置规则同权重且后注入，需 !important */
+.twikoo .tk-avatar.tk-has-avatar {
+  background-color: transparent !important;
 }
 
-.twikoo .el-loading-mask {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.twikoo .el-loading-spinner {
-  position: static;
-  top: auto;
-  margin-top: 0;
-  width: auto;
+/* 相邻主评论之间加分隔线（楼中楼回复之间不加） */
+.twikoo .tk-comment + .tk-comment:not(.tk-replies .tk-comment) {
+  border-top: 1px solid var(--tk-border);
+  padding-top: 1rem;
 }
 
 /* 输入框禁用态：降低对比度并保持边框统一 */
-.twikoo .el-input.is-disabled .el-input__inner,
-.twikoo .el-textarea.is-disabled .el-textarea__inner {
+.twikoo .tk-input.is-disabled .tk-input__inner {
   background-color: color-mix(in oklch, var(--tk-bg) 88%, var(--tk-border) 12%);
   border-color: var(--tk-border);
   color: color-mix(in oklch, var(--tk-text) 55%, var(--tk-bg) 45%);
 }
 
 /* 占位符颜色：统一弱化文本风格 */
-.twikoo .el-input__inner::placeholder,
-.twikoo .el-textarea__inner::placeholder {
+.twikoo .tk-input__inner::placeholder {
   color: color-mix(in oklch, var(--tk-muted) 75%, var(--tk-bg) 25%);
 }
 
 /* 评论信息输入区：取消圆角边框，保持直角 */
-.twikoo .el-input__wrapper,
-.twikoo .el-input__inner,
-.twikoo .el-textarea__inner,
-.twikoo .el-input-group__append,
-.twikoo .el-input-group__prepend,
+.twikoo .tk-input__inner,
+.twikoo .tk-input-group__append,
+.twikoo .tk-input-group__prepend,
 .twikoo .tk-sort-select {
   border-radius: 0 !important;
 }
 
 /* 输入组前后缀：背景与文字色跟随主题 */
-.twikoo .el-input-group__append,
-.twikoo .el-input-group__prepend {
+.twikoo .tk-input-group__append,
+.twikoo .tk-input-group__prepend {
   background-color: color-mix(in oklch, var(--tk-bg) 90%, var(--tk-accent) 10%);
   color: var(--tk-muted);
 }
@@ -297,25 +258,16 @@
   margin-bottom: 0.75rem;
 }
 
-/* 其他语义按钮：success/warning/danger/info 统一主题化 */
-.twikoo .el-button--success,
-.twikoo .el-button--warning,
-.twikoo .el-button--danger,
-.twikoo .el-button--info {
+/* 信息按钮：统一主题化 */
+.twikoo .tk-button--info {
   color: var(--tk-text);
   background-color: color-mix(in oklch, var(--tk-bg) 88%, var(--tk-accent) 12%);
   border-color: color-mix(in oklch, var(--tk-border) 72%, var(--tk-accent) 28%);
 }
 
-/* 其他语义按钮交互态：悬停/聚焦强调主题主色 */
-.twikoo .el-button--success:hover,
-.twikoo .el-button--warning:hover,
-.twikoo .el-button--danger:hover,
-.twikoo .el-button--info:hover,
-.twikoo .el-button--success:focus,
-.twikoo .el-button--warning:focus,
-.twikoo .el-button--danger:focus,
-.twikoo .el-button--info:focus {
+/* 信息按钮交互态：悬停/聚焦强调主题主色 */
+.twikoo .tk-button--info:hover,
+.twikoo .tk-button--info:focus {
   color: var(--tk-accent);
   border-color: var(--tk-accent);
   background-color: color-mix(in oklch, var(--tk-bg) 84%, var(--tk-accent) 16%);

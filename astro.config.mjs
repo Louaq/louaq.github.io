@@ -93,7 +93,7 @@ export default defineConfig({
 			// 本站 HTML 体积较大，hover 预取容易在用户仅经过链接时浪费整页下载。
 			preload: false,
 			accessibility: false,
-			// Twikoo 的 Element UI 样式由脚本运行时注入 <style>，而脚本全局只加载一次；
+			// Twikoo 的样式由脚本运行时注入 <style>，而脚本全局只加载一次；
 			// 默认 head diff 会把它们当作孤儿标签移除，二次 swup 进入评论页时样式永久丢失。
 			// 组件里给这些 style 打了 data-twikoo-style，这里声明保留（#twikoo-css 同理）。
 			updateHead: {

@@ -28,7 +28,7 @@ export const friendsPageConfig: FriendsPageConfig = {
 	showCustomContent: true,
 
 	// 是否显示评论区，需要先在commentConfig.ts启用评论系统
-	showComment: true,
+	showComment: false,
 
 	// 是否开启随机排序配置，如果开启，就会忽略权重，构建时进行一次随机排序
 	randomizeSort: false,
