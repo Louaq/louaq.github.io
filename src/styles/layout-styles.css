@@ -34,6 +34,21 @@
     min-height: calc(100vh - 5.5rem) !important;
 }
 
+/* 文章页顶部有通栏标题区（PostHeader），主内容从标题区下方开始 */
+:root {
+    --post-header-height: 22rem;
+}
+
+@media (min-width: 768px) {
+    :root {
+        --post-header-height: 30rem;
+    }
+}
+
+body:has(.post-header) .no-banner-layout {
+    top: var(--post-header-height) !important;
+}
+
 /* 移动端文章封面图（.banner-container）性能优化 */
 @media (max-width: 1023px) {
     .banner-container {

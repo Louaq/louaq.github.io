@@ -1,0 +1,148 @@
+---
+import { Icon } from "astro-icon/components";
+import { commentConfig } from "@/config";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import { getCategoryUrl } from "@/utils/category-utils";
+import { formatDateToYYYYMMDD } from "@/utils/date-utils";
+import { getTagUrl } from "@/utils/url-utils";
+
+interface Props {
+	title: string;
+	published: Date;
+	updated?: Date;
+	category?: string;
+	tags: string[];
+	words: number;
+	minutes: number;
+	locked: boolean;
+}
+
+const { title, published, updated, category, tags, words, minutes, locked } =
+	Astro.props;
+---
+
+<header class="post-header">
+  <div class="post-header-inner">
+    <a href={getCategoryUrl(category || "")} class="post-header-category">
+      {category || i18n(I18nKey.uncategorized)}
+    </a>
+
+    <h1 class="post-header-title">
+      {title}
+      {locked && (
+        <Icon name="material-symbols:lock-outline" class="inline align-middle ml-2" aria-label="文章已加密" />
+      )}
+    </h1>
+
+    <div class="post-header-meta">
+      <span><Icon name="material-symbols:calendar-today-outline-rounded" />{formatDateToYYYYMMDD(published)}</span>
+      {updated && updated.getTime() !== published.getTime() && (
+        <span><Icon name="material-symbols:edit-calendar-outline-rounded" />{formatDateToYYYYMMDD(updated)}</span>
+      )}
+      <span><Icon name="material-symbols:notes-rounded" />{words} {i18n(I18nKey.wordsCount)}</span>
+      <span>
+        <Icon name="material-symbols:schedule-outline-rounded" />
+        {minutes} {i18n(minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
+      </span>
+      {commentConfig.type === "twikoo" && commentConfig.twikoo?.visitorCount && (
+        <span>
+          <Icon name="material-symbols:visibility-outline-rounded" />
+          <span id="twikoo_visitors">{i18n(I18nKey.pageViewsLoading)}</span>
+        </span>
+      )}
+    </div>
+
+    {tags.length > 0 && (
+      <div class="post-header-tags">
+        {tags.map((tag) => (
+          <a href={getTagUrl(tag)}><Icon name="material-symbols:tag-rounded" />{tag.trim()}</a>
+        ))}
+      </div>
+    )}
+  </div>
+</header>
+
+<style>
+  /* 参考样式：主题色底 + 大块柔光斑（用径向渐变模拟模糊光晕，避免 filter: blur 的开销） */
+  .post-header {
+    position: relative;
+    height: var(--post-header-height);
+    overflow: hidden;
+    color: #fff;
+    background:
+      radial-gradient(28% 40% at 76% 52%, color-mix(in oklch, var(--primary) 55%, #c9c3ff) 0, transparent 100%),
+      radial-gradient(22% 36% at 92% 22%, rgba(255, 255, 255, 0.55) 0, transparent 100%),
+      radial-gradient(18% 30% at 80% 88%, rgba(255, 255, 255, 0.4) 0, transparent 100%),
+      radial-gradient(30% 70% at 0% 30%, rgba(255, 255, 255, 0.45) 0, transparent 100%),
+      color-mix(in oklch, var(--primary) 78%, white);
+  }
+
+  :global(:root.dark) .post-header {
+    background:
+      radial-gradient(28% 40% at 76% 52%, color-mix(in oklch, var(--primary) 40%, #3b3470) 0, transparent 100%),
+      radial-gradient(22% 36% at 92% 22%, rgba(255, 255, 255, 0.08) 0, transparent 100%),
+      radial-gradient(30% 70% at 0% 30%, rgba(255, 255, 255, 0.06) 0, transparent 100%),
+      color-mix(in oklch, var(--primary) 35%, #17171a);
+  }
+
+  .post-header-inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
+    height: 100%;
+    max-width: calc(var(--page-width) - 18rem);
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 5rem;
+  }
+
+  .post-header-category {
+    align-self: flex-start;
+    padding: 0.2rem 0.7rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.25);
+  }
+
+  .post-header-title {
+    font-size: 2rem;
+    line-height: 1.25;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  .post-header-meta,
+  .post-header-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.72);
+  }
+
+  .post-header-meta > span,
+  .post-header-tags a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .post-header-tags a:hover {
+    color: #fff;
+  }
+
+  @media (min-width: 768px) {
+    .post-header-inner {
+      padding-left: 2.25rem;
+      padding-right: 2.25rem;
+    }
+
+    .post-header-title {
+      font-size: 3rem;
+    }
+  }
+</style>
