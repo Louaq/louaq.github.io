@@ -249,29 +249,6 @@
 @layer utilities {
   /* 其他组件样式 */
 
-  /* 侧边栏标题图标摇晃动画（喇叭抖动效果） */
-  .icon-shake {
-    transform-origin: center;
-    animation: icon-shake 0.3s infinite;
-  }
-  @keyframes icon-shake {
-    0% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(-10deg);
-    }
-    50% {
-      transform: rotate(0deg);
-    }
-    75% {
-      transform: rotate(10deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
-
   /* 侧边栏标题图标缩放动画 */
   .icon-scale {
     transform-origin: center;

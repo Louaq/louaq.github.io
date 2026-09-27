@@ -7,7 +7,6 @@ interface Props {
 	id: string;
 	name?: string;
 	icon?: string;
-	iconShake?: boolean;
 	iconScale?: boolean;
 	isCollapsed?: boolean;
 	collapsedHeight?: string;
@@ -18,7 +17,6 @@ const {
 	id,
 	name,
 	icon,
-	iconShake,
 	iconScale,
 	isCollapsed,
 	collapsedHeight,
@@ -38,7 +36,7 @@ const className = Astro.props.class;
                 {icon && (
                     <Icon
                         name={icon}
-                        class:list={["shrink-0 size-[1.05em]", iconShake && "icon-shake", iconScale && "icon-scale"]}
+                        class:list={["shrink-0 size-[1.05em]", iconScale && "icon-scale"]}
                         aria-hidden="true"
                     />
                 )}
