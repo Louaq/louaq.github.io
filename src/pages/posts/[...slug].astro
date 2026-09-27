@@ -11,21 +11,19 @@ import {
 	getFileDirFromPath,
 	getPostUrlBySlug,
 	getResolvedPostPath,
-	getTagUrl,
 } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import CoverImage from "@/components/common/CoverImage.astro";
+import PostMetadata from "@/components/layout/PostMeta.astro";
 import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
 import EncryptedContent from "@/components/misc/EncryptedContent.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import PromoStrip from "@/components/misc/PromoStrip.astro";
-import { commentConfig } from "@/config";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
 import { profileConfig } from "@/config/profileConfig";
 import { siteConfig } from "@/config/siteConfig";
 import { sponsorConfig } from "@/config/sponsorConfig";
-import { getCategoryUrl } from "@/utils/category-utils";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
 import { url } from "@/utils/url-utils";
 
@@ -116,56 +114,78 @@ const jsonLd = {
       {/* 顶部推广位（由 config/adConfig.ts 控制，未启用时不渲染） */}
       <PromoStrip placement="top" class="onload-animation" />
 
-      <!-- 顶部元信息卡：有封面时以封面为底，否则用主题色渐变；集中展示分类、标签、标题、统计与日期 -->
-      <div class:list={["post-meta-hero mb-6 onload-animation", { "has-cover": processedImage }]}>
-        {processedImage && (
-          <CoverImage
-            src={processedImage}
-            basePath={getFileDirFromPath(entry.filePath || '')}
-            class="absolute inset-0"
-            preview={false}
-          />
-        )}
-        <div class="post-meta-hero-inner">
-          <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-            <a href={getCategoryUrl(entry.data.category || "")} class="post-meta-badge">
-              {entry.data.category || i18n(I18nKey.uncategorized)}
-            </a>
-            {entry.data.tags.map((tag) => (
-              <a href={getTagUrl(tag)} class="post-meta-tag"># {tag.trim()}</a>
-            ))}
+      <!-- word count and reading time -->
+      <div
+        class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 onload-animation"
+      >
+        <div class="flex flex-row items-center">
+          <div
+            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
+          >
+            <Icon name="material-symbols:notes-rounded" />
           </div>
-
-          <h1 class="text-3xl md:text-[2.5rem]/[3rem] font-bold wrap-break-word">
-            {entry.data.title}
-            {entry.data.password && (
-              <Icon name="material-symbols:lock-outline" class="inline align-middle ml-2" aria-label="文章已加密" />
-            )}
-          </h1>
-
-          <div class="post-meta-items">
-            <span><Icon name="material-symbols:notes-rounded" />{remarkPluginFrontmatter.words} {i18n(I18nKey.wordsCount)}</span>
-            <span>
-              <Icon name="material-symbols:schedule-outline-rounded" />
-              {remarkPluginFrontmatter.minutes}
-              {i18n(remarkPluginFrontmatter.minutes === 1 ? I18nKey.minuteCount : I18nKey.minutesCount)}
-            </span>
-            <span aria-label={i18n(I18nKey.publishedAt)}>
-              <Icon name="material-symbols:calendar-today-outline-rounded" />{formatDateToYYYYMMDD(entry.data.published)}
-            </span>
-            {siteConfig.showLastModified && entry.data.updated && entry.data.updated.getTime() !== entry.data.published.getTime() && (
-              <span aria-label={i18n(I18nKey.lastModifiedPrefix)}>
-                <Icon name="material-symbols:edit-calendar-outline-rounded" />{formatDateToYYYYMMDD(entry.data.updated)}
-              </span>
-            )}
-            {commentConfig.type === "twikoo" && commentConfig.twikoo?.visitorCount && (
-              <span aria-label={i18n(I18nKey.pageViews)}>
-                <Icon name="material-symbols:visibility-outline-rounded" />
-                <span id="twikoo_visitors">{i18n(I18nKey.pageViewsLoading)}</span>
-              </span>
-            )}
+          <div class="text-sm">
+            {remarkPluginFrontmatter.words}
+            {" " + i18n(I18nKey.wordsCount)}
           </div>
         </div>
+        <div class="flex flex-row items-center">
+          <div
+            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
+          >
+            <Icon name="material-symbols:schedule-outline-rounded" />
+          </div>
+          <div class="text-sm">
+            {remarkPluginFrontmatter.minutes}
+            {
+              " " +
+                i18n(
+                  remarkPluginFrontmatter.minutes === 1
+                    ? I18nKey.minuteCount
+                    : I18nKey.minutesCount
+                )
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- title -->
+      <div class="relative onload-animation">
+        <h1
+          class="w-full flex items-center gap-2 flex-wrap font-bold mb-3
+                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    wrap-break-word
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
+                    before:absolute before:top-3 before:-left-4.5"
+        >
+          <span class="min-w-0">{entry.data.title}</span>
+          {entry.data.password && (
+            <Icon
+              name="material-symbols:lock-outline"
+              class="inline text-2xl md:text-3xl align-middle -translate-y-px text-inherit shrink-0"
+              aria-label="文章已加密"
+            />
+          )}
+        </h1>
+      </div>
+
+      <!-- metadata -->
+      <div class="onload-animation">
+        <PostMetadata
+          className="mb-5"
+          published={entry.data.published}
+          updated={entry.data.updated}
+          tags={entry.data.tags}
+          category={entry.data.category || undefined}
+          id={entry.id}
+          hideUpdateDate={!siteConfig.showLastModified}
+        />
+        {
+          !processedImage && (
+            <div class="border-(--line-divider) border-dashed border-b mt-3 mb-5" />
+          )
+        }
       </div>
 
       <!-- 过期/过时提醒：置于正文前（非加密文章直接显示；加密文章移至解锁后显示） -->
@@ -351,96 +371,6 @@ const jsonLd = {
 </MainGridLayout>
 
 <style>
-  /* 顶部元信息卡：与站内卡片同一套样式（卡片底色、细边框、浅阴影），主题色只做点缀；
-     有封面时封面铺底、加暗色遮罩，文字改白 */
-  .post-meta-hero {
-    position: relative;
-    overflow: hidden;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 0.75rem;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-    color: rgba(0, 0, 0, 0.9);
-    background:
-      radial-gradient(50% 120% at 100% 0%, color-mix(in oklch, var(--primary) 12%, transparent), transparent),
-      var(--card-bg);
-  }
-
-  :global(:root.dark) .post-meta-hero {
-    border-color: rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.9);
-  }
-
-  .post-meta-hero-inner {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    min-height: 14rem;
-    padding: 1.5rem;
-  }
-
-  .post-meta-badge {
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.4rem;
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--btn-content);
-    background: var(--btn-regular-bg);
-  }
-
-  .post-meta-items,
-  .post-meta-tag {
-    color: #737373;
-  }
-
-  :global(:root.dark) .post-meta-items,
-  :global(:root.dark) .post-meta-tag {
-    color: #a3a3a3;
-  }
-
-  .post-meta-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem 1.25rem;
-    font-size: 0.875rem;
-  }
-
-  .post-meta-items > span {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-  }
-
-  .post-meta-tag {
-    font-size: 0.8125rem;
-  }
-
-  .post-meta-tag:hover {
-    color: var(--primary);
-  }
-
-  .has-cover .post-meta-hero-inner {
-    background: rgba(0, 0, 0, 0.45);
-  }
-
-  .has-cover,
-  .has-cover .post-meta-items,
-  .has-cover .post-meta-tag {
-    color: #fff;
-  }
-
-  .has-cover .post-meta-badge {
-    color: #fff;
-    background: rgba(255, 255, 255, 0.2);
-  }
-
-  @media (min-width: 768px) {
-    .post-meta-hero-inner {
-      padding: 2rem 2.5rem;
-    }
-  }
-
   /* 上一篇/下一篇：方向标签 + 标题的两行结构（参考 ThriveX-Blog 的文章导航）。
      不复用 .btn-card：main.css 里它被强制 border-radius:4px，且是全站按钮样式。 */
   .post-nav-item {
