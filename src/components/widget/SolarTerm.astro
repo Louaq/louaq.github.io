@@ -50,10 +50,22 @@ const { class: className, style } = Astro.props;
     return passed.at(-1) ?? (await calendar(year - 1)).at(-1)!;
   }
 
+  // 结果在 localStorage 缓存 24 小时，期间不再请求接口
+  const CACHE_KEY = "solar-term";
+  const CACHE_TTL = 24 * 60 * 60 * 1000;
+
+  async function cachedTerm(): Promise<TermEvent> {
+    const cached = JSON.parse(localStorage.getItem(CACHE_KEY) ?? "null");
+    if (cached && Date.now() - cached.at < CACHE_TTL) return cached.term;
+    const term = await currentTerm();
+    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), term }));
+    return term;
+  }
+
   async function renderSolarTerm() {
     const root = document.querySelector<HTMLElement>(".solar-term");
     if (!root) return;
-    state.term ??= currentTerm();
+    state.term ??= cachedTerm();
     const term = await state.term;
     const img = root.querySelector("img")!;
     img.src = term.card.image;
