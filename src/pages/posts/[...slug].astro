@@ -14,7 +14,7 @@ import {
 } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
 import CoverImage from "@/components/common/CoverImage.astro";
-import PostHeader from "@/components/layout/PostHeader.astro";
+import PostMetadata from "@/components/layout/PostMeta.astro";
 import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
 import EncryptedContent from "@/components/misc/EncryptedContent.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
@@ -101,17 +101,6 @@ const jsonLd = {
     type="application/ld+json"
     set:html={JSON.stringify(jsonLd)}
   />
-  <PostHeader
-    slot="post-header"
-    title={entry.data.title}
-    published={entry.data.published}
-    updated={siteConfig.showLastModified ? entry.data.updated : undefined}
-    category={entry.data.category || undefined}
-    tags={entry.data.tags}
-    words={remarkPluginFrontmatter.words}
-    minutes={remarkPluginFrontmatter.minutes}
-    locked={!!entry.data.password}
-  />
   <div
     class="flex w-full relative mb-4"
   >
@@ -124,6 +113,80 @@ const jsonLd = {
     >
       {/* 顶部推广位（由 config/adConfig.ts 控制，未启用时不渲染） */}
       <PromoStrip placement="top" class="onload-animation" />
+
+      <!-- word count and reading time -->
+      <div
+        class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 onload-animation"
+      >
+        <div class="flex flex-row items-center">
+          <div
+            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
+          >
+            <Icon name="material-symbols:notes-rounded" />
+          </div>
+          <div class="text-sm">
+            {remarkPluginFrontmatter.words}
+            {" " + i18n(I18nKey.wordsCount)}
+          </div>
+        </div>
+        <div class="flex flex-row items-center">
+          <div
+            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
+          >
+            <Icon name="material-symbols:schedule-outline-rounded" />
+          </div>
+          <div class="text-sm">
+            {remarkPluginFrontmatter.minutes}
+            {
+              " " +
+                i18n(
+                  remarkPluginFrontmatter.minutes === 1
+                    ? I18nKey.minuteCount
+                    : I18nKey.minutesCount
+                )
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- title -->
+      <div class="relative onload-animation">
+        <h1
+          class="w-full flex items-center gap-2 flex-wrap font-bold mb-3
+                    text-3xl md:text-[2.25rem]/[2.75rem]
+                    wrap-break-word
+                    text-black/90 dark:text-white/90
+                    md:before:w-1 before:h-5 before:rounded-md before:bg-(--primary)
+                    before:absolute before:top-3 before:-left-4.5"
+        >
+          <span class="min-w-0">{entry.data.title}</span>
+          {entry.data.password && (
+            <Icon
+              name="material-symbols:lock-outline"
+              class="inline text-2xl md:text-3xl align-middle -translate-y-px text-inherit shrink-0"
+              aria-label="文章已加密"
+            />
+          )}
+        </h1>
+      </div>
+
+      <!-- metadata -->
+      <div class="onload-animation">
+        <PostMetadata
+          className="mb-5"
+          published={entry.data.published}
+          updated={entry.data.updated}
+          tags={entry.data.tags}
+          category={entry.data.category || undefined}
+          id={entry.id}
+          hideUpdateDate={!siteConfig.showLastModified}
+        />
+        {
+          !processedImage && (
+            <div class="border-(--line-divider) border-dashed border-b mt-3 mb-5" />
+          )
+        }
+      </div>
 
       <!-- 过期/过时提醒：置于正文前（非加密文章直接显示；加密文章移至解锁后显示） -->
       {!entry.data.password && shouldShowOutdatedNotice && (
