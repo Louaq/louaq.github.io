@@ -49,7 +49,7 @@
 
   /* 导航栏样式适配 */
   & #navbar > div:not(.absolute) {
-    @apply border shadow-xs;
+    @apply border;
     border-color: var(--line-divider) !important;
   }
 }
@@ -454,7 +454,7 @@ body {
   box-shadow: none !important;
 }
 #navbar > div {
-  background: var(--card-bg) !important;
+  background: transparent !important;
   border-radius: 0 !important;
   border: none !important;
   backdrop-filter: none !important;

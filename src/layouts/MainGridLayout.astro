@@ -57,17 +57,12 @@ const mainPanelTop = "5.5rem";
 
 <!-- Navbar -->
 <slot slot="head" name="head"></slot>
-<div id="top-row" class="z-50 pointer-events-none fixed top-0 left-0 right-0 transition-[opacity,transform] duration-700">
+<div id="top-row" class="z-50 pointer-events-none absolute top-0 left-0 right-0 transition-[opacity,transform] duration-700">
     <div id="navbar-wrapper" class="pointer-events-auto transition-[opacity,transform] duration-700">
         <Navbar></Navbar>
     </div>
 </div>
 
-
-{/* 文章页顶部通栏标题区。与 #post-toc-floating-layer 一样注册为 swup 容器，所有页面都渲染这个容器 */}
-<div id="post-header-layer" class="transition-swup-fade transition-main">
-    <slot name="post-header" />
-</div>
 
 <!-- Main content -->
 <div class="absolute w-full z-30 pointer-events-none no-banner-layout" style={`top: ${mainPanelTop}`}>
@@ -148,28 +143,6 @@ const mainPanelTop = "5.5rem";
 
 <FloatingControls headings={headings} showToc={isPostPageCheck} />
 
-<script>
-    // 与文章标题区联动（非文章页 #post-header-layer 为空，高度 0）：
-    // 1. 导航栏在标题区范围内保持透明，滚出后加 .is-scrolled 恢复白底
-    // 2. 悬浮目录是 fixed 定位：先停在标题区下方，随滚动上移，直到贴住导航栏下沿
-    const NAVBAR_HEIGHT = 72; // h-18
-    const TOC_MIN_TOP = 88; // 5.5rem，与 .post-toc-inner-wrapper 的 top-22 一致
-    function syncWithPostHeader() {
-        const headerHeight = document.getElementById("post-header-layer")!.offsetHeight;
-        // 滚动为 0 时一律视为未滚动：非文章页（高度 0）停在顶部时不留下 is-scrolled，
-        // 否则换页进入文章页、滚动位置没变时，导航栏会先白底闪一下
-        document.getElementById("navbar")!.classList.toggle("is-scrolled", window.scrollY > 0 && window.scrollY > headerHeight - NAVBAR_HEIGHT);
-        const toc = document.querySelector<HTMLElement>(".post-toc-inner-wrapper");
-        if (toc) {
-            toc.style.top = `${Math.max(TOC_MIN_TOP, headerHeight + 16 - window.scrollY)}px`;
-        }
-    }
-    syncWithPostHeader();
-    window.addEventListener("scroll", syncWithPostHeader, { passive: true });
-    // swup 换页后滚动位置可能没变（不触发 scroll），需按新页面重算一次
-    document.addEventListener("astro:page-load", syncWithPostHeader);
-</script>
-
 
 </Layout>
 
@@ -197,38 +170,6 @@ const mainPanelTop = "5.5rem";
 
   .post-toc-floating-layer {
     display: none;
-  }
-
-  /* 文章页换页：标题区与正文同用 transition-main，作为整体同时淡入淡出。
-     有标题区时取消位移和缩放——标题区贴着页面顶端，位移会在顶部露出一条底色 */
-  html.is-animating body:has(.post-header) .transition-main {
-    transform: none;
-  }
-
-  /* 未滚动时目录的初始位置：标题区下方（滚动后由上面的脚本接管） */
-  body:has(.post-header) .post-toc-inner-wrapper {
-    top: calc(var(--post-header-height) + 1rem);
-  }
-
-  /* 文章页标题区范围内：导航栏透明，顶层菜单文字改白（下拉面板不受影响） */
-  body:has(.post-header) #navbar:not(.is-scrolled) > div {
-    background: transparent !important;
-    box-shadow: none !important;
-  }
-
-  body:has(.post-header) #navbar:not(.is-scrolled) .navbar-row > a,
-  body:has(.post-header) #navbar:not(.is-scrolled) .navbar-row .dropdown-container > .btn-plain,
-  body:has(.post-header) #navbar:not(.is-scrolled) #nav-menu-switch {
-    color: rgba(255, 255, 255, 0.88) !important;
-  }
-
-  body:has(.post-header) #navbar:not(.is-scrolled) .navbar-row .dropdown-container > .btn-plain:hover,
-  body:has(.post-header) #navbar:not(.is-scrolled) .navbar-row .dropdown-container > .navbar-link-active {
-    color: #fff !important;
-  }
-
-  body:has(.post-header) #navbar:not(.is-scrolled) .navbar-row .dropdown-container > .btn-plain [class*="text-black/"] {
-    color: rgba(255, 255, 255, 0.5);
   }
 
   .post-toc-floating-layer .toc-item {
