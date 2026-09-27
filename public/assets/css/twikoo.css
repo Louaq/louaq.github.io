@@ -90,17 +90,89 @@
   color: var(--tk-text);
 }
 
-/* 输入类 hover 态：边框过渡到主题色（Twikoo 2.x） */
-.twikoo .tk-input__inner:hover,
+/* 自定义表单：无描边的圆角填充块，标签内嵌为弱化文字，聚焦时整块出现主题色描边 */
+.twikoo .tk-submit .tk-input {
+  background-color: var(--btn-regular-bg);
+  border-radius: 0.75rem;
+  box-shadow: 0 0 0 1px transparent inset;
+  transition: box-shadow 0.15s, background-color 0.15s;
+}
+
+.twikoo .tk-submit .tk-input:hover {
+  background-color: var(--btn-regular-bg-hover);
+}
+
+.twikoo .tk-submit .tk-input:focus-within {
+  background-color: var(--tk-bg);
+  box-shadow: 0 0 0 1.5px var(--tk-accent) inset;
+}
+
+.twikoo .tk-submit .tk-input__inner,
+.twikoo .tk-submit .tk-input-group__prepend,
+.twikoo .tk-submit .tk-input-group__append {
+  background-color: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.twikoo .tk-submit .tk-input__inner {
+  height: 38px;
+  line-height: 38px;
+  padding: 0 0.875rem;
+}
+
+.twikoo .tk-submit .tk-input-group__prepend {
+  padding: 0 0 0 0.875rem;
+  color: var(--tk-muted);
+  font-size: 0.8125rem;
+}
+
+/* 标签与输入之间用短竖线分隔 */
+.twikoo .tk-submit .tk-input-group__prepend::after {
+  content: "";
+  display: inline-block;
+  width: 1px;
+  height: 0.875rem;
+  margin-left: 0.875rem;
+  vertical-align: middle;
+  background-color: var(--tk-border);
+}
+
+.twikoo .tk-submit .tk-textarea .tk-input__inner {
+  height: auto;
+  min-height: 110px;
+  padding: 0.75rem 0.875rem;
+  line-height: 1.6;
+}
+
+/* 头像改圆形，与站点其它头像保持一致 */
+.twikoo .tk-avatar {
+  border-radius: 50%;
+}
+
+/* 按钮与预览区统一圆角 */
+.twikoo .tk-button,
+.twikoo .tk-preview-container {
+  border-radius: 0.625rem;
+}
+
+.twikoo .tk-submit .tk-button {
+  padding: 0.5rem 1.25rem;
+}
+
+/* 隐藏 Markdown 教程链接和预览按钮 */
+.twikoo .tk-submit .tk-submit-action-icon.__markdown,
+.twikoo .tk-submit .tk-preview {
+  display: none;
+}
+
+/* 排序下拉：沿用主题色 hover / focus 边框 */
 .twikoo .tk-sort-select:hover {
   border-color: color-mix(in oklch, var(--tk-accent) 55%, var(--tk-border) 45%) !important;
 }
 
-/* 输入类 focus 态：边框 + 外发光跟随主题色（Twikoo 2.x） */
-.twikoo .tk-input__inner:focus,
 .twikoo .tk-sort-select:focus {
   border-color: var(--tk-accent) !important;
-  box-shadow: 0 0 0 1px var(--tk-accent) inset !important;
 }
 
 /* 新版排序样式：并排文字按钮，仅改文字颜色（默认/悬停/激活） */
@@ -212,21 +284,6 @@
 /* 占位符颜色：统一弱化文本风格 */
 .twikoo .tk-input__inner::placeholder {
   color: color-mix(in oklch, var(--tk-muted) 75%, var(--tk-bg) 25%);
-}
-
-/* 评论信息输入区：取消圆角边框，保持直角 */
-.twikoo .tk-input__inner,
-.twikoo .tk-input-group__append,
-.twikoo .tk-input-group__prepend,
-.twikoo .tk-sort-select {
-  border-radius: 0 !important;
-}
-
-/* 输入组前后缀：背景与文字色跟随主题 */
-.twikoo .tk-input-group__append,
-.twikoo .tk-input-group__prepend {
-  background-color: color-mix(in oklch, var(--tk-bg) 90%, var(--tk-accent) 10%);
-  color: var(--tk-muted);
 }
 
 /* 分页当前项文字白色 */
