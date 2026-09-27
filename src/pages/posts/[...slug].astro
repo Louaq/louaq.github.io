@@ -50,7 +50,7 @@ export async function getStaticPaths() {
 }
 
 const { entry } = Astro.props;
-const { Content, headings, remarkPluginFrontmatter } = await render(entry);
+const { Content, headings } = await render(entry);
 
 const processedImage = entry.data.image;
 
@@ -113,41 +113,6 @@ const jsonLd = {
     >
       {/* 顶部推广位（由 config/adConfig.ts 控制，未启用时不渲染） */}
       <PromoStrip placement="top" class="onload-animation" />
-
-      <!-- word count and reading time -->
-      <div
-        class="flex flex-row text-black/30 dark:text-white/30 gap-5 mb-3 onload-animation"
-      >
-        <div class="flex flex-row items-center">
-          <div
-            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
-          >
-            <Icon name="material-symbols:notes-rounded" />
-          </div>
-          <div class="text-sm">
-            {remarkPluginFrontmatter.words}
-            {" " + i18n(I18nKey.wordsCount)}
-          </div>
-        </div>
-        <div class="flex flex-row items-center">
-          <div
-            class="h-6 w-6 rounded-md bg-black/5 dark:bg-white/10 text-black/50 dark:text-white/50 flex items-center justify-center mr-2"
-          >
-            <Icon name="material-symbols:schedule-outline-rounded" />
-          </div>
-          <div class="text-sm">
-            {remarkPluginFrontmatter.minutes}
-            {
-              " " +
-                i18n(
-                  remarkPluginFrontmatter.minutes === 1
-                    ? I18nKey.minuteCount
-                    : I18nKey.minutesCount
-                )
-            }
-          </div>
-        </div>
-      </div>
 
       <!-- title -->
       <div class="relative onload-animation">
