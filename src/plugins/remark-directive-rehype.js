@@ -77,6 +77,22 @@ export function parseDirectiveNode() {
 					node.data.hName = "blockquote";
 					// 关键：清除可能存在的 hProperties，防止变为自定义标签
 					delete node.data.hProperties;
+				} else if (node.type === "containerDirective" && name === "grid") {
+					// 多图并排，参考 https://blog.cuteleaf.cn/posts/dev-notes/markdown-image-grid/
+					// 取出各段落里的图片平铺进网格，列数 = 图片数（最多 4）
+					const images = node.children.flatMap((child) =>
+						child.type === "paragraph"
+							? child.children.filter((n) => n.type === "image")
+							: [],
+					);
+					node.children = images;
+					node.data = {
+						hName: "div",
+						hProperties: {
+							className: ["image-grid"],
+							style: `--cols: ${Math.min(images.length, 4)}`,
+						},
+					};
 				} else {
 					// 其他 Directive，保留原有逻辑：转换为自定义 HTML 标签
 					const data = node.data || {};
