@@ -17,6 +17,13 @@ import { isHomePage } from "@/utils/layout-utils";
 import { url } from "@/utils/url-utils";
 
 import "@/styles/main.css";
+// 以下均为无层级（theme-switch 除外）的主题覆盖，必须排在 main.css 之后；不走 main.css 的 @import：
+// dev 下 Astro 会把被 @import 的文件再单独输出一份 <style>，造成重复且顺序与 build 不一致
+import "@/styles/theme-switch.css";
+import "@/styles/navbar-theme.css";
+import "@/styles/post-list.css";
+import "@/styles/code-block.css";
+import "@/styles/article.css";
 import "@/styles/transition.css";
 import "@/styles/markdown.css";
 import "@/styles/image-zoom.css";

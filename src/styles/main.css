@@ -78,9 +78,7 @@
     background-color: var(--btn-plain-bg-active);
   }
   /* 禁用 expand-animation 的 ::before 背景，避免多行时覆盖不完整 */
-  &:hover::before {
-    background: none !important;
-  }
+  &:hover::before,
   &:active::before {
     background: none !important;
   }
@@ -122,12 +120,8 @@
 
 @utility archive-row-link {
   /* 归档时间轴行：禁用 hover 时 transform/缩放（避免与 expand-animation 或浏览器默认感混淆） */
-  &:hover {
-    transform: none;
-  }
-  &:active {
-    transform: none;
-  }
+  &:hover,
+  &:active,
   &:focus-visible {
     transform: none;
   }
@@ -255,14 +249,12 @@
     animation: icon-scale 1s infinite;
   }
   @keyframes icon-scale {
-    0% {
+    0%,
+    100% {
       transform: scale(1);
     }
     50% {
       transform: scale(1.1);
-    }
-    100% {
-      transform: scale(1);
     }
   }
 
@@ -271,92 +263,6 @@
     scroll-behavior: smooth;
     /* 避免弹窗锁滚动时滚动条消失导致页面左右抖动 */
     scrollbar-gutter: stable;
-  }
-
-  #scheme-switch.theme-switch {
-    width: 52px;
-    height: 28px;
-    padding: 0;
-    border-radius: 999px;
-    overflow: hidden;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
-  }
-  :root.dark #scheme-switch.theme-switch {
-    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
-  }
-
-  #scheme-switch .switch-face {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-  }
-  #scheme-switch .switch-face-light {
-    background: linear-gradient(135deg, #6fb3e0 0%, #bfe3f7 55%, #fdf6e3 100%);
-  }
-  #scheme-switch .switch-face-dark {
-    background: linear-gradient(135deg, #0d1128 0%, #1c1a45 55%, #2f2264 100%);
-  }
-  html[data-theme-mode='light'] #scheme-switch .switch-face-light {
-    opacity: 1;
-  }
-  html[data-theme-mode='dark'] #scheme-switch .switch-face-dark {
-    opacity: 1;
-  }
-
-  /* 星星：仅暗色模式可见 */
-  #scheme-switch .switch-star {
-    position: absolute;
-    display: block;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: #fff;
-    opacity: 0;
-  }
-  html[data-theme-mode='dark'] #scheme-switch .switch-star {
-    opacity: 0.9;
-  }
-  #scheme-switch .switch-star.s1 { top: 6px; left: 9px; }
-  #scheme-switch .switch-star.s2 { top: 15px; left: 16px; width: 3px; height: 3px; }
-  #scheme-switch .switch-star.s3 { top: 8px; left: 22px; }
-  #scheme-switch .switch-star.s4 { top: 18px; left: 7px; }
-
-  /* 滑块：圆形，随主题左右滑动，内含太阳/月亮图标交叉淡入淡出 */
-  #scheme-switch .switch-thumb {
-    position: absolute;
-    top: 3px;
-    left: 3px;
-    width: 22px;
-    height: 22px;
-    border-radius: 50%;
-    background: #fff9ec;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 2;
-  }
-  html[data-theme-mode='dark'] #scheme-switch .switch-thumb {
-    transform: translateX(24px);
-    background: #241f42;
-  }
-
-  #scheme-switch .switch-thumb .theme-icon {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-  }
-  html[data-theme-mode='light'] #scheme-switch .switch-thumb .theme-icon-light {
-    opacity: 1;
-  }
-  html[data-theme-mode='dark'] #scheme-switch .switch-thumb .theme-icon-dark {
-    opacity: 1;
-  }
-  #scheme-switch .switch-icon {
-    font-size: 14px;
   }
 
 }
@@ -373,25 +279,6 @@
     border-left: 2px dashed var(--line-color);
     pointer-events: none;
     transform: translateY(-50%);
-}
-
-/*剧透效果*/
-.custom-md spoiler {
-  --_spoiler-mask: var(--primary);
-  @apply hover:bg-transparent px-1 py-0.5 overflow-hidden rounded-md transition-all duration-150;
-  background-color: var(--_spoiler-mask);
-  box-decoration-break: clone;
-  &:not(:hover) {
-    color: var(--_spoiler-mask);
-    * {
-        color: var(--_spoiler-mask);
-    }
-  }
-}
-
-/* 浅色模式：使用更浅的主题色且完全不透明 */
-:root:not(.dark) .custom-md spoiler {
-  --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
 }
 
 html,
@@ -453,183 +340,6 @@ body {
   border-color: transparent !important;
   box-shadow: none !important;
 }
-#navbar > div {
-  background: transparent !important;
-  border-radius: 0 !important;
-  border: none !important;
-  backdrop-filter: none !important;
-}
-
-/* 导航栏菜单项：字号 16px（搜索触发器单独用组件类，不受此条影响） */
-#navbar .btn-plain {
-  border-radius: 6px !important;
-  color: #000000 !important;
-  font-size: 16px !important;
-  font-weight: 400 !important;
-}
-:root.dark #navbar .btn-plain {
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-#navbar .btn-plain:hover {
-  color: #000000 !important;
-  background-color: transparent !important;
-}
-:root.dark #navbar .btn-plain:hover {
-  color: rgba(255, 255, 255, 0.85) !important;
-  background-color: transparent !important;
-}
-
-#navbar .btn-plain:active {
-  color: #000000 !important;
-  background-color: transparent !important;
-}
-:root.dark #navbar .btn-plain:active {
-  color: rgba(255, 255, 255, 0.85) !important;
-  background-color: transparent !important;
-}
-#navbar .btn-plain:hover::before,
-#navbar .btn-plain:active::before {
-  background: none !important;
-  background-color: transparent !important;
-}
-
-/* Logo / 站点标题：无悬浮背景与字色变化（字色与默认栏一致） */
-#navbar a.navbar-brand-link:hover,
-#navbar a.navbar-brand-link:active {
-  background-color: transparent !important;
-  color: #000000 !important;
-}
-:root.dark #navbar a.navbar-brand-link:hover,
-:root.dark #navbar a.navbar-brand-link:active {
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-/* 深色：品牌链接仍带 .btn-plain，需高于 #navbar .btn-plain:hover/:active，彻底取消悬浮/点击底色与字色变化 */
-:root.dark #navbar a.navbar-brand-link.btn-plain:hover,
-:root.dark #navbar a.navbar-brand-link.btn-plain:active {
-  background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-/* 主题选择器、明暗模式切换：无悬浮背景与字色变化（必须含 .btn-plain，否则盖不过 #navbar .btn-plain:hover） */
-#navbar button.navbar-util-no-hover:hover,
-#navbar button.navbar-util-no-hover:active {
-  background-color: transparent !important;
-  color: #000000 !important;
-}
-#navbar button.navbar-util-no-hover.btn-plain:hover,
-#navbar button.navbar-util-no-hover.btn-plain:active {
-  background-color: transparent !important;
-  color: #000000 !important;
-}
-:root.dark #navbar button.navbar-util-no-hover:hover,
-:root.dark #navbar button.navbar-util-no-hover:active {
-  background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-:root.dark #navbar button.navbar-util-no-hover.btn-plain:hover,
-:root.dark #navbar button.navbar-util-no-hover.btn-plain:active {
-  background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-/* 移动端折叠菜单：双 ID 提高优先级，覆盖 .btn-plain/:active 与 scale-animation 的 ::before 底色 */
-#navbar #nav-menu-switch {
-  -webkit-tap-highlight-color: transparent;
-}
-#navbar #nav-menu-switch:hover,
-#navbar #nav-menu-switch:active,
-#navbar #nav-menu-switch:focus,
-#navbar #nav-menu-switch:focus-visible {
-  background-color: transparent !important;
-  color: #000000 !important;
-}
-:root.dark #navbar #nav-menu-switch:hover,
-:root.dark #navbar #nav-menu-switch:active,
-:root.dark #navbar #nav-menu-switch:focus,
-:root.dark #navbar #nav-menu-switch:focus-visible {
-  background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-#navbar #nav-menu-switch:hover::before,
-#navbar #nav-menu-switch:active::before {
-  background: none !important;
-  background-color: transparent !important;
-}
-
-/* 选中态菜单：悬浮/点击时不改变背景 */
-#navbar .navbar-link-active:hover {
-  color: var(--primary) !important;
-  background-color: transparent !important;
-}
-:root.dark #navbar .navbar-link-active:hover {
-  color: var(--primary) !important;
-  background-color: transparent !important;
-}
-#navbar .navbar-link-active:active {
-  color: var(--primary) !important;
-  background-color: transparent !important;
-}
-:root.dark #navbar .navbar-link-active:active {
-  color: var(--primary) !important;
-  background-color: transparent !important;
-}
-
-/* 下拉菜单：掘金风格小圆角 */
-.dropdown-content {
-  border-radius: 6px !important;
-  border: 1px solid var(--juejin-border) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08) !important;
-}
-:root.dark .dropdown-content {
-  border-color: rgba(255, 255, 255, 0.1) !important;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4) !important;
-}
-
-.dropdown-item {
-  border-radius: 4px !important;
-  margin: 0 4px;
-}
-.dropdown-item:hover {
-  background-color: transparent !important;
-  color: #000000 !important;
-}
-:root.dark .dropdown-item:hover {
-  background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-.dropdown-item:active {
-  background-color: transparent !important;
-  color: #000000 !important;
-}
-:root.dark .dropdown-item:active {
-  background-color: transparent !important;
-  color: rgba(255, 255, 255, 0.85) !important;
-}
-
-.dropdown-item.current-theme-btn:hover {
-  color: var(--primary) !important;
-}
-
-/* =============================================================
- * 文章卡片（PostCard）：紧凑型 + 蓝色标题 hover
- * ============================================================= */
-.post-card-wrapper {
-  border-radius: var(--radius-large) !important;
-}
-
-/* 卡片之间的间距更紧凑 */
-#post-list-container.list-mode {
-  gap: 0.5rem !important;
-}
-
-@media (min-width: 768px) {
-  #post-list-container.list-mode {
-    gap: 0.75rem !important;
-  }
-}
 .btn-regular {
   border-radius: 8px !important;
   font-weight: 500;
@@ -688,306 +398,12 @@ a {
   background: rgba(255, 255, 255, 0.3);
 }
 
-.custom-md .expressive-code .frame {
-  overflow: hidden;
-  min-width: 0;
-  position: relative;
-  --ec-header-h: 2.5rem;
-}
-
-.custom-md .expressive-code pre {
-  overflow-x: visible;
-  overflow-y: hidden;
-  min-width: 0;
-  max-width: 100%;
-  padding-bottom: 2px;
-}
-
-.custom-md .expressive-code pre > code {
-  flex: 1 1 auto !important;
-  min-width: 0 !important;
-  overflow-x: auto !important;
-  max-width: 100%;
-}
-
-.custom-md .expressive-code .frame .header {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: flex-end !important;
-  gap: 0.35rem;
-  position: relative;
-  height: var(--ec-header-h) !important;
-  padding-inline: 1rem !important;
-  color: var(--deep-text);
-  background: color-mix(in srgb, var(--deep-text) 14%, var(--card-bg)) !important;
-  border: 1px solid var(--line-color);
-  border-bottom: 1px solid color-mix(in srgb, var(--deep-text) 18%, transparent);
-  border-radius: var(--header-border-radius, 0.75rem) var(--header-border-radius, 0.75rem) 0 0;
-}
-
-.custom-md .expressive-code .ec-collapse__toggle {
-  display: none !important;
-}
-
-.custom-md .expressive-code .frame .header .title {
-  display: none;
-}
-
-.custom-md .expressive-code .frame .header::before {
-  content: "";
-  position: absolute !important;
-  inset: auto !important;
-  left: 1rem !important;
-  top: 50% !important;
-  width: 0.62rem !important;
-  height: 0.62rem !important;
-  border: none !important;
-  border-radius: 50% !important;
-  background: #ff5f57 !important;
-  box-shadow:
-    1.05rem 0 0 #febc2e,
-    2.1rem 0 0 #28c840 !important;
-  transform: translateY(-50%) !important;
-  opacity: 1 !important;
-  mask-image: none !important;
-  -webkit-mask-image: none !important;
-  pointer-events: none !important;
-}
-
-.custom-md .expressive-code .frame .header .copy,
-.custom-md .expressive-code .frame .header .ec-collapse__header-toggle {
-  position: static;
-  inset-block-start: auto;
-  inset-inline-end: auto;
-  margin: 0;
-}
-
-/* 复制按钮常驻显示（不再依赖鼠标悬浮），图标比 EC 默认的更小一些 */
-.custom-md .expressive-code .frame .header .copy button {
-  width: 1.75rem !important;
-  height: 1.75rem !important;
-  opacity: 0.7 !important;
-  background: transparent !important;
-}
-
-/* 去掉 EC 默认按钮的边框（由 ::before 画出）和悬浮时的背景色块（由内部 div 画出） */
-.custom-md .expressive-code .frame .header .copy button::before {
-  border: none !important;
-}
-
-.custom-md .expressive-code .frame .header .copy button div {
-  opacity: 0 !important;
-}
-
-.custom-md .expressive-code .frame .header .copy button::after {
-  margin: 0.5rem !important;
-}
-
-/* 复制成功后 3 秒内把图标换成对勾（ec-copy-done 由 code-copy-feedback-init.ts 打上/摘掉） */
-.custom-md .expressive-code .frame .header .copy button.ec-copy-done::after {
-  background-color: #22c55e !important;
-  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpolyline%20points%3D%2220%206%209%2017%204%2012%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")
-    !important;
-  -webkit-mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpolyline%20points%3D%2220%206%209%2017%204%2012%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E")
-    !important;
-}
-
-/* 全屏按钮（expressive-code-header-toolbar 注入，点击逻辑见 code-fullscreen-init.ts） */
-.custom-md .expressive-code .frame .header .ec-fullscreen {
-  width: 1.75rem;
-  height: 1.75rem;
-  padding: 0;
-  border: none;
-  cursor: pointer;
-  opacity: 0.7;
-  background-color: currentColor;
-  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%203H5a2%202%200%200%200-2%202v3M21%208V5a2%202%200%200%200-2-2h-3M3%2016v3a2%202%200%200%200%202%202h3M16%2021h3a2%202%200%200%200%202-2v-3%22%2F%3E%3C%2Fsvg%3E")
-    center / 1rem no-repeat;
-}
-
-.custom-md .expressive-code .frame .header .ec-fullscreen:hover {
-  opacity: 1;
-}
-
-/* 铺满浏览器视口时（popover 顶层）：覆盖 UA 的 popover 样式，整块可滚动，标题栏吸顶，图标换成「退出全屏」 */
-.custom-md .expressive-code .frame:popover-open {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  max-height: none;
-  margin: 0;
-  padding: 0;
-  border: none;
-  color: inherit;
-  overflow: auto;
-  overscroll-behavior: contain;
-  background: var(--card-bg);
-  --header-border-radius: 0;
-}
-
-/* 铺满期间锁住文章滚动，并收回 scrollbar-gutter 预留的滚动条槽位，避免出现两条滚动条 */
-:root:has(.custom-md .expressive-code .frame:popover-open) {
-  overflow: hidden;
-  scrollbar-gutter: auto;
-}
-
-.custom-md .expressive-code .frame:popover-open .header {
-  position: sticky;
-  top: 0;
-  z-index: 1;
-}
-
-/* 铺满时代码本就完整显示，折叠按钮无意义，暂时隐藏 */
-.custom-md .expressive-code .frame:popover-open .header .ec-collapse__header-toggle {
-  display: none;
-}
-
-.custom-md .expressive-code .frame:popover-open .header .ec-fullscreen {
-  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%203v3a2%202%200%200%201-2%202H3M21%208h-3a2%202%200%200%201-2-2V3M3%2016h3a2%202%200%200%201%202%202v3M16%2021v-3a2%202%200%200%201%202-2h3%22%2F%3E%3C%2Fsvg%3E");
-}
-
-/* 标题栏已固定展示，代码区顶部不再需要圆角 */
-.custom-md .expressive-code .frame pre,
-.custom-md .expressive-code .frame code {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-/* =============================================================
- * 语言徽章
- * data-language 由 Expressive Code 原生输出在 <pre> 上，徽标直接用伪元素绘制，
- * 不依赖第三方插件（expressive-code-language-badge 的 peer 停留在 core 0.41，
- * 在本项目的 0.43 下 baseStyles 不生效）。
- * 开关来自 <html data-language-badge-enabled>，源头是 expressiveCodeConfig。
- * 视觉上居中显示在标题栏中央（用 top 对齐到 --ec-header-h 的一半）。
- * ============================================================= */
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language]::before {
-  /* 未在下方枚举的语言回退为语言标识本身 */
-  content: attr(data-language);
-  position: absolute;
-  top: calc(var(--ec-header-h) / 2);
-  left: 50%;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  /* 左侧留出图标位；未枚举的语言没有 background-image，留白也不突兀 */
-  padding: 0.2rem 0.5rem 0.2rem 1.55rem;
-  color: var(--deep-text);
-  background-repeat: no-repeat;
-  background-position: 0.45rem center;
-  background-size: 0.85rem 0.85rem;
-  font-family: var(--font-family-fallback);
-  font-size: 0.7rem;
-  font-weight: 600;
-  line-height: 1.4;
-  text-transform: capitalize;
-  white-space: nowrap;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-}
-
-/* 铺满视口时 frame 自身成为滚动容器，absolute 的徽标会随内容滚走；
- * 此时 frame 与视口重合，改 fixed 即可钉在吸顶标题栏中央 */
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  .frame:popover-open
-  pre[data-language]::before {
-  position: fixed;
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="python"]::before {
-  content: "Python";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%233776AB%22%20d%3D%22m14.25.18l.9.2l.73.26l.59.3l.45.32l.34.34l.25.34l.16.33l.1.3l.04.26l.02.2l-.01.13V8.5l-.05.63l-.13.55l-.21.46l-.26.38l-.3.31l-.33.25l-.35.19l-.35.14l-.33.1l-.3.07l-.26.04l-.21.02H8.77l-.69.05l-.59.14l-.5.22l-.41.27l-.33.32l-.27.35l-.2.36l-.15.37l-.1.35l-.07.32l-.04.27l-.02.21v3.06H3.17l-.21-.03l-.28-.07l-.32-.12l-.35-.18l-.36-.26l-.36-.36l-.35-.46l-.32-.59l-.28-.73l-.21-.88l-.14-1.05l-.05-1.23l.06-1.22l.16-1.04l.24-.87l.32-.71l.36-.57l.4-.44l.42-.33l.42-.24l.4-.16l.36-.1l.32-.05l.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75l-.02-.37l.05-.34l.11-.31l.17-.28l.25-.26l.31-.23l.38-.2l.44-.18l.51-.15l.58-.12l.64-.1l.71-.06l.77-.04l.84-.02l1.27.05zm-6.3%201.98l-.23.33l-.08.41l.08.41l.23.34l.33.22l.41.09l.41-.09l.33-.22l.23-.34l.08-.41l-.08-.41l-.23-.33l-.33-.22l-.41-.09l-.41.09zm13.09%203.95l.28.06l.32.12l.35.18l.36.27l.36.35l.35.47l.32.59l.28.73l.21.88l.14%201.04l.05%201.23l-.06%201.23l-.16%201.04l-.24.86l-.32.71l-.36.57l-.4.45l-.42.33l-.42.24l-.4.16l-.36.09l-.32.05l-.24.02l-.16-.01h-8.22v.82h5.84l.01%202.76l.02.36l-.05.34l-.11.31l-.17.29l-.25.25l-.31.24l-.38.2l-.44.17l-.51.15l-.58.13l-.64.09l-.71.07l-.77.04l-.84.01l-1.27-.04l-1.07-.14l-.9-.2l-.73-.25l-.59-.3l-.45-.33l-.34-.34l-.25-.34l-.16-.33l-.1-.3l-.04-.25l-.02-.2l.01-.13v-5.34l.05-.64l.13-.54l.21-.46l.26-.38l.3-.32l.33-.24l.35-.2l.35-.14l.33-.1l.3-.06l.26-.04l.21-.02l.13-.01h5.84l.69-.05l.59-.14l.5-.21l.41-.28l.33-.32l.27-.35l.2-.36l.15-.36l.1-.35l.07-.32l.04-.28l.02-.21V6.07h2.09l.14.01zm-6.47%2014.25l-.23.33l-.08.41l.08.41l.23.33l.33.23l.41.08l.41-.08l.33-.23l.23-.33l.08-.41l-.08-.41l-.23-.33l-.33-.23l-.41-.08l-.41.08z%22%2F%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="bash"]::before {
-  content: "Shell";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23E9713B%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22m7%2011l2-2l-2-2m4%206h4%22%2F%3E%3Crect%20width%3D%2218%22%20height%3D%2218%22%20x%3D%223%22%20y%3D%223%22%20rx%3D%222%22%20ry%3D%222%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="powershell"]::before {
-  content: "PowerShell";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%235391FE%22%20d%3D%22M23.181%202.974c.568%200%20.923.463.792%201.035l-3.659%2015.982c-.13.572-.697%201.035-1.265%201.035H.819c-.568%200-.923-.463-.792-1.035L3.686%204.009c.13-.572.697-1.035%201.265-1.035zm-8.375%209.346c.251-.394.227-.905-.09-1.243L9.122%205.125c-.38-.404-1.037-.407-1.466-.003c-.429.402-.468%201.056-.088%201.46l4.662%204.96v.11l-7.42%205.374c-.45.327-.533.977-.187%201.453s.991.597%201.44.27l8.229-5.91c.28-.196.438-.365.514-.52zm-2.796%204.399a.93.93%200%200%200-.934.923c0%20.51.418.923.934.923h4.433a.93.93%200%200%200%20.934-.923a.93.93%200%200%200-.934-.923z%22%2F%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="nginx"]::before {
-  content: "Nginx";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23009639%22%20d%3D%22M12%200L1.605%206v12L12%2024l10.395-6V6zm6%2016.59c0%20.705-.646%201.29-1.529%201.29c-.631%200-1.351-.255-1.801-.81l-6-7.141v6.66c0%20.721-.57%201.29-1.274%201.29H7.32c-.721%200-1.29-.6-1.29-1.29V7.41c0-.705.63-1.29%201.5-1.29c.646%200%201.38.255%201.83.81l5.97%207.141V7.41c0-.721.6-1.29%201.29-1.29h.075c.72%200%201.29.6%201.29%201.29v9.18z%22%2F%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="json"]::before {
-  content: "JSON";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%23E0A030%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%2F%3E%3Cpath%20d%3D%22M14%202v5a1%201%200%200%200%201%201h5m-10%204.5L8%2015l2%202.5m4-5l2%202.5l-2%202.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="toml"]::before {
-  content: "TOML";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cpath%20fill%3D%22%23B4643A%22%20d%3D%22M.014%200h5.34v2.652H2.888v18.681h2.468V24H.015zm17.622%205.049v2.78h-4.274v12.935h-3.008V7.83H6.059V5.05zM23.986%2024h-5.34v-2.652h2.467V2.667h-2.468V0h5.34v24Z%22%2F%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="tex"]::before {
-  content: "TeX";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%232AA198%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%2F%3E%3Cpath%20d%3D%22M14%202v5a1%201%200%200%200%201%201h5m-10%204.5L8%2015l2%202.5m4-5l2%202.5l-2%202.5%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="ini"]::before {
-  content: "INI";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238A919F%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M9.671%204.136a2.34%202.34%200%200%201%204.659%200a2.34%202.34%200%200%200%203.319%201.915a2.34%202.34%200%200%201%202.33%204.033a2.34%202.34%200%200%200%200%203.831a2.34%202.34%200%200%201-2.33%204.033a2.34%202.34%200%200%200-3.319%201.915a2.34%202.34%200%200%201-4.659%200a2.34%202.34%200%200%200-3.32-1.915a2.34%202.34%200%200%201-2.33-4.033a2.34%202.34%200%200%200%200-3.831A2.34%202.34%200%200%201%206.35%206.051a2.34%202.34%200%200%200%203.319-1.915%22%2F%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2212%22%20r%3D%223%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-
-html[data-language-badge-enabled="true"]
-  .custom-md
-  .expressive-code
-  pre[data-language="txt"]::before {
-  content: "Text";
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%3E%3Cg%20fill%3D%22none%22%20stroke%3D%22%238A919F%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%20stroke-width%3D%222%22%3E%3Cpath%20d%3D%22M6%2022a2%202%200%200%201-2-2V4a2%202%200%200%201%202-2h8a2.4%202.4%200%200%201%201.704.706l3.588%203.588A2.4%202.4%200%200%201%2020%208v12a2%202%200%200%201-2%202z%22%2F%3E%3Cpath%20d%3D%22M14%202v5a1%201%200%200%200%201%201h5M10%209H8m8%204H8m8%204H8%22%2F%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-
-#post-cover,
-.custom-md img {
-  border-radius: 4px !important;
-}
-
 .widget [class*="text-"] {
   letter-spacing: 0;
 }
 
 .widget .announcement {
   font-size: 0.875rem;
-}
-
-.btn-card {
-  border-radius: 4px !important;
 }
 
 footer {
@@ -1013,34 +429,6 @@ input[type="search"] {
   border-radius: 6px !important;
 }
 
-.custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
-  color: var(--juejin-primary);
-  text-decoration: none;
-}
-:root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
-  color: var(--juejin-primary);
-}
-
-@media (min-width: 1024px) {
-  /* 主网格内卡片之间的垂直间距更紧凑 */
-  #main-grid {
-    gap: 0.75rem !important;
-  }
-}
-
-.custom-md h1,
-.custom-md h2,
-.custom-md h3,
-.custom-md h4 {
-  color: var(--juejin-text-primary);
-}
-:root.dark .custom-md h1,
-:root.dark .custom-md h2,
-:root.dark .custom-md h3,
-:root.dark .custom-md h4 {
-  color: rgba(255, 255, 255, 0.95);
-}
-
 .widget-title::before,
 widget-layout .widget-title::before {
   background-color: var(--juejin-primary) !important;
@@ -1049,200 +437,12 @@ widget-layout .widget-title::before {
   border-radius: 2px !important;
 }
 
-.custom-md h1 {
-  font-size: 1.875rem !important;
-  font-weight: 700 !important;
-  border-bottom: 1px solid var(--juejin-border);
-  padding-bottom: 0.5rem;
-  margin-top: 1.5rem;
-  margin-bottom: 1rem;
-}
-.custom-md h2 {
-  font-size: 1.5rem !important;
-  font-weight: 700 !important;
-  margin-top: 2rem;
-  margin-bottom: 0.75rem;
-}
-.custom-md h3 {
-  font-size: 1.25rem !important;
-  font-weight: 600 !important;
-  margin-top: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-:root.dark .custom-md h1 {
-  border-bottom-color: rgba(255, 255, 255, 0.1);
-}
-
-/* 文章引用块：掘金风格的浅蓝左边框（左侧条用渐变条绘制，避免与 prose border 叠层或非整高条） */
-.custom-md blockquote {
-  display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  align-items: center;
-  column-gap: 0.75rem;
-  border-left: 4px solid var(--juejin-primary) !important;
-  border-inline-start: 4px solid var(--juejin-primary) !important;
-  background: color-mix(in oklch, var(--primary) 5%, white) !important;
-  border-radius: 3px !important;
-  margin: 1rem 0 !important;
-  padding: 0.75rem 1rem !important;
-  color: var(--juejin-text-secondary);
-}
-
-.custom-md blockquote::before {
-  content: "i";
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.125rem;
-  height: 1.125rem;
-  border-radius: 999px;
-  background: color-mix(in oklch, var(--primary) 70%, white);
-  color: #fff;
-  font-size: 0.75rem;
-  font-weight: 700;
-  font-style: normal;
-  line-height: 1;
-}
-
-.custom-md blockquote > * {
-  grid-column: 2;
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
-}
-
-.custom-md blockquote > * + * {
-  margin-top: 0.5rem !important;
-}
-
-/* 去掉 tailwind typography 给 blockquote 加的弯引号和斜体 */
-.custom-md blockquote p:first-of-type::before,
-.custom-md blockquote p:last-of-type::after {
-  content: none;
-}
-
-.custom-md blockquote p {
-  font-style: normal;
-}
-
-:root.dark .custom-md blockquote {
-  background: color-mix(in oklch, var(--primary) 12%, #111827) !important;
-  color: rgba(255, 255, 255, 0.75);
-}
-
-/* 文章内联代码 */
-.custom-md :not(pre) > code {
-  background: var(--juejin-tag-bg) !important;
-  color: #c7254e !important;
-  border-radius: 3px !important;
-  padding: 2px 6px !important;
-  font-size: 0.875em !important;
-  border: none !important;
-}
-:root.dark .custom-md :not(pre) > code {
-  background: rgba(255, 255, 255, 0.08) !important;
-  color: #ff7b85 !important;
-}
-
 #post-cover {
   border-radius: var(--radius-large) !important;
 }
 
-.custom-md table {
-  border-collapse: collapse;
-  border: 1px solid var(--juejin-border);
-  border-radius: 4px;
-  overflow: hidden;
-}
-.custom-md th {
-  background: var(--juejin-tag-bg);
-  font-weight: 600;
-}
-.custom-md th,
-.custom-md td {
-  border: 1px solid var(--juejin-border);
-  padding: 0.5rem 0.75rem;
-}
-
-@media (max-width: 767px) {
-  .custom-md table {
-    display: table !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    table-layout: fixed !important;
-    margin-left: 0;
-    margin-right: 0;
-    overflow: hidden;
-    font-size: 0.875rem;
-  }
-
-  .custom-md th,
-  .custom-md td {
-    min-width: 0;
-    padding: 0.5rem 0.625rem;
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .custom-md th:first-child,
-  .custom-md td:first-child {
-    width: 5.75rem;
-  }
-
-  .custom-md th:last-child,
-  .custom-md td:last-child {
-    width: 5.75rem;
-  }
-
-  .custom-md td a {
-    overflow-wrap: anywhere;
-    word-break: break-word;
-  }
-
-  .license-container {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .license-container > a {
-    display: block;
-    max-width: 100%;
-    overflow-wrap: anywhere;
-    word-break: break-all;
-  }
-
-  .license-container > .flex {
-    flex-wrap: wrap;
-    gap: 0.75rem 1rem;
-  }
-}
-
-:root.dark .custom-md table,
-:root.dark .custom-md th,
-:root.dark .custom-md td {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-:root.dark .custom-md th {
-  background: rgba(255, 255, 255, 0.06);
-}
-
-/* 移动端置顶卡：仅左侧强调条用主色，其余三边与普通卡片同色 */
-@media (max-width: 767px) {
-  #post-list-container .post-card-wrapper.pinned.card-base {
-    border-top-color: var(--juejin-border) !important;
-    border-right-color: var(--juejin-border) !important;
-    border-bottom-color: var(--juejin-border) !important;
-    box-shadow: none !important;
-  }
-  :root.dark #post-list-container .post-card-wrapper.pinned.card-base {
-    border-top-color: rgba(255, 255, 255, 0.08) !important;
-    border-right-color: rgba(255, 255, 255, 0.08) !important;
-    border-bottom-color: rgba(255, 255, 255, 0.08) !important;
-  }
-}
-
 .btn-card {
+  border-radius: 4px !important;
   border: 1px solid var(--juejin-border) !important;
   background: var(--card-bg) !important;
 }
@@ -1259,47 +459,6 @@ widget-layout .widget-title::before {
   background: color-mix(in oklch, var(--primary) 6%, transparent) !important;
   box-shadow: none !important;
 }
-@media (min-width: 768px) {
-  /* 列表外壳：单一白卡，无边框改用柔和阴影 */
-  #post-list-container.list-mode {
-    background: var(--card-bg) !important;
-    border: 1px solid transparent;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px -6px rgba(0, 0, 0, 0.08) !important;
-    border-radius: var(--radius-large) !important;
-    padding: 0 !important;
-    gap: 0 !important;
-  }
-  :root.dark #post-list-container.list-mode {
-    border-color: rgba(255, 255, 255, 0.08) !important;
-    box-shadow: none !important;
-  }
-
-  /* 每条卡片：去边框 + 行分割线 */
-  #post-list-container.list-mode .post-card-wrapper {
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    border-bottom: 1px solid var(--juejin-border) !important;
-    flex-direction: row !important;
-    align-items: stretch !important;
-  }
-  :root.dark #post-list-container.list-mode .post-card-wrapper {
-    border-bottom-color: rgba(255, 255, 255, 0.06) !important;
-  }
-  #post-list-container.list-mode .post-card-wrapper:last-child {
-    border-bottom: none !important;
-  }
-
-}
-
-/* 移动端：保留竖排但缩小行高，封面图更窄 */
-@media (max-width: 767px) {
-  #post-list-container.list-mode .post-card-wrapper {
-    border-radius: var(--radius-large) !important;
-  }
-}
-
 .footer .border-dashed {
   border-style: solid !important;
   border-color: var(--juejin-border) !important;
@@ -1313,16 +472,4 @@ widget-layout .widget-title::before {
   #main-grid {
     gap: 16px !important;
   }
-}
-
-#navbar .navbar-link-active {
-  color: var(--primary) !important;
-}
-
-#post-list-container {
-  margin-bottom: 1rem !important;
-}
-#navbar .btn-plain.h-11 {
-  height: 2.5rem !important;
-  padding: 0 0.75rem !important;
 }

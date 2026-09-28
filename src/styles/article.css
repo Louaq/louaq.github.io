@@ -1,0 +1,222 @@
+/* 文章正文（.custom-md）的掘金风格覆盖：剧透、图片、链接、标题、引用块、行内代码、表格。
+   无层级，优先于 markdown.css 的 base 层。本文件由 Layout.astro 单独引入、作为独立 CSS 模块编译，
+   @apply 需先 @reference 取得 utilities 上下文。 */
+@reference "tailwindcss";
+
+/*剧透效果*/
+.custom-md spoiler {
+  --_spoiler-mask: var(--primary);
+  @apply hover:bg-transparent px-1 py-0.5 overflow-hidden rounded-md transition-all duration-150;
+  background-color: var(--_spoiler-mask);
+  box-decoration-break: clone;
+  &:not(:hover) {
+    color: var(--_spoiler-mask);
+    * {
+        color: var(--_spoiler-mask);
+    }
+  }
+}
+
+/* 浅色模式：使用更浅的主题色且完全不透明 */
+:root:not(.dark) .custom-md spoiler {
+  --_spoiler-mask: color-mix(in oklch, var(--primary) 55%, white 45%);
+}
+
+.custom-md img {
+  border-radius: 4px !important;
+}
+
+.custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
+  color: var(--juejin-primary);
+  text-decoration: none;
+}
+:root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
+  color: var(--juejin-primary);
+}
+
+.custom-md h1,
+.custom-md h2,
+.custom-md h3,
+.custom-md h4 {
+  color: var(--juejin-text-primary);
+}
+:root.dark .custom-md h1,
+:root.dark .custom-md h2,
+:root.dark .custom-md h3,
+:root.dark .custom-md h4 {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.custom-md h1 {
+  font-size: 1.875rem !important;
+  font-weight: 700 !important;
+  border-bottom: 1px solid var(--juejin-border);
+  padding-bottom: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+}
+.custom-md h2 {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+.custom-md h3 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+:root.dark .custom-md h1 {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+/* 文章引用块：掘金风格的浅蓝左边框（左侧条用渐变条绘制，避免与 prose border 叠层或非整高条） */
+.custom-md blockquote {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  column-gap: 0.75rem;
+  border-left: 4px solid var(--juejin-primary) !important;
+  border-inline-start: 4px solid var(--juejin-primary) !important;
+  background: color-mix(in oklch, var(--primary) 5%, white) !important;
+  border-radius: 3px !important;
+  margin: 1rem 0 !important;
+  padding: 0.75rem 1rem !important;
+  color: var(--juejin-text-secondary);
+}
+
+.custom-md blockquote::before {
+  content: "i";
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.125rem;
+  height: 1.125rem;
+  border-radius: 999px;
+  background: color-mix(in oklch, var(--primary) 70%, white);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  font-style: normal;
+  line-height: 1;
+}
+
+.custom-md blockquote > * {
+  grid-column: 2;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.custom-md blockquote > * + * {
+  margin-top: 0.5rem !important;
+}
+
+/* 去掉 tailwind typography 给 blockquote 加的弯引号和斜体 */
+.custom-md blockquote p:first-of-type::before,
+.custom-md blockquote p:last-of-type::after {
+  content: none;
+}
+
+.custom-md blockquote p {
+  font-style: normal;
+}
+
+:root.dark .custom-md blockquote {
+  background: color-mix(in oklch, var(--primary) 12%, #111827) !important;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* 文章内联代码 */
+.custom-md :not(pre) > code {
+  background: var(--juejin-tag-bg) !important;
+  color: #c7254e !important;
+  border-radius: 3px !important;
+  padding: 2px 6px !important;
+  font-size: 0.875em !important;
+  border: none !important;
+}
+:root.dark .custom-md :not(pre) > code {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #ff7b85 !important;
+}
+
+.custom-md table {
+  border-collapse: collapse;
+  border: 1px solid var(--juejin-border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.custom-md th {
+  background: var(--juejin-tag-bg);
+  font-weight: 600;
+}
+.custom-md th,
+.custom-md td {
+  border: 1px solid var(--juejin-border);
+  padding: 0.5rem 0.75rem;
+}
+
+@media (max-width: 767px) {
+  .custom-md table {
+    display: table !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    table-layout: fixed !important;
+    margin-left: 0;
+    margin-right: 0;
+    overflow: hidden;
+    font-size: 0.875rem;
+  }
+
+  .custom-md th,
+  .custom-md td {
+    min-width: 0;
+    padding: 0.5rem 0.625rem;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .custom-md th:first-child,
+  .custom-md td:first-child {
+    width: 5.75rem;
+  }
+
+  .custom-md th:last-child,
+  .custom-md td:last-child {
+    width: 5.75rem;
+  }
+
+  .custom-md td a {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  .license-container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .license-container > a {
+    display: block;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-all;
+  }
+
+  .license-container > .flex {
+    flex-wrap: wrap;
+    gap: 0.75rem 1rem;
+  }
+}
+
+:root.dark .custom-md table,
+:root.dark .custom-md th,
+:root.dark .custom-md td {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+:root.dark .custom-md th {
+  background: rgba(255, 255, 255, 0.06);
+}

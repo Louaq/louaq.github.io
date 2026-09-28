@@ -1,0 +1,127 @@
+/* 导航栏与下拉菜单的掘金风格覆盖（无层级，优先于 navbar.css 的 base 层） */
+#navbar > div {
+  background: transparent !important;
+  border-radius: 0 !important;
+  border: none !important;
+  backdrop-filter: none !important;
+}
+
+/* 导航栏菜单项：字号 16px（搜索触发器单独用组件类，不受此条影响） */
+#navbar .btn-plain {
+  border-radius: 6px !important;
+  color: #000000 !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+}
+:root.dark #navbar .btn-plain {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+#navbar .btn-plain:hover,
+#navbar .btn-plain:active {
+  color: #000000 !important;
+  background-color: transparent !important;
+}
+:root.dark #navbar .btn-plain:hover,
+:root.dark #navbar .btn-plain:active {
+  color: rgba(255, 255, 255, 0.85) !important;
+  background-color: transparent !important;
+}
+#navbar .btn-plain:hover::before,
+#navbar .btn-plain:active::before {
+  background: none !important;
+}
+
+/* Logo / 站点标题：无悬浮背景与字色变化（字色与默认栏一致） */
+#navbar a.navbar-brand-link:hover,
+#navbar a.navbar-brand-link:active {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+:root.dark #navbar a.navbar-brand-link:hover,
+:root.dark #navbar a.navbar-brand-link:active {
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 深色：品牌链接仍带 .btn-plain，需高于 #navbar .btn-plain:hover/:active，彻底取消悬浮/点击底色与字色变化 */
+:root.dark #navbar a.navbar-brand-link.btn-plain:hover,
+:root.dark #navbar a.navbar-brand-link.btn-plain:active {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 主题选择器、明暗模式切换：无悬浮背景与字色变化（必须含 .btn-plain，否则盖不过 #navbar .btn-plain:hover） */
+#navbar button.navbar-util-no-hover:hover,
+#navbar button.navbar-util-no-hover:active,
+#navbar button.navbar-util-no-hover.btn-plain:hover,
+#navbar button.navbar-util-no-hover.btn-plain:active {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+:root.dark #navbar button.navbar-util-no-hover:hover,
+:root.dark #navbar button.navbar-util-no-hover:active,
+:root.dark #navbar button.navbar-util-no-hover.btn-plain:hover,
+:root.dark #navbar button.navbar-util-no-hover.btn-plain:active {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+/* 移动端折叠菜单：双 ID 提高优先级，覆盖 .btn-plain/:active 与 scale-animation 的 ::before 底色 */
+#navbar #nav-menu-switch {
+  -webkit-tap-highlight-color: transparent;
+}
+#navbar #nav-menu-switch:hover,
+#navbar #nav-menu-switch:active,
+#navbar #nav-menu-switch:focus,
+#navbar #nav-menu-switch:focus-visible {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+:root.dark #navbar #nav-menu-switch:hover,
+:root.dark #navbar #nav-menu-switch:active,
+:root.dark #navbar #nav-menu-switch:focus,
+:root.dark #navbar #nav-menu-switch:focus-visible {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+#navbar #nav-menu-switch:hover::before,
+#navbar #nav-menu-switch:active::before {
+  background: none !important;
+}
+
+/* 选中态菜单：主色，悬浮/点击时不改变背景（:root.dark 版本用于压过上面深色的 .btn-plain:hover/:active） */
+#navbar .navbar-link-active {
+  color: var(--primary) !important;
+}
+#navbar .navbar-link-active:hover,
+#navbar .navbar-link-active:active,
+:root.dark #navbar .navbar-link-active:hover,
+:root.dark #navbar .navbar-link-active:active {
+  color: var(--primary) !important;
+  background-color: transparent !important;
+}
+
+#navbar .btn-plain.h-11 {
+  height: 2.5rem !important;
+  padding: 0 0.75rem !important;
+}
+
+/* 下拉菜单项：掘金风格小圆角 */
+.dropdown-item {
+  border-radius: 4px !important;
+  margin: 0 4px;
+}
+.dropdown-item:hover,
+.dropdown-item:active {
+  background-color: transparent !important;
+  color: #000000 !important;
+}
+:root.dark .dropdown-item:hover,
+:root.dark .dropdown-item:active {
+  background-color: transparent !important;
+  color: rgba(255, 255, 255, 0.85) !important;
+}
+
+.dropdown-item.current-theme-btn:hover {
+  color: var(--primary) !important;
+}
