@@ -50,12 +50,12 @@ export function pluginHeaderToolbar() {
 
 				// 折叠插件只在 has-title/is-terminal 时才会往 header 里塞按钮，
 				// 其余情况从底部悬浮按钮克隆一份挪进 header
-				const alreadyInHeader = header.children.some(
+				let headerToggle = header.children.find(
 					(node) =>
 						isElement(node, "button") &&
 						hasClass(node, "ec-collapse__header-toggle"),
 				);
-				if (!alreadyInHeader) {
+				if (!headerToggle) {
 					const floatingToggle = findFirst(
 						root,
 						(node) =>
@@ -63,7 +63,7 @@ export function pluginHeaderToolbar() {
 							hasClass(node, "ec-collapse__toggle"),
 					);
 					if (floatingToggle) {
-						header.children.push({
+						headerToggle = {
 							type: "element",
 							tagName: "button",
 							properties: {
@@ -71,8 +71,15 @@ export function pluginHeaderToolbar() {
 								className: ["ec-collapse__header-toggle"],
 							},
 							children: floatingToggle.children,
-						});
+						};
+						header.children.push(headerToggle);
 					}
+				}
+				// 只保留图标，去掉「展开 / 折叠」文字
+				if (headerToggle) {
+					headerToggle.children = headerToggle.children.filter(
+						(node) => !isElement(node, "span"),
+					);
 				}
 
 				// 全屏按钮：点击逻辑见 code-fullscreen-init.ts

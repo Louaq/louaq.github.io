@@ -150,8 +150,6 @@ export const zh_CN: Translation = {
 	[Key.sitemapPages]: "页面",
 
 	// 代码块折叠配置
-	[Key.codeCollapsibleShowMore]: "展开更多",
-	[Key.codeCollapsibleShowLess]: "收起代码",
 	[Key.codeCollapsibleExpanded]: "代码块已展开",
-	[Key.codeCollapsibleCollapsed]: "代码块已收起",
+	[Key.codeCollapsibleCollapsed]: "代码块已折叠",
 };

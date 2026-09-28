@@ -48,8 +48,6 @@ const collapsibleOptions =
 				lineThreshold: collapsibleConfig.lineThreshold ?? 15,
 				previewLines: collapsibleConfig.previewLines ?? 8,
 				defaultCollapsed: collapsibleConfig.defaultCollapsed ?? true,
-				expandButtonText: i18n(I18nKey.codeCollapsibleShowMore),
-				collapseButtonText: i18n(I18nKey.codeCollapsibleShowLess),
 				expandedAnnouncement: i18n(I18nKey.codeCollapsibleExpanded),
 				collapsedAnnouncement: i18n(I18nKey.codeCollapsibleCollapsed),
 			}

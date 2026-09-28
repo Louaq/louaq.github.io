@@ -147,8 +147,6 @@ enum I18nKey {
 	sitemapPages = "sitemapPages",
 
 	// 代码块折叠
-	codeCollapsibleShowMore = "codeCollapsibleShowMore",
-	codeCollapsibleShowLess = "codeCollapsibleShowLess",
 	codeCollapsibleExpanded = "codeCollapsibleExpanded",
 	codeCollapsibleCollapsed = "codeCollapsibleCollapsed",
 
