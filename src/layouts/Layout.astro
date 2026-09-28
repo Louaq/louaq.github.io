@@ -233,6 +233,7 @@ const collapsiblePreviewLines =
   import { initMarkdownImages } from "@/utils/markdown-image-init";
   import { initPostPageTOC } from "@/utils/post-page-toc-init";
   import { initCodeCopyFeedback } from "@/utils/code-copy-feedback-init";
+  import { initCodeFullscreen } from "@/utils/code-fullscreen-init";
   import { warmUpDeferredBlocks } from "@/utils/deferred-block-warmup";
   import { initPromoStrip } from "@/utils/promo-init";
 
@@ -241,6 +242,7 @@ const collapsiblePreviewLines =
   initPostPageTOC();
   initMarkdownImages();
   initCodeCopyFeedback();
+  initCodeFullscreen();
   initPromoStrip();
   // 空闲期让 content-visibility: auto 的重型块各渲染一次，记住真实尺寸，
   // 消除目录点击/hash 跳转的落点估值误差（见模块头注释）

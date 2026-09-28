@@ -792,6 +792,62 @@ a {
     !important;
 }
 
+/* 全屏按钮（expressive-code-header-toolbar 注入，点击逻辑见 code-fullscreen-init.ts） */
+.custom-md .expressive-code .frame .header .ec-fullscreen {
+  width: 1.75rem;
+  height: 1.75rem;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  opacity: 0.7;
+  background-color: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%203H5a2%202%200%200%200-2%202v3M21%208V5a2%202%200%200%200-2-2h-3M3%2016v3a2%202%200%200%200%202%202h3M16%2021h3a2%202%200%200%200%202-2v-3%22%2F%3E%3C%2Fsvg%3E")
+    center / 1rem no-repeat;
+}
+
+.custom-md .expressive-code .frame .header .ec-fullscreen:hover {
+  opacity: 1;
+}
+
+/* 铺满浏览器视口时（popover 顶层）：覆盖 UA 的 popover 样式，整块可滚动，标题栏吸顶，图标换成「退出全屏」 */
+.custom-md .expressive-code .frame:popover-open {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  color: inherit;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: var(--card-bg);
+  --header-border-radius: 0;
+}
+
+/* 铺满期间锁住文章滚动，并收回 scrollbar-gutter 预留的滚动条槽位，避免出现两条滚动条 */
+:root:has(.custom-md .expressive-code .frame:popover-open) {
+  overflow: hidden;
+  scrollbar-gutter: auto;
+}
+
+.custom-md .expressive-code .frame:popover-open .header {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+/* 铺满时代码本就完整显示，折叠按钮无意义，暂时隐藏 */
+.custom-md .expressive-code .frame:popover-open .header .ec-collapse__header-toggle {
+  display: none;
+}
+
+.custom-md .expressive-code .frame:popover-open .header .ec-fullscreen {
+  mask-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22black%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpath%20d%3D%22M8%203v3a2%202%200%200%201-2%202H3M21%208h-3a2%202%200%200%201-2-2V3M3%2016h3a2%202%200%200%201%202%202v3M16%2021v-3a2%202%200%200%201%202-2h3%22%2F%3E%3C%2Fsvg%3E");
+}
+
 /* 标题栏已固定展示，代码区顶部不再需要圆角 */
 .custom-md .expressive-code .frame pre,
 .custom-md .expressive-code .frame code {
@@ -833,6 +889,16 @@ html[data-language-badge-enabled="true"]
   white-space: nowrap;
   pointer-events: none;
   transform: translate(-50%, -50%);
+}
+
+/* 铺满视口时 frame 自身成为滚动容器，absolute 的徽标会随内容滚走；
+ * 此时 frame 与视口重合，改 fixed 即可钉在吸顶标题栏中央 */
+html[data-language-badge-enabled="true"]
+  .custom-md
+  .expressive-code
+  .frame:popover-open
+  pre[data-language]::before {
+  position: fixed;
 }
 
 html[data-language-badge-enabled="true"]

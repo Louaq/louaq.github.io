@@ -141,12 +141,16 @@ export default defineConfig({
 			themes: [expressiveCodeConfig.darkTheme, expressiveCodeConfig.lightTheme],
 			useDarkModeMediaQuery: false,
 			themeCssSelector: (theme) => `[data-theme='${theme.name}']`,
+			// 去掉主题里所有斜体 token（catppuccin 的注释、关键字等默认斜体）
+			customizeTheme: (theme) => {
+				for (const { settings } of theme.settings) {
+					if (settings.fontStyle)
+						settings.fontStyle = settings.fontStyle
+							.replace("italic", "")
+							.trim();
+				}
+			},
 			plugins: [
-				// 语言徽章不用第三方插件：EC 原生就在 <pre> 上输出 data-language，
-				// 徽标由 main.css 的 [data-language]::before 绘制，开关见 Layout 的
-				// data-language-badge-enabled（源头仍是 expressiveCodeConfig.pluginLanguageBadge.enable）。
-				// expressive-code-language-badge@1.1.0 的 peer 为 core ^0.41.3，
-				// 在本项目的 core 0.43.1 下 baseStyles 不会被采纳，徽标画不出来。
 				pluginLineNumbers(),
 				// pluginCollapsible 配置 - 从expressiveCodeConfig读取设置，使用i18n文本
 				...(collapsiblePlugin ? [collapsiblePlugin] : []),
