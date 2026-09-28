@@ -89,7 +89,6 @@ export type SiteConfig = {
 	};
 
 	// 文章密码保护配置
-	postPassword?: string; // 当文章的 password 字段设置为 true 时使用的默认密码
 	postPasswordHint?: string; // 密码提示文案，如 "示例文章密码123456"
 };
 

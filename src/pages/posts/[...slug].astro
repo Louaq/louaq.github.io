@@ -186,7 +186,7 @@ const jsonLd = {
             hint={siteConfig.postPasswordHint ?? ""}
           />
           <EncryptedContent
-            password={typeof entry.data.password === 'boolean' ? (siteConfig.postPassword ?? "") : entry.data.password}
+            password={typeof entry.data.password === 'boolean' ? import.meta.env.PASSWORD : entry.data.password}
           >
             {/* 加密文章：过期提示仅解锁后显示 */}
             {shouldShowOutdatedNotice && (

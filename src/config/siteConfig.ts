@@ -126,8 +126,7 @@ export const siteConfig: SiteConfig = {
 	font: fontConfig,
 
 	// 文章密码保护配置
-	// 当文章的password字段设置为true时，将使用此密码
-	postPassword: "12345678yy",
+	// 当文章的password字段设置为true时，使用环境变量 PASSWORD（.env / Netlify）作为密码
 	// 密码提示文案，留空则不显示提示
 	postPasswordHint: "",
 
