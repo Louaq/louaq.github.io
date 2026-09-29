@@ -29,6 +29,7 @@ jobs:
           PUBLIC_MEILISEARCH_SEARCH_KEY: ${{ secrets.PUBLIC_MEILISEARCH_SEARCH_KEY }}
           PUBLIC_MEILISEARCH_INDEX_NAME: ${{ secrets.PUBLIC_MEILISEARCH_INDEX_NAME }}
 
+
       - name: Rsync to server
         run: |
           install -m 600 -D /dev/null ~/.ssh/id_ed25519
