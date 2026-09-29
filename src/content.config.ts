@@ -26,12 +26,6 @@ const postsCollection = defineCollection({
 		homeCarousel: z.boolean().optional().default(false),
 		homeCarouselOrder: z.number().int().optional(),
 		homeCarouselImage: z.string().optional().default(""),
-
-		/* For internal use */
-		prevTitle: z.string().default(""),
-		prevSlug: z.string().default(""),
-		nextTitle: z.string().default(""),
-		nextSlug: z.string().default(""),
 	}),
 });
 

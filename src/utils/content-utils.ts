@@ -29,21 +29,6 @@ function getRawSortedPosts(): Promise<PostEntry[]> {
 			return dateA > dateB ? -1 : 1;
 		});
 
-		for (let i = 1; i < sorted.length; i++) {
-			sorted[i].data.nextSlug = getResolvedPostPath(
-				sorted[i - 1].id,
-				sorted[i - 1].data,
-			);
-			sorted[i].data.nextTitle = sorted[i - 1].data.title;
-		}
-		for (let i = 0; i < sorted.length - 1; i++) {
-			sorted[i].data.prevSlug = getResolvedPostPath(
-				sorted[i + 1].id,
-				sorted[i + 1].data,
-			);
-			sorted[i].data.prevTitle = sorted[i + 1].data.title;
-		}
-
 		return sorted;
 	});
 

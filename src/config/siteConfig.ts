@@ -85,9 +85,6 @@ export const siteConfig: SiteConfig = {
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
 	outdatedThreshold: 10,
 
-	// 文章页"上一篇/下一篇"导航开关
-	showPostPrevNext: true,
-
 	// 文章 URL：hash=自动生成稳定短 id；legacy=旧版「文件名去扩展名」长路径
 	postPathMode: "hash",
 
