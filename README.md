@@ -3,13 +3,13 @@
 
 
 <p align="center">
-  <a href="https://louaq.com">
+  <a href="https://louaq.io">
     <img src="https://pic1.imgdb.cn/i/034IEGXh6qX4eNShZOHHLh.png" alt="站点首页预览" width="880">
   </a>
 </p>
 
 <p align="center">
-  <a href="https://louaq.com"><b>在线预览 →</b></a>
+  <a href="https://louaq.io"><b>在线预览 →</b></a>
 </p>
 
 基于 [Firefly](https://github.com/CuteLeaf/Firefly) 主题二次开发的个人博客，专注于多模态医学图像分析领域的论文阅读笔记与技术分享。使用 [Astro](https://astro.build) 构建，站点内容全部为静态生成。
