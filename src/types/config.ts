@@ -446,14 +446,3 @@ export type SponsorConfig = {
 	showComment?: boolean; // 是否显示评论区，默认 false
 	showButtonInPost?: boolean; // 是否在文章详情页底部显示赞助按钮，默认 true
 };
-
-// 文章正文水印配置
-export type WatermarkConfig = {
-	enable: boolean; // 是否显示水印
-	text: string; // 水印文字
-	fontSize: number; // 字号（px）
-	color: string; // 文字颜色，含透明度
-	rotate: number; // 旋转角度（度）
-	gapX: number; // 单个水印横向占位（px）
-	gapY: number; // 单个水印纵向占位（px）
-};

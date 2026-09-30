@@ -7,7 +7,7 @@ import { h } from "hastscript";
  * 用法：::pdf{src="https://..." title="可选" height="660px"}
  * - src / url：PDF 直链（跨域时源站需开启 CORS）
  * - title：viewer 标题与无障碍说明
- * - height：可选，默认 min(82vh, 56rem)，可写 660px、80vh 等
+ * - height：可选，默认 90vh，可写 660px、80vh 等
  */
 export function PdfEmbedComponent(properties, children) {
 	if (Array.isArray(children) && children.length !== 0) {
@@ -32,7 +32,7 @@ export function PdfEmbedComponent(properties, children) {
 	const height =
 		typeof properties.height === "string" && properties.height.trim()
 			? properties.height.trim()
-			: "min(82vh, 56rem)";
+			: "90vh";
 
 	const viewerSrc = `/pdfjs/web/viewer.html?file=${encodeURIComponent(rawSrc)}#zoom=page-width`;
 

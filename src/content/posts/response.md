@@ -11,4 +11,4 @@ image: https://pic1.imgdb.cn/i/0343OVoaybimn5t3S6sN1R.webp
 
 
 <!-- 预览PDF -->
-::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_template.pdf" title="CCF 2026 推荐目录" height="660px"}
+::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_template.pdf" title="CCF 2026 推荐目录"}

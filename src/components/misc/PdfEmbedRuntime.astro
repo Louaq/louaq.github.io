@@ -1,15 +1,9 @@
----
-/**
- * 为内嵌的 pdf.js viewer iframe 赋值 src（自托管 /pdfjs/web/viewer.html）。
- * 兼容 Swup：内容替换后重新扫描尚未加载的 viewer。
- */
----
 <script>
 (function () {
-	function loadPdfViewers(root) {
+	function loadPdfViewers(root: ParentNode) {
 		(root || document)
 			.querySelectorAll("iframe.pdf-embed-viewer[data-pdf-viewer-src]")
-			.forEach(function (el) {
+			.forEach(function (el: Element) {
 				var viewerSrc = el.getAttribute("data-pdf-viewer-src");
 				if (!viewerSrc || el.getAttribute("src") === viewerSrc) return;
 				el.setAttribute("src", viewerSrc);
@@ -21,8 +15,6 @@
 	}
 	document.addEventListener("astro:page-load", scan);
 
-	// 首次加载：此内联脚本位于 <slot/> 之前，iframe 尚未解析，
-	// 需等待 DOMContentLoaded 后再扫描，否则刷新后 PDF 不加载。
 	if (document.readyState === "loading") {
 		document.addEventListener("DOMContentLoaded", scan);
 	} else {

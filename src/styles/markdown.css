@@ -156,9 +156,16 @@
 .custom-md .pdf-embed {
   display: block;
   width: 100%;
-  height: var(--pdf-embed-h, min(82vh, 56rem)) !important;
+  height: var(--pdf-embed-h, 90vh) !important;
   min-height: min(78vh, 42rem);
   overflow: hidden;
+}
+
+@media (max-width: 767px) {
+  .custom-md .pdf-embed {
+    max-height: 60vh;
+    min-height: 0;
+  }
 }
 
 .custom-md .pdf-embed .pdf-embed-viewer {

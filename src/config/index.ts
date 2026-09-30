@@ -22,7 +22,6 @@ export type {
 	SponsorConfig,
 	SponsorItem,
 	SponsorMethod,
-	WatermarkConfig,
 	WidgetComponentConfig,
 	WidgetComponentType,
 } from "../types/config";
@@ -58,4 +57,3 @@ export { sidebarLayoutConfig } from "./sidebarConfig"; // 侧边栏布局配置
 // 核心配置
 export { siteConfig } from "./siteConfig"; // 站点基础配置
 export { sponsorConfig } from "./sponsorConfig"; // 赞助配置
-export { watermarkConfig } from "./watermarkConfig"; // 文章正文水印配置

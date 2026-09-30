@@ -15,7 +15,6 @@ import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.ast
 import EncryptedContent from "@/components/misc/EncryptedContent.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import PromoStrip from "@/components/misc/PromoStrip.astro";
-import Watermark from "@/components/misc/Watermark.astro";
 import { coverImageConfig } from "@/config/coverImageConfig";
 import { licenseConfig } from "@/config/licenseConfig";
 import { profileConfig } from "@/config/profileConfig";
@@ -192,19 +191,15 @@ const jsonLd = {
                 body={staleNoticeBody}
               />
             )}
-            <Watermark>
-              <Markdown class="mb-6 markdown-content onload-animation">
-                <Content />
-              </Markdown>
-            </Watermark>
+            <Markdown class="mb-6 markdown-content onload-animation">
+              <Content />
+            </Markdown>
           </EncryptedContent>
         </div>
       ) : (
-        <Watermark>
-          <Markdown class="mb-6 markdown-content onload-animation">
-            <Content />
-          </Markdown>
-        </Watermark>
+        <Markdown class="mb-6 markdown-content onload-animation">
+          <Content />
+        </Markdown>
       )}
       
       <script is:inline>

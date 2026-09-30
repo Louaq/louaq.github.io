@@ -24,63 +24,62 @@ import FloatingButton from "@/components/common/FloatingButton.astro";
   };
 
   // 响应式返回顶部按钮管理器
-  if (typeof window.BackToTopManager === "undefined") {
-    window.BackToTopManager = class BackToTopManager {
-      constructor() {
-        this.wrapper = document.getElementById("back-to-top-wrapper");
-        this.button = document.getElementById("back-to-top-btn");
-        this.progressBar = document.getElementById("back-to-top-progress-bar");
-        this.init();
-      }
+  class BackToTopManager {
+    wrapper = document.getElementById("back-to-top-wrapper")!;
+    button = document.getElementById("back-to-top-btn")!;
+    progressBar = document.getElementById("back-to-top-progress-bar")!;
 
-      init() {
-        if (!this.button || !this.wrapper) return;
+    constructor() {
+      this.init();
+    }
 
-        this.setupScrollListener();
-      }
+    init() {
+      if (!this.button || !this.wrapper) return;
 
-      setupScrollListener() {
-        let visible = false;
-        let frame = 0;
-        const updateVisibility = () => {
-          const scrollTop =
-            window.pageYOffset || document.documentElement.scrollTop;
+      this.setupScrollListener();
+    }
 
-          const maxScroll =
-            document.documentElement.scrollHeight - window.innerHeight;
-          const progress = Math.min(scrollTop / maxScroll, 1);
-          this.progressBar.style.strokeDashoffset = String(100 - progress * 100);
+    setupScrollListener() {
+      let visible = false;
+      let frame = 0;
+      const updateVisibility = () => {
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
 
-          // 当滚动超过200px时显示按钮
-          const nextVisible = scrollTop > 200;
-          if (nextVisible === visible) return;
-          visible = nextVisible;
+        const maxScroll =
+          document.documentElement.scrollHeight - window.innerHeight;
+        const progress = Math.min(scrollTop / maxScroll, 1);
+        this.progressBar.style.strokeDashoffset = String(100 - progress * 100);
 
-          if (visible) {
-            this.wrapper.classList.remove("hide");
-          } else {
-            this.wrapper.classList.add("hide");
-          }
-        };
+        // 当滚动超过200px时显示按钮
+        const nextVisible = scrollTop > 200;
+        if (nextVisible === visible) return;
+        visible = nextVisible;
 
-        const scheduleUpdate = () => {
-          if (frame) return;
-          frame = requestAnimationFrame(() => {
-            frame = 0;
-            updateVisibility();
-          });
-        };
+        if (visible) {
+          this.wrapper.classList.remove("hide");
+        } else {
+          this.wrapper.classList.add("hide");
+        }
+      };
 
-        window.addEventListener("scroll", scheduleUpdate, { passive: true });
-        window.addEventListener("load", scheduleUpdate);
-        window.addEventListener("pageshow", scheduleUpdate);
-        updateVisibility();
-        // 浏览器恢复滚动位置常在首帧布局之后，双 rAF 对齐 scroll restoration 时机
-        requestAnimationFrame(() => {
-          requestAnimationFrame(updateVisibility);
+      const scheduleUpdate = () => {
+        if (frame) return;
+        frame = requestAnimationFrame(() => {
+          frame = 0;
+          updateVisibility();
         });
-      }
-    };
+      };
+
+      window.addEventListener("scroll", scheduleUpdate, { passive: true });
+      window.addEventListener("load", scheduleUpdate);
+      window.addEventListener("pageshow", scheduleUpdate);
+      updateVisibility();
+      // 浏览器恢复滚动位置常在首帧布局之后，双 rAF 对齐 scroll restoration 时机
+      requestAnimationFrame(() => {
+        requestAnimationFrame(updateVisibility);
+      });
+    }
   }
 
   function initBackToTopManager() {
