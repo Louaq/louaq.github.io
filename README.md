@@ -1,5 +1,5 @@
 ## Firefly 修改自用版, 原项目：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/960d4c9f-098f-4174-a712-d0d6ee12d8bc/deploy-status)](https://app.netlify.com/projects/louaq/deploys)
+[![Deploy](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml)
 
 
 <p align="center">
