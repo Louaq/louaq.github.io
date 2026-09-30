@@ -91,7 +91,7 @@ const minuteLabel =
   <!-- 左侧封面图（偶数项） -->
   {
     isEven && (
-      <div class="hero-card-side hidden sm:block relative min-w-[45%] overflow-hidden z-10">
+      <div class="hero-card-side hidden sm:block relative w-[45%] shrink-0 overflow-hidden z-10">
         <CoverImage
           src={processedImage}
           basePath={basePath}
@@ -154,7 +154,7 @@ const minuteLabel =
   <!-- 右侧封面图（奇数项） -->
   {
     !isEven && (
-      <div class="hero-card-side hidden sm:block relative min-w-[45%] overflow-hidden z-10">
+      <div class="hero-card-side hidden sm:block relative w-[45%] shrink-0 overflow-hidden z-10">
         <CoverImage
           src={processedImage}
           basePath={basePath}

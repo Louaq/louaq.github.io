@@ -105,8 +105,8 @@ const remoteSizes = preview
         loading === 'lazy' && 'cover-image-fade-in'
       ]}
       style={imageStyle}
-      width={preview ? 400 : 1200}
-      height={preview ? 300 : 800}
+      width={preview ? 396 : 1200}
+      height={preview ? 240 : 800}
       loading={loading}
       fetchpriority={loading === "eager" ? "high" : "low"}
       format="webp"
@@ -124,8 +124,8 @@ const remoteSizes = preview
       src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc}
       srcset={shouldDeferRemoteSrc ? undefined : remoteSrcset}
       sizes={remoteSizes}
-      width={preview ? 400 : 1200}
-      height={preview ? 300 : 800}
+      width={preview ? 396 : 1200}
+      height={preview ? 240 : 800}
       alt={alt || ""}
       class:list={[
         imageClass,
