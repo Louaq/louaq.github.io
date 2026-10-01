@@ -101,6 +101,9 @@ export default defineConfig({
 			},
 			updateBodyClass: false,
 			globalInstance: true,
+			// 由 Layout.astro 自行重跑脚本：内建的 scripts 插件会把 Astro 内联的 type="module"
+			// 也每次重跑，导致其 astro:page-load 监听逐次叠加
+			reloadScripts: false,
 			// @swup/astro 仅合并 data-no-swup 与其「ignore」选项到 ignoreVisit，单独的 ignoreVisit 配置不会生效
 			ignore: (url) => {
 				try {

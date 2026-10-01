@@ -310,6 +310,32 @@ const collapsiblePreviewLines =
 
   const setup = () => {
     const MAX_SWUP_CACHE_PAGES = 6;
+
+    // 换页后执行新页面的脚本（替代 @swup/astro 的 reloadScripts，已在 astro.config 关闭）：
+    // is:inline 脚本每次换页都重跑；模块（Astro 打包后内联的或外链的）只在首次出现时执行一次，
+    // 与浏览器对外链模块的语义一致，之后由各自的 astro:page-load 监听负责重新初始化。
+    // 外链经典脚本只有全站常驻的 iconify-icon，不重跑。
+    const moduleKey = (s: HTMLScriptElement) => s.src || s.textContent;
+    const executedModules = new Set(
+      Array.from(document.querySelectorAll<HTMLScriptElement>('script[type="module"]'), moduleKey),
+    );
+    window.swup.hooks.on("content:replace", () => {
+      for (const old of document.querySelectorAll<HTMLScriptElement>("script")) {
+        if (old.type === "module") {
+          const key = moduleKey(old);
+          if (executedModules.has(key)) continue;
+          executedModules.add(key);
+        } else if (old.type || old.src) {
+          continue; // application/ld+json 等数据块，以及外链经典脚本
+        }
+        const script = document.createElement("script");
+        for (const { name, value } of Array.from(old.attributes)) {
+          script.setAttribute(name, value);
+        }
+        script.textContent = old.textContent;
+        old.replaceWith(script);
+      }
+    });
     window.swup.hooks.on("cache:set", () => {
       const cachedUrls = Array.from(window.swup.cache.all.keys()) as string[];
       while (cachedUrls.length > MAX_SWUP_CACHE_PAGES) {
@@ -496,11 +522,6 @@ const collapsiblePreviewLines =
 
       if (currentTheme !== expectedTheme) {
         document.documentElement.setAttribute("data-theme", expectedTheme);
-      }
-
-      // page:view 时新页面内容已替换完毕，#tcomment 存在即可直接通知评论区重新初始化
-      if (document.getElementById("tcomment")) {
-        document.dispatchEvent(new CustomEvent("firefly:page:loaded"));
       }
     });
     window.swup.hooks.on("visit:end", (_visit: { to: { url: string } }) => {

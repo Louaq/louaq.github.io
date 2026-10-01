@@ -145,9 +145,4 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
   } else {
     observeAndInit();
   }
-
-  // swup 导航后重新观察。Layout 的 page:view 钩子只在页面确实有 #tcomment 时才
-  // 派发 firefly:page:loaded，监听这一个就够，不必再自己去挂 swup 钩子：本内联
-  // 脚本先于 swup 初始化执行，拿不到 window.swup，得绕道 swup:enable 才能补注册。
-  document.addEventListener("firefly:page:loaded", observeAndInit);
 </script>
