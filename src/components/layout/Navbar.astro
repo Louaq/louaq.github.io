@@ -206,11 +206,10 @@ function loadButtonScript() {
                 if (resolvedIsDark) html.classList.add("dark");
                 else html.classList.remove("dark");
 
-                const darkTheme = html.dataset.expressiveDarkTheme;
-                const lightTheme = html.dataset.expressiveLightTheme;
-                if (darkTheme && lightTheme) {
-                    html.setAttribute("data-theme", resolvedIsDark ? darkTheme : lightTheme);
-                }
+                // Layout 首屏内联脚本已写入这两个 dataset
+                const darkTheme = html.dataset.expressiveDarkTheme as string;
+                const lightTheme = html.dataset.expressiveLightTheme as string;
+                html.setAttribute("data-theme", resolvedIsDark ? darkTheme : lightTheme);
             };
 
             // 深浅色切换不做过渡动画：直接翻转主题类/属性，新主题即时到位

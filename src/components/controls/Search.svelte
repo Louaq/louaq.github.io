@@ -68,7 +68,6 @@ let lastScrolledIndex = -1;
 let modalInputEl: HTMLInputElement | null = $state(null);
 
 function lockScroll() {
-	if (typeof document === "undefined") return;
 	if (prevScrollLock) return;
 
 	const html = document.documentElement;
@@ -102,7 +101,6 @@ function lockScroll() {
 }
 
 function unlockScroll() {
-	if (typeof document === "undefined") return;
 	if (!prevScrollLock) return;
 
 	const html = document.documentElement;
@@ -117,7 +115,6 @@ function unlockScroll() {
 
 // 简易 Portal：将节点移动到 document.body，避免被页面滚动/transform 影响
 function portal(node: HTMLElement) {
-	if (typeof document === "undefined") return;
 	document.body.appendChild(node);
 	return {
 		destroy() {
@@ -131,12 +128,7 @@ function portal(node: HTMLElement) {
 const openModal = async () => {
 	isOpen = true;
 	// 锁定背景滚动，避免滚动导致弹窗“丢失/穿透”
-	// 注意：先打开弹窗，再锁滚动；即使锁滚动异常，也不应阻止弹窗出现
-	try {
-		lockScroll();
-	} catch (e) {
-		console.error("lockScroll failed:", e);
-	}
+	lockScroll();
 	await tick();
 	modalInputEl?.focus();
 	activeIndex = -1;
@@ -159,11 +151,7 @@ const closeModal = () => {
 	hasMore = false;
 	isLoadingMore = false;
 	// 恢复背景滚动
-	try {
-		unlockScroll();
-	} catch (e) {
-		console.error("unlockScroll failed:", e);
-	}
+	unlockScroll();
 };
 
 const handleResultClick = (event: Event, url: string): void => {

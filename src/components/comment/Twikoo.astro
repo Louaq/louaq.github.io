@@ -126,10 +126,6 @@ const twikooCssUrl = url("/assets/css/twikoo.css");
       initTwikoo();
       return;
     }
-    if (!("IntersectionObserver" in window)) {
-      initTwikoo();
-      return;
-    }
     const observer = new IntersectionObserver(
       function (entries, obs) {
         if (entries.some((entry) => entry.isIntersecting)) {

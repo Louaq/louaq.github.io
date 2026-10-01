@@ -404,17 +404,12 @@ const ticks = Array.from({ length: 12 }, (_, i) => {
     updateClock(root);
     updateRuntime(root);
 
-    if ("IntersectionObserver" in window) {
-      state.isVisible = false;
-      state.observer = new IntersectionObserver((entries) => {
-        state.isVisible = entries.some((entry) => entry.isIntersecting);
-        syncSiteRuntimeActivity();
-      });
-      state.observer.observe(root);
-    } else {
-      state.isVisible = true;
+    state.isVisible = false;
+    state.observer = new IntersectionObserver((entries) => {
+      state.isVisible = entries.some((entry) => entry.isIntersecting);
       syncSiteRuntimeActivity();
-    }
+    });
+    state.observer.observe(root);
   }
 
   initSiteRuntime();
