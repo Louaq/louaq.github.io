@@ -202,25 +202,6 @@ const jsonLd = {
         </Markdown>
       )}
       
-      <script is:inline>
-        // 监听密码解锁事件
-        window.addEventListener('password-unlocked', function() {
-          const wrapper = document.getElementById('password-protection-wrapper');
-          const protectedContent = document.getElementById('protected-content');
-          
-          if (wrapper && protectedContent) {
-            // 隐藏密码输入界面，显示文章内容
-            const passwordCard = wrapper.querySelector('.password-protection-container');
-            if (passwordCard) {
-              passwordCard.style.display = 'none';
-            }
-            protectedContent.style.display = 'block';
-            // 正文是解锁后才注入 DOM 的，需要重新触发依赖 astro:page-load 的
-            // 初始化逻辑（表格滚动包裹、TOC、代码块复制按钮等）
-            document.dispatchEvent(new Event('astro:page-load'));
-          }
-        });
-      </script>
 
       {/* 赞助按钮 */}
       {

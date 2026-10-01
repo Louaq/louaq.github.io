@@ -192,12 +192,12 @@ async function verifyPassword() {
 		if (el) {
 			el.innerHTML = decryptedHtml;
 			reviveScripts(el);
+			el.style.display = "block";
 		}
 
-		// 发送自定义事件通知父组件
-		window.dispatchEvent(
-			new CustomEvent("password-unlocked", { detail: { postId } }),
-		);
+		// 正文是解锁后才注入 DOM 的，需要重新触发依赖 astro:page-load 的
+		// 初始化逻辑（表格滚动包裹、TOC、代码块复制按钮等）
+		document.dispatchEvent(new Event("astro:page-load"));
 	} else {
 		// 密码错误
 		const state = getFreezeState();
