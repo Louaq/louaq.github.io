@@ -1,9 +1,7 @@
 ﻿---
 import FontSetup from "@components/features/FontSetup.astro";
 import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
-import KatexManager from "@components/features/KatexManager.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
-import PdfEmbedRuntime from "@/components/misc/PdfEmbedRuntime.astro";
 
 import {
 	expressiveCodeConfig,
@@ -209,8 +207,6 @@ const collapsiblePreviewLines =
     data-page-type={pageType}
     data-white-bg={String(!!whiteBackground)}
   >
-    <PdfEmbedRuntime />
-
     <ConfigCarrier />
     <slot />
 
@@ -218,9 +214,6 @@ const collapsiblePreviewLines =
     <div id="page-height-extend" class="hidden h-[300vh]"></div>
 
     <ImageLightboxManager />
-    
-    <!-- KaTeX Manager -->
-    <KatexManager />
 
   </body>
 </html>

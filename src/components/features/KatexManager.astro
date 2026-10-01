@@ -17,9 +17,6 @@ const katexCssHref = url("/katex/katex.min.css");
         }
     }
 
-    // 初始化
+    // 本组件随 Markdown 正文出现；swup 导航后 scripts 插件会重新执行内联脚本
     loadKatex();
-
-    // Swup 页面切换支持
-    document.addEventListener('swup:content:replace', loadKatex);
 </script>

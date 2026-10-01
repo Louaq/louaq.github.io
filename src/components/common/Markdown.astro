@@ -4,6 +4,8 @@ import "@/styles/code-block.css";
 import "@/styles/article.css";
 import "@/styles/markdown.css";
 import "@rehype-callouts-theme";
+import KatexManager from "@/components/features/KatexManager.astro";
+import PdfEmbedRuntime from "@/components/misc/PdfEmbedRuntime.astro";
 
 // 代码字体（JetBrains Mono）已由 Astro Font API 统一加载，见 astro.config.mjs 的 `fonts`
 // 与 FontSetup.astro，此处无需再单独 import fontsource。
@@ -16,6 +18,8 @@ const className = Astro.props.class;
 <div class={`prose dark:prose-invert prose-base max-w-none! custom-md ${className}`}>
     <slot/>
 </div>
+<KatexManager />
+<PdfEmbedRuntime />
 
 <script>
   const wrapMarkdownTables = () => {
