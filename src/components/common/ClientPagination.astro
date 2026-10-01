@@ -2,6 +2,15 @@
 import { Icon } from "astro-icon/components";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
+import {
+	buildPageItems,
+	ellipsisClass,
+	jumpGroupClass,
+	jumpInputAria,
+	jumpInputClass,
+	jumpInputSlotClass,
+	jumpShellClass,
+} from "@/utils/pagination";
 
 interface Props {
 	totalItems: number;
@@ -13,30 +22,6 @@ interface Props {
 const { totalItems, itemsPerPage, currentPage, sectionId } = Astro.props;
 const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-type PageItem = { kind: "page"; num: number } | { kind: "ellipsis" };
-
-function buildPageItems(cur: number, last: number): PageItem[] {
-	if (last <= 1) return [];
-	if (last <= 9) {
-		return Array.from({ length: last }, (_, i) => ({
-			kind: "page" as const,
-			num: i + 1,
-		}));
-	}
-	const items: PageItem[] = [];
-	const delta = 1;
-	const left = Math.max(2, cur - delta);
-	const right = Math.min(last - 1, cur + delta);
-	items.push({ kind: "page", num: 1 });
-	if (left > 2) items.push({ kind: "ellipsis" });
-	for (let i = left; i <= right; i++) {
-		items.push({ kind: "page", num: i });
-	}
-	if (right < last - 1) items.push({ kind: "ellipsis" });
-	items.push({ kind: "page", num: last });
-	return items;
-}
-
 const pageItems = buildPageItems(currentPage, totalPages);
 
 const navArrowClass =
@@ -45,26 +30,10 @@ const pageNumBase =
 	"inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums";
 const pageNumIdle = `${pageNumBase} border-(--juejin-border) bg-(--card-bg) text-(--juejin-text-primary) hover:bg-(--btn-plain-bg-hover)`;
 const pageNumActive = `${pageNumBase} border-(--primary) bg-(--primary) text-white shadow-xs`;
-const ellipsisClass =
-	"flex h-9 items-center px-1 text-sm text-(--juejin-text-tertiary) select-none";
-const jumpGroupClass =
-	"group/pjump pagination-jump-group ml-0.5 inline-flex max-w-full";
-const jumpShellClass =
-	"inline-flex h-9 overflow-hidden rounded-lg border border-(--juejin-border) bg-(--card-bg)";
-const jumpInputSlotClass =
-	"jump-input-slot max-w-0 overflow-hidden opacity-0 transition-[max-width,opacity] duration-300 ease-out motion-reduce:transition-none group-hover/pjump:max-w-12 group-hover/pjump:opacity-100 group-focus-within/pjump:max-w-12 group-focus-within/pjump:opacity-100";
-const jumpInputClass =
-	"box-border h-9 w-12 min-w-12 shrink-0 border-0 bg-transparent px-1 text-center text-sm text-(--juejin-text-primary) tabular-nums outline-hidden focus:ring-0";
 const jumpSubmitClass =
 	"inline-flex h-9 shrink-0 items-center justify-center border-l border-(--juejin-border) bg-(--juejin-tag-bg) px-2 text-(--primary) hover:bg-(--btn-plain-bg-hover) disabled:cursor-not-allowed disabled:opacity-50";
 
 const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
-const jumpInputAria = [
-	i18n(I18nKey.paginationJumpTo),
-	i18n(I18nKey.paginationJumpPageUnit),
-]
-	.filter(Boolean)
-	.join("");
 ---
 
 {
