@@ -4,9 +4,10 @@ import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import {
 	buildPageItems,
+	clientPageNumActive,
+	clientPageNumIdle,
 	ellipsisClass,
 	jumpGroupClass,
-	jumpInputAria,
 	jumpInputClass,
 	jumpInputSlotClass,
 	jumpShellClass,
@@ -26,10 +27,6 @@ const pageItems = buildPageItems(currentPage, totalPages);
 
 const navArrowClass =
 	"inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-(--juejin-border) bg-(--juejin-tag-bg) text-(--juejin-text-secondary) hover:bg-(--btn-plain-bg-hover) disabled:cursor-not-allowed disabled:opacity-50";
-const pageNumBase =
-	"inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums";
-const pageNumIdle = `${pageNumBase} border-(--juejin-border) bg-(--card-bg) text-(--juejin-text-primary) hover:bg-(--btn-plain-bg-hover)`;
-const pageNumActive = `${pageNumBase} border-(--primary) bg-(--primary) text-white shadow-xs`;
 const jumpSubmitClass =
 	"inline-flex h-9 shrink-0 items-center justify-center border-l border-(--juejin-border) bg-(--juejin-tag-bg) px-2 text-(--primary) hover:bg-(--btn-plain-bg-hover) disabled:cursor-not-allowed disabled:opacity-50";
 
@@ -41,6 +38,10 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 		<div
 			class="responsive-pagination mt-6 flex w-full max-w-full flex-col gap-1"
 			data-pagination-section={sectionId}
+			data-items-per-page={itemsPerPage}
+			data-initial-page={currentPage}
+			data-jump-invalid-msg={jumpInvalidMsg}
+			data-page-label={i18n(I18nKey.paginationPage)}
 		>
 			<nav
 				class="pagination-reflow flex w-full max-w-full flex-row items-center gap-2 sm:gap-3"
@@ -73,7 +74,7 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 							</span>
 						) : item.num === currentPage ? (
 							<span
-								class={pageNumActive}
+								class={clientPageNumActive}
 								aria-current="page"
 								aria-label={`${i18n(I18nKey.paginationPage)} ${item.num}`}
 							>
@@ -82,7 +83,7 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 						) : (
 							<button
 								type="button"
-								class:list={[pageNumIdle, "pagination-page-btn"]}
+								class:list={[clientPageNumIdle, "pagination-page-btn"]}
 								data-page-num={item.num}
 								aria-label={`${i18n(I18nKey.paginationPage)} ${item.num}`}
 							>
@@ -103,7 +104,7 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 									maxlength={Math.max(1, String(totalPages).length)}
 									class={jumpInputClass}
 									data-pagination-jump-input
-									aria-label={jumpInputAria || i18n(I18nKey.paginationJumpTo)}
+									aria-label={`${i18n(I18nKey.paginationJumpTo)}${i18n(I18nKey.paginationJumpPageUnit)}`}
 								/>
 							</div>
 							<button
@@ -149,19 +150,14 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 	)
 }
 
-<script
-	is:inline
-	define:vars={{
-		itemsPerPage,
-		sectionId,
-		initialPage: currentPage,
-		jumpInvalidMsg,
-		pageNumIdle,
-		pageNumActive,
+<script>
+	import {
+		buildPageItems,
+		clientPageNumActive,
+		clientPageNumIdle,
 		ellipsisClass,
-		paginationPagePrefix: i18n(I18nKey.paginationPage),
-	}}
->
+	} from "@/utils/pagination";
+
 	function isCoarsePointer() {
 		return window.matchMedia("(hover: none), (pointer: coarse)").matches;
 	}
@@ -182,67 +178,52 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 		});
 	}
 
-	function buildPageItemsClient(current, last) {
-		if (last <= 1) return [];
-		if (last <= 9) {
-			const out = [];
-			for (let i = 1; i <= last; i++) {
-				out.push({ kind: "page", num: i });
-			}
-			return out;
-		}
-		const items = [];
-		const delta = 1;
-		const left = Math.max(2, current - delta);
-		const right = Math.min(last - 1, current + delta);
-		items.push({ kind: "page", num: 1 });
-		if (left > 2) items.push({ kind: "ellipsis" });
-		for (let i = left; i <= right; i++) {
-			items.push({ kind: "page", num: i });
-		}
-		if (right < last - 1) items.push({ kind: "ellipsis" });
-		items.push({ kind: "page", num: last });
-		return items;
-	}
+	function initPagination(pagination: HTMLElement) {
+		// 首屏加载与 astro:page-load 都会调用；swup 换页后是新元素，标记不会残留
+		if (pagination.dataset.paginationBound) return;
+		pagination.dataset.paginationBound = "true";
 
-	function initPagination() {
-		let currentPage = initialPage;
+		const sectionId = pagination.dataset.paginationSection as string;
+		const itemsPerPage = Number(pagination.dataset.itemsPerPage);
+		const jumpInvalidMsg = pagination.dataset.jumpInvalidMsg as string;
+		const pageLabel = pagination.dataset.pageLabel as string;
+		let currentPage = Number(pagination.dataset.initialPage);
 		let isInitialLoad = true;
 
-		const pagination = document.querySelector(
-			`[data-pagination-section="${sectionId}"]`,
-		);
-		if (!pagination) return;
+		const pageHost = pagination.querySelector(
+			"[data-page-numbers]",
+		) as HTMLElement;
+		const jumpShell = pageHost.querySelector(
+			"[data-pagination-jump-shell]",
+		) as HTMLElement;
+		const jumpGoBtn = pagination.querySelector(
+			"[data-pagination-jump-go]",
+		) as HTMLButtonElement;
+		const jumpInput = pagination.querySelector(
+			"[data-pagination-jump-input]",
+		) as HTMLInputElement;
+		const errEl = pagination.querySelector(
+			"[data-pagination-jump-error]",
+		) as HTMLElement;
 
-		const pageHost = pagination.querySelector("[data-page-numbers]");
-		if (!pageHost) return;
-
-		const jumpShell = pageHost.querySelector("[data-pagination-jump-shell]");
-		if (!(jumpShell instanceof HTMLElement)) return;
+		const getItems = () =>
+			document.querySelectorAll<HTMLElement>(
+				`[data-item-section="${sectionId}"]:not(.hidden)`,
+			);
 
 		ensureJumpTouchOutsideClose();
 		jumpShell.addEventListener("click", function (e) {
 			if (!isCoarsePointer()) return;
 			if (jumpShell.classList.contains("jump-touch-expanded")) return;
-			const goBtn = pagination.querySelector("[data-pagination-jump-go]");
 			const t = e.target;
-			if (
-				t instanceof Node &&
-				goBtn instanceof HTMLElement &&
-				(goBtn.contains(t) || t === goBtn)
-			) {
-				return;
-			}
+			if (t instanceof Node && jumpGoBtn.contains(t)) return;
 			jumpShell.classList.add("jump-touch-expanded");
-			const inp = pagination.querySelector("[data-pagination-jump-input]");
-			if (inp instanceof HTMLInputElement) inp.focus();
+			jumpInput.focus();
 		});
 
-		function rebuildPageNumberControls(totalPages) {
-			const tp = Math.max(1, totalPages);
-			const list = buildPageItemsClient(currentPage, tp);
+		function rebuildPageNumberControls(totalPages: number) {
 			const frag = document.createDocumentFragment();
-			for (const it of list) {
+			for (const it of buildPageItems(currentPage, totalPages)) {
 				if (it.kind === "ellipsis") {
 					const span = document.createElement("span");
 					span.className = ellipsisClass;
@@ -251,23 +232,17 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 					frag.appendChild(span);
 				} else if (it.num === currentPage) {
 					const span = document.createElement("span");
-					span.className = pageNumActive;
+					span.className = clientPageNumActive;
 					span.setAttribute("aria-current", "page");
-					span.setAttribute(
-						"aria-label",
-						`${paginationPagePrefix} ${it.num}`,
-					);
+					span.setAttribute("aria-label", `${pageLabel} ${it.num}`);
 					span.textContent = String(it.num);
 					frag.appendChild(span);
 				} else {
 					const button = document.createElement("button");
 					button.type = "button";
-					button.className = `${pageNumIdle} pagination-page-btn`;
+					button.className = `${clientPageNumIdle} pagination-page-btn`;
 					button.dataset.pageNum = String(it.num);
-					button.setAttribute(
-						"aria-label",
-						`${paginationPagePrefix} ${it.num}`,
-					);
+					button.setAttribute("aria-label", `${pageLabel} ${it.num}`);
 					button.textContent = String(it.num);
 					frag.appendChild(button);
 				}
@@ -279,70 +254,42 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 		}
 
 		function hideJumpError() {
-			const errEl = pagination.querySelector("[data-pagination-jump-error]");
-			const el = pagination.querySelector("[data-pagination-jump-input]");
-			if (errEl instanceof HTMLElement) {
-				errEl.textContent = "";
-				errEl.classList.add("hidden");
-			}
-			if (el instanceof HTMLInputElement) {
-				el.removeAttribute("aria-invalid");
-			}
+			errEl.textContent = "";
+			errEl.classList.add("hidden");
+			jumpInput.removeAttribute("aria-invalid");
 		}
 
 		function showJumpError() {
-			const errEl = pagination.querySelector("[data-pagination-jump-error]");
-			const el = pagination.querySelector("[data-pagination-jump-input]");
-			if (errEl instanceof HTMLElement && jumpInvalidMsg) {
-				errEl.textContent = jumpInvalidMsg;
-				errEl.classList.remove("hidden");
-			}
-			if (el instanceof HTMLInputElement) {
-				el.setAttribute("aria-invalid", "true");
-			}
+			errEl.textContent = jumpInvalidMsg;
+			errEl.classList.remove("hidden");
+			jumpInput.setAttribute("aria-invalid", "true");
 		}
 
-		function setNavDisabled(totalPages) {
+		function setNavDisabled(totalPages: number) {
 			const tp = Math.max(1, totalPages);
-			pagination.querySelectorAll('[data-page="prev"]').forEach((btn) => {
-				btn.disabled = currentPage === 1;
-			});
-			pagination.querySelectorAll('[data-page="next"]').forEach((btn) => {
-				btn.disabled = currentPage === tp;
-			});
-			const jumpGo = pagination.querySelector("[data-pagination-jump-go]");
-			if (jumpGo instanceof HTMLButtonElement) {
-				jumpGo.disabled = tp <= 1;
-			}
-			const jumpInput = pagination.querySelector(
-				"[data-pagination-jump-input]",
-			);
-			if (jumpInput instanceof HTMLInputElement) {
-				jumpInput.maxLength = Math.max(1, String(tp).length);
-			}
+			pagination
+				.querySelectorAll<HTMLButtonElement>('[data-page="prev"]')
+				.forEach((btn) => {
+					btn.disabled = currentPage === 1;
+				});
+			pagination
+				.querySelectorAll<HTMLButtonElement>('[data-page="next"]')
+				.forEach((btn) => {
+					btn.disabled = currentPage === tp;
+				});
+			jumpGoBtn.disabled = tp <= 1;
+			jumpInput.maxLength = Math.max(1, String(tp).length);
 		}
 
 		function applyJump() {
-			const jumpInput = pagination.querySelector(
-				"[data-pagination-jump-input]",
-			);
-			if (!(jumpInput instanceof HTMLInputElement)) return;
 			hideJumpError();
 			const v = String(jumpInput.value).trim();
 			if (v === "" || !/^\d+$/.test(v)) {
 				showJumpError();
 				return;
 			}
-			const items = document.querySelectorAll(
-				`[data-item-section="${sectionId}"]:not(.hidden)`,
-			);
-			const tp = Math.max(1, Math.ceil(items.length / itemsPerPage));
-			const n = parseInt(v, 10);
-			if (!Number.isFinite(n)) {
-				showJumpError();
-				return;
-			}
-			currentPage = Math.min(tp, Math.max(1, n));
+			const tp = Math.max(1, Math.ceil(getItems().length / itemsPerPage));
+			currentPage = Math.min(tp, Math.max(1, parseInt(v, 10)));
 			jumpInput.value = "";
 			updatePage();
 		}
@@ -352,61 +299,45 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 			if (!(target instanceof Element)) return;
 			const btn = target.closest("[data-page-num]");
 			if (!(btn instanceof HTMLButtonElement)) return;
-			const num = parseInt(btn.dataset.pageNum || "", 10);
-			if (!Number.isFinite(num)) return;
-			currentPage = num;
+			currentPage = parseInt(btn.dataset.pageNum as string, 10);
 			updatePage();
 		});
 
-		const jumpGoBtn = pagination.querySelector("[data-pagination-jump-go]");
-		const jumpInputEl = pagination.querySelector("[data-pagination-jump-input]");
-		jumpGoBtn?.addEventListener("click", function () {
+		jumpGoBtn.addEventListener("click", function () {
 			if (
 				isCoarsePointer() &&
 				!jumpShell.classList.contains("jump-touch-expanded")
 			) {
 				jumpShell.classList.add("jump-touch-expanded");
-				if (jumpInputEl instanceof HTMLInputElement) jumpInputEl.focus();
+				jumpInput.focus();
 				return;
 			}
 			applyJump();
 		});
-		jumpInputEl?.addEventListener("keydown", function (e) {
+		jumpInput.addEventListener("keydown", function (e) {
 			if (e.key === "Enter") {
 				e.preventDefault();
 				applyJump();
 			}
 		});
-		jumpInputEl?.addEventListener("input", hideJumpError);
+		jumpInput.addEventListener("input", hideJumpError);
 
-		pagination.querySelectorAll("[data-page]").forEach((button) => {
-			button.addEventListener("click", function () {
-				const page = this.dataset.page;
-				if (page === "prev") {
-					currentPage = Math.max(1, currentPage - 1);
-				} else if (page === "next") {
-					const items = document.querySelectorAll(
-						`[data-item-section="${sectionId}"]:not(.hidden)`,
-					);
-					const totalPages = Math.ceil(items.length / itemsPerPage);
-					currentPage = Math.min(
-						Math.max(1, totalPages),
-						currentPage + 1,
-					);
-				}
-				updatePage();
+		pagination
+			.querySelectorAll<HTMLButtonElement>("[data-page]")
+			.forEach((button) => {
+				button.addEventListener("click", function () {
+					if (button.dataset.page === "prev") {
+						currentPage = Math.max(1, currentPage - 1);
+					} else {
+						const totalPages = Math.ceil(getItems().length / itemsPerPage);
+						currentPage = Math.min(Math.max(1, totalPages), currentPage + 1);
+					}
+					updatePage();
+				});
 			});
-		});
-
-		pagination.addEventListener("updatePagination", function () {
-			currentPage = 1;
-			updatePage();
-		});
 
 		function updatePage() {
-			const items = document.querySelectorAll(
-				`[data-item-section="${sectionId}"]:not(.hidden)`,
-			);
+			const items = getItems();
 			const totalPages = Math.ceil(items.length / itemsPerPage);
 
 			if (currentPage > totalPages && totalPages > 0) {
@@ -437,20 +368,21 @@ const jumpInvalidMsg = i18n(I18nKey.paginationJumpInvalid);
 						item.style.opacity = "0";
 					}
 				}
-				setTimeout(() => {
-					applyVisibility();
-				}, 200);
+				setTimeout(applyVisibility, 200);
 			}
 		}
 
 		updatePage();
 	}
 
-	if (document.readyState === "loading") {
-		document.addEventListener("DOMContentLoaded", initPagination);
-	} else {
-		initPagination();
+	function initAll() {
+		document
+			.querySelectorAll<HTMLElement>("[data-pagination-section]")
+			.forEach(initPagination);
 	}
+
+	initAll();
+	document.addEventListener("astro:page-load", initAll);
 </script>
 
 <style>

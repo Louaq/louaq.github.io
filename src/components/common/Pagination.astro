@@ -7,7 +7,6 @@ import {
 	buildPageItems,
 	ellipsisClass,
 	jumpGroupClass,
-	jumpInputAria,
 	jumpInputClass,
 	jumpInputSlotClass,
 	jumpShellClass,
@@ -48,7 +47,6 @@ const pageNumIdle = `${pageNumBase} border-(--juejin-border) bg-(--card-bg) text
 const pageNumActive = `${pageNumBase} border-(--primary) bg-(--primary) text-white shadow-xs`;
 const jumpSubmitClass =
 	"inline-flex h-9 shrink-0 items-center justify-center border-l border-(--juejin-border) bg-(--juejin-tag-bg) px-2 text-(--primary) transition-colors hover:bg-(--btn-plain-bg-hover)";
-
 ---
 
 {
@@ -130,7 +128,7 @@ const jumpSubmitClass =
 									maxlength={Math.max(1, String(page.lastPage).length)}
 									class={jumpInputClass}
 									data-pagination-jump-input
-									aria-label={jumpInputAria || i18n(I18nKey.paginationJumpTo)}
+									aria-label={`${i18n(I18nKey.paginationJumpTo)}${i18n(I18nKey.paginationJumpPageUnit)}`}
 								/>
 							</div>
 							<button

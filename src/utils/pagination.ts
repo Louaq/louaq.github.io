@@ -1,6 +1,3 @@
-import I18nKey from "@/i18n/i18nKey";
-import { i18n } from "@/i18n/translation";
-
 export type PageItem = { kind: "page"; num: number } | { kind: "ellipsis" };
 
 export function buildPageItems(current: number, last: number): PageItem[] {
@@ -25,6 +22,12 @@ export function buildPageItems(current: number, last: number): PageItem[] {
 	return items;
 }
 
+// ClientPagination 的页码按钮：模板渲染与客户端重建共用
+const clientPageNumBase =
+	"inline-flex h-9 min-w-9 items-center justify-center rounded-lg border px-2 text-sm font-medium tabular-nums";
+export const clientPageNumIdle = `${clientPageNumBase} border-(--juejin-border) bg-(--card-bg) text-(--juejin-text-primary) hover:bg-(--btn-plain-bg-hover)`;
+export const clientPageNumActive = `${clientPageNumBase} border-(--primary) bg-(--primary) text-white shadow-xs`;
+
 export const ellipsisClass =
 	"flex h-9 items-center px-1 text-sm text-(--juejin-text-tertiary) select-none";
 export const jumpGroupClass =
@@ -35,10 +38,3 @@ export const jumpInputSlotClass =
 	"jump-input-slot max-w-0 overflow-hidden opacity-0 transition-[max-width,opacity] duration-300 ease-out motion-reduce:transition-none group-hover/pjump:max-w-12 group-hover/pjump:opacity-100 group-focus-within/pjump:max-w-12 group-focus-within/pjump:opacity-100";
 export const jumpInputClass =
 	"box-border h-9 w-12 min-w-12 shrink-0 border-0 bg-transparent px-1 text-center text-sm text-(--juejin-text-primary) tabular-nums outline-hidden focus:ring-0";
-
-export const jumpInputAria = [
-	i18n(I18nKey.paginationJumpTo),
-	i18n(I18nKey.paginationJumpPageUnit),
-]
-	.filter(Boolean)
-	.join("");

@@ -22,6 +22,7 @@ declare global {
 		toggleFloatingTOC: () => void;
 		backToTop: () => void;
 		tocInternalNavigation: boolean;
+		__fireflyJumpTouchOutside: boolean;
 		// swup is defined in global.d.ts
 	}
 }
