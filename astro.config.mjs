@@ -94,10 +94,13 @@ export default defineConfig({
 			// Twikoo 的样式由脚本运行时注入 <style>，而脚本全局只加载一次；
 			// 默认 head diff 会把它们当作孤儿标签移除，二次 swup 进入评论页时样式永久丢失。
 			// 组件里给这些 style 打了 data-twikoo-style，这里声明保留（#twikoo-css 同理）。
+			// 搜索框是 client:only：dev 下它的样式由 Vite 运行时注入，不在服务端 HTML 的 head 里，
+			// 第一次换页就会被删掉，之后打开搜索弹窗完全没有样式（生产构建是每页都有的静态 <link>）。
 			updateHead: {
 				awaitAssets: true,
 				persistAssets: false,
-				persistTags: "style[data-twikoo-style], link#twikoo-css",
+				persistTags:
+					'style[data-twikoo-style], link#twikoo-css, style[data-vite-dev-id*="Search.svelte"]',
 			},
 			updateBodyClass: false,
 			globalInstance: true,
