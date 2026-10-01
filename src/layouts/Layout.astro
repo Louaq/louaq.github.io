@@ -22,12 +22,8 @@ import "@/styles/main.css";
 import "@/styles/theme-switch.css";
 import "@/styles/navbar-theme.css";
 import "@/styles/post-list.css";
-import "@/styles/code-block.css";
-import "@/styles/article.css";
 import "@/styles/transition.css";
-import "@/styles/markdown.css";
 import "@/styles/image-zoom.css";
-import "@rehype-callouts-theme";
 
 interface Props {
 	title?: string;
@@ -86,6 +82,9 @@ const collapsiblePreviewLines =
     <title>{pageTitle}</title>
 
     <meta charset="UTF-8" />
+    <!-- 固定 cascade layer 顺序：正文样式（Markdown.astro）只在部分页面下发且可能先于 main.css 出现，
+         layer 顺序按首次出现决定，不在此声明就会被它打乱 -->
+    <style is:inline>@layer properties, theme, base, components, utilities;</style>
 
     <!-- 图片外链 CDN 预连接：提前完成 DNS/TCP/TLS 握手，减少首次图片请求延迟 -->
     <link rel="preconnect" href="https://pic1.imgdb.cn" crossorigin />

@@ -1,4 +1,10 @@
 ---
+// 正文专用样式只随渲染正文的页面下发，首页等列表页不加载
+import "@/styles/code-block.css";
+import "@/styles/article.css";
+import "@/styles/markdown.css";
+import "@rehype-callouts-theme";
+
 // 代码字体（JetBrains Mono）已由 Astro Font API 统一加载，见 astro.config.mjs 的 `fonts`
 // 与 FontSetup.astro，此处无需再单独 import fontsource。
 
