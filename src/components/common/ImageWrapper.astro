@@ -41,7 +41,7 @@ const isPublic = src.startsWith("/");
 // https://github.com/withastro/astro/issues/3373
 let img: ImageMetadata | null = null;
 if (isLocal) {
-	const files = import.meta.glob<ImageMetadata>("../../**", {
+	const files = import.meta.glob<ImageMetadata>("../../**/*.{png,jpg,jpeg,webp,gif,avif,svg}", {
 		import: "default",
 	});
 	let normalizedPath = path
