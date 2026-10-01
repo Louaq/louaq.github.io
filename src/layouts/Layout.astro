@@ -143,12 +143,10 @@ const collapsiblePreviewLines =
     <script
       is:inline
       define:vars={{
-        PAGE_WIDTH,
         themeColor,
         defaultMode: siteConfig.themeColor.defaultMode ?? "light",
         darkTheme: expressiveCodeConfig.darkTheme,
         lightTheme: expressiveCodeConfig.lightTheme,
-        baseUrl: import.meta.env.BASE_URL,
       }}
     >
       const LIGHT_MODE = "light";
@@ -510,14 +508,7 @@ const collapsiblePreviewLines =
 
       // page:view 时新页面内容已替换完毕，#tcomment 存在即可直接通知评论区重新初始化
       if (document.getElementById("tcomment")) {
-        document.dispatchEvent(
-          new CustomEvent("firefly:page:loaded", {
-            detail: {
-              path: window.location.pathname,
-              timestamp: Date.now(),
-            },
-          }),
-        );
+        document.dispatchEvent(new CustomEvent("firefly:page:loaded"));
       }
     });
     window.swup.hooks.on("visit:end", (_visit: { to: { url: string } }) => {

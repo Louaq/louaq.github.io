@@ -160,8 +160,3 @@ export const getEnabledFriendGroups = (): FriendGroup[] => {
 		.map((group) => ({ ...group, friends: sortFriends(group.friends) }))
 		.filter((group) => group.friends.length > 0 || group.includeSelf);
 };
-
-// 获取所有启用的友链（打平所有分组），供搜索索引等场景使用
-export const getEnabledFriends = (): FriendLink[] => {
-	return getEnabledFriendGroups().flatMap((group) => group.friends);
-};

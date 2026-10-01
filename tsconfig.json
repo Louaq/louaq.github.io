@@ -4,8 +4,6 @@
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "bundler",
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
     "strictNullChecks": true,
     "allowJs": false,
     "declaration": true,
@@ -17,12 +15,6 @@
     "paths": {
       "@components/*": [
         "./src/components/*"
-      ],
-      "@assets/*": [
-        "./src/assets/*"
-      ],
-      "@constants/*": [
-        "./src/constants/*"
       ],
       "@utils/*": [
         "./src/utils/*"

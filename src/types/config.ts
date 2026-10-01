@@ -83,8 +83,6 @@ export type SiteConfig = {
 	// 分页配置
 	pagination: {
 		postsPerPage: number;
-
-		archivePostsPerPage?: number;
 	};
 
 	// 文章密码保护配置
@@ -125,30 +123,12 @@ export type ProfileLinkItem = {
 	name: string;
 	url: string;
 	icon: string;
-	showName?: boolean;
 };
-
-export type ProfileBadgeItem = {
-	text: string;
-	href?: string;
-	icon?: string;
-};
-
-export type ProfileStatValueMode =
-	| "literal"
-	| "postCount"
-	| "randomReads"
-	| "randomFollowers";
 
 export type ProfileStatItem = {
 	label: string;
 	value?: string;
 	href?: string;
-
-	valueMode?: ProfileStatValueMode;
-
-	randomMin?: number;
-	randomMax?: number;
 };
 
 export type ProfileConfig = {
@@ -157,7 +137,6 @@ export type ProfileConfig = {
 	name: string;
 	bio?: string;
 	level?: string;
-	badges?: ProfileBadgeItem[];
 	stats?: ProfileStatItem[];
 	links: ProfileLinkItem[];
 };
@@ -207,9 +186,6 @@ export type AnnouncementConfig = {
 	// enable 属性已移除，现在通过 sidebarLayoutConfig 统一控制
 	title?: string; // 公告栏标题
 	content: string; // 公告栏内容
-	icon?: string; // 公告栏图标
-	type?: "info" | "warning" | "success" | "error"; // 公告类型
-	closable?: boolean; // 是否可关闭
 	link?: {
 		enable: boolean; // 是否启用链接
 		text: string; // 链接文字
@@ -267,20 +243,10 @@ export type FontConfig = {
 	body: BodyFont; // 正文字体（本地托管 + 分层切片）
 	code: CodeFont; // 代码字体（Astro Font API 自托管 + 子集化）
 	fallback?: string[]; // 全局字体回退列表
-	og?: {
-		family: string; // OpenGraph 使用的字体族
-		cssUrl: string; // OpenGraph 获取字体的 CSS 地址
-		weights: {
-			regular: number;
-			bold: number;
-		};
-		fallback: string[];
-	};
 };
 
 export type FooterConfig = {
 	enable: boolean; // 是否启用Footer HTML注入功能
-	customHtml?: string; // 自定义 HTML 内容，用于添加备案号等信息
 	visitorCount?: {
 		enable: boolean; // 是否在页脚显示访客计数
 		apiUrl?: string; // 统计接口地址（Vercount，接口与不蒜子兼容）
@@ -311,20 +277,6 @@ export type WidgetComponentConfig = {
 	class?: string; // CSS 类名，用于应用样式和动画
 	animationDelay?: number; // 动画延迟时间（毫秒），用于错开动画效果
 	style?: string; // 自定义内联样式
-	showOnPostPage?: boolean; // 是否在文章详情页显示
-	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
-	responsive?: {
-		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
-		collapseThreshold?: number; // 折叠阈值
-	};
-	customProps?: Record<string, unknown>; // 自定义属性，用于扩展组件功能
-};
-
-export type MobileBottomComponentConfig = {
-	type: WidgetComponentType; // 组件类型
-	enable: boolean; // 是否启用该组件
-	showOnPostPage?: boolean; // 是否在文章详情页显示
-	showOnNonPostPage?: boolean; // 是否在非文章详情页显示
 	responsive?: {
 		hidden?: ("mobile" | "tablet" | "desktop")[]; // 在指定设备上隐藏
 		collapseThreshold?: number; // 折叠阈值
@@ -335,7 +287,6 @@ export type MobileBottomComponentConfig = {
 export type SidebarLayoutConfig = {
 	enable: boolean; // 是否启用侧边栏
 	components: WidgetComponentConfig[]; // 侧边栏组件配置列表
-	mobileBottomComponents?: MobileBottomComponentConfig[]; // 移动端底部组件配置列表（<768px 显示）
 	defaultAnimation?: {
 		enable: boolean; // 是否启用默认动画
 		baseDelay: number; // 基础延迟时间（毫秒）

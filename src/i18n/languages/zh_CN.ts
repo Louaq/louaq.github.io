@@ -76,7 +76,6 @@ export const zh_CN: Translation = {
 	[Key.rssDescription]: "订阅获取最新更新",
 	[Key.rssSubtitle]: "通过 RSS 订阅，第一时间获取最新文章和动态",
 	[Key.rssLink]: "RSS 链接",
-	[Key.rssCopyToReader]: "复制链接到你的 RSS 阅读器",
 	[Key.rssCopyLink]: "复制链接",
 	[Key.rssLatestPosts]: "最新文章",
 	[Key.rssWhatIsRSS]: "什么是 RSS？",

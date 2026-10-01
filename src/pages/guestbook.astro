@@ -60,7 +60,7 @@ const description = i18n(I18nKey.guestbookDescription);
   <!-- 评论区 -->
   <div class="mt-4">
     {isCommentEnabled ? (
-      <Comment post={guestbookPost} customPath="/guestbook/" />
+      <Comment />
     ) : (
       <div class="card-base p-8 mb-6 relative overflow-hidden">
         <div class="text-center py-8 text-(--content-meta)">

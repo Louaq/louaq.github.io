@@ -23,7 +23,6 @@ declare global {
 		backToTop: () => void;
 		tocInternalNavigation: boolean;
 		// swup is defined in global.d.ts
-		closeAnnouncement: () => void;
 	}
 }
 

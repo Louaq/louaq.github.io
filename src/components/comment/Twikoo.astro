@@ -5,15 +5,7 @@ import { url } from "@/utils/url-utils";
 // 样式覆盖自托管到 public/assets/css，随评论脚本一起懒加载，
 // 避免被 Astro 打包成全站渲染阻塞的 <link>（评论区在首屏外）。
 
-interface Props {
-	path: string;
-}
-
-const config = {
-	...commentConfig.twikoo,
-	el: "#tcomment",
-	path: Astro.props.path,
-};
+const config = commentConfig.twikoo;
 
 // Twikoo 脚本体积较大（~810KB），评论区位于首屏外。改为按需懒加载：
 // 仅当 #tcomment 接近视口时再注入脚本，避免每个文章页无条件下载。

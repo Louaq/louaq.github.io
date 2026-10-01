@@ -33,7 +33,6 @@
     "@iconify-json/material-symbols": "^1.2.88",
     "@iconify-json/mingcute": "^1.2.8",
     "@iconify-json/simple-icons": "^1.2.92",
-    "@iconify/svelte": "^5.2.2",
     "@swup/astro": "^1.8.0",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
@@ -64,7 +63,6 @@
     "@astrojs/ts-plugin": "^1.10.11",
     "@biomejs/biome": "2.3.12",
     "@iconify-json/fluent-emoji-flat": "^1.2.5",
-    "@types/hast": "^3.0.5",
     "@types/mdast": "^4.0.4",
     "@types/sanitize-html": "^2.16.1",
     "typescript": "^6.0.3"

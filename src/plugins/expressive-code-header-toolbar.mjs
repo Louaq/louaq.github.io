@@ -100,5 +100,3 @@ export function pluginHeaderToolbar() {
 		},
 	};
 }
-
-export default pluginHeaderToolbar;

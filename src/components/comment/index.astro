@@ -1,31 +1,8 @@
 ---
-import type { CollectionEntry } from "astro:content";
 import { commentConfig } from "@/config/commentConfig";
 import Key from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
-import { getResolvedPostPath, removeFileExtension } from "@/utils/url-utils";
 import Twikoo from "./Twikoo.astro";
-
-interface Props {
-	// 内容集合驱动的页面（文章 / spec 页面）传 post；不依赖内容集合的页面
-	// （如友链页）可以省略 post，改为直接传 slug
-	post?: CollectionEntry<"posts"> | CollectionEntry<"spec">;
-	customPath?: string;
-	slug?: string;
-}
-
-const { post, customPath, slug: slugProp } = Astro.props;
-
-// 根据页面类型确定路径
-const slug =
-	slugProp ??
-	(post
-		? post.collection === "posts"
-			? getResolvedPostPath(post.id, post.data)
-			: removeFileExtension(post.id)
-		: "");
-const path =
-	customPath || (post?.collection === "posts" ? `/posts/${slug}` : `/${slug}`);
 
 // 强制commentService类型为string，避免类型不兼容警告
 let commentService: string = commentConfig?.type || "none";
@@ -44,7 +21,7 @@ let commentService: string = commentConfig?.type || "none";
       </div>
       <!-- 评论内容区域 -->
       <div class="relative z-10">
-        {commentService === "twikoo" && <Twikoo path={path} />}
+        {commentService === "twikoo" && <Twikoo />}
       </div>
     </div>
   )

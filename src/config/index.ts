@@ -1,39 +1,8 @@
 // 配置索引文件 - 统一导出所有配置
 // 这样组件可以一次性导入多个相关配置，减少重复的导入语句
 
-// 类型导出
-export type {
-	AdConfig,
-	AdItem,
-	AdPlacement,
-	AdPlacementName,
-	AnnouncementConfig,
-	CommentConfig,
-	CoverImageConfig,
-	ExpressiveCodeConfig,
-	FooterConfig,
-	HomeTopNoticeConfig,
-	HomeTopNoticeItem,
-	LicenseConfig,
-	NavBarConfig,
-	ProfileConfig,
-	SidebarLayoutConfig,
-	SiteConfig,
-	SponsorConfig,
-	SponsorItem,
-	SponsorMethod,
-	WidgetComponentConfig,
-	WidgetComponentType,
-} from "../types/config";
-export {
-	adConfig,
-	getActiveAdItems,
-	getAdAspectRatio,
-} from "./adConfig"; // 广告配置
-export { announcementConfig } from "./announcementConfig"; // 公告配置
 // 功能配置
 export { commentConfig } from "./commentConfig"; // 评论系统配置
-export { coverImageConfig } from "./coverImageConfig"; // 封面图配置
 export { expressiveCodeConfig } from "./expressiveCodeConfig"; // 代码高亮配置
 export { fontConfig } from "./fontConfig"; // 字体配置
 export { footerConfig } from "./footerConfig"; // 页脚配置
@@ -41,14 +10,9 @@ export {
 	friendSiteInfo,
 	friendsPageConfig,
 	getEnabledFriendGroups,
-	getEnabledFriends,
 } from "./friendsConfig"; // 友链配置
 export { homeCarouselConfig } from "./homeCarouselConfig"; // 首页轮播配置
-export {
-	getNormalizedHomeTopNoticeItems,
-	homeTopNoticeConfig,
-} from "./homeTopNoticeConfig"; // 首页顶部通知
-export { licenseConfig } from "./licenseConfig"; // 许可证配置
+export { getNormalizedHomeTopNoticeItems } from "./homeTopNoticeConfig"; // 首页顶部通知
 // 组件配置
 export { navBarConfig } from "./navBarConfig"; // 导航栏配置
 export { profileConfig } from "./profileConfig"; // 用户资料配置
