@@ -30,7 +30,6 @@ import rehypeFigure from "./src/plugins/rehype-figure.mjs";
 import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
-import { remarkFirstImage } from "./src/plugins/remark-first-image.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
 import meilisearch from "./src/utils/meilisearch.ts";
 
@@ -215,7 +214,6 @@ export default defineConfig({
 				remarkMath,
 				remarkReadingTime,
 				remarkExcerpt,
-				remarkFirstImage,
 				remarkDirective,
 				remarkSectionize,
 				parseDirectiveNode,
