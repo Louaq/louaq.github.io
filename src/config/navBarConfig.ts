@@ -35,6 +35,12 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		links.push(LinkPreset.Sponsor);
 	}
 
+	links.push({
+		name: "热搜",
+		url: "/hot/",
+		icon: "fluent-emoji-flat:fire",
+	});
+
 	links.push(LinkPreset.About);
 
 	// 监控（服务状态监控 + 探针监控）

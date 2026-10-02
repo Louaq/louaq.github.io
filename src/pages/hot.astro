@@ -1,0 +1,133 @@
+---
+import Icon from "@/components/common/Icon.astro";
+import MainGridLayout from "@/layouts/MainGridLayout.astro";
+
+const sources = [
+	{ id: "douyin", name: "抖音", icon: "douyin" },
+	{ id: "toutiao", name: "今日头条", icon: "toutiao" },
+	{ id: "baidu", name: "百度", icon: "baidu" },
+];
+---
+
+<MainGridLayout title="热搜" description="各平台实时热搜榜" hideSidebar wideContent>
+  <div class="card-base card-plain px-4 md:px-9 py-6 w-full" data-hot>
+
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+    {sources.map((source) => (
+      <section class="rounded-2xl bg-black/5 dark:bg-white/5 p-3">
+        <div class="flex items-center gap-3 mb-3 px-1">
+          <img src={`https://news.louaq.com/icons/${source.icon}.png`} alt="" class="size-10 rounded-full" />
+          <div class="flex-1">
+            <h2 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">{source.name}热搜</h2>
+            <p class="text-xs text-neutral-400" data-hot-time></p>
+          </div>
+          <button type="button" aria-label="刷新" data-hot-refresh class="text-neutral-400 hover:text-(--primary) disabled:animate-spin transition-colors">
+            <Icon icon="ph:arrow-counter-clockwise-duotone" class="text-2xl"></Icon>
+          </button>
+        </div>
+        <ol class="h-[360px] overflow-y-auto hide-scrollbar rounded-xl bg-white/60 dark:bg-black/20 p-2" data-hot-list={source.id}>
+          <li class="px-2 py-1.5 text-neutral-400">加载中…</li>
+        </ol>
+      </section>
+    ))}
+    </div>
+    <p class="mt-4 text-center text-xs text-neutral-400">
+      数据接口来自
+      <a href="https://github.com/newsnext/newsnow" target="_blank" rel="noopener noreferrer" class="hover:text-(--primary) underline">newsnext/newsnow</a>
+    </p>
+  </div>
+</MainGridLayout>
+
+<script>
+  // 数据源：自部署的 newsnow（https://github.com/newsnext/newsnow），浏览器端实时拉取
+  const API = "https://news.louaq.com/api/s?id=";
+  // 前三名排名方块：红、橙、黄
+  const TOP_RANK = ["bg-red-500 text-white", "bg-orange-500 text-white", "bg-amber-400 text-white"];
+
+  // 每分钟重算「N分钟前」，每 10 分钟自动拉一次（只在页面可见时）
+  const AUTO_REFRESH_MINUTES = 10;
+  let timer: ReturnType<typeof setInterval> | undefined;
+
+  function timeAgo(t: number) {
+    const minutes = Math.floor((Date.now() - t) / 60000);
+    if (minutes < 1) return "刚刚更新";
+    if (minutes < 60) return `${minutes}分钟前更新`;
+    return `${Math.floor(minutes / 60)}小时前更新`;
+  }
+
+  // latest=true 时带 &latest 绕过 newsnow 服务端缓存
+  function loadList(list: HTMLOListElement, latest: boolean) {
+    const section = list.closest("section") as HTMLElement;
+    const time = section.querySelector("[data-hot-time]") as HTMLElement;
+    const refresh = section.querySelector("[data-hot-refresh]") as HTMLButtonElement;
+    // 加载中禁用按钮：防止连点并发请求、旧响应覆盖新结果
+    if (refresh.disabled) return;
+    refresh.disabled = true;
+    fetch(`${API}${list.dataset.hotList}${latest ? "&latest" : ""}`)
+      .then((res) => res.json())
+      .then((data: { updatedTime: number; items: { title: string; url: string; extra?: { hover?: string; icon?: string } }[] }) => {
+        time.dataset.updated = String(data.updatedTime);
+        time.textContent = timeAgo(data.updatedTime);
+        // 标题来自第三方，用 textContent 写入，不拼 HTML
+        list.replaceChildren(
+          ...data.items.map((item, i) => {
+            const li = document.createElement("li");
+            li.className = "flex gap-3 items-start px-2 py-1.5 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 transition-colors";
+            const rank = document.createElement("span");
+            rank.className = `shrink-0 min-w-6 h-6 px-1 mt-0.5 rounded-md text-sm flex items-center justify-center ${TOP_RANK[i] ?? "bg-black/5 dark:bg-white/10 text-neutral-600 dark:text-neutral-300"}`;
+            rank.textContent = String(i + 1);
+            const a = document.createElement("a");
+            a.href = item.url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.className = "text-neutral-800 dark:text-neutral-200 hover:text-(--primary) transition-colors";
+            a.textContent = item.title;
+            // 百度带摘要（hover），放进悬停提示
+            if (item.extra?.hover) a.title = item.extra.hover;
+            li.append(rank, a);
+            // 头条等源的角标图片
+            if (item.extra?.icon) {
+              const icon = document.createElement("img");
+              icon.src = item.extra.icon;
+              icon.alt = "";
+              icon.className = "h-4 mt-1 shrink-0";
+              li.append(icon);
+            }
+            return li;
+          }),
+        );
+      })
+      .finally(() => {
+        refresh.disabled = false;
+      });
+  }
+
+  function loadHot() {
+    clearInterval(timer);
+    const root = document.querySelector<HTMLElement>("[data-hot]");
+    if (!root) return;
+
+    for (const list of root.querySelectorAll<HTMLOListElement>("[data-hot-list]")) {
+      loadList(list, false);
+      const refresh = (list.closest("section") as HTMLElement).querySelector("[data-hot-refresh]") as HTMLElement;
+      refresh.addEventListener("click", () => loadList(list, true));
+    }
+
+    let minutes = 0;
+    timer = setInterval(() => {
+      minutes++;
+      for (const time of root.querySelectorAll<HTMLElement>("[data-updated]")) {
+        time.textContent = timeAgo(Number(time.dataset.updated));
+      }
+      if (minutes % AUTO_REFRESH_MINUTES === 0 && !document.hidden) {
+        for (const list of root.querySelectorAll<HTMLOListElement>("[data-hot-list]")) {
+          loadList(list, false);
+        }
+      }
+    }, 60000);
+  }
+
+  // 模块脚本只执行一次：首屏直接调用，swup 换页靠 astro:page-load 续上
+  loadHot();
+  document.addEventListener("astro:page-load", loadHot);
+</script>
