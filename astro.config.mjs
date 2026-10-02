@@ -27,7 +27,6 @@ import { GithubCardComponent } from "./src/plugins/rehype-component-github-card.
 import { PdfEmbedComponent } from "./src/plugins/rehype-component-pdf-embed.mjs";
 import rehypeExternalLinks from "./src/plugins/rehype-external-links.mjs";
 import rehypeFigure from "./src/plugins/rehype-figure.mjs";
-import rehypeOssImage from "./src/plugins/rehype-oss-image.mjs";
 import { parseDirectiveNode } from "./src/plugins/remark-directive-rehype.js";
 import { remarkExcerpt } from "./src/plugins/remark-excerpt.js";
 import { remarkReadingTime } from "./src/plugins/remark-reading-time.mjs";
@@ -222,8 +221,6 @@ export default defineConfig({
 				[rehypeKatex, { katex }],
 				[rehypeCallouts, { theme: siteConfig.rehypeCallouts.theme }],
 				rehypeSlug,
-				// 必须在 rehypeFigure 之前：figure 会复制 img 的 properties
-				rehypeOssImage,
 				rehypeFigure,
 				[rehypeExternalLinks, { siteUrl: siteConfig.site_url }],
 				[

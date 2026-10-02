@@ -1,7 +1,6 @@
 ---
 import { Image } from "astro:assets";
 import * as path from "node:path";
-import { withOssImageProcess } from "@/utils/oss-image";
 import { url } from "@/utils/url-utils";
 
 interface Props {
@@ -40,9 +39,12 @@ const isPublic = src.startsWith("/");
 // https://github.com/withastro/astro/issues/3373
 let img: ImageMetadata | null = null;
 if (isLocal) {
-	const files = import.meta.glob<ImageMetadata>("../../**/*.{png,jpg,jpeg,webp,gif,avif,svg}", {
-		import: "default",
-	});
+	const files = import.meta.glob<ImageMetadata>(
+		"../../**/*.{png,jpg,jpeg,webp,gif,avif,svg}",
+		{
+			import: "default",
+		},
+	);
 	let normalizedPath = path
 		.normalize(path.join("../../", basePath, src))
 		.replace(/\\/g, "/");
@@ -60,33 +62,7 @@ const imageStyle = `object-position: ${position || "center"}; image-rendering: -
 const shouldDeferRemoteSrc = deferSrc && !isLocal;
 const transparentPlaceholder =
 	"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 9'%3E%3C/svg%3E";
-// 封面图：列表页预览卡最宽约 400px，详情页 banner 约 1200px；按 2x DPR 取值。
-// 只有阿里云 OSS 的图会被改写，其余（imgdb / 本地）原样返回。
-const remoteSrc = isPublic
-	? url(src)
-	: withOssImageProcess(src, { width: preview ? 800 : 1600 }) || src;
-const responsiveWidths = preview ? [400, 800] : [800, 1200, 1600];
-const responsiveCandidates = isPublic
-	? []
-	: responsiveWidths.map((width) => ({
-			width,
-			src: withOssImageProcess(src, { width }),
-		}));
-const hasResponsiveRemoteSource = responsiveCandidates.some(
-	(candidate) => candidate.src !== src,
-);
-const remoteSrcset = hasResponsiveRemoteSource
-	? responsiveCandidates
-			.filter(
-				(candidate, index, candidates) =>
-					candidates.findIndex((item) => item.src === candidate.src) === index,
-			)
-			.map((candidate) => `${candidate.src} ${candidate.width}w`)
-			.join(", ")
-	: undefined;
-const remoteSizes = preview
-	? "(max-width: 639px) 1px, (max-width: 1199px) 45vw, 34vw"
-	: "(max-width: 768px) 100vw, (max-width: 1200px) 90vw, 1200px";
+const remoteSrc = isPublic ? url(src) : src;
 ---
 
 <div id={id} class:list={[
@@ -122,8 +98,6 @@ const remoteSizes = preview
   {!isLocal && (
     <img
       src={shouldDeferRemoteSrc ? transparentPlaceholder : remoteSrc}
-      srcset={shouldDeferRemoteSrc ? undefined : remoteSrcset}
-      sizes={remoteSizes}
       width={preview ? 396 : 1200}
       height={preview ? 240 : 800}
       alt={alt || ""}
