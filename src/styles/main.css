@@ -320,7 +320,6 @@ body {
 
 .enable-card-border .card-base {
   border-radius: var(--radius-large) !important;
-  border: 1px solid var(--juejin-border) !important;
   box-shadow: none !important;
 }
 
