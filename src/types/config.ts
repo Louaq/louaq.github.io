@@ -185,13 +185,7 @@ export type PluginCollapsibleConfig = {
 export type AnnouncementConfig = {
 	// enable 属性已移除，现在通过 sidebarLayoutConfig 统一控制
 	title?: string; // 公告栏标题
-	content: string; // 公告栏内容
-	link?: {
-		enable: boolean; // 是否启用链接
-		text: string; // 链接文字
-		url: string; // 链接地址
-		external?: boolean; // 是否外部链接
-	};
+	content: string; // 公告栏内容（支持 HTML）
 };
 
 export type HomeTopNoticeItem = {
