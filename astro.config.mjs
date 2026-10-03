@@ -109,11 +109,7 @@ export default defineConfig({
 			ignore: (url) => {
 				try {
 					const pathname = new URL(url, "https://swup-ignore.local").pathname;
-					// 相册页不含 swup 容器（全屏无导航栏），走整页加载
-					return (
-						pathname.toLowerCase().endsWith(".xml") ||
-						pathname.startsWith("/album")
-					);
+					return pathname.toLowerCase().endsWith(".xml");
 				} catch {
 					return false;
 				}

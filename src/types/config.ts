@@ -66,7 +66,6 @@ export type SiteConfig = {
 		sponsor: boolean; // 赞助页面开关
 		guestbook: boolean; // 留言板页面开关
 		watchlist: boolean; // 观影清单页面开关
-		album: boolean; // 相册页面开关
 	};
 
 	// 文章列表布局配置
@@ -106,7 +105,6 @@ export enum LinkPreset {
 	Watchlist = 7,
 	Categories = 8,
 	Tags = 9,
-	Album = 10,
 }
 
 export type NavBarLink = {

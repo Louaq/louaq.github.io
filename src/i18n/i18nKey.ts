@@ -43,7 +43,6 @@ enum I18nKey {
 	guestbook = "guestbook",
 	guestbookDescription = "guestbookDescription",
 	watchlist = "watchlist",
-	album = "album",
 	watchlistTitle = "watchlistTitle",
 	watchlistSubtitle = "watchlistSubtitle",
 	watchlistEmpty = "watchlistEmpty",

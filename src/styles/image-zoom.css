@@ -56,7 +56,6 @@
 /* 可点击放大的图片指针 */
 .custom-md img,
 #post-cover img,
-.moment-images img,
-#photo-container img {
+.moment-images img {
 	cursor: zoom-in;
 }

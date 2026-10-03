@@ -44,7 +44,7 @@
     }
   }
 
-  /** 避免点击图片时触发外层 a[href] 跳转（相册等） */
+  /** 避免点击图片时触发外层 a[href] 跳转 */
   function attachAnchorImageGuards(signal: AbortSignal) {
     const handler = (e: Event) => {
       const t = e.target;
@@ -53,7 +53,6 @@
       }
     };
     for (const root of [
-      document.querySelector("#photo-container"),
       document.querySelector(".moment-images"),
     ]) {
       root?.addEventListener("click", handler, { capture: true, signal });

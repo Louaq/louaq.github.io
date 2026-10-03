@@ -31,10 +31,6 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		links.push(LinkPreset.Watchlist);
 	}
 
-	if (siteConfig.pages.album) {
-		links.push(LinkPreset.Album);
-	}
-
 	if (siteConfig.pages.sponsor) {
 		links.push(LinkPreset.Sponsor);
 	}
