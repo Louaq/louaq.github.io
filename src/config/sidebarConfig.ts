@@ -40,12 +40,26 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			animationDelay: 0,
 		},
 		{
+			// 组件类型：网易云音乐播放器（歌单等见 musicConfig）
+			type: "music",
+			// 是否启用该组件
+			enable: true,
+			// 组件显示顺序
+			order: 3,
+			// 组件位置
+			position: "sticky",
+			// CSS 类名
+			class: "onload-animation",
+			// 动画延迟时间
+			animationDelay: 0,
+		},
+		{
 			// 组件类型：站点运行时间组件
 			type: "runtime",
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 3,
+			order: 4,
 			// 组件位置
 			position: "sticky",
 			// CSS 类名
@@ -59,7 +73,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 是否启用该组件
 			enable: true,
 			// 组件显示顺序
-			order: 4,
+			order: 5,
 			// 组件位置
 			position: "sticky",
 			// CSS 类名
@@ -67,6 +81,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			// 动画延迟时间
 			animationDelay: 0,
 		},
+
 		// {
 		// 	// 组件类型：分类组件
 		// 	type: "categories",

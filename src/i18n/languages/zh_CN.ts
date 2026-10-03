@@ -138,6 +138,7 @@ export const zh_CN: Translation = {
 
 	// 节气
 	[Key.solarTerm]: "节气",
+	[Key.music]: "音乐",
 
 	// 页脚访客计数
 	[Key.visitorSitePv]: "总访问量",

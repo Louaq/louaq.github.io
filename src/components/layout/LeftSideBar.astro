@@ -2,6 +2,7 @@
 import type { MarkdownHeading } from "astro";
 import Announcement from "@/components/widget/Announcement.astro";
 import Categories from "@/components/widget/Categories.astro";
+import Music from "@/components/widget/Music.astro";
 import Profile from "@/components/widget/Profile.astro";
 import SiteRuntime from "@/components/widget/SiteRuntime.astro";
 import SiteStats from "@/components/widget/SiteStats.astro";
@@ -32,6 +33,7 @@ const componentMap = {
 	stats: SiteStats,
 	runtime: SiteRuntime,
 	solarTerm: SolarTerm,
+	music: Music,
 };
 
 // 渲染组件的辅助函数

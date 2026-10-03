@@ -136,6 +136,9 @@ enum I18nKey {
 	// 节气
 	solarTerm = "solarTerm",
 
+	// 音乐播放器
+	music = "music",
+
 	// 页脚访客计数
 	visitorSitePv = "visitorSitePv",
 	visitorSiteUv = "visitorSiteUv",

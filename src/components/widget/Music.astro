@@ -1,16 +1,42 @@
 ---
+import WidgetLayout from "@/components/common/WidgetLayout.astro";
 import { siteConfig } from "@/config";
 import { musicConfig } from "@/config/musicConfig";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
 import { url } from "@/utils/url-utils";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+
+const { class: className, style } = Astro.props;
 ---
 
-{/* 挂在 Layout 的 body 上、不在任何 swup 容器内，换页不会被替换，播放不中断 */}
-<div
-    id="music-player"
-    data-api={musicConfig.api}
-    data-songs={url("/music.json")}
-    data-theme={siteConfig.themeColor.color}
-></div>
+<WidgetLayout
+  name={i18n(I18nKey.music)}
+  icon="fluent-emoji-flat:musical-notes"
+  id="music"
+  class={className}
+  style={style}
+>
+  <div
+      id="music-player"
+      data-api={musicConfig.api}
+      data-songs={url("/music.json")}
+      data-theme={siteConfig.themeColor.color}
+  ></div>
+</WidgetLayout>
+
+<style is:global>
+  /* 去掉 APlayer 自带的卡片外观，融进侧边栏卡片；用 id 压过运行时插入的 APlayer.min.css */
+  #music-player.aplayer {
+    margin: 0;
+    box-shadow: none;
+    background: transparent;
+  }
+</style>
 
 {/* module 脚本整站只跑一次；APlayer 动态导入，不阻塞首屏渲染 */}
 <script>
@@ -51,7 +77,7 @@ import { url } from "@/utils/url-utils";
 
         const ap = new APlayer({
             container: el,
-            fixed: true,
+            listFolded: true,
             theme: el.dataset.theme,
             audio: songs.map((s: object) => ({ ...s, type: "netease" })),
             customAudioType: {
@@ -67,6 +93,13 @@ import { url } from "@/utils/url-utils";
         // 暂停状态下点播放：此时还没有地址，现取
         ap.on("play", () => {
             if (!ap.audio.getAttribute("src")) load(ap.list.audios[ap.list.index]);
+        });
+
+        // 侧边栏是 swup 容器，换页会换成新的空占位；把同一个播放器节点搬回去即可续上界面。
+        // <audio> 不在 DOM 里，节点被摘下期间（含无侧边栏的单栏页）照常播放
+        document.addEventListener("astro:page-load", () => {
+            const slot = document.getElementById("music-player");
+            if (slot && slot !== el) slot.replaceWith(el);
         });
     }
 </script>

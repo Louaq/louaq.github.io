@@ -261,7 +261,8 @@ export type WidgetComponentType =
 	| "tags"
 	| "stats"
 	| "runtime"
-	| "solarTerm";
+	| "solarTerm"
+	| "music";
 
 export type WidgetComponentConfig = {
 	type: WidgetComponentType; // 组件类型
