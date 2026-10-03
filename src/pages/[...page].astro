@@ -30,17 +30,6 @@ const allPosts = await getSortedPosts();
 // 1) 手动配置的轮播项（优先级最高，按数组定义顺序展示）
 const manualSlides: CarouselSlide[] = homeCarouselConfig.manualItems.map(
 	(item, index) => {
-		const meta: { icon: string; text: string }[] = [];
-		if (item.date?.trim()) {
-			meta.push({ icon: "lucide:calendar-days", text: item.date.trim() });
-		}
-		if (item.category?.trim()) {
-			meta.push({ icon: "lucide:folder", text: item.category.trim() });
-		}
-		(item.tags || []).slice(0, 2).forEach((tag) => {
-			const text = tag.trim();
-			if (text) meta.push({ icon: "lucide:tag", text: `#${text}` });
-		});
 		return {
 			href: item.href,
 			title: item.title,
@@ -48,7 +37,9 @@ const manualSlides: CarouselSlide[] = homeCarouselConfig.manualItems.map(
 			basePath: "/",
 			seed: `manual-${index}`,
 			openInNewTab: item.openInNewTab,
-			meta,
+			category: item.category,
+			description: item.description,
+			date: item.date,
 		};
 	},
 );
@@ -64,26 +55,18 @@ const postSlides: CarouselSlide[] = allPosts
 	})
 	.map((post) => {
 		const finalImage = post.data.homeCarouselImage?.trim() || post.data.image;
-		const publishedText = post.data.published.toLocaleDateString("zh-CN", {
-			year: "numeric",
-			month: "2-digit",
-			day: "2-digit",
-		});
-		const meta: { icon: string; text: string }[] = [
-			{ icon: "lucide:calendar-days", text: publishedText },
-		];
-		if (post.data.category?.trim()) {
-			meta.push({ icon: "lucide:folder", text: post.data.category.trim() });
-		}
-		(post.data.tags || []).slice(0, 2).forEach((tag) => {
-			meta.push({ icon: "lucide:tag", text: `#${tag.trim()}` });
-		});
 		return {
 			href: getPostUrlForEntry(post),
 			title: post.data.title,
 			image: finalImage,
 			basePath: getFileDirFromPath(post.filePath || ""),
-			meta,
+			category: post.data.category,
+			description: post.data.description,
+			date: post.data.published.toLocaleDateString("zh-CN", {
+				year: "numeric",
+				month: "long",
+				day: "numeric",
+			}),
 		};
 	});
 

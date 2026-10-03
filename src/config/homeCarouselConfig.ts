@@ -12,8 +12,8 @@ export interface HomeCarouselManualItem {
 	date?: string;
 	// 可选：分类
 	category?: string;
-	// 可选：标签数组（最多展示前 2 个）
-	tags?: string[];
+	// 可选：描述（标题下方的一行摘要）
+	description?: string;
 	// 可选：外链是否在新窗口打开（默认根据 href 是否以 http 开头自动判断）
 	openInNewTab?: boolean;
 }
@@ -38,7 +38,7 @@ export const homeCarouselConfig: HomeCarouselConfig = {
 		// 	href: "",
 		// 	date: "",
 		// 	category: "",
-		// 	tags: [],
+		// 	description: "",
 		// },
 	],
 };

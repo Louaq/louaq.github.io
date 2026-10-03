@@ -1,5 +1,4 @@
 ---
-import { Icon } from "astro-icon/components";
 import CoverImage from "@/components/common/CoverImage.astro";
 
 export interface CarouselSlide {
@@ -8,7 +7,9 @@ export interface CarouselSlide {
 	image: string;
 	basePath?: string;
 	openInNewTab?: boolean;
-	meta?: { icon: string; text: string }[];
+	category?: string | null;
+	description?: string;
+	date?: string;
 }
 
 interface Props {
@@ -23,18 +24,17 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 {
 	slides.length > 0 && (
 		<section
-			class="home-carousel card-base rounded-(--radius-large) overflow-hidden onload-animation mb-4"
+			class="home-carousel onload-animation mb-4"
 			data-home-carousel
 			data-autoplay={safeAutoplayMs}
 			aria-label="首页精选轮播"
 		>
-			<div class="carousel-track-wrap relative overflow-hidden">
+			<div class="carousel-track-wrap card-base rounded-(--radius-large) relative overflow-hidden">
 				<div class="carousel-track flex">
 					{
 						slides.map((slide, index) => {
 							const finalImage = slide.image?.trim() || "";
 							const hasImage = !!finalImage;
-							const metaItems = slide.meta || [];
 							const isExternal =
 								slide.openInNewTab ??
 								(/^https?:\/\//.test(slide.href) || slide.href.startsWith("//"));
@@ -65,22 +65,18 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 										}
 										<div class="carousel-mask absolute inset-0" />
 										<div class="carousel-content absolute inset-0 p-4 md:p-6">
-											<h2 class="text-xl md:text-3xl font-bold leading-snug mb-2 line-clamp-2 text-white">
+											{slide.category && (
+												<span class="carousel-category rounded-full px-3 py-1 text-xs font-bold text-white mb-3">
+													{slide.category}
+												</span>
+											)}
+											<h2 class="text-xl md:text-2xl font-bold leading-snug line-clamp-2 text-white">
 												{slide.title}
 											</h2>
-											<div class="flex items-center gap-3 text-white/85 text-sm mt-1 flex-wrap">
-												{
-													metaItems.map((item, index) => (
-														<>
-															{index > 0 && <span class="opacity-70">·</span>}
-															<span class="inline-flex items-center gap-1.5">
-																<Icon name={item.icon} class="text-base opacity-90" />
-																{item.text}
-															</span>
-														</>
-													))
-												}
-											</div>
+											{slide.description && (
+												<p class="text-sm text-white/85 mt-2 line-clamp-1">{slide.description}</p>
+											)}
+											{slide.date && <time class="text-xs text-white/70 mt-4">{slide.date}</time>}
 										</div>
 									</a>
 								</article>
@@ -88,39 +84,23 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 						})
 					}
 				</div>
-				{
-					slides.length > 1 && (
-						<>
-							<button
-								type="button"
-								class="carousel-btn carousel-prev absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full flex items-center justify-center"
-								aria-label="上一张"
-							>
-								‹
-							</button>
-							<button
-								type="button"
-								class="carousel-btn carousel-next absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full flex items-center justify-center"
-								aria-label="下一张"
-							>
-								›
-							</button>
-							<div class="carousel-dots absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2">
-								{
-									slides.map((_slide, index) => (
-										<button
-											type="button"
-											class="carousel-dot h-2.5 w-2.5 rounded-full"
-											data-slide-to={index}
-											aria-label={`跳转到第 ${index + 1} 张`}
-										/>
-									))
-								}
-							</div>
-						</>
-					)
-				}
 			</div>
+			{
+				slides.length > 1 && (
+					<div class="carousel-dots flex justify-center gap-2 mt-3">
+						{
+							slides.map((_slide, index) => (
+								<button
+									type="button"
+									class="carousel-dot h-1.5 rounded-full"
+									data-slide-to={index}
+									aria-label={`跳转到第 ${index + 1} 张`}
+								/>
+							))
+						}
+					</div>
+				)
+			}
 		</section>
 	)
 }
@@ -134,8 +114,6 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 		if (total === 0) return;
 
 		const dots = Array.from(root.querySelectorAll(".carousel-dot"));
-		const prevBtn = root.querySelector(".carousel-prev");
-		const nextBtn = root.querySelector(".carousel-next");
 		const autoplayMs = Number(root.getAttribute("data-autoplay") || "0");
 
 		let current = 0;
@@ -189,12 +167,6 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 			start();
 		};
 
-		prevBtn?.addEventListener("click", () => {
-			goTo(current - 1);
-		});
-		nextBtn?.addEventListener("click", () => {
-			goTo(current + 1);
-		});
 		dots.forEach((dot, i) => {
 			dot.addEventListener("click", () => {
 				goTo(i);
@@ -269,7 +241,6 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 	}
 
 	.home-carousel .carousel-track-wrap {
-		border-radius: inherit;
 		overflow: hidden;
 		background: color-mix(in oklab, var(--card-bg) 82%, black 18%);
 		touch-action: pan-y;
@@ -313,60 +284,36 @@ const safeAutoplayMs = Math.max(0, autoplayMs);
 	.home-carousel .carousel-content {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
-		align-items: center;
+		justify-content: flex-end;
+		align-items: flex-start;
 		min-height: 100%;
-		transform: translateY(4px);
-		transition: transform 0.25s ease;
 		padding-left: 3.2rem;
 		padding-right: 3.2rem;
-		padding-bottom: 3rem;
-		text-align: center;
+		padding-bottom: 1.5rem;
+		text-align: left;
 	}
 
-	.home-carousel .carousel-content p {
-		margin-left: auto;
-		margin-right: auto;
-	}
-
-	.home-carousel .carousel-content > div {
-		justify-content: center;
-	}
-
-	.home-carousel .carousel-btn {
-		color: white;
-		background: transparent;
-		border: 0;
-		backdrop-filter: none;
-		font-size: 2.2rem;
-		font-weight: 500;
-		text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-		transition: transform 0.2s ease, color 0.2s ease;
+	.home-carousel .carousel-category {
+		background: rgba(255, 255, 255, 0.25);
+		backdrop-filter: blur(6px);
 	}
 
 	.home-carousel .carousel-dot {
-		width: 0.5rem;
-		background: rgba(255, 255, 255, 0.55);
-		transition: width 0.2s ease, transform 0.2s ease, background 0.2s ease;
+		width: 1.5rem;
+		background: var(--btn-regular-bg-active);
+		transition: width 0.2s ease, background 0.2s ease;
 	}
 
 	.home-carousel .carousel-dot.is-active {
-		width: 1.6rem;
-		background: white;
-		transform: scale(1);
+		width: 2.5rem;
+		background: var(--primary);
 	}
 
 	@media (max-width: 768px) {
 		.home-carousel .carousel-content {
 			padding-left: 2.2rem;
 			padding-right: 2.2rem;
-			padding-bottom: 2.7rem;
-		}
-
-		.home-carousel .carousel-btn {
-			height: 2rem;
-			width: 2rem;
-			font-size: 1.7rem;
+			padding-bottom: 1.5rem;
 		}
 	}
 
