@@ -45,6 +45,13 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		icon: "fluent-emoji-flat:satellite-antenna",
 	});
 
+	// rss.xml 已在 swup ignore 中排除，走整页打开
+	links.push({
+		name: "RSS",
+		url: "/rss.xml",
+		icon: "fluent-emoji-flat:newspaper",
+	});
+
 	// 支持自定义导航栏链接,并且支持多级菜单
 	// links.push({
 	// 	name: "状态",
