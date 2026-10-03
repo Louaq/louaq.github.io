@@ -260,6 +260,12 @@ export default defineConfig({
 	vite: {
 		// Tailwind CSS v4 通过官方 Vite 插件接入
 		plugins: [tailwindcss()],
+		// 音乐播放器的 /ncm 同源反代只在线上 openresty 里，dev 下转发过去
+		server: {
+			proxy: {
+				"/ncm": { target: siteConfig.site_url, changeOrigin: true },
+			},
+		},
 		// 开发时预打包 Swup 子入口，减少 504 Outdated Optimize Dep（依赖变更后仍建议重启 dev）
 		optimizeDeps: {
 			include: [
