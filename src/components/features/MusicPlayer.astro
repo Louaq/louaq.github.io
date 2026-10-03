@@ -1,0 +1,50 @@
+---
+import { siteConfig } from "@/config";
+import { musicConfig } from "@/config/musicConfig";
+import { url } from "@/utils/url-utils";
+---
+
+{/* 挂在 Layout 的 body 上、不在任何 swup 容器内，换页不会被替换，播放不中断 */}
+<div
+    id="music-player"
+    data-api={musicConfig.api}
+    data-songs={url("/music.json")}
+    data-theme={siteConfig.themeColor.color}
+></div>
+
+{/* module 脚本整站只跑一次；APlayer 动态导入，不阻塞首屏渲染 */}
+<script>
+    // 直接 import CSS 会被 Astro 提升成每页的阻塞 <link>，改为运行时插入（swup 换页保留见 astro.config 的 persistTags）
+    import aplayerCss from "aplayer/dist/APlayer.min.css?url";
+
+    document.head.append(Object.assign(document.createElement("link"), { id: "aplayer-css", rel: "stylesheet", href: aplayerCss }));
+
+    const el = document.getElementById("music-player") as HTMLElement;
+    const api = el.dataset.api as string;
+
+    // 歌单在构建时生成为静态 music.json（见 src/pages/music.json.ts）
+    const [{ default: APlayer }, songs] = await Promise.all([
+        import("aplayer"),
+        fetch(el.dataset.songs as string).then((r) => r.json()),
+    ]);
+
+    new APlayer({
+        container: el,
+        fixed: true,
+        theme: el.dataset.theme,
+        audio: songs.map((s: object) => ({ ...s, type: "netease" })),
+        // 播放地址 20 分钟过期，切到哪首才现取；接口给的是 http，站点是 https，需改协议避免混合内容拦截
+        customAudioType: {
+            netease: async (audio: HTMLAudioElement, song: { id: number }, player: any) => {
+                audio.removeAttribute("src");
+                const { data } = await fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`).then((r) => r.json());
+                // 连续切歌时只采用当前这首的结果
+                if (player.list.audios[player.list.index] !== song) return;
+                // 无版权的歌 url 为 null，直接切下一首
+                if (!data[0].url) return player.skipForward();
+                audio.src = data[0].url.replace(/^http:/, "https:");
+                if (!player.paused) audio.play();
+            },
+        },
+    });
+</script>

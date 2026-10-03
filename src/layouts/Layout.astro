@@ -1,6 +1,7 @@
 ﻿---
 import FontSetup from "@components/features/FontSetup.astro";
 import ImageLightboxManager from "@components/features/ImageLightboxManager.astro";
+import MusicPlayer from "@components/features/MusicPlayer.astro";
 import ConfigCarrier from "@components/layout/ConfigCarrier.astro";
 
 import {
@@ -9,6 +10,7 @@ import {
 	siteConfig,
 } from "@/config";
 import { PAGE_WIDTH } from "@/constants/constants";
+import { musicConfig } from "@/config/musicConfig";
 import { defaultFavicons } from "@/constants/icon";
 import type { Favicon } from "@/types/config";
 import { isHomePage } from "@/utils/layout-utils";
@@ -214,6 +216,8 @@ const collapsiblePreviewLines =
     <div id="page-height-extend" class="hidden h-[300vh]"></div>
 
     <ImageLightboxManager />
+
+    {musicConfig.enable && <MusicPlayer />}
 
   </body>
 </html>
