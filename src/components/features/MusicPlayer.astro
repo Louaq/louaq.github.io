@@ -17,53 +17,56 @@ import { url } from "@/utils/url-utils";
     // 直接 import CSS 会被 Astro 提升成每页的阻塞 <link>，改为运行时插入（swup 换页保留见 astro.config 的 persistTags）
     import aplayerCss from "aplayer/dist/APlayer.min.css?url";
 
-    document.head.append(Object.assign(document.createElement("link"), { id: "aplayer-css", rel: "stylesheet", href: aplayerCss }));
+    // 移动端不显示播放器，也不加载 APlayer 和歌单（断点与站内其他组件一致）
+    if (!matchMedia("(max-width: 768px)").matches) {
+        document.head.append(Object.assign(document.createElement("link"), { id: "aplayer-css", rel: "stylesheet", href: aplayerCss }));
 
-    const el = document.getElementById("music-player") as HTMLElement;
-    const api = el.dataset.api as string;
+        const el = document.getElementById("music-player") as HTMLElement;
+        const api = el.dataset.api as string;
 
-    // 歌单在构建时生成为静态 music.json（见 src/pages/music.json.ts）
-    const [{ default: APlayer }, songs] = await Promise.all([
-        import("aplayer"),
-        fetch(el.dataset.songs as string).then((r) => r.json()),
-    ]);
+        // 歌单在构建时生成为静态 music.json（见 src/pages/music.json.ts）
+        const [{ default: APlayer }, songs] = await Promise.all([
+            import("aplayer"),
+            fetch(el.dataset.songs as string).then((r) => r.json()),
+        ]);
 
-    // 播放地址 20 分钟过期，真正播放时才现取；接口给的是 http，站点是 https，需改协议避免混合内容拦截
-    // 自然播完切下一首时，切歌回调和随后的 play 事件都会走到这里，同一首只取一次
-    let loading: object | null = null;
-    const load = (song: { id: number }) => {
-        if (loading === song) return;
-        loading = song;
-        // 不带站点 cookie：API 收到任何 Cookie 头都会改用它而不用服务端的会员 cookie，url 变成 null
-        return fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`, { credentials: "omit" })
-            .then((r) => r.json())
-            .then(({ data }) => {
-                // 连续切歌时只采用当前这首的结果
-                if (ap.list.audios[ap.list.index] !== song) return;
-                // 无版权的歌 url 为 null，直接切下一首
-                if (!data[0].url) return ap.skipForward();
-                ap.audio.src = data[0].url.replace(/^http:/, "https:");
-                if (!ap.paused) ap.audio.play();
-            });
-    };
+        // 播放地址 20 分钟过期，真正播放时才现取；接口给的是 http，站点是 https，需改协议避免混合内容拦截
+        // 自然播完切下一首时，切歌回调和随后的 play 事件都会走到这里，同一首只取一次
+        let loading: object | null = null;
+        const load = (song: { id: number }) => {
+            if (loading === song) return;
+            loading = song;
+            // 不带站点 cookie：API 收到任何 Cookie 头都会改用它而不用服务端的会员 cookie，url 变成 null
+            return fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`, { credentials: "omit" })
+                .then((r) => r.json())
+                .then(({ data }) => {
+                    // 连续切歌时只采用当前这首的结果
+                    if (ap.list.audios[ap.list.index] !== song) return;
+                    // 无版权的歌 url 为 null，直接切下一首
+                    if (!data[0].url) return ap.skipForward();
+                    ap.audio.src = data[0].url.replace(/^http:/, "https:");
+                    if (!ap.paused) ap.audio.play();
+                });
+        };
 
-    const ap = new APlayer({
-        container: el,
-        fixed: true,
-        theme: el.dataset.theme,
-        audio: songs.map((s: object) => ({ ...s, type: "netease" })),
-        customAudioType: {
-            // 不能写成 async 函数：APlayer 用 toString 判断类型，AsyncFunction 会报 Illegal customType
-            // 初始化和暂停状态下切歌只清空地址，不请求接口，避免每个访客打开页面就消耗一次会员取链
-            netease: (audio: HTMLAudioElement, song: { id: number }, player: { paused: boolean }) => {
-                audio.removeAttribute("src");
-                if (!player.paused) load(song);
+        const ap = new APlayer({
+            container: el,
+            fixed: true,
+            theme: el.dataset.theme,
+            audio: songs.map((s: object) => ({ ...s, type: "netease" })),
+            customAudioType: {
+                // 不能写成 async 函数：APlayer 用 toString 判断类型，AsyncFunction 会报 Illegal customType
+                // 初始化和暂停状态下切歌只清空地址，不请求接口，避免每个访客打开页面就消耗一次会员取链
+                netease: (audio: HTMLAudioElement, song: { id: number }, player: { paused: boolean }) => {
+                    audio.removeAttribute("src");
+                    if (!player.paused) load(song);
+                },
             },
-        },
-    });
+        });
 
-    // 暂停状态下点播放：此时还没有地址，现取
-    ap.on("play", () => {
-        if (!ap.audio.getAttribute("src")) load(ap.list.audios[ap.list.index]);
-    });
+        // 暂停状态下点播放：此时还没有地址，现取
+        ap.on("play", () => {
+            if (!ap.audio.getAttribute("src")) load(ap.list.audios[ap.list.index]);
+        });
+    }
 </script>
