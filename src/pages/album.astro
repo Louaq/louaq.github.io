@@ -1,0 +1,103 @@
+---
+import { Icon } from "astro-icon/components";
+import AlbumPagination from "@/components/pages/album/AlbumPagination.astro";
+import { siteConfig } from "@/config";
+import { albumItemsPerPage, albumPhotos } from "@/config/albumConfig";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
+import Layout from "@/layouts/Layout.astro";
+
+if (!siteConfig.pages.album) {
+	return Astro.redirect("/404/");
+}
+
+const navBtn =
+	"absolute flex items-center justify-center text-white/80 hover:text-white transition-colors";
+
+// 构建时算好每张图的页号，非首页先隐藏，打开页面不会闪出全部图片
+const totalPages = Math.ceil(albumPhotos.length / albumItemsPerPage);
+const pageOf = (i: number) => Math.floor(i / albumItemsPerPage) + 1;
+---
+
+{/* 不套 MainGridLayout：无导航栏、无页宽限制，整屏平铺。没有 swup 容器，已在 astro.config.mjs 的 swup ignore 中走整页加载 */}
+<Layout title={i18n(I18nKey.album)}>
+    <main data-no-swup>
+        <h1 class="sr-only">{i18n(I18nKey.album)}</h1>
+        {/* 等大网格：格子统一 5:4，图片按 cover 居中填满；点开后由下方预览层显示原图全貌 */}
+        <div id="photo-container" class="grid grid-cols-2 md:grid-cols-4 transition-opacity duration-200">
+            {albumPhotos.map((photo, i) => (
+                <button type="button" class="block" data-album-page={pageOf(i)} hidden={pageOf(i) !== 1}>
+                    <img
+                        src={photo.src}
+                        alt={photo.alt ?? ""}
+                        class="block w-full aspect-[5/4] object-cover"
+                        loading="lazy"
+                        decoding="async"
+                    />
+                </button>
+            ))}
+        </div>
+        <AlbumPagination totalPages={totalPages} />
+
+        {/* 预览层（参考 anheyu 相册）：按原图比例居中显示、不铺满，背景压暗模糊 */}
+        <dialog
+            id="album-viewer"
+            class="m-auto overflow-hidden rounded-xl bg-transparent p-0 backdrop:bg-[#1f2224cc] backdrop:backdrop-blur-sm"
+        >
+            <img id="album-viewer-img" alt="" class="block max-h-[90vh] max-w-[90vw] select-none transition-opacity duration-200 motion-reduce:transition-none" />
+            <button type="button" data-close aria-label="关闭" class={`${navBtn} top-3 right-3 size-9 rounded-full bg-black/30 hover:bg-black/55`}>
+                <Icon name="material-symbols:close" class="size-5" />
+            </button>
+            <button type="button" data-step="-1" aria-label="上一张" class={`${navBtn} top-1/2 left-2 size-12 -translate-y-1/2`}>
+                <Icon name="material-symbols:chevron-left" class="size-8 drop-shadow" />
+            </button>
+            <button type="button" data-step="1" aria-label="下一张" class={`${navBtn} top-1/2 right-2 size-12 -translate-y-1/2`}>
+                <Icon name="material-symbols:chevron-right" class="size-8 drop-shadow" />
+            </button>
+        </dialog>
+    </main>
+</Layout>
+
+{/* 整页加载，脚本只跑一次。预览图与缩略图同一 URL，命中缓存即时显示 */}
+<script is:inline>
+    const thumbs = [...document.querySelectorAll("#photo-container img")];
+    const viewer = document.getElementById("album-viewer");
+    const viewerImg = document.getElementById("album-viewer-img");
+    let current = 0;
+
+    const show = (i) => {
+        current = (i + thumbs.length) % thumbs.length;
+        viewerImg.src = thumbs[current].src;
+        viewerImg.alt = thumbs[current].alt;
+    };
+
+    // 切换过渡：先淡出，换图并解码完成后再淡入（时长与 duration-200 一致）
+    const step = (delta) => {
+        viewerImg.style.opacity = "0";
+        setTimeout(() => {
+            show(current + delta);
+            viewerImg.decode().finally(() => {
+                viewerImg.style.opacity = "";
+            });
+        }, 200);
+    };
+
+    thumbs.forEach((img, i) =>
+        img.parentElement.addEventListener("click", () => {
+            show(i);
+            viewer.showModal();
+        }),
+    );
+
+    // 点背景（target 是 dialog 本身）或关闭按钮关闭；Esc 由 dialog 原生处理
+    viewer.addEventListener("click", (e) => {
+        const btn = e.target.closest("button");
+        if (btn?.dataset.step) step(Number(btn.dataset.step));
+        else if (e.target === viewer || btn?.hasAttribute("data-close")) viewer.close();
+    });
+
+    viewer.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") step(-1);
+        if (e.key === "ArrowRight") step(1);
+    });
+</script>

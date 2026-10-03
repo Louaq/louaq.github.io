@@ -51,6 +51,11 @@ const pages = [
 		href: url("/watchlist/"),
 		icon: "fluent-emoji-flat:clapper-board",
 	},
+	siteConfig.pages.album && {
+		name: i18n(I18nKey.album),
+		href: url("/album/"),
+		icon: "fluent-emoji-flat:framed-picture",
+	},
 	siteConfig.pages.guestbook && {
 		name: i18n(I18nKey.guestbook),
 		href: url("/guestbook/"),

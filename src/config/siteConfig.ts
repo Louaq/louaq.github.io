@@ -95,6 +95,7 @@ export const siteConfig: SiteConfig = {
 		sponsor: false, // 赞助页面开关
 		guestbook: false, // 留言板页面开关，需要配置评论系统
 		watchlist: true, // 观影清单页面开关
+		album: true, // 相册页面开关
 	},
 
 	// 文章列表布局配置

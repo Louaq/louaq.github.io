@@ -38,6 +38,11 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/watchlist/",
 		icon: "fluent-emoji-flat:clapper-board",
 	},
+	[LinkPreset.Album]: {
+		name: i18n(I18nKey.album),
+		url: "/album/",
+		icon: "fluent-emoji-flat:framed-picture",
+	},
 	[LinkPreset.Categories]: {
 		name: i18n(I18nKey.categories),
 		url: "/categories/",
