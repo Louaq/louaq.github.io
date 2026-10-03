@@ -34,7 +34,8 @@ import { url } from "@/utils/url-utils";
     const load = (song: { id: number }) => {
         if (loading === song) return;
         loading = song;
-        return fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`)
+        // 不带站点 cookie：API 收到任何 Cookie 头都会改用它而不用服务端的会员 cookie，url 变成 null
+        return fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`, { credentials: "omit" })
             .then((r) => r.json())
             .then(({ data }) => {
                 // 连续切歌时只采用当前这首的结果
