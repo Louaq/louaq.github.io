@@ -5,12 +5,12 @@ expires: 2026-01-31 23:59:59
 mathjax: true
 category: 汇报
 tags: [组会]
-description: 汇报
+description: 汇报PPT
 pinned: true
 password: true
 image: https://pic1.imgdb.cn/i/0343OVOk1840RU3QCw2YqY.webp
 homeCarousel: true
-homeCarouselOrder: 1
+homeCarouselOrder: 3
 ---
 
 ## 2026年组会内容

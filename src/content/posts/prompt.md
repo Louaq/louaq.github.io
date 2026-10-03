@@ -6,6 +6,8 @@ category: prompt
 image: https://pic1.imgdb.cn/i/2Riv5i8fXRZVINulFUEqkR.png
 tags: [科研作图,润色]
 pinned: true
+homeCarousel: true
+homeCarouselOrder: 1
 ---
 
 
