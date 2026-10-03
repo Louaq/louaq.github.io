@@ -156,7 +156,7 @@
 }
 
 @utility text-50 {
-  @apply text-black/50 dark:text-white/50;
+  @apply text-black/55 dark:text-white/50;
 }
 
 @utility text-30 {
