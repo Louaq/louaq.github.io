@@ -40,7 +40,7 @@ export const sidebarLayoutConfig: SidebarLayoutConfig = {
 			animationDelay: 0,
 		},
 		{
-			// 组件类型：网易云音乐播放器（歌单等见 musicConfig）
+			// 组件类型：音乐播放器（自建曲库，接口见 musicConfig）
 			type: "music",
 			// 是否启用该组件
 			enable: true,

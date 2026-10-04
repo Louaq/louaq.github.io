@@ -50,7 +50,7 @@ const { class: className, style } = Astro.props;
         const el = document.getElementById("music-player") as HTMLElement;
         const api = el.dataset.api as string;
 
-        // 歌单在构建时生成为静态 music.json（见 src/pages/music.json.ts）
+        // 歌单 music.json 由服务器上的 scan.mjs 生成，不随站点构建
         const [{ default: APlayer }, songs] = await Promise.all([
             import("aplayer"),
             fetch(el.dataset.songs as string).then((r) => r.json()),
