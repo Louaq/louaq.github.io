@@ -259,11 +259,34 @@ export default defineConfig({
 	},
 	vite: {
 		// Tailwind CSS v4 通过官方 Vite 插件接入
-		plugins: [tailwindcss()],
-		// 音乐播放器的 /ncm 同源反代只在线上 openresty 里，dev 下转发过去
+		plugins: [
+			tailwindcss(),
+			// 音乐播放器的 /ncm 同源反代只在线上 openresty 里，dev 下转发过去。
+			// 不能用下面的 server.proxy：Astro 把 trailingSlash: "always" 的中间件 unshift 到最前，会把无扩展名的 /ncm/xxx 拦成 404。
+			// 这里同样在 post 钩子里 unshift，且 enforce: "post" 排在 Astro 插件之后执行，最终位于最前
+			{
+				name: "ncm-dev-proxy",
+				enforce: "post",
+				configureServer(server) {
+					return () => {
+						server.middlewares.stack.unshift({
+							route: "/ncm",
+							handle: async (req, res) => {
+								const r = await fetch(`${siteConfig.site_url}/ncm${req.url}`);
+								res.statusCode = r.status;
+								res.setHeader("content-type", r.headers.get("content-type"));
+								res.end(Buffer.from(await r.arrayBuffer()));
+							},
+						});
+					};
+				},
+			},
+		],
+		// 歌单 music.json 和封面 /assets/music 只在线上服务器，dev 下转发过去
 		server: {
 			proxy: {
-				"/ncm": { target: siteConfig.site_url, changeOrigin: true },
+				"/music.json": { target: siteConfig.site_url, changeOrigin: true },
+				"/assets/music": { target: siteConfig.site_url, changeOrigin: true },
 			},
 		},
 		// 开发时预打包 Swup 子入口，减少 504 Outdated Optimize Dep（依赖变更后仍建议重启 dev）
