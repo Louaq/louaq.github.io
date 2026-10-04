@@ -56,7 +56,7 @@ export function GithubCardComponent(properties, children) {
 
 	const nScript = h(
 		`script#${cardUuid}-script`,
-		{ type: "text/javascript", defer: true },
+		{},
 		`
       (() => {
         const repo = ${JSON.stringify(repo)};
