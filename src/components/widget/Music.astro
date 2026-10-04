@@ -27,6 +27,7 @@ const { class: className, style } = Astro.props;
       data-api={musicConfig.api}
       data-songs={url("/music.json")}
       data-theme={siteConfig.themeColor.color}
+      data-search={i18n(I18nKey.search)}
   >
     {/* 加载占位：APlayer 初始化时会覆盖容器 innerHTML，占位自然消失 */}
     <div class="relative h-[66px]">
@@ -53,24 +54,18 @@ const { class: className, style } = Astro.props;
 
 {/* module 脚本整站只跑一次；APlayer 动态导入，不阻塞首屏渲染 */}
 <script>
-    // 直接 import CSS 会被 Astro 提升成每页的阻塞 <link>，改为运行时插入（swup 换页保留见 astro.config 的 persistTags）
     import aplayerCss from "aplayer/dist/APlayer.min.css?url";
-
-    // 移动端不显示播放器，也不加载 APlayer 和歌单（断点与站内其他组件一致）
     if (!matchMedia("(max-width: 768px)").matches) {
         document.head.append(Object.assign(document.createElement("link"), { id: "aplayer-css", rel: "stylesheet", href: aplayerCss }));
 
         const el = document.getElementById("music-player") as HTMLElement;
         const api = el.dataset.api as string;
 
-        // 歌单 music.json 由服务器上的 scan.mjs 生成，不随站点构建
         const [{ default: APlayer }, songs] = await Promise.all([
             import("aplayer"),
             fetch(el.dataset.songs as string).then((r) => r.json()),
         ]);
 
-        // 播放地址 20 分钟过期，真正播放时才现取；接口给的是 http，站点是 https，需改协议避免混合内容拦截
-        // 自然播完切下一首时，切歌回调和随后的 play 事件都会走到这里，同一首只取一次
         let loading: object | null = null;
         const load = (song: { id: number }) => {
             if (loading === song) return;
@@ -97,7 +92,9 @@ const { class: className, style } = Astro.props;
                 // 不能写成 async 函数：APlayer 用 toString 判断类型，AsyncFunction 会报 Illegal customType
                 // 初始化和暂停状态下切歌只清空地址，不请求接口，避免每个访客打开页面就消耗一次会员取链
                 netease: (audio: HTMLAudioElement, song: { id: number }, player: { paused: boolean }) => {
+                    // 只删 src 属性不会卸载已加载的上一首，播完切歌后 APlayer 紧接着 play() 会把它从头放出来；load() 才真正清空
                     audio.removeAttribute("src");
+                    audio.load();
                     if (!player.paused) load(song);
                 },
             },
@@ -108,8 +105,25 @@ const { class: className, style } = Astro.props;
             if (!ap.audio.getAttribute("src")) load(ap.list.audios[ap.list.index]);
         });
 
-        // 侧边栏是 swup 容器，换页会换成新的空占位；把同一个播放器节点搬回去即可续上界面。
-        // <audio> 不在 DOM 里，节点被摘下期间（含无侧边栏的单栏页）照常播放
+        const labels = songs.map((s: { name: string; artist: string }) => `${s.name} ${s.artist}`.toLowerCase());
+        const search = Object.assign(document.createElement("input"), {
+            type: "search",
+            placeholder: el.dataset.search,
+            className: "my-2 w-full rounded-lg bg-black/5 px-3 py-1.5 text-sm outline-none focus:ring-2 focus:ring-(--primary) focus:ring-inset dark:bg-white/10",
+        });
+        
+        search.style.boxSizing = "border-box";
+
+        search.addEventListener("click", (e) => e.stopPropagation());
+        search.addEventListener("input", () => {
+            const q = search.value.trim().toLowerCase();
+            [...ap.template.listOl.children].forEach((li, i) => {
+                (li as HTMLElement).hidden = !labels[i].includes(q);
+            });
+        });
+        ap.template.list.prepend(search);
+        ap.template.list.style.maxHeight = "calc(250px + 3rem)";
+
         document.addEventListener("astro:page-load", () => {
             const slot = document.getElementById("music-player");
             if (slot && slot !== el) slot.replaceWith(el);
