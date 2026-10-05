@@ -2,6 +2,8 @@
 import type { MarkdownHeading } from "astro";
 import "@/styles/toc.css";
 import WidgetLayout from "@/components/common/WidgetLayout.astro";
+import I18nKey from "@/i18n/i18nKey";
+import { i18n } from "@/i18n/translation";
 
 interface Props {
 	headings: MarkdownHeading[];
@@ -13,7 +15,7 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 ---
 
 <div class:list={["post-page-toc-wrap", className]} style={style}>
-  <WidgetLayout id="post-page-toc-widget" class="toc-widget-plain">
+  <WidgetLayout id="post-page-toc-widget" name={i18n(I18nKey.tableOfContents)} class="toc-widget-plain">
     <div class="toc-scroll-container">
       <div class="toc-content" id="post-page-toc-content">
         <!-- TOC 内容由 TOCManager 从正文标题生成 -->
@@ -39,6 +41,14 @@ const { headings: _headings = [], class: className, style } = Astro.props;
 .post-page-toc-wrap :global(widget-layout > .collapse-wrapper) {
 	padding: 0;
 	border-radius: inherit;
+}
+
+/* 标题与目录项文字左对齐（.toc-item 左内边距 0.62rem），去掉标题前的竖条 */
+.post-page-toc-wrap :global(.widget-title) {
+	margin-left: 0.62rem;
+}
+.post-page-toc-wrap :global(.widget-title)::before {
+	display: none;
 }
 
 .post-page-toc-wrap .toc-scroll-container {

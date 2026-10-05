@@ -28,7 +28,9 @@ export class TOCManager {
 	private observer: IntersectionObserver | null = null;
 	private minDepth = 10;
 	private maxLevel: number;
-	private scrollTimeout: number | null = null;
+	// 目录要跟随的活动项：滚动途中只记录，等正文停下（scrollend）再滚目录，
+	// 这样点击目录引起的平滑滚动不会让目录被途经的标题来回拉扯
+	private followItem: HTMLElement | null = null;
 	private contentId: string;
 	private indicatorId: string;
 
@@ -250,7 +252,7 @@ export class TOCManager {
 
 		// 移除所有活动状态
 		this.tocItems.forEach((item) => {
-			item.classList.remove("visible");
+			item.classList.remove("visible", "active");
 		});
 
 		const visibleHeadingIds = this.getVisibleHeadingIds();
@@ -265,6 +267,8 @@ export class TOCManager {
 		activeItems.forEach((item) => {
 			item.classList.add("visible");
 		});
+		// 当前所在章节：视口内第一个标题
+		activeItems[0]?.classList.add("active");
 
 		// 更新活动指示器
 		this.updateActiveIndicator(activeItems);
@@ -299,16 +303,14 @@ export class TOCManager {
 		indicator.style.height = `${height}px`;
 		indicator.style.opacity = "1";
 
-		// 自动滚动到活动项
-		if (firstActive) {
-			this.scrollToActiveItem(firstActive);
-		}
+		this.followItem = firstActive;
 	}
 
 	/**
 	 * 滚动到活动项
 	 */
-	private scrollToActiveItem(activeItem: HTMLElement): void {
+	private scrollToActiveItem = (): void => {
+		const activeItem = this.followItem;
 		if (!activeItem) return;
 
 		const tocContainer = document
@@ -316,37 +318,29 @@ export class TOCManager {
 			?.closest(".toc-scroll-container");
 		if (!tocContainer) return;
 
-		// 清除之前的定时器
-		if (this.scrollTimeout) {
-			clearTimeout(this.scrollTimeout);
+		const containerRect = tocContainer.getBoundingClientRect();
+		const itemRect = activeItem.getBoundingClientRect();
+
+		// 只在元素不在可视区域时才滚动
+		const isVisible =
+			itemRect.top >= containerRect.top &&
+			itemRect.bottom <= containerRect.bottom;
+
+		if (!isVisible) {
+			const itemOffsetTop = activeItem.offsetTop;
+			const containerHeight = tocContainer.clientHeight;
+			const itemHeight = activeItem.clientHeight;
+
+			// 计算目标滚动位置，将元素居中显示
+			const targetScroll =
+				itemOffsetTop - containerHeight / 2 + itemHeight / 2;
+
+			tocContainer.scrollTo({
+				top: targetScroll,
+				behavior: "smooth",
+			});
 		}
-
-		// 使用节流机制
-		this.scrollTimeout = window.setTimeout(() => {
-			const containerRect = tocContainer.getBoundingClientRect();
-			const itemRect = activeItem.getBoundingClientRect();
-
-			// 只在元素不在可视区域时才滚动
-			const isVisible =
-				itemRect.top >= containerRect.top &&
-				itemRect.bottom <= containerRect.bottom;
-
-			if (!isVisible) {
-				const itemOffsetTop = (activeItem as HTMLElement).offsetTop;
-				const containerHeight = tocContainer.clientHeight;
-				const itemHeight = activeItem.clientHeight;
-
-				// 计算目标滚动位置，将元素居中显示
-				const targetScroll =
-					itemOffsetTop - containerHeight / 2 + itemHeight / 2;
-
-				tocContainer.scrollTo({
-					top: targetScroll,
-					behavior: "smooth",
-				});
-			}
-		}, 100);
-	}
+	};
 
 	/**
 	 * 处理点击事件
@@ -420,10 +414,7 @@ export class TOCManager {
 			this.observer.disconnect();
 			this.observer = null;
 		}
-		if (this.scrollTimeout) {
-			clearTimeout(this.scrollTimeout);
-			this.scrollTimeout = null;
-		}
+		window.removeEventListener("scrollend", this.scrollToActiveItem);
 	}
 
 	/**
@@ -434,6 +425,8 @@ export class TOCManager {
 		this.bindClickEvents();
 		this.setupObserver();
 		this.updateActiveState();
+		this.scrollToActiveItem();
+		window.addEventListener("scrollend", this.scrollToActiveItem);
 	}
 }
 

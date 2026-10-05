@@ -88,6 +88,24 @@
 	opacity: 1;
 }
 
+/* 当前所在章节：主题色加粗 + 左侧竖条 */
+.toc-item.active .toc-label {
+	color: var(--primary);
+	font-weight: 600;
+}
+
+.toc-item.active::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 3px;
+	height: 1.1rem;
+	border-radius: 9999px;
+	background: var(--primary);
+}
+
 .toc-item:hover .toc-label {
 	color: var(--primary);
 }
