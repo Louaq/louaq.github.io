@@ -131,6 +131,8 @@ const { class: className, style } = Astro.props;
         });
         ap.template.list.prepend(search);
         ap.template.list.style.maxHeight = "calc(250px + 3rem)";
+        // APlayer 切歌（及展开列表）时会把列表滚到 33*index，选中的歌被顶到最上面；屏蔽它对 scrollTop 的写入，用户滚轮滚动不受影响
+        Object.defineProperty(ap.template.listOl, "scrollTop", { set() {} });
 
         document.addEventListener("astro:page-load", () => {
             const slot = document.getElementById("music-player");
