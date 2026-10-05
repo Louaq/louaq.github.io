@@ -50,6 +50,14 @@ const { class: className, style } = Astro.props;
     box-shadow: none;
     background: transparent;
   }
+  /* 当前播放项左侧的主题色竖条 */
+  #music-player .aplayer-list-cur {
+    display: none;
+  }
+  /* 列表项悬停和当前播放的背景加圆角，与搜索框一致 */
+  #music-player .aplayer-list ol li {
+    border-radius: 0.5rem;
+  }
 </style>
 
 {/* module 脚本整站只跑一次；APlayer 动态导入，不阻塞首屏渲染 */}
