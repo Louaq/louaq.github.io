@@ -252,20 +252,6 @@ const wordLabel =
     color: var(--primary) !important;
   }
 
-  /* grid-mode 下：覆盖旧规则强加的 1:1 方形、column-reverse 与固定行方向（固定高度已保证等高） */
-  #post-list-container.grid-mode .post-card-wrapper.hero-card,
-  #post-list-container.grid-mode .post-card-wrapper.hero-card.has-cover {
-    aspect-ratio: auto !important;
-    flex-direction: row !important;
-    height: 160px !important;
-  }
-  @media (min-width: 768px) {
-    #post-list-container.grid-mode .post-card-wrapper.hero-card,
-    #post-list-container.grid-mode .post-card-wrapper.hero-card.has-cover {
-      height: 13rem !important;
-    }
-  }
-
   /* 覆盖旧 list-mode 规则：不再降级为紧凑白色行 */
   @media (min-width: 768px) {
     #post-list-container.list-mode .post-card-wrapper.hero-card {

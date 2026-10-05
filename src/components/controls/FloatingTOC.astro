@@ -305,11 +305,6 @@ let { headings: _ = [] } = Astro.props;
       setTimeout(initFloatingTOC, 100);
     });
 
-    // 监听布局模式切换（通过自定义事件）
-    window.addEventListener('layoutChange', () => {
-      updateFloatingTOCVisibility();
-    });
-
     // 监听窗口大小变化
     let resizeTimeout: ReturnType<typeof setTimeout>;
     window.addEventListener('resize', () => {

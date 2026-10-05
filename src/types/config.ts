@@ -68,18 +68,6 @@ export type SiteConfig = {
 		watchlist: boolean; // 观影清单页面开关
 	};
 
-	// 文章列表布局配置
-	postListLayout: {
-		defaultMode: "list" | "grid"; // 默认布局模式：list=列表模式，grid=网格模式
-		grid: {
-			// 网格布局配置，仅当 defaultMode 为 "grid" 时生效
-			// 是否开启瀑布流布局
-			masonry: boolean;
-			// 网格模式列数，2 或 3，默认为 2。注意：3列模式仅在单侧边栏（或无侧边栏）且屏幕宽度足够时生效
-			columns?: 2 | 3;
-		};
-	};
-
 	// 分页配置
 	pagination: {
 		postsPerPage: number;
