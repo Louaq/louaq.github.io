@@ -5,7 +5,7 @@ import { onDestroy, onMount, tick } from "svelte";
 /**
  * 文案由 SearchLazy.astro 在服务端解析好后传进来，而不是在组件里 import
  * `@i18n/translation`：那个模块静态引用了全部 5 种语言（打包后 ~44KB），
- * 而本组件是 client:only，等于让每个页面都白背这 44KB。
+ * 而本组件每页都会水合，等于让每个页面都白背这 44KB。
  */
 export interface SearchLabels {
 	search: string;
@@ -14,16 +14,17 @@ export interface SearchLabels {
 	searchKbdSelect: string;
 	searchKbdSwitch: string;
 	announcementClose: string;
-	searchBy: string;
 }
 
 interface Props {
 	/** 首次挂载时是否直接打开搜索弹窗（用于懒加载入口） */
 	initialOpen?: boolean;
 	labels: SearchLabels;
+	/** 搜索框为空时默认展示的文章 */
+	recentPosts: { url: string; title: string; description: string }[];
 }
 
-let { initialOpen = false, labels }: Props = $props();
+let { initialOpen = false, labels, recentPosts }: Props = $props();
 
 const MEILISEARCH_HOST =
 	import.meta.env.PUBLIC_MEILISEARCH_HOST || "https://search.louaq.com";
@@ -131,12 +132,22 @@ const openModal = async () => {
 	lockScroll();
 	await tick();
 	modalInputEl?.focus();
-	activeIndex = -1;
+	showRecent();
 	page = 0;
 	nbHits = 0;
 	nbPages = 0;
 	hasMore = false;
 	isLoadingMore = false;
+};
+
+const showRecent = () => {
+	results = recentPosts.map((post) => ({
+		...post,
+		excerpt: "",
+		tags: [],
+		category: "",
+	}));
+	activeIndex = 0;
 };
 
 const closeModal = () => {
@@ -231,9 +242,8 @@ const doSearch = async (keyword: string, opts?: { reset?: boolean }) => {
 
 	const trimmed = keyword.trim();
 	if (!trimmed) {
-		results = [];
+		showRecent();
 		isSearching = false;
-		activeIndex = -1;
 		page = 0;
 		nbHits = 0;
 		nbPages = 0;
@@ -491,8 +501,6 @@ onDestroy(() => {
 				<div class="search-empty">搜索服务未配置</div>
 			{:else if isSearching}
 				<div class="search-empty">{labels.searchLoading}</div>
-			{:else if !query.trim()}
-				<div class="search-empty search-empty-centered"></div>
 			{:else if results.length === 0}
 				<div class="search-empty">{labels.searchNoResults}</div>
 			{:else}
@@ -516,6 +524,7 @@ onDestroy(() => {
 					{/each}
 				</div>
 
+				{#if query.trim()}
 				<div class="search-more">
 					<div class="search-more-meta">
 						已显示 {results.length}{nbHits ? ` / ${nbHits}` : ""}{nbHits ? " 条" : ""}
@@ -531,6 +540,7 @@ onDestroy(() => {
 						</button>
 					{/if}
 				</div>
+				{/if}
 			{/if}
 		</div>
 
@@ -589,31 +599,6 @@ onDestroy(() => {
 					<span class="docsearch-modal-footer-commands-label">{labels.announcementClose}</span>
 				</li>
 			</ul>
-			<span class="docsearch-modal-footer-logo" aria-label="Meilisearch">
-				<span class="docsearch-modal-footer-logo-label">{labels.searchBy}</span>
-				<a
-					class="docsearch-modal-footer-logo-link"
-					href="https://www.meilisearch.com/"
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					<img
-						src="/assets/images/meilisearch-logo-light.svg"
-						alt="Meilisearch"
-						width="110"
-						height="16"
-						class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-light"
-					/>
-					<img
-						src="/assets/images/meilisearch-logo-dark.svg"
-						alt=""
-						width="110"
-						height="16"
-						class="docsearch-modal-footer-logo-icon docsearch-modal-footer-logo-dark"
-						aria-hidden="true"
-					/>
-				</a>
-			</span>
 		</footer>
 	</div>
 	</div>
@@ -653,7 +638,7 @@ onDestroy(() => {
 		max-height: min(640px, calc(100vh - 2rem));
 		display: flex;
 		flex-direction: column;
-		border-radius: 5px;
+		border-radius: 8px;
 		overflow: hidden;
 		background: rgba(255, 255, 255, 0.98);
 		color: #111827;
@@ -662,25 +647,6 @@ onDestroy(() => {
 			0 2px 0 rgba(255, 255, 255, 0.6) inset;
 		z-index: 2147483647;
 		border: 1px solid rgba(0, 0, 0, 0.06);
-	}
-
-	/* 无搜索词时的空闲态：总高约 160–180px，接近 DocSearch 紧凑面板（图一） */
-	.search-modal:has(.search-empty-centered) {
-		max-height: none;
-		height: auto;
-	}
-	.search-modal:has(.search-empty-centered) .search-header {
-		padding: 0.625rem 0.75rem 0.5rem;
-	}
-	.search-modal:has(.search-empty-centered) .search-body {
-		flex: 0 0 auto;
-		min-height: 0;
-		overflow: visible;
-		padding: 0.2rem 0.5rem 0.35rem;
-	}
-	.search-modal:has(.search-empty-centered) .search-empty-centered {
-		min-height: 2.25rem;
-		padding: 0.25rem 0.75rem;
 	}
 
 	:global(html.dark) .search-modal {
@@ -704,7 +670,7 @@ onDestroy(() => {
 		flex: 1;
 		display: flex;
 		align-items: center;
-		border-radius: 5px;
+		border-radius: 8px;
 		background: rgba(255, 255, 255, 1);
 		border: 1px solid rgba(17, 24, 39, 0.12);
 		box-shadow: 0 1px 0 rgba(17, 24, 39, 0.04);
@@ -797,17 +763,6 @@ onDestroy(() => {
 	:global(html.dark) .search-empty {
 		color: #cbd5e1;
 		opacity: 0.95;
-	}
-	.search-empty-centered {
-		min-height: 3.5rem;
-		padding: 0.5rem 0.75rem 0.65rem 0.75rem;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		color: rgba(107, 114, 128, 1);
-	}
-	:global(html.dark) .search-empty-centered {
-		color: #cbd5e1;
 	}
 
 	.search-list {
@@ -936,6 +891,7 @@ onDestroy(() => {
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
+		flex: 1;
 		gap: 0.65rem 1rem;
 		list-style: none;
 		margin: 0;
@@ -945,6 +901,9 @@ onDestroy(() => {
 		display: flex;
 		align-items: center;
 		gap: 0.35rem;
+	}
+	.docsearch-modal-footer-commands li:last-child {
+		margin-left: auto;
 	}
 	.docsearch-modal-footer-commands-key {
 		display: inline-flex;
@@ -983,45 +942,4 @@ onDestroy(() => {
 		color: #9ca3af;
 	}
 
-	.docsearch-modal-footer-logo {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.5rem;
-		margin-left: auto;
-	}
-	.docsearch-modal-footer-logo-label {
-		font-size: 0.75rem;
-		color: #6b7280;
-		white-space: nowrap;
-	}
-	:global(html.dark) .docsearch-modal-footer-logo-label {
-		color: #9ca3af;
-	}
-	.docsearch-modal-footer-logo-link {
-		display: inline-flex;
-		align-items: center;
-		line-height: 0;
-		color: inherit;
-		text-decoration: none;
-	}
-	.docsearch-modal-footer-logo-link:hover {
-		opacity: 0.9;
-	}
-	.docsearch-modal-footer-logo-icon {
-		display: block;
-		width: auto;
-		height: 1.125rem;
-		max-width: 6.875rem;
-		object-fit: contain;
-		object-position: left center;
-	}
-	.docsearch-modal-footer-logo-dark {
-		display: none;
-	}
-	:global(html.dark) .docsearch-modal-footer-logo-light {
-		display: none;
-	}
-	:global(html.dark) .docsearch-modal-footer-logo-dark {
-		display: block;
-	}
 </style>

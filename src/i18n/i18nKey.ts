@@ -3,7 +3,6 @@ enum I18nKey {
 	about = "about",
 	archive = "archive",
 	search = "search",
-	searchBy = "searchBy",
 	searchKbdSelect = "searchKbdSelect",
 	searchKbdSwitch = "searchKbdSwitch",
 	searchNoResults = "searchNoResults",

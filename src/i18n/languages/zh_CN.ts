@@ -6,7 +6,6 @@ export const zh_CN: Translation = {
 	[Key.about]: "关于",
 	[Key.archive]: "归档",
 	[Key.search]: "搜索",
-	[Key.searchBy]: "Search by",
 	[Key.searchKbdSelect]: "选择",
 	[Key.searchKbdSwitch]: "切换",
 	[Key.searchNoResults]: "找不到相关结果。",
