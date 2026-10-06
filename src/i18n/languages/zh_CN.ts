@@ -22,13 +22,8 @@ export const zh_CN: Translation = {
 
 	[Key.commentSection]: "评论区",
 	[Key.commentSubtitle]: "分享你的想法，与大家交流讨论",
-	[Key.commentNotConfigured]: "评论系统暂未配置",
-	[Key.guestbookCommentHint]:
-		"您还未在配置文件中启用评论系统，启用后访客才可在此留言",
 	[Key.friends]: "友链",
 	[Key.friendsDescription]: "这里是我的朋友们，欢迎互相访问交流",
-	[Key.guestbook]: "留言",
-	[Key.guestbookDescription]: "欢迎在这里留下你的足迹，分享你的想法和建议",
 	[Key.uncategorized]: "未分类",
 	[Key.noTags]: "无标签",
 
@@ -103,19 +98,6 @@ export const zh_CN: Translation = {
 	// 壁纸模式
 
 	// 横幅设置
-
-	// 赞助页面
-	[Key.sponsor]: "赞助",
-	[Key.sponsorTitle]: "赞助支持",
-	[Key.sponsorDescription]:
-		"如果我的内容对你有帮助，欢迎通过以下方式赞助我，你的支持是我持续创作的动力！",
-	[Key.sponsorList]: "赞助列表",
-	[Key.sponsorEmpty]: "暂无赞助记录",
-	[Key.scanToSponsor]: "扫码赞助",
-	[Key.sponsorGoTo]: "前往赞助",
-	[Key.sponsorButton]: "支持与分享",
-	[Key.sponsorButtonText]:
-		"如果这篇文章对你有帮助，欢迎分享给更多人或赞助支持！",
 
 	// 站点统计
 	[Key.siteStats]: "站点统计",

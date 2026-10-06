@@ -90,11 +90,8 @@ export const siteConfig: SiteConfig = {
 
 	// 页面开关配置 - 控制特定页面的访问权限，设为false会返回404
 	pages: {
-		// 友链页面开关
 		friends: true,
-		sponsor: false, // 赞助页面开关
-		guestbook: false, // 留言板页面开关，需要配置评论系统
-		watchlist: true, // 观影清单页面开关
+		watchlist: true, 
 	},
 
 	// 分页配置
@@ -107,11 +104,6 @@ export const siteConfig: SiteConfig = {
 	// 在src/config/fontConfig.ts中配置具体字体
 	font: fontConfig,
 
-	// 文章密码保护配置
-	// 当文章的password字段设置为true时，使用环境变量 PASSWORD（.env / Netlify）作为密码
-	// 密码提示文案，留空则不显示提示
-	postPasswordHint: "",
-
-	// 站点语言，在本配置文件顶部SITE_LANG定义
+	//简体中文
 	lang: SITE_LANG,
 };

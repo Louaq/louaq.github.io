@@ -95,7 +95,7 @@ export const GET: APIRoute = async () => {
 
 	const records: MeilisearchRecord[] = [];
 
-	// 索引只收录文章。页面（关于/留言板/归档/友链/赞助等）与友链条目一律不入库，
+	// 索引只收录文章。页面（关于/归档/友链等）与友链条目一律不入库，
 	// 从 payload 里消失的旧记录会被 utils/meilisearch.ts 的陈旧文档清理自动删除。
 	for (const post of publishedPosts) {
 		// 加密文章：标题/描述/标签仍可被搜到（方便用户找到入口去解锁），

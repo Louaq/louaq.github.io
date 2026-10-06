@@ -2,7 +2,6 @@
 import { onDestroy, onMount } from "svelte";
 
 export let postId: string;
-export let hint = ""; // 可选密码提示，如 "示例文章密码123456"
 
 let inputPassword = "";
 let errorMessage = "";
@@ -298,10 +297,6 @@ onDestroy(() => {
         <span>{errorMessage}</span>
       </div>
     {/if}
-
-    {#if hint}
-      <p class="password-hint">{hint}</p>
-    {/if}
   </div>
 </div>
 {/if}
@@ -360,16 +355,6 @@ onDestroy(() => {
 
   :global(.dark) .password-title {
     color: var(--text-primary, #f5f5f5);
-  }
-
-  .password-hint {
-    font-size: 0.8125rem;
-    color: #ec4899;
-    margin-top: 1rem;
-    margin-bottom: 0;
-    text-decoration: underline;
-    text-underline-offset: 2px;
-    cursor: pointer;
   }
 
   .password-input-group {

@@ -63,8 +63,6 @@ export type SiteConfig = {
 	// 页面开关配置
 	pages: {
 		friends: boolean; // 友链页面开关
-		sponsor: boolean; // 赞助页面开关
-		guestbook: boolean; // 留言板页面开关
 		watchlist: boolean; // 观影清单页面开关
 	};
 
@@ -72,9 +70,6 @@ export type SiteConfig = {
 	pagination: {
 		postsPerPage: number;
 	};
-
-	// 文章密码保护配置
-	postPasswordHint?: string; // 密码提示文案，如 "示例文章密码123456"
 };
 
 export type Favicon = {
@@ -88,8 +83,6 @@ export enum LinkPreset {
 	Archive = 1,
 	About = 2,
 	Friends = 3,
-	Sponsor = 4,
-	Guestbook = 5,
 	Watchlist = 7,
 	Categories = 8,
 	Tags = 9,
@@ -346,37 +339,7 @@ export type FriendGroup = {
 export type FriendsPageConfig = {
 	title?: string; // 页面标题，留空则使用 i18n 中的翻译
 	description?: string; // 页面描述，留空则使用 i18n 中的翻译
-	showCustomContent?: boolean; // 是否显示自定义内容（friends.mdx）
+	showCustomContent?: boolean; // 是否显示申请友链按钮
 	showComment?: boolean; // 是否显示评论区，默认 true
 	randomizeSort?: boolean; // 是否打乱排序，如果为 true，将忽略 weight，随机排序
-};
-
-// 赞助方式类型
-export type SponsorMethod = {
-	name: string; // 赞助方式名称，如 "支付宝"、"微信"、"PayPal"
-	icon?: string; // 图标名称（Iconify 格式），如 "fa6-brands:alipay"
-	qrCode?: string; // 收款码图片路径（相对于 public 目录），可选
-	link?: string; // 赞助链接 URL，可选，如果提供，会显示跳转按钮
-	description?: string; // 描述文本
-	enabled: boolean; // 是否启用
-};
-
-// 赞助者列表项
-export type SponsorItem = {
-	name: string; // 赞助者名称，如果想显示匿名，可以直接设置为"匿名"或使用 i18n
-	amount?: string; // 赞助金额（可选）
-	date?: string; // 赞助日期（可选，ISO 格式）
-	message?: string; // 留言（可选）
-};
-
-// 赞助配置
-export type SponsorConfig = {
-	title?: string; // 页面标题，默认使用 i18n
-	description?: string; // 页面描述文本
-	usage?: string; // 赞助用户说明
-	methods: SponsorMethod[]; // 赞助方式列表
-	sponsors?: SponsorItem[]; // 赞助者列表（可选）
-	showSponsorsList?: boolean; // 是否显示赞助者列表，默认 true
-	showComment?: boolean; // 是否显示评论区，默认 false
-	showButtonInPost?: boolean; // 是否在文章详情页底部显示赞助按钮，默认 true
 };

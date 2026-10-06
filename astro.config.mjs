@@ -192,12 +192,6 @@ export default defineConfig({
 				if (pathname === "/friends/" && !siteConfig.pages.friends) {
 					return false;
 				}
-				if (pathname === "/sponsor/" && !siteConfig.pages.sponsor) {
-					return false;
-				}
-				if (pathname === "/guestbook/" && !siteConfig.pages.guestbook) {
-					return false;
-				}
 
 				return true;
 			},

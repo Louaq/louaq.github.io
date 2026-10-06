@@ -23,16 +23,6 @@ export const LinkPresets: { [key in LinkPreset]: NavBarLink } = {
 		url: "/friends/",
 		icon: "fluent-emoji-flat:handshake",
 	},
-	[LinkPreset.Sponsor]: {
-		name: i18n(I18nKey.sponsor),
-		url: "/sponsor/",
-		icon: "fluent-emoji-flat:red-heart",
-	},
-	[LinkPreset.Guestbook]: {
-		name: i18n(I18nKey.guestbook),
-		url: "/guestbook/",
-		icon: "fluent-emoji-flat:speech-balloon",
-	},
 	[LinkPreset.Watchlist]: {
 		name: i18n(I18nKey.watchlist),
 		url: "/watchlist/",

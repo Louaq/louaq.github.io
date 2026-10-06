@@ -19,8 +19,6 @@ enum I18nKey {
 
 	commentSection = "commentSection",
 	commentSubtitle = "commentSubtitle",
-	commentNotConfigured = "commentNotConfigured",
-	guestbookCommentHint = "guestbookCommentHint",
 
 	uncategorized = "uncategorized",
 	noTags = "noTags",
@@ -39,8 +37,6 @@ enum I18nKey {
 	license = "license",
 	friends = "friends",
 	friendsDescription = "friendsDescription",
-	guestbook = "guestbook",
-	guestbookDescription = "guestbookDescription",
 	watchlist = "watchlist",
 	watchlistTitle = "watchlistTitle",
 	watchlistSubtitle = "watchlistSubtitle",
@@ -102,17 +98,6 @@ enum I18nKey {
 
 	// 置顶
 	pinned = "pinned",
-
-	// 赞助页面
-	sponsor = "sponsor",
-	sponsorTitle = "sponsorTitle",
-	sponsorDescription = "sponsorDescription",
-	sponsorList = "sponsorList",
-	sponsorEmpty = "sponsorEmpty",
-	scanToSponsor = "scanToSponsor",
-	sponsorGoTo = "sponsorGoTo",
-	sponsorButton = "sponsorButton",
-	sponsorButtonText = "sponsorButtonText",
 
 	// 站点统计
 	siteStats = "siteStats",
