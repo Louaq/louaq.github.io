@@ -6,6 +6,13 @@ tags: [测试]
 description: ::video 指令测试
 ---
 
-## MP4
+## 测试视频
 
 ::video{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/video.mp4"}
+
+<br>
+
+::video{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/video_2.mp4"}
+
+
+
