@@ -11,7 +11,7 @@ export const friendSiteInfo = {
 	name: profileConfig.name,
 	desc: "致力于探索如何利用计算机视觉和深度学习技术",
 	url: siteConfig.site_url,
-	avatar: `${siteConfig.site_url}${profileConfig.avatar}`,
+	avatar: "/assets/images/avatar.webp",
 	rss: `${siteConfig.site_url}/rss.xml`,
 	email: "louaqo@gmail.com",
 };

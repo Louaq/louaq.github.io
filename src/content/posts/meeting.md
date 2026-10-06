@@ -8,7 +8,7 @@ tags: [组会]
 description: 汇报PPT
 pinned: true
 password: true
-image: https://pic1.imgdb.cn/i/0343OVOk1840RU3QCw2YqY.webp
+image: https://pic1.imgdb.cn/i/034ayrKE1k6isnCZ8u1B24.webp
 homeCarousel: true
 homeCarouselOrder: 3
 ---

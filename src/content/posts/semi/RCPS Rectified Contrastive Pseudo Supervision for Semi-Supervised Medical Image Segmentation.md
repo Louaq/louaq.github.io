@@ -6,8 +6,6 @@ mathjax: true
 category: 半监督医学图像分割
 tags: [JBHI,伪监督]
 description: Medical image segmentation methods
-image: https://pic1.imgdb.cn/i/0343OVlmOIXrAa1wf9GC1h.webp
-
 ---
 
 ::github{repo="hsiangyuzhao/rcps"}

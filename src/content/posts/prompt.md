@@ -3,7 +3,7 @@ title: 学术提示词
 published: 2026-09-21 14:04:00
 description: "整理部分学术prompt"
 category: prompt
-image: https://pic1.imgdb.cn/i/2Riv5i8fXRZVINulFUEqkR.png
+image: https://pic1.imgdb.cn/i/034ayrIBtGz4zxRlJE3oVf.webp
 tags: [科研作图,润色]
 pinned: true
 homeCarousel: true
