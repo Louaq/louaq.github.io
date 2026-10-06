@@ -36,6 +36,8 @@
     "@swup/astro": "^1.8.0",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.3",
+    "@videojs/hlsjs-video": "10.0.1",
+    "@videojs/html": "10.0.1",
     "aplayer": "1.10.1",
     "astro": "7.3.3",
     "astro-expressive-code": "^0.43.1",

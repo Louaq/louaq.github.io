@@ -1,0 +1,29 @@
+<script>
+// Video.js 10 仅在含 ::video 的页面动态加载，不进全站包；hls.js 只在有 .m3u8 时加载
+async function initVideos() {
+	// 同步插入媒体元素并摘掉标记再 await，避免首屏直调与 astro:page-load 重复初始化
+	const players = Array.from(document.querySelectorAll<HTMLElement>("video-player[data-video-src]"));
+	if (players.length === 0) return;
+	let hasHls = false;
+	for (const player of players) {
+		const { videoSrc, videoTitle } = player.dataset;
+		player.removeAttribute("data-video-src");
+		const isHls = new URL(videoSrc!, location.href).pathname.endsWith(".m3u8");
+		hasHls ||= isHls;
+		const media = document.createElement(isHls ? "hlsjs-video" : "video");
+		media.setAttribute("src", videoSrc!);
+		media.setAttribute("playsinline", "");
+		if (videoTitle) media.setAttribute("title", videoTitle);
+		player.querySelector("video-skin")!.append(media);
+	}
+	// player 必须先于 skin 注册，否则 skin 拿不到 feature，控制条偶发不显示
+	await import("@videojs/html/video/player");
+	await Promise.all([
+		import("@videojs/html/video/skin"),
+		hasHls && import("@videojs/html/media/hlsjs-video"),
+	]);
+}
+
+initVideos();
+document.addEventListener("astro:page-load", initVideos);
+</script>
