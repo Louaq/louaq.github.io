@@ -24,7 +24,6 @@ const { class: className, style } = Astro.props;
 </WidgetLayout>
 
 <script>
-  // 数据来自 jieqi.dev 公开日历接口：取北京时间今天及之前最近的一个节气
   type TermEvent = {
     name: string;
     category: string;
@@ -33,7 +32,7 @@ const { class: className, style } = Astro.props;
   };
 
   const state = ((window as any).__solarTermState ??= {}) as {
-    term?: Promise<TermEvent>;
+    card?: Promise<{ name: string; src: string }>;
     listenerAdded?: boolean;
   };
 
@@ -42,34 +41,48 @@ const { class: className, style } = Astro.props;
       .then((r) => r.json())
       .then((j) => j.events.filter((e: TermEvent) => e.category === "solar-term"));
 
+  const today = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai" }).format(new Date());
+
   async function currentTerm() {
-    const today = new Intl.DateTimeFormat("en-CA", { timeZone: "Asia/Shanghai" }).format(new Date());
-    const year = Number(today.slice(0, 4));
-    const passed = (await calendar(year)).filter((e) => e.start <= today);
-    // 1 月初小寒之前，当前节气是上一年的冬至
-    return passed.at(-1) ?? (await calendar(year - 1)).at(-1)!;
+    const year = Number(today().slice(0, 4));
+    const terms = (await Promise.all([year - 1, year, year + 1].map(calendar))).flat();
+    const i = terms.findLastIndex((e) => e.start <= today());
+    return { term: terms[i], until: terms[i + 1].start };
   }
 
-  // 结果在 localStorage 缓存 24 小时，期间不再请求接口
   const CACHE_KEY = "solar-term";
-  const CACHE_TTL = 24 * 60 * 60 * 1000;
 
   async function cachedTerm(): Promise<TermEvent> {
     const cached = JSON.parse(localStorage.getItem(CACHE_KEY) ?? "null");
-    if (cached && Date.now() - cached.at < CACHE_TTL) return cached.term;
-    const term = await currentTerm();
-    localStorage.setItem(CACHE_KEY, JSON.stringify({ at: Date.now(), term }));
-    return term;
+    if (cached && today() < cached.until) return cached.term;
+    const fresh = await currentTerm();
+    localStorage.setItem(CACHE_KEY, JSON.stringify(fresh));
+    return fresh.term;
+  }
+
+  async function cachedImage(src: string) {
+    let res = await (await caches.open(CACHE_KEY)).match(src);
+    if (!res) {
+      await caches.delete(CACHE_KEY);
+      res = await fetch(src);
+      await (await caches.open(CACHE_KEY)).put(src, res.clone());
+    }
+    return URL.createObjectURL(await res.blob());
+  }
+
+  async function loadCard() {
+    const term = await cachedTerm();
+    return { name: term.name, src: await cachedImage(term.card.image) };
   }
 
   async function renderSolarTerm() {
     const root = document.querySelector<HTMLElement>(".solar-term");
     if (!root) return;
-    state.term ??= cachedTerm();
-    const term = await state.term;
+    state.card ??= loadCard();
+    const card = await state.card;
     const img = root.querySelector("img")!;
-    img.src = term.card.image;
-    img.alt = term.name;
+    img.src = card.src;
+    img.alt = card.name;
     img.hidden = false;
   }
 
