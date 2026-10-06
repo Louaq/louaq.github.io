@@ -10,9 +10,5 @@ description: ::video 指令测试
 
 ::video{src="https://cdn.louaq.io/video/video.mp4"}
 
-<br>
-
-::video{src="https://cdn.louaq.io/video/video_2.mp4"}
-
 
 
