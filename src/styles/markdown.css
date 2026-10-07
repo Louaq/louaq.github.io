@@ -186,6 +186,12 @@
    （全屏时 skin 自己设回 contain） */
 .custom-md .video-embed video-skin {
   --media-object-fit: cover;
+  transition: opacity 0.5s ease;
+}
+
+/* 元数据到达前整个播放器透明，就绪后淡入 */
+.custom-md .video-embed[data-loading] video-skin {
+  opacity: 0;
 }
 
 /* preflight 的 video { height: auto } 会压过 skin 的 ::slotted(video) { height: 100% }，

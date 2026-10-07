@@ -14,6 +14,7 @@ async function initVideos() {
 		media.setAttribute("src", videoSrc!);
 		media.setAttribute("playsinline", "");
 		if (videoTitle) media.setAttribute("title", videoTitle);
+		media.addEventListener("loadedmetadata", () => player.removeAttribute("data-loading"), { once: true });
 		player.querySelector("video-skin")!.append(media);
 	}
 	// player 必须先于 skin 注册，否则 skin 拿不到 feature，控制条偶发不显示

@@ -32,6 +32,8 @@ export function VideoEmbedComponent(properties, children) {
 			poster: properties.poster,
 			"data-video-src": src,
 			"data-video-title": properties.title,
+			// 元数据到达前隐藏，运行时在 loadedmetadata 时移除以淡入
+			"data-loading": "",
 		},
 		// 不固定尺寸：高度随视频自身比例，避免黑边
 		[h("video-skin", { style: "display: block; width: 100%; --media-border-radius: 12px;" })],
