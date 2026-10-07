@@ -4,6 +4,9 @@ async function initVideos() {
 	// 同步插入媒体元素并摘掉标记再 await，避免首屏直调与 astro:page-load 重复初始化
 	const players = Array.from(document.querySelectorAll<HTMLElement>("video-player[data-video-src]"));
 	if (players.length === 0) return;
+	// player 必须先于 skin 注册，否则 skin 拿不到 feature，控制条偶发不显示
+	const playerReady = import("@videojs/html/video/player");
+	const skinReady = playerReady.then(() => import("@videojs/html/video/skin"));
 	let hasHls = false;
 	for (const player of players) {
 		const { videoSrc, videoTitle } = player.dataset;
@@ -14,15 +17,13 @@ async function initVideos() {
 		media.setAttribute("src", videoSrc!);
 		media.setAttribute("playsinline", "");
 		if (videoTitle) media.setAttribute("title", videoTitle);
-		media.addEventListener("loadedmetadata", () => player.removeAttribute("data-loading"), { once: true });
+		// 原生 video 的元数据可能早于 skin 模块到达，等控制条渲染后再一起淡入
+		media.addEventListener("loadedmetadata", () => skinReady.then(() => player.removeAttribute("data-loading")), {
+			once: true,
+		});
 		player.querySelector("video-skin")!.append(media);
 	}
-	// player 必须先于 skin 注册，否则 skin 拿不到 feature，控制条偶发不显示
-	await import("@videojs/html/video/player");
-	await Promise.all([
-		import("@videojs/html/video/skin"),
-		hasHls && import("@videojs/html/media/hlsjs-video"),
-	]);
+	await Promise.all([skinReady, hasHls && playerReady.then(() => import("@videojs/html/media/hlsjs-video"))]);
 }
 
 initVideos();
