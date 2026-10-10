@@ -1,6 +1,7 @@
 ---
 title: 学术提示词
 published: 2026-09-21 14:04:00
+updated: 2026-10-10 17:53:00
 description: "整理部分学术prompt"
 category: prompt
 image: https://pic1.imgdb.cn/i/034ayrIBtGz4zxRlJE3oVf.webp
