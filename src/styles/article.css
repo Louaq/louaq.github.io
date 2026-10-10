@@ -30,9 +30,6 @@
   color: var(--juejin-primary);
   text-decoration: none;
 }
-:root.dark .custom-md a:not(.btn-regular):not(.btn-card):not(.btn-plain) {
-  color: var(--juejin-primary);
-}
 
 .custom-md h1,
 .custom-md h2,
@@ -161,9 +158,7 @@
 @media (max-width: 767px) {
   .custom-md table {
     display: table !important;
-    width: 100% !important;
     max-width: 100% !important;
-    table-layout: fixed !important;
     margin-left: 0;
     margin-right: 0;
     overflow: hidden;
@@ -172,10 +167,8 @@
 
   .custom-md th,
   .custom-md td {
-    min-width: 0;
     padding: 0.5rem 0.625rem;
     overflow-wrap: anywhere;
-    word-break: break-word;
   }
 
   .custom-md th:first-child,

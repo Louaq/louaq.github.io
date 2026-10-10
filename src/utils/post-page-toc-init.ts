@@ -10,14 +10,9 @@ import { TOCManager } from "@/utils/tocUtils";
  * 现在由 Layout 常驻脚本在每次导航后调用。目标容器不存在时直接返回，非文章页调用无副作用。
  */
 
-declare global {
-	interface Window {
-		PostPageTOC?: { manager: TOCManager | null };
-	}
-}
-
 export function initPostPageTOC(): void {
-	const store = (window.PostPageTOC ??= { manager: null });
+	window.PostPageTOC ??= { manager: null };
+	const store = window.PostPageTOC;
 
 	const tocContent = document.getElementById("post-page-toc-content");
 	if (!tocContent) return;

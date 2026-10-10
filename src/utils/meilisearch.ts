@@ -103,9 +103,7 @@ async function meiliRequest(options: {
 }
 
 type MeiliLogger = {
-	info: (msg: string) => void;
 	warn: (msg: string) => void;
-	error: (msg: string) => void;
 };
 
 async function addDocumentsWithFallback(options: {
@@ -136,14 +134,14 @@ async function addDocumentsWithFallback(options: {
 
 	// 1) 优先：数组形式
 	let { res, json } = await tryAdd(documents);
-	if (res.ok && json?.taskUid) return { res, json, used: "array" as const };
+	if (res.ok && json?.taskUid) return { res, json };
 
 	// 2) 回退：包装形式
 	logger.warn(
 		`Meilisearch addDocuments fallback triggered (status=${res.status}). Retrying with { documents: [...] } ...`,
 	);
 	({ res, json } = await tryAdd({ documents }));
-	return { res, json, used: "wrapped" as const };
+	return { res, json };
 }
 
 async function listRemoteIds(options: {
@@ -388,9 +386,7 @@ export default function meilisearch(): AstroIntegration {
 								adminKey: MEILISEARCH_ADMIN_KEY,
 								documents: batch,
 								logger: {
-									info: logger.info.bind(logger),
 									warn: logger.warn.bind(logger),
-									error: logger.error.bind(logger),
 								},
 							});
 
@@ -410,30 +406,21 @@ export default function meilisearch(): AstroIntegration {
 							continue;
 						}
 
-						if (addJson?.taskUid) {
-							await waitForTask({
-								host,
-								adminKey: MEILISEARCH_ADMIN_KEY,
-								taskUid: addJson.taskUid,
-								timeoutMs: 60_000,
+						await waitForTask({
+							host,
+							adminKey: MEILISEARCH_ADMIN_KEY,
+							taskUid: addJson.taskUid,
+							timeoutMs: 60_000,
+						})
+							.then(() => {
+								taskSucceededBatchCount += 1;
 							})
-								.then(() => {
-									taskSucceededBatchCount += 1;
-								})
-								.catch((e) => {
-									uploadSucceeded = false;
-									logger.warn(
-										`Meilisearch upload wait failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
-									);
-								});
-						} else {
-							uploadSucceeded = false;
-							logger.warn(
-								`Meilisearch addDocuments returned no taskUid (batch ${i / chunkSize + 1}). body=${JSON.stringify(
-									addJson,
-								).slice(0, 500)}`,
-							);
-						}
+							.catch((e) => {
+								uploadSucceeded = false;
+								logger.warn(
+									`Meilisearch upload wait failed (ignored): ${e instanceof Error ? e.message : String(e)}`,
+								);
+							});
 					}
 
 					// 4) 清理残留：本地已不存在的文档（文章改名/移动目录会生成新 id，旧文档会留在索引里指向死链）

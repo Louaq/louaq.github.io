@@ -80,7 +80,7 @@ export class TOCManager {
 	 * 过滤标题
 	 */
 	private filterHeadings(headings: HTMLElement[]): HTMLElement[] {
-		return Array.from(headings).filter((heading) => {
+		return headings.filter((heading) => {
 			const depth = Number.parseInt(heading.tagName.charAt(1), 10);
 			return depth < this.minDepth + this.maxLevel;
 		});
@@ -163,9 +163,7 @@ export class TOCManager {
 
 			if (!headingText) {
 				headingText =
-					heading.id === "banner-subtitle"
-						? "Banner Subtitle"
-						: heading.id || "Heading";
+					heading.id === "banner-subtitle" ? "Banner Subtitle" : heading.id;
 			}
 
 			const escapedHeadingText = this.escapeHtmlAttr(headingText);
@@ -248,7 +246,7 @@ export class TOCManager {
 	 * 更新活动状态
 	 */
 	public updateActiveState(): void {
-		if (!this.tocItems || this.tocItems.length === 0) return;
+		if (this.tocItems.length === 0) return;
 
 		// 移除所有活动状态
 		this.tocItems.forEach((item) => {
@@ -332,8 +330,7 @@ export class TOCManager {
 			const itemHeight = activeItem.clientHeight;
 
 			// 计算目标滚动位置，将元素居中显示
-			const targetScroll =
-				itemOffsetTop - containerHeight / 2 + itemHeight / 2;
+			const targetScroll = itemOffsetTop - containerHeight / 2 + itemHeight / 2;
 
 			tocContainer.scrollTo({
 				top: targetScroll,

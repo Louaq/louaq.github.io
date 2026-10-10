@@ -131,19 +131,7 @@
       @apply bg-(--btn-plain-bg-active);
     }
 
-    /* 注意：本块与 article.css 同断点的 `.custom-md table { width: 100% !important;
-       table-layout: fixed !important }` 直接冲突，且**本块才是生效的那一套**。
-       原因是级联层对 !important 的排序是反向的：normal 声明里无层级(layerless)优先级最高，
-       但 !important 声明里无层级优先级最低，因此 @layer base 内的 !important
-       反而压过 article.css 那条 layerless 的 !important。
-       不要以为「article.css 在后面所以它赢」而删掉这里。 */
     @media (max-width: 767px) {
-      table {
-        width: max-content !important;
-        min-width: 100% !important;
-        table-layout: auto !important;
-      }
-
       th,
       td {
         min-width: 120px !important;

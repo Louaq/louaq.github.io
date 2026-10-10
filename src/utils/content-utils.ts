@@ -12,7 +12,7 @@ let categoryListPromise: Promise<Category[]> | undefined;
 
 // Content collections are immutable during one build. Cache the shared derivations so
 // every generated route does not scan and sort the complete collection again.
-function getRawSortedPosts(): Promise<PostEntry[]> {
+export function getSortedPosts(): Promise<PostEntry[]> {
 	if (sortedPostsPromise) return sortedPostsPromise;
 
 	sortedPostsPromise = getCollection("posts", ({ data }) => {
@@ -35,9 +35,6 @@ function getRawSortedPosts(): Promise<PostEntry[]> {
 	return sortedPostsPromise;
 }
 
-export async function getSortedPosts() {
-	return getRawSortedPosts();
-}
 export type ArchivePost = {
 	id: string;
 	pathSlug: string;
@@ -48,7 +45,7 @@ export type ArchivePost = {
 	password: boolean;
 };
 export async function getArchivePostsList(): Promise<ArchivePost[]> {
-	const posts = await getRawSortedPosts();
+	const posts = await getSortedPosts();
 	return posts.map(({ id, data }) => ({
 		id,
 		pathSlug: getResolvedPostPath(id, data),
@@ -67,7 +64,7 @@ export type Tag = {
 export async function getTagList(): Promise<Tag[]> {
 	if (tagListPromise) return tagListPromise;
 
-	tagListPromise = getRawSortedPosts().then((allBlogPosts) => {
+	tagListPromise = getSortedPosts().then((allBlogPosts) => {
 		const countMap: { [key: string]: number } = {};
 		allBlogPosts.forEach((post: { data: { tags: string[] } }) => {
 			post.data.tags.forEach((tag: string) => {
@@ -96,7 +93,7 @@ export type Category = {
 export async function getCategoryList(): Promise<Category[]> {
 	if (categoryListPromise) return categoryListPromise;
 
-	categoryListPromise = getRawSortedPosts().then((allBlogPosts) => {
+	categoryListPromise = getSortedPosts().then((allBlogPosts) => {
 		const count: { [key: string]: number } = {};
 		allBlogPosts.forEach((post: { data: { category: string | null } }) => {
 			if (!post.data.category) {
@@ -105,10 +102,7 @@ export async function getCategoryList(): Promise<Category[]> {
 				return;
 			}
 
-			const categoryName =
-				typeof post.data.category === "string"
-					? post.data.category.trim()
-					: String(post.data.category).trim();
+			const categoryName = post.data.category.trim();
 
 			count[categoryName] = count[categoryName] ? count[categoryName] + 1 : 1;
 		});

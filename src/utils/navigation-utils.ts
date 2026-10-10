@@ -12,7 +12,6 @@ export function navigateToPage(
 	url: string,
 	options?: {
 		replace?: boolean;
-		force?: boolean;
 	},
 ): void {
 	// 检查 URL 是否有效
@@ -66,7 +65,6 @@ function fallbackNavigation(
 	url: string,
 	options?: {
 		replace?: boolean;
-		force?: boolean;
 	},
 ): void {
 	if (options?.replace) {

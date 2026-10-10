@@ -30,12 +30,6 @@
   @apply bg-(--card-bg) rounded-(--radius-large) shadow-xl border border-black/5 dark:border-white/10 py-2 min-w-48;
 }
 
-@utility post-card {
-  /* 强制使用 contain 隔离渲染上下文 - 提升性能 */
-  contain: layout style;
-}
-
-
 @utility card-base {
   @apply rounded-(--radius-large) overflow-hidden bg-(--card-bg);
   /* `.enable-card-border .card-base` 的边框只在 @utility enable-card-border 里定义一次 */
@@ -52,12 +46,6 @@
     @apply border;
     border-color: var(--line-divider) !important;
   }
-}
-
-@utility btn-card {
-  @apply flex items-center justify-center bg-(--card-bg) hover:bg-(--btn-card-bg-hover)
-        active:bg-(--btn-card-bg-active);
-  /* `.btn-card.disabled` 只在 @utility disabled 里定义一次 */
 }
 
 @utility expand-animation {
@@ -98,12 +86,6 @@
 @utility search-panel {
   & mark {
     @apply bg-transparent text-(--primary);
-  }
-}
-
-@utility disabled {
-  &.btn-card {
-    @apply pointer-events-none text-black/10 dark:text-white/10;
   }
 }
 
@@ -319,7 +301,6 @@ body {
 }
 
 .enable-card-border .card-base {
-  border-radius: var(--radius-large) !important;
   box-shadow: none !important;
 }
 
@@ -440,24 +421,6 @@ widget-layout .widget-title::before {
   border-radius: var(--radius-large) !important;
 }
 
-.btn-card {
-  border-radius: 4px !important;
-  border: 1px solid var(--juejin-border) !important;
-  background: var(--card-bg) !important;
-}
-:root.dark .btn-card {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-}
-.btn-card:hover {
-  border-color: var(--juejin-border) !important;
-  background: color-mix(in oklch, var(--primary) 4%, transparent) !important;
-  box-shadow: none !important;
-}
-:root.dark .btn-card:hover {
-  border-color: rgba(255, 255, 255, 0.08) !important;
-  background: color-mix(in oklch, var(--primary) 6%, transparent) !important;
-  box-shadow: none !important;
-}
 .footer .border-dashed {
   border-style: solid !important;
   border-color: var(--juejin-border) !important;
