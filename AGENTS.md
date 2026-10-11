@@ -133,6 +133,5 @@
 
 - `git status` 确认改动范围
 - `git add <files>` 仅添加相关文件
-- `npm run lint` 通过后再提交
-- `git commit -m "..."` 完成提交
+- `git commit -m "..."` 完成提交，git message信息使用英文
 - `git push` 后发起 PR（如需）
