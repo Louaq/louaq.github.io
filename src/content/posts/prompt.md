@@ -16,11 +16,7 @@ homeCarouselOrder: 1
 > 润色相关的prompt来自[awesome-ai-research-writing](https://github.com/Leey21/awesome-ai-research-writing)，感谢[Leey21](https://github.com/Leey21)的贡献🤗🤗
 
 ## 画图
-> 建议使用codex的work模式（GPT-6 Astra）+[Sivia](https://github.com/exsinger-hub/Sivia)，Sivia是一个科学绘图插件，可以直接得出可编辑的PPT文件，一般先使用image-2生成对应的插图，再使用codex得到可编辑的PPT文件，示例图片如下：
-
-
-
-![参考图片](https://pic1.imgdb.cn/i/034VLdJEPVFR6kx0hijEs6.png)
+> 建议使用codex的work模式（GPT-6 Astra）+[Sivia](https://github.com/exsinger-hub/Sivia)，Sivia是一个科学绘图插件，可以直接得出可编辑的PPT文件，一般先使用image-2生成对应的插图，再使用codex得到可编辑的PPT文件
 
 ```txt
 定位

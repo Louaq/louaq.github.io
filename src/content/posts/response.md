@@ -5,9 +5,13 @@ expires: 2026-08-31 23:59:59
 mathjax: true
 category: 模板
 tags: [Response Template]
+image: https://pic1.imgdb.cn/i/034ZNXUrCe6F9ALU9g8iep.webp
 description: 回复审稿人模板
+pinned: true
+homeCarousel: true
+homeCarouselOrder: 3
 ---
 
-
+## point-to-point response
 <!-- 预览PDF -->
-::pdf{src="https://yangyang666.oss-cn-chengdu.aliyuncs.com/files/reviewer_response_template.pdf" title="CCF 2026 推荐目录"}
+::pdf{src="https://1816472581.cdn.123clouddisk.com/1816472581/video/reviewer_response_template.pdf#" title="CCF 2026 推荐目录"}
