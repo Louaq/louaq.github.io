@@ -15,8 +15,6 @@ import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.ast
 import EncryptedContent from "@/components/misc/EncryptedContent.astro";
 import PasswordProtection from "@/components/misc/PasswordProtection.svelte";
 import PromoStrip from "@/components/misc/PromoStrip.astro";
-import { coverImageConfig } from "@/config/coverImageConfig";
-import { licenseConfig } from "@/config/licenseConfig";
 import { profileConfig } from "@/config/profileConfig";
 import { siteConfig } from "@/config/siteConfig";
 import { formatDateToYYYYMMDD } from "@/utils/date-utils";
@@ -158,7 +156,7 @@ const jsonLd = {
       <!-- always show cover as long as it has one -->
 
       {
-        processedImage && coverImageConfig.enableInPost && (
+        processedImage && siteConfig.coverImage.enableInPost && (
           <div style="margin-top:1rem;">
             <CoverImage
               id="post-cover"
@@ -201,7 +199,7 @@ const jsonLd = {
       
 
       {
-        licenseConfig.enable && (
+        siteConfig.license.enable && (
           <License
             title={entry.data.title}
             id={entry.id}

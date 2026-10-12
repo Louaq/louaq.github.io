@@ -2,7 +2,6 @@
 import { Icon } from "astro-icon/components";
 import WidgetLayout from "@/components/common/WidgetLayout.astro";
 import { siteConfig } from "@/config";
-import { musicConfig } from "@/config/musicConfig";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { url } from "@/utils/url-utils";
@@ -24,7 +23,6 @@ const { class: className, style } = Astro.props;
 >
   <div
       id="music-player"
-      data-api={musicConfig.api}
       data-songs={url("/music.json")}
       data-theme={siteConfig.themeColor.color}
   >
@@ -70,7 +68,8 @@ const { class: className, style } = Astro.props;
         document.head.append(Object.assign(document.createElement("link"), { id: "aplayer-css", rel: "stylesheet", href: aplayerCss }));
 
         const el = document.getElementById("music-player") as HTMLElement;
-        const api = el.dataset.api as string;
+
+        const api = "/ncm";
 
         const [{ default: APlayer }, songs] = await Promise.all([
             import("aplayer"),
@@ -81,14 +80,10 @@ const { class: className, style } = Astro.props;
         const load = (song: { id: number }) => {
             if (loading === song) return;
             loading = song;
-            // 不带站点 cookie：API 收到任何 Cookie 头都会改用它而不用服务端的会员 cookie，url 变成 null
-            return fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`, { credentials: "omit" })
+            return fetch(`${api}/song/url/v1?id=${song.id}&level=exhigh`)
                 .then((r) => r.json())
                 .then(({ data }) => {
-                    // 连续切歌时只采用当前这首的结果
                     if (ap.list.audios[ap.list.index] !== song) return;
-                    // 无版权的歌 url 为 null，直接切下一首
-                    if (!data[0].url) return ap.skipForward();
                     ap.audio.src = data[0].url.replace(/^http:/, "https:");
                     if (!ap.paused) ap.audio.play();
                 });
@@ -100,8 +95,6 @@ const { class: className, style } = Astro.props;
             theme: el.dataset.theme,
             audio: songs.map((s: object) => ({ ...s, type: "netease" })),
             customAudioType: {
-                // 不能写成 async 函数：APlayer 用 toString 判断类型，AsyncFunction 会报 Illegal customType
-                // 初始化和暂停状态下切歌只清空地址，不请求接口，避免每个访客打开页面就消耗一次会员取链
                 netease: (audio: HTMLAudioElement, song: { id: number }, player: { paused: boolean }) => {
                     // 只删 src 属性不会卸载已加载的上一首，播完切歌后 APlayer 紧接着 play() 会把它从头放出来；load() 才真正清空
                     audio.removeAttribute("src");
@@ -111,14 +104,11 @@ const { class: className, style } = Astro.props;
             },
         });
 
-        // 暂停状态下点播放：此时还没有地址，现取
         ap.on("play", () => {
             if (!ap.audio.getAttribute("src")) load(ap.list.audios[ap.list.index]);
         });
 
-        // 列表最大高度跟 ol 一样是 250px，补上 ol 的 margin-top，否则最后一首被裁掉
         ap.template.list.style.maxHeight = "calc(250px + 0.5rem)";
-        // APlayer 切歌（及展开列表）时会把列表滚到 33*index，选中的歌被顶到最上面；屏蔽它对 scrollTop 的写入，用户滚轮滚动不受影响
         Object.defineProperty(ap.template.listOl, "scrollTop", { set() {} });
 
         document.addEventListener("astro:page-load", () => {

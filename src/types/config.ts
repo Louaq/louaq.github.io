@@ -56,6 +56,14 @@ export type SiteConfig = {
 	};
 
 	showLastModified: boolean; // 控制文章页元信息中的更新日期与正文前过期提醒卡片
+	coverImage: {
+		enableInPost: boolean; // 是否在文章详情页显示封面图
+	};
+	license: {
+		enable: boolean;
+		name: string;
+		url: string;
+	};
 	outdatedThreshold?: number; // 过期提醒卡片：距上次编辑超过该天数才显示（元信息更新日期不受此限制）
 
 	postPathMode?: "hash" | "legacy";
@@ -122,11 +130,6 @@ export type ProfileConfig = {
 	links: ProfileLinkItem[];
 };
 
-export type LicenseConfig = {
-	enable: boolean;
-	name: string;
-	url: string;
-};
 // 评论配置
 
 export type CommentConfig = {
@@ -228,10 +231,6 @@ export type FooterConfig = {
 		showSitePv?: boolean; // 显示全站访问量（PV）
 		showSiteUv?: boolean; // 显示全站访客数（UV）
 	};
-};
-
-export type CoverImageConfig = {
-	enableInPost: boolean; // 是否在文章详情页显示封面图
 };
 
 // 组件配置类型定义

@@ -82,6 +82,20 @@ export const siteConfig: SiteConfig = {
 	// 文章页「上次编辑」相关展示：false 时隐藏元信息里的更新日期 + 正文前的过期提醒卡片
 	showLastModified: true,
 
+	coverImage: {
+		// 是否在文章详情页显示封面图
+		enableInPost: false,
+	},
+
+	license: {
+		// 是否启用文章顶部许可证信息显示
+		enable: true,
+
+		// 许可证名称及链接
+		name: "CC BY-NC-SA 4.0",
+		url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+	},
+
 	// 文章过期阈值（天数），超过此天数才显示过期提醒卡片（元信息里的更新日期不受此阈值影响）
 	outdatedThreshold: 10,
 

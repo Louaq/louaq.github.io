@@ -148,7 +148,7 @@ lang: ""
 ## 侧边栏音乐
 
 - 开关与排序：`src/config/sidebarConfig.ts` 中 `type: "music"` 的组件
-- 接口地址：`src/config/musicConfig.ts` 的 `api`（默认同源 `/ncm`，由服务器反向代理到网易云兼容接口）
+- 接口地址：固定使用同源 `/ncm`，由服务器反向代理到网易云兼容接口（见 `src/components/widget/Music.astro`）
 - 歌单：站点根路径 `/music.json`，由服务器上的 `scan.mjs` 生成，不在仓库内
 - 开发时 `/ncm`、`/music.json`、`/assets/music` 会被代理到线上站点（见 `astro.config.mjs`）
 - 移动端（≤ 768px）不加载播放器
@@ -159,18 +159,15 @@ lang: ""
 
 | 文件 | 内容 |
 | --- | --- |
-| `siteConfig.ts` | 站点信息、主题色、文章 URL 模式、过期提醒阈值、页面开关、分页 |
+| `siteConfig.ts` | 站点信息、主题色、文章 URL 模式、封面图显示、文章许可证信息、过期提醒阈值、页面开关、分页 |
 | `navBarConfig.ts` | 导航栏链接 |
 | `profileConfig.ts` | 头像、简介、社交链接 |
 | `sidebarConfig.ts` | 侧边栏组件顺序与开关 |
 | `announcementConfig.ts` | 侧边栏公告 |
-| `musicConfig.ts` | 音乐播放器接口 |
 | `homeCarouselConfig.ts` | 首页轮播手动项 |
 | `homeTopNoticeConfig.ts` | 首页顶部通知 |
 | `adConfig.ts` | 推广位 |
 | `commentConfig.ts` | 评论系统（Twikoo） |
-| `coverImageConfig.ts` | 封面图显示 |
-| `licenseConfig.ts` | 文章许可证信息 |
 | `expressiveCodeConfig.ts` | 代码块主题 |
 | `fontConfig.ts` | 字体 |
 | `footerConfig.ts` / `FooterConfig.html` | 页脚 HTML 注入 |
