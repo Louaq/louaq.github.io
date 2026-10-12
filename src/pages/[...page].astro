@@ -29,17 +29,21 @@ const allPosts = await getSortedPosts();
 
 // 1) 手动配置的轮播项（优先级最高，按数组定义顺序展示）
 const manualSlides: CarouselSlide[] = homeCarouselConfig.manualItems.map(
-	(item, index) => {
+	(item) => {
 		return {
 			href: item.href,
 			title: item.title,
 			image: item.image,
 			basePath: "/",
-			seed: `manual-${index}`,
-			openInNewTab: item.openInNewTab,
 			category: item.category,
 			description: item.description,
-			date: item.date,
+			date: item.published
+				? new Date(item.published).toLocaleDateString("zh-CN", {
+						year: "numeric",
+						month: "long",
+						day: "numeric",
+					})
+				: undefined,
 		};
 	},
 );

@@ -8,14 +8,12 @@ export interface HomeCarouselManualItem {
 	image: string;
 	// 必填：点击跳转的链接（外链或站内路径）
 	href: string;
-	// 可选：日期文本，原样显示（例如 "2026-04-29" 或 "2026 年特刊"）
-	date?: string;
+	// 可选：发布日期，与文章一致显示为年月日（例如 "2026-04-29"）
+	published?: string | Date;
 	// 可选：分类
 	category?: string;
 	// 可选：描述（标题下方的一行摘要）
 	description?: string;
-	// 可选：外链是否在新窗口打开（默认根据 href 是否以 http 开头自动判断）
-	openInNewTab?: boolean;
 }
 
 export interface HomeCarouselConfig {
@@ -28,14 +26,13 @@ export const homeCarouselConfig: HomeCarouselConfig = {
 	enable: true,
 	autoplayMs: 10000,
 	manualItems: [
-		// 示例：
 		// {
-		// 	title: "",
-		// 	image: "https://pic1.imgdb.cn/i/0343OUWGoncCGl82k7I6Nm.webp",
-		// 	href: "",
-		// 	date: "",
-		// 	category: "",
-		// 	description: "",
+		// 	title: "1111111111",
+		// 	image: "https://pic1.imgdb.cn/i/034ZNXV1j7FrOPsXhA8ARN.webp",
+		// 	href: "https://www.baidu.com/",
+		// 	published: "2026-10-12",
+		// 	category: "测试",
+		// 	description: "测试",
 		// },
 	],
 };
