@@ -88,7 +88,7 @@ export const siteConfig: SiteConfig = {
 	},
 
 	license: {
-		// 是否启用文章顶部许可证信息显示
+		// 是否启用文章底部许可证信息显示
 		enable: true,
 
 		// 许可证名称及链接
