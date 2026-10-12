@@ -9,6 +9,7 @@ import MainGridLayout from "@layouts/MainGridLayout.astro";
 import { getSortedPosts } from "@utils/content-utils";
 import { getFileDirFromPath, getResolvedPostPath } from "@utils/url-utils";
 import { Icon } from "astro-icon/components";
+import qrcode from "qrcode-generator";
 import CoverImage from "@/components/common/CoverImage.astro";
 import PostMetadata from "@/components/layout/PostMeta.astro";
 import PostStaleNoticeBanner from "@/components/layout/PostStaleNoticeBanner.astro";
@@ -45,6 +46,12 @@ const { entry } = Astro.props;
 const { Content, headings } = await render(entry);
 
 const processedImage = entry.data.image;
+
+const shareUrl = new URL(Astro.url.pathname, Astro.site).href;
+const wechatQr = qrcode(0, "M");
+wechatQr.addData(shareUrl);
+wechatQr.make();
+const wechatQrImage = `data:image/svg+xml,${encodeURIComponent(wechatQr.createSvgTag({ cellSize: 6, margin: 24, scalable: true }))}`;
 
 const lastModified = new Date(entry.data.updated || entry.data.published);
 const daysDiff = Math.floor((Date.now() - lastModified.getTime()) / 86400000);
@@ -215,9 +222,91 @@ const jsonLd = {
 
       {/* 底部推广位（由 config/adConfig.ts 控制，未启用时不渲染） */}
       <PromoStrip placement="bottom" class="onload-animation" />
+
+      <div class="flex items-start justify-center gap-6 mt-8 pt-7 pb-3 border-t border-(--line-divider) onload-animation">
+        <button
+          id="post-share"
+          type="button"
+          class="group flex flex-col items-center gap-2 min-w-11 text-black/65 dark:text-white/65 hover:text-(--primary) transition-colors"
+          title={i18n(I18nKey.rssCopyLink)}
+          aria-label={i18n(I18nKey.rssCopyLink)}
+          data-url={shareUrl}
+          data-label={i18n(I18nKey.postShare)}
+          data-copied={i18n(I18nKey.postLinkCopied)}
+          data-failed={i18n(I18nKey.postLinkCopyFailed)}
+        >
+          <span class="flex items-center justify-center w-11 h-11 rounded-full bg-slate-100 dark:bg-white/5 group-hover:bg-slate-200 dark:group-hover:bg-white/10 transition-colors">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="18" cy="5" r="3"></circle>
+              <circle cx="6" cy="12" r="3"></circle>
+              <circle cx="18" cy="19" r="3"></circle>
+              <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+              <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+            </svg>
+          </span>
+          <span data-share-label class="text-xs" aria-live="polite">{i18n(I18nKey.postShare)}</span>
+        </button>
+        <button
+          type="button"
+          popovertarget="wechat-share"
+          class="group flex flex-col items-center gap-2 min-w-11 text-black/65 dark:text-white/65 hover:text-(--primary) transition-colors"
+          title={i18n(I18nKey.postQrCode)}
+          aria-label={i18n(I18nKey.postQrCode)}
+        >
+          <span class="flex items-center justify-center w-11 h-11 rounded-full bg-slate-100 dark:bg-white/5 group-hover:bg-slate-200 dark:group-hover:bg-white/10 transition-colors">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="3" y="3" width="7" height="7"></rect>
+              <rect x="14" y="3" width="7" height="7"></rect>
+              <rect x="3" y="14" width="7" height="7"></rect>
+              <rect x="14" y="14" width="3" height="3"></rect>
+              <line x1="21" y1="14" x2="21" y2="14.01"></line>
+              <line x1="21" y1="21" x2="21" y2="21.01"></line>
+              <line x1="17" y1="21" x2="17" y2="21.01"></line>
+            </svg>
+          </span>
+          <span class="text-xs">{i18n(I18nKey.postQrCode)}</span>
+        </button>
+      </div>
+      <div
+        id="wechat-share"
+        popover
+        class="m-auto rounded-xl border border-(--line-divider) bg-(--card-bg) p-6 text-center shadow-xl text-black/75 dark:text-white/75"
+        aria-labelledby="wechat-share-title"
+      >
+        <h2 id="wechat-share-title" class="font-bold mb-3">{i18n(I18nKey.postQrCode)}</h2>
+        <img src={wechatQrImage} width="240" height="240" alt={i18n(I18nKey.postShareWechatGuide)} class="mx-auto bg-white" />
+        <p class="text-sm mt-3 max-w-60">{i18n(I18nKey.postShareWechatGuide)}</p>
+        <button type="button" popovertarget="wechat-share" popovertargetaction="hide" class="absolute top-2 right-2 flex items-center justify-center w-8 h-8" aria-label="关闭">
+          <Icon name="material-symbols:close-rounded" class="text-lg" />
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- 评论 -->
   {entry.data.comment && <Comment />}
 </MainGridLayout>
+
+<script>
+  let copyResetTimer: ReturnType<typeof setTimeout>;
+
+  document.addEventListener("click", async (event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>("#post-share");
+    if (!button) return;
+
+    const label = button.querySelector("[data-share-label]")!;
+    try {
+      await navigator.clipboard.writeText(button.dataset.url!);
+      label.textContent = button.dataset.copied!;
+      button.title = button.dataset.copied!;
+      clearTimeout(copyResetTimer);
+      copyResetTimer = setTimeout(() => {
+        label.textContent = button.dataset.label!;
+        button.title = button.getAttribute("aria-label")!;
+      }, 3000);
+    } catch {
+      label.textContent = button.dataset.failed!;
+      button.title = button.dataset.failed!;
+    }
+  });
+</script>
