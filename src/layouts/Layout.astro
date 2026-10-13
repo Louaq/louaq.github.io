@@ -240,6 +240,28 @@ const collapsiblePreviewLines =
   // 消除目录点击/hash 跳转的落点估值误差（见模块头注释）
   warmUpDeferredBlocks();
 
+  let copyResetTimer: ReturnType<typeof setTimeout>;
+
+  document.addEventListener("click", async (event) => {
+    const button = (event.target as Element).closest<HTMLButtonElement>("#post-share");
+    if (!button) return;
+
+    const label = button.querySelector("[data-share-label]")!;
+    try {
+      await navigator.clipboard.writeText(button.dataset.url!);
+      label.textContent = button.dataset.copied!;
+      button.title = button.dataset.copied!;
+      clearTimeout(copyResetTimer);
+      copyResetTimer = setTimeout(() => {
+        label.textContent = button.dataset.label!;
+        button.title = button.getAttribute("aria-label")!;
+      }, 3000);
+    } catch {
+      label.textContent = button.dataset.failed!;
+      button.title = button.dataset.failed!;
+    }
+  });
+
   function setClickOutsideToClose(panel: string, ignores: string[]) {
       document.addEventListener("click", (event) => {
           let panelDom = document.getElementById(panel);
