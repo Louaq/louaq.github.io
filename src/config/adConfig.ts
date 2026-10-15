@@ -21,7 +21,7 @@ export const adConfig: AdConfig = {
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://www.onesproxy.com/?user_source=1&invite_code=HLY74977",
+				link: "https://www.onesproxy.com",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
@@ -41,7 +41,7 @@ export const adConfig: AdConfig = {
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://linkstatic.com/?kwd=lqd-pingo",
+				link: "https://linkstatic.com",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
@@ -61,7 +61,7 @@ export const adConfig: AdConfig = {
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://www.proxy-cheap.com/cn/?utm_source=ping0cc&utm_medium=banner&utm_campaign=display_ads",
+				link: "https://www.proxy-cheap.com/",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
@@ -91,7 +91,7 @@ export const adConfig: AdConfig = {
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://bestproxy.com/?keyword=ihoa1wt1",
+				link: "https://bestproxy.com",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
@@ -131,7 +131,7 @@ export const adConfig: AdConfig = {
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://www.nsocks.com/?keyword=0suirfse",
+				link: "https://www.nsocks.com",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
