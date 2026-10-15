@@ -107,11 +107,11 @@ export const adConfig: AdConfig = {
 				// 是否启用该条
 				enable: true,
 				// 横幅图片：/ 开头为 public 下的站内资源，也可直接填外链
-				image: "https://pic1.imgdb.cn/i/034FQJE23MJ1xb0zwSF69y.gif",
+				image: "https://pic1.imgdb.cn/i/034fmi3cO1iNmk0ENwCrJI.gif",
 				// 图片描述（无障碍与图片加载失败时显示）
 				alt: "广告横幅",
 				// 点击跳转地址
-				link: "https://www.vircs.com/promotion?code=4",
+				link: "https://accszone.com/",
 				// 没有 image 时占位块上的文字，留空用「广告」；填了 image 则不生效
 				// placeholderText: "广告位",
 				// 是否在新标签页打开
