@@ -240,7 +240,7 @@ if (footerConfig.enable) {
       return;
     }
     for (const el of document.querySelectorAll('[data-visitor-value="page_pv"]')) {
-      el.textContent = "—";
+      el.textContent = "...";
     }
 
     // 首次访问才计入 UV，与官方脚本共用同一个 cookie
