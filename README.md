@@ -1,4 +1,4 @@
-## Folumio: 面向技术写作与深度阅读的 Astro 博客主题(https://github.com/CuteLeaf/Firefly)二次开发 [![Deploy](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml)
+## Folumio: 面向技术写作与深度阅读的 Astro 博客主题[![Deploy](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml)
 
 基于 [Firefly](https://github.com/CuteLeaf/Firefly) 主题二次开发的个人博客，专注于多模态医学图像分析领域的论文阅读笔记与技术分享。使用 [Astro](https://astro.build) 构建，站点内容全部为静态生成。
 
