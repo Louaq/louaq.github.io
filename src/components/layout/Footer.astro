@@ -198,10 +198,11 @@ if (footerConfig.enable) {
   };
 
   // querySelectorAll 而非 getElementById：页面上同时存在桌面端与移动端两份页脚
-  const render = (counts: Counts) => {
+  const render = (counts: Counts, includePageViews = true) => {
     for (const el of document.querySelectorAll<HTMLElement>(
       "[data-visitor-value]",
     )) {
+      if (!includePageViews && el.dataset.visitorValue === "page_pv") continue;
       const value = counts[el.dataset.visitorValue as keyof Counts];
       if (typeof value === "number") el.textContent = value.toLocaleString();
     }
@@ -214,6 +215,7 @@ if (footerConfig.enable) {
   let inFlight = false;
   let lastRequestKey = "";
   let lastRequestAt = 0;
+  let lastCounts: Counts | null = null;
   const SAME_PAGE_REQUEST_TTL = 60_000;
 
   const refresh = async () => {
@@ -225,19 +227,21 @@ if (footerConfig.enable) {
 
     const requestKey = `${window.location.pathname}${window.location.search}`;
     const cached = readCache(requestKey);
-    if (cached) render(cached);
+    if (cached) render(cached, false);
 
     const now = Date.now();
     if (
-      cached &&
+      lastCounts &&
       requestKey === lastRequestKey &&
       now - lastRequestAt < SAME_PAGE_REQUEST_TTL
     ) {
+      render(lastCounts);
       inFlight = false;
       return;
     }
-    lastRequestKey = requestKey;
-    lastRequestAt = now;
+    for (const el of document.querySelectorAll('[data-visitor-value="page_pv"]')) {
+      el.textContent = "—";
+    }
 
     // 首次访问才计入 UV，与官方脚本共用同一个 cookie
     const isNewUv = !hasUvCookie();
@@ -254,18 +258,16 @@ if (footerConfig.enable) {
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const counts = normalize(await response.json());
+      lastRequestKey = requestKey;
+      lastRequestAt = Date.now();
+      lastCounts = counts;
       if (requestKey === `${window.location.pathname}${window.location.search}`) {
         render(counts);
       }
       writeCache(requestKey, counts);
     } catch (error) {
-      // 接口不可用时保持隐藏（或沿用缓存值），不影响页脚其余内容
+      // 接口不可用时文章保持占位符，页脚沿用缓存值或保持隐藏
       console.warn("访客计数接口请求失败:", error);
-      if (!cached && requestKey === `${window.location.pathname}${window.location.search}`) {
-        for (const el of document.querySelectorAll('[data-visitor-value="page_pv"]')) {
-          el.textContent = "—";
-        }
-      }
     } finally {
       clearTimeout(timer);
       inFlight = false;
