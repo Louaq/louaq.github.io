@@ -1,5 +1,4 @@
-## Firefly 修改自用版, 原项目：[https://github.com/CuteLeaf/Firefly](https://github.com/CuteLeaf/Firefly)
-[![Deploy](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml)
+## Folumio: 面向技术写作与深度阅读的 Astro 博客主题，基于[Firefly](https://github.com/CuteLeaf/Firefly)二次开发 [![Deploy](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/Louaq/louaq.github.io/actions/workflows/deploy.yml)
 
 
 <p align="center">
