@@ -6,6 +6,6 @@ export const commentConfig: CommentConfig = {
 	twikoo: {
 		envId: "https://twikoo.louaq.com",
 		lang: "zh-CN", // 设置 Twikoo 评论系统语言
-		visitorCount: true, // 文章访问量统计功能。
+		visitorCount: false, // 文章浏览量改由 Vercount 统计。
 	},
 };

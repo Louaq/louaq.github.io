@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { commentConfig } from "@/config";
+import { footerConfig } from "@/config";
 import I18nKey from "@/i18n/i18nKey";
 import { i18n } from "@/i18n/translation";
 import { getCategoryUrl } from "@/utils/category-utils";
@@ -148,13 +148,15 @@ const minuteLabel =
     )
   }
 
-  <!-- Twikoo访问量统计（首页不显示，且文章访问量统计启用时显示） -->
+  <!-- Vercount文章浏览量（首页不显示，与页脚共用统计请求） -->
   {
     !isHome &&
-      commentConfig.type === 'twikoo' &&
-      commentConfig.twikoo?.visitorCount &&
       id && (
-        <div class="flex items-center">
+        <div
+          class="flex items-center"
+          data-page-visitor-count
+          data-api-url={footerConfig.visitorCount?.apiUrl}
+        >
           <div class="meta-icon">
             <Icon
               name="material-symbols:visibility-outline-rounded"
@@ -164,7 +166,7 @@ const minuteLabel =
           <span class="text-50 text-sm font-medium mr-1">
             {i18n(I18nKey.pageViews)}
           </span>
-          <span class="text-50 text-sm font-medium" id="twikoo_visitors">
+          <span class="text-50 text-sm font-medium" data-visitor-value="page_pv">
             {i18n(I18nKey.pageViewsLoading)}
           </span>
         </div>

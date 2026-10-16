@@ -180,18 +180,18 @@ if (footerConfig.enable) {
     };
   };
 
-  const readCache = (): Counts | null => {
+  const readCache = (requestKey: string): Counts | null => {
     try {
-      const raw = localStorage.getItem(STORAGE_KEY);
+      const raw = localStorage.getItem(`${STORAGE_KEY}:${requestKey}`);
       return raw ? normalize(JSON.parse(raw)) : null;
     } catch {
       return null;
     }
   };
 
-  const writeCache = (counts: Counts) => {
+  const writeCache = (requestKey: string, counts: Counts) => {
     try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(counts));
+      localStorage.setItem(`${STORAGE_KEY}:${requestKey}`, JSON.stringify(counts));
     } catch {
       // localStorage 不可用（隐私模式等）时忽略，下次访问重新拉取
     }
@@ -217,14 +217,16 @@ if (footerConfig.enable) {
   const SAME_PAGE_REQUEST_TTL = 60_000;
 
   const refresh = async () => {
-    const root = document.querySelector<HTMLElement>("[data-visitor-count]");
+    const root = document.querySelector<HTMLElement>(
+      "[data-page-visitor-count], [data-visitor-count]",
+    );
     if (!root || inFlight) return;
     inFlight = true;
 
-    const cached = readCache();
+    const requestKey = `${window.location.pathname}${window.location.search}`;
+    const cached = readCache(requestKey);
     if (cached) render(cached);
 
-    const requestKey = `${window.location.pathname}${window.location.search}`;
     const now = Date.now();
     if (
       cached &&
@@ -252,14 +254,24 @@ if (footerConfig.enable) {
       });
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
       const counts = normalize(await response.json());
-      render(counts);
-      writeCache(counts);
+      if (requestKey === `${window.location.pathname}${window.location.search}`) {
+        render(counts);
+      }
+      writeCache(requestKey, counts);
     } catch (error) {
       // 接口不可用时保持隐藏（或沿用缓存值），不影响页脚其余内容
       console.warn("访客计数接口请求失败:", error);
+      if (!cached && requestKey === `${window.location.pathname}${window.location.search}`) {
+        for (const el of document.querySelectorAll('[data-visitor-value="page_pv"]')) {
+          el.textContent = "—";
+        }
+      }
     } finally {
       clearTimeout(timer);
       inFlight = false;
+      if (requestKey !== `${window.location.pathname}${window.location.search}`) {
+        void refresh();
+      }
     }
   };
 
