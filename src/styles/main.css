@@ -54,14 +54,11 @@
 }
 
 @utility link {
-  /* 只过渡自身 hover 背景（静止时透明，不受主题影响）；文字颜色随主题即时翻转 */
+  /* 只过渡点击背景；文字颜色随主题即时翻转 */
   @apply transition-[background-color] duration-150 rounded-md p-1 -m-1 expand-animation;
-  /* 多行链接时 hover 背景需完整覆盖每行，用元素自身背景替代 ::before */
+  /* 多行链接的点击背景需完整覆盖每行，用元素自身背景替代 ::before */
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  &:hover {
-    background-color: var(--btn-plain-bg-hover);
-  }
   &:active {
     background-color: var(--btn-plain-bg-active);
   }
@@ -74,6 +71,9 @@
 
 @utility link-lg {
   @apply rounded-md p-1.5 -m-1.5 expand-animation;
+  &:hover::before {
+    background: none !important;
+  }
 }
 
 @utility float-panel-closed {
