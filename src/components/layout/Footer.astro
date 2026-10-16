@@ -79,22 +79,22 @@ if (footerConfig.enable) {
       href="https://github.com/CuteLeaf/Firefly"> Firefly</a
     ><br />
     <span
-      class="mt-1 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1"
+      class="mt-1 mr-1 inline-flex flex-wrap items-center justify-center gap-x-2 gap-y-1 align-middle"
     >
       <span class="text-50">Supported by</span>
       <a
         class="link inline-flex items-center gap-1 text-(--primary) font-medium"
         target="_blank"
         rel="noopener noreferrer"
-        href="https://www.netlify.com/"
-        aria-label="Netlify"
+        href="https://cloud.tencent.com/"
+        aria-label="腾讯云"
       >
         <img
-          src={url("/assets/images/netlify-icon-light.svg")}
+          src={url("/assets/images/tencent-cloud.svg")}
           alt=""
-          width={28}
-          height={28}
-          class="h-7 w-auto shrink-0 object-contain align-[-0.125em]"
+          width={80}
+          height={18}
+          class="h-[18px] w-20 shrink-0"
           aria-hidden="true"
           loading="lazy"
           decoding="async"
@@ -105,7 +105,7 @@ if (footerConfig.enable) {
     {
       showVisitorCount && (
         <span
-          class="mt-1 hidden flex-wrap items-center justify-center gap-x-3 gap-y-1"
+          class="mt-1 hidden flex-wrap items-center justify-center gap-x-3 gap-y-1 align-middle"
           data-visitor-count
           data-api-url={visitorApiUrl}
         >
