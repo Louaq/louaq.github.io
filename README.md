@@ -10,21 +10,21 @@
   <tr>
     <td width="50%" align="center">
       <img src="https://pic1.imgdb.cn/i/034eTilS48S3CdG1acXUup.png" alt="首页"><br>
-      <sub><b>首页 · 深色</b>｜一键明暗切换</sub>
+      <sub><b>首页 · 深色</b></sub>
     </td>
     <td width="50%" align="center">
       <img src="https://pic1.imgdb.cn/i/034eTjOcsNigCY1uSZadG3.png" alt="文章页"><br>
-      <sub><b>文章页</b>｜右侧目录、字数与阅读时长</sub>
+      <sub><b>文章页</b></sub>
     </td>
   </tr>
   <tr>
     <td width="50%" align="center">
       <img src="https://pic1.imgdb.cn/i/034eTlN9D2SLgavCMnmveB.png" alt="归档页"><br>
-      <sub><b>归档页</b>｜按年份时间线，支持标签 / 分类筛选</sub>
+      <sub><b>归档页</b></sub>
     </td>
     <td width="50%" align="center">
       <img src="https://pic1.imgdb.cn/i/034eTlmbViuJddiKcsv7j4.png" alt="追番 / 观影清单"><br>
-      <sub><b>追番 / 观影清单</b>｜评分、观看状态与分类</sub>
+      <sub><b>追番 / 观影清单</b></sub>
     </td>
   </tr>
 </table>
