@@ -8,15 +8,14 @@
  * 一切基于坐标的滚动（目录点击、URL hash、页内查找）落点偏移——scrollIntoView
  * 只强制渲染目标自身的祖先链，管不到滚动路径上的中间块。
  *
- * 本模块在页面空闲期让所有此类块真实渲染一帧再恢复 auto。contain-intrinsic-size
+ * 本模块在页面初始化后异步让所有此类块真实渲染一帧再恢复 auto。contain-intrinsic-size
  * 的 auto 关键字会在这一帧记住真实尺寸，此后估值即精确值，布局彻底稳定，同时
- * content-visibility 的按视口渲染优化原样保留。渲染成本一次性发生在空闲期，
- * 相当于把未加 content-visibility 之前本就存在的整页布局从首屏挪到了空闲时。
+ * content-visibility 的按视口渲染优化原样保留。
  *
  * 记住的尺寸依赖布局宽度，故视口宽度变化后需重新预热（窄→宽换行数不同）。
  */
 
-let pendingIdle: number | null = null;
+let pendingWarmup: number | null = null;
 let resizeListenerBound = false;
 let resizeTimeout: number | null = null;
 let lastWarmedWidth = 0;
@@ -48,11 +47,12 @@ function renderOnceToRememberSizes(blocks: HTMLElement[]): void {
 }
 
 function scheduleWarmup(): void {
-	if (pendingIdle !== null) {
-		cancelIdleCallback(pendingIdle);
+	if (pendingWarmup !== null) {
+		window.clearTimeout(pendingWarmup);
 	}
-	pendingIdle = requestIdleCallback(() => {
-		pendingIdle = null;
+	// Safari 未普遍支持 requestIdleCallback，直接调用会中断页面初始化和布局钩子注册。
+	pendingWarmup = window.setTimeout(() => {
+		pendingWarmup = null;
 		// 等 web 字体就绪后再量：字体换用会改变换行数与块高，
 		// 提前记住的尺寸会作废
 		document.fonts.ready.then(() => {
@@ -61,13 +61,13 @@ function scheduleWarmup(): void {
 			lastWarmedWidth = window.innerWidth;
 			renderOnceToRememberSizes(blocks);
 		});
-	});
+	}, 0);
 }
 
 /**
  * 立即（同步）强制渲染目标元素之前的所有重型块，用于目录点击等程序化跳转。
  *
- * 空闲期预热覆盖不了一种竞态：页面刚加载、空闲回调还没跑完用户就点了目录。
+ * 异步预热覆盖不了一种竞态：页面刚加载、预热回调还没跑完用户就点了目录。
  * 跳转路径上尚未预热的块仍用占位估值参与布局，scrollIntoView 只按点击那一刻
  * 的布局算一次落点就开始动画；动画途中这些块从占位值变为真实值（通常占位值
  * 偏大，块一收缩，目标标题连同其后内容一起上移），落点还停在旧的、偏大的

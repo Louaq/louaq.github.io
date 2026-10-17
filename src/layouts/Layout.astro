@@ -236,7 +236,7 @@ const collapsiblePreviewLines =
   initCodeCopyFeedback();
   initCodeFullscreen();
   initPromoStrip();
-  // 空闲期让 content-visibility: auto 的重型块各渲染一次，记住真实尺寸，
+  // 异步让 content-visibility: auto 的重型块各渲染一次，记住真实尺寸，
   // 消除目录点击/hash 跳转的落点估值误差（见模块头注释）
   warmUpDeferredBlocks();
 
