@@ -72,7 +72,7 @@ const friendGroups: FriendGroup[] = [
 			},
 			{
 				title: "最美博客",
-				imgurl: "https://s1.ax1x.com/2022/11/10/z9E7X4.jpg",
+				imgurl: "https://s41.ax1x.com/2026/02/28/peSMkwt.png",
 				desc: "这是一个 Vue2 Vue3 与 SpringBoot 结合的产物",
 				siteurl: "https://poetize.cn/",
 				weight: 8,
